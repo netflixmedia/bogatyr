@@ -5,3 +5,5 @@
 || Own crypto implementation || laubenberger ||
 || DB python script || silvan.spross ||
 || Installer || laubenberger ||
+|| Implement Port-Switching || ||
+|| HTTP Requests || ||
