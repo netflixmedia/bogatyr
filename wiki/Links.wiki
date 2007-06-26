@@ -1,0 +1,18 @@
+#summary Usefull references
+= Links =
+http://www.galileocomputing.de/openbook/javainsel6/
+
+http://www.adp-gmbh.ch/blog/2004/november/15.html
+
+http://www.tutorials.de/forum/java/
+
+http://java.sun.com/products/jfc/tsc/articles/threads/threads2.html
+
+http://www.clug.de/vortraege/Java/
+
+http://de.wikibooks.org/wiki/Java_Standard
+http://de.wikibooks.org/wiki/Java_Standard:_Muster_Singleton
+http://de.wikibooks.org/wiki/Java_Standard:_Muster_Observer
+http://de.wikibooks.org/wiki/Java_Standard:_Muster_TemplateMethod
+
+http://java.sun.com/docs/books/tutorial/uiswing/index.html
