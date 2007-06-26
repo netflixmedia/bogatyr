@@ -1,0 +1,2 @@
+#summary How to install the Bogatyr framework library
+
