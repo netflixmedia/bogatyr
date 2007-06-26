@@ -1,0 +1,6 @@
+#summary ToDos of the project
+= ToDos =
+|| Create ArrayList Dumper || laubenberger ||
+|| Own crypto implementation || laubenberger ||
+|| DB python script || silvan.spross ||
+|| Installer || laubenberger ||
