@@ -1,6 +1,6 @@
 #summary How to install the Bogatyr framework library
 #labels Featured,Phase-Deploy
 =Installation=
-Just download the newest Bogatyr JAR library from the [http://code.google.com/p/bogatyr/ project home] and add it to your project. After that you can access the package over `import ch.orwell.bogatyr.*`.
+Just download the newest Bogatyr JAR library `bogatyr-x.x.x.jar` from the [http://code.google.com/p/bogatyr/ project home] and add it to your project. After that you can access the package over `import ch.orwell.bogatyr.*`.
 
 A complete installation tutorial will added soon!
