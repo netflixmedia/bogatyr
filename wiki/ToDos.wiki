@@ -1,4 +1,5 @@
 #summary ToDos of the project
+#labels Phase-Requirements,Deprecated
 = ToDos =
 || *Task* || *Who* ||
 || Create Arraylist Dumper || laubenberger ||
