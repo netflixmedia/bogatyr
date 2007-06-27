@@ -1,2 +1,2 @@
 #summary How to install the Bogatyr framework library
-
+#labels Featured,Phase-Deploy
