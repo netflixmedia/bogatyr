@@ -1,4 +1,5 @@
 #summary Open and closed questions
+#labels Deprecated
 
 = Questions =
 == Open ==
