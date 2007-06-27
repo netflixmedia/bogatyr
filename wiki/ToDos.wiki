@@ -1,8 +1,8 @@
 #summary ToDos of the project
-#labels Phase-Requirements,Deprecated
+#labels Phase-Requirements
 = ToDos =
 || *Task* || *Who* ||
-|| Create Arraylist Dumper || laubenberger ||
+|| Create !ArrayList Dumper || laubenberger ||
 || Own crypto implementation || laubenberger ||
 || DB python script || silvan.spross ||
 || Installer || laubenberger ||
