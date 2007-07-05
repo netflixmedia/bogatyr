@@ -9,10 +9,9 @@ import ch.orwell.bogatyr.util.Logger;
 /**
  * The data object for a user
  *
- * @author Roman Wuersch
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070622
+ * @version 20070705
  */
 public final class User extends DataObject {
 	private static final long serialVersionUID = -2688333932057727527L;
@@ -76,8 +75,8 @@ public final class User extends DataObject {
 	 * @see DataObject 
 	 */
 	public void validate() throws Exception {
-		validateString(this.className, "username", this.username); //$NON-NLS-1$
-		validateString(this.className, "password", this.password); //$NON-NLS-1$
+		validateString("username", this.username); //$NON-NLS-1$
+		validateString("password", this.password); //$NON-NLS-1$
 	}
 
 	
@@ -121,5 +120,4 @@ public final class User extends DataObject {
 			return false;
 		return true;
 	}
-
 }

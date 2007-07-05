@@ -9,10 +9,9 @@ import ch.orwell.bogatyr.util.GeneralHelper;
 /**
  * This is the super-class for all value objects of the system
  * 
- * @author Roman Wuersch
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070625
+ * @version 20070705
  */
 public abstract class DataObject implements Serializable, ValidaterInterface {
 	protected String className;
@@ -33,54 +32,54 @@ public abstract class DataObject implements Serializable, ValidaterInterface {
 	/**
 	 * Validate a String with {@link GeneralHelper#isValidString(String)}. 
 	 */
-	public void validateString(String className, String variable, String arg) throws Exception {
+	public void validateString(String variable, String arg) throws Exception {
 		if (!GeneralHelper.isValidString(arg)) {
-			throw new Exception(className + "::validateString - " + variable + " == 'null'/''"); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new Exception(this.className + "::validateString - " + variable + " == 'null'/''"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 	
 	/**
 	 * Validate an int with {@link GeneralHelper#isValidInt(int)}
 	 */
-	public void validateInt(String className, String variable, int arg) throws Exception {
+	public void validateInt(String variable, int arg) throws Exception {
 		if (!GeneralHelper.isValidInt(arg)) {
-			throw new Exception(className + "::validateInt - " + variable + " == 0"); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new Exception(this.className + "::validateInt - " + variable + " == 0"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
 	/**
 	 * Validate a long with {@link GeneralHelper#isValidLong(long)}
 	 */
-	public void validateLong(String className, String variable, long arg) throws Exception {
+	public void validateLong(String variable, long arg) throws Exception {
 		if (!GeneralHelper.isValidLong(arg)) {
-			throw new Exception(className + "::validateLong - " + variable + " == 0"); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new Exception(this.className + "::validateLong - " + variable + " == 0"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
 	/**
 	 * Validate an Object with {@link GeneralHelper#isValidObject(Object)}
 	 */
-	public void validateObject(String className, String variable, Object arg) throws Exception {
+	public void validateObject(String variable, Object arg) throws Exception {
 		if (!GeneralHelper.isValidObject(arg)) {
-			throw new Exception(className + "::validateObject - " + variable + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new Exception(this.className + "::validateObject - " + variable + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
 	/**
 	 * Validate an Array with {@link GeneralHelper#isValidArray(Object[])}
 	 */
-	public void validateArray(String className, String variable, Object[] arg) throws Exception {
+	public void validateArray(String variable, Object[] arg) throws Exception {
 		if (!GeneralHelper.isValidArray(arg)) {
-			throw new Exception(className + "::validateArray - " + variable + ".length() == 0");  //$NON-NLS-1$ //$NON-NLS-2$
+			throw new Exception(this.className + "::validateArray - " + variable + ".length() == 0");  //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
 	/**
 	 * Validate an ArrayList with {@link GeneralHelper#isValidArrayList(ArrayList)}
 	 */
-	public void validateArrayList(String className, String variable, ArrayList arg) throws Exception {
+	public void validateArrayList(String variable, ArrayList arg) throws Exception {
 		if (!GeneralHelper.isValidArrayList(arg)) {
-			throw new Exception(className + "::validateArrayList - " + variable + ".size() == 0"); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new Exception(this.className + "::validateArrayList - " + variable + ".size() == 0"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 	

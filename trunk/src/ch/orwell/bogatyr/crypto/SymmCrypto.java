@@ -17,10 +17,9 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 /**
  * This is a class for symmetric cryptology
  * 
- * @author Roman Wuersch
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070626
+ * @version 20070705
  */
 public final class SymmCrypto {
 	private static final int KEYSIZE = 128;
@@ -41,7 +40,7 @@ public final class SymmCrypto {
 	 * Encrypt the Data with a given Key.
 	 * 
 	 * @param input The Data to encrypt as a Byte-Array
-	 * @param key The Key for the encryption
+	 * @param encryptionKey The Key for the encryption
 	 * @return Return the encrypted Byte-Array 
 	 * @throws NoSuchAlgorithmException
 	 * @throws NoSuchPaddingException
@@ -50,9 +49,9 @@ public final class SymmCrypto {
 	 * @throws BadPaddingException
 	 * @see java.security.Key
 	 */
-	public byte[] encrypt(byte[] input, Key key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+	public byte[] encrypt(byte[] input, Key encryptionKey) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		Cipher cipher = Cipher.getInstance(ALGORITHM);
-		cipher.init(Cipher.ENCRYPT_MODE, key);
+		cipher.init(Cipher.ENCRYPT_MODE, encryptionKey);
 		
 		return cipher.doFinal(input);
 	}
@@ -61,7 +60,7 @@ public final class SymmCrypto {
 	 * Decrypt the Data with a given Key.
 	 * 
 	 * @param input The encrypted Data as a Byte-Array
-	 * @param key The Key for the decryption
+	 * @param decryptionKey The Key for the decryption
 	 * @return Return the decrypted Byte-Array
 	 * @throws IllegalBlockSizeException
 	 * @throws BadPaddingException
@@ -70,9 +69,9 @@ public final class SymmCrypto {
 	 * @throws InvalidKeyException
 	 * @see java.security.Key
 	 */
-	public byte[] decrypt(byte[] input, Key key) throws IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
+	public byte[] decrypt(byte[] input, Key decryptionKey) throws IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
 		Cipher cipher = Cipher.getInstance(ALGORITHM);
-		cipher.init(Cipher.DECRYPT_MODE, key);
+		cipher.init(Cipher.DECRYPT_MODE, decryptionKey);
 		
 		return cipher.doFinal(input);
 	}
