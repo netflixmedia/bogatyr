@@ -62,9 +62,7 @@ public class PDFControl {
 	}
 
 	/**
-	 * Deletes all PDF files in the PDF Directory. Calls {@link ExceptionHandler#handleCleanupError} if
-	 * a file could not be deleted, for example because the PDF viewer is still open and showing one of the
-	 * files (see {@link #setExceptionHandler}).
+	 * Deletes all PDF files in the PDF Directory.
 	 * <p>
 	 * Intended to be called before the application is closed for security reasons (Else the information within
 	 * temporary PDF files could be read by anyone with access to the files).
