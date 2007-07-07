@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2007 by Stefan Laubenberger and Silvan Spross.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the General Public License v2.0
+ * which accompanies this distribution, and is available at
+ * http://code.google.com/p/bogatyr/
+ *******************************************************************************/
 package ch.orwell.bogatyr;
 
 import java.util.Map;
@@ -16,10 +23,9 @@ import ch.orwell.bogatyr.util.PropertiesManager;
  * ~~~ one of the musthaves for this semester.<br>
  * Look here: <a href="http://edu.panter.ch/static/SingletonPattern.html">http://edu.panter.ch/static/SingletonPattern.html</a>
  * 
- * @author Roman Wuersch
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070624
+ * @version 20070707
  */
 public class Context {
 	private static Context instance = null;

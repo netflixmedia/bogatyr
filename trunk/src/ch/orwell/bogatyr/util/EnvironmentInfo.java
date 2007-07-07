@@ -1,8 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2007 by Stefan Laubenberger and Silvan Spross.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the General Public License v2.0
+ * which accompanies this distribution, and is available at
+ * http://code.google.com/p/bogatyr/
+ *******************************************************************************/
 package ch.orwell.bogatyr.util;
 
 
 /**
- * EnvInfo
  * This class may be used to transmit client environment info to the server and to decide if
  * an operating system corresponds to the Windows, Mac or a Unix operating system. 
  * <p>
@@ -10,12 +16,11 @@ package ch.orwell.bogatyr.util;
  * The class is instanciated on the client by calling and transmitted to the server
  * where the client operating system properties may be read by the server.
  * 
- * @author Roman Wuersch
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070625
+ * @version 20070707
  */
-public abstract class EnvInfo {
+public abstract class EnvironmentInfo {
 
 	/**
 	 * Returns same as system property "os.arch".

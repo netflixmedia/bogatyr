@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2007 by Stefan Laubenberger and Silvan Spross.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the General Public License v2.0
+ * which accompanies this distribution, and is available at
+ * http://code.google.com/p/bogatyr/
+ *******************************************************************************/
 package ch.orwell.bogatyr.net.server.asynch;
 
 import java.util.Map;
@@ -15,8 +22,7 @@ import ch.orwell.bogatyr.util.Logger;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @author Roman Wuersch
- * @version 20070626
+ * @version 20070707
  */
 public abstract class AsynchServer extends Server {
 

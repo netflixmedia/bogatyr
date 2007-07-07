@@ -1,8 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2007 by Stefan Laubenberger and Silvan Spross.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the General Public License v2.0
+ * which accompanies this distribution, and is available at
+ * http://code.google.com/p/bogatyr/
+ *******************************************************************************/
 package ch.orwell.bogatyr;
 
 import java.util.Locale;
 
-import ch.orwell.bogatyr.util.EnvInfo;
+import ch.orwell.bogatyr.util.EnvironmentInfo;
 import ch.orwell.bogatyr.util.GeneralHelper;
 import ch.orwell.bogatyr.util.Localizer;
 import ch.orwell.bogatyr.util.Logger;
@@ -12,10 +19,9 @@ import ch.orwell.bogatyr.util.PropertiesManager;
 /**
  * This is the skeleton for all applications
  * 
- * @author Roman Wuersch
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070624
+ * @version 20070707
  */
 public abstract class Application implements Runnable {
 	protected static String className = null;
@@ -92,7 +98,7 @@ public abstract class Application implements Runnable {
 		// Logger
 		this.logger = Logger.getInstance();
 		this.logger.writeLog(className + "::init", "#  " + localizer.getValue(RES_LOG_START) + " " + this.context.getName() + " " + this.context.getVersion()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		this.logger.writeLog(className + "::init", "#  " + localizer.getValue(RES_LOG_OS) + " " + EnvInfo.getOsName() + " - " + localizer.getValue(RES_LOG_VERSION) + " " + EnvInfo.getOsVersion()+ " - " + localizer.getValue(RES_LOG_ARCHITECTURE) + " " + EnvInfo.getOsArch()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+		this.logger.writeLog(className + "::init", "#  " + localizer.getValue(RES_LOG_OS) + " " + EnvironmentInfo.getOsName() + " - " + localizer.getValue(RES_LOG_VERSION) + " " + EnvironmentInfo.getOsVersion()+ " - " + localizer.getValue(RES_LOG_ARCHITECTURE) + " " + EnvironmentInfo.getOsArch()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 	}
 	
 	private void readProperties() {
