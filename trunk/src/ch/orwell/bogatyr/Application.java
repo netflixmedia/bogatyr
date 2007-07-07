@@ -50,7 +50,7 @@ public abstract class Application implements Runnable {
 	private static final String PROPERTY_APPLICATION_WORKDIRECTORY  = "application.work_directory"; //$NON-NLS-1$
 	private static final String PROPERTY_APPLICATION_LOCALIZER_BASE = "application.localizer.base"; //$NON-NLS-1$
 
-	private static Localizer localizer;
+	private static Localizer localizer = null;
 
 	private String localizerBase;
 	private Logger logger;
