@@ -25,7 +25,7 @@ import ch.orwell.bogatyr.io.FileManager;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070708
  */
 public final class Logger {
 	private static Logger instance = null;
@@ -180,7 +180,7 @@ public final class Logger {
 	 * @throws IOException 
      */
 	private void write(String descent, String logEntry, String fileName) throws IOException {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss"); //$NON-NLS-1$
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss"); //$NON-NLS-1$
 		FileManager.writeLine(fileName, null, new String(formatter.format(new Date()) + " - " + checkDescent(descent) + " - " + checkLogEntry(logEntry))); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
