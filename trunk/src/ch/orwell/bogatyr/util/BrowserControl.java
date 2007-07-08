@@ -17,12 +17,12 @@ import java.lang.reflect.Method;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070708
  */
 public class BrowserControl {
 	// The default system browser under windows.
-	private static final String WIN_PATH = "rundll32"; //$NON-NLS-1$
-	private static final String WIN_FLAG = "url.dll,FileProtocolHandler"; //$NON-NLS-1$
+	private static final String WINDOWS_PATH = "rundll32"; //$NON-NLS-1$
+	private static final String WINDOWS_FLAG = "url.dll,FileProtocolHandler"; //$NON-NLS-1$
 
 	// The default browser under unix.
 	private static final String UNIX_PATH = "netscape"; //$NON-NLS-1$
@@ -50,7 +50,7 @@ public class BrowserControl {
 		String cmd;
 		
 		if (EnvironmentInfo.isWindowsPlatform()) {
-			cmd = WIN_PATH + " " + WIN_FLAG + " " + url;  //$NON-NLS-1$//$NON-NLS-2$
+			cmd = WINDOWS_PATH + " " + WINDOWS_FLAG + " " + url;  //$NON-NLS-1$//$NON-NLS-2$
 
 			// If the URL starts with "http://" or "https://" and
 			// doesn't contain a "?" or "#" we have problems

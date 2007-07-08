@@ -20,16 +20,16 @@ import ch.orwell.bogatyr.io.FileManager;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070708
  */
 public class PDFControl {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
 
-	private static final String WIN_PDF_VIEWER_PATH  = "rundll32 url.dll,FileProtocolHandler {0}"; //$NON-NLS-1$
-	private static final String UNIX_PDF_VIEWER_PATH = "acroread {0}"; //$NON-NLS-1$
+	private static final String WINDOWS_PDF_VIEWER_PATH  = "rundll32 url.dll,FileProtocolHandler {0}"; //$NON-NLS-1$
+	private static final String UNIX_PDF_VIEWER_PATH     = "acroread {0}"; //$NON-NLS-1$
 
 	private static final String fileNamePrefix = "temp"; //$NON-NLS-1$
-	private static final String directoryName = "pdffiles"; //$NON-NLS-1$
+	private static final String directoryName  = "pdffiles"; //$NON-NLS-1$
 
 	private static OutputStream outputStream = null;
 	private static OutputStream errorStream = null;
@@ -37,7 +37,7 @@ public class PDFControl {
 
 	/**
 	 * Show a PDF (provided as a byte[]) with PDF viewer. A temporary file is first created (see
-	 * {@link #createFile} and {@link PDFControl class description}).
+	 * {@link #createFile} and {@link PdfControl class description}).
 	 */
 	public static void open(byte[] pdfFileContents)	throws Exception {
 		try {
@@ -55,7 +55,7 @@ public class PDFControl {
 	 */
 	public static void open(File pdfFile) throws Exception {
 		try {
-			PDFControl.exec(pdfFile.getCanonicalPath());
+			PDFControl.execute(pdfFile.getCanonicalPath());
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -93,7 +93,7 @@ public class PDFControl {
 	 * Private methods
 	 */
 	/**
-	 * Return next temporary non existing file according to the rules of this class (see {@link PDFControl above}).
+	 * Return next temporary non existing file according to the rules of this class (see {@link PdfControl above}).
 	 * Is not synchronized.
 	 * @return File object. File is not physically created.
 	 */
@@ -121,10 +121,10 @@ public class PDFControl {
 		return directory;
 	}
 
-	private static void exec(String path) throws IOException {
+	private static void execute(String path) throws IOException {
 		String viewerPath;
 		if (EnvironmentInfo.isWindowsPlatform()) {
-			viewerPath = WIN_PDF_VIEWER_PATH;
+			viewerPath = WINDOWS_PDF_VIEWER_PATH;
 		} else if (EnvironmentInfo.isMacPlatform()) {
 			BrowserControl.openUrlOnMacPlatform("file://" + path); //$NON-NLS-1$
 			return;

@@ -96,7 +96,6 @@ public abstract class DataObject implements Serializable, ValidaterInterface {
 	 */
 	/**
 	 * Initialize the object<p>
-	 * Do some logging.
 	 */
 	private void init() {
 		this.className = this.getClass().getName();
