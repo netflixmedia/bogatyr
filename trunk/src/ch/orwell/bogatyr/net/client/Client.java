@@ -28,8 +28,8 @@ import ch.orwell.bogatyr.crypto.AsymmCrypto;
 import ch.orwell.bogatyr.crypto.SymmCrypto;
 import ch.orwell.bogatyr.exception.ExceptionHelper;
 import ch.orwell.bogatyr.exception.InvalidStreamSizeException;
+import ch.orwell.bogatyr.net.common.ComInterface;
 import ch.orwell.bogatyr.net.common.dto.ComContainer;
-import ch.orwell.bogatyr.net.common.dto.ComInterface;
 import ch.orwell.bogatyr.net.common.dto.ComObject;
 import ch.orwell.bogatyr.net.common.dto.User;
 import ch.orwell.bogatyr.util.GeneralHelper;
@@ -40,7 +40,7 @@ import ch.orwell.bogatyr.util.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class Client extends Application implements ComInterface {
 	// Properties
@@ -63,6 +63,7 @@ public abstract class Client extends Application implements ComInterface {
 	
 	/**
 	 * Constructs an Client.
+	 * 
 	 * @param propertiesFileName The property file for the configuration.
 	 */
 	public Client(String propertiesFileName) {
@@ -80,6 +81,7 @@ public abstract class Client extends Application implements ComInterface {
 
 	/**
      * Open a stream
+     * 
      * @throws IOException
      */
 	protected final void openStream() throws IOException {
@@ -89,6 +91,7 @@ public abstract class Client extends Application implements ComInterface {
 	
 	/**
      * Close a stream
+     * 
      * @throws IOException
      */
 	protected final void closeStream() throws IOException {
@@ -97,6 +100,7 @@ public abstract class Client extends Application implements ComInterface {
 
 	/**
      * Reads a socket-stream
+     * 
      * @return Returns a byte-array
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
@@ -125,6 +129,7 @@ public abstract class Client extends Application implements ComInterface {
 
     /**
      * Writes on a socket-stream
+     * 
      * @param key The key for authentication
      * @param data The data as a byte-array
      * @throws IOException 
@@ -164,6 +169,7 @@ public abstract class Client extends Application implements ComInterface {
     
     /**
      * Reads a ComObject
+     * 
      * @return Returns the ComObject
      * @throws InvalidKeyException
      * @throws NoSuchAlgorithmException
@@ -183,6 +189,7 @@ public abstract class Client extends Application implements ComInterface {
 
 	/**
 	 * Writes a ComObject
+	 * 
 	 * @param comObject The ComObject to write
 	 * @throws InvalidKeyException
 	 * @throws NoSuchAlgorithmException
@@ -201,8 +208,7 @@ public abstract class Client extends Application implements ComInterface {
 
 	/**
 	 * Send the ComObject to the Server.
-	 * <p>
-	 * The Server will execute the given Methodname.
+	 * The server will execute the given method name.
 	 * 
 	 * @param comObject for the execute
 	 * @return Result Data
@@ -217,7 +223,6 @@ public abstract class Client extends Application implements ComInterface {
 	 */
 	/**
 	 * Intialize the SynchClient object.
-	 * <p>
 	 * Do some logging.
 	 */
 	private void init() {
@@ -243,9 +248,6 @@ public abstract class Client extends Application implements ComInterface {
 
 	/**
 	 * Reads the Properties.
-	 * <p>
-	 * Set host to network.host Set port to network.port
-	 * 
 	 */
 	private void readProperties() {
 		this.host     = Context.getInstance().getProperties().getProperty(PROPERTY_NETWORK_HOST);

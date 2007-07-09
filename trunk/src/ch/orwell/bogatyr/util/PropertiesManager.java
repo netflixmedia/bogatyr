@@ -20,7 +20,7 @@ import ch.orwell.bogatyr.Application;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public final class PropertiesManager {
     private Properties properties;
@@ -42,6 +42,7 @@ public final class PropertiesManager {
     
 	/**
      * Returns the property-value as String
+     * 
      * @param propertyName Input-String
      * @return String-value
      */	
@@ -52,6 +53,7 @@ public final class PropertiesManager {
 
     /**
      * Returns the property-value as double-value
+     * 
      * @param propertyName Input-String
      * @return double-value
      */	
@@ -61,6 +63,7 @@ public final class PropertiesManager {
 
     /**
      * Returns the property-value as int-value
+     * 
      * @param propertyName Input-String
      * @return int-value
      */	
@@ -70,6 +73,7 @@ public final class PropertiesManager {
 
     /**
      * Returns the property-value as boolean-value
+     * 
      * @param propertyName Input-String
      * @return boolean-value
      */	
@@ -78,15 +82,16 @@ public final class PropertiesManager {
     }
     
     /**
-     * writes all properties to the system-out
+     * Writes all properties to the system-out
      */	
-    public void diagProperties() {
-     	Enumeration enumeration = this.properties.propertyNames();
+    @SuppressWarnings("unchecked")
+	public void diagProperties() {
+     	Enumeration<String> enumeration = (Enumeration<String>) this.properties.propertyNames();
      	String propertyName;
      	System.out.println("## Properties ##"); //$NON-NLS-1$
         
         while (enumeration.hasMoreElements()) {
-        	propertyName = (String)enumeration.nextElement(); 
+        	propertyName = enumeration.nextElement(); 
         	System.out.println(propertyName + ": " + this.properties.getProperty(propertyName)); //$NON-NLS-1$
         }
     }

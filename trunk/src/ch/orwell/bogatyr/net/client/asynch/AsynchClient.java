@@ -24,13 +24,14 @@ import ch.orwell.bogatyr.util.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class AsynchClient extends Client {
 	protected Thread thread;
 	
 	/**
 	 * Constructs an AsynchClient.
+	 * 
 	 * @param propertiesFileName The property file for the configuration.
 	 */
 	public AsynchClient(String propertiesFileName) {
@@ -51,7 +52,8 @@ public abstract class AsynchClient extends Client {
 	 * Private methods
 	 */
  	/**
-	 * Starts the Socket Connection to the Server
+	 * Starts the socket connection to the server
+	 * 
 	 * @see Socket
 	 */
 	private void start()	{
@@ -84,6 +86,7 @@ public abstract class AsynchClient extends Client {
 	
 	/**
 	 * Send a asymm key
+	 * 
 	 * @param comObject The {@link ComObject} with the asymm key
 	 * @see ComObject
 	 */
@@ -94,6 +97,7 @@ public abstract class AsynchClient extends Client {
 
 	/**
 	 * Send a symm key
+	 * 
 	 * @param comObject The {@link ComObject} with the symm key
 	 * @see ComObject
 	 */
@@ -107,8 +111,8 @@ public abstract class AsynchClient extends Client {
 	 * Overriden methods
 	 */
 	/**
-	 * Send the ComObject to the Server.<p>
-	 * The Server will execute the given Methodname.
+	 * Send the ComObject to the Server.
+	 * The Server will execute the given method name.
 	 * 
      * @param  data ComObject
      * @see ComObject

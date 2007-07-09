@@ -30,7 +30,7 @@ import ch.orwell.bogatyr.util.Logger;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class Server extends Application {
 	// Attributes
@@ -57,6 +57,7 @@ public abstract class Server extends Application {
 
 	/**
 	 * Constructs a server.
+	 * 
 	 * @param propertiesFileName Properties file for the server configuration.
 	 */
 	public Server(String propertiesFileName) {
@@ -100,7 +101,7 @@ public abstract class Server extends Application {
 	 * This adds a user to the {@link #userList}.
 	 * 
 	 * @param uniqueKey The unique key for the {@link #userList}.
-	 * @param user The user to add.
+	 * @param user The {@link User} to add.
 	 * @throws InvalidUserKeyException
 	 * @see Map
 	 */
@@ -126,8 +127,9 @@ public abstract class Server extends Application {
 
 	/**
 	 * Adds a crypto key to the {@link #cryptoKeyList}.
+	 * 
 	 * @param uniqueKey The unique key for the {@link #cryptoKeyList}.
-	 * @param key The key to add.
+	 * @param key The {@link Key} to add.
 	 * @throws InvalidUserKeyException
 	 * @see Map
 	 */
@@ -141,7 +143,7 @@ public abstract class Server extends Application {
 	}
 
 	/**
-	 * Removes a key from the server.
+	 * Removes a crypto key from the server.
 	 * 
 	 * @param uniqueKey The unique key to find the key in the {@link #cryptoKeyList}.
 	 * @see Map
@@ -152,8 +154,9 @@ public abstract class Server extends Application {
 	}
 
 	/**
-	 * Removes both the user and the key from the Server
-	 * @param uniqueKey The unique key to find the key in the {@link #cryptoKeyList}.<br>
+	 * Removes the user and the crypto key from the Server
+	 * 
+	 * @param uniqueKey The unique key to find the key in the {@link #cryptoKeyList}.
 	 *                  the unique key to find the user in the {@link #userList}.
 	 */
 	public void removeAllData(String uniqueKey) {

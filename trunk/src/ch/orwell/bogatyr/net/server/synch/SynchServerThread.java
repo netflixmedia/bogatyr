@@ -17,12 +17,13 @@ import ch.orwell.bogatyr.net.server.ServerThread;
  *  
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class SynchServerThread extends ServerThread {
 
 	/**
-	 * Constructs a synchronized server.<br>
+	 * Constructs a synchronized server.
+	 * 
 	 * @param socket The Socket to start the server thread.
 	 */
 	public SynchServerThread(Socket socket) {

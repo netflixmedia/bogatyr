@@ -20,7 +20,7 @@ import ch.orwell.bogatyr.util.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public class Panel extends JPanel {
 	private static final long serialVersionUID = 3027031734134184715L;
@@ -28,7 +28,6 @@ public class Panel extends JPanel {
 	
 	/**
 	 * Constructs a Panel without a title.
-	 *
 	 */
 	public Panel() {
 		super();
@@ -60,7 +59,7 @@ public class Panel extends JPanel {
 	 * Private methods
 	 */
 	/**
-	 * Initialize the object<p>
+	 * Initialize the object
 	 * Do some logging.
 	 */
 	private void init() {

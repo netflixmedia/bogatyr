@@ -24,8 +24,8 @@ import javax.crypto.SecretKey;
 
 import ch.orwell.bogatyr.Context;
 import ch.orwell.bogatyr.exception.InvalidStreamSizeException;
+import ch.orwell.bogatyr.net.common.ComInterface;
 import ch.orwell.bogatyr.net.common.dto.ComContainer;
-import ch.orwell.bogatyr.net.common.dto.ComInterface;
 import ch.orwell.bogatyr.net.common.dto.ComObject;
 import ch.orwell.bogatyr.net.common.dto.User;
 import ch.orwell.bogatyr.util.GeneralHelper;
@@ -37,7 +37,7 @@ import ch.orwell.bogatyr.util.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class ServerThread implements Runnable, ComInterface {
 	protected String className;
@@ -53,6 +53,7 @@ public abstract class ServerThread implements Runnable, ComInterface {
 	
 	/**
 	 * Constructs a ServerThread.
+	 * 
 	 * @param socket The socket where the server thread listen.
 	 */
 	public ServerThread(Socket socket) {
@@ -62,6 +63,7 @@ public abstract class ServerThread implements Runnable, ComInterface {
 	
 	/**
      * Reads a socket-stream
+     * 
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 * @throws BadPaddingException 
@@ -89,6 +91,7 @@ public abstract class ServerThread implements Runnable, ComInterface {
 
     /**
      * Writes on a socket-stream
+     * 
      * @throws IOException 
      * @throws BadPaddingException 
      * @throws IllegalBlockSizeException 
@@ -122,6 +125,7 @@ public abstract class ServerThread implements Runnable, ComInterface {
 
     /**
      * Reads a communication object from socket-stream
+     * 
      * @return ComObject Returns a communication object.
      * @throws Exception 
      * @throws ClassNotFoundException 
@@ -141,6 +145,7 @@ public abstract class ServerThread implements Runnable, ComInterface {
 
     /**
      * Writes a communication object on a socket-stream
+     * 
      * @param comObject The communication object to write on the socket-stream.
      * @throws InvalidStreamSizeException 
      * @throws IOException 

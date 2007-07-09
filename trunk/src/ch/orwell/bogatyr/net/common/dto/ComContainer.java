@@ -20,7 +20,7 @@ import ch.orwell.bogatyr.util.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public final class ComContainer implements Serializable {
 	private static final long serialVersionUID = 2670074600547970553L;
@@ -32,6 +32,7 @@ public final class ComContainer implements Serializable {
 
 	/**
 	 * Constructs a ComContainer.
+	 * 
 	 * @param key The key for authentication
 	 * @param data The Data as a byte-array
 	 */
@@ -55,7 +56,7 @@ public final class ComContainer implements Serializable {
 	 * Private methods
 	 */
 	/**
-	 * Initialize the object<p>
+	 * Initialize the object
 	 * Do some logging.
 	 */
 	private void init() {

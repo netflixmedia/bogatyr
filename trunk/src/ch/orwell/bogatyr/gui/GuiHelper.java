@@ -21,7 +21,7 @@ import ch.orwell.bogatyr.Context;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class GuiHelper {
 	// MenuItem types
@@ -31,7 +31,8 @@ public abstract class GuiHelper {
 
 	/**
      * Creates a JMenuItem
-     * @param type Typ (0 = Plain, 1 = Radio, 2 = Check)
+     * 
+     * @param type Type (0 = Plain, 1 = Radio, 2 = Check)
      * @param text Text
      * @param image Picture
      * @param mnemonic Mnemonic
@@ -79,7 +80,8 @@ public abstract class GuiHelper {
 	
 	/**
      * Creates a JMenuItem
-     * @param type Typ (0 = Plain, 1 = Radio, 2 = Check)
+     * 
+     * @param type Type (0 = Plain, 1 = Radio, 2 = Check)
      * @param key Localizer
      * @param image Picture
      * @return JMenuItem
@@ -120,6 +122,7 @@ public abstract class GuiHelper {
 	}
 	/**
      * Creates a JMenu
+     * 
      * @param key Localizer
      * @return JMenu
      * @see JMenu

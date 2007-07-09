@@ -11,14 +11,13 @@ package ch.orwell.bogatyr.util;
 /**
  * This class may be used to transmit client environment info to the server and to decide if
  * an operating system corresponds to the Windows, Mac or a Unix operating system. 
- * <p>
  * It encapsulates name, architecture and version of an operating system, based on system properties.
  * The class is instanciated on the client by calling and transmitted to the server
  * where the client operating system properties may be read by the server.
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class EnvironmentInfo {
 
@@ -46,7 +45,6 @@ public abstract class EnvironmentInfo {
 	/**
 	 * Try to determine whether this application is running under Windows
 	 * or some other platform by examing the "os.name" property.
-	 * <p>
 	 * A check for unix platform is done by checking that it is not the Windows and not the
 	 * Mac platform.
 	 *

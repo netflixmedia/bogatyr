@@ -91,7 +91,7 @@ public class SplashScreen extends JFrame {
 	 * Private methods
 	 */
 	/**
-	 * Initialize the object<p>
+	 * Initialize the object
 	 * Do some logging.
 	 */
 	private void init() {

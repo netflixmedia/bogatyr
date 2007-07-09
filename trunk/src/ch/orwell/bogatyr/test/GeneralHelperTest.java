@@ -20,7 +20,7 @@ import ch.orwell.bogatyr.util.GeneralHelper;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public class GeneralHelperTest extends TestCase {
 	
@@ -136,5 +136,4 @@ public class GeneralHelperTest extends TestCase {
 		assertTrue(this.simpleDouble == simpleDoubleFromBytes);
 		assertTrue(this.simpleInt == simpleIntFromBytes);
     }
-    
 }

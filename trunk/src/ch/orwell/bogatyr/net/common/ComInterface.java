@@ -5,17 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://code.google.com/p/bogatyr/
  *******************************************************************************/
-package ch.orwell.bogatyr.net.common.dto;
+package ch.orwell.bogatyr.net.common;
 
+import ch.orwell.bogatyr.net.common.dto.ComObject;
 
 
 /**
- * This is the communication interface<br>
- * it will be implemented by all server threads and client applications
+ * This is the communication interface
+ * It will be implemented by all server threads and client applications
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public interface ComInterface {
 	// Methods
@@ -29,6 +30,7 @@ public interface ComInterface {
 	/**
      * Send a connect request
      * This is the first called method on the server
+     * 
      * @param comObject
      * @throws Exception
      */
@@ -37,6 +39,7 @@ public interface ComInterface {
 	/**
      * Send a disconnect request
      * This is the last called method on the server
+     * 
      * @param comObject
      * @throws Exception
      */
@@ -44,6 +47,7 @@ public interface ComInterface {
 
 	/**
      * Send the asymmetric key
+     * 
      * @param comObject
      * @throws Exception
      */
@@ -51,6 +55,7 @@ public interface ComInterface {
 	
 	/**
      * Send the symmetric key
+     * 
      * @param comObject
      * @throws Exception
      */
@@ -58,6 +63,7 @@ public interface ComInterface {
     
 	/**
      * Logon to server
+     * 
      * @param comObject
      * @throws Exception
      */
@@ -65,6 +71,7 @@ public interface ComInterface {
     
     /**
      * Logoff from server
+     * 
      * @param comObject
      * @throws Exception
      */

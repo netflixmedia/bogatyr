@@ -44,6 +44,7 @@ public class TableModel extends AbstractTableModel {
 	
 	/**
 	 * Counts the number of columns
+	 * 
 	 * @return Number of columns
 	 */
 	
@@ -53,6 +54,7 @@ public class TableModel extends AbstractTableModel {
 	
 	/**
 	 * Counts the number of rows
+	 * 
 	 * @return Number of rows
 	 */
 	
@@ -65,6 +67,7 @@ public class TableModel extends AbstractTableModel {
 	
 	/**
 	 * Get the Object at a specific place in the data array
+	 * 
 	 * @param row row number
 	 * @param col column number
 	 * @return Returns the Object at specific place in the data array 
@@ -79,7 +82,7 @@ public class TableModel extends AbstractTableModel {
 	 * Private methods
 	 */
 	/**
-	 * Initialize the TableModel object<p>
+	 * Initialize the TableModel object
 	 * Do some logging.
 	 */
 	private void init() {

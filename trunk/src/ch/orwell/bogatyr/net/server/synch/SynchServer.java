@@ -15,12 +15,13 @@ import ch.orwell.bogatyr.net.server.Server;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class SynchServer extends Server {
 
 	/**
-	 * Constructs a synchron server.<br>
+	 * Constructs a synchron server.
+	 * 
 	 * @param propertiesFileName Properties file for the server configuration.
 	 */
     public SynchServer(String propertiesFileName) {

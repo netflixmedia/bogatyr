@@ -23,7 +23,7 @@ import ch.orwell.bogatyr.util.GeneralHelper;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public class CryptoTest extends TestCase {
 	
@@ -132,5 +132,4 @@ public class CryptoTest extends TestCase {
 		// Back testing
 		assertTrue(this.toEncrypt.equals(expectedObject));
     }
-    
 }

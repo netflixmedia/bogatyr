@@ -7,35 +7,25 @@
  *******************************************************************************/
 package ch.orwell.bogatyr.exception;
 
-import ch.orwell.bogatyr.Context;
+import ch.orwell.bogatyr.dao.DataObject;
 
 
 /**
- * This is an exception if the user-key is invalid
+ * This is an exception if the validation of a {@link DataObject} is failed
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
  * @version 20070709
  */
-public final class InvalidUserKeyException extends Exception {
-	private static final long serialVersionUID = -5681289983282835248L;
-
-	// Resources
-	private final static String	RES_TEXT = "InvalidUserKeyException.text"; //$NON-NLS-1$
+public final class ValidationException extends Exception {
+	private static final long serialVersionUID = 2262162323753693225L;
 
 	/**
-	 * Exception when the user key is invalid.
-	 */
-	public InvalidUserKeyException() {
-        super(Context.getInstance().getLocalizer().getValue(RES_TEXT));
-    }
-
-	/**
-	 * Exception when the user key is invalid with a individual Message.
+	 * Exception when the the validation of a {@link DataObject} is failed.
 	 * 
 	 * @param msg Message as String
 	 */
-	public InvalidUserKeyException(final String msg) {
+	public ValidationException(final String msg) {
         super(msg);
     }
 } 

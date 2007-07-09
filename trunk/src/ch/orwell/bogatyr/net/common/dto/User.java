@@ -8,6 +8,8 @@
 package ch.orwell.bogatyr.net.common.dto;
 
 import ch.orwell.bogatyr.Context;
+import ch.orwell.bogatyr.dao.DataObject;
+import ch.orwell.bogatyr.exception.ValidationException;
 import ch.orwell.bogatyr.util.GeneralHelper;
 import ch.orwell.bogatyr.util.Localizer;
 import ch.orwell.bogatyr.util.Logger;
@@ -18,7 +20,7 @@ import ch.orwell.bogatyr.util.Logger;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public final class User extends DataObject {
 	private static final long serialVersionUID = -2688333932057727527L;
@@ -29,6 +31,7 @@ public final class User extends DataObject {
 	
 	/**
 	 * Constructs a ComContainer.
+	 * 
 	 * @param username Username as a String
 	 * @param password Password as a String
 	 */
@@ -65,7 +68,7 @@ public final class User extends DataObject {
 	 * Private methods
 	 */
 	/**
-	 * Initialize the object<p>
+	 * Initialize the object
 	 * Do some logging.
 	 */
 	private void init() {
@@ -78,10 +81,11 @@ public final class User extends DataObject {
 	 */
 	/**
 	 * Validates the attributes {@link #username} and {@link #password}
-	 * @throws Exception
+	 * 
+	 * @throws ValidationException
 	 * @see DataObject 
 	 */
-	public void validate() throws Exception {
+	public void validate() throws ValidationException {
 		validateString("username", this.username); //$NON-NLS-1$
 		validateString("password", this.password); //$NON-NLS-1$
 	}

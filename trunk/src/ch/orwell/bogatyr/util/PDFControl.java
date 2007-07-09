@@ -13,14 +13,13 @@ import java.io.OutputStream;
 import java.text.MessageFormat;
 
 import ch.orwell.bogatyr.Context;
-import ch.orwell.bogatyr.io.FileManager;
 
 /**
  * This is a tool to open PDF data with an external program such as Acrobat Reader.
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070708
+ * @version 20070709
  */
 public class PDFControl {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
@@ -37,15 +36,15 @@ public class PDFControl {
 
 	/**
 	 * Show a PDF (provided as a byte[]) with PDF viewer. A temporary file is first created (see
-	 * {@link #createFile} and {@link PdfControl class description}).
+	 * {@link #createFile} and {@link PDFControl class description}).
 	 */
-	public static void open(byte[] pdfFileContents)	throws Exception {
+	public static void open(byte[] pdfFileContents)	throws IOException {
 		try {
 			// first store the pdfFileContents to a temporary file
 			File temporaryFile = createFile();
 			FileManager.writeBinaryFile(temporaryFile.getAbsolutePath(), pdfFileContents);
 			open(temporaryFile);
-		} catch (Exception ex) {
+		} catch (IOException ex) {
 			throw ex;
 		}
 	}
@@ -53,20 +52,18 @@ public class PDFControl {
 	/**
 	 * Show a PDF (provided as {@link File}) with PDF viewer.
 	 */
-	public static void open(File pdfFile) throws Exception {
+	public static void open(File pdfFile) throws IOException {
 		try {
 			PDFControl.execute(pdfFile.getCanonicalPath());
-		} catch (Exception ex) {
+		} catch (IOException ex) {
 			throw ex;
 		}
 	}
 
 	/**
 	 * Deletes all PDF files in the PDF Directory.
-	 * <p>
-	 * Intended to be called before the application is closed for security reasons (Else the information within
+	 * Intended to be called before the application is closed for security reasons (else the information within
 	 * temporary PDF files could be read by anyone with access to the files).
-	 * <p>
 	 * This will also delete the directory itself if it contains PDF files only. This is especially important on
 	 * Unix systems where the directory could not be written to by another user of the application because of
 	 * file permissions.
@@ -94,7 +91,7 @@ public class PDFControl {
 	 */
 	/**
 	 * Return next temporary non existing file according to the rules of this class (see {@link PdfControl above}).
-	 * Is not synchronized.
+	 * 
 	 * @return File object. File is not physically created.
 	 */
 	private static File createFile() {

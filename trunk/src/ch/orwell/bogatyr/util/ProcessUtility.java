@@ -19,12 +19,11 @@ import ch.orwell.bogatyr.exception.ExceptionHelper;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public final class ProcessUtility {
 	/**
 	 * Starts two threads which read standard output and standard error from a subprocess.
-	 * <p>
 	 * <strong>Note:</strong> Standard output and standard error of the process returned by
 	 * {@link Runtime#exec} must be read else the process might hang infinitly.
 	 * <p>
@@ -54,6 +53,7 @@ public final class ProcessUtility {
 		/**
 		 * Start new thread which reads from an {@link InputStream} until end-of-file is reached.
 		 * The read data is written to an {@link OutputStream}.
+		 * 
 		 * @param source may not be null
 		 * @param target may be null
 		 */

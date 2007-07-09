@@ -21,6 +21,7 @@ public class Runner {
 	
 	/**
 	 * The only main() method to run every application.
+	 * 
 	 * @param args The arguments given to start an application.
 	 */
 	

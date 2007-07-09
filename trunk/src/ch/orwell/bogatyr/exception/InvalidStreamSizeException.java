@@ -15,7 +15,7 @@ import ch.orwell.bogatyr.Context;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public final class InvalidStreamSizeException extends Exception {
 	private static final long serialVersionUID = 6400247262258600862L;
@@ -36,8 +36,7 @@ public final class InvalidStreamSizeException extends Exception {
 	/**
 	 * Exception when the Stream size is invalid with a individual Message.
 	 * 
-	 * @param msg
-	 *            Message as String
+	 * @param msg Message as String
 	 */
 	public InvalidStreamSizeException(final String msg) {
         super(msg);

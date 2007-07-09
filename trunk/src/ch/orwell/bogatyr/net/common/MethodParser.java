@@ -7,7 +7,6 @@
  *******************************************************************************/
 package ch.orwell.bogatyr.net.common;
 
-import ch.orwell.bogatyr.net.common.dto.ComInterface;
 import ch.orwell.bogatyr.net.common.dto.ComObject;
 
 
@@ -16,11 +15,18 @@ import ch.orwell.bogatyr.net.common.dto.ComObject;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class MethodParser {	
 	
-	public static synchronized Object execute(ComInterface caller, ComObject comObject) throws Exception {
+	/**
+	 * Execute a method in the server thread or client.
+	 * 
+	 * @param caller The server thread or the client
+	 * @param comObject Communication object between the server thread an the client
+	 * @throws Exception
+	 */
+	public static Object execute(ComInterface caller, ComObject comObject) throws Exception {
 		Object result = null;
 
 		if (comObject.getMethodName().equalsIgnoreCase(ComInterface.METHOD_CONNECT)) {

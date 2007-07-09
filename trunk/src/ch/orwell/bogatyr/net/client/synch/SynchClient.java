@@ -8,7 +8,7 @@
 package ch.orwell.bogatyr.net.client.synch;
 
 import ch.orwell.bogatyr.net.client.Client;
-import ch.orwell.bogatyr.net.common.dto.ComInterface;
+import ch.orwell.bogatyr.net.common.ComInterface;
 import ch.orwell.bogatyr.net.common.dto.ComObject;
 import ch.orwell.bogatyr.util.Logger;
 
@@ -18,7 +18,7 @@ import ch.orwell.bogatyr.util.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class SynchClient extends Client {
 

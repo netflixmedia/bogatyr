@@ -21,7 +21,7 @@ import ch.orwell.bogatyr.util.PropertiesManager;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class Application implements Runnable {
 	protected static String className = null;
@@ -58,6 +58,7 @@ public abstract class Application implements Runnable {
 	
 	/**
 	 * Constructs an Application.
+	 * 
 	 * @param propertiesFileName Properties file for the server configuration.
 	 */
 	public Application(String propertiesFileName) {
@@ -71,6 +72,7 @@ public abstract class Application implements Runnable {
 	
 	/**
      * Terminates the application in a proper way 
+     * 
      * @param returnCode System-Return-Code
      */	
 	public final static void exit(int returnCode) {

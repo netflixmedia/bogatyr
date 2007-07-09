@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import ch.orwell.bogatyr.Context;
-import ch.orwell.bogatyr.net.common.dto.ComInterface;
+import ch.orwell.bogatyr.net.common.ComInterface;
 import ch.orwell.bogatyr.net.common.dto.ComObject;
 
 
@@ -23,11 +23,17 @@ import ch.orwell.bogatyr.net.common.dto.ComObject;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class Security {	
 	private static Map<SocketAddress, Long> contactTable = new ConcurrentHashMap<SocketAddress, Long>(); //#LS new
 
+	/**
+	 * Validates a {@link ComObject} and the requested method on the server
+	 * 
+	 * @param comObject Communication object
+	 * @throws Exception
+	 */
 	public static boolean isMethodGranted(ComObject comObject) throws Exception {
 		if (comObject.getMethodName().equalsIgnoreCase(ComInterface.METHOD_CONNECT)) {
 			return true;
@@ -46,10 +52,10 @@ public abstract class Security {
 	}
 
 	/**
-	 * Validates a socket (DOS and overload protection)
-	 * <p>
-	 * Looks that one client has not to more traffic than {@link Server#getInterval()}.
-	 * Looks that all clients has not more traffic than {@link Server#getRequests()}
+	 * Validates a socket (simple DOS and overload protection)
+	 * 
+	 * Ensures that no client connects faster than {@link Server#getInterval()}.
+	 * Ensures that the total number of client connects within {@link Server#getInterval()} dosen't reach {@link Server#getRequests()}
 	 * 
 	 * @param socket The socket to protect
 	 * @see Server#getInterval()
@@ -94,7 +100,6 @@ public abstract class Security {
 	 * 
 	 * @param comObject The communication Object
 	 */
-
 	public static boolean isUserLoggedOn(ComObject comObject) {
 		if (((Server)Context.getInstance().getData(Server.ATT_INSTANCE)).getUser(comObject.getUserKey()) != null) {
 			return true;

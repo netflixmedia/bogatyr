@@ -13,19 +13,14 @@ import java.util.Date;
 
 import ch.orwell.bogatyr.Application;
 import ch.orwell.bogatyr.Context;
-import ch.orwell.bogatyr.io.FileManager;
 
 
 /**
- * This is the logger for the hole framework (Singleton)
- * <p>
- * This is a design pattern implementation for the singleton pattern.<br>
- * ~~~ one of the musthaves for this semester.<br>
- * Look here: <a href="http://edu.panter.ch/static/SingletonPattern.html">http://edu.panter.ch/static/SingletonPattern.html</a>
- * 
+ * This is the logger for the hole framework
+ *  
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070708
+ * @version 20070709
  */
 public final class Logger {
 	private static Logger instance = null;
@@ -48,8 +43,9 @@ public final class Logger {
 	}
 	
     /**
-     * If an instance of Logger exists it will give it back.<br>
+     * If an instance of Logger exists it will give it back.
      * Else it will generate one instance of Logger.
+     * 
      * @return The only one Logger.
      */
     public static Logger getInstance() {
@@ -61,6 +57,7 @@ public final class Logger {
     
 	/**
      * Writes to the WARNING-file
+     * 
      * @param descent Caller Class::Method
      * @param logEntry Entry
      */
@@ -77,6 +74,7 @@ public final class Logger {
 	
 	/**
      * Writes to the DEBUG-file
+     * 
      * @param descent Caller Class::Method
      * @param logEntry Entry
      */
@@ -94,6 +92,7 @@ public final class Logger {
 
 	/**
      * Writes to the EXCEPTION-file
+     * 
      * @param descent Caller Class::Method
      * @param logEntry Entry
      * @param ex Exception
@@ -114,6 +113,7 @@ public final class Logger {
 
 	/**
      * Writes to the EXCEPTION-file
+     * 
      * @param descent Caller Class::Method
      * @param logEntry Entry
      */
@@ -130,6 +130,7 @@ public final class Logger {
 
 	/**
      * Writes to the Log-file
+     * 
      * @param descent Caller Class::Method
      * @param logEntry Entry
      */
@@ -150,6 +151,7 @@ public final class Logger {
 	 */
 	/**
      * Checks the entry
+     * 
      * @param logEntry Entry
      * @return validate/corrected entry
      */
@@ -162,6 +164,7 @@ public final class Logger {
 
 	/**
      * Checks the descent
+     * 
      * @param descent Caller Class::Method
      * @return validate/corrected descent
      */
@@ -174,6 +177,7 @@ public final class Logger {
 
 	/**
      * Writes physically into the log file
+     * 
      * @param descent Caller Class::Method
      * @param logEntry Entry
      * @param fileName File name (with absolut path)
@@ -196,7 +200,6 @@ public final class Logger {
 			System.err.println("Logger::readProperties - " + PROPERTY_LOGGER_FILE + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
 			Application.exit(400);
 		}
-		
 		this.logFileName = (logPath + logFile);
 	}
 }

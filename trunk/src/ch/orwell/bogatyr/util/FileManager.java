@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://code.google.com/p/bogatyr/
  *******************************************************************************/
-package ch.orwell.bogatyr.io;
+package ch.orwell.bogatyr.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,7 +23,7 @@ import ch.orwell.bogatyr.Context;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class FileManager {
 	// Resources
@@ -31,6 +31,7 @@ public abstract class FileManager {
 	
 	/**
      * Search in a path (directory) for files via identifier
+     * 
      * @param path Path
      * @param identifier Part of the file name (if it's "null", all files will be delivered)
      * @param isCaseSensitive true/false
@@ -53,18 +54,20 @@ public abstract class FileManager {
 	
 	/**
      * Delete a file
+     * 
      * @param fileName File name (with absolut path)
      */	
-	public static synchronized void deleteFile(String fileName) {
+	public static void deleteFile(String fileName) {
     	(new File(fileName)).delete();
     }
 
 	/**
      * Rename a file
+     * 
      * @param fileNameCurrent Current file name (with absolut path)
      * @param fileNameNew New file name (with absolut path)
      */	
-	public static synchronized void renameFile(String fileNameCurrent, String fileNameNew) {
+	public static void renameFile(String fileNameCurrent, String fileNameNew) {
 		File fileCurrent = new File(fileNameCurrent);
 		File fileNew = new File(fileNameNew);
 		fileCurrent.renameTo(fileNew);
@@ -72,11 +75,12 @@ public abstract class FileManager {
 
 	/**
      * Write a text line in a file
+     * 
      * @param fileName File name (with absolut path)
      * @param code Code page of the text (e.g. "UTF-8")
      * @param line Text line
      */	
-	public static synchronized void writeLine(String fileName, String code, String line) throws IOException {
+	public static void writeLine(String fileName, String code, String line) throws IOException {
 		String encoding = code;
 		
 		PrintWriter file = null;
@@ -92,15 +96,17 @@ public abstract class FileManager {
 	
 	/**
      * Write a text line with "UTF-8"-encoding in a file
+     * 
      * @param fileName File name (with absolut path)
      * @param line Text line
      */	
-	public static synchronized void writeLine(String fileName, String line) throws IOException {
+	public static void writeLine(String fileName, String line) throws IOException {
 		writeLine(fileName, null, line);
 	}
 
 	/**
      * Read a file in a byte-array
+     * 
      * @param fileName File name (with absolut path)
      * @return byte-array
      */	
@@ -119,6 +125,7 @@ public abstract class FileManager {
 
 	/**
      * Write a byte-array into a file 
+     * 
      * @param fileName File name (with absolut path)
      * @param data byte-array
      */	
@@ -135,6 +142,7 @@ public abstract class FileManager {
 	 */
 	/**
      * Recursive search method for a path (directories)
+     * 
      * @param filePath Path
      * @param identifier Part of the file name (if it's "null", all files will be delivered)
      * @param isCaseSensitive true/false

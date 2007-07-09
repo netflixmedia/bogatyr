@@ -12,7 +12,7 @@ import java.net.Socket;
 
 import ch.orwell.bogatyr.Context;
 import ch.orwell.bogatyr.exception.ExceptionHelper;
-import ch.orwell.bogatyr.net.common.dto.ComInterface;
+import ch.orwell.bogatyr.net.common.ComInterface;
 import ch.orwell.bogatyr.net.common.dto.ComObject;
 import ch.orwell.bogatyr.net.server.Server;
 import ch.orwell.bogatyr.net.server.ServerThread;
@@ -24,7 +24,7 @@ import ch.orwell.bogatyr.util.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class AsynchServerThread extends ServerThread {
 	protected Thread thread;
@@ -33,6 +33,7 @@ public abstract class AsynchServerThread extends ServerThread {
 	
 	/**
 	 * Constructs a asynchron Server.
+	 * 
 	 * @param socket The Socket to start the server thread.
 	 */
 	public AsynchServerThread(Socket socket) {
@@ -46,8 +47,7 @@ public abstract class AsynchServerThread extends ServerThread {
 	 * Private methods
 	 */
 	/**
-	 * Initialize the object<p>
-	 * Do some logging.
+	 * Initialize the object
 	 */
 	private void init() {
 		this.server = (AsynchServer)Context.getInstance().getData(Server.ATT_INSTANCE);
@@ -55,7 +55,6 @@ public abstract class AsynchServerThread extends ServerThread {
 
 	/**
 	 * Starts the thread with {@link Thread#MIN_PRIORITY}.
-	 *
 	 */
 	private void start() {
 		if (this.thread == null) {
@@ -67,7 +66,6 @@ public abstract class AsynchServerThread extends ServerThread {
 
 	/**
 	 * Stops the thread. And closes the open socket.
-	 *
 	 */
 	public void stop() {
 		if ((this.thread != null) && this.thread.isAlive()) {

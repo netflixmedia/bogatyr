@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070708
+ * @version 20070709
  */
 public class BrowserControl {
 	// The default system browser under windows.
@@ -35,7 +35,6 @@ public class BrowserControl {
 	/**
 	 * Display a file in the browser. If you want to display a
 	 * file, you must include the absolute path name.
-	 * <p>
 	 * <em>Possible security issue:</em> if the url is received from a third party company such as Paynet, the url
 	 * must be verified by the application before calling <code>displayURL</code>. Else it is
 	 * possible for the third party company to send an url like "notepad.exe" which directly starts
@@ -98,6 +97,7 @@ public class BrowserControl {
 	public static void openUrlOnMacPlatform(final String url) {
 		Runnable runnable = new Runnable() {
 			
+			@SuppressWarnings("unchecked")
 			public void run() {
 				try {
 					// Call the mac specific method com.apple.eio.FileManager.openURL(url)

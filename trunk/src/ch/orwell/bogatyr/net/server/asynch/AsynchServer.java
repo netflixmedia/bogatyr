@@ -22,7 +22,7 @@ import ch.orwell.bogatyr.util.Logger;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class AsynchServer extends Server {
 
@@ -31,8 +31,9 @@ public abstract class AsynchServer extends Server {
 	private Thread thread;
 
 	/**
-	 * Constructs a AsynchServer.<br>
+	 * Constructs a AsynchServer.
 	 * Starts a new Thread.
+	 * 
 	 * @param propertiesFileName Properties file for the server configuration.
 	 */
 	public AsynchServer(String propertiesFileName) {
@@ -45,7 +46,8 @@ public abstract class AsynchServer extends Server {
 	}
 	
 	/**
-	 * Adds a new Thread to the {@link #threadList}.
+	 * Adds a new thread to the {@link #threadList}.
+	 * 
 	 * @param uniqueKey A unique Key for the {@link #threadList} as Map index
 	 * @param asynchServerThread An asynchron server thread
 	 * @throws InvalidUserKeyException
@@ -62,6 +64,7 @@ public abstract class AsynchServer extends Server {
 
 	/**
 	 * Removes the thread with the given unique key from the {@link #threadList}.
+	 * 
 	 * @param uniqueKey A unique Key for the {@link #threadList} as Map index
 	 * @see Map
 	 */

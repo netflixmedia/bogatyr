@@ -30,7 +30,7 @@ import ch.orwell.bogatyr.util.GeneralHelper;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public final class AsymmCrypto {
 	private static final int KEYSIZE = 1024;
@@ -41,19 +41,19 @@ public final class AsymmCrypto {
 	private PrivateKey privateKey;
 	
 	/**
-	 * Return the generated public key for encryption and decryption use.
+	 * Return the generated {@link PublicKey} for encryption and decryption use.
 	 * 
-	 * @return Returns the generated public key.
+	 * @return Returns the generated {@link PublicKey}.
 	 */
 	public PublicKey getPublicKey() {
 		return this.publicKey;
 	}
 
 	/**
-	 * Encrypt the Data with a given PublicKey.
+	 * Encrypt the data with a given {@link PublicKey}.
 	 * 
-	 * @param input The Data to encrypt as a Byte-Array
-	 * @param key The PublicKey for the encryption
+	 * @param input The data to encrypt as a Byte-Array
+	 * @param key The {@link PublicKey} for the encryption
 	 * @return Return the encrypted Byte-Array 
 	 * @throws InvalidKeyException
 	 * @throws NoSuchAlgorithmException
@@ -88,7 +88,6 @@ public final class AsymmCrypto {
 						result = GeneralHelper.appendByteArray(result, encryptInternal(usedBytes, key));
 					}
 					tempCounter++;
-					
 				}
 			}
 		} else {
@@ -100,7 +99,7 @@ public final class AsymmCrypto {
 	/**
 	 * Decrypt the Data.
 	 * 
-	 * @param input The encrypted Data as a Byte-Array
+	 * @param input The encrypted data as a Byte-Array
 	 * @return Return the decrypted Byte-Array
 	 * @throws InvalidKeyException
 	 * @throws NoSuchAlgorithmException
@@ -134,8 +133,9 @@ public final class AsymmCrypto {
 	}
 
 	/**
-	 * Generates a public and a private KeyPair whith the Class<br>
-	 * KeyPairGenerator and saves it to the intern attributes.
+	 * Generates a public and a private KeyPair whith the Class
+	 * KeyPairGenerator and saves it to the internal attributes.
+	 * 
 	 * @throws NoSuchAlgorithmException
 	 * @see java.security.KeyPair
 	 * @see java.security.KeyPairGenerator
@@ -153,10 +153,10 @@ public final class AsymmCrypto {
 	}
 
 	/**
-	 * Encrypt the Data with a given PublicKey internal.
+	 * Encrypt the data with a given {@link PublicKey} (internal).
 	 * 
-	 * @param input The Data to encrypt as a Byte-Array
-	 * @param key The PublicKey for the encryption
+	 * @param input The data to encrypt as a Byte-Array
+	 * @param key The {@link PublicKey} for the encryption
 	 * @return Return the encrypted Byte-Array 
 	 * @throws NoSuchAlgorithmException
 	 * @throws NoSuchProviderException
@@ -173,9 +173,9 @@ public final class AsymmCrypto {
 	}
 
 	/**
-	 * Decrypt the Data internal.
+	 * Decrypt the data (internal).
 	 * 
-	 * @param input The encrypted Data as a Byte-Array
+	 * @param input The encrypted data as a Byte-Array
 	 * @return Return the decrypted Byte-Array
 	 * @throws NoSuchAlgorithmException
 	 * @throws NoSuchProviderException

@@ -19,7 +19,7 @@ import ch.orwell.bogatyr.util.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public final class ComObject implements Serializable {
 	private static final long serialVersionUID = -737966508835228621L;
@@ -34,9 +34,10 @@ public final class ComObject implements Serializable {
 	
 	/**
 	 * Constructs a ComObject.
+	 * 
 	 * @param userKey The user key for authentication
 	 * @param methodName The method name that will be invoked
-	 * @param data The Dataobject to send with
+	 * @param data The data object to send with
 	 */
 	public ComObject(String userKey, String methodName, Object data) {
 		this.userKey = userKey;
@@ -48,8 +49,9 @@ public final class ComObject implements Serializable {
 	
 	/**
 	 * Constructs a ComObject.
+	 * 
 	 * @param userKey The user key for authentication
-	 * @param data The Dataobject to send with
+	 * @param data The data object to send with
 	 */
 	public ComObject(String userKey, Object data) {
 		this.userKey = userKey;
@@ -91,7 +93,7 @@ public final class ComObject implements Serializable {
 	 * Private methods
 	 */
 	/**
-	 * Initialize the object<p>
+	 * Initialize the object
 	 * Do some logging.
 	 */
 	private void init() {

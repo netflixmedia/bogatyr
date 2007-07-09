@@ -26,7 +26,7 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public final class SymmCrypto {
 	private static final int KEYSIZE = 128;
@@ -35,7 +35,7 @@ public final class SymmCrypto {
 	private SecretKey key;
 	
 	/**
-	 * Return the generated key for encryption and decryption use.
+	 * Return the generated {@link SecretKey} for encryption and decryption use.
 	 * 
 	 * @return Returns the generated key.
 	 */
@@ -44,10 +44,10 @@ public final class SymmCrypto {
 	}
 	
 	/**
-	 * Encrypt the Data with a given Key.
+	 * Encrypt the data with a given {@link Key}.
 	 * 
-	 * @param input The Data to encrypt as a Byte-Array
-	 * @param encryptionKey The Key for the encryption
+	 * @param input The data to encrypt as a Byte-Array
+	 * @param encryptionKey The key for the encryption
 	 * @return Return the encrypted Byte-Array 
 	 * @throws NoSuchAlgorithmException
 	 * @throws NoSuchPaddingException
@@ -64,10 +64,10 @@ public final class SymmCrypto {
 	}
 
 	/**
-	 * Decrypt the Data with a given Key.
+	 * Decrypt the data with a given {@link Key}.
 	 * 
-	 * @param input The encrypted Data as a Byte-Array
-	 * @param decryptionKey The Key for the decryption
+	 * @param input The encrypted data as a Byte-Array
+	 * @param decryptionKey The key for the decryption
 	 * @return Return the decrypted Byte-Array
 	 * @throws IllegalBlockSizeException
 	 * @throws BadPaddingException

@@ -15,13 +15,8 @@ import ch.orwell.bogatyr.util.PropertiesManager;
 
 
 /**
- * Application-Context (Singleton)
- * <p>
+ * Application-Context
  * Get access for general content in the context.
- * <p>
- * This is a design pattern implementation for the singleton pattern.<br>
- * ~~~ one of the musthaves for this semester.<br>
- * Look here: <a href="http://edu.panter.ch/static/SingletonPattern.html">http://edu.panter.ch/static/SingletonPattern.html</a>
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross

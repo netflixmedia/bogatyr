@@ -25,7 +25,7 @@ import java.util.Map;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070709
  */
 public abstract class GeneralHelper {
 
@@ -34,6 +34,7 @@ public abstract class GeneralHelper {
 	
 	/**
      * Checks if a long is greater than 0
+     * 
      * @param value long-Value to check
      */	
 	public static boolean isGreaterThanZero(long value) {
@@ -44,8 +45,9 @@ public abstract class GeneralHelper {
 	}
 
 	/**
-     * Convert a double to an int-Value.<br>
+     * Convert a double to an int-Value.
      * Rounds the double value with {@link Math#round(double)}.
+     * 
      * @param value double-Value
      * @return int-Value
      * @see Math
@@ -56,6 +58,7 @@ public abstract class GeneralHelper {
 	
 	/**
      * Creates an object with parameters via Reflection-API
+     * 
      * @param className Full qualified class name
      * @param parameter Parameter-array
      * @return Rueckgabewert: instanciated object
@@ -86,10 +89,11 @@ public abstract class GeneralHelper {
 
 	/**
      * Checks if a String is valid.
+     * 
      * @param arg String to check
      */	
 	public static boolean isValidString(String arg) {
-		if (!isValidObject(arg) || arg.trim().equals("")) { //$NON-NLS-1$
+		if (!isValidObject(arg) || "".equals(arg.trim())) { //$NON-NLS-1$
 			return false;
 		}
 		return true;
@@ -97,6 +101,7 @@ public abstract class GeneralHelper {
 	
 	/**
      * Checks if a int is not 0.
+     * 
      * @param arg int to check
      */	
 	public static boolean isValidInt(int arg) {
@@ -108,6 +113,7 @@ public abstract class GeneralHelper {
 
 	/**
      * Checks if a long is not 0.
+     * 
      * @param arg long to check
      */	
 	public static boolean isValidLong(long arg) {
@@ -119,6 +125,7 @@ public abstract class GeneralHelper {
 
 	/**
      * Checks if a {@link Object} is not null.
+     * 
      * @param arg Object to check
      */	
 	public static boolean isValidObject(Object arg) {
@@ -130,6 +137,7 @@ public abstract class GeneralHelper {
 
 	/**
      * Checks if a array is valid.
+     * 
      * @param arg Object array to check
      */	
 	public static boolean isValidArray(Object[] arg) {
@@ -141,8 +149,10 @@ public abstract class GeneralHelper {
 
 	/**
      * Checks if a {@link ArrayList} is valid.
+     * 
      * @param arg ArrayList to check
      */	
+	@SuppressWarnings("unchecked")
 	public static boolean isValidArrayList(ArrayList arg) {
 		if (!isValidObject(arg) || arg.size() == 0) {
 			return false;
@@ -151,7 +161,7 @@ public abstract class GeneralHelper {
 	}
 	
 	/**
-	 * Converts an {@link Object} into a byte-array.<br>
+	 * Converts an {@link Object} into a byte-array.
 	 * It uses the {@link ByteArrayOutputStream} and the {@link ObjectOutputStream}.
 	 * 
 	 * @param obj The Object to convert into a byte-array.
@@ -179,7 +189,7 @@ public abstract class GeneralHelper {
 	}
 	
 	/**
-	 * Converts a given byte-array into a valid {@link Object}.<br>
+	 * Converts a given byte-array into a valid {@link Object}.
 	 * It uses the {@link ByteArrayInputStream} and the {@link ObjectInputStream}.
 	 * 
 	 * @param bytes The byte-array to convert into an {@link Object}.
@@ -213,8 +223,8 @@ public abstract class GeneralHelper {
     }
     
     /**
-     * Generates an unique String.<br>
-     * This is used for unique keys.<br>
+     * Generates an unique String.
+     * This is used for unique keys.
      * For example this is used for {@link Map} to store values in it.
      * 
      * @param algo The algorithm to use.
@@ -242,7 +252,7 @@ public abstract class GeneralHelper {
 	}
 
     /**
-     * Generates an unique String with MD5.<br>
+     * Generates an unique String with MD5.
      *
      * @param data The data to encrypt.
      * @return The generated unique String.
@@ -258,7 +268,7 @@ public abstract class GeneralHelper {
     }
 
     /**
-     * Generates an unique String with Sha1.<br>
+     * Generates an unique String with SHA-1.
      *
      * @param data The data to encrypt.
      * @return The generated unique String.
@@ -274,14 +284,13 @@ public abstract class GeneralHelper {
     }
     
     /**
-     * wait for some milli seconds
+     * Wait for some milli seconds
+     * 
      * @param time The milli seconds to wait for.
      */
     public static synchronized void suspendMilliseconds(long time){
     	long startTime = System.currentTimeMillis();
     	
-    	while(System.currentTimeMillis() - time < startTime) {
-    		//let everything wait...
-    	}
-    }
+    	while(System.currentTimeMillis() - time < startTime); //let everything wait...
+     }
 }
