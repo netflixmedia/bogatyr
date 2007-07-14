@@ -1,9 +1,33 @@
 /*******************************************************************************
  * Copyright (c) 2007 by Stefan Laubenberger and Silvan Spross.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the General Public License v2.0
- * which accompanies this distribution, and is available at
- * http://code.google.com/p/bogatyr/
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the General Public License v2.0.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * 
+ * See the GNU General Public License for more details:
+ * ----------------------------------------------------
+ * <http://www.gnu.org/licenses>
+ * 
+ * This distribution is available at:
+ * ----------------------------------
+ * <http://code.google.com/p/bogatyr/>
+ * 
+ * Contact information:
+ * --------------------
+ * Stefan Laubenberger
+ * Bullingerstrasse 53
+ * CH-8004 Zuerich
+ * <laubenberger@gmail.com>
+ * 
+ * Silvan Spross
+ * Badenerstrasse 47 
+ * CH-8022 Zuerich
+ * <silvan.spross@gmail.com>
+ * 
  *******************************************************************************/
 package ch.orwell.bogatyr.gui;
 
@@ -19,7 +43,7 @@ import ch.orwell.bogatyr.util.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070714
  */
 public class TableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 3971895479011825010L;
@@ -125,7 +149,13 @@ public class TableModel extends AbstractTableModel {
 	*/
 	@Override
 	public Class<?> getColumnClass(int c) {
-		return getValueAt(0, c).getClass();
+		Object obj = getValueAt(0, c);
+		
+		if (obj != null) {
+			return getValueAt(0, c).getClass();
+		}
+//		return null;
+		return String.class; //FIXME not really nice implemented... But it works fine :-)
 	}
 	
 	/*
