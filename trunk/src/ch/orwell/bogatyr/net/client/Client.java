@@ -273,7 +273,7 @@ public abstract class Client extends Application implements ComInterface {
 	/**
 	 * Reads the Properties.
 	 */
-	private void readProperties() {
+	private void readProperties() { //TODO improve! @see Application
 		this.host     = Context.getInstance().getProperties().getProperty(PROPERTY_NETWORK_HOST);
 		this.port     = Context.getInstance().getProperties().getPropertyInt(PROPERTY_NETWORK_PORT);
 		this.size     = Context.getInstance().getProperties().getPropertyInt(PROPERTY_NETWORK_SIZE);

@@ -33,11 +33,17 @@ package ch.orwell.bogatyr.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.SequenceInputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.NoSuchElementException;
 
 import ch.orwell.bogatyr.Context;
 
@@ -47,7 +53,7 @@ import ch.orwell.bogatyr.Context;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070709
+ * @version 20070715
  */
 public abstract class FileManager {
 	// Resources
@@ -62,13 +68,13 @@ public abstract class FileManager {
      * @param isRecursive true/false
      * @return ArrayList containing the path to the matched files
      */	
-	public static ArrayList<String> getFileNames(String path, String identifier, boolean isCaseSensitive, boolean isRecursive) throws Exception {
+	public static ArrayList<String> getFileNames(String path, String identifier, boolean isCaseSensitive, boolean isRecursive) throws IOException {
 		ArrayList<String> fileList = new ArrayList<String>();
 
 		File filePath = new File(path);
 		
 		if (!filePath.isDirectory()) {
-			throw new Exception(Context.getInstance().getLocalizer().getValue(RES_INVALID_DIRECTORY));
+			throw new IOException(Context.getInstance().getLocalizer().getValue(RES_INVALID_DIRECTORY));
 		}
 
 		getFileNamesRecursion(filePath, identifier, fileList, isCaseSensitive, isRecursive);
@@ -77,24 +83,108 @@ public abstract class FileManager {
 	}
 	
 	/**
-     * Delete a file
+     * Copy a directory
      * 
-     * @param fileName File name (with absolut path)
+     * @param source Source as absolut path
+     * @param dest Destination as absolut path
      */	
-	public static void deleteFile(String fileName) {
-    	(new File(fileName)).delete();
-    }
+	public static void copyDirectory(String source, String dest) throws IOException{
+		File input = new File(source);
+	    File output = new File(dest);
+
+		if (!output.exists()) {
+	      output.mkdir();
+	    }
+	    
+		File[] children = input.listFiles();
+	    
+		for (File sourceChild : children) {
+			String name = sourceChild.getName();
+			File destChild = new File(output, name);
+			
+			if (sourceChild.isDirectory()) {
+				copyDirectory(sourceChild.getAbsolutePath(), destChild.getAbsolutePath());
+			} else {
+				copyFile(sourceChild.getAbsolutePath(), destChild.getAbsolutePath());
+			}
+	    }
+	}
+	  
+	/**
+     * Copy a file
+     * 
+     * @param source Source as absolut path
+     * @param dest Destination as absolut path
+     */	
+	public static void copyFile(String source, String dest) throws IOException{
+	    File input = new File(source);
+	    File output = new File(dest);
+	    
+		InputStream in = null;
+	    OutputStream out = null;
+
+		if (!output.exists()) {
+			output.createNewFile();
+	    }
+
+		try {
+			in = new FileInputStream(input);
+			out = new FileOutputStream(output);
+			byte[] buf = new byte[1024];
+			int len;
+			while ((len = in.read(buf)) > 0) {
+				out.write(buf, 0, len);
+			}
+		} finally {
+			if (in != null)	in.close();
+			if (out != null) out.close();
+		}
+	}
+	
+	/**
+     * Move a file or directory
+     * 
+     * @param source Source as absolut path
+     * @param dest Destination as absolut path
+     */	
+	public static boolean move(String source, String dest) throws IOException{
+	    File input = new File(source);
+	    
+	    if (input.isDirectory()) {
+	    	copyDirectory(source, dest);
+	    } else {
+	    	copyFile(source, dest);
+	    }
+	    return delete(source);
+	}
 
 	/**
-     * Rename a file
+     * Delete a file or directory
      * 
-     * @param fileNameCurrent Current file name (with absolut path)
-     * @param fileNameNew New file name (with absolut path)
+     * @param name Name (with absolut path)
      */	
-	public static void renameFile(String fileNameCurrent, String fileNameNew) {
-		File fileCurrent = new File(fileNameCurrent);
-		File fileNew = new File(fileNameNew);
-		fileCurrent.renameTo(fileNew);
+	public static boolean delete(String name) throws IOException{ 
+		File resource = new File(name);
+		  
+		if (resource.isDirectory()) {
+			File[] childFiles = resource.listFiles();
+			for(File child : childFiles) {
+				delete(child.getAbsolutePath());
+			}
+		}
+		return resource.delete();
+	}
+	  
+	/**
+     * Rename a file or directory
+     * 
+     * @param nameCurrent Current name (with absolut path)
+     * @param nameNew New name (with absolut path)
+     */	
+	public static boolean rename(String nameCurrent, String nameNew) {
+		File fileCurrent = new File(nameCurrent);
+		File fileNew = new File(nameNew);
+		return fileCurrent.renameTo(fileNew);
 	}
 
 	/**
@@ -136,13 +226,13 @@ public abstract class FileManager {
      */	
 	public static byte[] readBinaryFile(String fileName) throws IOException {
 		File file = new File(fileName);
-		FileInputStream fileInputStream = new FileInputStream(file);
+		FileInputStream fis = new FileInputStream(file);
 		
 		long length = file.length();
 		
 		byte[] buffer = new byte[(int) length];
-		fileInputStream.read(buffer, 0, (int) length);
-		fileInputStream.close();
+		fis.read(buffer, 0, (int) length);
+		fis.close();
 		
 		return buffer;
 	}
@@ -155,9 +245,31 @@ public abstract class FileManager {
      */	
 	public static void writeBinaryFile(String fileName, byte data[]) throws IOException {
 		File file = new File(fileName);
-		FileOutputStream fileoutputstream = new FileOutputStream(file);
-		fileoutputstream.write(data);
-		fileoutputstream.close();
+		FileOutputStream fos = new FileOutputStream(file);
+		fos.write(data);
+		fos.close();
+	}
+
+	/**
+     * Concatenate files to one output file 
+     * 
+     * @param outputFileName Output file name (with absolut path)
+     * @param list List with all file names (with absolut path)
+     */	
+	@SuppressWarnings("unchecked")
+	public static void concatenateFiles(String outputFileName, String list[]) throws IOException {
+		FileOutputStream fos = new FileOutputStream(outputFileName);
+
+		ListOfFiles lof = new ListOfFiles(list);
+
+	    SequenceInputStream sis = new SequenceInputStream(lof);
+        int c;
+
+        while ((c = sis.read()) != -1) {
+    		fos.write(c);
+        }
+        sis.close();
+		fos.close();
 	}
 
 	
@@ -192,5 +304,43 @@ public abstract class FileManager {
 				getFileNamesRecursion(file, identifier, fileList, isCaseSensitive, true); // Recursion
 			}
 		}
+	}
+	
+	
+	/*
+	 * Inner classes
+	 */
+	static class ListOfFiles implements Enumeration<InputStream> {
+
+	    String listOfFiles[];
+	    int current = 0;
+
+	    ListOfFiles(String listOfFiles[]) {
+	    	this.listOfFiles = listOfFiles;
+	    }
+
+	    public boolean hasMoreElements() {
+			if (this.current < this.listOfFiles.length) {
+			    return true;
+		    }
+			return false;
+	    }
+	    
+	    public InputStream nextElement() {
+			InputStream is = null;
+	
+			if (!hasMoreElements()) {
+			    throw new NoSuchElementException("No more files.");
+			}
+
+			try {
+		        String nextElement = this.listOfFiles[this.current];
+		        this.current++;
+		        is = new FileInputStream(nextElement);
+		    } catch (FileNotFoundException ex) {
+				System.err.println("ListOfFiles: " + ex); //FIXME improve?
+		    }
+			return is;
+	    }
 	}
 }

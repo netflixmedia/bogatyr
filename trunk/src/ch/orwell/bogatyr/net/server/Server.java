@@ -209,7 +209,7 @@ public abstract class Server extends Application {
 		Context.getInstance().addData(ATT_INSTANCE, this);
 	}
 	
-	private void readProperties() {
+	private void readProperties() { //TODO improve! @see Application
 		this.port     = Context.getInstance().getProperties().getPropertyInt(PROPERTY_NETWORK_PORT);
 		this.timeout  = Context.getInstance().getProperties().getPropertyInt(PROPERTY_NETWORK_TIMEOUT) * 1000;
 		this.interval = Context.getInstance().getProperties().getPropertyInt(PROPERTY_SERVER_INTERVAL);
