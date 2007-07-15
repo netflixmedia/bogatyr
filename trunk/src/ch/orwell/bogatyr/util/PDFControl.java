@@ -43,9 +43,9 @@ import ch.orwell.bogatyr.Context;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070709
+ * @version 20070715
  */
-public class PDFControl {
+public abstract class PDFControl {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
 
 	private static final String WINDOWS_PDF_VIEWER_PATH  = "rundll32 url.dll,FileProtocolHandler {0}"; //$NON-NLS-1$

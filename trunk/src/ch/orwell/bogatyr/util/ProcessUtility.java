@@ -43,15 +43,13 @@ import ch.orwell.bogatyr.exception.ExceptionHelper;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070709
+ * @version 20070715
  */
 public final class ProcessUtility {
 	/**
 	 * Starts two threads which read standard output and standard error from a subprocess.
 	 * <strong>Note:</strong> Standard output and standard error of the process returned by
 	 * {@link Runtime#exec} must be read else the process might hang infinitly.
-	 * <p>
-	 * See this <a href = http://www.javaworld.com/javaworld/jw-12-2000/jw-1229-traps_p.html>javaworld article</a>.
 	 * <p>
 	 * Usage example: <code><pre>
 	final Process process = Runtime.getRuntime().exec("some command");

@@ -35,15 +35,17 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
 
+import ch.orwell.bogatyr.exception.ExceptionHelper;
+
 
 /**
  * A tool to display an URL in a browser.
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070709
+ * @version 20070715
  */
-public class BrowserControl {
+public abstract class BrowserControl {
 	// The default system browser under windows.
 	private static final String WINDOWS_PATH = "rundll32"; //$NON-NLS-1$
 	private static final String WINDOWS_FLAG = "url.dll,FileProtocolHandler"; //$NON-NLS-1$
@@ -59,6 +61,7 @@ public class BrowserControl {
 	/**
 	 * Display a file in the browser. If you want to display a
 	 * file, you must include the absolute path name.
+	 * <p>
 	 * <em>Possible security issue:</em> if the url is received from a third party company such as Paynet, the url
 	 * must be verified by the application before calling <code>displayURL</code>. Else it is
 	 * possible for the third party company to send an url like "notepad.exe" which directly starts
@@ -84,7 +87,6 @@ public class BrowserControl {
 			//  - maybe more
 			//
 			// Fixed by adding a "#" at the end of the URL.
-			// Why? We don't know... :-)
 			//
 			// Test for http or https protocol is necessary else file-urls
 			// will not work.
@@ -100,7 +102,7 @@ public class BrowserControl {
 			// check for an exit value. If the exit command is 0,
 			// it worked, otherwise we need to start the browser.
 
-			// cmd = 'netscape -remote openURL(http://www.javaworld.com)'
+			// cmd = 'netscape -remote openURL(http://code.google.com/p/bogatyr)'
 			cmd = UNIX_PATH + " " + UNIX_FLAG + "(" + url + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			Process p = createSubprocess(cmd);
 
@@ -111,7 +113,7 @@ public class BrowserControl {
 			if (exitCode != 0) {
 				// Command failed, start up the browser
 
-				// cmd = 'netscape http://www.javaworld.com'
+				// cmd = 'netscape http://code.google.com/p/bogatyr'
 				cmd = UNIX_PATH + " " + url; //$NON-NLS-1$
 				createSubprocess(cmd);
 			}
@@ -130,7 +132,7 @@ public class BrowserControl {
 					final Method method = fileManager.getDeclaredMethod("openURL", new Class[]{String.class}); //$NON-NLS-1$
 					method.invoke(null, new Object[]{url});
 				} catch (Exception ex) {
-					ex.printStackTrace(); //TODO replace by logger?
+					Logger.getInstance().writeException("BrowserControl::openUrlOnMacPlatform", ExceptionHelper.EX_UNKNOWN_ERROR, ex); //$NON-NLS-1$
 				}
 			}
 		};

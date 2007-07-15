@@ -40,7 +40,7 @@ import java.util.ResourceBundle;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070715
  */
 public final class Localizer {
 	private String className;
@@ -112,7 +112,6 @@ public final class Localizer {
 	 */
 	private void init() {
 		this.className = this.getClass().getName();
-		Logger.getInstance().writeDebug(this.className + "::init", "+++ instanciated +++" + toString()); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	

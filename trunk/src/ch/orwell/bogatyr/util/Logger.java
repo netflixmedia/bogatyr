@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.orwell.bogatyr.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,12 +45,13 @@ import ch.orwell.bogatyr.Context;
  *  
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070709
+ * @version 20070715
  */
 public final class Logger {
 	private static Logger instance = null;
 
 	// Resources
+	private final static String	RES_INVALID_PATH = "Logger.invalidPath"; //$NON-NLS-1$
 	private final static String	RES_UNKNOWN      = "Logger.unknown"; //$NON-NLS-1$
 	private final static String	RES_WRITE_FAILED = "Logger.writeFailed"; //$NON-NLS-1$
 	
@@ -216,13 +218,19 @@ public final class Logger {
 		String logPath = Context.getInstance().getProperties().getProperty(PROPERTY_LOGGER_PATH);
 		if (!GeneralHelper.isValidString(logPath)) {
 			System.err.println("Logger::readProperties - " + PROPERTY_LOGGER_PATH + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
-			Application.exit(300);
+			Application.exit(200);
+		}
+
+		// be sure, that the path really exists
+		if (!(new File(logPath)).exists()) {
+			System.err.println("Logger::readProperties - " + PROPERTY_LOGGER_PATH + " " + Context.getInstance().getLocalizer().getValue(RES_INVALID_PATH)); //$NON-NLS-1$ //$NON-NLS-2$
+			Application.exit(210);
 		}
 
 		String logFile = Context.getInstance().getProperties().getProperty(PROPERTY_LOGGER_FILE);
 		if (!GeneralHelper.isValidString(logFile)) {
 			System.err.println("Logger::readProperties - " + PROPERTY_LOGGER_FILE + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
-			Application.exit(400);
+			Application.exit(220);
 		}
 		this.logFileName = (logPath + logFile);
 	}

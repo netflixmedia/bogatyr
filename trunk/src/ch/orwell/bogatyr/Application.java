@@ -45,7 +45,7 @@ import ch.orwell.bogatyr.util.PropertiesManager;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070709
+ * @version 20070715
  */
 public abstract class Application implements Runnable {
 	protected static String className = null;
@@ -77,7 +77,6 @@ public abstract class Application implements Runnable {
 	private static Localizer localizer = null;
 
 	private String localizerBase;
-	private Logger logger;
 	private Context context;
 	
 	/**
@@ -103,7 +102,11 @@ public abstract class Application implements Runnable {
 		if (returnCode == 0) {
 			Logger.getInstance().writeLog(className + "::exit", "## " + localizer.getValue(RES_LOG_SUCCESSFUL) + " ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		} else {
-			Logger.getInstance().writeLog(className + "::exit", "## " + localizer.getValue(RES_LOG_UNSUCCESSFUL) + " " + returnCode + " ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			if (returnCode >= 200 && returnCode <= 300) { // To prevent logging if Logger fails
+				System.err.println(className + "::exit - ## " + localizer.getValue(RES_LOG_UNSUCCESSFUL) + " " + returnCode + " ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			} else {
+				Logger.getInstance().writeLog(className + "::exit", "## " + localizer.getValue(RES_LOG_UNSUCCESSFUL) + " " + returnCode + " ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			}
 		}
 		System.exit(returnCode);
 	}
@@ -114,37 +117,51 @@ public abstract class Application implements Runnable {
 	 */
 	private void init() {
 		className = this.getClass().getName();
-		
+
 		readProperties();
 
 		// Localizer
 		localizer = new Localizer(this.localizerBase, Locale.getDefault());
 		this.context.addData(ATT_APPLICATION_LOCALIZER, localizer);
 
-		// Logger
-		this.logger = Logger.getInstance();
-		this.logger.writeLog(className + "::init", "#  " + localizer.getValue(RES_LOG_START) + " " + this.context.getName() + " " + this.context.getVersion()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		this.logger.writeLog(className + "::init", "#  " + localizer.getValue(RES_LOG_OS) + " " + EnvironmentInfo.getOsName() + " - " + localizer.getValue(RES_LOG_VERSION) + " " + EnvironmentInfo.getOsVersion()+ " - " + localizer.getValue(RES_LOG_ARCHITECTURE) + " " + EnvironmentInfo.getOsArch()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+		Logger.getInstance().writeLog(className + "::init", "#  " + localizer.getValue(RES_LOG_START) + " " + this.context.getName() + " " + this.context.getVersion()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		Logger.getInstance().writeLog(className + "::init", "#  " + localizer.getValue(RES_LOG_OS) + " " + EnvironmentInfo.getOsName() + " - " + localizer.getValue(RES_LOG_VERSION) + " " + EnvironmentInfo.getOsVersion()+ " - " + localizer.getValue(RES_LOG_ARCHITECTURE) + " " + EnvironmentInfo.getOsArch()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 	}
 	
 	private void readProperties() {
-		this.context.addData(ATT_APPLICATION_NAME, this.context.getProperties().getProperty(PROPERTY_APPLICATION_NAME));
-		if (!GeneralHelper.isValidString(this.context.getName())) {
-			System.err.println(className + "::readProperties - " + PROPERTY_APPLICATION_NAME + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
+		String value = this.context.getProperties().getProperty(PROPERTY_APPLICATION_NAME);
+		if (GeneralHelper.isValidObject(value)) {
+			this.context.addData(ATT_APPLICATION_NAME, value);
+		} else {
+			System.err.println("Logger::readProperties - " + PROPERTY_APPLICATION_NAME + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
 			exit(100);
 		}
 		
-		this.context.addData(ATT_APPLICATION_VERSION, this.context.getProperties().getProperty(PROPERTY_APPLICATION_VERSION));
-		if (!GeneralHelper.isValidString(this.context.getVersion())) {
-			System.err.println(className + "::readProperties - " + PROPERTY_APPLICATION_VERSION + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
-			exit(200);
+		value = this.context.getProperties().getProperty(PROPERTY_APPLICATION_VERSION);
+		if (GeneralHelper.isValidObject(value)) {
+			this.context.addData(ATT_APPLICATION_VERSION, value);
+		} else {
+			System.err.println("Logger::readProperties - " + PROPERTY_APPLICATION_VERSION + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
+			exit(110);
 		}
 
 		this.context.addData(ATT_APPLICATION_DEBUG, new Boolean(this.context.getProperties().getPropertyBoolean(PROPERTY_APPLICATION_DEBUG)));
+
+		value = this.context.getProperties().getProperty(PROPERTY_APPLICATION_WORKDIRECTORY);
+		if (GeneralHelper.isValidObject(value)) {
+			this.context.addData(ATT_APPLICATION_WORKDIRECTORY, value);
+		} else {
+			System.err.println("Logger::readProperties - " + PROPERTY_APPLICATION_WORKDIRECTORY + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
+			exit(120);
+		}
 		
-		this.context.addData(ATT_APPLICATION_WORKDIRECTORY, this.context.getProperties().getProperty(PROPERTY_APPLICATION_WORKDIRECTORY));
-		
-		this.localizerBase = this.context.getProperties().getProperty(PROPERTY_APPLICATION_LOCALIZER_BASE);
+		value = this.context.getProperties().getProperty(PROPERTY_APPLICATION_LOCALIZER_BASE);
+		if (GeneralHelper.isValidObject(value)) {
+			this.localizerBase = this.context.getProperties().getProperty(PROPERTY_APPLICATION_LOCALIZER_BASE);
+		} else {
+			System.err.println("Logger::readProperties - " + PROPERTY_APPLICATION_LOCALIZER_BASE + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
+			exit(130);
+		}
 		
 		if (this.context.isDebug()) this.context.getProperties().diagProperties();
 	}
