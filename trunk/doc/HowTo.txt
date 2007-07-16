@@ -1,0 +1,36 @@
+###########################
+#  Bogatyr                #
+#  HowTo                  #
+###########################
+
+Installation
+
+1) Just download the newest Bogatyr JAR library bogatyr-*.jar from the project home and add it to your project.
+
+2) After that, you can access the package over import ch.orwell.bogatyr.*.
+
+3) Extract and copy the two folders to your workspace or import it in your IDE:
+
+    * cfg 
+
+    * res 
+
+4) Move cfg/ch/orwell/bogatyr/standard.properties to cfg/yourapp/standard.properties file and enter the correct path settings
+
+5) To run your app, enter this on your command prompt:
+
+    * java -jar /lib/bogatyr-*.jar ch.orwell.yourapp.YourApp ./cfg/ch/orwell/yourapp/standard.properties 
+
+6) Enjoy... 
+
+7) ...if not, check your classpath settings and your java installation.
+
+
+If you have any questions, visit our project page:
+--------------------------------------------------
+http://code.google.com/p/bogatyr/
+
+or write us an email:
+---------------------
+laubenberger@gmail.com
+silvan.spross@gmail.com
