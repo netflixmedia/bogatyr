@@ -2,4 +2,14 @@
 
 =History=
 
-Add your content here.
+2007/07/15 - Version 0.1.4 released
+
+2007/07/09 - *Stable* version 0.1.3 released
+
+2007/07/07 - Version 0.1.2 released
+
+2007/07/05 - Version 0.1.1 released
+
+2007/06/28 - Todos added
+
+2007/06/27 - Repository checked in and version 0.1.0 released
