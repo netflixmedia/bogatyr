@@ -40,14 +40,15 @@ import java.util.ResourceBundle;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070715
+ * @version 20070828
  */
 public final class Localizer {
 	private String className;
 	private long createTime = System.currentTimeMillis();
 
 	// Resources
-	public final static String RES_INSTANCIATED = "global.instanciated"; //$NON-NLS-1$
+	public final static String RES_INSTANCIATED      = "global.instanciated"; //$NON-NLS-1$
+	public final static String RES_INVALID_DIRECTORY = "global.invalid.directory"; //$NON-NLS-1$
 	
 	private Locale locale;
 	private String localizerBase;
