@@ -35,15 +35,19 @@ import javax.swing.JTextArea;
 
 
 /**
- * This is an extended TextArea
+ * This is an extended JTextArea
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070829
  */
 public class TextArea extends JTextArea {
 	private static final long serialVersionUID = -801724496277932349L;
     
+    public TextArea(String text, int rows, int columns) {
+        super(text, rows, columns);
+    }
+
 	
 	/*
 	 * Overriden methods

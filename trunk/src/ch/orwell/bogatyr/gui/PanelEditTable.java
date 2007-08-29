@@ -34,6 +34,7 @@ package ch.orwell.bogatyr.gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -41,7 +42,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import ch.orwell.bogatyr.Context;
-
+import ch.orwell.bogatyr.exception.ExceptionHelper;
+import ch.orwell.bogatyr.util.Logger;
 
 
 /**
@@ -49,27 +51,35 @@ import ch.orwell.bogatyr.Context;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070707
+ * @version 20070829
  */
 public abstract class PanelEditTable extends Panel implements ActionListener {
-	private static final long serialVersionUID = -1516031824098742290L;
-	
-	protected final static String	RES_BUTTON_ADD    = "PanelEditTable.button.add"; //$NON-NLS-1$
-	protected final static String	RES_BUTTON_EDIT   = "PanelEditTable.button.edit"; //$NON-NLS-1$
-	protected final static String	RES_BUTTON_DELETE = "PanelEditTable.button.delete"; //$NON-NLS-1$
-		
-	private String title;
+	private final static String RES_BUTTON_ADD    = "PanelEditTable.button.add"; //$NON-NLS-1$
+	private final static String RES_BUTTON_EDIT   = "PanelEditTable.button.edit"; //$NON-NLS-1$
+	private final static String RES_BUTTON_DELETE = "PanelEditTable.button.delete"; //$NON-NLS-1$
+
+	private JTable table;
+	private JButton buttonAdd;
+	private JButton buttonEdit;
+	private JButton buttonDelete;
+
 	private String[] columnNames;
 	private Object[][] data;
 	
-	public PanelEditTable(String[] columnNames, Object[][] data, String title) {
+	public PanelEditTable(String[] columnNames, Object[][] data) {
 		super();
 		
 		this.columnNames = columnNames;
 		this.data = data;
-		this.title = title;
-		
-		setTitle(this.title);
+		createLayout();
+    }
+
+	public PanelEditTable(String[] columnNames, Object[][] data, String title) {
+		super();
+
+		this.columnNames = columnNames;
+		this.data = data;
+		setTitle(title);
 		createLayout();
     }
 	
@@ -93,32 +103,45 @@ public abstract class PanelEditTable extends Panel implements ActionListener {
 		doLayout();
 	}
 	
-	
-	/*
-	 * Private methods
-	 */
-	private void createLayout() {
+	protected JTable getTable() {
+		return this.table;
+	}
+
+	public JButton getButtonAdd() {
+		return this.buttonAdd;
+	}
+
+	public JButton getButtonDelete() {
+		return this.buttonDelete;
+	}
+
+	public JButton getButtonEdit() {
+		return this.buttonEdit;
+	}
+
+	protected void createLayout() {
 		removeAll();
 		
 		setLayout(new GridBagLayout());
 
-        JTable table = new JTable(new TableModel(this.columnNames, this.data));
+        this.table = createTable(new TableModel(this.columnNames, this.data));
 
-        table.setFillsViewportHeight(true);
-        table.setAutoCreateRowSorter(true);
+        table.setFillsViewportHeight(true); // Java 1.6
+        table.setAutoCreateRowSorter(true); // Java 1.6
 
         // Create the scroll pane and add the table to it
-        JScrollPane scrollPane = new JScrollPane(table);
+        JScrollPane scrollPane = new JScrollPane(this.table);
         
         // Buttons
-		JButton buttonAdd = new JButton(Context.getInstance().getLocalizer().getValue(RES_BUTTON_ADD));
-		buttonAdd.addActionListener(this);
+        this.buttonAdd = new JButton(Context.getInstance().getLocalizer().getValue(RES_BUTTON_ADD));
+        this.buttonAdd.addActionListener(this);
 
-		JButton buttonEdit = new JButton(Context.getInstance().getLocalizer().getValue(RES_BUTTON_EDIT));
-		buttonEdit.addActionListener(this);
+//        this.buttonEdit = new JButton("<html><b><u>T</u>wo</b><br>lines</html>"); //COOL!
+        this.buttonEdit = new JButton(Context.getInstance().getLocalizer().getValue(RES_BUTTON_EDIT));
+        this.buttonEdit.addActionListener(this);
 		
-		JButton buttonDelete = new JButton(Context.getInstance().getLocalizer().getValue(RES_BUTTON_DELETE));
-		buttonDelete.addActionListener(this);
+        this.buttonDelete = new JButton(Context.getInstance().getLocalizer().getValue(RES_BUTTON_DELETE));
+        this.buttonDelete.addActionListener(this);
 
         // Add components to this panel
 		GridBagConstraints c = new GridBagConstraints();
@@ -127,7 +150,7 @@ public abstract class PanelEditTable extends Panel implements ActionListener {
         c.weighty = 1.0;
 	    c.gridx = 0;
 	    c.gridy = 0;
-        c.gridwidth = 1;
+//        c.gridwidth = 1;
         c.gridheight = 3;
 	    c.insets = new Insets(5,5,5,5);
 		add(scrollPane, c);
@@ -135,13 +158,39 @@ public abstract class PanelEditTable extends Panel implements ActionListener {
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.weightx = 0.0;
 	    c.gridheight = 1;
-	    c.gridx = 11;
-        add(buttonAdd, c);
+	    c.gridx = 1;
+        add(this.buttonAdd, c);
         
         c.gridy = 1;
-        add(buttonEdit, c);
+        add(this.buttonEdit, c);
         
         c.gridy = 2;
-        add(buttonDelete, c);
+        add(this.buttonDelete, c);
+	}
+	
+	protected JTable createTable(TableModel tableModel) {
+		return new JTable(tableModel);
+	}
+	
+	protected abstract void executeActionAdd();
+
+	protected abstract void executeActionEdit();
+	
+	protected abstract void executeActionDelete();
+
+	
+	/*
+	 * Implemented methods
+	 */
+	public void actionPerformed(ActionEvent event) {
+		if (event.getActionCommand().equals(Context.getInstance().getLocalizer().getValue(RES_BUTTON_ADD))) {
+			executeActionAdd();
+		} else if (event.getActionCommand().equals(Context.getInstance().getLocalizer().getValue(RES_BUTTON_EDIT))) {
+			executeActionEdit();
+		} else if (event.getActionCommand().equals(Context.getInstance().getLocalizer().getValue(RES_BUTTON_DELETE))) {
+			executeActionDelete();
+		} else {
+			Logger.getInstance().writeException(this.className + "::actionPerformed", ExceptionHelper.EX_UNKNOWN_EVENT + ": " + event); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 	}
 }

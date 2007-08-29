@@ -43,12 +43,23 @@ import ch.orwell.bogatyr.util.GeneralHelper;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070709
+ * @version 20070829
  */
 public abstract class DataObject implements Serializable, ValidaterInterface {
+	//TODO generate hashCode() & equals()!
+	
+	public static final int PERSISTENCE_CHANGED = 1;
+	public static final int PERSISTENCE_NEW     = 2;
+	public static final int PERSISTENCE_DELETED = 3;
+
 	protected String className;
 	protected final long createTime = System.currentTimeMillis();
-	protected boolean isEdited = false;
+	
+	// Status of the DataObject related to its persistence state
+	private int persistenceState = 0;
+//	protected boolean isNew     = false;
+//	protected boolean isChanged = false;
+//	protected boolean isDeleted = false;
 	
 	/**
 	 * Constructs a DataObject.
@@ -56,8 +67,19 @@ public abstract class DataObject implements Serializable, ValidaterInterface {
 	public DataObject() {
 		init();
 	}
-	
-	
+		
+	public int getPersistenceState() {
+		return this.persistenceState;
+	}
+
+
+	public void setPersistenceState(int persistenceState) {
+		if (persistenceState > this.persistenceState) {
+			this.persistenceState = persistenceState;
+		}
+	}
+
+
 	/*
 	 * Implemented methods
 	 */
@@ -135,37 +157,6 @@ public abstract class DataObject implements Serializable, ValidaterInterface {
 	public String toString() {
 		return "\nclassName: " + this.className + //$NON-NLS-1$
 			"\ncreateTime: " + this.createTime + //$NON-NLS-1$
-			"\nisEdited: " + this.isEdited; //$NON-NLS-1$
-	}
-
-	@Override
-	public int hashCode() {
-		final int PRIME = 31;
-		int result = 1;
-		result = PRIME * result + ((this.className == null) ? 0 : this.className.hashCode());
-		result = PRIME * result + (int) (this.createTime ^ (this.createTime >>> 32));
-		result = PRIME * result + (this.isEdited ? 1231 : 1237);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final DataObject other = (DataObject) obj;
-		if (this.className == null) {
-			if (other.className != null)
-				return false;
-		} else if (!this.className.equals(other.className))
-			return false;
-		if (this.createTime != other.createTime)
-			return false;
-		if (this.isEdited != other.isEdited)
-			return false;
-		return true;
+			"\npersistenceState: " + this.persistenceState; //$NON-NLS-1$
 	}
 }

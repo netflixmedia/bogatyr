@@ -53,7 +53,7 @@ import ch.orwell.bogatyr.Context;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070715
+ * @version 20070829
  */
 public abstract class FileManager {
 	// Resources
@@ -199,7 +199,7 @@ public abstract class FileManager {
 		
 		PrintWriter file = null;
 		
-		if (encoding == null) {
+		if (!GeneralHelper.isValidString(encoding)) {
 			encoding = "UTF-8"; //$NON-NLS-1$
 		}
 		
@@ -306,7 +306,7 @@ public abstract class FileManager {
 		}
 	}
 	
-	
+
 	/*
 	 * Inner classes
 	 */

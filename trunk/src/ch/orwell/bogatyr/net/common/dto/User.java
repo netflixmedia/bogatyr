@@ -44,7 +44,7 @@ import ch.orwell.bogatyr.util.Logger;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070709
+ * @version 20070828
  */
 public final class User extends DataObject {
 	private static final long serialVersionUID = -2688333932057727527L;
@@ -54,7 +54,7 @@ public final class User extends DataObject {
 	
 	
 	/**
-	 * Constructs a ComContainer.
+	 * Constructs a User.
 	 * 
 	 * @param username Username as a String
 	 * @param password Password as a String
@@ -72,7 +72,7 @@ public final class User extends DataObject {
 	}
 	
 	public void setPassword(String password) {
-		this.isEdited = true;
+		setPersistenceState(DataObject.PERSISTENCE_CHANGED);
 		this.password = password;
 	}
 	
@@ -105,6 +105,7 @@ public final class User extends DataObject {
 	 */
 	/**
 	 * Validates the attributes {@link #username} and {@link #password}
+
 	 * 
 	 * @throws ValidationException
 	 * @see DataObject 

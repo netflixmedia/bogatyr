@@ -42,6 +42,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -49,7 +51,7 @@ import java.util.Map;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070709
+ * @version 20070829
  */
 public abstract class GeneralHelper {
 
@@ -122,7 +124,21 @@ public abstract class GeneralHelper {
 		}
 		return true;
 	}
-	
+
+	/**
+     * Checks if a String is full numeric.
+     * 
+     * @param arg String to check
+     */	
+	public static boolean isStringNumeric(String arg) {
+		if (isValidString(arg)) {
+			Pattern p = Pattern.compile("[0-9]+"); //$NON-NLS-1$
+			Matcher m = p.matcher(arg);
+	        if (m.matches() != false) return true; 	          
+		}
+		return false;
+	}
+
 	/**
      * Checks if a int is not 0.
      * 
