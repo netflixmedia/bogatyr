@@ -44,7 +44,7 @@ import ch.orwell.bogatyr.Application;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070709
+ * @version 20071114
  */
 public final class PropertiesManager {
     private Properties properties;
@@ -71,8 +71,7 @@ public final class PropertiesManager {
      * @return String-value
      */	
     public String getProperty(String propertyName) {
-        String propertyValue = this.properties.getProperty(propertyName);
-        return propertyValue;
+        return this.properties.getProperty(propertyName);
     }
 
     /**
@@ -82,7 +81,10 @@ public final class PropertiesManager {
      * @return double-value
      */	
     public double getPropertyDouble(String propertyName) {
-        return Double.parseDouble(this.properties.getProperty(propertyName));
+    	if (this.properties.getProperty(propertyName) != null) {
+    		return Double.parseDouble(this.properties.getProperty(propertyName));
+    	}
+    	return 0;
     }
 
     /**
@@ -92,7 +94,10 @@ public final class PropertiesManager {
      * @return int-value
      */	
     public int getPropertyInt(String propertyName) {
-        return Integer.parseInt(this.properties.getProperty(propertyName));
+    	if (this.properties.getProperty(propertyName) != null) {
+    		return Integer.parseInt(this.properties.getProperty(propertyName));
+    	}
+    	return 0;
     }
 
     /**
@@ -102,7 +107,10 @@ public final class PropertiesManager {
      * @return boolean-value
      */	
     public boolean getPropertyBoolean(String propertyName) {
-        return Boolean.valueOf(this.properties.getProperty(propertyName)).booleanValue();
+    	if (this.properties.getProperty(propertyName) != null) {
+    		return Boolean.valueOf(this.properties.getProperty(propertyName)).booleanValue();
+    	}
+    	return false;
     }
     
     /**

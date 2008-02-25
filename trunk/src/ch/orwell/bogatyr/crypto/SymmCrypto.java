@@ -31,58 +31,45 @@
  *******************************************************************************/
 package ch.orwell.bogatyr.crypto;
 
-import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.Security;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 /**
- * This is a class for symmetric cryptology
+ * This is a class for symmetric cryptology via AES
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070709
+ * @version 20080225
  */
 public final class SymmCrypto {
-	private static final int KEYSIZE = 128;
-	private static final String ALGORITHM = "AES"; //$NON-NLS-1$
-
-	private SecretKey key;
+	public static final String ALGORITHM     = "AES"; //$NON-NLS-1$
+	public static final String XFORM         = "AES/CBC/PKCS5Padding"; //$NON-NLS-1$
 	
-	/**
-	 * Return the generated {@link SecretKey} for encryption and decryption use.
-	 * 
-	 * @return Returns the generated key.
-	 */
-	public SecretKey getKey() {
-		return this.key;
+	public SymmCrypto() {
+		super();
 	}
-	
+
 	/**
 	 * Encrypt the data with a given {@link Key}.
 	 * 
 	 * @param input The data to encrypt as a Byte-Array
 	 * @param encryptionKey The key for the encryption
 	 * @return Return the encrypted Byte-Array 
-	 * @throws NoSuchAlgorithmException
-	 * @throws NoSuchPaddingException
-	 * @throws InvalidKeyException
-	 * @throws IllegalBlockSizeException
-	 * @throws BadPaddingException
+	 * @throws Exception 
 	 * @see java.security.Key
 	 */
-	public byte[] encrypt(byte[] input, Key encryptionKey) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-		Cipher cipher = Cipher.getInstance(ALGORITHM);
-		cipher.init(Cipher.ENCRYPT_MODE, encryptionKey);
+	public byte[] encrypt(byte[] input, Key encryptionKey, int keysize) throws Exception {
+        Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
+		cipher.init(Cipher.ENCRYPT_MODE, encryptionKey, prepareIv(keysize));
 		
 		return cipher.doFinal(input);
 	}
@@ -93,36 +80,49 @@ public final class SymmCrypto {
 	 * @param input The encrypted data as a Byte-Array
 	 * @param decryptionKey The key for the decryption
 	 * @return Return the decrypted Byte-Array
-	 * @throws IllegalBlockSizeException
-	 * @throws BadPaddingException
-	 * @throws NoSuchAlgorithmException
-	 * @throws NoSuchPaddingException
-	 * @throws InvalidKeyException
+	 * @throws Exception
 	 * @see java.security.Key
 	 */
-	public byte[] decrypt(byte[] input, Key decryptionKey) throws IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
-		Cipher cipher = Cipher.getInstance(ALGORITHM);
-		cipher.init(Cipher.DECRYPT_MODE, decryptionKey);
+	public byte[] decrypt(byte[] input, Key decryptionKey, int keysize) throws Exception {
+		Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
+		cipher.init(Cipher.DECRYPT_MODE, decryptionKey, prepareIv(keysize));
 		
 		return cipher.doFinal(input);
 	}
-	
+
 	/**
 	 * Generates a key. Sets the intern attribute key to the generated key.
 	 * With this generated key, you can encrypt and decrypt Byte-Arrays.
 	 * 
+	 * @param keysize Size of the key in bits (e.g. 128, 256)
 	 * @throws NoSuchAlgorithmException
+	 * @throws NoSuchProviderException 
 	 * @see #encrypt(byte[], Key)
 	 * @see #key
 	 * @see #decrypt(byte[], Key)
 	 */
-	public void generateKey() throws NoSuchAlgorithmException {
+	public SecretKey generateKey(int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 
 		// Generate a key
-		KeyGenerator kg = KeyGenerator.getInstance(ALGORITHM);
-		kg.init(KEYSIZE);
+		KeyGenerator kg = KeyGenerator.getInstance(ALGORITHM, "BC"); //$NON-NLS-1$
+		kg.init(keysize);
 		
-		this.key  = kg.generateKey();
+		return kg.generateKey();
+	}
+	
+	
+	/*
+	 * Private methods
+	 */
+	private IvParameterSpec prepareIv(int keysize) {
+		int elements = keysize/16;
+        byte[] ivBytes = new byte[elements];
+        
+        for (int ii = 0; ii < elements; ii++) {
+        	ivBytes[ii] = (byte) 0x5a;
+        }
+        
+        return new IvParameterSpec(ivBytes);
 	}
 }

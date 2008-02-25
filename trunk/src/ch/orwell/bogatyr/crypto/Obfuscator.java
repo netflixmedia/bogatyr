@@ -29,25 +29,55 @@
  * <silvan.spross@gmail.com>
  * 
  *******************************************************************************/
-package ch.orwell.bogatyr.exception;
+package ch.orwell.bogatyr.crypto;
 
+import java.security.PublicKey;
 
 /**
- * This is an exception if the validation of a {@link DataObject} is failed
+ * This is a class for obfuscating a byte[]
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070709
+ * @version 20080111
  */
-public final class ValidationException extends Exception {
-	private static final long serialVersionUID = 2262162323753693225L;
+public abstract class Obfuscator {
+	private static byte pattern = Byte.MAX_VALUE; //Region: -128 - 127
 
 	/**
-	 * Exception when the the validation of a {@link DataObject} is failed.
+	 * Obfuscate the data
 	 * 
-	 * @param msg Message as String
+	 * @param input The data to obfuscate as a Byte-Array
+	 * @return Return the obfuscated Byte-Array 
+	 * @see PublicKey
 	 */
-	public ValidationException(final String msg) {
-        super(msg);
-    }
-} 
+	public static byte[] encrypt(byte[] input) {
+		return obfuscate(input);
+	}
+
+	/**
+	 * Unobfuscate the data.
+	 * 
+	 * @param input The obfuscated data as a Byte-Array
+	 * @return Return the unobfuscated Byte-Array
+	 */
+	public static byte[] decrypt(byte[] input) {
+		return obfuscate(input);
+	}
+
+	/*
+	 * Private methods
+	 */
+	/**
+	 * Obfuscate the data
+	 * 
+	 * @param input The data to obfuscate as a Byte-Array
+	 */
+	private static byte[] obfuscate(byte[] input) {
+		byte[] result = new byte[input.length];
+		
+		for (int ii = 0; ii < input.length; ii++ ) {
+			result[ii] = (byte)(input[ii] ^ pattern);
+		}
+		return result;
+	}
+}

@@ -51,7 +51,7 @@ import ch.orwell.bogatyr.util.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070829
+ * @version 20080225
  */
 public abstract class PanelEditTable extends Panel implements ActionListener {
 	private final static String RES_BUTTON_ADD    = "PanelEditTable.button.add"; //$NON-NLS-1$
@@ -126,8 +126,8 @@ public abstract class PanelEditTable extends Panel implements ActionListener {
 
         this.table = createTable(new TableModel(this.columnNames, this.data));
 
-        table.setFillsViewportHeight(true); // Java 1.6
-        table.setAutoCreateRowSorter(true); // Java 1.6
+        this.table.setFillsViewportHeight(true); // Java 1.6
+        this.table.setAutoCreateRowSorter(true); // Java 1.6
 
         // Create the scroll pane and add the table to it
         JScrollPane scrollPane = new JScrollPane(this.table);

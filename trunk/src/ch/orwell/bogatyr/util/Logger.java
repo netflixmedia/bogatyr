@@ -33,6 +33,8 @@ package ch.orwell.bogatyr.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -45,15 +47,15 @@ import ch.orwell.bogatyr.Context;
  *  
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070715
+ * @version 20080128
  */
 public final class Logger {
 	private static Logger instance = null;
 
 	// Resources
-	private final static String	RES_INVALID_PATH = "Logger.invalidPath"; //$NON-NLS-1$
-	private final static String	RES_UNKNOWN      = "Logger.unknown"; //$NON-NLS-1$
-	private final static String	RES_WRITE_FAILED = "Logger.writeFailed"; //$NON-NLS-1$
+	private static final String	RES_INVALID_PATH = "Logger.invalidPath"; //$NON-NLS-1$
+	private static final String	RES_UNKNOWN      = "Logger.unknown"; //$NON-NLS-1$
+	private static final String	RES_WRITE_FAILED = "Logger.writeFailed"; //$NON-NLS-1$
 	
 	// Properties
 	private static final String PROPERTY_LOGGER_PATH = "logger.path"; //$NON-NLS-1$
@@ -74,7 +76,7 @@ public final class Logger {
      * 
      * @return The only one Logger.
      */
-    public static Logger getInstance() {
+    public static synchronized Logger getInstance() {
     	if(instance == null) {
     		instance = new Logger();
 		}
@@ -125,7 +127,9 @@ public final class Logger {
      */
 	public void writeException(String descent, String logEntry, Exception ex) {
 		try {
-			write(descent, logEntry + " - " + ex.getMessage(), this.logFileName + "_Exception.log"); //$NON-NLS-1$ //$NON-NLS-2$
+			StringWriter sw = new StringWriter();
+			ex.printStackTrace(new PrintWriter(sw));
+			write(descent, logEntry + "\n" + sw.toString(), this.logFileName + "_Exception.log"); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (IOException e) {
 			System.err.println("Logger::writeException - " + Context.getInstance().getLocalizer().getValue(RES_WRITE_FAILED)); //$NON-NLS-1$
 			e.printStackTrace();

@@ -129,7 +129,7 @@ public class LabeledCheckBox extends Panel {
 		c.ipadx = 0;
 		c.weightx = 1.0;
 		c.gridx = 1;
-		this.checkBox = new JCheckBox("", flag);
+		this.checkBox = new JCheckBox("", flag); //$NON-NLS-1$
 		add(this.checkBox, c);
 	}
 }

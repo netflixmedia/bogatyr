@@ -45,7 +45,7 @@ import ch.orwell.bogatyr.util.PropertiesManager;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070715
+ * @version 20071115
  */
 public abstract class Application implements Runnable {
 	protected static String className = null;
@@ -124,8 +124,8 @@ public abstract class Application implements Runnable {
 		localizer = new Localizer(this.localizerBase, Locale.getDefault());
 		this.context.addData(ATT_APPLICATION_LOCALIZER, localizer);
 
-		Logger.getInstance().writeLog(className + "::init", "#  " + localizer.getValue(RES_LOG_START) + " " + this.context.getName() + " " + this.context.getVersion()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		Logger.getInstance().writeLog(className + "::init", "#  " + localizer.getValue(RES_LOG_OS) + " " + EnvironmentInfo.getOsName() + " - " + localizer.getValue(RES_LOG_VERSION) + " " + EnvironmentInfo.getOsVersion()+ " - " + localizer.getValue(RES_LOG_ARCHITECTURE) + " " + EnvironmentInfo.getOsArch()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+		Logger.getInstance().writeLog(className + "::init", "##  " + localizer.getValue(RES_LOG_START) + " " + this.context.getName() + " " + this.context.getVersion() + "  ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+		Logger.getInstance().writeLog(className + "::init", localizer.getValue(RES_LOG_OS) + " " + EnvironmentInfo.getOsName() + " - " + localizer.getValue(RES_LOG_VERSION) + " " + EnvironmentInfo.getOsVersion()+ " - " + localizer.getValue(RES_LOG_ARCHITECTURE) + " " + EnvironmentInfo.getOsArch()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
 	}
 	
 	private void readProperties() {

@@ -63,7 +63,7 @@ public class Context {
      * Else it will generate one instance of Context.
      * @return The only one Context.
      */
-    public static Context getInstance() {
+    public static synchronized Context getInstance() {
     	if(instance == null) {
     		instance = new Context();
 		}

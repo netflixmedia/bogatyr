@@ -31,21 +31,18 @@
  *******************************************************************************/
 package ch.orwell.bogatyr.util;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.SequenceInputStream;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.NoSuchElementException;
-
-import ch.orwell.bogatyr.Context;
+import java.util.List;
 
 
 /**
@@ -53,11 +50,14 @@ import ch.orwell.bogatyr.Context;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070829
+ * @author t952
+ * @version 20080218
  */
 public abstract class FileManager {
+
 	// Resources
-	private final static String	RES_INVALID_DIRECTORY = "FileManager.invalidDirecory"; //$NON-NLS-1$
+//	private final static String	RES_INVALID_DIRECTORY = "FileManager.invalidDirecory"; //$NON-NLS-1$
+	
 	
 	/**
      * Search in a path (directory) for files via identifier
@@ -68,20 +68,20 @@ public abstract class FileManager {
      * @param isRecursive true/false
      * @return ArrayList containing the path to the matched files
      */	
-	public static ArrayList<String> getFileNames(String path, String identifier, boolean isCaseSensitive, boolean isRecursive) throws IOException {
-		ArrayList<String> fileList = new ArrayList<String>();
+	public static List<String> getFileNames(String path, String identifier, boolean isCaseSensitive, boolean isRecursive) throws IOException {
+		List<String> fileList = new ArrayList<String>();
 
 		File filePath = new File(path);
 		
-		if (!filePath.isDirectory()) {
-			throw new IOException(Context.getInstance().getLocalizer().getValue(RES_INVALID_DIRECTORY));
-		}
+//		if (!filePath.isDirectory()) throw new IOException(Context.getInstance().getLocalizer().getValue(RES_INVALID_DIRECTORY));
+		if ( ! filePath.isDirectory()) throw new IOException("Invalid directory");
 
 		getFileNamesRecursion(filePath, identifier, fileList, isCaseSensitive, isRecursive);
 
 		return fileList;
 	}
 	
+
 	/**
      * Copy a directory
      * 
@@ -92,9 +92,7 @@ public abstract class FileManager {
 		File input = new File(source);
 	    File output = new File(dest);
 
-		if (!output.exists()) {
-	      output.mkdir();
-	    }
+		if ( ! output.exists()) { output.mkdir(); }
 	    
 		File[] children = input.listFiles();
 	    
@@ -109,7 +107,8 @@ public abstract class FileManager {
 			}
 	    }
 	}
-	  
+
+	
 	/**
      * Copy a file
      * 
@@ -120,13 +119,12 @@ public abstract class FileManager {
 	    File input = new File(source);
 	    File output = new File(dest);
 	    
-		InputStream in = null;
-	    OutputStream out = null;
-
-		if (!output.exists()) {
+		if ( ! output.exists()) {
 			output.createNewFile();
 	    }
 
+		InputStream in = null;
+	    OutputStream out = null;
 		try {
 			in = new FileInputStream(input);
 			out = new FileOutputStream(output);
@@ -140,6 +138,7 @@ public abstract class FileManager {
 			if (out != null) out.close();
 		}
 	}
+
 	
 	/**
      * Move a file or directory
@@ -157,6 +156,7 @@ public abstract class FileManager {
 	    }
 	    return delete(source);
 	}
+
 
 	/**
      * Delete a file or directory
@@ -187,6 +187,7 @@ public abstract class FileManager {
 		return fileCurrent.renameTo(fileNew);
 	}
 
+	
 	/**
      * Write a text line in a file
      * 
@@ -194,16 +195,13 @@ public abstract class FileManager {
      * @param code Code page of the text (e.g. "UTF-8")
      * @param line Text line
      */	
-	public static void writeLine(String fileName, String code, String line) throws IOException {
-		String encoding = code;
-		
-		PrintWriter file = null;
-		
-		if (!GeneralHelper.isValidString(encoding)) {
+	public static void writeLine(String fileName, String encoding, String line) throws IOException {
+
+		if ( ! GeneralHelper.isValidString(encoding)) {
 			encoding = "UTF-8"; //$NON-NLS-1$
 		}
 		
-		file = new PrintWriter(new OutputStreamWriter(new FileOutputStream(fileName, true), encoding));    
+		PrintWriter file = new PrintWriter(new OutputStreamWriter(new FileOutputStream(fileName, true), encoding));    
 		file.println(line);
 		file.close();
 	}
@@ -227,7 +225,7 @@ public abstract class FileManager {
 	public static byte[] readBinaryFile(String fileName) throws IOException {
 		File file = new File(fileName);
 		FileInputStream fis = new FileInputStream(file);
-		
+
 		long length = file.length();
 		
 		byte[] buffer = new byte[(int) length];
@@ -243,12 +241,12 @@ public abstract class FileManager {
      * @param fileName File name (with absolut path)
      * @param data byte-array
      */	
-	public static void writeBinaryFile(String fileName, byte data[]) throws IOException {
-		File file = new File(fileName);
-		FileOutputStream fos = new FileOutputStream(file);
+	public static void writeBinaryFile(String fileName, byte data[], boolean append) throws IOException {
+		FileOutputStream fos = new FileOutputStream(fileName, append);
 		fos.write(data);
 		fos.close();
 	}
+
 
 	/**
      * Concatenate files to one output file 
@@ -256,26 +254,32 @@ public abstract class FileManager {
      * @param outputFileName Output file name (with absolut path)
      * @param list List with all file names (with absolut path)
      */	
-	@SuppressWarnings("unchecked")
 	public static void concatenateFiles(String outputFileName, String list[]) throws IOException {
-		FileOutputStream fos = new FileOutputStream(outputFileName);
+	    //Create output stream
+	    PrintWriter saveAs = new PrintWriter(new FileOutputStream(outputFileName));
 
-		ListOfFiles lof = new ListOfFiles(list);
+	    //Process all files that are not the desitnation file
+	    for (int ii = 0; ii < list.length; ii++) {
 
-	    SequenceInputStream sis = new SequenceInputStream(lof);
-        int c;
-
-        while ((c = sis.read()) != -1) {
-    		fos.write(c);
-        }
-        sis.close();
-		fos.close();
-	}
-
+			//Create input stream
+			BufferedReader readBuff = new BufferedReader (new FileReader(list[ii]));
 	
-	/*
-	 * Private methods
-	 */
+			//Read each line from the input file
+			String line = readBuff.readLine();
+			
+			while (line != null) {
+			    saveAs.println(line);
+			    line = readBuff.readLine();
+			}
+			readBuff.close();
+	    }
+	    saveAs.close();
+	}
+	
+	
+	// --- Private methods ----------------------------------------------------
+	
+	
 	/**
      * Recursive search method for a path (directories)
      * 
@@ -284,15 +288,14 @@ public abstract class FileManager {
      * @param isCaseSensitive true/false
      * @param isRecursive true/false
      */	
-	private static void getFileNamesRecursion(File filePath, String identifier, ArrayList<String> fileList, boolean isCaseSensitive, boolean isRecursive) {
+	private static void getFileNamesRecursion(File filePath, String identifier, List<String> fileList, boolean isCaseSensitive, boolean isRecursive) {
+
 		File[] files = filePath.listFiles();
-		File file;
-		String fileName;
 		
 		for (int ii = 0; ii < files.length; ii++) {
-			file = new File(files[ii].getAbsolutePath());
+			File file = new File(files[ii].getAbsolutePath());
 			if (file.isFile()) {
-				fileName = file.getAbsolutePath();
+				String fileName = file.getAbsolutePath();
 				if (identifier == null) {
 					fileList.add(fileName);
 				} else if (isCaseSensitive && fileName.indexOf(identifier) > 0) {
@@ -307,40 +310,63 @@ public abstract class FileManager {
 	}
 	
 
-	/*
-	 * Inner classes
-	 */
-	static class ListOfFiles implements Enumeration<InputStream> {
+//	/*
+//	 * Inner classes
+//	 */
+//	static class ListOfFiles implements Enumeration<InputStream> {
+//
+//	    String listOfFiles[];
+//	    int current = 0;
+//
+//	    ListOfFiles(String listOfFiles[]) {
+//	    	this.listOfFiles = listOfFiles;
+//	    }
+//
+//	    public boolean hasMoreElements() {
+//			if (this.current < this.listOfFiles.length) {
+//			    return true;
+//		    }
+//			return false;
+//	    }
+//	    
+//	    public InputStream nextElement() {
+//			InputStream is = null;
+//	
+//			if (!hasMoreElements()) {
+//			    throw new NoSuchElementException("No more files.");
+//			}
+//
+//			try {
+//		        String nextElement = this.listOfFiles[this.current];
+//		        this.current++;
+//		        is = new FileInputStream(nextElement);
+//		    } catch (FileNotFoundException ex) {
+//				System.err.println("ListOfFiles: " + ex); //FIXME improve?
+//		    }
+//			return is;
+//	    }
+//	}
 
-	    String listOfFiles[];
-	    int current = 0;
 
-	    ListOfFiles(String listOfFiles[]) {
-	    	this.listOfFiles = listOfFiles;
-	    }
-
-	    public boolean hasMoreElements() {
-			if (this.current < this.listOfFiles.length) {
-			    return true;
-		    }
-			return false;
-	    }
-	    
-	    public InputStream nextElement() {
-			InputStream is = null;
-	
-			if (!hasMoreElements()) {
-			    throw new NoSuchElementException("No more files.");
-			}
-
-			try {
-		        String nextElement = this.listOfFiles[this.current];
-		        this.current++;
-		        is = new FileInputStream(nextElement);
-		    } catch (FileNotFoundException ex) {
-				System.err.println("ListOfFiles: " + ex); //FIXME improve?
-		    }
-			return is;
-	    }
-	}
+//	/**
+//  * Concatenate files to one output file 
+//  * 
+//  * @param outputFileName Output file name (with absolut path)
+//  * @param list List with all file names (with absolut path)
+//  */	
+//	@SuppressWarnings("unchecked")
+//	public static void concatenateFiles(String outputFileName, String list[]) throws IOException {
+//		FileOutputStream fos = new FileOutputStream(outputFileName);
+//
+//		ListOfFiles lof = new ListOfFiles(list);
+//
+//	    SequenceInputStream sis = new SequenceInputStream(lof);
+//     int c;
+//
+//     while ((c = sis.read()) != -1) {
+// 		fos.write(c);
+//     }
+//     sis.close();
+//		fos.close();
+//	}
 }

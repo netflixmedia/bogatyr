@@ -51,7 +51,7 @@ import java.util.regex.Pattern;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20070829
+ * @version 20080131
  */
 public abstract class GeneralHelper {
 
@@ -251,11 +251,18 @@ public abstract class GeneralHelper {
 	/**
 	 * Appends a given byte-array to an existing byte-array.
 	 * 
-	 * @param a The first array.
-	 * @param b The second array.
+	 * @param inA The first array.
+	 * @param inB The second array.
 	 * @return The array a & b as one new byte-array.
 	 */
-    public static byte[] appendByteArray(byte[] a, byte[] b) {
+    public static byte[] appendByteArray(byte[] inA, byte[] inB) {
+    	byte[] a = inA;
+    	byte[] b = inB;
+    	
+    	if (a == null) a = new byte[0];
+
+    	if (b == null) b = new byte[0];
+    	
     	byte[] z = new byte[a.length + b.length];
         System.arraycopy(a, 0, z, 0, a.length);
         System.arraycopy(b, 0, z, a.length, b.length);
@@ -298,13 +305,8 @@ public abstract class GeneralHelper {
      * @return The generated unique String.
      * @see #generateChecksum(String, String)
      */
-    public static String generateMd5(String data) {
-    	try {
-			return generateChecksum(CHECKSUM_ALGORITHM_MD5, data);
-		} catch (NoSuchAlgorithmException ex) {
-			ex.printStackTrace();
-		}
-		return null;
+    public static String generateMd5(String data) throws NoSuchAlgorithmException {
+		return generateChecksum(CHECKSUM_ALGORITHM_MD5, data);
     }
 
     /**
@@ -314,13 +316,8 @@ public abstract class GeneralHelper {
      * @return The generated unique String.
      * @see #generateChecksum(String, String)
      */
-    public static String generateSha1(String data) {
-    	try {
-			return generateChecksum(CHECKSUM_ALGORITHM_SHA1, data);
-		} catch (NoSuchAlgorithmException ex) {
-			ex.printStackTrace();
-		}
-		return null;
+    public static String generateSha1(String data) throws NoSuchAlgorithmException {
+		return generateChecksum(CHECKSUM_ALGORITHM_SHA1, data);
     }
     
     /**
@@ -331,6 +328,23 @@ public abstract class GeneralHelper {
     public static synchronized void suspendMilliseconds(long time){
     	long startTime = System.currentTimeMillis();
     	
-    	while(System.currentTimeMillis() - time < startTime); //let everything wait...
+    	while(System.currentTimeMillis() - time < startTime) {
+    		//let everything wait...
+    	}
      }
+    
+    /**
+     * Fill a string
+     * @param fillChar
+     * @param fillLength
+     * @return filled string
+     */
+    public static String fillString(char fillChar, int fillLength){
+        int length = fillLength;
+    	char[] chars = new char[length];
+        
+    	while (length > 0) chars[--length] = fillChar;
+        
+    	return new String(chars);
+    }
 }
