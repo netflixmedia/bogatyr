@@ -2,8 +2,6 @@
 #labels Phase-Requirements
 = ToDos =
 || *Task* || *Who* ||
-|| Create !ArrayList Dumper || laubenberger ||
-|| Own crypto implementation || laubenberger ||
 || DB python script || silvan.spross ||
 || Installer || laubenberger ||
 || Implement Port-Switching || ||
