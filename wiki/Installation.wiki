@@ -1,7 +1,7 @@
 #summary How to install the Bogatyr framework library
 #labels Featured,Phase-Deploy
 =Installation=
-1) Just download the newest Bogatyr library `bogatyr_0.35.zip` from the [http://code.google.com/p/bogatyr/ project home], extract it and add the JAR to your own project (normally in the /lib directory).
+1) Just download the newest Bogatyr library `bogatyr_0.35.zip` from the [http://code.google.com/p/bogatyr/ project home], extract it and add the JAR to your own project (normally in the `/lib` directory).
 
 2) Now you can access the package over `import ch.orwell.bogatyr.*`.
 
@@ -10,19 +10,19 @@
   * cfg
 
   * res
-4) Move the file `cfg/ch/orwell/bogatyr/standard.properties` to `cfg/yourapp/standard.properties`. Open the standard.properties with any text editor and enter the correct settings for your application. If you use i18n, then do the same with the resource files (and add your own language).
+4) Move the file `cfg/ch/orwell/bogatyr/standard.properties` to `cfg/yourapp/standard.properties`. Open the `standard.properties` with any text editor and enter the correct settings for your application. If you use `i18n`, then do the same with the resource files (and add your own language).
 
-5) If you use an IDE, go to "run" and select as main method `ch.orwell.bogatyr.controller.Runner`. As parameter `ch.orwell.yourapp.YourApp /cfg/ch/orwell/yourapp/standard.properties`.
+5) If you use an `IDE`, go to `run` and select as main method `ch.orwell.bogatyr.controller.Runner`. 
+As parameter `ch.orwell.yourapp.YourApp /cfg/ch/orwell/yourapp/standard.properties`.
+Now run the application.
 
-Without IDE, you must first compile your app it with javac and enter this on your command prompt:
+Without IDE, you must first compile your application with `javac` and enter this on your command prompt:
   * `java -jar /lib/bogatyr_0.35.jar ch.orwell.yourapp.YourApp ./cfg/ch/orwell/yourapp/standard.properties`
 
-6) Enjoy :-)
+6) Enjoy! `(hopefully)` :-)
 
 
 _A complete installation tutorial will added soon!_
-
-
 
 
 
