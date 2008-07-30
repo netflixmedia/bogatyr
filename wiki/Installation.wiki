@@ -22,9 +22,7 @@ Now run the application.
 6) Enjoy! `(hopefully)` :-)
 
 
-_A complete installation tutorial will added soon!_
-
-
+_A better installation tutorial will be added soon!_
 
 
 
