@@ -141,7 +141,7 @@ public abstract class HelperSound {
 	}
 	
     /**
-     * Plays an audio clip (if no player thread is available)
+     * Plays a whole audio clip (if no player thread is available)
      *
      * @param clip to play
      */
@@ -154,6 +154,25 @@ public abstract class HelperSound {
 				clip.stop();
 			}
 		}, (int)(clip.getMicrosecondLength()/1000));
+	}
+
+	/**
+     * Plays a whole sequence (if no player thread is available)
+     *
+     * @param sequence to play
+	 * @throws InvalidMidiDataException 
+	 * @throws MidiUnavailableException 
+     */
+	public static void play(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
+		final Sequencer sequencer = getSequencer(sequence);
+		sequencer.start();
+		final Timer timer = new Timer();
+		timer.schedule(new TimerTask(){
+			@Override
+			public void run() {
+				sequencer.stop();
+			}
+		}, (int)sequence.getTickLength());
 	}
 	
 	/*
