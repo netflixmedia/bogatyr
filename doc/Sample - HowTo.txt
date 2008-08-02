@@ -1,0 +1,41 @@
+###########################
+#  Sample                 #
+#  HowTo                  #
+###########################
++-------------+
+| Preparation |
++-------------+
+- Ensure that Java 1.5 or higher is installed on your machine (http://java.sun.com)
+
+- Simply copy the folders to your project workspace or import it in your IDE: 
+
+cfg
+lib
+res
+src
+(and optional bin)
+
+
++------------+
+| HelloWorld |
++------------+
+optional: edit the cfg/ch/orwell/sample/helloworld/standard.properties file and enter the correct path settings
+
+If you use an IDE, go to run and select as main method ch.orwell.bogatyr.controller.Runner. 
+As parameter ch.orwell.bogatyr.sample.helloworld.HelloWorld /cfg/ch/orwell/bogatyr/sample/helloworld/standard.properties. Now run the application.
+
+
+Without IDE, you must first compile your application with javac and enter this on your command prompt:
+
+java -jar /lib/bogatyr_0.35.jar ch.orwell.bogatyr.sample.helloworld.HelloWorld /cfg/ch/orwell/bogatyr/sample/helloworld/standard.properties
+
+
+
+If you have any questions, visit our project page:
+--------------------------------------------------
+http://code.google.com/p/bogatyr/
+
+or write us an email:
+---------------------
+laubenberger@gmail.com
+silvan.spross@gmail.com
