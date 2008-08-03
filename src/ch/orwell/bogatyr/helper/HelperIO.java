@@ -53,13 +53,13 @@ import ch.orwell.bogatyr.helper.localizer.Localizer;
 
 
 /**
- * This is a helper class for file system operations
+ * This is a helper class for I/O
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
  * @version 20080803
  */
-public abstract class HelperFile {
+public abstract class HelperIO {
 	private static final int BUFFER = 1024;
 	
 	/**
@@ -132,27 +132,28 @@ public abstract class HelperFile {
      * @param dest Destination as absolute path
      */	
 	public static void copyFile(final File source, final File dest) throws IOException{
-        InputStream in = null;
-        OutputStream out = null;
+        InputStream fis = null;
+        OutputStream fos = null;
 
 		if (!dest.exists()) {
             dest.createNewFile();
         }
 
         try {
-            in = new FileInputStream(source);
-            out = new FileOutputStream(dest);
+            fis = new FileInputStream(source);
+            fos = new FileOutputStream(dest);
 			final byte[] buf = new byte[BUFFER];
 			int len;
-			while ((len = in.read(buf)) > 0) {
-				out.write(buf, 0, len);
+			while ((len = fis.read(buf)) > 0) {
+				fos.write(buf, 0, len);
 			}
+			fos.flush();
 		} finally {
-			if (in != null) {
-				in.close();
+			if (fis != null) {
+				fis.close();
 			}
-			if (out != null) {
-				out.close();
+			if (fos != null) {
+				fos.close();
 			}
 		}
 	}
@@ -221,6 +222,7 @@ public abstract class HelperFile {
         try {
 			pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file, true), enc));    
 			pw.println(line);
+			pw.flush();
 		} finally {
 			if (pw != null) {
                 pw.close();
@@ -253,6 +255,7 @@ public abstract class HelperFile {
 		try {
 			fos = new FileOutputStream(file, append);
 			fos.write(data);
+			fos.flush();
 		} finally {
 			if (fos != null) {
                 fos.close();
@@ -277,9 +280,26 @@ public abstract class HelperFile {
 	    	} else {
 	    		writer.write(data);
 	    	}
+	    	writer.flush();
 	    } finally {
 	      writer.close();
 	    }
+	}
+	
+	/**
+     * Writes a byte array to a stream 
+     * 
+     * @param os output stream
+     * @param data byte-array
+     * @throws java.io.IOException
+     */	
+	public static void writeStream(final OutputStream os, final byte[] data) throws IOException {
+//	    try {
+    		os.write(data);
+    		os.flush();
+//	    } finally {
+//	      os.close();
+//	    }
 	}
 	
 	/**
@@ -292,14 +312,14 @@ public abstract class HelperFile {
 	public static byte[] readStreamFast(final InputStream in) throws IOException {
 		
 		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		bos.flush();
+//		bos.flush();
 
 		try {
             final byte[] buffer = new byte[BUFFER];
             while (in.available() != 0) {
 				bos.write(buffer, 0, in.read(buffer, 0, BUFFER));
 			}
-		
+            bos.flush();
 			return bos.toByteArray();
 		} finally {
 			bos.close();
@@ -315,13 +335,13 @@ public abstract class HelperFile {
      */	
 	public static byte[] readStreamSecure(InputStream in) throws IOException {
 		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		bos.flush();
+//		bos.flush();
 
 		try {
 			while (in.available() != 0) {
 				bos.write(in.read());
 			}
-		
+			bos.flush();
 			return bos.toByteArray();
 		} finally {
 			bos.close();

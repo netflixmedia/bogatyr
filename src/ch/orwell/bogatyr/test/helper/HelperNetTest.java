@@ -41,9 +41,9 @@ import ch.orwell.bogatyr.helper.HelperNet;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080802
+ * @version 20080803
  */
-public class HelperNetTest extends TestCase {
+public class HelperNetTest extends TestCase { //TODO improve
 	public void testReadUrl() {
 		try {
 //			System.out.println(HelperNet.readUrl(new URL("http://www.kaywa.com/files/qr_chip_de.pdf")).length);

@@ -43,9 +43,9 @@ import ch.orwell.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080802
+ * @version 20080803
  */
-public class HelperGeneralTest extends TestCase {
+public class HelperGeneralTest extends TestCase { //TODO improve
 	
 	public void testCreateObject() {
 		try {
@@ -198,7 +198,6 @@ public class HelperGeneralTest extends TestCase {
 	public void testReverseString() {
 		assertEquals("nafetS", HelperGeneral.reverseString("Stefan"));
 	}
-	//TODO complete tests
 }
 
 

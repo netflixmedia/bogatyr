@@ -37,11 +37,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.math.BigInteger;
 import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.NoSuchProviderException;
 import java.security.SignatureException;
+import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
@@ -57,6 +59,8 @@ import org.bouncycastle.asn1.x509.KeyPurposeId;
 import org.bouncycastle.asn1.x509.KeyUsage;
 import org.bouncycastle.asn1.x509.X509Extensions;
 import org.bouncycastle.x509.X509V3CertificateGenerator;
+
+import ch.orwell.bogatyr.helper.HelperIO;
 
 
 /**
@@ -104,6 +108,30 @@ public abstract class PublicKeyProvider {
                 is.close();
             }
         }
+    }
+    
+    /**
+     * Store the certificate on a stream
+     * 
+     * @param cert certificate
+     * @param file for the certificate
+     * @throws IOException 
+     * @throws CertificateEncodingException 
+     */
+    public static void storeCertificate(final X509Certificate cert, final OutputStream os) throws CertificateEncodingException, IOException {    
+    	HelperIO.writeStream(os, cert.getEncoded());
+    }
+    
+    /**
+     * Store the certificate in a file
+     * 
+     * @param cert certificate
+     * @param file for the certificate
+     * @throws IOException 
+     * @throws CertificateEncodingException 
+     */
+    public static void storeCertificate(final X509Certificate cert, final File file) throws CertificateEncodingException, IOException {    
+    	HelperIO.writeFileAsBinary(file, cert.getEncoded(), false);
     }
 
     /**

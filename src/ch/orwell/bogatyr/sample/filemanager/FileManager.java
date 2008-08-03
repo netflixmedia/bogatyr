@@ -35,7 +35,7 @@ import java.io.File;
 import java.io.IOException;
 
 import ch.orwell.bogatyr.controller.ApplicationTemplate;
-import ch.orwell.bogatyr.helper.HelperFile;
+import ch.orwell.bogatyr.helper.HelperIO;
 import ch.orwell.bogatyr.helper.HelperGeneral;
 import ch.orwell.bogatyr.helper.exception.HelperException;
 import ch.orwell.bogatyr.helper.logger.Logger;
@@ -89,9 +89,9 @@ public class FileManager extends ApplicationTemplate {
 	private void searchFiles() throws IOException {
 		int ii = 0;
 		
-		for (File file : HelperFile.getFiles(path, identifier, false)) {
+		for (File file : HelperIO.getFiles(path, identifier, false)) {
 			if (isDelete) {
-				HelperFile.delete(file);
+				HelperIO.delete(file);
 			}
 			Logger.getInstance().writeDebug(this, "searchFiles", file.getAbsolutePath());
 			ii++;

@@ -37,7 +37,7 @@ package ch.orwell.bogatyr.helper;
  * This is a helper class for XML operations
  * 
  * @author Stefan Laubenberger
- * @version 20080616
+ * @version 20080803
  */
 public abstract class HelperXml {
 	/**
@@ -51,7 +51,7 @@ public abstract class HelperXml {
      * @param in The String whose non-valid characters we want to remove.
      * @return The in String, stripped of non-valid characters.
      */
-    public static String stripNonValidXMLCharacters(final String in) {
+    public static String getValidXmlString(final String in) {
         final StringBuilder out = new StringBuilder(); // Used to hold the output.
         char current; // Used to reference the current character.
 
@@ -59,8 +59,8 @@ public abstract class HelperXml {
             return ""; //$NON-NLS-1$
         }
         
-        for (int i = 0; i < in.length(); i++) {
-            current = in.charAt(i); // NOTE: No IndexOutOfBoundsException caught here; it should not happen.
+        for (int ii = 0; ii < in.length(); ii++) {
+            current = in.charAt(ii);
 //            if (current != 0x96 && current != 0x9C) { // new
             if (current != (char) 0x26) { // new
 	            if (current == (char) 0x9 || current == (char) 0xA || current == (char) 0xD || current >= (char) 0x20 && current <= (char) 0xD7FF || current >= (char) 0xE000 && current <= (char) 0xFFFD || current >= (char) 0x10000 && current <= (char) 0x10FFFF) {

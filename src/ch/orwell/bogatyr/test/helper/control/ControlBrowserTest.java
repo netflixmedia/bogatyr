@@ -39,9 +39,9 @@ import ch.orwell.bogatyr.helper.control.ControlBrowser;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080802
+ * @version 20080803
  */
-public class ControlBrowserTest extends TestCase {
+public class ControlBrowserTest extends TestCase { //TODO improve
 	
 	public void testDisplayUrl() {
 		try {

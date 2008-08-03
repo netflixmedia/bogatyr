@@ -35,6 +35,7 @@ import junit.extensions.RepeatedTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
+import ch.orwell.bogatyr.helper.crypto.PublicKeyProvider;
 import ch.orwell.bogatyr.test.helper.HelperEnvInfoTest;
 import ch.orwell.bogatyr.test.helper.HelperFileTest;
 import ch.orwell.bogatyr.test.helper.HelperGeneralTest;
@@ -43,12 +44,14 @@ import ch.orwell.bogatyr.test.helper.HelperImageTest;
 import ch.orwell.bogatyr.test.helper.HelperMathTest;
 import ch.orwell.bogatyr.test.helper.HelperNetTest;
 import ch.orwell.bogatyr.test.helper.HelperPdfTest;
-import ch.orwell.bogatyr.test.helper.HelperSoundTest;
+import ch.orwell.bogatyr.test.helper.HelperXmlTest;
 import ch.orwell.bogatyr.test.helper.context.ContextTest;
 import ch.orwell.bogatyr.test.helper.converter.ConverterBase64Test;
+import ch.orwell.bogatyr.test.helper.converter.ConverterHexTest;
 import ch.orwell.bogatyr.test.helper.crypto.CryptoAsymmTest;
 import ch.orwell.bogatyr.test.helper.crypto.CryptoSymmTest;
 import ch.orwell.bogatyr.test.helper.crypto.ObfuscatorTest;
+import ch.orwell.bogatyr.test.helper.crypto.PublicKeyProviderTest;
 import ch.orwell.bogatyr.test.helper.localizer.LocalizerTest;
 
 
@@ -74,9 +77,11 @@ public class AllBogatyrTests extends TestSuite implements Runnable {
 		testSuite.addTestSuite(ContextTest.class);
 //		testSuite.addTestSuite(ControlBrowserTest.class);
 		testSuite.addTestSuite(ConverterBase64Test.class);
+		testSuite.addTestSuite(ConverterHexTest.class);
 		testSuite.addTestSuite(CryptoAsymmTest.class);
 		testSuite.addTestSuite(CryptoSymmTest.class);
 		testSuite.addTestSuite(ObfuscatorTest.class);
+		testSuite.addTestSuite(PublicKeyProviderTest.class);
 		testSuite.addTestSuite(LocalizerTest.class);		
 		testSuite.addTestSuite(HelperEnvInfoTest.class);
 		testSuite.addTestSuite(HelperFileTest.class);
@@ -87,7 +92,7 @@ public class AllBogatyrTests extends TestSuite implements Runnable {
 		testSuite.addTestSuite(HelperNetTest.class);
 		testSuite.addTestSuite(HelperPdfTest.class);
 //		testSuite.addTestSuite(HelperPreferencesTest.class);
-//		testSuite.addTestSuite(HelperXmlTest.class);
+		testSuite.addTestSuite(HelperXmlTest.class);
 //		testSuite.addTestSuite(PaginatorTest.class);
 //		testSuite.addTestSuite(PrinterTest.class);
 //		testSuite.addTestSuite(HelperSoundTest.class);

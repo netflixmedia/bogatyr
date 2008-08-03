@@ -29,18 +29,11 @@
  * <silvan.spross@gmail.com>
  * 
  *******************************************************************************/
-package ch.orwell.bogatyr.test.helper;
-
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.io.File;
+package ch.orwell.bogatyr.test.helper.converter;
 
 import junit.framework.TestCase;
-import ch.orwell.bogatyr.helper.HelperEnvInfo;
-import ch.orwell.bogatyr.helper.HelperImage;
-import ch.orwell.bogatyr.view.swing.Button;
+import ch.orwell.bogatyr.helper.converter.ConverterHex;
+import ch.orwell.bogatyr.test.AllBogatyrTests;
 
 
 /**
@@ -49,17 +42,11 @@ import ch.orwell.bogatyr.view.swing.Button;
  * @author Stefan Laubenberger
  * @version 20080803
  */
-public class HelperImageTest extends TestCase { //TODO improve
+public class ConverterHexTest extends TestCase { //TODO improve
 	
-	public void testCreateImage() {
-		try {
-			Component component = new Button("Hello world", "");
-			component.setBackground(Color.YELLOW);
-			component.setForeground(Color.BLACK);
-			component.setFont(new Font("Arial", Font.PLAIN, 18));
-			component.setSize(new Dimension(100, 100));
-			
-			HelperImage.createImage(component, HelperImage.TYPE_JPG, new File(HelperEnvInfo.getOsTempDirectory(), "test.jpg"));
-		} catch (Exception ex) {fail(ex.getMessage());}
+	public void testEncodeAndDecode() {
+		assertEquals(AllBogatyrTests.DATA, new String(ConverterHex.decode(ConverterHex.encode(AllBogatyrTests.DATA.getBytes()))));
 	}
 }
+
+

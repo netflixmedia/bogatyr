@@ -266,7 +266,7 @@ public abstract class HelperNet {
     public static byte[] readUrl(URL url) throws IOException {
         URLConnection connection = url.openConnection();
  
-        return HelperFile.readStreamSecure(connection.getInputStream());
+        return HelperIO.readStreamSecure(connection.getInputStream());
      }
 
 //	public static String getMacAddress(NetworkInterface ni) throws SocketException { // Java 1.6 only

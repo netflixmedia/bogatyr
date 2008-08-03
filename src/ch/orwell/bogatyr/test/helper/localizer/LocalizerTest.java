@@ -41,7 +41,7 @@ import ch.orwell.bogatyr.helper.localizer.Localizer;
  * @author Stefan Laubenberger
  * @version 20080802
  */
-public class LocalizerTest extends TestCase {
+public class LocalizerTest extends TestCase { //TODO improve
 
 	public void testGetLocales() {
 		assertNotNull(Localizer.getLocales());
