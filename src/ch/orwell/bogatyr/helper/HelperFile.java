@@ -57,7 +57,7 @@ import ch.orwell.bogatyr.helper.localizer.Localizer;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20080730
+ * @version 20080803
  */
 public abstract class HelperFile {
 	private static final int BUFFER = 1024;
@@ -66,7 +66,7 @@ public abstract class HelperFile {
      * Search in a path (directory) for files via identifier
      * 
      * @param path Path
-     * @param identifier Part of the file name (if it's "null", all files will be delivered)
+     * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
      * @param isExclude Is the identifier excluded
      * @param isCaseSensitive true/false
      * @param isRecursive true/false
@@ -75,7 +75,7 @@ public abstract class HelperFile {
      * @return ArrayList containing the path to the matched files
      * @throws java.io.IOException
      */	
-	public static List<File> getFiles(final File path, final String identifier, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) throws IOException {
+	public static List<File> getFiles(final File path, final String[] identifier, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) throws IOException {
 		final List<File> fileList = new ArrayList<File>();
 
 		if (!path.isDirectory()) {
@@ -88,14 +88,14 @@ public abstract class HelperFile {
 	}
 
 	/**
-     * Search in a path (directory) for files via identifier
+     * Search in a path (directory) for files and directories via identifier
      * 
      * @param path Path
-     * @param identifier Part of the file name (if it's "null", all files will be delivered)
+     * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
      * @param isExclude Is the identifier excluded
      * @return ArrayList containing the path to the matched files
      */	
-	public static List<File> getFiles(final File path, final String identifier, final boolean isExclude) throws IOException {
+	public static List<File> getFiles(final File path, final String[] identifier, final boolean isExclude) throws IOException {
 		return getFiles(path, identifier, isExclude, false, true, true, true);
 	}
 
@@ -430,7 +430,7 @@ public abstract class HelperFile {
      * Recursive search method for a path (directories)
      * 
      * @param filePath Path
-     * @param identifier Part of the file name (if it's "null", all files will be delivered)
+     * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
      * @param fileList
      * @param isExclude true/false
      * @param isCaseSensitive true/false
@@ -438,14 +438,20 @@ public abstract class HelperFile {
      * @param isFile true/false
      * @param isDirectory true/false
      */	
-	private static void getFileNamesRecursion(final File filePath, final String identifier, final List<File> fileList, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) {
+	private static void getFileNamesRecursion(final File filePath, final String[] identifier, final List<File> fileList, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) {
 		final File[] files = filePath.listFiles();
 		
 		if (files != null) {
 			for (final File file : files) {
 				if (isFile == file.isFile() || isDirectory == file.isDirectory()) {
-					if (identifier == null || isCaseSensitive && file.getAbsolutePath().contains(identifier) != isExclude || !isCaseSensitive && file.getAbsolutePath().toUpperCase().contains(identifier.toUpperCase()) != isExclude) {
+					if (identifier == null) {
 						fileList.add(file);
+					} else {
+						for (String id : identifier) {
+							 if (isCaseSensitive && file.getAbsolutePath().contains(id) != isExclude || !isCaseSensitive && file.getAbsolutePath().toUpperCase().contains(id.toUpperCase()) != isExclude) {
+								 fileList.add(file);
+							 }
+						}
 					}
 				}
 	//			} else if (file.isDirectory() && isRecursive) {
