@@ -39,9 +39,9 @@ import ch.orwell.bogatyr.helper.HelperGraphic;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080802
+ * @version 20080803
  */
-public class HelperGraphicTest extends TestCase {
+public class HelperGraphicTest extends TestCase { //TODO improve
 	
 	public void testGetFonts() {
 		assertNotNull(HelperGraphic.getFonts());

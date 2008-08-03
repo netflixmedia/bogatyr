@@ -42,12 +42,11 @@ import ch.orwell.bogatyr.test.AllBogatyrTests;
  * @author Stefan Laubenberger
  * @version 20080802
  */
-public class ConverterBase64Test extends TestCase {
+public class ConverterBase64Test extends TestCase { //TODO improve
 	
 	public void testEncodeAndDecode() {
 		assertEquals(AllBogatyrTests.DATA, ConverterBase64.decodeString(ConverterBase64.encodeString(AllBogatyrTests.DATA)));
 	}
-	//TODO complete all tests
 }
 
 

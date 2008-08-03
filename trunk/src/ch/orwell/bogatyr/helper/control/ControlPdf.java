@@ -37,7 +37,7 @@ import java.io.OutputStream;
 import java.text.MessageFormat;
 
 import ch.orwell.bogatyr.helper.HelperEnvInfo;
-import ch.orwell.bogatyr.helper.HelperFile;
+import ch.orwell.bogatyr.helper.HelperIO;
 import ch.orwell.bogatyr.helper.context.Context;
 
 /**
@@ -68,7 +68,7 @@ public abstract class ControlPdf {
 	public static void open(final byte[] pdfFileContents)	throws Exception {
 		// first store the pdfFileContents to a temporary file
 		final File temporaryFile = createFile();
-		HelperFile.writeFileAsBinary(temporaryFile, pdfFileContents, false);
+		HelperIO.writeFileAsBinary(temporaryFile, pdfFileContents, false);
 		open(temporaryFile);
 	}
 

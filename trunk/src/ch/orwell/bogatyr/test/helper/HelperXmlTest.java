@@ -32,16 +32,23 @@
 package ch.orwell.bogatyr.test.helper;
 
 import junit.framework.TestCase;
+import ch.orwell.bogatyr.helper.HelperXml;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080802
+ * @version 20080803
  */
 public class HelperXmlTest extends TestCase {
-	//TODO complete
+	private static final String INVALID_XML = new String(new byte[]{(byte)0x26});
+	
+
+	public void testGetValidXmlString() {
+		assertEquals("", HelperXml.getValidXmlString(null));
+		assertNotSame(INVALID_XML, HelperXml.getValidXmlString(INVALID_XML));
+	}
 }
 
 

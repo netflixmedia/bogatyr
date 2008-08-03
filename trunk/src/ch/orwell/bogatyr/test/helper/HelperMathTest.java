@@ -39,9 +39,9 @@ import ch.orwell.bogatyr.helper.HelperMath;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080802 
+ * @version 20080803
  */
-public class HelperMathTest extends TestCase {
+public class HelperMathTest extends TestCase { //TODO improve
 
 	public void testConvertDoubleToInt() {
 		assertEquals(-2, HelperMath.convertDoubleToInt(-2.499D));

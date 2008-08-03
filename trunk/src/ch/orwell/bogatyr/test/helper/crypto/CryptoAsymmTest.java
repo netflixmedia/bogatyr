@@ -42,7 +42,7 @@ import ch.orwell.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080802
+ * @version 20080803
  */
 public class CryptoAsymmTest extends TestCase {
 	private static final int KEYSIZE = 1024;
@@ -120,7 +120,6 @@ public class CryptoAsymmTest extends TestCase {
 
 		try {
 			assertEquals(AllBogatyrTests.DATA, new String(CryptoAsymm.decrypt(CryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), keyPair.getPublic(), KEYSIZE), keyPair.getPrivate(), KEYSIZE)));
-//			assertEquals(DATA.getBytes(), CryptoAsymm.decrypt(CryptoAsymm.encrypt(DATA.getBytes(), this.keyPair.getPublic(), KEYSIZE), this.keyPair.getPrivate(), KEYSIZE)); //TODO why does this test not work?
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 

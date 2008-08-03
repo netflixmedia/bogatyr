@@ -47,9 +47,9 @@ import ch.orwell.bogatyr.view.swing.Button;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080802
+ * @version 20080803
  */
-public class HelperPdfTest extends TestCase {
+public class HelperPdfTest extends TestCase { //TODO improve
 	
 	public void testCreatePdf() {
 		try {

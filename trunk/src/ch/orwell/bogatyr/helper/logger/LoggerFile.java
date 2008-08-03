@@ -39,7 +39,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import ch.orwell.bogatyr.helper.HelperFile;
+import ch.orwell.bogatyr.helper.HelperIO;
 import ch.orwell.bogatyr.helper.HelperGeneral;
 import ch.orwell.bogatyr.helper.context.Context;
 import ch.orwell.bogatyr.helper.localizer.Localizer;
@@ -50,7 +50,7 @@ import ch.orwell.bogatyr.helper.property.Property;
  * This is the logger for file access
  *  
  * @author Stefan Laubenberger
- * @version 20080729
+ * @version 20080803
  */
 public class LoggerFile implements ILogger {
 	// Resources
@@ -60,14 +60,14 @@ public class LoggerFile implements ILogger {
 	// Properties
 	private static final String PROPERTY_LOGGER_PATH = "LoggerFile.path"; //$NON-NLS-1$
 	
-	private boolean isDebug ;
+	private boolean isDebug;
 	
 	private String logFileName;
 	private final DateFormat formatter = new SimpleDateFormat("yyyyMMdd HH:mm:ss.SSS", Localizer.getInstance().getLocale()); //$NON-NLS-1$
 	private String formattedDate;
 	
 
-	public LoggerFile() throws Exception {
+	public LoggerFile() {
         super();
         init();
 	}
@@ -76,23 +76,17 @@ public class LoggerFile implements ILogger {
 	/*
 	 * Private methods
 	 */
-	private void init() throws Exception {
+	private void init() {
         isDebug = Context.getInstance().isApplicationDebug();
 		
 		readProperties();
 	}
 
-	private void readProperties() throws Exception {
+	private void readProperties() {
 		String logPath = Property.getInstance().getProperty(PROPERTY_LOGGER_PATH);
 		if (!HelperGeneral.isValidString(logPath)) {
 			logPath = Context.getInstance().getApplicationWorkDirectory().getAbsolutePath();
 			Context.getInstance().addData(PROPERTY_LOGGER_PATH, logPath);
-//			throw new Exception("Logger::readProperties - " + PROPERTY_LOGGER_PATH + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-
-		// be sure, that the path really exists
-		if (!new File(logPath).exists()) {
-			throw new Exception(getClass().getName() + "::readProperties - " + logPath + ' ' + Localizer.getInstance().getValue(Localizer.RES_INVALID_DIRECTORY)); //$NON-NLS-1$
 		}
 
 		final String logFile = Context.getInstance().getApplicationName();
@@ -110,7 +104,7 @@ public class LoggerFile implements ILogger {
      */
 	private void write(final Object object, final String method, final String logEntry, final File file) throws IOException {
         formattedDate = formatter.format(new Date());
-		HelperFile.writeLine(file, null, formattedDate + " - " + Logger.getClassName(object) + "::" + method + " - " + logEntry); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		HelperIO.writeLine(file, null, formattedDate + " - " + Logger.getClassName(object) + "::" + method + " - " + logEntry); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	

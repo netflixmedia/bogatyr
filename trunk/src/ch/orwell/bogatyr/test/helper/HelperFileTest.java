@@ -34,25 +34,25 @@ package ch.orwell.bogatyr.test.helper;
 import java.io.File;
 
 import junit.framework.TestCase;
-import ch.orwell.bogatyr.helper.HelperFile;
+import ch.orwell.bogatyr.helper.HelperIO;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080802
+ * @version 20080803
  */
-public class HelperFileTest extends TestCase {
+public class HelperFileTest extends TestCase { //TODO improve and complete
 	
 	public void testGetFileNames() {
 		try {
-			HelperFile.getFiles(null, null, false, false, false, true, true);
+			HelperIO.getFiles(null, null, false, false, false, true, true);
 			fail("null"); //$NON-NLS-1$
 		} catch (Exception ex) {}
 		
 		try {
-			HelperFile.getFiles(new File("*blablabla\\asdf"), null, false, false, false, true, true);
+			HelperIO.getFiles(new File("*blablabla/asdf"), null, false, false, false, true, true);
 			fail("Invalid path");
 		} catch (Exception ex) {}
 		
@@ -62,7 +62,6 @@ public class HelperFileTest extends TestCase {
 //		} catch (Exception ex) {}
 
 	}
-	//TODO complete all tests
 }
 
 
