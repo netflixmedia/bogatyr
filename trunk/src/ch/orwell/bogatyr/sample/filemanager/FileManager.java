@@ -54,7 +54,7 @@ public class FileManager extends ApplicationTemplate {
 	private final static String	PROPERTY_DELETE      = "FileManager.delete"; //$NON-NLS-1$
 
 	private File path; 
-	private String identifier;
+	private String[] identifier;
 	private boolean isDelete;
 	
 	
@@ -81,7 +81,7 @@ public class FileManager extends ApplicationTemplate {
 			exit(70);
 		}
 		
-		identifier = Property.getInstance().getProperty(PROPERTY_IDENTIFIER);
+		identifier = new String[]{Property.getInstance().getProperty(PROPERTY_IDENTIFIER)};
 	
 		isDelete = Property.getInstance().getPropertyBoolean(PROPERTY_DELETE);
 	}
@@ -96,7 +96,7 @@ public class FileManager extends ApplicationTemplate {
 			Logger.getInstance().writeDebug(this, "searchFiles", file.getAbsolutePath());
 			ii++;
 		}
-		Logger.getInstance().writeLog(this, "searchFiles", ii + " files found/deleted");
+		Logger.getInstance().writeLog(this, "searchFiles", ii + " file(s) " + (isDelete ? "deleted" : "found"));
 	}
 	
 	
