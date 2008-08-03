@@ -37,33 +37,62 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigInteger;
+import java.security.InvalidKeyException;
+import java.security.KeyPair;
 import java.security.NoSuchProviderException;
+import java.security.SignatureException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.Date;
+
+import javax.security.auth.x500.X500Principal;
+
+import org.bouncycastle.asn1.x509.BasicConstraints;
+import org.bouncycastle.asn1.x509.ExtendedKeyUsage;
+import org.bouncycastle.asn1.x509.GeneralName;
+import org.bouncycastle.asn1.x509.GeneralNames;
+import org.bouncycastle.asn1.x509.KeyPurposeId;
+import org.bouncycastle.asn1.x509.KeyUsage;
+import org.bouncycastle.asn1.x509.X509Extensions;
+import org.bouncycastle.x509.X509V3CertificateGenerator;
+
 
 /**
  * The PublicKeyProvider class
  *
  * @author Stefan Laubenberger
- * @version 20080613
+ * @version 20080803
  */
 public abstract class PublicKeyProvider {
 	/**
-     * Get the Certificate out of the given Certificate File.
-     * @param certFile File the certificate File
+     * Get the certificate out of the given certificate file
+     * 
+     * @param file containing the certificate
      * @return X509Certificate the certificate
      * @throws CertificateException e
      * @throws NoSuchProviderException e
      * @throws IOException e
      */
-    public static X509Certificate getCertFromFile(final File certFile) throws CertificateException, NoSuchProviderException, IOException {
+    public static X509Certificate getCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException {
         // open the file stream
-        final FileInputStream fis = new FileInputStream(certFile);
-        InputStream is = null;        
+        final FileInputStream fis = new FileInputStream(file);
 
+        return getCertificate(new BufferedInputStream(fis));
+    }
+
+    /**
+     * Get the certificate out of the given certificate stream
+     * 
+     * @param file containing the certificate
+     * @return X509Certificate the certificate
+     * @throws CertificateException e
+     * @throws NoSuchProviderException e
+     * @throws IOException e
+     */
+    public static X509Certificate getCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {    
         try {
-            is = new BufferedInputStream(fis);
 
             // Generate the certificate factory
             final CertificateFactory cf = CertificateFactory.getInstance("X.509", "BC"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -76,4 +105,43 @@ public abstract class PublicKeyProvider {
             }
         }
     }
+
+    /**
+     * Generate a public key certificate out of the given keypair
+     * 
+     * @param pair the keypair for the certificate
+     * @param issuerDN (e.g. "CN=Test Certificate")
+     * @param subjectDN (e.g. "CN=Test Certificate")
+     * @param generalName of he certificate owner (e.g. laubenberger@gmail.com)
+     * @param start date of the certificate
+     * @param end date of the certificate
+     * @return X509Certificate the certificate
+     * @throws SignatureException 
+     * @throws SecurityException 
+     * @throws NoSuchProviderException 
+     * @throws InvalidKeyException 
+     */
+    public static X509Certificate generateCertificate(KeyPair pair, String issuerDN, String subjectDN, String generalName, Date start, Date end) throws InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {
+
+	    // generate the certificate
+	    X509V3CertificateGenerator  certGen = new X509V3CertificateGenerator();
+	
+	    certGen.setSerialNumber(BigInteger.valueOf(System.currentTimeMillis()));
+	    certGen.setIssuerDN(new X500Principal(issuerDN));
+	    certGen.setNotBefore(start);
+	    certGen.setNotAfter(end);
+	    certGen.setSubjectDN(new X500Principal(subjectDN));
+	    certGen.setPublicKey(pair.getPublic());
+	    certGen.setSignatureAlgorithm("SHA256WithRSAEncryption");
+	
+	    certGen.addExtension(X509Extensions.BasicConstraints, true, new BasicConstraints(false));
+	
+	    certGen.addExtension(X509Extensions.KeyUsage, true, new KeyUsage(KeyUsage.digitalSignature | KeyUsage.keyEncipherment));
+	
+	    certGen.addExtension(X509Extensions.ExtendedKeyUsage, true, new ExtendedKeyUsage(KeyPurposeId.id_kp_serverAuth));
+	
+	    certGen.addExtension(X509Extensions.SubjectAlternativeName, false, new GeneralNames(new GeneralName(GeneralName.rfc822Name, generalName)));
+	
+	    return certGen.generateX509Certificate(pair.getPrivate(), "BC");
+	}													
 }

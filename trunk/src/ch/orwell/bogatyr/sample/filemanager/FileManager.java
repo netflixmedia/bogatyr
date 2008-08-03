@@ -45,7 +45,7 @@ import ch.orwell.bogatyr.helper.property.Property;
  * Simple file manager using the Bogatyr framework
  * 
  * @author Stefan Laubenberger
- * @version 20080802
+ * @version 20080803
  */
 public class FileManager extends ApplicationTemplate {
 	// Resources
@@ -81,13 +81,7 @@ public class FileManager extends ApplicationTemplate {
 			exit(70);
 		}
 		
-		value = Property.getInstance().getProperty(PROPERTY_IDENTIFIER);
-		if (HelperGeneral.isValidString(value)) {
-            identifier = value;
-		} else {
-			System.err.println(getClass().getName() + "::readProperties - " + PROPERTY_IDENTIFIER + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
-			exit(71);
-		}
+		identifier = Property.getInstance().getProperty(PROPERTY_IDENTIFIER);
 	
 		isDelete = Property.getInstance().getPropertyBoolean(PROPERTY_DELETE);
 	}
