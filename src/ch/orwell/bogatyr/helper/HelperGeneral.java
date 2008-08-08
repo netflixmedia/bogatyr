@@ -392,7 +392,7 @@ public abstract class HelperGeneral {
      * @param list
      * @return dump string
      */
-    public static String dumpList(final List<?> list) {
+    public static String dump(final List<?> list) {
         final StringBuilder sb = new StringBuilder();
 
         for (final Object value : list) {
@@ -407,7 +407,7 @@ public abstract class HelperGeneral {
      * @param map
      * @return dump string
      */
-    public static String dumpMap(final Map<?, ?> map) {
+    public static String dump(final Map<?, ?> map) {
         final StringBuilder sb = new StringBuilder();
 
         for (final Map.Entry<?, ?> pair : map.entrySet()) {
@@ -424,7 +424,7 @@ public abstract class HelperGeneral {
      * @param array
      * @return dump string
      */
-    public static String dumpArray(final Object[] array) {
+    public static String dump(final Object[] array) {
          final StringBuilder sb = new StringBuilder();
 
        for (final Object value : array) {

@@ -48,17 +48,17 @@ import java.util.List;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 20080725
+ * @version 20080807
  */
 public abstract class HelperGraphic {
 	
 	/**
      * Enable antialiasing on a graphic container
      * 
-     * @param g Graphic container
+     * @param g Graphics2D container
      */	
-	public static void enableAntialiasing(Graphics g) {
-		((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+	public static void enableAntialiasing(Graphics2D g) {
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 	}
 
     /**

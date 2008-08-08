@@ -39,9 +39,30 @@ import ch.orwell.bogatyr.helper.HelperMath;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080803
+ * @version 20080808
  */
 public class HelperMathTest extends TestCase { //TODO improve
+
+	public void testIsPrime() {
+		assertEquals(false, HelperMath.isPrime(-1));
+		assertEquals(false, HelperMath.isPrime(0));
+		assertEquals(false, HelperMath.isPrime(1));
+		assertEquals(true, HelperMath.isPrime(2));
+		assertEquals(false, HelperMath.isPrime(21));
+		assertEquals(true, HelperMath.isPrime(23));
+	}
+	
+	public void testGetPrime() {
+		assertEquals(23, HelperMath.getPrime(21));
+	}
+	
+	public void testGetPrimes() {
+		assertNotNull(HelperMath.getPrimes(-5, 100));
+		assertNotNull(HelperMath.getPrimes(50, 10));
+		assertNotNull(HelperMath.getPrimes(21, 23));
+//		System.out.println(HelperGeneral.dump(HelperMath.getPrimes(-5, 100)));
+//		System.out.println(HelperGeneral.dump(HelperMath.getPrimes(21, 23)));
+	}
 
 	public void testConvertDoubleToInt() {
 		assertEquals(-2, HelperMath.convertDoubleToInt(-2.499D));
