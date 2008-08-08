@@ -36,13 +36,14 @@ import java.security.NoSuchAlgorithmException;
 import ch.orwell.bogatyr.helper.HelperGeneral;
 import ch.orwell.bogatyr.helper.dao.DataObject;
 import ch.orwell.bogatyr.helper.exception.ExceptionValidation;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * The data object for a user
  *
  * @author Stefan Laubenberger
- * @version 20080613
+ * @version 20080808
  */
 public final class User extends DataObject {
 	private static final long serialVersionUID = -4679247079715137984L;
@@ -58,20 +59,35 @@ public final class User extends DataObject {
 	}
 
 	public String getPassword() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getPassword"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getPassword", password); //$NON-NLS-1$
+
 		return password;
 	}
 	
 	public void setPassword(final String password) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "setPassword", password); //$NON-NLS-1$
+
 		setPersistenceState(PERSISTENCE_CHANGED);
 		this.password = password;
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "setPassword"); //$NON-NLS-1$
 	}
 	
 	public String getUsername() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getUsername"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getUsername", username); //$NON-NLS-1$
+
 		return username;
 	}
 
 	public String getUniqueKey() throws NoSuchAlgorithmException {
-		return HelperGeneral.getChecksum(toString());
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getUniqueKey"); //$NON-NLS-1$
+		
+		String uniqueKey = HelperGeneral.getChecksum(toString());
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "getUniqueKey", uniqueKey); //$NON-NLS-1$
+		return uniqueKey;
 	}
 
 	

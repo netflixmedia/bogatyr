@@ -39,7 +39,7 @@ import java.io.File;
  * Interface for the Application-Context
  * 
  * @author Stefan Laubenberger
- * @version 20080724
+ * @version 20080808
  */
 public interface IContext {
 
@@ -51,13 +51,13 @@ public interface IContext {
 
 	String getDataString(Object key);
 
-    double getDataDouble(Object key);
-
-    int getDataInt(Object key);
-
-    long getDataLong(Object key);
-
-    boolean getDataBoolean(Object key);
+//    double getDataDouble(Object key);
+//
+//    int getDataInt(Object key);
+//
+//    long getDataLong(Object key);
+//
+//    boolean getDataBoolean(Object key);
     
     /*
      * Bogatyr specific

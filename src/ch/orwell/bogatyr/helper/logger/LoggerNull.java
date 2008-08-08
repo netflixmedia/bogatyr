@@ -34,6 +34,7 @@ package ch.orwell.bogatyr.helper.logger;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
 import ch.orwell.bogatyr.helper.context.Context;
@@ -44,13 +45,13 @@ import ch.orwell.bogatyr.helper.localizer.Localizer;
  * This is the logger for stdout
  *  
  * @author Stefan Laubenberger
- * @version 20080724
+ * @version 20080808
  */
 public class LoggerNull implements ILogger {
 	
 	private boolean isDebug ;
 
-	private final DateFormat formatter = new SimpleDateFormat("yyyyMMdd HH:mm:ss.SSS", Localizer.getInstance().getLocale()); //$NON-NLS-1$
+	private final DateFormat formatter = new SimpleDateFormat("yyyyMMdd HH:mm:ss.SSS", Locale.getDefault()); //$NON-NLS-1$
 	private String formattedDate;
 
 	
@@ -80,34 +81,71 @@ public class LoggerNull implements ILogger {
 	/*
 	 * Implemented methods
 	 */
-	public void writeWarning(final Object object, final String method, final String logEntry) {
+	public void writeWarning(final Class<?> clazz, final String method, final Object logEntry) {
 		if (isDebug) {
             formattedDate = formatter.format(new Date());
-			System.out.println(formattedDate + "|WARNING: " + Logger.getClassName(object) + "::" + method + " - " + logEntry);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+			System.out.println(formattedDate + "|WARNING: " + Logger.getClassName(clazz) + "::" + method + " - " + HelperGeneral.toString(logEntry));  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 		}
  	}
 	
-	public void writeDebug(final Object object, final String method, final String logEntry) {
+	public void writeDebug(final Class<?> clazz, final String method, final Object logEntry) {
 		if (isDebug) {
             formattedDate = formatter.format(new Date());
-			System.out.println(formattedDate + "|DEBUG: " + Logger.getClassName(object) + "::" + method + " - " + logEntry);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+			System.out.println(formattedDate + "|DEBUG: " + Logger.getClassName(clazz) + "::" + method + " - " + logEntry);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 		}
  	}
 
-	public void writeException(final Object object, final String method, final String logEntry, final Exception ex) {
+	public void writeException(final Class<?> clazz, final String method, final Object logEntry, final Exception ex) {
 		if (isDebug) {
             formattedDate = formatter.format(new Date());
-			System.err.println(formattedDate + "|ERROR: " + Logger.getClassName(object) + "::" + method + " - " + logEntry);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+			System.err.println(formattedDate + "|ERROR: " + Logger.getClassName(clazz) + "::" + method + " - " + logEntry);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 			if (ex != null) {
                 ex.printStackTrace();
             }
 		}
 	}
 
-	public void writeLog(final Object object, final String method, final String logEntry) {
+	public void writeLog(final Class<?> clazz, final String method, final Object logEntry) {
 		if (isDebug) {
             formattedDate = formatter.format(new Date());
-			System.out.println(formattedDate + "|LOG: " + Logger.getClassName(object) + "::" + method + " - " + logEntry);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+			System.out.println(formattedDate + "|LOG: " + Logger.getClassName(clazz) + "::" + method + " - " + logEntry);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 		}
+	}
+
+	public void writeMethodEntry(Class<?> clazz, String method, Object[] methodInput) {
+		if (isDebug) {
+			StringBuilder sb = new StringBuilder();
+			sb.append("ENTRY:");
+			
+			for (Object obj : methodInput) {
+				sb.append(obj);
+				sb.append('|');
+			}
+			writeDebug(clazz, method, sb.toString());
+		}		
+	}
+	
+	public void writeMethodEntry(Class<?> clazz, String method, Object methodInput) {
+		if (isDebug) {
+			writeDebug(clazz, method, "ENTRY:" + methodInput);
+		}		
+	}
+
+	public void writeMethodEntry(Class<?> clazz, String method) {
+		if (isDebug) {
+			writeDebug(clazz, method, "ENTRY");
+		}		
+	}
+
+	public void writeMethodExit(Class<?> clazz, String method, Object methodOutput) {
+		if (isDebug) {
+			writeDebug(clazz, method, "EXIT:" + methodOutput);
+		}		
+	}
+	
+	public void writeMethodExit(Class<?> clazz, String method) {
+		if (isDebug) {
+			writeDebug(clazz, method, "EXIT");
+		}		
 	}
 }

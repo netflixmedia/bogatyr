@@ -43,7 +43,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This is the communication container for the client/server-communication.
  * 
  * @author Stefan Laubenberger
- * @version 20080515
+ * @version 20080808
  */
 public final class ComContainer implements Serializable {
 	private static final long serialVersionUID = 1639137536981333349L;
@@ -63,10 +63,16 @@ public final class ComContainer implements Serializable {
 	}
 
 	public String getKey() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getKey"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getKey", key); //$NON-NLS-1$
+
 		return key;
 	}
 
 	public byte[] getData() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getData"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getData", data); //$NON-NLS-1$
+
 		return data;
 	}
 	
@@ -75,7 +81,7 @@ public final class ComContainer implements Serializable {
 	 * Private methods
 	 */
 	private void init() {
-		Logger.getInstance().writeDebug(this, "init", Localizer.getInstance().getValue(Localizer.RES_INSTANCIATED) + toString()); //$NON-NLS-1$
+		Logger.getInstance().writeDebug(this.getClass(), "init", Localizer.getInstance().getValue(Localizer.RES_INSTANCIATED) + toString()); //$NON-NLS-1$
 	}
 	
 	

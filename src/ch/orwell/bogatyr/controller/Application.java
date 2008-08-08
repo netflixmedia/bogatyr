@@ -33,11 +33,12 @@ package ch.orwell.bogatyr.controller;
 
 
 
+
 /**
  * Application holder
  *  
  * @author Stefan Laubenberger
- * @version 20080525
+ * @version 20080808
  */
 public abstract class Application {
 	private static ApplicationTemplate instance;

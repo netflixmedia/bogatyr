@@ -44,7 +44,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This is the skeleton for asynchron servers
  *
  * @author Stefan Laubenberger
- * @version 20080723
+ * @version 20080808
  */
 public abstract class ServerAsynchTemplate extends ServerTemplate {
 	private final Map<String, ThreadServerAsynchTemplate> mapThread = new ConcurrentHashMap<String, ThreadServerAsynchTemplate>();
@@ -68,12 +68,16 @@ public abstract class ServerAsynchTemplate extends ServerTemplate {
 	 * @see Map
 	 */
 	public void addAsynchServerThread(final String uniqueKey, final ThreadServerAsynchTemplate asynchServerThread) throws ExceptionInvalidUserKey {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "addAsynchServerThread", new Object[]{uniqueKey, asynchServerThread}); //$NON-NLS-1$
+
 		if (HelperGeneral.isValidString(uniqueKey) && HelperGeneral.isValidObject(asynchServerThread)) {
-			Logger.getInstance().writeDebug(this, "addAsynchServerThread", "uniqueKey: " + uniqueKey + " asynchServerThread: " + asynchServerThread);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
             mapThread.put(uniqueKey, asynchServerThread);
 		} else {
 			throw new ExceptionInvalidUserKey();
 		}
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "addAsynchServerThread"); //$NON-NLS-1$
+
 	}
 
 	/**
@@ -83,8 +87,11 @@ public abstract class ServerAsynchTemplate extends ServerTemplate {
 	 * @see Map
 	 */
 	public void removeAsynchServerThread(final String uniqueKey) {
-		Logger.getInstance().writeDebug(this, "removeAsynchServerThread", "uniqueKey: " + uniqueKey);  //$NON-NLS-1$//$NON-NLS-2$
-        mapThread.remove(uniqueKey);
+		Logger.getInstance().writeMethodEntry(this.getClass(), "removeAsynchServerThread", uniqueKey); //$NON-NLS-1$
+
+		mapThread.remove(uniqueKey);
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "removeAsynchServerThread"); //$NON-NLS-1$
 	}
 	
 	/**
@@ -94,6 +101,9 @@ public abstract class ServerAsynchTemplate extends ServerTemplate {
 	 * @see Map
 	 */
 	protected Map<String, ThreadServerAsynchTemplate> getThreads() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getThreads"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getThreads", mapThread); //$NON-NLS-1$
+
 		return Collections.unmodifiableMap(mapThread);
 	}
 

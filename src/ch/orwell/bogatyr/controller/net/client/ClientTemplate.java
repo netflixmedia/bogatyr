@@ -59,7 +59,7 @@ import ch.orwell.bogatyr.helper.property.Property;
  * This is the skeleton for clients
  * 
  * @author Stefan Laubenberger
- * @version 20080725
+ * @version 20080808
  */
 public abstract class ClientTemplate extends ApplicationTemplate implements ICom {
 	// Properties
@@ -86,27 +86,46 @@ public abstract class ClientTemplate extends ApplicationTemplate implements ICom
 	}
 	
 	public User getUser() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getUser"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getUser"); //$NON-NLS-1$
+
 		return user;
 	}
 
-	public void setUser(final User user) {
+	protected void setUser(final User user) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "setUser", user); //$NON-NLS-1$
+
 		this.user = user;
+	
+		Logger.getInstance().writeMethodExit(this.getClass(), "setUser"); //$NON-NLS-1$
 	}
 
 	protected KeyPair getAsymmKey() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getAsymmKey"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getAsymmKey", asymmKey); //$NON-NLS-1$
+
 		return asymmKey;
 	}
 
 	protected SecretKey getSymmKey() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getSymmKey"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getSymmKey", symmKey); //$NON-NLS-1$
+
 		return symmKey;
 	}
 
 	protected Key getCryptoKey() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getCryptoKey"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getCryptoKey", cryptoKey); //$NON-NLS-1$
+
 		return cryptoKey;
 	}
 	
 	protected void setCryptoKey(final Key cryptoKey) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "setCryptoKey", cryptoKey); //$NON-NLS-1$
+		
 		this.cryptoKey = cryptoKey;
+		Logger.getInstance().writeMethodExit(this.getClass(), "setCryptoKey"); //$NON-NLS-1$
 	}
 
 	/**
@@ -115,8 +134,11 @@ public abstract class ClientTemplate extends ApplicationTemplate implements ICom
      * @throws IOException
      */
 	protected void openStream() throws IOException {
-//		this.socket = new Socket((new URL(this.host)).getHost(), this.port);
-        socket = new Socket(host, port);
+		Logger.getInstance().writeMethodEntry(this.getClass(), "openStream"); //$NON-NLS-1$
+
+		socket = new Socket(host, port);
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "openStream"); //$NON-NLS-1$
 	}
 	
 	/**
@@ -125,7 +147,11 @@ public abstract class ClientTemplate extends ApplicationTemplate implements ICom
      * @throws IOException
      */
 	protected void closeStream() throws IOException {
-        socket.close();
+		Logger.getInstance().writeMethodEntry(this.getClass(), "closeStream"); //$NON-NLS-1$
+
+		socket.close();
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "closeStream"); //$NON-NLS-1$
 	}
 
 	/**
@@ -135,6 +161,8 @@ public abstract class ClientTemplate extends ApplicationTemplate implements ICom
 	 * @throws Exception 
      */
 	protected byte[] readStream() throws Exception {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "readStream"); //$NON-NLS-1$
+
 		final ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
         final Object obj = ois.readObject();
@@ -148,7 +176,9 @@ public abstract class ClientTemplate extends ApplicationTemplate implements ICom
 	    	data = CryptoSymm.decrypt(data, cryptoKey);
 
 	    }
-    	return data;
+	    
+	    Logger.getInstance().writeMethodExit(this.getClass(), "readStream", data); //$NON-NLS-1$
+	    return data;
     }
 
 //	protected final byte[] readStream() throws Exception {
@@ -176,6 +206,8 @@ public abstract class ClientTemplate extends ApplicationTemplate implements ICom
      * @throws Exception 
      */
     protected void writeStream(final String key, final byte[] data) throws Exception {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "writeStream", new Object[]{key, data}); //$NON-NLS-1$
+
 		if (size == 0 || data.length < size) {
 			
 			if (interval > 0) { // prevent too fast connection attemps (DOS protection on the server side)
@@ -203,6 +235,7 @@ public abstract class ClientTemplate extends ApplicationTemplate implements ICom
 		} else {
 			throw new ExceptionInvalidStreamSize(size, data.length);
 		}
+		Logger.getInstance().writeMethodExit(this.getClass(), "writeStream"); //$NON-NLS-1$
 	}
 //    protected final void writeStream(String key, byte[] data) throws Exception {
 //		if (this.size == 0 || data.length < this.size) {
@@ -240,8 +273,11 @@ public abstract class ClientTemplate extends ApplicationTemplate implements ICom
      * @throws Exception 
      */
 	protected ComObject readObject() throws Exception {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "readObject"); //$NON-NLS-1$
+
 		final ComObject comObject = (ComObject)HelperGeneral.getObjectFromBytes(readStream());
-		Logger.getInstance().writeDebug(this, "readObject", "comObject: " + comObject);  //$NON-NLS-1$//$NON-NLS-2$
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "readObject", comObject); //$NON-NLS-1$
 		return comObject;
     }
 
@@ -254,8 +290,11 @@ public abstract class ClientTemplate extends ApplicationTemplate implements ICom
 	 * @see ComObject
 	 */
     public void writeObject(final ComObject comObject) throws Exception {
-    	writeStream(comObject.getUserKey(), HelperGeneral.getBytesFromObject(comObject));
-    	Logger.getInstance().writeDebug(this, "writeObject", "comObject: " + comObject);  //$NON-NLS-1$//$NON-NLS-2$
+		Logger.getInstance().writeMethodEntry(this.getClass(), "writeObject", comObject); //$NON-NLS-1$
+
+		writeStream(comObject.getUserKey(), HelperGeneral.getBytesFromObject(comObject));
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "writeObject"); //$NON-NLS-1$
     }
 
 	/**
@@ -321,26 +360,38 @@ public abstract class ClientTemplate extends ApplicationTemplate implements ICom
 	 * Implemented methods
 	 */	
 	public void connect(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeDebug(this, "connect", "comObject: " + comObject); //$NON-NLS-1$ //$NON-NLS-2$
+		Logger.getInstance().writeMethodEntry(this.getClass(), "connect", comObject); //$NON-NLS-1$
+
 		comObject.setMethodName(METHOD_CONNECT);
 		execute(comObject);
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "connect"); //$NON-NLS-1$
 	}
 
 	public void disconnect(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeDebug(this, "disconnect", "comObject: " + comObject); //$NON-NLS-1$ //$NON-NLS-2$
+		Logger.getInstance().writeMethodEntry(this.getClass(), "disconnect", comObject); //$NON-NLS-1$
+
 		comObject.setMethodName(METHOD_DISCONNECT);
 		execute(comObject);
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "disconnect"); //$NON-NLS-1$
 	}
 
 	public void logon(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeDebug(this, "logon", "comObject: " + comObject);  //$NON-NLS-1$//$NON-NLS-2$
+		Logger.getInstance().writeMethodEntry(this.getClass(), "logon", comObject); //$NON-NLS-1$
+
 		comObject.setMethodName(METHOD_LOGON);
 		execute(comObject);
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "logon"); //$NON-NLS-1$
 	}
 
 	public void logoff(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeDebug(this, "logoff", "comObject: " + comObject); //$NON-NLS-1$ //$NON-NLS-2$
+		Logger.getInstance().writeMethodEntry(this.getClass(), "logoff", comObject); //$NON-NLS-1$
+
 		comObject.setMethodName(METHOD_LOGOFF);
 		execute(comObject);
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "logoff"); //$NON-NLS-1$
 	}
 }

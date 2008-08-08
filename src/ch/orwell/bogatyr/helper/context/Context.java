@@ -37,6 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import ch.orwell.bogatyr.helper.HelperEnvInfo;
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
@@ -44,7 +45,7 @@ import ch.orwell.bogatyr.helper.HelperGeneral;
  * Get access for general content in the context.
  * 
  * @author Stefan Laubenberger
- * @version 20080729
+ * @version 20080808
  */
 public class Context implements IContext {
 	private static Context instance;
@@ -83,57 +84,121 @@ public class Context implements IContext {
 
 	public void removeData(final Object key) {
         contextData.remove(key);
+        Logger.getInstance().writeMethodEntry(Context.class, "removeData", key);  //$NON-NLS-1$
 	}
 
 	public Object getData(final Object key) {
-	    return contextData.get(key);
+		Logger.getInstance().writeMethodEntry(Context.class, "getData", key);  //$NON-NLS-1$
+
+		Object obj = contextData.get(key);
+		
+		Logger.getInstance().writeMethodExit(Context.class, "getData", obj);  //$NON-NLS-1$
+		return obj;
 	}
 
 	public String getDataString(final Object key) {
-        return (String) contextData.get(key);
-    }
+		Logger.getInstance().writeMethodEntry(Context.class, "getDataString", key);  //$NON-NLS-1$
 
-    public double getDataDouble(final Object key) {
-        return (Double) contextData.get(key);
+		String str = (String) contextData.get(key);
+		
+		Logger.getInstance().writeMethodExit(Context.class, "getDataString", str);
+		return str;
     }
-
-    public int getDataInt(final Object key) {
-       return (Integer) contextData.get(key);
-    }
-
-    public long getDataLong(final Object key) {
-        return (Long) contextData.get(key);
-    }
-
-    public boolean getDataBoolean(final Object key) {
-    	return (Boolean) contextData.get(key);
-    }
+//
+//    public double getDataDouble(final Object key) {
+//    	double value = (Double) contextData.get(key);
+//    	
+//    	Logger.getInstance().writeMethodEntry(Context.class, "getDataDouble", key);  //$NON-NLS-1$
+//    	Logger.getInstance().writeMethodExit(Context.class, "getDataDouble", value);  //$NON-NLS-1$
+//        
+//    	return value;
+//    }
+//
+//    public int getDataInt(final Object key) {
+//    	int value = (Integer) contextData.get(key);
+//    	
+//    	Logger.getInstance().writeMethodEntry(Context.class, "getDataInt", key);  //$NON-NLS-1$
+//    	Logger.getInstance().writeMethodExit(Context.class, "getDataInt", value);  //$NON-NLS-1$
+//    	
+//    	return value;
+//    }
+//
+//    public long getDataLong(final Object key) {
+//    	long value = (Long) contextData.get(key);
+//    	
+//    	Logger.getInstance().writeMethodEntry(Context.class, "getDataLong", key);  //$NON-NLS-1$
+//    	Logger.getInstance().writeMethodExit(Context.class, "getDataLong", value);  //$NON-NLS-1$
+//    	
+//    	return value;
+//    }
+//
+//    public boolean getDataBoolean(final Object key) {
+//    	Boolean value = (Boolean) contextData.get(key);
+//    	boolean flag = value != null ? value : false;
+////    	Logger.getInstance().writeDebug(Context.class, "getDataBoolean", key);  //$NON-NLS-1$
+//    	return flag;
+//    }
 
 	public String getApplicationName() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getApplicationName"); //$NON-NLS-1$
+
 		String str = getDataString(ATT_APPLICATION_NAME);
-		if (str == null) return "Bogatyr";
+
+		if (str == null) {
+			str = "Bogatyr";
+		}
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "getApplicationName", str); //$NON-NLS-1$		
 		return str;
 	}
 
 	public String getApplicationVersion() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getApplicationVersion"); //$NON-NLS-1$
+
 		String str = getDataString(ATT_APPLICATION_VERSION);
-		if (str == null) return "0.35"; //TODO change every release!
+
+		if (str == null) {
+			str = "0.36"; //TODO change every release!
+		}
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "getApplicationVersion", str); //$NON-NLS-1$
 		return str;
 	}
 
 	public String getApplicationBuild() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getApplicationBuild"); //$NON-NLS-1$
+
 		String str = getDataString(ATT_APPLICATION_BUILD);
-		if (str == null) return "20080729"; //TODO change every release!
+		
+		if (str == null) {
+			str = "20080808"; //TODO change every release!
+		}
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "getApplicationBuild", str); //$NON-NLS-1$
 		return str;
 	}
 	
 	public boolean isApplicationDebug() {
-		return getDataBoolean(ATT_APPLICATION_DEBUG);
+    	Boolean value = (Boolean) contextData.get(ATT_APPLICATION_DEBUG);
+    	boolean flag = value != null ? value : false;
+
+    	return flag;
+    	
+//		boolean isApplicationDebug = getDataBoolean(ATT_APPLICATION_DEBUG);
+////		Logger.getInstance().writeDebug(Context.class, "isApplicationDebug", isApplicationDebug);  //$NON-NLS-1$
+//		return isApplicationDebug;
 	}
 
 	public File getApplicationWorkDirectory() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getApplicationWorkDirectory"); //$NON-NLS-1$
+
 		File file = (File)getData(ATT_APPLICATION_WORKDIRECTORY);
-		if (file == null) return HelperEnvInfo.getOsTempDirectory();
+
+		if (file == null) {
+			file = HelperEnvInfo.getOsTempDirectory();
+		}
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "getApplicationWorkDirectory", file); //$NON-NLS-1$
 		return file;
 	}
 

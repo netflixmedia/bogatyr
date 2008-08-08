@@ -43,11 +43,50 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * Reads standard output and standard error of a process.
  * 
  * @author Stefan Laubenberger
- * @version 20080515
+ * @version 20080808
  */
 public abstract class ControlProcess {
 	/**
-	 * Starts two threads which read standard output and standard error from a subprocess.
+	 * Creates a new process and reads the standard output and standard error.
+	 *
+	 * @param process
+     * @param outputStream If null, output is discarded.
+	 * @param errorStream If null, error is discarded.
+	 * @return created process
+	 */
+	public static Process createProcess(final String command, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
+		Logger.getInstance().writeMethodEntry(ControlProcess.class, "createSubprocess", command);  //$NON-NLS-1$
+
+		final Process process = Runtime.getRuntime().exec(command);
+		ControlProcess.readStandardOutput(process, outputStream, errorStream);
+		
+		Logger.getInstance().writeMethodExit(ControlProcess.class, "createSubprocess", process);  //$NON-NLS-1$
+		
+		return process;
+	}
+
+	/**
+	 * Creates a new process without reading the standard output and standard error ("fire and forget").
+	 *
+	 * @param process
+	 * @return created process
+	 */
+	public static Process createProcess(final String command) throws IOException {
+		Logger.getInstance().writeMethodEntry(ControlProcess.class, "createSubprocess", command);  //$NON-NLS-1$
+
+		final Process process = Runtime.getRuntime().exec(command);
+		
+		Logger.getInstance().writeMethodExit(ControlProcess.class, "createSubprocess", process);  //$NON-NLS-1$
+		
+		return process;
+	}
+
+	
+	/*
+	 * Private methods
+	 */
+	/**
+	 * Starts two threads which read standard output and standard error from a process.
 	 * <strong>Note:</strong> Standard output and standard error of the process returned by
 	 * {@link Runtime#exec} must be read else the process might hang infinitly.
 	 * <p>
@@ -57,18 +96,14 @@ public abstract class ControlProcess {
 	 * </pre></code>
 	 *
 	 * @param process
-     * @param outStream If null, output is discarded.
-	 * @param errStream If null, error is discarded.
+     * @param outputStream If null, output is discarded.
+	 * @param errorStream If null, error is discarded.
 	 */
-	public static void readStandardOutput(final Process process, final OutputStream outStream, final OutputStream errStream) {
-		new StreamReader(process.getErrorStream(), errStream);
-		new StreamReader(process.getInputStream(), outStream);
+	private static void readStandardOutput(final Process process, final OutputStream outputStream, final OutputStream errorStream) {
+		new StreamReader(process.getErrorStream(), errorStream);
+		new StreamReader(process.getInputStream(), outputStream);
 	}
 
-	
-	/*
-	 * Private methods
-	 */
 	protected static class StreamReader extends Thread {
 		private final InputStream fSource;
 		private final OutputStream fTarget;
@@ -99,7 +134,7 @@ public abstract class ControlProcess {
 					}
 				}
 			} catch (IOException ex) {
-				Logger.getInstance().writeException(this, "run", HelperException.EX_COMMUNICATION, ex); //$NON-NLS-1$
+				Logger.getInstance().writeException(this.getClass(), "run", HelperException.EX_COMMUNICATION, ex); //$NON-NLS-1$
 			}
 		}
 	}
