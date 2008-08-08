@@ -30,14 +30,78 @@
  * 
  *******************************************************************************/
 package ch.orwell.bogatyr.helper;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This is a math helper class for math problems
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20080725
+ * @version 20080808
  */
 public abstract class HelperMath {
+	
+	/**
+     * Checks if a number is a prime
+     * 
+     * @param n number for the check
+     * @return true/false
+     */	
+	public static boolean isPrime(final int n) {
+        // 2 is the smallest prime
+        if (n <= 2) {
+            return n == 2;
+        }
+
+        // even numbers other than 2 are not prime
+        if (n % 2 == 0) {
+            return false;
+        }
+
+        // check odd divisors from 3 to the square root of n
+        for (int i = 3, end = (int)Math.sqrt(n); i <= end; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+	/**
+     * Find the smallest prime >= n
+     * 
+     * @param n number for the check
+     * @return prime number
+     */	
+	public static int getPrime(final int n) {
+        int number = n;
+        
+		while (!isPrime(number)) {
+            number++;
+        }
+        return number;
+    }
+
+	/**
+     * Returns all primes in range
+     * 
+     * @param start number of the range
+     * @param end number of the range
+     * @return list with prime numbers
+     */	
+	public static List<Integer> getPrimes(final int start, final int end) {
+		List<Integer> list = new ArrayList<Integer>();
+		
+		for (int ii = start; ii <= end; ii++) {
+			if (isPrime(ii)) {
+				list.add(ii);
+			}
+		}
+		return list;
+	}
+	
 	/**
      * Convert a double to an int-Value.
      * Rounds the double value with {@link Math#round(double)}.
