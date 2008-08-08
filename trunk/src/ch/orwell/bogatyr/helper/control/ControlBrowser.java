@@ -31,8 +31,6 @@
  *******************************************************************************/
 package ch.orwell.bogatyr.helper.control;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.lang.reflect.Method;
 
 import ch.orwell.bogatyr.helper.HelperEnvInfo;
@@ -44,7 +42,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This controls displays an URL in a browser.
  *
  * @author Stefan Laubenberger
- * @version 20080723
+ * @version 20080808
  */
 public abstract class ControlBrowser {
 	// The default system browser under windows.
@@ -55,8 +53,8 @@ public abstract class ControlBrowser {
 	private static final String UNIX_PATH = "netscape"; //$NON-NLS-1$
 	private static final String UNIX_FLAG = "-remote openURL"; //$NON-NLS-1$
 
-	private static final OutputStream outputStream = null;
-	private static final OutputStream errorStream = null;
+//	private static final OutputStream outputStream = null;
+//	private static final OutputStream errorStream = null;
 
 	
 	/**
@@ -74,8 +72,10 @@ public abstract class ControlBrowser {
      * @throws Exception
 	 */
 	public static void displayURL(final String url) throws Exception {
+		Logger.getInstance().writeMethodEntry(ControlBrowser.class, "displayURL", url);  //$NON-NLS-1$
+
 		String cmd;
-		
+				
 		if (HelperEnvInfo.isWindowsPlatform()) {
 			cmd = WINDOWS_PATH + ' ' + WINDOWS_FLAG + ' ' + url;
 
@@ -91,7 +91,7 @@ public abstract class ControlBrowser {
 			if ((url.toLowerCase().startsWith("http://") || url.toLowerCase().startsWith("https://")) && !url.contains("?") && !url.contains("#")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
                 cmd += "#"; //$NON-NLS-1$
 			}
-			createSubprocess(cmd);
+			ControlProcess.createProcess(cmd);
 		} else if (HelperEnvInfo.isMacPlatform()) {
 			displayURLonMac(url);
 		} else {
@@ -102,7 +102,7 @@ public abstract class ControlBrowser {
 
 			// cmd = 'netscape -remote openURL(http://code.google.com/p/bogatyr)'
 			cmd = UNIX_PATH + ' ' + UNIX_FLAG + '(' + url + ')';
-			final Process process = createSubprocess(cmd);
+			final Process process = ControlProcess.createProcess(cmd);
 
 			// wait for exit code -- if it's 0, command worked,
 			// otherwise we need to start the browser up.
@@ -113,7 +113,7 @@ public abstract class ControlBrowser {
 
 				// cmd = 'netscape http://code.google.com/p/bogatyr'
 				cmd = UNIX_PATH + ' ' + url;
-				createSubprocess(cmd);
+				ControlProcess.createProcess(cmd);
 			}
 		}
 	}
@@ -122,13 +122,20 @@ public abstract class ControlBrowser {
 	/*
 	 * Private methods
 	 */
-	private static Process createSubprocess(final String command) throws IOException {
-		final Process process = Runtime.getRuntime().exec(command);
-		ControlProcess.readStandardOutput(process, outputStream, errorStream);
-		return process;
-	}
+//	private static Process createSubprocess(final String command) throws IOException {
+//		Logger.getInstance().writeMethodEntry(ControlBrowser.class, "createSubprocess", command);  //$NON-NLS-1$
+//
+//		final Process process = Runtime.getRuntime().exec(command);
+//		ControlProcess.readStandardOutput(process, outputStream, errorStream);
+//		
+//		Logger.getInstance().writeMethodExit(ControlBrowser.class, "createSubprocess", process);  //$NON-NLS-1$
+//		
+//		return process;
+//	}
 	
 	private static void displayURLonMac(final String url) {
+		Logger.getInstance().writeMethodEntry(ControlBrowser.class, "displayURLonMac", url);  //$NON-NLS-1$
+
 		final Runnable runnable = new Runnable() {
 
 			public void run() {
@@ -139,7 +146,7 @@ public abstract class ControlBrowser {
 					final Method method = fileManager.getDeclaredMethod("openURL", String.class); //$NON-NLS-1$
 					method.invoke(null, url);
 				} catch (Exception ex) {
-					Logger.getInstance().writeException(this, "displayURLonMac", HelperException.EX_UNKNOWN_ERROR, ex); //$NON-NLS-1$
+					Logger.getInstance().writeException(this.getClass(), "displayURLonMac", HelperException.EX_UNKNOWN_ERROR, ex); //$NON-NLS-1$
 				}
 			}
 		};

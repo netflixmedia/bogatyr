@@ -93,10 +93,10 @@ public class FileManager extends ApplicationTemplate {
 			if (isDelete) {
 				HelperIO.delete(file);
 			}
-			Logger.getInstance().writeDebug(this, "searchFiles", file.getAbsolutePath());
+			Logger.getInstance().writeDebug(this.getClass(), "searchFiles", file.getAbsolutePath());
 			ii++;
 		}
-		Logger.getInstance().writeLog(this, "searchFiles", ii + " file(s) " + (isDelete ? "deleted" : "found"));
+		Logger.getInstance().writeLog(this.getClass(), "searchFiles", ii + " file(s) " + (isDelete ? "deleted" : "found"));
 	}
 	
 	
@@ -108,7 +108,7 @@ public class FileManager extends ApplicationTemplate {
 		try {
 			searchFiles();
 		} catch (IOException ex) {
-			Logger.getInstance().writeException(this, "run", HelperException.EX_UNKNOWN_ERROR, ex);
+			Logger.getInstance().writeException(this.getClass(), "run", HelperException.EX_UNKNOWN_ERROR, ex);
 			exit(79);
 		}
 		exit(0);

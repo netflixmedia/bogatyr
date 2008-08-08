@@ -56,7 +56,7 @@ import ch.orwell.bogatyr.helper.property.Property;
  * This is the skeleton for servers
  *
  * @author Stefan Laubenberger
- * @version 20080606
+ * @version 20080808
  */
 public abstract class ServerTemplate extends ApplicationTemplate {
 	// Properties
@@ -92,39 +92,69 @@ public abstract class ServerTemplate extends ApplicationTemplate {
 	}
 	
 	protected int getPort() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getPort"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getPort", port); //$NON-NLS-1$
+
 		return port;
 	}
 
 	protected ServerSocket getServerSocket() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getServerSocket"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getServerSocket", serverSocket); //$NON-NLS-1$
+		
 		return serverSocket;
 	}
 
 	public KeyPair getAsymmKey() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getAsymmKey"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getAsymmKey", asymmKey); //$NON-NLS-1$
+		
 		return asymmKey;
 	}
 
 	public SecretKey getSymmKey() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getSymmKey"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getSymmKey", symmKey); //$NON-NLS-1$
+		
 		return symmKey;
 	}
 
 	public int getInterval() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getInterval"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getInterval", interval); //$NON-NLS-1$
+		
 		return interval;
 	}
 
 	public int getRequests() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getRequests"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getRequests", requests); //$NON-NLS-1$
+	
 		return requests;
 	}
 	
 	public User getUser(final String key) {
-	    return mapUser.get(key);
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getUser", key); //$NON-NLS-1$
+		User user = mapUser.get(key);
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "getUser", user); //$NON-NLS-1$
+		return user;
 	}
 
 	protected Map<String, User> getUsers() {
-	    return Collections.unmodifiableMap(mapUser);
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getUsers"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getUsers", mapUser); //$NON-NLS-1$
+
+		return Collections.unmodifiableMap(mapUser);
 	}
 	
 	public Key getKey(final String key) {
-	    return mapCryptoKey.get(key);
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getKey", key); //$NON-NLS-1$
+
+		Key cryptoKey = mapCryptoKey.get(key);
+	    
+		Logger.getInstance().writeMethodExit(this.getClass(), "getKey", cryptoKey); //$NON-NLS-1$
+		return cryptoKey;
 	}
 	
 	/**
@@ -136,12 +166,15 @@ public abstract class ServerTemplate extends ApplicationTemplate {
 	 * @see Map
 	 */
 	public void addUser(final String uniqueKey, final User user) throws ExceptionInvalidUserKey {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "addUser", new Object[]{uniqueKey, user}); //$NON-NLS-1$
+		
 		if (HelperGeneral.isValidString(uniqueKey) && HelperGeneral.isValidObject(user)) {
-			Logger.getInstance().writeDebug(this, "addUser", "user: " + user); //$NON-NLS-1$ //$NON-NLS-2$
-            mapUser.put(uniqueKey, user);
+           mapUser.put(uniqueKey, user);
 		} else {
 			throw new ExceptionInvalidUserKey();
 		}
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "addUser"); //$NON-NLS-1$
 	}
 
 	/**
@@ -151,8 +184,11 @@ public abstract class ServerTemplate extends ApplicationTemplate {
 	 * @see Map
 	 */
 	public void removeUser(final String uniqueKey) {
-		Logger.getInstance().writeDebug(this, "removeUser", "uniqueKey: " + uniqueKey); //$NON-NLS-1$ //$NON-NLS-2$
-        mapUser.remove(uniqueKey);
+		Logger.getInstance().writeMethodEntry(this.getClass(), "removeUser", uniqueKey); //$NON-NLS-1$
+
+		mapUser.remove(uniqueKey);
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "removeUser"); //$NON-NLS-1$
 	}
 
 	/**
@@ -164,12 +200,15 @@ public abstract class ServerTemplate extends ApplicationTemplate {
 	 * @see Map
 	 */
 	public void addCryptoKey(final String uniqueKey, final Key key) throws ExceptionInvalidUserKey {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "addCryptoKey", new Object[]{uniqueKey, key}); //$NON-NLS-1$
+
 		if (HelperGeneral.isValidString(uniqueKey) && HelperGeneral.isValidObject(key)) {
-			Logger.getInstance().writeDebug(this, "addCryptoKey", "uniqueKey: " + uniqueKey + " key: " + key);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
             mapCryptoKey.put(uniqueKey, key);
 		} else {
 			throw new ExceptionInvalidUserKey();
 		}
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "addCryptoKey"); //$NON-NLS-1$
 	}
 
 	/**
@@ -179,8 +218,11 @@ public abstract class ServerTemplate extends ApplicationTemplate {
 	 * @see Map
 	 */
 	public void removeCryptoKey(final String uniqueKey) {
-		Logger.getInstance().writeDebug(this, "removeCryptoKey", "uniqueKey: " + uniqueKey); //$NON-NLS-1$ //$NON-NLS-2$
-        mapCryptoKey.remove(uniqueKey);
+		Logger.getInstance().writeMethodEntry(this.getClass(), "removeCryptoKey", uniqueKey); //$NON-NLS-1$
+
+		mapCryptoKey.remove(uniqueKey);
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "removeCryptoKey"); //$NON-NLS-1$
 	}
 
 	/**
@@ -190,8 +232,12 @@ public abstract class ServerTemplate extends ApplicationTemplate {
 	 *                  the unique key to find the user in the {@link #mapUser}.
 	 */
 	public void removeAllData(final String uniqueKey) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "removeAllData", uniqueKey); //$NON-NLS-1$
+		
 		removeUser(uniqueKey);
 		removeCryptoKey(uniqueKey);
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "removeAllData"); //$NON-NLS-1$
 	}
 
 

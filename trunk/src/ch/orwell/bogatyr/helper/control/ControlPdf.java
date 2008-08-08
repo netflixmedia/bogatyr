@@ -39,6 +39,7 @@ import java.text.MessageFormat;
 import ch.orwell.bogatyr.helper.HelperEnvInfo;
 import ch.orwell.bogatyr.helper.HelperIO;
 import ch.orwell.bogatyr.helper.context.Context;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 /**
  * This control opens PDF data with an external program such as Acrobat Reader.
@@ -55,8 +56,8 @@ public abstract class ControlPdf {
 	private static final String FILE_NAME_PREFIX = "temp"; //$NON-NLS-1$
 	private static final String DIRECTORY_NAME   = "pdffiles"; //$NON-NLS-1$
 
-	private static final OutputStream outputStream = null;
-	private static final OutputStream errorStream = null;
+//	private static final OutputStream outputStream = null;
+//	private static final OutputStream errorStream = null;
 
 
 	/**
@@ -66,6 +67,8 @@ public abstract class ControlPdf {
      * @throws Exception
 	 */
 	public static void open(final byte[] pdfFileContents)	throws Exception {
+		Logger.getInstance().writeMethodEntry(ControlPdf.class, "open", pdfFileContents);  //$NON-NLS-1$
+
 		// first store the pdfFileContents to a temporary file
 		final File temporaryFile = createFile();
 		HelperIO.writeFileAsBinary(temporaryFile, pdfFileContents, false);
@@ -78,6 +81,8 @@ public abstract class ControlPdf {
      * @throws Exception
 	 */
 	public static void open(final File pdfFile) throws Exception {
+		Logger.getInstance().writeMethodEntry(ControlPdf.class, "open", pdfFile);  //$NON-NLS-1$
+
 		execute(pdfFile.getCanonicalPath());
 	}
 
@@ -90,6 +95,8 @@ public abstract class ControlPdf {
 	 * file permissions.
 	 */
 	public static void cleanup() {
+		Logger.getInstance().writeMethodEntry(ControlPdf.class, "cleanup");  //$NON-NLS-1$
+
 		final File directory = createDirectory();
 		final File[] files = directory.listFiles();
 		if (files != null) {
@@ -106,6 +113,8 @@ public abstract class ControlPdf {
 
 		// cleanup the directory
 		directory.delete();
+	
+		Logger.getInstance().writeMethodExit(ControlPdf.class, "cleanup");  //$NON-NLS-1$
 	}
 
 	
@@ -118,6 +127,8 @@ public abstract class ControlPdf {
 	 * @return File object. File is not physically created.
 	 */
 	private static File createFile() {
+		Logger.getInstance().writeMethodEntry(ControlPdf.class, "createFile");  //$NON-NLS-1$
+
 		final File directory = createDirectory();
 		int count = 0;
 		File file;
@@ -125,10 +136,15 @@ public abstract class ControlPdf {
 		do {
 			file = new File(directory, FILE_NAME_PREFIX + count++ + PDF_EXTENSION);
 		} while (file.exists());
+		
+		Logger.getInstance().writeMethodExit(ControlPdf.class, "createFile", file);  //$NON-NLS-1$
+
 		return file;
 	}
 
 	private static File createDirectory() {
+		Logger.getInstance().writeMethodEntry(ControlPdf.class, "createDirectory");  //$NON-NLS-1$
+
 		// this is the root for Pdfs
 		final File directoryPath = Context.getInstance().getApplicationWorkDirectory();
 
@@ -138,10 +154,15 @@ public abstract class ControlPdf {
 		if (!directory.exists()) {
 			directory.mkdir();
 		}
+		
+		Logger.getInstance().writeMethodExit(ControlPdf.class, "createDirectory", directory);  //$NON-NLS-1$
+
 		return directory;
 	}
 
 	private static void execute(final String path) throws Exception {
+		Logger.getInstance().writeMethodEntry(ControlPdf.class, "execute");  //$NON-NLS-1$
+
 		final String viewerPath;
 		if (HelperEnvInfo.isWindowsPlatform()) {
 			viewerPath = WINDOWS_PDF_VIEWER_PATH;
@@ -152,12 +173,14 @@ public abstract class ControlPdf {
 			viewerPath = UNIX_PDF_VIEWER_PATH;
 		}
 		final String cmd = MessageFormat.format(viewerPath, path);
-		createSubprocess(cmd);
+		ControlProcess.createProcess(cmd);
+		
+		Logger.getInstance().writeMethodExit(ControlPdf.class, "execute");  //$NON-NLS-1$
 	}
-
-	private static Process createSubprocess(final String command) throws IOException {
-		final Process process = Runtime.getRuntime().exec(command);
-		ControlProcess.readStandardOutput(process, outputStream, errorStream);
-		return process;
-	}
+//
+//	private static Process createSubprocess(final String command) throws IOException {
+//		final Process process = Runtime.getRuntime().exec(command);
+//		ControlProcess.readStandardOutput(process, outputStream, errorStream);
+//		return process;
+//	}
 }

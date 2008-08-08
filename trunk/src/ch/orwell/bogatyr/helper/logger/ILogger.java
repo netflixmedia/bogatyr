@@ -36,43 +36,86 @@ package ch.orwell.bogatyr.helper.logger;
  * Defines the methods for the implementation of the logger
  *  
  * @author Stefan Laubenberger
- * @version 20080526
+ * @version 20080808
  */
 public interface ILogger {
 	/**
      * Writes to the WARNING-file
      * 
-     * @param object Caller object
-     * @param method Caller method
-     * @param logEntry Entry
+     * @param object caller class
+     * @param method caller method
+     * @param logEntry object for log entry
      */
-    void writeWarning(Object object, String method, String logEntry);
+    void writeWarning(Class<?> clazz, String method, Object logEntry);
 	
 	/**
      * Writes to the DEBUG-file
      * 
-     * @param object Caller object
-     * @param method Caller method
-     * @param logEntry Entry
+     * @param object caller class
+     * @param method caller method
+     * @param logEntry object for log entry
      */
-    void writeDebug(Object object, String method, String logEntry);
+    void writeDebug(Class<?> clazz, String method, Object logEntry);
 
 	/**
      * Writes to the EXCEPTION-file
      * 
-     * @param object Caller object
-     * @param method Caller method
-     * @param logEntry Entry
+     * @param object caller class
+     * @param method caller method
+     * @param logEntry object for log entry
      * @param ex Exception
      */
-    void writeException(Object object, String method, String logEntry, Exception ex);
+    void writeException(Class<?> clazz, String method, Object logEntry, Exception ex);
 
 	/**
      * Writes to the Log-file
      * 
-     * @param object Caller object
-     * @param method Caller method
-     * @param logEntry Entry
+     * @param object caller class
+     * @param method caller method
+     * @param logEntry object for log entry
      */
-    void writeLog(Object object, String method, String logEntry);
+    void writeLog(Class<?> clazz, String method, Object logEntry);
+    
+	/**
+     * Writes an method entry to the DEBUG-file
+     * 
+     * @param object caller class
+     * @param method caller method
+     * @param methodInput input objects (parameters) for the method
+     */
+    void writeMethodEntry(Class<?> clazz, String method, Object[] methodInput);
+
+    /**
+     * Writes an method entry to the DEBUG-file
+     * 
+     * @param object caller class
+     * @param method caller method
+     * @param methodInput input object (parameter) for the method
+     */
+    void writeMethodEntry(Class<?> clazz, String method, Object methodInput);
+
+    /**
+     * Writes an method entry (without parameters) to the DEBUG-file
+     * 
+     * @param object caller class
+     * @param method caller method
+     */
+    void writeMethodEntry(Class<?> clazz, String method);
+    
+	/**
+     * Writes an method exit to the DEBUG-file
+     * 
+     * @param object caller class
+     * @param method caller method
+     * @param methodOutput result object from the method
+     */
+    void writeMethodExit(Class<?> clazz, String method, Object methodOutput);
+    
+	/**
+     * Writes an method exit (without result object) to the DEBUG-file
+     * 
+     * @param object caller class
+     * @param method caller method
+     */
+    void writeMethodExit(Class<?> clazz, String method);
 }

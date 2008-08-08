@@ -103,7 +103,7 @@ public abstract class ProviderSqlTemplate {
 	 */
     protected int executeUpdate(final String statement) throws Exception {
 
-        Logger.getInstance().writeDebug(this, "executeUpdate", statement); //$NON-NLS-1$
+        Logger.getInstance().writeDebug(this.getClass(), "executeUpdate", statement); //$NON-NLS-1$
 
         Statement stmt = null;
         Connection con = null;
@@ -131,7 +131,7 @@ public abstract class ProviderSqlTemplate {
 	 */
     protected boolean execute(final String statement) throws Exception {
 
-        Logger.getInstance().writeDebug(this, "execute", statement); //$NON-NLS-1$
+        Logger.getInstance().writeDebug(this.getClass(), "execute", statement); //$NON-NLS-1$
 
         Statement stmt = null;
         Connection con = null;
@@ -156,7 +156,7 @@ public abstract class ProviderSqlTemplate {
 	 */
 	private void init() throws Exception {
 		readProperties();
-		Logger.getInstance().writeDebug(this, "init", Localizer.getInstance().getValue(Localizer.RES_INSTANCIATED)); //$NON-NLS-1$
+		Logger.getInstance().writeDebug(this.getClass(), "init", Localizer.getInstance().getValue(Localizer.RES_INSTANCIATED)); //$NON-NLS-1$
 	}
 
 	private void readProperties() throws Exception {

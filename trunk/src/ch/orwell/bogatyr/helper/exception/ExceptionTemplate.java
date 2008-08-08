@@ -55,7 +55,7 @@ public abstract class ExceptionTemplate extends Exception {
 	 * Private methods
 	 */
 	private void init() {
-		Logger.getInstance().writeDebug(this, "init", Localizer.getInstance().getValue(Localizer.RES_INSTANCIATED)); //$NON-NLS-1$
+		Logger.getInstance().writeDebug(this.getClass(), "init", Localizer.getInstance().getValue(Localizer.RES_INSTANCIATED)); //$NON-NLS-1$
 	}
 
 	

@@ -59,7 +59,7 @@ public class HelloWorld extends ApplicationTemplate {
 		
 		System.out.println(text);
 		
-		Logger.getInstance().writeLog(this, "run", "## " + text + " ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		Logger.getInstance().writeLog(this.getClass(), "run", "## " + text + " ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		exit(0);
 	}

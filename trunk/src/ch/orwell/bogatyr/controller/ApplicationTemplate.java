@@ -54,7 +54,7 @@ import ch.orwell.bogatyr.helper.property.PropertyStream;
  * This is the skeleton for applications
  * 
  * @author Stefan Laubenberger
- * @version 20080729
+ * @version 20080808
  */
 public abstract class ApplicationTemplate implements Runnable {
 	// Resources
@@ -75,9 +75,9 @@ public abstract class ApplicationTemplate implements Runnable {
 	private static final String PROPERTY_APPLICATION_LOGGER         = "Application.logger"; //$NON-NLS-1$
 	private static final String PROPERTY_APPLICATION_PROPERTIES     = "Application.properties"; //$NON-NLS-1$
 	
-	private String name, version, build; //, workdirectory;
-	private File workdirectory;
-	private boolean isDebug;
+//	private String name, version, build; //, workdirectory;
+//	private File workdirectory;
+//	private boolean isDebug;
 	private final long startTime = System.currentTimeMillis();
 	
 
@@ -104,40 +104,59 @@ public abstract class ApplicationTemplate implements Runnable {
 	}
 	
 	public long getStartTime() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getStartTime"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getStartTime", startTime); //$NON-NLS-1$
+
 		return startTime;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getVersion() {
-		return version;
-	}
-
-	public String getBuild() {
-		return build;
-	}
-
-//	public String getWorkdirectory() {
+//	public String getName() {
+//		Logger.getInstance().writeMethodEntry(this.getClass(), "getPassword"); //$NON-NLS-1$
+//		Logger.getInstance().writeMethodExit(this.getClass(), "getPassword", password); //$NON-NLS-1$
+//
+//		return name;
+//	}
+//
+//	public String getVersion() {
+//		Logger.getInstance().writeMethodEntry(this.getClass(), "getPassword"); //$NON-NLS-1$
+//		Logger.getInstance().writeMethodExit(this.getClass(), "getPassword", password); //$NON-NLS-1$
+//
+//		return version;
+//	}
+//
+//	public String getBuild() {
+//		Logger.getInstance().writeMethodEntry(this.getClass(), "getPassword"); //$NON-NLS-1$
+//		Logger.getInstance().writeMethodExit(this.getClass(), "getPassword", password); //$NON-NLS-1$
+//
+//		return build;
+//	}
+//
+////	public String getWorkdirectory() {
+////		return workdirectory;
+////	}
+//	
+//	public File getWorkdirectory() {
+//		Logger.getInstance().writeMethodEntry(this.getClass(), "getPassword"); //$NON-NLS-1$
+//		Logger.getInstance().writeMethodExit(this.getClass(), "getPassword", password); //$NON-NLS-1$
 //		return workdirectory;
 //	}
-	
-	public File getWorkdirectory() {
-		return workdirectory;
-	}
-	
-	public boolean isDebug() {
-		return isDebug;
-	}
-	
-	public void setWorkdirectory(final File workdirectory) {
-		this.workdirectory = workdirectory;
-	}
-	
-//	public void setWorkdirectory(final String workdirectory) {
-//		this.workdirectory = workdirectory;
+//	
+//	public boolean isDebug() {
+//		Logger.getInstance().writeMethodEntry(this.getClass(), "getPassword"); //$NON-NLS-1$
+//		Logger.getInstance().writeMethodExit(this.getClass(), "getPassword", password); //$NON-NLS-1$
+//		return isDebug;
 //	}
+//	
+//	public void setWorkdirectory(final File workdirectory) {
+//		Logger.getInstance().writeMethodEntry(this.getClass(), "getPassword"); //$NON-NLS-1$
+//		Logger.getInstance().writeMethodExit(this.getClass(), "getPassword", password); //$NON-NLS-1$
+//		this.workdirectory = workdirectory;
+//		Logger.getInstance().writeDebug(this.getClass(), "setWorkdirectory", workdirectory);  //$NON-NLS-1$
+//	}
+//	
+////	public void setWorkdirectory(final String workdirectory) {
+////		this.workdirectory = workdirectory;
+////	}
 
 	/**
      * Terminates the application in a proper way 
@@ -146,9 +165,9 @@ public abstract class ApplicationTemplate implements Runnable {
      */	
 	protected void exit(final int returnCode) {
 		if (returnCode == 0) {
-			Logger.getInstance().writeLog(this, "exit", "##  " + Localizer.getInstance().getValue(RES_LOG_SUCCESSFUL) + "  ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			Logger.getInstance().writeLog(this.getClass(), "exit", "##  " + Localizer.getInstance().getValue(RES_LOG_SUCCESSFUL) + "  ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		} else {
-			Logger.getInstance().writeLog(this, "exit", "##  " + Localizer.getInstance().getValue(RES_LOG_UNSUCCESSFUL) + ' ' + returnCode + "  ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			Logger.getInstance().writeLog(this.getClass(), "exit", "##  " + Localizer.getInstance().getValue(RES_LOG_UNSUCCESSFUL) + ' ' + returnCode + "  ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		System.exit(returnCode);
 	}
@@ -162,17 +181,19 @@ public abstract class ApplicationTemplate implements Runnable {
 
 		Application.setInstance(this);
 		
-		Logger.getInstance().writeLog(this, "init", "##  " + Localizer.getInstance().getValue(RES_LOG_START) + ' ' + name + ' ' + version + " (" + build + ")  ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		Logger.getInstance().writeLog(this, "init", Localizer.getInstance().getValue(RES_LOG_OS) + ' ' + HelperEnvInfo.getOsName() + " - " + Localizer.getInstance().getValue(RES_LOG_VERSION) + ' ' + HelperEnvInfo.getOsVersion()+ " - " + Localizer.getInstance().getValue(RES_LOG_ARCHITECTURE) + ' ' + HelperEnvInfo.getOsArch()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		Logger.getInstance().writeLog(this.getClass(), "init", "##  " + Localizer.getInstance().getValue(RES_LOG_START) + ' ' + Context.getInstance().getApplicationName() + ' ' + Context.getInstance().getApplicationVersion() + " (" + Context.getInstance().getApplicationBuild() + ")  ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		Logger.getInstance().writeLog(this.getClass(), "init", Localizer.getInstance().getValue(RES_LOG_OS) + ' ' + HelperEnvInfo.getOsName() + " - " + Localizer.getInstance().getValue(RES_LOG_VERSION) + ' ' + HelperEnvInfo.getOsVersion()+ " - " + Localizer.getInstance().getValue(RES_LOG_ARCHITECTURE) + ' ' + HelperEnvInfo.getOsArch()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	private void readProperties() {
-        isDebug = Property.getInstance().getPropertyBoolean(PROPERTY_APPLICATION_DEBUG);
+		File workdirectory;
+		
+        boolean isDebug = Property.getInstance().getPropertyBoolean(PROPERTY_APPLICATION_DEBUG);
 		Context.getInstance().addData(Context.ATT_APPLICATION_DEBUG, Boolean.valueOf(isDebug));
 		
 		String value = Property.getInstance().getProperty(PROPERTY_APPLICATION_NAME);
 		if (HelperGeneral.isValidString(value)) {
-            name = value;
+//            name = value;
 			Context.getInstance().addData(Context.ATT_APPLICATION_NAME, value);
 		} else {
 			System.err.println(getClass().getName() + "::readProperties - " + PROPERTY_APPLICATION_NAME + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -181,7 +202,7 @@ public abstract class ApplicationTemplate implements Runnable {
 		
 		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_VERSION);
 		if (HelperGeneral.isValidString(value)) {
-            version = value;
+//            version = value;
 			Context.getInstance().addData(Context.ATT_APPLICATION_VERSION, value);
 		} else {
 			System.err.println(getClass().getName() + "::readProperties - " + PROPERTY_APPLICATION_VERSION + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -190,7 +211,7 @@ public abstract class ApplicationTemplate implements Runnable {
 
 		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_BUILD);
 		if (HelperGeneral.isValidString(value)) {
-            build = value;
+//            build = value;
 			Context.getInstance().addData(Context.ATT_APPLICATION_BUILD, value);
 		} else {
 			System.err.println(getClass().getName() + "::readProperties - " + PROPERTY_APPLICATION_BUILD + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$

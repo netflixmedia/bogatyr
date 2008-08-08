@@ -39,13 +39,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import ch.orwell.bogatyr.controller.net.common.ICom;
 import ch.orwell.bogatyr.controller.net.common.dto.ComObject;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is the super class for all Security-children
  * 
  * @author Stefan Laubenberger
- * @version 20080515
+ * @version 20080808
  */
 public abstract class Security {	
 	private static final Map<SocketAddress, Long> contactTable = new ConcurrentHashMap<SocketAddress, Long>(); //#LS new
@@ -59,20 +60,26 @@ public abstract class Security {
      * @return true/false
 	 */
 	public static boolean isMethodGranted(final ServerTemplate server, final ComObject comObject) throws Exception {
+		Logger.getInstance().writeMethodEntry(Security.class, "isMethodGranted", new Object[]{server, comObject}); //$NON-NLS-1$
+
+		boolean flag = false;
+		
 		if (comObject.getMethodName().equalsIgnoreCase(ICom.METHOD_CONNECT)) {
-			return true;
+			flag = true;
 		} else if (comObject.getMethodName().equalsIgnoreCase(ICom.METHOD_DISCONNECT)) {
-			return true;
+			flag = true;
 		} else if (comObject.getMethodName().equalsIgnoreCase(ICom.METHOD_SEND_ASYMMKEY)) {
-			return true;
+			flag = true;
 		} else if (comObject.getMethodName().equalsIgnoreCase(ICom.METHOD_SEND_SYMMKEY)) {
-			return true;
+			flag = true;
 		} else if (comObject.getMethodName().equalsIgnoreCase(ICom.METHOD_LOGON)) {
-			return true;
+			flag = true;
 		} else if (comObject.getMethodName().equalsIgnoreCase(ICom.METHOD_LOGOFF)) {
-			return isUserLoggedOn(server, comObject);
+			flag = isUserLoggedOn(server, comObject);
 		}
-		return false;
+		
+		Logger.getInstance().writeMethodExit(Security.class, "isMethodGranted", flag); //$NON-NLS-1$
+		return flag;
 	}
 
 	/**
@@ -87,7 +94,9 @@ public abstract class Security {
 	 * @see ServerTemplate#getRequests()
 	 */
 	public static boolean isValidContact(final ServerTemplate server, final Socket socket) {
-		boolean flag = true;
+		Logger.getInstance().writeMethodEntry(Security.class, "isValidContact", new Object[]{server, socket}); //$NON-NLS-1$
+
+		boolean isValid = true;
 
 		if (server.getInterval() != 0) { // not disabled
 
@@ -97,11 +106,11 @@ public abstract class Security {
 			final long timeDifference = time - (long) server.getInterval();
 
             if (timeOld != null && time - timeOld < (long) server.getInterval()) {
-				flag = false;
+				isValid = false;
 			}
 
             int counter = 0;
-            for (Iterator<SocketAddress> iter = contactTable.keySet().iterator(); iter.hasNext() && flag;) {
+            for (Iterator<SocketAddress> iter = contactTable.keySet().iterator(); iter.hasNext() && isValid;) {
 				final long element = contactTable.get(iter.next());
 							
 				if (element < timeDifference) {
@@ -109,13 +118,15 @@ public abstract class Security {
 				}
 				
 				if (counter > server.getRequests()) {
-					flag = false;
+					isValid = false;
 				}
 			}
 			
 			contactTable.put(socketAddress, time);
 		}
-		return flag;
+
+		Logger.getInstance().writeMethodExit(Security.class, "isValidContact", isValid); //$NON-NLS-1$
+		return isValid;
 	}
 	
 	/**
@@ -126,6 +137,11 @@ public abstract class Security {
      * @return true/false
 	 */
 	public static boolean isUserLoggedOn(final ServerTemplate server, final ComObject comObject) {
-        return server.getUser(comObject.getUserKey()) != null;
+		Logger.getInstance().writeMethodEntry(Security.class, "isUserLoggedOn", new Object[]{server, comObject}); //$NON-NLS-1$
+
+		boolean isLoggedOn = server.getUser(comObject.getUserKey()) != null;
+
+		Logger.getInstance().writeMethodExit(Security.class, "isUserLoggedOn", isLoggedOn); //$NON-NLS-1$
+        return isLoggedOn;
     }
 }

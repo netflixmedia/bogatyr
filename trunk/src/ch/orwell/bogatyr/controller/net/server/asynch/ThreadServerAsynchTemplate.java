@@ -36,13 +36,14 @@ import java.net.Socket;
 
 import ch.orwell.bogatyr.controller.net.common.dto.ComObject;
 import ch.orwell.bogatyr.controller.net.server.ThreadServerTemplate;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is the skeleton for asynchron server threads
  * 
  * @author Stefan Laubenberger
- * @version 20080724
+ * @version 20080808
  */
 public abstract class ThreadServerAsynchTemplate extends ThreadServerTemplate {
 	private Thread thread;
@@ -63,6 +64,9 @@ public abstract class ThreadServerAsynchTemplate extends ThreadServerTemplate {
      * @return Thread
 	 */
 	protected Thread getThread() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getThread"); //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getThread", thread); //$NON-NLS-1$
+
 		return thread;
 	}  
 
@@ -72,22 +76,30 @@ public abstract class ThreadServerAsynchTemplate extends ThreadServerTemplate {
 	 * @throws IOException 
 	 */
 	public void stop() throws IOException {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "stop"); //$NON-NLS-1$
+
 		if (thread != null && thread.isAlive()) {
             thread = null;
         }
 
 		getSocket().close();
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "stop"); //$NON-NLS-1$
 	}  
 
 	/**
 	 * Starts the thread with {@link Thread#MIN_PRIORITY}.
 	 */
 	protected void start() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "start"); //$NON-NLS-1$
+
 		if (thread == null) {
             thread = new Thread(this);
             thread.setPriority(Thread.MIN_PRIORITY);
             thread.start();
 		}
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "start"); //$NON-NLS-1$
 	}
 
 	
@@ -111,8 +123,12 @@ public abstract class ThreadServerAsynchTemplate extends ThreadServerTemplate {
 	 * Implemented methods
 	 */
 	public void connect(final ComObject comObject) throws Exception {
-//		super.connect(comObject);
+		Logger.getInstance().writeMethodEntry(this.getClass(), "connect", comObject); //$NON-NLS-1$
+
+		//		super.connect(comObject);
         server.addAsynchServerThread(comObject.getUserKey(), this);
+
+        Logger.getInstance().writeMethodExit(this.getClass(), "connect"); //$NON-NLS-1$
 	}
 
 }

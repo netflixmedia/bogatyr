@@ -38,7 +38,7 @@ package ch.orwell.bogatyr.helper.logger;
  * Logger holder and helper
  *  
  * @author Stefan Laubenberger
- * @version 20080724
+ * @version 20080808
  */
 public abstract class Logger {
 	private static ILogger instance;
@@ -59,13 +59,13 @@ public abstract class Logger {
 	/**
      * Returns the class name
      * 
-     * @param object Caller object
+     * @param object caller class
      * @return validate/corrected descent
      */
-	public static String getClassName(final Object object) {
-		if (object == null) {
+	public static String getClassName(final Class<?> clazz) {
+		if (clazz == null) {
 			return "null"; //$NON-NLS-1$
 		}
-		return object.getClass().getName();
+		return clazz.getName();
 	}
 }
