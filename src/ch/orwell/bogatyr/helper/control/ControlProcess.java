@@ -43,7 +43,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * Reads standard output and standard error of a process.
  * 
  * @author Stefan Laubenberger
- * @version 20080808
+ * @version 20080809
  */
 public abstract class ControlProcess {
 	/**
@@ -61,7 +61,6 @@ public abstract class ControlProcess {
 		ControlProcess.readStandardOutput(process, outputStream, errorStream);
 		
 		Logger.getInstance().writeMethodExit(ControlProcess.class, "createSubprocess", process);  //$NON-NLS-1$
-		
 		return process;
 	}
 
@@ -77,7 +76,6 @@ public abstract class ControlProcess {
 		final Process process = Runtime.getRuntime().exec(command);
 		
 		Logger.getInstance().writeMethodExit(ControlProcess.class, "createSubprocess", process);  //$NON-NLS-1$
-		
 		return process;
 	}
 
@@ -100,8 +98,12 @@ public abstract class ControlProcess {
 	 * @param errorStream If null, error is discarded.
 	 */
 	private static void readStandardOutput(final Process process, final OutputStream outputStream, final OutputStream errorStream) {
+		Logger.getInstance().writeMethodEntry(ControlProcess.class, "readStandardOutput", new Object[]{process, outputStream, errorStream});  //$NON-NLS-1$
+
 		new StreamReader(process.getErrorStream(), errorStream);
 		new StreamReader(process.getInputStream(), outputStream);
+
+		Logger.getInstance().writeMethodExit(ControlProcess.class, "readStandardOutput");  //$NON-NLS-1$
 	}
 
 	protected static class StreamReader extends Thread {
@@ -125,7 +127,6 @@ public abstract class ControlProcess {
 		@Override
 		public void run() {
 			try {
-//				final byte[] buffer = new byte[1000];
                 final byte[] buffer = new byte[1024];
                 int len;
 				while ((len = fSource.read(buffer)) != -1) {

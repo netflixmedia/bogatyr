@@ -42,7 +42,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This controls displays an URL in a browser.
  *
  * @author Stefan Laubenberger
- * @version 20080808
+ * @version 20080809
  */
 public abstract class ControlBrowser {
 	// The default system browser under windows.
@@ -52,9 +52,6 @@ public abstract class ControlBrowser {
 	// The default browser under unix.
 	private static final String UNIX_PATH = "netscape"; //$NON-NLS-1$
 	private static final String UNIX_FLAG = "-remote openURL"; //$NON-NLS-1$
-
-//	private static final OutputStream outputStream = null;
-//	private static final OutputStream errorStream = null;
 
 	
 	/**
@@ -116,23 +113,13 @@ public abstract class ControlBrowser {
 				ControlProcess.createProcess(cmd);
 			}
 		}
+		Logger.getInstance().writeMethodExit(ControlBrowser.class, "displayURL");  //$NON-NLS-1$
 	}
 
 	
 	/*
 	 * Private methods
 	 */
-//	private static Process createSubprocess(final String command) throws IOException {
-//		Logger.getInstance().writeMethodEntry(ControlBrowser.class, "createSubprocess", command);  //$NON-NLS-1$
-//
-//		final Process process = Runtime.getRuntime().exec(command);
-//		ControlProcess.readStandardOutput(process, outputStream, errorStream);
-//		
-//		Logger.getInstance().writeMethodExit(ControlBrowser.class, "createSubprocess", process);  //$NON-NLS-1$
-//		
-//		return process;
-//	}
-	
 	private static void displayURLonMac(final String url) {
 		Logger.getInstance().writeMethodEntry(ControlBrowser.class, "displayURLonMac", url);  //$NON-NLS-1$
 
@@ -155,5 +142,6 @@ public abstract class ControlBrowser {
 		
 		// must be called in separate thread because the call to openURL sometimes hangs (probably a bug)
 		thread.start();
+		Logger.getInstance().writeMethodExit(ControlBrowser.class, "displayURLonMac");  //$NON-NLS-1$
 	}
 }

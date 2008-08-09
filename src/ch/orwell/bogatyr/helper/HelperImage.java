@@ -41,15 +41,18 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import ch.orwell.bogatyr.helper.logger.Logger;
+
 /**
  * This is a helper class for image operations
  * 
  * @author Stefan Laubenberger
- * @version 20080725
+ * @version 20080810
  */
 public abstract class HelperImage {
 	public static final String TYPE_JPG = "jpg"; //$NON-NLS-1$
 	public static final String TYPE_PNG = "png"; //$NON-NLS-1$
+	public static final String TYPE_GIF = "gif"; //$NON-NLS-1$
 
     /**
      * Create an image from a RenderImage
@@ -60,8 +63,12 @@ public abstract class HelperImage {
      * @throws java.io.IOException
      */
     public static void createImage(final RenderedImage image, final String type, final File output) throws IOException {
-        ImageIO.write(image, type, output);
-	}
+		Logger.getInstance().writeMethodEntry(HelperImage.class, "createImage", new Object[]{image, type, output});  //$NON-NLS-1$
+
+    	ImageIO.write(image, type, output);
+
+		Logger.getInstance().writeMethodExit(HelperImage.class, "createImage");  //$NON-NLS-1$
+    }
 
     /**
      * Create an image from a Component
@@ -72,11 +79,15 @@ public abstract class HelperImage {
      * @throws java.io.IOException
      */
 	public static void createImage(final Component component, final String type, final File output) throws IOException {
-       final Dimension size = component.getSize();
-       final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-       final Graphics2D g2 = image.createGraphics();
-       component.paint(g2);
+		Logger.getInstance().writeMethodEntry(HelperImage.class, "createImage", new Object[]{component, type, output});  //$NON-NLS-1$
+
+		final Dimension size = component.getSize();
+		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+		final Graphics2D g2 = image.createGraphics();
+		component.paint(g2);
        
-       createImage(image, type, output);
+		createImage(image, type, output);
+
+		Logger.getInstance().writeMethodExit(HelperImage.class, "createImage");  //$NON-NLS-1$
 	}  
 }

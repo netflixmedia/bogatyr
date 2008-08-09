@@ -45,16 +45,16 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * Get access for general content in the context.
  * 
  * @author Stefan Laubenberger
- * @version 20080808
+ * @version 20080809
  */
 public class Context implements IContext {
 	private static Context instance;
 
-	public static final String ATT_APPLICATION_NAME          = "Application.name"; //$NON-NLS-1$
-	public static final String ATT_APPLICATION_VERSION       = "Application.version"; //$NON-NLS-1$
-	public static final String ATT_APPLICATION_BUILD         = "Application.build"; //$NON-NLS-1$
-	public static final String ATT_APPLICATION_DEBUG         = "Application.debug"; //$NON-NLS-1$
-	public static final String ATT_APPLICATION_WORKDIRECTORY = "Application.work_directory"; //$NON-NLS-1$
+	public static final String KEY_APPLICATION_NAME          = "Application.name"; //$NON-NLS-1$
+	public static final String KEY_APPLICATION_VERSION       = "Application.version"; //$NON-NLS-1$
+	public static final String KEY_APPLICATION_BUILD         = "Application.build"; //$NON-NLS-1$
+	public static final String KEY_APPLICATION_DEBUG         = "Application.debug"; //$NON-NLS-1$
+	public static final String KEY_APPLICATION_WORKDIRECTORY = "Application.work_directory"; //$NON-NLS-1$
 
 	private final Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();
 	
@@ -142,7 +142,7 @@ public class Context implements IContext {
 	public String getApplicationName() {
 		Logger.getInstance().writeMethodEntry(this.getClass(), "getApplicationName"); //$NON-NLS-1$
 
-		String str = getDataString(ATT_APPLICATION_NAME);
+		String str = getDataString(KEY_APPLICATION_NAME);
 
 		if (str == null) {
 			str = "Bogatyr";
@@ -155,7 +155,7 @@ public class Context implements IContext {
 	public String getApplicationVersion() {
 		Logger.getInstance().writeMethodEntry(this.getClass(), "getApplicationVersion"); //$NON-NLS-1$
 
-		String str = getDataString(ATT_APPLICATION_VERSION);
+		String str = getDataString(KEY_APPLICATION_VERSION);
 
 		if (str == null) {
 			str = "0.36"; //TODO change every release!
@@ -168,7 +168,7 @@ public class Context implements IContext {
 	public String getApplicationBuild() {
 		Logger.getInstance().writeMethodEntry(this.getClass(), "getApplicationBuild"); //$NON-NLS-1$
 
-		String str = getDataString(ATT_APPLICATION_BUILD);
+		String str = getDataString(KEY_APPLICATION_BUILD);
 		
 		if (str == null) {
 			str = "20080808"; //TODO change every release!
@@ -179,20 +179,16 @@ public class Context implements IContext {
 	}
 	
 	public boolean isApplicationDebug() {
-    	Boolean value = (Boolean) contextData.get(ATT_APPLICATION_DEBUG);
+    	Boolean value = (Boolean) contextData.get(KEY_APPLICATION_DEBUG);
     	boolean flag = value != null ? value : false;
 
     	return flag;
-    	
-//		boolean isApplicationDebug = getDataBoolean(ATT_APPLICATION_DEBUG);
-////		Logger.getInstance().writeDebug(Context.class, "isApplicationDebug", isApplicationDebug);  //$NON-NLS-1$
-//		return isApplicationDebug;
-	}
+ 	}
 
 	public File getApplicationWorkDirectory() {
 		Logger.getInstance().writeMethodEntry(this.getClass(), "getApplicationWorkDirectory"); //$NON-NLS-1$
 
-		File file = (File)getData(ATT_APPLICATION_WORKDIRECTORY);
+		File file = (File)getData(KEY_APPLICATION_WORKDIRECTORY);
 
 		if (file == null) {
 			file = HelperEnvInfo.getOsTempDirectory();

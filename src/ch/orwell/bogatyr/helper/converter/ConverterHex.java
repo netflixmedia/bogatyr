@@ -31,12 +31,14 @@
  *******************************************************************************/
 package ch.orwell.bogatyr.helper.converter;
 
+import ch.orwell.bogatyr.helper.logger.Logger;
+
 
 /**
  * Encodes data to Hex and decodes it.
  * 
  * @author Stefan Laubenberger
- * @version 20080803
+ * @version 20080809
  */
 public abstract class ConverterHex {
     private static final String	DIGITS = "0123456789abcdef"; //$NON-NLS-1$
@@ -49,7 +51,9 @@ public abstract class ConverterHex {
      * @return hex representation of a byte array
      */
     public static String encode(byte[] data){
-        StringBuffer buf = new StringBuffer();
+		Logger.getInstance().writeMethodEntry(ConverterHex.class, "encode", data);  //$NON-NLS-1$
+
+		StringBuffer buf = new StringBuffer();
 
         for (int ii = 0; ii != data.length; ii++) {
 
@@ -58,7 +62,11 @@ public abstract class ConverterHex {
             buf.append(DIGITS.charAt(v >> 4));
             buf.append(DIGITS.charAt(v & 0xf));
         }
-        return buf.toString();
+        
+        String str = buf.toString();
+        
+		Logger.getInstance().writeMethodExit(ConverterHex.class, "encode", str);  //$NON-NLS-1$
+        return str;
     }
     
     /**
@@ -67,12 +75,16 @@ public abstract class ConverterHex {
      * @param data hex string to be converted
      * @return byte array representation of a hex string
      */
-    public static byte[] decode(String data){
+    public static byte[] decode(String data) {
+		Logger.getInstance().writeMethodEntry(ConverterHex.class, "decode", data);  //$NON-NLS-1$
+
     	byte[] bts = new byte[data.length() / 2];
 
     	for (int ii = 0; ii < bts.length; ii++) {
     		bts[ii] = (byte) Integer.parseInt(data.substring(2 * ii, 2 * ii + 2), 16);
     	}
+
+    	Logger.getInstance().writeMethodExit(ConverterHex.class, "decode", bts);  //$NON-NLS-1$
     	return bts;
     }
 }

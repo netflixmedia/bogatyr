@@ -51,15 +51,17 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import ch.orwell.bogatyr.helper.logger.Logger;
+
 
 /**
  * This is a general helper class for general problems
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20080725
+ * @version 20080809
  */
-public abstract class HelperGeneral {
+public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and when, is logging needed?
 	private static final String CHECKSUM_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
 	private static final char[] RANDOMKEY_SEED_DEFAULT    = new char[]{'1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 
@@ -78,18 +80,18 @@ public abstract class HelperGeneral {
 	 * @throws IllegalArgumentException 
      */
 	public static Object createObject(final String clazz, final Object[] parameter) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SecurityException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
-		final Object object;
+		final Object obj;
 
 		final Class<?> classDefinition = Class.forName(clazz);
 			
 		if (parameter == null) {
-			object = classDefinition.newInstance();
+			obj = classDefinition.newInstance();
 		} else {
             final Class<?>[] stringArgsClass = new Class[]{String.class};
             final Constructor<?> classConstructor = classDefinition.getConstructor(stringArgsClass);
-			object = classConstructor.newInstance(parameter);
+			obj = classConstructor.newInstance(parameter);
 		}
-		return object;
+		return obj;
 	}
 
 	/**
@@ -196,6 +198,8 @@ public abstract class HelperGeneral {
 	 * @see ObjectOutputStream
 	 */
 	public static byte[] getBytesFromObject(final Object obj) throws IOException {
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getBytesFromObject", obj);  //$NON-NLS-1$
+
 		byte[] data = null;
 		
 		if (obj != null) {
@@ -215,6 +219,8 @@ public abstract class HelperGeneral {
 //                bos.close();
             }
         }
+		
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "getBytesFromObject", data);  //$NON-NLS-1$
 	    return data;
 	}
 	
@@ -230,16 +236,21 @@ public abstract class HelperGeneral {
 	 * @see ObjectInputStream
 	 */
 	public static Object getObjectFromBytes(final byte[] bytes) throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = null;
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getObjectFromBytes", bytes);  //$NON-NLS-1$
 
+		ObjectInputStream ois = null;
+		Object obj = null;
+		
         try {
             ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
-            return ois.readObject();
+            obj = ois.readObject();
         } finally {
         	if (ois != null) {
         		ois.close();
         	}
         }
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "getObjectFromBytes", obj);  //$NON-NLS-1$
+        return obj;
 	}
 	
 	/**
@@ -250,6 +261,8 @@ public abstract class HelperGeneral {
 	 * @return The array a & b as one new byte-array.
 	 */
     public static byte[] appendByteArray(final byte[] inA, final byte[] inB) {
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "appendByteArray", new Object[]{inA, inB});  //$NON-NLS-1$
+
     	byte[] a = inA;
     	byte[] b = inB;
     	
@@ -261,10 +274,12 @@ public abstract class HelperGeneral {
             b = new byte[0];
         }
     	
-    	final byte[] z = new byte[a.length + b.length];
-        System.arraycopy(a, 0, z, 0, a.length);
-        System.arraycopy(b, 0, z, a.length, b.length);
-        return z;
+    	final byte[] result = new byte[a.length + b.length];
+        System.arraycopy(a, 0, result, 0, a.length);
+        System.arraycopy(b, 0, result, a.length, b.length);
+        
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "appendByteArray", result);  //$NON-NLS-1$
+        return result;
     }
     
 	/**
@@ -273,10 +288,14 @@ public abstract class HelperGeneral {
 	 * @param list containing duplicate objects
 	 * @return list without duplicates
 	 */
-    public static List<?> removeDuplicates(List<?> list) {
+    public static List<?> removeDuplicates(final List<?> list) {
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "removeDuplicates", list);  //$NON-NLS-1$
+
     	Set<?> set = new HashSet<Object>(list);
+    	List<?> result = new ArrayList<Object>(set);
     	
-        return new ArrayList<Object>(set);
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "removeDuplicates", result);  //$NON-NLS-1$
+        return result;
     }
 	
     /**
@@ -285,12 +304,16 @@ public abstract class HelperGeneral {
 	 * @param array containing duplicate objects
 	 * @return array without duplicates
 	 */
-    public static Object[] removeDuplicates(Object[] array) {
-        List<?> list = removeDuplicates(Arrays.asList(array));
+    public static Object[] removeDuplicates(final Object[] array) {
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "removeDuplicates", array);  //$NON-NLS-1$
 
-        Object[] result = new Object[list.size()];
- 
-        return list.toArray(result);
+    	List<?> list = removeDuplicates(Arrays.asList(array));
+
+        Object[] temp = new Object[list.size()];
+        Object[] result = list.toArray(temp);
+        
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "removeDuplicates", result);  //$NON-NLS-1$
+        return result;
     }
 
     /**
@@ -303,7 +326,9 @@ public abstract class HelperGeneral {
      * @throws NoSuchAlgorithmException
      */
     public static String getChecksum(final String algo, final String data) throws NoSuchAlgorithmException {
-		final MessageDigest algorithm = MessageDigest.getInstance(algo);
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getChecksum", new Object[]{algo, data});  //$NON-NLS-1$
+
+    	final MessageDigest algorithm = MessageDigest.getInstance(algo);
 
 		final byte[] input = data.getBytes();
 		algorithm.reset();
@@ -318,7 +343,11 @@ public abstract class HelperGeneral {
 			}
 			hexString.append(hex);
 		}
-		return hexString.toString();
+		
+		String str = hexString.toString();
+		
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "getChecksum", str);  //$NON-NLS-1$
+		return str;
 	}
 
     /**
@@ -330,7 +359,12 @@ public abstract class HelperGeneral {
      * @see #getChecksum(String, String)
      */
     public static String getChecksum(final String data) throws NoSuchAlgorithmException {
-		return getChecksum(CHECKSUM_ALGORITHM_SHA256, data);
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getChecksum", data);  //$NON-NLS-1$
+
+    	String str = getChecksum(CHECKSUM_ALGORITHM_SHA256, data);
+		
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "getChecksum", str);  //$NON-NLS-1$
+		return str;
     }
 
     /**
@@ -342,12 +376,17 @@ public abstract class HelperGeneral {
      * @return The generated unique String.
      */
     public static String getRandomKey(final int digits, final char[] seed) {
-        StringBuilder sb = new StringBuilder();
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getRandomKey", new Object[]{digits, seed});  //$NON-NLS-1$
+
+    	StringBuilder sb = new StringBuilder();
 
         for (int ii = 0; ii < digits; ii++) {
             sb.append(seed[HelperMath.random(seed.length)]);
         }
-        return sb.toString();
+    	String str = sb.toString();
+		
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "getRandomKey", str);  //$NON-NLS-1$
+		return str;
     }
 
     /**
@@ -358,7 +397,12 @@ public abstract class HelperGeneral {
      * @return The generated unique String.
      */
     public static String getRandomKey(final int digits) {
-        return getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getRandomKey", digits);  //$NON-NLS-1$
+
+    	String str = getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
+		
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "getRandomKey", str);  //$NON-NLS-1$
+		return str;
     }
     
     /**
@@ -368,14 +412,19 @@ public abstract class HelperGeneral {
      * @return filled string
      */
     public static String fillString(final char fillChar, final int fillLength) {
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "fillString", new Object[]{fillChar, fillLength});  //$NON-NLS-1$
+
         int length = fillLength;
     	final char[] chars = new char[length];
         
     	while (length > 0) {
             chars[--length] = fillChar;
         }
-        
-    	return new String(chars);
+    	
+    	String str = new String(chars);
+		
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "fillString", str);  //$NON-NLS-1$
+		return str;
     }
     
     /**
@@ -384,7 +433,12 @@ public abstract class HelperGeneral {
      * @return reversed string
      */
     public static String reverseString(final String input) {
-    	return new StringBuffer(input).reverse().toString();
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "reverseString", input);  //$NON-NLS-1$
+
+    	String str = new StringBuffer(input).reverse().toString();
+		
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "reverseString", str);  //$NON-NLS-1$
+		return str;
     }
 
     /**
@@ -393,13 +447,18 @@ public abstract class HelperGeneral {
      * @return dump string
      */
     public static String dump(final List<?> list) {
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "dump", list);  //$NON-NLS-1$
+
         final StringBuilder sb = new StringBuilder();
 
         for (final Object value : list) {
             sb.append(value);
             sb.append('\n');
         }
-        return sb.toString();
+    	String str = sb.toString();
+		
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "dump", str);  //$NON-NLS-1$
+		return str;
     }
 
     /**
@@ -408,6 +467,8 @@ public abstract class HelperGeneral {
      * @return dump string
      */
     public static String dump(final Map<?, ?> map) {
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "dump", map);  //$NON-NLS-1$
+
         final StringBuilder sb = new StringBuilder();
 
         for (final Map.Entry<?, ?> pair : map.entrySet()) {
@@ -416,7 +477,10 @@ public abstract class HelperGeneral {
             sb.append(pair.getValue());
             sb.append('\n');
         }
-        return sb.toString();
+    	String str = sb.toString();
+		
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "dump", str);  //$NON-NLS-1$
+		return str;
     }
 
      /**
@@ -425,20 +489,30 @@ public abstract class HelperGeneral {
      * @return dump string
      */
     public static String dump(final Object[] array) {
-         final StringBuilder sb = new StringBuilder();
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "dump", array);  //$NON-NLS-1$
 
-       for (final Object value : array) {
+		final StringBuilder sb = new StringBuilder();
+
+		for (final Object value : array) {
             sb.append(value);
             sb.append('\n');
         }
-        return sb.toString();
+	   	String str = sb.toString();
+		
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "dump", str);  //$NON-NLS-1$
+		return str;
     }
 
     public static String toString(final Object object) {
+		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "toString", object);  //$NON-NLS-1$
+
     	final List<String> list = new ArrayList<String>();
     	toString(object, object.getClass(), list);
 
-    	return object.getClass().getName() + list.toString();
+    	String str = object.getClass().getName() + list.toString();
+		
+		Logger.getInstance().writeMethodExit(HelperGeneral.class, "toString", str);  //$NON-NLS-1$
+		return str;
     }
 
     
@@ -482,17 +556,4 @@ public abstract class HelperGeneral {
 //    		toString(object, clazz.getSuperclass(), list);
 //    	}
     }
-
-//    /**
-//     * Wait for some milli seconds
-//     *
-//     * @param time The milli seconds to wait for.
-//     */
-//    public static synchronized void suspendMilliseconds(long time){
-//    	long startTime = System.currentTimeMillis();
-//
-//    	while(System.currentTimeMillis() - time < startTime) {
-//    		//let everything wait...
-//    	}
-//     }
 }

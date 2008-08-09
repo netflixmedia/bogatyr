@@ -189,12 +189,12 @@ public abstract class ApplicationTemplate implements Runnable {
 		File workdirectory;
 		
         boolean isDebug = Property.getInstance().getPropertyBoolean(PROPERTY_APPLICATION_DEBUG);
-		Context.getInstance().addData(Context.ATT_APPLICATION_DEBUG, Boolean.valueOf(isDebug));
+		Context.getInstance().addData(Context.KEY_APPLICATION_DEBUG, Boolean.valueOf(isDebug));
 		
 		String value = Property.getInstance().getProperty(PROPERTY_APPLICATION_NAME);
 		if (HelperGeneral.isValidString(value)) {
 //            name = value;
-			Context.getInstance().addData(Context.ATT_APPLICATION_NAME, value);
+			Context.getInstance().addData(Context.KEY_APPLICATION_NAME, value);
 		} else {
 			System.err.println(getClass().getName() + "::readProperties - " + PROPERTY_APPLICATION_NAME + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
 			exit(10);
@@ -203,7 +203,7 @@ public abstract class ApplicationTemplate implements Runnable {
 		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_VERSION);
 		if (HelperGeneral.isValidString(value)) {
 //            version = value;
-			Context.getInstance().addData(Context.ATT_APPLICATION_VERSION, value);
+			Context.getInstance().addData(Context.KEY_APPLICATION_VERSION, value);
 		} else {
 			System.err.println(getClass().getName() + "::readProperties - " + PROPERTY_APPLICATION_VERSION + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
 			exit(20);
@@ -212,7 +212,7 @@ public abstract class ApplicationTemplate implements Runnable {
 		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_BUILD);
 		if (HelperGeneral.isValidString(value)) {
 //            build = value;
-			Context.getInstance().addData(Context.ATT_APPLICATION_BUILD, value);
+			Context.getInstance().addData(Context.KEY_APPLICATION_BUILD, value);
 		} else {
 			System.err.println(getClass().getName() + "::readProperties - " + PROPERTY_APPLICATION_BUILD + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
 			exit(30);
@@ -227,7 +227,7 @@ public abstract class ApplicationTemplate implements Runnable {
             	System.err.println(getClass().getName() + "::readProperties - " + PROPERTY_APPLICATION_WORKDIRECTORY + " == 'null' => default: " + workdirectory); //$NON-NLS-1$ //$NON-NLS-2$
             }
 		}
-		Context.getInstance().addData(Context.ATT_APPLICATION_WORKDIRECTORY, workdirectory);
+		Context.getInstance().addData(Context.KEY_APPLICATION_WORKDIRECTORY, workdirectory);
 		
 		// Localizer
 		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_LOCALIZER);
