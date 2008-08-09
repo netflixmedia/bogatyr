@@ -44,12 +44,13 @@ import javax.crypto.Cipher;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 /**
  * This is a class for asymmetric cryptology via RSA
  * 
  * @author Stefan Laubenberger
- * @version 20080524
+ * @version 20080809
  */
 public abstract class CryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
@@ -69,26 +70,33 @@ public abstract class CryptoAsymm {
 	 * @see KeyPairGenerator
 	 */
 	public static KeyPair generateKeys(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
+		Logger.getInstance().writeMethodEntry(CryptoAsymm.class, "generateKeys", keysize);  //$NON-NLS-1$
+
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 
 		// Generate a key-pair
 		final KeyPairGenerator kpg = KeyPairGenerator.getInstance(ALGORITHM, "BC"); //$NON-NLS-1$
 		kpg.initialize(keysize);
+
+		KeyPair kp = kpg.generateKeyPair();
 		
-		return kpg.generateKeyPair();
+		Logger.getInstance().writeMethodExit(CryptoAsymm.class, "generateKeys", kp);  //$NON-NLS-1$
+		return kp;
 	}
 
 	/**
 	 * Encrypt the data with a given {@link PublicKey}.
 	 * 
 	 * @param input The data to encrypt as a Byte-Array
-	 * @param key The {@link PublicKey} for the encryption
+	 * @param key {@link PublicKey} for the encryption
 	 * @param keysize Size of the key in bits (e.g. 1024, 2048, 4096)
      * @return Return the encrypted Byte-Array
 	 * @throws Exception
 	 * @see PublicKey
 	 */
     public static byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws Exception {
+		Logger.getInstance().writeMethodEntry(CryptoAsymm.class, "encrypt", new Object[]{input, key, keysize});  //$NON-NLS-1$
+
 		final int space = keysize/8 - 11;
 		byte[] result = null;
 		final byte[] temp = new byte[space];
@@ -118,6 +126,8 @@ public abstract class CryptoAsymm {
 		} else {
 			result = encryptInternal(input, key);
 		}
+		
+		Logger.getInstance().writeMethodExit(CryptoAsymm.class, "encrypt", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -125,12 +135,14 @@ public abstract class CryptoAsymm {
 	 * Decrypt the data.
 	 * 
 	 * @param input The encrypted data as a Byte-Array
-	 * @param key The {@link PrivateKey} for the decryption
-	 * @param keysize Size of the key in bits (e.g. 1024, 2048, 4096)
+	 * @param key {@link PrivateKey} for the decryption
+	 * @param keysize of the key in bits (e.g. 1024, 2048, 4096)
      * @return Return the decrypted Byte-Array
 	 * @throws Exception
 	 */
 	public static byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws Exception {
+		Logger.getInstance().writeMethodEntry(CryptoAsymm.class, "decrypt", new Object[]{input, key, keysize});  //$NON-NLS-1$
+
 		final int space = keysize/8;
 		byte[] result = null;
 		final byte[] temp = new byte[space];
@@ -151,6 +163,8 @@ public abstract class CryptoAsymm {
 		} else {
 			result = decryptInternal(input, key);
 		}
+		
+		Logger.getInstance().writeMethodExit(CryptoAsymm.class, "decrypt", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -161,30 +175,40 @@ public abstract class CryptoAsymm {
 	/**
 	 * Encrypt the data with a given {@link PublicKey} (internal).
 	 * 
-	 * @param input The data to encrypt as a Byte-Array
-	 * @param key The {@link PublicKey} for the encryption
+	 * @param input data to encrypt as a Byte-Array
+	 * @param key {@link PublicKey} for the encryption
 	 * @return Return the encrypted Byte-Array 
 	 * @throws Exception
 	 */
 	private static byte[] encryptInternal(final byte[] input, final PublicKey key) throws Exception {
+		Logger.getInstance().writeMethodEntry(CryptoAsymm.class, "encryptInternal", new Object[]{input, key});  //$NON-NLS-1$
+
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.ENCRYPT_MODE, key);
+
+		byte[] result = cipher.doFinal(input);
 		
-		return cipher.doFinal(input);
+		Logger.getInstance().writeMethodExit(CryptoAsymm.class, "encryptInternal", result);  //$NON-NLS-1$
+		return result;
 	}
 
 	/**
 	 * Decrypt the data (internal).
 	 * 
-	 * @param input The encrypted data as a Byte-Array
-	 * @param key The {@link PrivateKey} for the decryption
+	 * @param input encrypted data as a Byte-Array
+	 * @param key {@link PrivateKey} for the decryption
 	 * @return Return the decrypted Byte-Array
 	 * @throws Exception
 	 */
 	private static byte[] decryptInternal(final byte[] input, final PrivateKey key) throws Exception {
+		Logger.getInstance().writeMethodEntry(CryptoAsymm.class, "decryptInternal", new Object[]{input, key});  //$NON-NLS-1$
+
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.DECRYPT_MODE, key);
+
+		byte[] result = cipher.doFinal(input);
 		
-		return cipher.doFinal(input);
+		Logger.getInstance().writeMethodEntry(CryptoAsymm.class, "decryptInternal", result);  //$NON-NLS-1$
+		return result;
 	}
 }

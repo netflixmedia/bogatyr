@@ -39,7 +39,7 @@ import java.util.List;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20080808
+ * @version 20080810
  */
 public abstract class HelperMath {
 	
@@ -163,7 +163,7 @@ public abstract class HelperMath {
 	                                        t * (-1.13520398D + 
 	                                        t * ( 1.48851587D + 
 	                                        t * (-0.82215223D +
-                                                    t * 0.17087277D)))))))));
+                                            t * 0.17087277D)))))))));
 	        if (z >= 0.0D) {
                 return ans;
             }

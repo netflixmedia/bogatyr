@@ -35,6 +35,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.crypto.Wrapper;
 import ch.orwell.bogatyr.helper.exception.ExceptionValidation;
 import ch.orwell.bogatyr.helper.localizer.Localizer;
 import ch.orwell.bogatyr.helper.logger.Logger;
@@ -65,17 +66,27 @@ public abstract class DataObject implements Serializable, IValidator {
 	}
 		
 	public int getPersistenceState() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getPersistenceState");  //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getPersistenceState", persistenceState);  //$NON-NLS-1$
+
 		return persistenceState;
 	}
 
 
 	public void setPersistenceState(final int persistenceState) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "setPersistenceState", persistenceState);  //$NON-NLS-1$
+
 		if (persistenceState > this.persistenceState) {
 			this.persistenceState = persistenceState;
 		}
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "setPersistenceState");  //$NON-NLS-1$
 	}
 
 	public long getCreateTime() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getCreateTime");  //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getCreateTime", createTime);  //$NON-NLS-1$
+
 		return createTime;
 	}
 
@@ -100,6 +111,7 @@ public abstract class DataObject implements Serializable, IValidator {
 	/*
 	 * Implemented methods
 	 */
+	//TODO Logger also for validation?
 	public void validateString(final String variable, final String arg) throws ExceptionValidation {
 		if (!HelperGeneral.isValidString(arg)) {
 			throw new ExceptionValidation(getClass().getName() + "::validateString - " + variable + " == 'null' / ''" + toString()); //$NON-NLS-1$ //$NON-NLS-2$

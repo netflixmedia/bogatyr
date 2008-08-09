@@ -44,11 +44,13 @@ import javax.crypto.spec.IvParameterSpec;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
+import ch.orwell.bogatyr.helper.logger.Logger;
+
 /**
  * This is a class for symmetric cryptology via AES
  * 
  * @author Stefan Laubenberger
- * @version 20080525
+ * @version 20080809
  */
 public abstract class CryptoSymm {
 	public static final String ALGORITHM = "AES"; //$NON-NLS-1$
@@ -67,45 +69,60 @@ public abstract class CryptoSymm {
 	 * @see #decrypt(byte[], Key)
 	 */
 	public static SecretKey generateKey(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
+		Logger.getInstance().writeMethodEntry(CryptoSymm.class, "generateKey", keysize);  //$NON-NLS-1$
+
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 
 		// Generate a key
 		final KeyGenerator kg = KeyGenerator.getInstance(ALGORITHM, "BC"); //$NON-NLS-1$
 		kg.init(keysize);
 		
-		return kg.generateKey();
+		SecretKey sk = kg.generateKey();
+		
+		Logger.getInstance().writeMethodExit(CryptoSymm.class, "generateKey", sk);  //$NON-NLS-1$
+		return sk;
 	}
 	
 	/**
 	 * Encrypt the data with a given {@link Key}.
 	 * 
-	 * @param input The data to encrypt as a Byte-Array
-	 * @param encryptionKey The key for the encryption
+	 * @param input data to encrypt as a Byte-Array
+	 * @param key for the encryption
 	 * @return Return the encrypted Byte-Array 
 	 * @throws Exception 
 	 * @see Key
 	 */
-	public static byte[] encrypt(final byte[] input, final Key encryptionKey) throws Exception {
-        final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
-		cipher.init(Cipher.ENCRYPT_MODE, encryptionKey, prepareIv());
+	public static byte[] encrypt(final byte[] input, final Key key) throws Exception {
+		Logger.getInstance().writeMethodEntry(CryptoSymm.class, "encrypt", new Object[]{input, key});  //$NON-NLS-1$
+
+		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
+		cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
+
+		byte[] result = cipher.doFinal(input);
 		
-		return cipher.doFinal(input);
+		Logger.getInstance().writeMethodExit(CryptoSymm.class, "encrypt", result);  //$NON-NLS-1$
+		return result;
 	}
 
 	/**
 	 * Decrypt the data with a given {@link Key}.
 	 * 
-	 * @param input The encrypted data as a Byte-Array
-	 * @param decryptionKey The key for the decryption
+	 * @param input encrypted data as a Byte-Array
+	 * @param key for the decryption
 	 * @return Return the decrypted Byte-Array
 	 * @throws Exception
 	 * @see Key
 	 */
-	public static byte[] decrypt(final byte[] input, final Key decryptionKey) throws Exception {
+	public static byte[] decrypt(final byte[] input, final Key key) throws Exception {
+		Logger.getInstance().writeMethodEntry(CryptoSymm.class, "decrypt", new Object[]{input, key});  //$NON-NLS-1$
+
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
-		cipher.init(Cipher.DECRYPT_MODE, decryptionKey, prepareIv());
+		cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
+
+		byte[] result = cipher.doFinal(input);
 		
-		return cipher.doFinal(input);
+		Logger.getInstance().writeMethodExit(CryptoSymm.class, "decrypt", result);  //$NON-NLS-1$
+		return result;
 	}
 	
 	
@@ -113,6 +130,8 @@ public abstract class CryptoSymm {
 	 * Private methods
 	 */
 	private static AlgorithmParameterSpec prepareIv() {
+		Logger.getInstance().writeMethodEntry(CryptoSymm.class, "prepareIv");  //$NON-NLS-1$
+
 		final int elements = 16;
 		
         final byte[] ivBytes = new byte[elements];
@@ -121,6 +140,9 @@ public abstract class CryptoSymm {
         	ivBytes[ii] = (byte) 0x5a;
         }
         
-        return new IvParameterSpec(ivBytes);
+        AlgorithmParameterSpec algo = new IvParameterSpec(ivBytes);
+        
+		Logger.getInstance().writeMethodExit(CryptoSymm.class, "prepareIv", algo);  //$NON-NLS-1$
+        return algo;
 	}
 }

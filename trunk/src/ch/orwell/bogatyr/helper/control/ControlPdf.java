@@ -32,8 +32,6 @@
 package ch.orwell.bogatyr.helper.control;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.text.MessageFormat;
 
 import ch.orwell.bogatyr.helper.HelperEnvInfo;
@@ -45,7 +43,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This control opens PDF data with an external program such as Acrobat Reader.
  *
  * @author Stefan Laubenberger
- * @version 20080724
+ * @version 20080809
  */
 public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
@@ -55,9 +53,6 @@ public abstract class ControlPdf {
 
 	private static final String FILE_NAME_PREFIX = "temp"; //$NON-NLS-1$
 	private static final String DIRECTORY_NAME   = "pdffiles"; //$NON-NLS-1$
-
-//	private static final OutputStream outputStream = null;
-//	private static final OutputStream errorStream = null;
 
 
 	/**
@@ -73,6 +68,8 @@ public abstract class ControlPdf {
 		final File temporaryFile = createFile();
 		HelperIO.writeFileAsBinary(temporaryFile, pdfFileContents, false);
 		open(temporaryFile);
+		
+		Logger.getInstance().writeMethodExit(ControlPdf.class, "open");  //$NON-NLS-1$
 	}
 
 	/**
@@ -84,6 +81,8 @@ public abstract class ControlPdf {
 		Logger.getInstance().writeMethodEntry(ControlPdf.class, "open", pdfFile);  //$NON-NLS-1$
 
 		execute(pdfFile.getCanonicalPath());
+		
+		Logger.getInstance().writeMethodExit(ControlPdf.class, "open");  //$NON-NLS-1$
 	}
 
 	/**
@@ -138,7 +137,6 @@ public abstract class ControlPdf {
 		} while (file.exists());
 		
 		Logger.getInstance().writeMethodExit(ControlPdf.class, "createFile", file);  //$NON-NLS-1$
-
 		return file;
 	}
 
@@ -156,7 +154,6 @@ public abstract class ControlPdf {
 		}
 		
 		Logger.getInstance().writeMethodExit(ControlPdf.class, "createDirectory", directory);  //$NON-NLS-1$
-
 		return directory;
 	}
 
@@ -177,10 +174,4 @@ public abstract class ControlPdf {
 		
 		Logger.getInstance().writeMethodExit(ControlPdf.class, "execute");  //$NON-NLS-1$
 	}
-//
-//	private static Process createSubprocess(final String command) throws IOException {
-//		final Process process = Runtime.getRuntime().exec(command);
-//		ControlProcess.readStandardOutput(process, outputStream, errorStream);
-//		return process;
-//	}
 }
