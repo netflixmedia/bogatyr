@@ -32,6 +32,9 @@
 package ch.orwell.bogatyr.view.swing;
 
 import javax.swing.AbstractButton;
+
+import ch.orwell.bogatyr.helper.logger.Logger;
+
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -42,7 +45,7 @@ import java.awt.event.ActionListener;
  * This is a button row
  * 
  * @author Stefan Laubenberger
- * @version 20080515
+ * @version 20080810
  */
 public class ButtonRow extends Panel {
 	private static final long serialVersionUID = -3557759501854611930L;
@@ -59,12 +62,16 @@ public class ButtonRow extends Panel {
 	}
 
 	public void addActionListener(final ActionListener listener) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "addActionListener", listener);  //$NON-NLS-1$
+
 		final Component[] components = getComponents();
 		for (final Component component : components) {
 	    	if (component instanceof Button) {
 	    		((AbstractButton) component).addActionListener(listener);
 			}
 	    }
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "addActionListener");  //$NON-NLS-1$
 	}
   
 	
@@ -72,14 +79,20 @@ public class ButtonRow extends Panel {
 	 * Private methods
 	 */
 	private void createLayout(final Button[] data, final boolean isVertical) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "createLayout", new Object[]{data, isVertical});  //$NON-NLS-1$
+
 		if (isVertical) {
 			createLayoutVertical(data);
 		} else {
 			createLayoutHorizontal(data);
 		}
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "createLayout");  //$NON-NLS-1$
 	}
 	
 	private void createLayoutVertical(final Button[] data) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "createLayoutVertical", data);  //$NON-NLS-1$
+
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
@@ -92,9 +105,13 @@ public class ButtonRow extends Panel {
 		    	add(button, gbc);
 		    }
 	    }
+	    
+		Logger.getInstance().writeMethodExit(this.getClass(), "createLayoutVertical");  //$NON-NLS-1$
 	}
 	
 	private void createLayoutHorizontal(final Button[] data) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "createLayoutHorizontal", data);  //$NON-NLS-1$
+
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
@@ -107,5 +124,7 @@ public class ButtonRow extends Panel {
 		    	add(button, gbc);
 		    }
 	    }
+	    
+		Logger.getInstance().writeMethodExit(this.getClass(), "createLayoutHorizontal");  //$NON-NLS-1$
 	}
 }

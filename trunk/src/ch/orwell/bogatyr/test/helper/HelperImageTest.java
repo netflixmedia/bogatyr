@@ -60,6 +60,6 @@ public class HelperImageTest extends TestCase { //TODO improve
 			component.setSize(new Dimension(100, 100));
 			
 			HelperImage.createImage(component, HelperImage.TYPE_JPG, new File(HelperEnvInfo.getOsTempDirectory(), "test.jpg"));
-		} catch (Exception ex) {fail(ex.getMessage());}
+		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
 	}
 }

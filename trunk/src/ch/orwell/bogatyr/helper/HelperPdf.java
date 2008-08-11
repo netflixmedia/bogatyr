@@ -42,6 +42,8 @@ import java.io.OutputStream;
 
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import ch.orwell.bogatyr.helper.logger.Logger;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Rectangle;
@@ -54,7 +56,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * This is a helper class for PDF operations
  * 
  * @author Stefan Laubenberger
- * @version 20080725
+ * @version 20080810
  */
 public abstract class HelperPdf {
 
@@ -67,8 +69,9 @@ public abstract class HelperPdf {
      * @throws java.io.FileNotFoundException
      */
     public static void createPdfFromComponent(final Component component, final File output) throws FileNotFoundException, DocumentException {
-		final Dimension size = component.getSize();
-		
+		Logger.getInstance().writeMethodEntry(HelperPdf.class, "createPdfFromComponent", new Object[]{component, output});  //$NON-NLS-1$
+
+    	final Dimension size = component.getSize();
 		final Document document = new Document(new Rectangle((float) size.width, (float) size.height));
 	   
 		try {
@@ -85,6 +88,8 @@ public abstract class HelperPdf {
 			} finally {
 				document.close();
 		}
+
+		Logger.getInstance().writeMethodExit(HelperPdf.class, "createPdfFromComponent");  //$NON-NLS-1$
 	}
 
     /**
@@ -96,6 +101,8 @@ public abstract class HelperPdf {
      * @throws java.io.IOException
      */
 	public static void createPdfFromHTML(File[] input, File output) throws IOException, DocumentException {
+		Logger.getInstance().writeMethodEntry(HelperPdf.class, "createPdfFromHTML", new Object[]{input, output});  //$NON-NLS-1$
+
 		OutputStream os = null;
 
 		try {
@@ -122,6 +129,8 @@ public abstract class HelperPdf {
 	    	   os.close();
 		   }
 		}
+		
+		Logger.getInstance().writeMethodExit(HelperPdf.class, "createPdfFromHTML");  //$NON-NLS-1$
 	}
 
 //	public static void createPdf(Component component, int width, int height, File file) throws FileNotFoundException, DocumentException {

@@ -35,7 +35,6 @@ import junit.extensions.RepeatedTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
-import ch.orwell.bogatyr.helper.crypto.PublicKeyProvider;
 import ch.orwell.bogatyr.test.helper.HelperEnvInfoTest;
 import ch.orwell.bogatyr.test.helper.HelperFileTest;
 import ch.orwell.bogatyr.test.helper.HelperGeneralTest;

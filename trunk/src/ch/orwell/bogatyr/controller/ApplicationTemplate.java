@@ -180,7 +180,8 @@ public abstract class ApplicationTemplate implements Runnable {
 		readProperties();
 
 		Application.setInstance(this);
-		
+
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 		Logger.getInstance().writeLog(this.getClass(), "init", "##  " + Localizer.getInstance().getValue(RES_LOG_START) + ' ' + Context.getInstance().getApplicationName() + ' ' + Context.getInstance().getApplicationVersion() + " (" + Context.getInstance().getApplicationBuild() + ")  ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		Logger.getInstance().writeLog(this.getClass(), "init", Localizer.getInstance().getValue(RES_LOG_OS) + ' ' + HelperEnvInfo.getOsName() + " - " + Localizer.getInstance().getValue(RES_LOG_VERSION) + ' ' + HelperEnvInfo.getOsVersion()+ " - " + Localizer.getInstance().getValue(RES_LOG_ARCHITECTURE) + ' ' + HelperEnvInfo.getOsArch()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
@@ -188,7 +189,7 @@ public abstract class ApplicationTemplate implements Runnable {
 	private void readProperties() {
 		File workdirectory;
 		
-        boolean isDebug = Property.getInstance().getPropertyBoolean(PROPERTY_APPLICATION_DEBUG);
+		final boolean isDebug = Property.getInstance().getPropertyBoolean(PROPERTY_APPLICATION_DEBUG);
 		Context.getInstance().addData(Context.KEY_APPLICATION_DEBUG, Boolean.valueOf(isDebug));
 		
 		String value = Property.getInstance().getProperty(PROPERTY_APPLICATION_NAME);

@@ -45,7 +45,6 @@ import ch.orwell.bogatyr.helper.HelperGeneral;
 import ch.orwell.bogatyr.helper.crypto.CryptoAsymm;
 import ch.orwell.bogatyr.helper.crypto.CryptoSymm;
 import ch.orwell.bogatyr.helper.exception.ExceptionInvalidStreamSize;
-import ch.orwell.bogatyr.helper.localizer.Localizer;
 import ch.orwell.bogatyr.helper.logger.Logger;
 import ch.orwell.bogatyr.helper.property.Property;
 
@@ -54,7 +53,7 @@ import ch.orwell.bogatyr.helper.property.Property;
  * This is a server thread
  * 
  * @author Stefan Laubenberger
- * @version 20080808
+ * @version 20080810
  */
 public abstract class ThreadServerTemplate implements Runnable, ICom {
 	private final long startTime = System.currentTimeMillis();
@@ -136,7 +135,6 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
 		Logger.getInstance().writeMethodEntry(this.getClass(), "readStream"); //$NON-NLS-1$
 
         final ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-
         final Object obj = ois.readObject();
         final ComContainer input = (ComContainer)obj;
         byte[] data = input.getData();
@@ -182,10 +180,10 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
 
 		if (size == 0 || data.length < size) {
 
-//    		try {
             final ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-            byte[] temp;
+//    		try {
+            	final byte[] temp;
 				final Key cryptoKey = server.getKey(key);
 				
 				if (cryptoKey instanceof PublicKey) {
@@ -233,7 +231,7 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
     
 	private void init() {
 		readProperties();
-		Logger.getInstance().writeDebug(this.getClass(), "init", Localizer.getInstance().getValue(Localizer.RES_INSTANCIATED)); //$NON-NLS-1$
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 	
 	private void readProperties() { //TODO improve! @see Application

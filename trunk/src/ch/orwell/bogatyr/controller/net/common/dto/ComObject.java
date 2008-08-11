@@ -34,7 +34,6 @@ package ch.orwell.bogatyr.controller.net.common.dto;
 import java.io.Serializable;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
-import ch.orwell.bogatyr.helper.localizer.Localizer;
 import ch.orwell.bogatyr.helper.logger.Logger;
 
 
@@ -125,7 +124,7 @@ public final class ComObject implements Serializable {
 	 * Private methods
 	 */
 	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", Localizer.getInstance().getValue(Localizer.RES_INSTANCIATED) + toString()); //$NON-NLS-1$
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 
 	

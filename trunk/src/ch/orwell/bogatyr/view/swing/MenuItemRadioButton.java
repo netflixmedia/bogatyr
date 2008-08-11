@@ -37,13 +37,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JRadioButtonMenuItem;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JRadioButtonMenuItem
  * 
  * @author Stefan Laubenberger
- * @version 20080613
+ * @version 20080810
  */
 public class MenuItemRadioButton extends JRadioButtonMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
@@ -51,6 +52,7 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 	
 	public MenuItemRadioButton() {
 		super();
+		init();
     }
 	
 	public MenuItemRadioButton(final String text, final ImageIcon image, final int mnemonic, final String toolTip, final boolean isSelected) {
@@ -72,6 +74,8 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 		}
 		
 		setSelected(isSelected);
+		
+		init();
     }
 
 	public MenuItemRadioButton(final String text, final ImageIcon image, final int mnemonic, final String toolTip, final boolean isSelected, final ActionListener listener) {
@@ -79,6 +83,14 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 		addActionListener(listener);
     }
 	
+	
+	/*
+	 * Private methods
+	 */
+	private void init() {
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
+	}
+
 	
 	/*
 	 * Overridden methods

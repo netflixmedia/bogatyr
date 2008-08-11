@@ -59,7 +59,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20080809
+ * @version 20080810
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and when, is logging needed?
 	private static final String CHECKSUM_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
@@ -113,7 +113,8 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 		if (isValidString(arg)) {
 			final Pattern p = Pattern.compile("[0-9.]+"); //$NON-NLS-1$
 			final Matcher m = p.matcher(arg);
-	        if (m.matches()) {
+
+			if (m.matches()) {
                 return true;
             }
 		}
@@ -239,7 +240,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getObjectFromBytes", bytes);  //$NON-NLS-1$
 
 		ObjectInputStream ois = null;
-		Object obj = null;
+		final Object obj;
 		
         try {
             ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
@@ -291,8 +292,8 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     public static List<?> removeDuplicates(final List<?> list) {
 		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "removeDuplicates", list);  //$NON-NLS-1$
 
-    	Set<?> set = new HashSet<Object>(list);
-    	List<?> result = new ArrayList<Object>(set);
+		final Set<?> set = new HashSet<Object>(list);
+		final List<?> result = new ArrayList<Object>(set);
     	
 		Logger.getInstance().writeMethodExit(HelperGeneral.class, "removeDuplicates", result);  //$NON-NLS-1$
         return result;
@@ -307,10 +308,9 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     public static Object[] removeDuplicates(final Object[] array) {
 		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "removeDuplicates", array);  //$NON-NLS-1$
 
-    	List<?> list = removeDuplicates(Arrays.asList(array));
-
-        Object[] temp = new Object[list.size()];
-        Object[] result = list.toArray(temp);
+		final List<?> list = removeDuplicates(Arrays.asList(array));
+		final Object[] temp = new Object[list.size()];
+		final Object[] result = list.toArray(temp);
         
 		Logger.getInstance().writeMethodExit(HelperGeneral.class, "removeDuplicates", result);  //$NON-NLS-1$
         return result;
@@ -329,10 +329,11 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getChecksum", new Object[]{algo, data});  //$NON-NLS-1$
 
     	final MessageDigest algorithm = MessageDigest.getInstance(algo);
-
 		final byte[] input = data.getBytes();
+
 		algorithm.reset();
 		algorithm.update(input);
+		
 		final byte[] messageDigest = algorithm.digest();
         final StringBuilder hexString = new StringBuilder();
 
@@ -344,7 +345,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 			hexString.append(hex);
 		}
 		
-		String str = hexString.toString();
+		final String str = hexString.toString();
 		
 		Logger.getInstance().writeMethodExit(HelperGeneral.class, "getChecksum", str);  //$NON-NLS-1$
 		return str;
@@ -361,7 +362,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     public static String getChecksum(final String data) throws NoSuchAlgorithmException {
 		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getChecksum", data);  //$NON-NLS-1$
 
-    	String str = getChecksum(CHECKSUM_ALGORITHM_SHA256, data);
+		final String str = getChecksum(CHECKSUM_ALGORITHM_SHA256, data);
 		
 		Logger.getInstance().writeMethodExit(HelperGeneral.class, "getChecksum", str);  //$NON-NLS-1$
 		return str;
@@ -378,12 +379,13 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     public static String getRandomKey(final int digits, final char[] seed) {
 		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getRandomKey", new Object[]{digits, seed});  //$NON-NLS-1$
 
-    	StringBuilder sb = new StringBuilder();
+		final StringBuilder sb = new StringBuilder();
 
         for (int ii = 0; ii < digits; ii++) {
             sb.append(seed[HelperMath.random(seed.length)]);
         }
-    	String str = sb.toString();
+        
+        final String str = sb.toString();
 		
 		Logger.getInstance().writeMethodExit(HelperGeneral.class, "getRandomKey", str);  //$NON-NLS-1$
 		return str;
@@ -399,7 +401,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     public static String getRandomKey(final int digits) {
 		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getRandomKey", digits);  //$NON-NLS-1$
 
-    	String str = getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
+		final String str = getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
 		
 		Logger.getInstance().writeMethodExit(HelperGeneral.class, "getRandomKey", str);  //$NON-NLS-1$
 		return str;
@@ -421,7 +423,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
             chars[--length] = fillChar;
         }
     	
-    	String str = new String(chars);
+    	final String str = new String(chars);
 		
 		Logger.getInstance().writeMethodExit(HelperGeneral.class, "fillString", str);  //$NON-NLS-1$
 		return str;
@@ -435,7 +437,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     public static String reverseString(final String input) {
 		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "reverseString", input);  //$NON-NLS-1$
 
-    	String str = new StringBuffer(input).reverse().toString();
+		final String str = new StringBuffer(input).reverse().toString();
 		
 		Logger.getInstance().writeMethodExit(HelperGeneral.class, "reverseString", str);  //$NON-NLS-1$
 		return str;
@@ -455,7 +457,8 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
             sb.append(value);
             sb.append('\n');
         }
-    	String str = sb.toString();
+        
+        final String str = sb.toString();
 		
 		Logger.getInstance().writeMethodExit(HelperGeneral.class, "dump", str);  //$NON-NLS-1$
 		return str;
@@ -477,7 +480,8 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
             sb.append(pair.getValue());
             sb.append('\n');
         }
-    	String str = sb.toString();
+        
+        final String str = sb.toString();
 		
 		Logger.getInstance().writeMethodExit(HelperGeneral.class, "dump", str);  //$NON-NLS-1$
 		return str;
@@ -497,21 +501,22 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
             sb.append(value);
             sb.append('\n');
         }
-	   	String str = sb.toString();
+		
+		final String str = sb.toString();
 		
 		Logger.getInstance().writeMethodExit(HelperGeneral.class, "dump", str);  //$NON-NLS-1$
 		return str;
     }
 
     public static String toString(final Object object) {
-		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "toString", object);  //$NON-NLS-1$
+//		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "toString", object);  //$NON-NLS-1$
 
     	final List<String> list = new ArrayList<String>();
     	toString(object, object.getClass(), list);
 
-    	String str = object.getClass().getName() + list.toString();
+    	final String str = object.getClass().getName() + list.toString();
 		
-		Logger.getInstance().writeMethodExit(HelperGeneral.class, "toString", str);  //$NON-NLS-1$
+//		Logger.getInstance().writeMethodExit(HelperGeneral.class, "toString", str);  //$NON-NLS-1$
 		return str;
     }
 
@@ -552,7 +557,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     	}
     	
 //    	if (clazz.getSuperclass().getSuperclass() != null) {
-//    	if (clazz.getSuperclass() != null) {    		
+////    	if (clazz.getSuperclass() != null) {    		
 //    		toString(object, clazz.getSuperclass(), list);
 //    	}
     }

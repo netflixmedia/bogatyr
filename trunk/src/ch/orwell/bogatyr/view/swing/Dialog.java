@@ -36,13 +36,14 @@ import java.awt.Frame;
 import javax.swing.JDialog;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JDialog
  * 
  * @author Stefan Laubenberger
- * @version 20080608
+ * @version 20080810
  */
 public class Dialog extends JDialog {
 	private static final long serialVersionUID = -3903296901431213544L;
@@ -66,6 +67,7 @@ public class Dialog extends JDialog {
 	 */
 	private void init() {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 	
 	

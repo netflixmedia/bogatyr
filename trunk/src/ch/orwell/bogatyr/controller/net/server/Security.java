@@ -139,7 +139,7 @@ public abstract class Security {
 	public static boolean isUserLoggedOn(final ServerTemplate server, final ComObject comObject) {
 		Logger.getInstance().writeMethodEntry(Security.class, "isUserLoggedOn", new Object[]{server, comObject}); //$NON-NLS-1$
 
-		boolean isLoggedOn = server.getUser(comObject.getUserKey()) != null;
+		final boolean isLoggedOn = server.getUser(comObject.getUserKey()) != null;
 
 		Logger.getInstance().writeMethodExit(Security.class, "isUserLoggedOn", isLoggedOn); //$NON-NLS-1$
         return isLoggedOn;

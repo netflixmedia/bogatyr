@@ -50,7 +50,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 20080809
+ * @version 20080810
  */
 public abstract class HelperGraphic {
 	
@@ -76,7 +76,7 @@ public abstract class HelperGraphic {
     public static Dimension getCenter(Dimension size) {
 		Logger.getInstance().writeMethodEntry(HelperGraphic.class, "getCenter", size);  //$NON-NLS-1$
 
-		Dimension dim = new Dimension(size.width / 2, size.height / 2);
+		final Dimension dim = new Dimension(size.width / 2, size.height / 2);
 		
 		Logger.getInstance().writeMethodExit(HelperGraphic.class, "getCenter", dim);  //$NON-NLS-1$
 		return dim;
@@ -92,10 +92,9 @@ public abstract class HelperGraphic {
 	public static Dimension getTextSize(String text, Graphics g) {
 		Logger.getInstance().writeMethodEntry(HelperGraphic.class, "getTextSize", new Object[]{text, g});  //$NON-NLS-1$
 
-		FontMetrics fm = g.getFontMetrics(g.getFont());
-		Rectangle2D rect = fm.getStringBounds(text, g);
-
-		Dimension dim = new Dimension((int)rect.getWidth(), (int)rect.getHeight()); 
+		final FontMetrics fm = g.getFontMetrics(g.getFont());
+		final Rectangle2D rect = fm.getStringBounds(text, g);
+		final Dimension dim = new Dimension((int)rect.getWidth(), (int)rect.getHeight()); 
 		
 		Logger.getInstance().writeMethodExit(HelperGraphic.class, "getTextSize", dim);  //$NON-NLS-1$
 		return dim;
@@ -116,9 +115,8 @@ public abstract class HelperGraphic {
 		Logger.getInstance().writeMethodEntry(HelperGraphic.class, "getFonts");  //$NON-NLS-1$
 
 		// Get all available fonts from GraphicsEnvironment
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		
-		List<Font> result = Arrays.asList(ge.getAllFonts());
+		final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		final List<Font> result = Arrays.asList(ge.getAllFonts());
 		
 		Logger.getInstance().writeMethodExit(HelperGraphic.class, "getFonts", result);  //$NON-NLS-1$
 		return result;

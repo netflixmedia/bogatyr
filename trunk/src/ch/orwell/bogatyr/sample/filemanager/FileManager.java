@@ -93,10 +93,10 @@ public class FileManager extends ApplicationTemplate {
 			if (isDelete) {
 				HelperIO.delete(file);
 			}
-			Logger.getInstance().writeDebug(this.getClass(), "searchFiles", file.getAbsolutePath());
+			Logger.getInstance().writeDebug(this.getClass(), "searchFiles", file.getAbsolutePath()); //$NON-NLS-1$
 			ii++;
 		}
-		Logger.getInstance().writeLog(this.getClass(), "searchFiles", ii + " file(s) " + (isDelete ? "deleted" : "found"));
+		Logger.getInstance().writeLog(this.getClass(), "searchFiles", ii + " file(s) " + (isDelete ? "deleted" : "found")); //$NON-NLS-1$
 	}
 	
 	

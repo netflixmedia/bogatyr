@@ -38,7 +38,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * Encodes data to Hex and decodes it.
  * 
  * @author Stefan Laubenberger
- * @version 20080809
+ * @version 20080810
  */
 public abstract class ConverterHex {
     private static final String	DIGITS = "0123456789abcdef"; //$NON-NLS-1$
@@ -53,7 +53,7 @@ public abstract class ConverterHex {
     public static String encode(byte[] data){
 		Logger.getInstance().writeMethodEntry(ConverterHex.class, "encode", data);  //$NON-NLS-1$
 
-		StringBuffer buf = new StringBuffer();
+		final StringBuffer buf = new StringBuffer();
 
         for (int ii = 0; ii != data.length; ii++) {
 
@@ -63,7 +63,7 @@ public abstract class ConverterHex {
             buf.append(DIGITS.charAt(v & 0xf));
         }
         
-        String str = buf.toString();
+        final String str = buf.toString();
         
 		Logger.getInstance().writeMethodExit(ConverterHex.class, "encode", str);  //$NON-NLS-1$
         return str;
@@ -78,7 +78,7 @@ public abstract class ConverterHex {
     public static byte[] decode(String data) {
 		Logger.getInstance().writeMethodEntry(ConverterHex.class, "decode", data);  //$NON-NLS-1$
 
-    	byte[] bts = new byte[data.length() / 2];
+		final byte[] bts = new byte[data.length() / 2];
 
     	for (int ii = 0; ii < bts.length; ii++) {
     		bts[ii] = (byte) Integer.parseInt(data.substring(2 * ii, 2 * ii + 2), 16);

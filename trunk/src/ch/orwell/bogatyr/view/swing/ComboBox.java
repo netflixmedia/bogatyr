@@ -34,13 +34,14 @@ package ch.orwell.bogatyr.view.swing;
 import javax.swing.JComboBox;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JComboBox
  * 
  * @author Stefan Laubenberger
- * @version 20080526
+ * @version 20080810
  */
 public class ComboBox extends JComboBox {
 	private static final long serialVersionUID = -3870596701286078140L;
@@ -48,11 +49,21 @@ public class ComboBox extends JComboBox {
 	
 	public ComboBox() {
 		super();
+		init();
 	}
 	
 	public ComboBox(final Object[] data, final String toolTip) {
 		super(data);
 		setToolTipText(toolTip);
+		
+		init();
+	}
+
+	/*
+	 * Private methods
+	 */
+	private void init() {
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 	
 	

@@ -39,13 +39,14 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JPanel
  * 
  * @author Stefan Laubenberger
- * @version 20080603
+ * @version 20080810
  */
 public class Panel extends JPanel {
 	private static final long serialVersionUID = 3679443739459084931L;
@@ -57,11 +58,6 @@ public class Panel extends JPanel {
 		super();
 		init();
 	}
-
-//	public Panel(LayoutManager layout) {
-//		this();
-//		setLayout(layout);
-//	}
 
 	public Panel(final String title) {
 		this();
@@ -79,8 +75,12 @@ public class Panel extends JPanel {
      * @param title Title of the Panel
      */	
 	public void setTitle(final String title){
+		Logger.getInstance().writeMethodEntry(this.getClass(), "setTitle", title);  //$NON-NLS-1$
+
 		this.title = title;
 		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), title));
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "setTitle");  //$NON-NLS-1$
 	}
 
 	/**
@@ -88,6 +88,9 @@ public class Panel extends JPanel {
      * @return String title of the Panel
      */	
 	public String getTitle(){
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getTitle");  //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getTitle", title);  //$NON-NLS-1$
+
 		return title;
 	}
 	
@@ -97,6 +100,7 @@ public class Panel extends JPanel {
 	 */
 	private void init() {
 		setLayout(new GridBagLayout());
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 	
 	

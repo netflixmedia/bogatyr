@@ -38,13 +38,14 @@ import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JTextField
  * 
  * @author Stefan Laubenberger
- * @version 20080613
+ * @version 20080810
  */
 public class TextField extends JTextField {
 	private static final long serialVersionUID = 866371447844640358L;
@@ -52,12 +53,23 @@ public class TextField extends JTextField {
 	
 	public TextField() {
         super();
+        init();
     }
 
 	public TextField(final String text, final int columns, final String toolTip) {
         super(text, columns);
         setToolTipText(toolTip);
+        
+        init();
     }
+	
+	
+	/*
+	 * Private methods
+	 */
+	private void init() {
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
+	}
 	
 	
 	/*

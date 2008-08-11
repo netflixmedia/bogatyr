@@ -34,6 +34,7 @@ package ch.orwell.bogatyr.view.swing;
 import javax.swing.JTextArea;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
@@ -69,6 +70,7 @@ public class TextArea extends JTextArea {
 	private void init() {
 		setLineWrap(true);
 		setWrapStyleWord(true);
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 	
 	

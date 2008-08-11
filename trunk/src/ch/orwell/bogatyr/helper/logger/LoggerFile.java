@@ -158,7 +158,7 @@ public class LoggerFile implements ILogger {
                 	}
                 }
             }
-			write(clazz, method, logEntry != null ? logEntry : "" + '\n' + sw.toString(), new File(logFileName + "_Exception.log")); //$NON-NLS-1$
+			write(clazz, method, logEntry != null ? logEntry : "" + '\n' + sw.toString(), new File(logFileName + "_Exception.log")); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (IOException e) {
 			System.err.println(getClass().getName() + "::writeException - " + Localizer.getInstance().getValue(RES_WRITE_FAILED)); //$NON-NLS-1$
 			e.printStackTrace();
@@ -186,7 +186,7 @@ public class LoggerFile implements ILogger {
 	public void writeMethodEntry(Class<?> clazz, String method, Object[] methodInput) {
 		if (isDebug) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("ENTRY:");
+			sb.append("ENTRY:"); //$NON-NLS-1$
 			
 			for (Object obj : methodInput) {
 				sb.append(obj);
@@ -198,25 +198,25 @@ public class LoggerFile implements ILogger {
 
 	public void writeMethodEntry(Class<?> clazz, String method, Object methodInput) {
 		if (isDebug) {
-			writeDebug(clazz, method, "ENTRY:" + methodInput);
+			writeDebug(clazz, method, "ENTRY:" + methodInput); //$NON-NLS-1$
 		}		
 	}
 
 	public void writeMethodEntry(Class<?> clazz, String method) {
 		if (isDebug) {
-			writeDebug(clazz, method, "ENTRY");
+			writeDebug(clazz, method, "ENTRY"); //$NON-NLS-1$
 		}		
 	}
 
 	public void writeMethodExit(Class<?> clazz, String method, Object methodOutput) {
 		if (isDebug) {
-			writeDebug(clazz, method, "EXIT:" + methodOutput);
+			writeDebug(clazz, method, "EXIT:" + methodOutput); //$NON-NLS-1$
 		}		
 	}
 
 	public void writeMethodExit(Class<?> clazz, String method) {
 		if (isDebug) {
-			writeDebug(clazz, method, "EXIT");
+			writeDebug(clazz, method, "EXIT"); //$NON-NLS-1$
 		}		
 	}
 }

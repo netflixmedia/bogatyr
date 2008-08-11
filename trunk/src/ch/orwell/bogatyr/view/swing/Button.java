@@ -37,13 +37,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JButton
  * 
  * @author Stefan Laubenberger
- * @version 20080606
+ * @version 20080810
  */
 public class Button extends JButton {
 	private static final long serialVersionUID = -7231487009931166084L;
@@ -56,8 +57,9 @@ public class Button extends JButton {
 
 	public Button(final String title, final String toolTip) {
 		super(title);
-		init();
 		setToolTipText(toolTip);
+		
+		init();
 	}
 	
 	public Button(final String title, final String toolTip, final ActionListener listener) {
@@ -67,9 +69,10 @@ public class Button extends JButton {
 	
 	public Button(final String title, final ImageIcon icon, final String toolTip, final ActionListener listener) {
 		super(title, icon);
-		init();
 		setToolTipText(toolTip);
 		addActionListener(listener);
+		
+		init();
 	}	
 	
 
@@ -79,6 +82,7 @@ public class Button extends JButton {
 	private void init() {
 		setContentAreaFilled(false);
 		setOpaque(true);
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 	
 	

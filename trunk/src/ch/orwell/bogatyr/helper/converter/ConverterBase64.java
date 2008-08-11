@@ -39,7 +39,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * Encodes data to Base64 and decodes it.
  * 
  * @author Stefan Laubenberger
- * @version 20080809
+ * @version 20080810
  */
 public abstract class ConverterBase64 {
 	// Resources
@@ -85,7 +85,7 @@ public abstract class ConverterBase64 {
 	public static String encodeString(final String string) {
 		Logger.getInstance().writeMethodEntry(ConverterBase64.class, "encodeString", string);  //$NON-NLS-1$
 
-		String str = new String(encode(string.getBytes()));
+		final String str = new String(encode(string.getBytes()));
 		
 		Logger.getInstance().writeMethodExit(ConverterBase64.class, "encodeString", str);  //$NON-NLS-1$
 		return str;
@@ -101,7 +101,7 @@ public abstract class ConverterBase64 {
 	public static char[] encode(final byte[] in) {
 		Logger.getInstance().writeMethodEntry(ConverterBase64.class, "encode", in);  //$NON-NLS-1$
 
-		char[] result = encode(in, in.length);
+		final char[] result = encode(in, in.length);
 		
 		Logger.getInstance().writeMethodExit(ConverterBase64.class, "encode", result);  //$NON-NLS-1$
 		return result;
@@ -117,7 +117,7 @@ public abstract class ConverterBase64 {
 	public static String decodeString(final String string) {
 		Logger.getInstance().writeMethodEntry(ConverterBase64.class, "decodeString", string);  //$NON-NLS-1$
 
-		String str = new String(decode(string));
+		final String str = new String(decode(string));
 		
 		Logger.getInstance().writeMethodExit(ConverterBase64.class, "decodeString", str);  //$NON-NLS-1$
 		return str;
@@ -133,7 +133,7 @@ public abstract class ConverterBase64 {
 	public static byte[] decode(final String string) {
 		Logger.getInstance().writeMethodEntry(ConverterBase64.class, "decode", string);  //$NON-NLS-1$
 
-		byte[] result = decode(string.toCharArray());
+		final byte[] result = decode(string.toCharArray());
 		
 		Logger.getInstance().writeMethodExit(ConverterBase64.class, "decode", result);  //$NON-NLS-1$
 		return result;

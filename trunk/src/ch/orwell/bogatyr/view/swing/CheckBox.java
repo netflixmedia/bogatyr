@@ -34,13 +34,14 @@ package ch.orwell.bogatyr.view.swing;
 import javax.swing.JCheckBox;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JCheckBox
  * 
  * @author Stefan Laubenberger
- * @version 20080515
+ * @version 20080810
  */
 public class CheckBox extends JCheckBox {
 	private static final long serialVersionUID = -6439735629199643683L;
@@ -48,17 +49,30 @@ public class CheckBox extends JCheckBox {
 	
 	public CheckBox() {
 		super();
+		init();
 	}	
 	
 	public CheckBox(final String title, final boolean isSelected, final String toolTip) {
 		super(title, isSelected);
 		setToolTipText(toolTip);
+		
+		init();
 	}
 	
 	public CheckBox(final boolean isSelected, final String toolTip) {
 		super();
 		setSelected(isSelected);
 		setToolTipText(toolTip);
+		
+		init();
+	}
+
+	
+	/*
+	 * Private methods
+	 */
+	private void init() {
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 
 	
@@ -75,5 +89,5 @@ public class CheckBox extends JCheckBox {
 		if (text != null) {
             super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
         }
-}
+	}
 }

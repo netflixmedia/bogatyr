@@ -34,13 +34,14 @@ package ch.orwell.bogatyr.view.swing;
 import javax.swing.JMenuBar;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JMenuBar
  * 
  * @author Stefan Laubenberger
- * @version 20080613
+ * @version 20080810
  */
 public class MenuBar extends JMenuBar {
 	private static final long serialVersionUID = -5107664209576098148L;
@@ -48,8 +49,17 @@ public class MenuBar extends JMenuBar {
 
     public MenuBar() {
 		super();
+		init();
     }
-	
+    
+    
+	/*
+	 * Private methods
+	 */
+	private void init() {
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
+	}
+
 	
 	/*
 	 * Overridden methods

@@ -31,14 +31,13 @@
  *******************************************************************************/
 package ch.orwell.bogatyr.helper.logger;
 
-import java.text.SimpleDateFormat;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
 import ch.orwell.bogatyr.helper.context.Context;
-import ch.orwell.bogatyr.helper.localizer.Localizer;
 
 
 /**
@@ -115,7 +114,7 @@ public class LoggerNull implements ILogger {
 	public void writeMethodEntry(Class<?> clazz, String method, Object[] methodInput) {
 		if (isDebug) {
 			StringBuilder sb = new StringBuilder();
-			sb.append("ENTRY:");
+			sb.append("ENTRY:"); //$NON-NLS-1$
 			
 			for (Object obj : methodInput) {
 				sb.append(obj);
@@ -127,25 +126,25 @@ public class LoggerNull implements ILogger {
 	
 	public void writeMethodEntry(Class<?> clazz, String method, Object methodInput) {
 		if (isDebug) {
-			writeDebug(clazz, method, "ENTRY:" + methodInput);
+			writeDebug(clazz, method, "ENTRY:" + methodInput); //$NON-NLS-1$
 		}		
 	}
 
 	public void writeMethodEntry(Class<?> clazz, String method) {
 		if (isDebug) {
-			writeDebug(clazz, method, "ENTRY");
+			writeDebug(clazz, method, "ENTRY"); //$NON-NLS-1$
 		}		
 	}
 
 	public void writeMethodExit(Class<?> clazz, String method, Object methodOutput) {
 		if (isDebug) {
-			writeDebug(clazz, method, "EXIT:" + methodOutput);
+			writeDebug(clazz, method, "EXIT:" + methodOutput); //$NON-NLS-1$
 		}		
 	}
 	
 	public void writeMethodExit(Class<?> clazz, String method) {
 		if (isDebug) {
-			writeDebug(clazz, method, "EXIT");
+			writeDebug(clazz, method, "EXIT"); //$NON-NLS-1$
 		}		
 	}
 }

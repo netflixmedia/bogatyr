@@ -41,12 +41,14 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
 
+import ch.orwell.bogatyr.helper.logger.Logger;
+
 
 /**
  * Display a splash-screen
  * 
  * @author Stefan Laubenberger
- * @version 20080725
+ * @version 20080810
  */
 public class SplashScreen extends Frame {
 	private static final long serialVersionUID = 8819965047277292543L;
@@ -69,6 +71,8 @@ public class SplashScreen extends Frame {
      * @param displayTime Duration in ms
      */	
 	public void display(final long displayTime) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "display", displayTime);  //$NON-NLS-1$
+
 		setVisible(true);
 		final Timer timer = new Timer();
 		timer.schedule(new TimerTask(){
@@ -77,13 +81,19 @@ public class SplashScreen extends Frame {
 				dispose();
 			}
 		}, displayTime);
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "display");  //$NON-NLS-1$
 	}
 	
 	/**
      * Display the splash-screen
      */	
 	public void display() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "display");  //$NON-NLS-1$
+
 		setVisible(true);
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "display");  //$NON-NLS-1$
 	}  
 	
 
@@ -91,6 +101,7 @@ public class SplashScreen extends Frame {
 	 * Private methods
 	 */
 	private void createLayout() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "createLayout");  //$NON-NLS-1$
 
         if (image != null && image.getImageLoadStatus() == MediaTracker.COMPLETE) {
             int sizeX = image.getIconWidth();
@@ -110,5 +121,7 @@ public class SplashScreen extends Frame {
 			setAlwaysOnTop(true);
 			setLocationRelativeTo(null);
 		}
+
+        Logger.getInstance().writeMethodExit(this.getClass(), "createLayout");  //$NON-NLS-1$
 	}
 }

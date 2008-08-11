@@ -36,7 +36,6 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
-import ch.orwell.bogatyr.helper.localizer.Localizer;
 import ch.orwell.bogatyr.helper.logger.Logger;
 import ch.orwell.bogatyr.helper.property.Property;
 
@@ -47,7 +46,7 @@ import ch.orwell.bogatyr.helper.property.Property;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20080605
+ * @version 20080810
  */
 public abstract class ProviderSqlTemplate {	
 	private static final String PROPERTY_DRIVER   = "db.driver"; //$NON-NLS-1$
@@ -68,19 +67,33 @@ public abstract class ProviderSqlTemplate {
 	}
 	
 	public String getUser() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getUser");  //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getUser", user);  //$NON-NLS-1$
+
 		return user;
 	}
 
 	public String getPassword() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getPassword");  //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getPassword", password);  //$NON-NLS-1$
+
 		return password;
 	}
 
 	public void setUser(final String user) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "setUser", user);  //$NON-NLS-1$
+
 		this.user = user;
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "setUser");  //$NON-NLS-1$
 	}
 
 	public void setPassword(final String password) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "setPassword", password);  //$NON-NLS-1$
+
 		this.password = password;
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "setPassword");  //$NON-NLS-1$
 	}
 
 	/**
@@ -90,8 +103,13 @@ public abstract class ProviderSqlTemplate {
      * @throws Exception
 	 */
     protected Connection connectToDb() throws Exception {		
-    	Class.forName(driver).newInstance();
-        return DriverManager.getConnection(url, user, password);
+		Logger.getInstance().writeMethodEntry(this.getClass(), "connectToDb");  //$NON-NLS-1$
+
+		Class.forName(driver).newInstance();
+		final Connection con = DriverManager.getConnection(url, user, password);
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "connectToDb", con);  //$NON-NLS-1$
+        return con;
 	}
     
 	/**
@@ -102,16 +120,17 @@ public abstract class ProviderSqlTemplate {
      * @throws Exception
 	 */
     protected int executeUpdate(final String statement) throws Exception {
-
-        Logger.getInstance().writeDebug(this.getClass(), "executeUpdate", statement); //$NON-NLS-1$
+		Logger.getInstance().writeMethodEntry(this.getClass(), "executeUpdate", statement);  //$NON-NLS-1$
 
         Statement stmt = null;
         Connection con = null;
+        final int result;
+        
         try {
 	    	con = connectToDb();
 			stmt = con.createStatement();
 	
-			return stmt.executeUpdate(statement);
+			result = stmt.executeUpdate(statement);
 		} finally {
 			if (con != null) {
                 con.close();
@@ -120,6 +139,9 @@ public abstract class ProviderSqlTemplate {
                 stmt.close();
             }
 		}
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "executeUpdate", result);  //$NON-NLS-1$
+		return result;
     }
 	
     /**
@@ -130,16 +152,17 @@ public abstract class ProviderSqlTemplate {
      * @throws Exception
 	 */
     protected boolean execute(final String statement) throws Exception {
-
-        Logger.getInstance().writeDebug(this.getClass(), "execute", statement); //$NON-NLS-1$
+		Logger.getInstance().writeMethodEntry(this.getClass(), "execute", statement);  //$NON-NLS-1$
 
         Statement stmt = null;
         Connection con = null;
+        final boolean result;
+        
         try {
 	    	con = connectToDb();
 			stmt = con.createStatement();
 	
-			return stmt.execute(statement);
+			result = stmt.execute(statement);
 		} finally {
 			if (con != null) {
                 con.close();
@@ -148,6 +171,9 @@ public abstract class ProviderSqlTemplate {
                 stmt.close();
             }
 		}
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "execute", result);  //$NON-NLS-1$
+		return result;
     }   
    
     
@@ -156,7 +182,7 @@ public abstract class ProviderSqlTemplate {
 	 */
 	private void init() throws Exception {
 		readProperties();
-		Logger.getInstance().writeDebug(this.getClass(), "init", Localizer.getInstance().getValue(Localizer.RES_INSTANCIATED)); //$NON-NLS-1$
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 
 	private void readProperties() throws Exception {

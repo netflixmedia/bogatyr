@@ -68,7 +68,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * The PublicKeyProvider class
  *
  * @author Stefan Laubenberger
- * @version 20080809
+ * @version 2008080910
  */
 public abstract class PublicKeyProvider {
 	/**
@@ -83,10 +83,8 @@ public abstract class PublicKeyProvider {
     public static X509Certificate getCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException {
 		Logger.getInstance().writeMethodEntry(PublicKeyProvider.class, "getCertificate", file);  //$NON-NLS-1$
 
-    	// open the file stream
         final FileInputStream fis = new FileInputStream(file);
-
-        X509Certificate cert = getCertificate(new BufferedInputStream(fis));
+        final X509Certificate cert = getCertificate(new BufferedInputStream(fis));
         	
 		Logger.getInstance().writeMethodExit(PublicKeyProvider.class, "getCertificate", cert);  //$NON-NLS-1$
         return cert;
@@ -104,10 +102,9 @@ public abstract class PublicKeyProvider {
     public static X509Certificate getCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {    
 		Logger.getInstance().writeMethodEntry(PublicKeyProvider.class, "getCertificate", is);  //$NON-NLS-1$
 
-		X509Certificate cert = null;
+		final X509Certificate cert;
 		
     	try {
-
             // Generate the certificate factory
             final CertificateFactory cf = CertificateFactory.getInstance("X.509", "BC"); //$NON-NLS-1$ //$NON-NLS-2$
 
@@ -173,7 +170,7 @@ public abstract class PublicKeyProvider {
 		Logger.getInstance().writeMethodEntry(PublicKeyProvider.class, "generateCertificate", new Object[]{pair, issuerDN, subjectDN, generalName, start, end});  //$NON-NLS-1$
 
 	    // generate the certificate
-	    X509V3CertificateGenerator  certGen = new X509V3CertificateGenerator();
+		final X509V3CertificateGenerator certGen = new X509V3CertificateGenerator();
 	
 	    certGen.setSerialNumber(BigInteger.valueOf(System.currentTimeMillis()));
 	    certGen.setIssuerDN(new X500Principal(issuerDN));
@@ -181,17 +178,14 @@ public abstract class PublicKeyProvider {
 	    certGen.setNotAfter(end);
 	    certGen.setSubjectDN(new X500Principal(subjectDN));
 	    certGen.setPublicKey(pair.getPublic());
-	    certGen.setSignatureAlgorithm("SHA256WithRSAEncryption");
+	    certGen.setSignatureAlgorithm("SHA256WithRSAEncryption"); //$NON-NLS-1$
 	
 	    certGen.addExtension(X509Extensions.BasicConstraints, true, new BasicConstraints(false));
-	
 	    certGen.addExtension(X509Extensions.KeyUsage, true, new KeyUsage(KeyUsage.digitalSignature | KeyUsage.keyEncipherment));
-	
 	    certGen.addExtension(X509Extensions.ExtendedKeyUsage, true, new ExtendedKeyUsage(KeyPurposeId.id_kp_serverAuth));
-	
 	    certGen.addExtension(X509Extensions.SubjectAlternativeName, false, new GeneralNames(new GeneralName(GeneralName.rfc822Name, generalName)));
 	
-	    X509Certificate cert = certGen.generateX509Certificate(pair.getPrivate(), "BC");
+	    final X509Certificate cert = certGen.generateX509Certificate(pair.getPrivate(), "BC");  //$NON-NLS-1$
 	    
 		Logger.getInstance().writeMethodExit(PublicKeyProvider.class, "generateCertificate", cert);  //$NON-NLS-1$
 	    return cert;

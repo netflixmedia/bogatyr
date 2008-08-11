@@ -50,7 +50,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This is a class for symmetric cryptology via AES
  * 
  * @author Stefan Laubenberger
- * @version 20080809
+ * @version 20080810
  */
 public abstract class CryptoSymm {
 	public static final String ALGORITHM = "AES"; //$NON-NLS-1$
@@ -77,7 +77,7 @@ public abstract class CryptoSymm {
 		final KeyGenerator kg = KeyGenerator.getInstance(ALGORITHM, "BC"); //$NON-NLS-1$
 		kg.init(keysize);
 		
-		SecretKey sk = kg.generateKey();
+		final SecretKey sk = kg.generateKey();
 		
 		Logger.getInstance().writeMethodExit(CryptoSymm.class, "generateKey", sk);  //$NON-NLS-1$
 		return sk;
@@ -98,7 +98,7 @@ public abstract class CryptoSymm {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
 
-		byte[] result = cipher.doFinal(input);
+		final byte[] result = cipher.doFinal(input);
 		
 		Logger.getInstance().writeMethodExit(CryptoSymm.class, "encrypt", result);  //$NON-NLS-1$
 		return result;
@@ -119,7 +119,7 @@ public abstract class CryptoSymm {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
 
-		byte[] result = cipher.doFinal(input);
+		final byte[] result = cipher.doFinal(input);
 		
 		Logger.getInstance().writeMethodExit(CryptoSymm.class, "decrypt", result);  //$NON-NLS-1$
 		return result;
@@ -133,14 +133,13 @@ public abstract class CryptoSymm {
 		Logger.getInstance().writeMethodEntry(CryptoSymm.class, "prepareIv");  //$NON-NLS-1$
 
 		final int elements = 16;
-		
         final byte[] ivBytes = new byte[elements];
         
         for (int ii = 0; ii < elements; ii++) {
         	ivBytes[ii] = (byte) 0x5a;
         }
         
-        AlgorithmParameterSpec algo = new IvParameterSpec(ivBytes);
+        final AlgorithmParameterSpec algo = new IvParameterSpec(ivBytes);
         
 		Logger.getInstance().writeMethodExit(CryptoSymm.class, "prepareIv", algo);  //$NON-NLS-1$
         return algo;
