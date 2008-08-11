@@ -1,6 +1,7 @@
 #summary History of the project
 
 =History=
+ * 2008/08/11 - *Stable* version 0.3.7 released
  * 2008/07/30 - *Stable* version 0.3.5 released
  * 2007/08/29 - *Stable* version 0.1.6 released
  * 2007/07/16 - *Stable* version 0.1.5 released
