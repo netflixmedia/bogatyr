@@ -1,7 +1,7 @@
 #summary How to install the Bogatyr framework library
 #labels Featured,Phase-Deploy
 =Installation=
-1) Just download the newest Bogatyr library `bogatyr_0.35.zip` from the [http://code.google.com/p/bogatyr/ project home], extract it and add the JAR to your own project (normally in the `/lib` directory).
+1) Just download the newest Bogatyr library `bogatyr_0.37.zip` from the [http://code.google.com/p/bogatyr/ project home], extract it and add the JAR to your own project (normally in the `/lib` directory).
 
 2) Now you can access the package over `import ch.orwell.bogatyr.*`.
 
@@ -17,14 +17,12 @@ As parameter `ch.orwell.yourapp.YourApp /cfg/ch/orwell/yourapp/standard.properti
 Now run the application.
 
 *Without IDE*, you must first compile your application with `javac` and enter this on your command prompt:
-  * `java -jar /lib/bogatyr_0.35.jar ch.orwell.yourapp.YourApp ./cfg/ch/orwell/yourapp/standard.properties`
+  * `java -jar /lib/bogatyr_0.37.jar ch.orwell.yourapp.YourApp ./cfg/ch/orwell/yourapp/standard.properties`
 
 6) Enjoy! `(hopefully)` :-)
 
 
 _A better installation tutorial will be added soon!_
-
-
 
 
 
