@@ -34,13 +34,14 @@ package ch.orwell.bogatyr.view.swing;
 import javax.swing.table.AbstractTableModel;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended AbstractTableModel
  * 
  * @author Stefan Laubenberger
- * @version 20080613
+ * @version 20080810
  */
 public class TableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -472247252594891753L;
@@ -54,6 +55,8 @@ public class TableModel extends AbstractTableModel {
 		
 		this.columnNames = columnNames;
 		this.data = data;
+		
+		init();
 	}
 	
 	/**
@@ -88,6 +91,14 @@ public class TableModel extends AbstractTableModel {
 		return data[row][col];
 	}
 	
+	
+	/*
+	 * Private methods
+	 */
+	private void init() {
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
+	}
+
 	
 	/*
 	 * Overridden methods

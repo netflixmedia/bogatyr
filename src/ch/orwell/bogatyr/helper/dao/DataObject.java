@@ -35,9 +35,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
-import ch.orwell.bogatyr.helper.crypto.Wrapper;
 import ch.orwell.bogatyr.helper.exception.ExceptionValidation;
-import ch.orwell.bogatyr.helper.localizer.Localizer;
 import ch.orwell.bogatyr.helper.logger.Logger;
 
 
@@ -95,7 +93,7 @@ public abstract class DataObject implements Serializable, IValidator {
 	 * Private methods
 	 */
 	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", Localizer.getInstance().getValue(Localizer.RES_INSTANCIATED)); //$NON-NLS-1$
+		Logger.getInstance().writeDebug(this.getClass(), "init",  toString()); //$NON-NLS-1$
 	}
 	
 	

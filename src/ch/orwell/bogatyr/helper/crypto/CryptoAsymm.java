@@ -50,7 +50,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This is a class for asymmetric cryptology via RSA
  * 
  * @author Stefan Laubenberger
- * @version 20080809
+ * @version 20080810
  */
 public abstract class CryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
@@ -78,7 +78,7 @@ public abstract class CryptoAsymm {
 		final KeyPairGenerator kpg = KeyPairGenerator.getInstance(ALGORITHM, "BC"); //$NON-NLS-1$
 		kpg.initialize(keysize);
 
-		KeyPair kp = kpg.generateKeyPair();
+		final KeyPair kp = kpg.generateKeyPair();
 		
 		Logger.getInstance().writeMethodExit(CryptoAsymm.class, "generateKeys", kp);  //$NON-NLS-1$
 		return kp;
@@ -186,7 +186,7 @@ public abstract class CryptoAsymm {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.ENCRYPT_MODE, key);
 
-		byte[] result = cipher.doFinal(input);
+		final byte[] result = cipher.doFinal(input);
 		
 		Logger.getInstance().writeMethodExit(CryptoAsymm.class, "encryptInternal", result);  //$NON-NLS-1$
 		return result;
@@ -206,7 +206,7 @@ public abstract class CryptoAsymm {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.DECRYPT_MODE, key);
 
-		byte[] result = cipher.doFinal(input);
+		final byte[] result = cipher.doFinal(input);
 		
 		Logger.getInstance().writeMethodEntry(CryptoAsymm.class, "decryptInternal", result);  //$NON-NLS-1$
 		return result;

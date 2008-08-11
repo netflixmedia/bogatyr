@@ -38,7 +38,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This is a class for obfuscating a byte[]
  * 
  * @author Stefan Laubenberger
- * @version 20080809
+ * @version 20080810
  */
 public abstract class Obfuscator {
 	private static final byte DEFAULT_PATTERN = Byte.MAX_VALUE;
@@ -52,7 +52,7 @@ public abstract class Obfuscator {
 	public static byte[] encrypt(final byte[] input) {
 		Logger.getInstance().writeMethodEntry(Obfuscator.class, "encrypt", input);  //$NON-NLS-1$
 
-		byte[] result = obfuscate(input, DEFAULT_PATTERN);
+		final byte[] result = obfuscate(input, DEFAULT_PATTERN);
 		
 		Logger.getInstance().writeMethodExit(Obfuscator.class, "encrypt", result);  //$NON-NLS-1$
 		return result;
@@ -68,7 +68,7 @@ public abstract class Obfuscator {
 	public static byte[] encrypt(final byte[] input, final byte pattern) {
 		Logger.getInstance().writeMethodEntry(Obfuscator.class, "encrypt", new Object[]{input, pattern});  //$NON-NLS-1$
 
-		byte[] result = obfuscate(input, pattern);
+		final byte[] result = obfuscate(input, pattern);
 		
 		Logger.getInstance().writeMethodExit(Obfuscator.class, "encrypt", result);  //$NON-NLS-1$
 		return result;
@@ -83,7 +83,7 @@ public abstract class Obfuscator {
 	public static byte[] decrypt(final byte[] input) {
 		Logger.getInstance().writeMethodEntry(Obfuscator.class, "decrypt", input);  //$NON-NLS-1$
 
-		byte[] result = obfuscate(input, DEFAULT_PATTERN);
+		final byte[] result = obfuscate(input, DEFAULT_PATTERN);
 		
 		Logger.getInstance().writeMethodExit(Obfuscator.class, "decrypt", result);  //$NON-NLS-1$
 		return result;
@@ -100,7 +100,7 @@ public abstract class Obfuscator {
 	public static byte[] decrypt(final byte[] input, final byte pattern) {
 		Logger.getInstance().writeMethodEntry(Obfuscator.class, "decrypt", new Object[]{input, pattern});  //$NON-NLS-1$
 
-		byte[] result = obfuscate(input, pattern);
+		final byte[] result = obfuscate(input, pattern);
 		
 		Logger.getInstance().writeMethodExit(Obfuscator.class, "decrypt", result);  //$NON-NLS-1$
 		return result;

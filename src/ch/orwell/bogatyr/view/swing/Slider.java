@@ -39,6 +39,7 @@ import java.util.Dictionary;
 import javax.swing.JSlider;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
@@ -53,6 +54,7 @@ public class Slider extends JSlider {
 
 	public Slider() {
 		super();
+		init();
 	}
 
 	public Slider(final int minValue, final int maxValue, final int currentValue, final String toolTip) {
@@ -62,8 +64,17 @@ public class Slider extends JSlider {
 	public Slider(final int minValue, final int maxValue, final int currentValue, final int orientation, final String toolTip) {
 		super(orientation, minValue, maxValue, currentValue);
 		setToolTipText(toolTip);
+		init();
 	}
 	
+	
+	/*
+	 * Private methods
+	 */
+	private void init() {
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
+	}
+
 	
 	/*
 	 * Overridden methods

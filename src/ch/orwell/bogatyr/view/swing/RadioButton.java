@@ -34,13 +34,14 @@ package ch.orwell.bogatyr.view.swing;
 import javax.swing.JRadioButton;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JRadioButton
  * 
  * @author Stefan Laubenberger
- * @version 2008061
+ * @version 20080810
  */
 public class RadioButton extends JRadioButton {
 	private static final long serialVersionUID = 8676540667794440059L;
@@ -48,17 +49,27 @@ public class RadioButton extends JRadioButton {
 
 	public RadioButton() {
 		super();
+		init();
 	}
 	
 	public RadioButton(final String title, final boolean isSelected, final String toolTip) {
 		super(title, isSelected);
 		setToolTipText(toolTip);
+		init();
 	}
 	
 	public RadioButton(final boolean isSelected, final String toolTip) {
 		this();
 		setSelected(isSelected);
 		setToolTipText(toolTip);
+	}
+
+	
+	/*
+	 * Private methods
+	 */
+	private void init() {
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 	
 	

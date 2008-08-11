@@ -52,13 +52,15 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import ch.orwell.bogatyr.helper.logger.Logger;
+
 
 
 /**
  * This is a helper class for sound operations
  * 
  * @author Stefan Laubenberger
- * @version 20080728
+ * @version 20080810
  */
 public abstract class HelperSound {
 
@@ -71,8 +73,13 @@ public abstract class HelperSound {
      * @throws javax.sound.sampled.LineUnavailableException
      * @throws javax.sound.sampled.UnsupportedAudioFileException
      */
-    public static Clip getClip(File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-		return getClip(AudioSystem.getAudioInputStream(file));
+    public static Clip getClip(final File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		Logger.getInstance().writeMethodEntry(HelperSound.class, "getClip", file);  //$NON-NLS-1$
+
+		final Clip result = getClip(AudioSystem.getAudioInputStream(file));
+		
+		Logger.getInstance().writeMethodExit(HelperSound.class, "getClip", result);  //$NON-NLS-1$
+    	return result;
 	}
 
     /**
@@ -85,7 +92,12 @@ public abstract class HelperSound {
      * @throws javax.sound.sampled.UnsupportedAudioFileException
      */
 	public static Clip getClip(final InputStream in) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-		return getClip(AudioSystem.getAudioInputStream(in));
+		Logger.getInstance().writeMethodEntry(HelperSound.class, "getClip", in);  //$NON-NLS-1$
+
+		final Clip result = getClip(AudioSystem.getAudioInputStream(in));
+		
+		Logger.getInstance().writeMethodExit(HelperSound.class, "getClip", result);  //$NON-NLS-1$
+    	return result;
 	}
 
     /**
@@ -97,7 +109,12 @@ public abstract class HelperSound {
      * @throws javax.sound.midi.InvalidMidiDataException
      */
 	public static Sequence getSequence(final File file) throws InvalidMidiDataException, IOException {
-		return MidiSystem.getSequence(file);
+		Logger.getInstance().writeMethodEntry(HelperSound.class, "getSequence", file);  //$NON-NLS-1$
+
+		final Sequence result = MidiSystem.getSequence(file);
+		
+		Logger.getInstance().writeMethodExit(HelperSound.class, "getSequence", result);  //$NON-NLS-1$
+    	return result;
 	}
 
     /**
@@ -109,7 +126,12 @@ public abstract class HelperSound {
      * @throws javax.sound.midi.InvalidMidiDataException
      */
 	public static Sequence getSequence(final InputStream in) throws InvalidMidiDataException, IOException {
-		return MidiSystem.getSequence(in);
+		Logger.getInstance().writeMethodEntry(HelperSound.class, "getSequence", in);  //$NON-NLS-1$
+
+		final Sequence result = MidiSystem.getSequence(in);
+		
+		Logger.getInstance().writeMethodExit(HelperSound.class, "getSequence", result);  //$NON-NLS-1$
+    	return result;
 	}
 	
     /**
@@ -120,23 +142,26 @@ public abstract class HelperSound {
      * @throws javax.sound.midi.MidiUnavailableException
      * @throws javax.sound.midi.InvalidMidiDataException
      */
-	public static Sequencer getSequencer(Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
-		Sequencer sequencer = MidiSystem.getSequencer();  // Used to play sequences
+	public static Sequencer getSequencer(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
+		Logger.getInstance().writeMethodEntry(HelperSound.class, "getSequencer", sequence);  //$NON-NLS-1$
+
+		final Sequencer sequencer = MidiSystem.getSequencer();  // Used to play sequences
         sequencer.open();                       // Turn it on.
 
         // Get a Synthesizer for the Sequencer to send notes to
-        Synthesizer synth = MidiSystem.getSynthesizer( );
+        final Synthesizer synth = MidiSystem.getSynthesizer( );
         synth.open();  // acquire whatever resources it needs
         
         // The Sequencer obtained above may be connected to a Synthesizer
         // by default, or it may not.  Therefore, we explicitly connect it.
-        Transmitter transmitter = sequencer.getTransmitter( );
-        Receiver receiver = synth.getReceiver( );
+        final Transmitter transmitter = sequencer.getTransmitter( );
+        final Receiver receiver = synth.getReceiver( );
         transmitter.setReceiver(receiver);
         
         // Read the sequence from the file and tell the sequencer about it
         sequencer.setSequence(sequence);
         
+		Logger.getInstance().writeMethodExit(HelperSound.class, "getSequencer", sequencer);  //$NON-NLS-1$
         return sequencer;
 	}
 	
@@ -146,6 +171,8 @@ public abstract class HelperSound {
      * @param clip to play
      */
 	public static void play(final Clip clip) {
+		Logger.getInstance().writeMethodEntry(HelperSound.class, "play", clip);  //$NON-NLS-1$
+
 		clip.start();
 		final Timer timer = new Timer();
 		timer.schedule(new TimerTask(){
@@ -154,6 +181,8 @@ public abstract class HelperSound {
 				clip.stop();
 			}
 		}, (int)(clip.getMicrosecondLength()/1000));
+
+		Logger.getInstance().writeMethodExit(HelperSound.class, "play");  //$NON-NLS-1$
 	}
 
 	/**
@@ -164,6 +193,8 @@ public abstract class HelperSound {
 	 * @throws MidiUnavailableException 
      */
 	public static void play(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
+		Logger.getInstance().writeMethodEntry(HelperSound.class, "play", sequence);  //$NON-NLS-1$
+
 		final Sequencer sequencer = getSequencer(sequence);
 		sequencer.start();
 		final Timer timer = new Timer();
@@ -173,22 +204,28 @@ public abstract class HelperSound {
 				sequencer.stop();
 			}
 		}, (int)sequence.getTickLength());
+
+		Logger.getInstance().writeMethodExit(HelperSound.class, "play");  //$NON-NLS-1$
 	}
 	
 	/*
 	 * Private methods
 	 */
 	private static Clip getClip(final AudioInputStream ain) throws LineUnavailableException, IOException {
+		Logger.getInstance().writeMethodEntry(HelperSound.class, "getClip", ain);  //$NON-NLS-1$
+
 		Clip clip;
 
         try {
-            DataLine.Info info = new DataLine.Info(Clip.class, ain.getFormat());
+            final DataLine.Info info = new DataLine.Info(Clip.class, ain.getFormat());
             clip = (Clip) AudioSystem.getLine(info);
             clip.open(ain);
         }
         finally {
             ain.close( );
         }
+
+        Logger.getInstance().writeMethodExit(HelperSound.class, "getClip", clip);  //$NON-NLS-1$
         return clip;
 	}
 }

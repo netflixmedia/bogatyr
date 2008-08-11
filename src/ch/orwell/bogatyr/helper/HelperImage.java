@@ -84,6 +84,7 @@ public abstract class HelperImage {
 		final Dimension size = component.getSize();
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		final Graphics2D g2 = image.createGraphics();
+		
 		component.paint(g2);
        
 		createImage(image, type, output);

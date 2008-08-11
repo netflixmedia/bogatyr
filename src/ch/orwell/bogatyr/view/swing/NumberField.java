@@ -37,6 +37,7 @@ import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
@@ -62,7 +63,12 @@ public class NumberField extends TextField {
      * @return int number of the number field
      */	
 	public double getNumber() {
-		return HelperGeneral.isValidString(getText()) ? Double.valueOf(getText()) : 0.0D;
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getNumber");  //$NON-NLS-1$
+
+		final double result = HelperGeneral.isValidString(getText()) ? Double.valueOf(getText()) : 0.0D;
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "getNumber", result);  //$NON-NLS-1$
+		return result;
 	}
 
 	/**
@@ -70,7 +76,11 @@ public class NumberField extends TextField {
      * @param number Number of the number field
      */	
 	public void setNumber(final double number) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "setNumber", number);  //$NON-NLS-1$
+
         setText(Double.valueOf(number).toString());
+
+		Logger.getInstance().writeMethodExit(this.getClass(), "setNumber");  //$NON-NLS-1$
 	}
 	
 	

@@ -45,7 +45,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * It encapsulates name, architecture and version of an operating system, based on system properties.
  * 
  * @author Stefan Laubenberger
- * @version 20080809
+ * @version 20080810
  */
 public abstract class HelperEnvInfo {
 	/**
@@ -56,7 +56,7 @@ public abstract class HelperEnvInfo {
 	public static String getOsArch() {
 		Logger.getInstance().writeMethodEntry(HelperEnvInfo.class, "getOsArch");  //$NON-NLS-1$
 
-		String str = System.getProperties().getProperty("os.arch"); //$NON-NLS-1$
+		final String str = System.getProperties().getProperty("os.arch"); //$NON-NLS-1$
 		
 		Logger.getInstance().writeMethodExit(HelperEnvInfo.class, "getOsArch", str);  //$NON-NLS-1$
 		return str; 
@@ -70,7 +70,7 @@ public abstract class HelperEnvInfo {
 	public static String getOsName() {
 		Logger.getInstance().writeMethodEntry(HelperEnvInfo.class, "getOsName");  //$NON-NLS-1$
 
-		String str = System.getProperties().getProperty("os.name"); //$NON-NLS-1$
+		final String str = System.getProperties().getProperty("os.name"); //$NON-NLS-1$
 		
 		Logger.getInstance().writeMethodExit(HelperEnvInfo.class, "getOsName", str);  //$NON-NLS-1$
 		return str; 
@@ -84,7 +84,7 @@ public abstract class HelperEnvInfo {
 	public static String getOsVersion() {
 		Logger.getInstance().writeMethodEntry(HelperEnvInfo.class, "getOsVersion");  //$NON-NLS-1$
 
-		String str = System.getProperties().getProperty("os.version"); //$NON-NLS-1$
+		final String str = System.getProperties().getProperty("os.version"); //$NON-NLS-1$
 		
 		Logger.getInstance().writeMethodExit(HelperEnvInfo.class, "getOsVersion", str);  //$NON-NLS-1$
 		return str; 
@@ -98,13 +98,13 @@ public abstract class HelperEnvInfo {
 	public static List<String> getOsEnvironmentVariables() {
 		Logger.getInstance().writeMethodEntry(HelperEnvInfo.class, "getOsEnvironmentVariables");  //$NON-NLS-1$
 
-		List<String> list = new ArrayList<String>();
-		
-		Map<String, String> map = System.getenv();
+		final List<String> list = new ArrayList<String>();
+		final Map<String, String> map = System.getenv();
 		
 		for (final Map.Entry<String, String> pair : map.entrySet()) {
             list.add(pair.getKey() + '=' + pair.getValue());
         }
+		
 		Logger.getInstance().writeMethodExit(HelperEnvInfo.class, "getOsEnvironmentVariables", list);  //$NON-NLS-1$
         return list;
     }
@@ -117,7 +117,7 @@ public abstract class HelperEnvInfo {
 	public static File getOsTempDirectory() {
 		Logger.getInstance().writeMethodEntry(HelperEnvInfo.class, "getOsTempDirectory");  //$NON-NLS-1$
 
-		File file = new File(System.getProperty("java.io.tmpdir")); //$NON-NLS-1$
+		final File file = new File(System.getProperty("java.io.tmpdir")); //$NON-NLS-1$
 		
 		Logger.getInstance().writeMethodExit(HelperEnvInfo.class, "getOsTempDirectory", file);  //$NON-NLS-1$
 		return file;
@@ -134,7 +134,7 @@ public abstract class HelperEnvInfo {
 	public static boolean isWindowsPlatform() {
 		Logger.getInstance().writeMethodEntry(HelperEnvInfo.class, "isWindowsPlatform");  //$NON-NLS-1$
 
-		boolean flag = getOsName().contains("Windows"); //$NON-NLS-1$
+		final boolean flag = getOsName().contains("Windows"); //$NON-NLS-1$
 		
 		Logger.getInstance().writeMethodExit(HelperEnvInfo.class, "isWindowsPlatform", flag);  //$NON-NLS-1$
 		return flag; 
@@ -149,7 +149,7 @@ public abstract class HelperEnvInfo {
 	public static boolean isMacPlatform() {
 		Logger.getInstance().writeMethodEntry(HelperEnvInfo.class, "isMacPlatform");  //$NON-NLS-1$
 
-		boolean flag = getOsName().contains("Mac"); //$NON-NLS-1$
+		final boolean flag = getOsName().contains("Mac"); //$NON-NLS-1$
 		
 		Logger.getInstance().writeMethodExit(HelperEnvInfo.class, "isMacPlatform", flag);  //$NON-NLS-1$
 		return flag; 

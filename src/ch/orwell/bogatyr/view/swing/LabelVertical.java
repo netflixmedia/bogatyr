@@ -47,7 +47,7 @@ import javax.swing.Icon;
  * This is a vertical Label
  * 
  * @author Stefan Laubenberger
- * @version 20080515
+ * @version 20080810
  */
 public class LabelVertical extends Panel implements Icon {
 	private static final long serialVersionUID = -6664528555390753370L;
@@ -71,22 +71,29 @@ public class LabelVertical extends Panel implements Icon {
         label = new Label(title, alignment);
 	}
 	
-	// Delegate these methods to the JLabel...
+	// Delegate these methods to the Label...
  	public void setText(final String text) {
         label.setText("<html>" + text + "</html");}  //$NON-NLS-1$//$NON-NLS-2$
  
-	public String getText() {return label.getText();}
+	public String getText() {
+		return label.getText();
+	}
 	
 	public void setIcon(final Icon icon) {
-        label.setIcon(icon);}
+        label.setIcon(icon);
+    }
  
-	public Icon getIcon() {return label.getIcon();}
+	public Icon getIcon() {
+		return label.getIcon();
+	}
  
 	public void setHorizontalAlignment(final int alignment) {
-        label.setHorizontalAlignment(alignment);}
+        label.setHorizontalAlignment(alignment);
+    }
  
 	public void setVerticalAlignment(final int alignment) {
-        label.setVerticalAlignment(alignment);}
+        label.setVerticalAlignment(alignment);
+    }
 	
 	
 	/*

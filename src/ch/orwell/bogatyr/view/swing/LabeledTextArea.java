@@ -36,6 +36,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+import ch.orwell.bogatyr.helper.logger.Logger;
+
 
 /**
  * This is an combined Label and TextArea
@@ -63,10 +65,16 @@ public class LabeledTextArea extends Panel {
 	}
 	
 	public Label getLabel() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getLabel");  //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getLabel", label);  //$NON-NLS-1$
+
 		return label;
 	}
 
 	public TextArea getTextArea() {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "getTextArea");  //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(this.getClass(), "getTextArea", textArea);  //$NON-NLS-1$
+
 		return textArea;
 	}
 	
@@ -75,6 +83,8 @@ public class LabeledTextArea extends Panel {
 	 * Private methods
 	 */
 	private void createLayout(final String labelText, final String text, final int rows, final int columns) {
+		Logger.getInstance().writeMethodEntry(getClass(), "createLayout", new Object[]{labelText, text, rows, columns});  //$NON-NLS-1$
+
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 	    gbc.insets = new Insets(5, 5, 5, 5);
@@ -89,6 +99,8 @@ public class LabeledTextArea extends Panel {
         textArea.setWrapStyleWord(true);
 		final ScrollPane scrollPane = new ScrollPane(textArea);
 		add(scrollPane, gbc);
+		
+		Logger.getInstance().writeMethodExit(this.getClass(), "createLayout");  //$NON-NLS-1$
 	}
 	
 	

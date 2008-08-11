@@ -46,7 +46,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This is a class for wrapping and unwrapping a key
  * 
  * @author Stefan Laubenberger
- * @version 20080809
+ * @version 20080810
  */
 public abstract class Wrapper {
 	/**
@@ -66,7 +66,7 @@ public abstract class Wrapper {
 		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.WRAP_MODE, wrapperKey);
 
-		byte[] result = cipher.wrap(key);
+		final byte[] result = cipher.wrap(key);
 		
 		Logger.getInstance().writeMethodExit(Wrapper.class, "wrapKey", result);  //$NON-NLS-1$
 		return result;
@@ -90,7 +90,7 @@ public abstract class Wrapper {
 		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.UNWRAP_MODE, unwrapperKey);
 
-		Key key = cipher.unwrap(wrappedKey, keyAlgorithm, keyType);
+		final Key key = cipher.unwrap(wrappedKey, keyAlgorithm, keyType);
 		
 		Logger.getInstance().writeMethodExit(Wrapper.class, "unwrapKey", key);  //$NON-NLS-1$
 		return key;

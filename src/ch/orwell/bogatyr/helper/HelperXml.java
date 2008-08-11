@@ -31,13 +31,15 @@
  *******************************************************************************/
 package ch.orwell.bogatyr.helper;
 
+import ch.orwell.bogatyr.helper.logger.Logger;
+
 
 
 /**
  * This is a helper class for XML operations
  * 
  * @author Stefan Laubenberger
- * @version 20080803
+ * @version 20080810
  */
 public abstract class HelperXml {
 	/**
@@ -52,7 +54,9 @@ public abstract class HelperXml {
      * @return The in String, stripped of non-valid characters.
      */
     public static String getValidXmlString(final String in) {
-        final StringBuilder out = new StringBuilder(); // Used to hold the output.
+		Logger.getInstance().writeMethodEntry(HelperXml.class, "getValidXmlString", in);  //$NON-NLS-1$
+
+    	final StringBuilder out = new StringBuilder(); // Used to hold the output.
         char current; // Used to reference the current character.
 
         if (!HelperGeneral.isValidString(in)) { // vacancy test
@@ -68,6 +72,10 @@ public abstract class HelperXml {
                 }
             }
         }
-        return out.toString();
+
+        final String result = out.toString();
+        
+		Logger.getInstance().writeMethodExit(HelperXml.class, "getValidXmlString", result);  //$NON-NLS-1$
+        return result;
     }   
 }

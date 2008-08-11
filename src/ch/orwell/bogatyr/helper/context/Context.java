@@ -45,7 +45,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * Get access for general content in the context.
  * 
  * @author Stefan Laubenberger
- * @version 20080809
+ * @version 20080810
  */
 public class Context implements IContext {
 	private static Context instance;
@@ -90,7 +90,7 @@ public class Context implements IContext {
 	public Object getData(final Object key) {
 		Logger.getInstance().writeMethodEntry(Context.class, "getData", key);  //$NON-NLS-1$
 
-		Object obj = contextData.get(key);
+		final Object obj = contextData.get(key);
 		
 		Logger.getInstance().writeMethodExit(Context.class, "getData", obj);  //$NON-NLS-1$
 		return obj;
@@ -99,9 +99,9 @@ public class Context implements IContext {
 	public String getDataString(final Object key) {
 		Logger.getInstance().writeMethodEntry(Context.class, "getDataString", key);  //$NON-NLS-1$
 
-		String str = (String) contextData.get(key);
+		final String str = (String) contextData.get(key);
 		
-		Logger.getInstance().writeMethodExit(Context.class, "getDataString", str);
+		Logger.getInstance().writeMethodExit(Context.class, "getDataString", str); //$NON-NLS-1$
 		return str;
     }
 //
@@ -145,7 +145,7 @@ public class Context implements IContext {
 		String str = getDataString(KEY_APPLICATION_NAME);
 
 		if (str == null) {
-			str = "Bogatyr";
+			str = "Bogatyr"; //$NON-NLS-1$
 		}
 		
 		Logger.getInstance().writeMethodExit(this.getClass(), "getApplicationName", str); //$NON-NLS-1$		
@@ -158,7 +158,7 @@ public class Context implements IContext {
 		String str = getDataString(KEY_APPLICATION_VERSION);
 
 		if (str == null) {
-			str = "0.36"; //TODO change every release!
+			str = "0.36";  //$NON-NLS-1$ //TODO change every release!
 		}
 		
 		Logger.getInstance().writeMethodExit(this.getClass(), "getApplicationVersion", str); //$NON-NLS-1$
@@ -171,7 +171,7 @@ public class Context implements IContext {
 		String str = getDataString(KEY_APPLICATION_BUILD);
 		
 		if (str == null) {
-			str = "20080808"; //TODO change every release!
+			str = "20080808";  //$NON-NLS-1$ //TODO change every release!
 		}
 		
 		Logger.getInstance().writeMethodExit(this.getClass(), "getApplicationBuild", str); //$NON-NLS-1$
@@ -180,7 +180,7 @@ public class Context implements IContext {
 	
 	public boolean isApplicationDebug() {
     	Boolean value = (Boolean) contextData.get(KEY_APPLICATION_DEBUG);
-    	boolean flag = value != null ? value : false;
+    	final boolean flag = value != null ? value : false;
 
     	return flag;
  	}

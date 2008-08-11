@@ -46,10 +46,6 @@ import java.util.Locale;
 public abstract class Localizer {
 	private static ILocalizer instance;
 
-	// Resources
-    public static final String RES_INSTANCIATED      = "global.instanciated"; //$NON-NLS-1$
-	public static final String RES_INVALID_DIRECTORY = "global.invalid.directory"; //$NON-NLS-1$
-
 	
     public static ILocalizer getInstance() {
     	return instance;
@@ -82,7 +78,7 @@ public abstract class Localizer {
 			String iso = locale.getCountry();
 			String name = locale.getDisplayCountry();
 			
-			if (!"".equals(iso) && !"".equals(name)) {
+			if (!"".equals(iso) && !"".equals(name)) {  //$NON-NLS-1$//$NON-NLS-2$
 				list.add(iso +  '-' + name);
 			}
 		}

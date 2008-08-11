@@ -41,28 +41,46 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.InvalidPreferencesFormatException;
 import java.util.prefs.Preferences;
 
+import ch.orwell.bogatyr.helper.logger.Logger;
+
 
 
 /**
  * This is a helper class for preferences
  * 
  * @author Stefan Laubenberger
- * @version 20080725
+ * @version 20080810
  */
 public abstract class HelperPreferences {
-	public static void loadFromFile(File file) throws IOException, InvalidPreferencesFormatException {
-	  java.util.prefs.Preferences.importPreferences(new BufferedInputStream(new FileInputStream(file)));
+	public static void loadFromFile(final File file) throws IOException, InvalidPreferencesFormatException {
+		Logger.getInstance().writeMethodEntry(HelperPreferences.class, "loadFromFile", file);  //$NON-NLS-1$
+
+		java.util.prefs.Preferences.importPreferences(new BufferedInputStream(new FileInputStream(file)));
+
+		Logger.getInstance().writeMethodExit(HelperPreferences.class, "loadFromFile");  //$NON-NLS-1$
 	}
 	 
-	public static void save(Preferences prefs, File file) throws IOException, BackingStoreException {
-	  prefs.exportNode(new BufferedOutputStream(new FileOutputStream(file)));
+	public static void save(final Preferences prefs, final File file) throws IOException, BackingStoreException {
+		Logger.getInstance().writeMethodEntry(HelperPreferences.class, "save", new Object[]{prefs, file});  //$NON-NLS-1$
+
+		prefs.exportNode(new BufferedOutputStream(new FileOutputStream(file)));
+		
+		Logger.getInstance().writeMethodExit(HelperPreferences.class, "save");  //$NON-NLS-1$
 	}	
 	  
-	public static void saveUserNode(Class<?> clazz, File file) throws IOException, BackingStoreException {
+	public static void saveUserNode(final Class<?> clazz, final File file) throws IOException, BackingStoreException {
+		Logger.getInstance().writeMethodEntry(HelperPreferences.class, "saveUserNode", new Object[]{clazz, file});  //$NON-NLS-1$
+
 		java.util.prefs.Preferences.userNodeForPackage(clazz).exportNode(new BufferedOutputStream(new FileOutputStream(file)));
+	
+		Logger.getInstance().writeMethodExit(HelperPreferences.class, "saveUserNode");  //$NON-NLS-1$
 	}	
 	  
-	public static void saveSystemNode(Class<?> clazz, File file) throws IOException, BackingStoreException {
+	public static void saveSystemNode(final Class<?> clazz, final File file) throws IOException, BackingStoreException {
+		Logger.getInstance().writeMethodEntry(HelperPreferences.class, "saveSystemNode", new Object[]{clazz, file});  //$NON-NLS-1$
+
 		java.util.prefs.Preferences.systemNodeForPackage(clazz).exportNode(new BufferedOutputStream(new FileOutputStream(file)));
+	
+		Logger.getInstance().writeMethodExit(HelperPreferences.class, "saveSystemNode");  //$NON-NLS-1$
 	}	
 }

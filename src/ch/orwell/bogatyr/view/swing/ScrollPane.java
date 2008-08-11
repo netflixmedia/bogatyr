@@ -37,13 +37,14 @@ import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
+import ch.orwell.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JScrollPane
  * 
  * @author Stefan Laubenberger
- * @version 20080613
+ * @version 20080810
  */
 public class ScrollPane extends JScrollPane {
 	private static final long serialVersionUID = 544751396135811303L;
@@ -70,6 +71,7 @@ public class ScrollPane extends JScrollPane {
 	 */
 	private void init() {
 		setWheelScrollingEnabled(true);
+		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 	
 	
