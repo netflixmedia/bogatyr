@@ -115,26 +115,26 @@ public class LabeledComboBox extends Panel {
 	 * Overridden methods
 	 */
 	@Override
-	public void setBackground(final Color color) {
-		super.setBackground(color);
+	public void setBackground(final Color bg) {
+		super.setBackground(bg);
 		
 		if (label != null) {
-            label.setBackground(color);
+            label.setBackground(bg);
         }
 		if (comboBox != null) {
-            comboBox.setBackground(color);
+            comboBox.setBackground(bg);
         }
 	}
 	
 	@Override
-	public void setForeground(final Color color) {
-		super.setForeground(color);
+	public void setForeground(final Color fg) {
+		super.setForeground(fg);
 
 		if (label != null) {
-            label.setForeground(color);
+            label.setForeground(fg);
         }
 		if (comboBox != null) {
-            comboBox.setForeground(color);
+            comboBox.setForeground(fg);
         }
 	}
 	

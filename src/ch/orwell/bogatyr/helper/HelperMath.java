@@ -166,13 +166,13 @@ public abstract class HelperMath {
 		Logger.getInstance().writeMethodEntry(HelperMath.class, "round", new Object[]{value, decimalPlace});  //$NON-NLS-1$
 
 		int dp = decimalPlace;
-		double power_of_ten = 1.0D;
+		double powerOfTen = 1.0D;
 		
 	    while (dp-- > 0) {
-	       power_of_ten *= 10.0D;
+	       powerOfTen *= 10.0D;
 	    }
 	    
-	    final double result = (double) Math.round(value * power_of_ten) / power_of_ten;
+	    final double result = (double) Math.round(value * powerOfTen) / powerOfTen;
 	    
 		Logger.getInstance().writeMethodExit(HelperMath.class, "round", result);  //$NON-NLS-1$
 	    return result;

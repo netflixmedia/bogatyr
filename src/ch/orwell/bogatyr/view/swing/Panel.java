@@ -108,12 +108,12 @@ public class Panel extends JPanel {
 	 * Overridden methods
 	 */
 	@Override
-	public void setEnabled(final boolean flag) {
-		super.setEnabled(flag);
+	public void setEnabled(final boolean enabled) {
+		super.setEnabled(enabled);
 		
 		final Component[] components = getComponents();
 	    for (final Component component : components) {
-	    	component.setEnabled(flag);
+	    	component.setEnabled(enabled);
 	    }
 	}
 	

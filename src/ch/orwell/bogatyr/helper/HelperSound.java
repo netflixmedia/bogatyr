@@ -45,12 +45,7 @@ import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 import javax.sound.midi.Synthesizer;
 import javax.sound.midi.Transmitter;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
 
 import ch.orwell.bogatyr.helper.logger.Logger;
 
@@ -217,7 +212,7 @@ public abstract class HelperSound {
 		Clip clip;
 
         try {
-            final DataLine.Info info = new DataLine.Info(Clip.class, ain.getFormat());
+            final Line.Info info = new DataLine.Info(Clip.class, ain.getFormat());
             clip = (Clip) AudioSystem.getLine(info);
             clip.open(ain);
         }

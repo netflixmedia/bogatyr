@@ -92,6 +92,7 @@ public abstract class Security {
      * @param socket The socket to protect
 	 * @see ServerTemplate#getInterval()
 	 * @see ServerTemplate#getRequests()
+     * @return true/false
 	 */
 	public static boolean isValidContact(final ServerTemplate server, final Socket socket) {
 		Logger.getInstance().writeMethodEntry(Security.class, "isValidContact", new Object[]{server, socket}); //$NON-NLS-1$

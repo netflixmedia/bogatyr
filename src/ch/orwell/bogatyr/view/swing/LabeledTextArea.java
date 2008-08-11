@@ -108,26 +108,26 @@ public class LabeledTextArea extends Panel {
 	 * Overridden methods
 	 */
 	@Override
-	public void setBackground(final Color color) {
-		super.setBackground(color);
+	public void setBackground(final Color bg) {
+		super.setBackground(bg);
 		
 		if (label != null) {
-            label.setBackground(color);
+            label.setBackground(bg);
         }
 		if (textArea != null) {
-            textArea.setBackground(color);
+            textArea.setBackground(bg);
         }
 	}
 	
 	@Override
-	public void setForeground(final Color color) {
-		super.setForeground(color);
+	public void setForeground(final Color fg) {
+		super.setForeground(fg);
 
 		if (label != null) {
-            label.setForeground(color);
+            label.setForeground(fg);
         }
 		if (textArea != null) {
-            textArea.setForeground(color);
+            textArea.setForeground(fg);
         }
 	}
 	

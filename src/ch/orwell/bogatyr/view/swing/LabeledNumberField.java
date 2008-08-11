@@ -110,26 +110,26 @@ public class LabeledNumberField extends Panel {
 	 * Overridden methods
 	 */
 	@Override
-	public void setBackground(final Color color) {
-		super.setBackground(color);
+	public void setBackground(final Color bg) {
+		super.setBackground(bg);
 		
 		if (label != null) {
-            label.setBackground(color);
+            label.setBackground(bg);
         }
 		if (numberField != null) {
-            numberField.setBackground(color);
+            numberField.setBackground(bg);
         }
 	}
 	
 	@Override
-	public void setForeground(final Color color) {
-		super.setForeground(color);
+	public void setForeground(final Color fg) {
+		super.setForeground(fg);
 
 		if (label != null) {
-            label.setForeground(color);
+            label.setForeground(fg);
         }
 		if (numberField != null) {
-            numberField.setForeground(color);
+            numberField.setForeground(fg);
         }
 	}
 	

@@ -43,10 +43,7 @@ import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.NoSuchProviderException;
 import java.security.SignatureException;
-import java.security.cert.CertificateEncodingException;
-import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
+import java.security.cert.*;
 import java.util.Date;
 
 import javax.security.auth.x500.X500Principal;
@@ -84,7 +81,17 @@ public abstract class PublicKeyProvider {
 		Logger.getInstance().writeMethodEntry(PublicKeyProvider.class, "getCertificate", file);  //$NON-NLS-1$
 
         final FileInputStream fis = new FileInputStream(file);
-        final X509Certificate cert = getCertificate(new BufferedInputStream(fis));
+        BufferedInputStream bis = null;
+        final X509Certificate cert;
+
+        try {
+            bis = new BufferedInputStream(fis);
+            cert = getCertificate(bis);
+        } finally {
+            if (bis != null) {
+                bis.close();
+            }
+        }
         	
 		Logger.getInstance().writeMethodExit(PublicKeyProvider.class, "getCertificate", cert);  //$NON-NLS-1$
         return cert;
@@ -93,7 +100,7 @@ public abstract class PublicKeyProvider {
     /**
      * Get the certificate out of the given certificate stream
      * 
-     * @param file containing the certificate
+     * @param is input stream containing the certificate
      * @return X509Certificate the certificate
      * @throws CertificateException e
      * @throws NoSuchProviderException e
@@ -123,11 +130,11 @@ public abstract class PublicKeyProvider {
      * Store the certificate on a stream
      * 
      * @param cert certificate
-     * @param file for the certificate
+     * @param os output stream for the certificate
      * @throws IOException 
      * @throws CertificateEncodingException 
      */
-    public static void storeCertificate(final X509Certificate cert, final OutputStream os) throws CertificateEncodingException, IOException {    
+    public static void storeCertificate(final Certificate cert, final OutputStream os) throws CertificateEncodingException, IOException {
 		Logger.getInstance().writeMethodEntry(PublicKeyProvider.class, "storeCertificate", new Object[]{cert, os});  //$NON-NLS-1$
 
     	HelperIO.writeStream(os, cert.getEncoded());
@@ -143,7 +150,7 @@ public abstract class PublicKeyProvider {
      * @throws IOException 
      * @throws CertificateEncodingException 
      */
-    public static void storeCertificate(final X509Certificate cert, final File file) throws CertificateEncodingException, IOException {    
+    public static void storeCertificate(final Certificate cert, final File file) throws CertificateEncodingException, IOException {
 		Logger.getInstance().writeMethodEntry(PublicKeyProvider.class, "storeCertificate", new Object[]{cert, file});  //$NON-NLS-1$
 
 		HelperIO.writeFileAsBinary(file, cert.getEncoded(), false);

@@ -152,7 +152,7 @@ public abstract class DataObject implements Serializable, IValidator {
 	}
 
 	public void validateList(final String variable, final List<?> list) throws ExceptionValidation {
-		if (!HelperGeneral.isValidList(list)) {
+		if (!HelperGeneral.isValidCollection(list)) {
 			throw new ExceptionValidation(getClass().getName() + "::validateArrayList - " + variable + ".size() == 0" + toString()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}

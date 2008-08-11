@@ -57,7 +57,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20080810
+ * @version 20080811
  */
 public abstract class HelperIO {
 	private static final int BUFFER = 1024;
@@ -97,6 +97,7 @@ public abstract class HelperIO {
      * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
      * @param isExclude Is the identifier excluded
      * @return ArrayList containing the path to the matched files
+     * @throws java.io.IOException
      */	
 	public static List<File> getFiles(final File path, final String[] identifier, final boolean isExclude) throws IOException {
 		Logger.getInstance().writeMethodEntry(HelperIO.class, "getFiles", new Object[]{path, identifier, isExclude}); //$NON-NLS-1$
@@ -142,6 +143,7 @@ public abstract class HelperIO {
      * 
      * @param source Source as absolute path
      * @param dest Destination as absolute path
+     * @throws java.io.IOException
      */	
 	public static void copyFile(final File source, final File dest) throws IOException{
 		Logger.getInstance().writeMethodEntry(HelperIO.class, "copyFile", new Object[]{source, dest});  //$NON-NLS-1$
@@ -198,8 +200,9 @@ public abstract class HelperIO {
 	/**
      * Delete a file or directory
      * 
-     * @param file
+     * @param file to delete
      * @return true/false
+     * @throws java.io.IOException
      */	
 	public static boolean delete(final File file) throws IOException{
 		Logger.getInstance().writeMethodEntry(HelperIO.class, "delete", file);  //$NON-NLS-1$
@@ -285,7 +288,7 @@ public abstract class HelperIO {
      * 
      * @param file
      * @param data byte-array
-     * @param append
+     * @param append to file
      * @throws java.io.IOException
      */	
 	public static void writeFileAsBinary(final File file, final byte[] data, final boolean append) throws IOException {
@@ -311,7 +314,7 @@ public abstract class HelperIO {
      * 
      * @param file
      * @param data String
-     * @param append
+     * @param append to file
      * @throws java.io.IOException
      */	
 	public static void writeFileAsString(final File file, final String data, final boolean append) throws IOException {
@@ -359,6 +362,7 @@ public abstract class HelperIO {
      * 
      * @param in InputStream
      * @return byte-array
+     * @throws java.io.IOException
      */	
 	public static byte[] readStreamFast(final InputStream in) throws IOException {
 		Logger.getInstance().writeMethodEntry(HelperIO.class, "readStreamFast", in);  //$NON-NLS-1$
@@ -443,6 +447,7 @@ public abstract class HelperIO {
      * 
      * @param file File name (with absolute path)
      * @return String
+     * @throws java.io.IOException
      */	
 	public static String readFileAsString(final File file) throws IOException {
 		Logger.getInstance().writeMethodEntry(HelperIO.class, "readFileAsString", file);  //$NON-NLS-1$
@@ -455,7 +460,7 @@ public abstract class HelperIO {
 	    	while (scanner.hasNextLine()){
 	    		contents.append(scanner.nextLine());
 //	    		contents.append(System.getProperty("line.separator")); //$NON-NLS-1$
-                contents.append('\n');
+                contents.append(HelperGeneral.getLineSeparator());
             }
 	    	str = contents.toString();
 	    } finally {
@@ -477,24 +482,31 @@ public abstract class HelperIO {
 
 		// Create output stream
 	    PrintWriter pw = null;
+        BufferedReader br = null;
 
-	    try {
+        try {
 		    pw = new PrintWriter(new FileOutputStream(fileOutput));
-		    // Process all files that are not the destination file
+
+            // Process all files that are not the destination file
 		    for (final File file : list) {
-	
-				// Create input stream
-				final BufferedReader br = new BufferedReader (new FileReader(file));
-		
-				// Read each line from the input file
-				String line = br.readLine();
-				
-				while (line != null) {
-				    pw.println(line);
-				    line = br.readLine();
-				}
-				br.close();
-		    }
+
+                try {
+                    // Create input stream
+                    br = new BufferedReader (new FileReader(file));
+
+                    // Read each line from the input file
+                    String line = br.readLine();
+
+                    while (line != null) {
+                        pw.println(line);
+                        line = br.readLine();
+                    }
+                } finally {
+                    if (br != null) {
+                        br.close();
+                    }
+                }
+            }
 	    } finally {
 	    	if (pw != null) {
                 pw.close();

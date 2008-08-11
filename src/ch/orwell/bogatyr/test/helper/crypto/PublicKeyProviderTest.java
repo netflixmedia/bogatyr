@@ -65,6 +65,6 @@ public class PublicKeyProviderTest extends TestCase {
 //			System.out.println(cert.getSubjectDN());
 //			System.out.println(cert.getSubjectAlternativeNames());
 			assertEquals(kp.getPublic(), cert.getPublicKey());
-		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
+		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 }

@@ -83,8 +83,8 @@ public class TextArea extends JTextArea {
 	}
 	
 	@Override
-	public void append(final String text) {
-		super.append(text);
+	public void append(final String str) {
+		super.append(str);
         setCaretPosition(getDocument().getLength());
 	}
 	

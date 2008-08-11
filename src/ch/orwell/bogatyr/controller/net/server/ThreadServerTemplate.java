@@ -134,8 +134,18 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
 	private byte[] readStream() throws Exception {
 		Logger.getInstance().writeMethodEntry(this.getClass(), "readStream"); //$NON-NLS-1$
 
-        final ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-        final Object obj = ois.readObject();
+        ObjectInputStream ois = null;
+        Object obj;
+
+//        try {
+            ois = new ObjectInputStream(socket.getInputStream());
+            obj = ois.readObject();
+//        } finally {
+//            if (ois != null) {
+//                ois.close();
+//           }
+//        }
+
         final ComContainer input = (ComContainer)obj;
         byte[] data = input.getData();
         final Key cryptoKey = server.getKey(input.getKey());
