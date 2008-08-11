@@ -49,10 +49,11 @@ public abstract class ControlProcess {
 	/**
 	 * Creates a new process and reads the standard output and standard error.
 	 *
-	 * @param process
+	 * @param command to start the process
      * @param outputStream If null, output is discarded.
 	 * @param errorStream If null, error is discarded.
 	 * @return created process
+     * @throws java.io.IOException
 	 */
 	public static Process createProcess(final String command, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
 		Logger.getInstance().writeMethodEntry(ControlProcess.class, "createSubprocess", command);  //$NON-NLS-1$
@@ -67,8 +68,9 @@ public abstract class ControlProcess {
 	/**
 	 * Creates a new process without reading the standard output and standard error ("fire and forget").
 	 *
-	 * @param process
+	 * @param command to start the process
 	 * @return created process
+     * @throws java.io.IOException
 	 */
 	public static Process createProcess(final String command) throws IOException {
 		Logger.getInstance().writeMethodEntry(ControlProcess.class, "createSubprocess", command);  //$NON-NLS-1$
@@ -93,7 +95,7 @@ public abstract class ControlProcess {
 	ProcessUtil.readStandardOutputs(process, null, null);
 	 * </pre></code>
 	 *
-	 * @param process
+	 * @param process to observe
      * @param outputStream If null, output is discarded.
 	 * @param errorStream If null, error is discarded.
 	 */

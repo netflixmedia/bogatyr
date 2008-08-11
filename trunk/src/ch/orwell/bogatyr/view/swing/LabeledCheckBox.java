@@ -117,26 +117,26 @@ public class LabeledCheckBox extends Panel {
 	 * Overridden methods
 	 */
 	@Override
-	public void setBackground(final Color color) {
-		super.setBackground(color);
+	public void setBackground(final Color bg) {
+		super.setBackground(bg);
 		
 		if (label != null) {
-            label.setBackground(color);
+            label.setBackground(bg);
         }
 		if (checkBox != null) {
-            checkBox.setBackground(color);
+            checkBox.setBackground(bg);
         }
 	}
 	
 	@Override
-	public void setForeground(final Color color) {
-		super.setForeground(color);
+	public void setForeground(final Color fg) {
+		super.setForeground(fg);
 
 		if (label != null) {
-            label.setForeground(color);
+            label.setForeground(fg);
         }
 		if (checkBox != null) {
-            checkBox.setForeground(color);
+            checkBox.setForeground(fg);
         }
 	}
 	

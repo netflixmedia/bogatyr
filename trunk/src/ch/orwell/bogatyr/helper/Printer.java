@@ -131,15 +131,15 @@ public class Printer implements Printable {
     /*
      * Implemented methods
      */
-    public int print(final Graphics g, final PageFormat pageFormat, final int pageIndex) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "print", new Object[]{g, pageFormat, pageIndex});  //$NON-NLS-1$
+    public int print(final Graphics graphics, final PageFormat pageFormat, final int pageIndex) {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "print", new Object[]{graphics, pageFormat, pageIndex});  //$NON-NLS-1$
 
 		if (pageIndex > 0) {
 			return NO_SUCH_PAGE;
 		}
 //		componentToBePrinted.setSize((int)(componentToBePrinted.getWidth() * pageFormat.getWidth()/componentToBePrinted.getWidth()), (int)(componentToBePrinted.getHeight() * pageFormat.getHeight()/componentToBePrinted.getHeight()));
 
-		final Graphics2D g2d = (Graphics2D) g;
+		final Graphics2D g2d = (Graphics2D) graphics;
 		g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
 //		g2d.scale(pageFormat.getWidth()/componentToBePrinted.getWidth(), pageFormat.getHeight()/componentToBePrinted.getHeight());
 

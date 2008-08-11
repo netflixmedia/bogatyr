@@ -83,12 +83,12 @@ public class TableModel extends AbstractTableModel {
 	/**
 	 * Get the Object at a specific place in the data array
 	 * 
-	 * @param row row number
-	 * @param col column number
+	 * @param rowIndex row number
+	 * @param columnIndex column number
 	 * @return Returns the Object at specific place in the data array 
 	 */
-	public Object getValueAt(final int row, final int col) {
-		return data[row][col];
+	public Object getValueAt(final int rowIndex, final int columnIndex) {
+		return data[rowIndex][columnIndex];
 	}
 	
 	
@@ -109,8 +109,8 @@ public class TableModel extends AbstractTableModel {
 	}
 	
 	@Override
-	public String getColumnName(final int col) {
-		return columnNames[col];
+	public String getColumnName(final int column) {
+		return columnNames[column];
 	}
 	
 	/*
@@ -118,11 +118,11 @@ public class TableModel extends AbstractTableModel {
 	* then the last column would contain text ("true"/"false"), rather than a check box
 	*/
 	@Override
-	public Class<?> getColumnClass(final int c) {
-		final Object obj = getValueAt(0, c);
+	public Class<?> getColumnClass(final int columnIndex) {
+		final Object obj = getValueAt(0, columnIndex);
 		
 		if (obj != null) {
-			return getValueAt(0, c).getClass();
+			return getValueAt(0, columnIndex).getClass();
 		}
 //		return null;
 		return String.class; //FIXME not really nice implemented... But it works fine :-)
@@ -132,17 +132,17 @@ public class TableModel extends AbstractTableModel {
 	* Don't need to implement this method unless your table's editable.
 	*/
 	@Override
-	public boolean isCellEditable(final int row, final int col) {
+	public boolean isCellEditable(final int rowIndex, final int columnIndex) {
 		// Note that the data/cell address is constant, no matter where the cell appears onscreen
-        return col >= 2;
+        return columnIndex >= 2;
     }
 	
 	/*
 	* Don't need to implement this method unless your table's data can change
 	*/
 	@Override
-	public void setValueAt(final Object value, final int row, final int col) {
-        data[row][col] = value;
-		fireTableCellUpdated(row, col);
+	public void setValueAt(final Object aValue, final int rowIndex, final int columnIndex) {
+        data[rowIndex][columnIndex] = aValue;
+		fireTableCellUpdated(rowIndex, columnIndex);
 	}
 }

@@ -107,7 +107,7 @@ public class LabelVertical extends Panel implements Icon {
 //		this.label.updateUI();
 //		this.label.revalidate();
 		
-		// Paint the JLabel into an image buffer...
+		// Paint the JLabel into an image buffer (switch width <=> height)...
 		final BufferedImage buffer = new BufferedImage(height, width, BufferedImage.TYPE_INT_ARGB_PRE); // switch of width and height
 		final Graphics2D g2 = buffer.createGraphics();
         label.setSize(new Dimension(height, width)); // switch of width and height
@@ -138,20 +138,20 @@ public class LabelVertical extends Panel implements Icon {
 	}
 	
 	@Override
-	public void setBackground(final Color color) {
-		super.setBackground(color);
+	public void setBackground(final Color bg) {
+		super.setBackground(bg);
 		
 		if (label != null) {
-            label.setBackground(color);
+            label.setBackground(bg);
         }
 	}
 	
 	@Override
-	public void setForeground(final Color color) {
-		super.setForeground(color);
+	public void setForeground(final Color fg) {
+		super.setForeground(fg);
 		
 		if (label != null) {
-            label.setForeground(color);
+            label.setForeground(fg);
         }
 	}
 	

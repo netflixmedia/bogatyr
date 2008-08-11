@@ -97,20 +97,20 @@ public abstract class ClientAsynchTemplate extends ClientTemplate {
 	 * Send the ComObject to the Server.
 	 * The Server will execute the given method name.
 	 * 
-     * @param  data ComObject
+     * @param  comObject ComObject
      * @see ComObject
      * @throws Exception
      */
     @Override
-    protected Object execute(final ComObject data) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "execute", data); //$NON-NLS-1$
+    protected Object execute(final ComObject comObject) throws Exception {
+		Logger.getInstance().writeMethodEntry(this.getClass(), "execute", comObject); //$NON-NLS-1$
 		
     	//ComObject comObject = data;
 
 //    	Logger.getInstance().writeDebug(this.getClass(), "execute", "comObject: " + data.toString());  //$NON-NLS-1$//$NON-NLS-2$
 		
 		// write the ComObject on the socket-stream
-		writeObject(data);
+		writeObject(comObject);
 
 		Logger.getInstance().writeMethodExit(this.getClass(), "execute", null); //$NON-NLS-1$
     	return null; // always return null (because it's an async client)

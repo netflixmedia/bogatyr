@@ -294,6 +294,7 @@ public abstract class HelperNet {
     /**
      * Returns the content of an url
      *
+     * @param url to read
      * @return byte array with the content
      * @throws IOException
      */

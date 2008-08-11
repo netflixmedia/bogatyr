@@ -94,8 +94,9 @@ public class Chart extends Panel {
 
 	
 	/**
-	* Adds an entry to the product selection chart.
-     * @param entry
+	 * Adds an entry to the product selection chart.
+     * @param entry for the chart
+     * @throws Exception
      */
 	public void addEntry(final ChartEntry entry) throws Exception {
 		Logger.getInstance().writeMethodEntry(this.getClass(), "addEntry", entry);  //$NON-NLS-1$
@@ -331,16 +332,16 @@ public class Chart extends Panel {
 	 * Overridden methods
 	 */
 	@Override
-	public void setBackground(Color color) {
-		super.setBackground(color);
-		colorBackground = color;
+	public void setBackground(Color bg) {
+		super.setBackground(bg);
+		colorBackground = bg;
 //		createLayout();
 	}
 	
 	@Override
-	public void setForeground(Color color) {
-		super.setForeground(color);
-		colorForeground = color;
+	public void setForeground(Color fg) {
+		super.setForeground(fg);
+		colorForeground = fg;
 //		createLayout();
 	}
 	

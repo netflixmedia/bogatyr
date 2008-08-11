@@ -174,15 +174,15 @@ public abstract class PanelTableEditTemplate extends Panel implements ActionList
 	/*
 	 * Implemented methods
 	 */
-	public void actionPerformed(final ActionEvent event) {
-		if (event.getActionCommand().equals(Localizer.getInstance().getValue(RES_BUTTON_ADD))) {
+	public void actionPerformed(final ActionEvent e) {
+		if (e.getActionCommand().equals(Localizer.getInstance().getValue(RES_BUTTON_ADD))) {
 			executeActionAdd();
-		} else if (event.getActionCommand().equals(Localizer.getInstance().getValue(RES_BUTTON_EDIT))) {
+		} else if (e.getActionCommand().equals(Localizer.getInstance().getValue(RES_BUTTON_EDIT))) {
 			executeActionEdit();
-		} else if (event.getActionCommand().equals(Localizer.getInstance().getValue(RES_BUTTON_DELETE))) {
+		} else if (e.getActionCommand().equals(Localizer.getInstance().getValue(RES_BUTTON_DELETE))) {
 			executeActionDelete();
 		} else {
-			Logger.getInstance().writeException(this.getClass(), "actionPerformed", HelperException.EX_UNKNOWN_EVENT + ": " + event, null); //$NON-NLS-1$ //$NON-NLS-2$
+			Logger.getInstance().writeException(this.getClass(), "actionPerformed", HelperException.EX_UNKNOWN_EVENT + ": " + e, null); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 }

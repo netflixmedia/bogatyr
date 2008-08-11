@@ -51,7 +51,7 @@ import ch.orwell.bogatyr.helper.property.Property;
  * This is the logger for file access
  *  
  * @author Stefan Laubenberger
- * @version 20080808
+ * @version 20080811
  */
 public class LoggerFile implements ILogger {
 	// Resources
@@ -97,8 +97,8 @@ public class LoggerFile implements ILogger {
 	/**
      * Writes physically into the log file
      * 
-     * @param object Caller object
-     * @param method Caller method
+     * @param clazz caller object
+     * @param method caller method
      * @param logEntry Entry
      * @param file
 	 * @throws IOException
@@ -158,7 +158,7 @@ public class LoggerFile implements ILogger {
                 	}
                 }
             }
-			write(clazz, method, logEntry != null ? logEntry : "" + '\n' + sw.toString(), new File(logFileName + "_Exception.log")); //$NON-NLS-1$ //$NON-NLS-2$
+			write(clazz, method, logEntry != null ? logEntry : "" + HelperGeneral.getLineSeparator() + sw.toString(), new File(logFileName + "_Exception.log")); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (IOException e) {
 			System.err.println(getClass().getName() + "::writeException - " + Localizer.getInstance().getValue(RES_WRITE_FAILED)); //$NON-NLS-1$
 			e.printStackTrace();

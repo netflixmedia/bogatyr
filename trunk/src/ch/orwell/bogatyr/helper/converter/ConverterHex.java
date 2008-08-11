@@ -41,7 +41,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * @version 20080810
  */
 public abstract class ConverterHex {
-    private static final String	DIGITS = "0123456789abcdef"; //$NON-NLS-1$
+    private static final CharSequence DIGITS = "0123456789abcdef"; //$NON-NLS-1$
     
 
     /**

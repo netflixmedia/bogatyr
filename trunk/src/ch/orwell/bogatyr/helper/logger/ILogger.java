@@ -36,13 +36,13 @@ package ch.orwell.bogatyr.helper.logger;
  * Defines the methods for the implementation of the logger
  *  
  * @author Stefan Laubenberger
- * @version 20080808
+ * @version 20080811
  */
 public interface ILogger {
 	/**
      * Writes to the WARNING-file
      * 
-     * @param object caller class
+     * @param clazz caller class
      * @param method caller method
      * @param logEntry object for log entry
      */
@@ -51,7 +51,7 @@ public interface ILogger {
 	/**
      * Writes to the DEBUG-file
      * 
-     * @param object caller class
+     * @param clazz caller class
      * @param method caller method
      * @param logEntry object for log entry
      */
@@ -60,7 +60,7 @@ public interface ILogger {
 	/**
      * Writes to the EXCEPTION-file
      * 
-     * @param object caller class
+     * @param clazz caller class
      * @param method caller method
      * @param logEntry object for log entry
      * @param ex Exception
@@ -70,7 +70,7 @@ public interface ILogger {
 	/**
      * Writes to the Log-file
      * 
-     * @param object caller class
+     * @param clazz caller class
      * @param method caller method
      * @param logEntry object for log entry
      */
@@ -79,7 +79,7 @@ public interface ILogger {
 	/**
      * Writes an method entry to the DEBUG-file
      * 
-     * @param object caller class
+     * @param clazz caller class
      * @param method caller method
      * @param methodInput input objects (parameters) for the method
      */
@@ -88,7 +88,7 @@ public interface ILogger {
     /**
      * Writes an method entry to the DEBUG-file
      * 
-     * @param object caller class
+     * @param clazz caller class
      * @param method caller method
      * @param methodInput input object (parameter) for the method
      */
@@ -97,7 +97,7 @@ public interface ILogger {
     /**
      * Writes an method entry (without parameters) to the DEBUG-file
      * 
-     * @param object caller class
+     * @param clazz caller class
      * @param method caller method
      */
     void writeMethodEntry(Class<?> clazz, String method);
@@ -105,7 +105,7 @@ public interface ILogger {
 	/**
      * Writes an method exit to the DEBUG-file
      * 
-     * @param object caller class
+     * @param clazz caller class
      * @param method caller method
      * @param methodOutput result object from the method
      */
@@ -114,7 +114,7 @@ public interface ILogger {
 	/**
      * Writes an method exit (without result object) to the DEBUG-file
      * 
-     * @param object caller class
+     * @param clazz caller class
      * @param method caller method
      */
     void writeMethodExit(Class<?> clazz, String method);

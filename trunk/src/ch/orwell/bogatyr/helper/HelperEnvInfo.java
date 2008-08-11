@@ -45,11 +45,11 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * It encapsulates name, architecture and version of an operating system, based on system properties.
  * 
  * @author Stefan Laubenberger
- * @version 20080810
+ * @version 20080811
  */
 public abstract class HelperEnvInfo {
 	/**
-	 * Returns same as system property "os.arch"
+	 * Returns the same as system property "os.arch"
      *
      * @return OS architecture
 	 */
@@ -63,7 +63,7 @@ public abstract class HelperEnvInfo {
 	}
 
 	/**
-	 * Returns same as system property "os.name"
+	 * Returns the same as system property "os.name"
      *
      * @return OS name
 	 */
@@ -77,7 +77,7 @@ public abstract class HelperEnvInfo {
 	}
 
 	/**
-	 * Returns same as system property "os.version"
+	 * Returns the same as system property "os.version"
      *
      * @return OS version
 	 */
@@ -110,7 +110,7 @@ public abstract class HelperEnvInfo {
     }
 	
 	/**
-	 * Returns same as system property "java.io.tmpdir"
+	 * Returns the same as system property "java.io.tmpdir"
      *
      * @return OS temporary directory
 	 */
@@ -123,6 +123,20 @@ public abstract class HelperEnvInfo {
 		return file;
 	}
 	
+	/**
+	 * Returns the same as system property "user.home"
+     *
+     * @return user home directory
+	 */
+	public static File getUserHomeDirectory() {
+		Logger.getInstance().writeMethodEntry(HelperEnvInfo.class, "getOsTempDirectory");  //$NON-NLS-1$
+
+		final File file = new File(System.getProperty("user.home")); //$NON-NLS-1$
+		
+		Logger.getInstance().writeMethodExit(HelperEnvInfo.class, "getOsTempDirectory", file);  //$NON-NLS-1$
+		return file;
+	}
+
 	/**
 	 * Try to determine whether this application is running under Windows
 	 * or some other platform by examing the "os.name" property.

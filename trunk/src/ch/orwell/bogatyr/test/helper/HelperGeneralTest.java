@@ -102,10 +102,10 @@ public class HelperGeneralTest extends TestCase { //TODO improve
 	
 	public void testIsValidList() {
 		final List<String> list = new ArrayList<String>();
-		assertFalse(HelperGeneral.isValidList(null));
-		assertFalse(HelperGeneral.isValidList(list));
+		assertFalse(HelperGeneral.isValidCollection(null));
+		assertFalse(HelperGeneral.isValidCollection(list));
 		list.add(""); //$NON-NLS-1$
-		assertTrue(HelperGeneral.isValidList(list));
+		assertTrue(HelperGeneral.isValidCollection(list));
 	}
 
 	public void testGetBytesFromObject() {

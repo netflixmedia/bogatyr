@@ -42,12 +42,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -94,6 +89,20 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 		return obj;
 	}
 
+    /**
+     * Returns a line separator
+     *
+     * @return line separator
+     */
+    public static String getLineSeparator() {
+//        Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getLineSeparator");  //$NON-NLS-1$
+
+        String result = System.getProperty("line.separator");
+
+//        Logger.getInstance().writeMethodExit(HelperGeneral.class, "getLineSeparator", result);  //$NON-NLS-1$
+        return result;
+    }
+
 	/**
      * Checks if a String is valid.
      * 
@@ -108,6 +117,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * Checks if a String is full numeric.
      * 
      * @param arg String to check
+     * @return true/false
      */	
 	public static boolean isStringNumeric(final String arg) {
 		if (isValidString(arg)) {
@@ -135,6 +145,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * Checks if a double is not 0.
      * 
      * @param arg double to check
+     * @return true/false
      */	
 	public static boolean isValidDouble(final double arg) {
         return arg != 0.0D;
@@ -154,6 +165,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * Checks if a float is not 0.
      * 
      * @param arg float to check
+     * @return true/false
      */	
 	public static boolean isValidFloat(final float arg) {
         return arg != 0.0F;
@@ -180,11 +192,12 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 
 	/**
-     * Checks if a {@link ArrayList} is valid.
+     * Checks if a collection is valid.
      * 
      * @param list ArrayList to check
+     * @return true/false
      */
-	public static boolean isValidList(final List<?> list) {
+	public static boolean isValidCollection(final Collection<?> list) {
         return !(!isValidObject(list) || list.isEmpty());
     }
 	
@@ -448,14 +461,14 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param list
      * @return dump string
      */
-    public static String dump(final List<?> list) {
+    public static String dump(final Iterable<?> list) {
 		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "dump", list);  //$NON-NLS-1$
 
         final StringBuilder sb = new StringBuilder();
 
         for (final Object value : list) {
             sb.append(value);
-            sb.append('\n');
+            sb.append(getLineSeparator());
         }
         
         final String str = sb.toString();
@@ -478,7 +491,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
             sb.append(pair.getKey());
             sb.append('=');
             sb.append(pair.getValue());
-            sb.append('\n');
+            sb.append(getLineSeparator());
         }
         
         final String str = sb.toString();
@@ -499,7 +512,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 
 		for (final Object value : array) {
             sb.append(value);
-            sb.append('\n');
+            sb.append(getLineSeparator());
         }
 		
 		final String str = sb.toString();

@@ -190,7 +190,7 @@ public abstract class ApplicationTemplate implements Runnable {
 		File workdirectory;
 		
 		final boolean isDebug = Property.getInstance().getPropertyBoolean(PROPERTY_APPLICATION_DEBUG);
-		Context.getInstance().addData(Context.KEY_APPLICATION_DEBUG, Boolean.valueOf(isDebug));
+		Context.getInstance().addData(Context.KEY_APPLICATION_DEBUG, isDebug);
 		
 		String value = Property.getInstance().getProperty(PROPERTY_APPLICATION_NAME);
 		if (HelperGeneral.isValidString(value)) {
