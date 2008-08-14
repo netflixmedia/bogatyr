@@ -29,10 +29,10 @@
  * <silvan.spross@gmail.com>
  * 
  *******************************************************************************/
-package ch.orwell.bogatyr.helper.dao;
+package ch.orwell.bogatyr.model.dao;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
 import ch.orwell.bogatyr.helper.exception.ExceptionValidation;
@@ -43,11 +43,10 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This is the super-class for all value objects of the system
  * 
  * @author Stefan Laubenberger
- * @version 20080613
+ * @version 20080814
  */
 public abstract class DataObject implements Serializable, IValidator {
     private static final long serialVersionUID = -3023201860307136848L;
-	//TODO generate hashCode() & equals()!
 	
 	public static final int PERSISTENCE_CHANGED = 1;
 	public static final int PERSISTENCE_NEW     = 2;
@@ -55,7 +54,7 @@ public abstract class DataObject implements Serializable, IValidator {
 
 	private final long createTime = System.currentTimeMillis();
 	
-	private int persistenceState ;
+	private int persistenceState;
 
 
     protected DataObject() {
@@ -105,6 +104,31 @@ public abstract class DataObject implements Serializable, IValidator {
 		return HelperGeneral.toString(this);
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (createTime ^ (createTime >>> 32));
+		result = prime * result + persistenceState;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DataObject other = (DataObject) obj;
+		if (createTime != other.createTime)
+			return false;
+		if (persistenceState != other.persistenceState)
+			return false;
+		return true;
+	}
+
 	
 	/*
 	 * Implemented methods
@@ -151,9 +175,9 @@ public abstract class DataObject implements Serializable, IValidator {
 		}
 	}
 
-	public void validateList(final String variable, final List<?> list) throws ExceptionValidation {
-		if (!HelperGeneral.isValidCollection(list)) {
-			throw new ExceptionValidation(getClass().getName() + "::validateArrayList - " + variable + ".size() == 0" + toString()); //$NON-NLS-1$ //$NON-NLS-2$
+	public void validateCollection(final String variable, final Collection<?> arg) throws ExceptionValidation {
+		if (!HelperGeneral.isValidCollection(arg)) {
+			throw new ExceptionValidation(getClass().getName() + "::validateCollection - " + variable + ".size() == 0" + toString()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 }

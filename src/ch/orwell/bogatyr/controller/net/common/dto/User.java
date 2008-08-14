@@ -34,9 +34,9 @@ package ch.orwell.bogatyr.controller.net.common.dto;
 import java.security.NoSuchAlgorithmException;
 
 import ch.orwell.bogatyr.helper.HelperGeneral;
-import ch.orwell.bogatyr.helper.dao.DataObject;
 import ch.orwell.bogatyr.helper.exception.ExceptionValidation;
 import ch.orwell.bogatyr.helper.logger.Logger;
+import ch.orwell.bogatyr.model.dao.DataObject;
 
 
 /**

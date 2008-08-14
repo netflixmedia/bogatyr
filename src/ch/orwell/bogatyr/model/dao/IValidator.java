@@ -29,9 +29,9 @@
  * <silvan.spross@gmail.com>
  * 
  *******************************************************************************/
-package ch.orwell.bogatyr.helper.dao;
+package ch.orwell.bogatyr.model.dao;
 
-import java.util.List;
+import java.util.Collection;
 
 import ch.orwell.bogatyr.helper.exception.ExceptionValidation;
 
@@ -40,27 +40,27 @@ import ch.orwell.bogatyr.helper.exception.ExceptionValidation;
  * Defines the methods for the implementation of the validator for all value objects.
  * 
  * @author Stefan Laubenberger
- * @version 20080724
+ * @version 20080814
  */
 public interface IValidator {
 	/**
-     * Validate the object
+     * Validates the object
      * 
      * @throws ExceptionValidation
      */
     void validate() throws ExceptionValidation;
 	
 	/**
-     * Validate a string
+     * Validates a string
      * 
-      * @param variable Name of the variable
+     * @param variable Name of the variable
      * @param arg String for validation
      * @throws ExceptionValidation
      */
     void validateString(String variable, String arg) throws ExceptionValidation;
 
 	/**
-     * Validate an integer
+     * Validates an integer
      * 
      * @param variable Name of the variable
      * @param arg int for validation
@@ -69,16 +69,16 @@ public interface IValidator {
     void validateInt(String variable, int arg) throws ExceptionValidation;
 
 	/**
-     * Validate a double
+     * Validates a double
      * 
      * @param variable Name for validation of the variable
-     * @param arg double
+     * @param arg double for validation
      * @throws ExceptionValidation
      */
     void validateDouble(String variable, double arg) throws ExceptionValidation;
 
 	/**
-     * Validate a long
+     * Validates a long
      * 
      * @param variable Name of the variable
      * @param arg long for validation
@@ -87,7 +87,7 @@ public interface IValidator {
     void validateLong(String variable, long arg) throws ExceptionValidation;
 	
 	/**
-     * Validate a float
+     * Validates a float
      * 
      * @param variable Name of the variable
      * @param arg float for validation
@@ -96,7 +96,7 @@ public interface IValidator {
     void validateFloat(String variable, float arg) throws ExceptionValidation;
 
 	/**
-     * Validate an object
+     * Validates an object
      * 
      * @param variable Name of the variable
      * @param arg Object for validation
@@ -105,7 +105,7 @@ public interface IValidator {
     void validateObject(String variable, Object arg) throws ExceptionValidation;
 
 	/**
-     * Validate an object-array
+     * Validates an object-array
      * 
      * @param variable Name of the variable
      * @param arg Object-array for validation
@@ -114,11 +114,11 @@ public interface IValidator {
     void validateArray(String variable, Object[] arg) throws ExceptionValidation;
 
 	/**
-     * Validate an List
+     * Validates an collection
      * 
      * @param variable Name of the variable
-     * @param list List for validation
+     * @param arg Collection for validation
      * @throws ExceptionValidation
      */
-    void validateList(String variable, List<?> list) throws ExceptionValidation;
+    void validateCollection(String variable, Collection<?> arg) throws ExceptionValidation;
 }
