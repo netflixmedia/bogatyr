@@ -57,7 +57,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20080811
+ * @version 20080814
  */
 public abstract class HelperIO {
 	private static final int BUFFER = 1024;
@@ -111,8 +111,8 @@ public abstract class HelperIO {
 	/**
      * Copy a directory
      * 
-     * @param source Source as absolute path
-     * @param dest Destination as absolute path
+     * @param source
+     * @param dest
      * @throws java.io.IOException
      */	
 	public static void copyDirectory(final File source, final File dest) throws IOException{
@@ -141,8 +141,8 @@ public abstract class HelperIO {
 	/**
      * Copy a file
      * 
-     * @param source Source as absolute path
-     * @param dest Destination as absolute path
+     * @param source
+     * @param dest
      * @throws java.io.IOException
      */	
 	public static void copyFile(final File source, final File dest) throws IOException{
@@ -179,8 +179,8 @@ public abstract class HelperIO {
 	/**
      * Move a file or directory
      * 
-     * @param source Source as absolute path
-     * @param dest Destination as absolute path
+     * @param source
+     * @param dest
      * @return true/false
      * @throws java.io.IOException
      */	
@@ -240,9 +240,9 @@ public abstract class HelperIO {
 	/**
      * Writes a text line in a file
      * 
-     * @param file File name (with absolute path)
-     * @param encoding
-     * @param line Text line
+     * @param file for writing
+     * @param encoding of the file
+     * @param line containing the text to write
      * @throws java.io.IOException
      */	
 	public static void writeLine(final File file, final String encoding, final String line) throws IOException {
@@ -271,8 +271,8 @@ public abstract class HelperIO {
 	/**
      * Writes a text line with "UTF-8"-encoding in a file
      * 
-     * @param file File name (with absolute path)
-     * @param line Text line
+     * @param file for writing
+     * @param line containing the text to write
      * @throws java.io.IOException
      */	
 	public static void writeLine(final File file, final String line) throws IOException {
@@ -286,13 +286,13 @@ public abstract class HelperIO {
 	/**
      * Writes a byte-array into a file 
      * 
-     * @param file
-     * @param data byte-array
-     * @param append to file
+     * @param file for writing
+     * @param data byte-array to write
+     * @param append to file?
      * @throws java.io.IOException
      */	
-	public static void writeFileAsBinary(final File file, final byte[] data, final boolean append) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "writeFileAsBinary", new Object[]{file, data, append});  //$NON-NLS-1$
+	public static void writeFileFromBinary(final File file, final byte[] data, final boolean append) throws IOException {
+		Logger.getInstance().writeMethodEntry(HelperIO.class, "writeFileFromBinary", new Object[]{file, data, append});  //$NON-NLS-1$
 
 		FileOutputStream fos = null;
 		
@@ -306,19 +306,19 @@ public abstract class HelperIO {
             }
 		}
 		
-		Logger.getInstance().writeMethodExit(HelperIO.class, "writeFileAsBinary");  //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(HelperIO.class, "writeFileFromBinary");  //$NON-NLS-1$
 	}
 	
 	/**
      * Writes a String into a file 
      * 
-     * @param file
-     * @param data String
-     * @param append to file
+     * @param file for writing
+     * @param data String to write
+     * @param append to file?
      * @throws java.io.IOException
      */	
-	public static void writeFileAsString(final File file, final String data, final boolean append) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "writeFileAsString", new Object[]{file, data, append});  //$NON-NLS-1$
+	public static void writeFileFromString(final File file, final String data, final boolean append) throws IOException {
+		Logger.getInstance().writeMethodEntry(HelperIO.class, "writeFileFromString", new Object[]{file, data, append});  //$NON-NLS-1$
 
 		final Writer writer = new BufferedWriter(new FileWriter(file));
 	
@@ -333,14 +333,14 @@ public abstract class HelperIO {
 	      writer.close();
 	    }
 	    
-		Logger.getInstance().writeMethodExit(HelperIO.class, "writeFileAsString");  //$NON-NLS-1$
+		Logger.getInstance().writeMethodExit(HelperIO.class, "writeFileFromString");  //$NON-NLS-1$
 	}
 	
 	/**
      * Writes a byte array to a stream 
      * 
-     * @param os output stream
-     * @param data byte-array
+     * @param os output stream for writing
+     * @param data byte-array for the stream
      * @throws java.io.IOException
      */	
 	public static void writeStream(final OutputStream os, final byte[] data) throws IOException {
@@ -360,8 +360,8 @@ public abstract class HelperIO {
      * Reads a stream in a byte-array.
      * This is a fast method for reading files/resources streams but is probably not suitable for network streams.
      * 
-     * @param in InputStream
-     * @return byte-array
+     * @param in InputStream for reading
+     * @return byte-array containing the stream content
      * @throws java.io.IOException
      */	
 	public static byte[] readStreamFast(final InputStream in) throws IOException {
@@ -390,8 +390,8 @@ public abstract class HelperIO {
      * Reads a stream in a byte-array.
      * This is a slow method for secure reading a stream (e.g. network streams).
      * 
-     * @param in InputStream
-     * @return byte-array
+     * @param in InputStream for reading
+     * @return byte-array containing the stream content
      */	
 	public static byte[] readStreamSecure(InputStream in) throws IOException {
 		Logger.getInstance().writeMethodEntry(HelperIO.class, "readStreamSecure", in);  //$NON-NLS-1$
@@ -416,8 +416,8 @@ public abstract class HelperIO {
 	/**
      * Reads a file in a byte-array
      * 
-     * @param file File name (with absolute path)
-     * @return byte-array
+     * @param file for reading
+     * @return byte-array containing the file content
      * @throws java.io.IOException
      */	
 	public static byte[] readFileAsBinary(final File file) throws IOException {
@@ -438,6 +438,7 @@ public abstract class HelperIO {
                 fis.close();
             }
 		}
+
 		Logger.getInstance().writeMethodExit(HelperIO.class, "readFileAsBinary", buffer);  //$NON-NLS-1$
 		return buffer;
 	}
@@ -445,8 +446,8 @@ public abstract class HelperIO {
 	/**
      * Reads a file in a String
      * 
-     * @param file File name (with absolute path)
-     * @return String
+     * @param file for reading
+     * @return String containing the file content
      * @throws java.io.IOException
      */	
 	public static String readFileAsString(final File file) throws IOException {
@@ -466,15 +467,41 @@ public abstract class HelperIO {
 	    } finally {
 	      scanner.close();
 	    }
-		Logger.getInstance().writeMethodExit(HelperIO.class, "readFileAsString", str);  //$NON-NLS-1$
+		
+	    Logger.getInstance().writeMethodExit(HelperIO.class, "readFileAsString", str);  //$NON-NLS-1$
 		return str;
+	}
+
+	/**
+     * Reads a file in a list
+     * 
+     * @param file for reading
+     * @return List containing the file content
+     * @throws java.io.IOException
+     */	
+	public static List<String> readFileAsList(final File file) throws IOException {
+		Logger.getInstance().writeMethodEntry(HelperIO.class, "readFileAsList", file);  //$NON-NLS-1$
+
+		final Scanner scanner = new Scanner(file);
+		final List<String> list = new ArrayList<String>();
+		
+		try {
+	    	while (scanner.hasNextLine()){
+	    		list.add(scanner.nextLine());
+            }
+	    } finally {
+	      scanner.close();
+	    }
+	    
+		Logger.getInstance().writeMethodExit(HelperIO.class, "readFileAsList", list);  //$NON-NLS-1$
+		return list;
 	}
 
 	/**
      * Concatenates a list of files to one output file 
      * 
-     * @param fileOutput Output file name (with absolute path)
-     * @param list List with all file names (with absolute path)
+     * @param fileOutput Output file
+     * @param list List with all files
      * @throws java.io.IOException
      */	
 	public static void concatenateFiles(final File fileOutput, final File[] list) throws IOException {

@@ -153,7 +153,7 @@ public abstract class PublicKeyProvider {
     public static void storeCertificate(final Certificate cert, final File file) throws CertificateEncodingException, IOException {
 		Logger.getInstance().writeMethodEntry(PublicKeyProvider.class, "storeCertificate", new Object[]{cert, file});  //$NON-NLS-1$
 
-		HelperIO.writeFileAsBinary(file, cert.getEncoded(), false);
+		HelperIO.writeFileFromBinary(file, cert.getEncoded(), false);
 
 		Logger.getInstance().writeMethodExit(PublicKeyProvider.class, "storeCertificate");  //$NON-NLS-1$
     }

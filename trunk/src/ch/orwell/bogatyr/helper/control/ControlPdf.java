@@ -66,7 +66,7 @@ public abstract class ControlPdf {
 
 		// first store the pdfFileContents to a temporary file
 		final File temporaryFile = createFile();
-		HelperIO.writeFileAsBinary(temporaryFile, pdfFileContents, false);
+		HelperIO.writeFileFromBinary(temporaryFile, pdfFileContents, false);
 		open(temporaryFile);
 		
 		Logger.getInstance().writeMethodExit(ControlPdf.class, "open");  //$NON-NLS-1$

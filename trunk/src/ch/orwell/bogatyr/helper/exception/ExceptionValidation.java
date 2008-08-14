@@ -31,7 +31,7 @@
  *******************************************************************************/
 package ch.orwell.bogatyr.helper.exception;
 
-import ch.orwell.bogatyr.helper.dao.DataObject;
+import ch.orwell.bogatyr.model.dao.DataObject;
 
 
 /**
