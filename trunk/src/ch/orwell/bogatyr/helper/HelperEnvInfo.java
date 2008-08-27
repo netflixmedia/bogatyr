@@ -43,11 +43,40 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This class may be used to transmit client environment info to the server and to decide if
  * an operating system corresponds to the Windows, Mac or a Unix operating system. 
  * It encapsulates name, architecture and version of an operating system, based on system properties.
+ * It also provides informations about memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 20080811
+ * @version 20080827
  */
 public abstract class HelperEnvInfo {
+	/**
+	 * Returns the same as Runtime.getRuntime().totalMemory()
+     *
+     * @return total memory
+	 */
+	public long getMemoryTotal() {
+		Logger.getInstance().writeMethodEntry(HelperEnvInfo.class, "getMemoryTotal");  //$NON-NLS-1$
+
+		long memory = Runtime.getRuntime().totalMemory();
+		
+		Logger.getInstance().writeMethodExit(HelperEnvInfo.class, "getMemoryTotal", memory);  //$NON-NLS-1$
+		return memory;
+	}
+
+	/**
+	 * Returns the same as Runtime.getRuntime().freeMemory()
+     *
+     * @return total memory
+	 */
+	public long getMemoryFree() {
+		Logger.getInstance().writeMethodEntry(HelperEnvInfo.class, "getMemoryFree");  //$NON-NLS-1$
+
+		long memory = Runtime.getRuntime().freeMemory();
+		
+		Logger.getInstance().writeMethodExit(HelperEnvInfo.class, "getMemoryFree", memory);  //$NON-NLS-1$
+		return memory;
+	}
+
 	/**
 	 * Returns the same as system property "os.arch"
      *

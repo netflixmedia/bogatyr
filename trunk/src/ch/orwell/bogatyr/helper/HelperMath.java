@@ -41,10 +41,48 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20080810
+ * @version 20080826
  */
 public abstract class HelperMath {
 	
+	/**
+	 * Returns the greatest common divisor
+	 * 
+	 * @param a first number
+	 * @param b second number
+	 * @return calculated gcd
+	 */
+	 public static double gcd(double a, double b) {
+		 Logger.getInstance().writeMethodEntry(HelperMath.class, "gcd", new Object[]{a, b});  //$NON-NLS-1$
+
+		 final double result;
+		 
+		 if (b == 0) { 
+			 result = a;
+		 } else {
+			 result = gcd(b, a % b);
+		 }
+		 
+		 Logger.getInstance().writeMethodExit(HelperMath.class, "gcd", result);  //$NON-NLS-1$
+		 return result;
+	 } 
+
+	 /**
+	 * Returns the least common multiple
+	 * 
+	 * @param a first number
+	 * @param b second number
+	 * @return calculated lcm
+	 */
+	 public static double lcm(double a, double b) {
+		 Logger.getInstance().writeMethodEntry(HelperMath.class, "lcm", new Object[]{a, b});  //$NON-NLS-1$
+		 
+		 final double result = a * b / gcd(a, b);
+		 
+		 Logger.getInstance().writeMethodExit(HelperMath.class, "lcm", result);  //$NON-NLS-1$
+		 return result;
+	 }
+	 
 	/**
      * Checks if a number is a prime
      * 

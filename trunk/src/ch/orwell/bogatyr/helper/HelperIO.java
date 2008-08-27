@@ -57,10 +57,31 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20080814
+ * @version 20080827
  */
 public abstract class HelperIO {
 	private static final int BUFFER = 1024;
+	
+	/**
+     * Returns a temporary file which will be deleted on program exit
+     * 
+     * @param name of the file
+     * @param extension of the file (e.g. ".java")
+     * @return temporary file
+     * @throws java.io.IOException
+     */	
+	public static File getTemporaryFile(final String name, final String extension) throws IOException {
+		Logger.getInstance().writeMethodEntry(HelperIO.class, "getTemporaryFile", new Object[]{name, extension});  //$NON-NLS-1$
+
+		// Create temp file
+	    File file = File.createTempFile(name, extension);
+	
+	    // Delete temp file when program exits
+	    file.deleteOnExit();
+	    
+		Logger.getInstance().writeMethodExit(HelperIO.class, "getTemporaryFile", file);  //$NON-NLS-1$
+	    return file;
+	}
 	
 	/**
      * Search in a path (directory) for files via identifier

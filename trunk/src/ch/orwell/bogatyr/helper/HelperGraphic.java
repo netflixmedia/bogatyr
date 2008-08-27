@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.orwell.bogatyr.helper;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -50,7 +51,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 20080810
+ * @version 20080827
  */
 public abstract class HelperGraphic {
 	
@@ -120,5 +121,21 @@ public abstract class HelperGraphic {
 		
 		Logger.getInstance().writeMethodExit(HelperGraphic.class, "getFonts", result);  //$NON-NLS-1$
 		return result;
+	}
+    
+    /**
+     * Returns the hex value of a color (RGB).
+     * Used e.g. for HTML.
+     *
+     * @param color for the hex value
+     * @return hex value of the color
+     */
+    public static String getColorHex(Color color) {
+		Logger.getInstance().writeMethodEntry(HelperGraphic.class, "getColorHex", color);  //$NON-NLS-1$
+
+    	String str = Integer.toHexString(color.getRGB() & 0x00ffffff); 
+    	
+		Logger.getInstance().writeMethodExit(HelperGraphic.class, "getColorHex", str);  //$NON-NLS-1$
+		return str;
 	}
 }
