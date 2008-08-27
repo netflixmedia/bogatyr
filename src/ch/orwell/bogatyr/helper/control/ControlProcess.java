@@ -43,9 +43,11 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * Reads standard output and standard error of a process.
  * 
  * @author Stefan Laubenberger
- * @version 20080809
+ * @version 20080826
  */
 public abstract class ControlProcess {
+	private static final int BUFFER = 1024;
+	
 	/**
 	 * Creates a new process and reads the standard output and standard error.
 	 *
@@ -58,7 +60,8 @@ public abstract class ControlProcess {
 	public static Process createProcess(final String command, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
 		Logger.getInstance().writeMethodEntry(ControlProcess.class, "createSubprocess", command);  //$NON-NLS-1$
 
-		final Process process = Runtime.getRuntime().exec(command);
+		final Process process = new ProcessBuilder(command).start();
+//		final Process process = Runtime.getRuntime().exec(command);
 		ControlProcess.readStandardOutput(process, outputStream, errorStream);
 		
 		Logger.getInstance().writeMethodExit(ControlProcess.class, "createSubprocess", process);  //$NON-NLS-1$
@@ -75,7 +78,8 @@ public abstract class ControlProcess {
 	public static Process createProcess(final String command) throws IOException {
 		Logger.getInstance().writeMethodEntry(ControlProcess.class, "createSubprocess", command);  //$NON-NLS-1$
 
-		final Process process = Runtime.getRuntime().exec(command);
+		final Process process = new ProcessBuilder(command).start();
+//		final Process process = Runtime.getRuntime().exec(command);
 		
 		Logger.getInstance().writeMethodExit(ControlProcess.class, "createSubprocess", process);  //$NON-NLS-1$
 		return process;
@@ -89,11 +93,6 @@ public abstract class ControlProcess {
 	 * Starts two threads which read standard output and standard error from a process.
 	 * <strong>Note:</strong> Standard output and standard error of the process returned by
 	 * {@link Runtime#exec} must be read else the process might hang infinitly.
-	 * <p>
-	 * Usage example: <code><pre>
-	final Process process = Runtime.getRuntime().exec("some command");
-	ProcessUtil.readStandardOutputs(process, null, null);
-	 * </pre></code>
 	 *
 	 * @param process to observe
      * @param outputStream If null, output is discarded.
@@ -129,7 +128,7 @@ public abstract class ControlProcess {
 		@Override
 		public void run() {
 			try {
-                final byte[] buffer = new byte[1024];
+                final byte[] buffer = new byte[BUFFER];
                 int len;
 				while ((len = fSource.read(buffer)) != -1) {
 					if (fTarget != null) {

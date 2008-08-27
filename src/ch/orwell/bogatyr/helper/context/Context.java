@@ -45,7 +45,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * Get access for general content in the context.
  * 
  * @author Stefan Laubenberger
- * @version 20080810
+ * @version 20080827
  */
 public class Context implements IContext {
 	private static Context instance;
@@ -158,7 +158,7 @@ public class Context implements IContext {
 		String str = getDataString(KEY_APPLICATION_VERSION);
 
 		if (str == null) {
-			str = "0.37";  //$NON-NLS-1$ //TODO change every release!
+			str = "0.40";  //$NON-NLS-1$ //TODO change every release!
 		}
 		
 		Logger.getInstance().writeMethodExit(this.getClass(), "getApplicationVersion", str); //$NON-NLS-1$
@@ -171,7 +171,7 @@ public class Context implements IContext {
 		String str = getDataString(KEY_APPLICATION_BUILD);
 		
 		if (str == null) {
-			str = "20080811";  //$NON-NLS-1$ //TODO change every release!
+			str = "20080827";  //$NON-NLS-1$ //TODO change every release!
 		}
 		
 		Logger.getInstance().writeMethodExit(this.getClass(), "getApplicationBuild", str); //$NON-NLS-1$

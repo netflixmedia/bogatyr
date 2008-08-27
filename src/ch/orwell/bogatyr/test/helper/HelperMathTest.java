@@ -43,6 +43,14 @@ import ch.orwell.bogatyr.helper.HelperMath;
  */
 public class HelperMathTest extends TestCase { //TODO improve
 
+	public void testGcd() {
+		assertEquals(2.0, HelperMath.gcd(2.0D, 4.0D));
+	}
+	
+	public void testLcm() {
+		assertEquals(10.0D, HelperMath.lcm(2.0D, 5.0D));
+	}
+
 	public void testIsPrime() {
 		assertEquals(false, HelperMath.isPrime(-1));
 		assertEquals(false, HelperMath.isPrime(0));
