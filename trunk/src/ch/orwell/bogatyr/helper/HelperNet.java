@@ -50,7 +50,7 @@ import ch.orwell.bogatyr.helper.logger.Logger;
  * This is a helper class for network operations
  *
  * @author Stefan Laubenberger
- * @version 20080810
+ * @version 20080829
  */
 public abstract class HelperNet {
 	private static final String PROPERTY_HTTP_USE_PROXY   = "http.useProxy"; //$NON-NLS-1$
@@ -308,6 +308,25 @@ public abstract class HelperNet {
         return result;
      }
 
+    /**
+     * Returns the content of an url with HTTP authentication
+     *
+     * @param url to read
+     * @param username for the HTTP authentication
+     * @param password for the HTTP authentication
+     * @return byte array with the content
+     * @throws IOException
+     */
+    public static byte[] readUrl(URL url, String username, String password) throws IOException {
+		Logger.getInstance().writeMethodEntry(HelperNet.class, "readUrl", new Object[]{url, username, password});  //$NON-NLS-1$
+
+		Authenticator.setDefault(new MyAuthenticator(username, password));
+		final byte[] result = readUrl(url);
+		
+		Logger.getInstance().writeMethodExit(HelperNet.class, "readUrl", result);  //$NON-NLS-1$
+        return result;
+     }
+    
 //	public static String getMacAddress(NetworkInterface ni) throws SocketException { // Java 1.6 only
 //		String result = "";
 //
@@ -329,13 +348,26 @@ public abstract class HelperNet {
     private static void authenticate(final String username, final String password) {
 		Logger.getInstance().writeMethodEntry(HelperNet.class, "authenticate", new Object[]{username, password});  //$NON-NLS-1$
 
-    	Authenticator.setDefault(new Authenticator() {
-    		@Override
-    		protected PasswordAuthentication getPasswordAuthentication() {
-    			return new PasswordAuthentication(username, password.toCharArray());
-    		}
-    	});
+    	Authenticator.setDefault(new MyAuthenticator(username, password));
 
     	Logger.getInstance().writeMethodExit(HelperNet.class, "authenticate");  //$NON-NLS-1$
+    }
+    
+    
+    /*
+     * Inner classes
+     */
+    private static class MyAuthenticator extends Authenticator {
+        private String username, password;
+
+        public MyAuthenticator(String username, String password) {
+        	this.username = username;
+        	this.password = password;
+        }
+
+    	@Override
+		public PasswordAuthentication getPasswordAuthentication() {
+            return (new PasswordAuthentication(username, password.toCharArray()));
+        }
     }
 }
