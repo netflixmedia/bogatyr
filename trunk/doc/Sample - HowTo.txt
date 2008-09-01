@@ -27,7 +27,7 @@ As parameter ch.sisprocom.bogatyr.sample.helloworld.HelloWorld /cfg/ch/sisprocom
 
 Without IDE, you must first compile your application with javac and enter this on your command prompt:
 
-java -jar /lib/bogatyr_0.35.jar ch.sisprocom.bogatyr.sample.helloworld.HelloWorld /cfg/ch/sisprocom/bogatyr/sample/helloworld/standard.properties
+java -jar /lib/bogatyr_0.40.jar ch.sisprocom.bogatyr.sample.helloworld.HelloWorld /cfg/ch/sisprocom/bogatyr/sample/helloworld/standard.properties
 
 
 +-------------+
@@ -41,7 +41,7 @@ As parameter ch.sisprocom.bogatyr.sample.filemanager.FileManager /cfg/ch/sisproc
 
 Without IDE, you must first compile your application with javac and enter this on your command prompt:
 
-java -jar /lib/bogatyr_0.35.jar ch.sisprocom.bogatyr.sample.filemanager.FileManager /cfg/ch/sisprocom/bogatyr/sample/filemanager/standard.properties
+java -jar /lib/bogatyr_0.40.jar ch.sisprocom.bogatyr.sample.filemanager.FileManager /cfg/ch/sisprocom/bogatyr/sample/filemanager/standard.properties
 
 
 If you have any questions, visit our project pages:
@@ -51,5 +51,5 @@ http://www.sisprocom.ch/bogatyr/
 
 or write us an email:
 ---------------------
-s.spross@sisprocom.ch
 s.laubenberger@sisprocom.ch
+s.spross@sisprocom.ch

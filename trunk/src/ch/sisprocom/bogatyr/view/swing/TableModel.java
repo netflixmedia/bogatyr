@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by Stefan Laubenberger and Silvan Spross.
+ * Copyright (c) 2007-2008 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -15,18 +15,18 @@
  * This distribution is available at:
  * ----------------------------------
  * <http://code.google.com/p/bogatyr/>
+ * <http://www.sisprocom.ch/bogatyr/>
  * 
  * Contact information:
  * --------------------
- * Stefan Laubenberger
- * Bullingerstrasse 53
- * CH-8004 Zuerich
- * <laubenberger@gmail.com>
- * 
- * Silvan Spross
+ * SiSprocom GmbH
  * Badenerstrasse 47 
  * CH-8004 Zuerich
- * <silvan.spross@gmail.com>
+ *
+ * <http://www.sisprocom.ch>
+ *
+ * <s.laubenberger@sisprocom.ch>
+ * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.logger.Logger;
  * This is an extended AbstractTableModel
  * 
  * @author Stefan Laubenberger
- * @version 20080810
+ * @version 20080901
  */
 public class TableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -472247252594891753L;
