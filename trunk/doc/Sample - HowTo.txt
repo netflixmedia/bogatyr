@@ -19,36 +19,37 @@ src
 +------------+
 | HelloWorld |
 +------------+
-optional: edit the cfg/ch/orwell/sample/helloworld/standard.properties file and enter the correct settings
+optional: edit the cfg/ch/sisprocom/sample/helloworld/standard.properties file and enter the correct settings
 
-If you use an IDE, go to run and select as main method ch.orwell.bogatyr.controller.Runner. 
-As parameter ch.orwell.bogatyr.sample.helloworld.HelloWorld /cfg/ch/orwell/bogatyr/sample/helloworld/standard.properties. Now run the application.
+If you use an IDE, go to run and select as main method ch.sisprocom.bogatyr.controller.Runner. 
+As parameter ch.sisprocom.bogatyr.sample.helloworld.HelloWorld /cfg/ch/sisprocom/bogatyr/sample/helloworld/standard.properties. Now run the application.
 
 
 Without IDE, you must first compile your application with javac and enter this on your command prompt:
 
-java -jar /lib/bogatyr_0.35.jar ch.orwell.bogatyr.sample.helloworld.HelloWorld /cfg/ch/orwell/bogatyr/sample/helloworld/standard.properties
+java -jar /lib/bogatyr_0.35.jar ch.sisprocom.bogatyr.sample.helloworld.HelloWorld /cfg/ch/sisprocom/bogatyr/sample/helloworld/standard.properties
 
 
 +-------------+
 | FileManager |
 +-------------+
-optional: edit the cfg/ch/orwell/sample/filemanager/standard.properties file and enter the correct settings
+optional: edit the cfg/ch/sisprocom/sample/filemanager/standard.properties file and enter the correct settings
 
-If you use an IDE, go to run and select as main method ch.orwell.bogatyr.controller.Runner. 
-As parameter ch.orwell.bogatyr.sample.filemanager.FileManager /cfg/ch/orwell/bogatyr/sample/filemanager/standard.properties. Now run the application.
+If you use an IDE, go to run and select as main method ch.sisprocom.bogatyr.controller.Runner. 
+As parameter ch.sisprocom.bogatyr.sample.filemanager.FileManager /cfg/ch/sisprocom/bogatyr/sample/filemanager/standard.properties. Now run the application.
 
 
 Without IDE, you must first compile your application with javac and enter this on your command prompt:
 
-java -jar /lib/bogatyr_0.35.jar ch.orwell.bogatyr.sample.filemanager.FileManager /cfg/ch/orwell/bogatyr/sample/filemanager/standard.properties
+java -jar /lib/bogatyr_0.35.jar ch.sisprocom.bogatyr.sample.filemanager.FileManager /cfg/ch/sisprocom/bogatyr/sample/filemanager/standard.properties
 
 
-If you have any questions, visit our project page:
---------------------------------------------------
+If you have any questions, visit our project pages:
+---------------------------------------------------
 http://code.google.com/p/bogatyr/
+http://www.sisprocom.ch/bogatyr/
 
 or write us an email:
 ---------------------
-laubenberger@gmail.com
-silvan.spross@gmail.com
+s.spross@sisprocom.ch
+s.laubenberger@sisprocom.ch
