@@ -54,7 +54,7 @@ import ch.sisprocom.bogatyr.helper.logger.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20080901
+ * @version 20080903
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and when, is logging needed?
 	private static final String CHECKSUM_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
@@ -97,7 +97,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     public static String getLineSeparator() {
 //        Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getLineSeparator");  //$NON-NLS-1$
 
-        String result = System.getProperty("line.separator");
+        String result = System.getProperty("line.separator"); //$NON-NLS-1$
 
 //        Logger.getInstance().writeMethodExit(HelperGeneral.class, "getLineSeparator", result);  //$NON-NLS-1$
         return result;

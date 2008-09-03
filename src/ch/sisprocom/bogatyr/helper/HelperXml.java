@@ -38,7 +38,7 @@ import ch.sisprocom.bogatyr.helper.logger.Logger;
  * This is a helper class for XML operations
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20080903
  */
 public abstract class HelperXml {
 	/**
@@ -55,24 +55,22 @@ public abstract class HelperXml {
     public static String getValidXmlString(final String in) {
 		Logger.getInstance().writeMethodEntry(HelperXml.class, "getValidXmlString", in);  //$NON-NLS-1$
 
-    	final StringBuilder out = new StringBuilder(); // Used to hold the output.
-        char current; // Used to reference the current character.
-
         if (!HelperGeneral.isValidString(in)) { // vacancy test
             return ""; //$NON-NLS-1$
         }
-        
-        for (int ii = 0; ii < in.length(); ii++) {
-            current = in.charAt(ii);
+       
+       	final StringBuilder sb = new StringBuilder(); // Used to hold the output.
+
+        for (char current : in.toCharArray()) {
 //            if (current != 0x96 && current != 0x9C) { // new
             if (current != (char) 0x26) { // new
 	            if (current == (char) 0x9 || current == (char) 0xA || current == (char) 0xD || current >= (char) 0x20 && current <= (char) 0xD7FF || current >= (char) 0xE000 && current <= (char) 0xFFFD || current >= (char) 0x10000 && current <= (char) 0x10FFFF) {
-                    out.append(current);
+                    sb.append(current);
                 }
             }
         }
 
-        final String result = out.toString();
+        final String result = sb.toString();
         
 		Logger.getInstance().writeMethodExit(HelperXml.class, "getValidXmlString", result);  //$NON-NLS-1$
         return result;

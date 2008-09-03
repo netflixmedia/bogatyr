@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
 import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
@@ -51,18 +52,18 @@ import ch.sisprocom.bogatyr.helper.logger.Logger;
  * This is a helper class for network operations
  *
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20080903
  */
 public abstract class HelperNet {
-	private static final String PROPERTY_HTTP_USE_PROXY   = "http.useProxy"; //$NON-NLS-1$
+//	private static final String PROPERTY_HTTP_USE_PROXY   = "http.useProxy"; //$NON-NLS-1$
 	private static final String PROPERTY_HTTP_PROXY_HOST  = "http.proxyHost"; //$NON-NLS-1$
 	private static final String PROPERTY_HTTP_PROXY_PORT  = "http.proxyPort"; //$NON-NLS-1$
 
-	private static final String PROPERTY_HTTPS_USE_PROXY  = "https.useProxy"; //$NON-NLS-1$
+//	private static final String PROPERTY_HTTPS_USE_PROXY  = "https.useProxy"; //$NON-NLS-1$
 	private static final String PROPERTY_HTTPS_PROXY_HOST = "https.proxyHost"; //$NON-NLS-1$
 	private static final String PROPERTY_HTTPS_PROXY_PORT = "https.proxyPort"; //$NON-NLS-1$
 
-	private static final String PROPERTY_FTP_USE_PROXY    = "ftp.useProxy"; //$NON-NLS-1$
+//	private static final String PROPERTY_FTP_USE_PROXY    = "ftp.useProxy"; //$NON-NLS-1$
 	private static final String PROPERTY_FTP_PROXY_HOST   = "ftp.proxyHost"; //$NON-NLS-1$
 	private static final String PROPERTY_FTP_PROXY_PORT   = "ftp.proxyPort"; //$NON-NLS-1$
 
@@ -78,7 +79,7 @@ public abstract class HelperNet {
     public static void enableProxyHttp(final String host, final int port, final String username, final String password) {
 		Logger.getInstance().writeMethodEntry(HelperNet.class, "enableProxyHttp", new Object[]{host, port, username, password});  //$NON-NLS-1$
 
-    	System.setProperty(PROPERTY_HTTP_USE_PROXY, "true"); //$NON-NLS-1$
+//    	System.setProperty(PROPERTY_HTTP_USE_PROXY, "true"); //$NON-NLS-1$
         System.setProperty(PROPERTY_HTTP_PROXY_HOST, host);
         System.setProperty(PROPERTY_HTTP_PROXY_PORT, Integer.toString(port));
 
@@ -94,7 +95,7 @@ public abstract class HelperNet {
     public static void disableProxyHttp() {
 		Logger.getInstance().writeMethodEntry(HelperNet.class, "disableProxyHttp");  //$NON-NLS-1$
 
-        System.clearProperty(PROPERTY_HTTP_USE_PROXY);
+//        System.clearProperty(PROPERTY_HTTP_USE_PROXY);
         System.clearProperty(PROPERTY_HTTP_PROXY_HOST);
         System.clearProperty(PROPERTY_HTTP_PROXY_PORT);
 
@@ -112,7 +113,7 @@ public abstract class HelperNet {
     public static void enableProxyHttps(final String host, final int port, final String username, final String password) {
 		Logger.getInstance().writeMethodEntry(HelperNet.class, "enableProxyHttps", new Object[]{host, port, username, password});  //$NON-NLS-1$
 
-		System.setProperty(PROPERTY_HTTPS_USE_PROXY, "true"); //$NON-NLS-1$
+//		System.setProperty(PROPERTY_HTTPS_USE_PROXY, "true"); //$NON-NLS-1$
         System.setProperty(PROPERTY_HTTPS_PROXY_HOST, host);
         System.setProperty(PROPERTY_HTTPS_PROXY_PORT, Integer.toString(port));
 
@@ -128,7 +129,7 @@ public abstract class HelperNet {
     public static void disableProxyHttps() {
 		Logger.getInstance().writeMethodEntry(HelperNet.class, "disableProxyHttps");  //$NON-NLS-1$
 
-		System.clearProperty(PROPERTY_HTTPS_USE_PROXY);
+//		System.clearProperty(PROPERTY_HTTPS_USE_PROXY);
         System.clearProperty(PROPERTY_HTTPS_PROXY_HOST);
         System.clearProperty(PROPERTY_HTTPS_PROXY_PORT);
 
@@ -146,7 +147,7 @@ public abstract class HelperNet {
     public static void enableProxyFtp(final String host, final int port, final String username, final String password) {
 		Logger.getInstance().writeMethodEntry(HelperNet.class, "enableProxyFtp", new Object[]{host, port, username, password});  //$NON-NLS-1$
 
-		System.setProperty(PROPERTY_FTP_USE_PROXY, "true"); //$NON-NLS-1$
+//		System.setProperty(PROPERTY_FTP_USE_PROXY, "true"); //$NON-NLS-1$
         System.setProperty(PROPERTY_FTP_PROXY_HOST, host);
         System.setProperty(PROPERTY_FTP_PROXY_PORT, Integer.toString(port));
 
@@ -162,8 +163,7 @@ public abstract class HelperNet {
     public static void disableProxyFtp() {
 		Logger.getInstance().writeMethodEntry(HelperNet.class, "disableProxyFtp");  //$NON-NLS-1$
 
-        System.clearProperty(PROPERTY_FTP_USE_PROXY);
-//        System.clearProperty(PROPERTY_FTP_PROXY_SET);
+//        System.clearProperty(PROPERTY_FTP_USE_PROXY);
         System.clearProperty(PROPERTY_FTP_PROXY_HOST);
         System.clearProperty(PROPERTY_FTP_PROXY_PORT);
 
@@ -302,8 +302,9 @@ public abstract class HelperNet {
     public static byte[] readUrl(URL url) throws IOException {
 		Logger.getInstance().writeMethodEntry(HelperNet.class, "readUrl", url);  //$NON-NLS-1$
 
-		final URLConnection connection = url.openConnection();
-		final byte[] result = HelperIO.readStreamSecure(connection.getInputStream());
+		final URLConnection con = url.openConnection();
+		con.connect();
+		final byte[] result = HelperIO.readStream(con.getInputStream());
 		
 		Logger.getInstance().writeMethodExit(HelperNet.class, "readUrl", result);  //$NON-NLS-1$
         return result;
@@ -321,8 +322,10 @@ public abstract class HelperNet {
     public static byte[] readUrl(URL url, String username, String password) throws IOException {
 		Logger.getInstance().writeMethodEntry(HelperNet.class, "readUrl", new Object[]{url, username, password});  //$NON-NLS-1$
 
-		authenticate(username, password);
-		final byte[] result = readUrl(url);
+		final URLConnection con = url.openConnection();
+		con.setRequestProperty("Authorization", "Basic " + ConverterBase64.encode((username + ':' + password))); //$NON-NLS-1$ //$NON-NLS-2$
+		con.connect();
+		final byte[] result = HelperIO.readStream(con.getInputStream());
 		
 		Logger.getInstance().writeMethodExit(HelperNet.class, "readUrl", result);  //$NON-NLS-1$
         return result;
