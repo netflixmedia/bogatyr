@@ -40,12 +40,12 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20080903
  */
 public class ConverterBase64Test extends TestCase { //TODO improve
 	
 	public void testEncodeAndDecode() {
-		assertEquals(AllBogatyrTests.DATA, ConverterBase64.decodeString(ConverterBase64.encodeString(AllBogatyrTests.DATA)));
+		assertEquals(AllBogatyrTests.DATA, new String(ConverterBase64.decode(ConverterBase64.encode(AllBogatyrTests.DATA))));
 	}
 }
 

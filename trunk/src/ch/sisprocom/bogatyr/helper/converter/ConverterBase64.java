@@ -39,7 +39,7 @@ import ch.sisprocom.bogatyr.helper.logger.Logger;
  * Encodes data to Base64 and decodes it.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20080903
  */
 public abstract class ConverterBase64 {
 	// Resources
@@ -82,7 +82,7 @@ public abstract class ConverterBase64 {
 	 * @param string String to be encoded.
 	 * @return String with the Base64 encoded data.
 	 */
-	public static String encodeString(final String string) {
+	public static String encode(final String string) {
 		Logger.getInstance().writeMethodEntry(ConverterBase64.class, "encodeString", string);  //$NON-NLS-1$
 
 		final String str = new String(encode(string.getBytes()));
@@ -107,21 +107,21 @@ public abstract class ConverterBase64 {
 		return result;
 	}
 
-	/**
-	 * Decodes a string from Base64 format.
-	 * 
-	 * @param string Base64 String to be decoded.
-	 * @return String containing the decoded data.
-	 * @throws IllegalArgumentException
-	 */
-	public static String decodeString(final String string) {
-		Logger.getInstance().writeMethodEntry(ConverterBase64.class, "decodeString", string);  //$NON-NLS-1$
-
-		final String str = new String(decode(string));
-		
-		Logger.getInstance().writeMethodExit(ConverterBase64.class, "decodeString", str);  //$NON-NLS-1$
-		return str;
-	}
+//	/**
+//	 * Decodes a string from Base64 format.
+//	 * 
+//	 * @param string Base64 String to be decoded.
+//	 * @return String containing the decoded data.
+//	 * @throws IllegalArgumentException
+//	 */
+//	public static String decodeToString(final String string) {
+//		Logger.getInstance().writeMethodEntry(ConverterBase64.class, "decodeToString", string);  //$NON-NLS-1$
+//
+//		final String str = new String(decode(string));
+//		
+//		Logger.getInstance().writeMethodExit(ConverterBase64.class, "decodeToString", str);  //$NON-NLS-1$
+//		return str;
+//	}
 
 	/**
 	 * Decodes a byte array from Base64 format.

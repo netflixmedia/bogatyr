@@ -380,22 +380,22 @@ public abstract class HelperIO {
 	
 	/**
      * Reads a stream in a byte-array.
-     * This is a fast method for reading files/resources streams but is probably not suitable for network streams.
      * 
      * @param in InputStream for reading
      * @return byte-array containing the stream content
      * @throws java.io.IOException
      */	
-	public static byte[] readStreamFast(final InputStream in) throws IOException {
+	public static byte[] readStream(final InputStream in) throws IOException {
 		Logger.getInstance().writeMethodEntry(HelperIO.class, "readStreamFast", in);  //$NON-NLS-1$
 
 		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		final byte[] result;
-
+		int x;
+		
 		try {
 //            final byte[] buffer = new byte[BUFFER];
-            while (in.available() != 0) {
-				bos.write(BUFFER, 0, in.read(BUFFER, 0, BUFFER.length));
+            while ((x = in.read(BUFFER, 0, BUFFER.length)) != -1) {
+				bos.write(BUFFER, 0, x);
 			}
             bos.flush();
             
@@ -408,32 +408,33 @@ public abstract class HelperIO {
 		return result;
 	}
 	
-	/**
-     * Reads a stream in a byte-array.
-     * This is a slow method for secure reading a stream (e.g. network streams).
-     * 
-     * @param in InputStream for reading
-     * @return byte-array containing the stream content
-     */	
-	public static byte[] readStreamSecure(InputStream in) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "readStreamSecure", in);  //$NON-NLS-1$
-
-		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		final byte[] result;
-
-		try {
-			while (in.available() != 0) {
-				bos.write(in.read());
-			}
-			bos.flush();
-			result = bos.toByteArray();
-		} finally {
-			bos.close();
-		}
-		
-		Logger.getInstance().writeMethodExit(HelperIO.class, "readStreamSecure", result);  //$NON-NLS-1$
-		return result;
-	}
+//	/**
+//     * Reads a stream in a byte-array.
+//     * This is a slow method for secure reading a stream (e.g. network streams).
+//     * 
+//     * @param in InputStream for reading
+//     * @return byte-array containing the stream content
+//     */	
+//	public static byte[] readStreamSecure(InputStream in) throws IOException {
+//		Logger.getInstance().writeMethodEntry(HelperIO.class, "readStreamSecure", in);  //$NON-NLS-1$
+//
+//		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//		final byte[] result;
+//		int x;
+//		
+//		try {
+//			while ((x = in.read()) != -1) {
+//				bos.write(x);
+//			}
+//			bos.flush();
+//			result = bos.toByteArray();
+//		} finally {
+//			bos.close();
+//		}
+//		
+//		Logger.getInstance().writeMethodExit(HelperIO.class, "readStreamSecure", result);  //$NON-NLS-1$
+//		return result;
+//	}
 	
 	/**
      * Reads a file in a byte-array
