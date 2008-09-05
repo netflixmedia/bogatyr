@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.logger.Logger;
  * Reads standard output and standard error of a process.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20080905
  */
 public abstract class ControlProcess {
 	private static final int BUFFER = 1024;
@@ -60,8 +60,8 @@ public abstract class ControlProcess {
 	public static Process createProcess(final String command, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
 		Logger.getInstance().writeMethodEntry(ControlProcess.class, "createSubprocess", command);  //$NON-NLS-1$
 
-		final Process process = new ProcessBuilder(command).start();
-//		final Process process = Runtime.getRuntime().exec(command);
+		final Process process = createProcess(command);
+
 		ControlProcess.readStandardOutput(process, outputStream, errorStream);
 		
 		Logger.getInstance().writeMethodExit(ControlProcess.class, "createSubprocess", process);  //$NON-NLS-1$
@@ -78,8 +78,9 @@ public abstract class ControlProcess {
 	public static Process createProcess(final String command) throws IOException {
 		Logger.getInstance().writeMethodEntry(ControlProcess.class, "createSubprocess", command);  //$NON-NLS-1$
 
-		final Process process = new ProcessBuilder(command).start();
-//		final Process process = Runtime.getRuntime().exec(command);
+//		ProcessBuilder pb = new ProcessBuilder(command);
+//		final Process process = pb.start();
+		final Process process = Runtime.getRuntime().exec(command);
 		
 		Logger.getInstance().writeMethodExit(ControlProcess.class, "createSubprocess", process);  //$NON-NLS-1$
 		return process;

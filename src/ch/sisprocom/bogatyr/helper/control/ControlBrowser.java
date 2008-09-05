@@ -42,12 +42,11 @@ import ch.sisprocom.bogatyr.helper.logger.Logger;
  * This controls displays an URL in a browser.
  *
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20080905
  */
 public abstract class ControlBrowser {
 	// The default system browser under windows.
-	private static final String WINDOWS_PATH = "rundll32"; //$NON-NLS-1$
-	private static final String WINDOWS_FLAG = "url.dll,FileProtocolHandler"; //$NON-NLS-1$
+	private static final String WINDOWS_PATH = "rundll32 url.dll,FileProtocolHandler"; //$NON-NLS-1$
 
 	// The default browser under unix.
 	private static final String UNIX_PATH = "netscape"; //$NON-NLS-1$
@@ -74,7 +73,7 @@ public abstract class ControlBrowser {
 		String cmd;
 				
 		if (HelperEnvInfo.isWindowsPlatform()) {
-			cmd = WINDOWS_PATH + ' ' + WINDOWS_FLAG + ' ' + url;
+			cmd = WINDOWS_PATH + ' ' + url;
 
 			// If the URL starts with "http://" or "https://" and doesn't contain a "?" or "#" we have problems opening the browser under certain circumstances:
 			//  - under Windows XP or 2000 with Internet Explorer
