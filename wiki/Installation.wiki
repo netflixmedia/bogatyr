@@ -21,6 +21,7 @@ Now run the application.
 
 6) Enjoy! `(hopefully)` :-)
 
+For more informations, please visit our [http://www.sisprocom.ch/bogatyr/ project page]project page.
+
 
 _A better installation tutorial will be added soon!_
-
