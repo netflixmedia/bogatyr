@@ -34,11 +34,11 @@ package ch.sisprocom.bogatyr.sample.filemanager;
 import java.io.File;
 import java.io.IOException;
 
-import ch.sisprocom.bogatyr.controller.ApplicationTemplate;
-import ch.sisprocom.bogatyr.helper.HelperIO;
+import org.apache.log4j.Logger;
+
+import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.exception.HelperException;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
+import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.property.Property;
 
 
@@ -46,9 +46,11 @@ import ch.sisprocom.bogatyr.helper.property.Property;
  * Simple file manager using the Bogatyr framework
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
-public class FileManager extends ApplicationTemplate {
+public class FileManager extends ApplicationAbstract {
+	private static final Logger log = Logger.getLogger(FileManager.class);
+	
 	// Resources
 	private final static String	PROPERTY_PATH        = "FileManager.path"; //$NON-NLS-1$
 	private final static String	PROPERTY_IDENTIFIER  = "FileManager.identifier"; //$NON-NLS-1$
@@ -78,7 +80,7 @@ public class FileManager extends ApplicationTemplate {
 		if (HelperGeneral.isValidString(value)) {
             path = new File(value);
 		} else {
-			System.err.println(getClass().getName() + "::readProperties - " + PROPERTY_PATH + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
+			log.error(PROPERTY_PATH + " == 'null'"); //$NON-NLS-1$
 			exit(70);
 		}
 		
@@ -94,10 +96,10 @@ public class FileManager extends ApplicationTemplate {
 			if (isDelete) {
 				HelperIO.delete(file);
 			}
-			Logger.getInstance().writeDebug(this.getClass(), "searchFiles", file.getAbsolutePath()); //$NON-NLS-1$
+			log.debug(file.getAbsolutePath());
 			ii++;
 		}
-		Logger.getInstance().writeLog(this.getClass(), "searchFiles", ii + " file(s) " + (isDelete ? "deleted" : "found")); //$NON-NLS-1$
+		log.info(ii + " file(s) " + (isDelete ? "deleted" : "found")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	
@@ -109,7 +111,7 @@ public class FileManager extends ApplicationTemplate {
 		try {
 			searchFiles();
 		} catch (IOException ex) {
-			Logger.getInstance().writeException(this.getClass(), "run", HelperException.EX_UNKNOWN_ERROR, ex);
+			log.error("Search for files failed", ex); //$NON-NLS-1$
 			exit(79);
 		}
 		exit(0);

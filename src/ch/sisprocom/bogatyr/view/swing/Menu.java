@@ -34,14 +34,13 @@ package ch.sisprocom.bogatyr.view.swing;
 import javax.swing.JMenu;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JMenu
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class Menu extends JMenu {
 	private static final long serialVersionUID = -908869267540163157L;
@@ -49,7 +48,6 @@ public class Menu extends JMenu {
 	
 	public Menu() {
 		super();
-		init();
     }
 	
 	public Menu(final String text, final int mnemonic) {
@@ -59,16 +57,7 @@ public class Menu extends JMenu {
 		if (mnemonic > 0) {
 			setMnemonic(mnemonic);
 		}
-		init();
     }
-	
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
-	}
 
 	
 	/*

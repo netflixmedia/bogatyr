@@ -39,7 +39,7 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
  * @author Stefan Laubenberger
  * @version 20080901
  */
-public final class ExceptionMethodNotGranted extends ExceptionTemplate {
+public final class ExceptionMethodNotGranted extends ExceptionAbstract {
 	private static final long serialVersionUID = -5511296760913333465L;
 
 	// Resources

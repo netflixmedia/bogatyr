@@ -38,7 +38,7 @@ package ch.sisprocom.bogatyr.helper.exception;
  * @author Stefan Laubenberger
  * @version 20080901
  */
-public final class ExceptionInvalidStreamSize extends ExceptionTemplate {
+public final class ExceptionInvalidStreamSize extends ExceptionAbstract {
 	private static final long serialVersionUID = 6400247262258600862L;
 
 

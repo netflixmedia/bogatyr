@@ -36,14 +36,13 @@ import java.util.Collection;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.exception.ExceptionValidation;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is the super-class for all value objects of the system
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public abstract class DataObject implements Serializable, IValidator {
     private static final long serialVersionUID = -3023201860307136848L;
@@ -59,40 +58,21 @@ public abstract class DataObject implements Serializable, IValidator {
 
     protected DataObject() {
         super();
-        init();
 	}
 		
 	public int getPersistenceState() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getPersistenceState");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getPersistenceState", persistenceState);  //$NON-NLS-1$
-
 		return persistenceState;
 	}
 
 
 	public void setPersistenceState(final int persistenceState) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "setPersistenceState", persistenceState);  //$NON-NLS-1$
-
 		if (persistenceState > this.persistenceState) {
 			this.persistenceState = persistenceState;
 		}
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "setPersistenceState");  //$NON-NLS-1$
 	}
 
 	public long getCreateTime() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getCreateTime");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getCreateTime", createTime);  //$NON-NLS-1$
-
 		return createTime;
-	}
-
-
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init",  toString()); //$NON-NLS-1$
 	}
 	
 	

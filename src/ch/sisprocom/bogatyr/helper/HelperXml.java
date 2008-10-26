@@ -31,14 +31,13 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is a helper class for XML operations
  * 
  * @author Stefan Laubenberger
- * @version 20080903
+ * @version 20081026
  */
 public abstract class HelperXml {
 	/**
@@ -53,8 +52,6 @@ public abstract class HelperXml {
      * @return The in String, stripped of non-valid characters.
      */
     public static String getValidXmlString(final String in) {
-		Logger.getInstance().writeMethodEntry(HelperXml.class, "getValidXmlString", in);  //$NON-NLS-1$
-
         if (!HelperGeneral.isValidString(in)) { // vacancy test
             return ""; //$NON-NLS-1$
         }
@@ -71,8 +68,6 @@ public abstract class HelperXml {
         }
 
         final String result = sb.toString();
-        
-		Logger.getInstance().writeMethodExit(HelperXml.class, "getValidXmlString", result);  //$NON-NLS-1$
         return result;
     }   
 }

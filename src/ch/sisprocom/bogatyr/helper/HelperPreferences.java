@@ -41,19 +41,15 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.InvalidPreferencesFormatException;
 import java.util.prefs.Preferences;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-
 
 /**
  * This is a helper class for preferences
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public abstract class HelperPreferences {
 	public static void loadFromFile(final File file) throws IOException, InvalidPreferencesFormatException {
-		Logger.getInstance().writeMethodEntry(HelperPreferences.class, "loadFromFile", file);  //$NON-NLS-1$
-
         BufferedInputStream bis = null;
 
         try {
@@ -64,14 +60,9 @@ public abstract class HelperPreferences {
                 bis.close();
             }
         }
-
-
-		Logger.getInstance().writeMethodExit(HelperPreferences.class, "loadFromFile");  //$NON-NLS-1$
 	}
 	 
 	public static void save(final Preferences prefs, final File file) throws IOException, BackingStoreException {
-		Logger.getInstance().writeMethodEntry(HelperPreferences.class, "save", new Object[]{prefs, file});  //$NON-NLS-1$
-
         BufferedOutputStream bos = null;
 
         try {
@@ -82,13 +73,9 @@ public abstract class HelperPreferences {
                 bos.close();
             }
         }
-		
-		Logger.getInstance().writeMethodExit(HelperPreferences.class, "save");  //$NON-NLS-1$
 	}	
 	  
 	public static void saveUserNode(final Class<?> clazz, final File file) throws IOException, BackingStoreException {
-		Logger.getInstance().writeMethodEntry(HelperPreferences.class, "saveUserNode", new Object[]{clazz, file});  //$NON-NLS-1$
-
         BufferedOutputStream bos = null;
 
         try {
@@ -99,13 +86,9 @@ public abstract class HelperPreferences {
                 bos.close();
             }
         }
-	
-		Logger.getInstance().writeMethodExit(HelperPreferences.class, "saveUserNode");  //$NON-NLS-1$
 	}	
 	  
 	public static void saveSystemNode(final Class<?> clazz, final File file) throws IOException, BackingStoreException {
-		Logger.getInstance().writeMethodEntry(HelperPreferences.class, "saveSystemNode", new Object[]{clazz, file});  //$NON-NLS-1$
-
         BufferedOutputStream bos = null;
 
         try {
@@ -116,7 +99,5 @@ public abstract class HelperPreferences {
                 bos.close();
             }
         }
-
- 		Logger.getInstance().writeMethodExit(HelperPreferences.class, "saveSystemNode");  //$NON-NLS-1$
 	}	
 }

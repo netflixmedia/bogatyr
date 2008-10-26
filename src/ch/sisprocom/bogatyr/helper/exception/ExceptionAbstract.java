@@ -29,20 +29,30 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.net.server.synch;
+package ch.sisprocom.bogatyr.helper.exception;
 
-import ch.sisprocom.bogatyr.controller.net.server.ServerTemplate;
-
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 /**
- * This is the skeleton for synchron servers
+ * This is a template for exceptions
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
-public abstract class ServerSynchTemplate extends ServerTemplate {
+public abstract class ExceptionAbstract extends Exception {
+	private static final long serialVersionUID = -5815760735662202320L;
 
-	protected ServerSynchTemplate(final String propertiesStreamName) throws Exception {
-		super(propertiesStreamName);
- 	}
-}
+	
+	protected ExceptionAbstract(final String msg) {
+        super(msg);
+    }
+
+	
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperGeneral.toString(this);
+	}
+} 

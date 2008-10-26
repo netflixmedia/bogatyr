@@ -45,8 +45,6 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-
 
 /**
  * This is a helper class for image operations
@@ -68,11 +66,7 @@ public abstract class HelperImage {
      * @throws java.io.IOException
      */
     public static void saveImage(final RenderedImage image, final String type, final File output) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperImage.class, "saveImage", new Object[]{image, type, output});  //$NON-NLS-1$
-
     	ImageIO.write(image, type, output);
-
-		Logger.getInstance().writeMethodExit(HelperImage.class, "saveImage");  //$NON-NLS-1$
     }
 
     /**
@@ -84,8 +78,6 @@ public abstract class HelperImage {
      * @throws java.io.IOException
      */
 	public static void saveImage(final Component component, final String type, final File output) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperImage.class, "saveImage", new Object[]{component, type, output});  //$NON-NLS-1$
-
 		final Dimension size = component.getSize();
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		final Graphics2D g2 = image.createGraphics();
@@ -93,8 +85,6 @@ public abstract class HelperImage {
 		component.paint(g2);
        
 		saveImage(image, type, output);
-
-		Logger.getInstance().writeMethodExit(HelperImage.class, "saveImage");  //$NON-NLS-1$
 	} 
 	
 	/**
@@ -102,12 +92,9 @@ public abstract class HelperImage {
 	 * @return list of unique supported read formats
 	 */
 	public static List<String> getImageReadFormats() {
-		Logger.getInstance().writeMethodEntry(HelperImage.class, "getImageReadFormats");  //$NON-NLS-1$
-
 	    String[] formatNames = ImageIO.getReaderFormatNames();
 	    List<String> list = unique(formatNames);
 	    
-		Logger.getInstance().writeMethodExit(HelperImage.class, "getImageReadFormats", list);  //$NON-NLS-1$
 	    return list;
 	}
 
@@ -116,12 +103,9 @@ public abstract class HelperImage {
 	 * @return list of unique supported write formats
 	 */
 	public static List<String> getImageWriteFormats() {
-		Logger.getInstance().writeMethodEntry(HelperImage.class, "getImageWriteFormats");  //$NON-NLS-1$
-
 	    String[] formatNames = ImageIO.getWriterFormatNames();
 	    List<String> list = unique(formatNames);
 
-	    Logger.getInstance().writeMethodExit(HelperImage.class, "getImageWriteFormats", list);  //$NON-NLS-1$
 	    return list;
 	}
 
@@ -130,12 +114,9 @@ public abstract class HelperImage {
 	 * @return list of unique MIME types that can be read
 	 */
 	public static List<String> getImageReadMIMETypes() {
-		Logger.getInstance().writeMethodEntry(HelperImage.class, "getImageReadMIMETypes");  //$NON-NLS-1$
-
 	    String[] formatNames = ImageIO.getReaderMIMETypes();
 	    List<String> list = unique(formatNames);
 
-	    Logger.getInstance().writeMethodExit(HelperImage.class, "getImageReadMIMETypes", list);  //$NON-NLS-1$
 		return list;
 	}
 
@@ -144,12 +125,9 @@ public abstract class HelperImage {
 	 * @return list of unique MIME types that can be written
 	 */
 	public static List<String> getImageWriteMIMETypes() {
-		Logger.getInstance().writeMethodEntry(HelperImage.class, "getImageWriteMIMETypes");  //$NON-NLS-1$
-
 	    String[] formatNames = ImageIO.getWriterMIMETypes();
 	    List<String> list = unique(formatNames);
 
-	    Logger.getInstance().writeMethodExit(HelperImage.class, "getImageWriteMIMETypes", list);  //$NON-NLS-1$
 	    return list;
 	}
 
@@ -160,15 +138,12 @@ public abstract class HelperImage {
 	 * @return list containing the unique values
 	 */
     private static List<String> unique(String[] strings) {
-		Logger.getInstance().writeMethodEntry(HelperImage.class, "unique", strings);  //$NON-NLS-1$
-
         Set<String> set = new HashSet<String>();
         
         for (String str : strings) {
             set.add(str.toLowerCase());
         }
 
-		Logger.getInstance().writeMethodExit(HelperImage.class, "unique", set);  //$NON-NLS-1$
         return new ArrayList<String>(set);
     }
 }

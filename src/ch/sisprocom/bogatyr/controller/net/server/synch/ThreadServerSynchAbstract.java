@@ -33,19 +33,19 @@ package ch.sisprocom.bogatyr.controller.net.server.synch;
 
 import java.net.Socket;
 
-import ch.sisprocom.bogatyr.controller.net.server.ServerTemplate;
-import ch.sisprocom.bogatyr.controller.net.server.ThreadServerTemplate;
+import ch.sisprocom.bogatyr.controller.net.server.ServerAbstract;
+import ch.sisprocom.bogatyr.controller.net.server.ThreadServerAbstract;
 
 
 /**
- * This is the Skeleton for synchron server threads
+ * This is the skeleton for synchron server threads
  *  
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
-public abstract class ThreadServerSynchTemplate extends ThreadServerTemplate {
+public abstract class ThreadServerSynchAbstract extends ThreadServerAbstract {
 
-	protected ThreadServerSynchTemplate(final ServerTemplate server, final Socket socket) {
+	protected ThreadServerSynchAbstract(final ServerAbstract server, final Socket socket) {
 		super(server, socket);
 	}
 }

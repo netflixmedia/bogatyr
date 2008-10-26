@@ -33,9 +33,10 @@ package ch.sisprocom.bogatyr.sample.helloworld;
 
 import java.io.IOException;
 
-import ch.sisprocom.bogatyr.controller.ApplicationTemplate;
+import org.apache.log4j.Logger;
+
+import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
 import ch.sisprocom.bogatyr.helper.localizer.Localizer;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
@@ -43,24 +44,25 @@ import ch.sisprocom.bogatyr.helper.logger.Logger;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20080901
+ * @version 20081026
  */
-public class HelloWorld extends ApplicationTemplate {
+public class HelloWorld extends ApplicationAbstract {
+	private static final Logger log = Logger.getLogger(HelloWorld.class);
+	
 	// Resources
-	private final static String	RES_TEXT  = "HelloWorld.text"; //$NON-NLS-1$
+	private static final String	RES_TEXT  = "HelloWorld.text"; //$NON-NLS-1$
 
 	
 	public HelloWorld(String propertiesFileName) throws IOException {
 		super(propertiesFileName);
+		
 		run();
 	}
 
 	public void run() {
 		String text = Localizer.getInstance().getValue(RES_TEXT);
 		
-		System.out.println(text);
-		
-		Logger.getInstance().writeLog(this.getClass(), "run", "## " + text + " ##"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		log.info(text);
 
 		exit(0);
 	}

@@ -35,23 +35,22 @@ import java.io.IOException;
 import java.net.Socket;
 
 import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
-import ch.sisprocom.bogatyr.controller.net.server.ThreadServerTemplate;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
+import ch.sisprocom.bogatyr.controller.net.server.ThreadServerAbstract;
 
 
 /**
  * This is the skeleton for asynchron server threads
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
-public abstract class ThreadServerAsynchTemplate extends ThreadServerTemplate {
+public abstract class ThreadServerAsynchAbstract extends ThreadServerAbstract {
 	private Thread thread;
 	
-	private final ServerAsynchTemplate server;
+	private final ServerAsynchAbstract server;
 	
 
-	protected ThreadServerAsynchTemplate(final ServerAsynchTemplate server, final Socket socket) {
+	protected ThreadServerAsynchAbstract(final ServerAsynchAbstract server, final Socket socket) {
 		super(server, socket);
 		
 		this.server = server;
@@ -64,9 +63,6 @@ public abstract class ThreadServerAsynchTemplate extends ThreadServerTemplate {
      * @return Thread
 	 */
 	protected Thread getThread() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getThread"); //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getThread", thread); //$NON-NLS-1$
-
 		return thread;
 	}  
 
@@ -76,30 +72,22 @@ public abstract class ThreadServerAsynchTemplate extends ThreadServerTemplate {
 	 * @throws IOException 
 	 */
 	public void stop() throws IOException {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "stop"); //$NON-NLS-1$
-
 		if (thread != null && thread.isAlive()) {
             thread = null;
         }
 
 		getSocket().close();
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "stop"); //$NON-NLS-1$
 	}  
 
 	/**
 	 * Starts the thread with {@link Thread#MIN_PRIORITY}.
 	 */
 	protected void start() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "start"); //$NON-NLS-1$
-
 		if (thread == null) {
             thread = new Thread(this);
             thread.setPriority(Thread.MIN_PRIORITY);
             thread.start();
 		}
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "start"); //$NON-NLS-1$
 	}
 
 	
@@ -123,12 +111,8 @@ public abstract class ThreadServerAsynchTemplate extends ThreadServerTemplate {
 	 * Implemented methods
 	 */
 	public void connect(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "connect", comObject); //$NON-NLS-1$
-
 		//		super.connect(comObject);
         server.addAsynchServerThread(comObject.getUserKey(), this);
-
-        Logger.getInstance().writeMethodExit(this.getClass(), "connect"); //$NON-NLS-1$
 	}
 
 }

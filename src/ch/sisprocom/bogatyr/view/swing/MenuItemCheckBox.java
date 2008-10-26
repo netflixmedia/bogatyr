@@ -37,14 +37,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JCheckBoxMenuItem
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class MenuItemCheckBox extends JCheckBoxMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
@@ -52,7 +51,6 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 	
 	public MenuItemCheckBox() {
 		super();
-		init();
     }
 	
 	public MenuItemCheckBox(final String text, final ImageIcon image, final int mnemonic, final String toolTip, final boolean isSelected) {
@@ -72,24 +70,13 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 		if (toolTip != null) {
 			setToolTipText(toolTip);
 		}
-		
 		setSelected(isSelected);
-		
-		init();
     }
 	
 	public MenuItemCheckBox(final String text, final ImageIcon image, final int mnemonic, final String toolTip, final boolean isSelected, final ActionListener listener) {
 		this(text, image, mnemonic, toolTip, isSelected);
 		addActionListener(listener);
     }
-
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
-	}
 	
 	
 	/*

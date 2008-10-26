@@ -34,6 +34,9 @@ package ch.sisprocom.bogatyr.helper.localizer;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.apache.log4j.Logger;
+
+import ch.sisprocom.bogatyr.controller.net.server.ServerAbstract;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.property.Property;
 
@@ -42,9 +45,12 @@ import ch.sisprocom.bogatyr.helper.property.Property;
  * Localizer for file access
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class LocalizerFile implements ILocalizer {
+	private static final Logger log = Logger.getLogger(LocalizerFile.class);
+	
+	// Properties
 	private static final String PROPERTY_LOCALIZER_BASE = "LocalizerFile.base"; //$NON-NLS-1$
 
 	private Locale locale;
@@ -113,7 +119,7 @@ public class LocalizerFile implements ILocalizer {
 		if (HelperGeneral.isValidString(value)) {
             localizerBase = value;
 		} else {
-			System.err.println(getClass().getName() + "::readProperties - " + PROPERTY_LOCALIZER_BASE + " == 'null'"); //$NON-NLS-1$ //$NON-NLS-2$
+			log.warn(PROPERTY_LOCALIZER_BASE + " == 'null'"); //$NON-NLS-1$
 			//TODO enough? Or are more details needed?
 		}
 	}

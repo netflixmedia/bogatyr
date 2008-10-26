@@ -32,14 +32,13 @@
 package ch.sisprocom.bogatyr.helper.converter;
 
 import ch.sisprocom.bogatyr.helper.localizer.Localizer;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * Encodes data to Base64 and decodes it.
  * 
  * @author Stefan Laubenberger
- * @version 20080903
+ * @version 20081026
  */
 public abstract class ConverterBase64 {
 	// Resources
@@ -83,11 +82,7 @@ public abstract class ConverterBase64 {
 	 * @return String with the Base64 encoded data.
 	 */
 	public static String encode(final String string) {
-		Logger.getInstance().writeMethodEntry(ConverterBase64.class, "encodeString", string);  //$NON-NLS-1$
-
 		final String str = new String(encode(string.getBytes()));
-		
-		Logger.getInstance().writeMethodExit(ConverterBase64.class, "encodeString", str);  //$NON-NLS-1$
 		return str;
 	}
 
@@ -99,11 +94,7 @@ public abstract class ConverterBase64 {
 	 * @return Character array with the Base64 encoded data.
 	 */
 	public static char[] encode(final byte[] in) {
-		Logger.getInstance().writeMethodEntry(ConverterBase64.class, "encode", in);  //$NON-NLS-1$
-
 		final char[] result = encode(in, in.length);
-		
-		Logger.getInstance().writeMethodExit(ConverterBase64.class, "encode", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -131,11 +122,7 @@ public abstract class ConverterBase64 {
 	 * @throws IllegalArgumentException
 	 */
 	public static byte[] decode(final String string) {
-		Logger.getInstance().writeMethodEntry(ConverterBase64.class, "decode", string);  //$NON-NLS-1$
-
 		final byte[] result = decode(string.toCharArray());
-		
-		Logger.getInstance().writeMethodExit(ConverterBase64.class, "decode", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -148,8 +135,6 @@ public abstract class ConverterBase64 {
 	 * @throws IllegalArgumentException
 	 */
 	public static byte[] decode(final char[] in) {
-		Logger.getInstance().writeMethodEntry(ConverterBase64.class, "decode", in);  //$NON-NLS-1$
-
 		int iLen = in.length;
 
 		if (iLen % 4 != 0) {
@@ -195,7 +180,6 @@ public abstract class ConverterBase64 {
             }
 		}
 
-        Logger.getInstance().writeMethodExit(ConverterBase64.class, "decode", out);  //$NON-NLS-1$
 		return out;
 	}
 	
@@ -212,8 +196,6 @@ public abstract class ConverterBase64 {
 	 * @return Character array with the Base64 encoded data.
 	 */
 	private static char[] encode(final byte[] in, final int iLen) {
-		Logger.getInstance().writeMethodEntry(ConverterBase64.class, "encode", new Object[]{in, iLen});  //$NON-NLS-1$
-
 		final int oDataLen = (iLen * 4 + 2) / 3; // output length without padding
 		final int oLen = ((iLen + 2) / 3) * 4; // output length including padding
 		final char[] out = new char[oLen];
@@ -235,8 +217,6 @@ public abstract class ConverterBase64 {
 			out[op] = op < oDataLen ? map1[o3] : '=';
 			op++;
 		}
-		
-		Logger.getInstance().writeMethodExit(ConverterBase64.class, "encode", out);  //$NON-NLS-1$
 		return out;
 	}
 }

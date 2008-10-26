@@ -34,7 +34,6 @@ package ch.sisprocom.bogatyr.view.swing.chart;
 import javax.swing.JComponent;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
@@ -42,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.logger.Logger;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class ChartEntry {
 	private final JComponent component;
@@ -56,51 +55,26 @@ public class ChartEntry {
 		this.y		= y;
 		this.sizeX 	= sizeX;
 		this.sizeY 	= sizeY;
-		
-		init();
 	}
 
     public JComponent getComponent() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getComponent");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getComponent", component);  //$NON-NLS-1$
-
 		return component;
 	}
 
 	public int getSizeX() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getSizeX");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getSizeX", sizeX);  //$NON-NLS-1$
-
 		return sizeX;
 	}
 
 	public int getSizeY() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getSizeY");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getSizeY", sizeY);  //$NON-NLS-1$
-
 		return sizeY;
 	}
 
 	public int getX() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getX");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getX", x);  //$NON-NLS-1$
-
 		return x;
 	}
 
 	public int getY() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getY");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getY", y);  //$NON-NLS-1$
-
 		return y;
-	}
-
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 
 	

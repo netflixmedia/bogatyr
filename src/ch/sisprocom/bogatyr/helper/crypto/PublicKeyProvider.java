@@ -43,7 +43,11 @@ import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.NoSuchProviderException;
 import java.security.SignatureException;
-import java.security.cert.*;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateEncodingException;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.Date;
 
 import javax.security.auth.x500.X500Principal;
@@ -58,14 +62,13 @@ import org.bouncycastle.asn1.x509.X509Extensions;
 import org.bouncycastle.x509.X509V3CertificateGenerator;
 
 import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * The PublicKeyProvider class
  *
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public abstract class PublicKeyProvider {
 	/**
@@ -78,8 +81,6 @@ public abstract class PublicKeyProvider {
      * @throws IOException e
      */
     public static X509Certificate getCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException {
-		Logger.getInstance().writeMethodEntry(PublicKeyProvider.class, "getCertificate", file);  //$NON-NLS-1$
-
         final FileInputStream fis = new FileInputStream(file);
         BufferedInputStream bis = null;
         final X509Certificate cert;
@@ -92,8 +93,6 @@ public abstract class PublicKeyProvider {
                 bis.close();
             }
         }
-        	
-		Logger.getInstance().writeMethodExit(PublicKeyProvider.class, "getCertificate", cert);  //$NON-NLS-1$
         return cert;
     }
 
@@ -107,8 +106,6 @@ public abstract class PublicKeyProvider {
      * @throws IOException e
      */
     public static X509Certificate getCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {    
-		Logger.getInstance().writeMethodEntry(PublicKeyProvider.class, "getCertificate", is);  //$NON-NLS-1$
-
 		final X509Certificate cert;
 		
     	try {
@@ -122,7 +119,6 @@ public abstract class PublicKeyProvider {
                 is.close();
             }
         }
-		Logger.getInstance().writeMethodExit(PublicKeyProvider.class, "getCertificate", cert);  //$NON-NLS-1$
 		return cert;
     }
     
@@ -135,11 +131,7 @@ public abstract class PublicKeyProvider {
      * @throws CertificateEncodingException 
      */
     public static void storeCertificate(final Certificate cert, final OutputStream os) throws CertificateEncodingException, IOException {
-		Logger.getInstance().writeMethodEntry(PublicKeyProvider.class, "storeCertificate", new Object[]{cert, os});  //$NON-NLS-1$
-
     	HelperIO.writeStream(os, cert.getEncoded());
-
-    	Logger.getInstance().writeMethodExit(PublicKeyProvider.class, "storeCertificate");  //$NON-NLS-1$
     }
     
     /**
@@ -151,11 +143,7 @@ public abstract class PublicKeyProvider {
      * @throws CertificateEncodingException 
      */
     public static void storeCertificate(final Certificate cert, final File file) throws CertificateEncodingException, IOException {
-		Logger.getInstance().writeMethodEntry(PublicKeyProvider.class, "storeCertificate", new Object[]{cert, file});  //$NON-NLS-1$
-
 		HelperIO.writeFileFromBinary(file, cert.getEncoded(), false);
-
-		Logger.getInstance().writeMethodExit(PublicKeyProvider.class, "storeCertificate");  //$NON-NLS-1$
     }
 
     /**
@@ -174,8 +162,6 @@ public abstract class PublicKeyProvider {
      * @throws InvalidKeyException 
      */
     public static X509Certificate generateCertificate(KeyPair pair, String issuerDN, String subjectDN, String generalName, Date start, Date end) throws InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {
-		Logger.getInstance().writeMethodEntry(PublicKeyProvider.class, "generateCertificate", new Object[]{pair, issuerDN, subjectDN, generalName, start, end});  //$NON-NLS-1$
-
 	    // generate the certificate
 		final X509V3CertificateGenerator certGen = new X509V3CertificateGenerator();
 	
@@ -194,7 +180,6 @@ public abstract class PublicKeyProvider {
 	
 	    final X509Certificate cert = certGen.generateX509Certificate(pair.getPrivate(), "BC");  //$NON-NLS-1$
 	    
-		Logger.getInstance().writeMethodExit(PublicKeyProvider.class, "generateCertificate", cert);  //$NON-NLS-1$
 	    return cert;
 	}													
 }

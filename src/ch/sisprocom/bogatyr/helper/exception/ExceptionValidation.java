@@ -40,7 +40,7 @@ import ch.sisprocom.bogatyr.model.dao.DataObject;
  * @author Stefan Laubenberger
  * @version 20080901
  */
-public final class ExceptionValidation extends ExceptionTemplate {
+public final class ExceptionValidation extends ExceptionAbstract {
 	private static final long serialVersionUID = 2262162323753693225L;
 
 	/**

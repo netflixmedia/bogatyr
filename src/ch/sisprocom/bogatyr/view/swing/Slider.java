@@ -39,14 +39,13 @@ import java.util.Dictionary;
 import javax.swing.JSlider;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JSlider
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class Slider extends JSlider {
 	private static final long serialVersionUID = 8676540667794440059L;
@@ -54,7 +53,6 @@ public class Slider extends JSlider {
 
 	public Slider() {
 		super();
-		init();
 	}
 
 	public Slider(final int minValue, final int maxValue, final int currentValue, final String toolTip) {
@@ -64,15 +62,6 @@ public class Slider extends JSlider {
 	public Slider(final int minValue, final int maxValue, final int currentValue, final int orientation, final String toolTip) {
 		super(orientation, minValue, maxValue, currentValue);
 		setToolTipText(toolTip);
-		init();
-	}
-	
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 
 	

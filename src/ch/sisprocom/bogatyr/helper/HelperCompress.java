@@ -43,14 +43,12 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-
 
 /**
  * This is a helper class for compress operations
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
 	private final static byte[] BUFFER = new byte[1024];
@@ -63,8 +61,6 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * @throws java.io.IOException
      */	
 	public static void writeZip(final File file, final List<File> listOfFiles) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperCompress.class, "writeZip", new Object[]{file, listOfFiles});  //$NON-NLS-1$
-		
 		ZipOutputStream zos = null;
 		
 		try {
@@ -80,8 +76,6 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 			    zos.close();
 			} 
 		}
-		
-		Logger.getInstance().writeMethodExit(HelperCompress.class, "writeZip");  //$NON-NLS-1$
 	}
 	
 	public static void extractZip(final ZipFile file, final File destinationDirectory) throws IOException { 
@@ -98,8 +92,6 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	 * Private methods
 	 */
 	private static void addEntry(final ZipOutputStream zos, final File file) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperCompress.class, "addEntry", new Object[]{zos, file});  //$NON-NLS-1$
-
 		FileInputStream fis = null;
 //		byte[] readBuffer = new byte[2156];
         int bytesIn = 0; 
@@ -123,7 +115,6 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 				fis.close();
 			}
 		}
-		Logger.getInstance().writeMethodExit(HelperCompress.class, "addEntry");  //$NON-NLS-1$
 	}
 	
 	private static void extractEntry(ZipFile zipFile, ZipEntry entry, File destDir) throws IOException { 

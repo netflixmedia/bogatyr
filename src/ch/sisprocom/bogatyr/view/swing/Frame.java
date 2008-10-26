@@ -36,14 +36,13 @@ import java.awt.Image;
 import javax.swing.JFrame;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JFrame
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class Frame extends JFrame {
 	private static final long serialVersionUID = 7476360387134225315L;
@@ -67,7 +66,6 @@ public class Frame extends JFrame {
 	private void init() {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 	
 	

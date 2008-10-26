@@ -31,14 +31,13 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.crypto;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is a class for obfuscating a byte[]
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public abstract class Obfuscator {
 	private static final byte DEFAULT_PATTERN = Byte.MAX_VALUE;
@@ -50,11 +49,8 @@ public abstract class Obfuscator {
 	 * @return Return the obfuscated Byte-Array 
 	 */
 	public static byte[] encrypt(final byte[] input) {
-		Logger.getInstance().writeMethodEntry(Obfuscator.class, "encrypt", input);  //$NON-NLS-1$
-
 		final byte[] result = obfuscate(input, DEFAULT_PATTERN);
 		
-		Logger.getInstance().writeMethodExit(Obfuscator.class, "encrypt", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -66,11 +62,8 @@ public abstract class Obfuscator {
 	 * @return Return the obfuscated Byte-Array 
 	 */
 	public static byte[] encrypt(final byte[] input, final byte pattern) {
-		Logger.getInstance().writeMethodEntry(Obfuscator.class, "encrypt", new Object[]{input, pattern});  //$NON-NLS-1$
-
 		final byte[] result = obfuscate(input, pattern);
 		
-		Logger.getInstance().writeMethodExit(Obfuscator.class, "encrypt", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -81,11 +74,8 @@ public abstract class Obfuscator {
 	 * @return Return the unobfuscated Byte-Array
 	 */
 	public static byte[] decrypt(final byte[] input) {
-		Logger.getInstance().writeMethodEntry(Obfuscator.class, "decrypt", input);  //$NON-NLS-1$
-
 		final byte[] result = obfuscate(input, DEFAULT_PATTERN);
 		
-		Logger.getInstance().writeMethodExit(Obfuscator.class, "decrypt", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -98,11 +88,8 @@ public abstract class Obfuscator {
 	 * @return Return the unobfuscated Byte-Array
 	 */
 	public static byte[] decrypt(final byte[] input, final byte pattern) {
-		Logger.getInstance().writeMethodEntry(Obfuscator.class, "decrypt", new Object[]{input, pattern});  //$NON-NLS-1$
-
 		final byte[] result = obfuscate(input, pattern);
 		
-		Logger.getInstance().writeMethodExit(Obfuscator.class, "decrypt", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -118,15 +105,11 @@ public abstract class Obfuscator {
      * @return the obfuscated data
 	 */
 	private static byte[] obfuscate(final byte[] input, final byte pattern) {
-		Logger.getInstance().writeMethodEntry(Obfuscator.class, "obfuscate", new Object[]{input, pattern});  //$NON-NLS-1$
-
 		final byte[] result = new byte[input.length];
 		
 		for (int ii = 0; ii < input.length; ii++ ) {
 			result[ii] = (byte)(input[ii] ^ (int) pattern);
 		}
-		
-		Logger.getInstance().writeMethodExit(Obfuscator.class, "obfuscate", result);  //$NON-NLS-1$
 		return result;
 	}
 }

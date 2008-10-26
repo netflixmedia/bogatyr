@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="lib/mqseries/com.ibm.mq.jar"/>
 	<classpathentry kind="lib" path="lib/mqseries/com.ibm.mqbind.jar"/>
 	<classpathentry kind="lib" path="lib/mqseries/connector.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

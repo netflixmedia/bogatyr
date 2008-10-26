@@ -37,13 +37,12 @@ import java.text.MessageFormat;
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.context.Context;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 /**
  * This control opens PDF data with an external program such as Acrobat Reader.
  *
  * @author Stefan Laubenberger
- * @version 20080905
+ * @version 20081026
  */
 public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
@@ -59,14 +58,10 @@ public abstract class ControlPdf {
      * @throws Exception
 	 */
 	public static void open(final byte[] pdfFileContents)	throws Exception {
-		Logger.getInstance().writeMethodEntry(ControlPdf.class, "open", pdfFileContents);  //$NON-NLS-1$
-
 		// first store the pdfFileContents to a temporary file
 		final File temporaryFile = HelperIO.getTemporaryFile(Context.getInstance().getApplicationName(), PDF_EXTENSION); //$NON-NLS-1$ //$NON-NLS-2$
 		HelperIO.writeFileFromBinary(temporaryFile, pdfFileContents, false);
 		open(temporaryFile);
-		
-		Logger.getInstance().writeMethodExit(ControlPdf.class, "open");  //$NON-NLS-1$
 	}
 
 	/**
@@ -75,11 +70,7 @@ public abstract class ControlPdf {
      * @throws Exception
 	 */
 	public static void open(final File pdfFile) throws Exception {
-		Logger.getInstance().writeMethodEntry(ControlPdf.class, "open", pdfFile);  //$NON-NLS-1$
-
 		execute(pdfFile.getCanonicalPath());
-		
-		Logger.getInstance().writeMethodExit(ControlPdf.class, "open");  //$NON-NLS-1$
 	}
 
 //	/**
@@ -155,8 +146,6 @@ public abstract class ControlPdf {
 //	}
 
 	private static void execute(final String path) throws Exception {
-		Logger.getInstance().writeMethodEntry(ControlPdf.class, "execute");  //$NON-NLS-1$
-
 		final String viewerPath;
 		if (HelperEnvInfo.isWindowsPlatform()) {
 			viewerPath = WINDOWS_PDF_VIEWER_PATH;
@@ -168,7 +157,5 @@ public abstract class ControlPdf {
 		}
 		final String cmd = MessageFormat.format(viewerPath, path);
 		ControlProcess.createProcess(cmd);
-		
-		Logger.getInstance().writeMethodExit(ControlPdf.class, "execute");  //$NON-NLS-1$
 	}
 }

@@ -35,8 +35,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-
 import com.ibm.mq.MQEnvironment;
 import com.ibm.mq.MQException;
 import com.ibm.mq.MQGetMessageOptions;
@@ -51,7 +49,7 @@ import com.ibm.mqbind.MQC;
  * Allows a connection to an IBM MQ-Server. It allows to send and receive messages.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class MqConnector {
 
@@ -60,8 +58,6 @@ public class MqConnector {
 		MQEnvironment.hostname = hostname;
 		MQEnvironment.port     = port;
 		MQEnvironment.channel  = channel;
-
-		init();
 	}
 
 	public String getHostname() {
@@ -201,14 +197,6 @@ public class MqConnector {
 		mqManager.disconnect();
 
 		return list;
-	}
-
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init",  toString()); //$NON-NLS-1$
 	}
 	
 	

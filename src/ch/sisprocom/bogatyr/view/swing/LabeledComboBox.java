@@ -37,14 +37,12 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-
 
 /**
  * This is an combined Label and ComboBox
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class LabeledComboBox extends Panel {
 	private static final long serialVersionUID = -67296455436983811L;
@@ -66,16 +64,10 @@ public class LabeledComboBox extends Panel {
 	}
 	
 	public ComboBox getComboBox() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getComboBox");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getComboBox", comboBox);  //$NON-NLS-1$
-
 		return comboBox;
 	}
 
 	public Label getLabel() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getLabel");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getLabel", label);  //$NON-NLS-1$
-
 		return label;
 	}
 
@@ -88,8 +80,6 @@ public class LabeledComboBox extends Panel {
 	 * Private methods
 	 */
 	private void createLayout(final String labelText, final Object[] data) {
-		Logger.getInstance().writeMethodEntry(getClass(), "createLayout", new Object[]{labelText, data});  //$NON-NLS-1$
-
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 	    gbc.insets = new Insets(5,5,5,5);
@@ -106,8 +96,6 @@ public class LabeledComboBox extends Panel {
             comboBox = new ComboBox(null, null);
 		}
 		add(comboBox, gbc);
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "createLayout");  //$NON-NLS-1$
 	}
 	
 	

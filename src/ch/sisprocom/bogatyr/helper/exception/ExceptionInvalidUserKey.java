@@ -40,7 +40,7 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
  * @author Stefan Laubenberger
  * @version 20080901
  */
-public final class ExceptionInvalidUserKey extends ExceptionTemplate {
+public final class ExceptionInvalidUserKey extends ExceptionAbstract {
 	private static final long serialVersionUID = -5681289983282835248L;
 
 	// Resources

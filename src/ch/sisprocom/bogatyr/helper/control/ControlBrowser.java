@@ -33,18 +33,20 @@ package ch.sisprocom.bogatyr.helper.control;
 
 import java.lang.reflect.Method;
 
+import org.apache.log4j.Logger;
+
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
-import ch.sisprocom.bogatyr.helper.exception.HelperException;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This controls displays an URL in a browser.
  *
  * @author Stefan Laubenberger
- * @version 20080905
+ * @version 20081026
  */
 public abstract class ControlBrowser {
+	protected static final Logger log = Logger.getLogger(ControlBrowser.class);
+	
 	// The default system browser under windows.
 	private static final String WINDOWS_PATH = "rundll32 url.dll,FileProtocolHandler"; //$NON-NLS-1$
 
@@ -68,8 +70,6 @@ public abstract class ControlBrowser {
      * @throws Exception
 	 */
 	public static void displayURL(final String url) throws Exception {
-		Logger.getInstance().writeMethodEntry(ControlBrowser.class, "displayURL", url);  //$NON-NLS-1$
-
 		String cmd;
 				
 		if (HelperEnvInfo.isWindowsPlatform()) {
@@ -112,7 +112,6 @@ public abstract class ControlBrowser {
 				ControlProcess.createProcess(cmd);
 			}
 		}
-		Logger.getInstance().writeMethodExit(ControlBrowser.class, "displayURL");  //$NON-NLS-1$
 	}
 
 	
@@ -120,8 +119,6 @@ public abstract class ControlBrowser {
 	 * Private methods
 	 */
 	private static void displayURLonMac(final String url) {
-		Logger.getInstance().writeMethodEntry(ControlBrowser.class, "displayURLonMac", url);  //$NON-NLS-1$
-
 		final Runnable runnable = new Runnable() {
 
 			public void run() {
@@ -132,7 +129,7 @@ public abstract class ControlBrowser {
 					final Method method = fileManager.getDeclaredMethod("openURL", String.class); //$NON-NLS-1$
 					method.invoke(null, url);
 				} catch (Exception ex) {
-					Logger.getInstance().writeException(this.getClass(), "displayURLonMac", HelperException.EX_UNKNOWN_ERROR, ex); //$NON-NLS-1$
+					log.error("Browser couldn't be started", ex);
 				}
 			}
 		};
@@ -141,6 +138,5 @@ public abstract class ControlBrowser {
 		
 		// must be called in separate thread because the call to openURL sometimes hangs (probably a bug)
 		thread.start();
-		Logger.getInstance().writeMethodExit(ControlBrowser.class, "displayURLonMac");  //$NON-NLS-1$
 	}
 }

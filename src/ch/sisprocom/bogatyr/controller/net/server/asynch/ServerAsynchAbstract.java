@@ -31,29 +31,28 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.server.asynch;
 
-import java.util.Map;
 import java.util.Collections;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import ch.sisprocom.bogatyr.controller.net.server.ServerTemplate;
+import ch.sisprocom.bogatyr.controller.net.server.ServerAbstract;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.exception.ExceptionInvalidUserKey;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is the skeleton for asynchron servers
  *
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
-public abstract class ServerAsynchTemplate extends ServerTemplate {
-	private final Map<String, ThreadServerAsynchTemplate> mapThread = new ConcurrentHashMap<String, ThreadServerAsynchTemplate>();
+public abstract class ServerAsynchAbstract extends ServerAbstract {
+	private final Map<String, ThreadServerAsynchAbstract> mapThread = new ConcurrentHashMap<String, ThreadServerAsynchAbstract>();
 
 //	private Thread thread;
 
 	
-	protected ServerAsynchTemplate(final String propertiesStreamName) throws Exception {
+	protected ServerAsynchAbstract(final String propertiesStreamName) throws Exception {
 		super(propertiesStreamName);
 		
 //		this.thread = new Thread(this);
@@ -68,16 +67,12 @@ public abstract class ServerAsynchTemplate extends ServerTemplate {
 	 * @throws ExceptionInvalidUserKey 
 	 * @see Map
 	 */
-	public void addAsynchServerThread(final String uniqueKey, final ThreadServerAsynchTemplate asynchServerThread) throws ExceptionInvalidUserKey {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "addAsynchServerThread", new Object[]{uniqueKey, asynchServerThread}); //$NON-NLS-1$
-
+	public void addAsynchServerThread(final String uniqueKey, final ThreadServerAsynchAbstract asynchServerThread) throws ExceptionInvalidUserKey {
 		if (HelperGeneral.isValidString(uniqueKey) && HelperGeneral.isValidObject(asynchServerThread)) {
             mapThread.put(uniqueKey, asynchServerThread);
 		} else {
 			throw new ExceptionInvalidUserKey();
 		}
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "addAsynchServerThread"); //$NON-NLS-1$
 
 	}
 
@@ -88,11 +83,7 @@ public abstract class ServerAsynchTemplate extends ServerTemplate {
 	 * @see Map
 	 */
 	public void removeAsynchServerThread(final String uniqueKey) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "removeAsynchServerThread", uniqueKey); //$NON-NLS-1$
-
 		mapThread.remove(uniqueKey);
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "removeAsynchServerThread"); //$NON-NLS-1$
 	}
 	
 	/**
@@ -101,10 +92,7 @@ public abstract class ServerAsynchTemplate extends ServerTemplate {
 	 * @return list containing all threads
 	 * @see Map
 	 */
-	protected Map<String, ThreadServerAsynchTemplate> getThreads() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getThreads"); //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getThreads", mapThread); //$NON-NLS-1$
-
+	protected Map<String, ThreadServerAsynchAbstract> getThreads() {
 		return Collections.unmodifiableMap(mapThread);
 	}
 
