@@ -34,14 +34,13 @@ package ch.sisprocom.bogatyr.view.swing;
 import javax.swing.JCheckBox;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JCheckBox
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class CheckBox extends JCheckBox {
 	private static final long serialVersionUID = -6439735629199643683L;
@@ -49,30 +48,17 @@ public class CheckBox extends JCheckBox {
 	
 	public CheckBox() {
 		super();
-		init();
 	}	
 	
 	public CheckBox(final String title, final boolean isSelected, final String toolTip) {
 		super(title, isSelected);
 		setToolTipText(toolTip);
-		
-		init();
 	}
 	
 	public CheckBox(final boolean isSelected, final String toolTip) {
 		super();
 		setSelected(isSelected);
 		setToolTipText(toolTip);
-		
-		init();
-	}
-
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 
 	

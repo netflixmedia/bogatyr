@@ -34,14 +34,13 @@ package ch.sisprocom.bogatyr.view.swing;
 import javax.swing.JTextArea;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JTextArea
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class TextArea extends JTextArea {
 	private static final long serialVersionUID = 8509257459382968021L;
@@ -70,7 +69,6 @@ public class TextArea extends JTextArea {
 	private void init() {
 		setLineWrap(true);
 		setWrapStyleWord(true);
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 	
 	

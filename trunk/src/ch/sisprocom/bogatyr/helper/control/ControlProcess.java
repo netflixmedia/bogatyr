@@ -35,15 +35,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import ch.sisprocom.bogatyr.helper.exception.HelperException;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
+import org.apache.log4j.Logger;
 
 
 /**
  * Reads standard output and standard error of a process.
  * 
  * @author Stefan Laubenberger
- * @version 20080905
+ * @version 20081026
  */
 public abstract class ControlProcess {
 	private static final int BUFFER = 1024;
@@ -58,13 +57,10 @@ public abstract class ControlProcess {
      * @throws java.io.IOException
 	 */
 	public static Process createProcess(final String command, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
-		Logger.getInstance().writeMethodEntry(ControlProcess.class, "createSubprocess", command);  //$NON-NLS-1$
-
 		final Process process = createProcess(command);
 
 		ControlProcess.readStandardOutput(process, outputStream, errorStream);
 		
-		Logger.getInstance().writeMethodExit(ControlProcess.class, "createSubprocess", process);  //$NON-NLS-1$
 		return process;
 	}
 
@@ -76,13 +72,10 @@ public abstract class ControlProcess {
      * @throws java.io.IOException
 	 */
 	public static Process createProcess(final String command) throws IOException {
-		Logger.getInstance().writeMethodEntry(ControlProcess.class, "createSubprocess", command);  //$NON-NLS-1$
 
 //		ProcessBuilder pb = new ProcessBuilder(command);
 //		final Process process = pb.start();
 		final Process process = Runtime.getRuntime().exec(command);
-		
-		Logger.getInstance().writeMethodExit(ControlProcess.class, "createSubprocess", process);  //$NON-NLS-1$
 		return process;
 	}
 
@@ -100,15 +93,17 @@ public abstract class ControlProcess {
 	 * @param errorStream If null, error is discarded.
 	 */
 	private static void readStandardOutput(final Process process, final OutputStream outputStream, final OutputStream errorStream) {
-		Logger.getInstance().writeMethodEntry(ControlProcess.class, "readStandardOutput", new Object[]{process, outputStream, errorStream});  //$NON-NLS-1$
-
 		new StreamReader(process.getErrorStream(), errorStream);
 		new StreamReader(process.getInputStream(), outputStream);
-
-		Logger.getInstance().writeMethodExit(ControlProcess.class, "readStandardOutput");  //$NON-NLS-1$
 	}
 
+	
+	/*
+	 * Inner classes
+	 */
 	protected static class StreamReader extends Thread {
+		private static final Logger log = Logger.getLogger(StreamReader.class);
+		
 		private final InputStream fSource;
 		private final OutputStream fTarget;
 
@@ -137,7 +132,7 @@ public abstract class ControlProcess {
 					}
 				}
 			} catch (IOException ex) {
-				Logger.getInstance().writeException(this.getClass(), "run", HelperException.EX_COMMUNICATION, ex); //$NON-NLS-1$
+				log.error("Stream couldn't be readed", ex); //$NON-NLS-1$
 			}
 		}
 	}

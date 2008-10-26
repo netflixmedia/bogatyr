@@ -42,7 +42,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 import ch.sisprocom.bogatyr.view.swing.Label;
 import ch.sisprocom.bogatyr.view.swing.LabelVertical;
 import ch.sisprocom.bogatyr.view.swing.Panel;
@@ -53,7 +52,7 @@ import ch.sisprocom.bogatyr.view.swing.Panel;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class Chart extends Panel {
 	private static final long serialVersionUID = -4618658256880807781L;
@@ -100,31 +99,20 @@ public class Chart extends Panel {
      * @throws Exception
      */
 	public void addEntry(final ChartEntry entry) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "addEntry", entry);  //$NON-NLS-1$
-
 		if (entry.getX() + entry.getSizeX() > maxX || entry.getY() + entry.getSizeY() > maxY) {
 			throw new Exception("Component exceeds the defined chart area!");
 		}
         entries.add(entry);
 		createLayout();
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "addEntry");  //$NON-NLS-1$
 	}
 	
 	
 	public Color getColorGrid() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getColorGrid");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getColorGrid", colorGrid);  //$NON-NLS-1$
-
 		return colorGrid;
 	}
 
 	public void setColorGrid(final Color colorGrid) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "setColorGrid", colorGrid);  //$NON-NLS-1$
-
 		this.colorGrid = colorGrid;
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "setColorGrid");  //$NON-NLS-1$
 	}
 
 	
@@ -132,8 +120,6 @@ public class Chart extends Panel {
 	 * Private methods
 	 */
 	private void createLayout() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "createLayout");  //$NON-NLS-1$
-
 		// First remove all
 		removeAll();
 		
@@ -269,13 +255,9 @@ public class Chart extends Panel {
     			}
     		}
 		}
-    	
-		Logger.getInstance().writeMethodExit(this.getClass(), "createLayout");  //$NON-NLS-1$
 	}
 	
 	private Panel getXAxis() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getXAxis");  //$NON-NLS-1$
-
 		final Panel panelXAxis = new Panel(colorBackground);
 		panelXAxis.setLayout(new GridLayout(0, xAxes.length));
 		
@@ -295,14 +277,10 @@ public class Chart extends Panel {
 			}
 			panelXAxis.add(label);
 		}
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "getXAxis", panelXAxis);  //$NON-NLS-1$
 		return panelXAxis;	
 	}
 	
 	private Panel getYAxis() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getYAxis");  //$NON-NLS-1$
-
 		final Panel panelYAxis = new Panel(colorBackground);
 		panelYAxis.setLayout(new GridLayout(yAxes.length, 0));
 		
@@ -323,8 +301,6 @@ public class Chart extends Panel {
 			}
 			panelYAxis.add(label);
 		}
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "getYAxis", panelYAxis);  //$NON-NLS-1$
 		return panelYAxis;
 	}
 	

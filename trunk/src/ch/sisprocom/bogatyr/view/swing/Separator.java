@@ -36,14 +36,13 @@ import java.awt.Color;
 import javax.swing.JSeparator;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JSeparator
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class Separator extends JSeparator {
 	private static final long serialVersionUID = 544751396135811303L;
@@ -51,7 +50,6 @@ public class Separator extends JSeparator {
 
 	public Separator() {
 		super();
-		init();
 	}
 
 	public Separator(final Color color) {
@@ -70,17 +68,7 @@ public class Separator extends JSeparator {
 		setAlignmentX(LEFT_ALIGNMENT);
     	setBackground(color);
     	setForeground(color);	
-    	
-    	init();
     }
-	
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
-	}
 	
 	
 	/*

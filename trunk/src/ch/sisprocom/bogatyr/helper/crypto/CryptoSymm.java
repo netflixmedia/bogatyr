@@ -44,13 +44,11 @@ import javax.crypto.spec.IvParameterSpec;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-
 /**
  * This is a class for symmetric cryptology via AES
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public abstract class CryptoSymm {
 	public static final String ALGORITHM = "AES"; //$NON-NLS-1$
@@ -69,8 +67,6 @@ public abstract class CryptoSymm {
 	 * @see #decrypt(byte[], Key)
 	 */
 	public static SecretKey generateKey(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
-		Logger.getInstance().writeMethodEntry(CryptoSymm.class, "generateKey", keysize);  //$NON-NLS-1$
-
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 
 		// Generate a key
@@ -79,7 +75,6 @@ public abstract class CryptoSymm {
 		
 		final SecretKey sk = kg.generateKey();
 		
-		Logger.getInstance().writeMethodExit(CryptoSymm.class, "generateKey", sk);  //$NON-NLS-1$
 		return sk;
 	}
 	
@@ -93,14 +88,11 @@ public abstract class CryptoSymm {
 	 * @see Key
 	 */
 	public static byte[] encrypt(final byte[] input, final Key key) throws Exception {
-		Logger.getInstance().writeMethodEntry(CryptoSymm.class, "encrypt", new Object[]{input, key});  //$NON-NLS-1$
-
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
 
 		final byte[] result = cipher.doFinal(input);
 		
-		Logger.getInstance().writeMethodExit(CryptoSymm.class, "encrypt", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -114,14 +106,11 @@ public abstract class CryptoSymm {
 	 * @see Key
 	 */
 	public static byte[] decrypt(final byte[] input, final Key key) throws Exception {
-		Logger.getInstance().writeMethodEntry(CryptoSymm.class, "decrypt", new Object[]{input, key});  //$NON-NLS-1$
-
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
 
 		final byte[] result = cipher.doFinal(input);
 		
-		Logger.getInstance().writeMethodExit(CryptoSymm.class, "decrypt", result);  //$NON-NLS-1$
 		return result;
 	}
 	
@@ -130,8 +119,6 @@ public abstract class CryptoSymm {
 	 * Private methods
 	 */
 	private static AlgorithmParameterSpec prepareIv() {
-		Logger.getInstance().writeMethodEntry(CryptoSymm.class, "prepareIv");  //$NON-NLS-1$
-
 		final int elements = 16;
         final byte[] ivBytes = new byte[elements];
         
@@ -141,7 +128,6 @@ public abstract class CryptoSymm {
         
         final AlgorithmParameterSpec algo = new IvParameterSpec(ivBytes);
         
-		Logger.getInstance().writeMethodExit(CryptoSymm.class, "prepareIv", algo);  //$NON-NLS-1$
         return algo;
 	}
 }

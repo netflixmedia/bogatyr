@@ -37,14 +37,13 @@ import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is a NumberField, similar to TextField, but only numeric characters are allowed
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class NumberField extends TextField {
 	private static final long serialVersionUID = 4469777330124040925L;
@@ -63,11 +62,7 @@ public class NumberField extends TextField {
      * @return int number of the number field
      */	
 	public double getNumber() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getNumber");  //$NON-NLS-1$
-
 		final double result = HelperGeneral.isValidString(getText()) ? Double.valueOf(getText()) : 0.0D;
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "getNumber", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -76,11 +71,7 @@ public class NumberField extends TextField {
      * @param number Number of the number field
      */	
 	public void setNumber(final double number) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "setNumber", number);  //$NON-NLS-1$
-
         setText(Double.valueOf(number).toString());
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "setNumber");  //$NON-NLS-1$
 	}
 	
 	

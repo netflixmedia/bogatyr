@@ -37,14 +37,12 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-
 
 /**
  * This is an combined Label and TextField
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class LabeledTextField extends Panel {
 	private static final long serialVersionUID = 1310593497620798003L;
@@ -66,16 +64,10 @@ public class LabeledTextField extends Panel {
 	}
 
 	public Label getLabel() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getLabel");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getLabel", label);  //$NON-NLS-1$
-
 		return label;
 	}
 
 	public TextField getTextField() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getTextField");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getTextField", textField);  //$NON-NLS-1$
-
 		return textField;
 	}
   
@@ -84,8 +76,6 @@ public class LabeledTextField extends Panel {
 	 * Private methods
 	 */
 	private void createLayout(final String labelText, final String text, final int columns) {
-		Logger.getInstance().writeMethodEntry(getClass(), "createLayout", new Object[]{labelText, text, columns});  //$NON-NLS-1$
-
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 	    gbc.insets = new Insets(5,5,5,5);
@@ -97,8 +87,6 @@ public class LabeledTextField extends Panel {
 		gbc.gridx = 1;
         textField = new TextField(text, columns, null);
 		add(textField, gbc);
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "createLayout");  //$NON-NLS-1$
 	}
 	
 	

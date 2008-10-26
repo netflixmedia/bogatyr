@@ -35,14 +35,13 @@ import javax.swing.Icon;
 import javax.swing.JLabel;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JLabel
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class Label extends JLabel {
 	private static final long serialVersionUID = 2440681846691377894L;
@@ -50,30 +49,18 @@ public class Label extends JLabel {
 
 	public Label() {
 		super();
-		init();
 	}
 
 	public Label(final Icon icon) {
 		super(icon);
-		init();
 	}
 
 	public Label(final String title) {
 		super(title);
-		init();
 	}
 
 	public Label(final String title, final int alignment) {
 		super(title, alignment);
-		init();
-	}
-
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 
 	

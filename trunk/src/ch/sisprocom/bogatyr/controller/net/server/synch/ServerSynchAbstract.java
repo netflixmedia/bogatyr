@@ -29,40 +29,20 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper.exception;
+package ch.sisprocom.bogatyr.controller.net.server.synch;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
+import ch.sisprocom.bogatyr.controller.net.server.ServerAbstract;
+
 
 /**
- * This is a template for exceptions
+ * This is the skeleton for synchron servers
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
-public abstract class ExceptionTemplate extends Exception {
-	private static final long serialVersionUID = -5815760735662202320L;
+public abstract class ServerSynchAbstract extends ServerAbstract {
 
-	
-	protected ExceptionTemplate(final String msg) {
-        super(msg);
-        init();
-    }
-	
-
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
-	}
-
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
-	}
-} 
+	protected ServerSynchAbstract(final String propertiesStreamName) throws Exception {
+		super(propertiesStreamName);
+ 	}
+}

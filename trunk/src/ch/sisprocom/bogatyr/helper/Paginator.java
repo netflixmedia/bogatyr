@@ -35,14 +35,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-
 
 /**
  * The Paginator splits a list in different pages
  *
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class Paginator {
     private List<?> list;
@@ -54,38 +52,22 @@ public class Paginator {
         
         this.list = list;
         this.numberPerPage = numberPerPage;
-
-        init();
     }
 
     public List<?> getList() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getList");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getList", list);  //$NON-NLS-1$
-
 		return Collections.unmodifiableList(list);
     }
 
     public void setList(final List<?> list) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "setList", list);  //$NON-NLS-1$
-
         this.list = list;
-
-        Logger.getInstance().writeMethodExit(this.getClass(), "setList");  //$NON-NLS-1$
    }
 
     public int getNumberPerPage() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getNumberPerPage");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getNumberPerPage", numberPerPage);  //$NON-NLS-1$
-
 		return numberPerPage;
     }
 
     public void setNumberPerPage(final int numberPerPage) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "setNumberPerPage", numberPerPage);  //$NON-NLS-1$
-
 		this.numberPerPage = numberPerPage;
-	
-		Logger.getInstance().writeMethodExit(this.getClass(), "setNumberPerPage");  //$NON-NLS-1$
     }
 
     /**
@@ -94,8 +76,6 @@ public class Paginator {
      * @return Total number of pages
      */
     public int getNumberOfPages() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getNumberOfPages");  //$NON-NLS-1$
-
         if (list == null || list.isEmpty() || numberPerPage == 0) {
             return 0;
         } else if (list.size() < numberPerPage) {
@@ -107,8 +87,6 @@ public class Paginator {
         if (pages * numberPerPage < list.size()) {
             return pages + 1;
         }
-        
-		Logger.getInstance().writeMethodExit(this.getClass(), "getNumberOfPages", pages);  //$NON-NLS-1$
         return pages;
     }
 
@@ -119,8 +97,6 @@ public class Paginator {
      * @return List representing the requested page
      */
     public List<?> getPage(final int requestedPage) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getPage", requestedPage);  //$NON-NLS-1$
-
         int page = requestedPage;
         int xx = 0;
         final List<Object> result = new ArrayList<Object>();
@@ -143,17 +119,7 @@ public class Paginator {
                 }
             }
         }
-        
-		Logger.getInstance().writeMethodExit(this.getClass(), "getPage", result);  //$NON-NLS-1$
         return result;
-	}
-
-    
-    /*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init",  toString()); //$NON-NLS-1$
 	}
 
 

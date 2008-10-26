@@ -35,14 +35,13 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is the communication container for the client/server-communication.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public final class ComContainer implements Serializable {
 	private static final long serialVersionUID = 1639137536981333349L;
@@ -57,30 +56,14 @@ public final class ComContainer implements Serializable {
         super();
         this.key = key;
 		this.data = data;
-		
-		init();
 	}
 
 	public String getKey() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getKey"); //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getKey", key); //$NON-NLS-1$
-
 		return key;
 	}
 
 	public byte[] getData() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getData"); //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getData", data); //$NON-NLS-1$
-
 		return data;
-	}
-	
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 	
 	

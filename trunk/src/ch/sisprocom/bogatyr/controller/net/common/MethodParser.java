@@ -32,14 +32,13 @@
 package ch.sisprocom.bogatyr.controller.net.common;
 
 import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is the super class for all MethodParser-children
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public abstract class MethodParser {
     /**
@@ -51,8 +50,6 @@ public abstract class MethodParser {
      * @return result object
      */
     public static synchronized Object execute(final ICom caller, final ComObject comObject) throws Exception {
-		Logger.getInstance().writeMethodEntry(MethodParser.class, "execute", new Object[]{caller, comObject}); //$NON-NLS-1$
-
     	if (comObject.getMethodName().equalsIgnoreCase(ICom.METHOD_CONNECT)) {
             caller.connect(comObject);
         } else if (comObject.getMethodName().equalsIgnoreCase(ICom.METHOD_DISCONNECT)) {
@@ -66,8 +63,6 @@ public abstract class MethodParser {
         } else if (comObject.getMethodName().equalsIgnoreCase(ICom.METHOD_LOGOFF)) {
             caller.logoff(comObject);
         }
-
-		Logger.getInstance().writeMethodExit(MethodParser.class, "execute", null); //$NON-NLS-1$
     	return null;
     }
 }

@@ -37,7 +37,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
@@ -45,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.logger.Logger;
  * Get access for general content in the context.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class Context implements IContext {
 	private static Context instance;
@@ -84,24 +83,15 @@ public class Context implements IContext {
 
 	public void removeData(final Object key) {
         contextData.remove(key);
-        Logger.getInstance().writeMethodEntry(Context.class, "removeData", key);  //$NON-NLS-1$
 	}
 
 	public Object getData(final Object key) {
-		Logger.getInstance().writeMethodEntry(Context.class, "getData", key);  //$NON-NLS-1$
-
 		final Object obj = contextData.get(key);
-		
-		Logger.getInstance().writeMethodExit(Context.class, "getData", obj);  //$NON-NLS-1$
 		return obj;
 	}
 
 	public String getDataString(final Object key) {
-		Logger.getInstance().writeMethodEntry(Context.class, "getDataString", key);  //$NON-NLS-1$
-
 		final String str = (String) contextData.get(key);
-		
-		Logger.getInstance().writeMethodExit(Context.class, "getDataString", str); //$NON-NLS-1$
 		return str;
     }
 //
@@ -140,41 +130,29 @@ public class Context implements IContext {
 //    }
 
 	public String getApplicationName() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getApplicationName"); //$NON-NLS-1$
-
 		String str = getDataString(KEY_APPLICATION_NAME);
 
-		if (str == null) {
+		if (!HelperGeneral.isValidString(str)) {
 			str = "Bogatyr"; //$NON-NLS-1$
 		}
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "getApplicationName", str); //$NON-NLS-1$		
 		return str;
 	}
 
 	public String getApplicationVersion() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getApplicationVersion"); //$NON-NLS-1$
-
 		String str = getDataString(KEY_APPLICATION_VERSION);
 
-		if (str == null) {
+		if (!HelperGeneral.isValidString(str)) {
 			str = "0.40";  //$NON-NLS-1$ //TODO change every release!
 		}
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "getApplicationVersion", str); //$NON-NLS-1$
 		return str;
 	}
 
 	public String getApplicationBuild() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getApplicationBuild"); //$NON-NLS-1$
-
 		String str = getDataString(KEY_APPLICATION_BUILD);
 		
-		if (str == null) {
+		if (!HelperGeneral.isValidString(str)) {
 			str = "20080901";  //$NON-NLS-1$ //TODO change every release!
 		}
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "getApplicationBuild", str); //$NON-NLS-1$
 		return str;
 	}
 	
@@ -186,15 +164,11 @@ public class Context implements IContext {
  	}
 
 	public File getApplicationWorkDirectory() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getApplicationWorkDirectory"); //$NON-NLS-1$
-
 		File file = (File)getData(KEY_APPLICATION_WORKDIRECTORY);
 
 		if (file == null) {
 			file = HelperEnvInfo.getOsTempDirectory();
 		}
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "getApplicationWorkDirectory", file); //$NON-NLS-1$
 		return file;
 	}
 

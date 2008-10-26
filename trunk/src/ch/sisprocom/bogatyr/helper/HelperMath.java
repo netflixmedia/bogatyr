@@ -34,15 +34,13 @@ package ch.sisprocom.bogatyr.helper;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-
 
 /**
  * This is a math helper class for math problems
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public abstract class HelperMath {
 	
@@ -54,8 +52,6 @@ public abstract class HelperMath {
 	 * @return calculated gcd
 	 */
 	 public static double gcd(double a, double b) {
-		 Logger.getInstance().writeMethodEntry(HelperMath.class, "gcd", new Object[]{a, b});  //$NON-NLS-1$
-
 		 final double result;
 		 
 		 if (b == 0) { 
@@ -64,7 +60,6 @@ public abstract class HelperMath {
 			 result = gcd(b, a % b);
 		 }
 		 
-		 Logger.getInstance().writeMethodExit(HelperMath.class, "gcd", result);  //$NON-NLS-1$
 		 return result;
 	 } 
 
@@ -76,11 +71,8 @@ public abstract class HelperMath {
 	 * @return calculated lcm
 	 */
 	 public static double lcm(double a, double b) {
-		 Logger.getInstance().writeMethodEntry(HelperMath.class, "lcm", new Object[]{a, b});  //$NON-NLS-1$
-		 
 		 final double result = a * b / gcd(a, b);
 		 
-		 Logger.getInstance().writeMethodExit(HelperMath.class, "lcm", result);  //$NON-NLS-1$
 		 return result;
 	 }
 	 
@@ -91,11 +83,9 @@ public abstract class HelperMath {
      * @return true/false
      */	
 	public static boolean isPrime(final int n) {
-		Logger.getInstance().writeMethodEntry(HelperMath.class, "isPrime", n);  //$NON-NLS-1$
-
 		boolean flag = false;
         
-        try {
+//        try {
 			// 2 is the smallest prime
 	        if (n <= 2) {
 	            flag = n == 2;
@@ -115,9 +105,9 @@ public abstract class HelperMath {
 	        }
 	        flag = true;
 	        return flag;
-        } finally {
-    		Logger.getInstance().writeMethodExit(HelperMath.class, "isPrime", flag);  //$NON-NLS-1$
-        }
+//        } finally {
+//    		Logger.getInstance().writeMethodExit(HelperMath.class, "isPrime", flag);  //$NON-NLS-1$
+//        }
     }
 
 	/**
@@ -127,15 +117,11 @@ public abstract class HelperMath {
      * @return prime number
      */	
 	public static int getPrime(final int n) {
-		Logger.getInstance().writeMethodEntry(HelperMath.class, "getPrime", n);  //$NON-NLS-1$
-
 		int number = n;
         
 		while (!isPrime(number)) {
             number++;
         }
-		
-		Logger.getInstance().writeMethodExit(HelperMath.class, "getPrime", number);  //$NON-NLS-1$
         return number;
     }
 
@@ -147,8 +133,6 @@ public abstract class HelperMath {
      * @return list with prime numbers
      */	
 	public static List<Integer> getPrimes(final int start, final int end) {
-		Logger.getInstance().writeMethodEntry(HelperMath.class, "getPrimes", new Object[]{start, end});  //$NON-NLS-1$
-
 		final List<Integer> list = new ArrayList<Integer>();
 		
 		for (int ii = start; ii <= end; ii++) {
@@ -156,8 +140,6 @@ public abstract class HelperMath {
 				list.add(ii);
 			}
 		}
-
-		Logger.getInstance().writeMethodExit(HelperMath.class, "getPrimes", list);  //$NON-NLS-1$
 		return list;
 	}
 	
@@ -170,11 +152,8 @@ public abstract class HelperMath {
      * @see Math
      */	
 	public static int convertDoubleToInt(final double value) {
-		Logger.getInstance().writeMethodEntry(HelperMath.class, "convertDoubleToInt", value);  //$NON-NLS-1$
-		
 		final int result = (int)Math.round(value);
 
-		Logger.getInstance().writeMethodExit(HelperMath.class, "convertDoubleToInt", result);  //$NON-NLS-1$
 		return result;
 	}
 	
@@ -186,11 +165,8 @@ public abstract class HelperMath {
      * @return double-value
      */	
 	public static double log(final double base, final double value) {
-		Logger.getInstance().writeMethodEntry(HelperMath.class, "log", new Object[]{base, value});  //$NON-NLS-1$
-
 		final double result = StrictMath.log(value) / StrictMath.log(base);
 
-		Logger.getInstance().writeMethodExit(HelperMath.class, "log", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -202,8 +178,6 @@ public abstract class HelperMath {
      * @return double-value
      */
     public static double round(final double value, final int decimalPlace) {
-		Logger.getInstance().writeMethodEntry(HelperMath.class, "round", new Object[]{value, decimalPlace});  //$NON-NLS-1$
-
 		int dp = decimalPlace;
 		double powerOfTen = 1.0D;
 		
@@ -213,7 +187,6 @@ public abstract class HelperMath {
 	    
 	    final double result = (double) Math.round(value * powerOfTen) / powerOfTen;
 	    
-		Logger.getInstance().writeMethodExit(HelperMath.class, "round", result);  //$NON-NLS-1$
 	    return result;
 	}
 	
@@ -225,8 +198,6 @@ public abstract class HelperMath {
      * @return double-value
      */
     public static double erf(final double z) {
-		Logger.getInstance().writeMethodEntry(HelperMath.class, "erf", z);  //$NON-NLS-1$
-
 		double result = 0.0D;
 		
     	if (HelperGeneral.isValidDouble(z)) {
@@ -249,8 +220,6 @@ public abstract class HelperMath {
             	result = -ans;
             }
         }
-
-		Logger.getInstance().writeMethodExit(HelperMath.class, "erf", result);  //$NON-NLS-1$
     	return result;
 	}
 
@@ -261,8 +230,6 @@ public abstract class HelperMath {
      * @return double-value
      */
     public static double erf2(final double z) {
-		Logger.getInstance().writeMethodEntry(HelperMath.class, "erf2", z);  //$NON-NLS-1$
-
     	final double t = 1.0D / (1.0D + 0.47047D * Math.abs(z));
         final double poly = t * (0.3480242D + t * (-0.0958798D + t * 0.7478556D));
         final double ans = 1.0D - poly * StrictMath.exp(-z * z);
@@ -273,8 +240,6 @@ public abstract class HelperMath {
         } else {
         	result = -ans;
         }
-
-		Logger.getInstance().writeMethodExit(HelperMath.class, "erf2", result);  //$NON-NLS-1$
         return result;
     }
 
@@ -285,11 +250,8 @@ public abstract class HelperMath {
      * @return double-value
      */
     public static double phi(final double z) {
-		Logger.getInstance().writeMethodEntry(HelperMath.class, "phi", z);  //$NON-NLS-1$
-		
 		final double result = 0.5 * (1.0D + erf(z / 1.4142135623730951));
 		
-		Logger.getInstance().writeMethodExit(HelperMath.class, "phi", result);  //$NON-NLS-1$
         return result;
     }
 
@@ -299,13 +261,10 @@ public abstract class HelperMath {
      * @return double-value
      */
     public static double gaussian() {
-		Logger.getInstance().writeMethodEntry(HelperMath.class, "gaussian");  //$NON-NLS-1$
-
         final double U = Math.random();
         final double V = Math.random();
         final double result = StrictMath.sin(2.0D * Math.PI * V) * Math.sqrt(-2.0D * StrictMath.log(1.0 - U));
         
-		Logger.getInstance().writeMethodExit(HelperMath.class, "gaussian", result);  //$NON-NLS-1$
         return result;
     }
 
@@ -317,11 +276,8 @@ public abstract class HelperMath {
      * @return double-value
      */
     public static double gaussian(final double mu, final double sigma) {
-		Logger.getInstance().writeMethodEntry(HelperMath.class, "gaussian", new Object[]{mu, sigma});  //$NON-NLS-1$
-		
 		final double result = mu + sigma * gaussian();
 
-		Logger.getInstance().writeMethodExit(HelperMath.class, "gaussian", result);  //$NON-NLS-1$
         return result;
     }
 
@@ -332,11 +288,8 @@ public abstract class HelperMath {
      * @return random int-value between 0 and n-1
      */
     public static int random(int n) {
-		Logger.getInstance().writeMethodEntry(HelperMath.class, "random", n);  //$NON-NLS-1$
-		
 		final int result = (int) (Math.random() * n);
 	
-		Logger.getInstance().writeMethodExit(HelperMath.class, "random", result);  //$NON-NLS-1$
     	return result;
     }
     

@@ -34,14 +34,13 @@ package ch.sisprocom.bogatyr.view.swing;
 import javax.swing.JProgressBar;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JProgressBar
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class ProgressBar extends JProgressBar {
 	private static final long serialVersionUID = -6439735629199643683L;
@@ -49,21 +48,10 @@ public class ProgressBar extends JProgressBar {
 	
 	public ProgressBar() {
 		super();
-		init();
 	}
 	
 	public ProgressBar(final int start, final int end) {
 		super(start, end);
-//		setToolTipText(toolTip);
-		init();
-	}
-	
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 
 	

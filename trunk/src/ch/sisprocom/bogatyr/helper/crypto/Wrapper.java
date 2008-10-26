@@ -40,13 +40,11 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-
 /**
  * This is a class for wrapping and unwrapping a key
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public abstract class Wrapper {
 	/**
@@ -61,14 +59,11 @@ public abstract class Wrapper {
 	 * @throws NoSuchProviderException
 	 */
 	public static byte[] wrapKey(final Key wrapperKey, final Key key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, NoSuchProviderException {
-		Logger.getInstance().writeMethodEntry(Wrapper.class, "wrapKey", new Object[]{wrapperKey, key});  //$NON-NLS-1$
-
 		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.WRAP_MODE, wrapperKey);
 
 		final byte[] result = cipher.wrap(key);
 		
-		Logger.getInstance().writeMethodExit(Wrapper.class, "wrapKey", result);  //$NON-NLS-1$
 		return result;
 	}
 	
@@ -85,14 +80,11 @@ public abstract class Wrapper {
 	 * @throws NoSuchProviderException
 	 */
 	public static Key unwrapKey(final Key unwrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
-		Logger.getInstance().writeMethodEntry(Wrapper.class, "unwrapKey", new Object[]{unwrapperKey, wrappedKey, keyAlgorithm, keyType});  //$NON-NLS-1$
-
 		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.UNWRAP_MODE, unwrapperKey);
 
 		final Key key = cipher.unwrap(wrappedKey, keyAlgorithm, keyType);
 		
-		Logger.getInstance().writeMethodExit(Wrapper.class, "unwrapKey", key);  //$NON-NLS-1$
 		return key;
 	}
 }

@@ -45,7 +45,6 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
 import ch.sisprocom.bogatyr.helper.crypto.CryptoSymm;
 import ch.sisprocom.bogatyr.helper.exception.ExceptionInvalidStreamSize;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 import ch.sisprocom.bogatyr.helper.property.Property;
 
 
@@ -53,9 +52,9 @@ import ch.sisprocom.bogatyr.helper.property.Property;
  * This is a server thread
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
-public abstract class ThreadServerTemplate implements Runnable, ICom {
+public abstract class ThreadServerAbstract implements Runnable, ICom {
 	private final long startTime = System.currentTimeMillis();
 
 	// Properties
@@ -64,10 +63,10 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
 	private final Socket socket;
 
 	private int size; // max. message size of a ComContainer
-	private final ServerTemplate server;
+	private final ServerAbstract server;
 	
 
-	protected ThreadServerTemplate(final ServerTemplate server, final Socket socket) {
+	protected ThreadServerAbstract(final ServerAbstract server, final Socket socket) {
         super();
         this.server = server;
 		this.socket = socket;
@@ -80,9 +79,6 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
      * @return start time of the thread
 	 */
 	public long getStartTime() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getStartTime"); //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getStartTime", startTime); //$NON-NLS-1$
-
 		return startTime;
 	}
 	
@@ -93,11 +89,7 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
      * @throws Exception 
      */
 	protected ComObject readObject() throws Exception  {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "readObject"); //$NON-NLS-1$
-
 		final ComObject comObject = (ComObject)HelperGeneral.getObjectFromBytes(readStream());
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "readObject", comObject); //$NON-NLS-1$
 		return comObject;
     }
 
@@ -108,17 +100,10 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
      * @throws Exception 
      */
     public void writeObject(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "writeObject", comObject); //$NON-NLS-1$
-
 		writeStream(comObject.getUserKey(), HelperGeneral.getBytesFromObject(comObject));
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "writeObject"); //$NON-NLS-1$
     }
 
     protected Socket getSocket() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getSocket"); //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getSocket", socket); //$NON-NLS-1$
-
 		return socket;
     }
 
@@ -132,8 +117,6 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
      * @return byte array from stream
      */
 	private byte[] readStream() throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "readStream"); //$NON-NLS-1$
-
         ObjectInputStream ois = null;
         Object obj;
 
@@ -156,7 +139,6 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
             data = CryptoSymm.decrypt(data, cryptoKey);
         }
 
-        Logger.getInstance().writeMethodExit(this.getClass(), "readStream", data); //$NON-NLS-1$
         return data;
     }
 
@@ -186,8 +168,6 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
      * @throws Exception
      */
     private void writeStream(final String key, final byte[] data) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "writeStream", new Object[]{key, data}); //$NON-NLS-1$
-
 		if (size == 0 || data.length < size) {
 
             final ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
@@ -211,7 +191,6 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
 		} else {
 			throw new ExceptionInvalidStreamSize(size, data.length);
 		}
-		Logger.getInstance().writeMethodExit(this.getClass(), "writeStream"); //$NON-NLS-1$
     }
 //    protected final void writeStream(String key, byte[] data) throws Exception {
 //		if (this.size == 0 || data.length < this.size) {
@@ -241,7 +220,6 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
     
 	private void init() {
 		readProperties();
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 	
 	private void readProperties() { //TODO improve! @see Application
@@ -262,42 +240,22 @@ public abstract class ThreadServerTemplate implements Runnable, ICom {
 	 * Implemented methods
 	 */	
 	public void disconnect(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "disconnect", comObject); //$NON-NLS-1$
-
 		server.removeAllData(comObject.getUserKey());
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "disconnect"); //$NON-NLS-1$
 	}
 
 	public void sendAsymmKey(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "sendAsymmKey", comObject); //$NON-NLS-1$
-
 		server.addCryptoKey(comObject.getUserKey(), (Key) comObject.getData());
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "sendAsymmKey"); //$NON-NLS-1$
 	}
 
 	public void sendSymmKey(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "sendSymmKey", comObject); //$NON-NLS-1$
-
 		server.addCryptoKey(comObject.getUserKey(), (Key) comObject.getData());
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "sendSymmKey"); //$NON-NLS-1$
 	}
 
     public void logon(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "logon", comObject); //$NON-NLS-1$
-
 		server.addUser(comObject.getUserKey(), (User)comObject.getData());
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "logon"); //$NON-NLS-1$
 	}
 	
 	public void logoff(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "logoff", comObject); //$NON-NLS-1$
-
 		server.removeUser(comObject.getUserKey());
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "logoff"); //$NON-NLS-1$
 	}
 }

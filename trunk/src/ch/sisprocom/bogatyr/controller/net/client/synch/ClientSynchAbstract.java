@@ -31,21 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.client.synch;
 
-import ch.sisprocom.bogatyr.controller.net.client.ClientTemplate;
+import ch.sisprocom.bogatyr.controller.net.client.ClientAbstract;
 import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is the skeleton for synchron clients
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
-public abstract class ClientSynchTemplate extends ClientTemplate {
+public abstract class ClientSynchAbstract extends ClientAbstract {
 
 	
-	protected ClientSynchTemplate(final String propertiesStreamName) throws Exception {
+	protected ClientSynchAbstract(final String propertiesStreamName) throws Exception {
 		super(propertiesStreamName);
 	}
 
@@ -64,8 +63,6 @@ public abstract class ClientSynchTemplate extends ClientTemplate {
      */
     @Override
     protected Object execute(final ComObject data) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "execute", data); //$NON-NLS-1$
-
     	openStream();
     	
         // write the ComObject on the socket-stream
@@ -80,8 +77,7 @@ public abstract class ClientSynchTemplate extends ClientTemplate {
 
     	closeStream();
 
-		Logger.getInstance().writeMethodExit(this.getClass(), "execute", result); //$NON-NLS-1$
-        return result;
+    	return result;
     }
     
 	
@@ -95,12 +91,8 @@ public abstract class ClientSynchTemplate extends ClientTemplate {
 	 * @see ComObject
 	 */
 	public void sendAsymmKey(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "sendAsymmKey", comObject); //$NON-NLS-1$
-
 		comObject.setMethodName(METHOD_SEND_ASYMMKEY);
 		execute(comObject);
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "sendAsymmKey"); //$NON-NLS-1$
 	}
 
 	/**
@@ -109,11 +101,7 @@ public abstract class ClientSynchTemplate extends ClientTemplate {
 	 * @see ComObject
 	 */
 	public void sendSymmKey(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "sendSymmKey", comObject); //$NON-NLS-1$
-
 		comObject.setMethodName(METHOD_SEND_SYMMKEY);
 		execute(comObject);
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "sendSymmKey"); //$NON-NLS-1$
 	}
 }

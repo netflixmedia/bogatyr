@@ -39,14 +39,14 @@ package ch.sisprocom.bogatyr.controller;
  * @version 20080901
  */
 public abstract class Application {
-	private static ApplicationTemplate instance;
+	private static ApplicationAbstract instance;
 
 	
-    public static ApplicationTemplate getInstance() {
+    public static ApplicationAbstract getInstance() {
     	return instance;
 	}
 
-    public static void setInstance(final ApplicationTemplate instance) {
+    public static void setInstance(final ApplicationAbstract instance) {
     	Application.instance = instance;
 	}
 }

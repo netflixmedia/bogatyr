@@ -31,14 +31,23 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.property;
 
+import java.util.Properties;
+
 
 /**
  * Defines the methods for the implementation of the properties
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public interface IProperty {
+	/**
+     * Returns the properties
+     * 
+     * @return Properties object
+     */
+	Properties getProperties();
+    
 	/**
      * Returns the property-value as String
      * 

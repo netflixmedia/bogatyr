@@ -44,13 +44,12 @@ import javax.crypto.Cipher;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 /**
  * This is a class for asymmetric cryptology via RSA
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public abstract class CryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
@@ -70,8 +69,6 @@ public abstract class CryptoAsymm {
 	 * @see KeyPairGenerator
 	 */
 	public static KeyPair generateKeys(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
-		Logger.getInstance().writeMethodEntry(CryptoAsymm.class, "generateKeys", keysize);  //$NON-NLS-1$
-
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 
 		// Generate a key-pair
@@ -80,7 +77,6 @@ public abstract class CryptoAsymm {
 
 		final KeyPair kp = kpg.generateKeyPair();
 		
-		Logger.getInstance().writeMethodExit(CryptoAsymm.class, "generateKeys", kp);  //$NON-NLS-1$
 		return kp;
 	}
 
@@ -95,8 +91,6 @@ public abstract class CryptoAsymm {
 	 * @see PublicKey
 	 */
     public static byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws Exception {
-		Logger.getInstance().writeMethodEntry(CryptoAsymm.class, "encrypt", new Object[]{input, key, keysize});  //$NON-NLS-1$
-
 		final int space = keysize/8 - 11;
 		byte[] result = null;
 		final byte[] temp = new byte[space];
@@ -126,8 +120,6 @@ public abstract class CryptoAsymm {
 		} else {
 			result = encryptInternal(input, key);
 		}
-		
-		Logger.getInstance().writeMethodExit(CryptoAsymm.class, "encrypt", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -141,8 +133,6 @@ public abstract class CryptoAsymm {
 	 * @throws Exception
 	 */
 	public static byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws Exception {
-		Logger.getInstance().writeMethodEntry(CryptoAsymm.class, "decrypt", new Object[]{input, key, keysize});  //$NON-NLS-1$
-
 		final int space = keysize/8;
 		byte[] result = null;
 		final byte[] temp = new byte[space];
@@ -163,8 +153,6 @@ public abstract class CryptoAsymm {
 		} else {
 			result = decryptInternal(input, key);
 		}
-		
-		Logger.getInstance().writeMethodExit(CryptoAsymm.class, "decrypt", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -181,14 +169,11 @@ public abstract class CryptoAsymm {
 	 * @throws Exception
 	 */
 	private static byte[] encryptInternal(final byte[] input, final PublicKey key) throws Exception {
-		Logger.getInstance().writeMethodEntry(CryptoAsymm.class, "encryptInternal", new Object[]{input, key});  //$NON-NLS-1$
-
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.ENCRYPT_MODE, key);
 
 		final byte[] result = cipher.doFinal(input);
 		
-		Logger.getInstance().writeMethodExit(CryptoAsymm.class, "encryptInternal", result);  //$NON-NLS-1$
 		return result;
 	}
 
@@ -201,14 +186,11 @@ public abstract class CryptoAsymm {
 	 * @throws Exception
 	 */
 	private static byte[] decryptInternal(final byte[] input, final PrivateKey key) throws Exception {
-		Logger.getInstance().writeMethodEntry(CryptoAsymm.class, "decryptInternal", new Object[]{input, key});  //$NON-NLS-1$
-
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.DECRYPT_MODE, key);
 
 		final byte[] result = cipher.doFinal(input);
 		
-		Logger.getInstance().writeMethodEntry(CryptoAsymm.class, "decryptInternal", result);  //$NON-NLS-1$
 		return result;
 	}
 }

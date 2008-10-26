@@ -34,14 +34,13 @@ package ch.sisprocom.bogatyr.view.swing;
 import javax.swing.JRadioButton;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended JRadioButton
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class RadioButton extends JRadioButton {
 	private static final long serialVersionUID = 8676540667794440059L;
@@ -49,27 +48,17 @@ public class RadioButton extends JRadioButton {
 
 	public RadioButton() {
 		super();
-		init();
 	}
 	
 	public RadioButton(final String title, final boolean isSelected, final String toolTip) {
 		super(title, isSelected);
 		setToolTipText(toolTip);
-		init();
 	}
 	
 	public RadioButton(final boolean isSelected, final String toolTip) {
 		this();
 		setSelected(isSelected);
 		setToolTipText(toolTip);
-	}
-
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 	
 	

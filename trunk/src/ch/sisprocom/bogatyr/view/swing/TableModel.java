@@ -34,14 +34,13 @@ package ch.sisprocom.bogatyr.view.swing;
 import javax.swing.table.AbstractTableModel;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is an extended AbstractTableModel
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class TableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -472247252594891753L;
@@ -52,11 +51,8 @@ public class TableModel extends AbstractTableModel {
 
 	public TableModel(final String[] columnNames, final Object[][] data) {
 		super();
-		
 		this.columnNames = columnNames;
 		this.data = data;
-		
-		init();
 	}
 	
 	/**
@@ -89,14 +85,6 @@ public class TableModel extends AbstractTableModel {
 	 */
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		return data[rowIndex][columnIndex];
-	}
-	
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 
 	

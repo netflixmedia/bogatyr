@@ -42,14 +42,12 @@ import java.awt.print.PrinterJob;
 import javax.swing.JPanel;
 import javax.swing.RepaintManager;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-
 
 /**
  * This is a printer class for print operations
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public class Printer implements Printable {
 	private Component componentToBePrinted;
@@ -57,7 +55,6 @@ public class Printer implements Printable {
 
 	public Printer() {
         super();
-        init();
     }
 
     /**
@@ -67,12 +64,8 @@ public class Printer implements Printable {
      * @throws java.awt.print.PrinterException
      */
     public void print(final Component component) throws PrinterException {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "print", component);  //$NON-NLS-1$
-
 		this.componentToBePrinted = component;
         print();
-        
-		Logger.getInstance().writeMethodExit(this.getClass(), "print");  //$NON-NLS-1$
 	}
 
 
@@ -80,15 +73,11 @@ public class Printer implements Printable {
 	 * Private methods
 	 */
 	private void print() throws PrinterException {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "print");  //$NON-NLS-1$
-
 		final PrinterJob printJob = PrinterJob.getPrinterJob();
 		printJob.setPrintable(this);
 		if (printJob.printDialog()) {
 			printJob.print();
 		}
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "print");  //$NON-NLS-1$
 	}
 	
 	/**
@@ -99,12 +88,8 @@ public class Printer implements Printable {
      * @param component
 	 */
 	private void disableDoubleBuffering(final Component component) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "disableDoubleBuffering", component);  //$NON-NLS-1$
-
 		final RepaintManager currentManager = RepaintManager.currentManager(component);
 		currentManager.setDoubleBufferingEnabled(false);
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "disableDoubleBuffering");  //$NON-NLS-1$
 	}
 
 	/** Re-enables double buffering globally.
@@ -112,20 +97,8 @@ public class Printer implements Printable {
      * @param component
      */
 	private void enableDoubleBuffering(final Component component) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "enableDoubleBuffering", component);  //$NON-NLS-1$
-
 		final RepaintManager currentManager = RepaintManager.currentManager(component);
 		currentManager.setDoubleBufferingEnabled(true);
-	
-		Logger.getInstance().writeMethodExit(this.getClass(), "enableDoubleBuffering");  //$NON-NLS-1$
-	}
-
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init",  toString()); //$NON-NLS-1$
 	}
 
 
@@ -142,8 +115,6 @@ public class Printer implements Printable {
      * Implemented methods
      */
     public int print(final Graphics graphics, final PageFormat pageFormat, final int pageIndex) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "print", new Object[]{graphics, pageFormat, pageIndex});  //$NON-NLS-1$
-
 		if (pageIndex > 0) {
 			return NO_SUCH_PAGE;
 		}
@@ -163,8 +134,6 @@ public class Printer implements Printable {
 		enableDoubleBuffering(componentToBePrinted);
 		
 		final int result = PAGE_EXISTS;
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "print", result);  //$NON-NLS-1$
 		return result;
 	}
 }

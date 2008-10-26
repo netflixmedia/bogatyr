@@ -45,14 +45,13 @@ import java.util.Collections;
 import java.util.List;
 
 import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is a helper class for network operations
  *
  * @author Stefan Laubenberger
- * @version 20080903
+ * @version 20081026
  */
 public abstract class HelperNet {
 //	private static final String PROPERTY_HTTP_USE_PROXY   = "http.useProxy"; //$NON-NLS-1$
@@ -77,15 +76,11 @@ public abstract class HelperNet {
      * @param password for authentication
      */
     public static void enableProxyHttp(final String host, final int port, final String username, final String password) {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "enableProxyHttp", new Object[]{host, port, username, password});  //$NON-NLS-1$
-
 //    	System.setProperty(PROPERTY_HTTP_USE_PROXY, "true"); //$NON-NLS-1$
         System.setProperty(PROPERTY_HTTP_PROXY_HOST, host);
         System.setProperty(PROPERTY_HTTP_PROXY_PORT, Integer.toString(port));
 
         authenticate(username, password);
-          
-		Logger.getInstance().writeMethodExit(HelperNet.class, "enableProxyHttp");  //$NON-NLS-1$
     }
     
     /**
@@ -93,13 +88,9 @@ public abstract class HelperNet {
      *
      */
     public static void disableProxyHttp() {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "disableProxyHttp");  //$NON-NLS-1$
-
 //        System.clearProperty(PROPERTY_HTTP_USE_PROXY);
         System.clearProperty(PROPERTY_HTTP_PROXY_HOST);
         System.clearProperty(PROPERTY_HTTP_PROXY_PORT);
-
-		Logger.getInstance().writeMethodExit(HelperNet.class, "disableProxyHttp");  //$NON-NLS-1$
     }
     
 	/**
@@ -111,15 +102,11 @@ public abstract class HelperNet {
      * @param password for authentication
      */
     public static void enableProxyHttps(final String host, final int port, final String username, final String password) {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "enableProxyHttps", new Object[]{host, port, username, password});  //$NON-NLS-1$
-
 //		System.setProperty(PROPERTY_HTTPS_USE_PROXY, "true"); //$NON-NLS-1$
         System.setProperty(PROPERTY_HTTPS_PROXY_HOST, host);
         System.setProperty(PROPERTY_HTTPS_PROXY_PORT, Integer.toString(port));
 
         authenticate(username, password);
-        
-		Logger.getInstance().writeMethodExit(HelperNet.class, "enableProxyHttps");  //$NON-NLS-1$
     }
     
     /**
@@ -127,13 +114,9 @@ public abstract class HelperNet {
      *
      */
     public static void disableProxyHttps() {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "disableProxyHttps");  //$NON-NLS-1$
-
 //		System.clearProperty(PROPERTY_HTTPS_USE_PROXY);
         System.clearProperty(PROPERTY_HTTPS_PROXY_HOST);
         System.clearProperty(PROPERTY_HTTPS_PROXY_PORT);
-
-        Logger.getInstance().writeMethodExit(HelperNet.class, "disableProxyHttps");  //$NON-NLS-1$
     }
     
 	/**
@@ -145,15 +128,11 @@ public abstract class HelperNet {
      * @param password for authentication
      */
     public static void enableProxyFtp(final String host, final int port, final String username, final String password) {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "enableProxyFtp", new Object[]{host, port, username, password});  //$NON-NLS-1$
-
 //		System.setProperty(PROPERTY_FTP_USE_PROXY, "true"); //$NON-NLS-1$
         System.setProperty(PROPERTY_FTP_PROXY_HOST, host);
         System.setProperty(PROPERTY_FTP_PROXY_PORT, Integer.toString(port));
 
         authenticate(username, password);
-
-        Logger.getInstance().writeMethodExit(HelperNet.class, "enableProxyFtp");  //$NON-NLS-1$
     }
     
     /**
@@ -161,13 +140,9 @@ public abstract class HelperNet {
      *
      */
     public static void disableProxyFtp() {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "disableProxyFtp");  //$NON-NLS-1$
-
 //        System.clearProperty(PROPERTY_FTP_USE_PROXY);
         System.clearProperty(PROPERTY_FTP_PROXY_HOST);
         System.clearProperty(PROPERTY_FTP_PROXY_PORT);
-
-		Logger.getInstance().writeMethodExit(HelperNet.class, "disableProxyFtp");  //$NON-NLS-1$
     }
 
     /**
@@ -178,8 +153,6 @@ public abstract class HelperNet {
      * @throws java.io.IOException
      */
     public static boolean isPingable(final String host) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "isPingable", host);  //$NON-NLS-1$
-
 		final InetAddress address = InetAddress.getByName(host);
 
         // Try to reach the specified address within the timeout period.
@@ -187,7 +160,6 @@ public abstract class HelperNet {
         // reached then the method returns false.
 		final boolean result = address.isReachable(3000);
 		
-		Logger.getInstance().writeMethodExit(HelperNet.class, "isPingable", result);  //$NON-NLS-1$
 		return result;
     }
 
@@ -199,12 +171,9 @@ public abstract class HelperNet {
      * @throws java.net.UnknownHostException
      */
     public static String getHostname(final String ip) throws UnknownHostException {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "getHostname", ip);  //$NON-NLS-1$
-
 		final InetAddress address = InetAddress.getByName(ip);
 		final String result = address.getHostName();
 		
-		Logger.getInstance().writeMethodExit(HelperNet.class, "getHostname", result);  //$NON-NLS-1$
         return result;
     }
 
@@ -215,12 +184,9 @@ public abstract class HelperNet {
      * @throws java.net.UnknownHostException
      */
     public static String getLocalHostname() throws UnknownHostException {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "getLocalHostname");  //$NON-NLS-1$
-
 		final InetAddress address = InetAddress.getLocalHost();
 		final String result = address.getHostName();
 
-		Logger.getInstance().writeMethodExit(HelperNet.class, "getLocalHostname", result);  //$NON-NLS-1$
         return result;
     }
 
@@ -232,12 +198,9 @@ public abstract class HelperNet {
      * @throws java.net.UnknownHostException
      */
     public static String getIp(final String hostname) throws UnknownHostException {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "getIp", hostname);  //$NON-NLS-1$
-
 		final InetAddress address = InetAddress.getByName(hostname);
 		final String result = address.getHostAddress();
 		
-		Logger.getInstance().writeMethodExit(HelperNet.class, "getIp", result);  //$NON-NLS-1$
         return result;
     }
 
@@ -248,12 +211,9 @@ public abstract class HelperNet {
      * @throws java.net.UnknownHostException
      */
     public static String getLocalIp() throws UnknownHostException {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "getLocalIp");  //$NON-NLS-1$
-
 		final InetAddress address = InetAddress.getLocalHost();
 		final String result = address.getHostAddress();
 		
-		Logger.getInstance().writeMethodExit(HelperNet.class, "getLocalIp", result);  //$NON-NLS-1$
         return result;
    }
 
@@ -264,8 +224,6 @@ public abstract class HelperNet {
      * @throws java.net.UnknownHostException
      */
     public static List<String> getLocalIps() throws UnknownHostException {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "getLocalIps");  //$NON-NLS-1$
-
     	final List<String> list = new ArrayList<String>();
         final String localHost = InetAddress.getLocalHost().getHostName();
 
@@ -273,7 +231,6 @@ public abstract class HelperNet {
             list.add(address.getHostAddress());
         }
 
-		Logger.getInstance().writeMethodExit(HelperNet.class, "getLocalIps", list);  //$NON-NLS-1$
         return list;
     }
 
@@ -284,11 +241,8 @@ public abstract class HelperNet {
      * @throws java.net.SocketException
      */
     public static List<NetworkInterface> getNetworkInterfaces() throws SocketException {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "getNetworkInterfaces");  //$NON-NLS-1$
-		
 		final List<NetworkInterface> list = Collections.list(NetworkInterface.getNetworkInterfaces());
 		
-		Logger.getInstance().writeMethodExit(HelperNet.class, "getNetworkInterfaces", list);  //$NON-NLS-1$
 		return list;
     }
 
@@ -300,13 +254,10 @@ public abstract class HelperNet {
      * @throws IOException
      */
     public static byte[] readUrl(URL url) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "readUrl", url);  //$NON-NLS-1$
-
 		final URLConnection con = url.openConnection();
 		con.connect();
 		final byte[] result = HelperIO.readStream(con.getInputStream());
 		
-		Logger.getInstance().writeMethodExit(HelperNet.class, "readUrl", result);  //$NON-NLS-1$
         return result;
      }
 
@@ -320,14 +271,11 @@ public abstract class HelperNet {
      * @throws IOException
      */
     public static byte[] readUrl(URL url, String username, String password) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "readUrl", new Object[]{url, username, password});  //$NON-NLS-1$
-
 		final URLConnection con = url.openConnection();
 		con.setRequestProperty("Authorization", "Basic " + ConverterBase64.encode((username + ':' + password))); //$NON-NLS-1$ //$NON-NLS-2$
 		con.connect();
 		final byte[] result = HelperIO.readStream(con.getInputStream());
 		
-		Logger.getInstance().writeMethodExit(HelperNet.class, "readUrl", result);  //$NON-NLS-1$
         return result;
      }
     
@@ -350,11 +298,7 @@ public abstract class HelperNet {
      * Private methods
      */
     private static void authenticate(final String username, final String password) {
-		Logger.getInstance().writeMethodEntry(HelperNet.class, "authenticate", new Object[]{username, password});  //$NON-NLS-1$
-
     	Authenticator.setDefault(new MyAuthenticator(username, password));
-
-    	Logger.getInstance().writeMethodExit(HelperNet.class, "authenticate");  //$NON-NLS-1$
     }
     
     

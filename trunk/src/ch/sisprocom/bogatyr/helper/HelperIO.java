@@ -49,15 +49,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-
 
 /**
  * This is a helper class for I/O
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20080901
+ * @version 20081026
  */
 public abstract class HelperIO {
 	private final static byte[] BUFFER = new byte[1024];
@@ -72,15 +70,12 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static File getTemporaryFile(final String name, final String extension) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "getTemporaryFile", new Object[]{name, extension});  //$NON-NLS-1$
-
 		// Create temp file
 	    File file = File.createTempFile(name, extension);
 	
 	    // Delete temp file when program exits
 	    file.deleteOnExit();
 	    
-		Logger.getInstance().writeMethodExit(HelperIO.class, "getTemporaryFile", file);  //$NON-NLS-1$
 	    return file;
 	}
 	
@@ -98,8 +93,6 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static List<File> getFiles(final File path, final String[] identifier, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "getFiles", new Object[]{path, identifier, isExclude, isCaseSensitive, isRecursive, isFile, isDirectory});  //$NON-NLS-1$
-
 		final List<File> list = new ArrayList<File>();
 
 		if (!path.isDirectory()) {
@@ -108,7 +101,6 @@ public abstract class HelperIO {
 
 		getFileNamesRecursion(path, identifier, list, isExclude, isCaseSensitive, isRecursive, isFile, isDirectory);
 
-		Logger.getInstance().writeMethodExit(HelperIO.class, "getFiles", list);  //$NON-NLS-1$
 		return list;
 	}
 
@@ -122,11 +114,8 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static List<File> getFiles(final File path, final String[] identifier, final boolean isExclude) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "getFiles", new Object[]{path, identifier, isExclude}); //$NON-NLS-1$
-		
 		final List<File> list = getFiles(path, identifier, isExclude, false, true, true, true);
 		
-		Logger.getInstance().writeMethodExit(HelperIO.class, "getFiles", list);  //$NON-NLS-1$
 		return list;
 	}
 
@@ -138,8 +127,6 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static void copyDirectory(final File source, final File dest) throws IOException{
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "copyDirectory", new Object[]{source, dest});  //$NON-NLS-1$
-
 		if (!dest.exists()) {
             dest.mkdir();
         }
@@ -156,8 +143,6 @@ public abstract class HelperIO {
 				copyFile(sourceChild, destChild);
 			}
 	    }
-		
-		Logger.getInstance().writeMethodExit(HelperIO.class, "copyDirectory");  //$NON-NLS-1$
 	}
 	
 	/**
@@ -168,8 +153,6 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static void copyFile(final File source, final File dest) throws IOException{
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "copyFile", new Object[]{source, dest});  //$NON-NLS-1$
-
 		InputStream fis = null;
         OutputStream fos = null;
 
@@ -194,8 +177,6 @@ public abstract class HelperIO {
 				fos.close();
 			}
 		}
-		
-		Logger.getInstance().writeMethodExit(HelperIO.class, "copyFile");  //$NON-NLS-1$
 	}
 	
 	/**
@@ -207,15 +188,12 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static boolean move(final File source, final File dest) throws IOException{
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "move", new Object[]{source, dest});  //$NON-NLS-1$
-
 		if (source.isDirectory()) {
 	    	copyDirectory(source, dest);
 	    } else {
 	    	copyFile(source, dest);
 	    }
 
-		Logger.getInstance().writeMethodExit(HelperIO.class, "move");  //$NON-NLS-1$
 	    return delete(source);
 	}
 
@@ -227,8 +205,6 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static boolean delete(final File file) throws IOException{
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "delete", file);  //$NON-NLS-1$
-
 		if (file.isDirectory()) {
 			final File[] childFiles = file.listFiles();
 			for (final File child : childFiles) {
@@ -238,7 +214,6 @@ public abstract class HelperIO {
 
 		final boolean flag = file.delete();
 		
-		Logger.getInstance().writeMethodExit(HelperIO.class, "delete", flag);  //$NON-NLS-1$
 		return flag;
 	}
 	  
@@ -250,11 +225,8 @@ public abstract class HelperIO {
      * @return true/false
      */	
 	public static boolean rename(final File source, final File dest) {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "rename", new Object[]{source, dest});  //$NON-NLS-1$
-		
 		final boolean flag = source.renameTo(dest);
 		
-		Logger.getInstance().writeMethodExit(HelperIO.class, "rename", flag);  //$NON-NLS-1$
 		return flag;
 	}
 
@@ -268,8 +240,6 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static void writeLine(final File file, final String encoding, final String line) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "writeLine", new Object[]{file, encoding, line});  //$NON-NLS-1$
-
 		String enc = encoding;
 		
 		if (!HelperGeneral.isValidString(encoding)) {
@@ -286,8 +256,6 @@ public abstract class HelperIO {
                 pw.close();
             }
 		}
-		
-		Logger.getInstance().writeMethodExit(HelperIO.class, "writeLine");  //$NON-NLS-1$
 	}
 	
 	/**
@@ -298,11 +266,7 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static void writeLine(final File file, final String line) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "writeLine", new Object[]{file, line});  //$NON-NLS-1$
-
 		writeLine(file, null, line);
-	
-		Logger.getInstance().writeMethodExit(HelperIO.class, "writeLine");  //$NON-NLS-1$
 	}
 
 	/**
@@ -314,8 +278,6 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static void writeFileFromBinary(final File file, final byte[] data, final boolean append) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "writeFileFromBinary", new Object[]{file, data, append});  //$NON-NLS-1$
-
 		FileOutputStream fos = null;
 		
 		try {
@@ -327,8 +289,6 @@ public abstract class HelperIO {
                 fos.close();
             }
 		}
-		
-		Logger.getInstance().writeMethodExit(HelperIO.class, "writeFileFromBinary");  //$NON-NLS-1$
 	}
 	
 	/**
@@ -340,8 +300,6 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static void writeFileFromString(final File file, final String data, final boolean append) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "writeFileFromString", new Object[]{file, data, append});  //$NON-NLS-1$
-
 		final Writer writer = new BufferedWriter(new FileWriter(file));
 	
 	    try {
@@ -354,8 +312,6 @@ public abstract class HelperIO {
 	    } finally {
 	      writer.close();
 	    }
-	    
-		Logger.getInstance().writeMethodExit(HelperIO.class, "writeFileFromString");  //$NON-NLS-1$
 	}
 	
 	/**
@@ -366,16 +322,12 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static void writeStream(final OutputStream os, final byte[] data) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "writeStream", new Object[]{os, data});  //$NON-NLS-1$
-
 //	    try {
     		os.write(data);
     		os.flush();
 //	    } finally {
 //	      os.close();
 //	    }
-    		
-    	Logger.getInstance().writeMethodExit(HelperIO.class, "writeStream");  //$NON-NLS-1$
 	}
 	
 	/**
@@ -386,8 +338,6 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static byte[] readStream(final InputStream in) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "readStreamFast", in);  //$NON-NLS-1$
-
 		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		final byte[] result;
 		int x;
@@ -403,8 +353,6 @@ public abstract class HelperIO {
 		} finally {
 			bos.close();
 		}
-		
-		Logger.getInstance().writeMethodExit(HelperIO.class, "readStreamFast", result);  //$NON-NLS-1$
 		return result;
 	}
 	
@@ -444,8 +392,6 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static byte[] readFileAsBinary(final File file) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "readFileAsBinary", file);  //$NON-NLS-1$
-
 		final long length = file.length();
 		FileInputStream fis = null;
 		final byte[] buffer;
@@ -461,8 +407,6 @@ public abstract class HelperIO {
                 fis.close();
             }
 		}
-
-		Logger.getInstance().writeMethodExit(HelperIO.class, "readFileAsBinary", buffer);  //$NON-NLS-1$
 		return buffer;
 	}
 	
@@ -474,8 +418,6 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static String readFileAsString(final File file) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "readFileAsString", file);  //$NON-NLS-1$
-
 		final StringBuilder contents = new StringBuilder();
 		final Scanner scanner = new Scanner(file);
 		final String str;
@@ -490,8 +432,6 @@ public abstract class HelperIO {
 	    } finally {
 	      scanner.close();
 	    }
-		
-	    Logger.getInstance().writeMethodExit(HelperIO.class, "readFileAsString", str);  //$NON-NLS-1$
 		return str;
 	}
 
@@ -503,8 +443,6 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static List<String> readFileAsList(final File file) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "readFileAsList", file);  //$NON-NLS-1$
-
 		final Scanner scanner = new Scanner(file);
 		final List<String> list = new ArrayList<String>();
 		
@@ -515,8 +453,6 @@ public abstract class HelperIO {
 	    } finally {
 	      scanner.close();
 	    }
-	    
-		Logger.getInstance().writeMethodExit(HelperIO.class, "readFileAsList", list);  //$NON-NLS-1$
 		return list;
 	}
 
@@ -528,8 +464,6 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static void concatenateFiles(final File fileOutput, final File[] list) throws IOException {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "concatenateFiles", new Object[]{fileOutput, list});  //$NON-NLS-1$
-
 		// Create output stream
 	    PrintWriter pw = null;
         BufferedReader br = null;
@@ -562,7 +496,6 @@ public abstract class HelperIO {
                 pw.close();
             }
 	    }
-		Logger.getInstance().writeMethodExit(HelperIO.class, "concatenateFiles");  //$NON-NLS-1$
 	}
 	
 //	public static long getTotalSpace(File file) { //Java 1.6
@@ -595,8 +528,6 @@ public abstract class HelperIO {
      * @param isDirectory true/false
      */	
 	private static void getFileNamesRecursion(final File filePath, final String[] identifier, final List<File> fileList, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) {
-		Logger.getInstance().writeMethodEntry(HelperIO.class, "getFileNamesRecursion", new Object[]{filePath, identifier, fileList});  //$NON-NLS-1$
-
 		final File[] files = filePath.listFiles();
 		
 		if (files != null) {
@@ -619,6 +550,5 @@ public abstract class HelperIO {
 	//			}
 			}
 		}
-		Logger.getInstance().writeMethodExit(HelperIO.class, "getFileNamesRecursion");  //$NON-NLS-1$
 	}
 }

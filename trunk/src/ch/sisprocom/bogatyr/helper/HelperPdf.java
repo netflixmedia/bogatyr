@@ -41,8 +41,6 @@ import java.io.OutputStream;
 
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Rectangle;
@@ -56,7 +54,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * This is a helper class for PDF operations
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public abstract class HelperPdf {
 
@@ -69,8 +67,6 @@ public abstract class HelperPdf {
      * @throws java.io.IOException
      */
     public static void savePdfFromComponent(final Component component, final File output) throws IOException, DocumentException {
-		Logger.getInstance().writeMethodEntry(HelperPdf.class, "savePdfFromComponent", new Object[]{component, output});  //$NON-NLS-1$
-
     	final Dimension size = component.getSize();
 		final Document document = new Document(new Rectangle((float) size.width, (float) size.height));
 	    FileOutputStream fos = null;
@@ -93,8 +89,6 @@ public abstract class HelperPdf {
                 fos.close();
             }
         }
-
-		Logger.getInstance().writeMethodExit(HelperPdf.class, "savePdfFromComponent");  //$NON-NLS-1$
 	}
 
     /**
@@ -106,8 +100,6 @@ public abstract class HelperPdf {
      * @throws java.io.IOException
      */
 	public static void savePdfFromHTML(File[] input, File output) throws IOException, DocumentException {
-		Logger.getInstance().writeMethodEntry(HelperPdf.class, "savePdfFromHTML", new Object[]{input, output});  //$NON-NLS-1$
-
 		OutputStream os = null;
 
 		try {
@@ -134,8 +126,6 @@ public abstract class HelperPdf {
 	    	   os.close();
 		   }
 		}
-		
-		Logger.getInstance().writeMethodExit(HelperPdf.class, "savePdfFromHTML");  //$NON-NLS-1$
 	}
 
 //	public static void createPdf(Component component, int width, int height, File file) throws FileNotFoundException, DocumentException {

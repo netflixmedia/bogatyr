@@ -34,22 +34,21 @@ package ch.sisprocom.bogatyr.controller.net.client.asynch;
 import java.io.IOException;
 import java.security.Key;
 
-import ch.sisprocom.bogatyr.controller.net.client.ClientTemplate;
+import ch.sisprocom.bogatyr.controller.net.client.ClientAbstract;
 import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is the skeleton for asynchron clients
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
-public abstract class ClientAsynchTemplate extends ClientTemplate {
+public abstract class ClientAsynchAbstract extends ClientAbstract {
 //	protected Thread thread;
 	
 
-	protected ClientAsynchTemplate(final String propertiesStreamName) throws Exception {
+	protected ClientAsynchAbstract(final String propertiesStreamName) throws Exception {
 		super(propertiesStreamName);
 		
 		openStream();
@@ -79,14 +78,11 @@ public abstract class ClientAsynchTemplate extends ClientTemplate {
 	 * @throws IOException 
 	 */
 	public void stop() throws IOException {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "stop"); //$NON-NLS-1$
 //		if ((this.thread != null) && this.thread.isAlive()) {
 //			this.thread = null;
 //		}
 		
 		closeStream();
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "stop"); //$NON-NLS-1$
 	}
 
 
@@ -103,8 +99,6 @@ public abstract class ClientAsynchTemplate extends ClientTemplate {
      */
     @Override
     protected Object execute(final ComObject comObject) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "execute", comObject); //$NON-NLS-1$
-		
     	//ComObject comObject = data;
 
 //    	Logger.getInstance().writeDebug(this.getClass(), "execute", "comObject: " + data.toString());  //$NON-NLS-1$//$NON-NLS-2$
@@ -112,7 +106,6 @@ public abstract class ClientAsynchTemplate extends ClientTemplate {
 		// write the ComObject on the socket-stream
 		writeObject(comObject);
 
-		Logger.getInstance().writeMethodExit(this.getClass(), "execute", null); //$NON-NLS-1$
     	return null; // always return null (because it's an async client)
 	}
 
@@ -127,11 +120,7 @@ public abstract class ClientAsynchTemplate extends ClientTemplate {
 	 * @see ComObject
 	 */
 	public void sendAsymmKey(final ComObject comObject) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "sendAsymmKey", comObject); //$NON-NLS-1$
-		
 		setCryptoKey((Key)comObject.getData());
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "sendAsymmKey"); //$NON-NLS-1$
 	}
 
 	/**
@@ -141,10 +130,6 @@ public abstract class ClientAsynchTemplate extends ClientTemplate {
 	 * @see ComObject
 	 */
 	public void sendSymmKey(final ComObject comObject) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "sendSymmKey", comObject); //$NON-NLS-1$
-		
 		setCryptoKey((Key)comObject.getData());
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "sendSymmKey"); //$NON-NLS-1$
 	}
 }

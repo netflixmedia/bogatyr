@@ -39,14 +39,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import ch.sisprocom.bogatyr.controller.net.common.ICom;
 import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is the super class for all Security-children
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public abstract class Security {	
 	private static final Map<SocketAddress, Long> contactTable = new ConcurrentHashMap<SocketAddress, Long>(); //#LS new
@@ -59,9 +58,7 @@ public abstract class Security {
 	 * @throws Exception
      * @return true/false
 	 */
-	public static boolean isMethodGranted(final ServerTemplate server, final ComObject comObject) throws Exception {
-		Logger.getInstance().writeMethodEntry(Security.class, "isMethodGranted", new Object[]{server, comObject}); //$NON-NLS-1$
-
+	public static boolean isMethodGranted(final ServerAbstract server, final ComObject comObject) throws Exception {
 		boolean flag = false;
 		
 		if (comObject.getMethodName().equalsIgnoreCase(ICom.METHOD_CONNECT)) {
@@ -77,26 +74,22 @@ public abstract class Security {
 		} else if (comObject.getMethodName().equalsIgnoreCase(ICom.METHOD_LOGOFF)) {
 			flag = isUserLoggedOn(server, comObject);
 		}
-		
-		Logger.getInstance().writeMethodExit(Security.class, "isMethodGranted", flag); //$NON-NLS-1$
 		return flag;
 	}
 
 	/**
 	 * Validates a socket (simple DOS and overload protection)
 	 * 
-	 * Ensures that no client connects faster than {@link ServerTemplate#getInterval()}.
-	 * Ensures that the total number of client connects within {@link ServerTemplate#getInterval()} dosen't reach {@link ServerTemplate#getRequests()}
+	 * Ensures that no client connects faster than {@link ServerAbstract#getInterval()}.
+	 * Ensures that the total number of client connects within {@link ServerAbstract#getInterval()} dosen't reach {@link ServerAbstract#getRequests()}
 	 * 
 	 * @param server The server to protect
      * @param socket The socket to protect
-	 * @see ServerTemplate#getInterval()
-	 * @see ServerTemplate#getRequests()
+	 * @see ServerAbstract#getInterval()
+	 * @see ServerAbstract#getRequests()
      * @return true/false
 	 */
-	public static boolean isValidContact(final ServerTemplate server, final Socket socket) {
-		Logger.getInstance().writeMethodEntry(Security.class, "isValidContact", new Object[]{server, socket}); //$NON-NLS-1$
-
+	public static boolean isValidContact(final ServerAbstract server, final Socket socket) {
 		boolean isValid = true;
 
 		if (server.getInterval() != 0) { // not disabled
@@ -125,8 +118,6 @@ public abstract class Security {
 			
 			contactTable.put(socketAddress, time);
 		}
-
-		Logger.getInstance().writeMethodExit(Security.class, "isValidContact", isValid); //$NON-NLS-1$
 		return isValid;
 	}
 	
@@ -137,12 +128,8 @@ public abstract class Security {
      * @param comObject Communication Object
      * @return true/false
 	 */
-	public static boolean isUserLoggedOn(final ServerTemplate server, final ComObject comObject) {
-		Logger.getInstance().writeMethodEntry(Security.class, "isUserLoggedOn", new Object[]{server, comObject}); //$NON-NLS-1$
-
+	public static boolean isUserLoggedOn(final ServerAbstract server, final ComObject comObject) {
 		final boolean isLoggedOn = server.getUser(comObject.getUserKey()) != null;
-
-		Logger.getInstance().writeMethodExit(Security.class, "isUserLoggedOn", isLoggedOn); //$NON-NLS-1$
         return isLoggedOn;
     }
 }

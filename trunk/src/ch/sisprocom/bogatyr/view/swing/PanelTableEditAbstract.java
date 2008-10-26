@@ -38,19 +38,22 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTable;
 
+import org.apache.log4j.Logger;
+
 import ch.sisprocom.bogatyr.helper.exception.HelperException;
 import ch.sisprocom.bogatyr.helper.localizer.Localizer;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
- * This is a panel for tables
+ * This is a template panel for tables
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
-public abstract class PanelTableEditTemplate extends Panel implements ActionListener {
+public abstract class PanelTableEditAbstract extends Panel implements ActionListener {
 	private static final long serialVersionUID = 4152134766882997391L;
+	
+	private static final Logger log = Logger.getLogger(PanelTableEditAbstract.class);
 	
 	private static final String RES_BUTTON_ADD    = "PanelEditTable.button.add"; //$NON-NLS-1$
 	private static final String RES_BUTTON_EDIT   = "PanelEditTable.button.edit"; //$NON-NLS-1$
@@ -65,7 +68,7 @@ public abstract class PanelTableEditTemplate extends Panel implements ActionList
 	private Object[][] data;
 	
 	
-	protected PanelTableEditTemplate(final String[] columnNames, final Object[][] data) {
+	protected PanelTableEditAbstract(final String[] columnNames, final Object[][] data) {
 		super();
 		
 		this.columnNames = columnNames;
@@ -73,7 +76,7 @@ public abstract class PanelTableEditTemplate extends Panel implements ActionList
 		createLayout();
     }
 
-	protected PanelTableEditTemplate(final String[] columnNames, final Object[][] data, final String title) {
+	protected PanelTableEditAbstract(final String[] columnNames, final Object[][] data, final String title) {
 		this(columnNames, data);
 
 		setTitle(title);
@@ -182,7 +185,7 @@ public abstract class PanelTableEditTemplate extends Panel implements ActionList
 		} else if (e.getActionCommand().equals(Localizer.getInstance().getValue(RES_BUTTON_DELETE))) {
 			executeActionDelete();
 		} else {
-			Logger.getInstance().writeException(this.getClass(), "actionPerformed", HelperException.EX_UNKNOWN_EVENT + ": " + e, null); //$NON-NLS-1$ //$NON-NLS-2$
+			log.warn(HelperException.EX_UNKNOWN_EVENT + ": " + e); //$NON-NLS-1$
 		}
 	}
 }

@@ -36,8 +36,6 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
-import ch.sisprocom.bogatyr.helper.property.Property;
 
 
 /**
@@ -45,14 +43,9 @@ import ch.sisprocom.bogatyr.helper.property.Property;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20080901
+ * @version 20081026
  */
-public abstract class ProviderSqlTemplate {	
-	private static final String PROPERTY_DRIVER   = "db.driver"; //$NON-NLS-1$
-	private static final String PROPERTY_URL      = "db.url"; //$NON-NLS-1$
-	private static final String PROPERTY_USER     = "db.user"; //$NON-NLS-1$
-	private static final String PROPERTY_PASSWORD = "db.password"; //$NON-NLS-1$
-	
+public abstract class ProviderSqlAbstract {
 	// Server
 	private String driver;
 	private String url;
@@ -60,39 +53,44 @@ public abstract class ProviderSqlTemplate {
 	private String password;
 	
 	
-	protected ProviderSqlTemplate() throws Exception {
+	protected ProviderSqlAbstract(String driver, String url, String user, String password) throws Exception {
         super();
-        init();
+        this.driver = driver;
+        this.url = url;
+        this.user = user;
+        this.password = password;
 	}
 	
-	public String getUser() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getUser");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getUser", user);  //$NON-NLS-1$
+	public String getDriver() {
+		return driver;
+	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public String getUser() {
 		return user;
 	}
 
 	public String getPassword() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getPassword");  //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getPassword", password);  //$NON-NLS-1$
-
 		return password;
 	}
 
-	public void setUser(final String user) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "setUser", user);  //$NON-NLS-1$
-
-		this.user = user;
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "setUser");  //$NON-NLS-1$
+	public void setDriver(String driver) {
+		this.driver = driver;
 	}
 
-	public void setPassword(final String password) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "setPassword", password);  //$NON-NLS-1$
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public void setPassword(String password) {
 		this.password = password;
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "setPassword");  //$NON-NLS-1$
 	}
 
 	/**
@@ -102,12 +100,9 @@ public abstract class ProviderSqlTemplate {
      * @throws Exception
 	 */
     protected Connection connectToDb() throws Exception {		
-		Logger.getInstance().writeMethodEntry(this.getClass(), "connectToDb");  //$NON-NLS-1$
-
 		Class.forName(driver).newInstance();
 		final Connection con = DriverManager.getConnection(url, user, password);
 		
-		Logger.getInstance().writeMethodExit(this.getClass(), "connectToDb", con);  //$NON-NLS-1$
         return con;
 	}
     
@@ -119,8 +114,6 @@ public abstract class ProviderSqlTemplate {
      * @throws Exception
 	 */
     protected int executeUpdate(final String statement) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "executeUpdate", statement);  //$NON-NLS-1$
-
         Statement stmt = null;
         Connection con = null;
         final int result;
@@ -139,7 +132,6 @@ public abstract class ProviderSqlTemplate {
             }
 		}
 
-		Logger.getInstance().writeMethodExit(this.getClass(), "executeUpdate", result);  //$NON-NLS-1$
 		return result;
     }
 	
@@ -151,8 +143,6 @@ public abstract class ProviderSqlTemplate {
      * @throws Exception
 	 */
     protected boolean execute(final String statement) throws Exception {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "execute", statement);  //$NON-NLS-1$
-
         Statement stmt = null;
         Connection con = null;
         final boolean result;
@@ -170,41 +160,8 @@ public abstract class ProviderSqlTemplate {
                 stmt.close();
             }
 		}
-		
-		Logger.getInstance().writeMethodExit(this.getClass(), "execute", result);  //$NON-NLS-1$
 		return result;
     }   
-   
-    
-	/*
-	 * Private methods
-	 */
-	private void init() throws Exception {
-		readProperties();
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
-	}
-
-	private void readProperties() throws Exception {
-        driver = Property.getInstance().getProperty(PROPERTY_DRIVER);
-		if (!HelperGeneral.isValidString(driver)) {
-			throw new Exception(getClass().getName() + "::readProperties - PROPERTY_DRIVER + == 'null'"); //$NON-NLS-1$
-		}
-
-        url = Property.getInstance().getProperty(PROPERTY_URL);
-		if (!HelperGeneral.isValidString(url)) {
-			throw new Exception(getClass().getName() + "::readProperties - PROPERTY_URL + == 'null'"); //$NON-NLS-1$
-		}
-
-        user = Property.getInstance().getProperty(PROPERTY_USER);
-		if (!HelperGeneral.isValidString(user)) {
-            user = ""; //$NON-NLS-1$
-		}
-
-        password = Property.getInstance().getProperty(PROPERTY_PASSWORD);
-		if (!HelperGeneral.isValidString(password)) {
-            password = ""; //$NON-NLS-1$
-		}
-	}
 	
 	
 	/*

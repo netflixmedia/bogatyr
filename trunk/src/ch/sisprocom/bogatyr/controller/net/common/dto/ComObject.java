@@ -34,14 +34,13 @@ package ch.sisprocom.bogatyr.controller.net.common.dto;
 import java.io.Serializable;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.logger.Logger;
 
 
 /**
  * This is the communication object for the client/server-communication.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081026
  */
 public final class ComObject implements Serializable {
 	private static final long serialVersionUID = 4563277188299092069L;
@@ -63,68 +62,34 @@ public final class ComObject implements Serializable {
         super();
         this.userKey = userKey;
 		this.data = data;
-
-		init();
 	}
 	
 	public Object getData() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getData"); //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getData", data); //$NON-NLS-1$
-
 		return data;
 	}
 	
 	public void setData(final Object data) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "setData", data); //$NON-NLS-1$
-
 		this.data = data;
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "setData"); //$NON-NLS-1$
 	}
 	
 	public Exception getException() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getException"); //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getException", exception); //$NON-NLS-1$
-
 		return exception;
 	}
 	
 	public void setException(final Exception exception) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "setException", exception); //$NON-NLS-1$
-
 		this.exception = exception;
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "setException"); //$NON-NLS-1$
 	}
 	
 	public String getMethodName() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getMethodName"); //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getMethodName", methodName); //$NON-NLS-1$
-
 		return methodName;
 	}
 	
 	public void setMethodName(final String methodName) {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "setMethodName", methodName); //$NON-NLS-1$
-
 		this.methodName = methodName;
-
-		Logger.getInstance().writeMethodExit(this.getClass(), "setMethodName"); //$NON-NLS-1$
 	}
 
 	public String getUserKey() {
-		Logger.getInstance().writeMethodEntry(this.getClass(), "getUserKey"); //$NON-NLS-1$
-		Logger.getInstance().writeMethodExit(this.getClass(), "getUserKey", userKey); //$NON-NLS-1$
-
 		return userKey;
-	}
-	
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		Logger.getInstance().writeDebug(this.getClass(), "init", toString()); //$NON-NLS-1$
 	}
 
 	
