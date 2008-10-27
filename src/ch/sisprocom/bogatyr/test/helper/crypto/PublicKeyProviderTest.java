@@ -31,12 +31,16 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.crypto;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.security.KeyPair;
 import java.security.cert.X509Certificate;
 import java.util.Date;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.context.Context;
 import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
 import ch.sisprocom.bogatyr.helper.crypto.PublicKeyProvider;
@@ -46,10 +50,10 @@ import ch.sisprocom.bogatyr.helper.crypto.PublicKeyProvider;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class PublicKeyProviderTest extends TestCase {
-
+public class PublicKeyProviderTest {
+	@Test
 	public void testGenerateCertificate() {
 		KeyPair kp = null;
 		try {

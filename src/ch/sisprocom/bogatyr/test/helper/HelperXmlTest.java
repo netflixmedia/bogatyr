@@ -31,7 +31,11 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.HelperXml;
 
 
@@ -39,12 +43,12 @@ import ch.sisprocom.bogatyr.helper.HelperXml;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class HelperXmlTest extends TestCase {
+public class HelperXmlTest {
 	private static final String INVALID_XML = new String(new byte[]{(byte)0x26});
 	
-
+	@Test
 	public void testGetValidXmlString() {
 		assertEquals("", HelperXml.getValidXmlString(null));
 		assertNotSame(INVALID_XML, HelperXml.getValidXmlString(INVALID_XML));

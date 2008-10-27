@@ -31,10 +31,13 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
+import static org.junit.Assert.fail;
+
 import javax.sound.midi.Sequence;
 import javax.sound.sampled.Clip;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.HelperSound;
 
 
@@ -42,9 +45,10 @@ import ch.sisprocom.bogatyr.helper.HelperSound;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class HelperSoundTest extends TestCase {
+public class HelperSoundTest {
+	@Test
 	public void testGetAndPlayClip() {
 		try {
 			final Clip clip = HelperSound.getClip(this.getClass().getResourceAsStream("/res/ch/sisprocom/bogatyr/test/test.wav"));
@@ -52,7 +56,8 @@ public class HelperSoundTest extends TestCase {
 			HelperSound.play(clip);
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
 	}
-	
+
+	@Test
 	public void testGetAndPlaySequence() {
 		try {
 			final Sequence sequence = HelperSound.getSequence(this.getClass().getResourceAsStream("/res/ch/sisprocom/bogatyr/test/test.mid"));

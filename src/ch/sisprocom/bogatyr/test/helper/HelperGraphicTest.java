@@ -31,7 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.HelperGraphic;
 
 
@@ -39,10 +42,10 @@ import ch.sisprocom.bogatyr.helper.HelperGraphic;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class HelperGraphicTest extends TestCase { //TODO improve
-	
+public class HelperGraphicTest { //TODO improve
+	@Test
 	public void testGetFonts() {
 		assertNotNull(HelperGraphic.getFonts());
 //		System.out.println(HelperGeneral.dumpList(HelperGraphic.getFonts()));

@@ -31,7 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.converter;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
@@ -40,10 +43,10 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080903
+ * @version 20081027
  */
-public class ConverterBase64Test extends TestCase { //TODO improve
-	
+public class ConverterBase64Test { //TODO improve
+	@Test
 	public void testEncodeAndDecode() {
 		assertEquals(AllBogatyrTests.DATA, new String(ConverterBase64.decode(ConverterBase64.encode(AllBogatyrTests.DATA))));
 	}

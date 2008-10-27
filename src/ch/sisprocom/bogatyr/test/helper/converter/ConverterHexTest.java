@@ -31,7 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.converter;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.converter.ConverterHex;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
@@ -40,10 +43,10 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class ConverterHexTest extends TestCase { //TODO improve
-	
+public class ConverterHexTest { //TODO improve
+	@Test
 	public void testEncodeAndDecode() {
 		assertEquals(AllBogatyrTests.DATA, new String(ConverterHex.decode(ConverterHex.encode(AllBogatyrTests.DATA.getBytes()))));
 	}
