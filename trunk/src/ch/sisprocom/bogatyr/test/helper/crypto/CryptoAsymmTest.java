@@ -31,9 +31,15 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.crypto;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.security.KeyPair;
 
-import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
@@ -42,14 +48,20 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class CryptoAsymmTest extends TestCase {
+public class CryptoAsymmTest {
 	private static final int KEYSIZE = 1024;
 	
 	private KeyPair keyPair = null;
 	  
+	
+	@Before
+	public void setUp() throws Exception {
+        keyPair = CryptoAsymm.generateKeys(KEYSIZE);
+	}
 
+	@Test
 	public void testGenerateKeys() {
 		try {
 			CryptoAsymm.generateKeys(0);
@@ -71,6 +83,7 @@ public class CryptoAsymmTest extends TestCase {
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
+	@Test
 	public void testEncrypt() {
 		try {
 			CryptoAsymm.encrypt(null, null, 0);
@@ -97,6 +110,7 @@ public class CryptoAsymmTest extends TestCase {
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
+	@Test
 	public void testDecrypt() {
 		try {
 			CryptoAsymm.decrypt(null, null, 0);
@@ -121,15 +135,6 @@ public class CryptoAsymmTest extends TestCase {
 		try {
 			assertEquals(AllBogatyrTests.DATA, new String(CryptoAsymm.decrypt(CryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), keyPair.getPublic(), KEYSIZE), keyPair.getPrivate(), KEYSIZE)));
 		} catch (Exception ex) {fail(ex.getMessage());}
-	}
-
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public void setUp() throws Exception {
-        keyPair = CryptoAsymm.generateKeys(KEYSIZE);
 	}
 }
 

@@ -31,10 +31,18 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
@@ -43,10 +51,10 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class HelperGeneralTest extends TestCase { //TODO improve
-	
+public class HelperGeneralTest { //TODO improve
+	@Test
 	public void testCreateObject() {
 		try {
 			assertEquals("", HelperGeneral.createObject("java.lang.String", null)); //$NON-NLS-1$ //$NON-NLS-2$
@@ -55,12 +63,14 @@ public class HelperGeneralTest extends TestCase { //TODO improve
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 
+	@Test
 	public void testIsValidString() {
 		assertFalse(HelperGeneral.isValidString(null));
 		assertFalse(HelperGeneral.isValidString("")); //$NON-NLS-1$
 		assertTrue(HelperGeneral.isValidString("123")); //$NON-NLS-1$
 	}
 
+	@Test
 	public void testIsStringNumeric() {
 		assertFalse(HelperGeneral.isStringNumeric(null));
 		assertFalse(HelperGeneral.isStringNumeric("")); //$NON-NLS-1$
@@ -69,37 +79,44 @@ public class HelperGeneralTest extends TestCase { //TODO improve
 		assertFalse(HelperGeneral.isStringNumeric("123.23abc")); //$NON-NLS-1$
 	}
 
+	@Test
 	public void testIsValidInt() {
 		assertFalse(HelperGeneral.isValidInt(0));
 		assertTrue(HelperGeneral.isValidInt(1));
 	}
 	
+	@Test
 	public void testIsValidDouble() {
 		assertFalse(HelperGeneral.isValidDouble(0.0D));
 		assertTrue(HelperGeneral.isValidDouble(0.001D));
 	}
 	
+	@Test
 	public void testIsValidLong() {
 		assertFalse(HelperGeneral.isValidLong(0L));
 		assertTrue(HelperGeneral.isValidLong(1L));
 	}
 	
+	@Test
 	public void testIsValidFloat() {
 		assertFalse(HelperGeneral.isValidFloat(0.0F));
 		assertTrue(HelperGeneral.isValidFloat(0.001F));
 	}
 	
+	@Test
 	public void testIsValidObject() {
 		assertFalse(HelperGeneral.isValidObject(null));
 		assertTrue(HelperGeneral.isValidObject("")); //$NON-NLS-1$
 	}
 	
+	@Test
 	public void testIsValidArray() {
 		assertFalse(HelperGeneral.isValidArray(null));
 		assertFalse(HelperGeneral.isValidArray(new String[0]));
 		assertTrue(HelperGeneral.isValidArray(new String[1]));
 	}
 	
+	@Test
 	public void testIsValidList() {
 		final List<String> list = new ArrayList<String>();
 		assertFalse(HelperGeneral.isValidCollection(null));
@@ -108,6 +125,7 @@ public class HelperGeneralTest extends TestCase { //TODO improve
 		assertTrue(HelperGeneral.isValidCollection(list));
 	}
 
+	@Test
 	public void testGetBytesFromObject() {
 		try {
 			assertNull(HelperGeneral.getBytesFromObject(null));
@@ -118,6 +136,7 @@ public class HelperGeneralTest extends TestCase { //TODO improve
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 
+	@Test
 	public void testGetObjectFromBytes() {
 		try {
 			HelperGeneral.getObjectFromBytes(null);
@@ -134,6 +153,7 @@ public class HelperGeneralTest extends TestCase { //TODO improve
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
+	@Test
 	public void testRemoveDuplicates() {
 		List<String> list = new ArrayList<String>();
 		list.add("A");
@@ -148,6 +168,7 @@ public class HelperGeneralTest extends TestCase { //TODO improve
 		assertEquals(1, HelperGeneral.removeDuplicates(array).length);
 	}
 	
+	@Test
 	public void testGetChecksum() {
 		try {
 			HelperGeneral.getChecksum(null, null);
@@ -164,6 +185,7 @@ public class HelperGeneralTest extends TestCase { //TODO improve
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
+	@Test
 	public void testChecksumSha256() {
 		try {
 			HelperGeneral.getChecksum(null);
@@ -175,6 +197,7 @@ public class HelperGeneralTest extends TestCase { //TODO improve
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 
+	@Test
     public void testRandomKey() {
 		try {
             HelperGeneral.getRandomKey(16, null);
@@ -185,19 +208,20 @@ public class HelperGeneralTest extends TestCase { //TODO improve
 //        System.out.println(HelperGeneral.getRandomKey(16, new char[]{'1','2','3'}));
     }
 
+	@Test
     public void testRandomKeyDefault() {
 		assertNotNull(HelperGeneral.getRandomKey(16));
 //        System.out.println(HelperGeneral.getRandomKey(16));
     }
 
+	@Test
     public void testFillString() {
 		assertNotNull(HelperGeneral.fillString('1', 0));
 		assertEquals(10, HelperGeneral.fillString('1', 10).length());
 	}
 	
+	@Test
 	public void testReverseString() {
 		assertEquals("nafetS", HelperGeneral.reverseString("Stefan"));
 	}
 }
-
-

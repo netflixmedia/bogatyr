@@ -31,7 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.localizer;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.localizer.Localizer;
 
 
@@ -39,14 +42,15 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class LocalizerTest extends TestCase { //TODO improve
-
+public class LocalizerTest { //TODO improve
+	@Test
 	public void testGetLocales() {
 		assertNotNull(Localizer.getLocales());
 	}
 
+	@Test
 	public void testGetCountries() {
 		assertNotNull(Localizer.getCountries());
 //		System.out.println(HelperGeneral.dumpList(Localizer.getCountries()));

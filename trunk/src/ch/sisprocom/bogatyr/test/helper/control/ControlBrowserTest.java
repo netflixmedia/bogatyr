@@ -31,7 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.control;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.fail;
+
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.control.ControlBrowser;
 
 
@@ -39,10 +42,10 @@ import ch.sisprocom.bogatyr.helper.control.ControlBrowser;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class ControlBrowserTest extends TestCase { //TODO improve
-	
+public class ControlBrowserTest { //TODO improve
+	@Test
 	public void testDisplayUrl() {
 		try {
 			ControlBrowser.displayURL("www.sisprocom.ch");

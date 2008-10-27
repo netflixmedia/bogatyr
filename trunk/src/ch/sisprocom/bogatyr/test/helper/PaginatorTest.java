@@ -31,16 +31,15 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import junit.framework.TestCase;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class PaginatorTest extends TestCase {
+public class PaginatorTest {
 	//TODO complete
 }
 

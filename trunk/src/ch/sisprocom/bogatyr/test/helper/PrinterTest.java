@@ -31,12 +31,15 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
+import static org.junit.Assert.fail;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.Printer;
 import ch.sisprocom.bogatyr.view.swing.Button;
 
@@ -45,10 +48,10 @@ import ch.sisprocom.bogatyr.view.swing.Button;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class PrinterTest extends TestCase {
-	
+public class PrinterTest {
+	@Test
 	public void testPrint() {
 		try {
 			Component component = new Button("Hello world", "");

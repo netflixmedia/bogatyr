@@ -31,9 +31,15 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.HelperNet;
 
 
@@ -41,9 +47,10 @@ import ch.sisprocom.bogatyr.helper.HelperNet;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class HelperNetTest extends TestCase { //TODO improve
+public class HelperNetTest { //TODO improve
+	@Test
 	public void testReadUrl() {
 		try {
 //			System.out.println(HelperNet.readUrl(new URL("http://www.kaywa.com/files/qr_chip_de.pdf")).length);
@@ -55,6 +62,7 @@ public class HelperNetTest extends TestCase { //TODO improve
 		} catch (Exception ex) {/*fail(ex.getMessage());*/ ex.printStackTrace();}
 	}
 	
+	@Test
 	public void testIsPingable() {
 		try {
 			assertTrue(HelperNet.isPingable("sisprocom.ch"));
@@ -71,6 +79,7 @@ public class HelperNetTest extends TestCase { //TODO improve
 
 	}
 	
+	@Test
 	public void testGetHostname() {
 		try {
 			assertNotNull(HelperNet.getHostname("209.85.129.99"));
@@ -78,12 +87,14 @@ public class HelperNetTest extends TestCase { //TODO improve
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
+	@Test
 	public void testGetIp() {
 		try {
 			assertNotNull(HelperNet.getIp("www.sisprocom.ch"));
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
+	@Test
 	public void testGetLocalHostname() {
 		try {
 			assertNotNull(HelperNet.getLocalHostname());
@@ -91,6 +102,7 @@ public class HelperNetTest extends TestCase { //TODO improve
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
+//	@Test
 //	public void testGetLocalHostnames() {
 //		try {
 //			assertNotNull(HelperNet.getLocalHostnames());
@@ -98,6 +110,7 @@ public class HelperNetTest extends TestCase { //TODO improve
 //		} catch (Exception ex) {fail(ex.getMessage());}
 //	}
 	
+	@Test
 	public void testGetLocalIp() {
 		try {
 			assertNotNull(HelperNet.getLocalIp());
@@ -105,6 +118,7 @@ public class HelperNetTest extends TestCase { //TODO improve
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
+	@Test
 	public void testGetLocalIps() {
 		try {
 			assertNotNull(HelperNet.getLocalIps());
@@ -112,5 +126,3 @@ public class HelperNetTest extends TestCase { //TODO improve
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 }
-
-

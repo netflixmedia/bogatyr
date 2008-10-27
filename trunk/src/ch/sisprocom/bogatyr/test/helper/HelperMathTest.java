@@ -31,7 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.HelperMath;
 
 
@@ -39,18 +44,20 @@ import ch.sisprocom.bogatyr.helper.HelperMath;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class HelperMathTest extends TestCase { //TODO improve
-
+public class HelperMathTest { //TODO improve
+	@Test
 	public void testGcd() {
 		assertEquals(2.0, HelperMath.gcd(2.0D, 4.0D));
 	}
 	
+	@Test
 	public void testLcm() {
 		assertEquals(10.0D, HelperMath.lcm(2.0D, 5.0D));
 	}
 
+	@Test
 	public void testIsPrime() {
 		assertEquals(false, HelperMath.isPrime(-1));
 		assertEquals(false, HelperMath.isPrime(0));
@@ -60,10 +67,12 @@ public class HelperMathTest extends TestCase { //TODO improve
 		assertEquals(true, HelperMath.isPrime(23));
 	}
 	
+	@Test
 	public void testGetPrime() {
 		assertEquals(23, HelperMath.getPrime(21));
 	}
 	
+	@Test
 	public void testGetPrimes() {
 		assertNotNull(HelperMath.getPrimes(-5, 100));
 		assertNotNull(HelperMath.getPrimes(50, 10));
@@ -72,6 +81,7 @@ public class HelperMathTest extends TestCase { //TODO improve
 //		System.out.println(HelperGeneral.dump(HelperMath.getPrimes(21, 23)));
 	}
 
+	@Test
 	public void testConvertDoubleToInt() {
 		assertEquals(-2, HelperMath.convertDoubleToInt(-2.499D));
 		assertEquals(-2, HelperMath.convertDoubleToInt(-2.5D));
@@ -80,11 +90,13 @@ public class HelperMathTest extends TestCase { //TODO improve
 		assertEquals(3, HelperMath.convertDoubleToInt(2.5D));
 	}
 	
+	@Test
 	public void testLog() {
 		assertEquals(2.0D, HelperMath.log(10.0, 100.0));
 		assertEquals(4.19180654857877D, HelperMath.log(3.0, 100.0));
 	}
 	
+	@Test
 	public void testRound() {
 		assertEquals(0.0D, HelperMath.round(0.0D, 4));
 		assertEquals(-2.0D, HelperMath.round(-2.499D, 0));
@@ -98,6 +110,7 @@ public class HelperMathTest extends TestCase { //TODO improve
 		assertEquals(2.55D, HelperMath.round(2.545D, 2));
 	}
 	
+	@Test
 	public void testErf() {
 		assertEquals(0.0D, HelperMath.erf(0.0D));
 		assertEquals(-0.8427007877600067D, HelperMath.erf(-1.0D));
@@ -106,6 +119,7 @@ public class HelperMathTest extends TestCase { //TODO improve
 		assertEquals(0.995322265010666D, HelperMath.erf(2.0D));
 	}
 	
+	@Test
 	public void testErf2() {
 		assertEquals(0.0D, HelperMath.erf2(0.0D));
 		assertEquals(-0.842716825727904D, HelperMath.erf2(-1.0D));
@@ -114,6 +128,7 @@ public class HelperMathTest extends TestCase { //TODO improve
 		assertEquals(0.9953087428644348D, HelperMath.erf2(2.0D));
 	}
 
+	@Test
 	public void testPhi() {
 		assertEquals(0.5D, HelperMath.phi(0.0D));
 		assertEquals(0.15865526139567465D, HelperMath.phi(-1.0D));
@@ -122,6 +137,7 @@ public class HelperMathTest extends TestCase { //TODO improve
 		assertEquals(0.9772498701098755D, HelperMath.phi(2.0D));
 	}
 	
+	@Test
 	public void testRandom() {
 		final int range = 2000000000;
 		int number;

@@ -31,7 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.context;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
+
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.context.Context;
 
 
@@ -39,10 +44,11 @@ import ch.sisprocom.bogatyr.helper.context.Context;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class ContextTest extends TestCase {
+public class ContextTest {
 	
+	@Test
 	public void testAddData() {
 		try {
 			Context.getInstance().addData("Stefan", "Laubenberger");
@@ -55,16 +61,22 @@ public class ContextTest extends TestCase {
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
+	@Test
 	public void testGetApplicationName() {
 		assertNotNull(Context.getInstance().getApplicationName());
 	}
 	
+	@Test
 	public void testGetApplicationVersion() {
 		assertNotNull(Context.getInstance().getApplicationVersion());
 	}
+	
+	@Test
 	public void testGetApplicationBuild() {
 		assertNotNull(Context.getInstance().getApplicationBuild());
 	}
+	
+	@Test
 	public void testGetApplicationWorkDirectory() {
 		assertNotNull(Context.getInstance().getApplicationWorkDirectory());
 	}

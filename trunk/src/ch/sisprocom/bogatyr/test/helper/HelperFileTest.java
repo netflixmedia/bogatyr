@@ -31,9 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
+import static org.junit.Assert.fail;
+
 import java.io.File;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.HelperIO;
 
 
@@ -41,10 +44,10 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class HelperFileTest extends TestCase { //TODO improve and complete
-	
+public class HelperFileTest { //TODO improve and complete
+	@Test
 	public void testGetFileNames() {
 		try {
 			HelperIO.getFiles(null, null, false, false, false, true, true);

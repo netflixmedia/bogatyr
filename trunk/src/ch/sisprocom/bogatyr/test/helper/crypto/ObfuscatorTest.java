@@ -31,7 +31,11 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.crypto;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.crypto.Obfuscator;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
@@ -40,10 +44,10 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class ObfuscatorTest extends TestCase {
-
+public class ObfuscatorTest {
+	@Test
 	public void testEncryptAndDecrypt() {
 		assertEquals(AllBogatyrTests.DATA, new String(Obfuscator.decrypt(Obfuscator.encrypt(AllBogatyrTests.DATA.getBytes()))));
 		assertEquals(AllBogatyrTests.DATA, new String(Obfuscator.decrypt(Obfuscator.encrypt(AllBogatyrTests.DATA.getBytes(), (byte)0x6F), (byte)0x6F)));

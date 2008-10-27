@@ -31,7 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Test;
+
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 
 
@@ -39,27 +42,31 @@ import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081027
  */
-public class HelperEnvInfoTest extends TestCase {
-
+public class HelperEnvInfoTest {
+	@Test
 	public void testGetOsArch() {
 		assertNotNull(HelperEnvInfo.getOsArch());
 	}
 
+	@Test
 	public void testGetOsName() {
 		assertNotNull(HelperEnvInfo.getOsArch());
 	}
 
+	@Test
 	public void testGetOsVersion() {
 		assertNotNull(HelperEnvInfo.getOsArch());
 	}
 	
+	@Test
 	public void testGetOsEnvironmentVariables() {
 		assertNotNull(HelperEnvInfo.getOsEnvironmentVariables());
 //		System.out.println(HelperGeneral.dumpList(HelperEnvInfo.getOsEnvironmentVariables()));
 	}
 
+	@Test
 	public void testGetOsTempDirectory() {
 		assertNotNull(HelperEnvInfo.getOsTempDirectory());
 	}

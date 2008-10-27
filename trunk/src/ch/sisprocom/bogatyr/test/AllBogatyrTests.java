@@ -31,17 +31,21 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test;
 
-import junit.extensions.RepeatedTest;
-import junit.framework.Test;
-import junit.framework.TestSuite;
-import junit.textui.TestRunner;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.test.helper.HelperEnvInfoTest;
 import ch.sisprocom.bogatyr.test.helper.HelperFileTest;
 import ch.sisprocom.bogatyr.test.helper.HelperGeneralTest;
 import ch.sisprocom.bogatyr.test.helper.HelperGraphicTest;
 import ch.sisprocom.bogatyr.test.helper.HelperImageTest;
 import ch.sisprocom.bogatyr.test.helper.HelperMathTest;
-import ch.sisprocom.bogatyr.test.helper.HelperNetTest;
 import ch.sisprocom.bogatyr.test.helper.HelperPdfTest;
 import ch.sisprocom.bogatyr.test.helper.HelperXmlTest;
 import ch.sisprocom.bogatyr.test.helper.context.ContextTest;
@@ -54,69 +58,79 @@ import ch.sisprocom.bogatyr.test.helper.crypto.PublicKeyProviderTest;
 import ch.sisprocom.bogatyr.test.helper.localizer.LocalizerTest;
 
 
+
 /**
  * Junit test suite
  * 
- * @author Stefan Laubenberger
- * @version 20080901
+ * @author SiSprocom GmbH, Stefan Laubenberger
+ * @version 20081027
  */
-public class AllBogatyrTests extends TestSuite implements Runnable {
+public class AllBogatyrTests implements Runnable {
 	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œ Ÿ¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
-										 "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œ Ÿ¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
-										 "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œ Ÿ¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
-										 "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œ Ÿ¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ"; //$NON-NLS-1$
+	 "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œ Ÿ¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
+	 "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œ Ÿ¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
+	 "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œ Ÿ¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ"; //$NON-NLS-1$
+
 	public static final int ITERATIONS = 1;
 	public static final int THREADS	   = 1;
+
+	private static final DateFormat formatter = new SimpleDateFormat("yyyyMMdd HH:mm:ss.SSS", Locale.getDefault()); //$NON-NLS-1$
+
 	
-	
-	public static Test suite() {
-		final TestSuite testSuite = new TestSuite("Bogatyr Test-Suite"); //$NON-NLS-1$
-    
-		// Add test cases
-		testSuite.addTestSuite(ContextTest.class);
-//		testSuite.addTestSuite(ControlBrowserTest.class);
-		testSuite.addTestSuite(ConverterBase64Test.class);
-		testSuite.addTestSuite(ConverterHexTest.class);
-		testSuite.addTestSuite(CryptoAsymmTest.class);
-		testSuite.addTestSuite(CryptoSymmTest.class);
-		testSuite.addTestSuite(ObfuscatorTest.class);
-		testSuite.addTestSuite(PublicKeyProviderTest.class);
-		testSuite.addTestSuite(LocalizerTest.class);		
-		testSuite.addTestSuite(HelperEnvInfoTest.class);
-		testSuite.addTestSuite(HelperFileTest.class);
-		testSuite.addTestSuite(HelperGeneralTest.class);
-		testSuite.addTestSuite(HelperGraphicTest.class);
-		testSuite.addTestSuite(HelperImageTest.class);
-		testSuite.addTestSuite(HelperMathTest.class);
-		testSuite.addTestSuite(HelperNetTest.class);
-		testSuite.addTestSuite(HelperPdfTest.class);
-//		testSuite.addTestSuite(HelperPreferencesTest.class);
-		testSuite.addTestSuite(HelperXmlTest.class);
-//		testSuite.addTestSuite(PaginatorTest.class);
-//		testSuite.addTestSuite(PrinterTest.class);
-//		testSuite.addTestSuite(HelperSoundTest.class);
-		
-		return new RepeatedTest(testSuite, ITERATIONS);
-	}
-  
     public static void main(final String[] args) {
-    	System.out.println("*** Start all Bogatyr tests ***"); //$NON-NLS-1$
+    	System.out.println("+---------------------------+");
+    	System.out.println("|  Start all Bogatyr tests  |");
+    	System.out.println("|  " + formatter.format(new Date()) + "    |");
+    	System.out.println("+---------------------------+");
+    	System.out.println("Iterations:\t" + ITERATIONS);
+    	System.out.println("Threads:\t" + THREADS);
+    	
     	final AllBogatyrTests[] tests = new AllBogatyrTests[THREADS];
         for (int ii = 0; ii < tests.length; ii++) {
-        	tests[ii] = new AllBogatyrTests ();
+        	tests[ii] = new AllBogatyrTests();
         }
 
-        runThreads(tests);
+        for (int ii = 0; ii < ITERATIONS; ii++) {
+            runThreads(tests);
+        }
         
-        System.out.println("*** All tests completed ***"); //$NON-NLS-1$
+        System.out.println("+-------------------------------+");
+        System.out.println("|  All Bogatyr tests completed  |");
+    	System.out.println("|  " + formatter.format(new Date()) + "        |");
+        System.out.println("+-------------------------------+");
     }
     
 	public void run() {
-		try {
-			(new TestRunner()).start(new String[]{"ch.sisprocom.bogatyr.test.AllBogatyrTests"}); //$NON-NLS-1$
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+		Result result = JUnitCore.runClasses(
+				ContextTest.class,
+//				ControlBrowserTest.class,
+				ConverterBase64Test.class,
+				ConverterHexTest.class,
+				CryptoAsymmTest.class,
+				CryptoSymmTest.class,
+				ObfuscatorTest.class,
+				PublicKeyProviderTest.class,
+				LocalizerTest.class,	
+				HelperEnvInfoTest.class,
+				HelperFileTest.class,
+				HelperGeneralTest.class,
+				HelperGraphicTest.class,
+				HelperImageTest.class,
+				HelperMathTest.class,
+//				HelperNetTest.class,
+				HelperPdfTest.class,
+//				HelperPreferencesTest.class,
+				HelperXmlTest.class
+//				PaginatorTest.class,
+//				PrinterTest.class,
+//				HelperSoundTest.class
+		);
+		
+        System.out.println("** Test run completed **");
+        System.out.println("Time:\t" + result.getRunTime());
+        System.out.println("Total:\t" + result.getRunCount());
+        System.out.println("Failed:\t" + result.getFailureCount());
+        System.out.println(HelperGeneral.dump(result.getFailures()));
 	}
 	
 	
@@ -125,25 +139,27 @@ public class AllBogatyrTests extends TestSuite implements Runnable {
 	 */
     private static void runThreads (final AllBogatyrTests[] runnables) {
         if (runnables == null) {
-           throw new IllegalArgumentException("runnables == null"); //$NON-NLS-1$
+           throw new IllegalArgumentException("runnables == null");
         }
         Thread[] threads = new Thread[runnables.length];
-        
+
         for (int ii = 0; ii < threads.length; ii++) {
            threads[ii] = new Thread(runnables[ii]);
         }
-        
+
         for (final Thread thread : threads) {
-           thread.start();
+            thread.start();
         }
         
         try {
-           for (final Thread thread : threads) {
-              thread.join();
-           }
+            for (final Thread thread : threads) {
+                thread.join();
+            }
         } catch (InterruptedException ignore) {
            System.out.println("Thread join interrupted.");
+        } catch (Exception ex) {
+        	ex.printStackTrace();
         }
-//        threads = null;
+        threads = null;
      }
 }
