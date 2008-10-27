@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
  * This controls displays an URL in a browser.
  *
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081027
  */
 public abstract class ControlBrowser {
 	protected static final Logger log = Logger.getLogger(ControlBrowser.class);
@@ -129,7 +129,7 @@ public abstract class ControlBrowser {
 					final Method method = fileManager.getDeclaredMethod("openURL", String.class); //$NON-NLS-1$
 					method.invoke(null, url);
 				} catch (Exception ex) {
-					log.error("Browser couldn't be started", ex);
+					log.error("Couldn't start the web browser", ex);
 				}
 			}
 		};

@@ -42,7 +42,7 @@ import org.apache.log4j.Logger;
  * Reads standard output and standard error of a process.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081027
  */
 public abstract class ControlProcess {
 	private static final int BUFFER = 1024;
@@ -132,7 +132,7 @@ public abstract class ControlProcess {
 					}
 				}
 			} catch (IOException ex) {
-				log.error("Stream couldn't be readed", ex); //$NON-NLS-1$
+				log.error("Couldn't read the stream from the process", ex); //$NON-NLS-1$
 			}
 		}
 	}

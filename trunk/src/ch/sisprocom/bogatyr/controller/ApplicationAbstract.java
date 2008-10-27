@@ -54,7 +54,7 @@ import ch.sisprocom.bogatyr.helper.property.PropertyStream;
  * This is the skeleton for applications
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081027
  */
 public abstract class ApplicationAbstract implements Runnable {
 	private static final Logger log = Logger.getRootLogger();
@@ -184,7 +184,7 @@ public abstract class ApplicationAbstract implements Runnable {
 			try {
 				Localizer.setInstance((ILocalizer)Class.forName(value).newInstance());
 			} catch (Exception ex) {
-				log.error("Localizer couldn't be instantiated", ex); //$NON-NLS-1$
+				log.error("Construction of the localizer failed", ex); //$NON-NLS-1$
 				exit(40);
 			}
 		} else {
@@ -198,7 +198,7 @@ public abstract class ApplicationAbstract implements Runnable {
 			try {
 				Property.setInstance((IProperty)Class.forName(value).newInstance());
 			} catch (Exception ex) {
-				log.warn("PropertyHandler couldn't be instantiated - using default", ex); //$NON-NLS-1$
+				log.warn("Construction of the property handler failed - using default", ex); //$NON-NLS-1$
 			}
 		}
 	}

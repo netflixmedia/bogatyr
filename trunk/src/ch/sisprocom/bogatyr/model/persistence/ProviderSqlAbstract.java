@@ -35,6 +35,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
+import org.apache.log4j.Logger;
+
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
@@ -43,9 +45,11 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081026
+ * @version 20081027
  */
 public abstract class ProviderSqlAbstract {
+	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
+	
 	// Server
 	private String driver;
 	private String url;
@@ -122,6 +126,8 @@ public abstract class ProviderSqlAbstract {
 	    	con = connectToDb();
 			stmt = con.createStatement();
 	
+			log.debug(stmt.toString());
+			
 			result = stmt.executeUpdate(statement);
 		} finally {
 			if (con != null) {
@@ -151,6 +157,8 @@ public abstract class ProviderSqlAbstract {
 	    	con = connectToDb();
 			stmt = con.createStatement();
 	
+			log.debug(stmt.toString());
+			
 			result = stmt.execute(statement);
 		} finally {
 			if (con != null) {
