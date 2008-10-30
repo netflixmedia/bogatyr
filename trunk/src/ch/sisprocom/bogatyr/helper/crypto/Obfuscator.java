@@ -37,7 +37,7 @@ package ch.sisprocom.bogatyr.helper.crypto;
  * This is a class for obfuscating a byte[]
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081028
  */
 public abstract class Obfuscator {
 	private static final byte DEFAULT_PATTERN = Byte.MAX_VALUE;
@@ -49,9 +49,7 @@ public abstract class Obfuscator {
 	 * @return Return the obfuscated Byte-Array 
 	 */
 	public static byte[] encrypt(final byte[] input) {
-		final byte[] result = obfuscate(input, DEFAULT_PATTERN);
-		
-		return result;
+		return obfuscate(input, DEFAULT_PATTERN);
 	}
 
 	/**
@@ -62,9 +60,7 @@ public abstract class Obfuscator {
 	 * @return Return the obfuscated Byte-Array 
 	 */
 	public static byte[] encrypt(final byte[] input, final byte pattern) {
-		final byte[] result = obfuscate(input, pattern);
-		
-		return result;
+		return obfuscate(input, pattern);
 	}
 
 	/**
@@ -74,9 +70,7 @@ public abstract class Obfuscator {
 	 * @return Return the unobfuscated Byte-Array
 	 */
 	public static byte[] decrypt(final byte[] input) {
-		final byte[] result = obfuscate(input, DEFAULT_PATTERN);
-		
-		return result;
+		return obfuscate(input, DEFAULT_PATTERN);
 	}
 
 	
@@ -88,9 +82,7 @@ public abstract class Obfuscator {
 	 * @return Return the unobfuscated Byte-Array
 	 */
 	public static byte[] decrypt(final byte[] input, final byte pattern) {
-		final byte[] result = obfuscate(input, pattern);
-		
-		return result;
+		return obfuscate(input, pattern);
 	}
 
 	

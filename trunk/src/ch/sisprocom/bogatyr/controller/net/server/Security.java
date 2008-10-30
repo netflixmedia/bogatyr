@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
  * This is the super class for all Security-children
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081029
  */
 public abstract class Security {	
 	private static final Map<SocketAddress, Long> contactTable = new ConcurrentHashMap<SocketAddress, Long>(); //#LS new
@@ -129,7 +129,6 @@ public abstract class Security {
      * @return true/false
 	 */
 	public static boolean isUserLoggedOn(final ServerAbstract server, final ComObject comObject) {
-		final boolean isLoggedOn = server.getUser(comObject.getUserKey()) != null;
-        return isLoggedOn;
+		return server.getUser(comObject.getUserKey()) != null;
     }
 }

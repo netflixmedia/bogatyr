@@ -48,7 +48,7 @@ import java.util.List;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081028
  */
 public abstract class HelperGraphic {
 	
@@ -68,8 +68,7 @@ public abstract class HelperGraphic {
      * @return Dimension with center coordinates
      */
     public static Dimension getCenter(Dimension size) {
-		final Dimension dim = new Dimension(size.width / 2, size.height / 2);
-		return dim;
+    	return new Dimension(size.width / 2, size.height / 2);
 	}
 
     /**
@@ -82,9 +81,8 @@ public abstract class HelperGraphic {
 	public static Dimension getTextSize(String text, Graphics g) {
 		final FontMetrics fm = g.getFontMetrics(g.getFont());
 		final Rectangle2D rect = fm.getStringBounds(text, g);
-		final Dimension dim = new Dimension((int)rect.getWidth(), (int)rect.getHeight()); 
 		
-		return dim;
+		return new Dimension((int)rect.getWidth(), (int)rect.getHeight()); 
 	}
 	
 //	public static List<String> getFonts() {
@@ -101,8 +99,8 @@ public abstract class HelperGraphic {
     public static List<Font> getFonts() {
 		// Get all available fonts from GraphicsEnvironment
 		final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		final List<Font> result = Arrays.asList(ge.getAllFonts());
-		return result;
+		
+		return Arrays.asList(ge.getAllFonts());
 	}
     
     /**
@@ -113,8 +111,6 @@ public abstract class HelperGraphic {
      * @return hex value of the color
      */
     public static String getColorHex(Color color) {
-    	String str = Integer.toHexString(color.getRGB() & 0x00ffffff); 
-    	
-		return str;
+    	return Integer.toHexString(color.getRGB() & 0x00ffffff); 
 	}
 }

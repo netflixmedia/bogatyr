@@ -55,7 +55,7 @@ import java.util.Scanner;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081026
+ * @version 20081028
  */
 public abstract class HelperIO {
 	private final static byte[] BUFFER = new byte[1024];
@@ -114,9 +114,7 @@ public abstract class HelperIO {
      * @throws java.io.IOException
      */	
 	public static List<File> getFiles(final File path, final String[] identifier, final boolean isExclude) throws IOException {
-		final List<File> list = getFiles(path, identifier, isExclude, false, true, true, true);
-		
-		return list;
+		return getFiles(path, identifier, isExclude, false, true, true, true);
 	}
 
 	/**
@@ -193,7 +191,6 @@ public abstract class HelperIO {
 	    } else {
 	    	copyFile(source, dest);
 	    }
-
 	    return delete(source);
 	}
 
@@ -211,10 +208,7 @@ public abstract class HelperIO {
 				delete(child);
 			}
 		}
-
-		final boolean flag = file.delete();
-		
-		return flag;
+		return file.delete();
 	}
 	  
 	/**
@@ -225,9 +219,7 @@ public abstract class HelperIO {
      * @return true/false
      */	
 	public static boolean rename(final File source, final File dest) {
-		final boolean flag = source.renameTo(dest);
-		
-		return flag;
+		return source.renameTo(dest);
 	}
 
 	
@@ -400,8 +392,6 @@ public abstract class HelperIO {
 			fis = new FileInputStream(file);
 			buffer = new byte[(int) length];
 			fis.read(buffer, 0, (int) length);
-
-			
 		} finally {
 			if (fis != null) {
                 fis.close();

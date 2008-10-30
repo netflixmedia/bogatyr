@@ -42,7 +42,7 @@ import org.apache.log4j.Logger;
  * Reads standard output and standard error of a process.
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20081028
  */
 public abstract class ControlProcess {
 	private static final int BUFFER = 1024;
@@ -75,8 +75,7 @@ public abstract class ControlProcess {
 
 //		ProcessBuilder pb = new ProcessBuilder(command);
 //		final Process process = pb.start();
-		final Process process = Runtime.getRuntime().exec(command);
-		return process;
+		return Runtime.getRuntime().exec(command);
 	}
 
 	

@@ -41,32 +41,50 @@ import java.util.Map;
  * This class may be used to transmit client environment info to the server and to decide if
  * an operating system corresponds to the Windows, Mac or a Unix operating system. 
  * It encapsulates name, architecture and version of an operating system, based on system properties.
- * It also provides informations about memory, temp/user directory and variables.
+ * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081029
  */
 public abstract class HelperEnvInfo {
 	/**
+	 * Used vm memory
 	 * Returns the same as Runtime.getRuntime().totalMemory()
      *
-     * @return total memory
+     * @return used vm memory
 	 */
-	public long getMemoryTotal() {
-		long memory = Runtime.getRuntime().totalMemory();
-		
-		return memory;
+	public static long getMemoryUsed() {
+		return Runtime.getRuntime().totalMemory();
 	}
 
 	/**
+	 * Free vm memory
 	 * Returns the same as Runtime.getRuntime().freeMemory()
      *
-     * @return total memory
+     * @return free vm memory
 	 */
-	public long getMemoryFree() {
-		long memory = Runtime.getRuntime().freeMemory();
-		
-		return memory;
+	public static long getMemoryFree() {
+		return Runtime.getRuntime().freeMemory();
+	}
+
+	/**
+	 * Max vm memory
+	 * Returns the same as Runtime.getRuntime().maxMemory()
+     *
+     * @return max vm memory
+	 */
+	public static long getMemoryMax() {
+		return Runtime.getRuntime().maxMemory();
+	}
+	
+	/**
+	 * Available processors for the vm
+	 * Returns the same as Runtime.getRuntime().availableProcessors()
+     *
+     * @return available processors for the vm
+	 */
+	public static int getAvailableProcessors() {
+		return Runtime.getRuntime().availableProcessors();
 	}
 
 	/**
@@ -75,9 +93,7 @@ public abstract class HelperEnvInfo {
      * @return OS architecture
 	 */
 	public static String getOsArch() {
-		final String str = System.getProperties().getProperty("os.arch"); //$NON-NLS-1$
-		
-		return str; 
+		return System.getProperties().getProperty("os.arch"); //$NON-NLS-1$
 	}
 
 	/**
@@ -86,9 +102,7 @@ public abstract class HelperEnvInfo {
      * @return OS name
 	 */
 	public static String getOsName() {
-		final String str = System.getProperties().getProperty("os.name"); //$NON-NLS-1$
-		
-		return str; 
+		return System.getProperties().getProperty("os.name"); //$NON-NLS-1$
 	}
 
 	/**
@@ -97,9 +111,7 @@ public abstract class HelperEnvInfo {
      * @return OS version
 	 */
 	public static String getOsVersion() {
-		final String str = System.getProperties().getProperty("os.version"); //$NON-NLS-1$
-		
-		return str; 
+		return System.getProperties().getProperty("os.version"); //$NON-NLS-1$
 	}
 
 	/**
@@ -114,7 +126,6 @@ public abstract class HelperEnvInfo {
 		for (final Map.Entry<String, String> pair : map.entrySet()) {
             list.add(pair.getKey() + '=' + pair.getValue());
         }
-		
         return list;
     }
 	
@@ -124,10 +135,7 @@ public abstract class HelperEnvInfo {
      * @return OS temporary directory
 	 */
 	public static File getOsTempDirectory() {
-
-		final File file = new File(System.getProperty("java.io.tmpdir")); //$NON-NLS-1$
-		
-		return file;
+		return new File(System.getProperty("java.io.tmpdir")); //$NON-NLS-1$
 	}
 	
 	/**
@@ -136,9 +144,7 @@ public abstract class HelperEnvInfo {
      * @return user home directory
 	 */
 	public static File getUserHomeDirectory() {
-		final File file = new File(System.getProperty("user.home")); //$NON-NLS-1$
-		
-		return file;
+		return new File(System.getProperty("user.home")); //$NON-NLS-1$
 	}
 
 	/**
@@ -150,9 +156,7 @@ public abstract class HelperEnvInfo {
 	 * @return true if this application is running under a Windows OS
 	 */
 	public static boolean isWindowsPlatform() {
-		final boolean flag = getOsName().contains("Windows"); //$NON-NLS-1$
-		
-		return flag; 
+		return getOsName().contains("Windows"); //$NON-NLS-1$
 	}
 
 	/**
@@ -162,8 +166,6 @@ public abstract class HelperEnvInfo {
 	 * @return true if this application is running under Mac OS
 	 */
 	public static boolean isMacPlatform() {
-		final boolean flag = getOsName().contains("Mac"); //$NON-NLS-1$
-		
-		return flag; 
+		return getOsName().contains("Mac"); //$NON-NLS-1$
 	}
 }

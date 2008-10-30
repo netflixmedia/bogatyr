@@ -158,9 +158,7 @@ public abstract class HelperNet {
         // Try to reach the specified address within the timeout period.
         // If during this period the address cannot be
         // reached then the method returns false.
-		final boolean result = address.isReachable(3000);
-		
-		return result;
+		return address.isReachable(3000);
     }
 
     /**
@@ -172,9 +170,8 @@ public abstract class HelperNet {
      */
     public static String getHostname(final String ip) throws UnknownHostException {
 		final InetAddress address = InetAddress.getByName(ip);
-		final String result = address.getHostName();
-		
-        return result;
+
+		return address.getHostName();
     }
 
     /**
@@ -185,9 +182,8 @@ public abstract class HelperNet {
      */
     public static String getLocalHostname() throws UnknownHostException {
 		final InetAddress address = InetAddress.getLocalHost();
-		final String result = address.getHostName();
-
-        return result;
+		
+		return address.getHostName();
     }
 
     /**
@@ -199,9 +195,8 @@ public abstract class HelperNet {
      */
     public static String getIp(final String hostname) throws UnknownHostException {
 		final InetAddress address = InetAddress.getByName(hostname);
-		final String result = address.getHostAddress();
 		
-        return result;
+		return address.getHostAddress();
     }
 
     /**
@@ -212,9 +207,8 @@ public abstract class HelperNet {
      */
     public static String getLocalIp() throws UnknownHostException {
 		final InetAddress address = InetAddress.getLocalHost();
-		final String result = address.getHostAddress();
 		
-        return result;
+		return address.getHostAddress();
    }
 
     /**
@@ -230,7 +224,6 @@ public abstract class HelperNet {
         for (InetAddress address : InetAddress.getAllByName(localHost)) {
             list.add(address.getHostAddress());
         }
-
         return list;
     }
 
@@ -241,9 +234,7 @@ public abstract class HelperNet {
      * @throws java.net.SocketException
      */
     public static List<NetworkInterface> getNetworkInterfaces() throws SocketException {
-		final List<NetworkInterface> list = Collections.list(NetworkInterface.getNetworkInterfaces());
-		
-		return list;
+    	return Collections.list(NetworkInterface.getNetworkInterfaces());
     }
 
     /**
@@ -256,9 +247,8 @@ public abstract class HelperNet {
     public static byte[] readUrl(URL url) throws IOException {
 		final URLConnection con = url.openConnection();
 		con.connect();
-		final byte[] result = HelperIO.readStream(con.getInputStream());
 		
-        return result;
+		return HelperIO.readStream(con.getInputStream());
      }
 
     /**
@@ -274,9 +264,8 @@ public abstract class HelperNet {
 		final URLConnection con = url.openConnection();
 		con.setRequestProperty("Authorization", "Basic " + ConverterBase64.encode((username + ':' + password))); //$NON-NLS-1$ //$NON-NLS-2$
 		con.connect();
-		final byte[] result = HelperIO.readStream(con.getInputStream());
 		
-        return result;
+		return HelperIO.readStream(con.getInputStream());
      }
     
 //	public static String getMacAddress(NetworkInterface ni) throws SocketException { // Java 1.6 only

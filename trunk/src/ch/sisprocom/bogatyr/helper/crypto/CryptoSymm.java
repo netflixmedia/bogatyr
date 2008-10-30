@@ -48,7 +48,7 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
  * This is a class for symmetric cryptology via AES
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081028
  */
 public abstract class CryptoSymm {
 	public static final String ALGORITHM = "AES"; //$NON-NLS-1$
@@ -73,9 +73,7 @@ public abstract class CryptoSymm {
 		final KeyGenerator kg = KeyGenerator.getInstance(ALGORITHM, "BC"); //$NON-NLS-1$
 		kg.init(keysize);
 		
-		final SecretKey sk = kg.generateKey();
-		
-		return sk;
+		return kg.generateKey();
 	}
 	
 	/**
@@ -91,9 +89,7 @@ public abstract class CryptoSymm {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
 
-		final byte[] result = cipher.doFinal(input);
-		
-		return result;
+		return cipher.doFinal(input);
 	}
 
 	/**
@@ -109,9 +105,7 @@ public abstract class CryptoSymm {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
 
-		final byte[] result = cipher.doFinal(input);
-		
-		return result;
+		return cipher.doFinal(input);
 	}
 	
 	
@@ -125,9 +119,6 @@ public abstract class CryptoSymm {
         for (int ii = 0; ii < elements; ii++) {
         	ivBytes[ii] = (byte) 0x5a;
         }
-        
-        final AlgorithmParameterSpec algo = new IvParameterSpec(ivBytes);
-        
-        return algo;
+        return new IvParameterSpec(ivBytes);
 	}
 }

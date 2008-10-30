@@ -52,7 +52,7 @@ import ch.sisprocom.bogatyr.helper.property.Property;
  * This is a server thread
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081029
  */
 public abstract class ThreadServerAbstract implements Runnable, ICom {
 	private final long startTime = System.currentTimeMillis();
@@ -89,8 +89,7 @@ public abstract class ThreadServerAbstract implements Runnable, ICom {
      * @throws Exception 
      */
 	protected ComObject readObject() throws Exception  {
-		final ComObject comObject = (ComObject)HelperGeneral.getObjectFromBytes(readStream());
-		return comObject;
+		return (ComObject)HelperGeneral.getObjectFromBytes(readStream());
     }
 
     /**
@@ -138,7 +137,6 @@ public abstract class ThreadServerAbstract implements Runnable, ICom {
         } else {
             data = CryptoSymm.decrypt(data, cryptoKey);
         }
-
         return data;
     }
 

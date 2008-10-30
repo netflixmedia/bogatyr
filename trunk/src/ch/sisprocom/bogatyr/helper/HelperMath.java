@@ -59,7 +59,6 @@ public abstract class HelperMath {
 		 } else {
 			 result = gcd(b, a % b);
 		 }
-		 
 		 return result;
 	 } 
 
@@ -71,9 +70,7 @@ public abstract class HelperMath {
 	 * @return calculated lcm
 	 */
 	 public static double lcm(double a, double b) {
-		 final double result = a * b / gcd(a, b);
-		 
-		 return result;
+		 return a * b / gcd(a, b);
 	 }
 	 
 	/**
@@ -152,9 +149,7 @@ public abstract class HelperMath {
      * @see Math
      */	
 	public static int convertDoubleToInt(final double value) {
-		final int result = (int)Math.round(value);
-
-		return result;
+		return (int)Math.round(value);
 	}
 	
     /**
@@ -165,9 +160,7 @@ public abstract class HelperMath {
      * @return double-value
      */	
 	public static double log(final double base, final double value) {
-		final double result = StrictMath.log(value) / StrictMath.log(base);
-
-		return result;
+		return StrictMath.log(value) / StrictMath.log(base);
 	}
 
 	/**
@@ -184,10 +177,7 @@ public abstract class HelperMath {
 	    while (dp-- > 0) {
 	       powerOfTen *= 10.0D;
 	    }
-	    
-	    final double result = (double) Math.round(value * powerOfTen) / powerOfTen;
-	    
-	    return result;
+	    return (double) Math.round(value * powerOfTen) / powerOfTen;
 	}
 	
     /**
@@ -250,9 +240,7 @@ public abstract class HelperMath {
      * @return double-value
      */
     public static double phi(final double z) {
-		final double result = 0.5 * (1.0D + erf(z / 1.4142135623730951));
-		
-        return result;
+    	return 0.5D * (1.0D + erf(z / 1.4142135623730951));
     }
 
     /**
@@ -263,9 +251,8 @@ public abstract class HelperMath {
     public static double gaussian() {
         final double U = Math.random();
         final double V = Math.random();
-        final double result = StrictMath.sin(2.0D * Math.PI * V) * Math.sqrt(-2.0D * StrictMath.log(1.0 - U));
         
-        return result;
+        return StrictMath.sin(2.0D * Math.PI * V) * Math.sqrt(-2.0D * StrictMath.log(1.0 - U));
     }
 
     /**
@@ -276,9 +263,7 @@ public abstract class HelperMath {
      * @return double-value
      */
     public static double gaussian(final double mu, final double sigma) {
-		final double result = mu + sigma * gaussian();
-
-        return result;
+    	return mu + sigma * gaussian();
     }
 
     /**
@@ -288,9 +273,7 @@ public abstract class HelperMath {
      * @return random int-value between 0 and n-1
      */
     public static int random(int n) {
-		final int result = (int) (Math.random() * n);
-	
-    	return result;
+    	return (int) (Math.random() * n);
     }
     
     

@@ -41,9 +41,9 @@ import java.awt.Insets;
  * This is an combined Label and TextArea
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081029
  */
-public class LabeledTextArea extends Panel {
+public class LabeledTextArea extends Panel {//TODO add iPady and iPadx?
 	private static final long serialVersionUID = -3385104817739873049L;
 
 	private Label label;

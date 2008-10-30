@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a class for asymmetric cryptology via RSA
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081028
  */
 public abstract class CryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
@@ -75,9 +75,7 @@ public abstract class CryptoAsymm {
 		final KeyPairGenerator kpg = KeyPairGenerator.getInstance(ALGORITHM, "BC"); //$NON-NLS-1$
 		kpg.initialize(keysize);
 
-		final KeyPair kp = kpg.generateKeyPair();
-		
-		return kp;
+		return kpg.generateKeyPair();
 	}
 
 	/**
@@ -172,9 +170,7 @@ public abstract class CryptoAsymm {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.ENCRYPT_MODE, key);
 
-		final byte[] result = cipher.doFinal(input);
-		
-		return result;
+		return cipher.doFinal(input);
 	}
 
 	/**
@@ -189,8 +185,6 @@ public abstract class CryptoAsymm {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.DECRYPT_MODE, key);
 
-		final byte[] result = cipher.doFinal(input);
-		
-		return result;
+		return cipher.doFinal(input);
 	}
 }

@@ -48,7 +48,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,7 +57,7 @@ import java.util.regex.Pattern;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081026
+ * @version 20081029
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and when, is logging needed?
 	private static final String CHECKSUM_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
@@ -100,12 +99,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return line separator
      */
     public static String getLineSeparator() {
-//        Logger.getInstance().writeMethodEntry(HelperGeneral.class, "getLineSeparator");  //$NON-NLS-1$
-
-        String result = System.getProperty("line.separator"); //$NON-NLS-1$
-
-//        Logger.getInstance().writeMethodExit(HelperGeneral.class, "getLineSeparator", result);  //$NON-NLS-1$
-        return result;
+    	return System.getProperty("line.separator"); //$NON-NLS-1$
     }
 
 	/**
@@ -298,10 +292,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @return list without duplicates
 	 */
     public static List<?> removeDuplicates(final List<?> list) {
-		final Set<?> set = new HashSet<Object>(list);
-		final List<?> result = new ArrayList<Object>(set);
-    	
-        return result;
+		return new ArrayList<Object>(new HashSet<Object>(list));
     }
 	
     /**
@@ -313,9 +304,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     public static Object[] removeDuplicates(final Object[] array) {
 		final List<?> list = removeDuplicates(Arrays.asList(array));
 		final Object[] temp = new Object[list.size()];
-		final Object[] result = list.toArray(temp);
-        
-        return result;
+		return list.toArray(temp);
     }
 
     /**
@@ -344,10 +333,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 			}
 			hexString.append(hex);
 		}
-		
-		final String str = hexString.toString();
-		
-		return str;
+		return hexString.toString();
 	}
 
     /**
@@ -359,9 +345,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @see #getChecksum(String, String)
      */
     public static String getChecksum(final String data) throws NoSuchAlgorithmException {
-		final String str = getChecksum(CHECKSUM_ALGORITHM_SHA256, data);
-		
-		return str;
+    	return getChecksum(CHECKSUM_ALGORITHM_SHA256, data);
     }
 
     /**
@@ -378,10 +362,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
         for (int ii = 0; ii < digits; ii++) {
             sb.append(seed[HelperMath.random(seed.length)]);
         }
-        
-        final String str = sb.toString();
-		
-		return str;
+        return sb.toString();
     }
 
     /**
@@ -392,9 +373,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return The generated unique String.
      */
     public static String getRandomKey(final int digits) {
-		final String str = getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
-		
-		return str;
+    	return getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
     }
     
     /**
@@ -410,10 +389,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     	while (length > 0) {
             chars[--length] = fillChar;
         }
-    	
-    	final String str = new String(chars);
-		
-		return str;
+    	return new String(chars);
     }
     
     /**
@@ -422,9 +398,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return reversed string
      */
     public static String reverseString(final String input) {
-		final String str = new StringBuffer(input).reverse().toString();
-		
-		return str;
+    	return new StringBuffer(input).reverse().toString();
     }
 
     /**
@@ -439,10 +413,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
             sb.append(value);
             sb.append(getLineSeparator());
         }
-        
-        final String str = sb.toString();
-		
-		return str;
+        return sb.toString();
     }
 
     /**
@@ -459,10 +430,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
             sb.append(pair.getValue());
             sb.append(getLineSeparator());
         }
-        
-        final String str = sb.toString();
-		
-		return str;
+        return sb.toString();
     }
 
      /**
@@ -477,22 +445,14 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
             sb.append(value);
             sb.append(getLineSeparator());
         }
-		
-		final String str = sb.toString();
-		
-		return str;
+		return sb.toString();
     }
 
     public static String toString(final Object object) {
-//		Logger.getInstance().writeMethodEntry(HelperGeneral.class, "toString", object);  //$NON-NLS-1$
-
     	final List<String> list = new ArrayList<String>();
     	toString(object, object.getClass(), list);
 
-    	final String str = object.getClass().getName() + list.toString();
-		
-//		Logger.getInstance().writeMethodExit(HelperGeneral.class, "toString", str);  //$NON-NLS-1$
-		return str;
+    	return object.getClass().getName() + list.toString();
     }
 
     

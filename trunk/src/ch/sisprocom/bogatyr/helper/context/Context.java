@@ -44,16 +44,16 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * Get access for general content in the context.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081028
  */
 public class Context implements IContext {
 	private static Context instance;
 
-	public static final String KEY_APPLICATION_NAME          = "Application.name"; //$NON-NLS-1$
-	public static final String KEY_APPLICATION_VERSION       = "Application.version"; //$NON-NLS-1$
-	public static final String KEY_APPLICATION_BUILD         = "Application.build"; //$NON-NLS-1$
-	public static final String KEY_APPLICATION_DEBUG         = "Application.debug"; //$NON-NLS-1$
-	public static final String KEY_APPLICATION_WORKDIRECTORY = "Application.work_directory"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_NAME          = "Application.name"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_VERSION       = "Application.version"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_BUILD         = "Application.build"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_DEBUG         = "Application.debug"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_WORKDIRECTORY = "Application.work_directory"; //$NON-NLS-1$
 
 	private final Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();
 	
@@ -86,48 +86,27 @@ public class Context implements IContext {
 	}
 
 	public Object getData(final Object key) {
-		final Object obj = contextData.get(key);
-		return obj;
+		return contextData.get(key);
 	}
 
 	public String getDataString(final Object key) {
-		final String str = (String) contextData.get(key);
-		return str;
+		return (String) contextData.get(key);
     }
-//
-//    public double getDataDouble(final Object key) {
-//    	double value = (Double) contextData.get(key);
-//    	
-//    	Logger.getInstance().writeMethodEntry(Context.class, "getDataDouble", key);  //$NON-NLS-1$
-//    	Logger.getInstance().writeMethodExit(Context.class, "getDataDouble", value);  //$NON-NLS-1$
-//        
-//    	return value;
-//    }
-//
-//    public int getDataInt(final Object key) {
-//    	int value = (Integer) contextData.get(key);
-//    	
-//    	Logger.getInstance().writeMethodEntry(Context.class, "getDataInt", key);  //$NON-NLS-1$
-//    	Logger.getInstance().writeMethodExit(Context.class, "getDataInt", value);  //$NON-NLS-1$
-//    	
-//    	return value;
-//    }
-//
-//    public long getDataLong(final Object key) {
-//    	long value = (Long) contextData.get(key);
-//    	
-//    	Logger.getInstance().writeMethodEntry(Context.class, "getDataLong", key);  //$NON-NLS-1$
-//    	Logger.getInstance().writeMethodExit(Context.class, "getDataLong", value);  //$NON-NLS-1$
-//    	
-//    	return value;
-//    }
-//
-//    public boolean getDataBoolean(final Object key) {
-//    	Boolean value = (Boolean) contextData.get(key);
-//    	boolean flag = value != null ? value : false;
-////    	Logger.getInstance().writeDebug(Context.class, "getDataBoolean", key);  //$NON-NLS-1$
-//    	return flag;
-//    }
+
+
+	public String getApplicationBuild() {
+		String str = getDataString(KEY_APPLICATION_BUILD);
+		
+		if (!HelperGeneral.isValidString(str)) {
+			str = "20080901";  //$NON-NLS-1$ //TODO change every release!
+		}
+		return str;
+	}
+
+	public boolean isApplicationDebug() {
+    	Boolean value = (Boolean) contextData.get(KEY_APPLICATION_DEBUG);
+    	return value != null ? value : false;
+ 	}
 
 	public String getApplicationName() {
 		String str = getDataString(KEY_APPLICATION_NAME);
@@ -147,22 +126,6 @@ public class Context implements IContext {
 		return str;
 	}
 
-	public String getApplicationBuild() {
-		String str = getDataString(KEY_APPLICATION_BUILD);
-		
-		if (!HelperGeneral.isValidString(str)) {
-			str = "20080901";  //$NON-NLS-1$ //TODO change every release!
-		}
-		return str;
-	}
-	
-	public boolean isApplicationDebug() {
-    	Boolean value = (Boolean) contextData.get(KEY_APPLICATION_DEBUG);
-    	final boolean flag = value != null ? value : false;
-
-    	return flag;
- 	}
-
 	public File getApplicationWorkDirectory() {
 		File file = (File)getData(KEY_APPLICATION_WORKDIRECTORY);
 
@@ -172,7 +135,27 @@ public class Context implements IContext {
 		return file;
 	}
 
+	public void setApplicationBuild(final String build) {
+		addData(KEY_APPLICATION_BUILD, build);
+	}
 
+	public void setApplicationDebug(boolean isDebug) {
+		addData(KEY_APPLICATION_BUILD, isDebug);
+	}
+
+	public void setApplicationName(String name) {
+		addData(KEY_APPLICATION_NAME, name);
+	}
+
+	public void setApplicationVersion(String version) {
+		addData(KEY_APPLICATION_VERSION, version);
+	}
+
+	public void setApplicationWorkDirectory(File directory) {
+		addData(KEY_APPLICATION_WORKDIRECTORY, directory);
+	}
+	
+	
     /*
 	 * Overridden methods
 	 */

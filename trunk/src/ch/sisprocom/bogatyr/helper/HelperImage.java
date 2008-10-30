@@ -50,7 +50,7 @@ import javax.imageio.ImageIO;
  * This is a helper class for image operations
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081028
  */
 public abstract class HelperImage {
 	public static final String TYPE_JPG = "jpg"; //$NON-NLS-1$
@@ -93,9 +93,8 @@ public abstract class HelperImage {
 	 */
 	public static List<String> getImageReadFormats() {
 	    String[] formatNames = ImageIO.getReaderFormatNames();
-	    List<String> list = unique(formatNames);
 	    
-	    return list;
+	    return unique(formatNames);
 	}
 
 	/**
@@ -104,9 +103,8 @@ public abstract class HelperImage {
 	 */
 	public static List<String> getImageWriteFormats() {
 	    String[] formatNames = ImageIO.getWriterFormatNames();
-	    List<String> list = unique(formatNames);
-
-	    return list;
+	    
+	    return unique(formatNames);
 	}
 
 	/**
@@ -115,9 +113,8 @@ public abstract class HelperImage {
 	 */
 	public static List<String> getImageReadMIMETypes() {
 	    String[] formatNames = ImageIO.getReaderMIMETypes();
-	    List<String> list = unique(formatNames);
-
-		return list;
+	    
+	    return unique(formatNames);
 	}
 
 	/**
@@ -126,9 +123,8 @@ public abstract class HelperImage {
 	 */
 	public static List<String> getImageWriteMIMETypes() {
 	    String[] formatNames = ImageIO.getWriterMIMETypes();
-	    List<String> list = unique(formatNames);
-
-	    return list;
+	    
+	    return unique(formatNames);
 	}
 
 	/**
