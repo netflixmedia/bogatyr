@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.controller.net.server.ThreadServerAbstract;
  * This is the skeleton for asynchron server threads
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081029
  */
 public abstract class ThreadServerAsynchAbstract extends ThreadServerAbstract {
 	private Thread thread;
@@ -75,7 +75,6 @@ public abstract class ThreadServerAsynchAbstract extends ThreadServerAbstract {
 		if (thread != null && thread.isAlive()) {
             thread = null;
         }
-
 		getSocket().close();
 	}  
 

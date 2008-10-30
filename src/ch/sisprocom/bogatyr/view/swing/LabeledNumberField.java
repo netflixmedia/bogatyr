@@ -42,9 +42,9 @@ import java.awt.event.ActionListener;
  * This is an combined Label and NumberField
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081029
  */
-public class LabeledNumberField extends Panel {
+public class LabeledNumberField extends Panel {//TODO add iPady and iPadx?
 	private static final long serialVersionUID = 8536177338219909078L;
 
 	private Label label;

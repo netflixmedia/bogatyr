@@ -39,7 +39,7 @@ import java.io.File;
  * Interface for the Application-Context
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081028
  */
 public interface IContext {
 
@@ -71,4 +71,14 @@ public interface IContext {
 	boolean isApplicationDebug();
 
 	File getApplicationWorkDirectory();
+	
+    void setApplicationName(String name);
+
+	void setApplicationVersion(String version);
+
+	void setApplicationBuild(String build);
+	
+	void setApplicationDebug(boolean isDebug);
+
+	void setApplicationWorkDirectory(File directory);
 }

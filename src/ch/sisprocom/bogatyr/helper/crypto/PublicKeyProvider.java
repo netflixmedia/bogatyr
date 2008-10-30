@@ -68,7 +68,7 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
  * The PublicKeyProvider class
  *
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081028
  */
 public abstract class PublicKeyProvider {
 	/**
@@ -178,8 +178,6 @@ public abstract class PublicKeyProvider {
 	    certGen.addExtension(X509Extensions.ExtendedKeyUsage, true, new ExtendedKeyUsage(KeyPurposeId.id_kp_serverAuth));
 	    certGen.addExtension(X509Extensions.SubjectAlternativeName, false, new GeneralNames(new GeneralName(GeneralName.rfc822Name, generalName)));
 	
-	    final X509Certificate cert = certGen.generateX509Certificate(pair.getPrivate(), "BC");  //$NON-NLS-1$
-	    
-	    return cert;
+	    return certGen.generateX509Certificate(pair.getPrivate(), "BC");  //$NON-NLS-1$
 	}													
 }

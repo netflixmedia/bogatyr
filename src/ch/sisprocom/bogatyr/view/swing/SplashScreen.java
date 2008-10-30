@@ -31,28 +31,25 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.border.BevelBorder;
 
 
 /**
  * Display a splash-screen
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081029
  */
 public class SplashScreen extends Frame {
 	private static final long serialVersionUID = 8819965047277292543L;
 	
 	private final ImageIcon image;
-	private static final int BORDER_WIDTH = 40;
+//	private static final int BORDER_WIDTH = 40;
 
 
 	public SplashScreen(final String title, final Image icon, final ImageIcon splash) {
@@ -95,13 +92,13 @@ public class SplashScreen extends Frame {
             int sizeX = image.getIconWidth();
             int sizeY = image.getIconHeight();
 
-            sizeX += BORDER_WIDTH * 2;
-			sizeY += BORDER_WIDTH * 2;
+//          sizeX += BORDER_WIDTH * 2;
+//			sizeY += BORDER_WIDTH * 2;
 
 			
 			final Label label = new Label(image);
 			
-			label.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,	Color.LIGHT_GRAY, Color.WHITE, Color.DARK_GRAY, Color.GRAY));
+//			label.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,	Color.LIGHT_GRAY, Color.WHITE, Color.DARK_GRAY, Color.GRAY));
 			getContentPane().add(label);
 
 			setUndecorated(true);

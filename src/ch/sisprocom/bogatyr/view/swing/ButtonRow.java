@@ -43,7 +43,7 @@ import javax.swing.AbstractButton;
  * This is a button row
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081029
  */
 public class ButtonRow extends Panel {
 	private static final long serialVersionUID = -3557759501854611930L;
@@ -85,7 +85,7 @@ public class ButtonRow extends Panel {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-	    gbc.insets = new Insets(5, 5, 5, 5);
+	    gbc.insets = new Insets(0, 5, 0, 5);
 	   
 	    if (data != null) {
 	    	for (final Button button : data) {
@@ -100,7 +100,7 @@ public class ButtonRow extends Panel {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-	    gbc.insets = new Insets(5, 5, 5, 5);
+	    gbc.insets = new Insets(0, 5, 0, 5);
 
 	    if (data != null) {
 	    	for (final Button button : data) {

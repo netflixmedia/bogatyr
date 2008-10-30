@@ -60,7 +60,7 @@ import ch.sisprocom.bogatyr.helper.property.Property;
  * This is the skeleton for clients
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081029
  */
 public abstract class ClientAbstract extends ApplicationAbstract implements ICom {
 	private static final Logger log = Logger.getLogger(ClientAbstract.class);
@@ -242,8 +242,7 @@ public abstract class ClientAbstract extends ApplicationAbstract implements ICom
      * @throws Exception 
      */
 	protected ComObject readObject() throws Exception {
-		final ComObject comObject = (ComObject)HelperGeneral.getObjectFromBytes(readStream());
-		return comObject;
+		return (ComObject)HelperGeneral.getObjectFromBytes(readStream());
     }
 
 

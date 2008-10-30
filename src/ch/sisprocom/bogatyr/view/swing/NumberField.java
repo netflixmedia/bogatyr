@@ -43,9 +43,9 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a NumberField, similar to TextField, but only numeric characters are allowed
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081029
  */
-public class NumberField extends TextField {
+public class NumberField extends TextField {//TODO improve Document!
 	private static final long serialVersionUID = 4469777330124040925L;
 
 	

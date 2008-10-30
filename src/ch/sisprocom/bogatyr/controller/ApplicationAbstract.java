@@ -129,7 +129,7 @@ public abstract class ApplicationAbstract implements Runnable {
 
 		readProperties();
 
-		Application.setInstance(this);
+//		Application.setInstance(this);
 
 		log.debug(toString());
 		log.info(Localizer.getInstance().getValue(RES_LOG_START) + ' ' + Context.getInstance().getApplicationName() + ' ' + Context.getInstance().getApplicationVersion() + " (" + Context.getInstance().getApplicationBuild() + ")"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -137,15 +137,14 @@ public abstract class ApplicationAbstract implements Runnable {
 	}
 	
 	private void readProperties() {
-		File workdirectory;
+		File directory;
 		
 		final boolean isDebug = Property.getInstance().getPropertyBoolean(PROPERTY_APPLICATION_DEBUG);
-		Context.getInstance().addData(Context.KEY_APPLICATION_DEBUG, isDebug);
+		Context.getInstance().setApplicationDebug(isDebug);
 		
 		String value = Property.getInstance().getProperty(PROPERTY_APPLICATION_NAME);
 		if (HelperGeneral.isValidString(value)) {
-//            name = value;
-			Context.getInstance().addData(Context.KEY_APPLICATION_NAME, value);
+			Context.getInstance().setApplicationName(value);
 		} else {
 			log.error(PROPERTY_APPLICATION_NAME + " == 'null'"); //$NON-NLS-1$
 			exit(10);
@@ -153,8 +152,7 @@ public abstract class ApplicationAbstract implements Runnable {
 		
 		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_VERSION);
 		if (HelperGeneral.isValidString(value)) {
-//            version = value;
-			Context.getInstance().addData(Context.KEY_APPLICATION_VERSION, value);
+			Context.getInstance().setApplicationVersion(value);
 		} else {
 			log.error(PROPERTY_APPLICATION_VERSION + " == 'null'"); //$NON-NLS-1$
 			exit(20);
@@ -162,8 +160,7 @@ public abstract class ApplicationAbstract implements Runnable {
 
 		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_BUILD);
 		if (HelperGeneral.isValidString(value)) {
-//            build = value;
-			Context.getInstance().addData(Context.KEY_APPLICATION_BUILD, value);
+			Context.getInstance().setApplicationBuild(value);
 		} else {
 			log.error(PROPERTY_APPLICATION_BUILD + " == 'null'"); //$NON-NLS-1$
 			exit(30);
@@ -171,12 +168,12 @@ public abstract class ApplicationAbstract implements Runnable {
 		
 		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_WORKDIRECTORY);
 		if (HelperGeneral.isValidString(value)) {
-            workdirectory = new File(value);
+			directory = new File(value);
 		} else {
-            workdirectory = HelperEnvInfo.getOsTempDirectory();
-            log.warn(PROPERTY_APPLICATION_WORKDIRECTORY + " == 'null' => default: " + workdirectory.getAbsolutePath()); //$NON-NLS-1$
+			directory = HelperEnvInfo.getOsTempDirectory();
+            log.warn(PROPERTY_APPLICATION_WORKDIRECTORY + " == 'null' => default: " + directory.getAbsolutePath()); //$NON-NLS-1$
 		}
-		Context.getInstance().addData(Context.KEY_APPLICATION_WORKDIRECTORY, workdirectory);
+		Context.getInstance().setApplicationWorkDirectory(directory);
 		
 		// Localizer
 		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_LOCALIZER);

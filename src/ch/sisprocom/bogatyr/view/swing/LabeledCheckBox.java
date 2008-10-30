@@ -42,9 +42,9 @@ import java.awt.event.ActionListener;
  * This is an combined Label and CheckBox
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081029
  */
-public class LabeledCheckBox extends Panel {
+public class LabeledCheckBox extends Panel { //TODO add iPady and iPadx?
 	private static final long serialVersionUID = 2215341067138215010L;
 
 	private Label label;
@@ -86,7 +86,7 @@ public class LabeledCheckBox extends Panel {
 	private void createLayout(final String labelText, final boolean isSelected) {
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-	    gbc.insets = new Insets(5, 5, 5, 5);
+	    gbc.insets = new Insets(0, 5, 0, 5);
 
         checkBox = new CheckBox(isSelected, null);
 		add(checkBox, gbc);

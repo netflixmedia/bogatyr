@@ -47,7 +47,7 @@ import javax.swing.RepaintManager;
  * This is a printer class for print operations
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081029
  */
 public class Printer implements Printable {
 	private Component componentToBePrinted;
@@ -133,7 +133,6 @@ public class Printer implements Printable {
 		componentToBePrinted.paint(g2d);
 		enableDoubleBuffering(componentToBePrinted);
 		
-		final int result = PAGE_EXISTS;
-		return result;
+		return PAGE_EXISTS;
 	}
 }

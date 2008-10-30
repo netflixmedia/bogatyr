@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081027
+ * @version 20081029
  */
 public abstract class ProviderSqlAbstract {
 	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
@@ -105,9 +105,7 @@ public abstract class ProviderSqlAbstract {
 	 */
     protected Connection connectToDb() throws Exception {		
 		Class.forName(driver).newInstance();
-		final Connection con = DriverManager.getConnection(url, user, password);
-		
-        return con;
+		return DriverManager.getConnection(url, user, password);
 	}
     
 	/**
@@ -137,7 +135,6 @@ public abstract class ProviderSqlAbstract {
                 stmt.close();
             }
 		}
-
 		return result;
     }
 	

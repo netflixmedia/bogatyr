@@ -37,7 +37,7 @@ package ch.sisprocom.bogatyr.helper;
  * This is a helper class for XML operations
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081029
  */
 public abstract class HelperXml {
 	/**
@@ -66,8 +66,6 @@ public abstract class HelperXml {
                 }
             }
         }
-
-        final String result = sb.toString();
-        return result;
+        return sb.toString();
     }   
 }

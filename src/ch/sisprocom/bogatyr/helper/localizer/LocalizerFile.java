@@ -36,7 +36,6 @@ import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
 
-import ch.sisprocom.bogatyr.controller.net.server.ServerAbstract;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.property.Property;
 
@@ -45,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.property.Property;
  * Localizer for file access
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081028
  */
 public class LocalizerFile implements ILocalizer {
 	private static final Logger log = Logger.getLogger(LocalizerFile.class);

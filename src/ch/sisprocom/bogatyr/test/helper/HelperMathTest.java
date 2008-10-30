@@ -130,6 +130,7 @@ public class HelperMathTest { //TODO improve
 
 	@Test
 	public void testPhi() {
+//		System.out.println(HelperMath.phi(8.0D));
 		assertEquals(0.5D, HelperMath.phi(0.0D));
 		assertEquals(0.15865526139567465D, HelperMath.phi(-1.0D));
 		assertEquals(0.022750129890124482D, HelperMath.phi(-2.0D));

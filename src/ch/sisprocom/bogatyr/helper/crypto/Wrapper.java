@@ -44,7 +44,7 @@ import javax.crypto.NoSuchPaddingException;
  * This is a class for wrapping and unwrapping a key
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081028
  */
 public abstract class Wrapper {
 	/**
@@ -62,9 +62,7 @@ public abstract class Wrapper {
 		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.WRAP_MODE, wrapperKey);
 
-		final byte[] result = cipher.wrap(key);
-		
-		return result;
+		return cipher.wrap(key);
 	}
 	
 	/**
@@ -83,8 +81,6 @@ public abstract class Wrapper {
 		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.UNWRAP_MODE, unwrapperKey);
 
-		final Key key = cipher.unwrap(wrappedKey, keyAlgorithm, keyType);
-		
-		return key;
+		return cipher.unwrap(wrappedKey, keyAlgorithm, keyType);
 	}
 }

@@ -72,8 +72,7 @@ public abstract class HelperSound {
      * @throws javax.sound.sampled.UnsupportedAudioFileException
      */
     public static Clip getClip(final File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-		final Clip result = getClip(AudioSystem.getAudioInputStream(file));
-    	return result;
+    	return getClip(AudioSystem.getAudioInputStream(file));
 	}
 
     /**
@@ -86,8 +85,7 @@ public abstract class HelperSound {
      * @throws javax.sound.sampled.UnsupportedAudioFileException
      */
 	public static Clip getClip(final InputStream in) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-		final Clip result = getClip(AudioSystem.getAudioInputStream(in));
-    	return result;
+		return getClip(AudioSystem.getAudioInputStream(in));
 	}
 
     /**
@@ -99,8 +97,7 @@ public abstract class HelperSound {
      * @throws javax.sound.midi.InvalidMidiDataException
      */
 	public static Sequence getSequence(final File file) throws InvalidMidiDataException, IOException {
-		final Sequence result = MidiSystem.getSequence(file);
-    	return result;
+		return MidiSystem.getSequence(file);
 	}
 
     /**
@@ -112,8 +109,7 @@ public abstract class HelperSound {
      * @throws javax.sound.midi.InvalidMidiDataException
      */
 	public static Sequence getSequence(final InputStream in) throws InvalidMidiDataException, IOException {
-		final Sequence result = MidiSystem.getSequence(in);
-    	return result;
+		return MidiSystem.getSequence(in);
 	}
 	
     /**
@@ -126,7 +122,7 @@ public abstract class HelperSound {
      */
 	public static Sequencer getSequencer(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
 		final Sequencer sequencer = MidiSystem.getSequencer();  // Used to play sequences
-        sequencer.open();                       // Turn it on.
+        sequencer.open(); // Turn it on.
 
         // Get a Synthesizer for the Sequencer to send notes to
         final Synthesizer synth = MidiSystem.getSynthesizer( );
