@@ -49,14 +49,14 @@ public class ButtonRow extends Panel {
 	private static final long serialVersionUID = -3557759501854611930L;
 	
 
-	public ButtonRow(final Button[] data) {
+	public ButtonRow(final Button[] data, final Insets insets) {
 		super();
-		createLayout(data, false);
+		createLayout(data, insets, false);
 	}
 	
-	public ButtonRow(final Button[] data, final boolean isVertical) {
+	public ButtonRow(final Button[] data, final Insets insets, final boolean isVertical) {
 		super();
-		createLayout(data, isVertical);
+		createLayout(data, insets, isVertical);
 	}
 
 	public void addActionListener(final ActionListener listener) {
@@ -72,20 +72,20 @@ public class ButtonRow extends Panel {
 	/*
 	 * Private methods
 	 */
-	private void createLayout(final Button[] data, final boolean isVertical) {
+	private void createLayout(final Button[] data, final Insets insets, final boolean isVertical) {
 		if (isVertical) {
-			createLayoutVertical(data);
+			createLayoutVertical(data, insets);
 		} else {
-			createLayoutHorizontal(data);
+			createLayoutHorizontal(data, insets);
 		}
 	}
 	
-	private void createLayoutVertical(final Button[] data) {
+	private void createLayoutVertical(final Button[] data, final Insets insets) {
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-	    gbc.insets = new Insets(0, 5, 0, 5);
+	    gbc.insets = insets;
 	   
 	    if (data != null) {
 	    	for (final Button button : data) {
@@ -95,12 +95,12 @@ public class ButtonRow extends Panel {
 	    }
 	}
 	
-	private void createLayoutHorizontal(final Button[] data) {
+	private void createLayoutHorizontal(final Button[] data, final Insets insets) {
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-	    gbc.insets = new Insets(0, 5, 0, 5);
+	    gbc.insets = insets;
 
 	    if (data != null) {
 	    	for (final Button button : data) {
