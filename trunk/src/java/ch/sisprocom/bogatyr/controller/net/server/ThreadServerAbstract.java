@@ -40,12 +40,12 @@ import java.security.PublicKey;
 import ch.sisprocom.bogatyr.controller.net.common.ICom;
 import ch.sisprocom.bogatyr.controller.net.common.dto.ComContainer;
 import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
-import ch.sisprocom.bogatyr.controller.net.common.dto.User;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
 import ch.sisprocom.bogatyr.helper.crypto.CryptoSymm;
 import ch.sisprocom.bogatyr.helper.exception.ExceptionInvalidStreamSize;
 import ch.sisprocom.bogatyr.helper.property.Property;
+import ch.sisprocom.bogatyr.model.dao.User;
 
 
 /**

@@ -29,7 +29,7 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.net.common.dto;
+package ch.sisprocom.bogatyr.model.dao;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -42,9 +42,9 @@ import ch.sisprocom.bogatyr.model.dao.DataObject;
  * The data object for a user
  *
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081107
  */
-public final class User extends DataObject {
+public class User extends DataObject {
 	private static final long serialVersionUID = -4679247079715137984L;
 
 	private final String username;
@@ -71,7 +71,7 @@ public final class User extends DataObject {
 	}
 
 	public String getUniqueKey() throws NoSuchAlgorithmException {
-		String uniqueKey = HelperGeneral.getChecksum(toString());
+		String uniqueKey = HelperGeneral.getChecksum(this);
 		return uniqueKey;
 	}
 
