@@ -78,13 +78,14 @@ public class LabeledTextField extends Panel {//TODO add iPady and iPadx?
 	private void createLayout(final String labelText, final String text, final int columns) {
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-	    gbc.insets = new Insets(5,5,5,5);
+		gbc.insets = new Insets(0, 0, 0, 5);
 
         label = new Label(labelText);
 		add(label, gbc);
 		
 		gbc.weightx = 1.0D;
 		gbc.gridx = 1;
+		gbc.insets = new Insets(0, 0, 0, 0);
         textField = new TextField(text, columns, null);
 		add(textField, gbc);
 	}

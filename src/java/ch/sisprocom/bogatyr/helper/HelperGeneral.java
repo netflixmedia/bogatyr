@@ -308,17 +308,17 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 
     /**
-     * Generates an unique string from an input string.
+     * Generates an unique string from an input object.
      * This is used for unique keys.
      *
      * @param algo The algorithm to use.
-     * @param data The data to encrypt.
+     * @param data The data to generate a checksum.
      * @return The generated unique String.
      * @throws NoSuchAlgorithmException
      */
-    public static String getChecksum(final String algo, final String data) throws NoSuchAlgorithmException {
+    public static String getChecksum(final String algo, final Object data) throws NoSuchAlgorithmException {
     	final MessageDigest algorithm = MessageDigest.getInstance(algo);
-		final byte[] input = data.getBytes();
+		final byte[] input = toString(data).getBytes();
 
 		algorithm.reset();
 		algorithm.update(input);
@@ -337,14 +337,14 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	}
 
     /**
-     * Generates an unique string with SHA-256 from an input string.
+     * Generates an unique string with SHA-256 from an input object.
      *
-     * @param data The data to encrypt.
+     * @param data The data to generate a checksum.
      * @return The generated unique String.
      * @throws NoSuchAlgorithmException
      * @see #getChecksum(String, String)
      */
-    public static String getChecksum(final String data) throws NoSuchAlgorithmException {
+    public static String getChecksum(final Object data) throws NoSuchAlgorithmException {
     	return getChecksum(CHECKSUM_ALGORITHM_SHA256, data);
     }
 

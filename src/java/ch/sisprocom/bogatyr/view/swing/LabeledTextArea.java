@@ -35,62 +35,61 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
 
 
 /**
- * This is an combined Label and NumberField
+ * This is an combined Label and TextArea
  * 
  * @author Stefan Laubenberger
  * @version 20081029
  */
-public class LabeledNumberField extends Panel {//TODO add iPady and iPadx?
-	private static final long serialVersionUID = 8536177338219909078L;
+public class LabeledTextArea extends Panel {//TODO add iPady and iPadx?
+	private static final long serialVersionUID = -3385104817739873049L;
 
 	private Label label;
-	private NumberField numberField;
+	private TextArea textArea;
 	
 	
-	public LabeledNumberField(final String labelText, final int number, final int columns, final String toolTip) {
+	public LabeledTextArea(final String labelText, final String text, final int rows, final int columns, final String toolTip) {
 		super();
-		createLayout(labelText, number, columns);
+		createLayout(labelText, text, rows, columns);
 		setToolTipText(toolTip);
 	}
 
-	public LabeledNumberField(final String title, final String labelText, final int number, final int columns, final String toolTip) {
+	public LabeledTextArea(final String title, final String labelText, final String text, final int rows, final int columns, final String toolTip) {
 		super(title);
-		createLayout(labelText, number, columns);
+		createLayout(labelText, text, rows, columns);
 		setToolTipText(toolTip);
 	}
-
+	
 	public Label getLabel() {
 		return label;
 	}
 
-	public NumberField getNumberField() {
-		return numberField;
+	public TextArea getTextArea() {
+		return textArea;
 	}
-
-	public void addActionListener(final ActionListener listener) {
-        numberField.addActionListener(listener);
-	}
-
+	
 	
 	/*
 	 * Private methods
 	 */
-	private void createLayout(final String labelText, final int number, final int columns) {
+	private void createLayout(final String labelText, final String text, final int rows, final int columns) {
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-	    gbc.insets = new Insets(5,5,5,5);
+		gbc.insets = new Insets(0, 0, 0, 5);
 
         label = new Label(labelText);
 		add(label, gbc);
-		
+
 		gbc.weightx = 1.0D;
 		gbc.gridx = 1;
-        numberField = new NumberField((double) number, columns, null);
-		add(numberField, gbc);
+		gbc.insets = new Insets(0, 0, 0, 0);
+        textArea = new TextArea(text, rows, columns, null);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+		final ScrollPane scrollPane = new ScrollPane(textArea);
+		add(scrollPane, gbc);
 	}
 	
 	
@@ -104,8 +103,8 @@ public class LabeledNumberField extends Panel {//TODO add iPady and iPadx?
 		if (label != null) {
             label.setBackground(bg);
         }
-		if (numberField != null) {
-            numberField.setBackground(bg);
+		if (textArea != null) {
+            textArea.setBackground(bg);
         }
 	}
 	
@@ -116,8 +115,8 @@ public class LabeledNumberField extends Panel {//TODO add iPady and iPadx?
 		if (label != null) {
             label.setForeground(fg);
         }
-		if (numberField != null) {
-            numberField.setForeground(fg);
+		if (textArea != null) {
+            textArea.setForeground(fg);
         }
 	}
 	
@@ -128,8 +127,8 @@ public class LabeledNumberField extends Panel {//TODO add iPady and iPadx?
 		if (label != null) {
             label.setFont(font);
         }
-		if (numberField != null) {
-            numberField.setFont(font);
+		if (textArea != null) {
+            textArea.setFont(font);
         }
 	}
 }
