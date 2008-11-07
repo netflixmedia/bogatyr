@@ -35,60 +35,68 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 
 
 /**
- * This is an combined Label and TextArea
+ * This is an combined Label and ComboBox
  * 
  * @author Stefan Laubenberger
  * @version 20081029
  */
-public class LabeledTextArea extends Panel {//TODO add iPady and iPadx?
-	private static final long serialVersionUID = -3385104817739873049L;
+public class LabeledComboBox extends Panel {//TODO add iPady and iPadx?
+	private static final long serialVersionUID = -67296455436983811L;
 
 	private Label label;
-	private TextArea textArea;
+	private ComboBox comboBox;
 	
 	
-	public LabeledTextArea(final String labelText, final String text, final int rows, final int columns, final String toolTip) {
+	public LabeledComboBox(final String labelText, final Object[] data, final String toolTip) {
 		super();
-		createLayout(labelText, text, rows, columns);
+		createLayout(labelText, data);
 		setToolTipText(toolTip);
 	}
 
-	public LabeledTextArea(final String title, final String labelText, final String text, final int rows, final int columns, final String toolTip) {
+	public LabeledComboBox(final String title, final String labelText, final Object[] data, final String toolTip) {
 		super(title);
-		createLayout(labelText, text, rows, columns);
+		createLayout(labelText, data);
 		setToolTipText(toolTip);
 	}
 	
+	public ComboBox getComboBox() {
+		return comboBox;
+	}
+
 	public Label getLabel() {
 		return label;
 	}
 
-	public TextArea getTextArea() {
-		return textArea;
+	public void addActionListener(final ActionListener listener) {
+        comboBox.addActionListener(listener);
 	}
 	
 	
 	/*
 	 * Private methods
 	 */
-	private void createLayout(final String labelText, final String text, final int rows, final int columns) {
+	private void createLayout(final String labelText, final Object[] data) {
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-	    gbc.insets = new Insets(5, 5, 5, 5);
+		gbc.insets = new Insets(0, 0, 0, 5);
 
         label = new Label(labelText);
 		add(label, gbc);
-
+		
 		gbc.weightx = 1.0D;
 		gbc.gridx = 1;
-        textArea = new TextArea(text, rows, columns, null);
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-		final ScrollPane scrollPane = new ScrollPane(textArea);
-		add(scrollPane, gbc);
+		gbc.insets = new Insets(0, 0, 0, 0);
+		if (data != null) {
+            comboBox = new ComboBox(data, null);
+            comboBox.setSelectedIndex(0);
+		} else {
+            comboBox = new ComboBox(null, null);
+		}
+		add(comboBox, gbc);
 	}
 	
 	
@@ -102,8 +110,8 @@ public class LabeledTextArea extends Panel {//TODO add iPady and iPadx?
 		if (label != null) {
             label.setBackground(bg);
         }
-		if (textArea != null) {
-            textArea.setBackground(bg);
+		if (comboBox != null) {
+            comboBox.setBackground(bg);
         }
 	}
 	
@@ -114,8 +122,8 @@ public class LabeledTextArea extends Panel {//TODO add iPady and iPadx?
 		if (label != null) {
             label.setForeground(fg);
         }
-		if (textArea != null) {
-            textArea.setForeground(fg);
+		if (comboBox != null) {
+            comboBox.setForeground(fg);
         }
 	}
 	
@@ -126,8 +134,8 @@ public class LabeledTextArea extends Panel {//TODO add iPady and iPadx?
 		if (label != null) {
             label.setFont(font);
         }
-		if (textArea != null) {
-            textArea.setFont(font);
+		if (comboBox != null) {
+            comboBox.setFont(font);
         }
 	}
 }

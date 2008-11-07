@@ -39,27 +39,27 @@ import java.awt.event.ActionListener;
 
 
 /**
- * This is an combined Label and CheckBox
+ * This is an combined Label and NumberField
  * 
  * @author Stefan Laubenberger
  * @version 20081029
  */
-public class LabeledCheckBox extends Panel { //TODO add iPady and iPadx?
-	private static final long serialVersionUID = 2215341067138215010L;
+public class LabeledNumberField extends Panel {//TODO add iPady and iPadx?
+	private static final long serialVersionUID = 8536177338219909078L;
 
 	private Label label;
-	private CheckBox checkBox;
-
+	private NumberField numberField;
 	
-	public LabeledCheckBox(final String labelText, final boolean isSelected, final String toolTip) {
+	
+	public LabeledNumberField(final String labelText, final int number, final int columns, final String toolTip) {
 		super();
-		createLayout(labelText, isSelected);
+		createLayout(labelText, number, columns);
 		setToolTipText(toolTip);
 	}
 
-	public LabeledCheckBox(final String title, final String labelText, final boolean isSelected, final String toolTip) {
+	public LabeledNumberField(final String title, final String labelText, final int number, final int columns, final String toolTip) {
 		super(title);
-		createLayout(labelText, isSelected);
+		createLayout(labelText, number, columns);
 		setToolTipText(toolTip);
 	}
 
@@ -67,34 +67,31 @@ public class LabeledCheckBox extends Panel { //TODO add iPady and iPadx?
 		return label;
 	}
 
-	public CheckBox getCheckBox() {
-		return checkBox;
+	public NumberField getNumberField() {
+		return numberField;
 	}
-	
-	public boolean isSelected() {
-		return checkBox.isSelected();
-	}
-	
+
 	public void addActionListener(final ActionListener listener) {
-        checkBox.addActionListener(listener);
+        numberField.addActionListener(listener);
 	}
-  
+
 	
 	/*
 	 * Private methods
 	 */
-	private void createLayout(final String labelText, final boolean isSelected) {
+	private void createLayout(final String labelText, final int number, final int columns) {
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-	    gbc.insets = new Insets(0, 5, 0, 5);
+		gbc.insets = new Insets(0, 0, 0, 5);
 
-        checkBox = new CheckBox(isSelected, null);
-		add(checkBox, gbc);
-
-		gbc.weightx = 1.0D;
-		gbc.gridx = 1;
         label = new Label(labelText);
 		add(label, gbc);
+		
+		gbc.weightx = 1.0D;
+		gbc.gridx = 1;
+		gbc.insets = new Insets(0, 0, 0, 0);
+        numberField = new NumberField((double) number, columns, null);
+		add(numberField, gbc);
 	}
 	
 	
@@ -108,8 +105,8 @@ public class LabeledCheckBox extends Panel { //TODO add iPady and iPadx?
 		if (label != null) {
             label.setBackground(bg);
         }
-		if (checkBox != null) {
-            checkBox.setBackground(bg);
+		if (numberField != null) {
+            numberField.setBackground(bg);
         }
 	}
 	
@@ -120,8 +117,8 @@ public class LabeledCheckBox extends Panel { //TODO add iPady and iPadx?
 		if (label != null) {
             label.setForeground(fg);
         }
-		if (checkBox != null) {
-            checkBox.setForeground(fg);
+		if (numberField != null) {
+            numberField.setForeground(fg);
         }
 	}
 	
@@ -132,8 +129,8 @@ public class LabeledCheckBox extends Panel { //TODO add iPady and iPadx?
 		if (label != null) {
             label.setFont(font);
         }
-		if (checkBox != null) {
-            checkBox.setFont(font);
+		if (numberField != null) {
+            numberField.setFont(font);
         }
 	}
 }

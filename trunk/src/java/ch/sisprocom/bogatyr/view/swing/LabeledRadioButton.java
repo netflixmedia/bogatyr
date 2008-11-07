@@ -39,63 +39,63 @@ import java.awt.event.ActionListener;
 
 
 /**
- * This is an combined Label and ComboBox
+ * This is an combined Label and RadioButton
  * 
  * @author Stefan Laubenberger
- * @version 20081029
+ * @version 20081105
  */
-public class LabeledComboBox extends Panel {//TODO add iPady and iPadx?
-	private static final long serialVersionUID = -67296455436983811L;
+public class LabeledRadioButton extends Panel {
+	private static final long serialVersionUID = 3461718081893469685L;
 
 	private Label label;
-	private ComboBox comboBox;
+	private RadioButton radioButton;
+
 	
-	
-	public LabeledComboBox(final String labelText, final Object[] data, final String toolTip) {
+	public LabeledRadioButton(final String labelText, final boolean isSelected, final String toolTip) {
 		super();
-		createLayout(labelText, data);
+		createLayout(labelText, isSelected);
 		setToolTipText(toolTip);
 	}
 
-	public LabeledComboBox(final String title, final String labelText, final Object[] data, final String toolTip) {
+	public LabeledRadioButton(final String title, final String labelText, final boolean isSelected, final String toolTip) {
 		super(title);
-		createLayout(labelText, data);
+		createLayout(labelText, isSelected);
 		setToolTipText(toolTip);
-	}
-	
-	public ComboBox getComboBox() {
-		return comboBox;
 	}
 
 	public Label getLabel() {
 		return label;
 	}
 
-	public void addActionListener(final ActionListener listener) {
-        comboBox.addActionListener(listener);
+	public RadioButton getRadioButton() {
+		return radioButton;
 	}
 	
+	public boolean isSelected() {
+		return radioButton.isSelected();
+	}
+	
+	public void addActionListener(final ActionListener listener) {
+        radioButton.addActionListener(listener);
+	}
+  
 	
 	/*
 	 * Private methods
 	 */
-	private void createLayout(final String labelText, final Object[] data) {
+	private void createLayout(final String labelText, final boolean isSelected) {
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-	    gbc.insets = new Insets(5,5,5,5);
+		gbc.insets = new Insets(0, 0, 0, 5);
 
-        label = new Label(labelText);
-		add(label, gbc);
-		
+        radioButton = new RadioButton(isSelected, null);
+		add(radioButton, gbc);
+
 		gbc.weightx = 1.0D;
 		gbc.gridx = 1;
-		if (data != null) {
-            comboBox = new ComboBox(data, null);
-            comboBox.setSelectedIndex(0);
-		} else {
-            comboBox = new ComboBox(null, null);
-		}
-		add(comboBox, gbc);
+		gbc.insets = new Insets(0, 0, 0, 0);
+        label = new Label(labelText);
+		add(label, gbc);
 	}
 	
 	
@@ -109,8 +109,8 @@ public class LabeledComboBox extends Panel {//TODO add iPady and iPadx?
 		if (label != null) {
             label.setBackground(bg);
         }
-		if (comboBox != null) {
-            comboBox.setBackground(bg);
+		if (radioButton != null) {
+            radioButton.setBackground(bg);
         }
 	}
 	
@@ -121,8 +121,8 @@ public class LabeledComboBox extends Panel {//TODO add iPady and iPadx?
 		if (label != null) {
             label.setForeground(fg);
         }
-		if (comboBox != null) {
-            comboBox.setForeground(fg);
+		if (radioButton != null) {
+            radioButton.setForeground(fg);
         }
 	}
 	
@@ -133,8 +133,8 @@ public class LabeledComboBox extends Panel {//TODO add iPady and iPadx?
 		if (label != null) {
             label.setFont(font);
         }
-		if (comboBox != null) {
-            comboBox.setFont(font);
+		if (radioButton != null) {
+            radioButton.setFont(font);
         }
 	}
 }
