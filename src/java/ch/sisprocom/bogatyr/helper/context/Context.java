@@ -37,6 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.model.dao.User;
 
 
 /**
@@ -44,7 +45,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * Get access for general content in the context.
  * 
  * @author Stefan Laubenberger
- * @version 20081028
+ * @version 20081107
  */
 public class Context implements IContext {
 	private static Context instance;
@@ -54,6 +55,7 @@ public class Context implements IContext {
 	private static final String KEY_APPLICATION_BUILD         = "Application.build"; //$NON-NLS-1$
 	private static final String KEY_APPLICATION_DEBUG         = "Application.debug"; //$NON-NLS-1$
 	private static final String KEY_APPLICATION_WORKDIRECTORY = "Application.work_directory"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_USER          = "Application.user"; //$NON-NLS-1$
 
 	private final Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();
 	
@@ -68,8 +70,17 @@ public class Context implements IContext {
 		}
     	return instance;
 	}
-    
-    
+    	
+	
+    /*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperGeneral.toString(instance);
+	}
+	
+	
 	/*
 	 * Implemented methods
 	 */
@@ -98,7 +109,7 @@ public class Context implements IContext {
 		String str = getDataString(KEY_APPLICATION_BUILD);
 		
 		if (!HelperGeneral.isValidString(str)) {
-			str = "20080901";  //$NON-NLS-1$ //TODO change every release!
+			str = "20081107";  //$NON-NLS-1$ //TODO change every release!
 		}
 		return str;
 	}
@@ -121,7 +132,7 @@ public class Context implements IContext {
 		String str = getDataString(KEY_APPLICATION_VERSION);
 
 		if (!HelperGeneral.isValidString(str)) {
-			str = "0.40";  //$NON-NLS-1$ //TODO change every release!
+			str = "0.50";  //$NON-NLS-1$ //TODO change every release!
 		}
 		return str;
 	}
@@ -135,6 +146,11 @@ public class Context implements IContext {
 		return file;
 	}
 
+	
+	public User getApplicationUser() {
+		return (User)getData(KEY_APPLICATION_USER);
+	}
+	
 	public void setApplicationBuild(final String build) {
 		addData(KEY_APPLICATION_BUILD, build);
 	}
@@ -154,13 +170,8 @@ public class Context implements IContext {
 	public void setApplicationWorkDirectory(File directory) {
 		addData(KEY_APPLICATION_WORKDIRECTORY, directory);
 	}
-	
-	
-    /*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(instance);
+
+	public void setApplicationUser(User user) {
+		addData(KEY_APPLICATION_USER, user);
 	}
 }

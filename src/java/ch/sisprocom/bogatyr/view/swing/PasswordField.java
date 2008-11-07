@@ -29,62 +29,56 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper.context;
+package ch.sisprocom.bogatyr.view.swing;
 
-import java.io.File;
+import java.util.Arrays;
 
-import ch.sisprocom.bogatyr.model.dao.User;
+import javax.swing.JPasswordField;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * Interface for the Application-Context
+ * This is an extended JPasswordField
  * 
  * @author Stefan Laubenberger
  * @version 20081107
  */
-public interface IContext {
+public class PasswordField extends JPasswordField {
+	private static final long serialVersionUID = 4337982428755317915L;
 
-	void addData(Object key, Object value);
+	public PasswordField() {
+        super();
+    }
 
-	void removeData(Object key);
-
-	Object getData(Object key);
-
-	String getDataString(Object key);
-
-//    double getDataDouble(Object key);
-//
-//    int getDataInt(Object key);
-//
-//    long getDataLong(Object key);
-//
-//    boolean getDataBoolean(Object key);
-    
-    /*
-     * Bogatyr specific
-     */
-    String getApplicationName();
-
-	String getApplicationVersion();
-
-	String getApplicationBuild();
+	public PasswordField(final String toolTip) {
+        setToolTipText(toolTip);
+    }
 	
-	boolean isApplicationDebug();
+	public boolean isPasswordCorrect(char[] correctPassword) {
+	    boolean isCorrect = true;
 
-	File getApplicationWorkDirectory();
+	    if (getPassword().length != correctPassword.length) {
+	        isCorrect = false;
+	    } else {
+	        isCorrect = Arrays.equals(getPassword(), correctPassword);
+	    }
+	    return isCorrect;
+	}
 	
-	User getApplicationUser();
 	
-    void setApplicationName(String name);
-
-	void setApplicationVersion(String version);
-
-	void setApplicationBuild(String build);
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperGeneral.toString(this);
+	}
 	
-	void setApplicationDebug(boolean isDebug);
-
-	void setApplicationWorkDirectory(File directory);
-	
-	void setApplicationUser(User user);
+	@Override
+	public void setToolTipText(final String text) {
+		if (text != null) {
+            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+	}
 }

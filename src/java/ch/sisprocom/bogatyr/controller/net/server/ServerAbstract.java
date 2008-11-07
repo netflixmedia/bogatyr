@@ -45,12 +45,12 @@ import javax.crypto.SecretKey;
 import org.apache.log4j.Logger;
 
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
-import ch.sisprocom.bogatyr.controller.net.common.dto.User;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
 import ch.sisprocom.bogatyr.helper.crypto.CryptoSymm;
 import ch.sisprocom.bogatyr.helper.exception.ExceptionInvalidUserKey;
 import ch.sisprocom.bogatyr.helper.property.Property;
+import ch.sisprocom.bogatyr.model.dao.User;
 
 
 /**
