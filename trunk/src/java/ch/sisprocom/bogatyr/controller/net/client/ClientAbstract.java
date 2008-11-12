@@ -60,7 +60,7 @@ import ch.sisprocom.bogatyr.model.dao.User;
  * This is the skeleton for clients
  * 
  * @author Stefan Laubenberger
- * @version 20081029
+ * @version 20081112
  */
 public abstract class ClientAbstract extends ApplicationAbstract implements ICom {
 	private static final Logger log = Logger.getLogger(ClientAbstract.class);
@@ -83,8 +83,8 @@ public abstract class ClientAbstract extends ApplicationAbstract implements ICom
 	private int port, size, interval;
 	
 
-	protected ClientAbstract(final String propertiesStreamName) throws Exception {
-		super(propertiesStreamName);
+	protected ClientAbstract() throws Exception {
+		super();
 		init();
 	}
 	

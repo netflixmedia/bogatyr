@@ -39,13 +39,13 @@ import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
  * This is the skeleton for synchron clients
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public abstract class ClientSynchAbstract extends ClientAbstract {
 
 	
-	protected ClientSynchAbstract(final String propertiesStreamName) throws Exception {
-		super(propertiesStreamName);
+	protected ClientSynchAbstract() throws Exception {
+		super();
 	}
 
 	

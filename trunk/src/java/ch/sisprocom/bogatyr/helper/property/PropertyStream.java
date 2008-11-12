@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is the properties class for stream access
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public class PropertyStream implements IProperty {
 	private final Properties properties;
@@ -76,17 +76,13 @@ public class PropertyStream implements IProperty {
     }
 
     public double getPropertyDouble(final String propertyName) {
-    	if (properties.getProperty(propertyName) != null) {
-    		return Double.parseDouble(properties.getProperty(propertyName));
-    	}
-    	return 0.0;
+    	String value = properties.getProperty(propertyName);
+    	return HelperGeneral.isStringNumeric(value) ? Double.parseDouble(value) : 0.0D;
     }
 
     public int getPropertyInt(final String propertyName) {
-    	if (properties.getProperty(propertyName) != null) {
-    		return Integer.parseInt(properties.getProperty(propertyName));
-    	}
-    	return 0;
+    	String value = properties.getProperty(propertyName);
+    	return HelperGeneral.isStringNumeric(value) ? Integer.parseInt(value) : 0;
     }
 
     public boolean getPropertyBoolean(final String propertyName) {

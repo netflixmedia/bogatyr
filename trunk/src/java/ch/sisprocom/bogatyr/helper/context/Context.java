@@ -45,17 +45,19 @@ import ch.sisprocom.bogatyr.model.dao.User;
  * Get access for general content in the context.
  * 
  * @author Stefan Laubenberger
- * @version 20081107
+ * @version 20081112
  */
 public class Context implements IContext {
 	private static Context instance;
 
-	private static final String KEY_APPLICATION_NAME          = "Application.name"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_VERSION       = "Application.version"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_BUILD         = "Application.build"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_DEBUG         = "Application.debug"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_WORKDIRECTORY = "Application.work_directory"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_USER          = "Application.user"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_NAME             = "Application.name"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_VERSION          = "Application.version"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_MINORVERSION     = "Application.minorversion"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_BUILD            = "Application.build"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_DEBUG            = "Application.debug"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_WORKDIRECTORY    = "Application.work_directory"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_USER             = "Application.user"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_UPDATE_LOCATION  = "Application.user"; //$NON-NLS-1$
 
 	private final Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();
 	
@@ -104,16 +106,6 @@ public class Context implements IContext {
 		return (String) contextData.get(key);
     }
 
-
-	public String getApplicationBuild() {
-		String str = getDataString(KEY_APPLICATION_BUILD);
-		
-		if (!HelperGeneral.isValidString(str)) {
-			str = "20081107";  //$NON-NLS-1$ //TODO change every release!
-		}
-		return str;
-	}
-
 	public boolean isApplicationDebug() {
     	Boolean value = (Boolean) contextData.get(KEY_APPLICATION_DEBUG);
     	return value != null ? value : false;
@@ -128,15 +120,18 @@ public class Context implements IContext {
 		return str;
 	}
 
-	public String getApplicationVersion() {
-		String str = getDataString(KEY_APPLICATION_VERSION);
-
-		if (!HelperGeneral.isValidString(str)) {
-			str = "0.50";  //$NON-NLS-1$ //TODO change every release!
-		}
-		return str;
+	public int getApplicationVersion() {
+		return (Integer)contextData.get(KEY_APPLICATION_VERSION);
 	}
-
+	
+	public int getApplicationMinorVersion() {
+		return (Integer)contextData.get(KEY_APPLICATION_MINORVERSION);
+	}
+	
+	public int getApplicationBuild() {
+		return (Integer)contextData.get(KEY_APPLICATION_BUILD);
+	}
+	
 	public File getApplicationWorkDirectory() {
 		File file = (File)getData(KEY_APPLICATION_WORKDIRECTORY);
 
@@ -146,32 +141,43 @@ public class Context implements IContext {
 		return file;
 	}
 
-	
 	public User getApplicationUser() {
 		return (User)getData(KEY_APPLICATION_USER);
 	}
 	
-	public void setApplicationBuild(final String build) {
-		addData(KEY_APPLICATION_BUILD, build);
+	public String getApplicationUpdateLocation() {
+		return getDataString(KEY_APPLICATION_UPDATE_LOCATION);
 	}
 
-	public void setApplicationDebug(boolean isDebug) {
+	public void setApplicationDebug(final boolean isDebug) {
 		addData(KEY_APPLICATION_BUILD, isDebug);
 	}
 
-	public void setApplicationName(String name) {
+	public void setApplicationName(final String name) {
 		addData(KEY_APPLICATION_NAME, name);
 	}
 
-	public void setApplicationVersion(String version) {
+	public void setApplicationVersion(final int version) {
 		addData(KEY_APPLICATION_VERSION, version);
 	}
-
-	public void setApplicationWorkDirectory(File directory) {
+	
+	public void setApplicationMinorVersion(final int minorversion) {
+		addData(KEY_APPLICATION_MINORVERSION, minorversion);
+	}
+	
+	public void setApplicationBuild(final int build) {
+		addData(KEY_APPLICATION_BUILD, build);
+	}
+	
+	public void setApplicationWorkDirectory(final File directory) {
 		addData(KEY_APPLICATION_WORKDIRECTORY, directory);
 	}
 
-	public void setApplicationUser(User user) {
+	public void setApplicationUser(final User user) {
 		addData(KEY_APPLICATION_USER, user);
+	}
+	
+	public void setApplicationUpdateLocation(final String updateLocation) {
+		addData(KEY_APPLICATION_UPDATE_LOCATION, updateLocation);
 	}
 }

@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.model.dao.User;
  * Interface for the Application-Context
  * 
  * @author Stefan Laubenberger
- * @version 20081107
+ * @version 20081112
  */
 public interface IContext {
 
@@ -65,26 +65,20 @@ public interface IContext {
      * Bogatyr specific
      */
     String getApplicationName();
-
-	String getApplicationVersion();
-
-	String getApplicationBuild();
-	
+	int getApplicationVersion();
+	int getApplicationMinorVersion();
+	int getApplicationBuild();
 	boolean isApplicationDebug();
-
 	File getApplicationWorkDirectory();
-	
 	User getApplicationUser();
-	
-    void setApplicationName(String name);
+	String getApplicationUpdateLocation();
 
-	void setApplicationVersion(String version);
-
-	void setApplicationBuild(String build);
-	
+	void setApplicationName(String name);
+	void setApplicationVersion(int version);
+	void setApplicationMinorVersion(int minorversion);
+	void setApplicationBuild(int build);
 	void setApplicationDebug(boolean isDebug);
-
 	void setApplicationWorkDirectory(File directory);
-	
 	void setApplicationUser(User user);
+	void setApplicationUpdateLocation(String updateLocation);
 }
