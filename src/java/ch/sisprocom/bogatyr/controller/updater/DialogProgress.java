@@ -1,0 +1,58 @@
+package ch.sisprocom.bogatyr.controller.updater;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+
+import javax.swing.BorderFactory;
+import javax.swing.JProgressBar;
+import javax.swing.border.BevelBorder;
+
+import ch.sisprocom.bogatyr.view.swing.Dialog;
+import ch.sisprocom.bogatyr.view.swing.Panel;
+
+
+
+/**
+ * DialogProgress
+ * 
+ * @author Stefan Laubenberger
+ * @version 20081112
+ */
+public class DialogProgress extends Dialog {
+	private static final long serialVersionUID = 3287183043789350515L;
+	
+	protected final JProgressBar progressBar = new JProgressBar();
+	
+    public DialogProgress() {
+        super();
+        
+        createLayout();
+    }
+
+	public void createAndShowGUI() {
+    	setUndecorated(true);
+    	setSize(250, 40);
+    	setLocationRelativeTo(null);
+    	setVisible(true);
+    }
+   
+    public void clearAndHide() {
+        setVisible(false);
+    }
+    
+    
+	/*
+	 * Private methods
+	 */
+    private void createLayout() {
+		final Panel panelMain = new Panel(Color.WHITE);
+		panelMain.setLayout(new BorderLayout());
+		panelMain.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,	Color.LIGHT_GRAY, Color.WHITE, Color.DARK_GRAY, Color.GRAY));
+
+		progressBar.setIndeterminate(true);
+		
+		panelMain.add(progressBar, BorderLayout.CENTER);
+		
+		add(panelMain, BorderLayout.CENTER);
+	}
+ }

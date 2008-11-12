@@ -29,20 +29,25 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.net.server.synch;
-
-import ch.sisprocom.bogatyr.controller.net.server.ServerAbstract;
+package ch.sisprocom.bogatyr.controller;
 
 
 /**
- * This is the skeleton for synchron servers
+ * Application holder
  * 
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class ServerSynchAbstract extends ServerAbstract {
+public abstract class Application {
+	private static ApplicationAbstract instance;
+	   
 
-	protected ServerSynchAbstract() throws Exception {
-		super();
- 	}
-}
+    public static ApplicationAbstract getInstance() {
+    	return instance;
+	}
+
+    public static void setInstance(final ApplicationAbstract instance) {
+    	Application.instance = instance;
+	}
+}   
+

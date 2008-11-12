@@ -57,7 +57,7 @@ import ch.sisprocom.bogatyr.model.dao.User;
  * This is the skeleton for servers
  *
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public abstract class ServerAbstract extends ApplicationAbstract {
 	private static final Logger log = Logger.getLogger(ServerAbstract.class);
@@ -84,8 +84,8 @@ public abstract class ServerAbstract extends ApplicationAbstract {
 	private int requests;            //requests per interval
 
 
-	protected ServerAbstract(final String propertiesStreamName) throws Exception {
-		super(propertiesStreamName);
+	protected ServerAbstract() throws Exception {
+		super();
 		init();
 
         serverSocket = new ServerSocket(port);

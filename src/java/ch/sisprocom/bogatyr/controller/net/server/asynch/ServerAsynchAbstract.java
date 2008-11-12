@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.exception.ExceptionInvalidUserKey;
  * This is the skeleton for asynchron servers
  *
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public abstract class ServerAsynchAbstract extends ServerAbstract {
 	private final Map<String, ThreadServerAsynchAbstract> mapThread = new ConcurrentHashMap<String, ThreadServerAsynchAbstract>();
@@ -52,8 +52,8 @@ public abstract class ServerAsynchAbstract extends ServerAbstract {
 //	private Thread thread;
 
 	
-	protected ServerAsynchAbstract(final String propertiesStreamName) throws Exception {
-		super(propertiesStreamName);
+	protected ServerAsynchAbstract() throws Exception {
+		super();
 		
 //		this.thread = new Thread(this);
 //		this.thread.start();
