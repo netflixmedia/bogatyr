@@ -51,6 +51,7 @@ import ch.sisprocom.bogatyr.helper.HelperNet;
 import ch.sisprocom.bogatyr.helper.context.Context;
 import ch.sisprocom.bogatyr.helper.localizer.Localizer;
 
+
 /**
  * SAX-Handler to parse XML files
  * 
