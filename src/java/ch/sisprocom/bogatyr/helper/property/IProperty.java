@@ -42,14 +42,14 @@ import java.util.Properties;
  */
 public interface IProperty {
 	/**
-     * Returns the properties
+     * Returns the properties.
      * 
      * @return Properties object
      */
 	Properties getProperties();
     
 	/**
-     * Returns the property-value as String
+     * Returns the property-value as String.
      * 
      * @param propertyName Input-String
      * @return String-value
@@ -57,7 +57,7 @@ public interface IProperty {
     String getProperty(String propertyName);
 
     /**
-     * Returns the property-value as double-value
+     * Returns the property-value as double-value.
      * 
      * @param propertyName Input-String
      * @return double-value
@@ -65,7 +65,7 @@ public interface IProperty {
     double getPropertyDouble(String propertyName);
 
     /**
-     * Returns the property-value as int-value
+     * Returns the property-value as int-value.
      * 
      * @param propertyName Input-String
      * @return int-value
@@ -73,7 +73,7 @@ public interface IProperty {
     int getPropertyInt(String propertyName);
 
     /**
-     * Returns the property-value as boolean-value
+     * Returns the property-value as boolean-value.
      * 
      * @param propertyName Input-String
      * @return boolean-value

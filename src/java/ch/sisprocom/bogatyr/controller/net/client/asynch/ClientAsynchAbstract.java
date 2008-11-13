@@ -39,7 +39,7 @@ import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
 
 
 /**
- * This is the skeleton for asynchron clients
+ * This is the skeleton for asynchron clients.
  * 
  * @author Stefan Laubenberger
  * @version 20081112
@@ -73,7 +73,7 @@ public abstract class ClientAsynchAbstract extends ClientAbstract {
 //	}
 	
 	/**
-	 * Stops the Socket Connection
+	 * Stops the Socket Connection.
 	 * 
 	 * @throws IOException 
 	 */
@@ -114,7 +114,7 @@ public abstract class ClientAsynchAbstract extends ClientAbstract {
 	 * Implemented methods
 	 */
 	/**
-	 * Send a asymm key
+	 * Send a asymm key.
 	 * 
 	 * @param comObject The {@link ComObject} with the asymm key
 	 * @see ComObject
@@ -124,7 +124,7 @@ public abstract class ClientAsynchAbstract extends ClientAbstract {
 	}
 
 	/**
-	 * Send a symm key
+	 * Send a symm key.
 	 * 
 	 * @param comObject The {@link ComObject} with the symm key
 	 * @see ComObject

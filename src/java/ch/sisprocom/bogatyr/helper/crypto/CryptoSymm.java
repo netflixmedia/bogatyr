@@ -45,10 +45,10 @@ import javax.crypto.spec.IvParameterSpec;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 /**
- * This is a class for symmetric cryptology via AES
+ * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 20081028
+ * @version 20081112
  */
 public abstract class CryptoSymm {
 	public static final String ALGORITHM = "AES"; //$NON-NLS-1$

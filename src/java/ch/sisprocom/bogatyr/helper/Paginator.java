@@ -37,7 +37,7 @@ import java.util.List;
 
 
 /**
- * The Paginator splits a list in different pages
+ * The Paginator splits a list in different pages.
  *
  * @author Stefan Laubenberger
  * @version 20081026
@@ -71,7 +71,7 @@ public class Paginator {
     }
 
     /**
-     * Returns the total number of pages from the list
+     * Returns the total number of pages from the list.
      *
      * @return Total number of pages
      */
@@ -91,7 +91,7 @@ public class Paginator {
     }
 
     /**
-     * Returns a requested page from the list
+     * Returns a requested page from the list.
      *
      * @param requestedPage
      * @return List representing the requested page

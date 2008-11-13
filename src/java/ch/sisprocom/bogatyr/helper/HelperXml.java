@@ -34,22 +34,19 @@ package ch.sisprocom.bogatyr.helper;
 
 
 /**
- * This is a helper class for XML operations
+ * This is a helper class for XML operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081029
+ * @version 20081112
  */
 public abstract class HelperXml {
 	/**
-     * This method ensures that the output String has only
-     * valid XML unicode characters as specified by the
-     * XML 1.0 standard. For reference, please see
-     * <a href="http://www.w3.org/TR/2000/REC-xml-20001006#NT-Char">the
-     * standard</a>. This method will return an empty
-     * String if the input is null or empty.
+     * This method ensures that the output String has only valid XML unicode characters as specified by the XML 1.0 standard.
+     * For reference, please see <a href="http://www.w3.org/TR/2000/REC-xml-20001006#NT-Char">the standard</a>. 
+     * This method will return an empty String if the input is null or empty.
      *
-     * @param in The String whose non-valid characters we want to remove.
-     * @return The in String, stripped of non-valid characters.
+     * @param in The String whose non-valid characters we want to remove
+     * @return The in String, stripped of non-valid characters
      */
     public static String getValidXmlString(final String in) {
         if (!HelperGeneral.isValidString(in)) { // vacancy test

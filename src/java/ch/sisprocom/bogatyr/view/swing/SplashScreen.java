@@ -40,10 +40,10 @@ import javax.swing.ImageIcon;
 
 
 /**
- * Display a splash-screen
+ * Display a splash-screen manual or for a desired time.
  * 
  * @author Stefan Laubenberger
- * @version 20081029
+ * @version 20081112
  */
 public class SplashScreen extends Frame {
 	private static final long serialVersionUID = 8819965047277292543L;

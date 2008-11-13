@@ -35,11 +35,11 @@ import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
 
 
 /**
- * This is the communication interface
- * It will be implemented by all server threads and client applications
+ * This is the communication interface.
+ * It will be implemented by all server threads and client applications.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081112
  */
 public interface ICom {
 	// Methods
@@ -51,51 +51,51 @@ public interface ICom {
 	String METHOD_LOGOFF        = "logoff"; //$NON-NLS-1$
 
 	/**
-     * Send a connect request
-     * This is the first called method on the server
+     * Send a connect request.
+     * This is the first called method on the server.
      * 
-     * @param comObject Communication object
+     * @param comObject communication object
      * @throws Exception
      */
     void connect(ComObject comObject) throws Exception;
 
 	/**
-     * Send a disconnect request
-     * This is the last called method on the server
+     * Send a disconnect request.
+     * This is the last called method on the server.
      * 
-     * @param comObject Communication object
+     * @param comObject communication object
      * @throws Exception
      */
     void disconnect(ComObject comObject) throws Exception;
 
 	/**
-     * Send the asymmetric key
+     * Send the asymmetric key.
      * 
-     * @param comObject Communication object
+     * @param comObject communication object
      * @throws Exception
      */
     void sendAsymmKey(ComObject comObject) throws Exception;
 	
 	/**
-     * Send the symmetric key
+     * Send the symmetric key.
      * 
-     * @param comObject Communication object
+     * @param comObject communication object
      * @throws Exception
      */
     void sendSymmKey(ComObject comObject) throws Exception;
     
 	/**
-     * Logon to server
+     * Logon to server.
      * 
-     * @param comObject Communication object
+     * @param comObject communication object
      * @throws Exception
      */
     void logon(ComObject comObject) throws Exception;
     
     /**
-     * Logoff from server
+     * Logoff from server.
      * 
-     * @param comObject Communication object
+     * @param comObject communication object
      * @throws Exception
      */
     void logoff(ComObject comObject) throws Exception;

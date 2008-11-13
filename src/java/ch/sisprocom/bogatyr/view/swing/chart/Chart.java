@@ -48,11 +48,11 @@ import ch.sisprocom.bogatyr.view.swing.Panel;
 
 
 /**
- * Chart
+ * This is a chart class with labled x- and y-axes.
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public class Chart extends Panel {
 	private static final long serialVersionUID = -4618658256880807781L;
@@ -95,6 +95,7 @@ public class Chart extends Panel {
 	
 	/**
 	 * Adds an entry to the product selection chart.
+	 * 
      * @param entry for the chart
      * @throws Exception
      */

@@ -39,10 +39,10 @@ import ch.sisprocom.bogatyr.helper.exception.ExceptionValidation;
 
 
 /**
- * This is the super-class for all value objects of the system
+ * This is the super-class for all value objects of the Bogatyr system.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public abstract class DataObject implements Serializable, IValidator {
     private static final long serialVersionUID = -3023201860307136848L;

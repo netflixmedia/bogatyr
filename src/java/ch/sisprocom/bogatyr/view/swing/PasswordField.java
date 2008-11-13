@@ -39,10 +39,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is an extended JPasswordField
+ * This is an extended JPasswordField.
  * 
  * @author Stefan Laubenberger
- * @version 20081107
+ * @version 20081112
  */
 public class PasswordField extends JPasswordField {
 	private static final long serialVersionUID = 4337982428755317915L;
@@ -55,6 +55,12 @@ public class PasswordField extends JPasswordField {
         setToolTipText(toolTip);
     }
 	
+	/**
+	 * Checks if the entered password is correct.
+	 * 
+	 * @param correctPassword from the user (e.g. from the db).
+	 * @return true/false
+	 */
 	public boolean isPasswordCorrect(char[] correctPassword) {
 	    boolean isCorrect = true;
 

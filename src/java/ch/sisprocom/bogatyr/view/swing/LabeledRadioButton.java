@@ -39,10 +39,10 @@ import java.awt.event.ActionListener;
 
 
 /**
- * This is an combined Label and RadioButton
+ * This is an combined Label with a RadioButton.
  * 
  * @author Stefan Laubenberger
- * @version 20081105
+ * @version 20081112
  */
 public class LabeledRadioButton extends Panel {
 	private static final long serialVersionUID = 3461718081893469685L;

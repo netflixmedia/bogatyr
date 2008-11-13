@@ -39,10 +39,10 @@ import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 
 
 /**
- * This controls displays an URL in a browser.
+ * This controls displays an URL in the system browser.
  *
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20081112
  */
 public abstract class ControlBrowser {
 	protected static final Logger log = Logger.getLogger(ControlBrowser.class);
@@ -58,15 +58,12 @@ public abstract class ControlBrowser {
 	/**
 	 * Display a file in the browser. If you want to display a file, you must include the absolute path name.
 	 * <p>
-	 * <em>Possible security issue:</em> if the url is received from a third party company such as Paynet, the url
-	 * must be verified by the application before calling <code>displayURL</code>. Else it is
-	 * possible for the third party company to send an url like "notepad.exe" which directly starts
-	 * the exe without further asking the user of the application. Another attack could be the direct execution
-	 * of javascript with a javascript url such as <code>javascript:alert("demo")</code>.
+	 * <em>Possible security issue:</em> if the url is received from a third party company such as Paynet, the url must be verified by the application before calling <code>displayURL</code>.
+	 * Else it is possible for the third party company to send an url like "notepad.exe" which directly starts the exe without further asking the user of the application. 
+	 * Another attack could be the direct execution of javascript with a javascript url such as <code>javascript:alert("demo")</code>.
 	 * The verification could just check if the url starts with "https://" (or "http://" if that is allowed).
 	 *
-	 * @param url the file's url. The url should start with either "http://", "https://" or
-	 * "file://" but this is not enforced by Bogatyr. On windows the length of the url is limited to about 260 characters.
+	 * @param url the file's url. The url should start with either "http://", "https://" or "file://" but this is not enforced by Bogatyr. On windows the length of the url is limited to about 260 characters.
      * @throws Exception
 	 */
 	public static void displayURL(final String url) throws Exception {
@@ -83,7 +80,7 @@ public abstract class ControlBrowser {
 			//
 			// Fixed by adding a "#" at the end of the URL.
 			//
-			// Test for http or https protocol is necessary else file-urls will not work.
+			// Test for http or https protocol is necessary or file-urls will not work.
 			if ((url.toLowerCase().startsWith("http://") || url.toLowerCase().startsWith("https://")) && !url.contains("?") && !url.contains("#")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
                 cmd += "#"; //$NON-NLS-1$
 			}
@@ -91,22 +88,16 @@ public abstract class ControlBrowser {
 		} else if (HelperEnvInfo.isMacPlatform()) {
 			displayURLonMac(url);
 		} else {
-			// Under Unix, Netscape has to be running for the "-remote"
-			// command to work. So, we try sending the command and
-			// check for an exit value. If the exit command is 0,
-			// it worked, otherwise we need to start the browser.
-
+			// Under Unix, Netscape has to be running for the "-remote" command to work. So, we try sending the command and check for an exit value. If the exit command is 0, it worked, otherwise we need to start the browser.
 			// cmd = 'netscape -remote openURL(http://code.google.com/p/bogatyr)'
 			cmd = UNIX_PATH + ' ' + UNIX_FLAG + '(' + url + ')';
 			final Process process = ControlProcess.createProcess(cmd);
 
-			// wait for exit code -- if it's 0, command worked,
-			// otherwise we need to start the browser up.
+			// wait for exit code -- if it's 0, command worked, otherwise we need to start the browser up.
 			final int exitCode = process.waitFor();
 
 			if (exitCode != 0) {
 				// Command failed, start up the browser
-
 				// cmd = 'netscape http://code.google.com/p/bogatyr'
 				cmd = UNIX_PATH + ' ' + url;
 				ControlProcess.createProcess(cmd);
@@ -123,8 +114,7 @@ public abstract class ControlBrowser {
 
 			public void run() {
 				try {
-					// Call the mac specific method com.apple.eio.FileManager.openURL(url)
-					// dynamically because it should be compilable under windows
+					// Call the mac specific method com.apple.eio.FileManager.openURL(url) dynamically because it should be compilable under windows
 					final Class<?> fileManager = Class.forName("com.apple.eio.FileManager"); //$NON-NLS-1$
 					final Method method = fileManager.getDeclaredMethod("openURL", String.class); //$NON-NLS-1$
 					method.invoke(null, url);

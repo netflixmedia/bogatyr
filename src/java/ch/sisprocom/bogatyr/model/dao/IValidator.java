@@ -40,18 +40,18 @@ import ch.sisprocom.bogatyr.helper.exception.ExceptionValidation;
  * Defines the methods for the implementation of the validator for all value objects.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081112
  */
 public interface IValidator {
 	/**
-     * Validates the object
+     * Validates the object.
      * 
      * @throws ExceptionValidation
      */
     void validate() throws ExceptionValidation;
 	
 	/**
-     * Validates a string
+     * Validates a string.
      * 
      * @param variable Name of the variable
      * @param arg String for validation
@@ -60,7 +60,7 @@ public interface IValidator {
     void validateString(String variable, String arg) throws ExceptionValidation;
 
 	/**
-     * Validates an integer
+     * Validates an integer.
      * 
      * @param variable Name of the variable
      * @param arg int for validation
@@ -69,7 +69,7 @@ public interface IValidator {
     void validateInt(String variable, int arg) throws ExceptionValidation;
 
 	/**
-     * Validates a double
+     * Validates a double.
      * 
      * @param variable Name for validation of the variable
      * @param arg double for validation
@@ -78,7 +78,7 @@ public interface IValidator {
     void validateDouble(String variable, double arg) throws ExceptionValidation;
 
 	/**
-     * Validates a long
+     * Validates a long.
      * 
      * @param variable Name of the variable
      * @param arg long for validation
@@ -87,7 +87,7 @@ public interface IValidator {
     void validateLong(String variable, long arg) throws ExceptionValidation;
 	
 	/**
-     * Validates a float
+     * Validates a float.
      * 
      * @param variable Name of the variable
      * @param arg float for validation
@@ -96,7 +96,7 @@ public interface IValidator {
     void validateFloat(String variable, float arg) throws ExceptionValidation;
 
 	/**
-     * Validates an object
+     * Validates an object.
      * 
      * @param variable Name of the variable
      * @param arg Object for validation
@@ -105,7 +105,7 @@ public interface IValidator {
     void validateObject(String variable, Object arg) throws ExceptionValidation;
 
 	/**
-     * Validates an object-array
+     * Validates an object-array.
      * 
      * @param variable Name of the variable
      * @param arg Object-array for validation
@@ -114,7 +114,7 @@ public interface IValidator {
     void validateArray(String variable, Object[] arg) throws ExceptionValidation;
 
 	/**
-     * Validates an collection
+     * Validates an collection.
      * 
      * @param variable Name of the variable
      * @param arg Collection for validation

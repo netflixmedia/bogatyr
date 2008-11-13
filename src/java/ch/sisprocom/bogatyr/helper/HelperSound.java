@@ -55,15 +55,15 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 /**
- * This is a helper class for sound operations
+ * This is a helper class for sound operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public abstract class HelperSound {
 
     /**
-     * Returns an audio clip from file (e.g. WAV files)
+     * Returns an audio clip from file (e.g. WAV files).
      *
      * @param file for audio clip
      * @return Audio clip
@@ -76,7 +76,7 @@ public abstract class HelperSound {
 	}
 
     /**
-     * Returns an audio clip from stream
+     * Returns an audio clip from stream.
      *
      * @param in stream for audio clip
      * @return Audio clip
@@ -89,7 +89,7 @@ public abstract class HelperSound {
 	}
 
     /**
-     * Returns a sequence from file (e.g. MIDI files)
+     * Returns a sequence from file (e.g. MIDI files).
      *
      * @param file for sequence
      * @return Sequence
@@ -101,7 +101,7 @@ public abstract class HelperSound {
 	}
 
     /**
-     * Returns a sequence from stream
+     * Returns a sequence from stream.
      *
      * @param in stream for sequence
      * @return Sequence
@@ -113,7 +113,7 @@ public abstract class HelperSound {
 	}
 	
     /**
-     * Returns a sequencer to play a sequence
+     * Returns a sequencer to play a sequence.
      *
      * @param sequence for sequencer
      * @return Sequencer
@@ -140,7 +140,7 @@ public abstract class HelperSound {
 	}
 	
     /**
-     * Plays a whole audio clip (if no player thread is available)
+     * Plays a whole audio clip (if no player thread is available).
      *
      * @param clip to play
      */
@@ -156,7 +156,7 @@ public abstract class HelperSound {
 	}
 
 	/**
-     * Plays a whole sequence (if no player thread is available)
+     * Plays a whole sequence (if no player thread is available).
      *
      * @param sequence to play
 	 * @throws InvalidMidiDataException 
@@ -173,6 +173,7 @@ public abstract class HelperSound {
 			}
 		}, (int)sequence.getTickLength());
 	}
+	
 	
 	/*
 	 * Private methods

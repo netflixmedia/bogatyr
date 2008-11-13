@@ -48,10 +48,10 @@ import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
 
 
 /**
- * This is a helper class for network operations
+ * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public abstract class HelperNet {
 //	private static final String PROPERTY_HTTP_USE_PROXY   = "http.useProxy"; //$NON-NLS-1$
@@ -68,7 +68,7 @@ public abstract class HelperNet {
 
 	
 	/**
-     * Enable VM wide use of a proxy for HTTP
+     * Enable VM wide use of a proxy for HTTP.
      *
      * @param host of the proxy
      * @param port of the proxy
@@ -84,7 +84,7 @@ public abstract class HelperNet {
     }
     
     /**
-     * Disable VM wide use of a proxy for HTTP
+     * Disable VM wide use of a proxy for HTTP.
      *
      */
     public static void disableProxyHttp() {
@@ -94,7 +94,7 @@ public abstract class HelperNet {
     }
     
 	/**
-     * Enable VM wide use of a proxy for HTTPS
+     * Enable VM wide use of a proxy for HTTPS.
      *
      * @param host of the proxy
      * @param port of the proxy
@@ -110,7 +110,7 @@ public abstract class HelperNet {
     }
     
     /**
-     * Disable VM wide use of a proxy for HTTPS
+     * Disable VM wide use of a proxy for HTTPS.
      *
      */
     public static void disableProxyHttps() {
@@ -120,7 +120,7 @@ public abstract class HelperNet {
     }
     
 	/**
-     * Enable VM wide use of a proxy for FTP
+     * Enable VM wide use of a proxy for FTP.
      *
      * @param host of the proxy
      * @param port of the proxy
@@ -136,7 +136,7 @@ public abstract class HelperNet {
     }
     
     /**
-     * Disable VM wide use of a proxy for FTP
+     * Disable VM wide use of a proxy for FTP.
      *
      */
     public static void disableProxyFtp() {
@@ -146,7 +146,7 @@ public abstract class HelperNet {
     }
 
     /**
-     * Tests if a host is pingable
+     * Tests if a host is pingable.
      *
      * @param host for ping
      * @return true/false
@@ -162,7 +162,7 @@ public abstract class HelperNet {
     }
 
     /**
-     * Returns the host name of an IP address
+     * Returns the host name of an IP address.
      *
      * @param ip for host name
      * @return host name
@@ -175,7 +175,7 @@ public abstract class HelperNet {
     }
 
     /**
-     * Returns the local host name of the machine
+     * Returns the local host name of the machine.
      *
      * @return host name
      * @throws java.net.UnknownHostException
@@ -187,7 +187,7 @@ public abstract class HelperNet {
     }
 
     /**
-     * Returns the ip for an host name
+     * Returns the IP for an host name.
      *
      * @param hostname for IP
      * @return IP
@@ -200,7 +200,7 @@ public abstract class HelperNet {
     }
 
     /**
-     * Returns the local IP address
+     * Returns the local IP address.
      *
      * @return IP
      * @throws java.net.UnknownHostException
@@ -212,7 +212,7 @@ public abstract class HelperNet {
    }
 
     /**
-     * Returns the all IP addresses of the machine
+     * Returns the all IP addresses of the machine.
      *
      * @return List with IP addresses
      * @throws java.net.UnknownHostException
@@ -228,7 +228,7 @@ public abstract class HelperNet {
     }
 
     /**
-     * Returns the all network interfaces of the machine
+     * Returns the all network interfaces of the machine.
      *
      * @return List with network interfaces
      * @throws java.net.SocketException
@@ -238,7 +238,7 @@ public abstract class HelperNet {
     }
 
     /**
-     * Returns the content of an url
+     * Returns the content of an url.
      *
      * @param url to read
      * @return byte array with the content
@@ -252,7 +252,7 @@ public abstract class HelperNet {
      }
 
     /**
-     * Returns the content of an url with HTTP authentication
+     * Returns the content of an url with HTTP authentication.
      *
      * @param url to read
      * @param username for the HTTP authentication

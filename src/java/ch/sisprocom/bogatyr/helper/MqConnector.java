@@ -85,7 +85,7 @@ public class MqConnector {
 	}
 
 	/**
-	 * Sends a message to a mq manager and queue
+	 * Sends a message to a mq manager and queue.
 	 * 
 	 * @param data to send
 	 * @param managerOut manager for sending
@@ -131,7 +131,7 @@ public class MqConnector {
 	}
 
 	/**
-	 * Receives messages from a mq manager and queue
+	 * Receives messages from a mq manager and queue.
 	 * 
 	 * @param managerIn manager for receiving
 	 * @param queueIn queue for receiving

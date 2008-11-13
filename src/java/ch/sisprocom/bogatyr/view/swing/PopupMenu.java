@@ -37,10 +37,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is an extended JPopupMenu
+ * This is an extended JPopupMenu.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public class PopupMenu extends JPopupMenu {
 	private static final long serialVersionUID = -2117215021680174633L;

@@ -44,10 +44,10 @@ import javax.swing.RepaintManager;
 
 
 /**
- * This is a printer class for print operations
+ * This is a printer class for print operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081029
+ * @version 20081112
  */
 public class Printer implements Printable {
 	private Component componentToBePrinted;
@@ -58,7 +58,7 @@ public class Printer implements Printable {
     }
 
     /**
-     * Print a component
+     * Print a component.
      *
      * @param component for printing
      * @throws java.awt.print.PrinterException
@@ -81,9 +81,8 @@ public class Printer implements Printable {
 	}
 	
 	/**
-	 * The speed and quality of printing suffers dramatically if any of the
-	 * containers have double buffering turned on. So this turns if off
-  	 * globally.
+	 * The speed and quality of printing suffers dramatically if any of thecontainers have double buffering turned on.
+	 * So this turns if off globally.
      *
      * @param component
 	 */

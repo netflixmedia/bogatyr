@@ -39,10 +39,10 @@ import ch.sisprocom.bogatyr.controller.net.server.ThreadServerAbstract;
 
 
 /**
- * This is the skeleton for asynchron server threads
+ * This is the skeleton for asynchron server threads.
  * 
  * @author Stefan Laubenberger
- * @version 20081029
+ * @version 20081112
  */
 public abstract class ThreadServerAsynchAbstract extends ThreadServerAbstract {
 	private Thread thread;
@@ -58,7 +58,7 @@ public abstract class ThreadServerAsynchAbstract extends ThreadServerAbstract {
 	}
 
 	/**
-	 * Returns the thread
+	 * Returns the thread.
      *
      * @return Thread
 	 */
@@ -67,7 +67,7 @@ public abstract class ThreadServerAsynchAbstract extends ThreadServerAbstract {
 	}  
 
 	/**
-	 * Stops the thread. And closes the open socket
+	 * Stops the thread. And closes the open socket.
 	 * 
 	 * @throws IOException 
 	 */

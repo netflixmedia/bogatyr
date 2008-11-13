@@ -35,10 +35,10 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
 
 
 /**
- * Encodes data to Base64 and decodes it.
+ * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 20081028
+ * @version 20081112
  */
 public abstract class ConverterBase64 {
 	// Resources
@@ -78,8 +78,8 @@ public abstract class ConverterBase64 {
 	 * Encodes a string into Base64 format. 
 	 * No blanks or line breaks are inserted.
 	 * 
-	 * @param string String to be encoded.
-	 * @return String with the Base64 encoded data.
+	 * @param string String to be encoded
+	 * @return String with the Base64 encoded data
 	 */
 	public static String encode(final String string) {
 		return new String(encode(string.getBytes()));
@@ -89,8 +89,8 @@ public abstract class ConverterBase64 {
 	 * Encodes a byte array into Base64 format. 
 	 * No blanks or line breaks are inserted.
 	 * 
-	 * @param in Array containing the data bytes to be encoded.
-	 * @return Character array with the Base64 encoded data.
+	 * @param in Array containing the data bytes to be encoded
+	 * @return Character array with the Base64 encoded data
 	 */
 	public static char[] encode(final byte[] in) {
 		return encode(in, in.length);
@@ -115,8 +115,8 @@ public abstract class ConverterBase64 {
 	/**
 	 * Decodes a byte array from Base64 format.
 	 * 
-	 * @param string Base64 String to be decoded.
-	 * @return Array containing the decoded data bytes.
+	 * @param string Base64 String to be decoded
+	 * @return Array containing the decoded data bytes
 	 * @throws IllegalArgumentException
 	 */
 	public static byte[] decode(final String string) {
@@ -127,8 +127,8 @@ public abstract class ConverterBase64 {
 	 * Decodes a byte array from Base64 format. 
 	 * No blanks or line breaks are allowed within the Base64 encoded data.
 	 * 
-	 * @param in Character array containing the Base64 encoded data.
-	 * @return Array containing the decoded data bytes.
+	 * @param in Character array containing the Base64 encoded data
+	 * @return Array containing the decoded data bytes
 	 * @throws IllegalArgumentException
 	 */
 	public static byte[] decode(final char[] in) {
@@ -187,9 +187,9 @@ public abstract class ConverterBase64 {
 	 * Encodes a byte array into Base64 format. 
 	 * No blanks or line breaks are inserted.
 	 * 
-	 * @param in Array containing the data bytes to be encoded.
-	 * @param iLen Number of bytes to process in <code>in</code>.
-	 * @return Character array with the Base64 encoded data.
+	 * @param in Array containing the data bytes to be encoded
+	 * @param iLen Number of bytes to process in <code>in</code>
+	 * @return Character array with the Base64 encoded data
 	 */
 	private static char[] encode(final byte[] in, final int iLen) {
 		final int oDataLen = (iLen * 4 + 2) / 3; // output length without padding

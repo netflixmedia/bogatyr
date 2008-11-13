@@ -40,10 +40,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is an extended JMenuItem
+ * This is an extended JMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081112
  */
 public class MenuItem extends JMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;

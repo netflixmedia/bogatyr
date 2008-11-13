@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.view.swing.Panel;
 
 
 /**
- * DialogProgress
+ * DialogProgress displays a indeterminate progress bar during the download of the new application version.
  * 
  * @author Stefan Laubenberger
  * @version 20081112
@@ -60,15 +60,14 @@ public class DialogProgress extends Dialog {
         createLayout();
     }
 
+    /**
+     * Displays the indeterminate progress bar
+     */
 	public void createAndShowGUI() {
     	setUndecorated(true);
     	setSize(250, 40);
     	setLocationRelativeTo(null);
     	setVisible(true);
-    }
-   
-    public void clearAndHide() {
-        setVisible(false);
     }
     
     

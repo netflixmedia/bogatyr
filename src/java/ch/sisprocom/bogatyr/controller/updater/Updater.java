@@ -50,10 +50,10 @@ import ch.sisprocom.bogatyr.helper.context.Context;
 
 
 /**
- * This is the updater
+ * This is the updater for new application versions
  * 
  * @author Stefan Laubenberger
- * @version 20081111
+ * @version 20081112
  */
 public abstract class Updater {
 	

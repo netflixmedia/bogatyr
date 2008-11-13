@@ -54,7 +54,7 @@ import ch.sisprocom.bogatyr.model.dao.User;
 
 
 /**
- * This is the skeleton for servers
+ * This is the skeleton for servers.
  *
  * @author Stefan Laubenberger
  * @version 20081112
@@ -136,8 +136,8 @@ public abstract class ServerAbstract extends ApplicationAbstract {
 	/**
 	 * This adds a user to the {@link #mapUser}.
 	 * 
-	 * @param uniqueKey The unique key for the {@link #mapUser}.
-	 * @param user The {@link User} to add.
+	 * @param uniqueKey unique key for the {@link #mapUser}.
+	 * @param user {@link User} to add.
 	 * @throws ExceptionInvalidUserKey 
 	 * @see Map
 	 */
@@ -152,7 +152,7 @@ public abstract class ServerAbstract extends ApplicationAbstract {
 	/**
 	 * Removes a user from the server.
 	 * 
-	 * @param uniqueKey The unique key to find the user in the {@link #mapUser}.
+	 * @param uniqueKey unique key to find the user in the {@link #mapUser}.
 	 * @see Map
 	 */
 	public void removeUser(final String uniqueKey) {
@@ -162,8 +162,8 @@ public abstract class ServerAbstract extends ApplicationAbstract {
 	/**
 	 * Adds a crypto key to the {@link #mapCryptoKey}.
 	 * 
-	 * @param uniqueKey The unique key for the {@link #mapCryptoKey}.
-	 * @param key The {@link Key} to add.
+	 * @param uniqueKey unique key for the {@link #mapCryptoKey}.
+	 * @param key {@link Key} to add.
 	 * @throws ExceptionInvalidUserKey 
 	 * @see Map
 	 */
@@ -178,7 +178,7 @@ public abstract class ServerAbstract extends ApplicationAbstract {
 	/**
 	 * Removes a crypto key from the server.
 	 * 
-	 * @param uniqueKey The unique key to find the key in the {@link #mapCryptoKey}.
+	 * @param uniqueKey unique key to find the key in the {@link #mapCryptoKey}.
 	 * @see Map
 	 */
 	public void removeCryptoKey(final String uniqueKey) {
@@ -186,7 +186,7 @@ public abstract class ServerAbstract extends ApplicationAbstract {
 	}
 
 	/**
-	 * Removes the user and the crypto key from the Server
+	 * Removes the user and the crypto key from the Server.
 	 * 
 	 * @param uniqueKey The unique key to find the key in the {@link #mapCryptoKey}.
 	 *                  the unique key to find the user in the {@link #mapUser}.

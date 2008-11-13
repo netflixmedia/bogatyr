@@ -35,17 +35,17 @@ import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
 
 
 /**
- * This is the super class for all MethodParser-children
+ * This is the super class for all MethodParser-children.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public abstract class MethodParser {
     /**
      * Execute a method in the server thread or client.
      *
-     * @param caller The server thread or the client
-     * @param comObject Communication object between the server thread an the client
+     * @param caller server thread or the client
+     * @param comObject communication object between the server thread an the client
      * @throws Exception
      * @return result object
      */

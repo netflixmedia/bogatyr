@@ -47,10 +47,10 @@ import javax.imageio.ImageIO;
 
 
 /**
- * This is a helper class for image operations
+ * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081028
+ * @version 20081112
  */
 public abstract class HelperImage {
 	public static final String TYPE_JPG = "jpg"; //$NON-NLS-1$
@@ -58,7 +58,7 @@ public abstract class HelperImage {
 	public static final String TYPE_GIF = "gif"; //$NON-NLS-1$
 
     /**
-     * Saves an image from a RenderImage to a file
+     * Saves an image from a RenderImage to a file.
      *
      * @param image RenderImage for the image
      * @param type Image type (e.g. "jpg")
@@ -70,7 +70,7 @@ public abstract class HelperImage {
     }
 
     /**
-     * Saves an image from a Component to a file
+     * Saves an image from a Component to a file.
      *
      * @param component Component for the image
      * @param type Image type (e.g. "jpg")
@@ -88,7 +88,8 @@ public abstract class HelperImage {
 	} 
 	
 	/**
-	 * Returns list of unique supported read formats (e.g. "png", "jpg")
+	 * Returns list of unique supported read formats (e.g. "png", "jpg").
+	 * 
 	 * @return list of unique supported read formats
 	 */
 	public static List<String> getImageReadFormats() {
@@ -98,7 +99,8 @@ public abstract class HelperImage {
 	}
 
 	/**
-	 * Returns list of unique supported write formats (e.g. "png", "jpg")
+	 * Returns list of unique supported write formats (e.g. "png", "jpg").
+	 * 
 	 * @return list of unique supported write formats
 	 */
 	public static List<String> getImageWriteFormats() {
@@ -108,7 +110,8 @@ public abstract class HelperImage {
 	}
 
 	/**
-	 * Returns list of unique MIME types that can be read (e.g. "image/png", "image/jpg")
+	 * Returns list of unique MIME types that can be read (e.g. "image/png", "image/jpg").
+	 * 
 	 * @return list of unique MIME types that can be read
 	 */
 	public static List<String> getImageReadMIMETypes() {
@@ -118,7 +121,8 @@ public abstract class HelperImage {
 	}
 
 	/**
-	 * Returns list of unique MIME types that can be written (e.g. "image/png", "image/jpg")
+	 * Returns list of unique MIME types that can be written (e.g. "image/png", "image/jpg").
+	 * 
 	 * @return list of unique MIME types that can be written
 	 */
 	public static List<String> getImageWriteMIMETypes() {

@@ -39,10 +39,10 @@ import java.awt.event.ActionListener;
 
 
 /**
- * This is an combined Label and CheckBox
+ * This is an combined Label with a CheckBox.
  * 
  * @author Stefan Laubenberger
- * @version 20081029
+ * @version 20081112
  */
 public class LabeledCheckBox extends Panel { //TODO add iPady and iPadx?
 	private static final long serialVersionUID = 2215341067138215010L;

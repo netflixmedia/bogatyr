@@ -49,10 +49,10 @@ import ch.sisprocom.bogatyr.model.dao.User;
 
 
 /**
- * This is a server thread
+ * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 20081029
+ * @version 20081112
  */
 public abstract class ThreadServerAbstract implements Runnable, ICom {
 	private final long startTime = System.currentTimeMillis();
@@ -74,7 +74,7 @@ public abstract class ThreadServerAbstract implements Runnable, ICom {
 	}
 	
 	/**
-	 * Get the start time of the thread
+	 * Get the start time of the thread.
      *
      * @return start time of the thread
 	 */
@@ -83,9 +83,9 @@ public abstract class ThreadServerAbstract implements Runnable, ICom {
 	}
 	
 	/**
-     * Reads a communication object from socket-stream
+     * Reads a communication object from socket-stream.
      * 
-     * @return Returns a communication object.
+     * @return communication object
      * @throws Exception 
      */
 	protected ComObject readObject() throws Exception  {
@@ -93,9 +93,9 @@ public abstract class ThreadServerAbstract implements Runnable, ICom {
     }
 
     /**
-     * Writes a communication object on a socket-stream
+     * Writes a communication object on a socket-stream.
      * 
-     * @param comObject The communication object to write on the socket-stream.
+     * @param comObject communication object to write on the socket-stream
      * @throws Exception 
      */
     public void writeObject(final ComObject comObject) throws Exception {
@@ -111,7 +111,8 @@ public abstract class ThreadServerAbstract implements Runnable, ICom {
 	 * Private methods
 	 */
 	/**
-     * Reads a socket-stream
+     * Reads a socket-stream.
+     * 
 	 * @throws Exception
      * @return byte array from stream
      */
@@ -160,7 +161,8 @@ public abstract class ThreadServerAbstract implements Runnable, ICom {
 //    }
 
     /**
-     * Writes on a socket-stream
+     * Writes on a socket-stream.
+     * 
      * @param key
      * @param data
      * @throws Exception

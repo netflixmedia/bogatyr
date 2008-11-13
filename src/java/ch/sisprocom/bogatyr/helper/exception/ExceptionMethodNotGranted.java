@@ -34,10 +34,10 @@ package ch.sisprocom.bogatyr.helper.exception;
 import ch.sisprocom.bogatyr.helper.localizer.Localizer;
 
 /**
- * This is an exception if the method is not granted
+ * This is an exception if the method is not granted.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081112
  */
 public final class ExceptionMethodNotGranted extends ExceptionAbstract {
 	private static final long serialVersionUID = -5511296760913333465L;

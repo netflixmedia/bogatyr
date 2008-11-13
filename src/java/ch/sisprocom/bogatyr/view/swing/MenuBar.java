@@ -37,10 +37,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is an extended JMenuBar
+ * This is an extended JMenuBar.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public class MenuBar extends JMenuBar {
 	private static final long serialVersionUID = -5107664209576098148L;

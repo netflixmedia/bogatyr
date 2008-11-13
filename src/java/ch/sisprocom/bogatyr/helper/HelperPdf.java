@@ -51,15 +51,15 @@ import com.lowagie.text.pdf.PdfWriter;
 
 
 /**
- * This is a helper class for PDF operations
+ * This is a helper class for PDF operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public abstract class HelperPdf {
 
     /**
-     * Saves a pdf from a Component to a file
+     * Saves a pdf from a Component to a file.
      *
      * @param component Component for the pdf
      * @param output Filename
@@ -92,7 +92,7 @@ public abstract class HelperPdf {
 	}
 
     /**
-     * Saves a pdf from multiple (X)HTML files to a file
+     * Saves a pdf from multiple (X)HTML files to a file.
      *
      * @param input Array with (X)HTML files for the pdf
      * @param output Filename

@@ -35,10 +35,10 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
 
 
 /**
- * This is a helper class for exceptions
+ * This is a helper class for exceptions.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081112
  */
 public abstract class HelperException {
 	// Resources

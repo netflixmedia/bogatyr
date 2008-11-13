@@ -53,7 +53,7 @@ import java.util.List;
 public abstract class HelperGraphic {
 	
 	/**
-     * Enable antialiasing on a graphic container
+     * Enable antialiasing on a graphic container.
      * 
      * @param g Graphics2D container
      */	
@@ -62,7 +62,7 @@ public abstract class HelperGraphic {
 	}
 
     /**
-     * Calculates center of a dimension
+     * Calculates center of a dimension.
      *
      * @param size Dimension
      * @return Dimension with center coordinates
@@ -72,7 +72,7 @@ public abstract class HelperGraphic {
 	}
 
     /**
-     * Get size of a text in a graphic container
+     * Get size of a text in a graphic container.
      *
      * @param text Text
      * @param g Graphic container
@@ -92,7 +92,7 @@ public abstract class HelperGraphic {
 //	}
 
     /**
-     * Returns all system fonts
+     * Returns all system fonts.
      *
      * @return List containing all fonts
      */
