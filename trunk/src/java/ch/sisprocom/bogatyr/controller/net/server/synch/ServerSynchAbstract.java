@@ -35,7 +35,7 @@ import ch.sisprocom.bogatyr.controller.net.server.ServerAbstract;
 
 
 /**
- * This is the skeleton for synchron servers
+ * This is the skeleton for synchron servers.
  * 
  * @author Stefan Laubenberger
  * @version 20081112

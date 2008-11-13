@@ -40,10 +40,10 @@ import javax.swing.AbstractButton;
 
 
 /**
- * This is a button row
+ * This is a button row to add 1-n buttons.
  * 
  * @author Stefan Laubenberger
- * @version 20081029
+ * @version 20081112
  */
 public class ButtonRow extends Panel {
 	private static final long serialVersionUID = -3557759501854611930L;

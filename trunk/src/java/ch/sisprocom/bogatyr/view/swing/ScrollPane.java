@@ -40,10 +40,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is an extended JScrollPane
+ * This is an extended JScrollPane.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public class ScrollPane extends JScrollPane {
 	private static final long serialVersionUID = 544751396135811303L;

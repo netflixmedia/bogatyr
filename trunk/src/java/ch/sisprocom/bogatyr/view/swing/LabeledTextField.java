@@ -39,10 +39,10 @@ import java.awt.Insets;
 
 
 /**
- * This is an combined Label and TextField
+ * This is an combined Label with a TextField.
  * 
  * @author Stefan Laubenberger
- * @version 20081029
+ * @version 20081112
  */
 public class LabeledTextField extends Panel {//TODO add iPady and iPadx?
 	private static final long serialVersionUID = 1310593497620798003L;

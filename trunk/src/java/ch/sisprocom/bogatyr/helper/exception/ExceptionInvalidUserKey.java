@@ -35,10 +35,10 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
 
 
 /**
- * This is an exception if the user-key is invalid
+ * This is an exception if the user-key is invalid.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081112
  */
 public final class ExceptionInvalidUserKey extends ExceptionAbstract {
 	private static final long serialVersionUID = -5681289983282835248L;

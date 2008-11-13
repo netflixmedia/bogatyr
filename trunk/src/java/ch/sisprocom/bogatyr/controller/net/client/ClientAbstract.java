@@ -57,7 +57,7 @@ import ch.sisprocom.bogatyr.helper.property.Property;
 import ch.sisprocom.bogatyr.model.dao.User;
 
 /**
- * This is the skeleton for clients
+ * This is the skeleton for clients.
  * 
  * @author Stefan Laubenberger
  * @version 20081112
@@ -113,7 +113,7 @@ public abstract class ClientAbstract extends ApplicationAbstract implements ICom
 	}
 
 	/**
-     * Open a stream
+     * Open a stream.
      * 
      * @throws IOException
      */
@@ -122,7 +122,7 @@ public abstract class ClientAbstract extends ApplicationAbstract implements ICom
 	}
 	
 	/**
-     * Close a stream
+     * Close a stream.
      * 
      * @throws IOException
      */
@@ -131,9 +131,9 @@ public abstract class ClientAbstract extends ApplicationAbstract implements ICom
 	}
 
 	/**
-     * Reads a socket-stream
+     * Reads a socket-stream.
      * 
-     * @return Returns a byte-array
+     * @return byte-array
 	 * @throws Exception 
      */
 	protected byte[] readStream() throws Exception {
@@ -171,10 +171,10 @@ public abstract class ClientAbstract extends ApplicationAbstract implements ICom
 //    }
 
     /**
-     * Writes on a socket-stream
+     * Writes on a socket-stream.
      * 
-     * @param key The key for authentication
-     * @param data The data as a byte-array
+     * @param key for authentication
+     * @param data a byte-array
      * @throws Exception 
      */
     protected void writeStream(final String key, final byte[] data) throws Exception {
@@ -236,9 +236,9 @@ public abstract class ClientAbstract extends ApplicationAbstract implements ICom
 //	}
     
     /**
-     * Reads a ComObject
+     * Reads a ComObject.
      * 
-     * @return Returns the ComObject
+     * @return ComObject
      * @throws Exception 
      */
 	protected ComObject readObject() throws Exception {
@@ -247,9 +247,9 @@ public abstract class ClientAbstract extends ApplicationAbstract implements ICom
 
 
 	/**
-	 * Writes a ComObject
+	 * Writes a ComObject.
 	 * 
-	 * @param comObject The ComObject to write
+	 * @param comObject to write
 	 * @throws Exception 
 	 * @see ComObject
 	 */
@@ -261,8 +261,8 @@ public abstract class ClientAbstract extends ApplicationAbstract implements ICom
 	 * Send the ComObject to the Server.
 	 * The server will execute the given method name.
 	 * 
-	 * @param comObject for the execute
-	 * @return Result Data
+	 * @param comObject to execute
+	 * @return result data
 	 * @throws Exception
 	 * @see ComObject
 	 */

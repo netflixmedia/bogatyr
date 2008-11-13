@@ -46,10 +46,10 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 /**
- * This is a class for asymmetric cryptology via RSA
+ * This is a class for asymmetric cryptology via RSA.
  * 
  * @author Stefan Laubenberger
- * @version 20081028
+ * @version 20081112
  */
 public abstract class CryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$

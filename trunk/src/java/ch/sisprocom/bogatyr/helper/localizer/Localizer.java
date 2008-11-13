@@ -37,10 +37,10 @@ import java.util.Locale;
 
 
 /**
- * Localizer holder and helper
+ * Localizer holder and helper to access the localizer from everywhere.
  *  
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081112
  */
 public abstract class Localizer {
 	private static ILocalizer instance;
@@ -55,7 +55,7 @@ public abstract class Localizer {
 	}
     
 	/**
-	 * Returns all locales from the current machine
+	 * Returns all locales from the current machine.
 	 * 
      * @return Array containing locales from the current machine
 	 */
@@ -64,7 +64,7 @@ public abstract class Localizer {
 	}
 
     /**
-	 * Returns all supported countries from the current machine
+	 * Returns all supported countries from the current machine.
 	 * 
      * @return List containing supported countries from the current machine
 	 */

@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
 
 
 /**
- * This is the skeleton for applications
+ * This is the skeleton for all Bogatyr applications.
  * 
  * @author Stefan Laubenberger
  * @version 20081112
@@ -61,15 +61,6 @@ public abstract class ApplicationAbstract implements Runnable {
 	private static final String	RES_LOG_OS 			 = "Application.log.os"; //$NON-NLS-1$
 	private static final String	RES_LOG_VERSION 	 = "Application.log.version"; //$NON-NLS-1$
 	private static final String	RES_LOG_ARCHITECTURE = "Application.log.architecture"; //$NON-NLS-1$
-
-//	// Properties
-//	private static final String PROPERTY_APPLICATION_NAME    		= "Application.name"; //$NON-NLS-1$
-//	private static final String PROPERTY_APPLICATION_VERSION 		= "Application.version"; //$NON-NLS-1$
-//	private static final String PROPERTY_APPLICATION_BUILD 		    = "Application.build"; //$NON-NLS-1$
-//	private static final String PROPERTY_APPLICATION_DEBUG          = "Application.debug"; //$NON-NLS-1$
-//	private static final String PROPERTY_APPLICATION_WORKDIRECTORY  = "Application.work_directory"; //$NON-NLS-1$
-//	private static final String PROPERTY_APPLICATION_LOCALIZER      = "Application.localizer"; //$NON-NLS-1$
-//	private static final String PROPERTY_APPLICATION_PROPERTIES     = "Application.properties"; //$NON-NLS-1$
 	
 	private final long startTime = System.currentTimeMillis();
 
@@ -80,7 +71,7 @@ public abstract class ApplicationAbstract implements Runnable {
 	}
 	
 	/**
-     * Returns the start time of the application 
+     * Returns the start time of the application .
      * 
      * @return start time of the application
      */	
@@ -89,7 +80,7 @@ public abstract class ApplicationAbstract implements Runnable {
 	}
 
 	/**
-     * Terminates the application in a proper way 
+     * Terminates the application in a proper way.
      * 
      * @param returnCode System-Return-Code
      */	
@@ -103,7 +94,7 @@ public abstract class ApplicationAbstract implements Runnable {
 	}
 
 	/**
-     * Checks the updates for the application and update it if needed 
+     * Checks the update XML file for the application and update it if needed.
      */	
 	protected void update() throws SAXException, IOException, ParserConfigurationException {
 		Updater.update();
@@ -114,98 +105,12 @@ public abstract class ApplicationAbstract implements Runnable {
 	 * Private methods
 	 */
 	private void init() {
-//        // Properties and logger
-//		final File file = new File(propertiesStreamName);
-//		InputStream is = null;
-//		try {
-//            if (file.exists()) {
-//                is = new FileInputStream(file);
-//            } else {
-//                is = new DataInputStream(ApplicationAbstract.class.getResourceAsStream(propertiesStreamName));
-//            }
-//            Property.setInstance(new PropertyStream(is));
-////            PropertyConfigurator.configureAndWatch(logProperties, 60 * 1000);
-//            PropertyConfigurator.configure(Property.getInstance().getProperties());
-//            log.debug("Logging initialized.");
-//            log.debug(Property.getInstance().toString());
-//		} finally {
-//			if (is != null) {
-//				is.close();
-//			}
-//        }
-
-//		readProperties();
-
 		Application.setInstance(this);
 
 		log.debug(toString());
 		log.info(Localizer.getInstance().getValue(RES_LOG_START) + ' ' + Context.getInstance().getApplicationName() + ' ' + Context.getInstance().getApplicationVersion() + " (" + Context.getInstance().getApplicationBuild() + ")"); //$NON-NLS-1$ //$NON-NLS-2$
 		log.info(Localizer.getInstance().getValue(RES_LOG_OS) + ' ' + HelperEnvInfo.getOsName() + " - " + Localizer.getInstance().getValue(RES_LOG_VERSION) + ' ' + HelperEnvInfo.getOsVersion()+ " - " + Localizer.getInstance().getValue(RES_LOG_ARCHITECTURE) + ' ' + HelperEnvInfo.getOsArch()); //$NON-NLS-1$ //$NON-NLS-2$
 	}
-	
-//	private void readProperties() {
-//		File directory;
-//		
-//		final boolean isDebug = Property.getInstance().getPropertyBoolean(PROPERTY_APPLICATION_DEBUG);
-//		Context.getInstance().setApplicationDebug(isDebug);
-//		
-//		String value = Property.getInstance().getProperty(PROPERTY_APPLICATION_NAME);
-//		if (HelperGeneral.isValidString(value)) {
-//			Context.getInstance().setApplicationName(value);
-//		} else {
-//			log.error(PROPERTY_APPLICATION_NAME + " == 'null'"); //$NON-NLS-1$
-//			exit(10);
-//		}
-//		
-//		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_VERSION);
-//		if (HelperGeneral.isValidString(value)) {
-//			Context.getInstance().setApplicationVersion(value);
-//		} else {
-//			log.error(PROPERTY_APPLICATION_VERSION + " == 'null'"); //$NON-NLS-1$
-//			exit(20);
-//		}
-//
-//		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_BUILD);
-//		if (HelperGeneral.isValidString(value)) {
-//			Context.getInstance().setApplicationBuild(value);
-//		} else {
-//			log.error(PROPERTY_APPLICATION_BUILD + " == 'null'"); //$NON-NLS-1$
-//			exit(30);
-//		}
-//		
-//		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_WORKDIRECTORY);
-//		if (HelperGeneral.isValidString(value)) {
-//			directory = new File(value);
-//		} else {
-//			directory = HelperEnvInfo.getOsTempDirectory();
-//            log.warn(PROPERTY_APPLICATION_WORKDIRECTORY + " == 'null' => default: " + directory.getAbsolutePath()); //$NON-NLS-1$
-//		}
-//		Context.getInstance().setApplicationWorkDirectory(directory);
-//		
-//		// Localizer
-//		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_LOCALIZER);
-//		if (HelperGeneral.isValidString(value)) {
-//			try {
-//				Localizer.setInstance((ILocalizer)Class.forName(value).newInstance());
-//			} catch (Exception ex) {
-//				log.error("Construction of the localizer failed", ex); //$NON-NLS-1$
-//				exit(40);
-//			}
-//		} else {
-//			log.error(PROPERTY_APPLICATION_LOCALIZER + " == 'null'"); //$NON-NLS-1$
-//			exit(41);
-//		}
-//		
-//		// Properties
-//		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_PROPERTIES);
-//		if (HelperGeneral.isValidString(value)) {
-//			try {
-//				Property.setInstance((IProperty)Class.forName(value).newInstance());
-//			} catch (Exception ex) {
-//				log.warn("Construction of the property handler failed - using default", ex); //$NON-NLS-1$
-//			}
-//		}
-//	}
 	
 	
 	/*

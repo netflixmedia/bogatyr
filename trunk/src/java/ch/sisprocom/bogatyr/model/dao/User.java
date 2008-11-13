@@ -39,10 +39,10 @@ import ch.sisprocom.bogatyr.model.dao.DataObject;
 
 
 /**
- * The data object for a user
+ * The data object for a user.
  *
  * @author Stefan Laubenberger
- * @version 20081107
+ * @version 20081112
  */
 public class User extends DataObject {
 	private static final long serialVersionUID = -4679247079715137984L;
@@ -122,7 +122,7 @@ public class User extends DataObject {
 	 * Implemented methods
 	 */
 	/**
-	 * Validates the attributes {@link #username} and {@link #password}
+	 * Validates the attributes {@link #username} and {@link #password}.
 	 * 
 	 * @throws ExceptionValidation
 	 * @see DataObject 

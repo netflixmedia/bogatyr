@@ -41,14 +41,15 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 /**
- * This is a class for wrapping and unwrapping a key
+ * This is a class for wrapping and unwrapping a crypto key.
  * 
  * @author Stefan Laubenberger
- * @version 20081028
+ * @version 20081112
  */
 public abstract class Wrapper {
 	/**
-	 * Wrap the key
+	 * Wrap the key with a wrapper key.
+	 * 
 	 * @param wrapperKey
      * @param key
      * @return byte array with the wrapped key
@@ -66,7 +67,8 @@ public abstract class Wrapper {
 	}
 	
 	/**
-	 * Unwrap and set the key
+	 * Unwrap and return the key.
+	 * 
 	 * @param unwrapperKey
      * @param wrappedKey
      * @param keyAlgorithm

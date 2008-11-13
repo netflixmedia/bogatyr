@@ -40,12 +40,12 @@ import java.util.List;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public abstract class HelperMath {
 	
 	/**
-	 * Returns the greatest common divisor
+	 * Returns the greatest common divisor.
 	 * 
 	 * @param a first number
 	 * @param b second number
@@ -63,7 +63,7 @@ public abstract class HelperMath {
 	 } 
 
 	 /**
-	 * Returns the least common multiple
+	 * Returns the least common multiple.
 	 * 
 	 * @param a first number
 	 * @param b second number
@@ -74,7 +74,7 @@ public abstract class HelperMath {
 	 }
 	 
 	/**
-     * Checks if a number is a prime
+     * Checks if a number is a prime.
      * 
      * @param n number for the check
      * @return true/false
@@ -108,7 +108,7 @@ public abstract class HelperMath {
     }
 
 	/**
-     * Find the smallest prime >= n
+     * Find the smallest prime >= n.
      * 
      * @param n number for the check
      * @return prime number
@@ -123,7 +123,7 @@ public abstract class HelperMath {
     }
 
 	/**
-     * Returns all primes in range
+     * Returns all primes in range.
      * 
      * @param start number of the range
      * @param end number of the range
@@ -164,7 +164,7 @@ public abstract class HelperMath {
 	}
 
 	/**
-     * Round a double with decimal place
+     * Round a double with decimal place.
      *
      * @param value double-Value
      * @param decimalPlace for round
@@ -182,7 +182,7 @@ public abstract class HelperMath {
 	
     /**
      * Fractional error in math formula less than 1.2 * 10 ^ -7.
-     * Although subject to catastrophic cancellation when z is very close to 0
+     * Although subject to catastrophic cancellation when z is very close to 0.
      *
      * @param z double-Value
      * @return double-value
@@ -234,7 +234,7 @@ public abstract class HelperMath {
     }
 
     /**
-     * Cumulative normal distribution
+     * Cumulative normal distribution.
      *
      * @param z double-Value
      * @return double-value
@@ -244,7 +244,7 @@ public abstract class HelperMath {
     }
 
     /**
-     * Random number with standard Gaussian distribution
+     * Random number with standard Gaussian distribution.
      *
      * @return double-value
      */
@@ -256,7 +256,7 @@ public abstract class HelperMath {
     }
 
     /**
-     * Random number with Gaussian distribution of mean mu and stddev sigma
+     * Random number with Gaussian distribution of mean mu and stddev sigma.
      *
      * @param mu double-Value
      * @param sigma double-Value
@@ -267,7 +267,7 @@ public abstract class HelperMath {
     }
 
     /**
-     * Random integer between 0 and n-1
+     * Random integer between 0 and n-1.
      *
      * @param n int-Value
      * @return random int-value between 0 and n-1

@@ -41,23 +41,24 @@ import ch.sisprocom.bogatyr.model.dao.User;
 
 
 /**
- * Application-Context
- * Get access for general content in the context.
+ * Context for all Bogatyr applications.
+ * Get access from everywhere for general contents.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081113
  */
 public class Context implements IContext {
 	private static Context instance;
 
 	private static final String KEY_APPLICATION_NAME             = "Application.name"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_ID               = "Application.id"; //$NON-NLS-1$
 	private static final String KEY_APPLICATION_VERSION          = "Application.version"; //$NON-NLS-1$
 	private static final String KEY_APPLICATION_MINORVERSION     = "Application.minorversion"; //$NON-NLS-1$
 	private static final String KEY_APPLICATION_BUILD            = "Application.build"; //$NON-NLS-1$
 	private static final String KEY_APPLICATION_DEBUG            = "Application.debug"; //$NON-NLS-1$
 	private static final String KEY_APPLICATION_WORKDIRECTORY    = "Application.work_directory"; //$NON-NLS-1$
 	private static final String KEY_APPLICATION_USER             = "Application.user"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_UPDATE_LOCATION  = "Application.user"; //$NON-NLS-1$
+	private static final String KEY_APPLICATION_UPDATE_LOCATION  = "Application.update"; //$NON-NLS-1$
 
 	private final Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();
 	
@@ -119,7 +120,16 @@ public class Context implements IContext {
 		}
 		return str;
 	}
+	
+	public String getApplicationId() {
+		String str = getDataString(KEY_APPLICATION_ID);
 
+		if (!HelperGeneral.isValidString(str)) {
+			str = "Bogatyr"; //$NON-NLS-1$
+		}
+		return str;
+	}
+	
 	public int getApplicationVersion() {
 		return (Integer)contextData.get(KEY_APPLICATION_VERSION);
 	}
@@ -157,6 +167,10 @@ public class Context implements IContext {
 		addData(KEY_APPLICATION_NAME, name);
 	}
 
+	public void setApplicationId(final String id) {
+		addData(KEY_APPLICATION_ID, id);
+	}
+	
 	public void setApplicationVersion(final int version) {
 		addData(KEY_APPLICATION_VERSION, version);
 	}

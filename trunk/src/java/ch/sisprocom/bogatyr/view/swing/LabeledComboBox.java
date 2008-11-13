@@ -39,10 +39,10 @@ import java.awt.event.ActionListener;
 
 
 /**
- * This is an combined Label and ComboBox
+ * This is an combined Label with a ComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20081029
+ * @version 20081112
  */
 public class LabeledComboBox extends Panel {//TODO add iPady and iPadx?
 	private static final long serialVersionUID = -67296455436983811L;

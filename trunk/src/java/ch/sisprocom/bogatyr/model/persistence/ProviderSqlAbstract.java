@@ -41,11 +41,11 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is the skeleton for sql database connections
+ * This is the skeleton for sql database connections.
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081029
+ * @version 20081112
  */
 public abstract class ProviderSqlAbstract {
 	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);

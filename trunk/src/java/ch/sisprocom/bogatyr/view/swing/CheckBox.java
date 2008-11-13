@@ -37,10 +37,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is an extended JCheckBox
+ * This is an extended JCheckBox.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public class CheckBox extends JCheckBox {
 	private static final long serialVersionUID = -6439735629199643683L;

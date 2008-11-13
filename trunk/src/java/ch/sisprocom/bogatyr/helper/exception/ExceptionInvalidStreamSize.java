@@ -33,17 +33,17 @@ package ch.sisprocom.bogatyr.helper.exception;
 
 
 /**
- * This is an exception if the stream size is invalid
+ * This is an exception if the stream size is invalid.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081112
  */
 public final class ExceptionInvalidStreamSize extends ExceptionAbstract {
 	private static final long serialVersionUID = 6400247262258600862L;
 
 
 	/**
-	 * Exception when the Stream size is invalid.
+	 * Exception when the stream size is invalid.
 	 * 
 	 * @param allowedStreamSize
 	 * @param dataStreamSize
@@ -53,7 +53,7 @@ public final class ExceptionInvalidStreamSize extends ExceptionAbstract {
     }
     
 	/**
-	 * Exception when the Stream size is invalid with a individual Message.
+	 * Exception when the stream size is invalid with a individual message.
 	 * 
 	 * @param msg Message as String
 	 */

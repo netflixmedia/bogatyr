@@ -51,18 +51,18 @@ import java.util.Scanner;
 
 
 /**
- * This is a helper class for I/O
+ * This is a helper class for I/O.
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081028
+ * @version 20081112
  */
 public abstract class HelperIO {
 	private final static byte[] BUFFER = new byte[1024];
 //	private static final int BUFFER = 1024;
 	
 	/**
-     * Returns a temporary file which will be deleted on program exit
+     * Returns a temporary file which will be deleted on program exit.
      * 
      * @param name of the file
      * @param extension of the file (e.g. ".java")
@@ -80,7 +80,7 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Search in a path (directory) for files via identifier
+     * Search in a path (directory) for files via identifier.
      * 
      * @param path Path
      * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
@@ -105,7 +105,7 @@ public abstract class HelperIO {
 	}
 
 	/**
-     * Search in a path (directory) for files and directories via identifier
+     * Search in a path (directory) for files and directories via identifier.
      * 
      * @param path Path
      * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
@@ -118,7 +118,7 @@ public abstract class HelperIO {
 	}
 
 	/**
-     * Copy a directory
+     * Copy a directory.
      * 
      * @param source
      * @param dest
@@ -144,7 +144,7 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Copy a file
+     * Copy a file.
      * 
      * @param source
      * @param dest
@@ -178,7 +178,7 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Move a file or directory
+     * Move a file or directory.
      * 
      * @param source
      * @param dest
@@ -195,7 +195,7 @@ public abstract class HelperIO {
 	}
 
 	/**
-     * Delete a file or directory
+     * Delete a file or directory.
      * 
      * @param file to delete
      * @return true/false
@@ -212,7 +212,7 @@ public abstract class HelperIO {
 	}
 	  
 	/**
-     * Rename a file or directory
+     * Rename a file or directory.
      * 
      * @param source
      * @param dest
@@ -224,7 +224,7 @@ public abstract class HelperIO {
 
 	
 	/**
-     * Writes a text line in a file
+     * Writes a text line in a file.
      * 
      * @param file for writing
      * @param encoding of the file
@@ -251,7 +251,7 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Writes a text line with "UTF-8"-encoding in a file
+     * Writes a text line with "UTF-8"-encoding in a file.
      * 
      * @param file for writing
      * @param line containing the text to write
@@ -262,7 +262,7 @@ public abstract class HelperIO {
 	}
 
 	/**
-     * Writes a byte-array into a file 
+     * Writes a byte-array into a file.
      * 
      * @param file for writing
      * @param data byte-array to write
@@ -284,7 +284,7 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Writes a String into a file 
+     * Writes a String into a file.
      * 
      * @param file for writing
      * @param data String to write
@@ -307,7 +307,7 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Writes a byte array to a stream 
+     * Writes a byte array to a stream.
      * 
      * @param os output stream for writing
      * @param data byte-array for the stream
@@ -377,7 +377,7 @@ public abstract class HelperIO {
 //	}
 	
 	/**
-     * Reads a file in a byte-array
+     * Reads a file in a byte-array.
      * 
      * @param file for reading
      * @return byte-array containing the file content
@@ -401,7 +401,7 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Reads a file in a String
+     * Reads a file in a String.
      * 
      * @param file for reading
      * @return String containing the file content
@@ -426,7 +426,7 @@ public abstract class HelperIO {
 	}
 
 	/**
-     * Reads a file in a list
+     * Reads a file in a list.
      * 
      * @param file for reading
      * @return List containing the file content
@@ -447,7 +447,7 @@ public abstract class HelperIO {
 	}
 
 	/**
-     * Concatenates a list of files to one output file 
+     * Concatenates a list of files to one output file.
      * 
      * @param fileOutput Output file
      * @param list List with all files
@@ -506,7 +506,7 @@ public abstract class HelperIO {
 	 * Private methods
 	 */
 	/**
-     * Recursive search method for a path (directories)
+     * Recursive search method for a path (directories).
      * 
      * @param filePath Path
      * @param identifier array of parts from the file name (if it's "null", all files will be delivered)

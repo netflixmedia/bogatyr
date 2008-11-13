@@ -42,10 +42,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is an extended JPanel
+ * This is an extended JPanel.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public class Panel extends JPanel {
 	private static final long serialVersionUID = 3679443739459084931L;

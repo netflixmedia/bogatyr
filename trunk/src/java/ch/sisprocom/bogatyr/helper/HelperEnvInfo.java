@@ -38,18 +38,16 @@ import java.util.Map;
 
 
 /**
- * This class may be used to transmit client environment info to the server and to decide if
- * an operating system corresponds to the Windows, Mac or a Unix operating system. 
+ * This class may be used to transmit client environment info to the server and to decide if an operating system corresponds to the Windows, Mac or a Unix operating system. 
  * It encapsulates name, architecture and version of an operating system, based on system properties.
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 20081029
+ * @version 20081112
  */
 public abstract class HelperEnvInfo {
 	/**
-	 * Used vm memory
-	 * Returns the same as Runtime.getRuntime().totalMemory()
+	 * Returns the same as Runtime.getRuntime().totalMemory().
      *
      * @return used vm memory
 	 */
@@ -58,8 +56,7 @@ public abstract class HelperEnvInfo {
 	}
 
 	/**
-	 * Free vm memory
-	 * Returns the same as Runtime.getRuntime().freeMemory()
+	 * Returns the same as Runtime.getRuntime().freeMemory().
      *
      * @return free vm memory
 	 */
@@ -68,8 +65,7 @@ public abstract class HelperEnvInfo {
 	}
 
 	/**
-	 * Max vm memory
-	 * Returns the same as Runtime.getRuntime().maxMemory()
+	 * Returns the same as Runtime.getRuntime().maxMemory().
      *
      * @return max vm memory
 	 */
@@ -78,8 +74,7 @@ public abstract class HelperEnvInfo {
 	}
 	
 	/**
-	 * Available processors for the vm
-	 * Returns the same as Runtime.getRuntime().availableProcessors()
+	 * Returns the same as Runtime.getRuntime().availableProcessors().
      *
      * @return available processors for the vm
 	 */
@@ -88,7 +83,7 @@ public abstract class HelperEnvInfo {
 	}
 
 	/**
-	 * Returns the same as system property "os.arch"
+	 * Returns the same as system property "os.arch".
      *
      * @return OS architecture
 	 */
@@ -97,7 +92,7 @@ public abstract class HelperEnvInfo {
 	}
 
 	/**
-	 * Returns the same as system property "os.name"
+	 * Returns the same as system property "os.name".
      *
      * @return OS name
 	 */
@@ -106,7 +101,7 @@ public abstract class HelperEnvInfo {
 	}
 
 	/**
-	 * Returns the same as system property "os.version"
+	 * Returns the same as system property "os.version".
      *
      * @return OS version
 	 */
@@ -115,7 +110,7 @@ public abstract class HelperEnvInfo {
 	}
 
 	/**
-	 * Returns all system environment variables
+	 * Returns all system environment variables.
 	 *
 	 * @return list of system environment variables
 	 */
@@ -130,7 +125,7 @@ public abstract class HelperEnvInfo {
     }
 	
 	/**
-	 * Returns the same as system property "java.io.tmpdir"
+	 * Returns the same as system property "java.io.tmpdir".
      *
      * @return OS temporary directory
 	 */
@@ -139,7 +134,7 @@ public abstract class HelperEnvInfo {
 	}
 	
 	/**
-	 * Returns the same as system property "user.home"
+	 * Returns the same as system property "user.home".
      *
      * @return user home directory
 	 */
@@ -148,10 +143,7 @@ public abstract class HelperEnvInfo {
 	}
 
 	/**
-	 * Try to determine whether this application is running under Windows
-	 * or some other platform by examing the "os.name" property.
-	 * A check for unix platform is done by checking that it is not the Windows and not the
-	 * Mac platform.
+	 * Try to determine whether this application is running under Windows or some other platform by examing the "os.name" property.
 	 *
 	 * @return true if this application is running under a Windows OS
 	 */
@@ -160,12 +152,20 @@ public abstract class HelperEnvInfo {
 	}
 
 	/**
-	 * Try to determine whether this application is running under Mac OS
-	 * or some other platform by examing the "os.name" property.
+	 * Try to determine whether this application is running under Mac OS or some other platform by examing the "os.name" property.
 	 *
 	 * @return true if this application is running under Mac OS
 	 */
 	public static boolean isMacPlatform() {
 		return getOsName().contains("Mac"); //$NON-NLS-1$
+	}
+	
+	/**
+	 * Try to determine whether this application is running under UNIX.
+	 *
+	 * @return true if this application is running under UNIX
+	 */
+	public static boolean isUnixPlatform() {
+		return (!isWindowsPlatform() && !isMacPlatform());
 	}
 }

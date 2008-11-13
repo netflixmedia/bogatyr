@@ -36,7 +36,7 @@ import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
 
 
 /**
- * This is the skeleton for synchron clients
+ * This is the skeleton for synchron clients.
  * 
  * @author Stefan Laubenberger
  * @version 20081112
@@ -57,7 +57,7 @@ public abstract class ClientSynchAbstract extends ClientAbstract {
 	 * The server will execute the given method name.
 	 *
      * @param  data ComObject
-     * @return Result object
+     * @return result data
 	 * @throws Exception
      * @see ComObject
      */
@@ -86,8 +86,9 @@ public abstract class ClientSynchAbstract extends ClientAbstract {
 	 * Implemented methods
 	 */
 	/**
-	 * Send a asymm key
-	 * @param comObject The {@link ComObject} with the asymm key
+	 * Send a asymm key.
+	 * 
+	 * @param comObject {@link ComObject} with the asymm key
 	 * @see ComObject
 	 */
 	public void sendAsymmKey(final ComObject comObject) throws Exception {
@@ -96,8 +97,9 @@ public abstract class ClientSynchAbstract extends ClientAbstract {
 	}
 
 	/**
-	 * Send a symm key
-	 * @param comObject The {@link ComObject} with the symm key
+	 * Send a symm key.
+	 * 
+	 * @param comObject {@link ComObject} with the symm key
 	 * @see ComObject
 	 */
 	public void sendSymmKey(final ComObject comObject) throws Exception {

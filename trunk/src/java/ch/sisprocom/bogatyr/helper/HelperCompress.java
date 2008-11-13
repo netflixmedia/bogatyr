@@ -45,16 +45,16 @@ import java.util.zip.ZipOutputStream;
 
 
 /**
- * This is a helper class for compress operations
+ * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
 	private final static byte[] BUFFER = new byte[1024];
 
 	/**
-     * Writes a zip file containing a list of files
+     * Writes a zip file containing a list of files.
      * 
      * @param file for writing
      * @param listOfFiles for the zip file
@@ -78,6 +78,13 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 		}
 	}
 	
+	/**
+     * Extracts a zip file to a destination directory.
+     * 
+     * @param file to extract
+     * @param destinationDirectory for the zip file
+     * @throws java.io.IOException
+     */	
 	public static void extractZip(final ZipFile file, final File destinationDirectory) throws IOException { 
         Enumeration<? extends ZipEntry> zipEntryEnum = file.entries(); 
  

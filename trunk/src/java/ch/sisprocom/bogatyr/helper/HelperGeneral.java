@@ -53,11 +53,11 @@ import java.util.regex.Pattern;
 
 
 /**
- * This is a general helper class for general problems
+ * This is a general helper class for general problems.
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081029
+ * @version 20081112
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and when, is logging needed?
 	private static final String CHECKSUM_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
@@ -65,7 +65,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 
 	
 	/**
-     * Creates an object with parameters via Reflection-API
+     * Creates an object with parameters via reflection API.
      * 
      * @param clazz Full qualified class name
      * @param parameter Parameter-array
@@ -94,7 +94,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	}
 
     /**
-     * Returns a line separator
+     * Returns a line separator.
      *
      * @return line separator
      */
@@ -173,7 +173,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	/**
      * Checks if a {@link Object} is not null.
      * 
-     * @param arg Object to check
+     * @param arg object to check
      * @return true/false
      */	
 	public static boolean isValidObject(final Object arg) {
@@ -183,7 +183,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	/**
      * Checks if a array is valid.
      * 
-     * @param arg Object array to check
+     * @param arg object array to check
      * @return true/false
      */	
 	public static boolean isValidArray(final Object[] arg) {
@@ -205,7 +205,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * It uses the {@link ByteArrayOutputStream} and the {@link ObjectOutputStream}.
 	 * 
 	 * @param obj The Object to convert into a byte-array.
-	 * @return The given Object as byte-array.
+	 * @return object as byte-array
 	 * @throws IOException
 	 * @see ByteArrayOutputStream
 	 * @see ObjectOutputStream
@@ -238,7 +238,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * It uses the {@link ByteArrayInputStream} and the {@link ObjectInputStream}.
 	 * 
 	 * @param bytes The byte-array to convert into an {@link Object}.
-	 * @return Returns a valid Object.
+	 * @return a valid object
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @see ByteArrayInputStream
@@ -262,9 +262,9 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	/**
 	 * Appends a given byte-array to an existing byte-array.
 	 * 
-	 * @param inA The first array.
-	 * @param inB The second array.
-	 * @return The array a & b as one new byte-array.
+	 * @param inA first array
+	 * @param inB second array
+	 * @return The array a & b as one new byte-array
 	 */
     public static byte[] appendByteArray(final byte[] inA, final byte[] inB) {
     	byte[] a = inA;
@@ -286,7 +286,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
     
 	/**
-	 * Removes duplicate objects from list
+	 * Removes duplicate objects from list.
 	 * 
 	 * @param list containing duplicate objects
 	 * @return list without duplicates
@@ -296,7 +296,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 	
     /**
-	 * Removes duplicate objects from array
+	 * Removes duplicate objects from array.
 	 * 
 	 * @param array containing duplicate objects
 	 * @return array without duplicates
@@ -311,9 +311,9 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * Generates an unique string from an input object.
      * This is used for unique keys.
      *
-     * @param algo The algorithm to use.
-     * @param data The data to generate a checksum.
-     * @return The generated unique String.
+     * @param algo to use.
+     * @param data to generate a checksum
+     * @return generated checksum
      * @throws NoSuchAlgorithmException
      */
     public static String getChecksum(final String algo, final Object data) throws NoSuchAlgorithmException {
@@ -339,10 +339,9 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     /**
      * Generates an unique string with SHA-256 from an input object.
      *
-     * @param data The data to generate a checksum.
-     * @return The generated unique String.
+     * @param data to generate a checksum
+     * @return generated checksum
      * @throws NoSuchAlgorithmException
-     * @see #getChecksum(String, String)
      */
     public static String getChecksum(final Object data) throws NoSuchAlgorithmException {
     	return getChecksum(CHECKSUM_ALGORITHM_SHA256, data);
@@ -352,9 +351,9 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * Generates an unique string.
      * This is used for unique keys (e.g. for product keys).
      *
-     * @param digits Length of result string
+     * @param digits length of result string
      * @param seed for the string (e.g. "1,2...0,A,B...Z)
-     * @return The generated unique String.
+     * @return generated unique String
      */
     public static String getRandomKey(final int digits, final char[] seed) {
 		final StringBuilder sb = new StringBuilder();
@@ -369,15 +368,16 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * Generates an unique string with default seed.
      * This is used for unique keys (e.g. for product keys).
      *
-     * @param digits Length of result string
-     * @return The generated unique String.
+     * @param digits length of result string
+     * @return generated unique String.
      */
     public static String getRandomKey(final int digits) {
     	return getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
     }
     
     /**
-     * Fill a string with a char
+     * Fill a string with a char.
+     * 
      * @param fillChar
      * @param fillLength
      * @return filled string
@@ -393,7 +393,8 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
     
     /**
-     * Reverses a string
+     * Reverses a string.
+     * 
      * @param input string
      * @return reversed string
      */
@@ -402,7 +403,8 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 
     /**
-     * Dump a list
+     * Dump a list.
+     * 
      * @param list
      * @return dump string
      */
@@ -417,7 +419,8 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 
     /**
-     * Dump a map
+     * Dump a map.
+     * 
      * @param map
      * @return dump string
      */
@@ -434,7 +437,8 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 
      /**
-     * Dump an array
+     * Dump an array.
+     * 
      * @param array
      * @return dump string
      */

@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.exception.ExceptionInvalidUserKey;
 
 
 /**
- * This is the skeleton for asynchron servers
+ * This is the skeleton for asynchron servers.
  *
  * @author Stefan Laubenberger
  * @version 20081112
@@ -62,8 +62,8 @@ public abstract class ServerAsynchAbstract extends ServerAbstract {
 	/**
 	 * Adds a new thread to the {@link #mapThread}.
 	 * 
-	 * @param uniqueKey A unique Key for the {@link #mapThread} as Map index
-	 * @param asynchServerThread An asynchron server thread
+	 * @param uniqueKey unique Key for the {@link #mapThread} as Map index
+	 * @param asynchServerThread asynchron server thread
 	 * @throws ExceptionInvalidUserKey 
 	 * @see Map
 	 */
@@ -79,7 +79,7 @@ public abstract class ServerAsynchAbstract extends ServerAbstract {
 	/**
 	 * Removes the thread with the given unique key from the {@link #mapThread}.
 	 * 
-	 * @param uniqueKey A unique Key for the {@link #mapThread} as Map index
+	 * @param uniqueKey unique Key for the {@link #mapThread} as Map index
 	 * @see Map
 	 */
 	public void removeAsynchServerThread(final String uniqueKey) {
@@ -87,7 +87,7 @@ public abstract class ServerAsynchAbstract extends ServerAbstract {
 	}
 	
 	/**
-	 * Returns all threads
+	 * Returns all threads.
 	 * 
 	 * @return list containing all threads
 	 * @see Map

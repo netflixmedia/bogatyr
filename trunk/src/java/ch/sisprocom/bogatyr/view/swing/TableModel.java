@@ -37,10 +37,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is an extended AbstractTableModel
+ * This is an extended AbstractTableModel.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public class TableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -472247252594891753L;
@@ -56,18 +56,18 @@ public class TableModel extends AbstractTableModel {
 	}
 	
 	/**
-	 * Counts the number of columns
+	 * Counts the number of columns.
 	 * 
-	 * @return Number of columns
+	 * @return number of columns
 	 */
 	public int getColumnCount() {
 		return columnNames.length;
 	}
 	
 	/**
-	 * Counts the number of rows
+	 * Counts the number of rows.
 	 * 
-	 * @return Number of rows
+	 * @return number of rows
 	 */
 	public int getRowCount() {
 		if (data != null) {
@@ -77,11 +77,11 @@ public class TableModel extends AbstractTableModel {
 	}
 	
 	/**
-	 * Get the Object at a specific place in the data array
+	 * Get the Object at a specific place in the data array.
 	 * 
 	 * @param rowIndex row number
 	 * @param columnIndex column number
-	 * @return Returns the Object at specific place in the data array 
+	 * @return object at the specified place in the data array 
 	 */
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		return data[rowIndex][columnIndex];

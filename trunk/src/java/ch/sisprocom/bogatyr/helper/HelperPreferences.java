@@ -43,7 +43,7 @@ import java.util.prefs.Preferences;
 
 
 /**
- * This is a helper class for preferences
+ * This is a helper class for preferences.
  * 
  * @author Stefan Laubenberger
  * @version 20081026

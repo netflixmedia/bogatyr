@@ -33,7 +33,7 @@ package ch.sisprocom.bogatyr.controller;
 
 
 /**
- * Application holder
+ * Application holder to access the main application from everywhere (e.g. to exit the program).
  * 
  * @author Stefan Laubenberger
  * @version 20081112

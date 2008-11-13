@@ -65,14 +65,14 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
 
 
 /**
- * The PublicKeyProvider class
+ * This class generates, reads and save X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 20081028
+ * @version 20081112
  */
 public abstract class PublicKeyProvider {
 	/**
-     * Get the certificate out of the given certificate file
+     * Get the certificate out of the given certificate file.
      * 
      * @param file containing the certificate
      * @return X509Certificate the certificate
@@ -97,7 +97,7 @@ public abstract class PublicKeyProvider {
     }
 
     /**
-     * Get the certificate out of the given certificate stream
+     * Get the certificate out of the given certificate stream.
      * 
      * @param is input stream containing the certificate
      * @return X509Certificate the certificate
@@ -123,7 +123,7 @@ public abstract class PublicKeyProvider {
     }
     
     /**
-     * Store the certificate on a stream
+     * Store the certificate on a stream.
      * 
      * @param cert certificate
      * @param os output stream for the certificate
@@ -135,7 +135,7 @@ public abstract class PublicKeyProvider {
     }
     
     /**
-     * Store the certificate in a file
+     * Store the certificate in a file.
      * 
      * @param cert certificate
      * @param file for the certificate
@@ -147,7 +147,7 @@ public abstract class PublicKeyProvider {
     }
 
     /**
-     * Generate a public key certificate out of the given keypair
+     * Generate a public key certificate out of the given keypair.
      * 
      * @param pair the keypair for the certificate
      * @param issuerDN (e.g. "CN=Test Certificate")

@@ -54,7 +54,8 @@ import ch.sisprocom.bogatyr.helper.property.PropertyStream;
 
 
 /**
- * This class starts every Application
+ * This class starts every Bogatyr or "Runnable" application.
+ * It handles the main functions like setup the logger, properties and localizer.
  *
  * @author Stefan Laubenberger
  * @version 20081112
@@ -64,6 +65,7 @@ public abstract class Runner {
 	
 	// Properties
 	private static final String PROPERTY_APPLICATION_NAME    		= "Application.name"; //$NON-NLS-1$
+	private static final String PROPERTY_APPLICATION_ID             = "Application.id"; //$NON-NLS-1$
 	private static final String PROPERTY_APPLICATION_VERSION 		= "Application.version"; //$NON-NLS-1$
 	private static final String PROPERTY_APPLICATION_MINORVERSION   = "Application.minorversion"; //$NON-NLS-1$
 	private static final String PROPERTY_APPLICATION_BUILD 		    = "Application.build"; //$NON-NLS-1$
@@ -77,7 +79,7 @@ public abstract class Runner {
 	/**
 	 * The only main() method to run every runnable.
 	 * 
-	 * @param args The arguments given to start an application.
+	 * @param args The arguments given to start an application
 	 */
 	public static void main(final String[] args) {
 		if (args.length == 2) { // checks the number of arguments - <Application> and <Properties> are needed
@@ -95,7 +97,7 @@ public abstract class Runner {
 		}
 	}
 
-	private static void init(String propertiesStreamName) throws IOException, SAXException, ParserConfigurationException {
+	private static void init(String propertiesStreamName) throws IOException {
 	    // Properties and logger
 		final File file = new File(propertiesStreamName);
 		InputStream is = null;
@@ -130,6 +132,14 @@ public abstract class Runner {
 			System.exit(1);
 		}
 
+		value = Property.getInstance().getProperty(PROPERTY_APPLICATION_ID);
+		if (HelperGeneral.isValidString(value)) {
+			Context.getInstance().setApplicationId(value);
+		} else {
+			log.error(PROPERTY_APPLICATION_ID + " == 'null'"); //$NON-NLS-1$
+			System.exit(2);
+		}
+		
 		int number = Property.getInstance().getPropertyInt(PROPERTY_APPLICATION_VERSION);
 		Context.getInstance().setApplicationVersion(number);
 
@@ -155,11 +165,11 @@ public abstract class Runner {
 				Localizer.setInstance((ILocalizer)Class.forName(value).newInstance());
 			} catch (Exception ex) {
 				log.error("Construction of the localizer failed", ex); //$NON-NLS-1$
-				System.exit(40);
+				System.exit(3);
 			}
 		} else {
 			log.error(PROPERTY_APPLICATION_LOCALIZER + " == 'null'"); //$NON-NLS-1$
-			System.exit(41);
+			System.exit(4);
 		}
 		
 		// Properties

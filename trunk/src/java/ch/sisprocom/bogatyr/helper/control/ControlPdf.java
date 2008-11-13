@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.context.Context;
  * This control opens PDF data with an external program such as Acrobat Reader.
  *
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
@@ -52,20 +52,21 @@ public abstract class ControlPdf {
 
 
 	/**
-	 * Show a PDF (provided as a byte[]) with PDF viewer. A temporary file is first created (see
-	 * {@link #createFile} and {@link ControlPdf class description}).
+	 * Show a PDF (provided as a byte[]) with PDF viewer. A temporary file is first created.
+	 * 
 	 * @param pdfFileContents PDF content as byte array
      * @throws Exception
 	 */
 	public static void open(final byte[] pdfFileContents)	throws Exception {
 		// first store the pdfFileContents to a temporary file
-		final File temporaryFile = HelperIO.getTemporaryFile(Context.getInstance().getApplicationName(), PDF_EXTENSION); //$NON-NLS-1$ //$NON-NLS-2$
+		final File temporaryFile = HelperIO.getTemporaryFile(Context.getInstance().getApplicationName(), PDF_EXTENSION);
 		HelperIO.writeFileFromBinary(temporaryFile, pdfFileContents, false);
 		open(temporaryFile);
 	}
 
 	/**
 	 * Show a PDF (provided as {@link File}) with PDF viewer.
+	 * 
 	 * @param pdfFile PDF content as file
      * @throws Exception
 	 */
@@ -73,78 +74,10 @@ public abstract class ControlPdf {
 		execute(pdfFile.getCanonicalPath());
 	}
 
-//	/**
-//	 * Deletes all PDF files in the PDF Directory.
-//	 * Intended to be called before the application is closed for security reasons (else the information within
-//	 * temporary PDF files could be read by anyone with access to the files).
-//	 * This will also delete the directory itself if it contains PDF files only. This is especially important on
-//	 * Unix systems where the directory could not be written to by another user of the application because of
-//	 * file permissions.
-//	 */
-//	public static void cleanup() {
-//		Logger.getInstance().writeMethodEntry(ControlPdf.class, "cleanup");  //$NON-NLS-1$
-//
-//		final File directory = createDirectory();
-//		final File[] files = directory.listFiles();
-//		if (files != null) {
-//			for (final File file : files) {
-//				if (file.getName().endsWith(PDF_EXTENSION)) {
-//					file.delete();
-////					int ii = 0; // Prevent hang up
-////					while (!file.delete() && ii < 5) {
-////						ii++;
-////					}
-//				}
-//			}
-//		}
-//
-//		// cleanup the directory
-//		directory.delete();
-//	
-//		Logger.getInstance().writeMethodExit(ControlPdf.class, "cleanup");  //$NON-NLS-1$
-//	}
-
 	
 	/*
 	 * Private methods
 	 */
-//	/**
-//	 * Return next temporary non existing file according to the rules of this class (see {@link ControlPdf above}).
-//	 * 
-//	 * @return File object. File is not physically created.
-//	 */
-//	private static File createFile() {
-//		Logger.getInstance().writeMethodEntry(ControlPdf.class, "createFile");  //$NON-NLS-1$
-//
-//		final File directory = createDirectory();
-//		int count = 0;
-//		File file;
-//
-//		do {
-//			file = new File(directory, FILE_NAME_PREFIX + count++ + PDF_EXTENSION);
-//		} while (file.exists());
-//		
-//		Logger.getInstance().writeMethodExit(ControlPdf.class, "createFile", file);  //$NON-NLS-1$
-//		return file;
-//	}
-//
-//	private static File createDirectory() {
-//		Logger.getInstance().writeMethodEntry(ControlPdf.class, "createDirectory");  //$NON-NLS-1$
-//
-//		// this is the root for Pdfs
-//		final File directoryPath = Context.getInstance().getApplicationWorkDirectory();
-//
-//		// get a subdirectory for the Pdf files
-//		final File directory = new File(directoryPath, DIRECTORY_NAME);
-//
-//		if (!directory.exists()) {
-//			directory.mkdir();
-//		}
-//		
-//		Logger.getInstance().writeMethodExit(ControlPdf.class, "createDirectory", directory);  //$NON-NLS-1$
-//		return directory;
-//	}
-
 	private static void execute(final String path) throws Exception {
 		final String viewerPath;
 		if (HelperEnvInfo.isWindowsPlatform()) {

@@ -42,19 +42,19 @@ import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
 
 
 /**
- * This is the super class for all Security-children
+ * This is the super class for all Security-children.
  * 
  * @author Stefan Laubenberger
- * @version 20081029
+ * @version 20081112
  */
 public abstract class Security {	
 	private static final Map<SocketAddress, Long> contactTable = new ConcurrentHashMap<SocketAddress, Long>(); //#LS new
 
 	/**
-	 * Validates a {@link ComObject} and the requested method on the server
+	 * Validates a {@link ComObject} and the requested method on the server.
 	 * 
 	 * @param server
-     * @param comObject Communication object
+     * @param comObject communication object
 	 * @throws Exception
      * @return true/false
 	 */
@@ -78,13 +78,13 @@ public abstract class Security {
 	}
 
 	/**
-	 * Validates a socket (simple DOS and overload protection)
+	 * Validates a socket (simple DOS and overload protection).
 	 * 
 	 * Ensures that no client connects faster than {@link ServerAbstract#getInterval()}.
 	 * Ensures that the total number of client connects within {@link ServerAbstract#getInterval()} dosen't reach {@link ServerAbstract#getRequests()}
 	 * 
-	 * @param server The server to protect
-     * @param socket The socket to protect
+	 * @param server to protect
+     * @param socket to protect
 	 * @see ServerAbstract#getInterval()
 	 * @see ServerAbstract#getRequests()
      * @return true/false
@@ -125,7 +125,7 @@ public abstract class Security {
 	 * Checks if a user is logged on.
 	 * 
 	 * @param server
-     * @param comObject Communication Object
+     * @param comObject communication Object
      * @return true/false
 	 */
 	public static boolean isUserLoggedOn(final ServerAbstract server, final ComObject comObject) {

@@ -35,10 +35,10 @@ import ch.sisprocom.bogatyr.model.dao.DataObject;
 
 
 /**
- * This is an exception if the validation of a {@link DataObject} is failed
+ * This is an exception if the validation of a {@link DataObject} is failed.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081112
  */
 public final class ExceptionValidation extends ExceptionAbstract {
 	private static final long serialVersionUID = 2262162323753693225L;

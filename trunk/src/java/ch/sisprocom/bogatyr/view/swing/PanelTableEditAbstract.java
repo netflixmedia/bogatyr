@@ -45,10 +45,10 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
 
 
 /**
- * This is a template panel for tables
+ * This is a template panel for tables.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public abstract class PanelTableEditAbstract extends Panel implements ActionListener {
 	private static final long serialVersionUID = 4152134766882997391L;

@@ -33,10 +33,10 @@ package ch.sisprocom.bogatyr.helper.property;
 
 
 /**
- * Properties holder
+ * Properties holder to access the properties form everywhere.
  * 
  * @author Stefan Laubenberger
- * @version 20080901
+ * @version 20081112
  */
 public abstract class Property {
 	private static IProperty instance;

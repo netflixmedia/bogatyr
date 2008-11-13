@@ -38,10 +38,10 @@ import ch.sisprocom.bogatyr.controller.net.server.ThreadServerAbstract;
 
 
 /**
- * This is the skeleton for synchron server threads
+ * This is the skeleton for synchron server threads.
  *  
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081112
  */
 public abstract class ThreadServerSynchAbstract extends ThreadServerAbstract {
 

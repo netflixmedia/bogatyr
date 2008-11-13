@@ -39,10 +39,10 @@ import org.apache.log4j.Logger;
 
 
 /**
- * Reads standard output and standard error of a process.
+ * Creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 20081028
+ * @version 20081112
  */
 public abstract class ControlProcess {
 	private static final int BUFFER = 1024;
@@ -51,8 +51,8 @@ public abstract class ControlProcess {
 	 * Creates a new process and reads the standard output and standard error.
 	 *
 	 * @param command to start the process
-     * @param outputStream If null, output is discarded.
-	 * @param errorStream If null, error is discarded.
+     * @param outputStream If null, output is discarded
+	 * @param errorStream If null, error is discarded
 	 * @return created process
      * @throws java.io.IOException
 	 */
@@ -84,12 +84,11 @@ public abstract class ControlProcess {
 	 */
 	/**
 	 * Starts two threads which read standard output and standard error from a process.
-	 * <strong>Note:</strong> Standard output and standard error of the process returned by
-	 * {@link Runtime#exec} must be read else the process might hang infinitly.
+	 * <strong>Note:</strong> Standard output and standard error of the process returned by {@link Runtime#exec} must be read else the process might hang infinitly.
 	 *
 	 * @param process to observe
-     * @param outputStream If null, output is discarded.
-	 * @param errorStream If null, error is discarded.
+     * @param outputStream If null, output is discarded
+	 * @param errorStream If null, error is discarded
 	 */
 	private static void readStandardOutput(final Process process, final OutputStream outputStream, final OutputStream errorStream) {
 		new StreamReader(process.getErrorStream(), errorStream);
@@ -131,7 +130,7 @@ public abstract class ControlProcess {
 					}
 				}
 			} catch (IOException ex) {
-				log.error("Couldn't read the stream from the process", ex); //$NON-NLS-1$
+				log.error("Couldn't read the stream of the process", ex); //$NON-NLS-1$
 			}
 		}
 	}
