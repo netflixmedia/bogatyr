@@ -37,24 +37,25 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 
 import javax.swing.AbstractButton;
+import javax.swing.JButton;
 
 
 /**
  * This is a button row to add 1-n buttons.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081118
  */
 public class ButtonRow extends Panel {
 	private static final long serialVersionUID = -3557759501854611930L;
 	
 
-	public ButtonRow(final Button[] data, final Insets insets) {
+	public ButtonRow(final JButton[] data, final Insets insets) {
 		super();
 		createLayout(data, insets, false);
 	}
 	
-	public ButtonRow(final Button[] data, final Insets insets, final boolean isVertical) {
+	public ButtonRow(final JButton[] data, final Insets insets, final boolean isVertical) {
 		super();
 		createLayout(data, insets, isVertical);
 	}
@@ -62,7 +63,7 @@ public class ButtonRow extends Panel {
 	public void addActionListener(final ActionListener listener) {
 		final Component[] components = getComponents();
 		for (final Component component : components) {
-	    	if (component instanceof Button) {
+	    	if (component instanceof JButton) {
 	    		((AbstractButton) component).addActionListener(listener);
 			}
 	    }
@@ -72,7 +73,7 @@ public class ButtonRow extends Panel {
 	/*
 	 * Private methods
 	 */
-	private void createLayout(final Button[] data, final Insets insets, final boolean isVertical) {
+	private void createLayout(final JButton[] data, final Insets insets, final boolean isVertical) {
 		if (isVertical) {
 			createLayoutVertical(data, insets);
 		} else {
@@ -80,7 +81,7 @@ public class ButtonRow extends Panel {
 		}
 	}
 	
-	private void createLayoutVertical(final Button[] data, final Insets insets) {
+	private void createLayoutVertical(final JButton[] data, final Insets insets) {
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
@@ -88,14 +89,14 @@ public class ButtonRow extends Panel {
 	    gbc.insets = insets;
 	   
 	    if (data != null) {
-	    	for (final Button button : data) {
+	    	for (final JButton button : data) {
 				gbc.gridy++;
 		    	add(button, gbc);
 		    }
 	    }
 	}
 	
-	private void createLayoutHorizontal(final Button[] data, final Insets insets) {
+	private void createLayoutHorizontal(final JButton[] data, final Insets insets) {
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
@@ -103,7 +104,7 @@ public class ButtonRow extends Panel {
 	    gbc.insets = insets;
 
 	    if (data != null) {
-	    	for (final Button button : data) {
+	    	for (final JButton button : data) {
 				gbc.gridx++;
 		    	add(button, gbc);
 		    }

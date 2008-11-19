@@ -29,51 +29,16 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
-
-import java.awt.Frame;
-
-import javax.swing.JDialog;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
+package ch.sisprocom.bogatyr.helper.timer;
 
 /**
- * This is an extended JDialog.
+ * ListenerTimer
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081119
  */
-public class Dialog extends JDialog {
-	private static final long serialVersionUID = -3903296901431213544L;
-	
-	public Dialog() {
-		super();
-		init();
-    }
-	
-	public Dialog(final Frame frame, final String title) {
-		super(frame, true);
-		setTitle(title);
-//		setLocationRelativeTo(frame);
-//		setLocationRelativeTo(null);
-		init();
-    }
-	
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-	}
-	
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
-	}
+public interface ListenerTimer { //TODO improve JavaDoc
+	void timeChanged(long time);
+	void timerStarted();
+	void timerStopped();
 }

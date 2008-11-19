@@ -217,7 +217,7 @@ public abstract class ServerAbstract extends ApplicationAbstract {
             port = Property.getInstance().getPropertyInt(PROPERTY_NETWORK_PORT);
 		} else {
 			log.error(PROPERTY_NETWORK_PORT + " == 'null'"); //$NON-NLS-1$
-			exit(50);
+			exit(10);
 		}
 	
 		value = Property.getInstance().getProperty(PROPERTY_NETWORK_TIMEOUT);
@@ -225,7 +225,7 @@ public abstract class ServerAbstract extends ApplicationAbstract {
             timeout = Property.getInstance().getPropertyInt(PROPERTY_NETWORK_TIMEOUT);
 		} else {
 			log.error(PROPERTY_NETWORK_TIMEOUT + " == 'null'"); //$NON-NLS-1$
-			exit(51);
+			exit(11);
 		}
 		
 		value = Property.getInstance().getProperty(PROPERTY_SERVER_INTERVAL);
@@ -233,7 +233,7 @@ public abstract class ServerAbstract extends ApplicationAbstract {
             interval = Property.getInstance().getPropertyInt(PROPERTY_SERVER_INTERVAL);
 		} else {
 			log.error(PROPERTY_SERVER_INTERVAL + " == 'null'"); //$NON-NLS-1$
-			exit(52);
+			exit(12);
 		}
 
 		value = Property.getInstance().getProperty(PROPERTY_SERVER_REQUESTS);
@@ -241,7 +241,7 @@ public abstract class ServerAbstract extends ApplicationAbstract {
             requests = Property.getInstance().getPropertyInt(PROPERTY_SERVER_REQUESTS);
 		} else {
 			log.error(PROPERTY_SERVER_REQUESTS + " == 'null'"); //$NON-NLS-1$
-			exit(53);
+			exit(13);
 		}
 	}
 }

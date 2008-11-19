@@ -38,18 +38,18 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
-import ch.sisprocom.bogatyr.controller.updater.Updater;
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.context.Context;
 import ch.sisprocom.bogatyr.helper.localizer.Localizer;
+import ch.sisprocom.bogatyr.helper.updater.Updater;
 
 
 /**
  * This is the skeleton for all Bogatyr applications.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081113
  */
 public abstract class ApplicationAbstract implements Runnable {
 	private static final Logger log = Logger.getLogger(ApplicationAbstract.class);
@@ -71,7 +71,7 @@ public abstract class ApplicationAbstract implements Runnable {
 	}
 	
 	/**
-     * Returns the start time of the application .
+     * Returns the start time of the application.
      * 
      * @return start time of the application
      */	
@@ -80,7 +80,7 @@ public abstract class ApplicationAbstract implements Runnable {
 	}
 
 	/**
-     * Terminates the application in a proper way.
+     * Terminates the application in a proper way with a return code (between 30 and 90).
      * 
      * @param returnCode System-Return-Code
      */	

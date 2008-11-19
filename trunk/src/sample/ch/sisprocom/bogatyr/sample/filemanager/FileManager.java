@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.property.Property;
  * Simple file manager using the Bogatyr framework
  * 
  * @author Stefan Laubenberger
- * @version 20081111
+ * @version 20081113
  */
 public class FileManager extends ApplicationAbstract {
 	private static final Logger log = Logger.getLogger(FileManager.class);
@@ -81,7 +81,7 @@ public class FileManager extends ApplicationAbstract {
             path = new File(value);
 		} else {
 			log.error(PROPERTY_PATH + " == 'null'"); //$NON-NLS-1$
-			exit(70);
+			exit(30);
 		}
 		
 		identifier = new String[]{Property.getInstance().getProperty(PROPERTY_IDENTIFIER)};
@@ -112,7 +112,7 @@ public class FileManager extends ApplicationAbstract {
 			searchFiles();
 		} catch (IOException ex) {
 			log.error("Search for files failed", ex); //$NON-NLS-1$
-			exit(79);
+			exit(31);
 		}
 		exit(0);
 	}
