@@ -287,7 +287,7 @@ public abstract class ClientAbstract extends ApplicationAbstract implements ICom
             host = value;
 		} else {
 			log.error(PROPERTY_NETWORK_HOST + " == 'null'"); //$NON-NLS-1$
-			exit(50);
+			exit(10);
 		}
 		
 		value = Property.getInstance().getProperty(PROPERTY_NETWORK_PORT);
@@ -295,7 +295,7 @@ public abstract class ClientAbstract extends ApplicationAbstract implements ICom
             port = Property.getInstance().getPropertyInt(PROPERTY_NETWORK_PORT);
 		} else {
 			log.error(PROPERTY_NETWORK_PORT + " == 'null'"); //$NON-NLS-1$
-			exit(51);
+			exit(11);
 		}
 		
 		value = Property.getInstance().getProperty(PROPERTY_CLIENT_INTERVAL);
@@ -303,7 +303,7 @@ public abstract class ClientAbstract extends ApplicationAbstract implements ICom
             interval = Property.getInstance().getPropertyInt(PROPERTY_CLIENT_INTERVAL);
 		} else {
 			log.error(PROPERTY_CLIENT_INTERVAL + " == 'null'"); //$NON-NLS-1$
-			exit(52);
+			exit(12);
 		}
 
 		value = Property.getInstance().getProperty(PROPERTY_NETWORK_SIZE);
@@ -311,7 +311,7 @@ public abstract class ClientAbstract extends ApplicationAbstract implements ICom
             size = Property.getInstance().getPropertyInt(PROPERTY_NETWORK_SIZE);
 		} else {
 			log.error(PROPERTY_NETWORK_SIZE + " == 'null'"); //$NON-NLS-1$
-			exit(53);
+			exit(13);
 		}
 	}
 

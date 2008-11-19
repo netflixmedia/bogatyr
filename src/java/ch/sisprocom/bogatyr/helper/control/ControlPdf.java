@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.control;
 
+import java.io.DataInputStream;
 import java.io.File;
 import java.text.MessageFormat;
 
@@ -42,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.context.Context;
  * This control opens PDF data with an external program such as Acrobat Reader.
  *
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081118
  */
 public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
@@ -54,13 +55,13 @@ public abstract class ControlPdf {
 	/**
 	 * Show a PDF (provided as a byte[]) with PDF viewer. A temporary file is first created.
 	 * 
-	 * @param pdfFileContents PDF content as byte array
+	 * @param pdfContent PDF content as byte array
      * @throws Exception
 	 */
-	public static void open(final byte[] pdfFileContents)	throws Exception {
+	public static void open(final byte[] pdfContent)	throws Exception {
 		// first store the pdfFileContents to a temporary file
 		final File temporaryFile = HelperIO.getTemporaryFile(Context.getInstance().getApplicationName(), PDF_EXTENSION);
-		HelperIO.writeFileFromBinary(temporaryFile, pdfFileContents, false);
+		HelperIO.writeFileFromBinary(temporaryFile, pdfContent, false);
 		open(temporaryFile);
 	}
 
@@ -73,7 +74,17 @@ public abstract class ControlPdf {
 	public static void open(final File pdfFile) throws Exception {
 		execute(pdfFile.getCanonicalPath());
 	}
-
+	
+	/**
+	 * Show a PDF (provided as {@link File}) with PDF viewer.
+	 * 
+	 * @param pdfStream PDF content as stream
+     * @throws Exception
+	 */
+	public static void open(final DataInputStream pdfStream) throws Exception {
+		open(HelperIO.readStream(pdfStream));
+	}
+	
 	
 	/*
 	 * Private methods

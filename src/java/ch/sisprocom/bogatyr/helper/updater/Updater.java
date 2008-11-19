@@ -29,12 +29,13 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.updater;
+package ch.sisprocom.bogatyr.helper.updater;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -42,6 +43,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -53,10 +55,11 @@ import ch.sisprocom.bogatyr.helper.context.Context;
  * This is the updater for new application versions
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081113
  */
 public abstract class Updater {
-	
+	private static final Logger log = Logger.getLogger(Updater.class);
+
 	public static void update() throws SAXException, IOException, ParserConfigurationException {
 		String updateLocation = Context.getInstance().getApplicationUpdateLocation();
 		
@@ -68,6 +71,7 @@ public abstract class Updater {
 		            is = new FileInputStream(file);
 		        } else {
 		    		final URLConnection con = (new URL(updateLocation)).openConnection();
+		    		con.setConnectTimeout(2000);
 		    		con.connect();
 		        	
 		        	is = con.getInputStream();
@@ -79,6 +83,9 @@ public abstract class Updater {
 				final DefaultHandler handler = new XmlParser(); 
 		
 				saxParser.parse(is, handler);
+			} catch (SocketTimeoutException ex) {
+				// do nothing (no internet available)
+				log.warn("Couldn't connect to the update xml file! No internet connection available or a proxy authentication is needed.");
 			} finally {
 				if (is != null) {
 					is.close();

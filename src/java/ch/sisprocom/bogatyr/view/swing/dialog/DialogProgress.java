@@ -29,44 +29,48 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.updater;
+package ch.sisprocom.bogatyr.view.swing.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.border.BevelBorder;
 
-import ch.sisprocom.bogatyr.view.swing.Dialog;
 import ch.sisprocom.bogatyr.view.swing.Panel;
 
 
 
 /**
- * DialogProgress displays a indeterminate progress bar during the download of the new application version.
+ * DialogProgress displays a indeterminate progress bar.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081118
  */
 public class DialogProgress extends Dialog {
 	private static final long serialVersionUID = 3287183043789350515L;
 	
-	protected final JProgressBar progressBar = new JProgressBar();
+	private final JProgressBar progressBar = new JProgressBar();
+    private final JFrame frame;
 	
-    public DialogProgress() {
+	public DialogProgress(JFrame frame) {
         super();
         
+        this.frame = frame;
+        
         createLayout();
+    }
+    
+    public DialogProgress() {
+        this(null);
     }
 
     /**
      * Displays the indeterminate progress bar
      */
 	public void createAndShowGUI() {
-    	setUndecorated(true);
-    	setSize(250, 40);
-    	setLocationRelativeTo(null);
     	setVisible(true);
     }
     
@@ -84,5 +88,9 @@ public class DialogProgress extends Dialog {
 		panelMain.add(progressBar, BorderLayout.CENTER);
 		
 		add(panelMain, BorderLayout.CENTER);
+		
+    	setUndecorated(true);
+    	setSize(250, 40);
+    	setLocationRelativeTo(frame);
 	}
  }

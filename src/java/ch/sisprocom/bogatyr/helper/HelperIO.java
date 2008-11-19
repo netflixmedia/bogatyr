@@ -416,7 +416,7 @@ public abstract class HelperIO {
 	    	while (scanner.hasNextLine()){
 	    		contents.append(scanner.nextLine());
 //	    		contents.append(System.getProperty("line.separator")); //$NON-NLS-1$
-                contents.append(HelperGeneral.getLineSeparator());
+                contents.append(HelperGeneral.getLS());
             }
 	    	str = contents.toString();
 	    } finally {

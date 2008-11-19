@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.util.Timer;
@@ -43,19 +44,18 @@ import javax.swing.ImageIcon;
  * Display a splash-screen manual or for a desired time.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081118
  */
 public class SplashScreen extends Frame {
 	private static final long serialVersionUID = 8819965047277292543L;
 	
-	private final ImageIcon image;
-//	private static final int BORDER_WIDTH = 40;
+	private final ImageIcon splash;
 
 
 	public SplashScreen(final String title, final Image icon, final ImageIcon splash) {
 		super(title, icon);
 
-        image = splash;
+        this.splash = splash;
 		
 		createLayout();
 	}
@@ -88,23 +88,19 @@ public class SplashScreen extends Frame {
 	 * Private methods
 	 */
 	private void createLayout() {
-        if (image != null && image.getImageLoadStatus() == MediaTracker.COMPLETE) {
-            int sizeX = image.getIconWidth();
-            int sizeY = image.getIconHeight();
-
-//          sizeX += BORDER_WIDTH * 2;
-//			sizeY += BORDER_WIDTH * 2;
-
+        if (splash != null && splash.getImageLoadStatus() == MediaTracker.COMPLETE) {
 			
-			final Label label = new Label(image);
+			final Label label = new Label(splash);
+//			splash.setImageObserver(label);
 			
-//			label.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,	Color.LIGHT_GRAY, Color.WHITE, Color.DARK_GRAY, Color.GRAY));
 			getContentPane().add(label);
 
+			pack();
+//			setSize(splash.getIconWidth(), splash.getIconHeight());
 			setUndecorated(true);
-			setSize(sizeX, sizeY);
 			setAlwaysOnTop(true);
 			setLocationRelativeTo(null);
+			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		}
 	}
 }

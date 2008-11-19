@@ -29,10 +29,11 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.updater;
+package ch.sisprocom.bogatyr.helper.updater;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 
 import javax.swing.JFileChooser;
@@ -50,13 +51,14 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperNet;
 import ch.sisprocom.bogatyr.helper.context.Context;
 import ch.sisprocom.bogatyr.helper.localizer.Localizer;
+import ch.sisprocom.bogatyr.view.swing.dialog.DialogProgress;
 
 
 /**
  * SAX handler to parse the update XML files
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081118
  */
 public class XmlParser extends DefaultHandler {
 	private static final Logger log = Logger.getLogger(XmlParser.class);
@@ -68,6 +70,7 @@ public class XmlParser extends DefaultHandler {
     private static final String	RES_DOWNGRADE_TEXT = "Updater.downgrade.text"; //$NON-NLS-1$
     private static final String	RES_FILE 	       = "Updater.file"; //$NON-NLS-1$
     private static final String	RES_SUCCESS 	   = "Updater.success"; //$NON-NLS-1$
+    private static final String	RES_FAIL     	   = "Updater.fail"; //$NON-NLS-1$
 
     // Tags
 	private static final String TAG_APPLICATION      = "application"; //$NON-NLS-1$
@@ -120,32 +123,32 @@ public class XmlParser extends DefaultHandler {
 	 * Private methods
 	 */
 	private void update() {
-		if (JOptionPane.showConfirmDialog(null, Localizer.getInstance().getValue(RES_UPDATE) + HelperGeneral.getLineSeparator() + 
+		if (JOptionPane.showConfirmDialog(null, Localizer.getInstance().getValue(RES_UPDATE) + HelperGeneral.getLS() + 
 				Localizer.getInstance().getValue(RES_UPDATE_TEXT), Context.getInstance().getApplicationName(), JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 			try {
 				download();
 			} catch (IOException ex) {
 				log.error("Couldn't download the new application version", ex);
-				Application.getInstance().exit(50);
+				Application.getInstance().exit(20);
 			}
 		} else {
 			log.warn("Update cancelled");
-			Application.getInstance().exit(51);
+			Application.getInstance().exit(21);
 		}
 	}
 	
 	private void downgrade() {
-		if (JOptionPane.showConfirmDialog(null, Localizer.getInstance().getValue(RES_DOWNGRADE) + HelperGeneral.getLineSeparator() + 
+		if (JOptionPane.showConfirmDialog(null, Localizer.getInstance().getValue(RES_DOWNGRADE) + HelperGeneral.getLS() + 
 				Localizer.getInstance().getValue(RES_DOWNGRADE_TEXT), Context.getInstance().getApplicationName(), JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 			try {
 				download();
 			} catch (IOException ex) {
 				log.error("Couldn't download the old application version", ex);
-				Application.getInstance().exit(52);
+				Application.getInstance().exit(22);
 			}
 		} else {
 			log.warn("Downgrade cancelled");
-			Application.getInstance().exit(53);
+			Application.getInstance().exit(23);
 		}
 	}
 	
@@ -172,7 +175,7 @@ public class XmlParser extends DefaultHandler {
 	            }
 	        } else {
 				log.warn("Download cancelled");
-				Application.getInstance().exit(54);
+				Application.getInstance().exit(24);
 	        }
 
 		}
@@ -192,13 +195,18 @@ public class XmlParser extends DefaultHandler {
 	        	data = HelperNet.readUrl(new URL(location));
 	        }
 	        HelperIO.writeFileFromBinary(output, data, false);
+	        
+			JOptionPane.showMessageDialog(null, Localizer.getInstance().getValue(RES_SUCCESS), Context.getInstance().getApplicationName(), JOptionPane.INFORMATION_MESSAGE);
+			log.info("Update successful");
+			Application.getInstance().exit(0);
+		} catch (SocketTimeoutException ex) {
+			// do nothing (no internet available)
+			JOptionPane.showMessageDialog(null, Localizer.getInstance().getValue(RES_FAIL), Context.getInstance().getApplicationName(), JOptionPane.ERROR_MESSAGE);
+			log.warn("Couldn't connect to the update url! No internet connection available or a proxy authentication is needed.");
+			Application.getInstance().exit(25);
 		} finally {
 			dialogProgress.dispose();
 		}
-
-		JOptionPane.showMessageDialog(null, Localizer.getInstance().getValue(RES_SUCCESS), Context.getInstance().getApplicationName(), JOptionPane.INFORMATION_MESSAGE);
-		log.info("Update successful");
-		Application.getInstance().exit(0);
     }
 
 

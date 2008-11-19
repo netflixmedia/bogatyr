@@ -98,7 +98,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      *
      * @return line separator
      */
-    public static String getLineSeparator() {
+    public static String getLS() {
     	return System.getProperty("line.separator"); //$NON-NLS-1$
     }
 
@@ -413,7 +413,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 
         for (final Object value : list) {
             sb.append(value);
-            sb.append(getLineSeparator());
+            sb.append(getLS());
         }
         return sb.toString();
     }
@@ -431,7 +431,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
             sb.append(pair.getKey());
             sb.append('=');
             sb.append(pair.getValue());
-            sb.append(getLineSeparator());
+            sb.append(getLS());
         }
         return sb.toString();
     }
@@ -447,7 +447,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 
 		for (final Object value : array) {
             sb.append(value);
-            sb.append(getLineSeparator());
+            sb.append(getLS());
         }
 		return sb.toString();
     }
