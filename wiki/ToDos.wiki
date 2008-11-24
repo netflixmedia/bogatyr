@@ -1,8 +1,0 @@
-#summary ToDos of the project
-#labels Phase-Requirements
-= ToDos =
-|| *Task* || *Who* ||
-|| DB python script || silvan.spross ||
-|| Installer || laubenberger ||
-|| Implement Port-Switching || ||
-|| HTTP Requests || ||
