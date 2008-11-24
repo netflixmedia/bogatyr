@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JDialog.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081120
  */
 public class Dialog extends JDialog {
 	private static final long serialVersionUID = -3903296901431213544L;
@@ -59,6 +59,14 @@ public class Dialog extends JDialog {
 		init();
     }
 	
+	public void createAndShowGUI() {
+		setVisible(true);
+	}
+
+	public void clearAndHide() {
+		dispose();
+	}
+
 	
 	/*
 	 * Private methods

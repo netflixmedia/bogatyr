@@ -33,6 +33,7 @@ package ch.sisprocom.bogatyr.helper.control;
 
 import java.io.DataInputStream;
 import java.io.File;
+import java.net.URL;
 import java.text.MessageFormat;
 
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
@@ -43,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.context.Context;
  * This control opens PDF data with an external program such as Acrobat Reader.
  *
  * @author Stefan Laubenberger
- * @version 20081118
+ * @version 20081124
  */
 public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
@@ -94,7 +95,7 @@ public abstract class ControlPdf {
 		if (HelperEnvInfo.isWindowsPlatform()) {
 			viewerPath = WINDOWS_PDF_VIEWER_PATH;
 		} else if (HelperEnvInfo.isMacPlatform()) {
-			ControlBrowser.displayURL("file://" + path); //$NON-NLS-1$
+			ControlBrowser.display(new URL("file://" + path)); //$NON-NLS-1$
 			return;
 		} else {
 			viewerPath = UNIX_PDF_VIEWER_PATH;

@@ -42,7 +42,7 @@ import org.apache.log4j.Logger;
  * Creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081124
  */
 public abstract class ControlProcess {
 	private static final int BUFFER = 1024;
@@ -102,8 +102,8 @@ public abstract class ControlProcess {
 	protected static class StreamReader extends Thread {
 		private static final Logger log = Logger.getLogger(StreamReader.class);
 		
-		private final InputStream fSource;
-		private final OutputStream fTarget;
+		private final InputStream is;
+		private final OutputStream os;
 
 		/**
 		 * Start new thread which reads from an {@link InputStream} until end-of-file is reached.
@@ -114,8 +114,8 @@ public abstract class ControlProcess {
 		 */
 		StreamReader(final InputStream source, final OutputStream target) {
             super();
-            fSource = source;
-            fTarget = target;
+            is = source;
+            os = target;
 			start();
 		}
 
@@ -124,9 +124,9 @@ public abstract class ControlProcess {
 			try {
                 final byte[] buffer = new byte[BUFFER];
                 int len;
-				while ((len = fSource.read(buffer)) != -1) {
-					if (fTarget != null) {
-                        fTarget.write(buffer, 0, len);
+				while ((len = is.read(buffer)) != -1) {
+					if (os != null) {
+                        os.write(buffer, 0, len);
 					}
 				}
 			} catch (IOException ex) {
