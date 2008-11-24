@@ -44,7 +44,7 @@ import javax.swing.ImageIcon;
  * Display a splash-screen manual or for a desired time.
  * 
  * @author Stefan Laubenberger
- * @version 20081118
+ * @version 20081120
  */
 public class SplashScreen extends Frame {
 	private static final long serialVersionUID = 8819965047277292543L;
@@ -66,12 +66,12 @@ public class SplashScreen extends Frame {
      * @param displayTime Duration in ms
      */	
 	public void display(final long displayTime) {
-		setVisible(true);
+		createAndShowGUI();
 		final Timer timer = new Timer();
 		timer.schedule(new TimerTask(){
 			@Override
 			public void run() {
-				dispose();
+				clearAndHide();
 			}
 		}, displayTime);
 	}
@@ -80,7 +80,7 @@ public class SplashScreen extends Frame {
      * Display the splash-screen
      */	
 	public void display() {
-		setVisible(true);
+		createAndShowGUI();
 	}  
 	
 
@@ -95,8 +95,8 @@ public class SplashScreen extends Frame {
 			
 			getContentPane().add(label);
 
-			pack();
-//			setSize(splash.getIconWidth(), splash.getIconHeight());
+//			pack();
+			setSize(splash.getIconWidth(), splash.getIconHeight());
 			setUndecorated(true);
 			setAlwaysOnTop(true);
 			setLocationRelativeTo(null);

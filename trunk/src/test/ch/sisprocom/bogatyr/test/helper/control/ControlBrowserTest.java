@@ -33,6 +33,8 @@ package ch.sisprocom.bogatyr.test.helper.control;
 
 import static org.junit.Assert.fail;
 
+import java.net.URL;
+
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.control.ControlBrowser;
@@ -42,13 +44,13 @@ import ch.sisprocom.bogatyr.helper.control.ControlBrowser;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20081124
  */
 public class ControlBrowserTest { //TODO improve
 	@Test
 	public void testDisplayUrl() {
 		try {
-			ControlBrowser.displayURL("www.sisprocom.ch");
+			ControlBrowser.display(new URL("http://www.sisprocom.ch"));
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 }
