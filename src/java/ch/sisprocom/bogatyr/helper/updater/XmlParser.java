@@ -58,7 +58,7 @@ import ch.sisprocom.bogatyr.view.swing.dialog.DialogProgress;
  * SAX handler to parse the update XML files
  * 
  * @author Stefan Laubenberger
- * @version 20081118
+ * @version 20081126
  */
 public class XmlParser extends DefaultHandler {
 	private static final Logger log = Logger.getLogger(XmlParser.class);
@@ -215,7 +215,7 @@ public class XmlParser extends DefaultHandler {
 	 * Overridden methods
 	 */
     @Override
-	public void startElement(String namespaceUri, String localName, String qualifiedName, Attributes attributes) throws SAXException {
+	public void startElement(final String namespaceUri, final String localName, final String qualifiedName, final Attributes attributes) throws SAXException {
     	/*if (TAG_NAME.equals(qualifiedName)) {
     		isName = true;
     	} else*/ if (TAG_ID.equals(qualifiedName)) {
@@ -256,7 +256,7 @@ public class XmlParser extends DefaultHandler {
     }
     
 	@Override
-	public void endElement(String namespaceUri, String localName, String qualifiedName) throws SAXException {
+	public void endElement(final String namespaceUri, final String localName, final String qualifiedName) throws SAXException {
 		if (TAG_APPLICATION.equals(qualifiedName)) {
 			if (id.equals(Context.getInstance().getApplicationId())) {
 
@@ -286,7 +286,7 @@ public class XmlParser extends DefaultHandler {
 	}
 		
     @Override 
-	public void characters(char[] chars, int startIndex, int endIndex) {
+	public void characters(final char[] chars, final int startIndex, final int endIndex) {
     	String value = new String(chars, startIndex, endIndex).trim();
     	
     	/*if (isName) {

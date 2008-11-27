@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JPasswordField.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081126
  */
 public class PasswordField extends JPasswordField {
 	private static final long serialVersionUID = 4337982428755317915L;
@@ -61,7 +61,7 @@ public class PasswordField extends JPasswordField {
 	 * @param correctPassword from the user (e.g. from the db).
 	 * @return true/false
 	 */
-	public boolean isPasswordCorrect(char[] correctPassword) {
+	public boolean isPasswordCorrect(final char[] correctPassword) {
 	    boolean isCorrect = true;
 
 	    if (getPassword().length != correctPassword.length) {

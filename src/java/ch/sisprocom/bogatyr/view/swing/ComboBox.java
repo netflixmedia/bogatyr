@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20081119
+ * @version 20081126
  */
 public class ComboBox extends JComboBox {
 	private static final long serialVersionUID = -3870596701286078140L;
@@ -98,13 +98,13 @@ public class ComboBox extends JComboBox {
         }
 	}
 	
-	protected class ComboBoxPopup extends PlainDocument { //TODO implement in Bogi
+	protected class ComboBoxPopup extends PlainDocument {
 		private static final long serialVersionUID = -5374025097785761556L;
 
 		private JComboBox comboBox;
 		private ComboBoxModel model;
 		private JTextComponent editor;
-		private boolean selecting = false;
+		protected boolean selecting = false;
 
 		public ComboBoxPopup(final JComboBox comboBox) {
 		    this.comboBox = comboBox;
@@ -118,7 +118,8 @@ public class ComboBox extends JComboBox {
 		    });
 
 		    editor.addKeyListener(new KeyAdapter() {
-		        public void keyPressed(KeyEvent e) {
+		        @Override
+				public void keyPressed(KeyEvent e) {
 		            if (comboBox.isDisplayable()) comboBox.setPopupVisible(true);
 		        }
 		    });
@@ -127,18 +128,18 @@ public class ComboBox extends JComboBox {
 		/*
 		 * Private methods
 		 */
-		private void setText(String text) throws BadLocationException {
+		private void setText(final String text) throws BadLocationException {
 		    // remove all text and insert the completed string
 		    super.remove(0, getLength());
 		    super.insertString(0, text, null);
 		}
 		
-		private void highlightCompletedText(int start) {
+		protected void highlightCompletedText(final int start) {
 		    editor.setSelectionStart(start);
 		    editor.setSelectionEnd(getLength());
 		}
 
-		private void setSelectedItem(Object item) {
+		private void setSelectedItem(final Object item) {
 		    selecting = true;
 
 		    model.setSelectedItem(item);
@@ -146,7 +147,7 @@ public class ComboBox extends JComboBox {
 		    selecting = false;
 		}
 
-		private Object lookupItem(String pattern) {
+		private Object lookupItem(final String pattern) {
 		    Object selectedItem = model.getSelectedItem();
 
 		    // only search for a different item if the currently selected does not match
@@ -170,7 +171,7 @@ public class ComboBox extends JComboBox {
 		}
 
 		// checks if str1 starts with str2 - ignores case
-		private boolean startsWithIgnoreCase(String str1, String str2) {
+		private boolean startsWithIgnoreCase(final String str1, final String str2) {
 
 		    return str1.toUpperCase().startsWith(str2.toUpperCase());
 
@@ -180,7 +181,7 @@ public class ComboBox extends JComboBox {
 		 * Overridden methods
 		 */
 		@Override
-		public void remove(int offs, int len) throws BadLocationException {
+		public void remove(final int offs, final int len) throws BadLocationException {
 		    // return immediately when selecting an item
 		    if (selecting) return;
 
@@ -188,7 +189,7 @@ public class ComboBox extends JComboBox {
 		}
 
 		@Override
-		public void insertString(int offset, String str, AttributeSet a) throws BadLocationException {
+		public void insertString(final int offset, final String str, AttributeSet a) throws BadLocationException {
 		    int offs = offset;
 		    
 			// return immediately when selecting an item

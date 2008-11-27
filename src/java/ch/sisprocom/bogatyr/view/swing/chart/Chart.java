@@ -52,7 +52,7 @@ import ch.sisprocom.bogatyr.view.swing.Panel;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081126
  */
 public class Chart extends Panel {
 	private static final long serialVersionUID = -4618658256880807781L;
@@ -310,21 +310,21 @@ public class Chart extends Panel {
 	 * Overridden methods
 	 */
 	@Override
-	public void setBackground(Color bg) {
+	public void setBackground(final Color bg) {
 		super.setBackground(bg);
 		colorBackground = bg;
 //		createLayout();
 	}
 	
 	@Override
-	public void setForeground(Color fg) {
+	public void setForeground(final Color fg) {
 		super.setForeground(fg);
 		colorForeground = fg;
 //		createLayout();
 	}
 	
 	@Override
-	public void setFont(Font font) {
+	public void setFont(final Font font) {
 		super.setFont(font);
 		this.font = font;
 //		createLayout();

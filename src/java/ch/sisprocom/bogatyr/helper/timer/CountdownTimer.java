@@ -31,84 +31,55 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.timer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
 import java.util.TimerTask;
 
 /**
  * CountdownTimer
  * 
  * @author Stefan Laubenberger
- * @version 20081119
+ * @version 20081126
  */
-public class CountdownTimer  { //TODO improve JavaDoc
-	private List<ListenerTimer> listListenerTimer = new ArrayList<ListenerTimer>();
-
-	protected Timer timer;
+public class CountdownTimer extends Timer {
 	protected long runtime;
-	protected long interval;
 	
 
 	public CountdownTimer(){
-		timer = new Timer();
+		super();
 	}
 	
+	/**
+	 * Starts immediately the countdown with a given runtime and standard interval of 1000ms.
+	 * 
+	 * @param runtime of the countdown
+	 */
+	@Override
 	public void start(final long runtime) {
-		this.start(500, runtime, 1000);
+		this.start(0, runtime, 1000);
 	}
 
+	/**
+	 * Start the countdown with a given delay, runtime and interval.
+	 * 
+	 * @param delay
+	 * @param runtime
+	 * @param interval
+	 */
 	public void start(final long delay, final long runtime, final long interval) {
     	timer.cancel();
     	
-    	timer = new Timer();
+    	timer = new java.util.Timer();
     	this.runtime = runtime;
     	this.interval = interval;
     	
-        timer.schedule(new Task(), delay, interval);
+        timer.schedule(new TaskCountdown(), delay, interval);
         fireTimerStarted();
     }
-
-    public void stop() {
-        timer.cancel();
-        fireTimerStopped();
-    }	
-	
-	public void addListenerTimer(final ListenerTimer listener) {
-		listListenerTimer.add(listener);
-	}
-	
-	public void removeListenerTimer() {
-		listListenerTimer = new ArrayList<ListenerTimer>();
-	}
-	
-	
-	/*
-	 * Private methods
-	 */
-	private void fireTimeChanged(long time) {
-		for (final ListenerTimer listener : listListenerTimer) {
-			listener.timeChanged(time);
-		}	
-	}
-	
-	private void fireTimerStarted() {
-		for (final ListenerTimer listener : listListenerTimer) {
-			listener.timerStarted();
-		}	
-	}
-	
-	private void fireTimerStopped() {
-		for (final ListenerTimer listener : listListenerTimer) {
-			listener.timerStopped();
-		}	
-	}
 	
 	
 	/*
 	 * Inner classes
 	 */
-	class Task extends TimerTask {
+	protected class TaskCountdown extends TimerTask {
 		@Override
 		public void run() {
 			if (runtime > 0) {

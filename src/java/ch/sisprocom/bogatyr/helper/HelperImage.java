@@ -137,7 +137,7 @@ public abstract class HelperImage {
 	 * @param strings as array
 	 * @return list containing the unique values
 	 */
-    private static List<String> unique(String[] strings) {
+    private static List<String> unique(final String[] strings) {
         Set<String> set = new HashSet<String>();
         
         for (String str : strings) {

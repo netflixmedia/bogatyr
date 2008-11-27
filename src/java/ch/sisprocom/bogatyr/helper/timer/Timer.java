@@ -39,12 +39,12 @@ import java.util.TimerTask;
  * Timer
  * 
  * @author Stefan Laubenberger
- * @version 20081119
+ * @version 20081126
  */
-public class Timer { //TODO improve JavaDoc
+public class Timer {
 	private List<ListenerTimer> listListenerTimer = new ArrayList<ListenerTimer>();
 
-	private java.util.Timer timer;
+	protected java.util.Timer timer;
 	protected long time = 0;
 	protected long interval;
 	
@@ -53,10 +53,21 @@ public class Timer { //TODO improve JavaDoc
 		timer = new java.util.Timer();
 	}
 	
+	/**
+	 * Starts immediately the timer with a given interval.
+	 * 
+	 * @param interval of the timer
+	 */
 	public void start(final long interval) {
-		this.start(500, interval);
+		this.start(0, interval);
 	}
 
+	/**
+	 * Starts the timer with a given delay and interval.
+	 * 
+	 * @param delay for the start of the timer
+	 * @param interval of the timer
+	 */
 	public void start(final long delay, final long interval) {
     	timer.cancel();
     	
@@ -66,16 +77,36 @@ public class Timer { //TODO improve JavaDoc
         fireTimerStarted();
     }
 
+	/**
+	 * Stops immediately the timer/countdown.
+	 */
     public void stop() {
         timer.cancel();
         fireTimerStopped();
     }	
 	
+	/**
+	 * Adds a listener for this timer/countdown.
+	 * 
+	 * @param listener to add
+	 */
 	public void addListenerTimer(final ListenerTimer listener) {
 		listListenerTimer.add(listener);
 	}
 	
-	public void removeListenerTimer() {
+	/**
+	 * Remove a listener for this timer/countdown.
+	 * 
+	 * @param listener to remove
+	 */
+	public void removeListenerTimer(final ListenerTimer listener) {
+		listListenerTimer.remove(listener);
+	}
+	
+	/**
+	 * Removes all listeners for this timer/countdown. 
+	 */
+	public void removeAllListenerTimer() {
 		listListenerTimer = new ArrayList<ListenerTimer>();
 	}
 	
@@ -83,19 +114,19 @@ public class Timer { //TODO improve JavaDoc
 	/*
 	 * Private methods
 	 */
-	private void fireTimeChanged(long time) {
+	protected void fireTimeChanged(final long time) {
 		for (final ListenerTimer listener : listListenerTimer) {
 			listener.timeChanged(time);
 		}	
 	}
 	
-	private void fireTimerStarted() {
+	protected void fireTimerStarted() {
 		for (final ListenerTimer listener : listListenerTimer) {
 			listener.timerStarted();
 		}	
 	}
 	
-	private void fireTimerStopped() {
+	protected void fireTimerStopped() {
 		for (final ListenerTimer listener : listListenerTimer) {
 			listener.timerStopped();
 		}	
@@ -105,7 +136,7 @@ public class Timer { //TODO improve JavaDoc
 	/*
 	 * Inner classes
 	 */
-	class Task extends TimerTask {
+	protected class Task extends TimerTask {
 	    @Override
 		public void run() {
 	    	time += interval;

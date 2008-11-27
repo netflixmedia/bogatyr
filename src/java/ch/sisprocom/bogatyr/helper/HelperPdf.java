@@ -54,7 +54,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * This is a helper class for PDF operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081126
  */
 public abstract class HelperPdf {
 
@@ -99,7 +99,7 @@ public abstract class HelperPdf {
      * @throws com.lowagie.text.DocumentException
      * @throws java.io.IOException
      */
-	public static void savePdfFromHTML(File[] input, File output) throws IOException, DocumentException {
+	public static void savePdfFromHTML(final File[] input, final File output) throws IOException, DocumentException {
 		OutputStream os = null;
 
 		try {
