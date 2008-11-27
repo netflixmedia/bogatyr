@@ -40,7 +40,7 @@ import java.util.List;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081126
  */
 public abstract class HelperMath {
 	
@@ -51,7 +51,7 @@ public abstract class HelperMath {
 	 * @param b second number
 	 * @return calculated gcd
 	 */
-	 public static double gcd(double a, double b) {
+	 public static double gcd(final double a, final double b) {
 		 final double result;
 		 
 		 if (b == 0) { 
@@ -69,7 +69,7 @@ public abstract class HelperMath {
 	 * @param b second number
 	 * @return calculated lcm
 	 */
-	 public static double lcm(double a, double b) {
+	 public static double lcm(final double a, final double b) {
 		 return a * b / gcd(a, b);
 	 }
 	 

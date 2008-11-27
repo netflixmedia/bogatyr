@@ -37,11 +37,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.xml.sax.SAXException;
 
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
@@ -58,7 +55,7 @@ import ch.sisprocom.bogatyr.helper.property.PropertyStream;
  * It handles the main functions like setup the logger, properties and localizer.
  *
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081126
  */
 public abstract class Runner {
 	private static final Logger log = Logger.getRootLogger();
@@ -97,7 +94,7 @@ public abstract class Runner {
 		}
 	}
 
-	private static void init(String propertiesStreamName) throws IOException {
+	private static void init(final String propertiesStreamName) throws IOException {
 	    // Properties and logger
 		final File file = new File(propertiesStreamName);
 		InputStream is = null;

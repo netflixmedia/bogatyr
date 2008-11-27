@@ -48,7 +48,7 @@ import java.util.List;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 20081028
+ * @version 20081126
  */
 public abstract class HelperGraphic {
 	
@@ -57,7 +57,7 @@ public abstract class HelperGraphic {
      * 
      * @param g Graphics2D container
      */	
-	public static void enableAntialiasing(Graphics2D g) {
+	public static void enableAntialiasing(final Graphics2D g) {
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 	}
 
@@ -67,7 +67,7 @@ public abstract class HelperGraphic {
      * @param size Dimension
      * @return Dimension with center coordinates
      */
-    public static Dimension getCenter(Dimension size) {
+    public static Dimension getCenter(final Dimension size) {
     	return new Dimension(size.width / 2, size.height / 2);
 	}
 
@@ -78,7 +78,7 @@ public abstract class HelperGraphic {
      * @param g Graphic container
      * @return Dimension with text size
      */
-	public static Dimension getTextSize(String text, Graphics g) {
+	public static Dimension getTextSize(final String text, final Graphics g) {
 		final FontMetrics fm = g.getFontMetrics(g.getFont());
 		final Rectangle2D rect = fm.getStringBounds(text, g);
 		
@@ -110,7 +110,7 @@ public abstract class HelperGraphic {
      * @param color for the hex value
      * @return hex value of the color
      */
-    public static String getColorHex(Color color) {
+    public static String getColorHex(final Color color) {
     	return Integer.toHexString(color.getRGB() & 0x00ffffff); 
 	}
 }

@@ -35,10 +35,21 @@ package ch.sisprocom.bogatyr.helper.timer;
  * ListenerTimer
  * 
  * @author Stefan Laubenberger
- * @version 20081119
+ * @version 20081127
  */
-public interface ListenerTimer { //TODO improve JavaDoc
+public interface ListenerTimer {
+	/**
+	 * Sends the actual time of the timer/countdown to the listener.
+	 */
 	void timeChanged(long time);
+	
+	/**
+	 * Informs the listener that the timer/countdown has started.
+	 */
 	void timerStarted();
+	
+	/**
+	 * Informs the listener that the timer/countdown has stopped.
+	 */
 	void timerStopped();
 }

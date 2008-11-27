@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081112
+ * @version 20081126
  */
 public abstract class ProviderSqlAbstract {
 	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
@@ -57,7 +57,7 @@ public abstract class ProviderSqlAbstract {
 	private String password;
 	
 	
-	protected ProviderSqlAbstract(String driver, String url, String user, String password) throws Exception {
+	protected ProviderSqlAbstract(final String driver, final String url, final String user, final String password) throws Exception {
         super();
         this.driver = driver;
         this.url = url;
@@ -81,19 +81,19 @@ public abstract class ProviderSqlAbstract {
 		return password;
 	}
 
-	public void setDriver(String driver) {
+	public void setDriver(final String driver) {
 		this.driver = driver;
 	}
 
-	public void setUrl(String url) {
+	public void setUrl(final String url) {
 		this.url = url;
 	}
 
-	public void setUser(String user) {
+	public void setUser(final String user) {
 		this.user = user;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(final String password) {
 		this.password = password;
 	}
 

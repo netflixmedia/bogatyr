@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.view.swing.Panel;
  * DialogProgress displays a indeterminate progress bar.
  * 
  * @author Stefan Laubenberger
- * @version 20081118
+ * @version 20081126
  */
 public class DialogProgress extends Dialog {
 	private static final long serialVersionUID = 3287183043789350515L;
@@ -55,7 +55,7 @@ public class DialogProgress extends Dialog {
 	private final JProgressBar progressBar = new JProgressBar();
     private final JFrame frame;
 	
-	public DialogProgress(JFrame frame) {
+	public DialogProgress(final JFrame frame) {
         super();
         
         this.frame = frame;
@@ -65,13 +65,6 @@ public class DialogProgress extends Dialog {
     
     public DialogProgress() {
         this(null);
-    }
-
-    /**
-     * Displays the indeterminate progress bar
-     */
-	public void createAndShowGUI() {
-    	setVisible(true);
     }
     
     

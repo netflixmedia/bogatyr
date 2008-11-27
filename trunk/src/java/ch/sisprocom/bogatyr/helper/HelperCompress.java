@@ -48,7 +48,7 @@ import java.util.zip.ZipOutputStream;
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081126
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
 	private final static byte[] BUFFER = new byte[1024];
@@ -78,6 +78,32 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 		}
 	}
 	
+//	/**
+//     * Writes a compressed stream.
+//     * 
+//     * @param os OutputStram to compress
+//     * @return Compressed OutputStream
+//     * @throws java.io.IOException
+//     */	
+//	public static OutputStream writeStream(final OutputStream os) throws IOException {
+////		ZipOutputStream zos = null;
+////		
+////		try {
+////			// create a ZipOutputStream to zip the data to
+////			zos = new ZipOutputStream(new FileOutputStream(file));
+////
+////			for (File entry : listOfFiles) {
+////			addEntry(zos, entry);
+////			}
+////		} finally {
+////			if (zos != null) {
+////				//close the stream 
+////			    zos.close();
+////			} 
+////		}
+//		return null;
+//	}
+
 	/**
      * Extracts a zip file to a destination directory.
      * 
@@ -93,6 +119,23 @@ public abstract class HelperCompress { //TODO implement GZip for streams
           extractEntry(file, zipEntry, destinationDirectory); 
         }
 	} 
+
+//	/**
+//     * Read a compressed stream and returns it uncompressed.
+//     * 
+//     * @param is InputStream to uncompress
+//     * @return Uncompressed InutStream
+//     * @throws java.io.IOException
+//     */	
+//	public static InputStream readStream(final InputStream is) throws IOException { 
+////        Enumeration<? extends ZipEntry> zipEntryEnum = file.entries(); 
+//// 
+////        while (zipEntryEnum.hasMoreElements()) { 
+////          ZipEntry zipEntry = zipEntryEnum.nextElement(); 
+////          extractEntry(file, zipEntry, destinationDirectory); 
+////        }
+//		return null;
+//	} 
 
 	
 	/*
@@ -124,7 +167,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 		}
 	}
 	
-	private static void extractEntry(ZipFile zipFile, ZipEntry entry, File destDir) throws IOException { 
+	private static void extractEntry(final ZipFile zipFile, final ZipEntry entry, final File destDir) throws IOException { 
 		File file = new File(destDir, entry.getName()); 
  	 
 	    if (entry.isDirectory()) 
