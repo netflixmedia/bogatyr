@@ -42,7 +42,7 @@ import java.util.List;
  * @author Stefan Laubenberger
  * @version 20081126
  */
-public abstract class HelperMath {
+public abstract class HelperMath { //TODO document in Wiki!
 	
 	/**
 	 * Returns the greatest common divisor.

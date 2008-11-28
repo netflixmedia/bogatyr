@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.property.Property;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public class LocalizerFile implements ILocalizer {
+public class LocalizerFile implements ILocalizer { //TODO document in Wiki!
 	private static final Logger log = Logger.getLogger(LocalizerFile.class);
 	
 	// Properties

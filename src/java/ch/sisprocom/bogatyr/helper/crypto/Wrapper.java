@@ -46,7 +46,7 @@ import javax.crypto.NoSuchPaddingException;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class Wrapper {
+public abstract class Wrapper { //TODO document in Wiki!
 	/**
 	 * Wrap the key with a wrapper key.
 	 * 

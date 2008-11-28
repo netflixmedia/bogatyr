@@ -48,7 +48,7 @@ import java.util.prefs.Preferences;
  * @author Stefan Laubenberger
  * @version 20081026
  */
-public abstract class HelperPreferences {
+public abstract class HelperPreferences { //TODO document in Wiki!
 	public static void loadFromFile(final File file) throws IOException, InvalidPreferencesFormatException {
         BufferedInputStream bis = null;
 

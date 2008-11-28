@@ -38,7 +38,7 @@ package ch.sisprocom.bogatyr.helper.property;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class Property {
+public abstract class Property { //TODO document in Wiki!
 	private static IProperty instance;
 	   
 

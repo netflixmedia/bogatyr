@@ -50,7 +50,7 @@ import java.util.List;
  * @author Stefan Laubenberger
  * @version 20081126
  */
-public abstract class HelperGraphic {
+public abstract class HelperGraphic { //TODO document in Wiki!
 	
 	/**
      * Enable antialiasing on a graphic container.

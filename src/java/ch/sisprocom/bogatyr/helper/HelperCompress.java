@@ -51,7 +51,7 @@ import java.util.zip.ZipOutputStream;
  * @version 20081126
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
-	private final static byte[] BUFFER = new byte[1024];
+	private final static byte[] BUFFER = new byte[1024]; //TODO document in Wiki!
 
 	/**
      * Writes a zip file containing a list of files.

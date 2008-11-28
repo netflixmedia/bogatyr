@@ -56,7 +56,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * @author Stefan Laubenberger
  * @version 20081126
  */
-public abstract class HelperPdf {
+public abstract class HelperPdf { //TODO document in Wiki!
 
     /**
      * Saves a pdf from a Component to a file.

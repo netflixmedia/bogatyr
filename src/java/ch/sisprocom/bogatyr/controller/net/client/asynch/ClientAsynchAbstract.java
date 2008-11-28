@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class ClientAsynchAbstract extends ClientAbstract {
+public abstract class ClientAsynchAbstract extends ClientAbstract { //TODO document in Wiki!
 //	protected Thread thread;
 	
 

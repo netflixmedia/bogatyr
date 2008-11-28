@@ -46,7 +46,7 @@ import javax.swing.JButton;
  * @author Stefan Laubenberger
  * @version 20081118
  */
-public class ButtonRow extends Panel {
+public class ButtonRow extends Panel { //TODO document in Wiki!
 	private static final long serialVersionUID = -3557759501854611930L;
 	
 

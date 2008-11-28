@@ -42,7 +42,7 @@ import java.util.List;
  * @author Stefan Laubenberger
  * @version 20081026
  */
-public class Paginator {
+public class Paginator { //TODO document in Wiki!
     private List<?> list;
     private int numberPerPage;
 

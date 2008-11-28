@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * @author Silvan Spross
  * @version 20081126
  */
-public abstract class ProviderSqlAbstract {
+public abstract class ProviderSqlAbstract { //TODO document in Wiki!
 	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
 	
 	// Server

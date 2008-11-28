@@ -60,7 +60,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class HelperSound {
+public abstract class HelperSound { //TODO document in Wiki!
 
     /**
      * Returns an audio clip from file (e.g. WAV files).

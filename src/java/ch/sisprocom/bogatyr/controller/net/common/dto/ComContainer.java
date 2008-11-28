@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * @author Stefan Laubenberger
  * @version 20081026
  */
-public final class ComContainer implements Serializable {
+public final class ComContainer implements Serializable { //TODO document in Wiki!
 	private static final long serialVersionUID = 1639137536981333349L;
 
 	private final long createTime = System.currentTimeMillis();

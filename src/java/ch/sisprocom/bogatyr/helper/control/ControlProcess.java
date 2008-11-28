@@ -44,7 +44,7 @@ import org.apache.log4j.Logger;
  * @author Stefan Laubenberger
  * @version 20081124
  */
-public abstract class ControlProcess {
+public abstract class ControlProcess { //TODO document in Wiki!
 	private static final int BUFFER = 1024;
 	
 	/**

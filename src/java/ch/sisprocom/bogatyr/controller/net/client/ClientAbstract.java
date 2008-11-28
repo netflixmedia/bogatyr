@@ -62,7 +62,7 @@ import ch.sisprocom.bogatyr.model.dao.User;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class ClientAbstract extends ApplicationAbstract implements ICom {
+public abstract class ClientAbstract extends ApplicationAbstract implements ICom { //TODO document in Wiki!
 	private static final Logger log = Logger.getLogger(ClientAbstract.class);
 	
 	// Properties

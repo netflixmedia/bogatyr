@@ -39,7 +39,7 @@ import java.util.TimerTask;
  * @author Stefan Laubenberger
  * @version 20081126
  */
-public class CountdownTimer extends Timer {
+public class CountdownTimer extends Timer { //TODO document in Wiki!
 	protected long runtime;
 	
 

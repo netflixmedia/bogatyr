@@ -39,7 +39,7 @@ package ch.sisprocom.bogatyr.helper.crypto;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class Obfuscator {
+public abstract class Obfuscator { //TODO document in Wiki!
 	private static final byte DEFAULT_PATTERN = Byte.MAX_VALUE;
 
 	/**

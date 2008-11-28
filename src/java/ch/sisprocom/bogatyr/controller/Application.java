@@ -38,7 +38,7 @@ package ch.sisprocom.bogatyr.controller;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class Application {
+public abstract class Application { //TODO document in Wiki!
 	private static ApplicationAbstract instance;
 	   
 

@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.exception.ExceptionValidation;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class DataObject implements Serializable, IValidator {
+public abstract class DataObject implements Serializable, IValidator { //TODO document in Wiki!
     private static final long serialVersionUID = -3023201860307136848L;
 	
 	public static final int PERSISTENCE_CHANGED = 1;

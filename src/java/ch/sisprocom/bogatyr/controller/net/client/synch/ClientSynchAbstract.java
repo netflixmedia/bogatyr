@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class ClientSynchAbstract extends ClientAbstract {
+public abstract class ClientSynchAbstract extends ClientAbstract { //TODO document in Wiki!
 
 	
 	protected ClientSynchAbstract() throws Exception {

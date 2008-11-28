@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.context.Context;
  * @author Stefan Laubenberger
  * @version 20081124
  */
-public abstract class ControlPdf {
+public abstract class ControlPdf { //TODO document in Wiki!
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
 
 	private static final String WINDOWS_PDF_VIEWER_PATH  = "rundll32 url.dll,FileProtocolHandler {0}"; //$NON-NLS-1$

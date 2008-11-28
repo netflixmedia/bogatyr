@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
  * @author Stefan Laubenberger
  * @version 20081027
  */
-public class HelperFileTest { //TODO improve and complete
+public class HelperIOTest { //TODO improve and complete
 	@Test
 	public void testGetFileNames() {
 		try {

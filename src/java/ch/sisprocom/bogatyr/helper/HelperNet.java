@@ -53,7 +53,7 @@ import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
  * @author Stefan Laubenberger
  * @version 20081126
  */
-public abstract class HelperNet {
+public abstract class HelperNet { //TODO document in Wiki!
 //	private static final String PROPERTY_HTTP_USE_PROXY   = "http.useProxy"; //$NON-NLS-1$
 	private static final String PROPERTY_HTTP_PROXY_HOST  = "http.proxyHost"; //$NON-NLS-1$
 	private static final String PROPERTY_HTTP_PROXY_PORT  = "http.proxyPort"; //$NON-NLS-1$

@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.model.dao.User;
  * @author Stefan Laubenberger
  * @version 20081113
  */
-public class Context implements IContext {
+public class Context implements IContext { //TODO document in Wiki!
 	private static Context instance;
 
 	private static final String KEY_APPLICATION_NAME             = "Application.name"; //$NON-NLS-1$

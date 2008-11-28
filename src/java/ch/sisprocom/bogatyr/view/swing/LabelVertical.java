@@ -49,7 +49,7 @@ import javax.swing.Icon;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public class LabelVertical extends Panel implements Icon {
+public class LabelVertical extends Panel implements Icon { //TODO document in Wiki!
 	private static final long serialVersionUID = -6664528555390753370L;
 	
 	private static final double NINETY_DEGREES = 1.5707963267948966;

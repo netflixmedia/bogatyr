@@ -44,7 +44,7 @@ import java.awt.Insets;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public class LabeledTextField extends Panel {//TODO add iPady and iPadx?
+public class LabeledTextField extends Panel { //TODO document in Wiki!
 	private static final long serialVersionUID = 1310593497620798003L;
 	
 	private Label label;

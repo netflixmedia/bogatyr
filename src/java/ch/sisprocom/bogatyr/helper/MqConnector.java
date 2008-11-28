@@ -51,7 +51,7 @@ import com.ibm.mqbind.MQC;
  * @author Stefan Laubenberger
  * @version 20081026
  */
-public class MqConnector {
+public class MqConnector { //TODO document in Wiki!
 
 	public MqConnector(final String hostname, final int port, final String channel) {
 		// set up MQ environment

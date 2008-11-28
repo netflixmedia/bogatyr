@@ -42,7 +42,7 @@ import java.util.Locale;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class Localizer {
+public abstract class Localizer { //TODO document in Wiki!
 	private static ILocalizer instance;
 
 	

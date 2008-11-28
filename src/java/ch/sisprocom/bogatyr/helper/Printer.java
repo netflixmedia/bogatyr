@@ -49,7 +49,7 @@ import javax.swing.RepaintManager;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public class Printer implements Printable {
+public class Printer implements Printable { //TODO document in Wiki!
 	private Component componentToBePrinted;
 
 
