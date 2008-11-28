@@ -44,7 +44,7 @@ import java.awt.event.ActionListener;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public class LabeledRadioButton extends Panel {
+public class LabeledRadioButton extends Panel { //TODO document in Wiki!
 	private static final long serialVersionUID = 3461718081893469685L;
 
 	private Label label;

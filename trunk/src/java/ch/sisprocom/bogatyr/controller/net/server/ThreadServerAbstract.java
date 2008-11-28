@@ -54,7 +54,7 @@ import ch.sisprocom.bogatyr.model.dao.User;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class ThreadServerAbstract implements Runnable, ICom {
+public abstract class ThreadServerAbstract implements Runnable, ICom { //TODO document in Wiki!
 	private final long startTime = System.currentTimeMillis();
 
 	// Properties

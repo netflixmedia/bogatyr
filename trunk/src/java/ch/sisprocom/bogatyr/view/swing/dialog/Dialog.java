@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * @author Stefan Laubenberger
  * @version 20081120
  */
-public class Dialog extends JDialog {
+public class Dialog extends JDialog { //TODO document in Wiki!
 	private static final long serialVersionUID = -3903296901431213544L;
 	
 	public Dialog() {

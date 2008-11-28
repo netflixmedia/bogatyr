@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public class PropertyStream implements IProperty {
+public class PropertyStream implements IProperty { //TODO document in Wiki!
 	private final Properties properties;
 
 

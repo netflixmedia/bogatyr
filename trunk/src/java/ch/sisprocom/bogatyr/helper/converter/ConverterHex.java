@@ -39,7 +39,7 @@ package ch.sisprocom.bogatyr.helper.converter;
  * @author Stefan Laubenberger
  * @version 20081126
  */
-public abstract class ConverterHex {
+public abstract class ConverterHex { //TODO document in Wiki!
     private static final CharSequence DIGITS = "0123456789abcdef"; //$NON-NLS-1$
     
 

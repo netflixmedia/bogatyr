@@ -46,7 +46,7 @@ import javax.swing.ImageIcon;
  * @author Stefan Laubenberger
  * @version 20081120
  */
-public class SplashScreen extends Frame {
+public class SplashScreen extends Frame { //TODO document in Wiki!
 	private static final long serialVersionUID = 8819965047277292543L;
 	
 	private final ImageIcon splash;

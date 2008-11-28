@@ -31,7 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.sample.helloworld;
 
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.log4j.Logger;
+import org.xml.sax.SAXException;
 
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
 import ch.sisprocom.bogatyr.helper.localizer.Localizer;
@@ -42,7 +47,7 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081112
+ * @version 20081127
  */
 public class HelloWorld extends ApplicationAbstract {
 	private static final Logger log = Logger.getLogger(HelloWorld.class);
@@ -53,12 +58,18 @@ public class HelloWorld extends ApplicationAbstract {
 	
 	public HelloWorld() {
 		super();
+//		try {
+//			update();
+//		} catch (Exception ex) {
+//			log.error("Update failed", ex);
+//		}
 		run();
 	}
 
 	public void run() {
 		String text = Localizer.getInstance().getValue(RES_TEXT);
 		
+		System.out.println(text);
 		log.info(text);
 
 		exit(0);

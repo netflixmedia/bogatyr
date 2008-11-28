@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class Security {	
+public abstract class Security { //TODO document in Wiki!
 	private static final Map<SocketAddress, Long> contactTable = new ConcurrentHashMap<SocketAddress, Long>(); //#LS new
 
 	/**

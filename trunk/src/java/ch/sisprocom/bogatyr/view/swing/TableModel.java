@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public class TableModel extends AbstractTableModel {
+public class TableModel extends AbstractTableModel { //TODO document in Wiki!
 	private static final long serialVersionUID = -472247252594891753L;
 	
 	private final String[] columnNames;

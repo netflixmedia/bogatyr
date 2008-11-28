@@ -44,7 +44,7 @@ import java.awt.event.ActionListener;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public class LabeledComboBox extends Panel {//TODO add iPady and iPadx?
+public class LabeledComboBox extends Panel { //TODO document in Wiki!
 	private static final long serialVersionUID = -67296455436983811L;
 
 	private Label label;

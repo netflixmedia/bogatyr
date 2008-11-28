@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.controller.net.server.ThreadServerAbstract;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class ThreadServerAsynchAbstract extends ThreadServerAbstract {
+public abstract class ThreadServerAsynchAbstract extends ThreadServerAbstract { //TODO document in Wiki!
 	private Thread thread;
 	
 	private final ServerAsynchAbstract server;

@@ -52,7 +52,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * @author Stefan Laubenberger
  * @version 20081126
  */
-public class ComboBox extends JComboBox {
+public class ComboBox extends JComboBox { //TODO document in Wiki!
 	private static final long serialVersionUID = -3870596701286078140L;
 
 	

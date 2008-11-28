@@ -45,7 +45,7 @@ import java.util.Map;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class HelperEnvInfo {
+public abstract class HelperEnvInfo { //TODO document in Wiki!
 	/**
 	 * Returns the same as Runtime.getRuntime().totalMemory().
      *

@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.exception.ExceptionInvalidUserKey;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class ServerAsynchAbstract extends ServerAbstract {
+public abstract class ServerAsynchAbstract extends ServerAbstract { //TODO document in Wiki!
 	private final Map<String, ThreadServerAsynchAbstract> mapThread = new ConcurrentHashMap<String, ThreadServerAsynchAbstract>();
 
 //	private Thread thread;

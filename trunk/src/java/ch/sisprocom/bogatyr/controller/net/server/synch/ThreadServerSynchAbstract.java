@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.controller.net.server.ThreadServerAbstract;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class ThreadServerSynchAbstract extends ThreadServerAbstract {
+public abstract class ThreadServerSynchAbstract extends ThreadServerAbstract { //TODO document in Wiki!
 
 	protected ThreadServerSynchAbstract(final ServerAbstract server, final Socket socket) {
 		super(server, socket);

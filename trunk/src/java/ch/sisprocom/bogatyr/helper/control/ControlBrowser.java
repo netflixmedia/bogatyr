@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
  * @author Stefan Laubenberger
  * @version 20081124
  */
-public abstract class ControlBrowser {
+public abstract class ControlBrowser { //TODO document in Wiki!
 	protected static final Logger log = Logger.getLogger(ControlBrowser.class);
 	
 	// Default browser under windows

@@ -40,7 +40,7 @@ import ch.sisprocom.bogatyr.controller.net.server.ServerAbstract;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class ServerSynchAbstract extends ServerAbstract {
+public abstract class ServerSynchAbstract extends ServerAbstract { //TODO document in Wiki!
 
 	protected ServerSynchAbstract() throws Exception {
 		super();

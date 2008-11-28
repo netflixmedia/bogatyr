@@ -41,7 +41,7 @@ import java.util.TimerTask;
  * @author Stefan Laubenberger
  * @version 20081126
  */
-public class Timer {
+public class Timer { //TODO document in Wiki!
 	private List<ListenerTimer> listListenerTimer = new ArrayList<ListenerTimer>();
 
 	protected java.util.Timer timer;

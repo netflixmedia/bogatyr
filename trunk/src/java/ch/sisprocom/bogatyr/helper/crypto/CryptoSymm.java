@@ -50,7 +50,7 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class CryptoSymm {
+public abstract class CryptoSymm { //TODO document in Wiki!
 	public static final String ALGORITHM = "AES"; //$NON-NLS-1$
 	public static final String XFORM     = "AES/CBC/PKCS5Padding"; //$NON-NLS-1$
 

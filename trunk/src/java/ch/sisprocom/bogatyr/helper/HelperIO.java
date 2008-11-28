@@ -55,7 +55,7 @@ import java.util.Scanner;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081112
+ * @version 20081128
  */
 public abstract class HelperIO {
 	private final static byte[] BUFFER = new byte[1024];
@@ -325,18 +325,18 @@ public abstract class HelperIO {
 	/**
      * Reads a stream in a byte-array.
      * 
-     * @param in InputStream for reading
+     * @param is InputStream for reading
      * @return byte-array containing the stream content
      * @throws java.io.IOException
      */	
-	public static byte[] readStream(final InputStream in) throws IOException {
+	public static byte[] readStream(final InputStream is) throws IOException {
 		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		final byte[] result;
 		int x;
 		
 		try {
 //            final byte[] buffer = new byte[BUFFER];
-            while ((x = in.read(BUFFER, 0, BUFFER.length)) != -1) {
+            while ((x = is.read(BUFFER, 0, BUFFER.length)) != -1) {
 				bos.write(BUFFER, 0, x);
 			}
             bos.flush();

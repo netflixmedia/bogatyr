@@ -39,7 +39,7 @@ package ch.sisprocom.bogatyr.helper;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class HelperXml {
+public abstract class HelperXml { //TODO document in Wiki!
 	/**
      * This method ensures that the output String has only valid XML unicode characters as specified by the XML 1.0 standard.
      * For reference, please see <a href="http://www.w3.org/TR/2000/REC-xml-20001006#NT-Char">the standard</a>. 

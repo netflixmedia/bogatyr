@@ -44,7 +44,7 @@ import java.awt.event.ActionListener;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public class LabeledNumberField extends Panel {//TODO add iPady and iPadx?
+public class LabeledNumberField extends Panel { //TODO document in Wiki!
 	private static final long serialVersionUID = 8536177338219909078L;
 
 	private Label label;

@@ -44,7 +44,7 @@ import java.awt.event.ActionListener;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public class LabeledCheckBox extends Panel { //TODO add iPady and iPadx?
+public class LabeledCheckBox extends Panel {  //TODO document in Wiki!
 	private static final long serialVersionUID = 2215341067138215010L;
 
 	private Label label;

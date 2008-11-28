@@ -54,7 +54,7 @@ import ch.sisprocom.bogatyr.view.swing.Panel;
  * @author Stefan Laubenberger
  * @version 20081126
  */
-public class Chart extends Panel {
+public class Chart extends Panel { //TODO document in Wiki!
 	private static final long serialVersionUID = -4618658256880807781L;
 
 	public static final int X_AXIS_NORTH = 1;

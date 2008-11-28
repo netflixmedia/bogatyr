@@ -57,7 +57,7 @@ import ch.sisprocom.bogatyr.helper.property.PropertyStream;
  * @author Stefan Laubenberger
  * @version 20081126
  */
-public abstract class Runner {
+public abstract class Runner { //TODO document in Wiki!
 	private static final Logger log = Logger.getRootLogger();
 	
 	// Properties

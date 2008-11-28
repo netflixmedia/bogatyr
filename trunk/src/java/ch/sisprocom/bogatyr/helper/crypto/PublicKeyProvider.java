@@ -70,7 +70,7 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class PublicKeyProvider {
+public abstract class PublicKeyProvider { //TODO document in Wiki!
 	/**
      * Get the certificate out of the given certificate file.
      * 

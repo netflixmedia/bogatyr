@@ -51,7 +51,7 @@ import ch.sisprocom.bogatyr.helper.updater.Updater;
  * @author Stefan Laubenberger
  * @version 20081113
  */
-public abstract class ApplicationAbstract implements Runnable {
+public abstract class ApplicationAbstract implements Runnable { //TODO document in Wiki!
 	private static final Logger log = Logger.getLogger(ApplicationAbstract.class);
 	
 	// Resources

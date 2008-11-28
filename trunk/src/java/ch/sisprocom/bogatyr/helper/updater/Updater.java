@@ -57,7 +57,7 @@ import ch.sisprocom.bogatyr.helper.context.Context;
  * @author Stefan Laubenberger
  * @version 20081113
  */
-public abstract class Updater {
+public abstract class Updater { //TODO document in Wiki!
 	private static final Logger log = Logger.getLogger(Updater.class);
 
 	public static void update() throws SAXException, IOException, ParserConfigurationException {

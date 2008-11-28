@@ -40,7 +40,7 @@ import ch.sisprocom.bogatyr.controller.net.common.dto.ComObject;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class MethodParser {
+public abstract class MethodParser { //TODO document in Wiki!
     /**
      * Execute a method in the server thread or client.
      *

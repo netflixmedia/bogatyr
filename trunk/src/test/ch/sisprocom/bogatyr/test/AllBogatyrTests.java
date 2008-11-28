@@ -41,7 +41,7 @@ import org.junit.runner.Result;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.test.helper.HelperEnvInfoTest;
-import ch.sisprocom.bogatyr.test.helper.HelperFileTest;
+import ch.sisprocom.bogatyr.test.helper.HelperIOTest;
 import ch.sisprocom.bogatyr.test.helper.HelperGeneralTest;
 import ch.sisprocom.bogatyr.test.helper.HelperGraphicTest;
 import ch.sisprocom.bogatyr.test.helper.HelperImageTest;
@@ -113,7 +113,7 @@ public class AllBogatyrTests implements Runnable {
 				PublicKeyProviderTest.class,
 				LocalizerTest.class,	
 				HelperEnvInfoTest.class,
-				HelperFileTest.class,
+				HelperIOTest.class,
 				HelperGeneralTest.class,
 				HelperGraphicTest.class,
 				HelperImageTest.class,

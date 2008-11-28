@@ -59,7 +59,7 @@ import ch.sisprocom.bogatyr.model.dao.User;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class ServerAbstract extends ApplicationAbstract {
+public abstract class ServerAbstract extends ApplicationAbstract { //TODO document in Wiki!
 	private static final Logger log = Logger.getLogger(ServerAbstract.class);
 	
 	// Properties

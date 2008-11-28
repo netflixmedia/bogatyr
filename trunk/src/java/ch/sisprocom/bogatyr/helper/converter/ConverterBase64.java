@@ -40,7 +40,7 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class ConverterBase64 {
+public abstract class ConverterBase64 { //TODO document in Wiki!
 	// Resources
     private static final String	RES_ILLEGAL_CHARACTER = "ConverterBase64.illegal"; //$NON-NLS-1$
 	private static final String	RES_INVALID_STRING 	  = "ConverterBase64.invalid"; //$NON-NLS-1$

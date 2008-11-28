@@ -1,10 +1,8 @@
 ###########################
 #  TODO                   #
-#  Version: 20080901      #
+#  Version: 20081127      #
 ###########################
 
 -HelperIO: check free memory before reading?
--Zipper for files and streams
 -Redesign client/server (net part)
--Logger should be a thread (fire and forget)
 -Exception catcher (none or less throw clauses)

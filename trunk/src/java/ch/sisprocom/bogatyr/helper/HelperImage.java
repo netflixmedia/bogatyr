@@ -52,7 +52,7 @@ import javax.imageio.ImageIO;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public abstract class HelperImage {
+public abstract class HelperImage { //TODO document in Wiki!
 	public static final String TYPE_JPG = "jpg"; //$NON-NLS-1$
 	public static final String TYPE_PNG = "png"; //$NON-NLS-1$
 	public static final String TYPE_GIF = "gif"; //$NON-NLS-1$

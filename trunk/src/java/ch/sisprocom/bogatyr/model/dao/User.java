@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.model.dao.DataObject;
  * @author Stefan Laubenberger
  * @version 20081112
  */
-public class User extends DataObject {
+public class User extends DataObject { //TODO document in Wiki!
 	private static final long serialVersionUID = -4679247079715137984L;
 
 	private final String username;
