@@ -47,43 +47,43 @@ import java.util.Map;
  */
 public abstract class HelperEnvInfo { //TODO document in Wiki!
 	/**
-	 * Returns the same as Runtime.getRuntime().totalMemory().
+	 * Returns the used VM memory.
      *
-     * @return used vm memory
+     * @return used VM memory
 	 */
 	public static long getMemoryUsed() {
 		return Runtime.getRuntime().totalMemory();
 	}
 
 	/**
-	 * Returns the same as Runtime.getRuntime().freeMemory().
+	 * Returns the free VM memory.
      *
-     * @return free vm memory
+     * @return free VM memory
 	 */
 	public static long getMemoryFree() {
 		return Runtime.getRuntime().freeMemory();
 	}
 
 	/**
-	 * Returns the same as Runtime.getRuntime().maxMemory().
+	 * Returns the maximal memory reserved for the VM.
      *
-     * @return max vm memory
+     * @return max VM memory
 	 */
 	public static long getMemoryMax() {
 		return Runtime.getRuntime().maxMemory();
 	}
 	
 	/**
-	 * Returns the same as Runtime.getRuntime().availableProcessors().
+	 * Returns all available processors for the VM.
      *
-     * @return available processors for the vm
+     * @return available processors for the VM
 	 */
 	public static int getAvailableProcessors() {
 		return Runtime.getRuntime().availableProcessors();
 	}
 
 	/**
-	 * Returns the same as system property "os.arch".
+	 * Returns the architecture of the operating system.
      *
      * @return OS architecture
 	 */
@@ -92,7 +92,7 @@ public abstract class HelperEnvInfo { //TODO document in Wiki!
 	}
 
 	/**
-	 * Returns the same as system property "os.name".
+	 * Returns the name of the operating system.
      *
      * @return OS name
 	 */
@@ -101,7 +101,7 @@ public abstract class HelperEnvInfo { //TODO document in Wiki!
 	}
 
 	/**
-	 * Returns the same as system property "os.version".
+	 * Returns the version of the operating system.
      *
      * @return OS version
 	 */
@@ -125,7 +125,7 @@ public abstract class HelperEnvInfo { //TODO document in Wiki!
     }
 	
 	/**
-	 * Returns the same as system property "java.io.tmpdir".
+	 * Returns the temporary directory of the current machine.
      *
      * @return OS temporary directory
 	 */
@@ -134,7 +134,7 @@ public abstract class HelperEnvInfo { //TODO document in Wiki!
 	}
 	
 	/**
-	 * Returns the same as system property "user.home".
+	 * Returns the user directory of the current user.
      *
      * @return user home directory
 	 */
@@ -143,7 +143,7 @@ public abstract class HelperEnvInfo { //TODO document in Wiki!
 	}
 
 	/**
-	 * Try to determine whether this application is running under Windows or some other platform by examing the "os.name" property.
+	 * Try to determine if this application is running under a Windows OS.
 	 *
 	 * @return true if this application is running under a Windows OS
 	 */
@@ -152,7 +152,7 @@ public abstract class HelperEnvInfo { //TODO document in Wiki!
 	}
 
 	/**
-	 * Try to determine whether this application is running under Mac OS or some other platform by examing the "os.name" property.
+	 * Try to determine if this application is running under Mac OS.
 	 *
 	 * @return true if this application is running under Mac OS
 	 */
@@ -161,7 +161,7 @@ public abstract class HelperEnvInfo { //TODO document in Wiki!
 	}
 	
 	/**
-	 * Try to determine whether this application is running under UNIX.
+	 * Try to determine if this application is running under a UNIX OS.
 	 *
 	 * @return true if this application is running under UNIX
 	 */

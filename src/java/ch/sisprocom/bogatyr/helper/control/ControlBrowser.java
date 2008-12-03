@@ -40,10 +40,10 @@ import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 
 
 /**
- * This controls displays an URL in the system browser.
+ * This control displays an URL in the system browser.
  *
  * @author Stefan Laubenberger
- * @version 20081124
+ * @version 20081202
  */
 public abstract class ControlBrowser { //TODO document in Wiki!
 	protected static final Logger log = Logger.getLogger(ControlBrowser.class);

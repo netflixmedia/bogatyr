@@ -58,12 +58,12 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * This is a helper class for sound operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081202
  */
 public abstract class HelperSound { //TODO document in Wiki!
 
     /**
-     * Returns an audio clip from file (e.g. WAV files).
+     * Returns an audio clip from a file (e.g. WAV files).
      *
      * @param file for audio clip
      * @return Audio clip
@@ -76,7 +76,7 @@ public abstract class HelperSound { //TODO document in Wiki!
 	}
 
     /**
-     * Returns an audio clip from stream.
+     * Returns an audio clip from a stream.
      *
      * @param in stream for audio clip
      * @return Audio clip
@@ -89,7 +89,7 @@ public abstract class HelperSound { //TODO document in Wiki!
 	}
 
     /**
-     * Returns a sequence from file (e.g. MIDI files).
+     * Returns a sequence from a file (e.g. MIDI files).
      *
      * @param file for sequence
      * @return Sequence
@@ -101,7 +101,7 @@ public abstract class HelperSound { //TODO document in Wiki!
 	}
 
     /**
-     * Returns a sequence from stream.
+     * Returns a sequence from a stream.
      *
      * @param in stream for sequence
      * @return Sequence

@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.helper.updater.Updater;
  * This is the skeleton for all Bogatyr applications.
  * 
  * @author Stefan Laubenberger
- * @version 20081113
+ * @version 20081202
  */
 public abstract class ApplicationAbstract implements Runnable { //TODO document in Wiki!
 	private static final Logger log = Logger.getLogger(ApplicationAbstract.class);
@@ -96,7 +96,7 @@ public abstract class ApplicationAbstract implements Runnable { //TODO document 
 	/**
      * Checks the update XML file for the application and update it if needed.
      */	
-	protected void update() throws SAXException, IOException, ParserConfigurationException {
+	public void update() throws SAXException, IOException, ParserConfigurationException {
 		Updater.update();
 	}
 	

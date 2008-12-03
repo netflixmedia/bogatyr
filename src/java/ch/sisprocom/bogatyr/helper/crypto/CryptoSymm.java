@@ -48,7 +48,7 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
  * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081202
  */
 public abstract class CryptoSymm { //TODO document in Wiki!
 	public static final String ALGORITHM = "AES"; //$NON-NLS-1$
@@ -79,9 +79,9 @@ public abstract class CryptoSymm { //TODO document in Wiki!
 	/**
 	 * Encrypt the data with a given {@link Key}.
 	 * 
-	 * @param input data to encrypt as a Byte-Array
+	 * @param input data to encrypt as a byte-array
 	 * @param key for the encryption
-	 * @return Return the encrypted Byte-Array 
+	 * @return Return the encrypted byte-array 
 	 * @throws Exception 
 	 * @see Key
 	 */
@@ -95,9 +95,9 @@ public abstract class CryptoSymm { //TODO document in Wiki!
 	/**
 	 * Decrypt the data with a given {@link Key}.
 	 * 
-	 * @param input encrypted data as a Byte-Array
+	 * @param input encrypted data as a byte-array
 	 * @param key for the decryption
-	 * @return Return the decrypted Byte-Array
+	 * @return Return the decrypted byte-array
 	 * @throws Exception
 	 * @see Key
 	 */

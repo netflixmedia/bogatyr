@@ -55,7 +55,7 @@ import ch.sisprocom.bogatyr.helper.property.PropertyStream;
  * It handles the main functions like setup the logger, properties and localizer.
  *
  * @author Stefan Laubenberger
- * @version 20081126
+ * @version 20081202
  */
 public abstract class Runner { //TODO document in Wiki!
 	private static final Logger log = Logger.getRootLogger();
@@ -76,7 +76,7 @@ public abstract class Runner { //TODO document in Wiki!
 	/**
 	 * The only main() method to run every runnable.
 	 * 
-	 * @param args The arguments given to start an application
+	 * @param args The arguments given to start an application (at least the full qualified class name and the standard.properties)
 	 */
 	public static void main(final String[] args) {
 		if (args.length == 2) { // checks the number of arguments - <Application> and <Properties> are needed

@@ -169,31 +169,31 @@ public class HelperGeneralTest { //TODO improve
 	}
 	
 	@Test
-	public void testGetChecksum() {
+	public void testGetHashCode() {
 		try {
-			HelperGeneral.getChecksum(null, null);
+			HelperGeneral.getHashCode(null, null);
 			fail("algo is null");
 		} catch (Exception ex) {}
 
 		try {
-			HelperGeneral.getChecksum("MD5", null);
+			HelperGeneral.getHashCode("MD5", null);
 			fail("data is null");
 		} catch (Exception ex) {}
 
 		try {
-			assertNotNull(HelperGeneral.getChecksum("MD5", AllBogatyrTests.DATA));
+			assertNotNull(HelperGeneral.getHashCode("MD5", AllBogatyrTests.DATA));
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
 	@Test
 	public void testChecksumSha256() {
 		try {
-			HelperGeneral.getChecksum(null);
+			HelperGeneral.getHashCode(null);
 			fail("data is null");
 		} catch (Exception ex) {}
 
 		try {
-			assertNotNull(HelperGeneral.getChecksum(AllBogatyrTests.DATA));
+			assertNotNull(HelperGeneral.getHashCode(AllBogatyrTests.DATA));
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 
