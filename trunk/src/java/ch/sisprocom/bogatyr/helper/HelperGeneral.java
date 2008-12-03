@@ -57,10 +57,10 @@ import java.util.regex.Pattern;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081112
+ * @version 20081202
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and is logging needed?
-	private static final String CHECKSUM_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
+	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
 	private static final char[] RANDOMKEY_SEED_DEFAULT    = new char[]{'1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	 //TODO document in Wiki!
 	
@@ -260,13 +260,39 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	}
 	
 	/**
-	 * Appends a given byte-array to an existing byte-array.
+	 * Concatenate two arrays to one array.
+	 * 
+	 * @param inA first array
+	 * @param inB second array
+	 * @return The array a & b as one new array
+	 */
+    public static Object[] concatenateArrays(final Object[] inA, final Object[] inB) {
+    	Object[] a = inA;
+    	Object[] b = inB;
+    	
+    	if (a == null) {
+            a = new Object[0];
+        }
+
+    	if (b == null) {
+            b = new Object[0];
+        }
+    	
+    	final Object[] result = new Object[a.length + b.length];
+        System.arraycopy(a, 0, result, 0, a.length);
+        System.arraycopy(b, 0, result, a.length, b.length);
+        
+        return result;
+    }
+    
+	/**
+	 * Concatenate two byte-arrays to one byte-array.
 	 * 
 	 * @param inA first array
 	 * @param inB second array
 	 * @return The array a & b as one new byte-array
 	 */
-    public static byte[] appendByteArray(final byte[] inA, final byte[] inB) {
+    public static byte[] concatenateByteArrays(final byte[] inA, final byte[] inB) {
     	byte[] a = inA;
     	byte[] b = inB;
     	
@@ -308,15 +334,15 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 
     /**
-     * Generates an unique string from an input object.
-     * This is used for unique keys.
+     * Generates a hash (unique string) from an input object.
+     * This is also used for unique keys.
      *
-     * @param algo to use.
-     * @param data to generate a checksum
-     * @return generated checksum
+     * @param algo to use
+     * @param data to generate a hash
+     * @return generated hash value
      * @throws NoSuchAlgorithmException
      */
-    public static String getChecksum(final String algo, final Object data) throws NoSuchAlgorithmException {
+    public static String getHashCode(final String algo, final Object data) throws NoSuchAlgorithmException {
     	final MessageDigest algorithm = MessageDigest.getInstance(algo);
 		final byte[] input = toString(data).getBytes();
 
@@ -337,14 +363,14 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	}
 
     /**
-     * Generates an unique string with SHA-256 from an input object.
+     * Generates a hash (unique string) with SHA-256 from an input object.
      *
-     * @param data to generate a checksum
-     * @return generated checksum
+     * @param data to generate a hash
+     * @return generated hash value
      * @throws NoSuchAlgorithmException
      */
-    public static String getChecksum(final Object data) throws NoSuchAlgorithmException {
-    	return getChecksum(CHECKSUM_ALGORITHM_SHA256, data);
+    public static String getHashCode(final Object data) throws NoSuchAlgorithmException {
+    	return getHashCode(HASHCODE_ALGORITHM_SHA256, data);
     }
 
     /**
@@ -378,8 +404,8 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     /**
      * Fill a string with a char.
      * 
-     * @param fillChar
-     * @param fillLength
+     * @param fillChar char to fill the string
+     * @param fillLength length of the filled string 
      * @return filled string
      */
     public static String fillString(final char fillChar, final int fillLength) {
@@ -405,7 +431,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     /**
      * Dump a list.
      * 
-     * @param list
+     * @param list for dump
      * @return dump string
      */
     public static String dump(final Iterable<?> list) {
@@ -421,7 +447,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     /**
      * Dump a map.
      * 
-     * @param map
+     * @param map for dump
      * @return dump string
      */
     public static String dump(final Map<?, ?> map) {
@@ -439,7 +465,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      /**
      * Dump an array.
      * 
-     * @param array
+     * @param array for dump
      * @return dump string
      */
     public static String dump(final Object[] array) {

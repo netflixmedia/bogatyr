@@ -36,10 +36,10 @@ import java.util.List;
 import java.util.TimerTask;
 
 /**
- * Timer
+ * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 20081126
+ * @version 20081202
  */
 public class Timer { //TODO document in Wiki!
 	private List<ListenerTimer> listListenerTimer = new ArrayList<ListenerTimer>();
@@ -65,7 +65,7 @@ public class Timer { //TODO document in Wiki!
 	/**
 	 * Starts the timer with a given delay and interval.
 	 * 
-	 * @param delay for the start of the timer
+	 * @param delay until the timer starts
 	 * @param interval of the timer
 	 */
 	public void start(final long delay, final long interval) {

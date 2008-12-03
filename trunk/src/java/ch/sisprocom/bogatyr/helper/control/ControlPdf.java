@@ -54,7 +54,7 @@ public abstract class ControlPdf { //TODO document in Wiki!
 
 
 	/**
-	 * Show a PDF (provided as a byte[]) with PDF viewer. A temporary file is first created.
+	 * Show a PDF (provided as a byte[]) with PDF viewer.
 	 * 
 	 * @param pdfContent PDF content as byte array
      * @throws Exception
@@ -77,7 +77,7 @@ public abstract class ControlPdf { //TODO document in Wiki!
 	}
 	
 	/**
-	 * Show a PDF (provided as {@link File}) with PDF viewer.
+	 * Show a PDF (provided as stream) with PDF viewer.
 	 * 
 	 * @param pdfStream PDF content as stream
      * @throws Exception

@@ -84,7 +84,7 @@ public abstract class HelperIO {
      * 
      * @param path Path
      * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
-     * @param isExclude Is the identifier excluded
+     * @param isExclude is the identifier excluded
      * @param isCaseSensitive true/false
      * @param isRecursive true/false
      * @param isFile true/false
@@ -109,7 +109,7 @@ public abstract class HelperIO {
      * 
      * @param path Path
      * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
-     * @param isExclude Is the identifier excluded
+     * @param isExclude is the identifier excluded
      * @return ArrayList containing the path to the matched files
      * @throws java.io.IOException
      */	

@@ -71,7 +71,7 @@ public class User extends DataObject { //TODO document in Wiki!
 	}
 
 	public String getUniqueKey() throws NoSuchAlgorithmException {
-		String uniqueKey = HelperGeneral.getChecksum(this);
+		String uniqueKey = HelperGeneral.getHashCode(this);
 		return uniqueKey;
 	}
 

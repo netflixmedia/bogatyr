@@ -34,10 +34,10 @@ package ch.sisprocom.bogatyr.helper.timer;
 import java.util.TimerTask;
 
 /**
- * CountdownTimer
+ * This is a countdown timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 20081126
+ * @version 20081202
  */
 public class CountdownTimer extends Timer { //TODO document in Wiki!
 	protected long runtime;
@@ -60,9 +60,9 @@ public class CountdownTimer extends Timer { //TODO document in Wiki!
 	/**
 	 * Start the countdown with a given delay, runtime and interval.
 	 * 
-	 * @param delay
-	 * @param runtime
-	 * @param interval
+	 * @param delay until the timer starts
+	 * @param runtime of the countdown
+	 * @param interval of the countown
 	 */
 	public void start(final long delay, final long runtime, final long interval) {
     	timer.cancel();

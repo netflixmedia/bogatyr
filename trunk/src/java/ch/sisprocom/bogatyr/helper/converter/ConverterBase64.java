@@ -38,7 +38,7 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081202
  */
 public abstract class ConverterBase64 { //TODO document in Wiki!
 	// Resources
@@ -78,22 +78,22 @@ public abstract class ConverterBase64 { //TODO document in Wiki!
 	 * Encodes a string into Base64 format. 
 	 * No blanks or line breaks are inserted.
 	 * 
-	 * @param string String to be encoded
+	 * @param data String to be encoded
 	 * @return String with the Base64 encoded data
 	 */
-	public static String encode(final String string) {
-		return new String(encode(string.getBytes()));
+	public static String encode(final String data) {
+		return new String(encode(data.getBytes()));
 	}
 
 	/**
-	 * Encodes a byte array into Base64 format. 
+	 * Encodes a byte-array into Base64 format. 
 	 * No blanks or line breaks are inserted.
 	 * 
-	 * @param in Array containing the data bytes to be encoded
+	 * @param data Array containing the data bytes to be encoded
 	 * @return Character array with the Base64 encoded data
 	 */
-	public static char[] encode(final byte[] in) {
-		return encode(in, in.length);
+	public static char[] encode(final byte[] data) {
+		return encode(data, data.length);
 	}
 
 //	/**
@@ -113,32 +113,32 @@ public abstract class ConverterBase64 { //TODO document in Wiki!
 //	}
 
 	/**
-	 * Decodes a byte array from Base64 format.
+	 * Decodes a byte-array from Base64 format.
 	 * 
-	 * @param string Base64 String to be decoded
+	 * @param data Base64 String to be decoded
 	 * @return Array containing the decoded data bytes
 	 * @throws IllegalArgumentException
 	 */
-	public static byte[] decode(final String string) {
-		return decode(string.toCharArray());
+	public static byte[] decode(final String data) {
+		return decode(data.toCharArray());
 	}
 
 	/**
 	 * Decodes a byte array from Base64 format. 
 	 * No blanks or line breaks are allowed within the Base64 encoded data.
 	 * 
-	 * @param in Character array containing the Base64 encoded data
+	 * @param data Character array containing the Base64 encoded data
 	 * @return Array containing the decoded data bytes
 	 * @throws IllegalArgumentException
 	 */
-	public static byte[] decode(final char[] in) {
-		int iLen = in.length;
+	public static byte[] decode(final char[] data) {
+		int iLen = data.length;
 
 		if (iLen % 4 != 0) {
             throw new IllegalArgumentException(Localizer.getInstance().getValue(RES_INVALID_STRING));
         }
 		
-		while (iLen > 0 && in[iLen - 1] == '=') {
+		while (iLen > 0 && data[iLen - 1] == '=') {
 			iLen--;
 		}
 		
@@ -148,10 +148,10 @@ public abstract class ConverterBase64 { //TODO document in Wiki!
         int ip = 0;
         int op = 0;
         while (ip < iLen) {
-			final int i0 = in[ip++];
-			final int i1 = in[ip++];
-			final int i2 = (int) (ip < iLen ? in[ip++] : 'A');
-			final int i3 = (int) (ip < iLen ? in[ip++] : 'A');
+			final int i0 = data[ip++];
+			final int i1 = data[ip++];
+			final int i2 = (int) (ip < iLen ? data[ip++] : 'A');
+			final int i3 = (int) (ip < iLen ? data[ip++] : 'A');
 
 			if (i0 > 127 || i1 > 127 || i2 > 127 || i3 > 127) {
                 throw new IllegalArgumentException(Localizer.getInstance().getValue(RES_ILLEGAL_CHARACTER));
@@ -184,7 +184,7 @@ public abstract class ConverterBase64 { //TODO document in Wiki!
 	 * Private methods
 	 */
 	/**
-	 * Encodes a byte array into Base64 format. 
+	 * Encodes a byte-array into Base64 format. 
 	 * No blanks or line breaks are inserted.
 	 * 
 	 * @param in Array containing the data bytes to be encoded

@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a class for asymmetric cryptology via RSA.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081202
  */
 public abstract class CryptoAsymm { //TODO document in Wiki!
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
@@ -81,10 +81,10 @@ public abstract class CryptoAsymm { //TODO document in Wiki!
 	/**
 	 * Encrypt the data with a given {@link PublicKey}.
 	 * 
-	 * @param input The data to encrypt as a Byte-Array
+	 * @param input The data to encrypt as a byte-array
 	 * @param key {@link PublicKey} for the encryption
 	 * @param keysize Size of the key in bits (e.g. 1024, 2048, 4096)
-     * @return Return the encrypted Byte-Array
+     * @return Return the encrypted byte-array
 	 * @throws Exception
 	 * @see PublicKey
 	 */
@@ -101,7 +101,7 @@ public abstract class CryptoAsymm { //TODO document in Wiki!
 				temp[tempCounter] = input[ii];
 				
 				if (tempCounter == space - 1) {
-					result = HelperGeneral.appendByteArray(result, encryptInternal(temp, key));
+					result = HelperGeneral.concatenateByteArrays(result, encryptInternal(temp, key));
 					tempCounter = 0;
 				} else {
 					if (ii == input.length - 1) { // last byte
@@ -110,7 +110,7 @@ public abstract class CryptoAsymm { //TODO document in Wiki!
 						for (int xx = 0; xx <= tempCounter; xx++) {
 							usedBytes[xx] = input[(ii - tempCounter) + xx];
 						}
-						result = HelperGeneral.appendByteArray(result, encryptInternal(usedBytes, key));
+						result = HelperGeneral.concatenateByteArrays(result, encryptInternal(usedBytes, key));
 					}
 					tempCounter++;
 				}
@@ -124,10 +124,10 @@ public abstract class CryptoAsymm { //TODO document in Wiki!
 	/**
 	 * Decrypt the data.
 	 * 
-	 * @param input The encrypted data as a Byte-Array
+	 * @param input The encrypted data as a byte-array
 	 * @param key {@link PrivateKey} for the decryption
 	 * @param keysize of the key in bits (e.g. 1024, 2048, 4096)
-     * @return Return the decrypted Byte-Array
+     * @return Return the decrypted byte-array
 	 * @throws Exception
 	 */
 	public static byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws Exception {
@@ -142,7 +142,7 @@ public abstract class CryptoAsymm { //TODO document in Wiki!
 				temp[tempCounter] = data;
 				
 				if (tempCounter == space - 1) {
-					result = HelperGeneral.appendByteArray(result, decryptInternal(temp, key));
+					result = HelperGeneral.concatenateByteArrays(result, decryptInternal(temp, key));
 					tempCounter = 0;
 				} else {
 					tempCounter++;
@@ -161,9 +161,9 @@ public abstract class CryptoAsymm { //TODO document in Wiki!
 	/**
 	 * Encrypt the data with a given {@link PublicKey} (internal).
 	 * 
-	 * @param input data to encrypt as a Byte-Array
+	 * @param input data to encrypt as a byte-array
 	 * @param key {@link PublicKey} for the encryption
-	 * @return Return the encrypted Byte-Array 
+	 * @return Return the encrypted byte-array 
 	 * @throws Exception
 	 */
 	private static byte[] encryptInternal(final byte[] input, final PublicKey key) throws Exception {
@@ -176,9 +176,9 @@ public abstract class CryptoAsymm { //TODO document in Wiki!
 	/**
 	 * Decrypt the data (internal).
 	 * 
-	 * @param input encrypted data as a Byte-Array
+	 * @param input encrypted data as a byte-array
 	 * @param key {@link PrivateKey} for the decryption
-	 * @return Return the decrypted Byte-Array
+	 * @return Return the decrypted byte-array
 	 * @throws Exception
 	 */
 	private static byte[] decryptInternal(final byte[] input, final PrivateKey key) throws Exception {
