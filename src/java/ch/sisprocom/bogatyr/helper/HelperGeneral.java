@@ -57,12 +57,11 @@ import java.util.regex.Pattern;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081202
+ * @version 20081204
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and is logging needed?
 	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
 	private static final char[] RANDOMKEY_SEED_DEFAULT    = new char[]{'1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-	 //TODO document in Wiki!
 	
 	/**
      * Creates an object with parameters via reflection API.

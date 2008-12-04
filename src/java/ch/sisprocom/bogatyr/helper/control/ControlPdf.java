@@ -41,12 +41,12 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.context.Context;
 
 /**
- * This control opens PDF data with an external program such as Acrobat Reader.
+ * This control opens PDF data with the default system pdf-viewer (e.g. Acrobat Reader).
  *
  * @author Stefan Laubenberger
- * @version 20081124
+ * @version 20081204
  */
-public abstract class ControlPdf { //TODO document in Wiki!
+public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
 
 	private static final String WINDOWS_PDF_VIEWER_PATH  = "rundll32 url.dll,FileProtocolHandler {0}"; //$NON-NLS-1$
