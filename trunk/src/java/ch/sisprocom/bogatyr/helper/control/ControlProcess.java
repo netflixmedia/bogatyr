@@ -42,9 +42,9 @@ import org.apache.log4j.Logger;
  * Creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 20081124
+ * @version 20081204
  */
-public abstract class ControlProcess { //TODO document in Wiki!
+public abstract class ControlProcess {
 	private static final int BUFFER = 1024;
 	
 	/**

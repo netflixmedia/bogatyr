@@ -38,9 +38,9 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 20081202
+ * @version 20081204
  */
-public abstract class ConverterBase64 { //TODO document in Wiki!
+public abstract class ConverterBase64 {
 	// Resources
     private static final String	RES_ILLEGAL_CHARACTER = "ConverterBase64.illegal"; //$NON-NLS-1$
 	private static final String	RES_INVALID_STRING 	  = "ConverterBase64.invalid"; //$NON-NLS-1$

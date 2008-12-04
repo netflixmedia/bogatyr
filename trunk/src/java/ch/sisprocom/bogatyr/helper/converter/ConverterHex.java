@@ -37,9 +37,9 @@ package ch.sisprocom.bogatyr.helper.converter;
  * Encodes and decodes data to Hex format.
  * 
  * @author Stefan Laubenberger
- * @version 20081202
+ * @version 20081204
  */
-public abstract class ConverterHex { //TODO document in Wiki!
+public abstract class ConverterHex {
     private static final CharSequence DIGITS = "0123456789abcdef"; //$NON-NLS-1$
     
 
