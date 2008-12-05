@@ -37,9 +37,9 @@ package ch.sisprocom.bogatyr.helper.crypto;
  * This is a class for obfuscating data.
  * 
  * @author Stefan Laubenberger
- * @version 20081202
+ * @version 20081205
  */
-public abstract class Obfuscator { //TODO document in Wiki!
+public abstract class Obfuscator {
 	private static final byte DEFAULT_PATTERN = Byte.MAX_VALUE;
 
 	/**

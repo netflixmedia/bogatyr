@@ -44,14 +44,14 @@ import javax.crypto.NoSuchPaddingException;
  * This is a class for wrapping and unwrapping a crypto key.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081205
  */
-public abstract class Wrapper { //TODO document in Wiki!
+public abstract class Wrapper {
 	/**
 	 * Wrap the key with a wrapper key.
 	 * 
-	 * @param wrapperKey
-     * @param key
+	 * @param wrapperKey (e.g RSA public-key)
+     * @param key (e.g. AES-key)
      * @return byte array with the wrapped key
      * @throws NoSuchPaddingException
 	 * @throws NoSuchAlgorithmException 
@@ -59,7 +59,7 @@ public abstract class Wrapper { //TODO document in Wiki!
 	 * @throws IllegalBlockSizeException 
 	 * @throws NoSuchProviderException
 	 */
-	public static byte[] wrapKey(final Key wrapperKey, final Key key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, NoSuchProviderException {
+	public static byte[] wrap(final Key wrapperKey, final Key key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, NoSuchProviderException {
 		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.WRAP_MODE, wrapperKey);
 
@@ -69,19 +69,19 @@ public abstract class Wrapper { //TODO document in Wiki!
 	/**
 	 * Unwrap and return the key.
 	 * 
-	 * @param unwrapperKey
+	 * @param wrapperKey (e.g. RSA private-key)
      * @param wrappedKey
-     * @param keyAlgorithm
-     * @param keyType
-     * @return byte array with the unwrapped key
+     * @param keyAlgorithm (e.g. "AES")
+     * @param keyType (e.g. Cipher.SECRET_KEY)
+     * @return the unwrapped key
      * @throws NoSuchAlgorithmException
 	 * @throws InvalidKeyException 
 	 * @throws NoSuchPaddingException 
 	 * @throws NoSuchProviderException
 	 */
-	public static Key unwrapKey(final Key unwrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
+	public static Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
 		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
-		cipher.init(Cipher.UNWRAP_MODE, unwrapperKey);
+		cipher.init(Cipher.UNWRAP_MODE, wrapperKey);
 
 		return cipher.unwrap(wrappedKey, keyAlgorithm, keyType);
 	}

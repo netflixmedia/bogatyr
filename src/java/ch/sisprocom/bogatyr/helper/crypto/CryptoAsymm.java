@@ -49,9 +49,9 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a class for asymmetric cryptology via RSA.
  * 
  * @author Stefan Laubenberger
- * @version 20081202
+ * @version 20081205
  */
-public abstract class CryptoAsymm { //TODO document in Wiki!
+public abstract class CryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
 	public static final String XFORM     = "RSA/NONE/PKCS1PADDING"; //$NON-NLS-1$
 //	public static final String XFORM     = "RSA/NONE/NoPadding"; //$NON-NLS-1$

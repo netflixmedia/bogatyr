@@ -68,9 +68,9 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
  * This class generates, reads and save X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081205
  */
-public abstract class PublicKeyProvider { //TODO document in Wiki!
+public abstract class PublicKeyProvider {
 	/**
      * Get the certificate out of the given certificate file.
      * 
@@ -152,7 +152,7 @@ public abstract class PublicKeyProvider { //TODO document in Wiki!
      * @param pair the keypair for the certificate
      * @param issuerDN (e.g. "CN=Test Certificate")
      * @param subjectDN (e.g. "CN=Test Certificate")
-     * @param generalName of he certificate owner (e.g. laubenberger@gmail.com)
+     * @param generalName of the certificate owner (e.g. laubenberger@gmail.com)
      * @param start date of the certificate
      * @param end date of the certificate
      * @return X509Certificate the certificate
