@@ -63,7 +63,7 @@ public class Printer implements Printable { //TODO document in Wiki!
      * @param component for printing
      * @throws java.awt.print.PrinterException
      */
-    public void print(final Component component) throws PrinterException {
+    public synchronized void print(final Component component) throws PrinterException {
 		this.componentToBePrinted = component;
         print();
 	}

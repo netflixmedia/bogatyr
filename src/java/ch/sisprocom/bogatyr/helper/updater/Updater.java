@@ -55,7 +55,7 @@ import ch.sisprocom.bogatyr.helper.context.Context;
  * This is the updater for new Bogatyr-based applications versions.
  * 
  * @author Stefan Laubenberger
- * @version 20081202
+ * @version 20081205
  */
 public abstract class Updater { //TODO document in Wiki!
 	private static final Logger log = Logger.getLogger(Updater.class);
@@ -67,7 +67,7 @@ public abstract class Updater { //TODO document in Wiki!
 	 * @throws IOException
 	 * @throws ParserConfigurationException
 	 */
-	public static void update() throws SAXException, IOException, ParserConfigurationException {
+	public static synchronized void update() throws SAXException, IOException, ParserConfigurationException {
 		String updateLocation = Context.getInstance().getApplicationUpdateLocation();
 		
 		if (updateLocation != null) {

@@ -49,7 +49,7 @@ import com.ibm.mqbind.MQC;
  * Allows a connection to an IBM MQ-Server. It allows to send and receive messages.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081205
  */
 public class MqConnector { //TODO document in Wiki!
 
@@ -95,7 +95,7 @@ public class MqConnector { //TODO document in Wiki!
 	 * @throws IOException
 	 * @throws MQException
 	 */
-	public void sendMessage(final byte[] data, final String managerOut, final String queueOut, final String managerIn, final String queueIn) throws IOException, MQException {
+	public synchronized void sendMessage(final byte[] data, final String managerOut, final String queueOut, final String managerIn, final String queueIn) throws IOException, MQException {
 		MQQueue mqQueue;
 		MQQueueManager mqManager;
 
@@ -139,7 +139,7 @@ public class MqConnector { //TODO document in Wiki!
 	 * @throws MQException
 	 * @throws IOException
 	 */
-	public List<byte[]> receiveMessages(final String managerIn, final String queueIn) throws MQException, IOException {
+	public synchronized List<byte[]> receiveMessages(final String managerIn, final String queueIn) throws MQException, IOException {
 		MQQueue mqQueue;
 		MQQueueManager mqManager;
 

@@ -37,7 +37,7 @@ import java.util.TimerTask;
  * This is a countdown timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 20081202
+ * @version 20081205
  */
 public class CountdownTimer extends Timer { //TODO document in Wiki!
 	protected long runtime;
@@ -53,8 +53,8 @@ public class CountdownTimer extends Timer { //TODO document in Wiki!
 	 * @param runtime of the countdown
 	 */
 	@Override
-	public void start(final long runtime) {
-		this.start(0, runtime, 1000);
+	public synchronized void start(final long runtime) {
+		start(0, runtime, 1000);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class CountdownTimer extends Timer { //TODO document in Wiki!
 	 * @param runtime of the countdown
 	 * @param interval of the countown
 	 */
-	public void start(final long delay, final long runtime, final long interval) {
+	public synchronized void start(final long delay, final long runtime, final long interval) {
     	timer.cancel();
     	
     	timer = new java.util.Timer();

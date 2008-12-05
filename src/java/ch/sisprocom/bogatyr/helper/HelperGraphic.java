@@ -48,7 +48,7 @@ import java.util.List;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 20081126
+ * @version 20081205
  */
 public abstract class HelperGraphic { //TODO document in Wiki!
 	

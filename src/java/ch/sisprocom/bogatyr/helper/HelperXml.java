@@ -37,7 +37,7 @@ package ch.sisprocom.bogatyr.helper;
  * This is a helper class for XML operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081202
+ * @version 20081205
  */
 public abstract class HelperXml { //TODO document in Wiki!
 	/**
@@ -48,7 +48,7 @@ public abstract class HelperXml { //TODO document in Wiki!
      * @param in the String whose non-valid characters we want to remove
      * @return the in String, stripped of non-valid characters
      */
-    public static String getValidXmlString(final String in) {
+    public static synchronized String getValidXmlString(final String in) {
         if (!HelperGeneral.isValidString(in)) { // vacancy test
             return ""; //$NON-NLS-1$
         }

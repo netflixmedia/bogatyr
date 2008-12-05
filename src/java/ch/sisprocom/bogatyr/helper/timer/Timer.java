@@ -39,7 +39,7 @@ import java.util.TimerTask;
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 20081202
+ * @version 20081205
  */
 public class Timer { //TODO document in Wiki!
 	private List<ListenerTimer> listListenerTimer = new ArrayList<ListenerTimer>();
@@ -58,7 +58,7 @@ public class Timer { //TODO document in Wiki!
 	 * 
 	 * @param interval of the timer
 	 */
-	public void start(final long interval) {
+	public synchronized void start(final long interval) {
 		this.start(0, interval);
 	}
 
@@ -68,7 +68,7 @@ public class Timer { //TODO document in Wiki!
 	 * @param delay until the timer starts
 	 * @param interval of the timer
 	 */
-	public void start(final long delay, final long interval) {
+	public synchronized void start(final long delay, final long interval) {
     	timer.cancel();
     	
     	timer = new java.util.Timer();
@@ -80,7 +80,7 @@ public class Timer { //TODO document in Wiki!
 	/**
 	 * Stops immediately the timer/countdown.
 	 */
-    public void stop() {
+    public synchronized void stop() {
         timer.cancel();
         fireTimerStopped();
     }	
@@ -90,7 +90,7 @@ public class Timer { //TODO document in Wiki!
 	 * 
 	 * @param listener to add
 	 */
-	public void addListenerTimer(final ListenerTimer listener) {
+	public synchronized void addListenerTimer(final ListenerTimer listener) {
 		listListenerTimer.add(listener);
 	}
 	
@@ -99,14 +99,14 @@ public class Timer { //TODO document in Wiki!
 	 * 
 	 * @param listener to remove
 	 */
-	public void removeListenerTimer(final ListenerTimer listener) {
+	public synchronized void removeListenerTimer(final ListenerTimer listener) {
 		listListenerTimer.remove(listener);
 	}
 	
 	/**
 	 * Removes all listeners for this timer/countdown. 
 	 */
-	public void removeAllListenerTimer() {
+	public synchronized void removeAllListenerTimer() {
 		listListenerTimer = new ArrayList<ListenerTimer>();
 	}
 	

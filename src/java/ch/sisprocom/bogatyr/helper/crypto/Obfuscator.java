@@ -48,7 +48,7 @@ public abstract class Obfuscator {
 	 * @param input The data to obfuscate as a byte-array
 	 * @return Return the obfuscated byte-array 
 	 */
-	public static byte[] encrypt(final byte[] input) {
+	public static synchronized byte[] encrypt(final byte[] input) {
 		return obfuscate(input, DEFAULT_PATTERN);
 	}
 
@@ -59,7 +59,7 @@ public abstract class Obfuscator {
 	 * @param pattern for obfuscating (region: -128 - 127)
 	 * @return Return the obfuscated byte-array 
 	 */
-	public static byte[] encrypt(final byte[] input, final byte pattern) {
+	public static synchronized byte[] encrypt(final byte[] input, final byte pattern) {
 		return obfuscate(input, pattern);
 	}
 
@@ -69,7 +69,7 @@ public abstract class Obfuscator {
 	 * @param input The obfuscated data as a byte-array
 	 * @return Return the unobfuscated byte-array
 	 */
-	public static byte[] decrypt(final byte[] input) {
+	public static synchronized byte[] decrypt(final byte[] input) {
 		return obfuscate(input, DEFAULT_PATTERN);
 	}
 
@@ -81,7 +81,7 @@ public abstract class Obfuscator {
 	 * @param pattern for unobfuscating (region: -128 - 127)
 	 * @return Return the unobfuscated byte-array
 	 */
-	public static byte[] decrypt(final byte[] input, final byte pattern) {
+	public static synchronized byte[] decrypt(final byte[] input, final byte pattern) {
 		return obfuscate(input, pattern);
 	}
 
