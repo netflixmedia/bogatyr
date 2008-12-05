@@ -48,9 +48,9 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
  * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 20081202
+ * @version 20081205
  */
-public abstract class CryptoSymm { //TODO document in Wiki!
+public abstract class CryptoSymm {
 	public static final String ALGORITHM = "AES"; //$NON-NLS-1$
 	public static final String XFORM     = "AES/CBC/PKCS5Padding"; //$NON-NLS-1$
 
