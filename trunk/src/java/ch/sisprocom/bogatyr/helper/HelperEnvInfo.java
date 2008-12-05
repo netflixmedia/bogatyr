@@ -114,7 +114,7 @@ public abstract class HelperEnvInfo { //TODO document in Wiki!
 	 *
 	 * @return list of system environment variables
 	 */
-	public static List<String> getOsEnvironmentVariables() {
+	public static synchronized List<String> getOsEnvironmentVariables() {
 		final List<String> list = new ArrayList<String>();
 		final Map<String, String> map = System.getenv();
 		

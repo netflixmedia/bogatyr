@@ -37,7 +37,7 @@ package ch.sisprocom.bogatyr.helper.converter;
  * Encodes and decodes data to Hex format.
  * 
  * @author Stefan Laubenberger
- * @version 20081204
+ * @version 20081205
  */
 public abstract class ConverterHex {
     private static final CharSequence DIGITS = "0123456789abcdef"; //$NON-NLS-1$
@@ -49,7 +49,7 @@ public abstract class ConverterHex {
      * @param data the bytes to be converted
      * @return hex representation of a byte array
      */
-    public static String encode(final byte[] data){
+    public static synchronized String encode(final byte[] data){
 		final StringBuffer buf = new StringBuffer();
 
         for (int ii = 0; ii != data.length; ii++) {
@@ -68,7 +68,7 @@ public abstract class ConverterHex {
      * @param data hex string to be converted
      * @return byte-array representation of a hex string
      */
-    public static byte[] decode(final String data) {
+    public static synchronized byte[] decode(final String data) {
 		final byte[] bts = new byte[data.length() / 2];
 
     	for (int ii = 0; ii < bts.length; ii++) {

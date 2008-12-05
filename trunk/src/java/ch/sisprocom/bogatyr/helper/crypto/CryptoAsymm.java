@@ -61,14 +61,14 @@ public abstract class CryptoAsymm {
 	 * Generates a public and a private KeyPair with the Class
 	 * KeyPairGenerator and saves it to the internal attributes.
 	 * 
-	 * @param keysize Size of the key in bits (e.g. 1024, 2048, 4096)
+	 * @param keysize Size of the key in bits (modulo 16 = 0, e.g. 1024, 2048)
 	 * @throws NoSuchAlgorithmException
 	 * @throws NoSuchProviderException 
      * @return generated key pair
 	 * @see KeyPair
 	 * @see KeyPairGenerator
 	 */
-	public static KeyPair generateKeys(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
+	public static synchronized KeyPair generateKeys(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 
 		// Generate a key-pair
@@ -83,12 +83,12 @@ public abstract class CryptoAsymm {
 	 * 
 	 * @param input The data to encrypt as a byte-array
 	 * @param key {@link PublicKey} for the encryption
-	 * @param keysize Size of the key in bits (e.g. 1024, 2048, 4096)
+	 * @param keysize Size of the key in bits (modulo 16 = 0, e.g. 1024, 2048)
      * @return Return the encrypted byte-array
 	 * @throws Exception
 	 * @see PublicKey
 	 */
-    public static byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws Exception {
+    public static synchronized byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws Exception {
 		final int space = keysize/8 - 11;
 		byte[] result = null;
 		final byte[] temp = new byte[space];
@@ -126,11 +126,11 @@ public abstract class CryptoAsymm {
 	 * 
 	 * @param input The encrypted data as a byte-array
 	 * @param key {@link PrivateKey} for the decryption
-	 * @param keysize of the key in bits (e.g. 1024, 2048, 4096)
+	 * @param keysize of the key in bits (modulo 16 = 0, e.g. 1024, 2048)
      * @return Return the decrypted byte-array
 	 * @throws Exception
 	 */
-	public static byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws Exception {
+	public static synchronized byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws Exception {
 		final int space = keysize/8;
 		byte[] result = null;
 		final byte[] temp = new byte[space];

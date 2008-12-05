@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.helper.updater.Updater;
  * This is the skeleton for all Bogatyr applications.
  * 
  * @author Stefan Laubenberger
- * @version 20081202
+ * @version 20081205
  */
 public abstract class ApplicationAbstract implements Runnable { //TODO document in Wiki!
 	private static final Logger log = Logger.getLogger(ApplicationAbstract.class);
@@ -84,7 +84,7 @@ public abstract class ApplicationAbstract implements Runnable { //TODO document 
      * 
      * @param returnCode System-Return-Code
      */	
-	public void exit(final int returnCode) {
+	public synchronized void exit(final int returnCode) {
 		if (returnCode == 0) {
 			log.info(Localizer.getInstance().getValue(RES_LOG_SUCCESSFUL));
 		} else {

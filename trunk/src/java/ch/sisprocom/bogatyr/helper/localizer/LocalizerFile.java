@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.property.Property;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081205
  */
 public class LocalizerFile implements ILocalizer { //TODO document in Wiki!
 	private static final Logger log = Logger.getLogger(LocalizerFile.class);
@@ -66,7 +66,7 @@ public class LocalizerFile implements ILocalizer { //TODO document in Wiki!
 		return localizerBase;
 	}
 
-	public void setLocalizerBase(final String localizerBase) {
+	public synchronized void setLocalizerBase(final String localizerBase) {
 		this.localizerBase = localizerBase;
         bundle = ResourceBundle.getBundle(localizerBase, locale);
 	}
@@ -79,7 +79,7 @@ public class LocalizerFile implements ILocalizer { //TODO document in Wiki!
 		return locale;
 	}
 
-	public void setLocale(final Locale locale) {
+	public synchronized void setLocale(final Locale locale) {
 		this.locale = locale;
         bundle = ResourceBundle.getBundle(localizerBase, locale);
 	}

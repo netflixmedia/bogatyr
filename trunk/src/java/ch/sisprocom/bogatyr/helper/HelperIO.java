@@ -55,7 +55,7 @@ import java.util.Scanner;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081128
+ * @version 20081205
  */
 public abstract class HelperIO {
 	private final static byte[] BUFFER = new byte[1024];
@@ -92,7 +92,7 @@ public abstract class HelperIO {
      * @return ArrayList containing the path to the matched files
      * @throws java.io.IOException
      */	
-	public static List<File> getFiles(final File path, final String[] identifier, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) throws IOException {
+	public static synchronized List<File> getFiles(final File path, final String[] identifier, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) throws IOException {
 		final List<File> list = new ArrayList<File>();
 
 		if (!path.isDirectory()) {
@@ -124,7 +124,7 @@ public abstract class HelperIO {
      * @param dest
      * @throws java.io.IOException
      */	
-	public static void copyDirectory(final File source, final File dest) throws IOException{
+	public static synchronized void copyDirectory(final File source, final File dest) throws IOException{
 		if (!dest.exists()) {
             dest.mkdir();
         }
@@ -150,7 +150,7 @@ public abstract class HelperIO {
      * @param dest
      * @throws java.io.IOException
      */	
-	public static void copyFile(final File source, final File dest) throws IOException{
+	public static synchronized void copyFile(final File source, final File dest) throws IOException{
 		InputStream fis = null;
         OutputStream fos = null;
 
@@ -185,7 +185,7 @@ public abstract class HelperIO {
      * @return true/false
      * @throws java.io.IOException
      */	
-	public static boolean move(final File source, final File dest) throws IOException{
+	public static synchronized boolean move(final File source, final File dest) throws IOException{
 		if (source.isDirectory()) {
 	    	copyDirectory(source, dest);
 	    } else {
@@ -201,7 +201,7 @@ public abstract class HelperIO {
      * @return true/false
      * @throws java.io.IOException
      */	
-	public static boolean delete(final File file) throws IOException{
+	public static synchronized boolean delete(final File file) throws IOException{
 		if (file.isDirectory()) {
 			final File[] childFiles = file.listFiles();
 			for (final File child : childFiles) {
@@ -231,7 +231,7 @@ public abstract class HelperIO {
      * @param line containing the text to write
      * @throws java.io.IOException
      */	
-	public static void writeLine(final File file, final String encoding, final String line) throws IOException {
+	public static synchronized void writeLine(final File file, final String encoding, final String line) throws IOException {
 		String enc = encoding;
 		
 		if (!HelperGeneral.isValidString(encoding)) {
@@ -269,7 +269,7 @@ public abstract class HelperIO {
      * @param append to file?
      * @throws java.io.IOException
      */	
-	public static void writeFileFromBinary(final File file, final byte[] data, final boolean append) throws IOException {
+	public static synchronized void writeFileFromBinary(final File file, final byte[] data, final boolean append) throws IOException {
 		FileOutputStream fos = null;
 		
 		try {
@@ -291,7 +291,7 @@ public abstract class HelperIO {
      * @param append to file?
      * @throws java.io.IOException
      */	
-	public static void writeFileFromString(final File file, final String data, final boolean append) throws IOException {
+	public static synchronized void writeFileFromString(final File file, final String data, final boolean append) throws IOException {
 		final Writer writer = new BufferedWriter(new FileWriter(file));
 	
 	    try {
@@ -313,7 +313,7 @@ public abstract class HelperIO {
      * @param data byte-array for the stream
      * @throws java.io.IOException
      */	
-	public static void writeStream(final OutputStream os, final byte[] data) throws IOException {
+	public static synchronized void writeStream(final OutputStream os, final byte[] data) throws IOException {
 //	    try {
     		os.write(data);
     		os.flush();
@@ -329,7 +329,7 @@ public abstract class HelperIO {
      * @return byte-array containing the stream content
      * @throws java.io.IOException
      */	
-	public static byte[] readStream(final InputStream is) throws IOException {
+	public static synchronized byte[] readStream(final InputStream is) throws IOException {
 		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		final byte[] result;
 		int x;
@@ -383,7 +383,7 @@ public abstract class HelperIO {
      * @return byte-array containing the file content
      * @throws java.io.IOException
      */	
-	public static byte[] readFileAsBinary(final File file) throws IOException {
+	public static synchronized byte[] readFileAsBinary(final File file) throws IOException {
 		final long length = file.length();
 		FileInputStream fis = null;
 		final byte[] buffer;
@@ -407,7 +407,7 @@ public abstract class HelperIO {
      * @return String containing the file content
      * @throws java.io.IOException
      */	
-	public static String readFileAsString(final File file) throws IOException {
+	public static synchronized String readFileAsString(final File file) throws IOException {
 		final StringBuilder contents = new StringBuilder();
 		final Scanner scanner = new Scanner(file);
 		final String str;
@@ -432,7 +432,7 @@ public abstract class HelperIO {
      * @return List containing the file content
      * @throws java.io.IOException
      */	
-	public static List<String> readFileAsList(final File file) throws IOException {
+	public static synchronized List<String> readFileAsList(final File file) throws IOException {
 		final Scanner scanner = new Scanner(file);
 		final List<String> list = new ArrayList<String>();
 		
@@ -453,7 +453,7 @@ public abstract class HelperIO {
      * @param list List with all files
      * @throws java.io.IOException
      */	
-	public static void concatenateFiles(final File fileOutput, final File[] list) throws IOException {
+	public static synchronized void concatenateFiles(final File fileOutput, final File[] list) throws IOException {
 		// Create output stream
 	    PrintWriter pw = null;
         BufferedReader br = null;

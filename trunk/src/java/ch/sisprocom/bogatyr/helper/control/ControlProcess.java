@@ -42,7 +42,7 @@ import org.apache.log4j.Logger;
  * Creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 20081204
+ * @version 20081205
  */
 public abstract class ControlProcess {
 	private static final int BUFFER = 1024;
@@ -56,7 +56,7 @@ public abstract class ControlProcess {
 	 * @return created process
      * @throws java.io.IOException
 	 */
-	public static Process createProcess(final String command, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
+	public static synchronized Process createProcess(final String command, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
 		final Process process = createProcess(command);
 
 		ControlProcess.readStandardOutput(process, outputStream, errorStream);

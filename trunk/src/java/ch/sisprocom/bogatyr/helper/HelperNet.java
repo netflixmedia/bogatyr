@@ -51,7 +51,7 @@ import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 20081126
+ * @version 20081205
  */
 public abstract class HelperNet { //TODO document in Wiki!
 //	private static final String PROPERTY_HTTP_USE_PROXY   = "http.useProxy"; //$NON-NLS-1$
@@ -217,7 +217,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return List with IP addresses
      * @throws java.net.UnknownHostException
      */
-    public static List<String> getLocalIps() throws UnknownHostException {
+    public static synchronized List<String> getLocalIps() throws UnknownHostException {
     	final List<String> list = new ArrayList<String>();
         final String localHost = InetAddress.getLocalHost().getHostName();
 
@@ -244,7 +244,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return byte array with the content
      * @throws IOException
      */
-    public static byte[] readUrl(final URL url) throws IOException {
+    public static synchronized byte[] readUrl(final URL url) throws IOException {
 		final URLConnection con = url.openConnection();
 		con.setConnectTimeout(2000);
 		con.connect();
@@ -261,7 +261,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return byte array with the content
      * @throws IOException
      */
-    public static byte[] readUrl(final URL url, final String username, final String password) throws IOException {
+    public static synchronized byte[] readUrl(final URL url, final String username, final String password) throws IOException {
 		final URLConnection con = url.openConnection();
 		con.setRequestProperty("Authorization", "Basic " + ConverterBase64.encode((username + ':' + password))); //$NON-NLS-1$ //$NON-NLS-2$
 		con.setConnectTimeout(2000);

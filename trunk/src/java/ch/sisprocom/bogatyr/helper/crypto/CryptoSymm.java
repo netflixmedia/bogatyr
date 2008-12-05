@@ -59,14 +59,14 @@ public abstract class CryptoSymm {
 	 * Generates a key. Sets the intern attribute key to the generated key.
 	 * With this generated key, you can encrypt and decrypt Byte-Arrays.
 	 * 
-	 * @param keysize Size of the key in bits (e.g. 128, 256)
+	 * @param keysize Size of the key in bits (must be 128, 192 or 256)
 	 * @throws NoSuchAlgorithmException
 	 * @throws NoSuchProviderException 
      * @return generated secret key
 	 * @see #encrypt(byte[], Key)
 	 * @see #decrypt(byte[], Key)
 	 */
-	public static SecretKey generateKey(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
+	public static synchronized SecretKey generateKey(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 
 		// Generate a key
@@ -85,7 +85,7 @@ public abstract class CryptoSymm {
 	 * @throws Exception 
 	 * @see Key
 	 */
-	public static byte[] encrypt(final byte[] input, final Key key) throws Exception {
+	public static synchronized byte[] encrypt(final byte[] input, final Key key) throws Exception {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
 
@@ -101,7 +101,7 @@ public abstract class CryptoSymm {
 	 * @throws Exception
 	 * @see Key
 	 */
-	public static byte[] decrypt(final byte[] input, final Key key) throws Exception {
+	public static synchronized byte[] decrypt(final byte[] input, final Key key) throws Exception {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
 

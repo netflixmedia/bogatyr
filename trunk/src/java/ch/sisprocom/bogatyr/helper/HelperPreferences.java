@@ -46,10 +46,10 @@ import java.util.prefs.Preferences;
  * This is a helper class for preferences.
  * 
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20081205
  */
 public abstract class HelperPreferences { //TODO document in Wiki!
-	public static void loadFromFile(final File file) throws IOException, InvalidPreferencesFormatException {
+	public static synchronized void loadFromFile(final File file) throws IOException, InvalidPreferencesFormatException {
         BufferedInputStream bis = null;
 
         try {
@@ -62,7 +62,7 @@ public abstract class HelperPreferences { //TODO document in Wiki!
         }
 	}
 	 
-	public static void save(final Preferences prefs, final File file) throws IOException, BackingStoreException {
+	public static synchronized void save(final Preferences prefs, final File file) throws IOException, BackingStoreException {
         BufferedOutputStream bos = null;
 
         try {
@@ -75,7 +75,7 @@ public abstract class HelperPreferences { //TODO document in Wiki!
         }
 	}	
 	  
-	public static void saveUserNode(final Class<?> clazz, final File file) throws IOException, BackingStoreException {
+	public static synchronized void saveUserNode(final Class<?> clazz, final File file) throws IOException, BackingStoreException {
         BufferedOutputStream bos = null;
 
         try {
@@ -88,7 +88,7 @@ public abstract class HelperPreferences { //TODO document in Wiki!
         }
 	}	
 	  
-	public static void saveSystemNode(final Class<?> clazz, final File file) throws IOException, BackingStoreException {
+	public static synchronized void saveSystemNode(final Class<?> clazz, final File file) throws IOException, BackingStoreException {
         BufferedOutputStream bos = null;
 
         try {
