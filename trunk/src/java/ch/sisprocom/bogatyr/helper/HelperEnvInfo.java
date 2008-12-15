@@ -43,7 +43,7 @@ import java.util.Map;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20081215
  */
 public abstract class HelperEnvInfo { //TODO document in Wiki!
 	/**
@@ -114,7 +114,7 @@ public abstract class HelperEnvInfo { //TODO document in Wiki!
 	 *
 	 * @return list of system environment variables
 	 */
-	public static synchronized List<String> getOsEnvironmentVariables() {
+	public static List<String> getOsEnvironmentVariables() {
 		final List<String> list = new ArrayList<String>();
 		final Map<String, String> map = System.getenv();
 		

@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a class for asymmetric cryptology via RSA.
  * 
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20081215
  */
 public abstract class CryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
@@ -68,7 +68,7 @@ public abstract class CryptoAsymm {
 	 * @see KeyPair
 	 * @see KeyPairGenerator
 	 */
-	public static synchronized KeyPair generateKeys(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
+	public static KeyPair generateKeys(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 
 		// Generate a key-pair
@@ -88,7 +88,7 @@ public abstract class CryptoAsymm {
 	 * @throws Exception
 	 * @see PublicKey
 	 */
-    public static synchronized byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws Exception {
+    public static byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws Exception {
 		final int space = keysize/8 - 11;
 		byte[] result = null;
 		final byte[] temp = new byte[space];
@@ -130,7 +130,7 @@ public abstract class CryptoAsymm {
      * @return Return the decrypted byte-array
 	 * @throws Exception
 	 */
-	public static synchronized byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws Exception {
+	public static byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws Exception {
 		final int space = keysize/8;
 		byte[] result = null;
 		final byte[] temp = new byte[space];

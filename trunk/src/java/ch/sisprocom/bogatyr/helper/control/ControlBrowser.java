@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
  * This control displays an URL in the default system webbrowser.
  *
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20081215
  */
 public abstract class ControlBrowser {
 	protected static final Logger log = Logger.getLogger(ControlBrowser.class);
@@ -62,7 +62,7 @@ public abstract class ControlBrowser {
 	 * @param url for the browser
      * @throws Exception
 	 */
-	public static synchronized void display(final URL url) throws Exception {
+	public static void display(final URL url) throws Exception {
 		final String urlString = url.toExternalForm();
 		String cmd;
 				

@@ -38,7 +38,7 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20081215
  */
 public abstract class ConverterBase64 {
 	// Resources
@@ -131,7 +131,7 @@ public abstract class ConverterBase64 {
 	 * @return Array containing the decoded data bytes
 	 * @throws IllegalArgumentException
 	 */
-	public static synchronized byte[] decode(final char[] data) {
+	public static byte[] decode(final char[] data) {
 		int iLen = data.length;
 
 		if (iLen % 4 != 0) {
@@ -191,7 +191,7 @@ public abstract class ConverterBase64 {
 	 * @param iLen Number of bytes to process in <code>in</code>
 	 * @return Character array with the Base64 encoded data
 	 */
-	private static synchronized char[] encode(final byte[] in, final int iLen) {
+	private static char[] encode(final byte[] in, final int iLen) {
 		final int oDataLen = (iLen * 4 + 2) / 3; // output length without padding
 		final int oLen = ((iLen + 2) / 3) * 4; // output length including padding
 		final char[] out = new char[oLen];
