@@ -58,7 +58,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * This is a helper class for sound operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20081215
  */
 public abstract class HelperSound { //TODO document in Wiki!
 
@@ -120,7 +120,7 @@ public abstract class HelperSound { //TODO document in Wiki!
      * @throws javax.sound.midi.MidiUnavailableException
      * @throws javax.sound.midi.InvalidMidiDataException
      */
-	public static synchronized Sequencer getSequencer(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
+	public static Sequencer getSequencer(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
 		final Sequencer sequencer = MidiSystem.getSequencer();  // Used to play sequences
         sequencer.open(); // Turn it on.
 
@@ -144,7 +144,7 @@ public abstract class HelperSound { //TODO document in Wiki!
      *
      * @param clip to play
      */
-	public static synchronized void play(final Clip clip) {
+	public static void play(final Clip clip) {
 		clip.start();
 		final Timer timer = new Timer();
 		timer.schedule(new TimerTask(){
@@ -162,7 +162,7 @@ public abstract class HelperSound { //TODO document in Wiki!
 	 * @throws InvalidMidiDataException 
 	 * @throws MidiUnavailableException 
      */
-	public static synchronized void play(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
+	public static void play(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
 		final Sequencer sequencer = getSequencer(sequence);
 		sequencer.start();
 		final Timer timer = new Timer();

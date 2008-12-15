@@ -44,7 +44,7 @@ import javax.crypto.NoSuchPaddingException;
  * This is a class for wrapping and unwrapping a crypto key.
  * 
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20081215
  */
 public abstract class Wrapper {
 	/**
@@ -59,7 +59,7 @@ public abstract class Wrapper {
 	 * @throws IllegalBlockSizeException 
 	 * @throws NoSuchProviderException
 	 */
-	public static synchronized byte[] wrap(final Key wrapperKey, final Key key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, NoSuchProviderException {
+	public static byte[] wrap(final Key wrapperKey, final Key key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, NoSuchProviderException {
 		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.WRAP_MODE, wrapperKey);
 
@@ -79,7 +79,7 @@ public abstract class Wrapper {
 	 * @throws NoSuchPaddingException 
 	 * @throws NoSuchProviderException
 	 */
-	public static synchronized Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
+	public static Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
 		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.UNWRAP_MODE, wrapperKey);
 

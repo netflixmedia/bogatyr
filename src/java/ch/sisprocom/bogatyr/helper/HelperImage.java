@@ -50,7 +50,7 @@ import javax.imageio.ImageIO;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20081215
  */
 public abstract class HelperImage { //TODO document in Wiki!
 	public static final String TYPE_JPG = "jpg"; //$NON-NLS-1$
@@ -77,7 +77,7 @@ public abstract class HelperImage { //TODO document in Wiki!
      * @param output Filename
      * @throws java.io.IOException
      */
-	public static synchronized void saveImage(final Component component, final String type, final File output) throws IOException {
+	public static void saveImage(final Component component, final String type, final File output) throws IOException {
 		final Dimension size = component.getSize();
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		final Graphics2D g2 = image.createGraphics();

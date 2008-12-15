@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.context.Context;
  * This control opens PDF data with the default system pdf-viewer (e.g. Acrobat Reader).
  *
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20081215
  */
 public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
@@ -59,7 +59,7 @@ public abstract class ControlPdf {
 	 * @param pdfContent PDF content as byte array
      * @throws Exception
 	 */
-	public static synchronized void open(final byte[] pdfContent)	throws Exception {
+	public static void open(final byte[] pdfContent)	throws Exception {
 		// first store the pdfFileContents to a temporary file
 		final File temporaryFile = HelperIO.getTemporaryFile(Context.getInstance().getApplicationName(), PDF_EXTENSION);
 		HelperIO.writeFileFromBinary(temporaryFile, pdfContent, false);
@@ -72,7 +72,7 @@ public abstract class ControlPdf {
 	 * @param pdfFile PDF content as file
      * @throws Exception
 	 */
-	public static synchronized void open(final File pdfFile) throws Exception {
+	public static void open(final File pdfFile) throws Exception {
 		execute(pdfFile.getCanonicalPath());
 	}
 	

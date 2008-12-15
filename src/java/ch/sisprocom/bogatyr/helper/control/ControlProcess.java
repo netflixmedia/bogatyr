@@ -56,7 +56,7 @@ public abstract class ControlProcess {
 	 * @return created process
      * @throws java.io.IOException
 	 */
-	public static synchronized Process createProcess(final String command, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
+	public static Process createProcess(final String command, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
 		final Process process = createProcess(command);
 
 		ControlProcess.readStandardOutput(process, outputStream, errorStream);

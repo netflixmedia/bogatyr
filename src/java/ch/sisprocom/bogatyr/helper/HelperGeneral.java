@@ -57,7 +57,7 @@ import java.util.regex.Pattern;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081205
+ * @version 20081215
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and is logging needed?
 	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
@@ -77,7 +77,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
      */
-	public static synchronized Object createObject(final String clazz, final Object[] parameter) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SecurityException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
+	public static Object createObject(final String clazz, final Object[] parameter) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SecurityException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
 		final Object obj;
 
 		final Class<?> classDefinition = Class.forName(clazz);
@@ -209,7 +209,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @see ByteArrayOutputStream
 	 * @see ObjectOutputStream
 	 */
-	public static synchronized byte[] getBytesFromObject(final Object obj) throws IOException {
+	public static byte[] getBytesFromObject(final Object obj) throws IOException {
 		byte[] data = null;
 		
 		if (obj != null) {
@@ -243,7 +243,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @see ByteArrayInputStream
 	 * @see ObjectInputStream
 	 */
-	public static synchronized Object getObjectFromBytes(final byte[] bytes) throws IOException, ClassNotFoundException {
+	public static Object getObjectFromBytes(final byte[] bytes) throws IOException, ClassNotFoundException {
 		ObjectInputStream ois = null;
 		final Object obj;
 		
@@ -265,7 +265,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @param inB second array
 	 * @return The array a & b as one new array
 	 */
-    public static synchronized Object[] concatenateArrays(final Object[] inA, final Object[] inB) {
+    public static Object[] concatenateArrays(final Object[] inA, final Object[] inB) {
     	Object[] a = inA;
     	Object[] b = inB;
     	
@@ -291,7 +291,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @param inB second array
 	 * @return The array a & b as one new byte-array
 	 */
-    public static synchronized byte[] concatenateByteArrays(final byte[] inA, final byte[] inB) {
+    public static byte[] concatenateByteArrays(final byte[] inA, final byte[] inB) {
     	byte[] a = inA;
     	byte[] b = inB;
     	
@@ -341,7 +341,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return generated hash value
      * @throws NoSuchAlgorithmException
      */
-    public static synchronized String getHashCode(final String algo, final Object data) throws NoSuchAlgorithmException {
+    public static String getHashCode(final String algo, final Object data) throws NoSuchAlgorithmException {
     	final MessageDigest algorithm = MessageDigest.getInstance(algo);
 		final byte[] input = toString(data).getBytes();
 
@@ -368,7 +368,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return generated hash value
      * @throws NoSuchAlgorithmException
      */
-    public static synchronized String getHashCode(final Object data) throws NoSuchAlgorithmException {
+    public static String getHashCode(final Object data) throws NoSuchAlgorithmException {
     	return getHashCode(HASHCODE_ALGORITHM_SHA256, data);
     }
 
@@ -380,7 +380,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param seed for the string (e.g. "1,2...0,A,B...Z)
      * @return generated unique String
      */
-    public static synchronized String getRandomKey(final int digits, final char[] seed) {
+    public static String getRandomKey(final int digits, final char[] seed) {
 		final StringBuilder sb = new StringBuilder();
 
         for (int ii = 0; ii < digits; ii++) {
@@ -396,7 +396,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param digits length of result string
      * @return generated unique String.
      */
-    public static synchronized String getRandomKey(final int digits) {
+    public static String getRandomKey(final int digits) {
     	return getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
     }
     
@@ -407,7 +407,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param fillLength length of the filled string 
      * @return filled string
      */
-    public static synchronized String fillString(final char fillChar, final int fillLength) {
+    public static String fillString(final char fillChar, final int fillLength) {
         int length = fillLength;
     	final char[] chars = new char[length];
         
@@ -433,7 +433,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param list for dump
      * @return dump string
      */
-    public static synchronized String dump(final Iterable<?> list) {
+    public static String dump(final Iterable<?> list) {
         final StringBuilder sb = new StringBuilder();
 
         for (final Object value : list) {
@@ -449,7 +449,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param map for dump
      * @return dump string
      */
-    public static synchronized String dump(final Map<?, ?> map) {
+    public static String dump(final Map<?, ?> map) {
         final StringBuilder sb = new StringBuilder();
 
         for (final Map.Entry<?, ?> pair : map.entrySet()) {
@@ -467,7 +467,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param array for dump
      * @return dump string
      */
-    public static synchronized String dump(final Object[] array) {
+    public static String dump(final Object[] array) {
 		final StringBuilder sb = new StringBuilder();
 
 		for (final Object value : array) {
@@ -477,7 +477,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 		return sb.toString();
     }
 
-    public static synchronized String toString(final Object object) {
+    public static String toString(final Object object) {
     	final List<String> list = new ArrayList<String>();
     	toString(object, object.getClass(), list);
 

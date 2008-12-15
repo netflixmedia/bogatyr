@@ -68,7 +68,7 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
  * This class generates, reads and save X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20081215
  */
 public abstract class PublicKeyProvider {
 	/**
@@ -80,7 +80,7 @@ public abstract class PublicKeyProvider {
      * @throws NoSuchProviderException e
      * @throws IOException e
      */
-    public static synchronized X509Certificate getCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException {
+    public static X509Certificate getCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException {
         final FileInputStream fis = new FileInputStream(file);
         BufferedInputStream bis = null;
         final X509Certificate cert;
@@ -105,7 +105,7 @@ public abstract class PublicKeyProvider {
      * @throws NoSuchProviderException e
      * @throws IOException e
      */
-    public static synchronized X509Certificate getCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {    
+    public static X509Certificate getCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {    
 		final X509Certificate cert;
 		
     	try {
@@ -161,7 +161,7 @@ public abstract class PublicKeyProvider {
      * @throws NoSuchProviderException 
      * @throws InvalidKeyException 
      */
-    public static synchronized X509Certificate generateCertificate(KeyPair pair, String issuerDN, String subjectDN, String generalName, Date start, Date end) throws InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {
+    public static X509Certificate generateCertificate(KeyPair pair, String issuerDN, String subjectDN, String generalName, Date start, Date end) throws InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {
 	    // generate the certificate
 		final X509V3CertificateGenerator certGen = new X509V3CertificateGenerator();
 	

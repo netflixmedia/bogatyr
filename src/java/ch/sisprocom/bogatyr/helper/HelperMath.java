@@ -40,7 +40,7 @@ import java.util.List;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20081215
  */
 public abstract class HelperMath { //TODO document in Wiki!
 	
@@ -51,7 +51,7 @@ public abstract class HelperMath { //TODO document in Wiki!
 	 * @param b second number
 	 * @return calculated gcd
 	 */
-	 public static synchronized double gcd(final double a, final double b) {
+	 public static double gcd(final double a, final double b) {
 		 final double result;
 		 
 		 if (b == 0) { 
@@ -79,7 +79,7 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @param n number for the check
      * @return true/false
      */	
-	public static synchronized boolean isPrime(final int n) {
+	public static boolean isPrime(final int n) {
 		boolean flag = false;
         
 //        try {
@@ -113,7 +113,7 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @param n number for the check
      * @return prime number
      */	
-	public static synchronized int getPrime(final int n) {
+	public static int getPrime(final int n) {
 		int number = n;
         
 		while (!isPrime(number)) {
@@ -129,7 +129,7 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @param end number of the range
      * @return list with prime numbers
      */	
-	public static synchronized List<Integer> getPrimes(final int start, final int end) {
+	public static List<Integer> getPrimes(final int start, final int end) {
 		final List<Integer> list = new ArrayList<Integer>();
 		
 		for (int ii = start; ii <= end; ii++) {
@@ -170,7 +170,7 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @param decimalPlace for round
      * @return double-value
      */
-    public static synchronized double round(final double value, final int decimalPlace) {
+    public static double round(final double value, final int decimalPlace) {
 		int dp = decimalPlace;
 		double powerOfTen = 1.0D;
 		
