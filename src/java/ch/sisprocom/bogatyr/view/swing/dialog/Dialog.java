@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -41,10 +41,12 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JDialog.
  * 
  * @author Stefan Laubenberger
- * @version 20081120
+ * @version 20090113
  */
 public class Dialog extends JDialog { //TODO document in Wiki!
 	private static final long serialVersionUID = -3903296901431213544L;
+	
+	private JFrame frame;
 	
 	public Dialog() {
 		super();
@@ -53,13 +55,15 @@ public class Dialog extends JDialog { //TODO document in Wiki!
 	
 	public Dialog(final JFrame frame, final String title) {
 		super(frame, true);
+		
+		this.frame = frame;
+		
 		setTitle(title);
-//		setLocationRelativeTo(frame);
-//		setLocationRelativeTo(null);
 		init();
     }
 	
 	public void createAndShowGUI() {
+		setLocationRelativeTo(frame);
 		setVisible(true);
 	}
 

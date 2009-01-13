@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.ProtocolException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -55,11 +56,11 @@ import ch.sisprocom.bogatyr.helper.context.Context;
  * This is the updater for new Bogatyr-based applications versions.
  * 
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20090112
  */
-public abstract class Updater { //TODO document in Wiki!
+public class Updater { //TODO document in Wiki!
 	private static final Logger log = Logger.getLogger(Updater.class);
-
+	
 	/**
 	 * Checks the update XML file for new versions an update the application if needed.
 	 * 
@@ -67,9 +68,7 @@ public abstract class Updater { //TODO document in Wiki!
 	 * @throws IOException
 	 * @throws ParserConfigurationException
 	 */
-	public static synchronized void update() throws SAXException, IOException, ParserConfigurationException {
-		String updateLocation = Context.getInstance().getApplicationUpdateLocation();
-		
+	public synchronized void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws SAXException, IOException, ParserConfigurationException { //TODO setting the Context could be a problem (overwrites the Context-Info...)
 		if (updateLocation != null) {
 			final File file = new File(updateLocation);
 			InputStream is = null;
@@ -87,17 +86,24 @@ public abstract class Updater { //TODO document in Wiki!
 				final SAXParserFactory factory = SAXParserFactory.newInstance(); 
 				final SAXParser saxParser = factory.newSAXParser();
 				
-				final DefaultHandler handler = new XmlParser(); 
+				final DefaultHandler handler = new XmlParser(name, id, version, minorversion, build); 
 		
 				saxParser.parse(is, handler);
 			} catch (SocketTimeoutException ex) {
 				// do nothing (no internet available)
 				log.warn("Couldn't connect to the update xml file! No internet connection available or a proxy authentication is needed.");
+			} catch (ProtocolException ex) {
+				// do nothing (no update location available)
+				log.warn("Couldn't open or connect to the update xml file! No update location available.");
 			} finally {
 				if (is != null) {
 					is.close();
 				}
 		    }
 	    }
+	}
+	
+	public synchronized void update() throws SAXException, IOException, ParserConfigurationException {
+		update(Context.getInstance().getApplicationName(), Context.getInstance().getApplicationId(), Context.getInstance().getApplicationVersion(), Context.getInstance().getApplicationMinorVersion(), Context.getInstance().getApplicationBuild(), Context.getInstance().getApplicationUpdateLocation());
 	}
 }

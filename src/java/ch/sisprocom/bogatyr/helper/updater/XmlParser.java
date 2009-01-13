@@ -49,7 +49,6 @@ import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperNet;
-import ch.sisprocom.bogatyr.helper.context.Context;
 import ch.sisprocom.bogatyr.helper.localizer.Localizer;
 import ch.sisprocom.bogatyr.view.swing.dialog.DialogProgress;
 
@@ -58,7 +57,7 @@ import ch.sisprocom.bogatyr.view.swing.dialog.DialogProgress;
  * SAX handler to parse the update XML files
  * 
  * @author Stefan Laubenberger
- * @version 20081126
+ * @version 20081217
  */
 public class XmlParser extends DefaultHandler {
 	private static final Logger log = Logger.getLogger(XmlParser.class);
@@ -119,12 +118,30 @@ public class XmlParser extends DefaultHandler {
 	private boolean isNameOSX;
 	private boolean isNameUnix;	
 
+	private String applicationName;
+	private String applicationId;
+	private int applicationVersion;
+	private int applicationMinorversion;
+	private int applicationBuild;
+	
+	
+	public XmlParser(final String applicationName, final String applicationId, final int applicationVersion, final int applicationMinorversion, final int applicationBuild) {
+		super();
+		
+		this.applicationName = applicationName;
+		this.applicationId = applicationId;
+		this.applicationVersion = applicationVersion;
+		this.applicationMinorversion = applicationMinorversion;
+		this.applicationBuild = applicationBuild;
+	}
+	
+	
 	/*
 	 * Private methods
 	 */
 	private void update() {
 		if (JOptionPane.showConfirmDialog(null, Localizer.getInstance().getValue(RES_UPDATE) + HelperGeneral.getLS() + 
-				Localizer.getInstance().getValue(RES_UPDATE_TEXT), Context.getInstance().getApplicationName(), JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				Localizer.getInstance().getValue(RES_UPDATE_TEXT), applicationName, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 			try {
 				download();
 			} catch (IOException ex) {
@@ -139,7 +156,7 @@ public class XmlParser extends DefaultHandler {
 	
 	private void downgrade() {
 		if (JOptionPane.showConfirmDialog(null, Localizer.getInstance().getValue(RES_DOWNGRADE) + HelperGeneral.getLS() + 
-				Localizer.getInstance().getValue(RES_DOWNGRADE_TEXT), Context.getInstance().getApplicationName(), JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				Localizer.getInstance().getValue(RES_DOWNGRADE_TEXT), applicationName, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 			try {
 				download();
 			} catch (IOException ex) {
@@ -166,7 +183,7 @@ public class XmlParser extends DefaultHandler {
 	            output = fc.getSelectedFile();
 
 	            if (output.exists()) {
-	            	if (JOptionPane.showConfirmDialog(null, Localizer.getInstance().getValue(RES_FILE), Context.getInstance().getApplicationName(), JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+	            	if (JOptionPane.showConfirmDialog(null, Localizer.getInstance().getValue(RES_FILE), applicationName, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 	            		output.delete();
 	            		isOk = true;
 	            	}
@@ -196,12 +213,12 @@ public class XmlParser extends DefaultHandler {
 	        }
 	        HelperIO.writeFileFromBinary(output, data, false);
 	        
-			JOptionPane.showMessageDialog(null, Localizer.getInstance().getValue(RES_SUCCESS), Context.getInstance().getApplicationName(), JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, Localizer.getInstance().getValue(RES_SUCCESS), applicationName, JOptionPane.INFORMATION_MESSAGE);
 			log.info("Update successful");
 			Application.getInstance().exit(0);
 		} catch (SocketTimeoutException ex) {
 			// do nothing (no internet available)
-			JOptionPane.showMessageDialog(null, Localizer.getInstance().getValue(RES_FAIL), Context.getInstance().getApplicationName(), JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, Localizer.getInstance().getValue(RES_FAIL), applicationName, JOptionPane.ERROR_MESSAGE);
 			log.warn("Couldn't connect to the update url! No internet connection available or a proxy authentication is needed.");
 			Application.getInstance().exit(25);
 		} finally {
@@ -258,21 +275,21 @@ public class XmlParser extends DefaultHandler {
 	@Override
 	public void endElement(final String namespaceUri, final String localName, final String qualifiedName) throws SAXException {
 		if (TAG_APPLICATION.equals(qualifiedName)) {
-			if (id.equals(Context.getInstance().getApplicationId())) {
+			if (id.equals(applicationId)) {
 
-				if (version_min > Context.getInstance().getApplicationVersion()) {
+				if (version_min > applicationVersion) {
 					update();
-				} else if (version_max < Context.getInstance().getApplicationVersion()) {
+				} else if (version_max < applicationVersion) {
 					downgrade();
 				} else {
-					if (minorversion_min > Context.getInstance().getApplicationMinorVersion()) {
+					if (minorversion_min > applicationMinorversion) {
 						update();
-					} else if (minorversion_max < Context.getInstance().getApplicationMinorVersion()) {
+					} else if (minorversion_max < applicationMinorversion) {
 						downgrade();
 					} else {
-						if (build_min > Context.getInstance().getApplicationBuild()) {
+						if (build_min > applicationBuild) {
 							update();
-						} else if (build_max < Context.getInstance().getApplicationBuild()) {
+						} else if (build_max < applicationBuild) {
 							downgrade();
 						}
 					}
