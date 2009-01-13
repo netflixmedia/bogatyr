@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.helper.updater.Updater;
  * This is the skeleton for all Bogatyr applications.
  * 
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20090113
  */
 public abstract class ApplicationAbstract implements Runnable { //TODO document in Wiki!
 	private static final Logger log = Logger.getLogger(ApplicationAbstract.class);
@@ -97,7 +97,7 @@ public abstract class ApplicationAbstract implements Runnable { //TODO document 
      * Checks the update XML file for the application and update it if needed.
      */	
 	public void update() throws SAXException, IOException, ParserConfigurationException {
-		Updater.update();
+		new Updater().update();
 	}
 	
 	
