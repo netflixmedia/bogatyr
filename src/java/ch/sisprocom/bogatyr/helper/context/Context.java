@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.model.dao.User;
  * Get access from everywhere for general contents.
  * 
  * @author Stefan Laubenberger
- * @version 20081113
+ * @version 20090114
  */
 public class Context implements IContext { //TODO document in Wiki!
 	private static Context instance;
@@ -107,8 +107,12 @@ public class Context implements IContext { //TODO document in Wiki!
 		return (String) contextData.get(key);
     }
 
-	public boolean isApplicationDebug() {
-    	Boolean value = (Boolean) contextData.get(KEY_APPLICATION_DEBUG);
+	public Boolean getDataBoolean(final Object key) {
+		return (Boolean)contextData.get(key);
+    }
+	
+	public Boolean isApplicationDebug() {
+    	Boolean value = (Boolean)contextData.get(KEY_APPLICATION_DEBUG);
     	return value != null ? value : false;
  	}
 
@@ -130,15 +134,15 @@ public class Context implements IContext { //TODO document in Wiki!
 		return str;
 	}
 	
-	public int getApplicationVersion() {
+	public Integer getApplicationVersion() {
 		return (Integer)contextData.get(KEY_APPLICATION_VERSION);
 	}
 	
-	public int getApplicationMinorVersion() {
+	public Integer getApplicationMinorVersion() {
 		return (Integer)contextData.get(KEY_APPLICATION_MINORVERSION);
 	}
 	
-	public int getApplicationBuild() {
+	public Integer getApplicationBuild() {
 		return (Integer)contextData.get(KEY_APPLICATION_BUILD);
 	}
 	

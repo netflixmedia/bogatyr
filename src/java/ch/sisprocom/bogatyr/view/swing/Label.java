@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JLabel.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090114
  */
 public class Label extends JLabel {
 	private static final long serialVersionUID = 2440681846691377894L;
@@ -72,6 +72,9 @@ public class Label extends JLabel {
 		return HelperGeneral.toString(this);
 	}
 	
+	@Override
+	public void setText(final String text) {super.setText("<html>" + text + "</html>");} //$NON-NLS-1$ //$NON-NLS-2$
+
 	@Override
 	public void setToolTipText(final String text) {
 		if (text != null) {
