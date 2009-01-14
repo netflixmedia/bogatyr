@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -41,13 +41,14 @@ import ch.sisprocom.bogatyr.model.dao.User;
  * Interface for the Context for all Bogatyr applications.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090114
  */
 public interface IContext {
 	void addData(Object key, Object value);
 	void removeData(Object key);
 	Object getData(Object key);
 	String getDataString(Object key);
+	Boolean getDataBoolean(Object key);
     
     /*
      * Bogatyr specific
@@ -64,10 +65,10 @@ public interface IContext {
 
 	String getApplicationName();
 	String getApplicationId();
-	int getApplicationVersion();
-	int getApplicationMinorVersion();
-	int getApplicationBuild();
-	boolean isApplicationDebug();
+	Integer getApplicationVersion();
+	Integer getApplicationMinorVersion();
+	Integer getApplicationBuild();
+	Boolean isApplicationDebug();
 	File getApplicationWorkDirectory();
 	User getApplicationUser();
 	String getApplicationUpdateLocation();
