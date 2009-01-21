@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,34 +29,30 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
+
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.event.ActionListener;
 
 
 /**
- * This is an combined Label with a NumberField.
+ * This is an combined Label with a TextField.
  * 
  * @author Stefan Laubenberger
  * @version 20090121
  */
-public class LabeledNumberField extends LabeledComponent { //TODO document in Wiki!
-	private static final long serialVersionUID = 8536177338219909078L;
-
+public class LabeledPasswordField extends LabeledComponent { //TODO document in Wiki!
+	private static final long serialVersionUID = 1310593497620798003L;
 	
-	public LabeledNumberField(final String labelText, final int number, final int columns, final String toolTip) {
-		super(labelText, toolTip, new NumberField(number, columns, null));
+	
+	public LabeledPasswordField(final String labelText, final String toolTip) {
+		super(labelText, toolTip, new PasswordField());
 	}
 
-	public LabeledNumberField(final String title, final String labelText, final int number, final int columns, final String toolTip) {
-		super(title, labelText, toolTip, new NumberField(number, columns, null));
+	public LabeledPasswordField(final String title, final String labelText, final String toolTip) {
+		super(title, labelText, toolTip, new PasswordField());
 	}
 
-	public NumberField getNumberField() {
-		return ((NumberField)getComponent());
-	}
-
-	public void addActionListener(final ActionListener listener) {
-		((NumberField)getComponent()).addActionListener(listener);
+	public PasswordField getPasswordField() {
+		return ((PasswordField)getComponent());
 	}
 }

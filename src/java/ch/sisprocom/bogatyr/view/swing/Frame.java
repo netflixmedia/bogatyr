@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JFrame.
  * 
  * @author Stefan Laubenberger
- * @version 20090113
+ * @version 20090119
  */
 public class Frame extends JFrame {
 	private static final long serialVersionUID = 7476360387134225315L;
@@ -88,8 +88,8 @@ public class Frame extends JFrame {
 	
 //	    if (isFading) {
 	        panelGlass.add(new Panel(colorFader), gbc);
-//		} else {
-//			panelGlass.add(new Panel(new Color(255, 255, 255, 0)), gbc);
+		} else {
+			panelGlass.setVisible(false);
 		}
 		
         validate();

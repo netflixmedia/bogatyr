@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,101 +32,27 @@
 
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
 
 /**
  * This is an combined Label with a TextField.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090121
  */
-public class LabeledTextField extends Panel { //TODO document in Wiki!
+public class LabeledTextField extends LabeledComponent { //TODO document in Wiki!
 	private static final long serialVersionUID = 1310593497620798003L;
-	
-	private Label label;
-	private TextField textField;
 	
 	
 	public LabeledTextField(final String labelText, final String text, final int columns, final String toolTip) {
-		super();
-		createLayout(labelText, text, columns);
-		setToolTipText(toolTip);
+		super(labelText, toolTip, new TextField(text, columns, null));
 	}
 
 	public LabeledTextField(final String title, final String labelText, final String text, final int columns, final String toolTip) {
-		super(title);
-		createLayout(labelText, text, columns);
-		setToolTipText(toolTip);
-	}
-
-	public Label getLabel() {
-		return label;
+		super(title, labelText, toolTip, new TextField(text, columns, null));
 	}
 
 	public TextField getTextField() {
-		return textField;
-	}
-  
-	
-	/*
-	 * Private methods
-	 */
-	private void createLayout(final String labelText, final String text, final int columns) {
-		final GridBagConstraints gbc = new GridBagConstraints();
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.insets = new Insets(0, 0, 0, 5);
-
-        label = new Label(labelText);
-		add(label, gbc);
-		
-		gbc.weightx = 1.0D;
-		gbc.gridx = 1;
-		gbc.insets = new Insets(0, 0, 0, 0);
-        textField = new TextField(text, columns, null);
-		add(textField, gbc);
-	}
-	
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public void setBackground(final Color bg) {
-		super.setBackground(bg);
-		
-		if (label != null) {
-            label.setBackground(bg);
-        }
-		if (textField != null) {
-            textField.setBackground(bg);
-        }
-	}
-	
-	@Override
-	public void setForeground(final Color fg) {
-		super.setForeground(fg);
-
-		if (label != null) {
-            label.setForeground(fg);
-        }
-		if (textField != null) {
-            textField.setForeground(fg);
-        }
-	}
-	
-	@Override
-	public void setFont(final Font font) {
-		super.setFont(font);
-		
-		if (label != null) {
-            label.setFont(font);
-        }
-		if (textField != null) {
-            textField.setFont(font);
-        }
+		return ((TextField)getComponent());
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20081126
+ * @version 20090121
  */
 public class ComboBox extends JComboBox { //TODO document in Wiki!
 	private static final long serialVersionUID = -3870596701286078140L;
@@ -64,6 +64,12 @@ public class ComboBox extends JComboBox { //TODO document in Wiki!
 	
 	public ComboBox(final Object[] data, final String toolTip) {
 		super(data);
+		
+		if (data != null) {
+//			setSelectedIndex(0);
+			setSelectedIndex(-1);
+		}
+
 		setToolTipText(toolTip);
 		createLayout();
 	}
