@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,10 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.event.ActionListener;
 
 
@@ -42,100 +38,25 @@ import java.awt.event.ActionListener;
  * This is an combined Label with a ComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090121
  */
-public class LabeledComboBox extends Panel { //TODO document in Wiki!
+public class LabeledComboBox extends LabeledComponent { //TODO document in Wiki!
 	private static final long serialVersionUID = -67296455436983811L;
-
-	private Label label;
-	private ComboBox comboBox;
 	
 	
 	public LabeledComboBox(final String labelText, final Object[] data, final String toolTip) {
-		super();
-		createLayout(labelText, data);
-		setToolTipText(toolTip);
+		super(labelText, toolTip, new ComboBox(data, null));
 	}
 
 	public LabeledComboBox(final String title, final String labelText, final Object[] data, final String toolTip) {
-		super(title);
-		createLayout(labelText, data);
-		setToolTipText(toolTip);
+		super(title, labelText, toolTip, new ComboBox(data, null));
 	}
 	
 	public ComboBox getComboBox() {
-		return comboBox;
-	}
-
-	public Label getLabel() {
-		return label;
+		return ((ComboBox)getComponent());
 	}
 
 	public void addActionListener(final ActionListener listener) {
-        comboBox.addActionListener(listener);
-	}
-	
-	
-	/*
-	 * Private methods
-	 */
-	private void createLayout(final String labelText, final Object[] data) {
-		final GridBagConstraints gbc = new GridBagConstraints();
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.insets = new Insets(0, 0, 0, 5);
-
-        label = new Label(labelText);
-		add(label, gbc);
-		
-		gbc.weightx = 1.0D;
-		gbc.gridx = 1;
-		gbc.insets = new Insets(0, 0, 0, 0);
-		if (data != null) {
-            comboBox = new ComboBox(data, null);
-            comboBox.setSelectedIndex(0);
-		} else {
-            comboBox = new ComboBox(null, null);
-		}
-		add(comboBox, gbc);
-	}
-	
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public void setBackground(final Color bg) {
-		super.setBackground(bg);
-		
-		if (label != null) {
-            label.setBackground(bg);
-        }
-		if (comboBox != null) {
-            comboBox.setBackground(bg);
-        }
-	}
-	
-	@Override
-	public void setForeground(final Color fg) {
-		super.setForeground(fg);
-
-		if (label != null) {
-            label.setForeground(fg);
-        }
-		if (comboBox != null) {
-            comboBox.setForeground(fg);
-        }
-	}
-	
-	@Override
-	public void setFont(final Font font) {
-		super.setFont(font);
-		
-		if (label != null) {
-            label.setFont(font);
-        }
-		if (comboBox != null) {
-            comboBox.setFont(font);
-        }
+        ((ComboBox)getComponent()).addActionListener(listener);
 	}
 }
