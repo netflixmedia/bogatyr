@@ -29,38 +29,32 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
+package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 
-import java.awt.event.ActionListener;
+import ch.sisprocom.bogatyr.view.swing.ScrollPane;
+import ch.sisprocom.bogatyr.view.swing.TextArea;
+
 
 
 /**
- * This is an combined Label with a CheckBox.
+ * This is an combined Label with a TextArea.
  * 
  * @author Stefan Laubenberger
  * @version 20090121
  */
-public class LabeledCheckBox extends LabeledComponent {  //TODO document in Wiki!
-	private static final long serialVersionUID = 2215341067138215010L;
-
+public class LabeledTextArea extends LabeledComponent { //TODO document in Wiki!
+	private static final long serialVersionUID = -3385104817739873049L;
 	
-	public LabeledCheckBox(final String labelText, final boolean isSelected, final String toolTip) {
-		super(labelText, toolTip, new CheckBox(isSelected, null));
-	}
-
-	public LabeledCheckBox(final String title, final String labelText, final boolean isSelected, final String toolTip) {
-		super(title, labelText, toolTip, new CheckBox(isSelected, null));
+	
+	public LabeledTextArea(final String labelText, final String text, final int rows, final int columns, final String toolTip) {
+		super(labelText, toolTip, new ScrollPane(new TextArea(text, rows, columns, null)));
 	}
 
-	public CheckBox getCheckBox() {
-		return (CheckBox)getComponent();
+	public LabeledTextArea(final String title, final String labelText, final String text, final int rows, final int columns, final String toolTip) {
+		super(title, labelText, toolTip, new ScrollPane(new TextArea(text, rows, columns, null)));
 	}
-	
-	public boolean isSelected() {
-		return ((CheckBox)getComponent()).isSelected();
-	}
-	
-	public void addActionListener(final ActionListener listener) {
-		((CheckBox)getComponent()).addActionListener(listener);
+
+	public TextArea getTextArea() {
+		return ((TextArea)getComponent());
 	}
 }

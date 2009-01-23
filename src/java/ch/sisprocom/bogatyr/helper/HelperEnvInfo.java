@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -43,9 +43,9 @@ import java.util.Map;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090121
  */
-public abstract class HelperEnvInfo { //TODO document in Wiki!
+public abstract class HelperEnvInfo {
 	/**
 	 * Returns the used VM memory.
      *

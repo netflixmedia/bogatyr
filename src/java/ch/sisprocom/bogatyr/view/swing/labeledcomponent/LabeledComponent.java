@@ -29,40 +29,51 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
+package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JRadioButton;
+
+import ch.sisprocom.bogatyr.view.swing.Label;
+import ch.sisprocom.bogatyr.view.swing.Panel;
 
 
 /**
  * This is an combined Label with a JComponent.
  * 
  * @author Stefan Laubenberger
- * @version 20090119
+ * @version 20090122
  */
 public class LabeledComponent extends Panel {  //TODO document in Wiki!
 	private static final long serialVersionUID = 2215341067138215010L;
 
-	private Label label;
-	private JComponent component;
+	private final Label label = new Label();
+	private final JComponent component;
 
 	
-	public LabeledComponent(final String labelText, final String toolTip, JComponent component) {
+	public LabeledComponent(final String labelText, final String toolTip, final JComponent component) {
 		super();
 		
 		this.component = component;
-		
-		createLayout(labelText);
+		label.setText(labelText);
+
+		createLayout();
 		setToolTipText(toolTip);
 	}
 
-	public LabeledComponent(final String title, final String labelText, final String toolTip, JComponent component) {
+	public LabeledComponent(final String title, final String labelText, final String toolTip, final JComponent component) {
 		super(title);
-		createLayout(labelText);
+		
+		this.component = component;
+		label.setText(labelText);
+
+		createLayout();
 		setToolTipText(toolTip);
 	}
 
@@ -78,18 +89,27 @@ public class LabeledComponent extends Panel {  //TODO document in Wiki!
 	/*
 	 * Private methods
 	 */
-	private void createLayout(final String labelText) {
+	private void createLayout() {
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 	    gbc.insets = new Insets(0, 0, 0, 5);
 
-		add(component, gbc);
+	    if (component instanceof JCheckBox || component instanceof JRadioButton) {
+			add(component, gbc);
 
-		gbc.weightx = 1.0D;
-		gbc.gridx = 1;
-		gbc.insets = new Insets(0, 0, 0, 0);
-        label = new Label(labelText);
-		add(label, gbc);
+			gbc.weightx = 1.0D;
+			gbc.gridx = 1;
+			gbc.insets = new Insets(0, 0, 0, 0);
+			add(label, gbc);	    	
+	    } else {
+			add(label, gbc);
+			
+			gbc.weightx = 1.0D;
+			gbc.gridx = 1;
+			gbc.insets = new Insets(0, 0, 0, 0);
+			add(component, gbc);
+
+	    }
 	}
 	
 	
@@ -101,9 +121,10 @@ public class LabeledComponent extends Panel {  //TODO document in Wiki!
 		super.setBackground(bg);
 		
 		if (label != null) {
-            label.setBackground(bg);
-        }
-		if (component != null) {
+			label.setBackground(bg);
+		}
+		
+        if (component != null) {
             component.setBackground(bg);
         }
 	}
@@ -113,9 +134,10 @@ public class LabeledComponent extends Panel {  //TODO document in Wiki!
 		super.setForeground(fg);
 
 		if (label != null) {
-            label.setForeground(fg);
-        }
-		if (component != null) {
+			label.setForeground(fg);
+		}
+		
+        if (component != null) {
 			component.setForeground(fg);
         }
 	}
@@ -125,9 +147,10 @@ public class LabeledComponent extends Panel {  //TODO document in Wiki!
 		super.setFont(font);
 		
 		if (label != null) {
-            label.setFont(font);
-        }
-		if (component != null) {
+			label.setFont(font);
+		}
+
+        if (component != null) {
 			component.setFont(font);
         }
 	}

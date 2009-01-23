@@ -35,7 +35,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.ProtocolException;
+import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -56,7 +56,7 @@ import ch.sisprocom.bogatyr.helper.context.Context;
  * This is the updater for new Bogatyr-based applications versions.
  * 
  * @author Stefan Laubenberger
- * @version 20090112
+ * @version 20090122
  */
 public class Updater { //TODO document in Wiki!
 	private static final Logger log = Logger.getLogger(Updater.class);
@@ -92,7 +92,7 @@ public class Updater { //TODO document in Wiki!
 			} catch (SocketTimeoutException ex) {
 				// do nothing (no internet available)
 				log.warn("Couldn't connect to the update xml file! No internet connection available or a proxy authentication is needed.");
-			} catch (ProtocolException ex) {
+			} catch (MalformedURLException ex) {
 				// do nothing (no update location available)
 				log.warn("Couldn't open or connect to the update xml file! No update location available.");
 			} finally {
