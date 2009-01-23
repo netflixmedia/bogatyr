@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -55,7 +55,7 @@ import java.util.Scanner;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081215
+ * @version 20090122
  */
 public abstract class HelperIO {
 	private final static byte[] BUFFER = new byte[1024];
@@ -284,10 +284,10 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Writes a String into a file.
+     * Writes a string into a file.
      * 
      * @param file for writing
-     * @param data String to write
+     * @param data string to write
      * @param append to file?
      * @throws java.io.IOException
      */	
@@ -305,6 +305,18 @@ public abstract class HelperIO {
 	      writer.close();
 	    }
 	}
+	
+	/**
+     * Writes a stream into a file.
+     * 
+     * @param file for writing
+     * @param is stream to write
+     * @param append to file?
+     * @throws java.io.IOException
+     */	
+	public static void writeFileFromStream(final File file, final InputStream is, final boolean append) throws IOException { //TODO document in Wiki
+		writeFileFromBinary(file, readStream(is), append);
+	}	
 	
 	/**
      * Writes a byte array to a stream.
@@ -445,6 +457,17 @@ public abstract class HelperIO {
 	    }
 		return list;
 	}
+
+	/**
+     * Reads a file into a stream.
+     * 
+     * @param file for reading
+     * @param os output stream for the file content
+     * @throws java.io.IOException
+     */	
+	public static void readFileAsStream(final File file, final OutputStream os) throws IOException { //TODO document in Wiki
+		writeStream(os, readFileAsBinary(file));
+	}	
 
 	/**
      * Concatenates a list of files to one output file.

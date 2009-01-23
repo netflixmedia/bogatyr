@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,29 +29,31 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
+package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
+
+import ch.sisprocom.bogatyr.view.swing.PasswordField;
 
 
 
 /**
- * This is an combined Label with a TextArea.
+ * This is an combined Label with a TextField.
  * 
  * @author Stefan Laubenberger
  * @version 20090121
  */
-public class LabeledTextArea extends LabeledComponent { //TODO document in Wiki!
-	private static final long serialVersionUID = -3385104817739873049L;
+public class LabeledPasswordField extends LabeledComponent { //TODO document in Wiki!
+	private static final long serialVersionUID = 1310593497620798003L;
 	
 	
-	public LabeledTextArea(final String labelText, final String text, final int rows, final int columns, final String toolTip) {
-		super(labelText, toolTip, new ScrollPane(new TextArea(text, rows, columns, null)));
+	public LabeledPasswordField(final String labelText, final String toolTip) {
+		super(labelText, toolTip, new PasswordField());
 	}
 
-	public LabeledTextArea(final String title, final String labelText, final String text, final int rows, final int columns, final String toolTip) {
-		super(title, labelText, toolTip, new ScrollPane(new TextArea(text, rows, columns, null)));
+	public LabeledPasswordField(final String title, final String labelText, final String toolTip) {
+		super(title, labelText, toolTip, new PasswordField());
 	}
 
-	public TextArea getTextArea() {
-		return ((TextArea)getComponent());
+	public PasswordField getPasswordField() {
+		return ((PasswordField)getComponent());
 	}
 }

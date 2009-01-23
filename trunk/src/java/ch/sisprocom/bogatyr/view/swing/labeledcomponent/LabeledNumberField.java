@@ -29,9 +29,11 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
+package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 
 import java.awt.event.ActionListener;
+
+import ch.sisprocom.bogatyr.view.swing.NumberField;
 
 
 /**

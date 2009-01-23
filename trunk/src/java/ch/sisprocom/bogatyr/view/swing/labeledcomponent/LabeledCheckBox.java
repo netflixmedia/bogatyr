@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,30 +29,40 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
+package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 
-package ch.sisprocom.bogatyr.view.swing;
+import java.awt.event.ActionListener;
 
+import ch.sisprocom.bogatyr.view.swing.CheckBox;
 
 
 /**
- * This is an combined Label with a TextField.
+ * This is an combined Label with a CheckBox.
  * 
  * @author Stefan Laubenberger
  * @version 20090121
  */
-public class LabeledPasswordField extends LabeledComponent { //TODO document in Wiki!
-	private static final long serialVersionUID = 1310593497620798003L;
+public class LabeledCheckBox extends LabeledComponent {  //TODO document in Wiki!
+	private static final long serialVersionUID = 2215341067138215010L;
+
 	
-	
-	public LabeledPasswordField(final String labelText, final String toolTip) {
-		super(labelText, toolTip, new PasswordField());
+	public LabeledCheckBox(final String labelText, final boolean isSelected, final String toolTip) {
+		super(labelText, toolTip, new CheckBox(isSelected, null));
 	}
 
-	public LabeledPasswordField(final String title, final String labelText, final String toolTip) {
-		super(title, labelText, toolTip, new PasswordField());
+	public LabeledCheckBox(final String title, final String labelText, final boolean isSelected, final String toolTip) {
+		super(title, labelText, toolTip, new CheckBox(isSelected, null));
 	}
 
-	public PasswordField getPasswordField() {
-		return ((PasswordField)getComponent());
+	public CheckBox getCheckBox() {
+		return (CheckBox)getComponent();
+	}
+	
+	public boolean isSelected() {
+		return ((CheckBox)getComponent()).isSelected();
+	}
+	
+	public void addActionListener(final ActionListener listener) {
+		((CheckBox)getComponent()).addActionListener(listener);
 	}
 }

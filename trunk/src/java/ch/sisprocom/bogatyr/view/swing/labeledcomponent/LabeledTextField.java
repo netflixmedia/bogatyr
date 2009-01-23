@@ -29,38 +29,31 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
+package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 
-import java.awt.event.ActionListener;
+import ch.sisprocom.bogatyr.view.swing.TextField;
+
 
 
 /**
- * This is an combined Label with a RadioButton.
+ * This is an combined Label with a TextField.
  * 
  * @author Stefan Laubenberger
  * @version 20090121
  */
-public class LabeledRadioButton extends LabeledComponent { //TODO document in Wiki!
-	private static final long serialVersionUID = 3461718081893469685L;
-
+public class LabeledTextField extends LabeledComponent { //TODO document in Wiki!
+	private static final long serialVersionUID = 1310593497620798003L;
 	
-	public LabeledRadioButton(final String labelText, final boolean isSelected, final String toolTip) {
-		super(labelText, toolTip, new RadioButton(isSelected, null));
-	}
-
-	public LabeledRadioButton(final String title, final String labelText, final boolean isSelected, final String toolTip) {
-		super(title, labelText, toolTip, new RadioButton(isSelected, null));
+	
+	public LabeledTextField(final String labelText, final String text, final int columns, final String toolTip) {
+		super(labelText, toolTip, new TextField(text, columns, null));
 	}
 
-	public RadioButton getRadioButton() {
-		return ((RadioButton)getComponent());
+	public LabeledTextField(final String title, final String labelText, final String text, final int columns, final String toolTip) {
+		super(title, labelText, toolTip, new TextField(text, columns, null));
 	}
-	
-	public boolean isSelected() {
-		return ((RadioButton)getComponent()).isSelected();
-	}
-	
-	public void addActionListener(final ActionListener listener) {
-		((RadioButton)getComponent()).addActionListener(listener);
+
+	public TextField getTextField() {
+		return ((TextField)getComponent());
 	}
 }
