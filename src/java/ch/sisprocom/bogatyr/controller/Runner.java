@@ -55,7 +55,7 @@ import ch.sisprocom.bogatyr.helper.property.PropertyStream;
  * It handles the main functions like setup the logger, properties and localizer.
  *
  * @author Stefan Laubenberger
- * @version 20081202
+ * @version 20090127
  */
 public abstract class Runner { //TODO document in Wiki!
 	private static final Logger log = Logger.getRootLogger();
@@ -83,6 +83,10 @@ public abstract class Runner { //TODO document in Wiki!
 			try {
 				init(args[1]);
 				((Runnable) HelperGeneral.createObject(args[0], null)).run();
+			} catch (NullPointerException ex) {
+				System.err.println("Error: " + args[1] + " not found!");
+				ex.printStackTrace();
+				System.exit(97);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 				System.exit(98);
