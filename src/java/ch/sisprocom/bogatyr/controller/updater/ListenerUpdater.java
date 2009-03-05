@@ -29,47 +29,58 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
+package ch.sisprocom.bogatyr.controller.updater;
 
-import javax.swing.JMenuBar;
-import javax.swing.UIManager;
-
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
+import java.io.IOException;
 
 /**
- * This is an extended JMenuBar.
+ * ListenerUpdater
  * 
  * @author Stefan Laubenberger
  * @version 20090301
  */
-public class MenuBar extends JMenuBar {
-	private static final long serialVersionUID = -5107664209576098148L;
-
-	static {
-		if (HelperEnvInfo.isMacPlatform()) {
-			//display the menu in MacOS X style
-			try {
-	            System.setProperty("apple.laf.useScreenMenuBar", "true");
-	            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Test");
-	            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		    } catch(Exception e) {
-		    	//do nothing
-		    }
-		}
-	}
-	
-    public MenuBar() {
-		super();
-    }
-
-	
-	/*
-	 * Overridden methods
+public interface ListenerUpdater {
+	/**
+	 * The update was successful.
 	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
-	}
+	void updateSuccessful();
+	
+	/**
+	 * The update was cancelled.
+	 */
+	void updateCancelled();
+	
+	/**
+	 * The update was failed.
+	 * 
+	 * @param ex Exception containing details of the failure
+	 */
+	void updateFailed(IOException ex);
+	
+	/**
+	 * The downgrade was successful.
+	 */
+	void downgradeSuccessful();
+	
+	/**
+	 * The downgrade was cancelled.
+	 */
+	void downgradeCancelled();
+	
+	/**
+	 * The downgrade was failed.
+	 * 
+	 * @param ex Exception containing details of the failure
+	 */
+	void downgradeFailed(IOException ex);
+	
+	/**
+	 * The download was cancelled.
+	 */
+	void downloadCancelled();
+	
+	/**
+	 * The network was not available.
+	 */
+	void networkNotAvailable();
 }

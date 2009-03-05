@@ -31,19 +31,15 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.converter;
 
-import ch.sisprocom.bogatyr.helper.localizer.Localizer;
 
 
 /**
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090228
  */
 public abstract class ConverterBase64 {
-	// Resources
-    private static final String	RES_ILLEGAL_CHARACTER = "ConverterBase64.illegal"; //$NON-NLS-1$
-	private static final String	RES_INVALID_STRING 	  = "ConverterBase64.invalid"; //$NON-NLS-1$
 
 	private static final char[] map1 = new char[64];
 	private static final byte[] map2 = new byte[128];
@@ -135,7 +131,7 @@ public abstract class ConverterBase64 {
 		int iLen = data.length;
 
 		if (iLen % 4 != 0) {
-            throw new IllegalArgumentException(Localizer.getInstance().getValue(RES_INVALID_STRING));
+            throw new IllegalArgumentException("Length of Base64 encoded input string is not a multiple of 4");
         }
 		
 		while (iLen > 0 && data[iLen - 1] == '=') {
@@ -154,7 +150,7 @@ public abstract class ConverterBase64 {
 			final int i3 = (int) (ip < iLen ? data[ip++] : 'A');
 
 			if (i0 > 127 || i1 > 127 || i2 > 127 || i3 > 127) {
-                throw new IllegalArgumentException(Localizer.getInstance().getValue(RES_ILLEGAL_CHARACTER));
+                throw new IllegalArgumentException("Illegal character in Base64 encoded data");
             }
 			final int b0 = map2[i0];
 			final int b1 = map2[i1];
@@ -162,7 +158,7 @@ public abstract class ConverterBase64 {
 			final int b3 = map2[i3];
 
 			if (b0 < 0 || b1 < 0 || b2 < 0 || b3 < 0) {
-                throw new IllegalArgumentException(Localizer.getInstance().getValue(RES_ILLEGAL_CHARACTER));
+                throw new IllegalArgumentException("Illegal character in Base64 encoded data");
             }
 
 			final int o0 = b0 << 2 | b1 >>> 4;

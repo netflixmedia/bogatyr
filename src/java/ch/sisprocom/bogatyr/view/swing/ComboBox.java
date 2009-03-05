@@ -109,13 +109,13 @@ public class ComboBox extends JComboBox { //TODO document in Wiki!
 
 		private JComboBox comboBox;
 		private ComboBoxModel model;
-		private JTextComponent editor;
+		private JTextComponent myEditor;
 		protected boolean selecting = false;
 
 		public ComboBoxPopup(final JComboBox comboBox) {
 		    this.comboBox = comboBox;
 		    model = comboBox.getModel();
-		    editor = (JTextComponent) comboBox.getEditor().getEditorComponent();
+		    myEditor = (JTextComponent) comboBox.getEditor().getEditorComponent();
 
 		    comboBox.addActionListener(new ActionListener() {
 		        public void actionPerformed(ActionEvent e) {
@@ -123,7 +123,7 @@ public class ComboBox extends JComboBox { //TODO document in Wiki!
 		        }
 		    });
 
-		    editor.addKeyListener(new KeyAdapter() {
+		    myEditor.addKeyListener(new KeyAdapter() {
 		        @Override
 				public void keyPressed(KeyEvent e) {
 		            if (comboBox.isDisplayable()) comboBox.setPopupVisible(true);
@@ -141,8 +141,8 @@ public class ComboBox extends JComboBox { //TODO document in Wiki!
 		}
 		
 		protected void highlightCompletedText(final int start) {
-		    editor.setSelectionStart(start);
-		    editor.setSelectionEnd(getLength());
+		    myEditor.setSelectionStart(start);
+		    myEditor.setSelectionEnd(getLength());
 		}
 
 		private void setSelectedItem(final Object item) {

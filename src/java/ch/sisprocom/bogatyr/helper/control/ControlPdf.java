@@ -59,7 +59,7 @@ public abstract class ControlPdf {
 	 * @param pdfContent PDF content as byte array
      * @throws Exception
 	 */
-	public static void open(final byte[] pdfContent)	throws Exception {
+	public static void open(final byte[] pdfContent) throws Exception {
 		// first store the pdfFileContents to a temporary file
 		final File temporaryFile = HelperIO.getTemporaryFile(Context.getInstance().getApplicationName(), PDF_EXTENSION);
 		HelperIO.writeFileFromBinary(temporaryFile, pdfContent, false);

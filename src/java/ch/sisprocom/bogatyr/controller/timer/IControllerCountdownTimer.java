@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,47 +29,35 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
-
-import javax.swing.JMenuBar;
-import javax.swing.UIManager;
-
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+package ch.sisprocom.bogatyr.controller.timer;
 
 
 /**
- * This is an extended JMenuBar.
+ * Defines the methods for the implementation of the countdown timer.
  * 
  * @author Stefan Laubenberger
- * @version 20090301
+ * @version 20090304
  */
-public class MenuBar extends JMenuBar {
-	private static final long serialVersionUID = -5107664209576098148L;
-
-	static {
-		if (HelperEnvInfo.isMacPlatform()) {
-			//display the menu in MacOS X style
-			try {
-	            System.setProperty("apple.laf.useScreenMenuBar", "true");
-	            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Test");
-	            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		    } catch(Exception e) {
-		    	//do nothing
-		    }
-		}
-	}
-	
-    public MenuBar() {
-		super();
-    }
-
-	
-	/*
-	 * Overridden methods
+public interface IControllerCountdownTimer extends IListener{
+	/**
+	 * Starts immediately the countdown with a given runtime and standard interval of 1000ms.
+	 * 
+	 * @param runtime of the countdown
 	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
-	}
-}
+	void start(final long runtime);
+
+	/**
+	 * Start the countdown with a given delay, runtime and interval.
+	 * 
+	 * @param delay until the timer starts
+	 * @param runtime of the countdown
+	 * @param interval of the countown
+	 */
+	void start(final long delay, final long runtime, final long interval);
+
+	/**
+	 * Stops immediately the countdown timer.
+	 */
+	void stop();
+}   
+

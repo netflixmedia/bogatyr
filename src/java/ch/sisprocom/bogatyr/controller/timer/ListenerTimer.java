@@ -29,47 +29,27 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
-
-import javax.swing.JMenuBar;
-import javax.swing.UIManager;
-
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
+package ch.sisprocom.bogatyr.controller.timer;
 
 /**
- * This is an extended JMenuBar.
+ * ListenerTimer
  * 
  * @author Stefan Laubenberger
- * @version 20090301
+ * @version 20081127
  */
-public class MenuBar extends JMenuBar {
-	private static final long serialVersionUID = -5107664209576098148L;
-
-	static {
-		if (HelperEnvInfo.isMacPlatform()) {
-			//display the menu in MacOS X style
-			try {
-	            System.setProperty("apple.laf.useScreenMenuBar", "true");
-	            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Test");
-	            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		    } catch(Exception e) {
-		    	//do nothing
-		    }
-		}
-	}
-	
-    public MenuBar() {
-		super();
-    }
-
-	
-	/*
-	 * Overridden methods
+public interface ListenerTimer {
+	/**
+	 * Sends the actual time of the timer/countdown to the listener.
 	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
-	}
+	void timeChanged(long time);
+	
+	/**
+	 * Informs the listener that the timer/countdown has started.
+	 */
+	void timerStarted();
+	
+	/**
+	 * Informs the listener that the timer/countdown has stopped.
+	 */
+	void timerStopped();
 }

@@ -33,15 +33,13 @@ package ch.sisprocom.bogatyr.helper.context;
 
 import java.io.File;
 
-import ch.sisprocom.bogatyr.model.dao.User;
-
 
 
 /**
  * Interface for the Context for all Bogatyr applications.
  * 
  * @author Stefan Laubenberger
- * @version 20090114
+ * @version 20090305
  */
 public interface IContext {
 	void addData(Object key, Object value);
@@ -60,7 +58,6 @@ public interface IContext {
 	void setApplicationBuild(int build);
 	void setApplicationDebug(boolean isDebug);
 	void setApplicationWorkDirectory(File directory);
-	void setApplicationUser(User user);
 	void setApplicationUpdateLocation(String updateLocation);
 
 	String getApplicationName();
@@ -70,6 +67,5 @@ public interface IContext {
 	Integer getApplicationBuild();
 	Boolean isApplicationDebug();
 	File getApplicationWorkDirectory();
-	User getApplicationUser();
 	String getApplicationUpdateLocation();
 }

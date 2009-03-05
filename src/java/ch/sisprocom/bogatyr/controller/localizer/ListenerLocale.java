@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,47 +29,17 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
-
-import javax.swing.JMenuBar;
-import javax.swing.UIManager;
-
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
+package ch.sisprocom.bogatyr.controller.localizer;
 
 /**
- * This is an extended JMenuBar.
+ * ListenerLocale
  * 
  * @author Stefan Laubenberger
- * @version 20090301
+ * @version 20090304
  */
-public class MenuBar extends JMenuBar {
-	private static final long serialVersionUID = -5107664209576098148L;
-
-	static {
-		if (HelperEnvInfo.isMacPlatform()) {
-			//display the menu in MacOS X style
-			try {
-	            System.setProperty("apple.laf.useScreenMenuBar", "true");
-	            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Test");
-	            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		    } catch(Exception e) {
-		    	//do nothing
-		    }
-		}
-	}
-	
-    public MenuBar() {
-		super();
-    }
-
-	
-	/*
-	 * Overridden methods
+public interface ListenerLocale {
+	/**
+	 * Informs the listener that the locale has changed.
 	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
-	}
+	void localeChanged();
 }

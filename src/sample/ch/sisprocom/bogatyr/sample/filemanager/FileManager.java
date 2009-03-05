@@ -34,23 +34,20 @@ package ch.sisprocom.bogatyr.sample.filemanager;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
-
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
+import ch.sisprocom.bogatyr.controller.property.ControllerProperty;
+import ch.sisprocom.bogatyr.controller.property.IControllerProperty;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.property.Property;
 
 
 /**
  * Simple file manager using the Bogatyr framework
  * 
  * @author Stefan Laubenberger
- * @version 20081113
+ * @version 20090305
  */
-public class FileManager extends ApplicationAbstract {
-	private static final Logger log = Logger.getLogger(FileManager.class);
-	
+public class FileManager extends ApplicationAbstract { //TODO document in Wiki!
 	// Resources
 	private final static String	PROPERTY_PATH        = "FileManager.path"; //$NON-NLS-1$
 	private final static String	PROPERTY_IDENTIFIER  = "FileManager.identifier"; //$NON-NLS-1$
@@ -61,8 +58,13 @@ public class FileManager extends ApplicationAbstract {
 	private boolean isDelete;
 	
 	
+	public static void main(String[] args) {
+		new FileManager();
+	}
+	
 	public FileManager() {
 		super();
+		
 		init();
 		run();
 	}
@@ -72,21 +74,27 @@ public class FileManager extends ApplicationAbstract {
 	 * Private methods
 	 */
 	private void init() {
-		readProperties();
-	}
-	
-	private void readProperties() {
- 		String value = Property.getInstance().getProperty(PROPERTY_PATH);
+		IControllerProperty property = null;
+		
+		try {
+			property = new ControllerProperty(new File("cfg/ch/sisprocom/bogatyr/sample/filemanager/standard.properties"));
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			exit(1);
+		}
+
+ 		String value = property.getProperty(PROPERTY_PATH);
 		if (HelperGeneral.isValidString(value)) {
             path = new File(value);
 		} else {
-			log.error(PROPERTY_PATH + " == 'null'"); //$NON-NLS-1$
+			System.err.println(PROPERTY_PATH + " == 'null'"); //$NON-NLS-1$
 			exit(30);
 		}
 		
-		identifier = new String[]{Property.getInstance().getProperty(PROPERTY_IDENTIFIER)};
+		identifier = new String[]{property.getProperty(PROPERTY_IDENTIFIER)};
 	
-		isDelete = Property.getInstance().getPropertyBoolean(PROPERTY_DELETE);
+		isDelete = property.getPropertyBoolean(PROPERTY_DELETE);
+
 	}
 
 	private void searchFiles() throws IOException {
@@ -96,24 +104,28 @@ public class FileManager extends ApplicationAbstract {
 			if (isDelete) {
 				HelperIO.delete(file);
 			}
-			log.debug(file.getAbsolutePath());
+			System.out.println(file);
 			ii++;
 		}
-		log.info(ii + " file(s) " + (isDelete ? "deleted" : "found")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		System.out.println(ii + " file(s) " + (isDelete ? "deleted" : "found")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 	
 	
 	/*
 	 * Implemented methods
-	 * @see java.lang.Runnable#run()
 	 */
 	public void run() {
 		try {
 			searchFiles();
 		} catch (IOException ex) {
-			log.error("Search for files failed", ex); //$NON-NLS-1$
+			ex.printStackTrace();
 			exit(31);
 		}
 		exit(0);
+	}
+
+	@Override
+	public void exit(int returnCode) {
+		System.exit(returnCode);
 	}
 }

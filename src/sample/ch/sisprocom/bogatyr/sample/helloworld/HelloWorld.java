@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,15 +31,11 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.sample.helloworld;
 
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.apache.log4j.Logger;
-import org.xml.sax.SAXException;
+import java.util.Locale;
 
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
-import ch.sisprocom.bogatyr.helper.localizer.Localizer;
+import ch.sisprocom.bogatyr.controller.localizer.ControllerLocalizerFile;
+import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
 
 
 /**
@@ -47,31 +43,41 @@ import ch.sisprocom.bogatyr.helper.localizer.Localizer;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081127
+ * @version 20090305
  */
-public class HelloWorld extends ApplicationAbstract {
-	private static final Logger log = Logger.getLogger(HelloWorld.class);
-	
+public class HelloWorld extends ApplicationAbstract { //TODO document in Wiki!
 	// Resources
 	private static final String	RES_TEXT  = "HelloWorld.text"; //$NON-NLS-1$
 
+	private IControllerLocalizer localizer;
+	
+	
+	public static void main(String[] args) {
+		new HelloWorld();
+	}
 	
 	public HelloWorld() {
 		super();
-//		try {
-//			update();
-//		} catch (Exception ex) {
-//			log.error("Update failed", ex);
-//		}
+
+		localizer = new ControllerLocalizerFile("res/ch/sisprocom/bogatyr/sample/helloworld/helloworld");
 		run();
 	}
 
+	/*
+	 * Implemented methods
+	 */
 	public void run() {
-		String text = Localizer.getInstance().getValue(RES_TEXT);
+		localizer.setLocale(Locale.GERMAN);
+		System.out.println(localizer.getValue(RES_TEXT));
 		
-		System.out.println(text);
-		log.info(text);
-
+		localizer.setLocale(Locale.ROOT);
+		System.out.println(localizer.getValue(RES_TEXT));
+		
 		exit(0);
+	}
+
+	@Override
+	public void exit(int returnCode) {
+		System.exit(returnCode);
 	}
 }
