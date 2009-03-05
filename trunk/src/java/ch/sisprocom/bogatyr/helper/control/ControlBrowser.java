@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -34,8 +34,6 @@ package ch.sisprocom.bogatyr.helper.control;
 import java.lang.reflect.Method;
 import java.net.URL;
 
-import org.apache.log4j.Logger;
-
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 
 
@@ -43,10 +41,9 @@ import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
  * This control displays an URL in the default system webbrowser.
  *
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090304
  */
 public abstract class ControlBrowser {
-	protected static final Logger log = Logger.getLogger(ControlBrowser.class);
 	
 	// Default browser under windows
 	private static final String WINDOWS_PATH = "rundll32 url.dll,FileProtocolHandler"; //$NON-NLS-1$
@@ -108,7 +105,7 @@ public abstract class ControlBrowser {
 					final Method method = fileManager.getDeclaredMethod("openURL", String.class); //$NON-NLS-1$
 					method.invoke(null, url);
 				} catch (Exception ex) {
-					log.error("Couldn't start the web browser", ex);
+					throw new RuntimeException("Couldn't start the web browser: " + ex.getLocalizedMessage());
 				}
 			}
 		};

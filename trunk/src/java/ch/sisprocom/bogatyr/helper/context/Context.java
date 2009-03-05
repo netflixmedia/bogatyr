@@ -37,7 +37,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.model.dao.User;
 
 
 /**
@@ -45,7 +44,7 @@ import ch.sisprocom.bogatyr.model.dao.User;
  * Get access from everywhere for general contents.
  * 
  * @author Stefan Laubenberger
- * @version 20090114
+ * @version 20090305
  */
 public class Context implements IContext { //TODO document in Wiki!
 	private static Context instance;
@@ -57,7 +56,6 @@ public class Context implements IContext { //TODO document in Wiki!
 	private static final String KEY_APPLICATION_BUILD            = "Application.build"; //$NON-NLS-1$
 	private static final String KEY_APPLICATION_DEBUG            = "Application.debug"; //$NON-NLS-1$
 	private static final String KEY_APPLICATION_WORKDIRECTORY    = "Application.work_directory"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_USER             = "Application.user"; //$NON-NLS-1$
 	private static final String KEY_APPLICATION_UPDATE_LOCATION  = "Application.update"; //$NON-NLS-1$
 
 	private final Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();
@@ -155,10 +153,6 @@ public class Context implements IContext { //TODO document in Wiki!
 		return file;
 	}
 
-	public User getApplicationUser() {
-		return (User)getData(KEY_APPLICATION_USER);
-	}
-	
 	public String getApplicationUpdateLocation() {
 		return getDataString(KEY_APPLICATION_UPDATE_LOCATION);
 	}
@@ -189,10 +183,6 @@ public class Context implements IContext { //TODO document in Wiki!
 	
 	public void setApplicationWorkDirectory(final File directory) {
 		addData(KEY_APPLICATION_WORKDIRECTORY, directory);
-	}
-
-	public void setApplicationUser(final User user) {
-		addData(KEY_APPLICATION_USER, user);
 	}
 	
 	public void setApplicationUpdateLocation(final String updateLocation) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,41 +29,45 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
+package ch.sisprocom.bogatyr.controller.localizer;
 
-import javax.swing.JMenuBar;
-import javax.swing.UIManager;
+import java.util.ArrayList;
+import java.util.List;
 
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is an extended JMenuBar.
+ * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 20090301
+ * @version 20090304
  */
-public class MenuBar extends JMenuBar {
-	private static final long serialVersionUID = -5107664209576098148L;
+public abstract class ControllerLocalizerAbstract implements IControllerLocalizer { //TODO document in Wiki!
+	private List<ListenerLocale> listListener = new ArrayList<ListenerLocale>();
 
-	static {
-		if (HelperEnvInfo.isMacPlatform()) {
-			//display the menu in MacOS X style
-			try {
-	            System.setProperty("apple.laf.useScreenMenuBar", "true");
-	            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Test");
-	            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		    } catch(Exception e) {
-		    	//do nothing
-		    }
-		}
+	public synchronized void addListener(final ListenerLocale listener) {
+		listListener.add(listener);
 	}
 	
-    public MenuBar() {
-		super();
-    }
-
+	public synchronized void removeListener(final ListenerLocale listener) {
+		listListener.remove(listener);
+	}
+	
+	public synchronized void removeAllListener() {
+		listListener = new ArrayList<ListenerLocale>();
+	}
+	
+	
+	/*
+	 * Private methods
+	 */
+	protected void fireLocaleChanged() {
+		for (final ListenerLocale listener : listListener) {
+			listener.localeChanged();
+		}	
+	}
+	
 	
 	/*
 	 * Overridden methods

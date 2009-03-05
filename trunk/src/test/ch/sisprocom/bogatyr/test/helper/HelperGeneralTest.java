@@ -57,8 +57,8 @@ public class HelperGeneralTest { //TODO improve
 	@Test
 	public void testCreateObject() {
 		try {
-			assertEquals("", HelperGeneral.createObject("java.lang.String", null)); //$NON-NLS-1$ //$NON-NLS-2$
-			assertEquals(AllBogatyrTests.DATA, HelperGeneral.createObject("java.lang.String", new Object[]{AllBogatyrTests.DATA})); //$NON-NLS-1$
+			assertEquals("", HelperGeneral.newInstance(String.class)); //$NON-NLS-1$
+			assertEquals(AllBogatyrTests.DATA, HelperGeneral.newInstance(String.class, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA}));
 			assertNull(null, null);
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}

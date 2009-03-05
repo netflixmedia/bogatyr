@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,44 +29,46 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller;
+package ch.sisprocom.bogatyr.controller.updater;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is the skeleton for all Bogatyr applications.
+ * Defines the methods for the implementation of the updater.
  * 
  * @author Stefan Laubenberger
  * @version 20090304
  */
-public abstract class ApplicationAbstract implements Runnable { //TODO document in Wiki!
-	private final long startTime = System.currentTimeMillis();
-	
-	
+public interface IControllerUpdater {
 	/**
-     * Returns the start time of the application.
-     * 
-     * @return start time of the application
-     */	
-	public long getStartTime() {
-		return startTime;
-	}
-
-	/**
-     * Terminates the application in a proper way with a return code.
-     * 
-     * @param returnCode System-Return-Code
-     */	
-	public abstract void exit(final int returnCode);
-
-
-	
-	/*
-	 * Overridden methods
+	 * Checks the update information for new versions an update the application if needed.
+	 * 
+	 * @param name Name of the application
+	 * @param id Unique id of the application
+	 * @param version Version of the application
+	 * @param minorversion Minor version of the application
+	 * @param build Build of the application
+	 * @param updateLocation Location for the update information
 	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
-	}
-}
+	void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws Exception;
+
+	/**
+	 * Adds a listener for this timer.
+	 * 
+	 * @param listener to add
+	 */
+	void addListener(ListenerUpdater listener);
+	
+	/**
+	 * Remove a listener for this timer.
+	 * 
+	 * @param listener to remove
+	 */
+	void removeListener(ListenerUpdater listener);
+
+	/**
+	 * Remove all listeners for this timer. 
+	 */
+	void removeAllListener();
+}   
+

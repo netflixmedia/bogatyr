@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,44 +29,55 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller;
+package ch.sisprocom.bogatyr.controller.property;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.util.Properties;
 
 
 /**
- * This is the skeleton for all Bogatyr applications.
+ * Defines the methods for the implementation of the properties
  * 
  * @author Stefan Laubenberger
  * @version 20090304
  */
-public abstract class ApplicationAbstract implements Runnable { //TODO document in Wiki!
-	private final long startTime = System.currentTimeMillis();
-	
-	
+public interface IControllerProperty {
 	/**
-     * Returns the start time of the application.
+     * Returns the properties.
      * 
-     * @return start time of the application
-     */	
-	public long getStartTime() {
-		return startTime;
-	}
-
+     * @return Properties object
+     */
+	Properties getProperties();
+    
 	/**
-     * Terminates the application in a proper way with a return code.
+     * Returns the property-value as String.
      * 
-     * @param returnCode System-Return-Code
-     */	
-	public abstract void exit(final int returnCode);
+     * @param propertyName Input-String
+     * @return String-value
+     */
+    String getProperty(String propertyName);
 
+    /**
+     * Returns the property-value as double-value.
+     * 
+     * @param propertyName Input-String
+     * @return double-value
+     */
+    double getPropertyDouble(String propertyName);
 
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
-	}
-}
+    /**
+     * Returns the property-value as int-value.
+     * 
+     * @param propertyName Input-String
+     * @return int-value
+     */
+    int getPropertyInt(String propertyName);
+
+    /**
+     * Returns the property-value as boolean-value.
+     * 
+     * @param propertyName Input-String
+     * @return boolean-value
+     */
+    boolean getPropertyBoolean(String propertyName);
+}   
+

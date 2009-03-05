@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/Bogatyr/src/test/ch/sisprocom/bogatyr/test/AllBogatyrTests.java"/>
+<listEntry value="/Bogatyr/src/sample/ch/sisprocom/bogatyr/sample/helloworld/HelloWorld.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
@@ -10,6 +10,6 @@
 <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
 <listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="ch.sisprocom.bogatyr.test.AllBogatyrTests"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="ch.sisprocom.bogatyr.sample.helloworld.HelloWorld"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Bogatyr"/>
 </launchConfiguration>

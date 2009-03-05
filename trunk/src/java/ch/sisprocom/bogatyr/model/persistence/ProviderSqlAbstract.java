@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -35,8 +35,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-import org.apache.log4j.Logger;
-
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
@@ -45,10 +43,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081126
+ * @version 20090304
  */
 public abstract class ProviderSqlAbstract { //TODO document in Wiki!
-	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
+//	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
 	
 	// Server
 	private String driver;
@@ -124,7 +122,7 @@ public abstract class ProviderSqlAbstract { //TODO document in Wiki!
 	    	con = connectToDb();
 			stmt = con.createStatement();
 	
-			log.debug(stmt.toString());
+//			log.debug(stmt.toString());
 			
 			result = stmt.executeUpdate(statement);
 		} finally {
@@ -154,7 +152,7 @@ public abstract class ProviderSqlAbstract { //TODO document in Wiki!
 	    	con = connectToDb();
 			stmt = con.createStatement();
 	
-			log.debug(stmt.toString());
+//			log.debug(stmt.toString());
 			
 			result = stmt.execute(statement);
 		} finally {

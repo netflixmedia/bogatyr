@@ -35,14 +35,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.apache.log4j.Logger;
-
 
 /**
  * Creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20090304
  */
 public abstract class ControlProcess {
 	private static final int BUFFER = 1024;
@@ -100,8 +98,6 @@ public abstract class ControlProcess {
 	 * Inner classes
 	 */
 	protected static class StreamReader extends Thread {
-		private static final Logger log = Logger.getLogger(StreamReader.class);
-		
 		private final InputStream is;
 		private final OutputStream os;
 
@@ -130,7 +126,7 @@ public abstract class ControlProcess {
 					}
 				}
 			} catch (IOException ex) {
-				log.error("Couldn't read the stream of the process", ex); //$NON-NLS-1$
+				throw new RuntimeException("Couldn't read the stream of the process: " + ex.getLocalizedMessage());
 			}
 		}
 	}

@@ -37,7 +37,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.security.MessageDigest;
@@ -77,19 +76,27 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
      */
-	public static Object createObject(final String clazz, final Object[] parameter) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SecurityException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
-		final Object obj;
+//	public static Object createObject(final String clazz, final Object[] parameter) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SecurityException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
+//		final Object obj;
+//
+//		final Class<?> classDefinition = Class.forName(clazz);
+//			
+//		if (parameter == null) {
+//			obj = classDefinition.newInstance();
+//		} else {
+//            final Class<?>[] stringArgsClass = new Class[]{String.class};
+//            final Constructor<?> classConstructor = classDefinition.getConstructor(stringArgsClass);
+//			obj = classConstructor.newInstance(parameter);
+//		}
+//		return obj;
+//	}
+	
+	public static <T> T newInstance(Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		return newInstance(clazz, new Class[0], new Object[0]);
+	}
 
-		final Class<?> classDefinition = Class.forName(clazz);
-			
-		if (parameter == null) {
-			obj = classDefinition.newInstance();
-		} else {
-            final Class<?>[] stringArgsClass = new Class[]{String.class};
-            final Constructor<?> classConstructor = classDefinition.getConstructor(stringArgsClass);
-			obj = classConstructor.newInstance(parameter);
-		}
-		return obj;
+	public static <T> T newInstance(Class<T> clazz, Class<?>[] paramClazzes, Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		return clazz.getConstructor(paramClazzes).newInstance(params);
 	}
 
     /**

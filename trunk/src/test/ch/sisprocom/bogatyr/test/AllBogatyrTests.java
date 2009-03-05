@@ -41,9 +41,9 @@ import org.junit.runner.Result;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.test.helper.HelperEnvInfoTest;
-import ch.sisprocom.bogatyr.test.helper.HelperIOTest;
 import ch.sisprocom.bogatyr.test.helper.HelperGeneralTest;
 import ch.sisprocom.bogatyr.test.helper.HelperGraphicTest;
+import ch.sisprocom.bogatyr.test.helper.HelperIOTest;
 import ch.sisprocom.bogatyr.test.helper.HelperImageTest;
 import ch.sisprocom.bogatyr.test.helper.HelperMathTest;
 import ch.sisprocom.bogatyr.test.helper.HelperPdfTest;
@@ -56,7 +56,6 @@ import ch.sisprocom.bogatyr.test.helper.crypto.CryptoAsymmTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.CryptoSymmTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.ObfuscatorTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.PublicKeyProviderTest;
-import ch.sisprocom.bogatyr.test.helper.localizer.LocalizerTest;
 
 
 
@@ -111,7 +110,6 @@ public class AllBogatyrTests implements Runnable {
 				CryptoSymmTest.class,
 				ObfuscatorTest.class,
 				PublicKeyProviderTest.class,
-				LocalizerTest.class,	
 				HelperEnvInfoTest.class,
 				HelperIOTest.class,
 				HelperGeneralTest.class,
