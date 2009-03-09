@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import javax.swing.BoundedRangeModel;
 import javax.swing.JProgressBar;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
@@ -40,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JProgressBar.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090309
  */
 public class ProgressBar extends JProgressBar {
 	private static final long serialVersionUID = -6439735629199643683L;
@@ -50,6 +51,10 @@ public class ProgressBar extends JProgressBar {
 		super();
 	}
 	
+	public ProgressBar(BoundedRangeModel newModel) {
+		super(newModel);
+	}
+
 	public ProgressBar(final int start, final int end) {
 		super(start, end);
 	}

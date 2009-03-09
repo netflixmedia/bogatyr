@@ -33,6 +33,7 @@ package ch.sisprocom.bogatyr.view.swing;
 
 import java.awt.event.ActionListener;
 
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JRadioButtonMenuItem;
 
@@ -43,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JRadioButtonMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090309
  */
 public class MenuItemRadioButton extends JRadioButtonMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
@@ -53,6 +54,10 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 		super();
     }
 	
+	public MenuItemRadioButton(Action action) {
+		super(action);
+	}
+
 	public MenuItemRadioButton(final String text, final ImageIcon image, final int mnemonic, final String toolTip, final boolean isSelected) {
 		super(text);
 		

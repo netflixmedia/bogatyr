@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import javax.swing.Action;
 import javax.swing.JCheckBox;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
@@ -40,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JCheckBox.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090309
  */
 public class CheckBox extends JCheckBox {
 	private static final long serialVersionUID = -6439735629199643683L;
@@ -49,6 +50,10 @@ public class CheckBox extends JCheckBox {
 	public CheckBox() {
 		super();
 	}	
+	
+	public CheckBox(Action action) {
+		super(action);
+	}
 	
 	public CheckBox(final String title, final boolean isSelected, final String toolTip) {
 		super(title, isSelected);

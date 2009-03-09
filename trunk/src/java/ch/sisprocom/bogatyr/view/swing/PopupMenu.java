@@ -40,7 +40,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JPopupMenu.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090309
  */
 public class PopupMenu extends JPopupMenu {
 	private static final long serialVersionUID = -2117215021680174633L;
@@ -50,7 +50,11 @@ public class PopupMenu extends JPopupMenu {
 		super();
 	}
 	
-	
+	public PopupMenu(String label) {
+		super(label);
+	}
+
+
 	/*
 	 * Overridden methods
 	 */

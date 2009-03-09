@@ -33,6 +33,7 @@ package ch.sisprocom.bogatyr.view.swing;
 
 import java.awt.event.ActionListener;
 
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -54,6 +55,11 @@ public class Button extends JButton {
 		init();
 	}
 
+	public Button(Action action) {
+		super(action);
+		init();
+	}
+	
 	public Button(final String title, final String toolTip) {
 		super(title);
 		setToolTipText(toolTip);

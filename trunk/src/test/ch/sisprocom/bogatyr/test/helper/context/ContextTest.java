@@ -61,23 +61,23 @@ public class ContextTest {
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
-	@Test
-	public void testGetApplicationName() {
-		assertNotNull(Context.getInstance().getApplicationName());
-	}
-	
-	@Test
-	public void testGetApplicationVersion() {
-		assertNotNull(Context.getInstance().getApplicationVersion());
-	}
-	
-	@Test
-	public void testGetApplicationBuild() {
-		assertNotNull(Context.getInstance().getApplicationBuild());
-	}
-	
-	@Test
-	public void testGetApplicationWorkDirectory() {
-		assertNotNull(Context.getInstance().getApplicationWorkDirectory());
-	}
+//	@Test
+//	public void testGetApplicationName() {
+//		assertNotNull(Context.getInstance().getApplicationName());
+//	}
+//	
+//	@Test
+//	public void testGetApplicationVersion() {
+//		assertNotNull(Context.getInstance().getApplicationVersion());
+//	}
+//	
+//	@Test
+//	public void testGetApplicationBuild() {
+//		assertNotNull(Context.getInstance().getApplicationBuild());
+//	}
+//	
+//	@Test
+//	public void testGetApplicationWorkDirectory() {
+//		assertNotNull(Context.getInstance().getApplicationWorkDirectory());
+//	}
 }

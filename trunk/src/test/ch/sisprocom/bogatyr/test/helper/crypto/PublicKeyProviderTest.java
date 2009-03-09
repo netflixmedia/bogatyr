@@ -41,6 +41,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.context.Context;
 import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
 import ch.sisprocom.bogatyr.helper.crypto.PublicKeyProvider;
@@ -62,8 +63,8 @@ public class PublicKeyProviderTest {
 		
 		try {
 			X509Certificate cert = PublicKeyProvider.generateCertificate(kp, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(System.currentTimeMillis() - 50000), new Date(System.currentTimeMillis() + 50000));
-			PublicKeyProvider.storeCertificate(cert, new File(Context.getInstance().getApplicationWorkDirectory(), "test.cer"));
-			cert = PublicKeyProvider.getCertificate(new File(Context.getInstance().getApplicationWorkDirectory(), "test.cer"));
+			PublicKeyProvider.storeCertificate(cert, new File(HelperEnvInfo.getOsTempDirectory(), "test.cer"));
+			cert = PublicKeyProvider.getCertificate(new File(HelperEnvInfo.getOsTempDirectory(), "test.cer"));
 //			System.out.println(HelperGeneral.toString(cert));
 //			System.out.println(cert.getIssuerDN());
 //			System.out.println(cert.getSubjectDN());
