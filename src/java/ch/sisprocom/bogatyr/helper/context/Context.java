@@ -44,19 +44,19 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * Get access from everywhere for general contents.
  * 
  * @author Stefan Laubenberger
- * @version 20090305
+ * @version 20090306
  */
 public class Context implements IContext { //TODO document in Wiki!
-	private static Context instance;
+	private static volatile Context instance;
 
-	private static final String KEY_APPLICATION_NAME             = "Application.name"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_ID               = "Application.id"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_VERSION          = "Application.version"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_MINORVERSION     = "Application.minorversion"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_BUILD            = "Application.build"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_DEBUG            = "Application.debug"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_WORKDIRECTORY    = "Application.work_directory"; //$NON-NLS-1$
-	private static final String KEY_APPLICATION_UPDATE_LOCATION  = "Application.update"; //$NON-NLS-1$
+//	private static final String KEY_APPLICATION_NAME             = "Application.name"; //$NON-NLS-1$
+//	private static final String KEY_APPLICATION_ID               = "Application.id"; //$NON-NLS-1$
+//	private static final String KEY_APPLICATION_VERSION          = "Application.version"; //$NON-NLS-1$
+//	private static final String KEY_APPLICATION_MINORVERSION     = "Application.minorversion"; //$NON-NLS-1$
+//	private static final String KEY_APPLICATION_BUILD            = "Application.build"; //$NON-NLS-1$
+//	private static final String KEY_APPLICATION_DEBUG            = "Application.debug"; //$NON-NLS-1$
+//	private static final String KEY_APPLICATION_WORKDIRECTORY    = "Application.work_directory"; //$NON-NLS-1$
+//	private static final String KEY_APPLICATION_UPDATE_LOCATION  = "Application.update"; //$NON-NLS-1$
 
 	private final Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();
 	
@@ -66,11 +66,16 @@ public class Context implements IContext { //TODO document in Wiki!
     }
 	
     public static IContext getInstance() {
-    	if (instance == null) {
-    		instance = new Context();
-		}
-    	return instance;
-	}
+	    if (instance == null) {
+//	    	synchronized(instance) {
+	//            	synchronized(this) {
+//	            if (instance == null)
+	            	instance = new Context();
+//	        }
+	    }
+	    return instance;
+    }
+
     	
 	
     /*
@@ -109,83 +114,83 @@ public class Context implements IContext { //TODO document in Wiki!
 		return (Boolean)contextData.get(key);
     }
 	
-	public Boolean isApplicationDebug() {
-    	Boolean value = (Boolean)contextData.get(KEY_APPLICATION_DEBUG);
-    	return value != null ? value : false;
- 	}
-
-	public String getApplicationName() {
-		String str = getDataString(KEY_APPLICATION_NAME);
-
-		if (!HelperGeneral.isValidString(str)) {
-			str = "Bogatyr"; //$NON-NLS-1$
-		}
-		return str;
-	}
-	
-	public String getApplicationId() {
-		String str = getDataString(KEY_APPLICATION_ID);
-
-		if (!HelperGeneral.isValidString(str)) {
-			str = "Bogatyr"; //$NON-NLS-1$
-		}
-		return str;
-	}
-	
-	public Integer getApplicationVersion() {
-		return (Integer)contextData.get(KEY_APPLICATION_VERSION);
-	}
-	
-	public Integer getApplicationMinorVersion() {
-		return (Integer)contextData.get(KEY_APPLICATION_MINORVERSION);
-	}
-	
-	public Integer getApplicationBuild() {
-		return (Integer)contextData.get(KEY_APPLICATION_BUILD);
-	}
-	
-	public File getApplicationWorkDirectory() {
-		File file = (File)getData(KEY_APPLICATION_WORKDIRECTORY);
-
-		if (file == null) {
-			file = HelperEnvInfo.getOsTempDirectory();
-		}
-		return file;
-	}
-
-	public String getApplicationUpdateLocation() {
-		return getDataString(KEY_APPLICATION_UPDATE_LOCATION);
-	}
-
-	public void setApplicationDebug(final boolean isDebug) {
-		addData(KEY_APPLICATION_BUILD, isDebug);
-	}
-
-	public void setApplicationName(final String name) {
-		addData(KEY_APPLICATION_NAME, name);
-	}
-
-	public void setApplicationId(final String id) {
-		addData(KEY_APPLICATION_ID, id);
-	}
-	
-	public void setApplicationVersion(final int version) {
-		addData(KEY_APPLICATION_VERSION, version);
-	}
-	
-	public void setApplicationMinorVersion(final int minorversion) {
-		addData(KEY_APPLICATION_MINORVERSION, minorversion);
-	}
-	
-	public void setApplicationBuild(final int build) {
-		addData(KEY_APPLICATION_BUILD, build);
-	}
-	
-	public void setApplicationWorkDirectory(final File directory) {
-		addData(KEY_APPLICATION_WORKDIRECTORY, directory);
-	}
-	
-	public void setApplicationUpdateLocation(final String updateLocation) {
-		addData(KEY_APPLICATION_UPDATE_LOCATION, updateLocation);
-	}
+//	public Boolean isApplicationDebug() {
+//    	Boolean value = (Boolean)contextData.get(KEY_APPLICATION_DEBUG);
+//    	return value != null ? value : false;
+// 	}
+//
+//	public String getApplicationName() {
+//		String str = getDataString(KEY_APPLICATION_NAME);
+//
+//		if (!HelperGeneral.isValidString(str)) {
+//			str = "Bogatyr"; //$NON-NLS-1$
+//		}
+//		return str;
+//	}
+//	
+//	public String getApplicationId() {
+//		String str = getDataString(KEY_APPLICATION_ID);
+//
+//		if (!HelperGeneral.isValidString(str)) {
+//			str = "Bogatyr"; //$NON-NLS-1$
+//		}
+//		return str;
+//	}
+//	
+//	public Integer getApplicationVersion() {
+//		return (Integer)contextData.get(KEY_APPLICATION_VERSION);
+//	}
+//	
+//	public Integer getApplicationMinorVersion() {
+//		return (Integer)contextData.get(KEY_APPLICATION_MINORVERSION);
+//	}
+//	
+//	public Integer getApplicationBuild() {
+//		return (Integer)contextData.get(KEY_APPLICATION_BUILD);
+//	}
+//	
+//	public File getApplicationWorkDirectory() {
+//		File file = (File)getData(KEY_APPLICATION_WORKDIRECTORY);
+//
+//		if (file == null) {
+//			file = HelperEnvInfo.getOsTempDirectory();
+//		}
+//		return file;
+//	}
+//
+//	public String getApplicationUpdateLocation() {
+//		return getDataString(KEY_APPLICATION_UPDATE_LOCATION);
+//	}
+//
+//	public void setApplicationDebug(final boolean isDebug) {
+//		addData(KEY_APPLICATION_BUILD, isDebug);
+//	}
+//
+//	public void setApplicationName(final String name) {
+//		addData(KEY_APPLICATION_NAME, name);
+//	}
+//
+//	public void setApplicationId(final String id) {
+//		addData(KEY_APPLICATION_ID, id);
+//	}
+//	
+//	public void setApplicationVersion(final int version) {
+//		addData(KEY_APPLICATION_VERSION, version);
+//	}
+//	
+//	public void setApplicationMinorVersion(final int minorversion) {
+//		addData(KEY_APPLICATION_MINORVERSION, minorversion);
+//	}
+//	
+//	public void setApplicationBuild(final int build) {
+//		addData(KEY_APPLICATION_BUILD, build);
+//	}
+//	
+//	public void setApplicationWorkDirectory(final File directory) {
+//		addData(KEY_APPLICATION_WORKDIRECTORY, directory);
+//	}
+//	
+//	public void setApplicationUpdateLocation(final String updateLocation) {
+//		addData(KEY_APPLICATION_UPDATE_LOCATION, updateLocation);
+//	}
 }

@@ -39,7 +39,7 @@ import java.io.File;
  * Interface for the Context for all Bogatyr applications.
  * 
  * @author Stefan Laubenberger
- * @version 20090305
+ * @version 20090306
  */
 public interface IContext {
 	void addData(Object key, Object value);
@@ -48,24 +48,24 @@ public interface IContext {
 	String getDataString(Object key);
 	Boolean getDataBoolean(Object key);
     
-    /*
-     * Bogatyr specific
-     */
-	void setApplicationName(String name);
-	void setApplicationId(String id);
-	void setApplicationVersion(int version);
-	void setApplicationMinorVersion(int minorversion);
-	void setApplicationBuild(int build);
-	void setApplicationDebug(boolean isDebug);
-	void setApplicationWorkDirectory(File directory);
-	void setApplicationUpdateLocation(String updateLocation);
-
-	String getApplicationName();
-	String getApplicationId();
-	Integer getApplicationVersion();
-	Integer getApplicationMinorVersion();
-	Integer getApplicationBuild();
-	Boolean isApplicationDebug();
-	File getApplicationWorkDirectory();
-	String getApplicationUpdateLocation();
+//    /*
+//     * Bogatyr specific
+//     */
+//	void setApplicationName(String name);
+//	void setApplicationId(String id);
+//	void setApplicationVersion(int version);
+//	void setApplicationMinorVersion(int minorversion);
+//	void setApplicationBuild(int build);
+//	void setApplicationDebug(boolean isDebug);
+//	void setApplicationWorkDirectory(File directory);
+//	void setApplicationUpdateLocation(String updateLocation);
+//
+//	String getApplicationName();
+//	String getApplicationId();
+//	Integer getApplicationVersion();
+//	Integer getApplicationMinorVersion();
+//	Integer getApplicationBuild();
+//	Boolean isApplicationDebug();
+//	File getApplicationWorkDirectory();
+//	String getApplicationUpdateLocation();
 }

@@ -32,8 +32,10 @@
 package ch.sisprocom.bogatyr.view.swing;
 
 import java.awt.Color;
+import java.awt.GraphicsConfiguration;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.HeadlessException;
 import java.awt.Image;
 
 import javax.swing.JFrame;
@@ -58,6 +60,21 @@ public class Frame extends JFrame {
 		super();
 		init();
     }
+
+	public Frame(GraphicsConfiguration gc) {
+		super(gc);
+		init();
+	}
+
+	public Frame(String title, GraphicsConfiguration gc) {
+		super(title, gc);
+		init();
+	}
+
+	public Frame(String title) throws HeadlessException {
+		super(title);
+		init();
+	}
 	
 	public Frame(final String title, final Image icon) {
 		this();

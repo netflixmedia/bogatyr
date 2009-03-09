@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.view.swing;
 
 import javax.swing.JTextArea;
+import javax.swing.text.Document;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
@@ -40,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JTextArea.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090309
  */
 public class TextArea extends JTextArea {
 	private static final long serialVersionUID = 8509257459382968021L;
@@ -51,6 +52,10 @@ public class TextArea extends JTextArea {
         init();
     }
     
+	public TextArea(Document doc) {
+		super(doc);
+	}
+
 	public TextArea(final String toolTip) {
         this();
         setToolTipText(toolTip);

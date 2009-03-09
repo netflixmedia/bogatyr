@@ -36,6 +36,7 @@ import java.awt.Font;
 import java.util.Collections;
 import java.util.Dictionary;
 
+import javax.swing.BoundedRangeModel;
 import javax.swing.JSlider;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
@@ -53,6 +54,10 @@ public class Slider extends JSlider {
 
 	public Slider() {
 		super();
+	}
+
+	public Slider(BoundedRangeModel model) {
+		super(model);
 	}
 
 	public Slider(final int minValue, final int maxValue, final int currentValue, final String toolTip) {

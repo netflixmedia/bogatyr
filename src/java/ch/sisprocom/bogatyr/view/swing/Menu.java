@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import javax.swing.Action;
 import javax.swing.JMenu;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
@@ -40,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JMenu.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090309
  */
 public class Menu extends JMenu {
 	private static final long serialVersionUID = -908869267540163157L;
@@ -50,6 +51,10 @@ public class Menu extends JMenu {
 		super();
     }
 	
+	public Menu(Action action) {
+		super(action);
+	}
+
 	public Menu(final String text, final int mnemonic) {
 		super(text);
 		

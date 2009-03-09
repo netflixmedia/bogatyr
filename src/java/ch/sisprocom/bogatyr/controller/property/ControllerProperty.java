@@ -44,11 +44,28 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 20090304
+ * @version 20090306
  */
 public class ControllerProperty implements IControllerProperty { //TODO document in Wiki!
+//	private Properties properties;
 	private final Properties properties;
 
+//  public ControllerProperty() {
+//	  this.properties = properties;
+//  
+//  }
+
+//	public void setProperties(final Property properties) {
+//		this.properties = properties;
+//
+//}
+	
+//	@Required
+//	public void setProperties(final InputStream inputStream)  throws IOException{
+//        properties = new Properties();
+////        properties.load(inputStream);
+//
+//	}
 
     public ControllerProperty(final InputStream inputStream) throws IOException {
         super();
