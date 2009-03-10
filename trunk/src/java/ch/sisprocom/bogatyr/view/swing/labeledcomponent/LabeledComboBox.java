@@ -40,17 +40,17 @@ import ch.sisprocom.bogatyr.view.swing.ComboBox;
  * This is an combined Label with a ComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090121
+ * @version 20090310
  */
 public class LabeledComboBox extends LabeledComponent { //TODO document in Wiki!
 	private static final long serialVersionUID = -67296455436983811L;
 	
 	
-	public LabeledComboBox(final String labelText, final Object[] data, final String toolTip) {
+	public LabeledComboBox(final String labelText, final String toolTip, final Object[] data) {
 		super(labelText, toolTip, new ComboBox(data, null));
 	}
 
-	public LabeledComboBox(final String title, final String labelText, final Object[] data, final String toolTip) {
+	public LabeledComboBox(final String title, final String labelText, final String toolTip, final Object[] data) {
 		super(title, labelText, toolTip, new ComboBox(data, null));
 	}
 	

@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JTextField.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090310
  */
 public class TextField extends JTextField {//TODO improve Document!
 	private static final long serialVersionUID = 866371447844640358L;
@@ -54,7 +54,7 @@ public class TextField extends JTextField {//TODO improve Document!
         super();
     }
 
-	public TextField(final String text, final int columns, final String toolTip) {
+	public TextField(final String text, final String toolTip, final int columns) {
         super(text, columns);
         setToolTipText(toolTip);
     }

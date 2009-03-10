@@ -36,7 +36,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.AbstractAction;
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.text.AttributeSet;
@@ -51,7 +50,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090309
+ * @version 20090310
  */
 public class ComboBox extends JComboBox { //TODO document in Wiki!
 	private static final long serialVersionUID = -3870596701286078140L;

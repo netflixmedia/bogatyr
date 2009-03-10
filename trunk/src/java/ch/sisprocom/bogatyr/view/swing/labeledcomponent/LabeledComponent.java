@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.view.swing.Panel;
  * This is an combined Label with a JComponent.
  * 
  * @author Stefan Laubenberger
- * @version 20090122
+ * @version 20090310
  */
 public class LabeledComponent extends Panel {  //TODO document in Wiki!
 	private static final long serialVersionUID = 2215341067138215010L;

@@ -31,11 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.context;
 
-import java.io.File;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 

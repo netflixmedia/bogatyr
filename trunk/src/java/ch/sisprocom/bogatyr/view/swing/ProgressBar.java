@@ -51,8 +51,8 @@ public class ProgressBar extends JProgressBar {
 		super();
 	}
 	
-	public ProgressBar(BoundedRangeModel newModel) {
-		super(newModel);
+	public ProgressBar(final BoundedRangeModel model) {
+		super(model);
 	}
 
 	public ProgressBar(final int start, final int end) {

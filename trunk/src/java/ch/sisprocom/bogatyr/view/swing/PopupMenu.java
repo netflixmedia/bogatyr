@@ -50,7 +50,7 @@ public class PopupMenu extends JPopupMenu {
 		super();
 	}
 	
-	public PopupMenu(String label) {
+	public PopupMenu(final String label) {
 		super(label);
 	}
 
