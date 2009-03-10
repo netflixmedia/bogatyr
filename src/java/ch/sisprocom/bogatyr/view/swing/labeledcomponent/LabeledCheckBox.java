@@ -33,6 +33,8 @@ package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 
 import java.awt.event.ActionListener;
 
+import javax.swing.Action;
+
 import ch.sisprocom.bogatyr.view.swing.CheckBox;
 
 
@@ -40,17 +42,21 @@ import ch.sisprocom.bogatyr.view.swing.CheckBox;
  * This is an combined Label with a CheckBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090121
+ * @version 20090310
  */
 public class LabeledCheckBox extends LabeledComponent {  //TODO document in Wiki!
 	private static final long serialVersionUID = 2215341067138215010L;
 
 	
-	public LabeledCheckBox(final String labelText, final boolean isSelected, final String toolTip) {
+	public LabeledCheckBox(final String labelText, final String toolTip, final Action action) {
+		super(labelText, toolTip, new CheckBox(action));
+	}
+
+	public LabeledCheckBox(final String labelText, final String toolTip, final boolean isSelected) {
 		super(labelText, toolTip, new CheckBox(isSelected, null));
 	}
 
-	public LabeledCheckBox(final String title, final String labelText, final boolean isSelected, final String toolTip) {
+	public LabeledCheckBox(final String title, final String labelText, final String toolTip, final boolean isSelected) {
 		super(title, labelText, toolTip, new CheckBox(isSelected, null));
 	}
 

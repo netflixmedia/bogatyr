@@ -40,17 +40,17 @@ import ch.sisprocom.bogatyr.view.swing.NumberField;
  * This is an combined Label with a NumberField.
  * 
  * @author Stefan Laubenberger
- * @version 20090121
+ * @version 20090310
  */
 public class LabeledNumberField extends LabeledComponent { //TODO document in Wiki!
 	private static final long serialVersionUID = 8536177338219909078L;
 
 	
-	public LabeledNumberField(final String labelText, final int number, final int columns, final String toolTip) {
+	public LabeledNumberField(final String labelText, final String toolTip, final int number, final int columns) {
 		super(labelText, toolTip, new NumberField(number, columns, null));
 	}
 
-	public LabeledNumberField(final String title, final String labelText, final int number, final int columns, final String toolTip) {
+	public LabeledNumberField(final String title, final String labelText, final String toolTip, final int number, final int columns) {
 		super(title, labelText, toolTip, new NumberField(number, columns, null));
 	}
 

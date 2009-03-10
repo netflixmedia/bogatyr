@@ -40,18 +40,18 @@ import ch.sisprocom.bogatyr.view.swing.TextArea;
  * This is an combined Label with a TextArea.
  * 
  * @author Stefan Laubenberger
- * @version 20090121
+ * @version 20090310
  */
 public class LabeledTextArea extends LabeledComponent { //TODO document in Wiki!
 	private static final long serialVersionUID = -3385104817739873049L;
 	
 	
-	public LabeledTextArea(final String labelText, final String text, final int rows, final int columns, final String toolTip) {
-		super(labelText, toolTip, new ScrollPane(new TextArea(text, rows, columns, null)));
+	public LabeledTextArea(final String labelText, final String toolTip, final String text, final int rows, final int columns) {
+		super(labelText, toolTip, new ScrollPane(new TextArea(text, toolTip, rows, columns)));
 	}
 
-	public LabeledTextArea(final String title, final String labelText, final String text, final int rows, final int columns, final String toolTip) {
-		super(title, labelText, toolTip, new ScrollPane(new TextArea(text, rows, columns, null)));
+	public LabeledTextArea(final String title, final String toolTip, final String labelText, final String text, final int rows, final int columns) {
+		super(title, labelText, toolTip, new ScrollPane(new TextArea(text, toolTip, rows, columns)));
 	}
 
 	public TextArea getTextArea() {

@@ -42,7 +42,6 @@ import java.util.Date;
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
-import ch.sisprocom.bogatyr.helper.context.Context;
 import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
 import ch.sisprocom.bogatyr.helper.crypto.PublicKeyProvider;
 
@@ -51,7 +50,7 @@ import ch.sisprocom.bogatyr.helper.crypto.PublicKeyProvider;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20090310
  */
 public class PublicKeyProviderTest {
 	@Test

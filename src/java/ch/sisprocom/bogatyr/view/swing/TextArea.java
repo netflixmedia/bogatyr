@@ -61,7 +61,7 @@ public class TextArea extends JTextArea {
         setToolTipText(toolTip);
     }
 
-    public TextArea(final String text, final int rows, final int columns, final String toolTip) {
+    public TextArea(final String text, final String toolTip, final int rows, final int columns) {
         super(text, rows, columns);
         setToolTipText(toolTip);
         init();

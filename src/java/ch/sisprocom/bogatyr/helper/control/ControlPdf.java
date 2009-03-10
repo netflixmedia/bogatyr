@@ -38,7 +38,6 @@ import java.text.MessageFormat;
 
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.context.Context;
 
 /**
  * This control opens PDF data with the default system pdf-viewer (e.g. Acrobat Reader).
