@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JRadioButtonMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 20090309
+ * @version 20090318
  */
 public class MenuItemRadioButton extends JRadioButtonMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
@@ -54,8 +54,10 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 		super();
     }
 	
-	public MenuItemRadioButton(Action action) {
+	public MenuItemRadioButton(final boolean isSelected, Action action) {
 		super(action);
+		
+		setSelected(isSelected);
 	}
 
 	public MenuItemRadioButton(final String text, final ImageIcon image, final int mnemonic, final String toolTip, final boolean isSelected) {

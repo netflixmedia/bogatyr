@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -56,7 +56,7 @@ import java.util.regex.Pattern;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20081215
+ * @version 20090325
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and is logging needed?
 	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
@@ -182,7 +182,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param arg object to check
      * @return true/false
      */	
-	public static boolean isValidObject(final Object arg) {
+	public static <T> boolean isValidObject(final T arg) {
         return arg != null;
     }
 
@@ -192,7 +192,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param arg object array to check
      * @return true/false
      */	
-	public static boolean isValidArray(final Object[] arg) {
+	public static <T> boolean isValidArray(final T[] arg) {
         return !(!isValidObject(arg) || arg.length == 0);
     }
 
@@ -216,7 +216,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @see ByteArrayOutputStream
 	 * @see ObjectOutputStream
 	 */
-	public static byte[] getBytesFromObject(final Object obj) throws IOException {
+	public static <T> byte[] getBytesFromObject(final T obj) throws IOException {
 		byte[] data = null;
 		
 		if (obj != null) {
@@ -323,8 +323,8 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @param list containing duplicate objects
 	 * @return list without duplicates
 	 */
-    public static List<?> removeDuplicates(final List<?> list) {
-		return new ArrayList<Object>(new HashSet<Object>(list));
+    public static <T> List<T> removeDuplicates(final List<T> list) {
+		return new ArrayList<T>(new HashSet<T>(list));
     }
 	
     /**
@@ -348,7 +348,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return generated hash value
      * @throws NoSuchAlgorithmException
      */
-    public static String getHashCode(final String algo, final Object data) throws NoSuchAlgorithmException {
+    public static <T> String getHashCode(final String algo, final T data) throws NoSuchAlgorithmException {
     	final MessageDigest algorithm = MessageDigest.getInstance(algo);
 		final byte[] input = toString(data).getBytes();
 
@@ -375,7 +375,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return generated hash value
      * @throws NoSuchAlgorithmException
      */
-    public static String getHashCode(final Object data) throws NoSuchAlgorithmException {
+    public static <T> String getHashCode(final T data) throws NoSuchAlgorithmException {
     	return getHashCode(HASHCODE_ALGORITHM_SHA256, data);
     }
 
@@ -435,6 +435,21 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 
     /**
+     * Clean a string to numeric chars.
+     * 
+     * @param input string
+     * @return numeric string
+     */
+    public static String getValidNumericString(final String text) { //TODO document in Wiki!
+    	final String result = text.replaceAll("[^0-9.]+", ""); //$NON-NLS-1$ //$NON-NLS-2$ //TODO add minus (-) to regex?
+
+    	if (text.length() == 0) {
+    		return "0"; //$NON-NLS-1$
+    	}
+    	return result;
+    }
+    
+    /**
      * Dump a list.
      * 
      * @param list for dump
@@ -474,19 +489,19 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param array for dump
      * @return dump string
      */
-    public static String dump(final Object[] array) {
+    public static <T> String dump(final T[] array) {
 		final StringBuilder sb = new StringBuilder();
 
-		for (final Object value : array) {
+		for (final T value : array) {
             sb.append(value);
             sb.append(getLS());
         }
 		return sb.toString();
     }
 
-    public static String toString(final Object object) {
+    public static <T> String toString(final T object) {
     	final List<String> list = new ArrayList<String>();
-    	toString(object, object.getClass(), list);
+    	toString(object, list);
 
     	return object.getClass().getName() + list.toString();
     }
@@ -495,8 +510,8 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     /*
      * Private methods
      */
-    private static void toString(final Object object, final Class<?> clazz, final List<String> list) {
-    	final Field[] fields = clazz.getDeclaredFields();
+    private static <T> void toString(final T object, final List<String> list) {
+    	final Field[] fields = object.getClass().getDeclaredFields();
     	AccessibleObject.setAccessible(fields, true);
 
     	for (final Field field : fields) {

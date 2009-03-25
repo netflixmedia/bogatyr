@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -42,9 +42,29 @@ import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20090313
  */
 public class HelperEnvInfoTest {
+	@Test
+	public void testGetMemoryUsed() {
+		assertNotNull(HelperEnvInfo.getMemoryUsed());
+	}
+	
+	@Test
+	public void testGetMemoryFree() {
+		assertNotNull(HelperEnvInfo.getMemoryFree());
+	}
+	
+	@Test
+	public void testGetMemoryMax() {
+		assertNotNull(HelperEnvInfo.getMemoryMax());
+	}
+	
+	@Test
+	public void testGetAvailableProcessors() {
+		assertNotNull(HelperEnvInfo.getAvailableProcessors());
+	}
+
 	@Test
 	public void testGetOsArch() {
 		assertNotNull(HelperEnvInfo.getOsArch());
@@ -69,6 +89,11 @@ public class HelperEnvInfoTest {
 	@Test
 	public void testGetOsTempDirectory() {
 		assertNotNull(HelperEnvInfo.getOsTempDirectory());
+	}
+	
+	@Test
+	public void testGetUserHomeDirectory() {
+		assertNotNull(HelperEnvInfo.getUserHomeDirectory());
 	}
 }
 

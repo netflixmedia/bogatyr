@@ -55,7 +55,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  */
 public class HelperGeneralTest { //TODO improve
 	@Test
-	public void testCreateObject() {
+	public void testNewInstance() {
 		try {
 			assertEquals("", HelperGeneral.newInstance(String.class)); //$NON-NLS-1$
 			assertEquals(AllBogatyrTests.DATA, HelperGeneral.newInstance(String.class, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA}));
@@ -63,6 +63,11 @@ public class HelperGeneralTest { //TODO improve
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 
+	@Test
+	public void testGetLS() {
+		assertNull(HelperGeneral.getLS());
+	}
+	
 	@Test
 	public void testIsValidString() {
 		assertFalse(HelperGeneral.isValidString(null));
@@ -117,7 +122,7 @@ public class HelperGeneralTest { //TODO improve
 	}
 	
 	@Test
-	public void testIsValidList() {
+	public void testIsValidCollection() {
 		final List<String> list = new ArrayList<String>();
 		assertFalse(HelperGeneral.isValidCollection(null));
 		assertFalse(HelperGeneral.isValidCollection(list));

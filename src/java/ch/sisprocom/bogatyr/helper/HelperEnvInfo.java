@@ -141,7 +141,16 @@ public abstract class HelperEnvInfo {
 	public static File getUserHomeDirectory() {
 		return new File(System.getProperty("user.home")); //$NON-NLS-1$
 	}
-
+	
+	/**
+	* Returns the directory where the application has been started.
+	*
+	* @return application home directory
+	*/
+	public static File getWorkingDirectory() {
+		return new File(System.getProperty("user.dir")); //$NON-NLS-1$
+	}
+	
 	/**
 	 * Try to determine if this application is running under a Windows OS.
 	 *
