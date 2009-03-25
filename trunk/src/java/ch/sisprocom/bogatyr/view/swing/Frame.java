@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JFrame.
  * 
  * @author Stefan Laubenberger
- * @version 20090119
+ * @version 20090324
  */
 public class Frame extends JFrame {
 	private static final long serialVersionUID = 7476360387134225315L;
@@ -116,6 +116,15 @@ public class Frame extends JFrame {
 	public void setFaderColor(Color colorFader) {
 		this.colorFader = colorFader;
 	}
+	
+//	/**
+//     * Refresh the frame (validate() and repaint() in one method)
+//     */	
+//	public void refresh() {
+//		validate();
+//		repaint();
+//	}
+	
 	
 	/*
 	 * Private methods

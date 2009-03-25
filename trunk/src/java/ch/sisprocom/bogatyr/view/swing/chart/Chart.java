@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -52,7 +52,7 @@ import ch.sisprocom.bogatyr.view.swing.Panel;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20081126
+ * @version 20090325
  */
 public class Chart extends Panel { //TODO document in Wiki!
 	private static final long serialVersionUID = -4618658256880807781L;
@@ -99,9 +99,9 @@ public class Chart extends Panel { //TODO document in Wiki!
      * @param entry for the chart
      * @throws Exception
      */
-	public void addEntry(final ChartEntry entry) throws Exception {
+	public void addEntry(final ChartEntry entry) {
 		if (entry.getX() + entry.getSizeX() > maxX || entry.getY() + entry.getSizeY() > maxY) {
-			throw new Exception("Component exceeds the defined chart area!");
+			throw new RuntimeException("Component exceeds the defined chart area!");
 		}
         entries.add(entry);
 		createLayout();
@@ -184,8 +184,10 @@ public class Chart extends Panel { //TODO document in Wiki!
 //	    	gbc.gridy 		= entry.y + 1;
 	    	gbc.gridwidth 	= entry.getSizeX(); 
 	    	gbc.gridheight 	= entry.getSizeY();
-	    	gbc.weightx 	= (double) entry.getSizeX();
-			gbc.weighty		= (double) entry.getSizeY();
+//	    	gbc.weightx 	= (double) entry.getSizeX();
+//			gbc.weighty		= (double) entry.getSizeY();
+			gbc.weightx 	= 1.0/maxX;
+			gbc.weighty		= 1.0/maxY;
 			
 			// Save used coordinates in map
 			for (int x = entry.getX(); x < entry.getX() + entry.getSizeX(); x++) {
@@ -234,8 +236,8 @@ public class Chart extends Panel { //TODO document in Wiki!
 //    		    	gbc.gridy 		= y + 1;
     		    	gbc.gridwidth 	= 1;
     		    	gbc.gridheight 	= 1;
-    		    	gbc.weightx 	= 1.0D;
-    				gbc.weighty		= 1.0D;
+//    		    	gbc.weightx 	= 1.0D;
+//    				gbc.weighty		= 1.0D;
     				
     				final Panel spacer = new Panel(colorBackground);
     				

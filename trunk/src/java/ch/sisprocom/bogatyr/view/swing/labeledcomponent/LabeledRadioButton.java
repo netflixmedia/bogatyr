@@ -42,22 +42,22 @@ import ch.sisprocom.bogatyr.view.swing.RadioButton;
  * This is an combined Label with a RadioButton.
  * 
  * @author Stefan Laubenberger
- * @version 20090310
+ * @version 20090318
  */
 public class LabeledRadioButton extends LabeledComponent { //TODO document in Wiki!
 	private static final long serialVersionUID = 3461718081893469685L;
 
 	
-	public LabeledRadioButton(final String labelText, final String toolTip, final Action action) {
-		super(labelText, toolTip, new RadioButton(action));
+	public LabeledRadioButton(final String labelText, final String toolTip, final boolean isSelected, final Action action) {
+		super(labelText, toolTip, new RadioButton(isSelected, action));
 	}
 	
 	public LabeledRadioButton(final String labelText, final String toolTip, final boolean isSelected) {
-		super(labelText, toolTip, new RadioButton(isSelected, null));
+		super(labelText, toolTip, new RadioButton(isSelected, toolTip));
 	}
 
 	public LabeledRadioButton(final String title, final String labelText, final String toolTip, final boolean isSelected) {
-		super(title, labelText, toolTip, new RadioButton(isSelected, null));
+		super(title, labelText, toolTip, new RadioButton(isSelected, toolTip));
 	}
 
 	public RadioButton getRadioButton() {

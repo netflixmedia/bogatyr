@@ -54,8 +54,10 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 		super();
     }
 	
-	public MenuItemCheckBox(Action action) {
+	public MenuItemCheckBox(final boolean isSelected, Action action) {
 		super(action);
+		
+		setSelected(isSelected);
 	}
 
 	public MenuItemCheckBox(final String text, final ImageIcon image, final int mnemonic, final String toolTip, final boolean isSelected) {

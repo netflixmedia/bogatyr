@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JPanel.
  * 
  * @author Stefan Laubenberger
- * @version 20090309
+ * @version 20090324
  */
 public class Panel extends JPanel {
 	private static final long serialVersionUID = 3679443739459084931L;
@@ -91,7 +91,15 @@ public class Panel extends JPanel {
 		return title;
 	}
 	
+//	/**
+//     * Refresh the panel (revalidate() and repaint() in one method)
+//     */	
+//	public void refresh() {
+//		revalidate();
+//		repaint();
+//	}
 
+	
 	/*
 	 * Private methods
 	 */
