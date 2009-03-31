@@ -54,7 +54,7 @@ public class MenuItem extends JMenuItem {
 		super();
     }
 	
-	public MenuItem(Action action) {
+	public MenuItem(final Action action) {
 		super(action);
 	}
 
@@ -67,7 +67,7 @@ public class MenuItem extends JMenuItem {
         }
 
 		// Add the mnemonic key
-		if (mnemonic > 0) {
+		if (0 < mnemonic) {
 			setMnemonic(mnemonic);
 		}
 

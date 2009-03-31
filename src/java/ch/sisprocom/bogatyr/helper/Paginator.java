@@ -76,7 +76,7 @@ public class Paginator { //TODO document in Wiki!
      * @return Total number of pages
      */
     public int getNumberOfPages() {
-        if (list == null || list.isEmpty() || numberPerPage == 0) {
+        if (list == null || list.isEmpty() || 0 == numberPerPage) {
             return 0;
         } else if (list.size() < numberPerPage) {
             return 1;
@@ -98,18 +98,19 @@ public class Paginator { //TODO document in Wiki!
      */
     public List<?> getPage(final int requestedPage) {
         int page = requestedPage;
-        int xx = 0;
         final List<Object> result = new ArrayList<Object>();
 
         if (list != null) {
             if (page > getNumberOfPages()) {
                 page = getNumberOfPages();
             }
-            if (page < 1) {
+            if (1 > page) {
                 page = 1;
             }
 
             boolean isLoop = true;
+            int xx = 0;
+
             for (int ii = (page - 1) * numberPerPage; ii < page * numberPerPage && isLoop; ii++) {
                 if (list.size() > ii) {
                     result.add(list.get(ii));

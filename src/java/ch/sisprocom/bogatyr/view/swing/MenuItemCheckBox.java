@@ -54,7 +54,7 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 		super();
     }
 	
-	public MenuItemCheckBox(final boolean isSelected, Action action) {
+	public MenuItemCheckBox(final boolean isSelected, final Action action) {
 		super(action);
 		
 		setSelected(isSelected);
@@ -69,7 +69,7 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
         }
 
 		// Add the mnemonic key
-		if (mnemonic > 0) {
+		if (0 < mnemonic) {
 			setMnemonic(mnemonic);
 		}
 

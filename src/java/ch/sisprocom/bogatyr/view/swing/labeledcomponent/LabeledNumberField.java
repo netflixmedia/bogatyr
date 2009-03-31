@@ -35,6 +35,8 @@ import java.awt.event.ActionListener;
 
 import ch.sisprocom.bogatyr.view.swing.NumberField;
 
+import javax.swing.JTextField;
+
 
 /**
  * This is an combined Label with a NumberField.
@@ -55,10 +57,10 @@ public class LabeledNumberField extends LabeledComponent { //TODO document in Wi
 	}
 
 	public NumberField getNumberField() {
-		return ((NumberField)getComponent());
+		return (NumberField)getComponent();
 	}
 
 	public void addActionListener(final ActionListener listener) {
-		((NumberField)getComponent()).addActionListener(listener);
+		((JTextField) getComponent()).addActionListener(listener);
 	}
 }

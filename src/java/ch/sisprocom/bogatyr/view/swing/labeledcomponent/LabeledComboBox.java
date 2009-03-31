@@ -35,6 +35,8 @@ import java.awt.event.ActionListener;
 
 import ch.sisprocom.bogatyr.view.swing.ComboBox;
 
+import javax.swing.JComboBox;
+
 
 /**
  * This is an combined Label with a ComboBox.
@@ -55,10 +57,10 @@ public class LabeledComboBox extends LabeledComponent { //TODO document in Wiki!
 	}
 	
 	public ComboBox getComboBox() {
-		return ((ComboBox)getComponent());
+		return (ComboBox)getComponent();
 	}
 
 	public void addActionListener(final ActionListener listener) {
-        ((ComboBox)getComponent()).addActionListener(listener);
+        ((JComboBox) getComponent()).addActionListener(listener);
 	}
 }

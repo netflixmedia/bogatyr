@@ -49,10 +49,10 @@ public class HelloWorld extends ApplicationAbstract { //TODO document in Wiki!
 	// Resources
 	private static final String	RES_TEXT  = "HelloWorld.text"; //$NON-NLS-1$
 
-	private IControllerLocalizer localizer;
+	private final IControllerLocalizer localizer;
 	
 	
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		new HelloWorld();
 	}
 	
@@ -77,7 +77,7 @@ public class HelloWorld extends ApplicationAbstract { //TODO document in Wiki!
 	}
 
 	@Override
-	public void exit(int returnCode) {
+	public void exit(final int returnCode) {
 		System.exit(returnCode);
 	}
 }

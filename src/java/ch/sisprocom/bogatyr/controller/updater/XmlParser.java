@@ -115,10 +115,10 @@ public class XmlParser extends DefaultHandler {
 	private boolean isNameUnix;	
 
 	private final String applicationName;
-	private String applicationId;
-	private int applicationVersion;
-	private int applicationMinorversion;
-	private int applicationBuild;
+	private final String applicationId;
+	private final int applicationVersion;
+	private final int applicationMinorversion;
+	private final int applicationBuild;
 	
 	private final ListenerUpdater listener;
 	private final IControllerLocalizer localizer;
@@ -141,8 +141,8 @@ public class XmlParser extends DefaultHandler {
 	 * Private methods
 	 */
 	private void update() {
-		if (JOptionPane.showConfirmDialog(null, localizer.getValue(RES_UPDATE) + HelperGeneral.getLS() + 
-				localizer.getValue(RES_UPDATE_TEXT), applicationName, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+		if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, localizer.getValue(RES_UPDATE) + HelperGeneral.getLS() +
+                localizer.getValue(RES_UPDATE_TEXT), applicationName, JOptionPane.YES_NO_OPTION)) {
 			try {
 				download();
 				listener.updateSuccessful();
@@ -157,8 +157,8 @@ public class XmlParser extends DefaultHandler {
 	}
 	
 	private void downgrade() {
-		if (JOptionPane.showConfirmDialog(null, localizer.getValue(RES_DOWNGRADE) + HelperGeneral.getLS() + 
-				localizer.getValue(RES_DOWNGRADE_TEXT), applicationName, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+		if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, localizer.getValue(RES_DOWNGRADE) + HelperGeneral.getLS() +
+                localizer.getValue(RES_DOWNGRADE_TEXT), applicationName, JOptionPane.YES_NO_OPTION)) {
 			try {
 				download();
 				listener.downgradeSuccessful();
@@ -173,7 +173,7 @@ public class XmlParser extends DefaultHandler {
 	}
 	
     private void download() throws IOException {
-		File output = new File(HelperEnvInfo.getUserHomeDirectory() + "/" + (HelperEnvInfo.isWindowsPlatform() ? name_windows : (HelperEnvInfo.isMacPlatform() ? name_osx : name_unix)));
+		File output = new File(HelperEnvInfo.getUserHomeDirectory() + "/" + (HelperEnvInfo.isWindowsPlatform() ? name_windows : HelperEnvInfo.isMacPlatform() ? name_osx : name_unix));
 		boolean isOk = false;
 		
 		while (!isOk) {
@@ -182,11 +182,11 @@ public class XmlParser extends DefaultHandler {
 	
 			final int returnVal = fc.showSaveDialog(null);
 	
-	        if (returnVal == JFileChooser.APPROVE_OPTION) {
+	        if (JFileChooser.APPROVE_OPTION == returnVal) {
 	            output = fc.getSelectedFile();
 
 	            if (output.exists()) {
-	            	if (JOptionPane.showConfirmDialog(null, localizer.getValue(RES_FILE), applicationName, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+	            	if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, localizer.getValue(RES_FILE), applicationName, JOptionPane.YES_NO_OPTION)) {
 	            		output.delete();
 	            		isOk = true;
 	            	}
@@ -201,20 +201,14 @@ public class XmlParser extends DefaultHandler {
 
 		}
 		
-		DialogProgress dialogProgress = new DialogProgress();
+		final DialogProgress dialogProgress = new DialogProgress();
 		dialogProgress.createAndShowGUI();
 		
-		final String location = (HelperEnvInfo.isWindowsPlatform() ? location_windows : (HelperEnvInfo.isMacPlatform() ? location_osx : location_unix));
+		final String location = HelperEnvInfo.isWindowsPlatform() ? location_windows : HelperEnvInfo.isMacPlatform() ? location_osx : location_unix;
 		final File file = new File(location);
 		
-		byte[] data;
-		
 		try {
-	        if (file.exists()) {
-	            data = HelperIO.readFileAsBinary(file);
-	        } else {
-	        	data = HelperNet.readUrl(new URL(location));
-	        }
+            final byte[] data = file.exists() ? HelperIO.readFileAsBinary(file) : HelperNet.readUrl(new URL(location));
 	        HelperIO.writeFileFromBinary(output, data, false);
 	        
 			JOptionPane.showMessageDialog(null, localizer.getValue(RES_SUCCESS), applicationName, JOptionPane.INFORMATION_MESSAGE);
@@ -307,7 +301,7 @@ public class XmlParser extends DefaultHandler {
 		
     @Override 
 	public void characters(final char[] chars, final int startIndex, final int endIndex) {
-    	String value = new String(chars, startIndex, endIndex).trim();
+    	final String value = new String(chars, startIndex, endIndex).trim();
     	
     	/*if (isName) {
     		name = value;

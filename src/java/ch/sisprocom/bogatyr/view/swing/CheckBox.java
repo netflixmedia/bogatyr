@@ -51,7 +51,7 @@ public class CheckBox extends JCheckBox {
 		super();
 	}	
 	
-	public CheckBox(final boolean isSelected, Action action) {
+	public CheckBox(final boolean isSelected, final Action action) {
 		super(action);
 		
 		setSelected(isSelected);

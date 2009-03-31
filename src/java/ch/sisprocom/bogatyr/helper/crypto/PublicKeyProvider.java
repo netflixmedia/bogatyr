@@ -161,7 +161,7 @@ public abstract class PublicKeyProvider {
      * @throws NoSuchProviderException 
      * @throws InvalidKeyException 
      */
-    public static X509Certificate generateCertificate(KeyPair pair, String issuerDN, String subjectDN, String generalName, Date start, Date end) throws InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {
+    public static X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {
 	    // generate the certificate
 		final X509V3CertificateGenerator certGen = new X509V3CertificateGenerator();
 	

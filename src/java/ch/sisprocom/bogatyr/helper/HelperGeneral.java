@@ -60,16 +60,14 @@ import java.util.regex.Pattern;
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and is logging needed?
 	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
-	private static final char[] RANDOMKEY_SEED_DEFAULT    = new char[]{'1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+	private static final char[] RANDOMKEY_SEED_DEFAULT    = {'1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	
 	/**
      * Creates an object with parameters via reflection API.
      * 
      * @param clazz Full qualified class name
-     * @param parameter Parameter-array
      * @return instanciated object
-	 * @throws ClassNotFoundException 
-	 * @throws IllegalAccessException 
+	 * @throws IllegalAccessException
 	 * @throws InstantiationException 
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
@@ -91,11 +89,11 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 //		return obj;
 //	}
 	
-	public static <T> T newInstance(Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public static <T> T newInstance(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		return newInstance(clazz, new Class[0], new Object[0]);
 	}
 
-	public static <T> T newInstance(Class<T> clazz, Class<?>[] paramClazzes, Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public static <T> T newInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		return clazz.getConstructor(paramClazzes).newInstance(params);
 	}
 
@@ -115,7 +113,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return true/false
      */	
 	public static boolean isValidString(final String arg) {
-        return !(!isValidObject(arg) || arg.length() == 0);
+        return !(!isValidObject(arg) || 0 == arg.length());
     }
 
 	/**
@@ -143,7 +141,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return true/false
      */
 	public static boolean isValidInt(final int arg) {
-        return arg != 0;
+        return 0 != arg;
     }
 	
 	/**
@@ -153,7 +151,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return true/false
      */	
 	public static boolean isValidDouble(final double arg) {
-        return arg != 0.0D;
+        return 0.0D != arg;
     }
 	
 	/**
@@ -163,7 +161,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return true/false
      */
 	public static boolean isValidLong(final long arg) {
-        return arg != 0L;
+        return 0L != arg;
     }
 
 	/**
@@ -173,7 +171,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return true/false
      */	
 	public static boolean isValidFloat(final float arg) {
-        return arg != 0.0F;
+        return 0.0F != arg;
     }
 
 	/**
@@ -193,7 +191,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return true/false
      */	
 	public static <T> boolean isValidArray(final T[] arg) {
-        return !(!isValidObject(arg) || arg.length == 0);
+        return !(!isValidObject(arg) || 0 == arg.length);
     }
 
 	/**
@@ -360,7 +358,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 
 		for (final byte digest : messageDigest) {
 			final String hex = Integer.toHexString(0xFF & (int) digest);
-			if (hex.length() == 1) {
+			if (1 == hex.length()) {
 				hexString.append('0');
 			}
 			hexString.append(hex);
@@ -418,8 +416,9 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
         int length = fillLength;
     	final char[] chars = new char[length];
         
-    	while (length > 0) {
-            chars[--length] = fillChar;
+    	while (0 < length) {
+            --length;
+            chars[length] = fillChar;
         }
     	return new String(chars);
     }
@@ -437,13 +436,13 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     /**
      * Clean a string to numeric chars.
      * 
-     * @param input string
+     * @param text string
      * @return numeric string
      */
     public static String getValidNumericString(final String text) { //TODO document in Wiki!
     	final String result = text.replaceAll("[^0-9.]+", ""); //$NON-NLS-1$ //$NON-NLS-2$ //TODO add minus (-) to regex?
 
-    	if (text.length() == 0) {
+    	if (0 == text.length()) {
     		return "0"; //$NON-NLS-1$
     	}
     	return result;

@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.controller.timer;
 
 import java.util.TimerTask;
+import java.util.Timer;
 
 /**
  * This is a countdown timer which informs all added listeners about its state.
@@ -42,27 +43,33 @@ import java.util.TimerTask;
 public class ControllerCountdownTimer extends ControllerTimerAbstract implements IControllerCountdownTimer{ //TODO document in Wiki!
 	protected long runtime;
 
-	/*
-	 * Implemented methods
-	 */
-	public synchronized void start(final long runtime) {
-		start(0, runtime, 1000);
-	}
-
-	public synchronized void start(final long delay, final long runtime, final long interval) {
-    	timer.cancel();
-    	
-    	timer = new java.util.Timer();
-    	this.runtime = runtime;
-    	this.interval = interval;
-    	
-        timer.schedule(new TaskCountdown(), delay, interval);
-        fireTimerStarted();
+    /*
+      * Implemented methods
+      */
+    public void start(final long runtime) {
+        synchronized (this) {
+            start(0, runtime, 1000);
+        }
     }
-	
-    public synchronized void stop() {
-        timer.cancel();
-        fireTimerStopped();
+
+    public void start(final long delay, final long runtime, final long interval) {
+        synchronized (this) {
+            timer.cancel();
+
+            timer = new Timer();
+            this.runtime = runtime;
+            this.interval = interval;
+
+            timer.schedule(new TaskCountdown(), delay, interval);
+            fireTimerStarted();
+        }
+    }
+
+    public void stop() {
+        synchronized (this) {
+            timer.cancel();
+            fireTimerStopped();
+        }
     }
 
     
@@ -72,7 +79,7 @@ public class ControllerCountdownTimer extends ControllerTimerAbstract implements
 	protected class TaskCountdown extends TimerTask {
 		@Override
 		public void run() {
-			if (runtime > 0) {
+			if (0 < runtime) {
 				runtime -= interval;
 				fireTimeChanged(runtime);
 			} else {

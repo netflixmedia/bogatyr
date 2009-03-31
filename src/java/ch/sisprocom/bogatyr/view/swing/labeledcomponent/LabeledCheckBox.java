@@ -33,6 +33,7 @@ package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractButton;
 import javax.swing.Action;
 
 import ch.sisprocom.bogatyr.view.swing.CheckBox;
@@ -65,10 +66,10 @@ public class LabeledCheckBox extends LabeledComponent {  //TODO document in Wiki
 	}
 	
 	public boolean isSelected() {
-		return ((CheckBox)getComponent()).isSelected();
+		return ((AbstractButton) getComponent()).isSelected();
 	}
 	
 	public void addActionListener(final ActionListener listener) {
-		((CheckBox)getComponent()).addActionListener(listener);
+		((AbstractButton) getComponent()).addActionListener(listener);
 	}
 }

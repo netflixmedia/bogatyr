@@ -54,6 +54,6 @@ public class LabeledPasswordField extends LabeledComponent { //TODO document in 
 	}
 
 	public PasswordField getPasswordField() {
-		return ((PasswordField)getComponent());
+		return (PasswordField)getComponent();
 	}
 }

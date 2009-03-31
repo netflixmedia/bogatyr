@@ -57,24 +57,27 @@ public interface IControllerLocalizer {
 	
 	/**
 	 * Returns the value for a key.
-	 * 
-	 * @return value for a key
+	 *
+     * @param key for the value
+	 * @return value for the key
 	 */
 	String getValue(String key);
 
 	/**
 	 * Returns the mnemonic for a key.
 	 * This is very useful for GUI components.
-	 * 
-	 * @return value for a key
+	 *
+     * @param key for the mnemonic
+	 * @return mnemonic for the key
 	 */
 	int getMnemonic(String key);
 	
 	/**
 	 * Returns the tooltip for a key.
 	 * This is very useful for GUI components.
-	 * 
-	 * @return value for a key
+	 *
+     * @param key for the tooltip
+	 * @return tooltip for the key
 	 */
 	String getTooltip(String key);
 	

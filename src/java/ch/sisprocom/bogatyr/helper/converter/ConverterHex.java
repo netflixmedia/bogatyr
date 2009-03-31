@@ -49,11 +49,11 @@ public abstract class ConverterHex {
      * @return hex representation of a byte array
      */
     public static String encode(final byte[] data){
-		final StringBuffer buf = new StringBuffer();
+		final StringBuilder buf = new StringBuilder();
 
         for (int ii = 0; ii != data.length; ii++) {
 
-            int	v = data[ii] & 0xff;
+            final int	v = data[ii] & 0xff;
 
             buf.append(DIGITS.charAt(v >> 4));
             buf.append(DIGITS.charAt(v & 0xf));

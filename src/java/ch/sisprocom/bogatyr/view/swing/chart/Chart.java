@@ -97,7 +97,6 @@ public class Chart extends Panel { //TODO document in Wiki!
 	 * Adds an entry to the product selection chart.
 	 * 
      * @param entry for the chart
-     * @throws Exception
      */
 	public void addEntry(final ChartEntry entry) {
 		if (entry.getX() + entry.getSizeX() > maxX || entry.getY() + entry.getSizeY() > maxY) {
@@ -138,10 +137,10 @@ public class Chart extends Panel { //TODO document in Wiki!
     	gbc.gridheight 	= 1;
     	gbc.weightx 	= 1.0D;
 		gbc.weighty		= 0.0D;
-		if (positionXAxis == X_AXIS_NORTH) {
+		if (X_AXIS_NORTH == positionXAxis) {
 
 			// Border in the south
-			Panel panelXAxis = new Panel(colorBackground);
+			final Panel panelXAxis = new Panel(colorBackground);
 			panelXAxis.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorGrid));
 			add(panelXAxis, gbc);
 			
@@ -155,19 +154,15 @@ public class Chart extends Panel { //TODO document in Wiki!
 		gbc.gridwidth = 1;
     	gbc.weightx = 0.0D;
 		gbc.weighty = 1.0D;
-		if (positionYAxis == Y_AXIS_WEST) {
-			if (positionXAxis == X_AXIS_SOUTH) {
-				gbc.gridy = 0;
-			} else {
-				gbc.gridy = 1;
-			}
+		if (Y_AXIS_WEST == positionYAxis) {
+            gbc.gridy = X_AXIS_SOUTH == positionXAxis ? 0 : 1;
 			gbc.gridheight 	= maxY + 1;
 		} else {
 			gbc.gridy 		= 1;
 			gbc.gridheight 	= maxY;
 
 			// Border in the west
-			Panel panelYAxis = new Panel(colorBackground);
+			final Panel panelYAxis = new Panel(colorBackground);
 			panelYAxis.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorGrid));
 			add(panelYAxis, gbc);
 			
@@ -204,17 +199,17 @@ public class Chart extends Panel { //TODO document in Wiki!
 			panelContainer.setLayout(new GridLayout(1, 1));
 			
 			// Create borders
-			if ((entry.getX() + 1) % gridIntervalX == 0) {
+			if (0 == (entry.getX() + 1) % gridIntervalX) {
 				panelContainer.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorGrid));
 				component.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorBackground));
 			}
 			
-			if ((entry.getY() + 1) % gridIntervalY == 0) {
+			if (0 == (entry.getY() + 1) % gridIntervalY) {
 				panelContainer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorGrid));
 				component.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorBackground));
 			}
 			
-			if ((entry.getX() + 1) % gridIntervalX == 0 && (entry.getY() + 1) % gridIntervalY == 0) {
+			if (0 == (entry.getX() + 1) % gridIntervalX && 0 == (entry.getY() + 1) % gridIntervalY) {
 				panelContainer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, colorGrid));
 				component.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, colorBackground));
 			}
@@ -242,15 +237,15 @@ public class Chart extends Panel { //TODO document in Wiki!
     				final Panel spacer = new Panel(colorBackground);
     				
     				// Create borders
-    				if ((x + 1) % gridIntervalX == 0) {
+    				if (0 == (x + 1) % gridIntervalX) {
     					spacer.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorGrid));
     				}
     				
-    				if ((y + 1) % gridIntervalY == 0) {
+    				if (0 == (y + 1) % gridIntervalY) {
     					spacer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorGrid));
     				}
     				
-    				if ((x + 1) % gridIntervalX == 0 && (y + 1) % gridIntervalY == 0) {
+    				if (0 == (x + 1) % gridIntervalX && 0 == (y + 1) % gridIntervalY) {
     					spacer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, colorGrid));
     				}
     				
@@ -264,7 +259,7 @@ public class Chart extends Panel { //TODO document in Wiki!
 		final Panel panelXAxis = new Panel(colorBackground);
 		panelXAxis.setLayout(new GridLayout(0, xAxes.length));
 		
-		if (positionXAxis == X_AXIS_SOUTH) {
+		if (X_AXIS_SOUTH == positionXAxis) {
 			panelXAxis.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorGrid));
 		} else {
 			panelXAxis.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, colorGrid));
@@ -272,7 +267,7 @@ public class Chart extends Panel { //TODO document in Wiki!
 		
 		// Paint x axis
 		for (final String text : xAxes) {
-			Label label = new Label(text, SwingConstants.CENTER);
+			final Label label = new Label(text, SwingConstants.CENTER);
 			label.setBackground(colorBackground);
 			label.setForeground(colorForeground);
 			if (font != null) {
@@ -287,7 +282,7 @@ public class Chart extends Panel { //TODO document in Wiki!
 		final Panel panelYAxis = new Panel(colorBackground);
 		panelYAxis.setLayout(new GridLayout(yAxes.length, 0));
 		
-		if (positionYAxis == Y_AXIS_WEST) {
+		if (Y_AXIS_WEST == positionYAxis) {
 			panelYAxis.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorGrid));
 			
 		} else {
@@ -296,7 +291,7 @@ public class Chart extends Panel { //TODO document in Wiki!
 
 		// Paint y axis
 		for (final String text : yAxes) {
-			LabelVertical label = new LabelVertical(text, SwingConstants.CENTER);
+			final LabelVertical label = new LabelVertical(text, SwingConstants.CENTER);
 			label.setBackground(colorBackground);
 			label.setForeground(colorForeground);
 			if (font != null) {

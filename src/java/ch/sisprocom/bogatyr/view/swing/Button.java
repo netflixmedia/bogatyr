@@ -55,7 +55,7 @@ public class Button extends JButton {
 		init();
 	}
 
-	public Button(Action action) {
+	public Button(final Action action) {
 		super(action);
 		init();
 	}

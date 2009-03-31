@@ -67,11 +67,11 @@ public abstract class HelperIO {
      * @param name of the file
      * @param extension of the file (e.g. ".java")
      * @return temporary file
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static File getTemporaryFile(final String name, final String extension) throws IOException {
 		// Create temp file
-	    File file = File.createTempFile(name, extension);
+	    final File file = File.createTempFile(name, extension);
 	
 	    // Delete temp file when program exits
 	    file.deleteOnExit();
@@ -90,7 +90,7 @@ public abstract class HelperIO {
      * @param isFile true/false
      * @param isDirectory true/false
      * @return ArrayList containing the path to the matched files
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static List<File> getFiles(final File path, final String[] identifier, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) throws IOException {
 		final List<File> list = new ArrayList<File>();
@@ -111,7 +111,7 @@ public abstract class HelperIO {
      * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
      * @param isExclude is the identifier excluded
      * @return ArrayList containing the path to the matched files
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static List<File> getFiles(final File path, final String[] identifier, final boolean isExclude) throws IOException {
 		return getFiles(path, identifier, isExclude, false, true, true, true);
@@ -122,7 +122,7 @@ public abstract class HelperIO {
      * 
      * @param source
      * @param dest
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static void copyDirectory(final File source, final File dest) throws IOException{
 		if (!dest.exists()) {
@@ -148,22 +148,22 @@ public abstract class HelperIO {
      * 
      * @param source
      * @param dest
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static void copyFile(final File source, final File dest) throws IOException{
-		InputStream fis = null;
-        OutputStream fos = null;
-
 		if (!dest.exists()) {
             dest.createNewFile();
         }
+
+        InputStream fis = null;
+        OutputStream fos = null;
 
         try {
             fis = new FileInputStream(source);
             fos = new FileOutputStream(dest);
 //			final byte[] buf = new byte[BUFFER];
 			int len;
-			while ((len = fis.read(BUFFER)) > 0) {
+			while (0 < (len = fis.read(BUFFER))) {
 				fos.write(BUFFER, 0, len);
 			}
 			fos.flush();
@@ -183,7 +183,7 @@ public abstract class HelperIO {
      * @param source
      * @param dest
      * @return true/false
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static boolean move(final File source, final File dest) throws IOException{
 		if (source.isDirectory()) {
@@ -199,7 +199,7 @@ public abstract class HelperIO {
      * 
      * @param file to delete
      * @return true/false
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static boolean delete(final File file) throws IOException{
 		if (file.isDirectory()) {
@@ -229,7 +229,7 @@ public abstract class HelperIO {
      * @param file for writing
      * @param encoding of the file
      * @param line containing the text to write
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static void writeLine(final File file, final String encoding, final String line) throws IOException {
 		String enc = encoding;
@@ -255,7 +255,7 @@ public abstract class HelperIO {
      * 
      * @param file for writing
      * @param line containing the text to write
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static void writeLine(final File file, final String line) throws IOException {
 		writeLine(file, null, line);
@@ -267,7 +267,7 @@ public abstract class HelperIO {
      * @param file for writing
      * @param data byte-array to write
      * @param append to file?
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static void writeFileFromBinary(final File file, final byte[] data, final boolean append) throws IOException {
 		FileOutputStream fos = null;
@@ -289,7 +289,7 @@ public abstract class HelperIO {
      * @param file for writing
      * @param data string to write
      * @param append to file?
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static void writeFileFromString(final File file, final String data, final boolean append) throws IOException {
 		final Writer writer = new BufferedWriter(new FileWriter(file));
@@ -312,7 +312,7 @@ public abstract class HelperIO {
      * @param file for writing
      * @param is stream to write
      * @param append to file?
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static void writeFileFromStream(final File file, final InputStream is, final boolean append) throws IOException { //TODO document in Wiki
 		writeFileFromBinary(file, readStream(is), append);
@@ -323,7 +323,7 @@ public abstract class HelperIO {
      * 
      * @param os output stream for writing
      * @param data byte-array for the stream
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static void writeStream(final OutputStream os, final byte[] data) throws IOException {
 //	    try {
@@ -339,16 +339,17 @@ public abstract class HelperIO {
      * 
      * @param is InputStream for reading
      * @return byte-array containing the stream content
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static byte[] readStream(final InputStream is) throws IOException {
 		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		final byte[] result;
-		int x;
 		
 		try {
 //            final byte[] buffer = new byte[BUFFER];
-            while ((x = is.read(BUFFER, 0, BUFFER.length)) != -1) {
+            int x;
+
+            while (-1 != (x = is.read(BUFFER, 0, BUFFER.length))) {
 				bos.write(BUFFER, 0, x);
 			}
             bos.flush();
@@ -393,7 +394,7 @@ public abstract class HelperIO {
      * 
      * @param file for reading
      * @return byte-array containing the file content
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static byte[] readFileAsBinary(final File file) throws IOException {
 		final long length = file.length();
@@ -417,7 +418,7 @@ public abstract class HelperIO {
      * 
      * @param file for reading
      * @return String containing the file content
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static String readFileAsString(final File file) throws IOException {
 		final StringBuilder contents = new StringBuilder();
@@ -442,7 +443,7 @@ public abstract class HelperIO {
      * 
      * @param file for reading
      * @return List containing the file content
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static List<String> readFileAsList(final File file) throws IOException {
 		final Scanner scanner = new Scanner(file);
@@ -463,7 +464,7 @@ public abstract class HelperIO {
      * 
      * @param file for reading
      * @param os output stream for the file content
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static void readFileAsStream(final File file, final OutputStream os) throws IOException { //TODO document in Wiki
 		writeStream(os, readFileAsBinary(file));
@@ -474,18 +475,19 @@ public abstract class HelperIO {
      * 
      * @param fileOutput Output file
      * @param list List with all files
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static void concatenateFiles(final File fileOutput, final File[] list) throws IOException {
 		// Create output stream
 	    PrintWriter pw = null;
-        BufferedReader br = null;
 
         try {
 		    pw = new PrintWriter(new FileOutputStream(fileOutput));
 
+            BufferedReader br = null;
+
             // Process all files that are not the destination file
-		    for (final File file : list) {
+            for (final File file : list) {
 
                 try {
                     // Create input stream
@@ -549,7 +551,7 @@ public abstract class HelperIO {
 					if (identifier == null) {
 						fileList.add(file);
 					} else {
-						for (String id : identifier) {
+						for (final String id : identifier) {
 							 if (isCaseSensitive && file.getAbsolutePath().contains(id) != isExclude || !isCaseSensitive && file.getAbsolutePath().toUpperCase().contains(id.toUpperCase()) != isExclude) {
 								 fileList.add(file);
 							 }

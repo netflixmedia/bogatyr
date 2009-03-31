@@ -53,20 +53,18 @@ public class Printer implements Printable { //TODO document in Wiki!
 	private Component componentToBePrinted;
 
 
-	public Printer() {
-        super();
-    }
-
     /**
      * Print a component.
      *
      * @param component for printing
-     * @throws java.awt.print.PrinterException
+     * @throws PrinterException
      */
-    public synchronized void print(final Component component) throws PrinterException {
-		this.componentToBePrinted = component;
-        print();
-	}
+    public void print(final Component component) throws PrinterException {
+        synchronized (this) {
+            componentToBePrinted = component;
+            print();
+        }
+    }
 
 
 	/*
@@ -114,7 +112,7 @@ public class Printer implements Printable { //TODO document in Wiki!
      * Implemented methods
      */
     public int print(final Graphics graphics, final PageFormat pageFormat, final int pageIndex) {
-		if (pageIndex > 0) {
+		if (0 < pageIndex) {
 			return NO_SUCH_PAGE;
 		}
 //		componentToBePrinted.setSize((int)(componentToBePrinted.getWidth() * pageFormat.getWidth()/componentToBePrinted.getWidth()), (int)(componentToBePrinted.getHeight() * pageFormat.getHeight()/componentToBePrinted.getHeight()));

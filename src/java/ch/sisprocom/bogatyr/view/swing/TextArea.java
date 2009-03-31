@@ -52,7 +52,7 @@ public class TextArea extends JTextArea {
         init();
     }
     
-	public TextArea(Document doc) {
+	public TextArea(final Document doc) {
 		super(doc);
 	}
 

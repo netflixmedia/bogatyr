@@ -52,6 +52,7 @@ public class PasswordField extends JPasswordField { //TODO document in Wiki!
     }
 
 	public PasswordField(final String toolTip) {
+        super();
         setToolTipText(toolTip);
     }
 	
@@ -64,11 +65,7 @@ public class PasswordField extends JPasswordField { //TODO document in Wiki!
 	public boolean isPasswordCorrect(final char[] correctPassword) {
 	    boolean isCorrect = true;
 
-	    if (getPassword().length != correctPassword.length) {
-	        isCorrect = false;
-	    } else {
-	        isCorrect = Arrays.equals(getPassword(), correctPassword);
-	    }
+        isCorrect = getPassword().length != correctPassword.length ? false : Arrays.equals(getPassword(), correctPassword);
 	    return isCorrect;
 	}
 	

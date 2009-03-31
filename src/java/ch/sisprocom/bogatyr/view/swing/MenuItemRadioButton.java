@@ -54,7 +54,7 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 		super();
     }
 	
-	public MenuItemRadioButton(final boolean isSelected, Action action) {
+	public MenuItemRadioButton(final boolean isSelected, final Action action) {
 		super(action);
 		
 		setSelected(isSelected);
@@ -69,7 +69,7 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
         }
 
 		// Add the mnemonic key
-		if (mnemonic > 0) {
+		if (0 < mnemonic) {
 			setMnemonic(mnemonic);
 		}
 

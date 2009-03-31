@@ -175,6 +175,6 @@ public abstract class HelperEnvInfo {
 	 * @return true if this application is running under UNIX
 	 */
 	public static boolean isUnixPlatform() {
-		return (!isWindowsPlatform() && !isMacPlatform());
+		return !isWindowsPlatform() && !isMacPlatform();
 	}
 }

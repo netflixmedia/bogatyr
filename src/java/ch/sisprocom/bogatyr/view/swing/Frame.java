@@ -61,17 +61,17 @@ public class Frame extends JFrame {
 		init();
     }
 
-	public Frame(GraphicsConfiguration gc) {
+	public Frame(final GraphicsConfiguration gc) {
 		super(gc);
 		init();
 	}
 
-	public Frame(String title, GraphicsConfiguration gc) {
+	public Frame(final String title, final GraphicsConfiguration gc) {
 		super(title, gc);
 		init();
 	}
 
-	public Frame(String title) throws HeadlessException {
+	public Frame(final String title) throws HeadlessException {
 		super(title);
 		init();
 	}
@@ -90,7 +90,7 @@ public class Frame extends JFrame {
 		dispose();
 	}
 	
-	public void setFading(boolean isFading) {
+	public void setFading(final boolean isFading) {
 		final JPanel panelGlass = (JPanel) getGlassPane();
 		panelGlass.removeAll();
 		
@@ -113,7 +113,7 @@ public class Frame extends JFrame {
         repaint();
 	}
 	
-	public void setFaderColor(Color colorFader) {
+	public void setFaderColor(final Color colorFader) {
 		this.colorFader = colorFader;
 	}
 	

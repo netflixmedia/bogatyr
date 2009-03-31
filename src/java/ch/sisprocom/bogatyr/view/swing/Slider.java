@@ -56,7 +56,7 @@ public class Slider extends JSlider {
 		super();
 	}
 
-	public Slider(BoundedRangeModel model) {
+	public Slider(final BoundedRangeModel model) {
 		super(model);
 	}
 
@@ -91,7 +91,7 @@ public class Slider extends JSlider {
 		
 		final Dictionary<?, ?> dict = getLabelTable();
 		if (dict != null) {
-			for (Object element : Collections.list(dict.elements())) {
+			for (final Object element : Collections.list(dict.elements())) {
 				if (element instanceof Component) {
 					((Component) element).setFont( font );
 				}

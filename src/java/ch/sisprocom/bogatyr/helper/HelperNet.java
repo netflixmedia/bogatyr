@@ -150,7 +150,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      *
      * @param host for ping
      * @return true/false
-     * @throws java.io.IOException
+     * @throws IOException
      */
     public static boolean isPingable(final String host) throws IOException {
 		final InetAddress address = InetAddress.getByName(host);
@@ -166,7 +166,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      *
      * @param ip for host name
      * @return host name
-     * @throws java.net.UnknownHostException
+     * @throws UnknownHostException
      */
     public static String getHostname(final String ip) throws UnknownHostException {
 		final InetAddress address = InetAddress.getByName(ip);
@@ -178,7 +178,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * Returns the local host name of the machine.
      *
      * @return host name
-     * @throws java.net.UnknownHostException
+     * @throws UnknownHostException
      */
     public static String getLocalHostname() throws UnknownHostException {
 		final InetAddress address = InetAddress.getLocalHost();
@@ -191,7 +191,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      *
      * @param hostname for IP
      * @return IP
-     * @throws java.net.UnknownHostException
+     * @throws UnknownHostException
      */
     public static String getIp(final String hostname) throws UnknownHostException {
 		final InetAddress address = InetAddress.getByName(hostname);
@@ -203,7 +203,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * Returns the local IP address.
      *
      * @return IP
-     * @throws java.net.UnknownHostException
+     * @throws UnknownHostException
      */
     public static String getLocalIp() throws UnknownHostException {
 		final InetAddress address = InetAddress.getLocalHost();
@@ -215,13 +215,13 @@ public abstract class HelperNet { //TODO document in Wiki!
      * Returns the all IP addresses of the machine.
      *
      * @return List with IP addresses
-     * @throws java.net.UnknownHostException
+     * @throws UnknownHostException
      */
     public static List<String> getLocalIps() throws UnknownHostException {
     	final List<String> list = new ArrayList<String>();
         final String localHost = InetAddress.getLocalHost().getHostName();
 
-        for (InetAddress address : InetAddress.getAllByName(localHost)) {
+        for (final InetAddress address : InetAddress.getAllByName(localHost)) {
             list.add(address.getHostAddress());
         }
         return list;
@@ -231,7 +231,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * Returns the all network interfaces of the machine.
      *
      * @return List with network interfaces
-     * @throws java.net.SocketException
+     * @throws SocketException
      */
     public static List<NetworkInterface> getNetworkInterfaces() throws SocketException {
     	return Collections.list(NetworkInterface.getNetworkInterfaces());
@@ -263,7 +263,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      */
     public static byte[] readUrl(final URL url, final String username, final String password) throws IOException {
 		final URLConnection con = url.openConnection();
-		con.setRequestProperty("Authorization", "Basic " + ConverterBase64.encode((username + ':' + password))); //$NON-NLS-1$ //$NON-NLS-2$
+		con.setRequestProperty("Authorization", "Basic " + ConverterBase64.encode(username + ':' + password)); //$NON-NLS-1$ //$NON-NLS-2$
 		con.setConnectTimeout(2000);
 		con.connect();
 		
@@ -297,16 +297,17 @@ public abstract class HelperNet { //TODO document in Wiki!
      * Inner classes
      */
     private static class MyAuthenticator extends Authenticator {
-        private String username, password;
+        private final String username, password;
 
-        public MyAuthenticator(String username, String password) {
-        	this.username = username;
-        	this.password = password;
+        private MyAuthenticator(final String username, final String password) {
+            super();
+            this.username = username;
+            this.password = password;
         }
 
     	@Override
 		public PasswordAuthentication getPasswordAuthentication() {
-            return (new PasswordAuthentication(username, password.toCharArray()));
+            return new PasswordAuthentication(username, password.toCharArray());
         }
     }
 }

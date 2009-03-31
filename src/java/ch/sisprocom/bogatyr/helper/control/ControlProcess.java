@@ -52,12 +52,12 @@ public abstract class ControlProcess {
      * @param outputStream If null, output is discarded
 	 * @param errorStream If null, error is discarded
 	 * @return created process
-     * @throws java.io.IOException
+     * @throws IOException
 	 */
 	public static Process createProcess(final String command, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
 		final Process process = createProcess(command);
 
-		ControlProcess.readStandardOutput(process, outputStream, errorStream);
+		readStandardOutput(process, outputStream, errorStream);
 		
 		return process;
 	}
@@ -67,7 +67,7 @@ public abstract class ControlProcess {
 	 *
 	 * @param command to start the process
 	 * @return created process
-     * @throws java.io.IOException
+     * @throws IOException
 	 */
 	public static Process createProcess(final String command) throws IOException {
 
@@ -120,7 +120,7 @@ public abstract class ControlProcess {
 			try {
                 final byte[] buffer = new byte[BUFFER];
                 int len;
-				while ((len = is.read(buffer)) != -1) {
+				while (-1 != (len = is.read(buffer))) {
 					if (os != null) {
                         os.write(buffer, 0, len);
 					}

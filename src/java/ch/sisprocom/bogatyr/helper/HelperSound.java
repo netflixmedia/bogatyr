@@ -67,9 +67,9 @@ public abstract class HelperSound { //TODO document in Wiki!
      *
      * @param file for audio clip
      * @return Audio clip
-     * @throws java.io.IOException
-     * @throws javax.sound.sampled.LineUnavailableException
-     * @throws javax.sound.sampled.UnsupportedAudioFileException
+     * @throws IOException
+     * @throws LineUnavailableException
+     * @throws UnsupportedAudioFileException
      */
     public static Clip getClip(final File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
     	return getClip(AudioSystem.getAudioInputStream(file));
@@ -80,9 +80,9 @@ public abstract class HelperSound { //TODO document in Wiki!
      *
      * @param in stream for audio clip
      * @return Audio clip
-     * @throws java.io.IOException
-     * @throws javax.sound.sampled.LineUnavailableException
-     * @throws javax.sound.sampled.UnsupportedAudioFileException
+     * @throws IOException
+     * @throws LineUnavailableException
+     * @throws UnsupportedAudioFileException
      */
 	public static Clip getClip(final InputStream in) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 		return getClip(AudioSystem.getAudioInputStream(in));
@@ -93,8 +93,8 @@ public abstract class HelperSound { //TODO document in Wiki!
      *
      * @param file for sequence
      * @return Sequence
-     * @throws java.io.IOException
-     * @throws javax.sound.midi.InvalidMidiDataException
+     * @throws IOException
+     * @throws InvalidMidiDataException
      */
 	public static Sequence getSequence(final File file) throws InvalidMidiDataException, IOException {
 		return MidiSystem.getSequence(file);
@@ -105,8 +105,8 @@ public abstract class HelperSound { //TODO document in Wiki!
      *
      * @param in stream for sequence
      * @return Sequence
-     * @throws java.io.IOException
-     * @throws javax.sound.midi.InvalidMidiDataException
+     * @throws IOException
+     * @throws InvalidMidiDataException
      */
 	public static Sequence getSequence(final InputStream in) throws InvalidMidiDataException, IOException {
 		return MidiSystem.getSequence(in);
@@ -117,8 +117,8 @@ public abstract class HelperSound { //TODO document in Wiki!
      *
      * @param sequence for sequencer
      * @return Sequencer
-     * @throws javax.sound.midi.MidiUnavailableException
-     * @throws javax.sound.midi.InvalidMidiDataException
+     * @throws MidiUnavailableException
+     * @throws InvalidMidiDataException
      */
 	public static Sequencer getSequencer(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
 		final Sequencer sequencer = MidiSystem.getSequencer();  // Used to play sequences

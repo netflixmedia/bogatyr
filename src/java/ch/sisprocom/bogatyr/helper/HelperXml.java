@@ -55,10 +55,10 @@ public abstract class HelperXml { //TODO document in Wiki!
        
        	final StringBuilder sb = new StringBuilder(); // Used to hold the output.
 
-        for (char current : in.toCharArray()) {
+        for (final char current : in.toCharArray()) {
 //            if (current != 0x96 && current != 0x9C) { // new
-            if (current != (char) 0x26) { // new
-	            if (current == (char) 0x9 || current == (char) 0xA || current == (char) 0xD || current >= (char) 0x20 && current <= (char) 0xD7FF || current >= (char) 0xE000 && current <= (char) 0xFFFD || current >= (char) 0x10000 && current <= (char) 0x10FFFF) {
+            if ((char) 0x26 != current) { // new
+	            if ((char) 0x9 == current || (char) 0xA == current || (char) 0xD == current || (char) 0x20 <= current && (char) 0xD7FF >= current || (char) 0xE000 <= current && (char) 0xFFFD >= current || (char) 0x10000 <= current && (char) 0x10FFFF >= current) {
                     sb.append(current);
                 }
             }

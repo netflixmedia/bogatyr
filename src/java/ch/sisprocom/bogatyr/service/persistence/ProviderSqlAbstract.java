@@ -29,7 +29,7 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.model.persistence;
+package ch.sisprocom.bogatyr.service.persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090304
+ * @version 20090331
  */
 public abstract class ProviderSqlAbstract { //TODO document in Wiki!
 //	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
@@ -55,7 +55,7 @@ public abstract class ProviderSqlAbstract { //TODO document in Wiki!
 	private String password;
 	
 	
-	protected ProviderSqlAbstract(final String driver, final String url, final String user, final String password) throws Exception {
+	protected ProviderSqlAbstract(final String driver, final String url, final String user, final String password) {
         super();
         this.driver = driver;
         this.url = url;

@@ -54,6 +54,6 @@ public class LabeledTextField extends LabeledComponent { //TODO document in Wiki
 	}
 
 	public TextField getTextField() {
-		return ((TextField)getComponent());
+		return (TextField)getComponent();
 	}
 }

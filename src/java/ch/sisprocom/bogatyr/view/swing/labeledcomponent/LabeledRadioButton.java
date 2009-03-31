@@ -34,6 +34,7 @@ package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Action;
+import javax.swing.AbstractButton;
 
 import ch.sisprocom.bogatyr.view.swing.RadioButton;
 
@@ -61,14 +62,14 @@ public class LabeledRadioButton extends LabeledComponent { //TODO document in Wi
 	}
 
 	public RadioButton getRadioButton() {
-		return ((RadioButton)getComponent());
+		return (RadioButton)getComponent();
 	}
 	
 	public boolean isSelected() {
-		return ((RadioButton)getComponent()).isSelected();
+		return ((AbstractButton) getComponent()).isSelected();
 	}
 	
 	public void addActionListener(final ActionListener listener) {
-		((RadioButton)getComponent()).addActionListener(listener);
+		((AbstractButton) getComponent()).addActionListener(listener);
 	}
 }

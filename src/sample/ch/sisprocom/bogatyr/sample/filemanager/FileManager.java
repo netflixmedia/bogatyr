@@ -58,7 +58,7 @@ public class FileManager extends ApplicationAbstract { //TODO document in Wiki!
 	private boolean isDelete;
 	
 	
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		new FileManager();
 	}
 	
@@ -83,7 +83,7 @@ public class FileManager extends ApplicationAbstract { //TODO document in Wiki!
 			exit(1);
 		}
 
- 		String value = property.getProperty(PROPERTY_PATH);
+ 		final String value = property.getProperty(PROPERTY_PATH);
 		if (HelperGeneral.isValidString(value)) {
             path = new File(value);
 		} else {
@@ -100,7 +100,7 @@ public class FileManager extends ApplicationAbstract { //TODO document in Wiki!
 	private void searchFiles() throws IOException {
 		int ii = 0;
 		
-		for (File file : HelperIO.getFiles(path, identifier, false)) {
+		for (final File file : HelperIO.getFiles(path, identifier, false)) {
 			if (isDelete) {
 				HelperIO.delete(file);
 			}
@@ -125,7 +125,7 @@ public class FileManager extends ApplicationAbstract { //TODO document in Wiki!
 	}
 
 	@Override
-	public void exit(int returnCode) {
+	public void exit(final int returnCode) {
 		System.exit(returnCode);
 	}
 }

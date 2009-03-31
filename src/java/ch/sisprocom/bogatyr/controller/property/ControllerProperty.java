@@ -98,12 +98,12 @@ public class ControllerProperty implements IControllerProperty { //TODO document
     }
 
     public double getPropertyDouble(final String propertyName) {
-    	String value = properties.getProperty(propertyName);
+    	final String value = properties.getProperty(propertyName);
     	return HelperGeneral.isStringNumeric(value) ? Double.parseDouble(value) : 0.0D;
     }
 
     public int getPropertyInt(final String propertyName) {
-    	String value = properties.getProperty(propertyName);
+    	final String value = properties.getProperty(propertyName);
     	return HelperGeneral.isStringNumeric(value) ? Integer.parseInt(value) : 0;
     }
 

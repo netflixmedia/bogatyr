@@ -47,17 +47,21 @@ public abstract class ConverterBase64 {
 	// Mapping table from 6-bit nibbles to Base64 characters.
 	static {
 		int ii = 0;
-		for (char c = 'A'; c <= 'Z'; c++) {
-			map1[ii++] = c;
-		}
-		for (char c = 'a'; c <= 'z'; c++) {
-			map1[ii++] = c;
-		}
-		for (char c = '0'; c <= '9'; c++) {
-			map1[ii++] = c;
-		}
-		map1[ii++] = '+';
-		map1[ii] = '/';
+		for (char c = 'A'; 'Z' >= c; c++) {
+			map1[ii] = c;
+            ii++;
+        }
+		for (char c = 'a'; 'z' >= c; c++) {
+			map1[ii] = c;
+            ii++;
+        }
+		for (char c = '0'; '9' >= c; c++) {
+			map1[ii] = c;
+            ii++;
+        }
+		map1[ii] = '+';
+        ii++;
+        map1[ii] = '/';
 	}
 
 	// Mapping table from Base64 characters to 6-bit nibbles.
@@ -65,7 +69,7 @@ public abstract class ConverterBase64 {
 		for (int ii = 0; ii < map2.length; ii++) {
 			map2[ii] = (byte) -1;
 		}
-		for (int ii = 0; ii < 64; ii++) {
+		for (int ii = 0; 64 > ii; ii++) {
 			map2[map1[ii]] = (byte) ii;
 		}
 	}
@@ -130,26 +134,30 @@ public abstract class ConverterBase64 {
 	public static byte[] decode(final char[] data) {
 		int iLen = data.length;
 
-		if (iLen % 4 != 0) {
+		if (0 != iLen % 4) {
             throw new IllegalArgumentException("Length of Base64 encoded input string is not a multiple of 4");
         }
 		
-		while (iLen > 0 && data[iLen - 1] == '=') {
+		while (0 < iLen && '=' == data[iLen - 1]) {
 			iLen--;
 		}
 		
-		final int oLen = (iLen * 3) / 4;
+		final int oLen = iLen * 3 / 4;
 		final byte[] out = new byte[oLen];
 
         int ip = 0;
         int op = 0;
         while (ip < iLen) {
-			final int i0 = data[ip++];
-			final int i1 = data[ip++];
-			final int i2 = (int) (ip < iLen ? data[ip++] : 'A');
-			final int i3 = (int) (ip < iLen ? data[ip++] : 'A');
+			final int i0 = data[ip];
+            ip++;
+            final int i1 = data[ip];
+            ip++;
+            final int i2 = (int) (ip < iLen ? data[ip] : 'A');
+            ip++;
+            final int i3 = (int) (ip < iLen ? data[ip] : 'A');
+            ip++;
 
-			if (i0 > 127 || i1 > 127 || i2 > 127 || i3 > 127) {
+            if (127 < i0 || 127 < i1 || 127 < i2 || 127 < i3) {
                 throw new IllegalArgumentException("Illegal character in Base64 encoded data");
             }
 			final int b0 = map2[i0];
@@ -157,19 +165,22 @@ public abstract class ConverterBase64 {
 			final int b2 = map2[i2];
 			final int b3 = map2[i3];
 
-			if (b0 < 0 || b1 < 0 || b2 < 0 || b3 < 0) {
+			if (0 > b0 || 0 > b1 || 0 > b2 || 0 > b3) {
                 throw new IllegalArgumentException("Illegal character in Base64 encoded data");
             }
 
 			final int o0 = b0 << 2 | b1 >>> 4;
 			final int o1 = (b1 & 0xf) << 4 | b2 >>> 2;
 			final int o2 = (b2 & 3) << 6 | b3;
-			out[op++] = (byte) o0;
-			if (op < oLen) {
-                out[op++] = (byte) o1;
+			out[op] = (byte) o0;
+            op++;
+            if (op < oLen) {
+                out[op] = (byte) o1;
+                op++;
             }
 			if (op < oLen) {
-                out[op++] = (byte) o2;
+                out[op] = (byte) o2;
+                op++;
             }
 		}
 		return out;
@@ -189,22 +200,27 @@ public abstract class ConverterBase64 {
 	 */
 	private static char[] encode(final byte[] in, final int iLen) {
 		final int oDataLen = (iLen * 4 + 2) / 3; // output length without padding
-		final int oLen = ((iLen + 2) / 3) * 4; // output length including padding
+		final int oLen = (iLen + 2) / 3 * 4; // output length including padding
 		final char[] out = new char[oLen];
 		int ip = 0;
 		int op = 0;
 
 		while (ip < iLen) {
-			final int i0 = in[ip++] & 0xff;
-			final int i1 = ip < iLen ? in[ip++] & 0xff : 0;
-			final int i2 = ip < iLen ? in[ip++] & 0xff : 0;
-			final int o0 = i0 >>> 2;
+			final int i0 = in[ip] & 0xff;
+            ip++;
+            final int i1 = ip < iLen ? in[ip] & 0xff : 0;
+            ip++;
+            final int i2 = ip < iLen ? in[ip] & 0xff : 0;
+            ip++;
+            final int o0 = i0 >>> 2;
 			final int o1 = (i0 & 3) << 4 | i1 >>> 4;
 			final int o2 = (i1 & 0xf) << 2 | i2 >>> 6;
 			final int o3 = i2 & 0x3F;
-			out[op++] = map1[o0];
-			out[op++] = map1[o1];
-			out[op] = op < oDataLen ? map1[o2] : '=';
+			out[op] = map1[o0];
+            op++;
+            out[op] = map1[o1];
+            op++;
+            out[op] = op < oDataLen ? map1[o2] : '=';
 			op++;
 			out[op] = op < oDataLen ? map1[o3] : '=';
 			op++;

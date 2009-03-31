@@ -34,8 +34,6 @@ package ch.sisprocom.bogatyr.controller.localizer;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
 
 /**
  * Localizer implementation for file access.
@@ -50,19 +48,22 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 	
 	
 	public ControllerLocalizerFile(final String localizerBase) {
+        super();
         this.localizerBase = localizerBase;
-        
+
         init();
-	}
+    }
 
 	public String getLocalizerBase() {
 		return localizerBase;
 	}
 
-	public synchronized void setLocalizerBase(final String localizerBase) {
-		this.localizerBase = localizerBase;
-        bundle = ResourceBundle.getBundle(localizerBase, locale);
-	}
+    public void setLocalizerBase(final String localizerBase) {
+        synchronized (this) {
+            this.localizerBase = localizerBase;
+            bundle = ResourceBundle.getBundle(localizerBase, locale);
+        }
+    }
 	
 	
 	/*
@@ -72,11 +73,13 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 		return locale;
 	}
 
-	public synchronized void setLocale(final Locale locale) {
-		this.locale = locale;
-        bundle = ResourceBundle.getBundle(localizerBase, locale);
-        fireLocaleChanged();
-	}
+    public void setLocale(final Locale locale) {
+        synchronized (this) {
+            this.locale = locale;
+            bundle = ResourceBundle.getBundle(localizerBase, locale);
+            fireLocaleChanged();
+        }
+    }
 	
 	public String getValue(final String key) {
 		return bundle.getString(key);
@@ -106,14 +109,5 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 	private void init() {
         locale = Locale.getDefault();
         bundle = ResourceBundle.getBundle(localizerBase, locale);
-	}
-
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
 	}
 }

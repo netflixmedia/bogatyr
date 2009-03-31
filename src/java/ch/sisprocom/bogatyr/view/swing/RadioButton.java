@@ -51,7 +51,7 @@ public class RadioButton extends JRadioButton {
 		super();
 	}
 	
-	public RadioButton(final boolean isSelected, Action action) {
+	public RadioButton(final boolean isSelected, final Action action) {
 		super(action);
 		
 		setSelected(isSelected);
