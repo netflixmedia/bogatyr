@@ -100,7 +100,7 @@ public class LabelVertical extends Panel implements Icon { //TODO document in Wi
 	 * Private methods
 	 */
 	private void paintVertical(final Graphics g, final int x, final int y, final int width, final int height) {
-		if (height <= 0 || width <= 0) {
+		if (0 >= height || 0 >= width) {
             return;
         }
  

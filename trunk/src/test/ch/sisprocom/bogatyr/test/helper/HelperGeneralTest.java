@@ -160,7 +160,7 @@ public class HelperGeneralTest { //TODO improve
 	
 	@Test
 	public void testRemoveDuplicates() {
-		List<String> list = new ArrayList<String>();
+		final List<String> list = new ArrayList<String>();
 		list.add("A");
 		list.add("A");
 		list.add("A");
@@ -168,7 +168,7 @@ public class HelperGeneralTest { //TODO improve
 		assertEquals(1, HelperGeneral.removeDuplicates(list).size());
 
 
-		String[] array = new String[]{"A", "A", "A"};
+		final String[] array = {"A", "A", "A"};
 
 		assertEquals(1, HelperGeneral.removeDuplicates(array).length);
 	}

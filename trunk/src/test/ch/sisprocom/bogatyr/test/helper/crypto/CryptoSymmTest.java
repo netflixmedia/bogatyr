@@ -53,7 +53,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 public class CryptoSymmTest {
 	private static final int KEYSIZE = 128;
 	
-	private SecretKey secretKey = null;
+	private SecretKey secretKey;
 	 
 	
 	@Before

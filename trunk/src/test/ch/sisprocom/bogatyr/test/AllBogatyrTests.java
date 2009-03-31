@@ -90,7 +90,7 @@ public class AllBogatyrTests implements Runnable {
         	tests[ii] = new AllBogatyrTests();
         }
 
-        for (int ii = 0; ii < ITERATIONS; ii++) {
+        for (int ii = 0; ITERATIONS > ii; ii++) {
             runThreads(tests);
         }
         
@@ -101,7 +101,7 @@ public class AllBogatyrTests implements Runnable {
     }
     
 	public void run() {
-		Result result = JUnitCore.runClasses(
+		final Result result = JUnitCore.runClasses(
 				ContextTest.class,
 				ControlBrowserTest.class,
 				ConverterBase64Test.class,

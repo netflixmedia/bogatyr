@@ -40,6 +40,8 @@ package ch.sisprocom.bogatyr.controller.timer;
 public interface ListenerTimer {
 	/**
 	 * Sends the actual time of the timer/countdown to the listener.
+     *
+     * @param time
 	 */
 	void timeChanged(long time);
 	

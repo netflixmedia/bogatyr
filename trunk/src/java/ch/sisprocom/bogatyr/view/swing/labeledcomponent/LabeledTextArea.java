@@ -55,6 +55,6 @@ public class LabeledTextArea extends LabeledComponent { //TODO document in Wiki!
 	}
 
 	public TextArea getTextArea() {
-		return ((TextArea)getComponent());
+		return (TextArea)getComponent();
 	}
 }

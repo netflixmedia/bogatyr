@@ -116,7 +116,7 @@ public abstract class CryptoSymm {
 		final int elements = 16;
         final byte[] ivBytes = new byte[elements];
         
-        for (int ii = 0; ii < elements; ii++) {
+        for (int ii = 0; elements > ii; ii++) {
         	ivBytes[ii] = (byte) 0x5a;
         }
         return new IvParameterSpec(ivBytes);

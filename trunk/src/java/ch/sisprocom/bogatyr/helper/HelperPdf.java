@@ -63,8 +63,8 @@ public abstract class HelperPdf { //TODO document in Wiki!
      *
      * @param component Component for the pdf
      * @param output Filename
-     * @throws com.lowagie.text.DocumentException
-     * @throws java.io.IOException
+     * @throws DocumentException
+     * @throws IOException
      */
     public static void savePdfFromComponent(final Component component, final File output) throws IOException, DocumentException {
     	final Dimension size = component.getSize();
@@ -96,8 +96,8 @@ public abstract class HelperPdf { //TODO document in Wiki!
      *
      * @param input Array with (X)HTML files for the pdf
      * @param output Filename
-     * @throws com.lowagie.text.DocumentException
-     * @throws java.io.IOException
+     * @throws DocumentException
+     * @throws IOException
      */
 	public static void savePdfFromHTML(final File[] input, final File output) throws IOException, DocumentException {
 		OutputStream os = null;
@@ -105,7 +105,7 @@ public abstract class HelperPdf { //TODO document in Wiki!
 		try {
 		   os = new FileOutputStream(output);
 	
-		   ITextRenderer renderer = new ITextRenderer();
+		   final ITextRenderer renderer = new ITextRenderer();
 	
 		   renderer.setDocument(input[0]);
 		   renderer.layout();

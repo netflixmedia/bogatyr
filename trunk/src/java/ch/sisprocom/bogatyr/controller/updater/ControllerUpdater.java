@@ -62,56 +62,65 @@ public class ControllerUpdater implements IControllerUpdater, ListenerUpdater { 
 	
 	
 	public ControllerUpdater(final IControllerLocalizer localizer) {
-		this.localizer = localizer;
-	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-	/*
-	 * Checks the update XML file for new versions an update the application if needed.
-	 */
-	public synchronized void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws Exception {
+        super();
+        this.localizer = localizer;
+    }
+
+
+    /*
+      * Implemented methods
+      */
+    /*
+      * Checks the update XML file for new versions an update the application if needed.
+      */
+    public void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws Exception {
+        synchronized (this) {
 //		if (updateLocation != null) {
-			final File file = new File(updateLocation);
-			InputStream is = null;
-			try {
-		        if (file.exists()) {
-		            is = new FileInputStream(file);
-		        } else {
-		    		final URLConnection con = (new URL(updateLocation)).openConnection();
-		    		con.setConnectTimeout(2000);
-		    		con.connect();
-		        	
-		        	is = con.getInputStream();
-		        }
-		        
-				final SAXParserFactory factory = SAXParserFactory.newInstance(); 
-				final SAXParser saxParser = factory.newSAXParser();
-				
-				final DefaultHandler handler = new XmlParser(name, id, version, minorversion, build, this, localizer); 
-		
-				saxParser.parse(is, handler);
-			} finally {
-				if (is != null) {
-					is.close();
-				}
-		    }
+            final File file = new File(updateLocation);
+            InputStream is = null;
+            try {
+                if (file.exists()) {
+                    is = new FileInputStream(file);
+                } else {
+                    final URLConnection con = new URL(updateLocation).openConnection();
+                    con.setConnectTimeout(2000);
+                    con.connect();
+
+                    is = con.getInputStream();
+                }
+
+                final SAXParserFactory factory = SAXParserFactory.newInstance();
+                final SAXParser saxParser = factory.newSAXParser();
+
+                final DefaultHandler handler = new XmlParser(name, id, version, minorversion, build, this, localizer);
+
+                saxParser.parse(is, handler);
+            } finally {
+                if (is != null) {
+                    is.close();
+                }
+            }
 //	    }
-	}
-	
-	public synchronized void addListener(final ListenerUpdater listener) {
-		listListener.add(listener);
-	}
-	
-	public synchronized void removeListener(final ListenerUpdater listener) {
-		listListener.remove(listener);
-	}
-	
-	public synchronized void removeAllListener() {
-		listListener = new ArrayList<ListenerUpdater>();
-	}
+        }
+    }
+
+    public void addListener(final ListenerUpdater listener) {
+        synchronized (this) {
+            listListener.add(listener);
+        }
+    }
+
+    public void removeListener(final ListenerUpdater listener) {
+        synchronized (this) {
+            listListener.remove(listener);
+        }
+    }
+
+    public void removeAllListener() {
+        synchronized (this) {
+            listListener = new ArrayList<ListenerUpdater>();
+        }
+    }
 
 	public void downgradeCancelled() {
 		for (final ListenerUpdater listener : listListener) {
@@ -119,7 +128,7 @@ public class ControllerUpdater implements IControllerUpdater, ListenerUpdater { 
 		}	
 	}
 
-	public void downgradeFailed(IOException ex) {
+	public void downgradeFailed(final IOException ex) {
 		for (final ListenerUpdater listener : listListener) {
 			listener.downgradeFailed(ex);
 		}	
@@ -149,7 +158,7 @@ public class ControllerUpdater implements IControllerUpdater, ListenerUpdater { 
 		}	
 	}
 
-	public void updateFailed(IOException ex) {
+	public void updateFailed(final IOException ex) {
 		for (final ListenerUpdater listener : listListener) {
 			listener.updateFailed(ex);
 		}	

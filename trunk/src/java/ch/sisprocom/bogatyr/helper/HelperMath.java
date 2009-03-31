@@ -53,12 +53,8 @@ public abstract class HelperMath { //TODO document in Wiki!
 	 */
 	 public static double gcd(final double a, final double b) {
 		 final double result;
-		 
-		 if (b == 0) { 
-			 result = a;
-		 } else {
-			 result = gcd(b, a % b);
-		 }
+
+        result = 0 == b ? a : gcd(b, a % b);
 		 return result;
 	 } 
 
@@ -84,19 +80,19 @@ public abstract class HelperMath { //TODO document in Wiki!
         
 //        try {
 			// 2 is the smallest prime
-	        if (n <= 2) {
-	            flag = n == 2;
+	        if (2 >= n) {
+	            flag = 2 == n;
 	        	return flag;
 	        }
 	
 	        // even numbers other than 2 are not prime
-	        if (n % 2 == 0) {
+	        if (0 == n % 2) {
 	            return flag;
 	        }
 	
 	        // check odd divisors from 3 to the square root of n
 	        for (int i = 3, end = (int)Math.sqrt(n); i <= end; i += 2) {
-	            if (n % i == 0) {
+	            if (0 == n % i) {
 	                return flag;
 	            }
 	        }
@@ -174,10 +170,12 @@ public abstract class HelperMath { //TODO document in Wiki!
 		int dp = decimalPlace;
 		double powerOfTen = 1.0D;
 		
-	    while (dp-- > 0) {
-	       powerOfTen *= 10.0D;
+	    while (0 < dp) {
+            dp--;
+            powerOfTen *= 10.0D;
 	    }
-	    return (double) Math.round(value * powerOfTen) / powerOfTen;
+        dp--;
+        return (double) Math.round(value * powerOfTen) / powerOfTen;
 	}
 	
     /**
@@ -204,11 +202,7 @@ public abstract class HelperMath { //TODO document in Wiki!
 	                                        t * ( 1.48851587D + 
 	                                        t * (-0.82215223D +
                                             t * 0.17087277D)))))))));
-	        if (z >= 0.0D) {
-                result = ans;
-            } else {
-            	result = -ans;
-            }
+            result = 0.0D <= z ? ans : -ans;
         }
     	return result;
 	}
@@ -224,12 +218,8 @@ public abstract class HelperMath { //TODO document in Wiki!
         final double poly = t * (0.3480242D + t * (-0.0958798D + t * 0.7478556D));
         final double ans = 1.0D - poly * StrictMath.exp(-z * z);
         final double result;
-        
-        if (z >= 0.0D) {
-        	result = ans;
-        } else {
-        	result = -ans;
-        }
+
+        result = 0.0D <= z ? ans : -ans;
         return result;
     }
 
@@ -272,7 +262,7 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @param n int-Value
      * @return random int-value between 0 and n-1
      */
-    public static int random(int n) {
+    public static int random(final int n) {
     	return (int) (Math.random() * n);
     }
     

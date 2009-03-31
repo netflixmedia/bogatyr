@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.controller.timer;
 
 import java.util.TimerTask;
+import java.util.Timer;
 
 /**
  * This is a timer which informs all added listeners about its state.
@@ -44,23 +45,30 @@ public class ControllerTimer extends ControllerTimerAbstract implements IControl
 	/*
 	 * Implemented methods
 	 */
-	public synchronized void start(final long interval) {
-		this.start(0, interval);
-	}
 
-	public synchronized void start(final long delay, final long interval) {
-    	timer.cancel();
-    	
-    	timer = new java.util.Timer();
-    	this.interval = interval;
-        timer.schedule(new Task(), delay, interval);
-        fireTimerStarted();
+    public void start(final long interval) {
+        synchronized (this) {
+            start(0, interval);
+        }
     }
 
-    public synchronized void stop() {
-        timer.cancel();
-        fireTimerStopped();
-    }	
+    public void start(final long delay, final long interval) {
+        synchronized (this) {
+            timer.cancel();
+
+            timer = new Timer();
+            this.interval = interval;
+            timer.schedule(new Task(), delay, interval);
+            fireTimerStarted();
+        }
+    }
+
+    public void stop() {
+        synchronized (this) {
+            timer.cancel();
+            fireTimerStopped();
+        }
+    }
 	
 	
 	/*

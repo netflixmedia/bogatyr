@@ -56,7 +56,7 @@ public class HelperImageTest { //TODO improve
 	@Test
 	public void testCreateImage() {
 		try {
-			Component component = new Button("Hello world", "");
+			final Component component = new Button("Hello world", "");
 			component.setBackground(Color.YELLOW);
 			component.setForeground(Color.BLACK);
 			component.setFont(new Font("Arial", Font.PLAIN, 18));

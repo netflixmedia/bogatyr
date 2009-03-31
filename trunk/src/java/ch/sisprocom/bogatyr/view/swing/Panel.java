@@ -59,7 +59,7 @@ public class Panel extends JPanel {
 		init();
 	}
 
-	public Panel(LayoutManager layout) {
+	public Panel(final LayoutManager layout) {
 		super(layout);
 	}
 

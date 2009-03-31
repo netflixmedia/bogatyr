@@ -54,11 +54,12 @@ import com.ibm.mqbind.MQC;
 public class MqConnector { //TODO document in Wiki!
 
 	public MqConnector(final String hostname, final int port, final String channel) {
-		// set up MQ environment
-		MQEnvironment.hostname = hostname;
-		MQEnvironment.port     = port;
-		MQEnvironment.channel  = channel;
-	}
+        super();
+        // set up MQ environment
+        MQEnvironment.hostname = hostname;
+        MQEnvironment.port = port;
+        MQEnvironment.channel = channel;
+    }
 
 	public String getHostname() {
 		return MQEnvironment.hostname;
@@ -84,120 +85,122 @@ public class MqConnector { //TODO document in Wiki!
 		MQEnvironment.channel = channel;
 	}
 
-	/**
-	 * Sends a message to a mq manager and queue.
-	 * 
-	 * @param data to send
-	 * @param managerOut manager for sending
-	 * @param queueOut queue for sending
-	 * @param managerIn manager for receiving
-	 * @param queueIn queue for receiving
-	 * @throws IOException
-	 * @throws MQException
-	 */
-	public synchronized void sendMessage(final byte[] data, final String managerOut, final String queueOut, final String managerIn, final String queueIn) throws IOException, MQException {
-		MQQueue mqQueue;
-		MQQueueManager mqManager;
+    /**
+     * Sends a message to a mq manager and queue.
+     *
+     * @param data       to send
+     * @param managerOut manager for sending
+     * @param queueOut   queue for sending
+     * @param managerIn  manager for receiving
+     * @param queueIn    queue for receiving
+     * @throws IOException
+     * @throws MQException
+     */
+    public void sendMessage(final byte[] data, final String managerOut, final String queueOut, final String managerIn, final String queueIn) throws IOException, MQException {
+        synchronized (this) {
 
-		// Create a connection to the queue manager
-		mqManager = new MQQueueManager(managerOut);
+            // Create a connection to the queue manager
+            final MQQueueManager mqManager = new MQQueueManager(managerOut);
 
-		// int options = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_OUTPUT;
-		int options = MQC.MQOO_OUTPUT;
+            // int options = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_OUTPUT;
+            final int options = MQC.MQOO_OUTPUT;
 
-		mqQueue = mqManager.accessQueue(queueOut, options, null,
-				null, // no dynamic q name
-				null); // no alternate user id
+            final MQQueue mqQueue = mqManager.accessQueue(queueOut, options, null,
+                    null, // no dynamic q name
+                    null);
 
-		MQMessage message = new MQMessage();
-		message.replyToQueueManagerName = managerIn;
-		message.replyToQueueName = queueIn;
-		message.messageFlags = MQC.MQMF_LAST_MSG_IN_GROUP;
-		message.format = "MQSTR"; //$NON-NLS-1$
-		// message.messageId = ???
-		// message.correlationId = ???
-		// message.expiry = ???
-		message.write(data);
+            final MQMessage message = new MQMessage();
+            message.replyToQueueManagerName = managerIn;
+            message.replyToQueueName = queueIn;
+            message.messageFlags = MQC.MQMF_LAST_MSG_IN_GROUP;
+            message.format = "MQSTR"; //$NON-NLS-1$
+            // message.messageId = ???
+            // message.correlationId = ???
+            // message.expiry = ???
+            message.write(data);
 
-		message.write(data);
+            message.write(data);
 
-		MQPutMessageOptions pmo = new MQPutMessageOptions();
+            final MQPutMessageOptions pmo = new MQPutMessageOptions();
 
-		// put the message on the queue
-		mqQueue.put(message, pmo);
+            // put the message on the queue
+            mqQueue.put(message, pmo);
 
-		mqQueue.close();
-		mqManager.disconnect();
-	}
+            mqQueue.close();
+            mqManager.disconnect();
+        }
+    }
 
-	/**
-	 * Receives messages from a mq manager and queue.
-	 * 
-	 * @param managerIn manager for receiving
-	 * @param queueIn queue for receiving
-	 * @return list containing all messages
-	 * @throws MQException
-	 * @throws IOException
-	 */
-	public synchronized List<byte[]> receiveMessages(final String managerIn, final String queueIn) throws MQException, IOException {
-		MQQueue mqQueue;
-		MQQueueManager mqManager;
+    /**
+     * Receives messages from a mq manager and queue.
+     *
+     * @param managerIn manager for receiving
+     * @param queueIn   queue for receiving
+     * @return list containing all messages
+     * @throws MQException
+     * @throws IOException
+     */
+    public List<byte[]> receiveMessages(final String managerIn, final String queueIn) throws MQException, IOException {
+        synchronized (this) {
 
-		List<byte[]> list = new ArrayList<byte[]>();
+            final List<byte[]> list = new ArrayList<byte[]>();
 //		byte[] data;
 
-		// create a connection to the queue manager
-		mqManager = new MQQueueManager(managerIn);
+            // create a connection to the queue manager
+            final MQQueueManager mqManager = new MQQueueManager(managerIn);
 
-		// create a queue manager object and access the queue that will be used for the putting of messages.
-		int options = MQC.MQOO_INPUT_EXCLUSIVE | MQC.MQOO_BROWSE;
+            // create a queue manager object and access the queue that will be used for the putting of messages.
+            final int options = MQC.MQOO_INPUT_EXCLUSIVE | MQC.MQOO_BROWSE;
 
-		mqQueue = mqManager.accessQueue(queueIn, options, null, null, null);
+            final MQQueue mqQueue = mqManager.accessQueue(queueIn, options, null, null, null);
 
-		// set up our options to browse for the first message
-		MQGetMessageOptions gmo = new MQGetMessageOptions();
-		gmo.options = MQC.MQGMO_WAIT | MQC.MQGMO_BROWSE_FIRST;
-		// gmo.options = MQC.MQGMO_NO_SYNCPOINT; // Set no sync point
-		// gmo.options = MQC.MQGMO_CONVERT; // Handles ASCII/EBCDIC
-		// gmo.options = MQC.MQGMO_WAIT; // Wait until message arrives
-		// gmo.waitInterval = 10000;
+            // set up our options to browse for the first message
+            final MQGetMessageOptions gmo = new MQGetMessageOptions();
+            gmo.options = MQC.MQGMO_WAIT | MQC.MQGMO_BROWSE_FIRST;
+            // gmo.options = MQC.MQGMO_NO_SYNCPOINT; // Set no sync point
+            // gmo.options = MQC.MQGMO_CONVERT; // Handles ASCII/EBCDIC
+            // gmo.options = MQC.MQGMO_WAIT; // Wait until message arrives
+            // gmo.waitInterval = 10000;
 
-		MQMessage message = new MQMessage();
+            final MQMessage message = new MQMessage();
 
-		// set up a loop exit flag
-		boolean done = false;
+            // set up a loop exit flag
+            boolean done = false;
 
-		do {
-			try {
-				// Reset the message and IDs to be empty
-				message.clearMessage();
-				message.correlationId = MQC.MQCI_NONE;
-				message.messageId = MQC.MQMI_NONE;
+            do {
+                try {
+                    // Reset the message and IDs to be empty
+                    message.clearMessage();
+                    message.correlationId = MQC.MQCI_NONE;
+                    message.messageId = MQC.MQMI_NONE;
 
-				// Browse the message
-				mqQueue.get(message, gmo);
+                    // Browse the message
+                    mqQueue.get(message, gmo);
 
-				gmo.options = MQC.MQGMO_MSG_UNDER_CURSOR;
-				mqQueue.get(message, gmo);
+                    gmo.options = MQC.MQGMO_MSG_UNDER_CURSOR;
+                    mqQueue.get(message, gmo);
 
-				list.add(HelperXml.getValidXmlString(message.readString(message.getMessageLength())).getBytes());
-				
-				// Reset the options to browse the next message
-				gmo.options = MQC.MQGMO_WAIT | MQC.MQGMO_BROWSE_NEXT;
-			} catch (MQException ex) {
+                    list.add(HelperXml.getValidXmlString(message.readString(message.getMessageLength())).getBytes());
 
-				if (ex.reasonCode == 2033) {
-					done = true;
-				} else throw ex;
-			}
-		} while (!done);
+                    // Reset the options to browse the next message
+                    gmo.options = MQC.MQGMO_WAIT | MQC.MQGMO_BROWSE_NEXT;
+                } catch (MQException ex) {
 
-		// before the program ends, the open queue will be closed and the queue manager will be disconnected.
-		mqQueue.close();
-		mqManager.disconnect();
+                    if (2033 == ex.reasonCode) {
+                        done = true;
+                    } else {
+                        throw ex;
+                    }
+                }
+            } while (!done);
 
-		return list;
-	}
+            // before the program ends, the open queue will be closed and the queue manager will be disconnected.
+            mqQueue.close();
+            mqManager.disconnect();
+
+            return list;
+        }
+    }
 	
 	
 	/*

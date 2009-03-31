@@ -108,7 +108,7 @@ public abstract class CryptoAsymm {
 						final byte[] usedBytes = new byte[tempCounter + 1];
 						
 						for (int xx = 0; xx <= tempCounter; xx++) {
-							usedBytes[xx] = input[(ii - tempCounter) + xx];
+							usedBytes[xx] = input[ii - tempCounter + xx];
 						}
 						result = HelperGeneral.concatenateByteArrays(result, encryptInternal(usedBytes, key));
 					}

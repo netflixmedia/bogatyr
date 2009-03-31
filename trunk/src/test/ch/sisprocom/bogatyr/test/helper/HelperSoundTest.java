@@ -51,7 +51,7 @@ public class HelperSoundTest {
 	@Test
 	public void testGetAndPlayClip() {
 		try {
-			final Clip clip = HelperSound.getClip(this.getClass().getResourceAsStream("/res/ch/sisprocom/bogatyr/test/test.wav"));
+			final Clip clip = HelperSound.getClip(getClass().getResourceAsStream("/res/ch/sisprocom/bogatyr/test/test.wav"));
 
 			HelperSound.play(clip);
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
@@ -60,7 +60,7 @@ public class HelperSoundTest {
 	@Test
 	public void testGetAndPlaySequence() {
 		try {
-			final Sequence sequence = HelperSound.getSequence(this.getClass().getResourceAsStream("/res/ch/sisprocom/bogatyr/test/test.mid"));
+			final Sequence sequence = HelperSound.getSequence(getClass().getResourceAsStream("/res/ch/sisprocom/bogatyr/test/test.mid"));
 			
 			HelperSound.play(sequence);
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}

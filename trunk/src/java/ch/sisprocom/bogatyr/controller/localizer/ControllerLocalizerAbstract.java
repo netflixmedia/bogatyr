@@ -46,17 +46,23 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public abstract class ControllerLocalizerAbstract implements IControllerLocalizer { //TODO document in Wiki!
 	private List<ListenerLocale> listListener = new ArrayList<ListenerLocale>();
 
-	public synchronized void addListener(final ListenerLocale listener) {
-		listListener.add(listener);
-	}
-	
-	public synchronized void removeListener(final ListenerLocale listener) {
-		listListener.remove(listener);
-	}
-	
-	public synchronized void removeAllListener() {
-		listListener = new ArrayList<ListenerLocale>();
-	}
+    public void addListener(final ListenerLocale listener) {
+        synchronized (this) {
+            listListener.add(listener);
+        }
+    }
+
+    public void removeListener(final ListenerLocale listener) {
+        synchronized (this) {
+            listListener.remove(listener);
+        }
+    }
+
+    public void removeAllListener() {
+        synchronized (this) {
+            listListener = new ArrayList<ListenerLocale>();
+        }
+    }
 	
 	
 	/*

@@ -51,7 +51,7 @@ public class Menu extends JMenu {
 		super();
     }
 	
-	public Menu(Action action) {
+	public Menu(final Action action) {
 		super(action);
 	}
 
@@ -59,7 +59,7 @@ public class Menu extends JMenu {
 		super(text);
 		
 		// Add the mnemonic key
-		if (mnemonic > 0) {
+		if (0 < mnemonic) {
 			setMnemonic(mnemonic);
 		}
     }

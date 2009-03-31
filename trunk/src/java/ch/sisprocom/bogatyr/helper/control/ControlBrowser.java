@@ -82,7 +82,7 @@ public abstract class ControlBrowser {
 			// wait for exit code -- if it's 0, command worked, otherwise we need to start the browser
 			final int exitCode = process.waitFor();
 
-			if (exitCode != 0) {
+			if (0 != exitCode) {
 				// Command failed, start the browser
 				// cmd = 'netscape http://code.google.com/p/bogatyr'
 				cmd = UNIX_PATH + ' ' + url;

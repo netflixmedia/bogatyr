@@ -122,7 +122,7 @@ public class TableModel extends AbstractTableModel { //TODO document in Wiki!
 	@Override
 	public boolean isCellEditable(final int rowIndex, final int columnIndex) {
 		// Note that the data/cell address is constant, no matter where the cell appears onscreen
-        return columnIndex >= 2;
+        return 2 <= columnIndex;
     }
 	
 	/*

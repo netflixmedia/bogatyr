@@ -53,7 +53,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 public class CryptoAsymmTest {
 	private static final int KEYSIZE = 1024;
 	
-	private KeyPair keyPair = null;
+	private KeyPair keyPair;
 	  
 	
 	@Before

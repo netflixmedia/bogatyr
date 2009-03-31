@@ -62,7 +62,7 @@ public class ComboBox extends JComboBox { //TODO document in Wiki!
 		createLayout();
 	}
 	
-	public ComboBox(ComboBoxModel model) {
+	public ComboBox(final ComboBoxModel model) {
 		super(model);
 		createLayout();
 	}
@@ -87,7 +87,7 @@ public class ComboBox extends JComboBox { //TODO document in Wiki!
 		setEditable(true);
 
 		// get the combo boxes editor component
-        JTextComponent editor = (JTextComponent) getEditor().getEditorComponent();
+        final JTextComponent editor = (JTextComponent) getEditor().getEditorComponent();
 
         // change the editor's document
         editor.setDocument(new ComboBoxPopup(this));
@@ -112,29 +112,34 @@ public class ComboBox extends JComboBox { //TODO document in Wiki!
 	protected class ComboBoxPopup extends PlainDocument {
 		private static final long serialVersionUID = -5374025097785761556L;
 
-		private JComboBox comboBox;
-		private ComboBoxModel model;
-		private JTextComponent myEditor;
-		protected boolean selecting = false;
+		private final JComboBox comboBox;
+		private final ComboBoxModel model;
+		private final JTextComponent myEditor;
+		protected boolean selecting;
 
-		public ComboBoxPopup(final JComboBox comboBox) {
-		    this.comboBox = comboBox;
-		    model = comboBox.getModel();
-		    myEditor = (JTextComponent) comboBox.getEditor().getEditorComponent();
+		private ComboBoxPopup(final JComboBox comboBox) {
+            super();
+            this.comboBox = comboBox;
+            model = comboBox.getModel();
+            myEditor = (JTextComponent) comboBox.getEditor().getEditorComponent();
 
-		    comboBox.addActionListener(new ActionListener() {
-		        public void actionPerformed(ActionEvent e) {
-		            if (!selecting) highlightCompletedText(0);
-		        }
-		    });
+            comboBox.addActionListener(new ActionListener() {
+                public void actionPerformed(final ActionEvent e) {
+                    if (!selecting) {
+                        highlightCompletedText(0);
+                    }
+                }
+            });
 
-		    myEditor.addKeyListener(new KeyAdapter() {
-		        @Override
-				public void keyPressed(KeyEvent e) {
-		            if (comboBox.isDisplayable()) comboBox.setPopupVisible(true);
-		        }
-		    });
-		}
+            myEditor.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(final KeyEvent e) {
+                    if (comboBox.isDisplayable()) {
+                        comboBox.setPopupVisible(true);
+                    }
+                }
+            });
+        }
 
 		/*
 		 * Private methods
@@ -159,7 +164,7 @@ public class ComboBox extends JComboBox { //TODO document in Wiki!
 		}
 
 		private Object lookupItem(final String pattern) {
-		    Object selectedItem = model.getSelectedItem();
+		    final Object selectedItem = model.getSelectedItem();
 
 		    // only search for a different item if the currently selected does not match
 		    if (selectedItem != null && startsWithIgnoreCase(selectedItem.toString(), pattern)) {
@@ -169,7 +174,7 @@ public class ComboBox extends JComboBox { //TODO document in Wiki!
 		    // iterate over all items
 	        for (int i=0, n=model.getSize(); i < n; i++) {
 
-	            Object currentItem = model.getElementAt(i);
+	            final Object currentItem = model.getElementAt(i);
 
 	            // current item starts with the pattern?
 	            if (startsWithIgnoreCase(currentItem.toString(), pattern)) {
@@ -194,17 +199,21 @@ public class ComboBox extends JComboBox { //TODO document in Wiki!
 		@Override
 		public void remove(final int offs, final int len) throws BadLocationException {
 		    // return immediately when selecting an item
-		    if (selecting) return;
+		    if (selecting) {
+                return;
+            }
 
 		    super.remove(offs, len);
 		}
 
 		@Override
-		public void insertString(final int offset, final String str, AttributeSet a) throws BadLocationException {
+		public void insertString(final int offset, final String str, final AttributeSet a) throws BadLocationException {
 		    int offs = offset;
 		    
 			// return immediately when selecting an item
-		    if (selecting) return;
+		    if (selecting) {
+                return;
+            }
 
 		    // insert the string into the document
 		    super.insertString(offs, str, a);
@@ -220,7 +229,7 @@ public class ComboBox extends JComboBox { //TODO document in Wiki!
 		        item = comboBox.getSelectedItem();
 
 		        // imitate no insert (later on offs will be incremented by str.length(): selection won't move forward)
-		        offs = offs-str.length();
+                offs -= str.length();
 
 		        // provide feedback to the user that his input has been received but can not be accepted
 		        comboBox.getToolkit().beep(); // when available use: UIManager.getLookAndFeel().provideErrorFeedback(comboBox);

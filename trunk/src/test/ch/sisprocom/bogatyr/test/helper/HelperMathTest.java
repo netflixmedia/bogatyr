@@ -36,6 +36,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.junit.Assert;
 
 import ch.sisprocom.bogatyr.helper.HelperMath;
 
@@ -59,12 +60,12 @@ public class HelperMathTest { //TODO improve
 
 	@Test
 	public void testIsPrime() {
-		assertEquals(false, HelperMath.isPrime(-1));
-		assertEquals(false, HelperMath.isPrime(0));
-		assertEquals(false, HelperMath.isPrime(1));
-		assertEquals(true, HelperMath.isPrime(2));
-		assertEquals(false, HelperMath.isPrime(21));
-		assertEquals(true, HelperMath.isPrime(23));
+        Assert.assertFalse(HelperMath.isPrime(-1));
+        Assert.assertFalse(HelperMath.isPrime(0));
+        Assert.assertFalse(HelperMath.isPrime(1));
+        Assert.assertTrue(HelperMath.isPrime(2));
+        Assert.assertFalse(HelperMath.isPrime(21));
+        Assert.assertTrue(HelperMath.isPrime(23));
 	}
 	
 	@Test
@@ -143,13 +144,13 @@ public class HelperMathTest { //TODO improve
 		final int range = 2000000000;
 		int number;
 		
-		for (int ii = 0; ii < 100; ii++) {
+		for (int ii = 0; 100 > ii; ii++) {
 			number = HelperMath.random(range);
 
-			if (number >= 0 && number <= range) {
+			if (0 <= number && range >= number) {
 				assertTrue(true);
 			} else {
-				assertTrue(false);
+                Assert.fail();
 			}
 		}
 	}

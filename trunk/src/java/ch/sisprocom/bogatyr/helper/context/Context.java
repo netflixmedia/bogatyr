@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * @version 20090306
  */
 public class Context implements IContext { //TODO document in Wiki!
-	private static volatile Context instance;
+	private static final Context instance = new Context();
 
 //	private static final String KEY_APPLICATION_NAME             = "Application.name"; //$NON-NLS-1$
 //	private static final String KEY_APPLICATION_ID               = "Application.id"; //$NON-NLS-1$
@@ -64,13 +64,13 @@ public class Context implements IContext { //TODO document in Wiki!
     }
 	
     public static IContext getInstance() {
-	    if (instance == null) {
+//	    if (instance == null) {
 //	    	synchronized(instance) {
 	//            	synchronized(this) {
 //	            if (instance == null)
-	            	instance = new Context();
+//	            	instance = new Context();
 //	        }
-	    }
+//	    }
 	    return instance;
     }
 

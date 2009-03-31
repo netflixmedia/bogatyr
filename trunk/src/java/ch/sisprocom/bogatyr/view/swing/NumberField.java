@@ -62,8 +62,7 @@ public class NumberField extends TextField {//TODO improve Document!
      * @return int number of the number field
      */	
 	public double getNumber() {
-		final double result = HelperGeneral.isValidString(getText()) ? Double.valueOf(getText()) : 0.0D;
-		return result;
+		return HelperGeneral.isValidString(getText()) ? Double.valueOf(getText()) : 0.0D;
 	}
 
 	/**

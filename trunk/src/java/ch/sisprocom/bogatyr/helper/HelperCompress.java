@@ -58,7 +58,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * 
      * @param file for writing
      * @param listOfFiles for the zip file
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static void writeZip(final File file, final List<File> listOfFiles) throws IOException {
 		ZipOutputStream zos = null;
@@ -67,7 +67,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 			// create a ZipOutputStream to zip the data to
 			zos = new ZipOutputStream(new FileOutputStream(file));
 
-			for (File entry : listOfFiles) {
+			for (final File entry : listOfFiles) {
 			addEntry(zos, entry);
 			}
 		} finally {
@@ -109,13 +109,13 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * 
      * @param file to extract
      * @param destinationDirectory for the zip file
-     * @throws java.io.IOException
+     * @throws IOException
      */	
 	public static void extractZip(final ZipFile file, final File destinationDirectory) throws IOException { 
-        Enumeration<? extends ZipEntry> zipEntryEnum = file.entries(); 
+        final Enumeration<? extends ZipEntry> zipEntryEnum = file.entries();
  
         while (zipEntryEnum.hasMoreElements()) { 
-          ZipEntry zipEntry = zipEntryEnum.nextElement(); 
+          final ZipEntry zipEntry = zipEntryEnum.nextElement();
           extractEntry(file, zipEntry, destinationDirectory); 
         }
 	} 
@@ -144,19 +144,20 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	private static void addEntry(final ZipOutputStream zos, final File file) throws IOException {
 		FileInputStream fis = null;
 //		byte[] readBuffer = new byte[2156];
-        int bytesIn = 0; 
 		
 		try {
 			fis = new FileInputStream(file);
 			
 	        // create a new zip entry 
-			ZipEntry entry = new ZipEntry(file.getPath());
+			final ZipEntry entry = new ZipEntry(file.getPath());
 	
 	        // place the zip entry in the ZipOutputStream object 
 	        zos.putNextEntry(entry); 
 	        
-	        // now write the content of the file to the ZipOutputStream 
-	        while((bytesIn = fis.read(BUFFER)) != -1) { 
+            int bytesIn = 0;
+
+            // now write the content of the file to the ZipOutputStream
+            while(-1 != (bytesIn = fis.read(BUFFER))) {
 	            zos.write(BUFFER, 0, bytesIn); 
 	        } 
 		} finally {
@@ -168,22 +169,24 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	}
 	
 	private static void extractEntry(final ZipFile zipFile, final ZipEntry entry, final File destDir) throws IOException { 
-		File file = new File(destDir, entry.getName()); 
+		final File file = new File(destDir, entry.getName());
  	 
-	    if (entry.isDirectory()) 
-	    	file.mkdirs(); 
+	    if (entry.isDirectory()) {
+            file.mkdirs();
+        }
 	    else {
 	    	new File(file.getParent()).mkdirs(); 
  
 	    	InputStream  is = null; 
-	    	OutputStream os = null; 
-	        int bytesOut = 0; 
+	    	OutputStream os = null;
  
 	    	try {
 	    		is = zipFile.getInputStream(entry); 
-	    		os = new FileOutputStream( file ); 
- 
-	    		while ((bytesOut = is.read(BUFFER)) != -1) { 
+	    		os = new FileOutputStream( file );
+
+                int bytesOut = 0;
+
+                while (-1 != (bytesOut = is.read(BUFFER))) { 
 	    			os.write(BUFFER, 0, bytesOut); 
 	    		}
 	    	} finally { 

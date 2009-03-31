@@ -49,6 +49,7 @@ public interface IControllerUpdater {
 	 * @param minorversion Minor version of the application
 	 * @param build Build of the application
 	 * @param updateLocation Location for the update information
+     * @throws Exception
 	 */
 	void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws Exception;
 

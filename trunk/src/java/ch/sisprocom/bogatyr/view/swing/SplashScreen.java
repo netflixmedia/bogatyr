@@ -88,7 +88,7 @@ public class SplashScreen extends Frame { //TODO document in Wiki!
 	 * Private methods
 	 */
 	private void createLayout() {
-        if (splash != null && splash.getImageLoadStatus() == MediaTracker.COMPLETE) {
+        if (splash != null && MediaTracker.COMPLETE == splash.getImageLoadStatus()) {
 			
 			final Label label = new Label(splash);
 //			splash.setImageObserver(label);

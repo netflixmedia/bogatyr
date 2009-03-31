@@ -54,20 +54,16 @@ public class MenuBar extends JMenuBar {
 	            System.setProperty("apple.laf.useScreenMenuBar", "true");
 	            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Test");
 	            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		    } catch(Exception e) {
+		    } catch(Exception ex) {
 		    	//do nothing
 		    }
 		}
 	}
-	
-    public MenuBar() {
-		super();
-    }
 
-	
-	/*
-	 * Overridden methods
-	 */
+
+    /*
+      * Overridden methods
+      */
 	@Override
 	public String toString() {
 		return HelperGeneral.toString(this);
