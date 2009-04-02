@@ -61,6 +61,7 @@ import org.bouncycastle.asn1.x509.KeyUsage;
 import org.bouncycastle.asn1.x509.X509Extensions;
 import org.bouncycastle.x509.X509V3CertificateGenerator;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 
 
@@ -68,10 +69,17 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
  * This class generates, reads and save X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 20090403
  */
 public class PublicKeyProvider implements IPublicKeyProvider {
-
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperGeneral.toString(this);
+	}
+	
 	
 	/*
 	 * Implemented methods

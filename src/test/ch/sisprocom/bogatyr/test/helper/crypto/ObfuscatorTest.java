@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 public class ObfuscatorTest {
 	@Test
 	public void testEncryptAndDecrypt() {
-		IObfuscator obfuscator = new Obfuscator();
+		final IObfuscator obfuscator = new Obfuscator();
 		assertEquals(AllBogatyrTests.DATA, new String(obfuscator.decrypt(obfuscator.encrypt(AllBogatyrTests.DATA.getBytes()))));
 		assertEquals(AllBogatyrTests.DATA, new String(obfuscator.decrypt(obfuscator.encrypt(AllBogatyrTests.DATA.getBytes(), (byte)0x6F), (byte)0x6F)));
 		assertNotSame(AllBogatyrTests.DATA, new String(obfuscator.decrypt(obfuscator.encrypt(AllBogatyrTests.DATA.getBytes(), (byte)0x6F), (byte)0x5F)));

@@ -31,12 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
@@ -52,6 +46,11 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.Line;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -152,7 +151,7 @@ public abstract class HelperSound { //TODO document in Wiki!
 			public void run() {
 				clip.stop();
 			}
-		}, (int)(clip.getMicrosecondLength()/1000));
+		}, (clip.getMicrosecondLength()/1000L));
 	}
 
 	/**

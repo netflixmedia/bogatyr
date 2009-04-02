@@ -31,25 +31,27 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.timer;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Timer;
 
 /**
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 20090304
+ * @version 20090403
  */
 public abstract class ControllerTimerAbstract implements IListener{ //TODO document in Wiki!
-	private List<ListenerTimer> listListener = new ArrayList<ListenerTimer>();
+	private Collection<ListenerTimer> listListener = new ArrayList<ListenerTimer>();
 
 	protected Timer timer;
 	protected long time;
 	protected long interval;
 	
 
-	public ControllerTimerAbstract() {
+	protected ControllerTimerAbstract() {
         super();
         timer = new Timer();
     }
@@ -76,25 +78,28 @@ public abstract class ControllerTimerAbstract implements IListener{ //TODO docum
 		}	
 	}
 
+	
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperGeneral.toString(this);
+	}
 
+	
     /*
       * Implemented methods
       */
-    public void addListener(final ListenerTimer listener) {
-        synchronized (this) {
-            listListener.add(listener);
-        }
+    public synchronized void addListener(final ListenerTimer listener) {
+        listListener.add(listener);
     }
 
-    public void removeListener(final ListenerTimer listener) {
-        synchronized (this) {
-            listListener.remove(listener);
-        }
+    public synchronized void removeListener(final ListenerTimer listener) {
+        listListener.remove(listener);
     }
 
-    public void removeAllListener() {
-        synchronized (this) {
-            listListener = new ArrayList<ListenerTimer>();
-        }
+    public synchronized void removeAllListener() {
+        listListener = new ArrayList<ListenerTimer>();
     }
 }

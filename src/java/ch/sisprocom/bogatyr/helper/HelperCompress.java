@@ -38,7 +38,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
@@ -51,7 +50,7 @@ import java.util.zip.ZipOutputStream;
  * @version 20081215
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
-	private final static byte[] BUFFER = new byte[1024]; //TODO document in Wiki!
+	private static final byte[] BUFFER = new byte[1024]; //TODO document in Wiki!
 
 	/**
      * Writes a zip file containing a list of files.
@@ -60,7 +59,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * @param listOfFiles for the zip file
      * @throws IOException
      */	
-	public static void writeZip(final File file, final List<File> listOfFiles) throws IOException {
+	public static void writeZip(final File file, final Iterable<File> listOfFiles) throws IOException {
 		ZipOutputStream zos = null;
 		
 		try {

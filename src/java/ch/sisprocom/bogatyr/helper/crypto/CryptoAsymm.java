@@ -31,7 +31,15 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.crypto;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
@@ -40,26 +48,26 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Security;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
 /**
  * This is a class for asymmetric cryptology via RSA.
  * 
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 20090403
  */
 public class CryptoAsymm implements ICryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
 	public static final String XFORM     = "RSA/NONE/PKCS1PADDING"; //$NON-NLS-1$
 //	public static final String XFORM     = "RSA/NONE/NoPadding"; //$NON-NLS-1$
 
+	
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperGeneral.toString(this);
+	}
+	
 	
 	/*
 	 * Implemented methods
@@ -148,7 +156,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 	 * @throws NoSuchProviderException 
 	 * @throws NoSuchAlgorithmException 
 	 */
-	private byte[] encryptInternal(final byte[] input, final PublicKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
+	private byte[] encryptInternal(final byte[] input, final Key key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.ENCRYPT_MODE, key);
 
@@ -168,7 +176,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 	 * @throws BadPaddingException 
 	 * @throws IllegalBlockSizeException 
 	 */
-	private byte[] decryptInternal(final byte[] input, final PrivateKey key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+	private byte[] decryptInternal(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.DECRYPT_MODE, key);
 

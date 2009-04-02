@@ -31,10 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
@@ -42,15 +39,17 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.PlainDocument;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 /**
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090310
+ * @version 20090403
  */
 public class ComboBox extends JComboBox { //TODO document in Wiki!
 	private static final long serialVersionUID = -3870596701286078140L;
@@ -109,11 +108,15 @@ public class ComboBox extends JComboBox { //TODO document in Wiki!
         }
 	}
 	
-	protected class ComboBoxPopup extends PlainDocument {
+	
+	/*
+	 * Inner classes
+	 */
+	private class ComboBoxPopup extends PlainDocument {
 		private static final long serialVersionUID = -5374025097785761556L;
 
 		private final JComboBox comboBox;
-		private final ComboBoxModel model;
+		private final transient ComboBoxModel model;
 		private final JTextComponent myEditor;
 		protected boolean selecting;
 

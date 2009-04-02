@@ -32,7 +32,7 @@
 package ch.sisprocom.bogatyr.helper;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 
 /**
@@ -52,9 +52,8 @@ public abstract class HelperMath { //TODO document in Wiki!
 	 * @return calculated gcd
 	 */
 	 public static double gcd(final double a, final double b) {
-		 final double result;
 
-        result = 0 == b ? a : gcd(b, a % b);
+        final double result = 0 == b ? a : gcd(b, a % b);
 		 return result;
 	 } 
 
@@ -91,7 +90,7 @@ public abstract class HelperMath { //TODO document in Wiki!
 	        }
 	
 	        // check odd divisors from 3 to the square root of n
-	        for (int i = 3, end = (int)Math.sqrt(n); i <= end; i += 2) {
+	        for (int i = 3, end = (int)Math.sqrt((double) n); i <= end; i += 2) {
 	            if (0 == n % i) {
 	                return flag;
 	            }
@@ -125,8 +124,8 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @param end number of the range
      * @return list with prime numbers
      */	
-	public static List<Integer> getPrimes(final int start, final int end) {
-		final List<Integer> list = new ArrayList<Integer>();
+	public static Object getPrimes(final int start, final int end) {
+		final Collection<Integer> list = new ArrayList<Integer>();
 		
 		for (int ii = start; ii <= end; ii++) {
 			if (isPrime(ii)) {
@@ -263,7 +262,7 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @return random int-value between 0 and n-1
      */
     public static int random(final int n) {
-    	return (int) (Math.random() * n);
+    	return (int) (Math.random() * (double) n);
     }
     
     

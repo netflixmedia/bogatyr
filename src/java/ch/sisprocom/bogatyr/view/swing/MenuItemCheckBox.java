@@ -31,13 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.event.ActionListener;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.Action;
-import javax.swing.ImageIcon;
+import javax.swing.Icon;
 import javax.swing.JCheckBoxMenuItem;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.awt.event.ActionListener;
 
 
 /**
@@ -60,7 +59,7 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 		setSelected(isSelected);
 	}
 
-	public MenuItemCheckBox(final String text, final ImageIcon image, final int mnemonic, final String toolTip, final boolean isSelected) {
+	public MenuItemCheckBox(final String text, final Icon image, final int mnemonic, final String toolTip, final boolean isSelected) {
 		super(text);
 		
 		// Add the optional icon
@@ -80,7 +79,7 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 		setSelected(isSelected);
     }
 	
-	public MenuItemCheckBox(final String text, final ImageIcon image, final int mnemonic, final String toolTip, final boolean isSelected, final ActionListener listener) {
+	public MenuItemCheckBox(final String text, final Icon image, final int mnemonic, final String toolTip, final boolean isSelected, final ActionListener listener) {
 		this(text, image, mnemonic, toolTip, isSelected);
 		addActionListener(listener);
     }

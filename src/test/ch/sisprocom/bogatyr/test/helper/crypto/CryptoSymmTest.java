@@ -31,34 +31,31 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.crypto;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
-import javax.crypto.SecretKey;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import ch.sisprocom.bogatyr.helper.crypto.CryptoSymm;
 import ch.sisprocom.bogatyr.helper.crypto.ICryptoSymm;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+
+import javax.crypto.SecretKey;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 20090403
  */
 public class CryptoSymmTest {
 	private static final int KEYSIZE = 128;
 	
 	private SecretKey secretKey;
-	private ICryptoSymm cryptoSymm = new CryptoSymm();
+	private ICryptoSymm cryptoSymm;
 	
 	@Before
 	public void setUp() throws Exception {
+		cryptoSymm = new CryptoSymm();
         secretKey = cryptoSymm.generateKey(KEYSIZE);
 	}
 

@@ -49,17 +49,18 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 20090403
  */
 public class CryptoAsymmTest {
 	private static final int KEYSIZE = 1024;
 	
 	private KeyPair keyPair;
-	private ICryptoAsymm cryptoAsymm = new CryptoAsymm(); 
+	private ICryptoAsymm cryptoAsymm;
 	
 	
 	@Before
 	public void setUp() throws Exception {
+		cryptoAsymm = new CryptoAsymm();
         keyPair = cryptoAsymm.generateKeys(KEYSIZE);
 	}
 

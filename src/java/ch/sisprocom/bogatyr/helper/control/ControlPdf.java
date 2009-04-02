@@ -31,21 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.control;
 
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.MessageFormat;
-
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperIO;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.text.MessageFormat;
 
 /**
  * This control opens PDF data with the default system pdf-viewer (e.g. Acrobat Reader).
  *
  * @author Stefan Laubenberger
- * @version 20090401
+ * @version 20090403
  */
 public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
@@ -74,9 +73,8 @@ public abstract class ControlPdf {
 	 * @param pdfFile PDF content as file
 	 * @throws InterruptedException 
 	 * @throws IOException 
-	 * @throws MalformedURLException 
 	 */
-	public static void open(final File pdfFile) throws MalformedURLException, IOException, InterruptedException {
+	public static void open(final File pdfFile) throws  IOException, InterruptedException {
 		execute(pdfFile.getCanonicalPath());
 	}
 	
@@ -84,9 +82,10 @@ public abstract class ControlPdf {
 	 * Show a PDF (provided as stream) with PDF viewer.
 	 * 
 	 * @param pdfStream PDF content as stream
-	 * @throws IOException 
+	 * @throws InterruptedException
+	 * @throws IOException
 	 */
-	public static void open(final DataInputStream pdfStream) throws IOException, Exception {
+	public static void open(final InputStream pdfStream) throws IOException, InterruptedException {
 		open(HelperIO.readStream(pdfStream));
 	}
 	
@@ -94,7 +93,7 @@ public abstract class ControlPdf {
 	/*
 	 * Private methods
 	 */
-	private static void execute(final String path) throws MalformedURLException, IOException, InterruptedException {
+	private static void execute(final String path) throws  IOException, InterruptedException {
 		final String viewerPath;
 		if (HelperEnvInfo.isWindowsPlatform()) {
 			viewerPath = WINDOWS_PDF_VIEWER_PATH;

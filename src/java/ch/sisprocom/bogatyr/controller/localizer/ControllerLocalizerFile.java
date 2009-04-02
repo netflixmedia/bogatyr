@@ -58,11 +58,9 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 		return localizerBase;
 	}
 
-    public void setLocalizerBase(final String localizerBase) {
-        synchronized (this) {
-            this.localizerBase = localizerBase;
-            bundle = ResourceBundle.getBundle(localizerBase, locale);
-        }
+    public synchronized void setLocalizerBase(final String localizerBase) {
+        this.localizerBase = localizerBase;
+        bundle = ResourceBundle.getBundle(localizerBase, locale);
     }
 	
 	
@@ -73,12 +71,10 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 		return locale;
 	}
 
-    public void setLocale(final Locale locale) {
-        synchronized (this) {
-            this.locale = locale;
-            bundle = ResourceBundle.getBundle(localizerBase, locale);
-            fireLocaleChanged();
-        }
+    public synchronized void setLocale(final Locale locale) {
+        this.locale = locale;
+        bundle = ResourceBundle.getBundle(localizerBase, locale);
+        fireLocaleChanged();
     }
 	
 	public String getValue(final String key) {

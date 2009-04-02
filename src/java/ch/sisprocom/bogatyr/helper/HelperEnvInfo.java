@@ -33,7 +33,7 @@ package ch.sisprocom.bogatyr.helper;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 
@@ -87,7 +87,7 @@ public abstract class HelperEnvInfo {
      *
      * @return OS architecture
 	 */
-	public static String getOsArch() {
+	public static Object getOsArch() {
 		return System.getProperties().getProperty("os.arch"); //$NON-NLS-1$
 	}
 
@@ -114,8 +114,8 @@ public abstract class HelperEnvInfo {
 	 *
 	 * @return list of system environment variables
 	 */
-	public static List<String> getOsEnvironmentVariables() {
-		final List<String> list = new ArrayList<String>();
+	public static Object getOsEnvironmentVariables() {
+		final Collection<String> list = new ArrayList<String>();
 		final Map<String, String> map = System.getenv();
 		
 		for (final Map.Entry<String, String> pair : map.entrySet()) {
@@ -138,7 +138,7 @@ public abstract class HelperEnvInfo {
      *
      * @return user home directory
 	 */
-	public static File getUserHomeDirectory() {
+	public static Object getUserHomeDirectory() {
 		return new File(System.getProperty("user.home")); //$NON-NLS-1$
 	}
 	

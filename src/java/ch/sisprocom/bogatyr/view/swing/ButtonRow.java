@@ -31,13 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
-
-import javax.swing.AbstractButton;
-import javax.swing.JButton;
 
 
 /**

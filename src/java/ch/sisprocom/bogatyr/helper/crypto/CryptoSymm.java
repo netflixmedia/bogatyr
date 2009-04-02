@@ -31,13 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.crypto;
 
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.Security;
-import java.security.spec.AlgorithmParameterSpec;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -46,19 +41,33 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
-
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.Security;
+import java.security.spec.AlgorithmParameterSpec;
 
 /**
  * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 20090403
  */
 public class CryptoSymm implements ICryptoSymm {
 	public static final String ALGORITHM = "AES"; //$NON-NLS-1$
 	public static final String XFORM     = "AES/CBC/PKCS5Padding"; //$NON-NLS-1$
 
+	
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperGeneral.toString(this);
+	}
+	
 	
 	/*
 	 * Implemented methods

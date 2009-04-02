@@ -31,17 +31,27 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.crypto;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
 
 
 /**
  * This is a class for obfuscating data.
  * 
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 20090403
  */
 public class Obfuscator implements IObfuscator {
 	private static final byte DEFAULT_PATTERN = Byte.MAX_VALUE;
-
+	
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperGeneral.toString(this);
+	}
+	
 	
 	/*
 	 * Implemented methods

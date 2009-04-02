@@ -31,20 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.event.ActionListener;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.Action;
-import javax.swing.ImageIcon;
+import javax.swing.Icon;
 import javax.swing.JButton;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.awt.event.ActionListener;
 
 
 /**
  * This is an extended JButton.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090403
  */
 public class Button extends JButton {
 	private static final long serialVersionUID = -7231487009931166084L;
@@ -71,7 +70,7 @@ public class Button extends JButton {
 		addActionListener(listener);
 	}	
 	
-	public Button(final String title, final ImageIcon icon, final String toolTip, final ActionListener listener) {
+	public Button(final String title, final Icon icon, final String toolTip, final ActionListener listener) {
 		super(title, icon);
 		setToolTipText(toolTip);
 		addActionListener(listener);

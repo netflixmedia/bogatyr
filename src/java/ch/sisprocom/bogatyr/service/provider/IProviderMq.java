@@ -54,7 +54,7 @@ public interface IProviderMq {
      * @throws IOException
      * @throws MQException
      */
-    public void sendMessage(final byte[] data, final String managerOut, final String queueOut, final String managerIn, final String queueIn) throws Exception;
+    void sendMessage(final byte[] data, final String managerOut, final String queueOut, final String managerIn, final String queueIn) throws Exception;
 
     /**
      * Receives messages from a mq manager and queue.

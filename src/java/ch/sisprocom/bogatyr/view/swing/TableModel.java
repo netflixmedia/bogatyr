@@ -31,9 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import javax.swing.table.AbstractTableModel;
-
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
+import javax.swing.table.AbstractTableModel;
 
 
 /**
@@ -46,7 +46,7 @@ public class TableModel extends AbstractTableModel { //TODO document in Wiki!
 	private static final long serialVersionUID = -472247252594891753L;
 	
 	private final String[] columnNames;
-    private final Object[][] data;
+    private final transient Object[][] data;
     
 
 	public TableModel(final String[] columnNames, final Object[][] data) {

@@ -31,13 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.event.ActionListener;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.Action;
-import javax.swing.ImageIcon;
+import javax.swing.Icon;
 import javax.swing.JMenuItem;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.awt.event.ActionListener;
 
 
 /**
@@ -58,7 +57,7 @@ public class MenuItem extends JMenuItem {
 		super(action);
 	}
 
-	public MenuItem(final String text, final ImageIcon image, final int mnemonic, final String toolTip) {
+	public MenuItem(final String text, final Icon image, final int mnemonic, final String toolTip) {
 		super(text);
 		
 		// Add the optional icon
@@ -77,7 +76,7 @@ public class MenuItem extends JMenuItem {
 		}
     }
 	
-	public MenuItem(final String text, final ImageIcon image, final int mnemonic, final String toolTip, final ActionListener listener) {
+	public MenuItem(final String text, final Icon image, final int mnemonic, final String toolTip, final ActionListener listener) {
 		this(text, image, mnemonic, toolTip);
 		addActionListener(listener);
     }

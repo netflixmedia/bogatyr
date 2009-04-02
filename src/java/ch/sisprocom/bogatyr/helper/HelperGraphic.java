@@ -33,7 +33,6 @@ package ch.sisprocom.bogatyr.helper;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -41,7 +40,6 @@ import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
-import java.util.List;
 
 
 /**
@@ -96,7 +94,7 @@ public abstract class HelperGraphic { //TODO document in Wiki!
      *
      * @return List containing all fonts
      */
-    public static List<Font> getFonts() {
+    public static Object getFonts() {
 		// Get all available fonts from GraphicsEnvironment
 		final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,27 +31,21 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Test;
-
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20090403
  */
 public class HelperGeneralTest { //TODO improve
 	@Test
@@ -65,7 +59,7 @@ public class HelperGeneralTest { //TODO improve
 
 	@Test
 	public void testGetLS() {
-		assertNull(HelperGeneral.getLS());
+		assertNotNull(HelperGeneral.getLS());
 	}
 	
 	@Test
@@ -123,7 +117,7 @@ public class HelperGeneralTest { //TODO improve
 	
 	@Test
 	public void testIsValidCollection() {
-		final List<String> list = new ArrayList<String>();
+		final Collection<String> list = new ArrayList<String>();
 		assertFalse(HelperGeneral.isValidCollection(null));
 		assertFalse(HelperGeneral.isValidCollection(list));
 		list.add(""); //$NON-NLS-1$

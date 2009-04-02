@@ -63,9 +63,8 @@ public class PasswordField extends JPasswordField { //TODO document in Wiki!
 	 * @return true/false
 	 */
 	public boolean isPasswordCorrect(final char[] correctPassword) {
-	    boolean isCorrect = true;
 
-        isCorrect = getPassword().length != correctPassword.length ? false : Arrays.equals(getPassword(), correctPassword);
+        boolean isCorrect = getPassword().length == correctPassword.length ? Arrays.equals(getPassword(), correctPassword) : false;
 	    return isCorrect;
 	}
 	
