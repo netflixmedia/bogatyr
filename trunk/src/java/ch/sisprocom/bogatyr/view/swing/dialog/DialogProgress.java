@@ -31,15 +31,16 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.dialog;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.border.BevelBorder;
-
 import ch.sisprocom.bogatyr.view.swing.Panel;
 import ch.sisprocom.bogatyr.view.swing.ProgressBar;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JProgressBar;
+import javax.swing.border.BevelBorder;
+import java.awt.BorderLayout;
+import java.awt.Color;
 
 
 
@@ -52,7 +53,7 @@ import ch.sisprocom.bogatyr.view.swing.ProgressBar;
 public class DialogProgress extends Dialog { //TODO document in Wiki!
 	private static final long serialVersionUID = 3287183043789350515L;
 	
-	private final ProgressBar progressBar = new ProgressBar();
+	private final JProgressBar progressBar = new ProgressBar();
     private final JFrame frame;
 	
 	public DialogProgress(final JFrame frame) {
@@ -72,7 +73,7 @@ public class DialogProgress extends Dialog { //TODO document in Wiki!
 	 * Private methods
 	 */
     private void createLayout() {
-		final Panel panelMain = new Panel(Color.WHITE);
+		final JComponent panelMain = new Panel(Color.WHITE);
 		panelMain.setLayout(new BorderLayout());
 		panelMain.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED,	Color.LIGHT_GRAY, Color.WHITE, Color.DARK_GRAY, Color.GRAY));
 

@@ -35,11 +35,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -49,6 +48,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 
@@ -56,10 +56,10 @@ import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
  * This is the updater controller for new Bogatyr-based applications versions.
  * 
  * @author Stefan Laubenberger
- * @version 20090401
+ * @version 20090403
  */
 public class ControllerUpdater implements IControllerUpdater, ListenerUpdater { //TODO document in Wiki!
-	private List<ListenerUpdater> listListener = new ArrayList<ListenerUpdater>();
+	private Collection<ListenerUpdater> listListener = new ArrayList<ListenerUpdater>();
 
 	private final IControllerLocalizer localizer;
 	
@@ -68,7 +68,16 @@ public class ControllerUpdater implements IControllerUpdater, ListenerUpdater { 
         super();
         this.localizer = localizer;
     }
-
+	
+	
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperGeneral.toString(this);
+	}
+	
 
     /*
       * Implemented methods
@@ -76,53 +85,43 @@ public class ControllerUpdater implements IControllerUpdater, ListenerUpdater { 
     /*
       * Checks the update XML file for new versions an update the application if needed.
       */
-    public void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws MalformedURLException, IOException, ParserConfigurationException, SAXException  {
-        synchronized (this) {
-//		if (updateLocation != null) {
-            final File file = new File(updateLocation);
-            InputStream is = null;
-            try {
-                if (file.exists()) {
-                    is = new FileInputStream(file);
-                } else {
-                    final URLConnection con = new URL(updateLocation).openConnection();
-                    con.setConnectTimeout(2000);
-                    con.connect();
+    public synchronized void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws IOException, ParserConfigurationException, SAXException  {
+        final File file = new File(updateLocation);
+        InputStream is = null;
+        try {
+            if (file.exists()) {
+                is = new FileInputStream(file);
+            } else {
+                final URLConnection con = new URL(updateLocation).openConnection();
+                con.setConnectTimeout(2000);
+                con.connect();
 
-                    is = con.getInputStream();
-                }
-
-                final SAXParserFactory factory = SAXParserFactory.newInstance();
-                final SAXParser saxParser = factory.newSAXParser();
-
-                final DefaultHandler handler = new XmlParser(name, id, version, minorversion, build, this, localizer);
-
-                saxParser.parse(is, handler);
-            } finally {
-                if (is != null) {
-                    is.close();
-                }
+                is = con.getInputStream();
             }
-//	    }
+
+            final SAXParserFactory factory = SAXParserFactory.newInstance();
+            final SAXParser saxParser = factory.newSAXParser();
+
+            final DefaultHandler handler = new XmlParser(name, id, version, minorversion, build, this, localizer);
+
+            saxParser.parse(is, handler);
+        } finally {
+            if (is != null) {
+                is.close();
+            }
         }
     }
 
-    public void addListener(final ListenerUpdater listener) {
-        synchronized (this) {
-            listListener.add(listener);
-        }
+    public synchronized void addListener(final ListenerUpdater listener) {
+        listListener.add(listener);
     }
 
-    public void removeListener(final ListenerUpdater listener) {
-        synchronized (this) {
-            listListener.remove(listener);
-        }
+    public synchronized void removeListener(final ListenerUpdater listener) {
+        listListener.remove(listener);
     }
 
-    public void removeAllListener() {
-        synchronized (this) {
-            listListener = new ArrayList<ListenerUpdater>();
-        }
+    public synchronized void removeAllListener() {
+        listListener = new ArrayList<ListenerUpdater>();
     }
 
 	public void downgradeCancelled() {

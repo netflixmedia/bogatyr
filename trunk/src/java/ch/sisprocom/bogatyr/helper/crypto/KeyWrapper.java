@@ -40,14 +40,23 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
 /**
  * This is a class for wrapping and unwrapping a crypto key.
  * 
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 20090403
  */
 public class KeyWrapper implements IKeyWrapper {
-
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperGeneral.toString(this);
+	}
+	
 	
 	/*
 	 * Implemented methods

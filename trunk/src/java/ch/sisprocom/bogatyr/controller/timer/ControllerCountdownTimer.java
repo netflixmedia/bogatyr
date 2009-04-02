@@ -46,30 +46,24 @@ public class ControllerCountdownTimer extends ControllerTimerAbstract implements
     /*
       * Implemented methods
       */
-    public void start(final long runtime) {
-        synchronized (this) {
-            start(0, runtime, 1000);
-        }
+    public synchronized void start(final long runtime) {
+        start(0L, runtime, 1000L);
     }
 
-    public void start(final long delay, final long runtime, final long interval) {
-        synchronized (this) {
-            timer.cancel();
+    public synchronized void start(final long delay, final long runtime, final long interval) {
+        timer.cancel();
 
-            timer = new Timer();
-            this.runtime = runtime;
-            this.interval = interval;
+        timer = new Timer();
+        this.runtime = runtime;
+        this.interval = interval;
 
-            timer.schedule(new TaskCountdown(), delay, interval);
-            fireTimerStarted();
-        }
+        timer.schedule(new TaskCountdown(), delay, interval);
+        fireTimerStarted();
     }
 
-    public void stop() {
-        synchronized (this) {
-            timer.cancel();
-            fireTimerStopped();
-        }
+    public synchronized void stop() {
+        timer.cancel();
+        fireTimerStopped();
     }
 
     
@@ -79,7 +73,7 @@ public class ControllerCountdownTimer extends ControllerTimerAbstract implements
 	protected class TaskCountdown extends TimerTask {
 		@Override
 		public void run() {
-			if (0 < runtime) {
+			if (0L < runtime) {
 				runtime -= interval;
 				fireTimeChanged(runtime);
 			} else {

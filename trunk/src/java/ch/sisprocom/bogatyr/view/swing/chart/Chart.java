@@ -31,20 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.chart;
 
+import ch.sisprocom.bogatyr.view.swing.Label;
+import ch.sisprocom.bogatyr.view.swing.LabelVertical;
+import ch.sisprocom.bogatyr.view.swing.Panel;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.SwingConstants;
-
-import ch.sisprocom.bogatyr.view.swing.Label;
-import ch.sisprocom.bogatyr.view.swing.LabelVertical;
-import ch.sisprocom.bogatyr.view.swing.Panel;
 
 
 /**
@@ -52,31 +52,31 @@ import ch.sisprocom.bogatyr.view.swing.Panel;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20090325
+ * @version 20090403
  */
 public class Chart extends Panel { //TODO document in Wiki!
 	private static final long serialVersionUID = -4618658256880807781L;
 
-	public static final int X_AXIS_NORTH = 1;
-	public static final int X_AXIS_SOUTH = 2;
-	public static final int Y_AXIS_WEST  = 3;
-	public static final int Y_AXIS_EAST  = 4;
-		
+    public enum X_Axis {NORTH, SOUTH}
+    public enum Y_Axis {WEST, SOUTH}
+
 	private Color colorGrid = Color.GRAY;
 	private Color colorBackground = Color.WHITE;
 	private Color colorForeground = Color.BLACK;
 	private Font font;
 	
 	private final String[] xAxes, yAxes;
-	private final int maxX, maxY, gridIntervalX, gridIntervalY, positionXAxis, positionYAxis;
+	private final int maxX, maxY, gridIntervalX, gridIntervalY;
+    private final X_Axis positionXAxis;
+    private final Y_Axis positionYAxis;
 	private final List<ChartEntry> entries;
 
 	
 	public Chart(final int maxX, final int maxY, final String[] xAxes, final String[] yAxes) {
-		this(maxX, maxY, xAxes, yAxes, X_AXIS_SOUTH, Y_AXIS_WEST);
+		this(maxX, maxY, xAxes, yAxes, X_Axis.SOUTH, Y_Axis.WEST);
 	}
 
-	public Chart(final int maxX, final int maxY, final String[] xAxes, final String[] yAxes, final int positionXAxis, final int positionYAxis) {
+	public Chart(final int maxX, final int maxY, final String[] xAxes, final String[] yAxes, final X_Axis positionXAxis, final Y_Axis positionYAxis) {
 		super();
 		
 		this.xAxes         = xAxes;
@@ -137,10 +137,10 @@ public class Chart extends Panel { //TODO document in Wiki!
     	gbc.gridheight 	= 1;
     	gbc.weightx 	= 1.0D;
 		gbc.weighty		= 0.0D;
-		if (X_AXIS_NORTH == positionXAxis) {
+		if (X_Axis.NORTH == positionXAxis) {
 
 			// Border in the south
-			final Panel panelXAxis = new Panel(colorBackground);
+			final JComponent panelXAxis = new Panel(colorBackground);
 			panelXAxis.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorGrid));
 			add(panelXAxis, gbc);
 			
@@ -154,15 +154,15 @@ public class Chart extends Panel { //TODO document in Wiki!
 		gbc.gridwidth = 1;
     	gbc.weightx = 0.0D;
 		gbc.weighty = 1.0D;
-		if (Y_AXIS_WEST == positionYAxis) {
-            gbc.gridy = X_AXIS_SOUTH == positionXAxis ? 0 : 1;
+		if (Y_Axis.WEST == positionYAxis) {
+            gbc.gridy = X_Axis.SOUTH == positionXAxis ? 0 : 1;
 			gbc.gridheight 	= maxY + 1;
 		} else {
 			gbc.gridy 		= 1;
 			gbc.gridheight 	= maxY;
 
 			// Border in the west
-			final Panel panelYAxis = new Panel(colorBackground);
+			final JComponent panelYAxis = new Panel(colorBackground);
 			panelYAxis.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorGrid));
 			add(panelYAxis, gbc);
 			
@@ -181,8 +181,8 @@ public class Chart extends Panel { //TODO document in Wiki!
 	    	gbc.gridheight 	= entry.getSizeY();
 //	    	gbc.weightx 	= (double) entry.getSizeX();
 //			gbc.weighty		= (double) entry.getSizeY();
-			gbc.weightx 	= 1.0/maxX;
-			gbc.weighty		= 1.0/maxY;
+			gbc.weightx 	= 1.0/ (double) maxX;
+			gbc.weighty		= 1.0/ (double) maxY;
 			
 			// Save used coordinates in map
 			for (int x = entry.getX(); x < entry.getX() + entry.getSizeX(); x++) {
@@ -195,7 +195,7 @@ public class Chart extends Panel { //TODO document in Wiki!
 			final JComponent component = entry.getComponent();
 			
 			// Create container with maybe a border
-			final Panel panelContainer = new Panel(colorBackground);
+			final JComponent panelContainer = new Panel(colorBackground);
 			panelContainer.setLayout(new GridLayout(1, 1));
 			
 			// Create borders
@@ -234,7 +234,7 @@ public class Chart extends Panel { //TODO document in Wiki!
 //    		    	gbc.weightx 	= 1.0D;
 //    				gbc.weighty		= 1.0D;
     				
-    				final Panel spacer = new Panel(colorBackground);
+    				final JComponent spacer = new Panel(colorBackground);
     				
     				// Create borders
     				if (0 == (x + 1) % gridIntervalX) {
@@ -255,11 +255,11 @@ public class Chart extends Panel { //TODO document in Wiki!
 		}
 	}
 	
-	private Panel getXAxis() {
-		final Panel panelXAxis = new Panel(colorBackground);
+	private Component getXAxis() {
+		final JComponent panelXAxis = new Panel(colorBackground);
 		panelXAxis.setLayout(new GridLayout(0, xAxes.length));
 		
-		if (X_AXIS_SOUTH == positionXAxis) {
+		if (X_Axis.SOUTH == positionXAxis) {
 			panelXAxis.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorGrid));
 		} else {
 			panelXAxis.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, colorGrid));
@@ -267,7 +267,7 @@ public class Chart extends Panel { //TODO document in Wiki!
 		
 		// Paint x axis
 		for (final String text : xAxes) {
-			final Label label = new Label(text, SwingConstants.CENTER);
+			final Component label = new Label(text, SwingConstants.CENTER);
 			label.setBackground(colorBackground);
 			label.setForeground(colorForeground);
 			if (font != null) {
@@ -278,11 +278,11 @@ public class Chart extends Panel { //TODO document in Wiki!
 		return panelXAxis;	
 	}
 	
-	private Panel getYAxis() {
-		final Panel panelYAxis = new Panel(colorBackground);
+	private Component getYAxis() {
+		final JComponent panelYAxis = new Panel(colorBackground);
 		panelYAxis.setLayout(new GridLayout(yAxes.length, 0));
 		
-		if (Y_AXIS_WEST == positionYAxis) {
+		if (Y_Axis.WEST == positionYAxis) {
 			panelYAxis.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorGrid));
 			
 		} else {
@@ -291,7 +291,7 @@ public class Chart extends Panel { //TODO document in Wiki!
 
 		// Paint y axis
 		for (final String text : yAxes) {
-			final LabelVertical label = new LabelVertical(text, SwingConstants.CENTER);
+			final Component label = new LabelVertical(text, SwingConstants.CENTER);
 			label.setBackground(colorBackground);
 			label.setForeground(colorForeground);
 			if (font != null) {

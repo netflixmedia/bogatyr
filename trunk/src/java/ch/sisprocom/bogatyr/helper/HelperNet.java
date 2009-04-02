@@ -43,6 +43,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Collection;
 
 import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
 
@@ -168,7 +169,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return host name
      * @throws UnknownHostException
      */
-    public static String getHostname(final String ip) throws UnknownHostException {
+    public static Object getHostname(final String ip) throws UnknownHostException {
 		final InetAddress address = InetAddress.getByName(ip);
 
 		return address.getHostName();
@@ -180,7 +181,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return host name
      * @throws UnknownHostException
      */
-    public static String getLocalHostname() throws UnknownHostException {
+    public static Object getLocalHostname() throws UnknownHostException {
 		final InetAddress address = InetAddress.getLocalHost();
 		
 		return address.getHostName();
@@ -193,7 +194,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return IP
      * @throws UnknownHostException
      */
-    public static String getIp(final String hostname) throws UnknownHostException {
+    public static Object getIp(final String hostname) throws UnknownHostException {
 		final InetAddress address = InetAddress.getByName(hostname);
 		
 		return address.getHostAddress();
@@ -205,7 +206,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return IP
      * @throws UnknownHostException
      */
-    public static String getLocalIp() throws UnknownHostException {
+    public static Object getLocalIp() throws UnknownHostException {
 		final InetAddress address = InetAddress.getLocalHost();
 		
 		return address.getHostAddress();
@@ -217,8 +218,8 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return List with IP addresses
      * @throws UnknownHostException
      */
-    public static List<String> getLocalIps() throws UnknownHostException {
-    	final List<String> list = new ArrayList<String>();
+    public static Object getLocalIps() throws UnknownHostException {
+    	final Collection<String> list = new ArrayList<String>();
         final String localHost = InetAddress.getLocalHost().getHostName();
 
         for (final InetAddress address : InetAddress.getAllByName(localHost)) {

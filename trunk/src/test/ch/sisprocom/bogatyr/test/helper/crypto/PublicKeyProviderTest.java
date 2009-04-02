@@ -31,30 +31,28 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.crypto;
 
+import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
+import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
+import ch.sisprocom.bogatyr.helper.crypto.IPublicKeyProvider;
+import ch.sisprocom.bogatyr.helper.crypto.PublicKeyProvider;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import org.junit.Test;
 
 import java.io.File;
 import java.security.KeyPair;
 import java.security.cert.X509Certificate;
 import java.util.Date;
 
-import org.junit.Test;
-
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
-import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
-import ch.sisprocom.bogatyr.helper.crypto.IPublicKeyProvider;
-import ch.sisprocom.bogatyr.helper.crypto.PublicKeyProvider;
-
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090310
+ * @version 20090403
  */
 public class PublicKeyProviderTest {
-	private IPublicKeyProvider publicKeyProvider = new PublicKeyProvider();
+	private final IPublicKeyProvider publicKeyProvider = new PublicKeyProvider();
 	
 	@Test
 	public void testGenerateCertificate() {
@@ -64,7 +62,7 @@ public class PublicKeyProviderTest {
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
 		
 		try {
-			X509Certificate cert = publicKeyProvider.generateCertificate(kp, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(System.currentTimeMillis() - 50000), new Date(System.currentTimeMillis() + 50000));
+			X509Certificate cert = publicKeyProvider.generateCertificate(kp, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(System.currentTimeMillis() - 50000L), new Date(System.currentTimeMillis() + 50000L));
 			publicKeyProvider.storeCertificate(cert, new File(HelperEnvInfo.getOsTempDirectory(), "test.cer"));
 			cert = publicKeyProvider.getCertificate(new File(HelperEnvInfo.getOsTempDirectory(), "test.cer"));
 //			System.out.println(HelperGeneral.toString(cert));

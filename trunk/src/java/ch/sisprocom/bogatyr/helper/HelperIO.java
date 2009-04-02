@@ -58,7 +58,7 @@ import java.util.Scanner;
  * @version 20090122
  */
 public abstract class HelperIO {
-	private final static byte[] BUFFER = new byte[1024];
+	private static final byte[] BUFFER = new byte[1024];
 //	private static final int BUFFER = 1024;
 	
 	/**
@@ -92,7 +92,7 @@ public abstract class HelperIO {
      * @return ArrayList containing the path to the matched files
      * @throws IOException
      */	
-	public static List<File> getFiles(final File path, final String[] identifier, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) throws IOException {
+	public static Iterable<File> getFiles(final File path, final String[] identifier, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) throws IOException {
 		final List<File> list = new ArrayList<File>();
 
 		if (!path.isDirectory()) {
@@ -113,7 +113,7 @@ public abstract class HelperIO {
      * @return ArrayList containing the path to the matched files
      * @throws IOException
      */	
-	public static List<File> getFiles(final File path, final String[] identifier, final boolean isExclude) throws IOException {
+	public static Iterable<File> getFiles(final File path, final String[] identifier, final boolean isExclude) throws IOException {
 		return getFiles(path, identifier, isExclude, false, true, true, true);
 	}
 

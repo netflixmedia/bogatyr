@@ -46,28 +46,22 @@ public class ControllerTimer extends ControllerTimerAbstract implements IControl
 	 * Implemented methods
 	 */
 
-    public void start(final long interval) {
-        synchronized (this) {
-            start(0, interval);
-        }
+    public synchronized void start(final long interval) {
+        start(0, interval);
     }
 
-    public void start(final long delay, final long interval) {
-        synchronized (this) {
-            timer.cancel();
+    public synchronized void start(final long delay, final long interval) {
+        timer.cancel();
 
-            timer = new Timer();
-            this.interval = interval;
-            timer.schedule(new Task(), delay, interval);
-            fireTimerStarted();
-        }
+        timer = new Timer();
+        this.interval = interval;
+        timer.schedule(new Task(), delay, interval);
+        fireTimerStarted();
     }
 
-    public void stop() {
-        synchronized (this) {
-            timer.cancel();
-            fireTimerStopped();
-        }
+    public synchronized void stop() {
+        timer.cancel();
+        fireTimerStopped();
     }
 	
 	

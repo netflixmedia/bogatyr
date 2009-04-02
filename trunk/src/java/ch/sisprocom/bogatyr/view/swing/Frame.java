@@ -31,17 +31,17 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.GraphicsConfiguration;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
 import java.awt.Image;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
@@ -91,7 +91,7 @@ public class Frame extends JFrame {
 	}
 	
 	public void setFading(final boolean isFading) {
-		final JPanel panelGlass = (JPanel) getGlassPane();
+		final Container panelGlass = (JPanel) getGlassPane();
 		panelGlass.removeAll();
 		
 		if (isFading) {

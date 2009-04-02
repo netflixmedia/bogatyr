@@ -89,11 +89,11 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 //		return obj;
 //	}
 	
-	public static <T> T newInstance(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public static <T> Object newInstance(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		return newInstance(clazz, new Class[0], new Object[0]);
 	}
 
-	public static <T> T newInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public static <T> Object newInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		return clazz.getConstructor(paramClazzes).newInstance(params);
 	}
 
@@ -112,7 +112,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param arg String to check
      * @return true/false
      */	
-	public static boolean isValidString(final String arg) {
+	public static boolean isValidString(final CharSequence arg) {
         return !(!isValidObject(arg) || 0 == arg.length());
     }
 
@@ -122,7 +122,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param arg String to check
      * @return true/false
      */	
-	public static boolean isStringNumeric(final String arg) {
+	public static boolean isStringNumeric(final CharSequence arg) {
 		if (isValidString(arg)) {
 			final Pattern p = Pattern.compile("[0-9.]+"); //$NON-NLS-1$
 			final Matcher m = p.matcher(arg);
@@ -180,7 +180,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param arg object to check
      * @return true/false
      */	
-	public static <T> boolean isValidObject(final T arg) {
+	public static boolean isValidObject(final Object arg) {
         return arg != null;
     }
 
@@ -190,7 +190,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param arg object array to check
      * @return true/false
      */	
-	public static <T> boolean isValidArray(final T[] arg) {
+	public static boolean isValidArray(final Object[] arg) {
         return !(!isValidObject(arg) || 0 == arg.length);
     }
 
@@ -214,7 +214,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @see ByteArrayOutputStream
 	 * @see ObjectOutputStream
 	 */
-	public static <T> byte[] getBytesFromObject(final T obj) throws IOException {
+	public static byte[] getBytesFromObject(final Object obj) throws IOException {
 		byte[] data = null;
 		
 		if (obj != null) {
@@ -346,7 +346,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return generated hash value
      * @throws NoSuchAlgorithmException
      */
-    public static <T> String getHashCode(final String algo, final T data) throws NoSuchAlgorithmException {
+    public static Object getHashCode(final String algo, final Object data) throws NoSuchAlgorithmException {
     	final MessageDigest algorithm = MessageDigest.getInstance(algo);
 		final byte[] input = toString(data).getBytes();
 
@@ -373,7 +373,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return generated hash value
      * @throws NoSuchAlgorithmException
      */
-    public static <T> String getHashCode(final T data) throws NoSuchAlgorithmException {
+    public static Object getHashCode(final Object data) throws NoSuchAlgorithmException {
     	return getHashCode(HASHCODE_ALGORITHM_SHA256, data);
     }
 
@@ -385,7 +385,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param seed for the string (e.g. "1,2...0,A,B...Z)
      * @return generated unique String
      */
-    public static String getRandomKey(final int digits, final char[] seed) {
+    public static Object getRandomKey(final int digits, final char[] seed) {
 		final StringBuilder sb = new StringBuilder();
 
         for (int ii = 0; ii < digits; ii++) {
@@ -401,7 +401,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param digits length of result string
      * @return generated unique String.
      */
-    public static String getRandomKey(final int digits) {
+    public static Object getRandomKey(final int digits) {
     	return getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
     }
     
@@ -412,7 +412,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param fillLength length of the filled string 
      * @return filled string
      */
-    public static String fillString(final char fillChar, final int fillLength) {
+    public static CharSequence fillString(final char fillChar, final int fillLength) {
         int length = fillLength;
     	final char[] chars = new char[length];
         
@@ -429,7 +429,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param input string
      * @return reversed string
      */
-    public static String reverseString(final String input) {
+    public static Object reverseString(final String input) {
     	return new StringBuffer(input).reverse().toString();
     }
 
@@ -488,18 +488,18 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param array for dump
      * @return dump string
      */
-    public static <T> String dump(final T[] array) {
+    public static String dump(final Object[] array) {
 		final StringBuilder sb = new StringBuilder();
 
-		for (final T value : array) {
+		for (final Object value : array) {
             sb.append(value);
             sb.append(getLS());
         }
 		return sb.toString();
     }
 
-    public static <T> String toString(final T object) {
-    	final List<String> list = new ArrayList<String>();
+    public static String toString(final Object object) {
+    	final Collection<String> list = new ArrayList<String>();
     	toString(object, list);
 
     	return object.getClass().getName() + list.toString();
@@ -509,7 +509,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     /*
      * Private methods
      */
-    private static <T> void toString(final T object, final List<String> list) {
+    private static void toString(final Object object, final Collection<String> list) {
     	final Field[] fields = object.getClass().getDeclaredFields();
     	AccessibleObject.setAccessible(fields, true);
 

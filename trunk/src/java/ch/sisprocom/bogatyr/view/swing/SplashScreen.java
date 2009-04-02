@@ -31,13 +31,13 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import javax.swing.ImageIcon;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.swing.ImageIcon;
 
 
 /**
@@ -90,7 +90,7 @@ public class SplashScreen extends Frame { //TODO document in Wiki!
 	private void createLayout() {
         if (splash != null && MediaTracker.COMPLETE == splash.getImageLoadStatus()) {
 			
-			final Label label = new Label(splash);
+			final Component label = new Label(splash);
 //			splash.setImageObserver(label);
 			
 			getContentPane().add(label);

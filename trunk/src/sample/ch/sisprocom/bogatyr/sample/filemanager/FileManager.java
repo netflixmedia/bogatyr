@@ -31,14 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.sample.filemanager;
 
-import java.io.File;
-import java.io.IOException;
-
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
 import ch.sisprocom.bogatyr.controller.property.ControllerProperty;
 import ch.sisprocom.bogatyr.controller.property.IControllerProperty;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.HelperIO;
+
+import java.io.File;
+import java.io.IOException;
 
 
 /**
@@ -49,9 +49,9 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
  */
 public class FileManager extends ApplicationAbstract { //TODO document in Wiki!
 	// Resources
-	private final static String	PROPERTY_PATH        = "FileManager.path"; //$NON-NLS-1$
-	private final static String	PROPERTY_IDENTIFIER  = "FileManager.identifier"; //$NON-NLS-1$
-	private final static String	PROPERTY_DELETE      = "FileManager.delete"; //$NON-NLS-1$
+	private static final String	PROPERTY_PATH        = "FileManager.path"; //$NON-NLS-1$
+	private static final String	PROPERTY_IDENTIFIER  = "FileManager.identifier"; //$NON-NLS-1$
+	private static final String	PROPERTY_DELETE      = "FileManager.delete"; //$NON-NLS-1$
 
 	private File path; 
 	private String[] identifier;
