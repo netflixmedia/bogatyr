@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.control;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 
@@ -41,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
  * This control displays an URL in the default system webbrowser.
  *
  * @author Stefan Laubenberger
- * @version 20090304
+ * @version 20090401
  */
 public abstract class ControlBrowser {
 	
@@ -57,9 +58,10 @@ public abstract class ControlBrowser {
 	 * Display an url in the browser.
 	 *
 	 * @param url for the browser
-     * @throws Exception
+	 * @throws IOException 
+	 * @throws InterruptedException 
 	 */
-	public static void display(final URL url) throws Exception {
+	public static void display(final URL url) throws IOException, InterruptedException {
 		final String urlString = url.toExternalForm();
 		String cmd;
 				

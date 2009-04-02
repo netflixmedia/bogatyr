@@ -29,23 +29,24 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.service.persistence;
+package ch.sisprocom.bogatyr.service.provider;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is the skeleton for sql database connections.
+ * This class provides functions to connect and execute statements on SQL-Server.
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090331
+ * @version 20090402
  */
-public abstract class ProviderSqlAbstract { //TODO document in Wiki!
+public class ProviderSql  implements IProviderSql { //TODO document in Wiki!
 //	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
 	
 	// Server
@@ -55,7 +56,7 @@ public abstract class ProviderSqlAbstract { //TODO document in Wiki!
 	private String password;
 	
 	
-	protected ProviderSqlAbstract(final String driver, final String url, final String user, final String password) {
+	protected ProviderSql(final String driver, final String url, final String user, final String password) {
         super();
         this.driver = driver;
         this.url = url;
@@ -94,14 +95,30 @@ public abstract class ProviderSqlAbstract { //TODO document in Wiki!
 	public void setPassword(final String password) {
 		this.password = password;
 	}
-
+ 	
+	
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperGeneral.toString(this);
+	}
+	
+	
+	/*
+	 * Implemented methods
+	 */	
 	/**
 	 * Connects to a database
      *
 	 * @return Connection
-     * @throws Exception
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws SQLException 
 	 */
-    protected Connection connectToDb() throws Exception {		
+    public Connection connectToDb() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {		
 		Class.forName(driver).newInstance();
 		return DriverManager.getConnection(url, user, password);
 	}
@@ -111,9 +128,12 @@ public abstract class ProviderSqlAbstract { //TODO document in Wiki!
      *
 	 * @param statement
      * @return SQL-Code
-     * @throws Exception
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-    protected int executeUpdate(final String statement) throws Exception {
+    public int executeUpdate(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
         Statement stmt = null;
         Connection con = null;
         final int result;
@@ -141,9 +161,12 @@ public abstract class ProviderSqlAbstract { //TODO document in Wiki!
      *
 	 * @param statement
      * @return true/false
-     * @throws Exception
+     * @throws SQLException 
+     * @throws ClassNotFoundException 
+     * @throws IllegalAccessException 
+     * @throws InstantiationException 
 	 */
-    protected boolean execute(final String statement) throws Exception {
+    public boolean execute(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException  {
         Statement stmt = null;
         Connection con = null;
         final boolean result;
@@ -164,14 +187,5 @@ public abstract class ProviderSqlAbstract { //TODO document in Wiki!
             }
 		}
 		return result;
-    }   
-	
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
-	}
+    }  
 }

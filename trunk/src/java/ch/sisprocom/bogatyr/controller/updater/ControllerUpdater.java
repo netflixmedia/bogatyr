@@ -35,14 +35,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
@@ -53,7 +56,7 @@ import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
  * This is the updater controller for new Bogatyr-based applications versions.
  * 
  * @author Stefan Laubenberger
- * @version 20090305
+ * @version 20090401
  */
 public class ControllerUpdater implements IControllerUpdater, ListenerUpdater { //TODO document in Wiki!
 	private List<ListenerUpdater> listListener = new ArrayList<ListenerUpdater>();
@@ -73,7 +76,7 @@ public class ControllerUpdater implements IControllerUpdater, ListenerUpdater { 
     /*
       * Checks the update XML file for new versions an update the application if needed.
       */
-    public void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws Exception {
+    public void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws MalformedURLException, IOException, ParserConfigurationException, SAXException  {
         synchronized (this) {
 //		if (updateLocation != null) {
             final File file = new File(updateLocation);

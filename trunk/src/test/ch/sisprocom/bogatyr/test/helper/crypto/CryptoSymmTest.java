@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -41,6 +41,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.crypto.CryptoSymm;
+import ch.sisprocom.bogatyr.helper.crypto.ICryptoSymm;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 
@@ -48,82 +49,82 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20090402
  */
 public class CryptoSymmTest {
 	private static final int KEYSIZE = 128;
 	
 	private SecretKey secretKey;
-	 
+	private ICryptoSymm cryptoSymm = new CryptoSymm();
 	
 	@Before
 	public void setUp() throws Exception {
-        secretKey = CryptoSymm.generateKey(KEYSIZE);
+        secretKey = cryptoSymm.generateKey(KEYSIZE);
 	}
 
 	@Test
 	public void testGenerateKey() {
 		try {
-			CryptoSymm.generateKey(0);
+			cryptoSymm.generateKey(0);
 			fail("keysize is 0");
 		} catch (Exception ex) {}
 
 		try {
-			CryptoSymm.generateKey(-1024);
+			cryptoSymm.generateKey(-1024);
 			fail("keysize is -1024");
 		} catch (Exception ex) {}
 
 		try {
-			assertNotNull(CryptoSymm.generateKey(KEYSIZE));
+			assertNotNull(cryptoSymm.generateKey(KEYSIZE));
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
 	@Test
 	public void testEncrypt() {
 		try {
-			CryptoSymm.encrypt(null, null);
+			cryptoSymm.encrypt(null, null);
 			fail("input is null");
 		} catch (Exception ex) {}
 
 		try {
-			CryptoSymm.encrypt(new byte[0], null);
+			cryptoSymm.encrypt(new byte[0], null);
 			fail("input is empty");
 		} catch (Exception ex) {}
 		
 		try {
-			CryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), null);
+			cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), null);
 			fail("key is null");
 		} catch (Exception ex) {}
 		
 		try {
-			assertNotNull(CryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKey));
+			assertNotNull(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKey));
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
 	}
 	
 	@Test
 	public void testDecrypt() {
 		try {
-			CryptoSymm.decrypt(null, null);
+			cryptoSymm.decrypt(null, null);
 			fail("input is null");
 		} catch (Exception ex) {}
 
 		try {
-			CryptoSymm.decrypt(new byte[0], null);
+			cryptoSymm.decrypt(new byte[0], null);
 			fail("input is empty");
 		} catch (Exception ex) {}
 		
 		try {
-			CryptoSymm.decrypt(AllBogatyrTests.DATA.getBytes(), null);
+			cryptoSymm.decrypt(AllBogatyrTests.DATA.getBytes(), null);
 			fail("key is null");
 		} catch (Exception ex) {}
 		
 		try {
-			CryptoSymm.decrypt(AllBogatyrTests.DATA.getBytes(), secretKey);
+			cryptoSymm.decrypt(AllBogatyrTests.DATA.getBytes(), secretKey);
 			fail("keysize is 0");
 		} catch (Exception ex) {}		
 
 		try {
-			assertEquals(AllBogatyrTests.DATA, new String(CryptoSymm.decrypt(CryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKey), secretKey)));
+			assertEquals(AllBogatyrTests.DATA, new String(cryptoSymm.decrypt(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKey), secretKey)));
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 }

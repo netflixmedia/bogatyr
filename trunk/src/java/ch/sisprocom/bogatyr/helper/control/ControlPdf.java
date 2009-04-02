@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -33,6 +33,8 @@ package ch.sisprocom.bogatyr.helper.control;
 
 import java.io.DataInputStream;
 import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
 
@@ -43,7 +45,7 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
  * This control opens PDF data with the default system pdf-viewer (e.g. Acrobat Reader).
  *
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090401
  */
 public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
@@ -56,9 +58,10 @@ public abstract class ControlPdf {
 	 * Show a PDF (provided as a byte[]) with PDF viewer.
 	 * 
 	 * @param pdfContent PDF content as byte array
-     * @throws Exception
+	 * @throws IOException 
+	 * @throws InterruptedException 
 	 */
-	public static void open(final byte[] pdfContent) throws Exception {
+	public static void open(final byte[] pdfContent) throws IOException, InterruptedException {
 		// first store the pdfFileContents to a temporary file
 		final File temporaryFile = HelperIO.getTemporaryFile("temp", PDF_EXTENSION);
 		HelperIO.writeFileFromBinary(temporaryFile, pdfContent, false);
@@ -69,9 +72,11 @@ public abstract class ControlPdf {
 	 * Show a PDF (provided as {@link File}) with PDF viewer.
 	 * 
 	 * @param pdfFile PDF content as file
-     * @throws Exception
+	 * @throws InterruptedException 
+	 * @throws IOException 
+	 * @throws MalformedURLException 
 	 */
-	public static void open(final File pdfFile) throws Exception {
+	public static void open(final File pdfFile) throws MalformedURLException, IOException, InterruptedException {
 		execute(pdfFile.getCanonicalPath());
 	}
 	
@@ -79,9 +84,9 @@ public abstract class ControlPdf {
 	 * Show a PDF (provided as stream) with PDF viewer.
 	 * 
 	 * @param pdfStream PDF content as stream
-     * @throws Exception
+	 * @throws IOException 
 	 */
-	public static void open(final DataInputStream pdfStream) throws Exception {
+	public static void open(final DataInputStream pdfStream) throws IOException, Exception {
 		open(HelperIO.readStream(pdfStream));
 	}
 	
@@ -89,7 +94,7 @@ public abstract class ControlPdf {
 	/*
 	 * Private methods
 	 */
-	private static void execute(final String path) throws Exception {
+	private static void execute(final String path) throws MalformedURLException, IOException, InterruptedException {
 		final String viewerPath;
 		if (HelperEnvInfo.isWindowsPlatform()) {
 			viewerPath = WINDOWS_PDF_VIEWER_PATH;

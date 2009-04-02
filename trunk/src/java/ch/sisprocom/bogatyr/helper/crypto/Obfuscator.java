@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -37,51 +37,28 @@ package ch.sisprocom.bogatyr.helper.crypto;
  * This is a class for obfuscating data.
  * 
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090402
  */
-public abstract class Obfuscator {
+public class Obfuscator implements IObfuscator {
 	private static final byte DEFAULT_PATTERN = Byte.MAX_VALUE;
 
-	/**
-	 * Obfuscate the data.
-	 * 
-	 * @param input The data to obfuscate as a byte-array
-	 * @return Return the obfuscated byte-array 
+	
+	/*
+	 * Implemented methods
 	 */
-	public static byte[] encrypt(final byte[] input) {
+	public byte[] encrypt(final byte[] input) {
 		return obfuscate(input, DEFAULT_PATTERN);
 	}
 
-	/**
-	 * Obfuscate the data.
-	 * 
-	 * @param input The data to obfuscate as a byte-array
-	 * @param pattern for obfuscating (region: -128 - 127)
-	 * @return Return the obfuscated byte-array 
-	 */
-	public static byte[] encrypt(final byte[] input, final byte pattern) {
+	public byte[] encrypt(final byte[] input, final byte pattern) {
 		return obfuscate(input, pattern);
 	}
 
-	/**
-	 * Unobfuscate the data.
-	 * 
-	 * @param input The obfuscated data as a byte-array
-	 * @return Return the unobfuscated byte-array
-	 */
-	public static byte[] decrypt(final byte[] input) {
+	public byte[] decrypt(final byte[] input) {
 		return obfuscate(input, DEFAULT_PATTERN);
 	}
 
-	
-	/**
-	 * Unobfuscate the data.
-	 * 
-	 * @param input The obfuscated data as a byte-array
-	 * @param pattern for unobfuscating (region: -128 - 127)
-	 * @return Return the unobfuscated byte-array
-	 */
-	public static byte[] decrypt(final byte[] input, final byte pattern) {
+	public byte[] decrypt(final byte[] input, final byte pattern) {
 		return obfuscate(input, pattern);
 	}
 
@@ -96,7 +73,7 @@ public abstract class Obfuscator {
      * @param pattern for unobfuscating (region: -128 - 127)
      * @return the obfuscated data
 	 */
-	private static byte[] obfuscate(final byte[] input, final byte pattern) {
+	private byte[] obfuscate(final byte[] input, final byte pattern) {
 		final byte[] result = new byte[input.length];
 		
 		for (int ii = 0; ii < input.length; ii++ ) {

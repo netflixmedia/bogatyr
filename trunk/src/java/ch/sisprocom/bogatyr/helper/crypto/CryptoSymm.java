@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,14 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.crypto;
 
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Security;
 import java.security.spec.AlgorithmParameterSpec;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
@@ -48,25 +53,17 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
  * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090402
  */
-public abstract class CryptoSymm {
+public class CryptoSymm implements ICryptoSymm {
 	public static final String ALGORITHM = "AES"; //$NON-NLS-1$
 	public static final String XFORM     = "AES/CBC/PKCS5Padding"; //$NON-NLS-1$
 
 	
-	/**
-	 * Generates a key. Sets the intern attribute key to the generated key.
-	 * With this generated key, you can encrypt and decrypt Byte-Arrays.
-	 * 
-	 * @param keysize Size of the key in bits (must be 128, 192 or 256)
-	 * @throws NoSuchAlgorithmException
-	 * @throws NoSuchProviderException 
-     * @return generated secret key
-	 * @see #encrypt(byte[], Key)
-	 * @see #decrypt(byte[], Key)
+	/*
+	 * Implemented methods
 	 */
-	public static SecretKey generateKey(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
+	public SecretKey generateKey(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 
 		// Generate a key
@@ -76,32 +73,14 @@ public abstract class CryptoSymm {
 		return kg.generateKey();
 	}
 	
-	/**
-	 * Encrypt the data with a given {@link Key}.
-	 * 
-	 * @param input data to encrypt as a byte-array
-	 * @param key for the encryption
-	 * @return Return the encrypted byte-array 
-	 * @throws Exception 
-	 * @see Key
-	 */
-	public static byte[] encrypt(final byte[] input, final Key key) throws Exception {
+	public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
 
 		return cipher.doFinal(input);
 	}
 
-	/**
-	 * Decrypt the data with a given {@link Key}.
-	 * 
-	 * @param input encrypted data as a byte-array
-	 * @param key for the decryption
-	 * @return Return the decrypted byte-array
-	 * @throws Exception
-	 * @see Key
-	 */
-	public static byte[] decrypt(final byte[] input, final Key key) throws Exception {
+	public byte[] decrypt(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
 
@@ -112,7 +91,7 @@ public abstract class CryptoSymm {
 	/*
 	 * Private methods
 	 */
-	private static AlgorithmParameterSpec prepareIv() {
+	private AlgorithmParameterSpec prepareIv() {
 		final int elements = 16;
         final byte[] ivBytes = new byte[elements];
         
