@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,11 +29,14 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper;
+package ch.sisprocom.bogatyr.service.provider;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperXml;
 
 import com.ibm.mq.MQEnvironment;
 import com.ibm.mq.MQException;
@@ -46,14 +49,14 @@ import com.ibm.mqbind.MQC;
 
 
 /**
- * Allows a connection to an IBM MQ-Server. It allows to send and receive messages.
+ * This class connects to an IBM MQ-Server and allows to send and receive messages.
  * 
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20090402
  */
-public class MqConnector { //TODO document in Wiki!
+public class ProviderMq implements IProviderMq { //TODO document in Wiki!
 
-	public MqConnector(final String hostname, final int port, final String channel) {
+	public ProviderMq(final String hostname, final int port, final String channel) {
         super();
         // set up MQ environment
         MQEnvironment.hostname = hostname;
@@ -85,18 +88,20 @@ public class MqConnector { //TODO document in Wiki!
 		MQEnvironment.channel = channel;
 	}
 
-    /**
-     * Sends a message to a mq manager and queue.
-     *
-     * @param data       to send
-     * @param managerOut manager for sending
-     * @param queueOut   queue for sending
-     * @param managerIn  manager for receiving
-     * @param queueIn    queue for receiving
-     * @throws IOException
-     * @throws MQException
+	
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperGeneral.toString(this);
+	}
+	
+	
+    /*
+     * Implemented methods
      */
-    public void sendMessage(final byte[] data, final String managerOut, final String queueOut, final String managerIn, final String queueIn) throws IOException, MQException {
+	public void sendMessage(final byte[] data, final String managerOut, final String queueOut, final String managerIn, final String queueIn) throws IOException, MQException {
         synchronized (this) {
 
             // Create a connection to the queue manager
@@ -131,15 +136,6 @@ public class MqConnector { //TODO document in Wiki!
         }
     }
 
-    /**
-     * Receives messages from a mq manager and queue.
-     *
-     * @param managerIn manager for receiving
-     * @param queueIn   queue for receiving
-     * @return list containing all messages
-     * @throws MQException
-     * @throws IOException
-     */
     public List<byte[]> receiveMessages(final String managerIn, final String queueIn) throws MQException, IOException {
         synchronized (this) {
 
@@ -201,13 +197,4 @@ public class MqConnector { //TODO document in Wiki!
             return list;
         }
     }
-	
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
-	}
 }

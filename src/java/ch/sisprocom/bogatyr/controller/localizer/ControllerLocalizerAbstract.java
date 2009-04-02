@@ -46,6 +46,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public abstract class ControllerLocalizerAbstract implements IControllerLocalizer { //TODO document in Wiki!
 	private List<ListenerLocale> listListener = new ArrayList<ListenerLocale>();
 
+	
+	/*
+	 * Implemented methods
+	 */
     public void addListener(final ListenerLocale listener) {
         synchronized (this) {
             listListener.add(listener);

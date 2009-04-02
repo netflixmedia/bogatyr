@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -43,6 +43,7 @@ import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
+import ch.sisprocom.bogatyr.helper.crypto.IPublicKeyProvider;
 import ch.sisprocom.bogatyr.helper.crypto.PublicKeyProvider;
 
 
@@ -53,17 +54,19 @@ import ch.sisprocom.bogatyr.helper.crypto.PublicKeyProvider;
  * @version 20090310
  */
 public class PublicKeyProviderTest {
+	private IPublicKeyProvider publicKeyProvider = new PublicKeyProvider();
+	
 	@Test
 	public void testGenerateCertificate() {
 		KeyPair kp = null;
 		try {
-			kp = CryptoAsymm.generateKeys(512);
+			kp = new CryptoAsymm().generateKeys(512);
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
 		
 		try {
-			X509Certificate cert = PublicKeyProvider.generateCertificate(kp, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(System.currentTimeMillis() - 50000), new Date(System.currentTimeMillis() + 50000));
-			PublicKeyProvider.storeCertificate(cert, new File(HelperEnvInfo.getOsTempDirectory(), "test.cer"));
-			cert = PublicKeyProvider.getCertificate(new File(HelperEnvInfo.getOsTempDirectory(), "test.cer"));
+			X509Certificate cert = publicKeyProvider.generateCertificate(kp, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(System.currentTimeMillis() - 50000), new Date(System.currentTimeMillis() + 50000));
+			publicKeyProvider.storeCertificate(cert, new File(HelperEnvInfo.getOsTempDirectory(), "test.cer"));
+			cert = publicKeyProvider.getCertificate(new File(HelperEnvInfo.getOsTempDirectory(), "test.cer"));
 //			System.out.println(HelperGeneral.toString(cert));
 //			System.out.println(cert.getIssuerDN());
 //			System.out.println(cert.getSubjectDN());

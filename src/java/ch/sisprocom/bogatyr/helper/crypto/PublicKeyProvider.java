@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -68,19 +68,15 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
  * This class generates, reads and save X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090402
  */
-public abstract class PublicKeyProvider {
-	/**
-     * Get the certificate out of the given certificate file.
-     * 
-     * @param file containing the certificate
-     * @return X509Certificate the certificate
-     * @throws CertificateException e
-     * @throws NoSuchProviderException e
-     * @throws IOException e
-     */
-    public static X509Certificate getCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException {
+public class PublicKeyProvider implements IPublicKeyProvider {
+
+	
+	/*
+	 * Implemented methods
+	 */
+    public X509Certificate getCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException {
         final FileInputStream fis = new FileInputStream(file);
         BufferedInputStream bis = null;
         final X509Certificate cert;
@@ -96,16 +92,7 @@ public abstract class PublicKeyProvider {
         return cert;
     }
 
-    /**
-     * Get the certificate out of the given certificate stream.
-     * 
-     * @param is input stream containing the certificate
-     * @return X509Certificate the certificate
-     * @throws CertificateException e
-     * @throws NoSuchProviderException e
-     * @throws IOException e
-     */
-    public static X509Certificate getCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {    
+    public X509Certificate getCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {    
 		final X509Certificate cert;
 		
     	try {
@@ -122,46 +109,15 @@ public abstract class PublicKeyProvider {
 		return cert;
     }
     
-    /**
-     * Store the certificate on a stream.
-     * 
-     * @param cert certificate
-     * @param os output stream for the certificate
-     * @throws IOException 
-     * @throws CertificateEncodingException 
-     */
-    public static void storeCertificate(final Certificate cert, final OutputStream os) throws CertificateEncodingException, IOException {
+    public void storeCertificate(final Certificate cert, final OutputStream os) throws CertificateEncodingException, IOException {
     	HelperIO.writeStream(os, cert.getEncoded());
     }
     
-    /**
-     * Store the certificate in a file.
-     * 
-     * @param cert certificate
-     * @param file for the certificate
-     * @throws IOException 
-     * @throws CertificateEncodingException 
-     */
-    public static void storeCertificate(final Certificate cert, final File file) throws CertificateEncodingException, IOException {
+    public void storeCertificate(final Certificate cert, final File file) throws CertificateEncodingException, IOException {
 		HelperIO.writeFileFromBinary(file, cert.getEncoded(), false);
     }
 
-    /**
-     * Generate a public key certificate out of the given keypair.
-     * 
-     * @param pair the keypair for the certificate
-     * @param issuerDN (e.g. "CN=Test Certificate")
-     * @param subjectDN (e.g. "CN=Test Certificate")
-     * @param generalName of the certificate owner (e.g. laubenberger@gmail.com)
-     * @param start date of the certificate
-     * @param end date of the certificate
-     * @return X509Certificate the certificate
-     * @throws SignatureException 
-     * @throws SecurityException 
-     * @throws NoSuchProviderException 
-     * @throws InvalidKeyException 
-     */
-    public static X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {
+    public X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {
 	    // generate the certificate
 		final X509V3CertificateGenerator certGen = new X509V3CertificateGenerator();
 	

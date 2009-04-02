@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.crypto;
 
+import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
@@ -39,7 +40,10 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Security;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -49,26 +53,18 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a class for asymmetric cryptology via RSA.
  * 
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090402
  */
-public abstract class CryptoAsymm {
+public class CryptoAsymm implements ICryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
 	public static final String XFORM     = "RSA/NONE/PKCS1PADDING"; //$NON-NLS-1$
 //	public static final String XFORM     = "RSA/NONE/NoPadding"; //$NON-NLS-1$
 
 	
-	/**
-	 * Generates a public and a private KeyPair with the Class
-	 * KeyPairGenerator and saves it to the internal attributes.
-	 * 
-	 * @param keysize Size of the key in bits (modulo 16 = 0, e.g. 1024, 2048)
-	 * @throws NoSuchAlgorithmException
-	 * @throws NoSuchProviderException 
-     * @return generated key pair
-	 * @see KeyPair
-	 * @see KeyPairGenerator
+	/*
+	 * Implemented methods
 	 */
-	public static KeyPair generateKeys(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
+	public KeyPair generateKeys(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 
 		// Generate a key-pair
@@ -78,17 +74,7 @@ public abstract class CryptoAsymm {
 		return kpg.generateKeyPair();
 	}
 
-	/**
-	 * Encrypt the data with a given {@link PublicKey}.
-	 * 
-	 * @param input The data to encrypt as a byte-array
-	 * @param key {@link PublicKey} for the encryption
-	 * @param keysize Size of the key in bits (modulo 16 = 0, e.g. 1024, 2048)
-     * @return Return the encrypted byte-array
-	 * @throws Exception
-	 * @see PublicKey
-	 */
-    public static byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws Exception {
+    public byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
 		final int space = keysize/8 - 11;
 		byte[] result = null;
 		final byte[] temp = new byte[space];
@@ -121,16 +107,7 @@ public abstract class CryptoAsymm {
 		return result;
 	}
 
-	/**
-	 * Decrypt the data.
-	 * 
-	 * @param input The encrypted data as a byte-array
-	 * @param key {@link PrivateKey} for the decryption
-	 * @param keysize of the key in bits (modulo 16 = 0, e.g. 1024, 2048)
-     * @return Return the decrypted byte-array
-	 * @throws Exception
-	 */
-	public static byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws Exception {
+	public byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 		final int space = keysize/8;
 		byte[] result = null;
 		final byte[] temp = new byte[space];
@@ -164,9 +141,14 @@ public abstract class CryptoAsymm {
 	 * @param input data to encrypt as a byte-array
 	 * @param key {@link PublicKey} for the encryption
 	 * @return Return the encrypted byte-array 
-	 * @throws Exception
+	 * @throws InvalidKeyException 
+	 * @throws BadPaddingException 
+	 * @throws IllegalBlockSizeException 
+	 * @throws NoSuchPaddingException 
+	 * @throws NoSuchProviderException 
+	 * @throws NoSuchAlgorithmException 
 	 */
-	private static byte[] encryptInternal(final byte[] input, final PublicKey key) throws Exception {
+	private byte[] encryptInternal(final byte[] input, final PublicKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.ENCRYPT_MODE, key);
 
@@ -179,9 +161,14 @@ public abstract class CryptoAsymm {
 	 * @param input encrypted data as a byte-array
 	 * @param key {@link PrivateKey} for the decryption
 	 * @return Return the decrypted byte-array
-	 * @throws Exception
+	 * @throws NoSuchPaddingException 
+	 * @throws NoSuchProviderException 
+	 * @throws NoSuchAlgorithmException 
+	 * @throws InvalidKeyException 
+	 * @throws BadPaddingException 
+	 * @throws IllegalBlockSizeException 
 	 */
-	private static byte[] decryptInternal(final byte[] input, final PrivateKey key) throws Exception {
+	private byte[] decryptInternal(final byte[] input, final PrivateKey key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.DECRYPT_MODE, key);
 
