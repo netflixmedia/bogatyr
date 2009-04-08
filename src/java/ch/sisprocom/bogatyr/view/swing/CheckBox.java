@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JCheckBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090318
+ * @version 20090407
  */
 public class CheckBox extends JCheckBox {
 	private static final long serialVersionUID = -6439735629199643683L;
@@ -50,6 +50,12 @@ public class CheckBox extends JCheckBox {
 	public CheckBox() {
 		super();
 	}	
+	
+	public CheckBox(final boolean isSelected) {
+		super();
+		
+		setSelected(isSelected);
+	}
 	
 	public CheckBox(final boolean isSelected, final Action action) {
 		super(action);
