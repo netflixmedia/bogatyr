@@ -43,7 +43,7 @@ import java.awt.event.ActionListener;
  * This is an extended JCheckBoxMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 20090309
+ * @version 20090407
  */
 public class MenuItemCheckBox extends JCheckBoxMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
@@ -52,6 +52,12 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 	public MenuItemCheckBox() {
 		super();
     }
+	
+	public MenuItemCheckBox(final boolean isSelected) {
+		super();
+		
+		setSelected(isSelected);
+	}
 	
 	public MenuItemCheckBox(final boolean isSelected, final Action action) {
 		super(action);

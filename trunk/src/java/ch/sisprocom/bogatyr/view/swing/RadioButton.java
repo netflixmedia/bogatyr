@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JRadioButton.
  * 
  * @author Stefan Laubenberger
- * @version 20090318
+ * @version 20090407
  */
 public class RadioButton extends JRadioButton {
 	private static final long serialVersionUID = 8676540667794440059L;
@@ -49,6 +49,12 @@ public class RadioButton extends JRadioButton {
 
 	public RadioButton() {
 		super();
+	}
+	
+	public RadioButton(final boolean isSelected) {
+		super();
+		
+		setSelected(isSelected);
 	}
 	
 	public RadioButton(final boolean isSelected, final Action action) {

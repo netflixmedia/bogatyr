@@ -43,7 +43,7 @@ import java.awt.event.ActionListener;
  * This is an extended JRadioButtonMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 20090318
+ * @version 20090407
  */
 public class MenuItemRadioButton extends JRadioButtonMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
@@ -52,6 +52,12 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 	public MenuItemRadioButton() {
 		super();
     }
+	
+	public MenuItemRadioButton(final boolean isSelected) {
+		super();
+		
+		setSelected(isSelected);
+	}
 	
 	public MenuItemRadioButton(final boolean isSelected, final Action action) {
 		super(action);
