@@ -39,11 +39,18 @@ import ch.sisprocom.bogatyr.view.swing.TextField;
  * This is an combined Label with a TextField.
  * 
  * @author Stefan Laubenberger
- * @version 20090310
+ * @version 20090414
  */
 public class LabeledTextField extends LabeledComponent { //TODO document in Wiki!
 	private static final long serialVersionUID = 1310593497620798003L;
 	
+	public LabeledTextField(final String labelText, final String toolTip, final String text) {
+		this(labelText, toolTip, text, Integer.MAX_VALUE);
+	}
+
+	public LabeledTextField(final String title, final String labelText, final String toolTip, final String text) {
+		this(title, labelText, toolTip, text, Integer.MAX_VALUE);
+	}
 	
 	public LabeledTextField(final String labelText, final String toolTip, final String text, final int columns) {
 		super(labelText, toolTip, new TextField(text, toolTip, columns));

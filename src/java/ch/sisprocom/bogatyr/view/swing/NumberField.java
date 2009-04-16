@@ -43,17 +43,17 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a NumberField, similar to TextField, but only numeric characters are allowed.
  * 
  * @author Stefan Laubenberger
- * @version 20090310
+ * @version 20090414
  */
 public class NumberField extends TextField {//TODO improve Document!
 	private static final long serialVersionUID = 4469777330124040925L;
 
 	
 	public NumberField() {
-		super();
+		this(0, "", Integer.MAX_VALUE);
 	}
 	
-	public NumberField(final double number, final int columns, final String toolTip) {
+	public NumberField(final double number, final String toolTip, final int columns) {
 		super(Double.toString(number), toolTip, columns);
 	}
 	
