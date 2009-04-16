@@ -44,14 +44,14 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JTextField.
  * 
  * @author Stefan Laubenberger
- * @version 20090310
+ * @version 20090414
  */
 public class TextField extends JTextField {//TODO improve Document!
 	private static final long serialVersionUID = 866371447844640358L;
 
 	
 	public TextField() {
-        super();
+        this("", "", Integer.MAX_VALUE);
     }
 
 	public TextField(final String text, final String toolTip, final int columns) {
