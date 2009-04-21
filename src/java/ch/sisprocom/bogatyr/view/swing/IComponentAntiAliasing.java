@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,32 +29,29 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
-
-import ch.sisprocom.bogatyr.view.swing.TextArea;
-import ch.sisprocom.bogatyr.view.swing.pane.PaneScroll;
+package ch.sisprocom.bogatyr.view.swing;
 
 
 
 /**
- * This is an combined Label with a TextArea.
+ * Defines the methods for the implementation of anti-aliasing.
  * 
  * @author Stefan Laubenberger
- * @version 20090310
+ * @version 20090421
  */
-public class LabeledTextArea extends LabeledComponent { //TODO document in Wiki!
-	private static final long serialVersionUID = -3385104817739873049L;
-	
-	
-	public LabeledTextArea(final String labelText, final String toolTip, final String text, final int rows, final int columns) {
-		super(labelText, toolTip, new PaneScroll(new TextArea(text, toolTip, rows, columns)));
-	}
+public interface IComponentAntiAliasing {
+	/**
+     * Returns the anti-aliasing state of the component.
+     * 
+     * @return true/false
+     */
+	boolean isAntiAliasing();
+    
+	/**
+     * Sets the anti-aliasing state of the component.
+     * 
+     * @param isEnabled anti-aliasing state
+     */
+    void setAntiAliasing(boolean isEnabled);
+}   
 
-	public LabeledTextArea(final String title, final String toolTip, final String labelText, final String text, final int rows, final int columns) {
-		super(title, labelText, toolTip, new PaneScroll(new TextArea(text, toolTip, rows, columns)));
-	}
-
-	public TextArea getTextArea() {
-		return (TextArea)getComponent();
-	}
-}

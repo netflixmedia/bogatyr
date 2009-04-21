@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -40,9 +40,9 @@ import javax.swing.table.AbstractTableModel;
  * This is an extended AbstractTableModel.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090421
  */
-public class TableModel extends AbstractTableModel { //TODO document in Wiki!
+public class TableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -472247252594891753L;
 	
 	private final String[] columnNames;

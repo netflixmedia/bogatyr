@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,74 +29,41 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
+package ch.sisprocom.bogatyr.view.swing.pane;
 
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionListener;
 
-import javax.swing.Action;
-import javax.swing.Icon;
-import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JTextPane;
+import javax.swing.text.StyledDocument;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.view.swing.IComponentAntiAliasing;
 
 
 /**
- * This is an extended JRadioButtonMenuItem.
+ * This is an extended JTextPane.
  * 
  * @author Stefan Laubenberger
  * @version 20090421
  */
-public class MenuItemRadioButton extends JRadioButtonMenuItem implements IComponentAntiAliasing {
-	private static final long serialVersionUID = -5950690648354816752L;
-
+public class PaneText extends JTextPane implements IComponentAntiAliasing {
+	private static final long serialVersionUID = -3996840505161218721L;
+	
 	private boolean isAntiAliasing = true;
 	
-	
-	public MenuItemRadioButton() {
+
+	public PaneText() {
 		super();
-    }
-	
-	public MenuItemRadioButton(final boolean isSelected) {
-		super();
-		
-		setSelected(isSelected);
 	}
 	
-	public MenuItemRadioButton(final boolean isSelected, final Action action) {
-		super(action);
-		
-		setSelected(isSelected);
+	public PaneText(StyledDocument doc) {
+		super(doc);
 	}
 
-	public MenuItemRadioButton(final String text, final Icon image, final int mnemonic, final String toolTip, final boolean isSelected) {
-		super(text);
-		
-		// Add the optional icon
-		if (image != null) {
-            setIcon(image);
-        }
 
-		// Add the mnemonic key
-		if (0 < mnemonic) {
-			setMnemonic(mnemonic);
-		}
-
-		// Add the optional tool tip text
-		if (toolTip != null) {
-			setToolTipText(toolTip);
-		}
-		setSelected(isSelected);
-    }
-
-	public MenuItemRadioButton(final String text, final Icon image, final int mnemonic, final String toolTip, final boolean isSelected, final ActionListener listener) {
-		this(text, image, mnemonic, toolTip, isSelected);
-		addActionListener(listener);
-    }
-
-	
 	/*
 	 * Overridden methods
 	 */
@@ -127,5 +94,12 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem implements ICompon
 
 	public void setAntiAliasing(final boolean isEnabled) {
 		isAntiAliasing = isEnabled;
-	}
+		isAntiAliasing = isEnabled;
+		final Component[] components = getComponents();
+	    for (final Component component : components) {
+	    	if (component instanceof IComponentAntiAliasing) {
+	    		((IComponentAntiAliasing)component).setAntiAliasing(isEnabled);
+	    	}
+	    }
+	} 
 }

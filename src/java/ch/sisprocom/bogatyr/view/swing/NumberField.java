@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a NumberField, similar to TextField, but only numeric characters are allowed.
  * 
  * @author Stefan Laubenberger
- * @version 20090414
+ * @version 20090421
  */
 public class NumberField extends TextField {//TODO improve Document!
 	private static final long serialVersionUID = 4469777330124040925L;
@@ -82,12 +82,12 @@ public class NumberField extends TextField {//TODO improve Document!
  	      return new NumberDocument();
      }
  
-	@Override
-	public void setToolTipText(final String text) {
-		if (text != null) {
-            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
-        }
-	}
+//	@Override
+//	public void setToolTipText(final String text) {
+//		if (text != null) {
+//            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
+//        }
+//	}
 
 
     /*

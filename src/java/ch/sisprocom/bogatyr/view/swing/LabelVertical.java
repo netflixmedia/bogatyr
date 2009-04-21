@@ -73,7 +73,12 @@ public class LabelVertical extends Panel implements Icon { //TODO document in Wi
 	
 	// Delegate these methods to the Label...
  	public void setText(final String text) {
-        label.setText("<html>" + text + "</html");}  //$NON-NLS-1$//$NON-NLS-2$
+		label.setText(text);
+    }
+ 	
+// 	public void setToolTipText(final String text) {
+//		label.setToolTipText(text);
+//    }
  
 	public String getText() {
 		return label.getText();

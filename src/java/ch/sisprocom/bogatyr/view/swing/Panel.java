@@ -33,10 +33,14 @@ package ch.sisprocom.bogatyr.view.swing;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.LayoutManager;
+import java.awt.RenderingHints;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
@@ -46,10 +50,12 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JPanel.
  * 
  * @author Stefan Laubenberger
- * @version 20090324
+ * @version 20090421
  */
-public class Panel extends JPanel {
+public class Panel extends JPanel implements IComponentAntiAliasing {
 	private static final long serialVersionUID = 3679443739459084931L;
+	
+	private boolean isAntiAliasing = true;
 	
 	private String title;
 	
@@ -123,13 +129,52 @@ public class Panel extends JPanel {
 	
 	@Override
 	public void setToolTipText(final String text) {
-		if (text != null) {
-            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
-        }
+		super.setToolTipText(text);
+		
+		final Component[] components = getComponents();
+	    for (final Component component : components) {
+	    	if (component instanceof JComponent) {
+	    		((JComponent)component).setToolTipText(text);
+	    	}
+	    }
+	    
+//		if (text != null) {
+//            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
+//        }
 	}
 	
 	@Override
 	public String toString() {
 		return HelperGeneral.toString(this);
+	}
+	
+	@Override
+	public void paintComponent(final Graphics g) {
+		if (isAntiAliasing) {
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			super.paintComponent(g2d);
+		} else {
+			super.paintComponent(g);
+		}
+	}
+	
+	
+	/*
+	 * Implemented methods
+	 */
+	public boolean isAntiAliasing() {
+		return isAntiAliasing;
+	}
+
+	public void setAntiAliasing(final boolean isEnabled) {
+		isAntiAliasing = isEnabled;
+		final Component[] components = getComponents();
+	    for (final Component component : components) {
+	    	if (component instanceof IComponentAntiAliasing) {
+	    		((IComponentAntiAliasing)component).setAntiAliasing(isEnabled);
+	    	}
+	    }
 	}
 }
