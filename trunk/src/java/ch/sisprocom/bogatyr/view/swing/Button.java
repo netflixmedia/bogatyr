@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,22 +31,28 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.ActionListener;
 
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
+
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
  * This is an extended JButton.
  * 
  * @author Stefan Laubenberger
- * @version 20090403
+ * @version 20090421
  */
-public class Button extends JButton {
+public class Button extends JButton implements IComponentAntiAliasing {
 	private static final long serialVersionUID = -7231487009931166084L;
+	
+	private boolean isAntiAliasing = true;
 	
 
 	public Button() {
@@ -95,13 +101,41 @@ public class Button extends JButton {
 		return HelperGeneral.toString(this);
 	}
 	
-	@Override
-	public void setText(final String text) {super.setText("<html>" + text + "</html>");} //$NON-NLS-1$ //$NON-NLS-2$
+//	@Override
+//	public void setText(final String text) {
+//		super.setText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
+//	}
+//	
+//	@Override
+//	public void setToolTipText(final String text) {
+//		if (text != null) {
+//            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
+//        } else {
+//        	super.setToolTipText(text);
+//        }
+//	}
 	
 	@Override
-	public void setToolTipText(final String text) {
-		if (text != null) {
-            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
-        }
-	} 
+	public void paintComponent(final Graphics g) {
+		if (isAntiAliasing) {
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			super.paintComponent(g2d);
+		} else {
+			super.paintComponent(g);
+		}
+	}
+	
+	
+	/*
+	 * Implemented methods
+	 */
+	public boolean isAntiAliasing() {
+		return isAntiAliasing;
+	}
+
+	public void setAntiAliasing(final boolean isEnabled) {
+		isAntiAliasing = isEnabled;
+	}
 }

@@ -31,6 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
@@ -41,10 +45,12 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JLabel.
  * 
  * @author Stefan Laubenberger
- * @version 20090114
+ * @version 20090421
  */
-public class Label extends JLabel {
+public class Label extends JLabel implements IComponentAntiAliasing {
 	private static final long serialVersionUID = 2440681846691377894L;
+	
+	private boolean isAntiAliasing = true;
 	
 
 	public Label() {
@@ -72,13 +78,39 @@ public class Label extends JLabel {
 		return HelperGeneral.toString(this);
 	}
 	
+//	@Override
+//	public void setText(final String text) {
+//		super.setText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
+//	}
+//
+//	@Override
+//	public void setToolTipText(final String text) {
+//		if (text != null) {
+//            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
+//        }
+//	}
+	
 	@Override
-	public void setText(final String text) {super.setText("<html>" + text + "</html>");} //$NON-NLS-1$ //$NON-NLS-2$
-
-	@Override
-	public void setToolTipText(final String text) {
-		if (text != null) {
-            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
-        }
+	public void paintComponent(final Graphics g) {
+		if (isAntiAliasing) {
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			super.paintComponent(g2d);
+		} else {
+			super.paintComponent(g);
+		}
 	}
+	
+	
+	/*
+	 * Implemented methods
+	 */
+	public boolean isAntiAliasing() {
+		return isAntiAliasing;
+	}
+
+	public void setAntiAliasing(final boolean isEnabled) {
+		isAntiAliasing = isEnabled;
+	} 
 }

@@ -31,6 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+
 import javax.swing.Action;
 import javax.swing.JCheckBox;
 
@@ -41,11 +45,13 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JCheckBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090407
+ * @version 20090421
  */
-public class CheckBox extends JCheckBox {
+public class CheckBox extends JCheckBox implements IComponentAntiAliasing {
 	private static final long serialVersionUID = -6439735629199643683L;
 
+	private boolean isAntiAliasing = true;
+	
 	
 	public CheckBox() {
 		super();
@@ -83,10 +89,34 @@ public class CheckBox extends JCheckBox {
 		return HelperGeneral.toString(this);
 	}
 	
+//	@Override
+//	public void setToolTipText(final String text) {
+//		if (text != null) {
+//            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
+//        }
+//	}
+	
 	@Override
-	public void setToolTipText(final String text) {
-		if (text != null) {
-            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
-        }
+	public void paintComponent(final Graphics g) {
+		if (isAntiAliasing) {
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			super.paintComponent(g2d);
+		} else {
+			super.paintComponent(g);
+		}
 	}
+	
+	
+	/*
+	 * Implemented methods
+	 */
+	public boolean isAntiAliasing() {
+		return isAntiAliasing;
+	}
+
+	public void setAntiAliasing(final boolean isEnabled) {
+		isAntiAliasing = isEnabled;
+	} 
 }

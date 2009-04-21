@@ -31,23 +31,29 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.ActionListener;
 
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JMenuItem;
-import java.awt.event.ActionListener;
+
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
  * This is an extended JMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 20090309
+ * @version 20090421
  */
-public class MenuItem extends JMenuItem {
+public class MenuItem extends JMenuItem implements IComponentAntiAliasing {
 	private static final long serialVersionUID = -5950690648354816752L;
 
+	private boolean isAntiAliasing = true;
+	
 	
 	public MenuItem() {
 		super();
@@ -88,5 +94,29 @@ public class MenuItem extends JMenuItem {
 	@Override
 	public String toString() {
 		return HelperGeneral.toString(this);
+	}
+	
+	@Override
+	public void paintComponent(final Graphics g) {
+		if (isAntiAliasing) {
+			Graphics2D g2d = (Graphics2D) g;
+			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+			super.paintComponent(g2d);
+		} else {
+			super.paintComponent(g);
+		}
+	}
+	
+	
+	/*
+	 * Implemented methods
+	 */
+	public boolean isAntiAliasing() {
+		return isAntiAliasing;
+	}
+
+	public void setAntiAliasing(final boolean isEnabled) {
+		isAntiAliasing = isEnabled;
 	}
 }
