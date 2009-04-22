@@ -32,27 +32,21 @@
 package ch.sisprocom.bogatyr.view.swing.pane;
 
 import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.view.swing.IComponentAntiAliasing;
 
 
 /**
  * This is an extended JScrollPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090421
+ * @version 20090422
  */
-public class PaneScroll extends JScrollPane implements IComponentAntiAliasing {
+public class PaneScroll extends JScrollPane {
 	private static final long serialVersionUID = 544751396135811303L;
-
-	private boolean isAntiAliasing = true;
 	
 	
 	public PaneScroll() {
@@ -88,32 +82,12 @@ public class PaneScroll extends JScrollPane implements IComponentAntiAliasing {
 	}
 	
 	@Override
-	public void paintComponent(final Graphics g) {
-		if (isAntiAliasing) {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-			super.paintComponent(g2d);
-		} else {
-			super.paintComponent(g);
-		}
-	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-	public boolean isAntiAliasing() {
-		return isAntiAliasing;
-	}
-
-	public void setAntiAliasing(final boolean isEnabled) {
-		isAntiAliasing = isEnabled;
+	public void setEnabled(final boolean enabled) {
+		super.setEnabled(enabled);
+		
 		final Component[] components = getComponents();
 	    for (final Component component : components) {
-	    	if (component instanceof IComponentAntiAliasing) {
-	    		((IComponentAntiAliasing)component).setAntiAliasing(isEnabled);
-	    	}
+	    	component.setEnabled(enabled);
 	    }
 	}
 }

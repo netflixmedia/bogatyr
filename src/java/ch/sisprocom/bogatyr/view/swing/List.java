@@ -31,9 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.util.Vector;
 
 import javax.swing.JList;
@@ -46,12 +43,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JList.
  * 
  * @author Stefan Laubenberger
- * @version 20090421
+ * @version 20090422
  */
-public class List extends JList implements IComponentAntiAliasing {
+public class List extends JList {
 	private static final long serialVersionUID = 7354802735840177105L;
-	
-	private boolean isAntiAliasing = true;
 	
 
 	public List() {
@@ -78,28 +73,4 @@ public class List extends JList implements IComponentAntiAliasing {
 	public String toString() {
 		return HelperGeneral.toString(this);
 	}
-	
-	@Override
-	public void paintComponent(final Graphics g) {
-		if (isAntiAliasing) {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-			super.paintComponent(g2d);
-		} else {
-			super.paintComponent(g);
-		}
-	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-	public boolean isAntiAliasing() {
-		return isAntiAliasing;
-	}
-
-	public void setAntiAliasing(final boolean isEnabled) {
-		isAntiAliasing = isEnabled;
-	} 
 }

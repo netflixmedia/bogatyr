@@ -54,7 +54,7 @@ import java.util.List;
  * @author Stefan Laubenberger
  * @version 20090403
  */
-public class Chart extends Panel { //TODO document in Wiki!
+public class Chart extends Panel {
 	private static final long serialVersionUID = -4618658256880807781L;
 
     public enum X_Axis {NORTH, SOUTH}

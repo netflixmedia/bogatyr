@@ -32,27 +32,21 @@
 package ch.sisprocom.bogatyr.view.swing.pane;
 
 import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 
 import javax.swing.JTextPane;
 import javax.swing.text.StyledDocument;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.view.swing.IComponentAntiAliasing;
 
 
 /**
  * This is an extended JTextPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090421
+ * @version 20090422
  */
-public class PaneText extends JTextPane implements IComponentAntiAliasing {
+public class PaneText extends JTextPane {
 	private static final long serialVersionUID = -3996840505161218721L;
-	
-	private boolean isAntiAliasing = true;
 	
 
 	public PaneText() {
@@ -73,33 +67,12 @@ public class PaneText extends JTextPane implements IComponentAntiAliasing {
 	}
 	
 	@Override
-	public void paintComponent(final Graphics g) {
-		if (isAntiAliasing) {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-			super.paintComponent(g2d);
-		} else {
-			super.paintComponent(g);
-		}
-	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-	public boolean isAntiAliasing() {
-		return isAntiAliasing;
-	}
-
-	public void setAntiAliasing(final boolean isEnabled) {
-		isAntiAliasing = isEnabled;
-		isAntiAliasing = isEnabled;
+	public void setEnabled(final boolean enabled) {
+		super.setEnabled(enabled);
+		
 		final Component[] components = getComponents();
 	    for (final Component component : components) {
-	    	if (component instanceof IComponentAntiAliasing) {
-	    		((IComponentAntiAliasing)component).setAntiAliasing(isEnabled);
-	    	}
+	    	component.setEnabled(enabled);
 	    }
 	} 
 }
