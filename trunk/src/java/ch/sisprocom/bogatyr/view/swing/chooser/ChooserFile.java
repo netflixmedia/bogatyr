@@ -31,28 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.chooser;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.view.swing.IComponentAntiAliasing;
 
 
 /**
  * This is an extended JFileChooser.
  * 
  * @author Stefan Laubenberger
- * @version 20090421
+ * @version 20090422
  */
-public class ChooserFile extends JFileChooser implements IComponentAntiAliasing {
+public class ChooserFile extends JFileChooser {
 	private static final long serialVersionUID = -4453036459563578035L;
-	
-	private boolean isAntiAliasing = true;
 	
 
 	public ChooserFile() {
@@ -91,29 +85,5 @@ public class ChooserFile extends JFileChooser implements IComponentAntiAliasing 
 	@Override
 	public String toString() {
 		return HelperGeneral.toString(this);
-	}
-	
-	@Override
-	public void paintComponent(final Graphics g) {
-		if (isAntiAliasing) {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-			super.paintComponent(g2d);
-		} else {
-			super.paintComponent(g);
-		}
-	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-	public boolean isAntiAliasing() {
-		return isAntiAliasing;
-	}
-
-	public void setAntiAliasing(final boolean isEnabled) {
-		isAntiAliasing = isEnabled;
 	} 
 }

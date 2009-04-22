@@ -31,10 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -48,12 +44,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JTextField.
  * 
  * @author Stefan Laubenberger
- * @version 20090421
+ * @version 20090422
  */
-public class TextField extends JTextField implements IComponentAntiAliasing {
+public class TextField extends JTextField {
 	private static final long serialVersionUID = 866371447844640358L;
-
-	private boolean isAntiAliasing = true;
 	
 	
 	public TextField() {
@@ -85,30 +79,7 @@ public class TextField extends JTextField implements IComponentAntiAliasing {
 //            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
 //        }
 //	}
-	
-	@Override
-	public void paintComponent(final Graphics g) {
-		if (isAntiAliasing) {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-			super.paintComponent(g2d);
-		} else {
-			super.paintComponent(g);
-		}
-	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-	public boolean isAntiAliasing() {
-		return isAntiAliasing;
-	}
 
-	public void setAntiAliasing(final boolean isEnabled) {
-		isAntiAliasing = isEnabled;
-	}
 
     /*
      * Inner classes

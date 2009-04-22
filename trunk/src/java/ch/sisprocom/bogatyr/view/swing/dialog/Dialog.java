@@ -31,28 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.dialog;
 
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.view.swing.IComponentAntiAliasing;
 
 
 /**
  * This is an extended JDialog.
  * 
  * @author Stefan Laubenberger
- * @version 20090421
+ * @version 20090422
  */
-public class Dialog extends JDialog implements IComponentAntiAliasing {
+public class Dialog extends JDialog {
 	private static final long serialVersionUID = -3903296901431213544L;
-	
-	private boolean isAntiAliasing = true;
 	
 	private JFrame frame;
 	
@@ -95,35 +87,5 @@ public class Dialog extends JDialog implements IComponentAntiAliasing {
 	@Override
 	public String toString() {
 		return HelperGeneral.toString(this);
-	}
-	
-	@Override
-	public void paint(final Graphics g) {
-		if (isAntiAliasing) {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-			super.paint(g2d);
-		} else {
-			super.paint(g);
-		}
-	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-	public boolean isAntiAliasing() {
-		return isAntiAliasing;
-	}
-
-	public void setAntiAliasing(final boolean isEnabled) {
-		isAntiAliasing = isEnabled;
-		final Component[] components = getComponents();
-	    for (final Component component : components) {
-	    	if (component instanceof IComponentAntiAliasing) {
-	    		((IComponentAntiAliasing)component).setAntiAliasing(isEnabled);
-	    	}
-	    }
 	} 
 }

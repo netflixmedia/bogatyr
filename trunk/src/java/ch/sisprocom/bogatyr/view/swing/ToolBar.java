@@ -31,10 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-
 import javax.swing.JToolBar;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
@@ -44,12 +40,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JToolBar.
  * 
  * @author Stefan Laubenberger
- * @version 20090421
+ * @version 20090422
  */
-public class ToolBar extends JToolBar implements IComponentAntiAliasing {
+public class ToolBar extends JToolBar {
 	private static final long serialVersionUID = 7538391089705088133L;
-	
-	private boolean isAntiAliasing = true;
 	
 
 	public ToolBar() {
@@ -76,28 +70,4 @@ public class ToolBar extends JToolBar implements IComponentAntiAliasing {
 	public String toString() {
 		return HelperGeneral.toString(this);
 	}
-	
-	@Override
-	public void paintComponent(final Graphics g) {
-		if (isAntiAliasing) {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-			super.paintComponent(g2d);
-		} else {
-			super.paintComponent(g);
-		}
-	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-	public boolean isAntiAliasing() {
-		return isAntiAliasing;
-	}
-
-	public void setAntiAliasing(final boolean isEnabled) {
-		isAntiAliasing = isEnabled;
-	} 
 }

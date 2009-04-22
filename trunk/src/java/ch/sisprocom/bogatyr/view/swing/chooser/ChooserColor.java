@@ -32,28 +32,22 @@
 package ch.sisprocom.bogatyr.view.swing.chooser;
 
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 
 import javax.swing.JColorChooser;
 import javax.swing.colorchooser.ColorSelectionModel;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.view.swing.IComponentAntiAliasing;
 
 
 /**
  * This is an extended JColorChooser.
  * 
  * @author Stefan Laubenberger
- * @version 20090421
+ * @version 20090422
  */
-public class ChooserColor extends JColorChooser implements IComponentAntiAliasing {
+public class ChooserColor extends JColorChooser {
 	private static final long serialVersionUID = 2106701368372263061L;
 
-	private boolean isAntiAliasing = true;
-	
 	
 	public ChooserColor() {
 		super();
@@ -75,28 +69,4 @@ public class ChooserColor extends JColorChooser implements IComponentAntiAliasin
 	public String toString() {
 		return HelperGeneral.toString(this);
 	}
-	
-	@Override
-	public void paintComponent(final Graphics g) {
-		if (isAntiAliasing) {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-			super.paintComponent(g2d);
-		} else {
-			super.paintComponent(g);
-		}
-	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-	public boolean isAntiAliasing() {
-		return isAntiAliasing;
-	}
-
-	public void setAntiAliasing(final boolean isEnabled) {
-		isAntiAliasing = isEnabled;
-	} 
 }

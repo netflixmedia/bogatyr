@@ -31,9 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -53,12 +50,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090421
+ * @version 20090422
  */
-public class ComboBox extends JComboBox  implements IComponentAntiAliasing {
+public class ComboBox extends JComboBox {
 	private static final long serialVersionUID = -3870596701286078140L;
-
-	private boolean isAntiAliasing = true;
 	
 	
 	public ComboBox() {
@@ -112,31 +107,7 @@ public class ComboBox extends JComboBox  implements IComponentAntiAliasing {
 //		if (text != null) {
 //            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
 //        }
-//	}
-	
-	@Override
-	public void paintComponent(final Graphics g) {
-		if (isAntiAliasing) {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-			super.paintComponent(g2d);
-		} else {
-			super.paintComponent(g);
-		}
-	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-	public boolean isAntiAliasing() {
-		return isAntiAliasing;
-	}
-
-	public void setAntiAliasing(final boolean isEnabled) {
-		isAntiAliasing = isEnabled;
-	} 	
+//	}	
 	
 	
 	/*
