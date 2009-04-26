@@ -31,11 +31,15 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.sample.helloworld;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
 import ch.sisprocom.bogatyr.controller.localizer.ControllerLocalizerFile;
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
+import ch.sisprocom.bogatyr.controller.property.ControllerProperty;
+import ch.sisprocom.bogatyr.controller.property.IControllerProperty;
 
 
 /**
@@ -43,13 +47,22 @@ import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090305
+ * @version 20090426
  */
 public class HelloWorld extends ApplicationAbstract { //TODO document in Wiki!
-	// Resources
-	private static final String	RES_TEXT  = "HelloWorld.text"; //$NON-NLS-1$
+	// Fixed parameter - e.g. this could be an argument
+	private static final String	ARG_PROPERTY_LOCATION = "cfg/ch/sisprocom/bogatyr/sample/helloworld/standard.properties"; //$NON-NLS-1$
+	
+	// Properties
+	private static final String	PROPERTY_LOCALIZER_BASE = "HelloWorld.localizerbase"; //$NON-NLS-1$
+	private static final String	PROPERTY_USERNAME       = "HelloWorld.username"; //$NON-NLS-1$
 
-	private final IControllerLocalizer localizer;
+	// Resources
+	private static final String	RES_WELCOME = "HelloWorld.welcome"; //$NON-NLS-1$
+	private static final String	RES_BYE     = "HelloWorld.bye"; //$NON-NLS-1$
+
+	private IControllerProperty property;
+	private IControllerLocalizer localizer;
 	
 	
 	public static void main(final String[] args) {
@@ -59,25 +72,49 @@ public class HelloWorld extends ApplicationAbstract { //TODO document in Wiki!
 	public HelloWorld() {
 		super();
 
-		localizer = new ControllerLocalizerFile("res/ch/sisprocom/bogatyr/sample/helloworld/helloworld");
+		init();
+		
 		run();
+	}
+
+	/*
+	 * Private methods
+	 */
+	private void init() {
+		try {
+			property = new ControllerProperty(new File(ARG_PROPERTY_LOCATION));
+		} catch (IOException ex) {
+			System.err.println("Couldn't process the property file!"); //$NON-NLS-1$
+			ex.printStackTrace();
+			exit(1);
+		}
+		
+		localizer = new ControllerLocalizerFile(property.getProperty(PROPERTY_LOCALIZER_BASE));
 	}
 
 	/*
 	 * Implemented methods
 	 */
 	public void run() {
+		String username = property.getProperty(PROPERTY_USERNAME);
+		
 		localizer.setLocale(Locale.GERMAN);
-		System.out.println(localizer.getValue(RES_TEXT));
+		System.out.println(localizer.getValue(RES_WELCOME) + ' ' + username + '!');
 		
 		localizer.setLocale(Locale.ROOT);
-		System.out.println(localizer.getValue(RES_TEXT));
-		
+		System.out.println(localizer.getValue(RES_WELCOME) + ' ' + username + '!');
+
 		exit(0);
 	}
 
 	@Override
 	public void exit(final int returnCode) {
+		localizer.setLocale(Locale.GERMAN);
+		System.out.println(localizer.getValue(RES_BYE));
+		
+		localizer.setLocale(Locale.ROOT);
+		System.out.println(localizer.getValue(RES_BYE));
+		
 		System.exit(returnCode);
 	}
 }
