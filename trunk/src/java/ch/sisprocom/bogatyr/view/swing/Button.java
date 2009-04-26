@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JButton.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090423
  */
 public class Button extends JButton {
 	private static final long serialVersionUID = -7231487009931166084L;
@@ -52,18 +52,15 @@ public class Button extends JButton {
 
 	public Button() {
 		super();
-		init();
 	}
 
 	public Button(final Action action) {
 		super(action);
-		init();
 	}
 	
 	public Button(final String title, final String toolTip) {
 		super(title);
 		setToolTipText(toolTip);
-		init();
 	}
 	
 	public Button(final String title, final String toolTip, final ActionListener listener) {
@@ -75,17 +72,7 @@ public class Button extends JButton {
 		super(title, icon);
 		setToolTipText(toolTip);
 		addActionListener(listener);
-		init();
 	}	
-	
-
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		setContentAreaFilled(false);
-		setOpaque(true);
-	}
 	
 	
 	/*
