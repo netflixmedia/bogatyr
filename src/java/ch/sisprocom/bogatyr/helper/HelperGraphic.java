@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -33,6 +33,7 @@ package ch.sisprocom.bogatyr.helper;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -40,15 +41,16 @@ import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
+import java.util.List;
 
 
 /**
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20090427
  */
-public abstract class HelperGraphic { //TODO document in Wiki!
+public abstract class HelperGraphic {
 	
 	/**
      * Enable antialiasing on a graphic container.
@@ -70,7 +72,7 @@ public abstract class HelperGraphic { //TODO document in Wiki!
 	}
 
     /**
-     * Get size of a text in a graphic container.
+     * Get size of a text in a graphic container with its current font.
      *
      * @param text Text
      * @param g Graphic container
@@ -83,6 +85,7 @@ public abstract class HelperGraphic { //TODO document in Wiki!
 		return new Dimension((int)rect.getWidth(), (int)rect.getHeight()); 
 	}
 	
+	
 //	public static List<String> getFonts() {
 //	    // Get all available font family names from GraphicsEnvironment
 //	    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -94,7 +97,7 @@ public abstract class HelperGraphic { //TODO document in Wiki!
      *
      * @return List containing all fonts
      */
-    public static Object getFonts() {
+    public static List<Font> getFonts() {
 		// Get all available fonts from GraphicsEnvironment
 		final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		
