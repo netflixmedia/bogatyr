@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -50,7 +50,7 @@ import javax.imageio.ImageIO;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090426
  */
 public abstract class HelperImage { //TODO document in Wiki!
 	public static final String TYPE_JPG = "jpg"; //$NON-NLS-1$
@@ -78,14 +78,25 @@ public abstract class HelperImage { //TODO document in Wiki!
      * @throws IOException
      */
 	public static void saveImage(final Component component, final String type, final File output) throws IOException {
+		saveImage(getImage(component), type, output);
+	} 
+    
+	/**
+     * Gets an image from a Component.
+     *
+     * @param component Component for the image
+     * @return component as BufferedImage
+     * @throws IOException
+     */
+	public static BufferedImage getImage(final Component component) {
 		final Dimension size = component.getSize();
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		final Graphics2D g2 = image.createGraphics();
 		
 		component.paint(g2);
        
-		saveImage(image, type, output);
-	} 
+		return image;
+	}
 	
 	/**
 	 * Returns list of unique supported read formats (e.g. "png", "jpg").
