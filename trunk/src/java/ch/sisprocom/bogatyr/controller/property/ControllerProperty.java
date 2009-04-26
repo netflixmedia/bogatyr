@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import ch.sisprocom.bogatyr.controller.ControllerAbstract;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
@@ -44,9 +45,9 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 20090306
+ * @version 20090426
  */
-public class ControllerProperty implements IControllerProperty { //TODO document in Wiki!
+public class ControllerProperty extends ControllerAbstract implements IControllerProperty { //TODO document in Wiki!
 //	private Properties properties;
 	private final Properties properties;
 
@@ -75,15 +76,7 @@ public class ControllerProperty implements IControllerProperty { //TODO document
 
     public ControllerProperty(final File file) throws IOException {
     	this(new FileInputStream(file));
-    }
-
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
-	} 
+    } 
 
 	
 	/*

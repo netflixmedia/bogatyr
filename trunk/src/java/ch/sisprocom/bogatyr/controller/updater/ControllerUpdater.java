@@ -47,6 +47,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import ch.sisprocom.bogatyr.controller.ControllerAbstract;
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
@@ -56,9 +57,9 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is the updater controller for new Bogatyr-based applications versions.
  * 
  * @author Stefan Laubenberger
- * @version 20090403
+ * @version 20090426
  */
-public class ControllerUpdater implements IControllerUpdater, ListenerUpdater { //TODO document in Wiki!
+public class ControllerUpdater extends ControllerAbstract implements IControllerUpdater, ListenerUpdater { //TODO document in Wiki!
 	private Collection<ListenerUpdater> listListener = new ArrayList<ListenerUpdater>();
 
 	private final IControllerLocalizer localizer;
@@ -68,15 +69,6 @@ public class ControllerUpdater implements IControllerUpdater, ListenerUpdater { 
         super();
         this.localizer = localizer;
     }
-	
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
-	}
 	
 
     /*

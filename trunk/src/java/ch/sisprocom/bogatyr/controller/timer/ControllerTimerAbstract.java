@@ -31,19 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.timer;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Timer;
+
+import ch.sisprocom.bogatyr.controller.ControllerAbstract;
 
 /**
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 20090403
+ * @version 20090426
  */
-public abstract class ControllerTimerAbstract implements IListener{ //TODO document in Wiki!
+public abstract class ControllerTimerAbstract extends ControllerAbstract implements IListener{ //TODO document in Wiki!
 	private Collection<ListenerTimer> listListener = new ArrayList<ListenerTimer>();
 
 	protected Timer timer;
@@ -76,15 +76,6 @@ public abstract class ControllerTimerAbstract implements IListener{ //TODO docum
 		for (final ListenerTimer listener : listListener) {
 			listener.timerStopped();
 		}	
-	}
-
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
 	}
 
 	
