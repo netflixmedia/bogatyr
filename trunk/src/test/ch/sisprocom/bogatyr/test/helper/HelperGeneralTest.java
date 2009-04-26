@@ -45,14 +45,14 @@ import java.util.List;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090403
+ * @version 20090426
  */
 public class HelperGeneralTest { //TODO improve
 	@Test
 	public void testNewInstance() {
 		try {
-			assertEquals("", HelperGeneral.newInstance(String.class)); //$NON-NLS-1$
-			assertEquals(AllBogatyrTests.DATA, HelperGeneral.newInstance(String.class, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA}));
+			assertEquals("", HelperGeneral.createObject(String.class)); //$NON-NLS-1$
+			assertEquals(AllBogatyrTests.DATA, HelperGeneral.createObject(String.class, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA}));
 			assertNull(null, null);
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}

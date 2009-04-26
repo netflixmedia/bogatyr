@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -33,6 +33,8 @@ package ch.sisprocom.bogatyr.test.helper;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.awt.Color;
+
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperGraphic;
@@ -42,13 +44,20 @@ import ch.sisprocom.bogatyr.helper.HelperGraphic;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20090427
  */
 public class HelperGraphicTest { //TODO improve
 	@Test
 	public void testGetFonts() {
 		assertNotNull(HelperGraphic.getFonts());
 //		System.out.println(HelperGeneral.dumpList(HelperGraphic.getFonts()));
+	}
+	
+	@Test
+	public void testGetColorHex() {
+		assertNotNull(HelperGraphic.getColorHex(Color.RED));
+		
+		System.out.println(HelperGraphic.getColorHex(Color.RED));
 	}
 }
 

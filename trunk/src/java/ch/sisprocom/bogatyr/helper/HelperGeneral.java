@@ -56,17 +56,17 @@ import java.util.regex.Pattern;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090325
+ * @version 20090426
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and is logging needed?
-	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
+	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$ //TODO update in Wiki!
 	private static final char[] RANDOMKEY_SEED_DEFAULT    = {'1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	
 	/**
      * Creates an object with parameters via reflection API.
      * 
      * @param clazz Full qualified class name
-     * @return instanciated object
+     * @return instantiated object
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException 
 	 * @throws NoSuchMethodException 
@@ -74,26 +74,25 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
      */
-//	public static Object createObject(final String clazz, final Object[] parameter) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SecurityException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
-//		final Object obj;
-//
-//		final Class<?> classDefinition = Class.forName(clazz);
-//			
-//		if (parameter == null) {
-//			obj = classDefinition.newInstance();
-//		} else {
-//            final Class<?>[] stringArgsClass = new Class[]{String.class};
-//            final Constructor<?> classConstructor = classDefinition.getConstructor(stringArgsClass);
-//			obj = classConstructor.newInstance(parameter);
-//		}
-//		return obj;
-//	}
-	
-	public static <T> Object newInstance(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-		return newInstance(clazz, new Class[0], new Object[0]);
+	public static <T> Object createObject(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		return createObject(clazz, new Class[0], new Object[0]);
 	}
 
-	public static <T> Object newInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	/**
+     * Creates an object with parameters via reflection API.
+     * 
+     * @param clazz full qualified class name
+     * @param paramClazzes classes for the constructor
+     * @param clazz parameters for the constructor
+     * @return instantiated object
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException 
+	 * @throws NoSuchMethodException 
+	 * @throws SecurityException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+     */
+	public static <T> Object createObject(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		return clazz.getConstructor(paramClazzes).newInstance(params);
 	}
 
