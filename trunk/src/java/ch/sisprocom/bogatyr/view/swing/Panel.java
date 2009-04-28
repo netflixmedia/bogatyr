@@ -47,11 +47,13 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JPanel.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090428
  */
-public class Panel extends JPanel {
+public class Panel extends JPanel implements IComponentActivate {
 	private static final long serialVersionUID = 3679443739459084931L;
 	
+	private boolean isActive = true;
+
 	private String title;
 	
 
@@ -115,12 +117,14 @@ public class Panel extends JPanel {
 	 */
 	@Override
 	public void setEnabled(final boolean enabled) {
-		super.setEnabled(enabled);
-		
-		final Component[] components = getComponents();
-	    for (final Component component : components) {
-	    	component.setEnabled(enabled);
-	    }
+		if (isActive) {
+			super.setEnabled(enabled);
+			
+			final Component[] components = getComponents();
+		    for (final Component component : components) {
+		    	component.setEnabled(enabled);
+		    }
+		}
 	}
 	
 	@Override
@@ -142,5 +146,23 @@ public class Panel extends JPanel {
 	@Override
 	public String toString() {
 		return HelperGeneral.toString(this);
+	}
+	
+	
+	/*
+	 * Implemented methods
+	 */	
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		if (isActive) {
+			this.isActive = isActive;
+			setEnabled(isActive);
+		} else {
+			setEnabled(isActive);
+			this.isActive = isActive;
+		}
 	}
 }

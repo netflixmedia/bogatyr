@@ -31,65 +31,28 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import javax.swing.JSpinner;
-import javax.swing.SpinnerModel;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is an extended JSpinner.
+ * Defines the methods for the implementation of activations.
  * 
  * @author Stefan Laubenberger
  * @version 20090428
  */
-public class Spinner extends JSpinner implements IComponentActivate {
-	private static final long serialVersionUID = 1637909823592308393L;
+public interface IComponentActivate {
+	/**
+     * Sets the activation state of the component.
+     * 
+     * @param isEnabled anti-aliasing state
+     */
+	void setActive(final boolean isActive);
 	
-	private boolean isActive = true;
+	/**
+     * Returns the activation state of the component.
+     * 
+     * @return true/false
+     */
+	boolean isActive();
+}   
 
-	
-	public Spinner() {
-		super();
-	}
-
-	public Spinner(SpinnerModel model) {
-		super(model);
-		// TODO Auto-generated constructor stub
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperGeneral.toString(this);
-	}
-	
-
-	@Override
-	public void setEnabled(boolean isEnabled) {
-		if (isActive) {
-			super.setEnabled(isEnabled);
-		}
-	}
-
-	
-	/*
-	 * Implemented methods
-	 */	
-	public boolean isActive() {
-		return isActive;
-	}
-
-	public void setActive(boolean isActive) {
-		if (isActive) {
-			this.isActive = isActive;
-			setEnabled(isActive);
-		} else {
-			setEnabled(isActive);
-			this.isActive = isActive;
-		}
-	}
-}

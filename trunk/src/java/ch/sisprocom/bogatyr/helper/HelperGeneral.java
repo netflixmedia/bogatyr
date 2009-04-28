@@ -123,7 +123,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      */	
 	public static boolean isStringNumeric(final CharSequence arg) {
 		if (isValidString(arg)) {
-			final Pattern p = Pattern.compile("[0-9.]+"); //$NON-NLS-1$
+			final Pattern p = Pattern.compile("[-0-9.]+"); //$NON-NLS-1$
 			final Matcher m = p.matcher(arg);
 
 			if (m.matches()) {
@@ -439,12 +439,23 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return numeric string
      */
     public static String getValidNumericString(final String text) { //TODO document in Wiki!
-    	final String result = text.replaceAll("[^0-9.]+", ""); //$NON-NLS-1$ //$NON-NLS-2$ //TODO add minus (-) to regex?
-
-    	if (0 == text.length()) {
-    		return "0"; //$NON-NLS-1$
+    	boolean isNegative = false;
+    	
+    	if (text.isEmpty()) {
+    		return null;
     	}
-    	return result;
+    	
+    	if (text.contains("-")) { //$NON-NLS-1$
+    		isNegative = true;
+    	}
+    	
+    	final String result = text.replaceAll("[^0-9.]+", ""); //$NON-NLS-1$ //$NON-NLS-2$
+
+    	if (result.isEmpty()) {
+    		return null;
+    	}
+    	
+    	return isNegative ? '-' + result : result;
     }
     
     /**

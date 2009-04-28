@@ -45,11 +45,13 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JTable.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090428
  */
-public class Table extends JTable {
+public class Table extends JTable implements IComponentActivate {
 	private static final long serialVersionUID = -1201835867524275584L;
 	
+	private boolean isActive = true;
+
 
 	public Table() {
 		super();
@@ -86,5 +88,30 @@ public class Table extends JTable {
 	@Override
 	public String toString() {
 		return HelperGeneral.toString(this);
+	}
+
+	@Override
+	public void setEnabled(boolean isEnabled) {
+		if (isActive) {
+			super.setEnabled(isEnabled);
+		}
+	}
+
+	
+	/*
+	 * Implemented methods
+	 */	
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		if (isActive) {
+			this.isActive = isActive;
+			setEnabled(isActive);
+		} else {
+			setEnabled(isActive);
+			this.isActive = isActive;
+		}
 	}
 }

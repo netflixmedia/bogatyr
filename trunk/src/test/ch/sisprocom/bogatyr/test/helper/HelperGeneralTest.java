@@ -45,7 +45,7 @@ import java.util.List;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090426
+ * @version 20090427
  */
 public class HelperGeneralTest { //TODO improve
 	@Test
@@ -75,6 +75,7 @@ public class HelperGeneralTest { //TODO improve
 		assertFalse(HelperGeneral.isStringNumeric("")); //$NON-NLS-1$
 		assertTrue(HelperGeneral.isStringNumeric("123")); //$NON-NLS-1$
 		assertTrue(HelperGeneral.isStringNumeric("123.23")); //$NON-NLS-1$
+		assertTrue(HelperGeneral.isStringNumeric("-123.23")); //$NON-NLS-1$
 		assertFalse(HelperGeneral.isStringNumeric("123.23abc")); //$NON-NLS-1$
 	}
 
