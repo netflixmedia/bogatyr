@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class ToggleButton extends JToggleButton implements IComponentActivate {
 	private static final long serialVersionUID = 7669429243607853809L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 	
 	public ToggleButton() {
@@ -109,11 +109,11 @@ public class ToggleButton extends JToggleButton implements IComponentActivate {
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			ToggleButton.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			ToggleButton.isActive = isActive;
 		}
 	}
 }

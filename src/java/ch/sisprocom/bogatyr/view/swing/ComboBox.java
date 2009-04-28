@@ -55,7 +55,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class ComboBox extends JComboBox implements IComponentActivate {
 	private static final long serialVersionUID = -3870596701286078140L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 	
 	public ComboBox() {
@@ -121,11 +121,11 @@ public class ComboBox extends JComboBox implements IComponentActivate {
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			ComboBox.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			ComboBox.isActive = isActive;
 		}
 	}
 

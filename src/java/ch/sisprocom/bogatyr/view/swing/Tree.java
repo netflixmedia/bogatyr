@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class Tree extends JTree implements IComponentActivate {
 	private static final long serialVersionUID = -4538444845018995986L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 
 	public Tree() {
@@ -108,11 +108,11 @@ public class Tree extends JTree implements IComponentActivate {
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			Tree.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			Tree.isActive = isActive;
 		}
 	}
 }

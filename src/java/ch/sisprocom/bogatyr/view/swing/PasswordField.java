@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class PasswordField extends JPasswordField implements IComponentActivate {
 	private static final long serialVersionUID = 4337982428755317915L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 	
 	public PasswordField() {
@@ -97,11 +97,11 @@ public class PasswordField extends JPasswordField implements IComponentActivate 
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			PasswordField.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			PasswordField.isActive = isActive;
 		}
 	}
 	

@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class ToolBar extends JToolBar implements IComponentActivate {
 	private static final long serialVersionUID = 7538391089705088133L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 
 	public ToolBar() {
@@ -90,11 +90,11 @@ public class ToolBar extends JToolBar implements IComponentActivate {
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			ToolBar.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			ToolBar.isActive = isActive;
 		}
 	}
 }

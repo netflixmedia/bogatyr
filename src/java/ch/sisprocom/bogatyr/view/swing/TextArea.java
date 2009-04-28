@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class TextArea extends JTextArea implements IComponentActivate {
 	private static final long serialVersionUID = 8509257459382968021L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 	
     public TextArea() {
@@ -110,11 +110,11 @@ public class TextArea extends JTextArea implements IComponentActivate {
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			TextArea.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			TextArea.isActive = isActive;
 		}
 	}
 	

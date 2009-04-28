@@ -52,7 +52,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class Panel extends JPanel implements IComponentActivate {
 	private static final long serialVersionUID = 3679443739459084931L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 	private String title;
 	
@@ -158,11 +158,11 @@ public class Panel extends JPanel implements IComponentActivate {
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			Panel.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			Panel.isActive = isActive;
 		}
 	}
 }
