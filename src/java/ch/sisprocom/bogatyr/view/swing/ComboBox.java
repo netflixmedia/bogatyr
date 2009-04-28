@@ -50,11 +50,13 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090428
  */
-public class ComboBox extends JComboBox {
+public class ComboBox extends JComboBox implements IComponentActivate {
 	private static final long serialVersionUID = -3870596701286078140L;
 	
+	private boolean isActive = true;
+
 	
 	public ComboBox() {
 		super();
@@ -101,7 +103,32 @@ public class ComboBox extends JComboBox {
 	public String toString() {
 		return HelperGeneral.toString(this);
 	}
+
+	@Override
+	public void setEnabled(boolean isEnabled) {
+		if (isActive) {
+			super.setEnabled(isEnabled);
+		}
+	}
+
 	
+	/*
+	 * Implemented methods
+	 */	
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		if (isActive) {
+			this.isActive = isActive;
+			setEnabled(isActive);
+		} else {
+			setEnabled(isActive);
+			this.isActive = isActive;
+		}
+	}
+
 //	@Override
 //	public void setToolTipText(final String text) {
 //		if (text != null) {

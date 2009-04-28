@@ -41,11 +41,13 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JCheckBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090428
  */
-public class CheckBox extends JCheckBox {
+public class CheckBox extends JCheckBox implements IComponentActivate {
 	private static final long serialVersionUID = -6439735629199643683L;
 	
+	private boolean isActive = true;
+
 	
 	public CheckBox() {
 		super();
@@ -81,6 +83,31 @@ public class CheckBox extends JCheckBox {
 	@Override
 	public String toString() {
 		return HelperGeneral.toString(this);
+	}
+	
+	@Override
+	public void setEnabled(boolean isEnabled) {
+		if (isActive) {
+			super.setEnabled(isEnabled);
+		}
+	}
+
+	
+	/*
+	 * Implemented methods
+	 */	
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		if (isActive) {
+			this.isActive = isActive;
+			setEnabled(isActive);
+		} else {
+			setEnabled(isActive);
+			this.isActive = isActive;
+		}
 	}
 	
 //	@Override

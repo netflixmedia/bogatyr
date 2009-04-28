@@ -31,6 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -43,34 +46,59 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a NumberField, similar to TextField, but only numeric characters are allowed.
  * 
  * @author Stefan Laubenberger
- * @version 20090421
+ * @version 20090427
  */
 public class NumberField extends TextField {//TODO improve Document!
 	private static final long serialVersionUID = 4469777330124040925L;
 
 	
 	public NumberField() {
-		this(0, "", Integer.MAX_VALUE);
+		this(0, "", Integer.MAX_VALUE); //$NON-NLS-1$
 	}
-	
-	public NumberField(final double number, final String toolTip, final int columns) {
-		super(Double.toString(number), toolTip, columns);
+
+	public NumberField(String text, String toolTip, int columns) {
+		super(text, toolTip, columns);
+	}
+
+	public NumberField(final Number number, final String toolTip, final int columns) {
+		super(number.toString(), toolTip, columns);
 	}
 	
 	/**
-     * Get the number of the number field
-     * @return int number of the number field
+     * Get the value of the number field as Double.
+     * @return Double value of the number field
      */	
-	public double getNumber() {
-		return HelperGeneral.isValidString(getText()) ? Double.valueOf(getText()) : 0.0D;
+	public Double getDouble() {
+		return Double.valueOf(HelperGeneral.getValidNumericString(getText()));
 	}
-
+	
+	/**
+     * Get the value of the number field as Integer.
+     * @return Integer value of the number field
+     */	
+	public Integer getInteger() {
+		return Integer.valueOf(HelperGeneral.getValidNumericString(getText()));
+	}
+	
 	/**
      * Set the number of the number field
      * @param number Number of the number field
      */	
-	public void setNumber(final double number) {
-        setText(Double.valueOf(number).toString());
+	public void setNumber(final Number number) {
+        setText(number.toString());
+	}
+	
+	
+	protected boolean isStringNumeric(final CharSequence arg) {
+		if (HelperGeneral.isValidString(arg)) {
+			final Pattern p = Pattern.compile("[-%'0-9.]+"); //$NON-NLS-1$
+			final Matcher m = p.matcher(arg);
+
+			if (m.matches()) {
+                return true;
+            }
+		}
+		return false;
 	}
 	
 	
@@ -98,7 +126,7 @@ public class NumberField extends TextField {//TODO improve Document!
 
 		@Override
 		public void insertString(final int offs, final String str, final AttributeSet a) throws BadLocationException {
-			if (str != null && str.length() + offs <= getColumns() && HelperGeneral.isStringNumeric(str)) {
+			if (str != null && str.length() + offs <= getColumns() && isStringNumeric(str)) {
 	 	          super.insertString(offs, str, a);
 			}
 		}

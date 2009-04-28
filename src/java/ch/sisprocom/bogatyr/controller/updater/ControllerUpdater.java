@@ -49,7 +49,6 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import ch.sisprocom.bogatyr.controller.ControllerAbstract;
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 
@@ -57,7 +56,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is the updater controller for new Bogatyr-based applications versions.
  * 
  * @author Stefan Laubenberger
- * @version 20090426
+ * @version 20090428
  */
 public class ControllerUpdater extends ControllerAbstract implements IControllerUpdater, ListenerUpdater { //TODO document in Wiki!
 	private Collection<ListenerUpdater> listListener = new ArrayList<ListenerUpdater>();

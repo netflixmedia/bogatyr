@@ -45,7 +45,7 @@ public interface IComponentFader {
 	/**
      * Sets the fading state of the component.
      * 
-     * @param isEnabled anti-aliasing state
+     * @param isEnabled fading state
      */
 	void setFading(final boolean isFading);
 	

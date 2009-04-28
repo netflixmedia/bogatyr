@@ -31,6 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.sample.filemanager;
 
+import java.io.File;
+import java.io.IOException;
+
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
 import ch.sisprocom.bogatyr.controller.localizer.ControllerLocalizerFile;
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
@@ -39,16 +42,12 @@ import ch.sisprocom.bogatyr.controller.property.IControllerProperty;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Locale;
-
 
 /**
  * Simple file manager using the Bogatyr framework
  * 
  * @author Stefan Laubenberger
- * @version 20090426
+ * @version 20090428
  */
 public class FileManager extends ApplicationAbstract { //TODO document in Wiki!
 	// Fixed parameter - e.g. this could be an argument

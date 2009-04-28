@@ -45,11 +45,13 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JTree.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090428
  */
-public class Tree extends JTree {
+public class Tree extends JTree implements IComponentActivate {
 	private static final long serialVersionUID = -4538444845018995986L;
 	
+	private boolean isActive = true;
+
 
 	public Tree() {
 		super();
@@ -86,5 +88,31 @@ public class Tree extends JTree {
 	@Override
 	public String toString() {
 		return HelperGeneral.toString(this);
+	}
+	
+
+	@Override
+	public void setEnabled(boolean isEnabled) {
+		if (isActive) {
+			super.setEnabled(isEnabled);
+		}
+	}
+
+	
+	/*
+	 * Implemented methods
+	 */	
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		if (isActive) {
+			this.isActive = isActive;
+			setEnabled(isActive);
+		} else {
+			setEnabled(isActive);
+			this.isActive = isActive;
+		}
 	}
 }

@@ -44,12 +44,14 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JButton.
  * 
  * @author Stefan Laubenberger
- * @version 20090423
+ * @version 20090428
  */
-public class Button extends JButton {
+public class Button extends JButton implements IComponentActivate {
 	private static final long serialVersionUID = -7231487009931166084L;
 	
+	private boolean isActive = true;
 
+	
 	public Button() {
 		super();
 	}
@@ -81,6 +83,31 @@ public class Button extends JButton {
 	@Override
 	public String toString() {
 		return HelperGeneral.toString(this);
+	}
+
+	@Override
+	public void setEnabled(boolean isEnabled) {
+		if (isActive) {
+			super.setEnabled(isEnabled);
+		}
+	}
+
+	
+	/*
+	 * Implemented methods
+	 */	
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		if (isActive) {
+			this.isActive = isActive;
+			setEnabled(isActive);
+		} else {
+			setEnabled(isActive);
+			this.isActive = isActive;
+		}
 	}
 	
 //	@Override
