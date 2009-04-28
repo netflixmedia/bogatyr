@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class List extends JList implements IComponentActivate {
 	private static final long serialVersionUID = 7354802735840177105L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 	
 	public List() {
@@ -93,11 +93,11 @@ public class List extends JList implements IComponentActivate {
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			List.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			List.isActive = isActive;
 		}
 	}
 }

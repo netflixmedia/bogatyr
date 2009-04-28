@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class Table extends JTable implements IComponentActivate {
 	private static final long serialVersionUID = -1201835867524275584L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 
 	public Table() {
@@ -107,11 +107,11 @@ public class Table extends JTable implements IComponentActivate {
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			Table.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			Table.isActive = isActive;
 		}
 	}
 }

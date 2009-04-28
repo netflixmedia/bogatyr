@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class TextField extends JTextField implements IComponentActivate {
 	private static final long serialVersionUID = 866371447844640358L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 	
 	public TextField() {
@@ -92,11 +92,11 @@ public class TextField extends JTextField implements IComponentActivate {
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			TextField.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			TextField.isActive = isActive;
 		}
 	}
 

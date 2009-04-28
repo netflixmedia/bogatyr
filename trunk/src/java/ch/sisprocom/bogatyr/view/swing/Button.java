@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class Button extends JButton implements IComponentActivate {
 	private static final long serialVersionUID = -7231487009931166084L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 	
 	public Button() {
@@ -102,11 +102,11 @@ public class Button extends JButton implements IComponentActivate {
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			Button.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			Button.isActive = isActive;
 		}
 	}
 	

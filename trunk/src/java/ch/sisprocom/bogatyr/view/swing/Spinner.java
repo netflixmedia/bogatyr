@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class Spinner extends JSpinner implements IComponentActivate {
 	private static final long serialVersionUID = 1637909823592308393L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 	
 	public Spinner() {
@@ -55,7 +55,6 @@ public class Spinner extends JSpinner implements IComponentActivate {
 
 	public Spinner(SpinnerModel model) {
 		super(model);
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -85,11 +84,11 @@ public class Spinner extends JSpinner implements IComponentActivate {
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			Spinner.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			Spinner.isActive = isActive;
 		}
 	}
 }

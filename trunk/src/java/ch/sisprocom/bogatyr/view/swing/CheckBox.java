@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class CheckBox extends JCheckBox implements IComponentActivate {
 	private static final long serialVersionUID = -6439735629199643683L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 	
 	public CheckBox() {
@@ -102,11 +102,11 @@ public class CheckBox extends JCheckBox implements IComponentActivate {
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			CheckBox.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			CheckBox.isActive = isActive;
 		}
 	}
 	

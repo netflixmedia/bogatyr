@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 public class RadioButton extends JRadioButton implements IComponentActivate {
 	private static final long serialVersionUID = 8676540667794440059L;
 	
-	private boolean isActive = true;
+	private static boolean isActive = true;
 
 
 	public RadioButton() {
@@ -102,11 +102,11 @@ public class RadioButton extends JRadioButton implements IComponentActivate {
 
 	public void setActive(boolean isActive) {
 		if (isActive) {
-			this.isActive = isActive;
+			RadioButton.isActive = isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			this.isActive = isActive;
+			RadioButton.isActive = isActive;
 		}
 	}
 	
