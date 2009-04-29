@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JTabbedPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090429
  */
 public class PaneTab extends JTabbedPane {
 	private static final long serialVersionUID = -4529079733239863943L;
@@ -52,11 +52,11 @@ public class PaneTab extends JTabbedPane {
 		super();
 	}
 
-	public PaneTab(int tabPlacement, int tabLayoutPolicy) {
+	public PaneTab(final int tabPlacement, final int tabLayoutPolicy) {
 		super(tabPlacement, tabLayoutPolicy);
 	}
 
-	public PaneTab(int tabPlacement) {
+	public PaneTab(final int tabPlacement) {
 		super(tabPlacement);
 	}
 

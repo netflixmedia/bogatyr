@@ -31,29 +31,29 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
 
 /**
  * This is an extended JTextField.
  * 
  * @author Stefan Laubenberger
- * @version 20090428
+ * @version 20090429
  */
 public class TextField extends JTextField implements IComponentActivate {
 	private static final long serialVersionUID = 866371447844640358L;
 	
-	private static boolean isActive = true;
+	private boolean isNotActive;
 
 	
 	public TextField() {
-        this("", "", Integer.MAX_VALUE);
+        this("", "", Integer.MAX_VALUE); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
 	public TextField(final String text, final String toolTip, final int columns) {
@@ -76,8 +76,8 @@ public class TextField extends JTextField implements IComponentActivate {
     }
 
 	@Override
-	public void setEnabled(boolean isEnabled) {
-		if (isActive) {
+	public void setEnabled(final boolean isEnabled) {
+		if (!isNotActive) {
 			super.setEnabled(isEnabled);
 		}
 	}
@@ -87,16 +87,16 @@ public class TextField extends JTextField implements IComponentActivate {
 	 * Implemented methods
 	 */	
 	public boolean isActive() {
-		return isActive;
+		return !isNotActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(final boolean isActive) {
 		if (isActive) {
-			TextField.isActive = isActive;
+			isNotActive = !isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			TextField.isActive = isActive;
+			isNotActive = !isActive;
 		}
 	}
 
@@ -111,7 +111,7 @@ public class TextField extends JTextField implements IComponentActivate {
     /*
      * Inner classes
      */
-    protected class TextFieldDocument extends PlainDocument {
+    private class TextFieldDocument extends PlainDocument {
     	private static final long serialVersionUID = -9060548395031856257L;
 
 		@Override

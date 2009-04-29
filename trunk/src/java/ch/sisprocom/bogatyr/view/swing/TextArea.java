@@ -41,12 +41,12 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JTextArea.
  * 
  * @author Stefan Laubenberger
- * @version 20090428
+ * @version 20090429
  */
 public class TextArea extends JTextArea implements IComponentActivate {
 	private static final long serialVersionUID = 8509257459382968021L;
 	
-	private static boolean isActive = true;
+	private boolean isNotActive;
 
 	
     public TextArea() {
@@ -94,8 +94,8 @@ public class TextArea extends JTextArea implements IComponentActivate {
 	}
 
 	@Override
-	public void setEnabled(boolean isEnabled) {
-		if (isActive) {
+	public void setEnabled(final boolean isEnabled) {
+		if (!isNotActive) {
 			super.setEnabled(isEnabled);
 		}
 	}
@@ -105,16 +105,16 @@ public class TextArea extends JTextArea implements IComponentActivate {
 	 * Implemented methods
 	 */	
 	public boolean isActive() {
-		return isActive;
+		return !isNotActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(final boolean isActive) {
 		if (isActive) {
-			TextArea.isActive = isActive;
+			isNotActive = !isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			TextArea.isActive = isActive;
+			isNotActive = !isActive;
 		}
 	}
 	

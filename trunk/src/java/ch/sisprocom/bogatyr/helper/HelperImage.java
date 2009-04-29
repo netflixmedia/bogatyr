@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import javax.imageio.ImageIO;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -43,14 +44,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.imageio.ImageIO;
-
 
 /**
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090426
+ * @version 20090429
  */
 public abstract class HelperImage { //TODO document in Wiki!
 	public static final String TYPE_JPG = "jpg"; //$NON-NLS-1$
@@ -88,7 +87,7 @@ public abstract class HelperImage { //TODO document in Wiki!
      * @return component as BufferedImage
      * @throws IOException
      */
-	public static BufferedImage getImage(final Component component) {
+	public static RenderedImage getImage(final Component component) {
 		final Dimension size = component.getSize();
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		final Graphics2D g2 = image.createGraphics();
@@ -149,7 +148,7 @@ public abstract class HelperImage { //TODO document in Wiki!
 	 * @return list containing the unique values
 	 */
     private static List<String> unique(final String[] strings) {
-        final Set<String> set = new HashSet<String>();
+        final Set<String> set = new HashSet<String>(strings.length);
         
         for (final String str : strings) {
             set.add(str.toLowerCase());

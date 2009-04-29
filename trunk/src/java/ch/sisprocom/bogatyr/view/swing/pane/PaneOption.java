@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JOptionPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090429
  */
 public class PaneOption extends JOptionPane {
 	private static final long serialVersionUID = -4947729751470298861L;
@@ -53,29 +53,29 @@ public class PaneOption extends JOptionPane {
 		super();
 	}
 	
-	public PaneOption(Object message, int messageType, int optionType,
-			Icon icon, Object[] options, Object initialValue) {
+	public PaneOption(final Object message, final int messageType, final int optionType,
+			final Icon icon, final Object[] options, final Object initialValue) {
 		super(message, messageType, optionType, icon, options, initialValue);
 	}
 
-	public PaneOption(Object message, int messageType, int optionType,
-			Icon icon, Object[] options) {
+	public PaneOption(final Object message, final int messageType, final int optionType,
+			final Icon icon, final Object[] options) {
 		super(message, messageType, optionType, icon, options);
 	}
 
-	public PaneOption(Object message, int messageType, int optionType, Icon icon) {
+	public PaneOption(final Object message, final int messageType, final int optionType, final Icon icon) {
 		super(message, messageType, optionType, icon);
 	}
 
-	public PaneOption(Object message, int messageType, int optionType) {
+	public PaneOption(final Object message, final int messageType, final int optionType) {
 		super(message, messageType, optionType);
 	}
 
-	public PaneOption(Object message, int messageType) {
+	public PaneOption(final Object message, final int messageType) {
 		super(message, messageType);
 	}
 
-	public PaneOption(Object message) {
+	public PaneOption(final Object message) {
 		super(message);
 	}
 

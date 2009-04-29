@@ -31,19 +31,18 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.chooser;
 
-import java.awt.Color;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.JColorChooser;
 import javax.swing.colorchooser.ColorSelectionModel;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.awt.Color;
 
 
 /**
  * This is an extended JColorChooser.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090429
  */
 public class ChooserColor extends JColorChooser {
 	private static final long serialVersionUID = 2106701368372263061L;
@@ -53,15 +52,15 @@ public class ChooserColor extends JColorChooser {
 		super();
 	}
 
-	public ChooserColor(Color initialColor) {
+	public ChooserColor(final Color initialColor) {
 		super(initialColor);
 	}
 
-	public ChooserColor(ColorSelectionModel model) {
+	public ChooserColor(final ColorSelectionModel model) {
 		super(model);
 	}
 
-	
+
 	/*
 	 * Overridden methods
 	 */

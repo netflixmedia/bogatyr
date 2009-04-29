@@ -31,9 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.sample.filemanager;
 
-import java.io.File;
-import java.io.IOException;
-
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
 import ch.sisprocom.bogatyr.controller.localizer.ControllerLocalizerFile;
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
@@ -41,6 +38,9 @@ import ch.sisprocom.bogatyr.controller.property.ControllerProperty;
 import ch.sisprocom.bogatyr.controller.property.IControllerProperty;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.HelperIO;
+
+import java.io.File;
+import java.io.IOException;
 
 
 /**
@@ -107,8 +107,8 @@ public class FileManager extends ApplicationAbstract { //TODO document in Wiki!
 
 	private void searchFiles() throws IOException {
 		int ii = 0;
-		String[] identifier = new String[]{property.getProperty(PROPERTY_IDENTIFIER)};
-		boolean isDelete = property.getPropertyBoolean(PROPERTY_DELETE);
+		final String[] identifier = {property.getProperty(PROPERTY_IDENTIFIER)};
+		final boolean isDelete = property.getPropertyBoolean(PROPERTY_DELETE);
 
 		for (final File file : HelperIO.getFiles(path, identifier, false)) {
 			if (isDelete) {

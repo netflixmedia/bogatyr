@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JSplitPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090429
  */
 public class PaneSplit extends JSplitPane {
 	private static final long serialVersionUID = 2243720263917281740L;
@@ -52,21 +52,21 @@ public class PaneSplit extends JSplitPane {
 		super();
 	}
 	
-	public PaneSplit(int newOrientation, boolean newContinuousLayout,
-			Component newLeftComponent, Component newRightComponent) {
+	public PaneSplit(final int newOrientation, final boolean newContinuousLayout,
+			final Component newLeftComponent, final Component newRightComponent) {
 		super(newOrientation, newContinuousLayout, newLeftComponent, newRightComponent);
 	}
 
-	public PaneSplit(int newOrientation, boolean newContinuousLayout) {
+	public PaneSplit(final int newOrientation, final boolean newContinuousLayout) {
 		super(newOrientation, newContinuousLayout);
 	}
 
-	public PaneSplit(int newOrientation, Component newLeftComponent,
-			Component newRightComponent) {
+	public PaneSplit(final int newOrientation, final Component newLeftComponent,
+			final Component newRightComponent) {
 		super(newOrientation, newLeftComponent, newRightComponent);
 	}
 
-	public PaneSplit(int newOrientation) {
+	public PaneSplit(final int newOrientation) {
 		super(newOrientation);
 	}
 

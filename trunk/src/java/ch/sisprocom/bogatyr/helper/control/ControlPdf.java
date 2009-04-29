@@ -44,7 +44,7 @@ import java.text.MessageFormat;
  * This control opens PDF data with the default system pdf-viewer (e.g. Acrobat Reader).
  *
  * @author Stefan Laubenberger
- * @version 20090403
+ * @version 20090429
  */
 public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
@@ -62,7 +62,7 @@ public abstract class ControlPdf {
 	 */
 	public static void open(final byte[] pdfContent) throws IOException, InterruptedException {
 		// first store the pdfFileContents to a temporary file
-		final File temporaryFile = HelperIO.getTemporaryFile("temp", PDF_EXTENSION);
+		final File temporaryFile = HelperIO.getTemporaryFile("temp", PDF_EXTENSION); //$NON-NLS-1$
 		HelperIO.writeFileFromBinary(temporaryFile, pdfContent, false);
 		open(temporaryFile);
 	}

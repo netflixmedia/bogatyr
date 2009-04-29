@@ -41,19 +41,19 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JSpinner.
  * 
  * @author Stefan Laubenberger
- * @version 20090428
+ * @version 20090429
  */
 public class Spinner extends JSpinner implements IComponentActivate {
 	private static final long serialVersionUID = 1637909823592308393L;
 	
-	private static boolean isActive = true;
+	private boolean isNotActive;
 
 	
 	public Spinner() {
 		super();
 	}
 
-	public Spinner(SpinnerModel model) {
+	public Spinner(final SpinnerModel model) {
 		super(model);
 	}
 
@@ -68,8 +68,8 @@ public class Spinner extends JSpinner implements IComponentActivate {
 	
 
 	@Override
-	public void setEnabled(boolean isEnabled) {
-		if (isActive) {
+	public void setEnabled(final boolean isEnabled) {
+		if (!isNotActive) {
 			super.setEnabled(isEnabled);
 		}
 	}
@@ -79,16 +79,16 @@ public class Spinner extends JSpinner implements IComponentActivate {
 	 * Implemented methods
 	 */	
 	public boolean isActive() {
-		return isActive;
+		return !isNotActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(final boolean isActive) {
 		if (isActive) {
-			Spinner.isActive = isActive;
+			isNotActive = !isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			Spinner.isActive = isActive;
+			isNotActive = !isActive;
 		}
 	}
 }

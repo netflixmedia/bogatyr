@@ -32,35 +32,33 @@
 package ch.sisprocom.bogatyr.controller.timer;
 
 import java.util.TimerTask;
-import java.util.Timer;
 
 /**
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 20090304
+ * @version 20090429
  */
 public class ControllerTimer extends ControllerTimerAbstract implements IControllerTimer { //TODO document in Wiki!
 
 	/*
 	 * Implemented methods
 	 */
-
     public synchronized void start(final long interval) {
         start(0, interval);
     }
 
     public synchronized void start(final long delay, final long interval) {
-        timer.cancel();
+    	getTimer().cancel();
 
-        timer = new Timer();
-        this.interval = interval;
-        timer.schedule(new Task(), delay, interval);
+//        timer = new Timer();
+        setInterval(interval);
+        getTimer().schedule(new Task(), delay, interval);
         fireTimerStarted();
     }
 
     public synchronized void stop() {
-        timer.cancel();
+    	getTimer().cancel();
         fireTimerStopped();
     }
 	
@@ -68,11 +66,11 @@ public class ControllerTimer extends ControllerTimerAbstract implements IControl
 	/*
 	 * Inner classes
 	 */
-	protected class Task extends TimerTask {
+	private class Task extends TimerTask {
 	    @Override
 		public void run() {
-	    	time += interval;
-    		fireTimeChanged(time);
+	    	setTime(getTime() + getInterval());
+    		fireTimeChanged(getTime());
 	    }
 	}
 }

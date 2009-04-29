@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import javax.swing.Icon;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -40,14 +41,12 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
-import javax.swing.Icon;
-
 
 /**
  * This is a vertical Label.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090429
  */
 public class LabelVertical extends Panel implements Icon { //TODO document in Wiki!
 	private static final long serialVersionUID = -6664528555390753370L;
@@ -132,14 +131,14 @@ public class LabelVertical extends Panel implements Icon { //TODO document in Wi
 	 */
 	@Override
 	public Dimension getPreferredSize() {
-		final Dimension d = label.getPreferredSize();
-		return new Dimension(d.height, d.width); // switch of width and height
+		final Dimension dimension = label.getPreferredSize();
+		return new Dimension(dimension.height, dimension.width); // switch of width and height
 	}
 
 	@Override
 	public void paintComponent(final Graphics g) {
-		final Dimension d = getSize();
-		paintVertical(g, 0, 0, d.width, d.height);
+		final Dimension dimension = getSize();
+		paintVertical(g, 0, 0, dimension.width, dimension.height);
 	}
 	
 	@Override
@@ -181,8 +180,8 @@ public class LabelVertical extends Panel implements Icon { //TODO document in Wi
 		return getPreferredSize().width;
 	}
  
-	public void paintIcon(final Component c, final Graphics g, final int x, final int y) {
-		final Dimension d = getPreferredSize();
-		paintVertical(g, x, y, d.width, d.height);
+	public void paintIcon(final Component component, final Graphics g, final int x, final int y) {
+		final Dimension dimension = getPreferredSize();
+		paintVertical(g, x, y, dimension.width, dimension.height);
 	}
 }

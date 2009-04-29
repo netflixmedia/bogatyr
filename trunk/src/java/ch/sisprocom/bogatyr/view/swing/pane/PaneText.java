@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JTextPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090429
  */
 public class PaneText extends JTextPane {
 	private static final long serialVersionUID = -3996840505161218721L;
@@ -53,7 +53,7 @@ public class PaneText extends JTextPane {
 		super();
 	}
 	
-	public PaneText(StyledDocument doc) {
+	public PaneText(final StyledDocument doc) {
 		super(doc);
 	}
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -48,7 +48,7 @@ import java.util.zip.ZipOutputStream;
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090429
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
 	private static final byte[] BUFFER = new byte[1024]; //TODO document in Wiki!
@@ -154,7 +154,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	        // place the zip entry in the ZipOutputStream object 
 	        zos.putNextEntry(entry); 
 	        
-            int bytesIn = 0;
+            int bytesIn;
 
             // now write the content of the file to the ZipOutputStream
             while(-1 != (bytesIn = fis.read(BUFFER))) {
@@ -184,7 +184,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	    		is = zipFile.getInputStream(entry); 
 	    		os = new FileOutputStream( file );
 
-                int bytesOut = 0;
+                int bytesOut;
 
                 while (-1 != (bytesOut = is.read(BUFFER))) { 
 	    			os.write(BUFFER, 0, bytesOut); 

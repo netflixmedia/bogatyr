@@ -42,43 +42,43 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JToggleButton.
  * 
  * @author Stefan Laubenberger
- * @version 20090428
+ * @version 20090429
  */
 public class ToggleButton extends JToggleButton implements IComponentActivate {
 	private static final long serialVersionUID = 7669429243607853809L;
 	
-	private static boolean isActive = true;
+	private boolean isNotActive;
 
 	
 	public ToggleButton() {
 		super();
 	}
 	
-	public ToggleButton(Action a) {
+	public ToggleButton(final Action a) {
 		super(a);
 	}
 
-	public ToggleButton(Icon icon, boolean selected) {
+	public ToggleButton(final Icon icon, final boolean selected) {
 		super(icon, selected);
 	}
 
-	public ToggleButton(Icon icon) {
+	public ToggleButton(final Icon icon) {
 		super(icon);
 	}
 
-	public ToggleButton(String text, boolean selected) {
+	public ToggleButton(final String text, final boolean selected) {
 		super(text, selected);
 	}
 
-	public ToggleButton(String text, Icon icon, boolean selected) {
+	public ToggleButton(final String text, final Icon icon, final boolean selected) {
 		super(text, icon, selected);
 	}
 
-	public ToggleButton(String text, Icon icon) {
+	public ToggleButton(final String text, final Icon icon) {
 		super(text, icon);
 	}
 
-	public ToggleButton(String text) {
+	public ToggleButton(final String text) {
 		super(text);
 	}
 
@@ -93,8 +93,8 @@ public class ToggleButton extends JToggleButton implements IComponentActivate {
 	
 
 	@Override
-	public void setEnabled(boolean isEnabled) {
-		if (isActive) {
+	public void setEnabled(final boolean isEnabled) {
+		if (!isNotActive) {
 			super.setEnabled(isEnabled);
 		}
 	}
@@ -104,16 +104,16 @@ public class ToggleButton extends JToggleButton implements IComponentActivate {
 	 * Implemented methods
 	 */	
 	public boolean isActive() {
-		return isActive;
+		return !isNotActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(final boolean isActive) {
 		if (isActive) {
-			ToggleButton.isActive = isActive;
+			isNotActive = !isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			ToggleButton.isActive = isActive;
+			isNotActive = !isActive;
 		}
 	}
 }

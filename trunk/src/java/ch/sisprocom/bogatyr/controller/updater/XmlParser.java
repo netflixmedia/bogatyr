@@ -31,30 +31,33 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.updater;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperNet;
+import ch.sisprocom.bogatyr.view.swing.chooser.ChooserFile;
 import ch.sisprocom.bogatyr.view.swing.dialog.Dialog;
 import ch.sisprocom.bogatyr.view.swing.dialog.DialogProgress;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import java.io.File;
-import java.io.IOException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
 
 
 /**
  * SAX handler to parse the update XML files
  * 
  * @author Stefan Laubenberger
- * @version 20090403
+ * @version 20090429
  */
 public class XmlParser extends DefaultHandler {
 	// Resources
@@ -176,7 +179,7 @@ public class XmlParser extends DefaultHandler {
 		boolean isOk = false;
 		
 		while (!isOk) {
-			final JFileChooser fc = new JFileChooser();
+			final ChooserFile fc = new ChooserFile();
 			fc.setSelectedFile(output);
 	
 			final int returnVal = fc.showSaveDialog(null);

@@ -56,7 +56,7 @@ import java.util.regex.Pattern;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090426
+ * @version 20090429
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and is logging needed?
 	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$ //TODO update in Wiki!
@@ -123,10 +123,10 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      */	
 	public static boolean isStringNumeric(final CharSequence arg) {
 		if (isValidString(arg)) {
-			final Pattern p = Pattern.compile("[-0-9.]+"); //$NON-NLS-1$
-			final Matcher m = p.matcher(arg);
+			final Pattern pattern = Pattern.compile("[-0-9.]+"); //$NON-NLS-1$
+			final Matcher matcher = pattern.matcher(arg);
 
-			if (m.matches()) {
+			if (matcher.matches()) {
                 return true;
             }
 		}
@@ -439,13 +439,13 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return numeric string
      */
     public static String getValidNumericString(final String text) { //TODO document in Wiki!
-    	boolean isNegative = false;
     	
     	if (text.isEmpty()) {
     		return null;
     	}
-    	
-    	if (text.contains("-")) { //$NON-NLS-1$
+
+        boolean isNegative = false;
+        if (text.contains("-")) { //$NON-NLS-1$
     		isNegative = true;
     	}
     	

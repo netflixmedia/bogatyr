@@ -39,7 +39,7 @@ import java.util.ResourceBundle;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 20090304
+ * @version 20090429
  */
 public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TODO document in Wiki!
 	private Locale locale;
@@ -94,7 +94,7 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 		try {
 			return bundle.getString(key + ".tooltip"); //$NON-NLS-1$
 		} catch (Exception ex) {
-			return null;
+			return "";
 		}
 	}
 	

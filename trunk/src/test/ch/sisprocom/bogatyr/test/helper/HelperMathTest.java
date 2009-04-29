@@ -142,10 +142,9 @@ public class HelperMathTest { //TODO improve
 	@Test
 	public void testRandom() {
 		final int range = 2000000000;
-		int number;
 		
 		for (int ii = 0; 100 > ii; ii++) {
-			number = HelperMath.random(range);
+            int number = HelperMath.random(range);
 
 			if (0 <= number && range >= number) {
 				assertTrue(true);

@@ -31,20 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.pane;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
+import javax.swing.JEditorPane;
 import java.awt.Component;
 import java.io.IOException;
 import java.net.URL;
-
-import javax.swing.JEditorPane;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
  * This is an extended JEditorPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090429
  */
 public class PaneEditor extends JEditorPane {
 	private static final long serialVersionUID = -3298005917085461997L;
@@ -54,15 +53,15 @@ public class PaneEditor extends JEditorPane {
 		super();
 	}
 	
-	public PaneEditor(String type, String text) {
+	public PaneEditor(final String type, final String text) {
 		super(type, text);
 	}
 
-	public PaneEditor(String url) throws IOException {
+	public PaneEditor(final String url) throws IOException {
 		super(url);
 	}
 
-	public PaneEditor(URL initialPage) throws IOException {
+	public PaneEditor(final URL initialPage) throws IOException {
 		super(initialPage);
 	}
 

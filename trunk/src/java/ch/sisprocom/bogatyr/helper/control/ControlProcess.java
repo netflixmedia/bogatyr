@@ -40,7 +40,7 @@ import java.io.OutputStream;
  * Creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 20090304
+ * @version 20090429
  */
 public abstract class ControlProcess {
 	private static final int BUFFER = 1024;
@@ -97,7 +97,7 @@ public abstract class ControlProcess {
 	/*
 	 * Inner classes
 	 */
-	protected static class StreamReader extends Thread {
+	private static class StreamReader extends Thread {
 		private final InputStream is;
 		private final OutputStream os;
 
@@ -108,7 +108,7 @@ public abstract class ControlProcess {
 		 * @param source may not be null
 		 * @param target may be null
 		 */
-		StreamReader(final InputStream source, final OutputStream target) {
+		private StreamReader(final InputStream source, final OutputStream target) {
             super();
             is = source;
             os = target;

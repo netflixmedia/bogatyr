@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -40,7 +40,7 @@ import java.util.Collection;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090429
  */
 public abstract class HelperMath { //TODO document in Wiki!
 	
@@ -52,9 +52,7 @@ public abstract class HelperMath { //TODO document in Wiki!
 	 * @return calculated gcd
 	 */
 	 public static double gcd(final double a, final double b) {
-
-        final double result = 0 == b ? a : gcd(b, a % b);
-		 return result;
+		 return 0 == b ? a : gcd(b, a % b);
 	 } 
 
 	 /**
@@ -75,28 +73,24 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @return true/false
      */	
 	public static boolean isPrime(final int n) {
-		boolean flag = false;
-        
 //        try {
 			// 2 is the smallest prime
 	        if (2 >= n) {
-	            flag = 2 == n;
-	        	return flag;
+	        	return 2 == n;
 	        }
 	
 	        // even numbers other than 2 are not prime
 	        if (0 == n % 2) {
-	            return flag;
+	            return false;
 	        }
 	
 	        // check odd divisors from 3 to the square root of n
 	        for (int i = 3, end = (int)Math.sqrt((double) n); i <= end; i += 2) {
 	            if (0 == n % i) {
-	                return flag;
+	                return false;
 	            }
 	        }
-	        flag = true;
-	        return flag;
+	        return true;
 //        } finally {
 //    		Logger.getInstance().writeMethodExit(HelperMath.class, "isPrime", flag);  //$NON-NLS-1$
 //        }
@@ -125,7 +119,11 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @return list with prime numbers
      */	
 	public static Object getPrimes(final int start, final int end) {
-		final Collection<Integer> list = new ArrayList<Integer>();
+        if (start > end) {
+            throw new IllegalArgumentException("end value (" + end + ") must be greater than the start value (" + start + ')');
+        }
+
+        final Collection<Integer> list = new ArrayList<Integer>(end - start + 1);
 		
 		for (int ii = start; ii <= end; ii++) {
 			if (isPrime(ii)) {

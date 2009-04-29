@@ -40,27 +40,27 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JToolBar.
  * 
  * @author Stefan Laubenberger
- * @version 20090428
+ * @version 20090429
  */
 public class ToolBar extends JToolBar implements IComponentActivate {
 	private static final long serialVersionUID = 7538391089705088133L;
 	
-	private static boolean isActive = true;
+	private boolean isNotActive;
 
 
 	public ToolBar() {
 		super();
 	}
 	
-	public ToolBar(int orientation) {
+	public ToolBar(final int orientation) {
 		super(orientation);
 	}
 
-	public ToolBar(String name, int orientation) {
+	public ToolBar(final String name, final int orientation) {
 		super(name, orientation);
 	}
 
-	public ToolBar(String name) {
+	public ToolBar(final String name) {
 		super(name);
 	}
 
@@ -74,8 +74,8 @@ public class ToolBar extends JToolBar implements IComponentActivate {
 	}
 
 	@Override
-	public void setEnabled(boolean isEnabled) {
-		if (isActive) {
+	public void setEnabled(final boolean isEnabled) {
+		if (!isNotActive) {
 			super.setEnabled(isEnabled);
 		}
 	}
@@ -85,16 +85,16 @@ public class ToolBar extends JToolBar implements IComponentActivate {
 	 * Implemented methods
 	 */	
 	public boolean isActive() {
-		return isActive;
+		return !isNotActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(final boolean isActive) {
 		if (isActive) {
-			ToolBar.isActive = isActive;
+			isNotActive = !isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			ToolBar.isActive = isActive;
+			isNotActive = !isActive;
 		}
 	}
 }

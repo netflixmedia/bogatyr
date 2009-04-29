@@ -31,33 +31,56 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.timer;
 
+import ch.sisprocom.bogatyr.controller.ControllerAbstract;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Timer;
-
-import ch.sisprocom.bogatyr.controller.ControllerAbstract;
 
 /**
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 20090426
+ * @version 20090429
  */
 public abstract class ControllerTimerAbstract extends ControllerAbstract implements IListener{ //TODO document in Wiki!
 	private Collection<ListenerTimer> listListener = new ArrayList<ListenerTimer>();
 
-	protected Timer timer;
-	protected long time;
-	protected long interval;
+	private final Timer timer = new Timer();
+	private long time;
+	private long interval;
 	
 
 	protected ControllerTimerAbstract() {
         super();
-        timer = new Timer();
     }
-	
-	
-	/*
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+//    public void setTimer(Timer timer) {
+//        this.timer = timer;
+//    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public long getInterval() {
+        return interval;
+    }
+
+    public void setInterval(long interval) {
+        this.interval = interval;
+    }
+    
+    
+    /*
 	 * Private methods
 	 */
 	protected void fireTimeChanged(final long time) {

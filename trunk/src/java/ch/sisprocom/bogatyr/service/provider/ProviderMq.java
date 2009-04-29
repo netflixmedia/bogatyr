@@ -31,13 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.provider;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.HelperXml;
-
 import com.ibm.mq.MQEnvironment;
 import com.ibm.mq.MQException;
 import com.ibm.mq.MQGetMessageOptions;
@@ -47,12 +42,16 @@ import com.ibm.mq.MQQueue;
 import com.ibm.mq.MQQueueManager;
 import com.ibm.mqbind.MQC;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * This class connects to an IBM MQ-Server and allows to send and receive messages.
  * 
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 20090429
  */
 public class ProviderMq implements IProviderMq { //TODO document in Wiki!
 
@@ -64,27 +63,27 @@ public class ProviderMq implements IProviderMq { //TODO document in Wiki!
         MQEnvironment.channel = channel;
     }
 
-	public String getHostname() {
+	public static String getHostname() {
 		return MQEnvironment.hostname;
 	}
 
-	public int getPort() {
+	public static int getPort() {
 		return MQEnvironment.port;
 	}
 
-	public String getChannel() {
+	public static String getChannel() {
 		return MQEnvironment.channel;
 	}
 
-	public void setHostname(final String hostname) {
+	public static void setHostname(final String hostname) {
 		MQEnvironment.hostname = hostname;
 	}
 
-	public void setPort(final int port) {
+	public static void setPort(final int port) {
 		MQEnvironment.port = port;
 	}
 
-	public void setChannel(final String channel) {
+	public static void setChannel(final String channel) {
 		MQEnvironment.channel = channel;
 	}
 

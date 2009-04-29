@@ -96,7 +96,7 @@ public class HelloWorld extends ApplicationAbstract { //TODO document in Wiki!
 	 * Implemented methods
 	 */
 	public void run() {
-		String username = property.getProperty(PROPERTY_USERNAME);
+		final String username = property.getProperty(PROPERTY_USERNAME);
 		
 		localizer.setLocale(Locale.GERMAN);
 		System.out.println(localizer.getValue(RES_WELCOME) + ' ' + username + '!');

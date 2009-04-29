@@ -31,23 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.util.Arrays;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.JPasswordField;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.util.Arrays;
 
 
 /**
  * This is an extended JPasswordField.
  * 
  * @author Stefan Laubenberger
- * @version 20090428
+ * @version 20090429
  */
 public class PasswordField extends JPasswordField implements IComponentActivate {
 	private static final long serialVersionUID = 4337982428755317915L;
 	
-	private static boolean isActive = true;
+	private boolean isNotActive;
 
 	
 	public PasswordField() {
@@ -66,9 +65,7 @@ public class PasswordField extends JPasswordField implements IComponentActivate 
 	 * @return true/false
 	 */
 	public boolean isPasswordCorrect(final char[] correctPassword) {
-
-        boolean isCorrect = getPassword().length == correctPassword.length ? Arrays.equals(getPassword(), correctPassword) : false;
-	    return isCorrect;
+	    return getPassword().length == correctPassword.length && Arrays.equals(getPassword(), correctPassword);
 	}
 	
 	
@@ -81,8 +78,8 @@ public class PasswordField extends JPasswordField implements IComponentActivate 
 	}
 
 	@Override
-	public void setEnabled(boolean isEnabled) {
-		if (isActive) {
+	public void setEnabled(final boolean isEnabled) {
+		if (!isNotActive) {
 			super.setEnabled(isEnabled);
 		}
 	}
@@ -92,16 +89,16 @@ public class PasswordField extends JPasswordField implements IComponentActivate 
 	 * Implemented methods
 	 */	
 	public boolean isActive() {
-		return isActive;
+		return !isNotActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(final boolean isActive) {
 		if (isActive) {
-			PasswordField.isActive = isActive;
+			isNotActive = !isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			PasswordField.isActive = isActive;
+			isNotActive = !isActive;
 		}
 	}
 	
