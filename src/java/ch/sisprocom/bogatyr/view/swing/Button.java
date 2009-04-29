@@ -31,25 +31,24 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.event.ActionListener;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.awt.event.ActionListener;
 
 
 /**
  * This is an extended JButton.
  * 
  * @author Stefan Laubenberger
- * @version 20090428
+ * @version 20090429
  */
 public class Button extends JButton implements IComponentActivate {
 	private static final long serialVersionUID = -7231487009931166084L;
 	
-	private static boolean isActive = true;
+	private boolean isNotActive;
 
 	
 	public Button() {
@@ -86,8 +85,8 @@ public class Button extends JButton implements IComponentActivate {
 	}
 
 	@Override
-	public void setEnabled(boolean isEnabled) {
-		if (isActive) {
+	public void setEnabled(final boolean isEnabled) {
+		if (!isNotActive) {
 			super.setEnabled(isEnabled);
 		}
 	}
@@ -97,16 +96,16 @@ public class Button extends JButton implements IComponentActivate {
 	 * Implemented methods
 	 */	
 	public boolean isActive() {
-		return isActive;
+		return !isNotActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(final boolean isActive) {
 		if (isActive) {
-			Button.isActive = isActive;
+			isNotActive = !isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			Button.isActive = isActive;
+			isNotActive = !isActive;
 		}
 	}
 	

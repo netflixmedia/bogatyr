@@ -46,10 +46,12 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JSlider.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090429
  */
-public class Slider extends JSlider {
+public class Slider extends JSlider implements IComponentActivate {
 	private static final long serialVersionUID = 8676540667794440059L;
+	
+	private boolean isNotActive;
 	
 
 	public Slider() {
@@ -96,6 +98,31 @@ public class Slider extends JSlider {
 					((Component) element).setFont( font );
 				}
 			}
+		}
+	}
+	
+	@Override
+	public void setEnabled(final boolean isEnabled) {
+		if (!isNotActive) {
+			super.setEnabled(isEnabled);
+		}
+	}
+
+	
+	/*
+	 * Implemented methods
+	 */	
+	public boolean isActive() {
+		return !isNotActive;
+	}
+
+	public void setActive(final boolean isActive) {
+		if (isActive) {
+			isNotActive = !isActive;
+			setEnabled(isActive);
+		} else {
+			setEnabled(isActive);
+			isNotActive = !isActive;
 		}
 	}
 }

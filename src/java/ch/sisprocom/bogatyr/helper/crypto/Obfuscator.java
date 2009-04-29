@@ -39,7 +39,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a class for obfuscating data.
  * 
  * @author Stefan Laubenberger
- * @version 20090403
+ * @version 20090429
  */
 public class Obfuscator implements IObfuscator {
 	private static final byte DEFAULT_PATTERN = Byte.MAX_VALUE;
@@ -83,7 +83,7 @@ public class Obfuscator implements IObfuscator {
      * @param pattern for unobfuscating (region: -128 - 127)
      * @return the obfuscated data
 	 */
-	private byte[] obfuscate(final byte[] input, final byte pattern) {
+	private static byte[] obfuscate(final byte[] input, final byte pattern) {
 		final byte[] result = new byte[input.length];
 		
 		for (int ii = 0; ii < input.length; ii++ ) {

@@ -31,22 +31,21 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
  * This is a NumberField, similar to TextField, but only numeric characters are allowed.
  * 
  * @author Stefan Laubenberger
- * @version 20090427
+ * @version 20090429
  */
 public class NumberField extends TextField {//TODO improve Document!
 	private static final long serialVersionUID = 4469777330124040925L;
@@ -56,7 +55,7 @@ public class NumberField extends TextField {//TODO improve Document!
 		this(0, "", Integer.MAX_VALUE); //$NON-NLS-1$
 	}
 
-	public NumberField(String text, String toolTip, int columns) {
+	public NumberField(final String text, final String toolTip, final int columns) {
 		super(text, toolTip, columns);
 	}
 
@@ -89,12 +88,12 @@ public class NumberField extends TextField {//TODO improve Document!
 	}
 	
 	
-	protected boolean isStringNumeric(final CharSequence arg) {
+	protected static boolean isStringNumeric(final CharSequence arg) {
 		if (HelperGeneral.isValidString(arg)) {
-			final Pattern p = Pattern.compile("[-%'0-9.]+"); //$NON-NLS-1$
-			final Matcher m = p.matcher(arg);
+			final Pattern pattern = Pattern.compile("[-%'0-9.]+"); //$NON-NLS-1$
+			final Matcher matcher = pattern.matcher(arg);
 
-			if (m.matches()) {
+			if (matcher.matches()) {
                 return true;
             }
 		}
@@ -121,7 +120,7 @@ public class NumberField extends TextField {//TODO improve Document!
     /*
      * Inner classes
      */
-	protected class NumberDocument extends PlainDocument {
+	private class NumberDocument extends PlainDocument {
 		private static final long serialVersionUID = 3766889554419497713L;
 
 		@Override

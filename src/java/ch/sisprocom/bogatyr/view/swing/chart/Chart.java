@@ -52,13 +52,13 @@ import java.util.List;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20090403
+ * @version 20090429
  */
 public class Chart extends Panel {
 	private static final long serialVersionUID = -4618658256880807781L;
 
     public enum X_Axis {NORTH, SOUTH}
-    public enum Y_Axis {WEST, SOUTH}
+    public enum Y_Axis {WEST, EAST}
 
 	private Color colorGrid = Color.GRAY;
 	private Color colorBackground = Color.WHITE;
@@ -87,7 +87,7 @@ public class Chart extends Panel {
 		this.positionYAxis = positionYAxis;
         gridIntervalX = maxX / xAxes.length;
         gridIntervalY = maxY / yAxes.length;
-        entries = new ArrayList<ChartEntry>();
+        entries = new ArrayList<ChartEntry>(maxX * maxY);
         
 		createLayout();
 	}
@@ -100,7 +100,7 @@ public class Chart extends Panel {
      */
 	public void addEntry(final ChartEntry entry) {
 		if (entry.getX() + entry.getSizeX() > maxX || entry.getY() + entry.getSizeY() > maxY) {
-			throw new RuntimeException("Component exceeds the defined chart area!");
+			throw new IllegalArgumentException("Component (" + entry.getSizeX() + 'x' + entry.getSizeY() + ") is outside of the defined chart area (" + maxX + 'x' + maxY + ')'); //$NON-NLS-1$ //$NON-NLS-2$
 		}
         entries.add(entry);
 		createLayout();

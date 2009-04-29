@@ -31,39 +31,38 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.util.Vector;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.JList;
 import javax.swing.ListModel;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.util.Vector;
 
 
 /**
  * This is an extended JList.
  * 
  * @author Stefan Laubenberger
- * @version 20090428
+ * @version 20090429
  */
 public class List extends JList implements IComponentActivate {
 	private static final long serialVersionUID = 7354802735840177105L;
 	
-	private static boolean isActive = true;
+	private boolean isNotActive;
 
 	
 	public List() {
 		super();
 	}
 
-	public List(ListModel dataModel) {
+	public List(final ListModel dataModel) {
 		super(dataModel);
 	}
 
-	public List(Object[] listData) {
+	public List(final Object[] listData) {
 		super(listData);
 	}
 
-	public List(Vector<?> listData) {
+	public List(final Vector<?> listData) {
 		super(listData);
 	}
 
@@ -77,8 +76,8 @@ public class List extends JList implements IComponentActivate {
 	}
 	
 	@Override
-	public void setEnabled(boolean isEnabled) {
-		if (isActive) {
+	public void setEnabled(final boolean isEnabled) {
+		if (!isNotActive) {
 			super.setEnabled(isEnabled);
 		}
 	}
@@ -88,16 +87,16 @@ public class List extends JList implements IComponentActivate {
 	 * Implemented methods
 	 */	
 	public boolean isActive() {
-		return isActive;
+		return !isNotActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(final boolean isActive) {
 		if (isActive) {
-			List.isActive = isActive;
+			isNotActive = !isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			List.isActive = isActive;
+			isNotActive = !isActive;
 		}
 	}
 }

@@ -36,9 +36,10 @@ package ch.sisprocom.bogatyr.helper.converter;
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 20090228
+ * @version 20090429
  */
 public abstract class ConverterBase64 {
+    private static final String ERROR_ILLEGAL_CHARACTER = "Illegal character in Base64 encoded data";
 
 	private static final char[] map1 = new char[64];
 	private static final byte[] map2 = new byte[128];
@@ -157,7 +158,7 @@ public abstract class ConverterBase64 {
             ip++;
 
             if (127 < i0 || 127 < i1 || 127 < i2 || 127 < i3) {
-                throw new IllegalArgumentException("Illegal character in Base64 encoded data");
+                throw new IllegalArgumentException(ERROR_ILLEGAL_CHARACTER);
             }
 			final int b0 = map2[i0];
 			final int b1 = map2[i1];
@@ -165,7 +166,7 @@ public abstract class ConverterBase64 {
 			final int b3 = map2[i3];
 
 			if (0 > b0 || 0 > b1 || 0 > b2 || 0 > b3) {
-                throw new IllegalArgumentException("Illegal character in Base64 encoded data");
+                throw new IllegalArgumentException(ERROR_ILLEGAL_CHARACTER);
             }
 
 			final int o0 = b0 << 2 | b1 >>> 4;

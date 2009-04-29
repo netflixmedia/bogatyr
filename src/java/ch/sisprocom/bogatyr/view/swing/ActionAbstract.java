@@ -31,36 +31,49 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.Color;
+import javax.swing.AbstractAction;
+import javax.swing.Icon;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * Defines the methods for the implementation of fading.
+ * This is an extended AbstractAction.
  * 
  * @author Stefan Laubenberger
  * @version 20090429
  */
-public interface IComponentFader {
-	/**
-     * Sets the fading state of the component.
-     * 
-     * @param isFading fading state
-     */
-	void setFading(final boolean isFading);
+public abstract class ActionAbstract extends AbstractAction {
 	
-	/**
-     * Sets the fading color.
-     * 
-     * @param colorFader color of the fader
-     */
-	void setFaderColor(final Color colorFader);
 	
-	/**
-     * Returns the fading state of the component.
-     * 
-     * @return true/false
-     */
-	boolean isFading();
-}   
+	protected ActionAbstract() {
+		super();
+	}
 
+	protected ActionAbstract(final String name, final Icon icon) {
+		super(name, icon);
+	}
+
+	protected ActionAbstract(final String name) {
+		super(name);
+	}
+	
+	protected ActionAbstract(final String name, final String toolTip) {
+		super(name);
+		putValue(SHORT_DESCRIPTION, toolTip);
+	}
+
+	protected ActionAbstract(final String name, final String toolTip, final Icon icon) {
+		super(name, icon);
+		putValue(SHORT_DESCRIPTION, toolTip);
+	}
+
+	
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperGeneral.toString(this);
+	}
+}

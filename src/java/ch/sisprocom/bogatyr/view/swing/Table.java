@@ -31,53 +31,52 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.util.Vector;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.util.Vector;
 
 
 /**
  * This is an extended JTable.
  * 
  * @author Stefan Laubenberger
- * @version 20090428
+ * @version 20090429
  */
 public class Table extends JTable implements IComponentActivate {
 	private static final long serialVersionUID = -1201835867524275584L;
 	
-	private static boolean isActive = true;
+	private boolean isNotActive;
 
 
 	public Table() {
 		super();
 	}
 	
-	public Table(int numRows, int numColumns) {
+	public Table(final int numRows, final int numColumns) {
 		super(numRows, numColumns);
 	}
 
-	public Table(Object[][] rowData, Object[] columnNames) {
+	public Table(final Object[][] rowData, final Object[] columnNames) {
 		super(rowData, columnNames);
 	}
 
-	public Table(TableModel dm, TableColumnModel cm, ListSelectionModel sm) {
+	public Table(final TableModel dm, final TableColumnModel cm, final ListSelectionModel sm) {
 		super(dm, cm, sm);
 	}
 
-	public Table(TableModel dm, TableColumnModel cm) {
+	public Table(final TableModel dm, final TableColumnModel cm) {
 		super(dm, cm);
 	}
 
-	public Table(TableModel dm) {
+	public Table(final TableModel dm) {
 		super(dm);
 	}
 
-	public Table(Vector<?> rowData, Vector<?> columnNames) {
+	public Table(final Vector<?> rowData, final Vector<?> columnNames) {
 		super(rowData, columnNames);
 	}
 
@@ -91,8 +90,8 @@ public class Table extends JTable implements IComponentActivate {
 	}
 
 	@Override
-	public void setEnabled(boolean isEnabled) {
-		if (isActive) {
+	public void setEnabled(final boolean isEnabled) {
+		if (!isNotActive) {
 			super.setEnabled(isEnabled);
 		}
 	}
@@ -102,16 +101,16 @@ public class Table extends JTable implements IComponentActivate {
 	 * Implemented methods
 	 */	
 	public boolean isActive() {
-		return isActive;
+		return !isNotActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(final boolean isActive) {
 		if (isActive) {
-			Table.isActive = isActive;
+			isNotActive = !isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			Table.isActive = isActive;
+			isNotActive = !isActive;
 		}
 	}
 }

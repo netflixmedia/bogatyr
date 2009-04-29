@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -40,7 +40,7 @@ import java.util.List;
  * The Paginator splits a list in different pages.
  *
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20090429
  */
 public class Paginator { //TODO document in Wiki!
     private List<?> list;
@@ -109,12 +109,10 @@ public class Paginator { //TODO document in Wiki!
             }
 
             boolean isLoop = true;
-            int xx = 0;
 
             for (int ii = (page - 1) * numberPerPage; ii < page * numberPerPage && isLoop; ii++) {
                 if (list.size() > ii) {
                     result.add(list.get(ii));
-                    xx++;
                 } else {
                     isLoop = false;
                 }

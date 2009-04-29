@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,6 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import ch.sisprocom.bogatyr.view.swing.Panel;
+
+import javax.swing.RepaintManager;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -39,15 +42,12 @@ import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 
-import javax.swing.JPanel;
-import javax.swing.RepaintManager;
-
 
 /**
  * This is a printer class for print operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081112
+ * @version 20090429
  */
 public class Printer implements Printable { //TODO document in Wiki!
 	private Component componentToBePrinted;
@@ -82,7 +82,7 @@ public class Printer implements Printable { //TODO document in Wiki!
      *
      * @param component
 	 */
-	private void disableDoubleBuffering(final Component component) {
+	private static void disableDoubleBuffering(final Component component) {
 		final RepaintManager currentManager = RepaintManager.currentManager(component);
 		currentManager.setDoubleBufferingEnabled(false);
 	}
@@ -91,7 +91,7 @@ public class Printer implements Printable { //TODO document in Wiki!
      *
      * @param component
      */
-	private void enableDoubleBuffering(final Component component) {
+	private static void enableDoubleBuffering(final Component component) {
 		final RepaintManager currentManager = RepaintManager.currentManager(component);
 		currentManager.setDoubleBufferingEnabled(true);
 	}
@@ -120,7 +120,7 @@ public class Printer implements Printable { //TODO document in Wiki!
 //		g2d.scale(pageFormat.getWidth()/componentToBePrinted.getWidth(), pageFormat.getHeight()/componentToBePrinted.getHeight());
 
         if (componentToBePrinted == null) {
-            componentToBePrinted = new JPanel();
+            componentToBePrinted = new Panel();
             //TODO set size of component?
         }
 

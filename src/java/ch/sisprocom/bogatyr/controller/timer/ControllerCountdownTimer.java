@@ -32,16 +32,15 @@
 package ch.sisprocom.bogatyr.controller.timer;
 
 import java.util.TimerTask;
-import java.util.Timer;
 
 /**
  * This is a countdown timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 20090304
+ * @version 20090429
  */
 public class ControllerCountdownTimer extends ControllerTimerAbstract implements IControllerCountdownTimer{ //TODO document in Wiki!
-	protected long runtime;
+	private long runtime;
 
     /*
       * Implemented methods
@@ -51,18 +50,18 @@ public class ControllerCountdownTimer extends ControllerTimerAbstract implements
     }
 
     public synchronized void start(final long delay, final long runtime, final long interval) {
-        timer.cancel();
+        getTimer().cancel();
 
-        timer = new Timer();
+//        setTimer(new Timer());
         this.runtime = runtime;
-        this.interval = interval;
+        setInterval(interval);
 
-        timer.schedule(new TaskCountdown(), delay, interval);
+        getTimer().schedule(new TaskCountdown(), delay, interval);
         fireTimerStarted();
     }
 
     public synchronized void stop() {
-        timer.cancel();
+    	getTimer().cancel();
         fireTimerStopped();
     }
 
@@ -70,15 +69,15 @@ public class ControllerCountdownTimer extends ControllerTimerAbstract implements
 	/*
 	 * Inner classes
 	 */
-	protected class TaskCountdown extends TimerTask {
+	private class TaskCountdown extends TimerTask {
 		@Override
 		public void run() {
 			if (0L < runtime) {
-				runtime -= interval;
+				runtime -= getInterval();
 				fireTimeChanged(runtime);
 			} else {
 				fireTimerStopped();
-				timer.cancel();
+				getTimer().cancel();
 			}
 		}
 	}

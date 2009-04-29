@@ -31,10 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
@@ -42,20 +39,22 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.PlainDocument;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 /**
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090428
+ * @version 20090429
  */
 public class ComboBox extends JComboBox implements IComponentActivate {
 	private static final long serialVersionUID = -3870596701286078140L;
 	
-	private static boolean isActive = true;
+	private boolean isNotActive;
 
 	
 	public ComboBox() {
@@ -105,8 +104,8 @@ public class ComboBox extends JComboBox implements IComponentActivate {
 	}
 
 	@Override
-	public void setEnabled(boolean isEnabled) {
-		if (isActive) {
+	public void setEnabled(final boolean isEnabled) {
+		if (!isNotActive) {
 			super.setEnabled(isEnabled);
 		}
 	}
@@ -116,16 +115,16 @@ public class ComboBox extends JComboBox implements IComponentActivate {
 	 * Implemented methods
 	 */	
 	public boolean isActive() {
-		return isActive;
+		return !isNotActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(final boolean isActive) {
 		if (isActive) {
-			ComboBox.isActive = isActive;
+			isNotActive = !isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			ComboBox.isActive = isActive;
+			isNotActive = !isActive;
 		}
 	}
 
@@ -140,13 +139,13 @@ public class ComboBox extends JComboBox implements IComponentActivate {
 	/*
 	 * Inner classes
 	 */
-	private class ComboBoxPopup extends PlainDocument {
+	private static class ComboBoxPopup extends PlainDocument {
 		private static final long serialVersionUID = -5374025097785761556L;
 
 		private final JComboBox comboBox;
 		private final transient ComboBoxModel model;
 		private final JTextComponent myEditor;
-		protected boolean selecting;
+		private boolean selecting;
 
 		private ComboBoxPopup(final JComboBox comboBox) {
             super();

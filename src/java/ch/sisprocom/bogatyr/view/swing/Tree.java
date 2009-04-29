@@ -31,53 +31,52 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.util.Hashtable;
-import java.util.Vector;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.JTree;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.util.Hashtable;
+import java.util.Vector;
 
 
 /**
  * This is an extended JTree.
  * 
  * @author Stefan Laubenberger
- * @version 20090428
+ * @version 20090429
  */
 public class Tree extends JTree implements IComponentActivate {
 	private static final long serialVersionUID = -4538444845018995986L;
 	
-	private static boolean isActive = true;
+	private boolean isNotActive;
 
 
 	public Tree() {
 		super();
 	}
 
-	public Tree(Hashtable<?, ?> value) {
+	public Tree(final Hashtable<?, ?> value) {
 		super(value);
 	}
 
-	public Tree(Object[] value) {
+	public Tree(final Object[] value) {
 		super(value);
 	}
 
-	public Tree(TreeModel newModel) {
+	public Tree(final TreeModel newModel) {
 		super(newModel);
 	}
 
-	public Tree(TreeNode root, boolean asksAllowsChildren) {
+	public Tree(final TreeNode root, final boolean asksAllowsChildren) {
 		super(root, asksAllowsChildren);
 	}
 
-	public Tree(TreeNode root) {
+	public Tree(final TreeNode root) {
 		super(root);
 	}
 
-	public Tree(Vector<?> value) {
+	public Tree(final Vector<?> value) {
 		super(value);
 	}
 
@@ -92,8 +91,8 @@ public class Tree extends JTree implements IComponentActivate {
 	
 
 	@Override
-	public void setEnabled(boolean isEnabled) {
-		if (isActive) {
+	public void setEnabled(final boolean isEnabled) {
+		if (!isNotActive) {
 			super.setEnabled(isEnabled);
 		}
 	}
@@ -103,16 +102,16 @@ public class Tree extends JTree implements IComponentActivate {
 	 * Implemented methods
 	 */	
 	public boolean isActive() {
-		return isActive;
+		return !isNotActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setActive(final boolean isActive) {
 		if (isActive) {
-			Tree.isActive = isActive;
+			isNotActive = !isActive;
 			setEnabled(isActive);
 		} else {
 			setEnabled(isActive);
-			Tree.isActive = isActive;
+			isNotActive = !isActive;
 		}
 	}
 }
