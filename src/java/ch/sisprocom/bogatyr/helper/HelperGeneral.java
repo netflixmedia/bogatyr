@@ -56,7 +56,7 @@ import java.util.regex.Pattern;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090429
+ * @version 20090430
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and is logging needed?
 	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$ //TODO update in Wiki!
@@ -105,7 +105,16 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     	return System.getProperty("line.separator"); //$NON-NLS-1$
     }
 
-	/**
+    /**
+     * Returns a file separator.
+     *
+     * @return file separator
+     */
+    public static String getFS() {
+    	return System.getProperty("file.separator"); //$NON-NLS-1$
+    }
+	
+    /**
      * Checks if a String is valid.
      * 
      * @param arg String to check

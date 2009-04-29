@@ -41,10 +41,16 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended AbstractAction.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090430
  */
 public abstract class ActionAbstract extends AbstractAction {
-	
+
+//	Action.LONG_DESCRIPTION
+//	Action.ACCELERATOR_KEY
+//	Action.MNEMONIC_KEY
+//	Action.SMALL_ICON
+//	Action.LARGE_ICON_KEY
+
 	
 	protected ActionAbstract() {
 		super();
