@@ -40,7 +40,7 @@ import java.util.Collection;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090430
  */
 public abstract class HelperMath { //TODO document in Wiki!
 	
@@ -118,7 +118,7 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @param end number of the range
      * @return list with prime numbers
      */	
-	public static Object getPrimes(final int start, final int end) {
+	public static Collection<Integer> getPrimes(final int start, final int end) {
         if (start > end) {
             throw new IllegalArgumentException("end value (" + end + ") must be greater than the start value (" + start + ')');
         }

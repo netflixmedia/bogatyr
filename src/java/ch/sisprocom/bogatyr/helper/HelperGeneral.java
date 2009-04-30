@@ -354,7 +354,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return generated hash value
      * @throws NoSuchAlgorithmException
      */
-    public static Object getHashCode(final String algo, final Object data) throws NoSuchAlgorithmException {
+    public static String getHashCode(final String algo, final Object data) throws NoSuchAlgorithmException {
     	final MessageDigest algorithm = MessageDigest.getInstance(algo);
 		final byte[] input = toString(data).getBytes();
 
@@ -381,7 +381,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return generated hash value
      * @throws NoSuchAlgorithmException
      */
-    public static Object getHashCode(final Object data) throws NoSuchAlgorithmException {
+    public static String getHashCode(final Object data) throws NoSuchAlgorithmException {
     	return getHashCode(HASHCODE_ALGORITHM_SHA256, data);
     }
 
@@ -393,7 +393,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param seed for the string (e.g. "1,2...0,A,B...Z)
      * @return generated unique String
      */
-    public static Object getRandomKey(final int digits, final char[] seed) {
+    public static String getRandomKey(final int digits, final char[] seed) {
 		final StringBuilder sb = new StringBuilder();
 
         for (int ii = 0; ii < digits; ii++) {
@@ -409,7 +409,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param digits length of result string
      * @return generated unique String.
      */
-    public static Object getRandomKey(final int digits) {
+    public static String getRandomKey(final int digits) {
     	return getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
     }
     
@@ -437,7 +437,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param input string
      * @return reversed string
      */
-    public static Object reverseString(final String input) {
+    public static String reverseString(final String input) {
     	return new StringBuffer(input).reverse().toString();
     }
 

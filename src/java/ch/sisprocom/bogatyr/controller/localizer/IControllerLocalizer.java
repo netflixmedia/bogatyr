@@ -38,7 +38,7 @@ import java.util.Locale;
  * Defines the methods for the implementation of the localizer controller for different languages (i18n standard).
  * 
  * @author Stefan Laubenberger
- * @version 20090304
+ * @version 20090430
  */
 public interface IControllerLocalizer {
 	/**
@@ -64,8 +64,15 @@ public interface IControllerLocalizer {
 	String getValue(String key);
 
 	/**
+	 * Returns the accelerator for a key.
+	 *
+     * @param key for the accelerator
+     * @return accelerator for the key
+	 */
+	String getAccelerator(String key);
+	
+	/**
 	 * Returns the mnemonic for a key.
-	 * This is very useful for GUI components.
 	 *
      * @param key for the mnemonic
 	 * @return mnemonic for the key
@@ -74,7 +81,6 @@ public interface IControllerLocalizer {
 	
 	/**
 	 * Returns the tooltip for a key.
-	 * This is very useful for GUI components.
 	 *
      * @param key for the tooltip
 	 * @return tooltip for the key

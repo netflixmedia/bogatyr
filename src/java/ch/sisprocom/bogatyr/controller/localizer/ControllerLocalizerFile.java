@@ -39,9 +39,13 @@ import java.util.ResourceBundle;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090430
  */
 public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TODO document in Wiki!
+	public static final String POSTFIX_ACCELERATOR = ".accelerator"; //$NON-NLS-1$
+	public static final String POSTFIX_MNEMONIC = ".mnemonic"; //$NON-NLS-1$
+	public static final String POSTFIX_TOOLTIP = ".tooltip"; //$NON-NLS-1$
+	
 	private Locale locale;
 	private String localizerBase;
 	private ResourceBundle bundle;
@@ -81,10 +85,17 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 		return bundle.getString(key);
 	}
 	
+	public String getAccelerator(final String key) {
+		try {
+			return bundle.getString(key + POSTFIX_ACCELERATOR);
+		} catch (Exception ex) {
+			return ""; //$NON-NLS-1$
+		}
+	}
+	
 	public int getMnemonic(final String key) {
 		try {
-			final String mnemonic = bundle.getString(key + ".mnemonic"); //$NON-NLS-1$
-			return (int) mnemonic.charAt(0);
+			return Integer.valueOf(bundle.getString(key + POSTFIX_MNEMONIC));
 		} catch (Exception ex) {
 			return 0;
 		}
@@ -92,9 +103,9 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 
 	public String getTooltip(final String key) {
 		try {
-			return bundle.getString(key + ".tooltip"); //$NON-NLS-1$
+			return bundle.getString(key + POSTFIX_TOOLTIP);
 		} catch (Exception ex) {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 	}
 	
