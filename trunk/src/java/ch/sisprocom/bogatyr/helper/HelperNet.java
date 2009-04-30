@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -52,7 +52,7 @@ import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090430
  */
 public abstract class HelperNet { //TODO document in Wiki!
 //	private static final String PROPERTY_HTTP_USE_PROXY   = "http.useProxy"; //$NON-NLS-1$
@@ -169,7 +169,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return host name
      * @throws UnknownHostException
      */
-    public static Object getHostname(final String ip) throws UnknownHostException {
+    public static String getHostname(final String ip) throws UnknownHostException {
 		final InetAddress address = InetAddress.getByName(ip);
 
 		return address.getHostName();
@@ -181,7 +181,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return host name
      * @throws UnknownHostException
      */
-    public static Object getLocalHostname() throws UnknownHostException {
+    public static String getLocalHostname() throws UnknownHostException {
 		final InetAddress address = InetAddress.getLocalHost();
 		
 		return address.getHostName();
@@ -194,7 +194,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return IP
      * @throws UnknownHostException
      */
-    public static Object getIp(final String hostname) throws UnknownHostException {
+    public static String getIp(final String hostname) throws UnknownHostException {
 		final InetAddress address = InetAddress.getByName(hostname);
 		
 		return address.getHostAddress();
@@ -206,7 +206,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return IP
      * @throws UnknownHostException
      */
-    public static Object getLocalIp() throws UnknownHostException {
+    public static String getLocalIp() throws UnknownHostException {
 		final InetAddress address = InetAddress.getLocalHost();
 		
 		return address.getHostAddress();
@@ -218,7 +218,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return List with IP addresses
      * @throws UnknownHostException
      */
-    public static Object getLocalIps() throws UnknownHostException {
+    public static Collection<String> getLocalIps() throws UnknownHostException {
     	final Collection<String> list = new ArrayList<String>();
         final String localHost = InetAddress.getLocalHost().getHostName();
 
