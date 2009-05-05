@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.view.swing.CheckBox;
  * This is an combined Label with a CheckBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090318
+ * @version 20090505
  */
 public class LabeledCheckBox extends LabeledComponent {  //TODO document in Wiki!
 	private static final long serialVersionUID = 2215341067138215010L;
@@ -71,5 +71,9 @@ public class LabeledCheckBox extends LabeledComponent {  //TODO document in Wiki
 	
 	public void addActionListener(final ActionListener listener) {
 		((AbstractButton) getComponent()).addActionListener(listener);
+	}
+	
+	public void removeActionListener(final ActionListener listener) {
+		((AbstractButton) getComponent()).removeActionListener(listener);
 	}
 }

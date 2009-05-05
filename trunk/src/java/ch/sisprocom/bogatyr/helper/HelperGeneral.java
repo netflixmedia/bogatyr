@@ -39,6 +39,7 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -47,8 +48,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 /**
@@ -112,14 +111,14 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param arg String to check
      * @return true/false
      */	
-	public static boolean isStringNumeric(final CharSequence arg) {
+	public static boolean isStringNumeric(final String arg) { //TODO a bit lazy implemented... improve with regex if possible
 		if (isValidString(arg)) {
-			final Pattern pattern = Pattern.compile("[-0-9.]+"); //$NON-NLS-1$
-			final Matcher matcher = pattern.matcher(arg);
-
-			if (matcher.matches()) {
-                return true;
-            }
+			try{
+				new BigDecimal(arg);
+				return true;
+			} catch (NumberFormatException ex) {
+				return false;
+			}
 		}
 		return false;
 	}
@@ -440,22 +439,39 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      */
     public static String getValidNumericString(final String text) { //TODO document in Wiki!
     	
-    	if (text.isEmpty()) {
+    	if (!isValidString(text)) {
     		return null;
     	}
 
         boolean isNegative = false;
-        if (text.contains("-")) { //$NON-NLS-1$
+        if (text.startsWith("-")) { //$NON-NLS-1$
     		isNegative = true;
     	}
     	
     	final String result = text.replaceAll("[^0-9.]+", ""); //$NON-NLS-1$ //$NON-NLS-2$
 
-    	if (result.isEmpty()) {
+    	boolean isPeriod = false;
+    	StringBuilder sb = new StringBuilder(result.length());
+   
+    	// remove multiple periods
+    	for (int ii = 0; ii < result.length(); ii++) {
+    		char character = result.charAt(ii);
+   
+    		if ('.' == character) {
+    			if (!isPeriod) {
+    		  		sb.append(character);
+    		  		isPeriod = true;
+    		 	}
+    		} else {
+    	  		sb.append(character);
+    		}
+    	}
+    	
+    	if (result.isEmpty() || (isPeriod && sb.length() == 1)) {
     		return null;
     	}
     	
-    	return isNegative ? '-' + result : result;
+    	return isNegative ? '-' + sb.toString() : sb.toString();
     }
     
     /**

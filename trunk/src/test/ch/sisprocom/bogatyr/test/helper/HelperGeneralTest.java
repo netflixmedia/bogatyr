@@ -74,10 +74,12 @@ public class HelperGeneralTest { //TODO improve
 	public void testIsStringNumeric() {
 		assertFalse(HelperGeneral.isStringNumeric(null));
 		assertFalse(HelperGeneral.isStringNumeric("")); //$NON-NLS-1$
+		assertTrue(HelperGeneral.isStringNumeric("123.0")); //$NON-NLS-1$
 		assertTrue(HelperGeneral.isStringNumeric("123")); //$NON-NLS-1$
 		assertTrue(HelperGeneral.isStringNumeric("123.23")); //$NON-NLS-1$
 		assertTrue(HelperGeneral.isStringNumeric("-123.23")); //$NON-NLS-1$
 		assertFalse(HelperGeneral.isStringNumeric("123.23abc")); //$NON-NLS-1$
+		assertFalse(HelperGeneral.isStringNumeric("123..23")); //$NON-NLS-1$
 	}
 
 //	@Test

@@ -42,7 +42,7 @@ import javax.swing.JComboBox;
  * This is an combined Label with a ComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090310
+ * @version 20090505
  */
 public class LabeledComboBox extends LabeledComponent { //TODO document in Wiki!
 	private static final long serialVersionUID = -67296455436983811L;
@@ -62,5 +62,9 @@ public class LabeledComboBox extends LabeledComponent { //TODO document in Wiki!
 
 	public void addActionListener(final ActionListener listener) {
         ((JComboBox) getComponent()).addActionListener(listener);
+	}
+	
+	public void removeActionListener(final ActionListener listener) {
+        ((JComboBox) getComponent()).removeActionListener(listener);
 	}
 }
