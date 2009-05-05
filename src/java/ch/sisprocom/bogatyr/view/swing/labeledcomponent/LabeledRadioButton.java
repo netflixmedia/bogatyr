@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.view.swing.RadioButton;
  * This is an combined Label with a RadioButton.
  * 
  * @author Stefan Laubenberger
- * @version 20090318
+ * @version 20090505
  */
 public class LabeledRadioButton extends LabeledComponent { //TODO document in Wiki!
 	private static final long serialVersionUID = 3461718081893469685L;
@@ -71,5 +71,9 @@ public class LabeledRadioButton extends LabeledComponent { //TODO document in Wi
 	
 	public void addActionListener(final ActionListener listener) {
 		((AbstractButton) getComponent()).addActionListener(listener);
+	}
+	
+	public void removeActionListener(final ActionListener listener) {
+		((AbstractButton) getComponent()).removeActionListener(listener);
 	}
 }

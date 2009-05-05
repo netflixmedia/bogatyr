@@ -31,43 +31,35 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 
-import java.awt.event.ActionListener;
-
 import ch.sisprocom.bogatyr.view.swing.NumberField;
-
-import javax.swing.JTextField;
 
 
 /**
  * This is an combined Label with a NumberField.
  * 
  * @author Stefan Laubenberger
- * @version 20090414
+ * @version 20090505
  */
-public class LabeledNumberField<T extends Number> extends LabeledComponent { //TODO document in Wiki!
+public class LabeledNumberField extends LabeledComponent { //TODO document in Wiki!
 	private static final long serialVersionUID = 8536177338219909078L;
 
-	public LabeledNumberField(final String labelText, final String toolTip, final T number) {
+	public LabeledNumberField(final String labelText, final String toolTip, final Number number) {
 		this(labelText, toolTip, number, Integer.MAX_VALUE);
 	}
 
-	public LabeledNumberField(final String title, final String labelText, final String toolTip, final T number) {
+	public LabeledNumberField(final String title, final String labelText, final String toolTip, final Number number) {
 		this(title, labelText, toolTip, number, Integer.MAX_VALUE);
 	}
 	
-	public LabeledNumberField(final String labelText, final String toolTip, final T number, final int columns) {
-		super(labelText, toolTip, new NumberField<T>(number, toolTip, columns));
+	public LabeledNumberField(final String labelText, final String toolTip, final Number number, final int columns) {
+		super(labelText, toolTip, new NumberField(number, toolTip, columns));
 	}
 
-	public LabeledNumberField(final String title, final String labelText, final String toolTip, final T number, final int columns) {
-		super(title, labelText, toolTip, new NumberField<T>(number, toolTip, columns));
+	public LabeledNumberField(final String title, final String labelText, final String toolTip, final Number number, final int columns) {
+		super(title, labelText, toolTip, new NumberField(number, toolTip, columns));
 	}
 
-	public NumberField<T> getNumberField() {
-		return (NumberField<T>)getComponent();
-	}
-
-	public void addActionListener(final ActionListener listener) {
-		((JTextField) getComponent()).addActionListener(listener);
+	public NumberField getNumberField() {
+		return (NumberField)getComponent();
 	}
 }

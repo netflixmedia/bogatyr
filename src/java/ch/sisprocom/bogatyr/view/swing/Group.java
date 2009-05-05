@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,30 +31,31 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import javax.swing.AbstractButton;
-import javax.swing.JButton;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractButton;
+import javax.swing.JComponent;
+
 
 /**
- * This is a button row to add 1-n buttons.
+ * This is a group to add 1-n components (e.g. useful with JButtons).
  * 
  * @author Stefan Laubenberger
- * @version 20081118
+ * @version 20090505
  */
-public class ButtonRow extends Panel { //TODO document in Wiki!
+public class Group extends Panel { //TODO document in Wiki!
 	private static final long serialVersionUID = -3557759501854611930L;
 	
 
-	public ButtonRow(final JButton[] data, final Insets insets) {
+	public Group(final JComponent[] data, final Insets insets) {
 		super();
 		createLayout(data, insets, false);
 	}
 	
-	public ButtonRow(final JButton[] data, final Insets insets, final boolean isVertical) {
+	public Group(final JComponent[] data, final Insets insets, final boolean isVertical) {
 		super();
 		createLayout(data, insets, isVertical);
 	}
@@ -62,17 +63,26 @@ public class ButtonRow extends Panel { //TODO document in Wiki!
 	public void addActionListener(final ActionListener listener) {
 		final Component[] components = getComponents();
 		for (final Component component : components) {
-	    	if (component instanceof JButton) {
+	    	if (component instanceof AbstractButton) {
 	    		((AbstractButton) component).addActionListener(listener);
 			}
 	    }
 	}
-  
+	
+	public void removeActionListener(final ActionListener listener) {
+		final Component[] components = getComponents();
+		for (final Component component : components) {
+	    	if (component instanceof AbstractButton) {
+	    		((AbstractButton) component).removeActionListener(listener);
+			}
+	    }
+	} 
+	
 	
 	/*
 	 * Private methods
 	 */
-	private void createLayout(final JButton[] data, final Insets insets, final boolean isVertical) {
+	private void createLayout(final JComponent[] data, final Insets insets, final boolean isVertical) {
 		if (isVertical) {
 			createLayoutVertical(data, insets);
 		} else {
@@ -80,7 +90,7 @@ public class ButtonRow extends Panel { //TODO document in Wiki!
 		}
 	}
 	
-	private void createLayoutVertical(final JButton[] data, final Insets insets) {
+	private void createLayoutVertical(final JComponent[] data, final Insets insets) {
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
@@ -88,14 +98,14 @@ public class ButtonRow extends Panel { //TODO document in Wiki!
 	    gbc.insets = insets;
 	   
 	    if (data != null) {
-	    	for (final JButton button : data) {
+	    	for (final JComponent button : data) {
 				gbc.gridy++;
 		    	add(button, gbc);
 		    }
 	    }
 	}
 	
-	private void createLayoutHorizontal(final JButton[] data, final Insets insets) {
+	private void createLayoutHorizontal(final JComponent[] data, final Insets insets) {
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
@@ -103,7 +113,7 @@ public class ButtonRow extends Panel { //TODO document in Wiki!
 	    gbc.insets = insets;
 
 	    if (data != null) {
-	    	for (final JButton button : data) {
+	    	for (final JComponent button : data) {
 				gbc.gridx++;
 		    	add(button, gbc);
 		    }

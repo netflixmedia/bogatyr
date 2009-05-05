@@ -48,12 +48,12 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a NumberField, similar to TextField, but only numeric characters are allowed.
  * 
  * @author Stefan Laubenberger
- * @version 20090504
+ * @version 20090505
  */
-public class NumberField<T extends Number> extends TextField {//TODO improve Document!
+public class NumberField extends TextField {//TODO improve Document!
 	private static final long serialVersionUID = 4469777330124040925L;
-
-	T type; 
+	
+	private static final Pattern PATTERN = Pattern.compile("[-%'0-9.]+"); //$NON-NLS-1$
 	
 	
 	public NumberField() {
@@ -69,67 +69,120 @@ public class NumberField<T extends Number> extends TextField {//TODO improve Doc
 	}
 	
 	/**
-     * Get the value of the number field.
-     * @return value of the number field
+     * Get the Double value of the number field.
+     * @return Double value of the number field
      */	
-	@SuppressWarnings("unchecked")
-	public T getValue() {
-		if (type instanceof Integer) {
-			return (T)Integer.valueOf(HelperGeneral.getValidNumericString(getText()));
-		} else if (type instanceof Float) {
-			return (T)Float.valueOf(HelperGeneral.getValidNumericString(getText()));
-		} else if (type instanceof Double) {
-			return (T)Double.valueOf(HelperGeneral.getValidNumericString(getText()));
-		} else if (type instanceof Byte) {
-			return (T)Byte.valueOf(HelperGeneral.getValidNumericString(getText()));
-		} else if (type instanceof Long) {
-			return (T)Long.valueOf(HelperGeneral.getValidNumericString(getText()));
-		} else if (type instanceof Short) {
-			return (T)Short.valueOf(HelperGeneral.getValidNumericString(getText()));
-		} else if (type instanceof BigInteger) {
-			return (T)new BigInteger(HelperGeneral.getValidNumericString(getText()));
-		} else if (type instanceof BigDecimal) {
-			return (T)new BigDecimal(HelperGeneral.getValidNumericString(getText()));
+	public Double getDoubleValue() {
+		String value = HelperGeneral.getValidNumericString(getText());
+		
+		if (null != value) {
+			return Double.valueOf(value);
 		}
 		return null;
 	}
 	
-//	/**
-//     * Get the value of the number field as an Integer.
-//     * @return Integer value of the number field
-//     */	
-//	public Integer getInteger() {
-//		return Integer.valueOf(HelperGeneral.getValidNumericString(getText()));
-//	}
-//
-//	/**
-//     * Get the value of the number field as a BigDecimal.
-//     * @return BigDecimal value of the number field
-//     */	
-//	public BigDecimal getBigDecimal() {
-//		return new BigDecimal(HelperGeneral.getValidNumericString(getText()));
-//	}
-//	
-//	/**
-//     * Get the value of the number field as a BigInteger.
-//     * @return BigInteger value of the number field
-//     */	
-//	public BigInteger getBigInteger() {
-//		return new BigInteger(HelperGeneral.getValidNumericString(getText()));
-//	}
+	/**
+     * Get the Integer value of the number field.
+     * @return Integer value of the number field
+     */	
+	public Integer getIntegerValue() {
+		final String value = HelperGeneral.getValidNumericString(getText());
+		
+		if (null != value) {
+			return Integer.valueOf(value);
+		}
+		return null;
+	}
+	
+	/**
+     * Get the Float value of the number field.
+     * @return Float value of the number field
+     */	
+	public Float getFloatValue() {
+		final String value = HelperGeneral.getValidNumericString(getText());
+		
+		if (null != value) {
+			return Float.valueOf(value);
+		}
+		return null;
+	}
+	
+	/**
+     * Get the Byte value of the number field.
+     * @return Byte value of the number field
+     */	
+	public Byte getByteValue() {
+		final String value = HelperGeneral.getValidNumericString(getText());
+		
+		if (null != value) {
+			return Byte.valueOf(value);
+		}
+		return null;
+	}
+	
+	/**
+     * Get the Long value of the number field.
+     * @return Long value of the number field
+     */	
+	public Long getLongValue() {
+		final String value = HelperGeneral.getValidNumericString(getText());
+		
+		if (null != value) {
+			return Long.valueOf(value);
+		}
+		return null;
+	}
+	
+	/**
+     * Get the Short value of the number field.
+     * @return Short value of the number field
+     */	
+	public Short getShortValue() {
+		final String value = HelperGeneral.getValidNumericString(getText());
+		
+		if (null != value) {
+			return Short.valueOf(value);
+		}
+		return null;
+	}
+	
+	/**
+     * Get the BigInteger value of the number field.
+     * @return BigInteger value of the number field
+     */	
+	public BigInteger getBigIntegerValue() {
+		final String value = HelperGeneral.getValidNumericString(getText());
+		
+		if (null != value) {
+			return new BigInteger(value);
+		}
+		return null;
+	}
+	
+	/**
+     * Get the BigDecimal value of the number field.
+     * @return BigDecimal value of the number field
+     */	
+	public BigDecimal getBigDecimalValue() {
+		final String value = HelperGeneral.getValidNumericString(getText());
+		
+		if (null != value) {
+			return new BigDecimal(value);
+		}
+		return null;
+	}
 	
 	/**
      * Set the value of the number field
      * @param number value of the number field
      */	
-	public void setValue(final T number) {
+	public void setValue(final Number number) {
         setText(number.toString());
 	}
 	
 	protected static boolean isStringNumeric(final CharSequence arg) {
 		if (HelperGeneral.isValidString(arg)) {
-			final Pattern pattern = Pattern.compile("[-%'0-9.]+"); //$NON-NLS-1$
-			final Matcher matcher = pattern.matcher(arg);
+			final Matcher matcher = PATTERN.matcher(arg);
 
 			if (matcher.matches()) {
                 return true;
