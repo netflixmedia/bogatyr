@@ -39,10 +39,29 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a class for obfuscating data.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090430
  */
 public class Obfuscator implements IObfuscator {
-	private static final byte DEFAULT_PATTERN = Byte.MAX_VALUE;
+	private byte pattern = Byte.MAX_VALUE;
+	
+	public Obfuscator() {
+		super();
+	}
+	
+	public Obfuscator(final byte pattern) {
+		super();
+		
+		this.pattern = pattern;
+	}
+	
+	public byte getPattern() {
+		return pattern;
+	}
+
+	public void setPattern(final byte pattern) {
+		this.pattern = pattern;
+	}
+
 	
 	/*
 	 * Overridden methods
@@ -57,19 +76,21 @@ public class Obfuscator implements IObfuscator {
 	 * Implemented methods
 	 */
 	public byte[] encrypt(final byte[] input) {
-		return obfuscate(input, DEFAULT_PATTERN);
+		return obfuscate(input);
 	}
 
 	public byte[] encrypt(final byte[] input, final byte pattern) {
-		return obfuscate(input, pattern);
+		this.pattern = pattern;
+		return obfuscate(input);
 	}
 
 	public byte[] decrypt(final byte[] input) {
-		return obfuscate(input, DEFAULT_PATTERN);
+		return unobfuscate(input);
 	}
 
 	public byte[] decrypt(final byte[] input, final byte pattern) {
-		return obfuscate(input, pattern);
+		this.pattern = pattern;
+		return unobfuscate(input);
 	}
 
 	
@@ -80,14 +101,25 @@ public class Obfuscator implements IObfuscator {
 	 * Obfuscate the data.
 	 * 
 	 * @param input The data to obfuscate as a byte-array
-     * @param pattern for unobfuscating (region: -128 - 127)
+     * @param pattern for obfuscating (region: -128 - 127)
      * @return the obfuscated data
 	 */
-	private static byte[] obfuscate(final byte[] input, final byte pattern) {
+	private byte[] obfuscate(final byte[] input) {
 		final byte[] result = new byte[input.length];
 		
-		for (int ii = 0; ii < input.length; ii++ ) {
-			result[ii] = (byte)(input[ii] ^ (int) pattern);
+		result[0] = (byte)(input[0] ^ (int) pattern);
+		for (int ii = 1; ii < input.length; ii++ ) {
+			result[ii] = (byte)(input[ii] ^ (int) result[ii-1]);
+		}
+		return result;
+	}
+
+	private byte[] unobfuscate(final byte[] input) {
+		final byte[] result = new byte[input.length];
+		
+		result[0] = (byte)(input[0] ^ (int) pattern);
+		for (int ii = 1; ii < input.length; ii++ ) {
+			result[ii] = (byte)(input[ii] ^ (int) input[ii-1]);
 		}
 		return result;
 	}

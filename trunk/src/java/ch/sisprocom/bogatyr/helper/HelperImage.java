@@ -31,7 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import javax.imageio.ImageIO;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -40,16 +39,18 @@ import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
+import javax.imageio.ImageIO;
 
 
 /**
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090504
  */
 public abstract class HelperImage { //TODO document in Wiki!
 	public static final String TYPE_JPG = "jpg"; //$NON-NLS-1$
@@ -102,7 +103,7 @@ public abstract class HelperImage { //TODO document in Wiki!
 	 * 
 	 * @return list of unique supported read formats
 	 */
-	public static List<String> getImageReadFormats() {
+	public static Collection<String> getImageReadFormats() {
 	    final String[] formatNames = ImageIO.getReaderFormatNames();
 	    
 	    return unique(formatNames);
@@ -113,7 +114,7 @@ public abstract class HelperImage { //TODO document in Wiki!
 	 * 
 	 * @return list of unique supported write formats
 	 */
-	public static List<String> getImageWriteFormats() {
+	public static Collection<String> getImageWriteFormats() {
 	    final String[] formatNames = ImageIO.getWriterFormatNames();
 	    
 	    return unique(formatNames);
@@ -124,7 +125,7 @@ public abstract class HelperImage { //TODO document in Wiki!
 	 * 
 	 * @return list of unique MIME types that can be read
 	 */
-	public static List<String> getImageReadMIMETypes() {
+	public static Collection<String> getImageReadMIMETypes() {
 	    final String[] formatNames = ImageIO.getReaderMIMETypes();
 	    
 	    return unique(formatNames);
@@ -135,7 +136,7 @@ public abstract class HelperImage { //TODO document in Wiki!
 	 * 
 	 * @return list of unique MIME types that can be written
 	 */
-	public static List<String> getImageWriteMIMETypes() {
+	public static Collection<String> getImageWriteMIMETypes() {
 	    final String[] formatNames = ImageIO.getWriterMIMETypes();
 	    
 	    return unique(formatNames);
@@ -147,7 +148,7 @@ public abstract class HelperImage { //TODO document in Wiki!
 	 * @param strings as array
 	 * @return list containing the unique values
 	 */
-    private static List<String> unique(final String[] strings) {
+    private static Collection<String> unique(final String[] strings) {
         final Set<String> set = new HashSet<String>(strings.length);
         
         for (final String str : strings) {

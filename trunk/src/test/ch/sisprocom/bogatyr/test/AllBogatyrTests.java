@@ -48,6 +48,7 @@ import ch.sisprocom.bogatyr.test.helper.HelperImageTest;
 import ch.sisprocom.bogatyr.test.helper.HelperMathTest;
 import ch.sisprocom.bogatyr.test.helper.HelperXmlTest;
 import ch.sisprocom.bogatyr.test.helper.context.ContextTest;
+import ch.sisprocom.bogatyr.test.helper.control.ControlBrowserTest;
 import ch.sisprocom.bogatyr.test.helper.converter.ConverterBase64Test;
 import ch.sisprocom.bogatyr.test.helper.converter.ConverterHexTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.CryptoAsymmTest;
@@ -101,7 +102,7 @@ public class AllBogatyrTests implements Runnable {
 	public void run() {
 		final Result result = JUnitCore.runClasses(
 				ContextTest.class,
-//				ControlBrowserTest.class,
+				ControlBrowserTest.class,
 				ConverterBase64Test.class,
 				ConverterHexTest.class,
 				CryptoAsymmTest.class,

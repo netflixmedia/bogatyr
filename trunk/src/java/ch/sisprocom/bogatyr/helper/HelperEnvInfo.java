@@ -41,7 +41,7 @@ import java.util.Map;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 20090430
+ * @version 20090504
  */
 public abstract class HelperEnvInfo {
 	/**
@@ -220,6 +220,7 @@ public abstract class HelperEnvInfo {
 	 * @return true if this application is running under UNIX
 	 */
 	public static boolean isUnixPlatform() {
+		//this method is a bit dirty, because it could be another system than Unix, but its the best guess...
 		return !isWindowsPlatform() && !isMacPlatform();
 	}
 }

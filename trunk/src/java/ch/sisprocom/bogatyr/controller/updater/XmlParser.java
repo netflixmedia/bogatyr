@@ -44,6 +44,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
+import ch.sisprocom.bogatyr.helper.Const;
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.HelperIO;
@@ -143,7 +144,7 @@ public class XmlParser extends DefaultHandler {
 	 * Private methods
 	 */
 	private void update() {
-		if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, localizer.getValue(RES_UPDATE) + HelperGeneral.getLS() +
+		if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, localizer.getValue(RES_UPDATE) + Const.NEW_LINE +
                 localizer.getValue(RES_UPDATE_TEXT), applicationName, JOptionPane.YES_NO_OPTION)) {
 			try {
 				download();
@@ -159,7 +160,7 @@ public class XmlParser extends DefaultHandler {
 	}
 	
 	private void downgrade() {
-		if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, localizer.getValue(RES_DOWNGRADE) + HelperGeneral.getLS() +
+		if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, localizer.getValue(RES_DOWNGRADE) + Const.NEW_LINE +
                 localizer.getValue(RES_DOWNGRADE_TEXT), applicationName, JOptionPane.YES_NO_OPTION)) {
 			try {
 				download();

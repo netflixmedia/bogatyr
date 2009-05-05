@@ -41,9 +41,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Collection;
+import java.util.Collections;
 
 import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
 
@@ -52,7 +51,7 @@ import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 20090430
+ * @version 20090505
  */
 public abstract class HelperNet { //TODO document in Wiki!
 //	private static final String PROPERTY_HTTP_USE_PROXY   = "http.useProxy"; //$NON-NLS-1$
@@ -227,6 +226,25 @@ public abstract class HelperNet { //TODO document in Wiki!
         }
         return list;
     }
+    
+    /**
+     * Returns the mac address for a given network interface.
+     *
+     * @return mac address for a given network interface
+     * @throws SocketException
+     */
+    public static String getMacAddress(NetworkInterface ni) throws SocketException {
+		String result = "";
+
+		byte[] hardwareAddress = ni.getHardwareAddress();
+
+		if (hardwareAddress != null) {
+			for (int ii = 0; ii < hardwareAddress.length; ii++) {
+				result += String.format((ii == 0 ? "" : '-') + "%02X", hardwareAddress[ii]);
+			}
+		}
+		return result;
+	}
 
     /**
      * Returns the all network interfaces of the machine.
@@ -234,7 +252,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return List with network interfaces
      * @throws SocketException
      */
-    public static List<NetworkInterface> getNetworkInterfaces() throws SocketException {
+    public static Collection<NetworkInterface> getNetworkInterfaces() throws SocketException {
     	return Collections.list(NetworkInterface.getNetworkInterfaces());
     }
 
@@ -269,22 +287,8 @@ public abstract class HelperNet { //TODO document in Wiki!
 		con.connect();
 		
 		return HelperIO.readStream(con.getInputStream());
-     }
-    
-//	public static String getMacAddress(NetworkInterface ni) throws SocketException { // Java 1.6 only
-//		String result = "";
-//
-//		byte[] hardwareAddress = ni.getHardwareAddress();
-//
-//		if (hardwareAddress != null) {
-//			for (int i = 0; i < hardwareAddress.length; i++) {
-//				result += String.format((i == 0 ? "" : "-") + "%02X", hardwareAddress[i]);
-//
-//			}
-//		}
-//		return result;
-//	}
-    
+    }
+    	
     
     /*
      * Private methods

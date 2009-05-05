@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,11 +32,12 @@
 package ch.sisprocom.bogatyr.test.helper;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
-import org.junit.Assert;
 
 import ch.sisprocom.bogatyr.helper.HelperMath;
 
@@ -45,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.HelperMath;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20090504
  */
 public class HelperMathTest { //TODO improve
 	@Test
@@ -60,12 +61,12 @@ public class HelperMathTest { //TODO improve
 
 	@Test
 	public void testIsPrime() {
-        Assert.assertFalse(HelperMath.isPrime(-1));
-        Assert.assertFalse(HelperMath.isPrime(0));
-        Assert.assertFalse(HelperMath.isPrime(1));
-        Assert.assertTrue(HelperMath.isPrime(2));
-        Assert.assertFalse(HelperMath.isPrime(21));
-        Assert.assertTrue(HelperMath.isPrime(23));
+        assertFalse(HelperMath.isPrime(-1));
+        assertFalse(HelperMath.isPrime(0));
+        assertFalse(HelperMath.isPrime(1));
+        assertTrue(HelperMath.isPrime(2));
+        assertFalse(HelperMath.isPrime(21));
+        assertTrue(HelperMath.isPrime(23));
 	}
 	
 	@Test
@@ -76,7 +77,12 @@ public class HelperMathTest { //TODO improve
 	@Test
 	public void testGetPrimes() {
 		assertNotNull(HelperMath.getPrimes(-5, 100));
-		assertNotNull(HelperMath.getPrimes(50, 10));
+		
+		try {
+			HelperMath.getPrimes(50, 10);
+			fail("end value (10) must be greater than the start value (50)");
+		} catch (Exception e) {}
+		
 		assertNotNull(HelperMath.getPrimes(21, 23));
 //		System.out.println(HelperGeneral.dump(HelperMath.getPrimes(-5, 100)));
 //		System.out.println(HelperGeneral.dump(HelperMath.getPrimes(21, 23)));
@@ -149,7 +155,7 @@ public class HelperMathTest { //TODO improve
 			if (0 <= number && range >= number) {
 				assertTrue(true);
 			} else {
-                Assert.fail();
+                fail();
 			}
 		}
 	}

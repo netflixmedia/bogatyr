@@ -31,13 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.timer;
 
+import java.util.Timer;
 import java.util.TimerTask;
 
 /**
  * This is a countdown timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090430
  */
 public class ControllerCountdownTimer extends ControllerTimerAbstract implements IControllerCountdownTimer{ //TODO document in Wiki!
 	private long runtime;
@@ -52,7 +53,7 @@ public class ControllerCountdownTimer extends ControllerTimerAbstract implements
     public synchronized void start(final long delay, final long runtime, final long interval) {
         getTimer().cancel();
 
-//        setTimer(new Timer());
+        setTimer(new Timer());
         this.runtime = runtime;
         setInterval(interval);
 

@@ -29,40 +29,51 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.timer;
+package ch.sisprocom.bogatyr.helper;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Date;
 
 
 /**
- * Defines the methods for the implementation of the countdown timer.
+ * This is a helper class for time operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090503
+ * @version 20090505
  */
-public interface IControllerCountdownTimer extends IListener{
-	/**
-	 * Starts immediately the countdown with a given runtime and standard interval of 1000ms.
-	 * 
-	 * @param runtime of the countdown
-	 */
-	void start(final long runtime);
-
-	/**
-	 * Start the countdown with a given delay, runtime and interval.
-	 * 
-	 * @param delay until the timer starts
-	 * @param runtime of the countdown
-	 * @param interval of the countown
-	 */
-	void start(final long delay, final long runtime, final long interval);
-
-	/**
-	 * Stops immediately the countdown timer.
-	 */
-	void stop();
+public abstract class HelperTime {
+	public static final String DEFAULT_TIME_SERVER = "ptbtime1.ptb.de"; //$NON-NLS-1$
 	
-	/**
-	 * Returns the running state of the timer.
-	 */
-	boolean isRunning();
-}   
+	public static Date getAtomicTime() throws UnknownHostException, IOException {
+		return getAtomicTime(DEFAULT_TIME_SERVER);
+	}
 
+	public static Date getAtomicTime(final String timeServer) throws UnknownHostException, IOException {
+		final long SECONDS_1900_1970 = 2208988800L;
+		
+		Socket socket = null;
+		InputStream is = null;
+		long time = 0;
+
+		try {
+			socket = new Socket(timeServer, 37);
+			is = socket.getInputStream();
+
+			for (int ii = 3; ii >= 0; ii-- ) {
+				time ^= (long) is.read() << ii * 8;
+			}
+
+			return new Date((time - SECONDS_1900_1970) * 1000);
+		} finally {
+			if (is != null) {
+				is.close();
+			}
+			
+			if (socket != null) 
+				socket.close();
+			}
+		}
+	}

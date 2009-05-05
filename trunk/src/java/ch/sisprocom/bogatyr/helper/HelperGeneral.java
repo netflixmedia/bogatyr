@@ -45,8 +45,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,7 +56,7 @@ import java.util.regex.Pattern;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090430
+ * @version 20090505
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and is logging needed?
 	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$ //TODO update in Wiki!
@@ -95,24 +95,6 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	public static <T> Object createObject(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		return clazz.getConstructor(paramClazzes).newInstance(params);
 	}
-
-    /**
-     * Returns a line separator.
-     *
-     * @return line separator
-     */
-    public static String getLS() {
-    	return System.getProperty("line.separator"); //$NON-NLS-1$
-    }
-
-    /**
-     * Returns a file separator.
-     *
-     * @return file separator
-     */
-    public static String getFS() {
-    	return System.getProperty("file.separator"); //$NON-NLS-1$
-    }
 	
     /**
      * Checks if a String is valid.
@@ -142,45 +124,45 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 		return false;
 	}
 
-	/**
-     * Checks if a int is not 0.
-     * 
-     * @param arg int to check
-     * @return true/false
-     */
-	public static boolean isValidInt(final int arg) {
-        return 0 != arg;
-    }
-	
-	/**
-     * Checks if a double is not 0.
-     * 
-     * @param arg double to check
-     * @return true/false
-     */	
-	public static boolean isValidDouble(final double arg) {
-        return 0.0D != arg;
-    }
-	
-	/**
-     * Checks if a long is not 0.
-     * 
-     * @param arg long to check
-     * @return true/false
-     */
-	public static boolean isValidLong(final long arg) {
-        return 0L != arg;
-    }
-
-	/**
-     * Checks if a float is not 0.
-     * 
-     * @param arg float to check
-     * @return true/false
-     */	
-	public static boolean isValidFloat(final float arg) {
-        return 0.0F != arg;
-    }
+//	/**
+//     * Checks if a int is not 0.
+//     * 
+//     * @param arg int to check
+//     * @return true/false
+//     */
+//	public static boolean isValidInt(final int arg) {
+//        return 0 != arg;
+//    }
+//	
+//	/**
+//     * Checks if a double is not 0.
+//     * 
+//     * @param arg double to check
+//     * @return true/false
+//     */	
+//	public static boolean isValidDouble(final double arg) {
+//        return 0.0D != arg;
+//    }
+//	
+//	/**
+//     * Checks if a long is not 0.
+//     * 
+//     * @param arg long to check
+//     * @return true/false
+//     */
+//	public static boolean isValidLong(final long arg) {
+//        return 0L != arg;
+//    }
+//
+//	/**
+//     * Checks if a float is not 0.
+//     * 
+//     * @param arg float to check
+//     * @return true/false
+//     */	
+//	public static boolean isValidFloat(final float arg) {
+//        return 0.0F != arg;
+//    }
 
 	/**
      * Checks if a {@link Object} is not null.
@@ -329,7 +311,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @param list containing duplicate objects
 	 * @return list without duplicates
 	 */
-    public static <T> List<T> removeDuplicates(final List<T> list) {
+    public static <T> Collection<T> removeDuplicates(final Collection<T> list) {
 		return new ArrayList<T>(new HashSet<T>(list));
     }
 	
@@ -340,7 +322,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @return array without duplicates
 	 */
     public static Object[] removeDuplicates(final Object[] array) {
-		final List<?> list = removeDuplicates(Arrays.asList(array));
+		final Collection<?> list = removeDuplicates(Arrays.asList(array));
 		final Object[] temp = new Object[list.size()];
 		return list.toArray(temp);
     }
@@ -407,12 +389,21 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * This is used for unique keys (e.g. for product keys).
      *
      * @param digits length of result string
-     * @return generated unique String.
+     * @return generated unique String
      */
     public static String getRandomKey(final int digits) {
     	return getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
     }
-    
+
+    /**
+     * Generates an universally unique identifier (UUID).
+     *
+     * @return generated universally unique identifier
+     */
+    public static UUID getUUID() {
+    	return UUID.randomUUID();
+    }    
+
     /**
      * Fill a string with a char.
      * 
@@ -478,7 +469,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 
         for (final Object value : list) {
             sb.append(value);
-            sb.append(getLS());
+            sb.append(Const.NEW_LINE);
         }
         return sb.toString();
     }
@@ -496,7 +487,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
             sb.append(pair.getKey());
             sb.append('=');
             sb.append(pair.getValue());
-            sb.append(getLS());
+            sb.append(Const.NEW_LINE);
         }
         return sb.toString();
     }
@@ -512,7 +503,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 
 		for (final Object value : array) {
             sb.append(value);
-            sb.append(getLS());
+            sb.append(Const.NEW_LINE);
         }
 		return sb.toString();
     }
