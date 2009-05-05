@@ -31,28 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.control;
 
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.text.MessageFormat;
+
+import ch.sisprocom.bogatyr.helper.HelperIO;
 
 /**
- * This control opens PDF data with the default system pdf-viewer (e.g. Acrobat Reader).
+ * This control opens PDF data with the default system pdf-viewer.
  *
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090504
  */
 public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
-
-	private static final String WINDOWS_PDF_VIEWER_PATH  = "rundll32 url.dll,FileProtocolHandler {0}"; //$NON-NLS-1$
-	private static final String UNIX_PDF_VIEWER_PATH     = "acroread {0}"; //$NON-NLS-1$
-
-
+	
 	/**
 	 * Show a PDF (provided as a byte[]) with PDF viewer.
 	 * 
@@ -75,7 +69,7 @@ public abstract class ControlPdf {
 	 * @throws IOException 
 	 */
 	public static void open(final File pdfFile) throws  IOException, InterruptedException {
-		execute(pdfFile.getCanonicalPath());
+		Desktop.getDesktop().open(pdfFile);
 	}
 	
 	/**
@@ -90,20 +84,64 @@ public abstract class ControlPdf {
 	}
 	
 	
-	/*
-	 * Private methods
-	 */
-	private static void execute(final String path) throws  IOException, InterruptedException {
-		final String viewerPath;
-		if (HelperEnvInfo.isWindowsPlatform()) {
-			viewerPath = WINDOWS_PDF_VIEWER_PATH;
-		} else if (HelperEnvInfo.isMacPlatform()) {
-			ControlBrowser.display(new URL("file://" + path)); //$NON-NLS-1$
-			return;
-		} else {
-			viewerPath = UNIX_PDF_VIEWER_PATH;
-		}
-		final String cmd = MessageFormat.format(viewerPath, path);
-		ControlProcess.createProcess(cmd);
-	}
+	//pre Java6 code
+	
+
+//	private static final String WINDOWS_PDF_VIEWER_PATH  = "rundll32 url.dll,FileProtocolHandler {0}"; //$NON-NLS-1$
+//	private static final String UNIX_PDF_VIEWER_PATH     = "acroread {0}"; //$NON-NLS-1$
+//
+//
+//	/**
+//	 * Show a PDF (provided as a byte[]) with PDF viewer.
+//	 * 
+//	 * @param pdfContent PDF content as byte array
+//	 * @throws IOException 
+//	 * @throws InterruptedException 
+//	 */
+//	public static void open(final byte[] pdfContent) throws IOException, InterruptedException {
+//		// first store the pdfFileContents to a temporary file
+//		final File temporaryFile = HelperIO.getTemporaryFile("temp", PDF_EXTENSION); //$NON-NLS-1$
+//		HelperIO.writeFileFromBinary(temporaryFile, pdfContent, false);
+//		open(temporaryFile);
+//	}
+//
+//	/**
+//	 * Show a PDF (provided as {@link File}) with PDF viewer.
+//	 * 
+//	 * @param pdfFile PDF content as file
+//	 * @throws InterruptedException 
+//	 * @throws IOException 
+//	 */
+//	public static void open(final File pdfFile) throws  IOException, InterruptedException {
+//		execute(pdfFile.getCanonicalPath());
+//	}
+//	
+//	/**
+//	 * Show a PDF (provided as stream) with PDF viewer.
+//	 * 
+//	 * @param pdfStream PDF content as stream
+//	 * @throws InterruptedException
+//	 * @throws IOException
+//	 */
+//	public static void open(final InputStream pdfStream) throws IOException, InterruptedException {
+//		open(HelperIO.readStream(pdfStream));
+//	}
+//	
+//	
+//	/*
+//	 * Private methods
+//	 */
+//	private static void execute(final String path) throws  IOException, InterruptedException {
+//		final String viewerPath;
+//		if (HelperEnvInfo.isWindowsPlatform()) {
+//			viewerPath = WINDOWS_PDF_VIEWER_PATH;
+//		} else if (HelperEnvInfo.isMacPlatform()) {
+//			ControlBrowser.display(new URL("file://" + path)); //$NON-NLS-1$
+//			return;
+//		} else {
+//			viewerPath = UNIX_PDF_VIEWER_PATH;
+//		}
+//		final String cmd = MessageFormat.format(viewerPath, path);
+//		ControlProcess.createProcess(cmd);
+//	}
 }

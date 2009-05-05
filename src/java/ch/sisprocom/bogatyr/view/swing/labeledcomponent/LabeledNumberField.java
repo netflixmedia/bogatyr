@@ -44,27 +44,27 @@ import javax.swing.JTextField;
  * @author Stefan Laubenberger
  * @version 20090414
  */
-public class LabeledNumberField extends LabeledComponent { //TODO document in Wiki!
+public class LabeledNumberField<T extends Number> extends LabeledComponent { //TODO document in Wiki!
 	private static final long serialVersionUID = 8536177338219909078L;
 
-	public LabeledNumberField(final String labelText, final String toolTip, final int number) {
+	public LabeledNumberField(final String labelText, final String toolTip, final T number) {
 		this(labelText, toolTip, number, Integer.MAX_VALUE);
 	}
 
-	public LabeledNumberField(final String title, final String labelText, final String toolTip, final int number) {
+	public LabeledNumberField(final String title, final String labelText, final String toolTip, final T number) {
 		this(title, labelText, toolTip, number, Integer.MAX_VALUE);
 	}
 	
-	public LabeledNumberField(final String labelText, final String toolTip, final int number, final int columns) {
-		super(labelText, toolTip, new NumberField(number, toolTip, columns));
+	public LabeledNumberField(final String labelText, final String toolTip, final T number, final int columns) {
+		super(labelText, toolTip, new NumberField<T>(number, toolTip, columns));
 	}
 
-	public LabeledNumberField(final String title, final String labelText, final String toolTip, final int number, final int columns) {
-		super(title, labelText, toolTip, new NumberField(number, toolTip, columns));
+	public LabeledNumberField(final String title, final String labelText, final String toolTip, final T number, final int columns) {
+		super(title, labelText, toolTip, new NumberField<T>(number, toolTip, columns));
 	}
 
-	public NumberField getNumberField() {
-		return (NumberField)getComponent();
+	public NumberField<T> getNumberField() {
+		return (NumberField<T>)getComponent();
 	}
 
 	public void addActionListener(final ActionListener listener) {

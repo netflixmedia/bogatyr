@@ -52,7 +52,7 @@ import java.util.List;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090430
  */
 public class Chart extends Panel {
 	private static final long serialVersionUID = -4618658256880807781L;
@@ -71,6 +71,9 @@ public class Chart extends Panel {
     private final Y_Axis positionYAxis;
 	private final List<ChartEntry> entries;
 
+	private boolean isConstructed;
+	private boolean isOverrideBorders = true;
+	
 	
 	public Chart(final int maxX, final int maxY, final String[] xAxes, final String[] yAxes) {
 		this(maxX, maxY, xAxes, yAxes, X_Axis.SOUTH, Y_Axis.WEST);
@@ -90,6 +93,8 @@ public class Chart extends Panel {
         entries = new ArrayList<ChartEntry>(maxX * maxY);
         
 		createLayout();
+		
+		isConstructed = true;
 	}
 
 	
@@ -106,13 +111,42 @@ public class Chart extends Panel {
 		createLayout();
 	}
 	
-	
+	/**
+	 * Returns the color of the grid.
+	 * 
+	 * @return color of the grid
+	 */
 	public Color getColorGrid() {
 		return colorGrid;
 	}
 
-	public void setColorGrid(final Color colorGrid) {
-		this.colorGrid = colorGrid;
+	/**
+	 * Sets the color of the grid.
+	 * 
+	 * @param color of the grid
+	 */
+	public void setColorGrid(final Color color) {
+		this.colorGrid = color;
+		createLayout();
+	}
+
+	/**
+	 * Returns the state for the borders of all components.
+	 * 
+	 * @return true/false
+	 */
+	public boolean isOverrideBorders() {
+		return isOverrideBorders;
+	}
+
+	/**
+	 * Sets if the borders of all components are overridden.
+	 * 
+	 * @param isOverrideBorders true/false
+	 */
+	public void setOverrideBorders(boolean isOverrideBorders) {
+		this.isOverrideBorders = isOverrideBorders;
+		createLayout();
 	}
 
 	
@@ -199,24 +233,31 @@ public class Chart extends Panel {
 			panelContainer.setLayout(new GridLayout(1, 1));
 			
 			// Create borders
-			if (0 == (entry.getX() + 1) % gridIntervalX) {
-				panelContainer.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorGrid));
-				component.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorBackground));
-			}
 			
-			if (0 == (entry.getY() + 1) % gridIntervalY) {
-				panelContainer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorGrid));
-				component.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorBackground));
-			}
-			
-			if (0 == (entry.getX() + 1) % gridIntervalX && 0 == (entry.getY() + 1) % gridIntervalY) {
-				panelContainer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, colorGrid));
-				component.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, colorBackground));
-			}
-			if (component.getBorder() == null) {
-				component.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, colorBackground));
-			} 
-			
+				if (0 == (entry.getX() + 1) % gridIntervalX) {
+					panelContainer.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorGrid));
+					if (component.getBorder() == null || isOverrideBorders) {
+						component.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorBackground));
+					}
+				}
+				
+				if (0 == (entry.getY() + 1) % gridIntervalY) {
+					panelContainer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorGrid));
+					if (component.getBorder() == null || isOverrideBorders) {
+						component.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorBackground));
+					}
+				}
+				
+				if (0 == (entry.getX() + 1) % gridIntervalX && 0 == (entry.getY() + 1) % gridIntervalY) {
+					panelContainer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, colorGrid));
+					if (component.getBorder() == null || isOverrideBorders) {
+						component.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, colorBackground));
+					}
+				}
+				if (component.getBorder() == null) {
+					component.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, colorBackground));
+				} 
+
 			panelContainer.add(component);
 	    	add(panelContainer, gbc);
 		}
@@ -310,20 +351,29 @@ public class Chart extends Panel {
 	public void setBackground(final Color bg) {
 		super.setBackground(bg);
 		colorBackground = bg;
-//		createLayout();
+		
+		if (isConstructed) {
+			createLayout();
+		}
 	}
 	
 	@Override
 	public void setForeground(final Color fg) {
 		super.setForeground(fg);
 		colorForeground = fg;
-//		createLayout();
+		
+		if (isConstructed) {
+			createLayout();
+		}
 	}
 	
 	@Override
 	public void setFont(final Font font) {
 		super.setFont(font);
 		this.font = font;
-//		createLayout();
+		
+		if (isConstructed) {
+			createLayout();
+		}
 	}
 }

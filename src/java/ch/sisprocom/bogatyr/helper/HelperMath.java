@@ -185,7 +185,7 @@ public abstract class HelperMath { //TODO document in Wiki!
     public static double erf(final double z) {
 		double result = 0.0D;
 		
-    	if (HelperGeneral.isValidDouble(z)) {
+    	if (0.0D < z) {
 	    	final double t = 1.0D / (1.0D + 0.5D * Math.abs(z));
 	
 	        // use Horner's method

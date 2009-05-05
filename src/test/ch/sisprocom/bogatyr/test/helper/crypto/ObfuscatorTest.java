@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 20090504
  */
 public class ObfuscatorTest {
 	@Test

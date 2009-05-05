@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -33,7 +33,7 @@ package ch.sisprocom.bogatyr.test.helper.control;
 
 import static org.junit.Assert.fail;
 
-import java.net.URL;
+import java.net.URI;
 
 import org.junit.Test;
 
@@ -44,13 +44,13 @@ import ch.sisprocom.bogatyr.helper.control.ControlBrowser;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081124
+ * @version 20090504
  */
 public class ControlBrowserTest { //TODO improve
 	@Test
 	public void testDisplayUrl() {
 		try {
-			ControlBrowser.display(new URL("http://www.sisprocom.ch"));
+			ControlBrowser.display(new URI("http://www.sisprocom.ch/bogatyr/"));
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 }

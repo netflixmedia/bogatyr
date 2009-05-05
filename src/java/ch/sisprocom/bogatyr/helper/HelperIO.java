@@ -45,9 +45,14 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.filechooser.FileSystemView;
 
 
 /**
@@ -55,7 +60,7 @@ import java.util.Scanner;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090122
+ * @version 20090505
  */
 public abstract class HelperIO {
 	private static final byte[] BUFFER = new byte[1024];
@@ -92,7 +97,7 @@ public abstract class HelperIO {
      * @return ArrayList containing the path to the matched files
      * @throws IOException
      */	
-	public static List<File> getFiles(final File path, final String[] identifier, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) throws IOException {
+	public static Collection<File> getFiles(final File path, final String[] identifier, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) throws IOException {
 		final List<File> list = new ArrayList<File>();
 
 		if (!path.isDirectory()) {
@@ -113,7 +118,7 @@ public abstract class HelperIO {
      * @return ArrayList containing the path to the matched files
      * @throws IOException
      */	
-	public static List<File> getFiles(final File path, final String[] identifier, final boolean isExclude) throws IOException {
+	public static Collection<File> getFiles(final File path, final String[] identifier, final boolean isExclude) throws IOException {
 		return getFiles(path, identifier, isExclude, false, true, true, true);
 	}
 
@@ -429,7 +434,7 @@ public abstract class HelperIO {
 	    	while (scanner.hasNextLine()){
 	    		contents.append(scanner.nextLine());
 //	    		contents.append(System.getProperty("line.separator")); //$NON-NLS-1$
-                contents.append(HelperGeneral.getLS());
+                contents.append(Const.NEW_LINE);
             }
 	    	str = contents.toString();
 	    } finally {
@@ -445,7 +450,7 @@ public abstract class HelperIO {
      * @return List containing the file content
      * @throws IOException
      */	
-	public static List<String> readFileAsList(final File file) throws IOException {
+	public static Collection<String> readFileAsList(final File file) throws IOException {
 		final Scanner scanner = new Scanner(file);
 		final List<String> list = new ArrayList<String>();
 		
@@ -512,20 +517,102 @@ public abstract class HelperIO {
             }
 	    }
 	}
-	
-//	public static long getTotalSpace(File file) { //Java 1.6
-//        // Using the getTotalSpace() we can get an information of
-//        // the actual size of the partition, and we convert it to
-//        // mega bytes. 
-//        return file.getTotalSpace() // / (1024 * 1024);
-//    }
-//
-//	public static long getFreeSpace(File file) { //Java 1.6
-//        // Next we get the free disk space as the name of the
-//        // method shown us, and also get the size in mega bytes.
-//        return file.getFreeSpace(); // / (1024 * 1024);
-//     }
 
+	/**
+	 * Returns the URL representation of a given file.
+	 * 
+	 * @param file
+	 * @return URL representation of a given file
+	 * @throws MalformedURLException 
+	 */
+	public static URL getURL(final File file) throws MalformedURLException {
+        return file.toURI().toURL();
+    }
+
+	/**
+	 * Returns all drive names of the current system.
+	 * 
+	 * @return list containing all drive names of the current system 
+	 */
+	public static Collection<String> getDriveNames() {
+		final Collection<String> list = new ArrayList<String>(File.listRoots().length);
+		final FileSystemView view = FileSystemView.getFileSystemView(); 
+		
+		for (final File file : File.listRoots()) { 
+			list.add(view.getSystemDisplayName(file));
+		}
+		return list;
+	}
+	
+	/**
+	 * Returns the total space of a given file location.
+	 * 
+	 * @param file location
+	 * @return total space in bytes
+	 */
+	public static long getSpaceTotal(final File file) {
+        return file.getTotalSpace(); // / (1024 * 1024);
+    }
+
+	/**
+	 * Returns the free space of a given file location.
+	 * 
+	 * @param file location
+	 * @return free space in bytes
+	 */
+	public static long getSpaceFree(final File file) {
+        return file.getFreeSpace(); // / (1024 * 1024);
+     }
+	
+	/** Returns the usable space of a given file location.
+	 * 
+	 * @param file location
+	 * @return usable space in bytes
+	 */
+	public static long getSpaceUsable(final File file) {
+        return file.getUsableSpace(); // / (1024 * 1024);
+     }
+	 
+	/**
+	 * Returns the used space of a given file location.
+	 * 
+	 * @param file location
+	 * @return used space in bytes
+	 */
+	public static long getSpaceUsed(final File file) {
+        return getSpaceTotal(file) - getSpaceFree(file);
+     }
+	
+	/**
+	 * Checks a given file if its a drive.
+	 * 
+	 * @param file location
+	 * @return true/false
+	 */
+	public static boolean isDrive(final File file) {
+        return FileSystemView.getFileSystemView().isDrive(file);
+     }
+	
+	/**
+	 * Checks a given file if its a removable drive.
+	 * 
+	 * @param file location
+	 * @return true/false
+	 */
+	public static boolean isRemovableDrive(final File file) {
+        return FileSystemView.getFileSystemView().isFloppyDrive(file);
+     }
+	
+	/**
+	 * Checks a given file if its a network drive.
+	 * 
+	 * @param file location
+	 * @return true/false
+	 */
+	public static boolean isNetworkDrive(final File file) {
+        return FileSystemView.getFileSystemView().isComputerNode(file);
+     }	
+	
 	
 	/*
 	 * Private methods

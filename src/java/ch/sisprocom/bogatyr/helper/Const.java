@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,35 +29,31 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.test.helper;
-
-import static org.junit.Assert.assertNotNull;
-
-import java.awt.Color;
-
-import org.junit.Test;
-
-import ch.sisprocom.bogatyr.helper.HelperGraphic;
+package ch.sisprocom.bogatyr.helper;
 
 
 /**
- * Junit test
+ * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 20090504
+ * @version 20090505
  */
-public class HelperGraphicTest { //TODO improve
-	@Test
-	public void testGetFonts() {
-		assertNotNull(HelperGraphic.getFonts());
-//		System.out.println(HelperGeneral.dumpList(HelperGraphic.getFonts()));
-	}
-	
-	@Test
-	public void testGetColorHex() {
-		assertNotNull(HelperGraphic.getColorHex(Color.RED));
-//		System.out.println(HelperGraphic.getColorHex(Color.RED));
-	}
+public interface Const {
+	  //characters
+	  String NEW_LINE = System.getProperty("line.separator"); //$NON-NLS-1$
+	  String FILE_SEPARATOR = System.getProperty("file.separator"); //$NON-NLS-1$
+	  String PATH_SEPARATOR = System.getProperty("path.separator"); //$NON-NLS-1$
+
+	  String EMPTY_STRING = ""; //$NON-NLS-1$
+	  String SPACE = " "; //$NON-NLS-1$
+	  String PERIOD = "."; //$NON-NLS-1$
+	  String TAB = "\t"; //$NON-NLS-1$
+	  String SINGLE_QUOTE = "'"; //$NON-NLS-1$
+	  String DOUBLE_QUOTE = "\""; //$NON-NLS-1$
+
+	  //algebraic signs
+	  int POSITIVE = 1;
+	  int NEGATIVE = -1;
+	  String PLUS_SIGN = "+"; //$NON-NLS-1$
+	  String NEGATIVE_SIGN = "-"; //$NON-NLS-1$
 }
-
-

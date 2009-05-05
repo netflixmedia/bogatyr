@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
+import ch.sisprocom.bogatyr.helper.Const;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 import static org.junit.Assert.*;
@@ -59,7 +60,7 @@ public class HelperGeneralTest { //TODO improve
 
 	@Test
 	public void testGetLS() {
-		assertNotNull(HelperGeneral.getLS());
+		assertNotNull(Const.NEW_LINE);
 	}
 	
 	@Test
@@ -79,29 +80,29 @@ public class HelperGeneralTest { //TODO improve
 		assertFalse(HelperGeneral.isStringNumeric("123.23abc")); //$NON-NLS-1$
 	}
 
-	@Test
-	public void testIsValidInt() {
-		assertFalse(HelperGeneral.isValidInt(0));
-		assertTrue(HelperGeneral.isValidInt(1));
-	}
-	
-	@Test
-	public void testIsValidDouble() {
-		assertFalse(HelperGeneral.isValidDouble(0.0D));
-		assertTrue(HelperGeneral.isValidDouble(0.001D));
-	}
-	
-	@Test
-	public void testIsValidLong() {
-		assertFalse(HelperGeneral.isValidLong(0L));
-		assertTrue(HelperGeneral.isValidLong(1L));
-	}
-	
-	@Test
-	public void testIsValidFloat() {
-		assertFalse(HelperGeneral.isValidFloat(0.0F));
-		assertTrue(HelperGeneral.isValidFloat(0.001F));
-	}
+//	@Test
+//	public void testIsValidInt() {
+//		assertFalse(HelperGeneral.isValidInt(0));
+//		assertTrue(HelperGeneral.isValidInt(1));
+//	}
+//	
+//	@Test
+//	public void testIsValidDouble() {
+//		assertFalse(HelperGeneral.isValidDouble(0.0D));
+//		assertTrue(HelperGeneral.isValidDouble(0.001D));
+//	}
+//	
+//	@Test
+//	public void testIsValidLong() {
+//		assertFalse(HelperGeneral.isValidLong(0L));
+//		assertTrue(HelperGeneral.isValidLong(1L));
+//	}
+//	
+//	@Test
+//	public void testIsValidFloat() {
+//		assertFalse(HelperGeneral.isValidFloat(0.0F));
+//		assertTrue(HelperGeneral.isValidFloat(0.001F));
+//	}
 	
 	@Test
 	public void testIsValidObject() {
