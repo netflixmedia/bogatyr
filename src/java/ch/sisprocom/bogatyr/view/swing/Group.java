@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.view.swing;
 
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
@@ -44,7 +45,7 @@ import javax.swing.JComponent;
  * This is a group to add 1-n components (e.g. useful with JButtons).
  * 
  * @author Stefan Laubenberger
- * @version 20090505
+ * @version 20090506
  */
 public class Group extends Panel { //TODO document in Wiki!
 	private static final long serialVersionUID = -3557759501854611930L;
@@ -117,6 +118,43 @@ public class Group extends Panel { //TODO document in Wiki!
 				gbc.gridx++;
 		    	add(button, gbc);
 		    }
+	    }
+	}
+
+	
+	/*
+	 * Overridden methods
+	 */
+//	@Override
+//	public void setBackground(final Color bg) {
+//		super.setBackground(bg);
+//		
+//	    for (final Component component : getComponents()) {
+//	    	if (component instanceof JComponent) {
+//	    		((JComponent)component).setBackground(bg);
+//	    	}
+//	    }
+//	}
+//	
+//	@Override
+//	public void setForeground(final Color fg) {
+//	    super.setForeground(fg);
+//		
+//		for (final Component component : getComponents()) {
+//	    	if (component instanceof JComponent) {
+//	    		((JComponent)component).setForeground(fg);
+//	    	}
+//	    }
+//	}
+	
+	@Override
+	public void setFont(final Font font) {
+		super.setFont(font);
+		
+	    for (final Component component : getComponents()) {
+	    	if (component instanceof JComponent) {
+	    		((JComponent)component).setFont(font);
+	    	}
 	    }
 	}
 }

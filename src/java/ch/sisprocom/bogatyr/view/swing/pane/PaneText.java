@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JTextPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090506
  */
 public class PaneText extends JTextPane {
 	private static final long serialVersionUID = -3996840505161218721L;
@@ -70,8 +70,7 @@ public class PaneText extends JTextPane {
 	public void setEnabled(final boolean enabled) {
 		super.setEnabled(enabled);
 		
-		final Component[] components = getComponents();
-	    for (final Component component : components) {
+	    for (final Component component : getComponents()) {
 	    	component.setEnabled(enabled);
 	    }
 	} 

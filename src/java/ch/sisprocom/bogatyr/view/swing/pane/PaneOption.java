@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JOptionPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090506
  */
 public class PaneOption extends JOptionPane {
 	private static final long serialVersionUID = -4947729751470298861L;
@@ -92,8 +92,7 @@ public class PaneOption extends JOptionPane {
 	public void setEnabled(final boolean enabled) {
 		super.setEnabled(enabled);
 		
-		final Component[] components = getComponents();
-	    for (final Component component : components) {
+	    for (final Component component : getComponents()) {
 	    	component.setEnabled(enabled);
 	    }
 	}

@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JLayeredPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090506
  */
 public class PaneLayer extends JLayeredPane {
 	private static final long serialVersionUID = -6557519717085237490L;
@@ -66,8 +66,7 @@ public class PaneLayer extends JLayeredPane {
 	public void setEnabled(final boolean enabled) {
 		super.setEnabled(enabled);
 		
-		final Component[] components = getComponents();
-	    for (final Component component : components) {
+	    for (final Component component : getComponents()) {
 	    	component.setEnabled(enabled);
 	    }
 	}

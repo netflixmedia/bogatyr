@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
  * This control opens PDF data with the default system pdf-viewer.
  *
  * @author Stefan Laubenberger
- * @version 20090504
+ * @version 20090506
  */
 public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
@@ -54,7 +54,7 @@ public abstract class ControlPdf {
 	 * @throws IOException 
 	 * @throws InterruptedException 
 	 */
-	public static void open(final byte[] pdfContent) throws IOException, InterruptedException {
+	public static void open(final byte[] pdfContent) throws IOException {
 		// first store the pdfFileContents to a temporary file
 		final File temporaryFile = HelperIO.getTemporaryFile("temp", PDF_EXTENSION); //$NON-NLS-1$
 		HelperIO.writeFileFromBinary(temporaryFile, pdfContent, false);
@@ -68,7 +68,7 @@ public abstract class ControlPdf {
 	 * @throws InterruptedException 
 	 * @throws IOException 
 	 */
-	public static void open(final File pdfFile) throws  IOException, InterruptedException {
+	public static void open(final File pdfFile) throws  IOException {
 		Desktop.getDesktop().open(pdfFile);
 	}
 	
@@ -79,7 +79,7 @@ public abstract class ControlPdf {
 	 * @throws InterruptedException
 	 * @throws IOException
 	 */
-	public static void open(final InputStream pdfStream) throws IOException, InterruptedException {
+	public static void open(final InputStream pdfStream) throws IOException {
 		open(HelperIO.readStream(pdfStream));
 	}
 	
