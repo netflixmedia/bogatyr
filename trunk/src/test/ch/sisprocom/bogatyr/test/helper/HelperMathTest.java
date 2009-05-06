@@ -117,33 +117,33 @@ public class HelperMathTest { //TODO improve
 		assertEquals(2.55D, HelperMath.round(2.545D, 2));
 	}
 	
-	@Test
-	public void testErf() {
-		assertEquals(0.0D, HelperMath.erf(0.0D));
-		assertEquals(-0.8427007877600067D, HelperMath.erf(-1.0D));
-		assertEquals(-0.995322265010666D, HelperMath.erf(-2.0D));
-		assertEquals(0.8427007877600067D, HelperMath.erf(1.0D));
-		assertEquals(0.995322265010666D, HelperMath.erf(2.0D));
-	}
-	
-	@Test
-	public void testErf2() {
-		assertEquals(0.0D, HelperMath.erf2(0.0D));
-		assertEquals(-0.842716825727904D, HelperMath.erf2(-1.0D));
-		assertEquals(-0.9953087428644348D, HelperMath.erf2(-2.0D));
-		assertEquals(0.842716825727904D, HelperMath.erf2(1.0D));
-		assertEquals(0.9953087428644348D, HelperMath.erf2(2.0D));
-	}
-
-	@Test
-	public void testPhi() {
-//		System.out.println(HelperMath.phi(8.0D));
-		assertEquals(0.5D, HelperMath.phi(0.0D));
-		assertEquals(0.15865526139567465D, HelperMath.phi(-1.0D));
-		assertEquals(0.022750129890124482D, HelperMath.phi(-2.0D));
-		assertEquals(0.8413447386043253D, HelperMath.phi(1.0D));
-		assertEquals(0.9772498701098755D, HelperMath.phi(2.0D));
-	}
+//	@Test
+//	public void testErf() {
+//		assertEquals(0.0D, HelperMath.erf(0.0D));
+//		assertEquals(-0.8427007877600067D, HelperMath.erf(-1.0D));
+//		assertEquals(-0.995322265010666D, HelperMath.erf(-2.0D));
+//		assertEquals(0.8427007877600067D, HelperMath.erf(1.0D));
+//		assertEquals(0.995322265010666D, HelperMath.erf(2.0D));
+//	}
+//	
+//	@Test
+//	public void testErf2() {
+//		assertEquals(0.0D, HelperMath.erf2(0.0D));
+//		assertEquals(-0.842716825727904D, HelperMath.erf2(-1.0D));
+//		assertEquals(-0.9953087428644348D, HelperMath.erf2(-2.0D));
+//		assertEquals(0.842716825727904D, HelperMath.erf2(1.0D));
+//		assertEquals(0.9953087428644348D, HelperMath.erf2(2.0D));
+//	}
+//
+//	@Test
+//	public void testPhi() {
+////		System.out.println(HelperMath.phi(8.0D));
+//		assertEquals(0.5D, HelperMath.phi(0.0D));
+//		assertEquals(0.15865526139567465D, HelperMath.phi(-1.0D));
+//		assertEquals(0.022750129890124482D, HelperMath.phi(-2.0D));
+//		assertEquals(0.8413447386043253D, HelperMath.phi(1.0D));
+//		assertEquals(0.9772498701098755D, HelperMath.phi(2.0D));
+//	}
 	
 	@Test
 	public void testRandom() {
