@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JTabbedPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090506
  */
 public class PaneTab extends JTabbedPane {
 	private static final long serialVersionUID = -4529079733239863943L;
@@ -73,8 +73,7 @@ public class PaneTab extends JTabbedPane {
 	public void setEnabled(final boolean enabled) {
 		super.setEnabled(enabled);
 		
-		final Component[] components = getComponents();
-	    for (final Component component : components) {
+	    for (final Component component : getComponents()) {
 	    	component.setEnabled(enabled);
 	    }
 	}

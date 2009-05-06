@@ -36,7 +36,7 @@ package ch.sisprocom.bogatyr.helper;
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 20090505
+ * @version 20090506
  */
 public interface Const {
 	  //characters
@@ -47,6 +47,7 @@ public interface Const {
 	  String EMPTY_STRING = ""; //$NON-NLS-1$
 	  String SPACE = " "; //$NON-NLS-1$
 	  String PERIOD = "."; //$NON-NLS-1$
+	  String SEMICOLON = ";"; //$NON-NLS-1$
 	  String TAB = "\t"; //$NON-NLS-1$
 	  String SINGLE_QUOTE = "'"; //$NON-NLS-1$
 	  String DOUBLE_QUOTE = "\""; //$NON-NLS-1$

@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JPanel.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090505
  */
 public class Panel extends JPanel implements IComponentActivate {
 	private static final long serialVersionUID = 3679443739459084931L;
@@ -120,8 +120,7 @@ public class Panel extends JPanel implements IComponentActivate {
 		if (!isNotActive) {
 			super.setEnabled(enabled);
 			
-			final Component[] components = getComponents();
-		    for (final Component component : components) {
+		    for (final Component component : getComponents()) {
 		    	component.setEnabled(enabled);
 		    }
 		}
@@ -131,8 +130,7 @@ public class Panel extends JPanel implements IComponentActivate {
 	public void setToolTipText(final String text) {
 		super.setToolTipText(text);
 		
-		final Component[] components = getComponents();
-	    for (final Component component : components) {
+	    for (final Component component : getComponents()) {
 	    	if (component instanceof JComponent) {
 	    		((JComponent)component).setToolTipText(text);
 	    	}

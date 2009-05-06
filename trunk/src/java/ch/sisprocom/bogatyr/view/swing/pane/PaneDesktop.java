@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JDesktopPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090506
  */
 public class PaneDesktop extends JDesktopPane {
 	private static final long serialVersionUID = -1000995349055355841L;
@@ -65,8 +65,7 @@ public class PaneDesktop extends JDesktopPane {
 	public void setEnabled(final boolean enabled) {
 		super.setEnabled(enabled);
 		
-		final Component[] components = getComponents();
-	    for (final Component component : components) {
+	    for (final Component component : getComponents()) {
 	    	component.setEnabled(enabled);
 	    }
 	}

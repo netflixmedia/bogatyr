@@ -43,7 +43,7 @@ import java.net.URL;
  * This is an extended JEditorPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090506
  */
 public class PaneEditor extends JEditorPane {
 	private static final long serialVersionUID = -3298005917085461997L;
@@ -78,8 +78,7 @@ public class PaneEditor extends JEditorPane {
 	public void setEnabled(final boolean enabled) {
 		super.setEnabled(enabled);
 		
-		final Component[] components = getComponents();
-	    for (final Component component : components) {
+	    for (final Component component : getComponents()) {
 	    	component.setEnabled(enabled);
 	    }
 	}
