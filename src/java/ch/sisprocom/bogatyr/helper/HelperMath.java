@@ -40,7 +40,7 @@ import java.util.Collection;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20090430
+ * @version 20090506
  */
 public abstract class HelperMath { //TODO document in Wiki!
 	
@@ -175,83 +175,83 @@ public abstract class HelperMath { //TODO document in Wiki!
         return (double) Math.round(value * powerOfTen) / powerOfTen;
 	}
 	
-    /**
-     * Fractional error in math formula less than 1.2 * 10 ^ -7.
-     * Although subject to catastrophic cancellation when z is very close to 0.
-     *
-     * @param z double-Value
-     * @return double-value
-     */
-    public static double erf(final double z) {
-		double result = 0.0D;
-		
-    	if (0.0D < z) {
-	    	final double t = 1.0D / (1.0D + 0.5D * Math.abs(z));
-	
-	        // use Horner's method
-	        final double ans = 1.0D - t * StrictMath.exp(-z*z - 1.26551223D +
-	        								t * ( 1.00002368D +
-	                                        t * ( 0.37409196D + 
-	                                        t * ( 0.09678418D + 
-	                                        t * (-0.18628806D + 
-	                                        t * ( 0.27886807D + 
-	                                        t * (-1.13520398D + 
-	                                        t * ( 1.48851587D + 
-	                                        t * (-0.82215223D +
-                                            t * 0.17087277D)))))))));
-            result = 0.0D <= z ? ans : -ans;
-        }
-    	return result;
-	}
-
-    /**
-     * Fractional error less than x.xx * 10 ^ -4.
-     *
-     * @param z double-Value
-     * @return double-value
-     */
-    public static double erf2(final double z) {
-    	final double t = 1.0D / (1.0D + 0.47047D * Math.abs(z));
-        final double poly = t * (0.3480242D + t * (-0.0958798D + t * 0.7478556D));
-        final double ans = 1.0D - poly * StrictMath.exp(-z * z);
-        final double result;
-
-        result = 0.0D <= z ? ans : -ans;
-        return result;
-    }
-
-    /**
-     * Cumulative normal distribution.
-     *
-     * @param z double-Value
-     * @return double-value
-     */
-    public static double phi(final double z) {
-    	return 0.5D * (1.0D + erf(z / 1.4142135623730951));
-    }
-
-    /**
-     * Random number with standard Gaussian distribution.
-     *
-     * @return double-value
-     */
-    public static double gaussian() {
-        final double U = Math.random();
-        final double V = Math.random();
-        
-        return StrictMath.sin(2.0D * Math.PI * V) * Math.sqrt(-2.0D * StrictMath.log(1.0 - U));
-    }
-
-    /**
-     * Random number with Gaussian distribution of mean mu and stddev sigma.
-     *
-     * @param mu double-Value
-     * @param sigma double-Value
-     * @return double-value
-     */
-    public static double gaussian(final double mu, final double sigma) {
-    	return mu + sigma * gaussian();
-    }
+//    /**
+//     * Fractional error in math formula less than 1.2 * 10 ^ -7.
+//     * Although subject to catastrophic cancellation when z is very close to 0.
+//     *
+//     * @param z double-Value
+//     * @return double-value
+//     */
+//    public static double erf(final double z) {
+//		double result = 0.0D;
+//		
+//    	if (0.0D != z) {
+//	    	final double t = 1.0D / (1.0D + 0.5D * Math.abs(z));
+//	
+//	        // use Horner's method
+//	        final double ans = 1.0D - t * StrictMath.exp(-z*z - 1.26551223D +
+//	        								t * ( 1.00002368D +
+//	                                        t * ( 0.37409196D + 
+//	                                        t * ( 0.09678418D + 
+//	                                        t * (-0.18628806D + 
+//	                                        t * ( 0.27886807D + 
+//	                                        t * (-1.13520398D + 
+//	                                        t * ( 1.48851587D + 
+//	                                        t * (-0.82215223D +
+//                                            t * 0.17087277D)))))))));
+//            result = 0.0D <= z ? ans : -ans;
+//        }
+//    	return result;
+//	}
+//
+//    /**
+//     * Fractional error less than x.xx * 10 ^ -4.
+//     *
+//     * @param z double-Value
+//     * @return double-value
+//     */
+//    public static double erf2(final double z) {
+//    	final double t = 1.0D / (1.0D + 0.47047D * Math.abs(z));
+//        final double poly = t * (0.3480242D + t * (-0.0958798D + t * 0.7478556D));
+//        final double ans = 1.0D - poly * StrictMath.exp(-z * z);
+//        final double result;
+//
+//        result = 0.0D <= z ? ans : -ans;
+//        return result;
+//    }
+//
+//    /**
+//     * Cumulative normal distribution.
+//     *
+//     * @param z double-Value
+//     * @return double-value
+//     */
+//    public static double phi(final double z) {
+//    	return 0.5D * (1.0D + erf(z / 1.4142135623730951));
+//    }
+//
+//    /**
+//     * Random number with standard Gaussian distribution.
+//     *
+//     * @return double-value
+//     */
+//    public static double gaussian() {
+//        final double U = Math.random();
+//        final double V = Math.random();
+//        
+//        return StrictMath.sin(2.0D * Math.PI * V) * Math.sqrt(-2.0D * StrictMath.log(1.0 - U));
+//    }
+//
+//    /**
+//     * Random number with Gaussian distribution of mean mu and stddev sigma.
+//     *
+//     * @param mu double-Value
+//     * @param sigma double-Value
+//     * @return double-value
+//     */
+//    public static double gaussian(final double mu, final double sigma) {
+//    	return mu + sigma * gaussian();
+//    }
 
     /**
      * Random integer between 0 and n-1.
