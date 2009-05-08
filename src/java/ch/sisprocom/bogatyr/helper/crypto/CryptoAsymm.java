@@ -52,7 +52,7 @@ import java.security.Security;
  * This is a class for asymmetric cryptology via RSA.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090508
  */
 public class CryptoAsymm implements ICryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
@@ -72,7 +72,11 @@ public class CryptoAsymm implements ICryptoAsymm {
 	/*
 	 * Implemented methods
 	 */
-	public KeyPair generateKeys(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
+	public KeyPair generateKeys(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
+		if (0 >= keysize || 0 != keysize%16) {
+			throw new IllegalArgumentException("keysize is invalid: " + keysize); //$NON-NLS-1$
+		}
+		
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 
 		// Generate a key-pair
@@ -82,8 +86,18 @@ public class CryptoAsymm implements ICryptoAsymm {
 		return kpg.generateKeyPair();
 	}
 
-    public byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
-		final int space = keysize/8 - 11;
+    public byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit
+		if (null == input || 0 == input.length) {
+			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == key) {
+			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+		}
+    	if (0 >= keysize || 0 != keysize%16) {
+			throw new IllegalArgumentException("keysize is invalid: " + keysize); //$NON-NLS-1$
+		}
+    	
+    	final int space = keysize/8 - 11;
 		byte[] result = null;
 		final byte[] temp = new byte[space];
 		
@@ -95,7 +109,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 				temp[tempCounter] = input[ii];
 				
 				if (tempCounter == space - 1) {
-					result = HelperGeneral.concatenateByteArrays(result, encryptInternal(temp, key));
+					result = HelperGeneral.concatenate(result, encryptInternal(temp, key));
 					tempCounter = 0;
 				} else {
 					if (ii == input.length - 1) { // last byte
@@ -104,7 +118,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 						for (int xx = 0; xx <= tempCounter; xx++) {
 							usedBytes[xx] = input[ii - tempCounter + xx];
 						}
-						result = HelperGeneral.concatenateByteArrays(result, encryptInternal(usedBytes, key));
+						result = HelperGeneral.concatenate(result, encryptInternal(usedBytes, key));
 					}
 					tempCounter++;
 				}
@@ -115,7 +129,17 @@ public class CryptoAsymm implements ICryptoAsymm {
 		return result;
 	}
 
-	public byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+	public byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit
+		if (!HelperGeneral.isValid(input)) {
+			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == key) {
+			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+		}
+    	if (0 >= keysize || 0 != keysize%16) {
+			throw new IllegalArgumentException("keysize is invalid: " + keysize); //$NON-NLS-1$
+		}
+
 		final int space = keysize/8;
 		byte[] result = null;
 		final byte[] temp = new byte[space];
@@ -127,7 +151,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 				temp[tempCounter] = data;
 				
 				if (tempCounter == space - 1) {
-					result = HelperGeneral.concatenateByteArrays(result, decryptInternal(temp, key));
+					result = HelperGeneral.concatenate(result, decryptInternal(temp, key));
 					tempCounter = 0;
 				} else {
 					tempCounter++;
@@ -144,11 +168,11 @@ public class CryptoAsymm implements ICryptoAsymm {
 	 * Private methods
 	 */
 	/**
-	 * Encrypt the data with a given {@link PublicKey} (internal).
+	 * Encrypt the data with a given {@link Key}.
 	 * 
-	 * @param input data to encrypt as a byte-array
-	 * @param key {@link PublicKey} for the encryption
-	 * @return Return the encrypted byte-array 
+	 * @param input data (byte-array) to encrypt
+	 * @param key for the encryption
+	 * @return encrypted byte-array 
 	 * @throws InvalidKeyException 
 	 * @throws BadPaddingException 
 	 * @throws IllegalBlockSizeException 
@@ -164,11 +188,11 @@ public class CryptoAsymm implements ICryptoAsymm {
 	}
 
 	/**
-	 * Decrypt the data (internal).
+	 * Decrypt the data with a given {@link Key}.
 	 * 
-	 * @param input encrypted data as a byte-array
-	 * @param key {@link PrivateKey} for the decryption
-	 * @return Return the decrypted byte-array
+	 * @param input data (byte-array) to decrypt
+	 * @param key for the decryption
+	 * @return decrypted byte-array
 	 * @throws NoSuchPaddingException 
 	 * @throws NoSuchProviderException 
 	 * @throws NoSuchAlgorithmException 

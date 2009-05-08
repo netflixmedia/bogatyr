@@ -31,12 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.converter;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
 
 /**
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090508
  */
 public abstract class ConverterBase64 {
     private static final String ERROR_ILLEGAL_CHARACTER = "Illegal character in Base64 encoded data";
@@ -75,70 +77,70 @@ public abstract class ConverterBase64 {
 	}
 
 	/**
-	 * Encodes a string into Base64 format. 
+	 * Encodes a {@link String} into Base64 format. 
 	 * No blanks or line breaks are inserted.
 	 * 
-	 * @param data String to be encoded
+	 * @param input String to be encoded
 	 * @return String with the Base64 encoded data
 	 */
-	public static String encode(final String data) {
-		return new String(encode(data.getBytes()));
+	public static String encode(final String input) { //$JUnit
+		if (!HelperGeneral.isValid(input)) {
+			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		}
+		
+		return new String(encode(input.getBytes()));
 	}
 
 	/**
 	 * Encodes a byte-array into Base64 format. 
 	 * No blanks or line breaks are inserted.
 	 * 
-	 * @param data Array containing the data bytes to be encoded
-	 * @return Character array with the Base64 encoded data
+	 * @param input byte-array to be encoded
+	 * @return character array with the Base64 encoded data
 	 */
-	public static char[] encode(final byte[] data) {
-		return encode(data, data.length);
+	public static char[] encode(final byte[] input) { //$JUnit
+		if (!HelperGeneral.isValid(input)) {
+			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		}
+		
+		return encode(input, input.length);
 	}
 
-//	/**
-//	 * Decodes a string from Base64 format.
-//	 * 
-//	 * @param string Base64 String to be decoded.
-//	 * @return String containing the decoded data.
-//	 * @throws IllegalArgumentException
-//	 */
-//	public static String decodeToString(final String string) {
-//		Logger.getInstance().writeMethodEntry(ConverterBase64.class, "decodeToString", string);  //$NON-NLS-1$
-//
-//		final String str = new String(decode(string));
-//		
-//		Logger.getInstance().writeMethodExit(ConverterBase64.class, "decodeToString", str);  //$NON-NLS-1$
-//		return str;
-//	}
-
 	/**
-	 * Decodes a byte-array from Base64 format.
+	 * Decodes a {@link String} from Base64 format.
 	 * 
-	 * @param data Base64 String to be decoded
+	 * @param input Base64 string to be decoded
 	 * @return Array containing the decoded data bytes
 	 * @throws IllegalArgumentException
 	 */
-	public static byte[] decode(final String data) {
-		return decode(data.toCharArray());
+	public static byte[] decode(final String input) { //$JUnit
+		if (!HelperGeneral.isValid(input)) {
+			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		}
+		
+		return decode(input.toCharArray());
 	}
 
 	/**
 	 * Decodes a byte array from Base64 format. 
 	 * No blanks or line breaks are allowed within the Base64 encoded data.
 	 * 
-	 * @param data Character array containing the Base64 encoded data
+	 * @param input character array containing the Base64 encoded data
 	 * @return Array containing the decoded data bytes
 	 * @throws IllegalArgumentException
 	 */
-	public static byte[] decode(final char[] data) {
-		int iLen = data.length;
+	public static byte[] decode(final char[] input) { //$JUnit
+		if (null == input || 0 >= input.length) {
+			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
+		}
+		
+		int iLen = input.length;
 
 		if (0 != iLen % 4) {
             throw new IllegalArgumentException("Length of Base64 encoded input string is not a multiple of 4");
         }
 		
-		while (0 < iLen && '=' == data[iLen - 1]) {
+		while (0 < iLen && '=' == input[iLen - 1]) {
 			iLen--;
 		}
 		
@@ -148,13 +150,13 @@ public abstract class ConverterBase64 {
         int ip = 0;
         int op = 0;
         while (ip < iLen) {
-			final int i0 = data[ip];
+			final int i0 = input[ip];
             ip++;
-            final int i1 = data[ip];
+            final int i1 = input[ip];
             ip++;
-            final int i2 = (int) (ip < iLen ? data[ip] : 'A');
+            final int i2 = (int) (ip < iLen ? input[ip] : 'A');
             ip++;
-            final int i3 = (int) (ip < iLen ? data[ip] : 'A');
+            final int i3 = (int) (ip < iLen ? input[ip] : 'A');
             ip++;
 
             if (127 < i0 || 127 < i1 || 127 < i2 || 127 < i3) {

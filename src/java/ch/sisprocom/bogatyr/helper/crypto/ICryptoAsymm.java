@@ -32,7 +32,6 @@
 package ch.sisprocom.bogatyr.helper.crypto;
 
 import java.security.KeyPair;
-import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
@@ -40,40 +39,38 @@ import java.security.PublicKey;
  * This is an interface for asymmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 20090508
  */
 public interface ICryptoAsymm {
 	/**
-	 * Generates a public and a private KeyPair with the Class
-	 * KeyPairGenerator and saves it to the internal attributes.
+	 * Generates a public and a private {@link KeyPair} with a given key size.
 	 * 
-	 * @param keysize Size of the key in bits (modulo 16 = 0, e.g. 1024, 2048)
+	 * @param keysize in bits (normally modulo 16 = 0, e.g. 1024, 2048)
 	 * @return generated key pair
 	 * @throws Exception
 	 * @see KeyPair
-	 * @see KeyPairGenerator
 	 */
 	KeyPair generateKeys(final int keysize) throws Exception;
 	
 	/**
-	 * Encrypt the data with a given {@link PublicKey}.
+	 * Encrypt the data (byte-array) with a given {@link PublicKey} and key size.
 	 * 
-	 * @param input The data to encrypt as a byte-array
-	 * @param key {@link PublicKey} for the encryption
-	 * @param keysize Size of the key in bits (modulo 16 = 0, e.g. 1024, 2048)
-     * @return Return the encrypted byte-array
+	 * @param input data to encrypt as a byte-array
+	 * @param key for the encryption
+	 * @param keysize in bits (normally modulo 16 = 0, e.g. 1024, 2048)
+     * @return encrypted byte-array
 	 * @throws Exception  
 	 * @see PublicKey
 	 */
 	byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws Exception;
 	
 	/**
-	 * Decrypt the data.
+	 * Decrypt the data (byte-array) with a given {@link PrivateKey} and key size.
 	 * 
-	 * @param input The encrypted data as a byte-array
-	 * @param key {@link PrivateKey} for the decryption
-	 * @param keysize of the key in bits (modulo 16 = 0, e.g. 1024, 2048)
-     * @return Return the decrypted byte-array
+	 * @param input encrypted data as a byte-array
+	 * @param key for the decryption
+	 * @param keysize in bits (normally modulo 16 = 0, e.g. 1024, 2048)
+     * @return decrypted byte-array
 	 * @throws Exception 
 	 */
 	byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws Exception;

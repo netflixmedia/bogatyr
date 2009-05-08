@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.test.helper.converter;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -43,12 +44,35 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20090508
  */
-public class ConverterHexTest { //TODO improve
+public class ConverterHexTest {
 	@Test
 	public void testEncodeAndDecode() {
-		assertEquals(AllBogatyrTests.DATA, new String(ConverterHex.decode(ConverterHex.encode(AllBogatyrTests.DATA.getBytes()))));
+		final String encoded = ConverterHex.encode(AllBogatyrTests.DATA.getBytes());
+		final byte[] decoded = ConverterHex.decode(encoded);
+		
+		assertEquals(AllBogatyrTests.DATA, new String(decoded));
+		
+		try {
+			ConverterHex.encode(null);
+			fail("byte[] is null!");
+		} catch (Exception ex) {}
+
+		try {
+			ConverterHex.encode(new byte[0]);
+			fail("byte[] is empty!");
+		} catch (Exception ex) {}
+
+		try {
+			ConverterHex.decode(null);
+			fail("String is null!");
+		} catch (Exception ex) {}
+
+		try {
+			ConverterHex.decode(new String());
+			fail("String is empty!");
+		} catch (Exception ex) {}
 	}
 }
 

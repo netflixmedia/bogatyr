@@ -36,10 +36,10 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This is a class for obfuscating data.
+ * This is a class for obfuscating data with CFB.
  * 
  * @author Stefan Laubenberger
- * @version 20090430
+ * @version 20090508
  */
 public class Obfuscator implements IObfuscator {
 	private byte pattern = Byte.MAX_VALUE;
@@ -100,11 +100,14 @@ public class Obfuscator implements IObfuscator {
 	/**
 	 * Obfuscate the data.
 	 * 
-	 * @param input The data to obfuscate as a byte-array
-     * @param pattern for obfuscating (region: -128 - 127)
-     * @return the obfuscated data
+	 * @param input data (byte-array) to obfuscate
+     * @return obfuscated data
 	 */
 	private byte[] obfuscate(final byte[] input) {
+		if (!HelperGeneral.isValid(input)) {
+			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		}
+
 		final byte[] result = new byte[input.length];
 		
 		result[0] = (byte)(input[0] ^ (int) pattern);
@@ -114,7 +117,17 @@ public class Obfuscator implements IObfuscator {
 		return result;
 	}
 
+	/**
+	 * Unobfuscate the data.
+	 * 
+	 * @param input data (byte-array) to unobfuscate
+     * @return unobfuscated data
+	 */
 	private byte[] unobfuscate(final byte[] input) {
+		if (!HelperGeneral.isValid(input)) {
+			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		}
+
 		final byte[] result = new byte[input.length];
 		
 		result[0] = (byte)(input[0] ^ (int) pattern);

@@ -31,15 +31,21 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import ch.sisprocom.bogatyr.helper.Const;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.test.AllBogatyrTests;
-import static org.junit.Assert.*;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import org.junit.Test;
+
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 
 /**
@@ -52,22 +58,18 @@ public class HelperGeneralTest { //TODO improve
 	@Test
 	public void testNewInstance() {
 		try {
-			assertEquals("", HelperGeneral.createObject(String.class)); //$NON-NLS-1$
-			assertEquals(AllBogatyrTests.DATA, HelperGeneral.createObject(String.class, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA}));
+			assertEquals("", HelperGeneral.createInstance(String.class)); //$NON-NLS-1$
+			assertEquals(AllBogatyrTests.DATA, HelperGeneral.createInstance(String.class, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA}));
 			assertNull(null, null);
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 
-	@Test
-	public void testGetLS() {
-		assertNotNull(Const.NEW_LINE);
-	}
 	
 	@Test
 	public void testIsValidString() {
-		assertFalse(HelperGeneral.isValidString(null));
-		assertFalse(HelperGeneral.isValidString("")); //$NON-NLS-1$
-		assertTrue(HelperGeneral.isValidString("123")); //$NON-NLS-1$
+//		assertFalse(HelperGeneral.isValid(null));
+		assertFalse(HelperGeneral.isValid("")); //$NON-NLS-1$
+		assertTrue(HelperGeneral.isValid("123")); //$NON-NLS-1$
 	}
 
 	@Test
@@ -82,77 +84,49 @@ public class HelperGeneralTest { //TODO improve
 		assertFalse(HelperGeneral.isStringNumeric("123..23")); //$NON-NLS-1$
 	}
 
-//	@Test
-//	public void testIsValidInt() {
-//		assertFalse(HelperGeneral.isValidInt(0));
-//		assertTrue(HelperGeneral.isValidInt(1));
-//	}
-//	
-//	@Test
-//	public void testIsValidDouble() {
-//		assertFalse(HelperGeneral.isValidDouble(0.0D));
-//		assertTrue(HelperGeneral.isValidDouble(0.001D));
-//	}
-//	
-//	@Test
-//	public void testIsValidLong() {
-//		assertFalse(HelperGeneral.isValidLong(0L));
-//		assertTrue(HelperGeneral.isValidLong(1L));
-//	}
-//	
-//	@Test
-//	public void testIsValidFloat() {
-//		assertFalse(HelperGeneral.isValidFloat(0.0F));
-//		assertTrue(HelperGeneral.isValidFloat(0.001F));
-//	}
-	
-	@Test
-	public void testIsValidObject() {
-		assertFalse(HelperGeneral.isValidObject(null));
-		assertTrue(HelperGeneral.isValidObject("")); //$NON-NLS-1$
-	}
 	
 	@Test
 	public void testIsValidArray() {
-		assertFalse(HelperGeneral.isValidArray(null));
-		assertFalse(HelperGeneral.isValidArray(new String[0]));
-		assertTrue(HelperGeneral.isValidArray(new String[1]));
+//		assertFalse(HelperGeneral.isValid(null));
+		assertFalse(HelperGeneral.isValid(new String[0]));
+		assertTrue(HelperGeneral.isValid(new String[1]));
 	}
 	
 	@Test
 	public void testIsValidCollection() {
 		final Collection<String> list = new ArrayList<String>();
-		assertFalse(HelperGeneral.isValidCollection(null));
-		assertFalse(HelperGeneral.isValidCollection(list));
+//		assertFalse(HelperGeneral.isValid(null));
+		assertFalse(HelperGeneral.isValid(list));
 		list.add(""); //$NON-NLS-1$
-		assertTrue(HelperGeneral.isValidCollection(list));
+		assertTrue(HelperGeneral.isValid(list));
 	}
 
 	@Test
-	public void testGetBytesFromObject() {
+	public void testSerialize() {
 		try {
-			assertNull(HelperGeneral.getBytesFromObject(null));
-		} catch (Exception ex) {fail(ex.getMessage());}
+			assertNull(HelperGeneral.serialize(null));
+			fail("Object is null!");
+		} catch (Exception ex) {}
 
 		try {
-			assertNotNull(HelperGeneral.getBytesFromObject(AllBogatyrTests.DATA));
+			assertNotNull(HelperGeneral.serialize(AllBogatyrTests.DATA));
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 
 	@Test
-	public void testGetObjectFromBytes() {
+	public void testDeserialize() {
 		try {
-			HelperGeneral.getObjectFromBytes(null);
+			HelperGeneral.deserialize(null);
 			fail("byte[] is null");
 		} catch (Exception ex) {}
 
 		try {
-			HelperGeneral.getObjectFromBytes(new byte[0]);
+			HelperGeneral.deserialize(new byte[0]);
 			fail("byte[] is empty");
 		} catch (Exception ex) {}
 		
 		try {
-			assertEquals(AllBogatyrTests.DATA, HelperGeneral.getObjectFromBytes(HelperGeneral.getBytesFromObject(AllBogatyrTests.DATA)));
+			assertEquals(AllBogatyrTests.DATA, HelperGeneral.deserialize(HelperGeneral.serialize(AllBogatyrTests.DATA)));
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	

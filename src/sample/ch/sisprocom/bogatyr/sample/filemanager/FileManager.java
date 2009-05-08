@@ -95,7 +95,7 @@ public class FileManager extends ApplicationAbstract { //TODO document in Wiki!
 		}
 
  		final String value = property.getProperty(PROPERTY_PATH);
-		if (HelperGeneral.isValidString(value)) {
+		if (HelperGeneral.isValid(value)) {
             path = new File(value);
 		} else {
 			System.err.println(PROPERTY_PATH + " == 'null'"); //$NON-NLS-1$

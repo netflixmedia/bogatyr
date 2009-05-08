@@ -239,7 +239,7 @@ public abstract class HelperIO {
 	public static void writeLine(final File file, final String encoding, final String line) throws IOException {
 		String enc = encoding;
 		
-		if (!HelperGeneral.isValidString(encoding)) {
+		if (!HelperGeneral.isValid(encoding)) {
 			enc = "UTF-8"; //$NON-NLS-1$
 		}
 

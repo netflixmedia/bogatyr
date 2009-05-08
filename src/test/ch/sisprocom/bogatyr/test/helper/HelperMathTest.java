@@ -51,12 +51,12 @@ import ch.sisprocom.bogatyr.helper.HelperMath;
 public class HelperMathTest { //TODO improve
 	@Test
 	public void testGcd() {
-		assertEquals(2.0, HelperMath.gcd(2.0D, 4.0D));
+		assertEquals(2.0D, HelperMath.gcd(2.0D, 4.0D), 0.00001D);
 	}
 	
 	@Test
 	public void testLcm() {
-		assertEquals(10.0D, HelperMath.lcm(2.0D, 5.0D));
+		assertEquals(10.0D, HelperMath.lcm(2.0D, 5.0D), 0.00001D);
 	}
 
 	@Test
@@ -99,22 +99,22 @@ public class HelperMathTest { //TODO improve
 	
 	@Test
 	public void testLog() {
-		assertEquals(2.0D, HelperMath.log(10.0, 100.0));
-		assertEquals(4.19180654857877D, HelperMath.log(3.0, 100.0));
+		assertEquals(2.0D, HelperMath.log(10.0, 100.0), 0.00001D);
+		assertEquals(4.19180654857877D, HelperMath.log(3.0, 100.0), 0.00001D);
 	}
 	
 	@Test
 	public void testRound() {
-		assertEquals(0.0D, HelperMath.round(0.0D, 4));
-		assertEquals(-2.0D, HelperMath.round(-2.499D, 0));
-		assertEquals(-2.0D, HelperMath.round(-2.5D, 0));
-		assertEquals(-3.0D, HelperMath.round(-2.51D, 0));
-		assertEquals(-2.55D, HelperMath.round(-2.554D, 2));
-		assertEquals(-2.55D, HelperMath.round(-2.546D, 2));
-		assertEquals(2.0D, HelperMath.round(2.499D, 0));
-		assertEquals(3.0D, HelperMath.round(2.5D, 0));
-		assertEquals(2.55D, HelperMath.round(2.554D, 2));
-		assertEquals(2.55D, HelperMath.round(2.545D, 2));
+		assertEquals(0.0D, HelperMath.round(0.0D, 4), 0.00001D);
+		assertEquals(-2.0D, HelperMath.round(-2.499D, 0), 0.00001D);
+		assertEquals(-2.0D, HelperMath.round(-2.5D, 0), 0.00001D);
+		assertEquals(-3.0D, HelperMath.round(-2.51D, 0), 0.00001D);
+		assertEquals(-2.55D, HelperMath.round(-2.554D, 2), 0.00001D);
+		assertEquals(-2.55D, HelperMath.round(-2.546D, 2), 0.00001D);
+		assertEquals(2.0D, HelperMath.round(2.499D, 0), 0.00001D);
+		assertEquals(3.0D, HelperMath.round(2.5D, 0), 0.00001D);
+		assertEquals(2.55D, HelperMath.round(2.554D, 2), 0.00001D);
+		assertEquals(2.55D, HelperMath.round(2.545D, 2), 0.00001D);
 	}
 	
 //	@Test

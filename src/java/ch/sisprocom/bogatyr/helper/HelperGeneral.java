@@ -55,16 +55,16 @@ import java.util.UUID;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090505
+ * @version 20090508
  */
 public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and is logging needed?
 	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$ //TODO update in Wiki!
 	private static final char[] RANDOMKEY_SEED_DEFAULT    = {'1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	
 	/**
-     * Creates an object with parameters via reflection API.
+     * Creates an instance of a class.
      * 
-     * @param clazz Full qualified class name
+     * @param clazz full qualified class name
      * @return instantiated object
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException 
@@ -73,16 +73,20 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
      */
-	public static <T> Object createObject(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-		return createObject(clazz, new Class[0], new Object[0]);
+	public static <T> T createInstance(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		if (null == clazz) {
+			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
+		}
+		
+		return clazz.getConstructor(new Class[0]).newInstance(new Object[0]);
 	}
 
 	/**
-     * Creates an object with parameters via reflection API.
+     * Creates an instance of a class with parameters.
      * 
      * @param clazz full qualified class name
      * @param paramClazzes classes for the constructor
-     * @param clazz parameters for the constructor
+     * @param params parameters for the constructor
      * @return instantiated object
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException 
@@ -91,28 +95,38 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
      */
-	public static <T> Object createObject(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public static <T> T createInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		if (null == clazz) {
+			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
+		}
+		if (!isValid(paramClazzes)) {
+			throw new IllegalArgumentException("paramClazzes is null or empty!"); //$NON-NLS-1$
+		}
+		if (!isValid(params)) {
+			throw new IllegalArgumentException("params is null or empty!"); //$NON-NLS-1$
+		}
+		
 		return clazz.getConstructor(paramClazzes).newInstance(params);
 	}
 	
     /**
-     * Checks if a String is valid.
+     * Checks if a {@link CharSequence} is valid.
      * 
-     * @param arg String to check
+     * @param arg to check
      * @return true/false
      */	
-	public static boolean isValidString(final CharSequence arg) {
-        return !(!isValidObject(arg) || 0 == arg.length());
+	public static boolean isValid(final CharSequence arg) {
+        return !(null == arg || 0 == arg.length());
     }
 
 	/**
-     * Checks if a String is full numeric.
+     * Checks if a {@link String} is full numeric.
      * 
-     * @param arg String to check
+     * @param arg to check
      * @return true/false
      */	
 	public static boolean isStringNumeric(final String arg) { //TODO a bit lazy implemented... improve with regex if possible
-		if (isValidString(arg)) {
+		if (isValid(arg)) {
 			try{
 				new BigDecimal(arg);
 				return true;
@@ -123,121 +137,84 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 		return false;
 	}
 
-//	/**
-//     * Checks if a int is not 0.
-//     * 
-//     * @param arg int to check
-//     * @return true/false
-//     */
-//	public static boolean isValidInt(final int arg) {
-//        return 0 != arg;
-//    }
-//	
-//	/**
-//     * Checks if a double is not 0.
-//     * 
-//     * @param arg double to check
-//     * @return true/false
-//     */	
-//	public static boolean isValidDouble(final double arg) {
-//        return 0.0D != arg;
-//    }
-//	
-//	/**
-//     * Checks if a long is not 0.
-//     * 
-//     * @param arg long to check
-//     * @return true/false
-//     */
-//	public static boolean isValidLong(final long arg) {
-//        return 0L != arg;
-//    }
-//
-//	/**
-//     * Checks if a float is not 0.
-//     * 
-//     * @param arg float to check
-//     * @return true/false
-//     */	
-//	public static boolean isValidFloat(final float arg) {
-//        return 0.0F != arg;
-//    }
-
 	/**
-     * Checks if a {@link Object} is not null.
+     * Checks if an {@link Object} array is valid.
      * 
-     * @param arg object to check
+     * @param arg to check
      * @return true/false
      */	
-	public static boolean isValidObject(final Object arg) {
-        return arg != null;
-    }
-
-	/**
-     * Checks if a array is valid.
-     * 
-     * @param arg object array to check
-     * @return true/false
-     */	
-	public static boolean isValidArray(final Object[] arg) {
-        return !(!isValidObject(arg) || 0 == arg.length);
-    }
-
-	/**
-     * Checks if a collection is valid.
-     * 
-     * @param list ArrayList to check
-     * @return true/false
-     */
-	public static boolean isValidCollection(final Collection<?> list) {
-        return !(!isValidObject(list) || list.isEmpty());
+	public static boolean isValid(final Object[] arg) {
+        return !(null == arg || 0 == arg.length);
     }
 	
 	/**
-	 * Converts an {@link Object} into a byte-array.
+     * Checks if a byte-array is valid.
+     * 
+     * @param arg to check
+     * @return true/false
+     */	
+	public static boolean isValid(final byte[] arg) {
+        return !(null == arg || 0 == arg.length);
+    }
+	
+	/**
+     * Checks if a {@link Collection} is valid.
+     * 
+     * @param arg to check
+     * @return true/false
+     */
+	public static boolean isValid(final Collection<?> arg) {
+        return !(null == arg || arg.isEmpty());
+    }
+	
+	/**
+	 * Serialize an {@link Object} into a byte-array.
 	 * It uses the {@link ByteArrayOutputStream} and the {@link ObjectOutputStream}.
 	 * 
-	 * @param obj The Object to convert into a byte-array.
+	 * @param obj convert into a byte-array.
 	 * @return object as byte-array
 	 * @throws IOException
 	 * @see ByteArrayOutputStream
 	 * @see ObjectOutputStream
 	 */
-	public static byte[] getBytesFromObject(final Object obj) throws IOException {
-		byte[] data = null;
-		
-		if (obj != null) {
-			final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ObjectOutputStream oos = null;
+	public static byte[] serialize(final Object obj) throws IOException {
+		if (null == obj) {
+			throw new IllegalArgumentException("obj is null!"); //$NON-NLS-1$
+		}	
 
-            try {
-                oos = new ObjectOutputStream(bos);
-                oos.writeObject(obj);
-                oos.flush();
-	
-        	    data = bos.toByteArray();
-            } finally {
-            	if (oos != null) {
-            		oos.close();	
-            	}
+		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = null;
+
+        try {
+            oos = new ObjectOutputStream(bos);
+            oos.writeObject(obj);
+            oos.flush();
+
+            return bos.toByteArray();
+        } finally {
+        	if (oos != null) {
+        		oos.close();	
+        	}
 //                bos.close();
-            }
         }
-	    return data;
 	}
 	
 	/**
-	 * Converts a given byte-array into a valid {@link Object}.
+	 * Deserialize a given byte-array into a valid {@link Object}.
 	 * It uses the {@link ByteArrayInputStream} and the {@link ObjectInputStream}.
 	 * 
-	 * @param bytes The byte-array to convert into an {@link Object}.
-	 * @return a valid object
+	 * @param bytes convert into an object
+	 * @return valid object
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @see ByteArrayInputStream
 	 * @see ObjectInputStream
 	 */
-	public static Object getObjectFromBytes(final byte[] bytes) throws IOException, ClassNotFoundException {
+	public static Object deserialize(final byte[] bytes) throws IOException, ClassNotFoundException {
+		if (!isValid(bytes)) {
+			throw new IllegalArgumentException("params is null or empty!"); //$NON-NLS-1$
+		}
+		
 		ObjectInputStream ois = null;
 		final Object obj;
 		
@@ -253,13 +230,13 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	}
 	
 	/**
-	 * Concatenate two arrays to one array.
+	 * Concatenate two {@link Object} arrays to one array.
 	 * 
 	 * @param inA first array
 	 * @param inB second array
-	 * @return The array a & b as one new array
+	 * @return array a & b as one new array
 	 */
-    public static Object[] concatenateArrays(final Object[] inA, final Object[] inB) {
+    public static Object[] concatenate(final Object[] inA, final Object[] inB) {
     	Object[] a = inA;
     	Object[] b = inB;
     	
@@ -283,9 +260,9 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * 
 	 * @param inA first array
 	 * @param inB second array
-	 * @return The array a & b as one new byte-array
+	 * @return array a & b as one new byte-array
 	 */
-    public static byte[] concatenateByteArrays(final byte[] inA, final byte[] inB) {
+    public static byte[] concatenate(final byte[] inA, final byte[] inB) {
     	byte[] a = inA;
     	byte[] b = inB;
     	
@@ -305,17 +282,17 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
     
 	/**
-	 * Removes duplicate objects from list.
+	 * Removes duplicate objects from {@link Collection}.
 	 * 
 	 * @param list containing duplicate objects
-	 * @return list without duplicates
+	 * @return collection without duplicates
 	 */
     public static <T> Collection<T> removeDuplicates(final Collection<T> list) {
 		return new ArrayList<T>(new HashSet<T>(list));
     }
 	
     /**
-	 * Removes duplicate objects from array.
+	 * Removes duplicate objects from an {@link Object} array.
 	 * 
 	 * @param array containing duplicate objects
 	 * @return array without duplicates
@@ -327,7 +304,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 
     /**
-     * Generates a hash (unique string) from an input object.
+     * Generates a hash (unique {@link String}) from an input {@link Object}.
      * This is also used for unique keys.
      *
      * @param algo to use
@@ -356,7 +333,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	}
 
     /**
-     * Generates a hash (unique string) with SHA-256 from an input object.
+     * Generates a hash (unique {@link String}) with SHA-256 from an input object.
      *
      * @param data to generate a hash
      * @return generated hash value
@@ -367,12 +344,12 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 
     /**
-     * Generates an unique string.
+     * Generates an unique {@link String} with a given seed.
      * This is used for unique keys (e.g. for product keys).
      *
      * @param digits length of result string
      * @param seed for the string (e.g. "1,2...0,A,B...Z)
-     * @return generated unique String
+     * @return generated unique string
      */
     public static String getRandomKey(final int digits, final char[] seed) {
 		final StringBuilder sb = new StringBuilder();
@@ -384,7 +361,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 
     /**
-     * Generates an unique string with default seed.
+     * Generates an unique {@link String} with default seed.
      * This is used for unique keys (e.g. for product keys).
      *
      * @param digits length of result string
@@ -404,7 +381,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }    
 
     /**
-     * Fill a string with a char.
+     * Fill a {@link CharSequence} with a char.
      * 
      * @param fillChar char to fill the string
      * @param fillLength length of the filled string 
@@ -422,7 +399,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
     
     /**
-     * Reverses a string.
+     * Reverses a {@link String}.
      * 
      * @param input string
      * @return reversed string
@@ -432,14 +409,14 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 
     /**
-     * Clean a string to numeric chars.
+     * Clean a {@link String} to numeric chars.
      * 
      * @param text string
      * @return numeric string
      */
     public static String getValidNumericString(final String text) { //TODO document in Wiki!
     	
-    	if (!isValidString(text)) {
+    	if (!isValid(text)) {
     		return null;
     	}
 
@@ -475,9 +452,9 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
     
     /**
-     * Dump a list.
+     * Dump an {@link Iterable}.
      * 
-     * @param list for dump
+     * @param list to dump
      * @return dump string
      */
     public static String dump(final Iterable<?> list) {
@@ -491,9 +468,9 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 
     /**
-     * Dump a map.
+     * Dump a {@link Map}.
      * 
-     * @param map for dump
+     * @param map to dump
      * @return dump string
      */
     public static String dump(final Map<?, ?> map) {
@@ -509,9 +486,9 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     }
 
      /**
-     * Dump an array.
+     * Dump an {@link Object} array.
      * 
-     * @param array for dump
+     * @param array to dump
      * @return dump string
      */
     public static String dump(final Object[] array) {
@@ -524,6 +501,12 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 		return sb.toString();
     }
 
+    /**
+     * Generic toString() method for {@link Object}  and different purposes.
+     * 
+     * @param object to dump
+     * @return dumped object string
+     */
     public static String toString(final Object object) {
     	final Collection<String> list = new ArrayList<String>();
     	toString(object, list);
