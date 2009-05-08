@@ -45,18 +45,20 @@ import javax.crypto.SecretKey;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090403
+ * @version 20090508
  */
 public class CryptoSymmTest {
-	private static final int KEYSIZE = 128;
+	private static final int KEYSIZE = 256;
 	
 	private SecretKey secretKey;
+	private SecretKey secretKeyDefault;
 	private ICryptoSymm cryptoSymm;
 	
 	@Before
 	public void setUp() throws Exception {
 		cryptoSymm = new CryptoSymm();
         secretKey = cryptoSymm.generateKey(KEYSIZE);
+        secretKeyDefault = cryptoSymm.generateKey();
 	}
 
 	@Test
@@ -74,6 +76,10 @@ public class CryptoSymmTest {
 		try {
 			assertNotNull(cryptoSymm.generateKey(KEYSIZE));
 		} catch (Exception ex) {fail(ex.getMessage());}
+		
+		try {
+			assertNotNull(cryptoSymm.generateKey());
+		} catch (Exception ex) {fail(ex.getMessage());}	
 	}
 	
 	@Test
@@ -95,6 +101,10 @@ public class CryptoSymmTest {
 		
 		try {
 			assertNotNull(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKey));
+		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
+
+		try {
+			assertNotNull(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKeyDefault));
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
 	}
 	
@@ -122,6 +132,10 @@ public class CryptoSymmTest {
 
 		try {
 			assertEquals(AllBogatyrTests.DATA, new String(cryptoSymm.decrypt(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKey), secretKey)));
+		} catch (Exception ex) {fail(ex.getMessage());}
+
+		try {
+			assertEquals(AllBogatyrTests.DATA, new String(cryptoSymm.decrypt(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKeyDefault), secretKeyDefault)));
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 }

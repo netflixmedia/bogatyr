@@ -56,8 +56,9 @@ import java.security.spec.AlgorithmParameterSpec;
  * @version 20090508
  */
 public class CryptoSymm implements ICryptoSymm {
-	public static final String ALGORITHM = "AES"; //$NON-NLS-1$
-	public static final String XFORM     = "AES/CBC/PKCS5Padding"; //$NON-NLS-1$
+	public static final String ALGORITHM    = "AES"; //$NON-NLS-1$
+	public static final String XFORM        = "AES/CBC/PKCS5Padding"; //$NON-NLS-1$
+	public static final int DEFAULT_KEYSIZE = 128;
 
 	
 	/*
@@ -72,6 +73,17 @@ public class CryptoSymm implements ICryptoSymm {
 	/*
 	 * Implemented methods
 	 */
+	/**
+	 * Generates a {@link SecretKey} with the AES standard key size of 128 bits.
+	 * 
+     * @return generated secret key
+	 * @throws Exception 
+	 * @see SecretKey 
+	 */
+	public SecretKey generateKey() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
+		return generateKey(DEFAULT_KEYSIZE);
+	}
+	
 	public SecretKey generateKey(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
     	if (0 >= keysize) {
 			throw new IllegalArgumentException("keysize is invalid: " + keysize); //$NON-NLS-1$

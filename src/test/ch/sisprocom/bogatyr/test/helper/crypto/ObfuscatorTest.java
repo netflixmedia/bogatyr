@@ -33,9 +33,11 @@ package ch.sisprocom.bogatyr.test.helper.crypto;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
 import ch.sisprocom.bogatyr.helper.crypto.IObfuscator;
 import ch.sisprocom.bogatyr.helper.crypto.Obfuscator;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
@@ -45,7 +47,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090504
+ * @version 20090508
  */
 public class ObfuscatorTest {
 	@Test
@@ -54,5 +56,25 @@ public class ObfuscatorTest {
 		assertEquals(AllBogatyrTests.DATA, new String(obfuscator.decrypt(obfuscator.encrypt(AllBogatyrTests.DATA.getBytes()))));
 		assertEquals(AllBogatyrTests.DATA, new String(obfuscator.decrypt(obfuscator.encrypt(AllBogatyrTests.DATA.getBytes(), (byte)0x6F), (byte)0x6F)));
 		assertNotSame(AllBogatyrTests.DATA, new String(obfuscator.decrypt(obfuscator.encrypt(AllBogatyrTests.DATA.getBytes(), (byte)0x6F), (byte)0x5F)));
+		
+		try {
+			obfuscator.encrypt(null);
+			fail("byte[] is null!");
+		} catch (Exception ex) {}
+
+		try {
+			obfuscator.encrypt(new byte[0]);
+			fail("byte[] is empty!");
+		} catch (Exception ex) {}
+
+		try {
+			obfuscator.decrypt(null);
+			fail("byte[] is null!");
+		} catch (Exception ex) {}
+
+		try {
+			obfuscator.decrypt(new byte[0]);
+			fail("byte[] is empty!");
+		} catch (Exception ex) {}	
 	}
 }
