@@ -58,7 +58,8 @@ public class CryptoAsymm implements ICryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
 	public static final String XFORM     = "RSA/NONE/PKCS1PADDING"; //$NON-NLS-1$
 //	public static final String XFORM     = "RSA/NONE/NoPadding"; //$NON-NLS-1$
-
+	public static final int DEFAULT_KEYSIZE = 1024;
+	
 	
 	/*
 	 * Overridden methods
@@ -72,7 +73,18 @@ public class CryptoAsymm implements ICryptoAsymm {
 	/*
 	 * Implemented methods
 	 */
-	public KeyPair generateKeys(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
+	/**
+	 * Generates a public and a private {@link KeyPair} with the RSA standard key size of 1024 bits.
+	 * 
+	 * @return generated key pair
+	 * @throws Exception
+	 * @see KeyPair
+	 */
+	public KeyPair generateKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
+		return generateKeyPair(DEFAULT_KEYSIZE);
+	}
+	
+	public KeyPair generateKeyPair(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
 		if (0 >= keysize || 0 != keysize%16) {
 			throw new IllegalArgumentException("keysize is invalid: " + keysize); //$NON-NLS-1$
 		}
@@ -86,6 +98,20 @@ public class CryptoAsymm implements ICryptoAsymm {
 		return kpg.generateKeyPair();
 	}
 
+	/**
+	 * Encrypt the data (byte-array) with a given {@link PublicKey}.
+	 * Use this method only, if the key has the RSA standard key size of 1024 bits. 
+	 * 
+	 * @param input data to encrypt as a byte-array
+	 * @param key for the encryption
+     * @return encrypted byte-array
+	 * @throws Exception  
+	 * @see PublicKey
+	 */
+    public byte[] encrypt(final byte[] input, final PublicKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit
+    	return encrypt(input, key, DEFAULT_KEYSIZE);
+    }
+    
     public byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit
 		if (null == input || 0 == input.length) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
@@ -127,6 +153,19 @@ public class CryptoAsymm implements ICryptoAsymm {
 			result = encryptInternal(input, key);
 		}
 		return result;
+	}
+
+	/**
+	 * Decrypt the data (byte-array) with a given {@link PrivateKey}.
+	 * Use this method only, if the key has the RSA standard key size of 1024 bits.
+	 * 
+	 * @param input encrypted data as a byte-array
+	 * @param key for the decryption
+     * @return decrypted byte-array
+	 * @throws Exception 
+	 */
+	public byte[] decrypt(final byte[] input, final PrivateKey key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit
+		return decrypt(input, key, DEFAULT_KEYSIZE);
 	}
 
 	public byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit

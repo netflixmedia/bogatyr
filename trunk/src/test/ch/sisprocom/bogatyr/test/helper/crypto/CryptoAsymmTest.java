@@ -49,40 +49,46 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090403
+ * @version 20090508
  */
 public class CryptoAsymmTest {
-	private static final int KEYSIZE = 1024;
+	private static final int KEYSIZE = 512;
 	
 	private KeyPair keyPair;
+	private KeyPair keyPairDefault;
 	private ICryptoAsymm cryptoAsymm;
 	
 	
 	@Before
 	public void setUp() throws Exception {
 		cryptoAsymm = new CryptoAsymm();
-        keyPair = cryptoAsymm.generateKeys(KEYSIZE);
+        keyPair = cryptoAsymm.generateKeyPair(KEYSIZE);
+        keyPairDefault = cryptoAsymm.generateKeyPair();
 	}
 
 	@Test
-	public void testGenerateKeys() {
+	public void testGenerateKeyPair() {
 		try {
-			cryptoAsymm.generateKeys(0);
+			cryptoAsymm.generateKeyPair(0);
 			fail("keysize is 0");
 		} catch (Exception ex) {}
 
 		try {
-			cryptoAsymm.generateKeys(-1024);
+			cryptoAsymm.generateKeyPair(-1024);
 			fail("keysize is -1024");
 		} catch (Exception ex) {}
 		
 		try {
-			cryptoAsymm.generateKeys(3);
+			cryptoAsymm.generateKeyPair(3);
 			fail("keysize is 3");
 		} catch (Exception ex) {}
 
 		try {
-			assertNotNull(cryptoAsymm.generateKeys(KEYSIZE));
+			assertNotNull(cryptoAsymm.generateKeyPair(KEYSIZE));
+		} catch (Exception ex) {fail(ex.getMessage());}
+		
+		try {
+			assertNotNull(cryptoAsymm.generateKeyPair());
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
@@ -111,6 +117,10 @@ public class CryptoAsymmTest {
 		try {
 			assertNotNull(cryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), keyPair.getPublic(), KEYSIZE));
 		} catch (Exception ex) {fail(ex.getMessage());}
+
+		try {
+			assertNotNull(cryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), keyPairDefault.getPublic()));
+		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
 	@Test
@@ -138,6 +148,11 @@ public class CryptoAsymmTest {
 		try {
 			assertEquals(AllBogatyrTests.DATA, new String(cryptoAsymm.decrypt(cryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), keyPair.getPublic(), KEYSIZE), keyPair.getPrivate(), KEYSIZE)));
 		} catch (Exception ex) {fail(ex.getMessage());}
+		
+		try {
+			assertEquals(AllBogatyrTests.DATA, new String(cryptoAsymm.decrypt(cryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), keyPairDefault.getPublic()), keyPairDefault.getPrivate())));
+		} catch (Exception ex) {fail(ex.getMessage());}
+
 	}
 }
 

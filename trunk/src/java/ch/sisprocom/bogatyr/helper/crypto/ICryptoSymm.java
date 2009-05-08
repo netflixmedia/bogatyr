@@ -43,6 +43,15 @@ import javax.crypto.SecretKey;
  */
 public interface ICryptoSymm {
 	/**
+	 * Generates a {@link SecretKey} with the algorithms standard key size.
+	 * 
+     * @return generated secret key
+	 * @throws Exception 
+	 * @see SecretKey 
+	 */
+	SecretKey generateKey() throws Exception;
+	
+	/**
 	 * Generates a {@link SecretKey} with a given key size.
 	 * 
 	 * @param keysize in bits (e.g. 128, 192 or 256)

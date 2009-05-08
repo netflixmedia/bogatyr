@@ -33,10 +33,13 @@ package ch.sisprocom.bogatyr.test.helper.crypto;
 
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
+import ch.sisprocom.bogatyr.helper.crypto.ICryptoAsymm;
 import ch.sisprocom.bogatyr.helper.crypto.IPublicKeyProvider;
 import ch.sisprocom.bogatyr.helper.crypto.PublicKeyProvider;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -49,27 +52,31 @@ import java.util.Date;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090403
+ * @version 20090508
  */
 public class PublicKeyProviderTest {
 	private final IPublicKeyProvider publicKeyProvider = new PublicKeyProvider();
 	
+	private KeyPair keyPair;
+	
+	
+	@Before
+	public void setUp() throws Exception {
+		ICryptoAsymm cryptoAsymm = new CryptoAsymm();
+        keyPair = cryptoAsymm.generateKeyPair();
+	}
+	
 	@Test
 	public void testGenerateCertificate() {
-		KeyPair kp = null;
 		try {
-			kp = new CryptoAsymm().generateKeys(512);
-		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
-		
-		try {
-			X509Certificate cert = publicKeyProvider.generateCertificate(kp, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(System.currentTimeMillis() - 50000L), new Date(System.currentTimeMillis() + 50000L));
+			X509Certificate cert = publicKeyProvider.generateCertificate(keyPair, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(System.currentTimeMillis() - 50000L), new Date(System.currentTimeMillis() + 50000L));
 			publicKeyProvider.storeCertificate(cert, new File(HelperEnvInfo.getOsTempDirectory(), "test.cer"));
 			cert = publicKeyProvider.getCertificate(new File(HelperEnvInfo.getOsTempDirectory(), "test.cer"));
 //			System.out.println(HelperGeneral.toString(cert));
 //			System.out.println(cert.getIssuerDN());
 //			System.out.println(cert.getSubjectDN());
 //			System.out.println(cert.getSubjectAlternativeNames());
-			assertEquals(kp.getPublic(), cert.getPublicKey());
+			assertEquals(keyPair.getPublic(), cert.getPublicKey());
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 }
