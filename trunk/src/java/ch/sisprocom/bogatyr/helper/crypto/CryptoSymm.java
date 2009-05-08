@@ -53,7 +53,7 @@ import java.security.spec.AlgorithmParameterSpec;
  * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090508
  */
 public class CryptoSymm implements ICryptoSymm {
 	public static final String ALGORITHM = "AES"; //$NON-NLS-1$
@@ -72,8 +72,12 @@ public class CryptoSymm implements ICryptoSymm {
 	/*
 	 * Implemented methods
 	 */
-	public SecretKey generateKey(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException {
-		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
+	public SecretKey generateKey(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
+    	if (0 >= keysize) {
+			throw new IllegalArgumentException("keysize is invalid: " + keysize); //$NON-NLS-1$
+		}
+
+    	Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 
 		// Generate a key
 		final KeyGenerator kg = KeyGenerator.getInstance(ALGORITHM, "BC"); //$NON-NLS-1$
@@ -82,14 +86,28 @@ public class CryptoSymm implements ICryptoSymm {
 		return kg.generateKey();
 	}
 	
-	public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
+	public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit
+		if (!HelperGeneral.isValid(input)) {
+			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == key) {
+			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+		}
+
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
 
 		return cipher.doFinal(input);
 	}
 
-	public byte[] decrypt(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+	public byte[] decrypt(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException { //$JUnit
+		if (!HelperGeneral.isValid(input)) {
+			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == key) {
+			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+		}
+		
 		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
 

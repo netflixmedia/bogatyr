@@ -39,27 +39,25 @@ import javax.crypto.SecretKey;
  * This is an interface for symmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 20090508
  */
 public interface ICryptoSymm {
 	/**
-	 * Generates a key. Sets the intern attribute key to the generated key.
-	 * With this generated key, you can encrypt and decrypt Byte-Arrays.
+	 * Generates a {@link SecretKey} with a given key size.
 	 * 
-	 * @param keysize Size of the key in bits (must be 128, 192 or 256)
+	 * @param keysize in bits (e.g. 128, 192 or 256)
      * @return generated secret key
 	 * @throws Exception 
-	 * @see #encrypt(byte[], Key)
-	 * @see #decrypt(byte[], Key)
+	 * @see SecretKey 
 	 */
 	SecretKey generateKey(final int keysize) throws Exception;
 	
 	/**
-	 * Encrypt the data with a given {@link Key}.
+	 * Encrypt the data (byte-array) with a given {@link Key}.
 	 * 
 	 * @param input data to encrypt as a byte-array
 	 * @param key for the encryption
-	 * @return Return the encrypted byte-array 
+	 * @return encrypted byte-array 
 	 * @throws Exception 
 	 * @see Key
 	 */
@@ -70,7 +68,7 @@ public interface ICryptoSymm {
 	 * 
 	 * @param input encrypted data as a byte-array
 	 * @param key for the decryption
-	 * @return Return the decrypted byte-array
+	 * @return decrypted byte-array
 	 * @throws Exception 
 	 * @see Key
 	 */

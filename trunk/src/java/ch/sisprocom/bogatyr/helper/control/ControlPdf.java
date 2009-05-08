@@ -36,25 +36,29 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 
 /**
- * This control opens PDF data with the default system pdf-viewer.
+ * This control opens PDF data with the default PDF-viewer.
  *
  * @author Stefan Laubenberger
- * @version 20090506
+ * @version 20090508
  */
 public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
 	
 	/**
-	 * Show a PDF (provided as a byte[]) with PDF viewer.
+	 * Show a PDF (provided as a byte[]) with the default PDF-viewer.
 	 * 
 	 * @param pdfContent PDF content as byte array
 	 * @throws IOException 
-	 * @throws InterruptedException 
 	 */
 	public static void open(final byte[] pdfContent) throws IOException {
+		if (!HelperGeneral.isValid(pdfContent)) {
+			throw new IllegalArgumentException("pdfContent is null or empty!"); //$NON-NLS-1$
+		}
+		
 		// first store the pdfFileContents to a temporary file
 		final File temporaryFile = HelperIO.getTemporaryFile("temp", PDF_EXTENSION); //$NON-NLS-1$
 		HelperIO.writeFileFromBinary(temporaryFile, pdfContent, false);
@@ -62,24 +66,28 @@ public abstract class ControlPdf {
 	}
 
 	/**
-	 * Show a PDF (provided as {@link File}) with PDF viewer.
+	 * Show a PDF (provided as {@link File}) with the default PDF-viewer.
 	 * 
 	 * @param pdfFile PDF content as file
-	 * @throws InterruptedException 
 	 * @throws IOException 
 	 */
-	public static void open(final File pdfFile) throws  IOException {
+	public static void open(final File pdfFile) throws IOException {
+		if (null == pdfFile) {
+			throw new IllegalArgumentException("pdfFile is null!"); //$NON-NLS-1$
+		}
 		Desktop.getDesktop().open(pdfFile);
 	}
 	
 	/**
-	 * Show a PDF (provided as stream) with PDF viewer.
+	 * Show a PDF (provided as {@link InputStream}) with the default PDF-viewer.
 	 * 
 	 * @param pdfStream PDF content as stream
-	 * @throws InterruptedException
 	 * @throws IOException
 	 */
 	public static void open(final InputStream pdfStream) throws IOException {
+		if (null == pdfStream) {
+			throw new IllegalArgumentException("pdfStream is null!"); //$NON-NLS-1$
+		}
 		open(HelperIO.readStream(pdfStream));
 	}
 	

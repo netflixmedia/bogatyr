@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.test.helper.converter;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -43,12 +44,35 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20090508
  */
-public class ConverterBase64Test { //TODO improve
+public class ConverterBase64Test {
 	@Test
 	public void testEncodeAndDecode() {
-		assertEquals(AllBogatyrTests.DATA, new String(ConverterBase64.decode(ConverterBase64.encode(AllBogatyrTests.DATA))));
+		final String encoded = ConverterBase64.encode(AllBogatyrTests.DATA);
+		final byte[] decoded = ConverterBase64.decode(encoded);
+		
+		assertEquals(AllBogatyrTests.DATA, new String(decoded));
+
+		try {
+			ConverterBase64.encode(new String());
+			fail("String is empty!");
+		} catch (Exception ex) {}
+
+		try {
+			ConverterBase64.encode(new byte[0]);
+			fail("byte[] is empty!");
+		} catch (Exception ex) {}
+
+		try {
+			ConverterBase64.decode(new String());
+			fail("String is empty!");
+		} catch (Exception ex) {}
+
+		try {
+			ConverterBase64.decode(new char[0]);
+			fail("char[] is empty!");
+		} catch (Exception ex) {}		
 	}
 }
 

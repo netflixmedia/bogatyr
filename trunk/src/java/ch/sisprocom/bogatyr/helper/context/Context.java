@@ -31,6 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.context;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -38,23 +41,13 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * Context for all Bogatyr applications.
- * Get access from everywhere for general contents.
+ * Implementation of the context for applications.
  * 
  * @author Stefan Laubenberger
- * @version 20090306
+ * @version 20090507
  */
 public class Context implements IContext { //TODO document in Wiki!
 	private static final IContext instance = new Context();
-
-//	private static final String KEY_APPLICATION_NAME             = "Application.name"; //$NON-NLS-1$
-//	private static final String KEY_APPLICATION_ID               = "Application.id"; //$NON-NLS-1$
-//	private static final String KEY_APPLICATION_VERSION          = "Application.version"; //$NON-NLS-1$
-//	private static final String KEY_APPLICATION_MINORVERSION     = "Application.minorversion"; //$NON-NLS-1$
-//	private static final String KEY_APPLICATION_BUILD            = "Application.build"; //$NON-NLS-1$
-//	private static final String KEY_APPLICATION_DEBUG            = "Application.debug"; //$NON-NLS-1$
-//	private static final String KEY_APPLICATION_WORKDIRECTORY    = "Application.work_directory"; //$NON-NLS-1$
-//	private static final String KEY_APPLICATION_UPDATE_LOCATION  = "Application.update"; //$NON-NLS-1$
 
 	private final Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();
 	
@@ -64,17 +57,9 @@ public class Context implements IContext { //TODO document in Wiki!
     }
 	
     public static IContext getInstance() {
-//	    if (instance == null) {
-//	    	synchronized(instance) {
-	//            	synchronized(this) {
-//	            if (instance == null)
-//	            	instance = new Context();
-//	        }
-//	    }
 	    return instance;
     }
 
-    	
 	
     /*
 	 * Overridden methods
@@ -88,107 +73,69 @@ public class Context implements IContext { //TODO document in Wiki!
 	/*
 	 * Implemented methods
 	 */
-	public void addData(final Object key, final Object value) {
+	public void addValue(final Object key, final Object value) { //$JUnit
 		if (value != null) {
             contextData.put(key, value);
 		} else {
-			removeData(key);
+			removeValue(key);
 		}
 	}
 
-	public void removeData(final Object key) {
-        contextData.remove(key);
+	public void removeValue(final Object key) { //$JUnit
+		if (null == key) {
+			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+		}
+		contextData.remove(key);
 	}
 
-	public Object getData(final Object key) {
+	public Object getValue(final Object key) { //$JUnit
+		if (null == key) {
+			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+		}
 		return contextData.get(key);
 	}
 
-	public String getDataString(final Object key) {
-		return (String) contextData.get(key);
+	public String getStringValue(final Object key) { //$JUnit
+		return (String)getValue(key);
     }
 
-	public Boolean getDataBoolean(final Object key) {
-		return (Boolean)contextData.get(key);
+	public Boolean getBooleanValue(final Object key) { //$JUnit
+		return (Boolean)getValue(key);
     }
 	
-//	public Boolean isApplicationDebug() {
-//    	Boolean value = (Boolean)contextData.get(KEY_APPLICATION_DEBUG);
-//    	return value != null ? value : false;
-// 	}
-//
-//	public String getApplicationName() {
-//		String str = getDataString(KEY_APPLICATION_NAME);
-//
-//		if (!HelperGeneral.isValidString(str)) {
-//			str = "Bogatyr"; //$NON-NLS-1$
-//		}
-//		return str;
-//	}
-//	
-//	public String getApplicationId() {
-//		String str = getDataString(KEY_APPLICATION_ID);
-//
-//		if (!HelperGeneral.isValidString(str)) {
-//			str = "Bogatyr"; //$NON-NLS-1$
-//		}
-//		return str;
-//	}
-//	
-//	public Integer getApplicationVersion() {
-//		return (Integer)contextData.get(KEY_APPLICATION_VERSION);
-//	}
-//	
-//	public Integer getApplicationMinorVersion() {
-//		return (Integer)contextData.get(KEY_APPLICATION_MINORVERSION);
-//	}
-//	
-//	public Integer getApplicationBuild() {
-//		return (Integer)contextData.get(KEY_APPLICATION_BUILD);
-//	}
-//	
-//	public File getApplicationWorkDirectory() {
-//		File file = (File)getData(KEY_APPLICATION_WORKDIRECTORY);
-//
-//		if (file == null) {
-//			file = HelperEnvInfo.getOsTempDirectory();
-//		}
-//		return file;
-//	}
-//
-//	public String getApplicationUpdateLocation() {
-//		return getDataString(KEY_APPLICATION_UPDATE_LOCATION);
-//	}
-//
-//	public void setApplicationDebug(final boolean isDebug) {
-//		addData(KEY_APPLICATION_BUILD, isDebug);
-//	}
-//
-//	public void setApplicationName(final String name) {
-//		addData(KEY_APPLICATION_NAME, name);
-//	}
-//
-//	public void setApplicationId(final String id) {
-//		addData(KEY_APPLICATION_ID, id);
-//	}
-//	
-//	public void setApplicationVersion(final int version) {
-//		addData(KEY_APPLICATION_VERSION, version);
-//	}
-//	
-//	public void setApplicationMinorVersion(final int minorversion) {
-//		addData(KEY_APPLICATION_MINORVERSION, minorversion);
-//	}
-//	
-//	public void setApplicationBuild(final int build) {
-//		addData(KEY_APPLICATION_BUILD, build);
-//	}
-//	
-//	public void setApplicationWorkDirectory(final File directory) {
-//		addData(KEY_APPLICATION_WORKDIRECTORY, directory);
-//	}
-//	
-//	public void setApplicationUpdateLocation(final String updateLocation) {
-//		addData(KEY_APPLICATION_UPDATE_LOCATION, updateLocation);
-//	}
+	public Double getDoubleValue(final Object key) { //$JUnit
+		return (Double)getValue(key);
+	}
+	
+	public Integer getIntegerValue(final Object key) { //$JUnit
+		return (Integer)getValue(key);
+	}
+	
+	public Float getFloatValue(final Object key) { //$JUnit
+		return (Float)getValue(key);
+	}
+	
+	public Byte getByteValue(final Object key) { //$JUnit
+		return (Byte)getValue(key);
+	}
+	
+	public Long getLongValue(final Object key) { //$JUnit
+		return (Long)getValue(key);
+	}
+
+	public Short getShortValue(final Object key) { //$JUnit
+		return (Short)getValue(key);
+	}
+	
+	public BigInteger getBigIntegerValue(final Object key) { //$JUnit
+		return (BigInteger)getValue(key);
+	}
+	
+	public BigDecimal getBigDecimalValue(final Object key) { //$JUnit
+		return (BigDecimal)getValue(key);
+	}
+
+	public Date getDateValue(final Object key) { //$JUnit
+		return (Date)getValue(key);
+	}
 }

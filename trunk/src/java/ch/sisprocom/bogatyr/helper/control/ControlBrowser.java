@@ -37,14 +37,24 @@ import java.net.URI;
 
 
 /**
- * This control displays an URL in the default system webbrowser.
+ * This control displays an URI in the default browser.
  *
  * @author Stefan Laubenberger
- * @version 20090504
+ * @version 20090507
  */
 public abstract class ControlBrowser {
 	
-	public static void display(final URI uri) throws IOException {
+	/**
+	 * Displays an {@link URI} in the default browser.
+	 *
+	 * @param uri for the browser (e.g. "http://www.sisprocom.ch/")
+	 * @throws IOException 
+	 * @throws InterruptedException 
+	 */
+	public static void display(final URI uri) throws IOException { //$JUnit
+		if (null == uri) {
+			throw new IllegalArgumentException("uri is null!"); //$NON-NLS-1$
+		}
 		Desktop.getDesktop().browse(uri);
 	}	
 	

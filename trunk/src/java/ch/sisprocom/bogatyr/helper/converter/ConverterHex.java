@@ -31,29 +31,35 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.converter;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
 
 
 /**
  * Encodes and decodes data to Hex format.
  * 
  * @author Stefan Laubenberger
- * @version 20090304
+ * @version 20090508
  */
 public abstract class ConverterHex {
     private static final CharSequence DIGITS = "0123456789abcdef"; //$NON-NLS-1$
 
     /**
-     * Encodes a byte array to a hex string.
+     * Encodes a byte-array to a hex {@link String}.
      * 
-     * @param data the bytes to be converted
+     * @param input bytes to be converted
      * @return hex representation of a byte array
      */
-    public static String encode(final byte[] data){
+    public static String encode(final byte[] input) { //$JUnit
+		if (!HelperGeneral.isValid(input)) {
+			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		}
+		
 		final StringBuilder buf = new StringBuilder();
 
-        for (int ii = 0; ii != data.length; ii++) {
+        for (int ii = 0; ii != input.length; ii++) {
 
-            final int	v = data[ii] & 0xff;
+            final int	v = input[ii] & 0xff;
 
             buf.append(DIGITS.charAt(v >> 4));
             buf.append(DIGITS.charAt(v & 0xf));
@@ -62,16 +68,19 @@ public abstract class ConverterHex {
     }
     
     /**
-     * Decodes a hex string to a byte-array.
+     * Decodes a hex {@link String} to a byte-array.
      * 
-     * @param data hex string to be converted
+     * @param input hex string to be converted
      * @return byte-array representation of a hex string
      */
-    public static byte[] decode(final String data) {
-		final byte[] bts = new byte[data.length() / 2];
+    public static byte[] decode(final String input) { //$JUnit
+		if (!HelperGeneral.isValid(input)) {
+			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		}
+		final byte[] bts = new byte[input.length() / 2];
 
     	for (int ii = 0; ii < bts.length; ii++) {
-    		bts[ii] = (byte) Integer.parseInt(data.substring(2 * ii, 2 * ii + 2), 16);
+    		bts[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), 16);
     	}
     	return bts;
     }

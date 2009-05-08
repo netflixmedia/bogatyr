@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.control.ControlBrowser;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090504
+ * @version 20090507
  */
 public class ControlBrowserTest { //TODO improve
 	@Test
@@ -52,7 +52,10 @@ public class ControlBrowserTest { //TODO improve
 		try {
 			ControlBrowser.display(new URI("http://www.sisprocom.ch/bogatyr/"));
 		} catch (Exception ex) {fail(ex.getMessage());}
+		
+		try {
+			ControlBrowser.display(null);
+			fail("URI is null");
+		} catch (Exception ex) {}
 	}
 }
-
-

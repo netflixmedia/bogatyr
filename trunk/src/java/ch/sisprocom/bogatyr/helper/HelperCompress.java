@@ -48,19 +48,26 @@ import java.util.zip.ZipOutputStream;
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090508
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
 	private static final byte[] BUFFER = new byte[1024]; //TODO document in Wiki!
 
 	/**
-     * Writes a zip file containing a list of files.
+     * Writes a ZIP {@link File} containing a list of {@link File}.
      * 
      * @param file for writing
-     * @param listOfFiles for the zip file
+     * @param listOfFiles for the ZIP file
      * @throws IOException
      */	
 	public static void writeZip(final File file, final List<File> listOfFiles) throws IOException {
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (!HelperGeneral.isValid(listOfFiles)) {
+			throw new IllegalArgumentException("listOfFiles is null or empty!"); //$NON-NLS-1$
+		}
+		
 		ZipOutputStream zos = null;
 		
 		try {
@@ -105,14 +112,21 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 //	}
 
 	/**
-     * Extracts a zip file to a destination directory.
+     * Extracts a ZIP {@link File} to a destination directory.
      * 
      * @param file to extract
-     * @param destinationDirectory for the zip file
+     * @param destinationDirectory for the ZIP file
      * @throws IOException
      */	
 	public static void extractZip(final ZipFile file, final File destinationDirectory) throws IOException { 
-        final Enumeration<? extends ZipEntry> zipEntryEnum = file.entries();
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (null == destinationDirectory) {
+			throw new IllegalArgumentException("destinationDirectory is null!"); //$NON-NLS-1$
+		}
+		
+		final Enumeration<? extends ZipEntry> zipEntryEnum = file.entries();
  
         while (zipEntryEnum.hasMoreElements()) { 
           final ZipEntry zipEntry = zipEntryEnum.nextElement();

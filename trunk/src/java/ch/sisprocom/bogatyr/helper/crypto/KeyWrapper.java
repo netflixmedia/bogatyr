@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a class for wrapping and unwrapping a crypto key.
  * 
  * @author Stefan Laubenberger
- * @version 20090403
+ * @version 20090508
  */
 public class KeyWrapper implements IKeyWrapper {
 	/*
@@ -62,6 +62,13 @@ public class KeyWrapper implements IKeyWrapper {
 	 * Implemented methods
 	 */
 	public byte[] wrap(final Key wrapperKey, final Key key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, NoSuchProviderException {
+		if (null == wrapperKey) {
+			throw new IllegalArgumentException("wrapperKey is null!"); //$NON-NLS-1$
+		}
+		if (null == key) {
+			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+		}
+		
 		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.WRAP_MODE, wrapperKey);
 
@@ -69,6 +76,19 @@ public class KeyWrapper implements IKeyWrapper {
 	}
 
 	public Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
+		if (null == wrapperKey) {
+			throw new IllegalArgumentException("wrapperKey is null!"); //$NON-NLS-1$
+		}
+		if (!HelperGeneral.isValid(wrappedKey)) {
+			throw new IllegalArgumentException("wrappedKey is null or empty!"); //$NON-NLS-1$
+		}
+		if (!HelperGeneral.isValid(keyAlgorithm)) {
+			throw new IllegalArgumentException("keyAlgorithm is null or empty!"); //$NON-NLS-1$
+		}
+		if (0 >= keyType) {
+			throw new IllegalArgumentException("keyType is invalid: " + keyType); //$NON-NLS-1$
+		}
+		
 		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.UNWRAP_MODE, wrapperKey);
 

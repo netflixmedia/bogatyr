@@ -49,7 +49,7 @@ public abstract class HelperXml { //TODO document in Wiki!
      * @return the in String, stripped of non-valid characters
      */
     public static String getValidXmlString(final String in) {
-        if (!HelperGeneral.isValidString(in)) { // vacancy test
+        if (!HelperGeneral.isValid(in)) { // vacancy test
             return ""; //$NON-NLS-1$
         }
        

@@ -181,7 +181,7 @@ public class NumberField extends TextField {//TODO improve Document!
 	}
 	
 	protected static boolean isStringNumeric(final CharSequence arg) {
-		if (HelperGeneral.isValidString(arg)) {
+		if (HelperGeneral.isValid(arg)) {
 			final Matcher matcher = PATTERN.matcher(arg);
 
 			if (matcher.matches()) {

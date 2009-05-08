@@ -69,9 +69,10 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
  * This class generates, reads and save X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 20090403
+ * @version 20090508
  */
 public class PublicKeyProvider implements IPublicKeyProvider {
+	
 	/*
 	 * Overridden methods
 	 */
@@ -85,7 +86,11 @@ public class PublicKeyProvider implements IPublicKeyProvider {
 	 * Implemented methods
 	 */
     public X509Certificate getCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException {
-        final FileInputStream fis = new FileInputStream(file);
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+
+    	final FileInputStream fis = new FileInputStream(file);
         BufferedInputStream bis = null;
         final X509Certificate cert;
 
@@ -101,6 +106,10 @@ public class PublicKeyProvider implements IPublicKeyProvider {
     }
 
     public X509Certificate getCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {    
+		if (null == is) {
+			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+		}
+		
 		final X509Certificate cert;
 		
     	try {
@@ -110,22 +119,53 @@ public class PublicKeyProvider implements IPublicKeyProvider {
             // get the certificate
             cert = (X509Certificate)cf.generateCertificate(is);
         } finally {
-            if (is != null) {
-                is.close();
-            }
+            is.close();
         }
 		return cert;
     }
     
     public void storeCertificate(final Certificate cert, final OutputStream os) throws CertificateEncodingException, IOException {
-    	HelperIO.writeStream(os, cert.getEncoded());
+		if (null == cert) {
+			throw new IllegalArgumentException("cert is null!"); //$NON-NLS-1$
+		}
+		if (null == os) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		
+		HelperIO.writeStream(os, cert.getEncoded());
     }
     
     public void storeCertificate(final Certificate cert, final File file) throws CertificateEncodingException, IOException {
-		HelperIO.writeFileFromBinary(file, cert.getEncoded(), false);
+		if (null == cert) {
+			throw new IllegalArgumentException("cert is null!"); //$NON-NLS-1$
+		}
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		
+    	HelperIO.writeFileFromBinary(file, cert.getEncoded(), false);
     }
 
     public X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {
+		if (null == pair) {
+			throw new IllegalArgumentException("pair is null!"); //$NON-NLS-1$
+		}
+		if (null == issuerDN || issuerDN.isEmpty()) {
+			throw new IllegalArgumentException("issuerDN is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == subjectDN || subjectDN.isEmpty()) {
+			throw new IllegalArgumentException("subjectDN is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == generalName || generalName.isEmpty()) {
+			throw new IllegalArgumentException("generalName is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == start) {
+			throw new IllegalArgumentException("start is null!"); //$NON-NLS-1$
+		}
+		if (null == end) {
+			throw new IllegalArgumentException("end is null!"); //$NON-NLS-1$
+		}
+		
 	    // generate the certificate
 		final X509V3CertificateGenerator certGen = new X509V3CertificateGenerator();
 	

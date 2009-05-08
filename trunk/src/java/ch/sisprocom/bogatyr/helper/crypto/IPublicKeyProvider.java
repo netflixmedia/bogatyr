@@ -44,29 +44,29 @@ import java.util.Date;
  * This interface is to generate, read and save X.509 certificates.
  * 
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 20090508
  */
 public interface IPublicKeyProvider {
 	/**
-     * Get the certificate out of the given certificate file.
+     * Get the {@link X509Certificate} out of the given certificate {@link File}.
      * 
      * @param file containing the certificate
-     * @return X509Certificate the certificate
+     * @return certificate
      * @throws Exception
      */
     X509Certificate getCertificate(final File file) throws Exception;
     
     /**
-     * Get the certificate out of the given certificate stream.
+     * Get the {@link X509Certificate} out of the given certificate {@link InputStream}.
      * 
      * @param is input stream containing the certificate
-     * @return X509Certificate the certificate
+     * @return certificate
      * @throws Exception
      */
     X509Certificate getCertificate(final InputStream is) throws Exception;
     
     /**
-     * Store the certificate on a stream.
+     * Store the {@link Certificate} on a {@link OutputStream}.
      * 
      * @param cert certificate
      * @param os output stream for the certificate
@@ -75,7 +75,7 @@ public interface IPublicKeyProvider {
     void storeCertificate(final Certificate cert, final OutputStream os) throws Exception;
     
     /**
-     * Store the certificate in a file.
+     * Store the {@link Certificate} in a {@link File}.
      * 
      * @param cert certificate
      * @param file for the certificate
@@ -84,15 +84,15 @@ public interface IPublicKeyProvider {
     void storeCertificate(final Certificate cert, final File file) throws Exception;
     
     /**
-     * Generate a public key certificate out of the given keypair.
+     * Generate a {@link X509Certificate} out of the given {@link KeyPair} and parameters.
      * 
      * @param pair the keypair for the certificate
-     * @param issuerDN (e.g. "CN=Test Certificate")
-     * @param subjectDN (e.g. "CN=Test Certificate")
-     * @param generalName of the certificate owner (e.g. laubenberger@gmail.com)
+     * @param issuerDN e.g. "CN=Test Certificate"
+     * @param subjectDN e.g. "CN=Test Certificate"
+     * @param generalName of the certificate owner (e.g. yourmail@gmail.com)
      * @param start date of the certificate
      * @param end date of the certificate
-     * @return X509Certificate the certificate
+     * @return certificate
      * @throws Exception 
      */
     X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws Exception; 

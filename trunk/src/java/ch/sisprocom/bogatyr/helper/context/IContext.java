@@ -31,40 +31,129 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.context;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
+
 
 
 
 /**
- * Interface for the Context for all Bogatyr applications.
+ * Interface for the context in applications.
  * 
  * @author Stefan Laubenberger
- * @version 20090306
+ * @version 20090507
  */
 public interface IContext {
-	void addData(Object key, Object value);
-	void removeData(Object key);
-	Object getData(Object key);
-	String getDataString(Object key);
-	Boolean getDataBoolean(Object key);
-    
-//    /*
-//     * Bogatyr specific
-//     */
-//	void setApplicationName(String name);
-//	void setApplicationId(String id);
-//	void setApplicationVersion(int version);
-//	void setApplicationMinorVersion(int minorversion);
-//	void setApplicationBuild(int build);
-//	void setApplicationDebug(boolean isDebug);
-//	void setApplicationWorkDirectory(File directory);
-//	void setApplicationUpdateLocation(String updateLocation);
-//
-//	String getApplicationName();
-//	String getApplicationId();
-//	Integer getApplicationVersion();
-//	Integer getApplicationMinorVersion();
-//	Integer getApplicationBuild();
-//	Boolean isApplicationDebug();
-//	File getApplicationWorkDirectory();
-//	String getApplicationUpdateLocation();
+	
+	/**
+     * Adds a key/value pair to the context.
+     * 
+     * @param key for the context
+     * @param value associated to the given key 
+     */	
+	void addValue(Object key, Object value);
+	
+	/**
+     * Removes a key/value pair from the context.
+     * 
+     * @param key for the context
+     */	
+	void removeValue(Object key);
+	
+	/**
+     * Returns a {@link Object} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Object associated to the given key 
+     */	
+	Object getValue(Object key);
+	
+	/**
+     * Returns a {@link String} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return String associated to the given key 
+     */	
+	String getStringValue(Object key);
+	
+	/**
+     * Returns a {@link Boolean} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Boolean associated to the given key 
+     */	
+	Boolean getBooleanValue(Object key);
+	
+	/**
+     * Returns a {@link Double} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Double associated to the given key 
+     */	
+	Double getDoubleValue(final Object key);
+	
+	/**
+     * Returns an {@link Integer} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Integer associated to the given key 
+     */	
+	Integer getIntegerValue(final Object key);
+	
+	/**
+     * Returns a {@link Float} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Float associated to the given key 
+     */	
+	Float getFloatValue(final Object key);
+	
+	/**
+     * Returns a {@link Byte} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Byte associated to the given key 
+     */	
+	public Byte getByteValue(final Object key);
+	
+	/**
+     * Returns a {@link Long} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Long associated to the given key 
+     */	
+	public Long getLongValue(final Object key);
+
+	/**
+     * Returns a {@link Short} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Short associated to the given key 
+     */	
+	public Short getShortValue(final Object key);
+	
+	/**
+     * Returns a {@link BigInteger} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return BigInteger associated to the given key 
+     */	
+	public BigInteger getBigIntegerValue(final Object key);
+	
+	/**
+     * Returns a {@link BigDecimal} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return BigDecimal associated to the given key 
+     */	
+	public BigDecimal getBigDecimalValue(final Object key);
+
+	/**
+     * Returns a {@link Date} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Date associated to the given key 
+     */	
+	public Date getDateValue(final Object key);
 }
