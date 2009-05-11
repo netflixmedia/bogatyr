@@ -104,8 +104,8 @@ public class Obfuscator implements IObfuscator {
      * @return obfuscated data
 	 */
 	private byte[] obfuscate(final byte[] input) {
-		if (!HelperGeneral.isValid(input)) {
-			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		if (null == input) {
+			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
 
 		final byte[] result = new byte[input.length];
@@ -124,8 +124,8 @@ public class Obfuscator implements IObfuscator {
      * @return unobfuscated data
 	 */
 	private byte[] unobfuscate(final byte[] input) {
-		if (!HelperGeneral.isValid(input)) {
-			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		if (null == input) {
+			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
 
 		final byte[] result = new byte[input.length];

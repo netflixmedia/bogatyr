@@ -88,8 +88,8 @@ public abstract class HelperGraphic {
      * @return Dimension with text size
      */
 	public static Dimension getTextSize(final String text, final Graphics graphics) {
-		if (null == text || text.isEmpty()) {
-			throw new IllegalArgumentException("text is null or empty!"); //$NON-NLS-1$
+		if (null == text) {
+			throw new IllegalArgumentException("text is null!"); //$NON-NLS-1$
 		}
 		if (null == graphics) {
 			throw new IllegalArgumentException("graphics is null!"); //$NON-NLS-1$
@@ -129,7 +129,7 @@ public abstract class HelperGraphic {
      */
     public static String getColorHex(final Color color) { //$JUnit
 		if (null == color) {
-			throw new IllegalArgumentException("colorsi is null!"); //$NON-NLS-1$
+			throw new IllegalArgumentException("color is null!"); //$NON-NLS-1$
 		}
 		
     	return Integer.toHexString(color.getRGB() & 0x00ffffff); 

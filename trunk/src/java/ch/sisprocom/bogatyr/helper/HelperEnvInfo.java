@@ -33,6 +33,7 @@ package ch.sisprocom.bogatyr.helper;
 
 import java.io.File;
 import java.util.Map;
+import java.util.TimeZone;
 
 
 /**
@@ -228,8 +229,10 @@ public abstract class HelperEnvInfo {
 	 *
 	 * @return time zone of the current user
 	 */
-	public static String getUserTimezone() {
-		return System.getProperty("user.timezone"); //$NON-NLS-1$
+	public static TimeZone getUserTimezone() {
+//		return System.getProperty("user.timezone"); //$NON-NLS-1$
+		return TimeZone.getDefault();
+		
 	}
 	
 	/**

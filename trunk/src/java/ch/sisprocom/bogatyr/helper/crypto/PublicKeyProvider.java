@@ -148,14 +148,14 @@ public class PublicKeyProvider implements IPublicKeyProvider {
 		if (null == pair) {
 			throw new IllegalArgumentException("pair is null!"); //$NON-NLS-1$
 		}
-		if (null == issuerDN || issuerDN.isEmpty()) {
-			throw new IllegalArgumentException("issuerDN is null or empty!"); //$NON-NLS-1$
+		if (null == issuerDN) {
+			throw new IllegalArgumentException("issuerDN is null!"); //$NON-NLS-1$
 		}
-		if (null == subjectDN || subjectDN.isEmpty()) {
-			throw new IllegalArgumentException("subjectDN is null or empty!"); //$NON-NLS-1$
+		if (null == subjectDN) {
+			throw new IllegalArgumentException("subjectDN is null!"); //$NON-NLS-1$
 		}
-		if (null == generalName || generalName.isEmpty()) {
-			throw new IllegalArgumentException("generalName is null or empty!"); //$NON-NLS-1$
+		if (null == generalName) {
+			throw new IllegalArgumentException("generalName is null!"); //$NON-NLS-1$
 		}
 		if (null == start) {
 			throw new IllegalArgumentException("start is null!"); //$NON-NLS-1$

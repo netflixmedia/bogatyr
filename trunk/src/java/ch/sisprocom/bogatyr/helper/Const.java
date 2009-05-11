@@ -31,6 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 
 /**
  * Collected constants of very general utility.
@@ -84,4 +87,18 @@ public interface Const {
 	  int VALUE_16384 = 16384;
 	  int VALUE_32768 = 32768;
 	  int VALUE_65536 = 65536;
+	  
+	  //arrays
+	  Class<?>[] EMPTY_ARRAY_CLASS = new Class[0];
+	  Object[] EMPTY_ARRAY_OBJECT = new Object[0];
+	  String[] EMPTY_ARRAY_STRING = new String[0];
+	  Boolean[] EMPTY_ARRAY_BOOLEAN = new Boolean[0];
+	  Double[] EMPTY_ARRAY_DOUBLE = new Double[0];
+	  Integer[] EMPTY_ARRAY_INTEGER = new Integer[0];
+	  Float[] EMPTY_ARRAY_FLOAT = new Float[0];
+	  byte[] EMPTY_ARRAY_BYTE = new byte[0];
+	  Long[] EMPTY_ARRAY_LONG = new Long[0];
+	  Short[] EMPTY_ARRAY_SHORT = new Short[0];
+	  BigInteger[] EMPTY_ARRAY_BIG_INTEGER = new BigInteger[0];
+	  BigDecimal[] EMPTY_ARRAY_BIG_DECIMAL = new BigDecimal[0];	  
 }

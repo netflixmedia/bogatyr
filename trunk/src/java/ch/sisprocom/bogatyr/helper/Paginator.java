@@ -80,7 +80,7 @@ public class Paginator { //TODO document in Wiki!
      * @return Total number of pages
      */
     public int getNumberOfPages() {
-        if (list == null || list.isEmpty() || 0 == numberPerPage) {
+        if (!HelperGeneral.isValid(list) || 0 == numberPerPage) {
             return 0;
         } else if (list.size() < numberPerPage) {
             return 1;

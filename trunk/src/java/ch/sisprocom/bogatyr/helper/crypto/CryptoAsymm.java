@@ -113,8 +113,8 @@ public class CryptoAsymm implements ICryptoAsymm {
     }
     
     public byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit
-		if (null == input || 0 == input.length) {
-			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		if (null == input) {
+			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
@@ -168,8 +168,8 @@ public class CryptoAsymm implements ICryptoAsymm {
 	}
 
 	public byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit
-		if (!HelperGeneral.isValid(input)) {
-			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		if (null == input) {
+			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$

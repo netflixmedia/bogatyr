@@ -99,8 +99,8 @@ public class CryptoSymm implements ICryptoSymm {
 	}
 	
 	public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit
-		if (!HelperGeneral.isValid(input)) {
-			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		if (null == input) {
+			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
@@ -113,8 +113,8 @@ public class CryptoSymm implements ICryptoSymm {
 	}
 
 	public byte[] decrypt(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException { //$JUnit
-		if (!HelperGeneral.isValid(input)) {
-			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		if (null == input) {
+			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
