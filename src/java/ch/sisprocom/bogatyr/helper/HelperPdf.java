@@ -106,7 +106,7 @@ public abstract class HelperPdf { //TODO document in Wiki!
      * @throws IOException
      */
 	public static void savePdfFromHTML(final File[] input, final File file) throws IOException, DocumentException {
-		if (null == input || 0 == input.length) {
+		if (!HelperGeneral.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
 		if (null == file) {

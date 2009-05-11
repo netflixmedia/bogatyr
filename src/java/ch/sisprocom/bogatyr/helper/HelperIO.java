@@ -75,10 +75,10 @@ public abstract class HelperIO {
      * @throws IOException
      */	
 	public static File getTemporaryFile(final String name, final String extension) throws IOException { //$JUnit
-		if (null == name || name.isEmpty()) {
+		if (!HelperGeneral.isValid(name)) {
 			throw new IllegalArgumentException("name is null or empty!"); //$NON-NLS-1$
 		}
-		if (null == extension || extension.isEmpty()) {
+		if (!HelperGeneral.isValid(extension)) {
 			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
 		}
 
@@ -287,14 +287,14 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
-		if (!file.isFile()) {
-			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
-		}
-		if (null == encoding || encoding.isEmpty()) {
+//		if (!file.isFile()) {
+//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+//		}
+		if (!HelperGeneral.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
-		if (null == line || line.isEmpty()) {
-			throw new IllegalArgumentException("line is null or empty!"); //$NON-NLS-1$
+		if (null == line) {
+			throw new IllegalArgumentException("line is null!"); //$NON-NLS-1$
 		}
 
         PrintWriter pw = null;
@@ -332,11 +332,11 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
-		if (!file.isFile()) {
-			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
-		}
-		if (null == data || 0 == data.length) {
-			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
+//		if (!file.isFile()) {
+//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+//		}
+		if (null == data) {
+			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
 		}
 
 		FileOutputStream fos = null;
@@ -365,14 +365,14 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
-		if (!file.isFile()) {
-			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
-		}
-		if (null == encoding || encoding.isEmpty()) {
+//		if (!file.isFile()) {
+//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+//		}
+		if (!HelperGeneral.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
-		if (null == data || data.isEmpty()) {
-			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
+		if (null == data) {
+			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
 		}
 
 		FileOutputStream fos = new FileOutputStream(file);
@@ -428,8 +428,8 @@ public abstract class HelperIO {
 		if (null == os) {
 			throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
 		}
-		if (null == data || 0 == data.length) {
-			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
+		if (null == data) {
+			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
 		}
 
 //	    try {
@@ -545,7 +545,7 @@ public abstract class HelperIO {
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		}
-		if (null == encoding || encoding.isEmpty()) {
+		if (!HelperGeneral.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
 
@@ -597,7 +597,7 @@ public abstract class HelperIO {
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		}
-		if (null == encoding || encoding.isEmpty()) {
+		if (!HelperGeneral.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
 
@@ -657,10 +657,10 @@ public abstract class HelperIO {
 		if (null == fileOutput) {
 			throw new IllegalArgumentException("fileOutput is null!"); //$NON-NLS-1$
 		}
-		if (!fileOutput.isFile()) {
-			throw new IllegalArgumentException("fileOutput is not a file: " + fileOutput); //$NON-NLS-1$
-		}
-		if (null == list || 0 == list.length) {
+//		if (!fileOutput.isFile()) {
+//			throw new IllegalArgumentException("fileOutput is not a file: " + fileOutput); //$NON-NLS-1$
+//		}
+		if (!HelperGeneral.isValid(list)) {
 			throw new IllegalArgumentException("list is null or empty!"); //$NON-NLS-1$
 		}
 

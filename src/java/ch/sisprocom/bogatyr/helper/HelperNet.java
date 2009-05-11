@@ -76,10 +76,10 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @param password for authentication
      */
     public static void enableProxyHttp(final String host, final int port, final String username, final String password) {
-		if (null == host || host.isEmpty()) {
+		if (!HelperGeneral.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
-		if (null == username || username.isEmpty()) {
+		if (!HelperGeneral.isValid(username)) {
 			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
 		}
 		if (null == password) {
@@ -112,10 +112,10 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @param password for authentication
      */
     public static void enableProxyHttps(final String host, final int port, final String username, final String password) {
-		if (null == host || host.isEmpty()) {
+		if (!HelperGeneral.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
-		if (null == username || username.isEmpty()) {
+		if (!HelperGeneral.isValid(username)) {
 			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
 		}
 		if (null == password) {
@@ -148,10 +148,10 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @param password for authentication
      */
     public static void enableProxyFtp(final String host, final int port, final String username, final String password) {
-		if (null == host || host.isEmpty()) {
+		if (!HelperGeneral.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
-		if (null == username || username.isEmpty()) {
+		if (!HelperGeneral.isValid(username)) {
 			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
 		}
 		if (null == password) {
@@ -183,7 +183,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @throws IOException
      */
     public static boolean isPingable(final String host) throws IOException {
-		if (null == host || host.isEmpty()) {
+		if (!HelperGeneral.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -203,7 +203,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @throws UnknownHostException
      */
     public static String getHostname(final String ip) throws UnknownHostException {
-		if (null == ip || ip.isEmpty()) {
+		if (!HelperGeneral.isValid(ip)) {
 			throw new IllegalArgumentException("ip is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -232,7 +232,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @throws UnknownHostException
      */
     public static String getIp(final String host) throws UnknownHostException {
-		if (null == host || host.isEmpty()) {
+		if (!HelperGeneral.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -335,7 +335,7 @@ public abstract class HelperNet { //TODO document in Wiki!
 		if (null == url) {
 			throw new IllegalArgumentException("url is null!"); //$NON-NLS-1$
 		}
-		if (null == username || username.isEmpty()) {
+		if (!HelperGeneral.isValid(username)) {
 			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
 		}
 		if (null == password) {

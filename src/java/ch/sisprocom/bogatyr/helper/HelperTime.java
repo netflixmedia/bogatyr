@@ -65,7 +65,7 @@ public abstract class HelperTime {
      * @throws IOException
      */
 	public static Date getAtomicTime(final String host) throws IOException {
-		if (null == host || host.isEmpty()) {
+		if (!HelperGeneral.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
 		

@@ -78,7 +78,7 @@ public abstract class HelperGeneral {
 			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
 		}
 		
-		return clazz.getConstructor(new Class[0]).newInstance();
+		return clazz.getConstructor(Const.EMPTY_ARRAY_CLASS).newInstance();
 	}
 
 	/**
@@ -99,11 +99,11 @@ public abstract class HelperGeneral {
 		if (null == clazz) {
 			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
 		}
-		if (!isValid(paramClazzes)) {
-			throw new IllegalArgumentException("paramClazzes is null or empty!"); //$NON-NLS-1$
+		if (null == paramClazzes) {
+			throw new IllegalArgumentException("paramClazzes is null!"); //$NON-NLS-1$
 		}
-		if (!isValid(params)) {
-			throw new IllegalArgumentException("params is null or empty!"); //$NON-NLS-1$
+		if (null == params) {
+			throw new IllegalArgumentException("params is null!"); //$NON-NLS-1$
 		}
 		
 		return clazz.getConstructor(paramClazzes).newInstance(params);
@@ -242,11 +242,11 @@ public abstract class HelperGeneral {
     	Object[] b = inB;
     	
     	if (a == null) {
-            a = new Object[0];
+            a = Const.EMPTY_ARRAY_OBJECT;
         }
 
     	if (b == null) {
-            b = new Object[0];
+            b = Const.EMPTY_ARRAY_OBJECT;
         }
     	
     	final Object[] result = new Object[a.length + b.length];
@@ -268,11 +268,11 @@ public abstract class HelperGeneral {
     	byte[] b = inB;
     	
     	if (a == null) {
-            a = new byte[0];
+            a = Const.EMPTY_ARRAY_BYTE;
         }
 
     	if (b == null) {
-            b = new byte[0];
+            b = Const.EMPTY_ARRAY_BYTE;
         }
     	
     	final byte[] result = new byte[a.length + b.length];
