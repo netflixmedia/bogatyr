@@ -31,6 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.property;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Properties;
 
 
@@ -38,7 +40,7 @@ import java.util.Properties;
  * Defines the methods for the implementation of the properties
  * 
  * @author Stefan Laubenberger
- * @version 20090304
+ * @version 20090511
  */
 public interface IControllerProperty {
 	/**
@@ -49,35 +51,91 @@ public interface IControllerProperty {
 	Properties getProperties();
     
 	/**
-     * Returns the property-value as String.
+     * Returns the value of a property as {@link String}.
      * 
-     * @param propertyName Input-String
-     * @return String-value
+     * @param key of the property
+     * @return String associated to the given key 
      */
-    String getProperty(String propertyName);
+    String getValue(String key);
 
-    /**
-     * Returns the property-value as double-value.
+	/**
+     * Returns the value of a property as {@link Boolean}.
      * 
-     * @param propertyName Input-String
-     * @return double-value
+     * @param key of the property
+     * @return Boolean associated to the given key 
      */
-    double getPropertyDouble(String propertyName);
-
-    /**
-     * Returns the property-value as int-value.
+    Boolean getBooleanValue(String key);
+    
+	/**
+     * Returns the value of a property as {@link Double}.
      * 
-     * @param propertyName Input-String
-     * @return int-value
+     * @param key of the property
+     * @return Double associated to the given key 
      */
-    int getPropertyInt(String propertyName);
-
-    /**
-     * Returns the property-value as boolean-value.
+	Double getDoubleValue(String key);
+	
+	/**
+     * Returns the value of a property as {@link Integer}.
      * 
-     * @param propertyName Input-String
-     * @return boolean-value
+     * @param key of the property
+     * @return Integer associated to the given key 
      */
-    boolean getPropertyBoolean(String propertyName);
+	Integer getIntegerValue(String key);
+	
+	/**
+     * Returns the value of a property as {@link Float}.
+     * 
+     * @param key of the property
+     * @return Float associated to the given key 
+     */
+	Float getFloatValue(String key);
+	
+	/**
+     * Returns the value of a property as {@link Byte}.
+     * 
+     * @param key of the property
+     * @return Byte associated to the given key 
+     */
+	Byte getByteValue(String key);
+	
+	/**
+     * Returns the value of a property as {@link Long}.
+     * 
+     * @param key of the property
+     * @return Long associated to the given key 
+     */
+	Long getLongValue(String key);
+	
+	/**
+     * Returns the value of a property as {@link Short}.
+     * 
+     * @param key of the property
+     * @return Short associated to the given key 
+     */	
+	Short getShortValue(String key);
+	
+	/**
+     * Returns the value of a property as {@link BigInteger}.
+     * 
+     * @param key of the property
+     * @return BigInteger associated to the given key 
+     */	
+	BigInteger getBigIntegerValue(String key);
+	
+	/**
+     * Returns the value of a property as {@link BigDecimal}.
+     * 
+     * @param key of the property
+     * @return BigDecimal associated to the given key 
+     */	
+	BigDecimal getBigDecimalValue(String key);
+	
+//	/**
+//     * Returns the value of a property as {@link Date} stored as "YYYY-MM-DD".
+//     * 
+//     * @param key of the property
+//     * @return Date associated to the given key 
+//     */	
+//	Date getDateValue(String key);
 }   
 

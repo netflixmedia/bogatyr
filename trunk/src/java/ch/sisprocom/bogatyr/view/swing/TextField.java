@@ -44,7 +44,7 @@ import javax.swing.text.PlainDocument;
  * This is an extended JTextField.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090511
  */
 public class TextField extends JTextField implements IComponentActivate {
 	private static final long serialVersionUID = 866371447844640358L;
@@ -111,7 +111,7 @@ public class TextField extends JTextField implements IComponentActivate {
     /*
      * Inner classes
      */
-    private class TextFieldDocument extends PlainDocument {
+    class TextFieldDocument extends PlainDocument {
     	private static final long serialVersionUID = -9060548395031856257L;
 
 		@Override

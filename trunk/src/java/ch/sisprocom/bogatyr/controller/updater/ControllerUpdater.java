@@ -31,6 +31,15 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.updater;
 
+import ch.sisprocom.bogatyr.controller.ControllerAbstract;
+import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
+import ch.sisprocom.bogatyr.helper.Const;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -39,17 +48,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
-import ch.sisprocom.bogatyr.controller.ControllerAbstract;
-import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
-
 
 
 /**
@@ -84,7 +82,7 @@ public class ControllerUpdater extends ControllerAbstract implements IController
                 is = new FileInputStream(file);
             } else {
                 final URLConnection con = new URL(updateLocation).openConnection();
-                con.setConnectTimeout(2000);
+                con.setConnectTimeout(Const.VALUE_2048);
                 con.connect();
 
                 is = con.getInputStream();

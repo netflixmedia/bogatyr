@@ -31,53 +31,101 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.dialog;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
+import javax.swing.JDialog;
+import java.awt.Frame;
+import java.awt.GraphicsConfiguration;
+import java.awt.Window;
 
 
 /**
  * This is an extended JDialog.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090511
  */
 public class Dialog extends JDialog {
 	private static final long serialVersionUID = -3903296901431213544L;
 	
-	private JFrame frame;
-	
+	{
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	}
 	
 	public Dialog() {
 		super();
-		init();
     }
 	
-	public Dialog(final JFrame frame, final String title) {
-		super(frame, true);
-		
-		this.frame = frame;
-		
-		setTitle(title);
-		init();
-    }
-	
+	public Dialog(Dialog owner, boolean modal) {
+		super(owner, modal);
+	}
+
+	public Dialog(Dialog owner, String title, boolean modal,
+			GraphicsConfiguration gc) {
+		super(owner, title, modal, gc);
+	}
+
+	public Dialog(Dialog owner, String title, boolean modal) {
+		super(owner, title, modal);
+	}
+
+	public Dialog(Dialog owner, String title) {
+		super(owner, title);
+	}
+
+	public Dialog(Dialog owner) {
+		super(owner);
+	}
+
+	public Dialog(Frame owner, boolean modal) {
+		super(owner, modal);
+	}
+
+	public Dialog(Frame owner, String title, boolean modal,
+			GraphicsConfiguration gc) {
+		super(owner, title, modal, gc);
+	}
+
+	public Dialog(Frame owner, String title, boolean modal) {
+		super(owner, title, modal);
+	}
+
+	public Dialog(Frame owner, String title) {
+		super(owner, title);
+	}
+
+	public Dialog(Frame owner) {
+		super(owner);
+	}
+
+	public Dialog(Window arg0, ModalityType arg1) {
+		super(arg0, arg1);
+	}
+
+	public Dialog(Window arg0, String arg1, ModalityType arg2,
+			GraphicsConfiguration arg3) {
+		super(arg0, arg1, arg2, arg3);
+	}
+
+	public Dialog(Window arg0, String arg1, ModalityType arg2) {
+		super(arg0, arg1, arg2);
+	}
+
+	public Dialog(Window arg0, String arg1) {
+		super(arg0, arg1);
+	}
+
+	public Dialog(Window arg0) {
+		super(arg0);
+	}
+
 	public void createAndShowGUI() {
-		setLocationRelativeTo(frame);
+//		setLocationRelativeTo(frame);
 		setVisible(true);
 	}
 
 	public void clearAndHide() {
 		dispose();
-	}
-
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	
 	

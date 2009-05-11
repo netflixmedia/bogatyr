@@ -49,7 +49,7 @@ import java.awt.event.KeyEvent;
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090511
  */
 public class ComboBox extends JComboBox implements IComponentActivate {
 	private static final long serialVersionUID = -3870596701286078140L;
@@ -139,15 +139,15 @@ public class ComboBox extends JComboBox implements IComponentActivate {
 	/*
 	 * Inner classes
 	 */
-	private static class ComboBoxPopup extends PlainDocument {
+	static class ComboBoxPopup extends PlainDocument {
 		private static final long serialVersionUID = -5374025097785761556L;
 
 		private final JComboBox comboBox;
 		private final transient ComboBoxModel model;
 		private final JTextComponent myEditor;
-		private boolean selecting;
+		boolean selecting;
 
-		private ComboBoxPopup(final JComboBox comboBox) {
+		ComboBoxPopup(final JComboBox comboBox) {
             super();
             this.comboBox = comboBox;
             model = comboBox.getModel();
@@ -180,7 +180,7 @@ public class ComboBox extends JComboBox implements IComponentActivate {
 		    super.insertString(0, text, null);
 		}
 		
-		protected void highlightCompletedText(final int start) {
+		void highlightCompletedText(final int start) {
 		    myEditor.setSelectionStart(start);
 		    myEditor.setSelectionEnd(getLength());
 		}
@@ -217,7 +217,7 @@ public class ComboBox extends JComboBox implements IComponentActivate {
 		}
 
 		// checks if str1 starts with str2 - ignores case
-		private boolean startsWithIgnoreCase(final String str1, final String str2) {
+		private static boolean startsWithIgnoreCase(final String str1, final String str2) {
 
 		    return str1.toUpperCase().startsWith(str2.toUpperCase());
 

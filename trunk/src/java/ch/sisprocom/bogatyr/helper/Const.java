@@ -36,7 +36,7 @@ package ch.sisprocom.bogatyr.helper;
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 20090506
+ * @version 20090511
  */
 public interface Const {
 	  //characters
@@ -57,4 +57,31 @@ public interface Const {
 	  int NEGATIVE = -1;
 	  String PLUS_SIGN = "+"; //$NON-NLS-1$
 	  String NEGATIVE_SIGN = "-"; //$NON-NLS-1$
+	  
+	  //constants
+	  int DIVIDER_KILOBYTE = 1024;
+	  int DIVIDER_MEGABYTE = 1024 * 1024;
+	  int DIVIDER_GIGABYTE = 1024 * 1024 * 1024;
+	  
+	  long MILLISECONDS_MIN = 60L * 1000L;
+	  long MILLISECONDS_HOUR = 60L * MILLISECONDS_MIN;
+	  long MILLISECONDS_DAY = 24L * MILLISECONDS_HOUR;
+	  long MILLISECONDS_WEEK = 7L * MILLISECONDS_DAY;
+	  long MILLISECONDS_YEAR = 365L * MILLISECONDS_DAY;
+	  long SECONDS_1900_1970 = 2208988800L;
+	  
+	  int VALUE_8 = 8;
+	  int VALUE_16 = 16;
+	  int VALUE_32 = 32;
+	  int VALUE_64 = 64;
+	  int VALUE_128 = 128;
+	  int VALUE_256 = 256;
+	  int VALUE_512 = 512;
+	  int VALUE_1024 = 1024;
+	  int VALUE_2048 = 2048;
+	  int VALUE_4096 = 4096;
+	  int VALUE_8192 = 8192;
+	  int VALUE_16384 = 16384;
+	  int VALUE_32768 = 32768;
+	  int VALUE_65536 = 65536;
 }

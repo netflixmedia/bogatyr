@@ -31,14 +31,13 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import javax.swing.AbstractButton;
+import javax.swing.JComponent;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
-
-import javax.swing.AbstractButton;
-import javax.swing.JComponent;
 
 
 /**
@@ -152,9 +151,7 @@ public class Group extends Panel { //TODO document in Wiki!
 		super.setFont(font);
 		
 	    for (final Component component : getComponents()) {
-	    	if (component instanceof JComponent) {
-	    		((JComponent)component).setFont(font);
-	    	}
+            component.setFont(font);
 	    }
 	}
 }

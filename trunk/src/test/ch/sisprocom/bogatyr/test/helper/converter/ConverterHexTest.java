@@ -56,23 +56,23 @@ public class ConverterHexTest {
 		
 		try {
 			ConverterHex.encode(null);
-			fail("byte[] is null!");
-		} catch (Exception ex) {}
+			fail("byte[] is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			ConverterHex.encode(new byte[0]);
-			fail("byte[] is empty!");
-		} catch (Exception ex) {}
+			fail("byte[] is empty!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			ConverterHex.decode(null);
-			fail("String is null!");
-		} catch (Exception ex) {}
+			fail("String is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			ConverterHex.decode(new String());
-			fail("String is empty!");
-		} catch (Exception ex) {}
+			fail("String is empty!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 }
 

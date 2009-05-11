@@ -32,7 +32,7 @@
 package ch.sisprocom.bogatyr.helper.converter;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
+import ch.sisprocom.bogatyr.helper.Const;
 
 
 /**
@@ -80,7 +80,7 @@ public abstract class ConverterHex {
 		final byte[] bts = new byte[input.length() / 2];
 
     	for (int ii = 0; ii < bts.length; ii++) {
-    		bts[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), 16);
+    		bts[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), Const.VALUE_16);
     	}
     	return bts;
     }

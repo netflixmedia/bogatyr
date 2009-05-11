@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,6 +31,15 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Rectangle;
+import com.lowagie.text.pdf.DefaultFontMapper;
+import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfTemplate;
+import com.lowagie.text.pdf.PdfWriter;
+import org.xhtmlrenderer.pdf.ITextRenderer;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -39,40 +48,37 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.xhtmlrenderer.pdf.ITextRenderer;
-
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Rectangle;
-import com.lowagie.text.pdf.DefaultFontMapper;
-import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.PdfTemplate;
-import com.lowagie.text.pdf.PdfWriter;
-
 
 /**
  * This is a helper class for PDF operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090511
  */
 public abstract class HelperPdf { //TODO document in Wiki!
 
     /**
-     * Saves a pdf from a Component to a file.
+     * Saves a PDF from a {@link Component} to a {@link File}.
      *
-     * @param component Component for the pdf
-     * @param output Filename
+     * @param component for the PDF
+     * @param file output
      * @throws DocumentException
      * @throws IOException
      */
-    public static void savePdfFromComponent(final Component component, final File output) throws IOException, DocumentException {
+    public static void savePdfFromComponent(final Component component, final File file) throws IOException, DocumentException {
+		if (null == component) {
+			throw new IllegalArgumentException("component is null!"); //$NON-NLS-1$
+		}
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		
     	final Dimension size = component.getSize();
 		final Document document = new Document(new Rectangle((float) size.width, (float) size.height));
 	    FileOutputStream fos = null;
 
         try {
-            fos = new FileOutputStream(output);
+            fos = new FileOutputStream(file);
             final PdfWriter writer = PdfWriter.getInstance(document, fos);
 			      
 			document.open();
@@ -92,18 +98,25 @@ public abstract class HelperPdf { //TODO document in Wiki!
 	}
 
     /**
-     * Saves a pdf from multiple (X)HTML files to a file.
+     * Saves a PDF from multiple (X)HTML files to a {@link File}.
      *
-     * @param input Array with (X)HTML files for the pdf
-     * @param output Filename
+     * @param input Array with (X)HTML files for the PDF
+     * @param file output
      * @throws DocumentException
      * @throws IOException
      */
-	public static void savePdfFromHTML(final File[] input, final File output) throws IOException, DocumentException {
+	public static void savePdfFromHTML(final File[] input, final File file) throws IOException, DocumentException {
+		if (null == input || 0 == input.length) {
+			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		
 		OutputStream os = null;
 
 		try {
-		   os = new FileOutputStream(output);
+		   os = new FileOutputStream(file);
 	
 		   final ITextRenderer renderer = new ITextRenderer();
 	

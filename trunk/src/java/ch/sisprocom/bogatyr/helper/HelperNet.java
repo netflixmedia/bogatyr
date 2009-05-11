@@ -31,6 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
+
 import java.io.IOException;
 import java.net.Authenticator;
 import java.net.InetAddress;
@@ -44,14 +46,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
-
 
 /**
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 20090505
+ * @version 20090511
  */
 public abstract class HelperNet { //TODO document in Wiki!
 //	private static final String PROPERTY_HTTP_USE_PROXY   = "http.useProxy"; //$NON-NLS-1$
@@ -76,6 +76,16 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @param password for authentication
      */
     public static void enableProxyHttp(final String host, final int port, final String username, final String password) {
+		if (null == host || host.isEmpty()) {
+			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == username || username.isEmpty()) {
+			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == password) {
+			throw new IllegalArgumentException("password is null!"); //$NON-NLS-1$
+		}
+		
 //    	System.setProperty(PROPERTY_HTTP_USE_PROXY, "true"); //$NON-NLS-1$
         System.setProperty(PROPERTY_HTTP_PROXY_HOST, host);
         System.setProperty(PROPERTY_HTTP_PROXY_PORT, Integer.toString(port));
@@ -102,6 +112,16 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @param password for authentication
      */
     public static void enableProxyHttps(final String host, final int port, final String username, final String password) {
+		if (null == host || host.isEmpty()) {
+			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == username || username.isEmpty()) {
+			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == password) {
+			throw new IllegalArgumentException("password is null!"); //$NON-NLS-1$
+		}
+		
 //		System.setProperty(PROPERTY_HTTPS_USE_PROXY, "true"); //$NON-NLS-1$
         System.setProperty(PROPERTY_HTTPS_PROXY_HOST, host);
         System.setProperty(PROPERTY_HTTPS_PROXY_PORT, Integer.toString(port));
@@ -128,6 +148,16 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @param password for authentication
      */
     public static void enableProxyFtp(final String host, final int port, final String username, final String password) {
+		if (null == host || host.isEmpty()) {
+			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == username || username.isEmpty()) {
+			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == password) {
+			throw new IllegalArgumentException("password is null!"); //$NON-NLS-1$
+		}
+		
 //		System.setProperty(PROPERTY_FTP_USE_PROXY, "true"); //$NON-NLS-1$
         System.setProperty(PROPERTY_FTP_PROXY_HOST, host);
         System.setProperty(PROPERTY_FTP_PROXY_PORT, Integer.toString(port));
@@ -148,17 +178,21 @@ public abstract class HelperNet { //TODO document in Wiki!
     /**
      * Tests if a host is pingable.
      *
-     * @param host for ping
+     * @param host for the ping command
      * @return true/false
      * @throws IOException
      */
     public static boolean isPingable(final String host) throws IOException {
-		final InetAddress address = InetAddress.getByName(host);
+		if (null == host || host.isEmpty()) {
+			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
+		}
+		
+    	final InetAddress address = InetAddress.getByName(host);
 
         // Try to reach the specified address within the timeout period.
         // If during this period the address cannot be
         // reached then the method returns false.
-		return address.isReachable(3000);
+		return address.isReachable(Const.VALUE_4096);
     }
 
     /**
@@ -169,15 +203,19 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @throws UnknownHostException
      */
     public static String getHostname(final String ip) throws UnknownHostException {
+		if (null == ip || ip.isEmpty()) {
+			throw new IllegalArgumentException("ip is null or empty!"); //$NON-NLS-1$
+		}
+		
 		final InetAddress address = InetAddress.getByName(ip);
 
 		return address.getHostName();
     }
 
     /**
-     * Returns the local host name of the machine.
+     * Returns the local host name of the current machine.
      *
-     * @return host name
+     * @return host name of the current machine
      * @throws UnknownHostException
      */
     public static String getLocalHostname() throws UnknownHostException {
@@ -189,20 +227,24 @@ public abstract class HelperNet { //TODO document in Wiki!
     /**
      * Returns the IP for an host name.
      *
-     * @param hostname for IP
-     * @return IP
+     * @param host for IP
+     * @return IP of the host name
      * @throws UnknownHostException
      */
-    public static String getIp(final String hostname) throws UnknownHostException {
-		final InetAddress address = InetAddress.getByName(hostname);
+    public static String getIp(final String host) throws UnknownHostException {
+		if (null == host || host.isEmpty()) {
+			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
+		}
+		
+		final InetAddress address = InetAddress.getByName(host);
 		
 		return address.getHostAddress();
     }
 
     /**
-     * Returns the local IP address.
+     * Returns the local IP address of the current machine.
      *
-     * @return IP
+     * @return IP of the current machine 
      * @throws UnknownHostException
      */
     public static String getLocalIp() throws UnknownHostException {
@@ -212,9 +254,9 @@ public abstract class HelperNet { //TODO document in Wiki!
    }
 
     /**
-     * Returns the all IP addresses of the machine.
+     * Returns the all IP addresses of the current machine.
      *
-     * @return List with IP addresses
+     * @return List with IP addresses of the current machine
      * @throws UnknownHostException
      */
     public static Collection<String> getLocalIps() throws UnknownHostException {
@@ -228,28 +270,33 @@ public abstract class HelperNet { //TODO document in Wiki!
     }
     
     /**
-     * Returns the mac address for a given network interface.
+     * Returns the MAC address of a given network interface.
      *
-     * @return mac address for a given network interface
+     * @param ni network interface to determine the MAC address
+     * @return MAC address of a given network interface
      * @throws SocketException
      */
     public static String getMacAddress(NetworkInterface ni) throws SocketException {
-		String result = "";
+		if (null == ni) {
+			throw new IllegalArgumentException("ni is null!"); //$NON-NLS-1$
+		}
+		
+		StringBuilder sb = new StringBuilder();
 
 		byte[] hardwareAddress = ni.getHardwareAddress();
 
 		if (hardwareAddress != null) {
 			for (int ii = 0; ii < hardwareAddress.length; ii++) {
-				result += String.format((ii == 0 ? "" : '-') + "%02X", hardwareAddress[ii]);
+				sb.append(String.format((0 == ii ? "" : '-') + "%02X", hardwareAddress[ii])); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
-		return result;
+		return sb.toString();
 	}
 
     /**
-     * Returns the all network interfaces of the machine.
+     * Returns the all network interfaces of the current machine.
      *
-     * @return List with network interfaces
+     * @return List with network interfaces of the current machine
      * @throws SocketException
      */
     public static Collection<NetworkInterface> getNetworkInterfaces() throws SocketException {
@@ -260,12 +307,16 @@ public abstract class HelperNet { //TODO document in Wiki!
      * Returns the content of an url.
      *
      * @param url to read
-     * @return byte array with the content
+     * @return byte-array with the content
      * @throws IOException
      */
     public static byte[] readUrl(final URL url) throws IOException {
+		if (null == url) {
+			throw new IllegalArgumentException("url is null!"); //$NON-NLS-1$
+		}
+		
 		final URLConnection con = url.openConnection();
-		con.setConnectTimeout(2000);
+		con.setConnectTimeout(Const.VALUE_2048);
 		con.connect();
 		
 		return HelperIO.readStream(con.getInputStream());
@@ -277,13 +328,23 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @param url to read
      * @param username for the HTTP authentication
      * @param password for the HTTP authentication
-     * @return byte array with the content
+     * @return byte-array with the content
      * @throws IOException
      */
     public static byte[] readUrl(final URL url, final String username, final String password) throws IOException {
-		final URLConnection con = url.openConnection();
+		if (null == url) {
+			throw new IllegalArgumentException("url is null!"); //$NON-NLS-1$
+		}
+		if (null == username || username.isEmpty()) {
+			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == password) {
+			throw new IllegalArgumentException("password is null!"); //$NON-NLS-1$
+		}
+		
+    	final URLConnection con = url.openConnection();
 		con.setRequestProperty("Authorization", "Basic " + ConverterBase64.encode(username + ':' + password)); //$NON-NLS-1$ //$NON-NLS-2$
-		con.setConnectTimeout(2000);
+		con.setConnectTimeout(Const.VALUE_2048);
 		con.connect();
 		
 		return HelperIO.readStream(con.getInputStream());
@@ -301,10 +362,10 @@ public abstract class HelperNet { //TODO document in Wiki!
     /*
      * Inner classes
      */
-    private static class MyAuthenticator extends Authenticator {
+    static class MyAuthenticator extends Authenticator {
         private final String username, password;
 
-        private MyAuthenticator(final String username, final String password) {
+        MyAuthenticator(final String username, final String password) {
             super();
             this.username = username;
             this.password = password;

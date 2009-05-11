@@ -31,14 +31,13 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import javax.swing.filechooser.FileSystemView;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -48,11 +47,10 @@ import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
-
-import javax.swing.filechooser.FileSystemView;
 
 
 /**
@@ -60,21 +58,30 @@ import javax.swing.filechooser.FileSystemView;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090505
+ * @version 20090511
  */
 public abstract class HelperIO {
-	private static final byte[] BUFFER = new byte[1024];
+	public static final String DEFAULT_ENCODING = "UTF-8"; //$NON-NLS-1$
+	
+	private static final byte[] BUFFER = new byte[Const.VALUE_1024];
 //	private static final int BUFFER = 1024;
 	
 	/**
-     * Returns a temporary file which will be deleted on program exit.
+     * Returns a temporary {@link File} which will be deleted on program exit.
      * 
      * @param name of the file
      * @param extension of the file (e.g. ".java")
      * @return temporary file
      * @throws IOException
      */	
-	public static File getTemporaryFile(final String name, final String extension) throws IOException {
+	public static File getTemporaryFile(final String name, final String extension) throws IOException { //$JUnit
+		if (null == name || name.isEmpty()) {
+			throw new IllegalArgumentException("name is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == extension || extension.isEmpty()) {
+			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
+		}
+
 		// Create temp file
 	    final File file = File.createTempFile(name, extension);
 	
@@ -85,24 +92,26 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Search in a path (directory) for files via identifier.
+     * Search in a path (directory) for files and directories via identifier.
      * 
-     * @param path Path
+     * @param path for searching
      * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
      * @param isExclude is the identifier excluded
      * @param isCaseSensitive true/false
      * @param isRecursive true/false
      * @param isFile true/false
      * @param isDirectory true/false
-     * @return ArrayList containing the path to the matched files
-     * @throws IOException
+     * @return List containing the path to the matched files
      */	
-	public static Collection<File> getFiles(final File path, final String[] identifier, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) throws IOException {
-		final List<File> list = new ArrayList<File>();
-
+	public static Collection<File> getFiles(final File path, final String[] identifier, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) { //$JUnit
+		if (null == path) {
+			throw new IllegalArgumentException("path is null!"); //$NON-NLS-1$
+		}
 		if (!path.isDirectory()) {
-            throw new IOException("not a directory");
+            throw new IllegalArgumentException("path is not a directory: " + path); //$NON-NLS-1$
         }
+
+		final List<File> list = new ArrayList<File>();
 
 		getFileNamesRecursion(path, identifier, list, isExclude, isCaseSensitive, isRecursive, isFile, isDirectory);
 
@@ -112,24 +121,34 @@ public abstract class HelperIO {
 	/**
      * Search in a path (directory) for files and directories via identifier.
      * 
-     * @param path Path
+     * @param path for searching
      * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
      * @param isExclude is the identifier excluded
-     * @return ArrayList containing the path to the matched files
+     * @return List containing the path to the matched files
      * @throws IOException
      */	
-	public static Collection<File> getFiles(final File path, final String[] identifier, final boolean isExclude) throws IOException {
+	public static Collection<File> getFiles(final File path, final String[] identifier, final boolean isExclude) throws IOException { //$JUnit
 		return getFiles(path, identifier, isExclude, false, true, true, true);
 	}
 
 	/**
      * Copy a directory.
      * 
-     * @param source
-     * @param dest
+     * @param source directory to copy
+     * @param dest directory
      * @throws IOException
      */	
 	public static void copyDirectory(final File source, final File dest) throws IOException{
+		if (null == source) {
+			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
+		}
+		if (!source.isDirectory()) {
+			throw new IllegalArgumentException("source is not a directory: " + source); //$NON-NLS-1$
+		}
+		if (null == dest) {
+			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+		}
+
 		if (!dest.exists()) {
             dest.mkdir();
         }
@@ -151,11 +170,21 @@ public abstract class HelperIO {
 	/**
      * Copy a file.
      * 
-     * @param source
-     * @param dest
+     * @param source file to copy
+     * @param dest file
      * @throws IOException
      */	
 	public static void copyFile(final File source, final File dest) throws IOException{
+		if (null == source) {
+			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
+		}
+		if (!source.isFile()) {
+			throw new IllegalArgumentException("source is not a file: " + source); //$NON-NLS-1$
+		}
+		if (null == dest) {
+			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+		}
+		
 		if (!dest.exists()) {
             dest.createNewFile();
         }
@@ -185,12 +214,19 @@ public abstract class HelperIO {
 	/**
      * Move a file or directory.
      * 
-     * @param source
-     * @param dest
+     * @param source file/directory to move
+     * @param dest file/directory
      * @return true/false
      * @throws IOException
      */	
 	public static boolean move(final File source, final File dest) throws IOException{
+		if (null == source) {
+			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
+		}
+		if (null == dest) {
+			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+		}
+
 		if (source.isDirectory()) {
 	    	copyDirectory(source, dest);
 	    } else {
@@ -202,34 +238,45 @@ public abstract class HelperIO {
 	/**
      * Delete a file or directory.
      * 
-     * @param file to delete
+     * @param target file/directory to delete
      * @return true/false
      * @throws IOException
      */	
-	public static boolean delete(final File file) throws IOException{
-		if (file.isDirectory()) {
-			final File[] childFiles = file.listFiles();
+	public static boolean delete(final File target) throws IOException{
+		if (null == target) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+
+		if (target.isDirectory()) {
+			final File[] childFiles = target.listFiles();
 			for (final File child : childFiles) {
 				delete(child);
 			}
 		}
-		return file.delete();
+		return target.delete();
 	}
 	  
 	/**
      * Rename a file or directory.
      * 
-     * @param source
-     * @param dest
+     * @param source file/directory to rename
+     * @param dest file/directory
      * @return true/false
      */	
 	public static boolean rename(final File source, final File dest) {
+		if (null == source) {
+			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
+		}
+		if (null == dest) {
+			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+		}
+
 		return source.renameTo(dest);
 	}
 
 	
 	/**
-     * Writes a text line in a file.
+     * Writes a text line in a {@link File} with the chosen encoding.
      * 
      * @param file for writing
      * @param encoding of the file
@@ -237,15 +284,22 @@ public abstract class HelperIO {
      * @throws IOException
      */	
 	public static void writeLine(final File file, final String encoding, final String line) throws IOException {
-		String enc = encoding;
-		
-		if (!HelperGeneral.isValid(encoding)) {
-			enc = "UTF-8"; //$NON-NLS-1$
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (!file.isFile()) {
+			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		}
+		if (null == encoding || encoding.isEmpty()) {
+			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == line || line.isEmpty()) {
+			throw new IllegalArgumentException("line is null or empty!"); //$NON-NLS-1$
 		}
 
         PrintWriter pw = null;
         try {
-			pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file, true), enc));    
+			pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file, true), encoding));    
 			pw.println(line);
 			pw.flush();
 		} finally {
@@ -256,25 +310,35 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Writes a text line with "UTF-8"-encoding in a file.
+     * Writes a text line in a {@link File} with the default encoding (UTF-8).
      * 
      * @param file for writing
      * @param line containing the text to write
      * @throws IOException
      */	
 	public static void writeLine(final File file, final String line) throws IOException {
-		writeLine(file, null, line);
+		writeLine(file, DEFAULT_ENCODING, line);
 	}
 
 	/**
-     * Writes a byte-array into a file.
+     * Writes a byte-array into a {@link File}.
      * 
      * @param file for writing
      * @param data byte-array to write
      * @param append to file?
      * @throws IOException
      */	
-	public static void writeFileFromBinary(final File file, final byte[] data, final boolean append) throws IOException {
+	public static void writeFile(final File file, final byte[] data, final boolean append) throws IOException {
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (!file.isFile()) {
+			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		}
+		if (null == data || 0 == data.length) {
+			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
+		}
+
 		FileOutputStream fos = null;
 		
 		try {
@@ -289,15 +353,33 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Writes a string into a file.
+     * Writes a {@link String} into a {@link File} with the chosen encoding.
      * 
      * @param file for writing
      * @param data string to write
+     * @param encoding of the file
      * @param append to file?
      * @throws IOException
      */	
-	public static void writeFileFromString(final File file, final String data, final boolean append) throws IOException {
-		final Writer writer = new BufferedWriter(new FileWriter(file));
+	public static void writeFile(final File file, final String data, final String encoding, final boolean append) throws IOException {
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (!file.isFile()) {
+			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		}
+		if (null == encoding || encoding.isEmpty()) {
+			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == data || data.isEmpty()) {
+			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
+		}
+
+		FileOutputStream fos = new FileOutputStream(file);
+		final Writer writer = new OutputStreamWriter(fos, encoding); 
+		
+//		final Writer writer = new BufferedWriter(new FileWriter(file));
+//		final Writer writer = new BufferedWriter(new FileWriter(file));
 	
 	    try {
 	    	if (append) {
@@ -312,25 +394,44 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Writes a stream into a file.
+     * Writes a {@link String} into a {@link File} with the default encoding (UTF-8).
+     * 
+     * @param file for writing
+     * @param data string to write
+     * @param append to file?
+     * @throws IOException
+     */	
+	public static void writeFile(final File file, final String data, final boolean append) throws IOException {
+		writeFile(file, data, DEFAULT_ENCODING, append);
+	}
+	
+	/**
+     * Writes an {@link InputStream} into a {@link File}.
      * 
      * @param file for writing
      * @param is stream to write
      * @param append to file?
      * @throws IOException
      */	
-	public static void writeFileFromStream(final File file, final InputStream is, final boolean append) throws IOException { //TODO document in Wiki
-		writeFileFromBinary(file, readStream(is), append);
+	public static void writeFile(final File file, final InputStream is, final boolean append) throws IOException { //TODO document in Wiki
+		writeFile(file, readStream(is), append);
 	}	
 	
 	/**
-     * Writes a byte array to a stream.
+     * Writes a byte array to an {@link OutputStream}.
      * 
      * @param os output stream for writing
      * @param data byte-array for the stream
      * @throws IOException
      */	
 	public static void writeStream(final OutputStream os, final byte[] data) throws IOException {
+		if (null == os) {
+			throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
+		}
+		if (null == data || 0 == data.length) {
+			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
+		}
+
 //	    try {
     		os.write(data);
     		os.flush();
@@ -340,13 +441,17 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Reads a stream in a byte-array.
+     * Reads an {@link InputStream} in a byte-array.
      * 
-     * @param is InputStream for reading
+     * @param is input stream for reading
      * @return byte-array containing the stream content
      * @throws IOException
      */	
 	public static byte[] readStream(final InputStream is) throws IOException {
+		if (null == is) {
+			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+		}
+		
 		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		final byte[] result;
 		
@@ -395,13 +500,20 @@ public abstract class HelperIO {
 //	}
 	
 	/**
-     * Reads a file in a byte-array.
+     * Reads a {@link File} in a byte-array.
      * 
      * @param file for reading
      * @return byte-array containing the file content
      * @throws IOException
      */	
-	public static byte[] readFileAsBinary(final File file) throws IOException {
+	public static byte[] readFile(final File file) throws IOException {
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (!file.isFile()) {
+			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		}
+
 		final long length = file.length();
 		FileInputStream fis = null;
 		final byte[] buffer;
@@ -419,22 +531,38 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Reads a file in a String.
+     * Reads a {@link File} in a {@link String} with the chosen encoding.
      * 
      * @param file for reading
+     * @param encoding of the file
      * @return String containing the file content
      * @throws IOException
      */	
-	public static String readFileAsString(final File file) throws IOException {
+	public static String readFileAsString(final File file, final String encoding) throws IOException {
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (!file.isFile()) {
+			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		}
+		if (null == encoding || encoding.isEmpty()) {
+			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
+		}
+
 		final StringBuilder contents = new StringBuilder();
-		final Scanner scanner = new Scanner(file);
+		final Scanner scanner = new Scanner(file, encoding);
 		final String str;
 		
 		try {
+			if (scanner.hasNextLine()) {
+				contents.append(scanner.nextLine());
+			}
+			
 	    	while (scanner.hasNextLine()){
+	    		contents.append(Const.NEW_LINE);
 	    		contents.append(scanner.nextLine());
 //	    		contents.append(System.getProperty("line.separator")); //$NON-NLS-1$
-                contents.append(Const.NEW_LINE);
+                
             }
 	    	str = contents.toString();
 	    } finally {
@@ -442,17 +570,39 @@ public abstract class HelperIO {
 	    }
 		return str;
 	}
-
+	
 	/**
-     * Reads a file in a list.
+     * Reads a {@link File} in a {@link String} with the default encoding (UTF-8).
      * 
      * @param file for reading
+     * @return String containing the file content
+     * @throws IOException
+     */	
+	public static String readFileAsString(final File file) throws IOException {
+		return readFileAsString(file, DEFAULT_ENCODING);
+	}
+	
+	/**
+     * Reads a {@link File} in a list with the chosen encoding.
+     * 
+     * @param file for reading
+     * @param encoding of the file
      * @return List containing the file content
      * @throws IOException
      */	
-	public static Collection<String> readFileAsList(final File file) throws IOException {
-		final Scanner scanner = new Scanner(file);
-		final List<String> list = new ArrayList<String>();
+	public static Collection<String> readFileAsList(final File file, final String encoding) throws IOException {
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (!file.isFile()) {
+			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		}
+		if (null == encoding || encoding.isEmpty()) {
+			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
+		}
+
+		final Scanner scanner = new Scanner(file, encoding);
+		final Collection<String> list = new ArrayList<String>();
 		
 		try {
 	    	while (scanner.hasNextLine()){
@@ -465,24 +615,55 @@ public abstract class HelperIO {
 	}
 
 	/**
-     * Reads a file into a stream.
+     * Reads a {@link File} in a list with the default encoding (UTF-8).
+     * 
+     * @param file for reading
+     * @return List containing the file content
+     * @throws IOException
+     */	
+	public static Collection<String> readFileAsList(final File file) throws IOException {
+		return readFileAsList(file, DEFAULT_ENCODING);
+	}
+	
+	/**
+     * Reads a {@link File} into an {@link OutputStream}.
      * 
      * @param file for reading
      * @param os output stream for the file content
      * @throws IOException
      */	
 	public static void readFileAsStream(final File file, final OutputStream os) throws IOException { //TODO document in Wiki
-		writeStream(os, readFileAsBinary(file));
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (!file.isFile()) {
+			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		}
+		if (null == os) {
+			throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
+		}
+
+		writeStream(os, readFile(file));
 	}	
 
 	/**
-     * Concatenates a list of files to one output file.
+     * Concatenates a list of files to one output {@link File}.
      * 
      * @param fileOutput Output file
      * @param list List with all files
      * @throws IOException
      */	
 	public static void concatenateFiles(final File fileOutput, final File[] list) throws IOException {
+		if (null == fileOutput) {
+			throw new IllegalArgumentException("fileOutput is null!"); //$NON-NLS-1$
+		}
+		if (!fileOutput.isFile()) {
+			throw new IllegalArgumentException("fileOutput is not a file: " + fileOutput); //$NON-NLS-1$
+		}
+		if (null == list || 0 == list.length) {
+			throw new IllegalArgumentException("list is null or empty!"); //$NON-NLS-1$
+		}
+
 		// Create output stream
 	    PrintWriter pw = null;
 
@@ -494,22 +675,24 @@ public abstract class HelperIO {
             // Process all files that are not the destination file
             for (final File file : list) {
 
-                try {
-                    // Create input stream
-                    br = new BufferedReader (new FileReader(file));
-
-                    // Read each line from the input file
-                    String line = br.readLine();
-
-                    while (line != null) {
-                        pw.println(line);
-                        line = br.readLine();
-                    }
-                } finally {
-                    if (br != null) {
-                        br.close();
-                    }
-                }
+            	if (file.isFile()) {
+	                try {
+	                    // Create input stream
+	                    br = new BufferedReader (new FileReader(file));
+	
+	                    // Read each line from the input file
+	                    String line = br.readLine();
+	
+	                    while (line != null) {
+	                        pw.println(line);
+	                        line = br.readLine();
+	                    }
+	                } finally {
+	                    if (br != null) {
+	                        br.close();
+	                    }
+	                }
+            	}
             }
 	    } finally {
 	    	if (pw != null) {
@@ -519,13 +702,17 @@ public abstract class HelperIO {
 	}
 
 	/**
-	 * Returns the URL representation of a given file.
+	 * Returns the {@link URL} representation of a given {@link File}.
 	 * 
-	 * @param file
+	 * @param file to get the URL
 	 * @return URL representation of a given file
 	 * @throws MalformedURLException 
 	 */
 	public static URL getURL(final File file) throws MalformedURLException {
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+
         return file.toURI().toURL();
     }
 
@@ -535,82 +722,128 @@ public abstract class HelperIO {
 	 * @return list containing all drive names of the current system 
 	 */
 	public static Collection<String> getDriveNames() {
-		final Collection<String> list = new ArrayList<String>(File.listRoots().length);
+		final Collection<String> list = new ArrayList<String>(getAvailableDrives().size());
 		final FileSystemView view = FileSystemView.getFileSystemView(); 
 		
-		for (final File file : File.listRoots()) { 
+		for (final File file : getAvailableDrives()) { 
 			list.add(view.getSystemDisplayName(file));
 		}
 		return list;
 	}
+
+	/**
+	 * Returns all available drives of the current system.
+	 * 
+	 * @return list containing all drive names of the current system 
+	 */
+	public static Collection<File> getAvailableDrives() {
+		return Arrays.asList(File.listRoots());
+	}
+	
+//	/**
+//	 * Returns all drive names of the current system.
+//	 * 
+//	 * @return list containing all drive names of the current system 
+//	 */
+//	public static Collection<String> getAvailable() {
+//		return Charset.availableCharsets();
+//	}
 	
 	/**
-	 * Returns the total space of a given file location.
+	 * Returns the total space of a given {@link File} location.
 	 * 
 	 * @param file location
 	 * @return total space in bytes
 	 */
 	public static long getSpaceTotal(final File file) {
-        return file.getTotalSpace(); // / (1024 * 1024);
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+
+		return file.getTotalSpace(); // / (1024 * 1024);
     }
 
 	/**
-	 * Returns the free space of a given file location.
+	 * Returns the free space of a given {@link File} location.
 	 * 
 	 * @param file location
 	 * @return free space in bytes
 	 */
 	public static long getSpaceFree(final File file) {
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+
         return file.getFreeSpace(); // / (1024 * 1024);
      }
 	
-	/** Returns the usable space of a given file location.
+	/** Returns the usable space of a {@link File} file location.
 	 * 
 	 * @param file location
 	 * @return usable space in bytes
 	 */
 	public static long getSpaceUsable(final File file) {
-        return file.getUsableSpace(); // / (1024 * 1024);
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+
+		return file.getUsableSpace(); // / (1024 * 1024);
      }
 	 
 	/**
-	 * Returns the used space of a given file location.
+	 * Returns the used space of a given {@link File} location.
 	 * 
 	 * @param file location
 	 * @return used space in bytes
 	 */
 	public static long getSpaceUsed(final File file) {
-        return getSpaceTotal(file) - getSpaceFree(file);
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+
+		return getSpaceTotal(file) - getSpaceFree(file);
      }
 	
 	/**
-	 * Checks a given file if its a drive.
+	 * Checks a given {@link File} if its a drive.
 	 * 
 	 * @param file location
 	 * @return true/false
 	 */
 	public static boolean isDrive(final File file) {
-        return FileSystemView.getFileSystemView().isDrive(file);
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+
+		return FileSystemView.getFileSystemView().isDrive(file);
      }
 	
 	/**
-	 * Checks a given file if its a removable drive.
+	 * Checks a given {@link File} if its a removable drive.
 	 * 
 	 * @param file location
 	 * @return true/false
 	 */
 	public static boolean isRemovableDrive(final File file) {
-        return FileSystemView.getFileSystemView().isFloppyDrive(file);
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+
+		return FileSystemView.getFileSystemView().isFloppyDrive(file);
      }
 	
 	/**
-	 * Checks a given file if its a network drive.
+	 * Checks a given {@link File} if its a network drive.
 	 * 
 	 * @param file location
 	 * @return true/false
 	 */
 	public static boolean isNetworkDrive(final File file) {
-        return FileSystemView.getFileSystemView().isComputerNode(file);
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+
+		return FileSystemView.getFileSystemView().isComputerNode(file);
      }	
 	
 	

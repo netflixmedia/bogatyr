@@ -38,13 +38,23 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is the skeleton for all services.
  * 
  * @author Stefan Laubenberger
- * @version 20090426
+ * @version 20090511
  */
 public abstract class ServiceAbstract {
-
+	private final long createTime = System.currentTimeMillis();
+	
+	/**
+     * Returns the instantiation time of the service.
+     * 
+     * @return instantiation time of the service
+     */	
+	public long getCreateTime() {
+		return createTime;
+	}
+	
 
     /*
-     * Overriden methods
+     * Overridden methods
      */
     @Override
     public String toString() {

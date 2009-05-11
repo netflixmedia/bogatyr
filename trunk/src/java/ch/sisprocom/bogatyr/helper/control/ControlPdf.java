@@ -31,19 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.control;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-
 /**
  * This control opens PDF data with the default PDF-viewer.
  *
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 20090511
  */
 public abstract class ControlPdf {
 	private static final String PDF_EXTENSION = ".pdf"; //$NON-NLS-1$
@@ -61,7 +61,7 @@ public abstract class ControlPdf {
 		
 		// first store the pdfFileContents to a temporary file
 		final File temporaryFile = HelperIO.getTemporaryFile("temp", PDF_EXTENSION); //$NON-NLS-1$
-		HelperIO.writeFileFromBinary(temporaryFile, pdfContent, false);
+		HelperIO.writeFile(temporaryFile, pdfContent, false);
 		open(temporaryFile);
 	}
 

@@ -83,6 +83,9 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="BouncyCastle" level="project" />
+    <orderEntry type="library" name="iText" level="project" />
+    <orderEntry type="library" name="XHTMLRenderer" level="project" />
   </component>
 </module>
 

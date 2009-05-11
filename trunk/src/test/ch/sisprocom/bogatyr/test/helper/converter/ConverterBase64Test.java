@@ -56,23 +56,23 @@ public class ConverterBase64Test {
 
 		try {
 			ConverterBase64.encode(new String());
-			fail("String is empty!");
-		} catch (Exception ex) {}
+			fail("String is empty!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			ConverterBase64.encode(new byte[0]);
-			fail("byte[] is empty!");
-		} catch (Exception ex) {}
+			fail("byte[] is empty!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			ConverterBase64.decode(new String());
-			fail("String is empty!");
-		} catch (Exception ex) {}
+			fail("String is empty!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			ConverterBase64.decode(new char[0]);
-			fail("char[] is empty!");
-		} catch (Exception ex) {}		
+			fail("char[] is empty!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}		
 	}
 }
 

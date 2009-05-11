@@ -31,15 +31,15 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.sample.helloworld;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Locale;
-
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
 import ch.sisprocom.bogatyr.controller.localizer.ControllerLocalizerFile;
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
 import ch.sisprocom.bogatyr.controller.property.ControllerProperty;
 import ch.sisprocom.bogatyr.controller.property.IControllerProperty;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Locale;
 
 
 /**
@@ -89,14 +89,14 @@ public class HelloWorld extends ApplicationAbstract { //TODO document in Wiki!
 			exit(1);
 		}
 		
-		localizer = new ControllerLocalizerFile(property.getProperty(PROPERTY_LOCALIZER_BASE));
+		localizer = new ControllerLocalizerFile(property.getValue(PROPERTY_LOCALIZER_BASE));
 	}
 
 	/*
 	 * Implemented methods
 	 */
 	public void run() {
-		final String username = property.getProperty(PROPERTY_USERNAME);
+		final String username = property.getValue(PROPERTY_USERNAME);
 		
 		localizer.setLocale(Locale.GERMAN);
 		System.out.println(localizer.getValue(RES_WELCOME) + ' ' + username + '!');

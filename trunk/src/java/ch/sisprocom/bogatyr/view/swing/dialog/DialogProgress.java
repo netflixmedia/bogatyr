@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -36,11 +36,11 @@ import ch.sisprocom.bogatyr.view.swing.ProgressBar;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.border.BevelBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Frame;
 
 
 
@@ -48,18 +48,16 @@ import java.awt.Color;
  * DialogProgress displays a indeterminate progress bar.
  * 
  * @author Stefan Laubenberger
- * @version 20081128
+ * @version 20090511
  */
 public class DialogProgress extends Dialog { //TODO document in Wiki!
 	private static final long serialVersionUID = 3287183043789350515L;
 	
 	private final JProgressBar progressBar = new ProgressBar();
-    private final JFrame frame;
+
 	
-	public DialogProgress(final JFrame frame) {
-        super();
-        
-        this.frame = frame;
+	public DialogProgress(final Frame frame) {
+        super(frame);
         
         createLayout();
     }
@@ -85,6 +83,6 @@ public class DialogProgress extends Dialog { //TODO document in Wiki!
 		
     	setUndecorated(true);
     	setSize(250, 40);
-    	setLocationRelativeTo(frame);
+//    	setLocationRelativeTo(frame);
 	}
  }

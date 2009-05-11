@@ -31,43 +31,56 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import ch.sisprocom.bogatyr.helper.Const;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.test.AllBogatyrTests;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-
-import org.junit.Test;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.test.AllBogatyrTests;
+import java.util.UUID;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090427
+ * @version 20090508
  */
 public class HelperGeneralTest { //TODO improve
 	@Test
-	public void testNewInstance() {
+	public void testCreateInstance() {
 		try {
 			assertEquals("", HelperGeneral.createInstance(String.class)); //$NON-NLS-1$
 			assertEquals(AllBogatyrTests.DATA, HelperGeneral.createInstance(String.class, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA}));
-			assertNull(null, null);
 		} catch (Exception ex) {fail(ex.getMessage());}
+		
+		try {
+			HelperGeneral.createInstance(null);
+			fail("class is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		
+		try {
+			HelperGeneral.createInstance(null, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA});
+			fail("class is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		
+		try {
+			HelperGeneral.createInstance(String.class, new Class[0], new Object[]{AllBogatyrTests.DATA});
+			fail("paramClazzes is empty!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+	
+		try {
+			HelperGeneral.createInstance(String.class, new Class[]{String.class}, new Object[0]);
+			fail("params is empty!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}	
 	}
 
 	
 	@Test
 	public void testIsValidString() {
-//		assertFalse(HelperGeneral.isValid(null));
+		assertFalse(HelperGeneral.isValid(new StringBuilder()));
 		assertFalse(HelperGeneral.isValid("")); //$NON-NLS-1$
 		assertTrue(HelperGeneral.isValid("123")); //$NON-NLS-1$
 	}
@@ -79,6 +92,7 @@ public class HelperGeneralTest { //TODO improve
 		assertTrue(HelperGeneral.isStringNumeric("123.0")); //$NON-NLS-1$
 		assertTrue(HelperGeneral.isStringNumeric("123")); //$NON-NLS-1$
 		assertTrue(HelperGeneral.isStringNumeric("123.23")); //$NON-NLS-1$
+		assertTrue(HelperGeneral.isStringNumeric("000123.23")); //$NON-NLS-1$
 		assertTrue(HelperGeneral.isStringNumeric("-123.23")); //$NON-NLS-1$
 		assertFalse(HelperGeneral.isStringNumeric("123.23abc")); //$NON-NLS-1$
 		assertFalse(HelperGeneral.isStringNumeric("123..23")); //$NON-NLS-1$
@@ -87,7 +101,6 @@ public class HelperGeneralTest { //TODO improve
 	
 	@Test
 	public void testIsValidArray() {
-//		assertFalse(HelperGeneral.isValid(null));
 		assertFalse(HelperGeneral.isValid(new String[0]));
 		assertTrue(HelperGeneral.isValid(new String[1]));
 	}
@@ -95,52 +108,81 @@ public class HelperGeneralTest { //TODO improve
 	@Test
 	public void testIsValidCollection() {
 		final Collection<String> list = new ArrayList<String>();
-//		assertFalse(HelperGeneral.isValid(null));
+
 		assertFalse(HelperGeneral.isValid(list));
-		list.add(""); //$NON-NLS-1$
+		list.add("Hi"); //$NON-NLS-1$
 		assertTrue(HelperGeneral.isValid(list));
 	}
 
 	@Test
 	public void testSerialize() {
 		try {
-			assertNull(HelperGeneral.serialize(null));
-			fail("Object is null!");
-		} catch (Exception ex) {}
-
-		try {
 			assertNotNull(HelperGeneral.serialize(AllBogatyrTests.DATA));
 		} catch (Exception ex) {fail(ex.getMessage());}
+		
+		try {
+			HelperGeneral.serialize(null);
+			fail("Object is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 
 	@Test
 	public void testDeserialize() {
 		try {
+			assertEquals(AllBogatyrTests.DATA, HelperGeneral.deserialize(HelperGeneral.serialize(AllBogatyrTests.DATA)));
+		} catch (Exception ex) {fail(ex.getMessage());}
+		
+		try {
 			HelperGeneral.deserialize(null);
-			fail("byte[] is null");
-		} catch (Exception ex) {}
+			fail("byte[] is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			HelperGeneral.deserialize(new byte[0]);
-			fail("byte[] is empty");
-		} catch (Exception ex) {}
-		
-		try {
-			assertEquals(AllBogatyrTests.DATA, HelperGeneral.deserialize(HelperGeneral.serialize(AllBogatyrTests.DATA)));
-		} catch (Exception ex) {fail(ex.getMessage());}
+			fail("byte[] is empty"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+	}
+	
+	@Test
+	public void testConcatenateObjects() {
+    	final Object[] a = {"A"}; //$NON-NLS-1$
+    	final Object[] b = {"B"}; //$NON-NLS-1$
+
+    	assertArrayEquals(new String[]{"A", "B"}, HelperGeneral.concatenate(a, b)); //$NON-NLS-1$ //$NON-NLS-2$
+
+    	assertArrayEquals(b, HelperGeneral.concatenate(null, b));
+
+    	assertArrayEquals(a, HelperGeneral.concatenate(a, null));
+
+	}
+	
+	@Test
+	public void testConcatenateBytes() {
+    	final byte[] a = {1};
+    	final byte[] b = {2};
+
+    	assertArrayEquals(new byte[]{1, 2}, HelperGeneral.concatenate(a, b));
+
+    	assertArrayEquals(b, HelperGeneral.concatenate(null, b));
+
+    	assertArrayEquals(a, HelperGeneral.concatenate(a, null));
+
 	}
 	
 	@Test
 	public void testRemoveDuplicates() {
-		final List<String> list = new ArrayList<String>();
-		list.add("A");
-		list.add("A");
-		list.add("A");
+		final Collection<String> list = new ArrayList<String>();
+
+		assertEquals(0, HelperGeneral.removeDuplicates(list).size());
+		
+		list.add("A"); //$NON-NLS-1$
+		list.add("A"); //$NON-NLS-1$
+		list.add("A"); //$NON-NLS-1$
 		
 		assertEquals(1, HelperGeneral.removeDuplicates(list).size());
 
 
-		final String[] array = {"A", "A", "A"};
+		final String[] array = {"A", "A", "A"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		assertEquals(1, HelperGeneral.removeDuplicates(array).length);
 	}
@@ -148,57 +190,101 @@ public class HelperGeneralTest { //TODO improve
 	@Test
 	public void testGetHashCode() {
 		try {
-			HelperGeneral.getHashCode(null, null);
-			fail("algo is null");
-		} catch (Exception ex) {}
-
-		try {
-			HelperGeneral.getHashCode("MD5", null);
-			fail("data is null");
-		} catch (Exception ex) {}
-
-		try {
-			assertNotNull(HelperGeneral.getHashCode("MD5", AllBogatyrTests.DATA));
+			assertNotNull(HelperGeneral.getHashCode("MD5", AllBogatyrTests.DATA)); //$NON-NLS-1$
 		} catch (Exception ex) {fail(ex.getMessage());}
+
+		try {
+			HelperGeneral.getHashCode(null, null);
+			fail("algo is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+
+		try {
+			HelperGeneral.getHashCode("MD5", null); //$NON-NLS-1$
+			fail("data is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 	
 	@Test
-	public void testChecksumSha256() {
-		try {
-			HelperGeneral.getHashCode(null);
-			fail("data is null");
-		} catch (Exception ex) {}
-
+	public void testGetHashCodeDefault() {
 		try {
 			assertNotNull(HelperGeneral.getHashCode(AllBogatyrTests.DATA));
 		} catch (Exception ex) {fail(ex.getMessage());}
+
+		try {
+			HelperGeneral.getHashCode(null);
+			fail("data is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 
 	@Test
-    public void testRandomKey() {
-		try {
-            HelperGeneral.getRandomKey(16, null);
-            fail("data is null");
-        } catch (Exception ex) {}
+    public void testGetRandomKey() {
+        assertNotNull(HelperGeneral.getRandomKey(Const.VALUE_16, new char[]{'1','2','3'}));
 
-        assertNotNull(HelperGeneral.getRandomKey(16, new char[]{'1','2','3'}));
-//        System.out.println(HelperGeneral.getRandomKey(16, new char[]{'1','2','3'}));
+        try {
+            HelperGeneral.getRandomKey(Integer.MIN_VALUE, new char[]{'1','2','3'});
+            fail("digits must be greater than 0"); //$NON-NLS-1$
+        } catch (Exception ex) {/*nothing to do*/}
+
+        try {
+            HelperGeneral.getRandomKey(Const.VALUE_16, null);
+            fail("data is null"); //$NON-NLS-1$
+        } catch (Exception ex) {/*nothing to do*/}
     }
 
 	@Test
-    public void testRandomKeyDefault() {
-		assertNotNull(HelperGeneral.getRandomKey(16));
-//        System.out.println(HelperGeneral.getRandomKey(16));
+    public void testGetRandomKeyDefault() {
+		assertNotNull(HelperGeneral.getRandomKey(Const.VALUE_16));
+
+		try {
+            HelperGeneral.getRandomKey(Integer.MIN_VALUE);
+            fail("digits must be greater than 0"); //$NON-NLS-1$
+        } catch (Exception ex) {/*nothing to do*/}
+    }
+	
+	@Test
+    public void testGetUUID() {
+		final UUID a = HelperGeneral.getUUID();
+		final UUID b = HelperGeneral.getUUID();
+		
+		assertNotNull(a);
+		assertNotNull(b);
+		
+		assertNotSame(a, b);
     }
 
 	@Test
     public void testFillString() {
-		assertNotNull(HelperGeneral.fillString('1', 0));
 		assertEquals(10, HelperGeneral.fillString('1', 10).length());
+		
+		try {
+			assertNotNull(HelperGeneral.fillString('1', 0));
+            fail("fillLength must be greater than 0"); //$NON-NLS-1$
+        } catch (Exception ex) {/*nothing to do*/}
 	}
 	
 	@Test
 	public void testReverseString() {
-		assertEquals("nafetS", HelperGeneral.reverseString("Stefan"));
+		assertEquals("nafetS", HelperGeneral.reverseString("Stefan")); //$NON-NLS-1$ //$NON-NLS-2$
+		
+		try {
+			HelperGeneral.reverseString(null);
+            fail("input is null!"); //$NON-NLS-1$
+        } catch (Exception ex) {/*nothing to do*/}
+	}
+	
+	@Test
+	public void testGetValidNumericString() {
+        assertNull(HelperGeneral.getValidNumericString(null));
+
+        assertNull(HelperGeneral.getValidNumericString("")); //$NON-NLS-1$
+
+		assertEquals("123.0", HelperGeneral.getValidNumericString("123.0")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("123.23", HelperGeneral.getValidNumericString("123.23abc")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("-123.23", HelperGeneral.getValidNumericString("--123.23abc")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("123.23", HelperGeneral.getValidNumericString("123.2-3abc")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("123.23", HelperGeneral.getValidNumericString("123..23")); //$NON-NLS-1$ //$NON-NLS-2$
+
+        assertNull(HelperGeneral.getValidNumericString(".")); //$NON-NLS-1$
+        assertNull(HelperGeneral.getValidNumericString("-")); //$NON-NLS-1$
 	}
 }

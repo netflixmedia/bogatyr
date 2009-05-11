@@ -48,7 +48,7 @@ import java.awt.Image;
  * This is an extended JFrame.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090511
  */
 public class Frame extends JFrame implements IComponentFader {
 	private static final long serialVersionUID = 7476360387134225315L;
@@ -57,25 +57,25 @@ public class Frame extends JFrame implements IComponentFader {
 	
 	private Color colorFader = new Color(0, 0, 0, 100);
 	
+	{
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setLocationRelativeTo(null);
+	}
 	
 	public Frame() {
 		super();
-		init();
     }
 
 	public Frame(final GraphicsConfiguration gc) {
 		super(gc);
-		init();
 	}
 
 	public Frame(final String title, final GraphicsConfiguration gc) {
 		super(title, gc);
-		init();
 	}
 
 	public Frame(final String title) throws HeadlessException {
 		super(title);
-		init();
 	}
 	
 	public Frame(final String title, final Image icon) {
@@ -99,15 +99,6 @@ public class Frame extends JFrame implements IComponentFader {
 //		validate();
 //		repaint();
 //	}
-	
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setLocationRelativeTo(null);
-	}
 	
 	
 	/*

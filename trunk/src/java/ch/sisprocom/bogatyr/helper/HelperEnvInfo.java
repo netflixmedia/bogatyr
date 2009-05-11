@@ -41,43 +41,52 @@ import java.util.Map;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 20090511
  */
 public abstract class HelperEnvInfo {
 	/**
-	 * Returns the used VM memory.
+	 * Returns the used VM memory in bytes.
      *
      * @return used VM memory
 	 */
-	public static long getMemoryUsed() {
+	public static long getMemoryUsed() { //$JUnit
 		return Runtime.getRuntime().totalMemory();
 	}
 
 	/**
-	 * Returns the free VM memory.
+	 * Returns the free VM memory in bytes.
      *
      * @return free VM memory
 	 */
-	public static long getMemoryFree() {
+	public static long getMemoryFree() { //$JUnit
 		return Runtime.getRuntime().freeMemory();
 	}
 
 	/**
-	 * Returns the maximal memory reserved for the VM.
+	 * Returns the maximal memory reserved for the VM in bytes.
      *
      * @return max VM memory
 	 */
-	public static long getMemoryMax() {
+	public static long getMemoryMax() { //$JUnit
 		return Runtime.getRuntime().maxMemory();
 	}
 
 	/**
-	 * Returns the current Java runtime version.
+	 * Returns the current Java version.
      *
      * @return current Java runtime version
 	 */
-	public static String getJavaVersion() {
+	public static String getJavaVersion() { //$JUnit
 		return System.getProperties().getProperty("java.version"); //$NON-NLS-1$
+	}
+
+	/**
+	 * Returns the current Java vendor.
+     *
+     * @return current Java runtime vendor
+	 */
+	public static String getJavaVendor() {
+		return System.getProperties().getProperty("java.vendor"); //$NON-NLS-1$
 	}
 	
 	/**
@@ -85,7 +94,7 @@ public abstract class HelperEnvInfo {
      *
      * @return current class path
 	 */
-	public static String getClassPath() {
+	public static String getClassPath() { //$JUnit
 		return System.getProperties().getProperty("java.class.path"); //$NON-NLS-1$
 	}
 	
@@ -94,7 +103,7 @@ public abstract class HelperEnvInfo {
      *
      * @return current class path
 	 */
-	public static String getLibraryPath() {
+	public static String getLibraryPath() { //$JUnit
 		return System.getProperties().getProperty("java.library.path"); //$NON-NLS-1$
 	}
 	
@@ -103,7 +112,7 @@ public abstract class HelperEnvInfo {
      *
      * @return available processors for the VM
 	 */
-	public static int getAvailableProcessors() {
+	public static int getAvailableProcessors() { //$JUnit
 		return Runtime.getRuntime().availableProcessors();
 	}
 
@@ -112,7 +121,7 @@ public abstract class HelperEnvInfo {
      *
      * @return OS architecture
 	 */
-	public static String getOsArch() {
+	public static String getOsArch() { //$JUnit
 		return System.getProperties().getProperty("os.arch"); //$NON-NLS-1$
 	}
 
@@ -121,7 +130,7 @@ public abstract class HelperEnvInfo {
      *
      * @return OS name
 	 */
-	public static String getOsName() {
+	public static String getOsName() { //$JUnit
 		return System.getProperties().getProperty("os.name"); //$NON-NLS-1$
 	}
 
@@ -130,7 +139,7 @@ public abstract class HelperEnvInfo {
      *
      * @return OS version
 	 */
-	public static String getOsVersion() {
+	public static String getOsVersion() { //$JUnit
 		return System.getProperties().getProperty("os.version"); //$NON-NLS-1$
 	}
 
@@ -139,7 +148,7 @@ public abstract class HelperEnvInfo {
 	 *
 	 * @return map of system environment variables
 	 */
-	public static Map<String, String> getOsEnvironmentVariables() {
+	public static Map<String, String> getOsEnvironmentVariables() { //$JUnit
 		return System.getenv();
 //		final Map<String, String> map = System.getenv();
 //		final Collection<String> list = new ArrayList<String>(map.size());
@@ -156,7 +165,7 @@ public abstract class HelperEnvInfo {
 	 * @param variable of the environment (e.g. PATH)
 	 * @return value of the system environment variable
 	 */
-	public static String getOsEnvironmentVariable(String variable) {
+	public static String getOsEnvironmentVariable(String variable) { //$JUnit
 		return System.getenv(variable);
     }
 	
@@ -165,7 +174,7 @@ public abstract class HelperEnvInfo {
      *
      * @return OS temporary directory
 	 */
-	public static File getOsTempDirectory() {
+	public static File getOsTempDirectory() { //$JUnit
 		return new File(System.getProperty("java.io.tmpdir")); //$NON-NLS-1$
 	}
 	
@@ -174,26 +183,53 @@ public abstract class HelperEnvInfo {
      *
      * @return user home directory
 	 */
-	public static File getUserHomeDirectory() {
+	public static File getUserHomeDirectory() { //$JUnit
 		return new File(System.getProperty("user.home")); //$NON-NLS-1$
 	}
 	
 	/**
-	* Returns the current user directory.
-	*
-	* @return current user directory
-	*/
-	public static File getUserDirectory() {
+	 * Returns the current user directory.
+	 *
+	 * @return current user directory
+	 */
+	public static File getUserDirectory() { //$JUnit
 		return new File(System.getProperty("user.dir")); //$NON-NLS-1$
 	}
 
 	/**
-	* Returns the name of the current user.
-	*
-	* @return name of the current user
-	*/
-	public static String getUserName() {
+	 * Returns the name of the current user.
+	 *
+	 * @return name of the current user
+	 */
+	public static String getUserName() { //$JUnit
 		return System.getProperty("user.name"); //$NON-NLS-1$
+	}
+
+	/**
+	 * Returns the country of the current user.
+	 *
+	 * @return language of the current country
+	 */
+	public static String getUserCountry() {
+		return System.getProperty("user.country"); //$NON-NLS-1$
+	}
+	
+	/**
+	 * Returns the language of the current user.
+	 *
+	 * @return language of the current user
+	 */
+	public static String getUserLanguage() {
+		return System.getProperty("user.language"); //$NON-NLS-1$
+	}
+	
+	/**
+	 * Returns the time zone of the current user.
+	 *
+	 * @return time zone of the current user
+	 */
+	public static String getUserTimezone() {
+		return System.getProperty("user.timezone"); //$NON-NLS-1$
 	}
 	
 	/**
@@ -201,7 +237,7 @@ public abstract class HelperEnvInfo {
 	 *
 	 * @return true if this application is running under a Windows OS
 	 */
-	public static boolean isWindowsPlatform() {
+	public static boolean isWindowsPlatform() { //$JUnit
 		return getOsName().contains("Windows"); //$NON-NLS-1$
 	}
 
@@ -210,7 +246,7 @@ public abstract class HelperEnvInfo {
 	 *
 	 * @return true if this application is running under Mac OS
 	 */
-	public static boolean isMacPlatform() {
+	public static boolean isMacPlatform() { //$JUnit
 		return getOsName().contains("Mac"); //$NON-NLS-1$
 	}
 	
@@ -219,7 +255,7 @@ public abstract class HelperEnvInfo {
 	 *
 	 * @return true if this application is running under UNIX
 	 */
-	public static boolean isUnixPlatform() {
+	public static boolean isUnixPlatform() { //$JUnit
 		return !isWindowsPlatform() && !isMacPlatform(); //this method is a bit dirty, because it could be another system than Unix, but its the best guess...
 	}
 }

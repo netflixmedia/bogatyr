@@ -39,6 +39,7 @@ import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 import javax.sound.midi.Synthesizer;
 import javax.sound.midi.Transmitter;
+import javax.sound.sampled.AudioFileFormat.Type;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -49,6 +50,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -57,12 +60,12 @@ import java.util.TimerTask;
  * This is a helper class for sound operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090511
  */
 public abstract class HelperSound { //TODO document in Wiki!
 
     /**
-     * Returns an audio clip from a file (e.g. WAV files).
+     * Returns an audio {@link Clip} from a {@link File} (e.g. "wav").
      *
      * @param file for audio clip
      * @return Audio clip
@@ -71,55 +74,75 @@ public abstract class HelperSound { //TODO document in Wiki!
      * @throws UnsupportedAudioFileException
      */
     public static Clip getClip(final File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-    	return getClip(AudioSystem.getAudioInputStream(file));
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		
+		return getClip(AudioSystem.getAudioInputStream(file));
 	}
 
     /**
-     * Returns an audio clip from a stream.
+     * Returns an audio {@link Clip} from a {@link InputStream}.
      *
-     * @param in stream for audio clip
+     * @param is stream for audio clip
      * @return Audio clip
      * @throws IOException
      * @throws LineUnavailableException
      * @throws UnsupportedAudioFileException
      */
-	public static Clip getClip(final InputStream in) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-		return getClip(AudioSystem.getAudioInputStream(in));
+	public static Clip getClip(final InputStream is) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+		if (null == is) {
+			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+		}
+		
+		return getClip(AudioSystem.getAudioInputStream(is));
 	}
 
     /**
-     * Returns a sequence from a file (e.g. MIDI files).
+     * Returns a {@link Sequence} from a {@link File} (e.g. "mid").
      *
      * @param file for sequence
-     * @return Sequence
+     * @return Audio sequence
      * @throws IOException
      * @throws InvalidMidiDataException
      */
 	public static Sequence getSequence(final File file) throws InvalidMidiDataException, IOException {
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		
 		return MidiSystem.getSequence(file);
 	}
 
     /**
-     * Returns a sequence from a stream.
+     * Returns a {@link Sequence} from a {@link InputStream}.
      *
-     * @param in stream for sequence
-     * @return Sequence
+     * @param is stream for sequence
+     * @return Audio sequence
      * @throws IOException
      * @throws InvalidMidiDataException
      */
-	public static Sequence getSequence(final InputStream in) throws InvalidMidiDataException, IOException {
-		return MidiSystem.getSequence(in);
+	public static Sequence getSequence(final InputStream is) throws InvalidMidiDataException, IOException {
+		if (null == is) {
+			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+		}
+		
+		return MidiSystem.getSequence(is);
 	}
 	
     /**
-     * Returns a sequencer to play a sequence.
+     * Returns a {@link Sequencer} to play a {@link Sequence}.
      *
      * @param sequence for sequencer
-     * @return Sequencer
+     * @return MIDI sequencer
      * @throws MidiUnavailableException
      * @throws InvalidMidiDataException
      */
 	public static Sequencer getSequencer(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
+		if (null == sequence) {
+			throw new IllegalArgumentException("sequence is null!"); //$NON-NLS-1$
+		}
+		
 		final Sequencer sequencer = MidiSystem.getSequencer();  // Used to play sequences
         sequencer.open(); // Turn it on.
 
@@ -139,11 +162,15 @@ public abstract class HelperSound { //TODO document in Wiki!
 	}
 	
     /**
-     * Plays a whole audio clip (if no player thread is available).
+     * Plays a whole audio {@link Clip} (if no player thread is available).
      *
      * @param clip to play
      */
 	public static void play(final Clip clip) {
+		if (null == clip) {
+			throw new IllegalArgumentException("clip is null!"); //$NON-NLS-1$
+		}
+		
 		clip.start();
 		final Timer timer = new Timer();
 		timer.schedule(new TimerTask(){
@@ -155,13 +182,17 @@ public abstract class HelperSound { //TODO document in Wiki!
 	}
 
 	/**
-     * Plays a whole sequence (if no player thread is available).
+     * Plays a whole {@link Sequence} (if no player thread is available).
      *
      * @param sequence to play
 	 * @throws InvalidMidiDataException 
 	 * @throws MidiUnavailableException 
      */
 	public static void play(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
+		if (null == sequence) {
+			throw new IllegalArgumentException("sequence is null!"); //$NON-NLS-1$
+		}
+		
 		final Sequencer sequencer = getSequencer(sequence);
 		sequencer.start();
 		final Timer timer = new Timer();
@@ -170,23 +201,32 @@ public abstract class HelperSound { //TODO document in Wiki!
 			public void run() {
 				sequencer.stop();
 			}
-		}, (int)sequence.getTickLength());
+		}, sequence.getTickLength());
 	}
 	
+    /**
+     * Returns all available audio formats of the current machine (e.g. "aiff", "wave").
+     *
+     * @return List of all available audio formats of the current machine
+     */
+	public static Collection<Type> getAvailableAudioFormats() {
+    	return Arrays.asList(AudioSystem.getAudioFileTypes());
+	}
+
 	
 	/*
 	 * Private methods
 	 */
-	private static Clip getClip(final AudioInputStream ain) throws LineUnavailableException, IOException {
+	private static Clip getClip(final AudioInputStream ais) throws LineUnavailableException, IOException {
 		Clip clip;
 
         try {
-            final Line.Info info = new DataLine.Info(Clip.class, ain.getFormat());
+            final Line.Info info = new DataLine.Info(Clip.class, ais.getFormat());
             clip = (Clip) AudioSystem.getLine(info);
-            clip.open(ain);
+            clip.open(ais);
         }
         finally {
-            ain.close( );
+            ais.close( );
         }
         return clip;
 	}

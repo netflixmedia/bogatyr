@@ -54,35 +54,35 @@ public class HelperNetTest { //TODO improve
 	public void testReadUrl() {
 		try {
 //			System.out.println(HelperNet.readUrl(new URL("http://www.kaywa.com/files/qr_chip_de.pdf")).length);
-			assertNotNull(HelperNet.readUrl(new URL("http://www.sisprocom.ch")));
+			assertNotNull(HelperNet.readUrl(new URL("http://www.sisprocom.ch"))); //$NON-NLS-1$
 
 //			System.out.println(HelperNet.readUrl(new URL("http://www.immopepper.ch:3000/"), "demo", "pepper").length);
 //			assertNotNull(HelperNet.readUrl(new URL("http://www.immopepper.ch:3000/")));
-			assertNotNull(HelperNet.readUrl(new URL("http://www.immopepper.ch:3000/"), "demo", "pepper"));
+			assertNotNull(HelperNet.readUrl(new URL("http://www.immopepper.ch:3000/"), "demo", "pepper")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		} catch (Exception ex) {/*fail(ex.getMessage());*/ ex.printStackTrace();}
 	}
 	
 	@Test
 	public void testIsPingable() {
 		try {
-			assertTrue(HelperNet.isPingable("sisprocom.ch"));
+			assertTrue(HelperNet.isPingable("sisprocom.ch")); //$NON-NLS-1$
 		} catch (Exception ex) {fail(ex.getMessage());}
 
 		try {
-			assertFalse(HelperNet.isPingable("192.168.1.12"));
+			assertFalse(HelperNet.isPingable("192.168.1.12")); //$NON-NLS-1$
 		} catch (Exception ex) {fail(ex.getMessage());}
 		
 		try {
-			HelperNet.isPingable("987.654.321.000");
-			fail("host invalid");
-		} catch (Exception ex) {}
+			HelperNet.isPingable("987.654.321.000"); //$NON-NLS-1$
+			fail("host is invalid!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 	}
 	
 	@Test
 	public void testGetHostname() {
 		try {
-			assertNotNull(HelperNet.getHostname("209.85.129.99"));
+			assertNotNull(HelperNet.getHostname("209.85.129.99")); //$NON-NLS-1$
 //			System.out.println(HelperNet.getHostname("209.85.129.99"));
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
@@ -90,7 +90,7 @@ public class HelperNetTest { //TODO improve
 	@Test
 	public void testGetIp() {
 		try {
-			assertNotNull(HelperNet.getIp("www.sisprocom.ch"));
+			assertNotNull(HelperNet.getIp("www.sisprocom.ch")); //$NON-NLS-1$
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	

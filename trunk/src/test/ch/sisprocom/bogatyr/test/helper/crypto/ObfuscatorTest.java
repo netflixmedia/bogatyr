@@ -37,7 +37,6 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
 import ch.sisprocom.bogatyr.helper.crypto.IObfuscator;
 import ch.sisprocom.bogatyr.helper.crypto.Obfuscator;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
@@ -59,22 +58,22 @@ public class ObfuscatorTest {
 		
 		try {
 			obfuscator.encrypt(null);
-			fail("byte[] is null!");
-		} catch (Exception ex) {}
+			fail("byte[] is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			obfuscator.encrypt(new byte[0]);
-			fail("byte[] is empty!");
-		} catch (Exception ex) {}
+			fail("byte[] is empty!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			obfuscator.decrypt(null);
-			fail("byte[] is null!");
-		} catch (Exception ex) {}
+			fail("byte[] is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			obfuscator.decrypt(new byte[0]);
-			fail("byte[] is empty!");
-		} catch (Exception ex) {}	
+			fail("byte[] is empty!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}	
 	}
 }

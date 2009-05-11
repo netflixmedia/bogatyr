@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.helper.crypto;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.Const;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.BadPaddingException;
@@ -53,7 +54,7 @@ import java.security.spec.AlgorithmParameterSpec;
  * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 20090511
  */
 public class CryptoSymm implements ICryptoSymm {
 	public static final String ALGORITHM    = "AES"; //$NON-NLS-1$
@@ -77,8 +78,7 @@ public class CryptoSymm implements ICryptoSymm {
 	 * Generates a {@link SecretKey} with the AES standard key size of 128 bits.
 	 * 
      * @return generated secret key
-	 * @throws Exception 
-	 * @see SecretKey 
+	 * @see SecretKey
 	 */
 	public SecretKey generateKey() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
 		return generateKey(DEFAULT_KEYSIZE);
@@ -131,10 +131,9 @@ public class CryptoSymm implements ICryptoSymm {
 	 * Private methods
 	 */
 	private static AlgorithmParameterSpec prepareIv() {
-		final int elements = 16;
-        final byte[] ivBytes = new byte[elements];
+        final byte[] ivBytes = new byte[Const.VALUE_16];
         
-        for (int ii = 0; elements > ii; ii++) {
+        for (int ii = 0; ivBytes.length > ii; ii++) {
         	ivBytes[ii] = (byte) 0x5a;
         }
         return new IvParameterSpec(ivBytes);
