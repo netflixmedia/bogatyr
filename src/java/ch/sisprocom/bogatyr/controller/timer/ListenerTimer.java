@@ -41,7 +41,7 @@ public interface ListenerTimer {
 	/**
 	 * Sends the actual time of the timer/countdown to the listener.
      *
-     * @param time
+     * @param time actual time of the timer/countdown
 	 */
 	void timeChanged(long time);
 	

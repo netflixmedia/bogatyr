@@ -55,9 +55,9 @@ import java.util.UUID;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090508
+ * @version 20090511
  */
-public abstract class HelperGeneral { //TODO are the methods isValidxxx still needed ore useful and is logging needed?
+public abstract class HelperGeneral {
 	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$ //TODO update in Wiki!
 	private static final char[] RANDOMKEY_SEED_DEFAULT    = {'1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	
@@ -73,12 +73,12 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
      */
-	public static <T> T createInstance(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public static <T> T createInstance(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit
 		if (null == clazz) {
 			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
 		}
 		
-		return clazz.getConstructor(new Class[0]).newInstance(new Object[0]);
+		return clazz.getConstructor(new Class[0]).newInstance();
 	}
 
 	/**
@@ -95,7 +95,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
      */
-	public static <T> T createInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public static <T> T createInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit
 		if (null == clazz) {
 			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
 		}
@@ -115,7 +115,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param arg to check
      * @return true/false
      */	
-	public static boolean isValid(final CharSequence arg) {
+	public static boolean isValid(final CharSequence arg) { //$JUnit
         return !(null == arg || 0 == arg.length());
     }
 
@@ -125,7 +125,8 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param arg to check
      * @return true/false
      */	
-	public static boolean isStringNumeric(final String arg) { //TODO a bit lazy implemented... improve with regex if possible
+	public static boolean isStringNumeric(final String arg) { //$JUnit
+		//TODO a bit lazy implemented... improve with regex if possible
 		if (isValid(arg)) {
 			try{
 				new BigDecimal(arg);
@@ -143,7 +144,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param arg to check
      * @return true/false
      */	
-	public static boolean isValid(final Object[] arg) {
+	public static boolean isValid(final Object[] arg) { //$JUnit
         return !(null == arg || 0 == arg.length);
     }
 	
@@ -153,7 +154,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param arg to check
      * @return true/false
      */	
-	public static boolean isValid(final byte[] arg) {
+	public static boolean isValid(final byte[] arg) { //$JUnit
         return !(null == arg || 0 == arg.length);
     }
 	
@@ -163,7 +164,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param arg to check
      * @return true/false
      */
-	public static boolean isValid(final Collection<?> arg) {
+	public static boolean isValid(final Collection<?> arg) { //$JUnit
         return !(null == arg || arg.isEmpty());
     }
 	
@@ -177,7 +178,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @see ByteArrayOutputStream
 	 * @see ObjectOutputStream
 	 */
-	public static byte[] serialize(final Object obj) throws IOException {
+	public static byte[] serialize(final Object obj) throws IOException { //$JUnit
 		if (null == obj) {
 			throw new IllegalArgumentException("obj is null!"); //$NON-NLS-1$
 		}	
@@ -210,9 +211,9 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @see ByteArrayInputStream
 	 * @see ObjectInputStream
 	 */
-	public static Object deserialize(final byte[] bytes) throws IOException, ClassNotFoundException {
+	public static Object deserialize(final byte[] bytes) throws IOException, ClassNotFoundException { //$JUnit
 		if (!isValid(bytes)) {
-			throw new IllegalArgumentException("params is null or empty!"); //$NON-NLS-1$
+			throw new IllegalArgumentException("bytes is null or empty!"); //$NON-NLS-1$
 		}
 		
 		ObjectInputStream ois = null;
@@ -236,7 +237,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @param inB second array
 	 * @return array a & b as one new array
 	 */
-    public static Object[] concatenate(final Object[] inA, final Object[] inB) {
+    public static Object[] concatenate(final Object[] inA, final Object[] inB) { //$JUnit
     	Object[] a = inA;
     	Object[] b = inB;
     	
@@ -262,7 +263,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @param inB second array
 	 * @return array a & b as one new byte-array
 	 */
-    public static byte[] concatenate(final byte[] inA, final byte[] inB) {
+    public static byte[] concatenate(final byte[] inA, final byte[] inB) { //$JUnit
     	byte[] a = inA;
     	byte[] b = inB;
     	
@@ -287,8 +288,9 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @param list containing duplicate objects
 	 * @return collection without duplicates
 	 */
-    public static <T> Collection<T> removeDuplicates(final Collection<T> list) {
-		return new ArrayList<T>(new HashSet<T>(list));
+    public static <T> Collection<T> removeDuplicates(final Collection<T> list) { //$JUnit
+//		return new ArrayList<T>(new HashSet<T>(list));
+		return new HashSet<T>(list);
     }
 	
     /**
@@ -297,7 +299,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
 	 * @param array containing duplicate objects
 	 * @return array without duplicates
 	 */
-    public static Object[] removeDuplicates(final Object[] array) {
+    public static Object[] removeDuplicates(final Object[] array) { //$JUnit
 		final Collection<?> list = removeDuplicates(Arrays.asList(array));
 		final Object[] temp = new Object[list.size()];
 		return list.toArray(temp);
@@ -312,7 +314,14 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return generated hash value
      * @throws NoSuchAlgorithmException
      */
-    public static String getHashCode(final String algo, final Object data) throws NoSuchAlgorithmException {
+    public static String getHashCode(final String algo, final Object data) throws NoSuchAlgorithmException { //$JUnit
+		if (!isValid(algo)) {
+			throw new IllegalArgumentException("algo is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == data) {
+			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
+		}
+
     	final MessageDigest algorithm = MessageDigest.getInstance(algo);
 		final byte[] input = toString(data).getBytes();
 
@@ -339,7 +348,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @return generated hash value
      * @throws NoSuchAlgorithmException
      */
-    public static String getHashCode(final Object data) throws NoSuchAlgorithmException {
+    public static String getHashCode(final Object data) throws NoSuchAlgorithmException { //$JUnit
     	return getHashCode(HASHCODE_ALGORITHM_SHA256, data);
     }
 
@@ -351,8 +360,15 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param seed for the string (e.g. "1,2...0,A,B...Z)
      * @return generated unique string
      */
-    public static String getRandomKey(final int digits, final char[] seed) {
-		final StringBuilder sb = new StringBuilder();
+    public static String getRandomKey(final int digits, final char[] seed) { //$JUnit
+		if (0 >= digits) {
+			throw new IllegalArgumentException("digits must be greater than 0: " + digits); //$NON-NLS-1$
+		}
+		if (null == seed || 0 == seed.length) {
+			throw new IllegalArgumentException("seed is null or empty!"); //$NON-NLS-1$
+		}
+
+    	final StringBuilder sb = new StringBuilder();
 
         for (int ii = 0; ii < digits; ii++) {
             sb.append(seed[HelperMath.random(seed.length)]);
@@ -367,7 +383,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param digits length of result string
      * @return generated unique String
      */
-    public static String getRandomKey(final int digits) {
+    public static String getRandomKey(final int digits) { //$JUnit
     	return getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
     }
 
@@ -376,7 +392,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      *
      * @return generated universally unique identifier
      */
-    public static UUID getUUID() {
+    public static UUID getUUID() { //$JUnit
     	return UUID.randomUUID();
     }    
 
@@ -387,8 +403,12 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param fillLength length of the filled string 
      * @return filled string
      */
-    public static CharSequence fillString(final char fillChar, final int fillLength) {
-        int length = fillLength;
+    public static CharSequence fillString(final char fillChar, final int fillLength) { //$JUnit
+		if (0 >= fillLength) {
+			throw new IllegalArgumentException("fillLength must be greater than 0: " + fillLength); //$NON-NLS-1$
+		}
+
+    	int length = fillLength;
     	final char[] chars = new char[length];
         
     	while (0 < length) {
@@ -404,8 +424,12 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param input string
      * @return reversed string
      */
-    public static String reverseString(final String input) {
-    	return new StringBuffer(input).reverse().toString();
+    public static String reverseString(final String input) { //$JUnit
+		if (null == input) {
+			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+		}
+
+    	return new StringBuilder(input).reverse().toString();
     }
 
     /**
@@ -414,7 +438,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
      * @param text string
      * @return numeric string
      */
-    public static String getValidNumericString(final String text) { //TODO document in Wiki!
+    public static String getValidNumericString(final String text) { //$JUnit //TODO document in Wiki!
     	
     	if (!isValid(text)) {
     		return null;
@@ -436,7 +460,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
    
     		if ('.' == character) {
     			if (!isPeriod) {
-    		  		sb.append(character);
+    		  		sb.append('.');
     		  		isPeriod = true;
     		 	}
     		} else {
@@ -444,7 +468,7 @@ public abstract class HelperGeneral { //TODO are the methods isValidxxx still ne
     		}
     	}
     	
-    	if (result.isEmpty() || (isPeriod && sb.length() == 1)) {
+    	if (result.isEmpty() || isPeriod && 1 == sb.length()) {
     		return null;
     	}
     	

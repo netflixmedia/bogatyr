@@ -31,18 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.crypto;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
-import java.security.KeyPair;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
 import ch.sisprocom.bogatyr.helper.crypto.ICryptoAsymm;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.security.KeyPair;
 
 
 /**
@@ -70,18 +66,18 @@ public class CryptoAsymmTest {
 	public void testGenerateKeyPair() {
 		try {
 			cryptoAsymm.generateKeyPair(0);
-			fail("keysize is 0");
-		} catch (Exception ex) {}
+			fail("keysize is 0"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
-			cryptoAsymm.generateKeyPair(-1024);
-			fail("keysize is -1024");
-		} catch (Exception ex) {}
+			cryptoAsymm.generateKeyPair(Integer.MIN_VALUE);
+			fail("keysize is -1024"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 		
 		try {
 			cryptoAsymm.generateKeyPair(3);
-			fail("keysize is 3");
-		} catch (Exception ex) {}
+			fail("keysize is 3"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			assertNotNull(cryptoAsymm.generateKeyPair(KEYSIZE));
@@ -96,23 +92,23 @@ public class CryptoAsymmTest {
 	public void testEncrypt() {
 		try {
 			cryptoAsymm.encrypt(null, null, 0);
-			fail("input is null");
-		} catch (Exception ex) {}
+			fail("input is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			cryptoAsymm.encrypt(new byte[0], null, 0);
-			fail("input is empty");
-		} catch (Exception ex) {}
+			fail("input is empty"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 		
 		try {
 			cryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), null, 0);
-			fail("key is null");
-		} catch (Exception ex) {}
+			fail("key is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 		
 		try {
 			cryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), keyPair.getPublic(), 0);
-			fail("keysize is 0");
-		} catch (Exception ex) {}		
+			fail("keysize is 0"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}		
 
 		try {
 			assertNotNull(cryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), keyPair.getPublic(), KEYSIZE));
@@ -127,23 +123,23 @@ public class CryptoAsymmTest {
 	public void testDecrypt() {
 		try {
 			cryptoAsymm.decrypt(null, null, 0);
-			fail("input is null");
-		} catch (Exception ex) {}
+			fail("input is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			cryptoAsymm.decrypt(new byte[0], null, 0);
-			fail("input is empty");
-		} catch (Exception ex) {}
+			fail("input is empty"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 		
 		try {
 			cryptoAsymm.decrypt(AllBogatyrTests.DATA.getBytes(), null, 0);
-			fail("key is null");
-		} catch (Exception ex) {}
+			fail("key is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 		
 		try {
 			cryptoAsymm.decrypt(AllBogatyrTests.DATA.getBytes(), keyPair.getPrivate(), 0);
-			fail("keysize is 0");
-		} catch (Exception ex) {}		
+			fail("keysize is 0"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}		
 
 		try {
 			assertEquals(AllBogatyrTests.DATA, new String(cryptoAsymm.decrypt(cryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), keyPair.getPublic(), KEYSIZE), keyPair.getPrivate(), KEYSIZE)));

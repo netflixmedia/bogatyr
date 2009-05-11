@@ -31,13 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.awt.Color;
-
+import ch.sisprocom.bogatyr.helper.HelperGraphic;
+import static org.junit.Assert.*;
 import org.junit.Test;
 
-import ch.sisprocom.bogatyr.helper.HelperGraphic;
+import java.awt.Color;
+import java.awt.Dimension;
 
 
 /**
@@ -46,16 +45,33 @@ import ch.sisprocom.bogatyr.helper.HelperGraphic;
  * @author Stefan Laubenberger
  * @version 20090504
  */
-public class HelperGraphicTest { //TODO improve
+public class HelperGraphicTest {
+	@Test
+	public void testGetCenter() {
+		assertEquals(new Dimension(50, 50), HelperGraphic.getCenter(new Dimension(100, 100)));
+		assertEquals(new Dimension(-50, -50), HelperGraphic.getCenter(new Dimension(-100, -100)));
+		
+		try {
+			HelperGraphic.getCenter(null);
+			fail("size is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+	}
+	
 	@Test
 	public void testGetFonts() {
-		assertNotNull(HelperGraphic.getFonts());
+		assertNotNull(HelperGraphic.getAvailableFonts());
 //		System.out.println(HelperGeneral.dumpList(HelperGraphic.getFonts()));
 	}
 	
 	@Test
 	public void testGetColorHex() {
 		assertNotNull(HelperGraphic.getColorHex(Color.RED));
+		
+		try {
+			HelperGraphic.getColorHex(null);
+			fail("color is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+
 //		System.out.println(HelperGraphic.getColorHex(Color.RED));
 	}
 }

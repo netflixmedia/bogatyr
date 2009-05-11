@@ -94,7 +94,7 @@ public class FileManager extends ApplicationAbstract { //TODO document in Wiki!
 			exit(1);
 		}
 
- 		final String value = property.getProperty(PROPERTY_PATH);
+ 		final String value = property.getValue(PROPERTY_PATH);
 		if (HelperGeneral.isValid(value)) {
             path = new File(value);
 		} else {
@@ -102,13 +102,13 @@ public class FileManager extends ApplicationAbstract { //TODO document in Wiki!
 			exit(10);
 		}
 		
-		localizer = new ControllerLocalizerFile(property.getProperty(PROPERTY_LOCALIZER_BASE));
+		localizer = new ControllerLocalizerFile(property.getValue(PROPERTY_LOCALIZER_BASE));
 	}
 
 	private void searchFiles() throws IOException {
 		int ii = 0;
-		final String[] identifier = {property.getProperty(PROPERTY_IDENTIFIER)};
-		final boolean isDelete = property.getPropertyBoolean(PROPERTY_DELETE);
+		final String[] identifier = {property.getValue(PROPERTY_IDENTIFIER)};
+		final boolean isDelete = property.getBooleanValue(PROPERTY_DELETE);
 
 		for (final File file : HelperIO.getFiles(path, identifier, false)) {
 			if (isDelete) {

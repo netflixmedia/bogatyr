@@ -65,13 +65,13 @@ public class CryptoSymmTest {
 	public void testGenerateKey() {
 		try {
 			cryptoSymm.generateKey(0);
-			fail("keysize is 0");
-		} catch (Exception ex) {}
+			fail("keysize is 0"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
-			cryptoSymm.generateKey(-1024);
-			fail("keysize is -1024");
-		} catch (Exception ex) {}
+			cryptoSymm.generateKey(Integer.MIN_VALUE);
+			fail("keysize is -1024"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			assertNotNull(cryptoSymm.generateKey(KEYSIZE));
@@ -86,18 +86,18 @@ public class CryptoSymmTest {
 	public void testEncrypt() {
 		try {
 			cryptoSymm.encrypt(null, null);
-			fail("input is null");
-		} catch (Exception ex) {}
+			fail("input is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			cryptoSymm.encrypt(new byte[0], null);
-			fail("input is empty");
-		} catch (Exception ex) {}
+			fail("input is empty"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 		
 		try {
 			cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), null);
-			fail("key is null");
-		} catch (Exception ex) {}
+			fail("key is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 		
 		try {
 			assertNotNull(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKey));
@@ -112,23 +112,23 @@ public class CryptoSymmTest {
 	public void testDecrypt() {
 		try {
 			cryptoSymm.decrypt(null, null);
-			fail("input is null");
-		} catch (Exception ex) {}
+			fail("input is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
 			cryptoSymm.decrypt(new byte[0], null);
-			fail("input is empty");
-		} catch (Exception ex) {}
+			fail("input is empty"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 		
 		try {
 			cryptoSymm.decrypt(AllBogatyrTests.DATA.getBytes(), null);
-			fail("key is null");
-		} catch (Exception ex) {}
+			fail("key is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 		
 		try {
 			cryptoSymm.decrypt(AllBogatyrTests.DATA.getBytes(), secretKey);
-			fail("keysize is 0");
-		} catch (Exception ex) {}		
+			fail("keysize is 0"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}		
 
 		try {
 			assertEquals(AllBogatyrTests.DATA, new String(cryptoSymm.decrypt(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKey), secretKey)));

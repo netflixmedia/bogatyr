@@ -31,43 +31,27 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.property;
 
+import ch.sisprocom.bogatyr.controller.ControllerAbstract;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Properties;
-
-import ch.sisprocom.bogatyr.controller.ControllerAbstract;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 20090426
+ * @version 20090511
  */
 public class ControllerProperty extends ControllerAbstract implements IControllerProperty { //TODO document in Wiki!
-//	private Properties properties;
 	private final Properties properties;
 
-//  public ControllerProperty() {
-//	  this.properties = properties;
-//  
-//  }
-
-//	public void setProperties(final Property properties) {
-//		this.properties = properties;
-//
-//}
 	
-//	@Required
-//	public void setProperties(final InputStream inputStream)  throws IOException{
-//        properties = new Properties();
-////        properties.load(inputStream);
-//
-//	}
-
     public ControllerProperty(final InputStream inputStream) throws IOException {
         super();
         properties = new Properties();
@@ -86,21 +70,48 @@ public class ControllerProperty extends ControllerAbstract implements IControlle
 		return properties;
 	}
     
-    public String getProperty(final String propertyName) {
-        return properties.getProperty(propertyName);
+    public String getValue(final String key) {
+        return properties.getProperty(key);
     }
 
-    public double getPropertyDouble(final String propertyName) {
-    	final String value = properties.getProperty(propertyName);
-    	return HelperGeneral.isStringNumeric(value) ? Double.parseDouble(value) : 0.0D;
+    public Boolean getBooleanValue(final String key) {
+        return Boolean.valueOf(properties.getProperty(key));
     }
 
-    public int getPropertyInt(final String propertyName) {
-    	final String value = properties.getProperty(propertyName);
-    	return HelperGeneral.isStringNumeric(value) ? Integer.parseInt(value) : 0;
-    }
+	public BigDecimal getBigDecimalValue(final String key) {
+		return new BigDecimal(properties.getProperty(key));
+	}
 
-    public boolean getPropertyBoolean(final String propertyName) {
-        return properties.getProperty(propertyName) != null && Boolean.valueOf(properties.getProperty(propertyName));
-    }
+	public BigInteger getBigIntegerValue(final String key) {
+		return new BigInteger(properties.getProperty(key));
+	}
+
+	public Byte getByteValue(final String key) {
+		return Byte.valueOf(properties.getProperty(key));	
+	}
+
+//	public Date getDateValue(final String key) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	public Double getDoubleValue(final String key) {
+		return Double.valueOf(properties.getProperty(key));
+	}
+
+	public Float getFloatValue(final String key) {
+		return Float.valueOf(properties.getProperty(key));
+	}
+
+	public Integer getIntegerValue(final String key) {
+		return Integer.valueOf(properties.getProperty(key));
+	}
+
+	public Long getLongValue(final String key) {
+		return Long.valueOf(properties.getProperty(key));
+	}
+
+	public Short getShortValue(final String key) {
+		return Short.valueOf(properties.getProperty(key));
+	}
 }   

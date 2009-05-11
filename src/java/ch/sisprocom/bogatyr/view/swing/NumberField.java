@@ -31,26 +31,25 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
  * This is a NumberField, similar to TextField, but only numeric characters are allowed.
  * 
  * @author Stefan Laubenberger
- * @version 20090505
+ * @version 20090511
  */
-public class NumberField extends TextField {//TODO improve Document!
+public class NumberField extends TextField {
 	private static final long serialVersionUID = 4469777330124040925L;
 	
 	private static final Pattern PATTERN = Pattern.compile("[-%'0-9.]+"); //$NON-NLS-1$
@@ -69,8 +68,9 @@ public class NumberField extends TextField {//TODO improve Document!
 	}
 	
 	/**
-     * Get the Double value of the number field.
-     * @return Double value of the number field
+     * Returns a {@link Double} value from the number field.
+     * 
+     * @return Double from the number field 
      */	
 	public Double getDoubleValue() {
 		String value = HelperGeneral.getValidNumericString(getText());
@@ -82,8 +82,9 @@ public class NumberField extends TextField {//TODO improve Document!
 	}
 	
 	/**
-     * Get the Integer value of the number field.
-     * @return Integer value of the number field
+     * Returns a {@link Integer} value from the number field.
+     * 
+     * @return Integer from the number field 
      */	
 	public Integer getIntegerValue() {
 		final String value = HelperGeneral.getValidNumericString(getText());
@@ -95,8 +96,9 @@ public class NumberField extends TextField {//TODO improve Document!
 	}
 	
 	/**
-     * Get the Float value of the number field.
-     * @return Float value of the number field
+     * Returns a {@link Float} value from the number field.
+     * 
+     * @return Float from the number field 
      */	
 	public Float getFloatValue() {
 		final String value = HelperGeneral.getValidNumericString(getText());
@@ -108,8 +110,9 @@ public class NumberField extends TextField {//TODO improve Document!
 	}
 	
 	/**
-     * Get the Byte value of the number field.
-     * @return Byte value of the number field
+     * Returns a {@link Byte} value from the number field.
+     * 
+     * @return Byte from the number field 
      */	
 	public Byte getByteValue() {
 		final String value = HelperGeneral.getValidNumericString(getText());
@@ -121,8 +124,9 @@ public class NumberField extends TextField {//TODO improve Document!
 	}
 	
 	/**
-     * Get the Long value of the number field.
-     * @return Long value of the number field
+     * Returns a {@link Long} value from the number field.
+     * 
+     * @return Long from the number field 
      */	
 	public Long getLongValue() {
 		final String value = HelperGeneral.getValidNumericString(getText());
@@ -134,8 +138,9 @@ public class NumberField extends TextField {//TODO improve Document!
 	}
 	
 	/**
-     * Get the Short value of the number field.
-     * @return Short value of the number field
+     * Returns a {@link Short} value from the number field.
+     * 
+     * @return Short from the number field 
      */	
 	public Short getShortValue() {
 		final String value = HelperGeneral.getValidNumericString(getText());
@@ -147,8 +152,9 @@ public class NumberField extends TextField {//TODO improve Document!
 	}
 	
 	/**
-     * Get the BigInteger value of the number field.
-     * @return BigInteger value of the number field
+     * Returns a {@link BigInteger} value from the number field.
+     * 
+     * @return BigInteger from the number field 
      */	
 	public BigInteger getBigIntegerValue() {
 		final String value = HelperGeneral.getValidNumericString(getText());
@@ -160,8 +166,9 @@ public class NumberField extends TextField {//TODO improve Document!
 	}
 	
 	/**
-     * Get the BigDecimal value of the number field.
-     * @return BigDecimal value of the number field
+     * Returns a {@link BigDecimal} value from the number field.
+     * 
+     * @return BigDecimal from the number field 
      */	
 	public BigDecimal getBigDecimalValue() {
 		final String value = HelperGeneral.getValidNumericString(getText());
@@ -173,14 +180,19 @@ public class NumberField extends TextField {//TODO improve Document!
 	}
 	
 	/**
-     * Set the value of the number field
-     * @param number value of the number field
+     * Set the {@link Number} value of the number field.
+     * 
+     * @param number value for the number field 
      */	
 	public void setValue(final Number number) {
         setText(number.toString());
 	}
 	
-	protected static boolean isStringNumeric(final CharSequence arg) {
+	
+	/*
+	 * Private methods
+	 */	
+	static boolean isStringNumeric(final CharSequence arg) {
 		if (HelperGeneral.isValid(arg)) {
 			final Matcher matcher = PATTERN.matcher(arg);
 
@@ -211,7 +223,7 @@ public class NumberField extends TextField {//TODO improve Document!
     /*
      * Inner classes
      */
-	private class NumberDocument extends PlainDocument {
+	class NumberDocument extends PlainDocument {
 		private static final long serialVersionUID = 3766889554419497713L;
 
 		@Override

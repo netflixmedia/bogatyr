@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -37,7 +37,7 @@ package ch.sisprocom.bogatyr.helper;
  * This is a helper class for XML operations.
  * 
  * @author Stefan Laubenberger
- * @version 20081215
+ * @version 20090511
  */
 public abstract class HelperXml { //TODO document in Wiki!
 	/**

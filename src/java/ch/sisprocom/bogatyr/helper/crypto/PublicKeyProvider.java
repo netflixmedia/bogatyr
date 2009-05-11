@@ -32,6 +32,18 @@
 package ch.sisprocom.bogatyr.helper.crypto;
 
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import org.bouncycastle.asn1.x509.BasicConstraints;
+import org.bouncycastle.asn1.x509.ExtendedKeyUsage;
+import org.bouncycastle.asn1.x509.GeneralName;
+import org.bouncycastle.asn1.x509.GeneralNames;
+import org.bouncycastle.asn1.x509.KeyPurposeId;
+import org.bouncycastle.asn1.x509.KeyUsage;
+import org.bouncycastle.asn1.x509.X509Extensions;
+import org.bouncycastle.x509.X509V3CertificateGenerator;
+
+import javax.security.auth.x500.X500Principal;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,26 +62,12 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Date;
 
-import javax.security.auth.x500.X500Principal;
-
-import org.bouncycastle.asn1.x509.BasicConstraints;
-import org.bouncycastle.asn1.x509.ExtendedKeyUsage;
-import org.bouncycastle.asn1.x509.GeneralName;
-import org.bouncycastle.asn1.x509.GeneralNames;
-import org.bouncycastle.asn1.x509.KeyPurposeId;
-import org.bouncycastle.asn1.x509.KeyUsage;
-import org.bouncycastle.asn1.x509.X509Extensions;
-import org.bouncycastle.x509.X509V3CertificateGenerator;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-
 
 /**
  * This class generates, reads and save X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 20090511
  */
 public class PublicKeyProvider implements IPublicKeyProvider {
 	
@@ -143,7 +141,7 @@ public class PublicKeyProvider implements IPublicKeyProvider {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
 		
-    	HelperIO.writeFileFromBinary(file, cert.getEncoded(), false);
+    	HelperIO.writeFile(file, cert.getEncoded(), false);
     }
 
     public X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {

@@ -31,27 +31,31 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
 import javax.swing.JTextArea;
 import javax.swing.text.Document;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
  * This is an extended JTextArea.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090511
  */
 public class TextArea extends JTextArea implements IComponentActivate {
 	private static final long serialVersionUID = 8509257459382968021L;
 	
 	private boolean isNotActive;
 
+	{
+		setLineWrap(true);
+		setWrapStyleWord(true);
+	}
+	
 	
     public TextArea() {
         super();
-        init();
     }
     
 	public TextArea(final Document doc) {
@@ -66,17 +70,7 @@ public class TextArea extends JTextArea implements IComponentActivate {
     public TextArea(final String text, final String toolTip, final int rows, final int columns) {
         super(text, rows, columns);
         setToolTipText(toolTip);
-        init();
     }
-	
-    
-    /*
-	 * Private methods
-	 */
-	private void init() {
-		setLineWrap(true);
-		setWrapStyleWord(true);
-	}
 	
 	
 	/*

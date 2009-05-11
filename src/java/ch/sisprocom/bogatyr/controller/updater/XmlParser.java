@@ -31,18 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.updater;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
 import ch.sisprocom.bogatyr.helper.Const;
 import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
@@ -52,13 +40,23 @@ import ch.sisprocom.bogatyr.helper.HelperNet;
 import ch.sisprocom.bogatyr.view.swing.chooser.ChooserFile;
 import ch.sisprocom.bogatyr.view.swing.dialog.Dialog;
 import ch.sisprocom.bogatyr.view.swing.dialog.DialogProgress;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import java.io.File;
+import java.io.IOException;
+import java.net.SocketTimeoutException;
+import java.net.URL;
 
 
 /**
  * SAX handler to parse the update XML files
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090511
  */
 public class XmlParser extends DefaultHandler {
 	// Resources
@@ -176,11 +174,11 @@ public class XmlParser extends DefaultHandler {
 	}
 	
     private void download() throws IOException {
-		File output = new File(HelperEnvInfo.getUserHomeDirectory() + "/" + (HelperEnvInfo.isWindowsPlatform() ? name_windows : HelperEnvInfo.isMacPlatform() ? name_osx : name_unix));
+		File output = new File(HelperEnvInfo.getUserHomeDirectory() + Const.PATH_SEPARATOR + (HelperEnvInfo.isWindowsPlatform() ? name_windows : HelperEnvInfo.isMacPlatform() ? name_osx : name_unix));
 		boolean isOk = false;
 		
 		while (!isOk) {
-			final ChooserFile fc = new ChooserFile();
+			final JFileChooser fc = new ChooserFile();
 			fc.setSelectedFile(output);
 	
 			final int returnVal = fc.showSaveDialog(null);
@@ -211,8 +209,8 @@ public class XmlParser extends DefaultHandler {
 		final File file = new File(location);
 		
 		try {
-            final byte[] data = file.exists() ? HelperIO.readFileAsBinary(file) : HelperNet.readUrl(new URL(location));
-	        HelperIO.writeFileFromBinary(output, data, false);
+            final byte[] data = file.exists() ? HelperIO.readFile(file) : HelperNet.readUrl(new URL(location));
+	        HelperIO.writeFile(output, data, false);
 	        
 			JOptionPane.showMessageDialog(null, localizer.getValue(RES_SUCCESS), applicationName, JOptionPane.INFORMATION_MESSAGE);
 //			Application.getInstance().exit(0);

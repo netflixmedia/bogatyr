@@ -49,7 +49,6 @@ public abstract class ControlBrowser {
 	 *
 	 * @param uri for the browser (e.g. "http://www.sisprocom.ch/")
 	 * @throws IOException 
-	 * @throws InterruptedException 
 	 */
 	public static void display(final URI uri) throws IOException { //$JUnit
 		if (null == uri) {

@@ -31,19 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
  * This is an extended AbstractAction.
  * 
  * @author Stefan Laubenberger
- * @version 20090430
+ * @version 20090511
  */
 public abstract class ActionAbstract extends AbstractAction {
+	private static final long serialVersionUID = -2411318943212390523L;
 
 //	Action.LONG_DESCRIPTION
 //	Action.ACCELERATOR_KEY
@@ -51,7 +52,7 @@ public abstract class ActionAbstract extends AbstractAction {
 //	Action.SMALL_ICON
 //	Action.LARGE_ICON_KEY
 
-	
+
 	protected ActionAbstract() {
 		super();
 	}

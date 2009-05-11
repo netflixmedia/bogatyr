@@ -31,14 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.test.helper.HelperEnvInfoTest;
 import ch.sisprocom.bogatyr.test.helper.HelperGeneralTest;
@@ -55,6 +47,13 @@ import ch.sisprocom.bogatyr.test.helper.crypto.CryptoAsymmTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.CryptoSymmTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.ObfuscatorTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.PublicKeyProviderTest;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 
@@ -65,10 +64,10 @@ import ch.sisprocom.bogatyr.test.helper.crypto.PublicKeyProviderTest;
  * @version 20090403
  */
 public class AllBogatyrTests implements Runnable {
-	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œ Ÿ¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
-	 "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œ Ÿ¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
-	 "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œ Ÿ¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
-	 "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~€‚ƒ„…†‡ˆ‰Š‹Œ‘’“”•–—˜™š›œ Ÿ¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ"; //$NON-NLS-1$
+	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
+	 "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
+	 "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
+	 "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ"; //$NON-NLS-1$
 
 	public static final int ITERATIONS = 1;
 	public static final int THREADS	   = 1;
@@ -77,12 +76,12 @@ public class AllBogatyrTests implements Runnable {
 
 	
     public static void main(final String[] args) {
-    	System.out.println("+---------------------------+");
-    	System.out.println("|  Start all Bogatyr tests  |");
-    	System.out.println("|  " + formatter.format(new Date()) + "    |");
-    	System.out.println("+---------------------------+");
-    	System.out.println("Iterations:\t" + ITERATIONS);
-    	System.out.println("Threads:\t" + THREADS);
+    	System.out.println("+---------------------------+"); //$NON-NLS-1$
+    	System.out.println("|  Start all Bogatyr tests  |"); //$NON-NLS-1$
+    	System.out.println("|  " + formatter.format(new Date()) + "    |");  //$NON-NLS-1$//$NON-NLS-2$
+    	System.out.println("+---------------------------+"); //$NON-NLS-1$
+    	System.out.println("Iterations:\t" + ITERATIONS); //$NON-NLS-1$
+    	System.out.println("Threads:\t" + THREADS); //$NON-NLS-1$
     	
     	final AllBogatyrTests[] tests = new AllBogatyrTests[THREADS];
         for (int ii = 0; ii < tests.length; ii++) {
@@ -93,10 +92,10 @@ public class AllBogatyrTests implements Runnable {
             runThreads(tests);
         }
         
-        System.out.println("+-------------------------------+");
-        System.out.println("|  All Bogatyr tests completed  |");
-    	System.out.println("|  " + formatter.format(new Date()) + "        |");
-        System.out.println("+-------------------------------+");
+        System.out.println("+-------------------------------+"); //$NON-NLS-1$
+        System.out.println("|  All Bogatyr tests completed  |"); //$NON-NLS-1$
+    	System.out.println("|  " + formatter.format(new Date()) + "        |"); //$NON-NLS-1$ //$NON-NLS-2$
+        System.out.println("+-------------------------------+"); //$NON-NLS-1$
     }
     
 	public void run() {
@@ -124,10 +123,10 @@ public class AllBogatyrTests implements Runnable {
 //				HelperSoundTest.class
 		);
 		
-        System.out.println("** Test run completed **");
-        System.out.println("Time:\t" + result.getRunTime());
-        System.out.println("Total:\t" + result.getRunCount());
-        System.out.println("Failed:\t" + result.getFailureCount());
+        System.out.println("** Test run completed **"); //$NON-NLS-1$
+        System.out.println("Time:\t" + result.getRunTime()); //$NON-NLS-1$
+        System.out.println("Total:\t" + result.getRunCount()); //$NON-NLS-1$
+        System.out.println("Failed:\t" + result.getFailureCount()); //$NON-NLS-1$
         System.out.println(HelperGeneral.dump(result.getFailures()));
 	}
 	
@@ -137,7 +136,7 @@ public class AllBogatyrTests implements Runnable {
 	 */
     private static void runThreads (final AllBogatyrTests[] runnables) {
         if (runnables == null) {
-           throw new IllegalArgumentException("runnables == null");
+           throw new IllegalArgumentException("runnables == null"); //$NON-NLS-1$
         }
         Thread[] threads = new Thread[runnables.length];
 
@@ -154,7 +153,7 @@ public class AllBogatyrTests implements Runnable {
                 thread.join();
             }
         } catch (InterruptedException ignore) {
-           System.out.println("Thread join interrupted.");
+           System.out.println("Thread join interrupted."); //$NON-NLS-1$
         } catch (Exception ex) {
         	ex.printStackTrace();
         }

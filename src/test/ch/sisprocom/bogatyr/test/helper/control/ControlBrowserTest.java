@@ -50,12 +50,12 @@ public class ControlBrowserTest { //TODO improve
 	@Test
 	public void testDisplayUrl() {
 		try {
-			ControlBrowser.display(new URI("http://www.sisprocom.ch/bogatyr/"));
+			ControlBrowser.display(new URI("http://www.sisprocom.ch/bogatyr/")); //$NON-NLS-1$
 		} catch (Exception ex) {fail(ex.getMessage());}
 		
 		try {
 			ControlBrowser.display(null);
-			fail("URI is null");
-		} catch (Exception ex) {}
+			fail("URI is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 }

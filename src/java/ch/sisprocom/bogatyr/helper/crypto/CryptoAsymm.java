@@ -31,13 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.crypto;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.KeyPair;
@@ -48,11 +41,20 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Security;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
 /**
  * This is a class for asymmetric cryptology via RSA.
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 20090511
  */
 public class CryptoAsymm implements ICryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
@@ -77,7 +79,6 @@ public class CryptoAsymm implements ICryptoAsymm {
 	 * Generates a public and a private {@link KeyPair} with the RSA standard key size of 1024 bits.
 	 * 
 	 * @return generated key pair
-	 * @throws Exception
 	 * @see KeyPair
 	 */
 	public KeyPair generateKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
@@ -105,7 +106,6 @@ public class CryptoAsymm implements ICryptoAsymm {
 	 * @param input data to encrypt as a byte-array
 	 * @param key for the encryption
      * @return encrypted byte-array
-	 * @throws Exception  
 	 * @see PublicKey
 	 */
     public byte[] encrypt(final byte[] input, final PublicKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit
@@ -162,7 +162,6 @@ public class CryptoAsymm implements ICryptoAsymm {
 	 * @param input encrypted data as a byte-array
 	 * @param key for the decryption
      * @return decrypted byte-array
-	 * @throws Exception 
 	 */
 	public byte[] decrypt(final byte[] input, final PrivateKey key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit
 		return decrypt(input, key, DEFAULT_KEYSIZE);

@@ -115,7 +115,7 @@ public interface IContext {
      * @param key for the context
      * @return Byte associated to the given key 
      */	
-	public Byte getByteValue(final Object key);
+	Byte getByteValue(final Object key);
 	
 	/**
      * Returns a {@link Long} value associated to the given key from the context.
@@ -123,7 +123,7 @@ public interface IContext {
      * @param key for the context
      * @return Long associated to the given key 
      */	
-	public Long getLongValue(final Object key);
+	Long getLongValue(final Object key);
 
 	/**
      * Returns a {@link Short} value associated to the given key from the context.
@@ -131,7 +131,7 @@ public interface IContext {
      * @param key for the context
      * @return Short associated to the given key 
      */	
-	public Short getShortValue(final Object key);
+	Short getShortValue(final Object key);
 	
 	/**
      * Returns a {@link BigInteger} value associated to the given key from the context.
@@ -139,7 +139,7 @@ public interface IContext {
      * @param key for the context
      * @return BigInteger associated to the given key 
      */	
-	public BigInteger getBigIntegerValue(final Object key);
+	BigInteger getBigIntegerValue(final Object key);
 	
 	/**
      * Returns a {@link BigDecimal} value associated to the given key from the context.
@@ -147,7 +147,7 @@ public interface IContext {
      * @param key for the context
      * @return BigDecimal associated to the given key 
      */	
-	public BigDecimal getBigDecimalValue(final Object key);
+	BigDecimal getBigDecimalValue(final Object key);
 
 	/**
      * Returns a {@link Date} value associated to the given key from the context.
@@ -155,5 +155,5 @@ public interface IContext {
      * @param key for the context
      * @return Date associated to the given key 
      */	
-	public Date getDateValue(final Object key);
+	Date getDateValue(final Object key);
 }

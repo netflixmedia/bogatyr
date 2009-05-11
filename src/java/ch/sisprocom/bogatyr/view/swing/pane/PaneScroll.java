@@ -31,46 +31,39 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.pane;
 
-import java.awt.Component;
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.awt.Component;
 
 
 /**
  * This is an extended JScrollPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090506
+ * @version 20090511
  */
 public class PaneScroll extends JScrollPane {
 	private static final long serialVersionUID = 544751396135811303L;
 	
+	{
+		setWheelScrollingEnabled(true);
+	}
+	
 	
 	public PaneScroll() {
 		super();
-		init();
     }
 	
 	public PaneScroll(final Component component) {
 		super(component);
-		init();
     }
 	
 	public PaneScroll(final Component component, final Border border) {
 		this(component);
 		setBorder(border);
     }
-	
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-		setWheelScrollingEnabled(true);
-	}
 	
 	
 	/*

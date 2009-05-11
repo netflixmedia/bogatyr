@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.controller.localizer;
 
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 
@@ -39,14 +40,13 @@ import java.util.ResourceBundle;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 20090430
+ * @version 20090511
  */
 public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TODO document in Wiki!
 	public static final String POSTFIX_ACCELERATOR = ".accelerator"; //$NON-NLS-1$
 	public static final String POSTFIX_MNEMONIC = ".mnemonic"; //$NON-NLS-1$
 	public static final String POSTFIX_TOOLTIP = ".tooltip"; //$NON-NLS-1$
 	
-	private Locale locale;
 	private String localizerBase;
 	private ResourceBundle bundle;
 	
@@ -64,23 +64,24 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 
     public synchronized void setLocalizerBase(final String localizerBase) {
         this.localizerBase = localizerBase;
-        bundle = ResourceBundle.getBundle(localizerBase, locale);
+        bundle = ResourceBundle.getBundle(localizerBase, getLocale());
     }
 	
-	
+
+    /*
+	 * Overridden methods
+	 */
+    @Override
+	public synchronized void setLocale(final Locale locale) {
+        bundle = ResourceBundle.getBundle(localizerBase, locale);
+
+        super.setLocale(locale);
+    }
+
+    
 	/*
 	 * Implemented methods
 	 */
-	public Locale getLocale() {
-		return locale;
-	}
-
-    public synchronized void setLocale(final Locale locale) {
-        this.locale = locale;
-        bundle = ResourceBundle.getBundle(localizerBase, locale);
-        fireLocaleChanged();
-    }
-	
 	public String getValue(final String key) {
 		return bundle.getString(key);
 	}
@@ -88,7 +89,7 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 	public String getAccelerator(final String key) {
 		try {
 			return bundle.getString(key + POSTFIX_ACCELERATOR);
-		} catch (Exception ex) {
+		} catch (MissingResourceException ex) {
 			return ""; //$NON-NLS-1$
 		}
 	}
@@ -96,7 +97,7 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 	public int getMnemonic(final String key) {
 		try {
 			return Integer.valueOf(bundle.getString(key + POSTFIX_MNEMONIC));
-		} catch (Exception ex) {
+		} catch (MissingResourceException ex) {
 			return 0;
 		}
 	}
@@ -104,7 +105,7 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 	public String getTooltip(final String key) {
 		try {
 			return bundle.getString(key + POSTFIX_TOOLTIP);
-		} catch (Exception ex) {
+		} catch (MissingResourceException ex) {
 			return ""; //$NON-NLS-1$
 		}
 	}
@@ -114,7 +115,6 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 	 * Private methods
 	 */
 	private void init() {
-        locale = Locale.getDefault();
-        bundle = ResourceBundle.getBundle(localizerBase, locale);
+        bundle = ResourceBundle.getBundle(localizerBase, getLocale());
 	}
 }

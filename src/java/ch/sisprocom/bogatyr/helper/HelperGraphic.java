@@ -48,39 +48,55 @@ import java.util.List;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 20090427
+ * @version 20090511
  */
 public abstract class HelperGraphic {
 	
 	/**
-     * Enable antialiasing on a graphic container.
+     * Enable anti-aliasing on a {@link Graphics2D} container.
      * 
-     * @param g Graphics2D container
+     * @param graphics Graphics2D container
      */	
-	public static void enableAntialiasing(final Graphics2D g) {
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+	public static void enableAntialiasing(final Graphics2D graphics) {
+		if (null == graphics) {
+			throw new IllegalArgumentException("graphics is null!"); //$NON-NLS-1$
+		}
+		
+		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 	}
 
     /**
-     * Calculates center of a dimension.
+     * Calculates the center of a {@link Dimension}.
      *
      * @param size Dimension
      * @return Dimension with center coordinates
      */
-    public static Dimension getCenter(final Dimension size) {
+    public static Dimension getCenter(final Dimension size) { //$JUnit
+		if (null == size) {
+			throw new IllegalArgumentException("size is null!"); //$NON-NLS-1$
+		}
+
     	return new Dimension(size.width / 2, size.height / 2);
 	}
 
     /**
-     * Get size of a text in a graphic container with its current font.
+     * Get size of a text in a {@link Graphics} container with its current font.
      *
      * @param text Text
-     * @param g Graphic container
+     * @param graphics Graphic container
      * @return Dimension with text size
      */
-	public static Dimension getTextSize(final String text, final Graphics g) {
-		final FontMetrics fm = g.getFontMetrics(g.getFont());
-		final Rectangle2D rect = fm.getStringBounds(text, g);
+	public static Dimension getTextSize(final String text, final Graphics graphics) {
+		if (null == text || text.isEmpty()) {
+			throw new IllegalArgumentException("text is null or empty!"); //$NON-NLS-1$
+		}
+		if (null == graphics) {
+			throw new IllegalArgumentException("graphics is null!"); //$NON-NLS-1$
+		}
+		
+		final FontMetrics fm = graphics.getFontMetrics(graphics.getFont());
+		final Rectangle2D rect = fm.getStringBounds(text, graphics);
 		
 		return new Dimension((int)rect.getWidth(), (int)rect.getHeight()); 
 	}
@@ -93,11 +109,11 @@ public abstract class HelperGraphic {
 //	}
 
     /**
-     * Returns all system fonts.
+     * Returns all available system {@link Font}.
      *
      * @return List containing all fonts
      */
-    public static List<Font> getFonts() {
+    public static List<Font> getAvailableFonts() { //$JUnit
 		// Get all available fonts from GraphicsEnvironment
 		final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		
@@ -105,13 +121,17 @@ public abstract class HelperGraphic {
 	}
     
     /**
-     * Returns the hex value of a color (RGB).
+     * Returns the hex value of a {@link Color} (RGB).
      * Used e.g. for HTML.
      *
      * @param color for the hex value
      * @return hex value of the color
      */
-    public static String getColorHex(final Color color) {
+    public static String getColorHex(final Color color) { //$JUnit
+		if (null == color) {
+			throw new IllegalArgumentException("colorsi is null!"); //$NON-NLS-1$
+		}
+		
     	return Integer.toHexString(color.getRGB() & 0x00ffffff); 
 	}
 }

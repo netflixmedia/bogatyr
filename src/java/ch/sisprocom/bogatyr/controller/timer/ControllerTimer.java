@@ -38,7 +38,7 @@ import java.util.TimerTask;
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 20090430
+ * @version 20090511
  */
 public class ControllerTimer extends ControllerTimerAbstract implements IControllerTimer { //TODO document in Wiki!
 
@@ -46,7 +46,7 @@ public class ControllerTimer extends ControllerTimerAbstract implements IControl
 	 * Implemented methods
 	 */
     public synchronized void start(final long interval) {
-        start(0, interval);
+        start(0L, interval);
     }
 
     public synchronized void start(final long delay, final long interval) {
@@ -67,7 +67,7 @@ public class ControllerTimer extends ControllerTimerAbstract implements IControl
 	/*
 	 * Inner classes
 	 */
-	private class Task extends TimerTask {
+	class Task extends TimerTask {
 	    @Override
 		public void run() {
 	    	setTime(getTime() + getInterval());

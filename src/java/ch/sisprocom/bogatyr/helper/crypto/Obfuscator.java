@@ -39,7 +39,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a class for obfuscating data with CFB.
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 20090511
  */
 public class Obfuscator implements IObfuscator {
 	private byte pattern = Byte.MAX_VALUE;
@@ -75,20 +75,20 @@ public class Obfuscator implements IObfuscator {
 	/*
 	 * Implemented methods
 	 */
-	public byte[] encrypt(final byte[] input) {
+	public byte[] encrypt(final byte[] input) { //$JUnit
 		return obfuscate(input);
 	}
 
-	public byte[] encrypt(final byte[] input, final byte pattern) {
+	public byte[] encrypt(final byte[] input, final byte pattern) { //$JUnit
 		this.pattern = pattern;
 		return obfuscate(input);
 	}
 
-	public byte[] decrypt(final byte[] input) {
+	public byte[] decrypt(final byte[] input) { //$JUnit
 		return unobfuscate(input);
 	}
 
-	public byte[] decrypt(final byte[] input, final byte pattern) {
+	public byte[] decrypt(final byte[] input, final byte pattern) { //$JUnit
 		this.pattern = pattern;
 		return unobfuscate(input);
 	}

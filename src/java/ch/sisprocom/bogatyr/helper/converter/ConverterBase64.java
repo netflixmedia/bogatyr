@@ -32,19 +32,20 @@
 package ch.sisprocom.bogatyr.helper.converter;
 
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.Const;
 
 
 /**
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 20090511
  */
 public abstract class ConverterBase64 {
-    private static final String ERROR_ILLEGAL_CHARACTER = "Illegal character in Base64 encoded data";
+    private static final String ERROR_ILLEGAL_CHARACTER = "Illegal character in Base64 encoded data"; //$NON-NLS-1$
 
-	private static final char[] map1 = new char[64];
-	private static final byte[] map2 = new byte[128];
+	private static final char[] map1 = new char[Const.VALUE_64];
+	private static final byte[] map2 = new byte[Const.VALUE_128];
 
 	// Mapping table from 6-bit nibbles to Base64 characters.
 	static {
@@ -71,7 +72,7 @@ public abstract class ConverterBase64 {
 		for (int ii = 0; ii < map2.length; ii++) {
 			map2[ii] = (byte) -1;
 		}
-		for (int ii = 0; 64 > ii; ii++) {
+		for (int ii = 0; Const.VALUE_64 > ii; ii++) {
 			map2[map1[ii]] = (byte) ii;
 		}
 	}
@@ -137,7 +138,7 @@ public abstract class ConverterBase64 {
 		int iLen = input.length;
 
 		if (0 != iLen % 4) {
-            throw new IllegalArgumentException("Length of Base64 encoded input string is not a multiple of 4");
+            throw new IllegalArgumentException("Length of Base64 encoded input string is not a multiple of 4"); //$NON-NLS-1$
         }
 		
 		while (0 < iLen && '=' == input[iLen - 1]) {
@@ -159,7 +160,7 @@ public abstract class ConverterBase64 {
             final int i3 = (int) (ip < iLen ? input[ip] : 'A');
             ip++;
 
-            if (127 < i0 || 127 < i1 || 127 < i2 || 127 < i3) {
+            if (Byte.MAX_VALUE < i0 || Byte.MAX_VALUE < i1 || Byte.MAX_VALUE < i2 || Byte.MAX_VALUE < i3) {
                 throw new IllegalArgumentException(ERROR_ILLEGAL_CHARACTER);
             }
 			final int b0 = map2[i0];

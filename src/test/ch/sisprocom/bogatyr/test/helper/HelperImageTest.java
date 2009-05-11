@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,38 +31,74 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperImage;
+import ch.sisprocom.bogatyr.helper.Const;
+import ch.sisprocom.bogatyr.view.swing.Button;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import org.junit.Test;
 
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.io.File;
-
-import org.junit.Test;
-
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
-import ch.sisprocom.bogatyr.helper.HelperImage;
-import ch.sisprocom.bogatyr.view.swing.Button;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20090510
  */
 public class HelperImageTest { //TODO improve
 	@Test
-	public void testCreateImage() {
+	public void testSaveImage() {
+		final Component component = new Button("Hello world", ""); //$NON-NLS-1$ //$NON-NLS-2$
+		component.setBackground(Color.YELLOW);
+		component.setForeground(Color.BLACK);
+		component.setFont(new Font("Arial", Font.PLAIN, Const.VALUE_16)); //$NON-NLS-1$
+		component.setSize(new Dimension(100, 100));
+
 		try {
-			final Component component = new Button("Hello world", "");
-			component.setBackground(Color.YELLOW);
-			component.setForeground(Color.BLACK);
-			component.setFont(new Font("Arial", Font.PLAIN, 18));
-			component.setSize(new Dimension(100, 100));
-			
-			HelperImage.saveImage(component, HelperImage.TYPE_JPG, new File(HelperEnvInfo.getOsTempDirectory(), "test.jpg"));
+			HelperImage.saveImage(component, HelperImage.TYPE_JPG, HelperIO.getTemporaryFile("bogatyr_HelperImageTest", HelperImage.TYPE_JPG)); //$NON-NLS-1$
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
+		
+		try {
+			HelperImage.saveImage(component, "blabla", HelperIO.getTemporaryFile("bogatyr_HelperImageTest", HelperImage.TYPE_JPG)); //$NON-NLS-1$ //$NON-NLS-2$
+			fail("type is invalid!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		try {
+			HelperImage.saveImage(component, HelperImage.TYPE_JPG, null);
+			fail("file is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
+	
+	@Test
+	public void testGetImageReadFormats() {
+		assertTrue(HelperImage.getAvailableImageReadFormats().contains(HelperImage.TYPE_PNG));
+		assertTrue(HelperImage.getAvailableImageReadFormats().contains(HelperImage.TYPE_GIF));
+		assertTrue(HelperImage.getAvailableImageReadFormats().contains(HelperImage.TYPE_JPG));
+		assertTrue(HelperImage.getAvailableImageReadFormats().contains(HelperImage.TYPE_BMP));
+	}
+	
+	@Test
+	public void testGetImageWriteFormats() {
+		assertTrue(HelperImage.getAvailableImageWriteFormats().contains(HelperImage.TYPE_PNG));
+		assertTrue(HelperImage.getAvailableImageWriteFormats().contains(HelperImage.TYPE_GIF));
+		assertTrue(HelperImage.getAvailableImageWriteFormats().contains(HelperImage.TYPE_JPG));
+		assertTrue(HelperImage.getAvailableImageWriteFormats().contains(HelperImage.TYPE_BMP));
+	}
+	
+	@Test
+	public void testGetImageReadMIMETypes() {
+		assertTrue(HelperImage.getAvailableImageReadMIMETypes().contains("image/png")); //$NON-NLS-1$
+		assertTrue(HelperImage.getAvailableImageReadMIMETypes().contains("image/jpeg")); //$NON-NLS-1$
+	}
+	
+	@Test
+	public void testGetImageWriteMIMETypes() {
+		assertTrue(HelperImage.getAvailableImageWriteMIMETypes().contains("image/png")); //$NON-NLS-1$
+		assertTrue(HelperImage.getAvailableImageWriteMIMETypes().contains("image/jpeg")); //$NON-NLS-1$
+	}	
 }

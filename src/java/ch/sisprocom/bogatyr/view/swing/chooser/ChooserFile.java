@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is an extended JFileChooser.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090511
  */
 public class ChooserFile extends JFileChooser {
 	private static final long serialVersionUID = -4453036459563578035L;
@@ -55,27 +55,22 @@ public class ChooserFile extends JFileChooser {
 
 	public ChooserFile(final File currentDirectory, final FileSystemView fsv) {
 		super(currentDirectory, fsv);
-		// TODO Auto-generated constructor stub
 	}
 
 	public ChooserFile(final File currentDirectory) {
 		super(currentDirectory);
-		// TODO Auto-generated constructor stub
 	}
 
 	public ChooserFile(final FileSystemView fsv) {
 		super(fsv);
-		// TODO Auto-generated constructor stub
 	}
 
 	public ChooserFile(final String currentDirectoryPath, final FileSystemView fsv) {
 		super(currentDirectoryPath, fsv);
-		// TODO Auto-generated constructor stub
 	}
 
 	public ChooserFile(final String currentDirectoryPath) {
 		super(currentDirectoryPath);
-		// TODO Auto-generated constructor stub
 	}
 
 	

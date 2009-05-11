@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import javax.imageio.ImageIO;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -38,57 +39,67 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
-
-import javax.imageio.ImageIO;
 
 
 /**
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090504
+ * @version 20090511
  */
 public abstract class HelperImage { //TODO document in Wiki!
-	public static final String TYPE_JPG = "jpg"; //$NON-NLS-1$
-	public static final String TYPE_PNG = "png"; //$NON-NLS-1$
-	public static final String TYPE_GIF = "gif"; //$NON-NLS-1$
+	public static final String TYPE_JPG  = "jpg"; //$NON-NLS-1$
+	public static final String TYPE_PNG  = "png"; //$NON-NLS-1$
+	public static final String TYPE_GIF  = "gif"; //$NON-NLS-1$
+	public static final String TYPE_BMP  = "bmp"; //$NON-NLS-1$
 
     /**
-     * Saves an image from a RenderImage to a file.
+     * Saves an image from a {@link RenderedImage} to a {@link File}.
      *
      * @param image RenderImage for the image
-     * @param type Image type (e.g. "jpg")
-     * @param output Filename
+     * @param type of the image (e.g. "jpg")
+     * @param file location
      * @throws IOException
      */
-    public static void saveImage(final RenderedImage image, final String type, final File output) throws IOException {
-    	ImageIO.write(image, type, output);
+    public static void saveImage(final RenderedImage image, final String type, final File file) throws IOException { //$JUnit
+		if (null == image) {
+			throw new IllegalArgumentException("image is null!"); //$NON-NLS-1$
+		}
+		if (null == type || !getAvailableImageWriteFormats().contains(type)) {
+			throw new IllegalArgumentException("type is null or invalid: " + type); //$NON-NLS-1$
+		}
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		
+		ImageIO.write(image, type, file);
     }
 
     /**
-     * Saves an image from a Component to a file.
+     * Saves an image from a {@link Component} to a {@link File}.
      *
      * @param component Component for the image
-     * @param type Image type (e.g. "jpg")
-     * @param output Filename
+     * @param type of the image (e.g. "jpg")
+     * @param file location
      * @throws IOException
      */
-	public static void saveImage(final Component component, final String type, final File output) throws IOException {
-		saveImage(getImage(component), type, output);
+	public static void saveImage(final Component component, final String type, final File file) throws IOException { //$JUnit
+		saveImage(getImage(component), type, file);
 	} 
     
 	/**
-     * Gets an image from a Component.
+     * Gets a {@link RenderedImage} from a {@link Component}.
      *
-     * @param component Component for the image
-     * @return component as BufferedImage
-     * @throws IOException
+     * @param component for the image
+     * @return component as image
      */
 	public static RenderedImage getImage(final Component component) {
+		if (null == component) {
+			throw new IllegalArgumentException("component is null!"); //$NON-NLS-1$
+		}
+
 		final Dimension size = component.getSize();
 		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
 		final Graphics2D g2 = image.createGraphics();
@@ -99,49 +110,53 @@ public abstract class HelperImage { //TODO document in Wiki!
 	}
 	
 	/**
-	 * Returns list of unique supported read formats (e.g. "png", "jpg").
+	 * Returns list of all available read formats (e.g. "png", "jpg").
 	 * 
-	 * @return list of unique supported read formats
+	 * @return list of all available read formats
 	 */
-	public static Collection<String> getImageReadFormats() {
+	public static Collection<String> getAvailableImageReadFormats() { //$JUnit
 	    final String[] formatNames = ImageIO.getReaderFormatNames();
 	    
 	    return unique(formatNames);
 	}
 
 	/**
-	 * Returns list of unique supported write formats (e.g. "png", "jpg").
+	 * Returns list of all available write formats (e.g. "png", "jpeg").
 	 * 
-	 * @return list of unique supported write formats
+	 * @return list of all available write formats
 	 */
-	public static Collection<String> getImageWriteFormats() {
+	public static Collection<String> getAvailableImageWriteFormats() { //$JUnit
 	    final String[] formatNames = ImageIO.getWriterFormatNames();
 	    
 	    return unique(formatNames);
 	}
 
 	/**
-	 * Returns list of unique MIME types that can be read (e.g. "image/png", "image/jpg").
+	 * Returns list of all available MIME types that can be read (e.g. "image/png", "image/jpeg").
 	 * 
-	 * @return list of unique MIME types that can be read
+	 * @return list of all available MIME types that can be read
 	 */
-	public static Collection<String> getImageReadMIMETypes() {
+	public static Collection<String> getAvailableImageReadMIMETypes() { //$JUnit
 	    final String[] formatNames = ImageIO.getReaderMIMETypes();
 	    
 	    return unique(formatNames);
 	}
 
 	/**
-	 * Returns list of unique MIME types that can be written (e.g. "image/png", "image/jpg").
+	 * Returns list of all available MIME types that can be written (e.g. "image/png", "image/jpg").
 	 * 
-	 * @return list of unique MIME types that can be written
+	 * @return list of all available MIME types that can be written
 	 */
-	public static Collection<String> getImageWriteMIMETypes() {
+	public static Collection<String> getAvailableImageWriteMIMETypes() { //$JUnit
 	    final String[] formatNames = ImageIO.getWriterMIMETypes();
 	    
 	    return unique(formatNames);
 	}
 
+	
+	/*
+	 * Private methods
+	 */
 	/**
 	 * Converts all strings to lowercase and returns a list containing the unique values.
 	 * 
@@ -149,12 +164,12 @@ public abstract class HelperImage { //TODO document in Wiki!
 	 * @return list containing the unique values
 	 */
     private static Collection<String> unique(final String[] strings) {
-        final Set<String> set = new HashSet<String>(strings.length);
+        final Collection<String> set = new HashSet<String>(strings.length);
         
         for (final String str : strings) {
             set.add(str.toLowerCase());
         }
 
-        return new ArrayList<String>(set);
+        return set;
     }
 }

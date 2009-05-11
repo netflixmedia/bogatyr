@@ -40,12 +40,16 @@ import java.util.List;
  * The Paginator splits a list in different pages.
  *
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090511
  */
 public class Paginator { //TODO document in Wiki!
     private List<?> list;
     private int numberPerPage;
 
+
+    public Paginator() {
+        super();
+    }
 
     public Paginator(final List<?> list, final int numberPerPage) {
         super();
@@ -93,7 +97,7 @@ public class Paginator { //TODO document in Wiki!
     /**
      * Returns a requested page from the list.
      *
-     * @param requestedPage
+     * @param requestedPage from the paginator
      * @return List representing the requested page
      */
     public List<?> getPage(final int requestedPage) {

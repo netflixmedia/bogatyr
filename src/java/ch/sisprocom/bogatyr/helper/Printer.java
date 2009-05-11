@@ -80,7 +80,7 @@ public class Printer implements Printable { //TODO document in Wiki!
 	 * The speed and quality of printing suffers dramatically if any of thecontainers have double buffering turned on.
 	 * So this turns if off globally.
      *
-     * @param component
+     * @param component to disable double buffering
 	 */
 	private static void disableDoubleBuffering(final Component component) {
 		final RepaintManager currentManager = RepaintManager.currentManager(component);
@@ -89,7 +89,7 @@ public class Printer implements Printable { //TODO document in Wiki!
 
 	/** Re-enables double buffering globally.
      *
-     * @param component
+     * @param component to enable double buffering
      */
 	private static void enableDoubleBuffering(final Component component) {
 		final RepaintManager currentManager = RepaintManager.currentManager(component);

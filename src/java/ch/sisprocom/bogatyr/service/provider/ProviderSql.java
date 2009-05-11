@@ -31,12 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.provider;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090402
+ * @version 20090511
  */
 public class ProviderSql  implements IProviderSql { //TODO document in Wiki!
 //	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
@@ -126,7 +126,7 @@ public class ProviderSql  implements IProviderSql { //TODO document in Wiki!
 	/**
 	 * Executes an update
      *
-	 * @param statement
+	 * @param statement string in SQL
      * @return SQL-Code
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
@@ -159,7 +159,7 @@ public class ProviderSql  implements IProviderSql { //TODO document in Wiki!
     /**
 	 * Executes an SQL command
      *
-	 * @param statement
+	 * @param statement string in SQL
      * @return true/false
      * @throws SQLException 
      * @throws ClassNotFoundException 

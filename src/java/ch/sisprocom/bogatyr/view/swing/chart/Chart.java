@@ -71,7 +71,7 @@ public class Chart extends Panel {
     private final Y_Axis positionYAxis;
 	private final List<ChartEntry> entries;
 
-	private boolean isConstructed;
+	private final boolean isConstructed;
 	private boolean isOverrideBorders = true;
 	
 	
@@ -126,7 +126,7 @@ public class Chart extends Panel {
 	 * @param color of the grid
 	 */
 	public void setColorGrid(final Color color) {
-		this.colorGrid = color;
+        colorGrid = color;
 		createLayout();
 	}
 

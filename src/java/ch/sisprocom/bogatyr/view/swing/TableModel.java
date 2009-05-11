@@ -40,7 +40,7 @@ import javax.swing.table.AbstractTableModel;
  * This is an extended AbstractTableModel.
  * 
  * @author Stefan Laubenberger
- * @version 20090421
+ * @version 20090511
  */
 public class TableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -472247252594891753L;
@@ -103,7 +103,7 @@ public class TableModel extends AbstractTableModel {
 	
 	/*
 	* JTable uses this method to determine the default renderer/editor for each cell.  If we didn't implement this method,
-	* then the last column would contain text ("true"/"false"), rather than a check box
+	* then the last column would contain text (true/false), rather than a check box
 	*/
 	@Override
 	public Class<?> getColumnClass(final int columnIndex) {

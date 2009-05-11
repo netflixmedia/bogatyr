@@ -34,7 +34,6 @@ package ch.sisprocom.bogatyr.helper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Date;
 
 
@@ -42,38 +41,56 @@ import java.util.Date;
  * This is a helper class for time operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090505
+ * @version 20090511
  */
 public abstract class HelperTime {
+    public static final int TIME_SERVER_PORT = 37;
 	public static final String DEFAULT_TIME_SERVER = "ptbtime1.ptb.de"; //$NON-NLS-1$
 	
-	public static Date getAtomicTime() throws UnknownHostException, IOException {
+    /**
+     * Returns the current atomic time of the default time server.
+     *
+     * @return atomic time of the default time server
+     * @throws IOException
+     */
+	public static Date getAtomicTime() throws IOException {
 		return getAtomicTime(DEFAULT_TIME_SERVER);
 	}
 
-	public static Date getAtomicTime(final String timeServer) throws UnknownHostException, IOException {
-		final long SECONDS_1900_1970 = 2208988800L;
+    /**
+     * Returns the current atomic time of the given time server.
+     *
+     * @param host time server
+     * @return atomic time of the given time server
+     * @throws IOException
+     */
+	public static Date getAtomicTime(final String host) throws IOException {
+		if (null == host || host.isEmpty()) {
+			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
+		}
 		
 		Socket socket = null;
 		InputStream is = null;
-		long time = 0;
 
 		try {
-			socket = new Socket(timeServer, 37);
+			socket = new Socket(host, TIME_SERVER_PORT);
 			is = socket.getInputStream();
 
-			for (int ii = 3; ii >= 0; ii-- ) {
+            long time = 0L;
+
+            for (int ii = 3; 0 <= ii; ii-- ) {
 				time ^= (long) is.read() << ii * 8;
 			}
 
-			return new Date((time - SECONDS_1900_1970) * 1000);
+			return new Date((time - Const.SECONDS_1900_1970) * 1000L);
 		} finally {
 			if (is != null) {
 				is.close();
 			}
 			
-			if (socket != null) 
-				socket.close();
-			}
-		}
-	}
+			if (socket != null) {
+                socket.close();
+            }
+        }
+    }
+}

@@ -38,7 +38,7 @@ import java.sql.SQLException;
  * This interface provides functions to connect and execute statements on SQL-Server.
  * 
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 20090511
  */
 public interface IProviderSql {
 	/**
@@ -52,7 +52,7 @@ public interface IProviderSql {
 	/**
 	 * Executes an update
      *
-	 * @param statement
+	 * @param statement string in SQL
      * @return SQL return code
 	 * @throws Exception 
 	 */
@@ -61,7 +61,7 @@ public interface IProviderSql {
     /**
 	 * Executes an SQL command
      *
-	 * @param statement
+	 * @param statement string in SQL
      * @return true/false
      * @throws SQLException 
      * @throws ClassNotFoundException 

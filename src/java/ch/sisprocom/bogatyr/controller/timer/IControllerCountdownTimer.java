@@ -62,7 +62,9 @@ public interface IControllerCountdownTimer extends IListener{
 	
 	/**
 	 * Returns the running state of the timer.
-	 */
+     *
+     * @return true/false
+     */
 	boolean isRunning();
 }   
 

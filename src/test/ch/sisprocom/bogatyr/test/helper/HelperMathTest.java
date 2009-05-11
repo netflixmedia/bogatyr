@@ -72,16 +72,25 @@ public class HelperMathTest { //TODO improve
 	@Test
 	public void testGetPrime() {
 		assertEquals(23, HelperMath.getPrime(21));
+		assertEquals(2, HelperMath.getPrime(-23));
 	}
 	
 	@Test
 	public void testGetPrimes() {
-		assertNotNull(HelperMath.getPrimes(-5, 100));
+		assertNotNull(HelperMath.getPrimes(0, 100));
 		
 		try {
+			HelperMath.getPrimes(-50, 10);
+			fail("start value (-50) must be positive"); //$NON-NLS-1$
+		} catch (Exception e) {/*nothing to do*/}
+		try {
+			HelperMath.getPrimes(50, -10);
+			fail("end value (-10) must be positive"); //$NON-NLS-1$
+		} catch (Exception e) {/*nothing to do*/}		
+		try {
 			HelperMath.getPrimes(50, 10);
-			fail("end value (10) must be greater than the start value (50)");
-		} catch (Exception e) {}
+			fail("end value (10) must be greater than the start value (50)"); //$NON-NLS-1$
+		} catch (Exception e) {/*nothing to do*/}
 		
 		assertNotNull(HelperMath.getPrimes(21, 23));
 //		System.out.println(HelperGeneral.dump(HelperMath.getPrimes(-5, 100)));
@@ -147,7 +156,7 @@ public class HelperMathTest { //TODO improve
 	
 	@Test
 	public void testRandom() {
-		final int range = 2000000000;
+		final int range = Integer.MAX_VALUE;
 		
 		for (int ii = 0; 100 > ii; ii++) {
             int number = HelperMath.random(range);
