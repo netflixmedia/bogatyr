@@ -31,8 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import javax.swing.filechooser.FileSystemView;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,6 +43,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.StringReader;
 import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -51,6 +53,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.filechooser.FileSystemView;
 
 
 /**
@@ -283,7 +287,7 @@ public abstract class HelperIO {
      * @param line containing the text to write
      * @throws IOException
      */	
-	public static void writeLine(final File file, final String encoding, final String line) throws IOException {
+	public static void writeLine(final File file, final String encoding, final String line) throws IOException { //$JUnit
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -316,7 +320,7 @@ public abstract class HelperIO {
      * @param line containing the text to write
      * @throws IOException
      */	
-	public static void writeLine(final File file, final String line) throws IOException {
+	public static void writeLine(final File file, final String line) throws IOException { //$JUnit
 		writeLine(file, DEFAULT_ENCODING, line);
 	}
 
@@ -328,7 +332,7 @@ public abstract class HelperIO {
      * @param append to file?
      * @throws IOException
      */	
-	public static void writeFile(final File file, final byte[] data, final boolean append) throws IOException {
+	public static void writeFile(final File file, final byte[] data, final boolean append) throws IOException { //$JUnit
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -361,7 +365,7 @@ public abstract class HelperIO {
      * @param append to file?
      * @throws IOException
      */	
-	public static void writeFile(final File file, final String data, final String encoding, final boolean append) throws IOException {
+	public static void writeFile(final File file, final String data, final String encoding, final boolean append) throws IOException { //$JUnit
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -401,7 +405,7 @@ public abstract class HelperIO {
      * @param append to file?
      * @throws IOException
      */	
-	public static void writeFile(final File file, final String data, final boolean append) throws IOException {
+	public static void writeFile(final File file, final String data, final boolean append) throws IOException { //$JUnit
 		writeFile(file, data, DEFAULT_ENCODING, append);
 	}
 	
@@ -413,7 +417,7 @@ public abstract class HelperIO {
      * @param append to file?
      * @throws IOException
      */	
-	public static void writeFile(final File file, final InputStream is, final boolean append) throws IOException { //TODO document in Wiki
+	public static void writeFile(final File file, final InputStream is, final boolean append) throws IOException { //$JUnit
 		writeFile(file, readStream(is), append);
 	}	
 	
@@ -471,34 +475,6 @@ public abstract class HelperIO {
 		return result;
 	}
 	
-//	/**
-//     * Reads a stream in a byte-array.
-//     * This is a slow method for secure reading a stream (e.g. network streams).
-//     * 
-//     * @param in InputStream for reading
-//     * @return byte-array containing the stream content
-//     */	
-//	public static byte[] readStreamSecure(InputStream in) throws IOException {
-//		Logger.getInstance().writeMethodEntry(HelperIO.class, "readStreamSecure", in);  //$NON-NLS-1$
-//
-//		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//		final byte[] result;
-//		int x;
-//		
-//		try {
-//			while ((x = in.read()) != -1) {
-//				bos.write(x);
-//			}
-//			bos.flush();
-//			result = bos.toByteArray();
-//		} finally {
-//			bos.close();
-//		}
-//		
-//		Logger.getInstance().writeMethodExit(HelperIO.class, "readStreamSecure", result);  //$NON-NLS-1$
-//		return result;
-//	}
-	
 	/**
      * Reads a {@link File} in a byte-array.
      * 
@@ -506,7 +482,7 @@ public abstract class HelperIO {
      * @return byte-array containing the file content
      * @throws IOException
      */	
-	public static byte[] readFile(final File file) throws IOException {
+	public static byte[] readFile(final File file) throws IOException { //$JUnit
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -538,7 +514,7 @@ public abstract class HelperIO {
      * @return String containing the file content
      * @throws IOException
      */	
-	public static String readFileAsString(final File file, final String encoding) throws IOException {
+	public static String readFileAsString(final File file, final String encoding) throws IOException { //$JUnit
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -578,7 +554,7 @@ public abstract class HelperIO {
      * @return String containing the file content
      * @throws IOException
      */	
-	public static String readFileAsString(final File file) throws IOException {
+	public static String readFileAsString(final File file) throws IOException { //$JUnit
 		return readFileAsString(file, DEFAULT_ENCODING);
 	}
 	
@@ -632,7 +608,7 @@ public abstract class HelperIO {
      * @param os output stream for the file content
      * @throws IOException
      */	
-	public static void readFileAsStream(final File file, final OutputStream os) throws IOException { //TODO document in Wiki
+	public static void readFileAsStream(final File file, final OutputStream os) throws IOException { //$JUnit
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -844,7 +820,27 @@ public abstract class HelperIO {
 		}
 
 		return FileSystemView.getFileSystemView().isComputerNode(file);
-     }	
+    }
+	
+	/**
+	 * Converts a given {@link ByteArrayOutputStream} to an {@link InputStream}.
+	 * 
+	 * @param baos byte-array output stream
+	 * @return Input stream
+	 */
+	public static InputStream convertOutputToInputStream(final ByteArrayOutputStream baos) {
+		return new ByteArrayInputStream(baos.toByteArray());
+    }	
+
+	/**
+	 * Converts a given {@link Writer} to a {@link Reader}.
+	 * 
+	 * @param writer to convert
+	 * @return Reader containing the data of the writer 
+	 */
+	public static Reader convertWriterToReader(final Writer writer) {
+		return new StringReader(writer.toString());
+    }
 	
 	
 	/*

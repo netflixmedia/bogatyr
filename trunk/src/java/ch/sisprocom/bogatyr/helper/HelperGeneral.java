@@ -371,7 +371,7 @@ public abstract class HelperGeneral {
     	final StringBuilder sb = new StringBuilder();
 
         for (int ii = 0; ii < digits; ii++) {
-            sb.append(seed[HelperMath.random(seed.length)]);
+            sb.append(seed[HelperMath.getRandom(seed.length)]);
         }
         return sb.toString();
     }

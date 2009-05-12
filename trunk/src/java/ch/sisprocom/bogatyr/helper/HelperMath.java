@@ -45,24 +45,41 @@ import java.util.Collection;
 public abstract class HelperMath { //TODO document in Wiki!
 	
 	/**
-	 * Returns the greatest common divisor.
+	 * Returns the greatest common divisor of two given numbers.
 	 * 
 	 * @param a first number
 	 * @param b second number
 	 * @return calculated gcd
 	 */
-	 public static double gcd(final double a, final double b) {
+	 public static double gcd(final double a, final double b) { //$JUnit
+		 if (0.0D > a) {
+			 throw new IllegalArgumentException("a value must be positive: " + a); //$NON-NLS-1$
+		 }
+		 if (0.0D > b) {
+			 throw new IllegalArgumentException("b value must be positive: " + b); //$NON-NLS-1$
+		 }
+		 
+		 if (a == b) {
+			 return a;
+		 }
+		 
 		 return 0.0D == b ? a : gcd(b, a % b);
 	 } 
 
 	 /**
-	 * Returns the least common multiple.
+	 * Returns the least common multiple of two given numbers.
 	 * 
 	 * @param a first number
 	 * @param b second number
 	 * @return calculated lcm
 	 */
-	 public static double lcm(final double a, final double b) {
+	 public static double lcm(final double a, final double b) { //$JUnit
+		 if (0.0D > a) {
+			 throw new IllegalArgumentException("a value must be positive: " + a); //$NON-NLS-1$
+		 }
+		 if (0.0D > b) {
+			 throw new IllegalArgumentException("b value must be positive: " + b); //$NON-NLS-1$
+		 }
 		 return a * b / gcd(a, b);
 	 }
 	 
@@ -72,7 +89,7 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @param n number for the check
      * @return true/false
      */	
-	public static boolean isPrime(final int n) {
+	public static boolean isPrime(final int n) { //$JUnit
 //        try {
 			// 2 is the smallest prime
 	        if (2 >= n) {
@@ -97,12 +114,12 @@ public abstract class HelperMath { //TODO document in Wiki!
     }
 
 	/**
-     * Find the smallest prime >= n.
+     * Find the nearest prime >= n.
      * 
      * @param n number for the check
-     * @return prime number
+     * @return nearest prime number
      */	
-	public static int getPrime(final int n) {
+	public static int calcNearestPrime(final int n) { //$JUnit
 		// 2 is the smallest prime
         if (2 >= n) {
         	return 2;
@@ -117,16 +134,16 @@ public abstract class HelperMath { //TODO document in Wiki!
     }
 
 	/**
-     * Returns all primes in range.
+     * Calculates all primes in a given range.
      * 
      * @param start number of the range
      * @param end number of the range
-     * @return list with prime numbers
+     * @return list with the calculated prime numbers
      */	
-	public static Collection<Integer> getPrimes(final int start, final int end) {
-        if (0 > start) {
-            throw new IllegalArgumentException("start value must be positive: " + start); //$NON-NLS-1$
-        }
+	public static Collection<Integer> calcPrimes(final int start, final int end) { //$JUnit
+//        if (0 > start) {
+//            throw new IllegalArgumentException("start value must be positive: " + start); //$NON-NLS-1$
+//        }
         if (0 > end) {
             throw new IllegalArgumentException("end value must be positive: " + end); //$NON-NLS-1$
         }
@@ -145,13 +162,13 @@ public abstract class HelperMath { //TODO document in Wiki!
 	}
 	
 	/**
-     * Convert a double to an int-Value.
+     * Convert a double to an int-value.
      * Rounds the double value with {@link Math#round(double)}.
      * 
      * @param value double-value
      * @return int-value
      */	
-	public static int convertDoubleToInt(final double value) {
+	public static int convertDoubleToInt(final double value) { //$JUnit
 		return (int)Math.round(value);
 	}
 	
@@ -159,21 +176,28 @@ public abstract class HelperMath { //TODO document in Wiki!
      * Logarithm
      *
      * @param base of the logarithm
-     * @param value double-Value
+     * @param value double-value
      * @return double-value
      */	
-	public static double log(final double base, final double value) {
+	public static double log(final double base, final double value) { //$JUnit
+        if (1.0D >= base) {
+            throw new IllegalArgumentException("base must be greater than 1: " + base); //$NON-NLS-1$
+        }
+        if (0.0D >= value) {
+            throw new IllegalArgumentException("value must be positive: " + value); //$NON-NLS-1$
+        }
+
 		return StrictMath.log(value) / StrictMath.log(base);
 	}
 
 	/**
      * Round a double with decimal place.
      *
-     * @param value double-Value
+     * @param value double-value
      * @param decimalPlace for round
      * @return double-value
      */
-    public static double round(final double value, final int decimalPlace) {
+    public static double round(final double value, final int decimalPlace) { //$JUnit
 		int dp = decimalPlace;
 		double powerOfTen = 1.0D;
 		
@@ -185,13 +209,26 @@ public abstract class HelperMath { //TODO document in Wiki!
 	}
 
     /**
-     * Random integer between 0 and n-1.
+     * Returns a random integer between 0 and n-1.
      *
      * @param n int-Value
      * @return random int-value between 0 and n-1
      */
-    public static int random(final int n) {
+    public static int getRandom(final int n) {
     	return (int) (Math.random() * (double) n);
+    }
+    
+    /**
+     * Returns the amount with a given start amount, interest and elapsed days.
+     * Note: the interest p.a. is based on 360 days
+     *
+     * @param amount start
+     * @param interest in % p.a. (e.g. 0.04)
+     * @param days elapsed
+     * @return calculated amount with a given start amount, interest and elapsed days
+     */
+    public static double calcAmount(final double amount, final double interest, final double days) {
+    	return amount * Math.pow(Math.E, (days/360)*interest);
     }
 }
 

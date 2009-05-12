@@ -31,10 +31,11 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -89,6 +90,78 @@ public class HelperIOTest { //TODO improve and complete
 			HelperIO.writeLine(file, AllBogatyrTests.DATA);
 			assertEquals(AllBogatyrTests.DATA, HelperIO.readFileAsString(file));
 		} catch (IOException ex) {fail(ex.getLocalizedMessage());}
+		
+		try {
+			HelperIO.writeLine(null, AllBogatyrTests.DATA);
+			fail("file is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		
+		try {
+			HelperIO.writeLine(HelperIO.getTemporaryFile("bogatyr_HelperIOTest", "txt"), null);  //$NON-NLS-1$//$NON-NLS-2$
+			fail("line is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		
+		try {
+			HelperIO.writeLine(HelperIO.getTemporaryFile("bogatyr_HelperIOTest", "txt"), null, AllBogatyrTests.DATA);  //$NON-NLS-1$//$NON-NLS-2$
+			fail("encoding is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+	}
+	
+	@Test
+	public void testWriteReadFileAsByteArray() {
+		try {
+			final File file = HelperIO.getTemporaryFile("bogatyr_HelperIOTest", "ba");  //$NON-NLS-1$//$NON-NLS-2$
+			HelperIO.writeFile(file, AllBogatyrTests.DATA.getBytes(), false);
+			assertEquals(AllBogatyrTests.DATA, new String(HelperIO.readFile(file)));
+		} catch (IOException ex) {fail(ex.getLocalizedMessage());}
+		
+		try {
+			HelperIO.readFile(null);
+			fail("file is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+	}
+	
+	@Test
+	public void testWriteReadFileAsString() {
+		try {
+			final File file = HelperIO.getTemporaryFile("bogatyr_HelperIOTest", "string");  //$NON-NLS-1$//$NON-NLS-2$
+			HelperIO.writeFile(file, AllBogatyrTests.DATA, false);
+			assertEquals(AllBogatyrTests.DATA, HelperIO.readFileAsString(file));
+		} catch (IOException ex) {fail(ex.getLocalizedMessage());}
+		
+		try {
+			HelperIO.readFileAsString(null);
+			fail("file is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		
+		try {
+			HelperIO.readFileAsString(HelperIO.getTemporaryFile("bogatyr_HelperIOTest", "string"), null); //$NON-NLS-1$ //$NON-NLS-2$
+			fail("encoding is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+	}
+	
+	
+	@Test
+	public void testWriteReadFileAsStream() {
+		try {
+			final ByteArrayOutputStream os = new ByteArrayOutputStream();
+			final File file = HelperIO.getTemporaryFile("bogatyr_HelperIOTest", "stream");  //$NON-NLS-1$//$NON-NLS-2$
+			final File fileResult = HelperIO.getTemporaryFile("bogatyr_HelperIOTest", "stream");  //$NON-NLS-1$//$NON-NLS-2$
+			HelperIO.writeFile(file, AllBogatyrTests.DATA, false);
+			HelperIO.readFileAsStream(file, os);
+			HelperIO.writeFile(fileResult, HelperIO.convertOutputToInputStream(os), false);
+			assertEquals(AllBogatyrTests.DATA, HelperIO.readFileAsString(fileResult));
+		} catch (IOException ex) {fail(ex.getLocalizedMessage());}
+		
+		try {
+			HelperIO.readFileAsStream(null, new ByteArrayOutputStream());
+			fail("file is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		
+		try {
+			HelperIO.readFileAsStream(HelperIO.getTemporaryFile("bogatyr_HelperIOTest", "stream"), null);  //$NON-NLS-1$//$NON-NLS-2$
+			fail("os is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 }
 
