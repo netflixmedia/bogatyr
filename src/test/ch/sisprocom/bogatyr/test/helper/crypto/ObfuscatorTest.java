@@ -35,11 +35,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.fail;
 
+import java.io.File;
+
 import org.junit.Test;
 
+import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.crypto.IObfuscator;
 import ch.sisprocom.bogatyr.helper.crypto.Obfuscator;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
+
 
 
 /**

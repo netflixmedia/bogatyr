@@ -39,6 +39,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperMath;
 
 
@@ -52,11 +53,40 @@ public class HelperMathTest { //TODO improve
 	@Test
 	public void testGcd() {
 		assertEquals(2.0D, HelperMath.gcd(2.0D, 4.0D), 0.00001D);
+		assertEquals(2.0D, HelperMath.gcd(2.0D, 2.0D), 0.00001D);
+		assertEquals(2.0D, HelperMath.gcd(4.0D, 2.0D), 0.00001D);
+		assertEquals(2.0D, HelperMath.gcd(2.0D, 2.0D), 0.00001D);
+		assertEquals(2.5D, HelperMath.gcd(2.5D, 5.0D), 0.00001D);
+		assertEquals(0.0D, HelperMath.gcd(0.0D, 0.0D), 0.00001D);
+		assertEquals(Double.MAX_VALUE, HelperMath.gcd(Double.MAX_VALUE, Double.MAX_VALUE), 0.00001D);
+		
+		try {
+			HelperMath.gcd(-2.0D, 4.0D);
+			fail("a is negative!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+
+		try {
+			HelperMath.gcd(2.0D, -4.0D);
+			fail("b is negative!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 	
 	@Test
 	public void testLcm() {
 		assertEquals(10.0D, HelperMath.lcm(2.0D, 5.0D), 0.00001D);
+		assertEquals(10.0D, HelperMath.lcm(5.0D, 2.0D), 0.00001D);
+		assertEquals(Double.NaN, HelperMath.lcm(0.0D, 0.0D), 0.00001D);
+		assertEquals(Double.POSITIVE_INFINITY, HelperMath.lcm(Double.MAX_VALUE, Double.MAX_VALUE), 0.00001D);
+	
+		try {
+			HelperMath.lcm(-2.0D, 4.0D);
+			fail("a is negative!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+
+		try {
+			HelperMath.lcm(2.0D, -4.0D);
+			fail("b is negative!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 
 	@Test
@@ -67,34 +97,36 @@ public class HelperMathTest { //TODO improve
         assertTrue(HelperMath.isPrime(2));
         assertFalse(HelperMath.isPrime(21));
         assertTrue(HelperMath.isPrime(23));
+        assertTrue(HelperMath.isPrime(997));
 	}
 	
 	@Test
-	public void testGetPrime() {
-		assertEquals(23, HelperMath.getPrime(21));
-		assertEquals(2, HelperMath.getPrime(-23));
+	public void testCalcNearestPrime() {
+		assertEquals(23, HelperMath.calcNearestPrime(21));
+		assertEquals(43, HelperMath.calcNearestPrime(42));
+		assertEquals(2, HelperMath.calcNearestPrime(-23));
+		assertEquals(2, HelperMath.calcNearestPrime(0));
 	}
 	
 	@Test
-	public void testGetPrimes() {
-		assertNotNull(HelperMath.getPrimes(0, 100));
+	public void testCalcPrimes() {
+		assertEquals(168, HelperMath.calcPrimes(0, 1000).size());
+		assertEquals(168, HelperMath.calcPrimes(-1000, 1000).size());
+		assertEquals(0, HelperMath.calcPrimes(0, 0).size());
+		assertEquals(2, HelperMath.calcPrimes(0, 3).size());
 		
+//		try {
+//			HelperMath.calcPrimes(-50, 10);
+//			fail("start value (-50) must be positive"); //$NON-NLS-1$
+//		} catch (Exception e) {/*nothing to do*/}
 		try {
-			HelperMath.getPrimes(-50, 10);
-			fail("start value (-50) must be positive"); //$NON-NLS-1$
-		} catch (Exception e) {/*nothing to do*/}
-		try {
-			HelperMath.getPrimes(50, -10);
-			fail("end value (-10) must be positive"); //$NON-NLS-1$
+			HelperMath.calcPrimes(50, -10);
+			fail("end value (-10) must be positive!"); //$NON-NLS-1$
 		} catch (Exception e) {/*nothing to do*/}		
 		try {
-			HelperMath.getPrimes(50, 10);
-			fail("end value (10) must be greater than the start value (50)"); //$NON-NLS-1$
+			HelperMath.calcPrimes(50, 10);
+			fail("end value (10) must be greater than the start value (50)!"); //$NON-NLS-1$
 		} catch (Exception e) {/*nothing to do*/}
-		
-		assertNotNull(HelperMath.getPrimes(21, 23));
-//		System.out.println(HelperGeneral.dump(HelperMath.getPrimes(-5, 100)));
-//		System.out.println(HelperGeneral.dump(HelperMath.getPrimes(21, 23)));
 	}
 
 	@Test
@@ -104,12 +136,24 @@ public class HelperMathTest { //TODO improve
 		assertEquals(-3, HelperMath.convertDoubleToInt(-2.51D));
 		assertEquals(2, HelperMath.convertDoubleToInt(2.499D));
 		assertEquals(3, HelperMath.convertDoubleToInt(2.5D));
+		assertEquals(0, HelperMath.convertDoubleToInt(0.0D));
 	}
 	
 	@Test
 	public void testLog() {
-		assertEquals(2.0D, HelperMath.log(10.0, 100.0), 0.00001D);
+		assertEquals(2.0D, HelperMath.log(10.0D, 100.0D), 0.00001D);
+		assertEquals(0.0D, HelperMath.log(2.0D, 1.0D), 0.00001D);
+		assertEquals(1.0D, HelperMath.log(2.0D, 2.0D), 0.00001D);
 		assertEquals(4.19180654857877D, HelperMath.log(3.0, 100.0), 0.00001D);
+		
+		try {
+			HelperMath.log(1.0, 100.0);
+			fail("base must be greater than 1!"); //$NON-NLS-1$
+		} catch (Exception e) {/*nothing to do*/}
+		try {
+			HelperMath.log(10.0, -100.0);
+			fail("value (-100) must be positive!"); //$NON-NLS-1$
+		} catch (Exception e) {/*nothing to do*/}		
 	}
 	
 	@Test
@@ -124,42 +168,15 @@ public class HelperMathTest { //TODO improve
 		assertEquals(3.0D, HelperMath.round(2.5D, 0), 0.00001D);
 		assertEquals(2.55D, HelperMath.round(2.554D, 2), 0.00001D);
 		assertEquals(2.55D, HelperMath.round(2.545D, 2), 0.00001D);
+		assertEquals(3.0D, HelperMath.round(2.545D, -2), 0.00001D);
 	}
-	
-//	@Test
-//	public void testErf() {
-//		assertEquals(0.0D, HelperMath.erf(0.0D));
-//		assertEquals(-0.8427007877600067D, HelperMath.erf(-1.0D));
-//		assertEquals(-0.995322265010666D, HelperMath.erf(-2.0D));
-//		assertEquals(0.8427007877600067D, HelperMath.erf(1.0D));
-//		assertEquals(0.995322265010666D, HelperMath.erf(2.0D));
-//	}
-//	
-//	@Test
-//	public void testErf2() {
-//		assertEquals(0.0D, HelperMath.erf2(0.0D));
-//		assertEquals(-0.842716825727904D, HelperMath.erf2(-1.0D));
-//		assertEquals(-0.9953087428644348D, HelperMath.erf2(-2.0D));
-//		assertEquals(0.842716825727904D, HelperMath.erf2(1.0D));
-//		assertEquals(0.9953087428644348D, HelperMath.erf2(2.0D));
-//	}
-//
-//	@Test
-//	public void testPhi() {
-////		System.out.println(HelperMath.phi(8.0D));
-//		assertEquals(0.5D, HelperMath.phi(0.0D));
-//		assertEquals(0.15865526139567465D, HelperMath.phi(-1.0D));
-//		assertEquals(0.022750129890124482D, HelperMath.phi(-2.0D));
-//		assertEquals(0.8413447386043253D, HelperMath.phi(1.0D));
-//		assertEquals(0.9772498701098755D, HelperMath.phi(2.0D));
-//	}
 	
 	@Test
 	public void testRandom() {
 		final int range = Integer.MAX_VALUE;
 		
 		for (int ii = 0; 100 > ii; ii++) {
-            int number = HelperMath.random(range);
+            int number = HelperMath.getRandom(range);
 
 			if (0 <= number && range >= number) {
 				assertTrue(true);
@@ -167,5 +184,10 @@ public class HelperMathTest { //TODO improve
                 fail();
 			}
 		}
+	}
+	
+	@Test
+	public void testCalcAmount() {
+//		System.out.println(HelperMath.calcAmount(10000D, 0.04D, 50));
 	}
 }
