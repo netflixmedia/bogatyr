@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2008 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -44,9 +44,9 @@ import java.util.TimerTask;
  * Display a splash-screen manual or for a desired time.
  * 
  * @author Stefan Laubenberger
- * @version 20081120
+ * @version 20090516
  */
-public class SplashScreen extends Frame { //TODO document in Wiki!
+public class SplashScreen extends Frame {
 	private static final long serialVersionUID = 8819965047277292543L;
 	
 	private final ImageIcon splash;

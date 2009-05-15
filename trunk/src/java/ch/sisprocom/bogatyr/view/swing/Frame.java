@@ -48,7 +48,7 @@ import java.awt.Image;
  * This is an extended JFrame.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
 public class Frame extends JFrame implements IComponentFader {
 	private static final long serialVersionUID = 7476360387134225315L;
@@ -129,8 +129,9 @@ public class Frame extends JFrame implements IComponentFader {
 		final Container panelGlass = (Container) getGlassPane();
 		panelGlass.removeAll();
 		
+		panelGlass.setVisible(isFading);
+		
 		if (isFading) {
-	        panelGlass.setVisible(true);
 	        panelGlass.setLayout(new GridBagLayout());
 	
 	        final GridBagConstraints gbc = new GridBagConstraints();
@@ -140,8 +141,6 @@ public class Frame extends JFrame implements IComponentFader {
 	
 //	    if (isFading) {
 	        panelGlass.add(new Panel(colorFader), gbc);
-		} else {
-			panelGlass.setVisible(false);
 		}
 		
         validate();

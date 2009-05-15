@@ -46,9 +46,9 @@ import java.awt.image.BufferedImage;
  * This is a vertical Label.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090516
  */
-public class LabelVertical extends Panel implements Icon { //TODO document in Wiki!
+public class LabelVertical extends Panel implements Icon {
 	private static final long serialVersionUID = -6664528555390753370L;
 	
 	private static final double NINETY_DEGREES = 1.5707963267948966;

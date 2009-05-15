@@ -31,6 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.localizer;
 
+import ch.sisprocom.bogatyr.helper.Const;
+
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -40,9 +42,9 @@ import java.util.ResourceBundle;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
-public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TODO document in Wiki!
+public class ControllerLocalizerFile extends ControllerLocalizerAbstract {
 	public static final String POSTFIX_ACCELERATOR = ".accelerator"; //$NON-NLS-1$
 	public static final String POSTFIX_MNEMONIC = ".mnemonic"; //$NON-NLS-1$
 	public static final String POSTFIX_TOOLTIP = ".tooltip"; //$NON-NLS-1$
@@ -90,7 +92,7 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 		try {
 			return bundle.getString(key + POSTFIX_ACCELERATOR);
 		} catch (MissingResourceException ex) {
-			return ""; //$NON-NLS-1$
+			return Const.EMPTY_STRING;
 		}
 	}
 	
@@ -106,7 +108,7 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract { //TOD
 		try {
 			return bundle.getString(key + POSTFIX_TOOLTIP);
 		} catch (MissingResourceException ex) {
-			return ""; //$NON-NLS-1$
+			return Const.EMPTY_STRING;
 		}
 	}
 	

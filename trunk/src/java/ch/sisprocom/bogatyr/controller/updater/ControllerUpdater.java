@@ -54,9 +54,9 @@ import java.util.Collection;
  * This is the updater controller for new Bogatyr-based applications versions.
  * 
  * @author Stefan Laubenberger
- * @version 20090428
+ * @version 20090516
  */
-public class ControllerUpdater extends ControllerAbstract implements IControllerUpdater, ListenerUpdater { //TODO document in Wiki!
+public class ControllerUpdater extends ControllerAbstract implements IControllerUpdater, ListenerUpdater {
 	private Collection<ListenerUpdater> listListener = new ArrayList<ListenerUpdater>();
 
 	private final IControllerLocalizer localizer;

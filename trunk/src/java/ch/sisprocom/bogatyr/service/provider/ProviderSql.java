@@ -44,9 +44,9 @@ import java.sql.Statement;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090511
+ * @version 20090516
  */
-public class ProviderSql  implements IProviderSql { //TODO document in Wiki!
+public class ProviderSql  implements IProviderSql {
 //	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
 	
 	// Server

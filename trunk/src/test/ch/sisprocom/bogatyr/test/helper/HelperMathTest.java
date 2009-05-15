@@ -33,13 +33,11 @@ package ch.sisprocom.bogatyr.test.helper;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperMath;
 
 
@@ -47,9 +45,9 @@ import ch.sisprocom.bogatyr.helper.HelperMath;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090504
+ * @version 20090516
  */
-public class HelperMathTest { //TODO improve
+public class HelperMathTest {
 	@Test
 	public void testGcd() {
 		assertEquals(2.0D, HelperMath.gcd(2.0D, 4.0D), 0.00001D);
@@ -173,21 +171,34 @@ public class HelperMathTest { //TODO improve
 	
 	@Test
 	public void testRandom() {
-		final int range = Integer.MAX_VALUE;
-		
-		for (int ii = 0; 100 > ii; ii++) {
-            int number = HelperMath.getRandom(range);
+		//positive numbers
+		int range = Integer.MAX_VALUE;
+		for (int ii = 0; 1000 > ii; ii++) {
+            final int number = HelperMath.getRandom(range);
 
-			if (0 <= number && range >= number) {
-				assertTrue(true);
-			} else {
-                fail();
-			}
+			assertTrue(0 <= number && range >= number);
+		}
+
+		//negative numbers
+		range = Integer.MIN_VALUE;
+		for (int ii = 0; 1000 > ii; ii++) {
+            final int number = HelperMath.getRandom(range);
+
+            assertTrue(0 >= number && range <= number);
 		}
 	}
 	
 	@Test
 	public void testCalcAmount() {
-//		System.out.println(HelperMath.calcAmount(10000D, 0.04D, 50));
+		assertEquals(10055.710162720176D, HelperMath.calcAmount(10000D, 0.04D, 50D), 0.00001D);
+		assertEquals(9944.598480048968D, HelperMath.calcAmount(10000D, -0.04D, 50D), 0.00001D);
+		assertEquals(-9944.598480048968D, HelperMath.calcAmount(-10000D, -0.04D, 50D), 0.00001D);
+		assertEquals(-10055.710162720176D, HelperMath.calcAmount(-10000D, 0.04D, 50D), 0.00001D);
+
+		try {
+			HelperMath.calcAmount(10000D, 0.04D, -50D);
+			fail("days (-50) must be positive!"); //$NON-NLS-1$
+		} catch (Exception e) {/*nothing to do*/}		
+
 	}
 }

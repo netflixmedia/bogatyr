@@ -42,9 +42,9 @@ import java.util.Locale;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
-public abstract class ControllerLocalizerAbstract extends ControllerAbstract implements IControllerLocalizer { //TODO document in Wiki!
+public abstract class ControllerLocalizerAbstract extends ControllerAbstract implements IControllerLocalizer {
 	private Collection<ListenerLocale> listListener = new ArrayList<ListenerLocale>();
 
 	private Locale locale = Locale.getDefault();

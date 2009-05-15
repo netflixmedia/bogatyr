@@ -52,7 +52,7 @@ import java.util.Date;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 20090516
  */
 public class PublicKeyProviderTest {
 	private final IPublicKeyProvider publicKeyProvider = new PublicKeyProvider();
@@ -62,7 +62,7 @@ public class PublicKeyProviderTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		ICryptoAsymm cryptoAsymm = new CryptoAsymm();
+		final ICryptoAsymm cryptoAsymm = new CryptoAsymm();
         keyPair = cryptoAsymm.generateKeyPair();
 	}
 	

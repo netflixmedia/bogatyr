@@ -32,14 +32,13 @@
 package ch.sisprocom.bogatyr.helper;
 
 
-
 /**
  * This is a helper class for XML operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
-public abstract class HelperXml { //TODO document in Wiki!
+public abstract class HelperXml {
 	/**
      * This method ensures that the output String has only valid XML unicode characters as specified by the XML 1.0 standard.
      * For reference, please see <a href="http://www.w3.org/TR/2000/REC-xml-20001006#NT-Char">the standard</a>. 
@@ -48,9 +47,9 @@ public abstract class HelperXml { //TODO document in Wiki!
      * @param in the String whose non-valid characters we want to remove
      * @return the in String, stripped of non-valid characters
      */
-    public static String getValidXmlString(final String in) {
+    public static String getValidXmlString(final String in) { //$JUnit
         if (!HelperGeneral.isValid(in)) { // vacancy test
-            return ""; //$NON-NLS-1$
+            return Const.EMPTY_STRING;
         }
        
        	final StringBuilder sb = new StringBuilder(); // Used to hold the output.

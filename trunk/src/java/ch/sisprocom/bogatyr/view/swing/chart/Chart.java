@@ -52,7 +52,7 @@ import java.util.List;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20090430
+ * @version 20090516
  */
 public class Chart extends Panel {
 	private static final long serialVersionUID = -4618658256880807781L;
@@ -144,7 +144,7 @@ public class Chart extends Panel {
 	 * 
 	 * @param isOverrideBorders true/false
 	 */
-	public void setOverrideBorders(boolean isOverrideBorders) {
+	public void setOverrideBorders(final boolean isOverrideBorders) {
 		this.isOverrideBorders = isOverrideBorders;
 		createLayout();
 	}

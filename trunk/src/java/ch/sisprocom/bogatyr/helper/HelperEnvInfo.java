@@ -42,7 +42,7 @@ import java.util.TimeZone;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
 public abstract class HelperEnvInfo {
 	/**
@@ -145,7 +145,7 @@ public abstract class HelperEnvInfo {
 	}
 
 	/**
-	 * Returns all system environment variables.
+	 * Returns a {@link Map} containing all system environment variables.
 	 *
 	 * @return map of system environment variables
 	 */
@@ -166,7 +166,7 @@ public abstract class HelperEnvInfo {
 	 * @param variable of the environment (e.g. PATH)
 	 * @return value of the system environment variable
 	 */
-	public static String getOsEnvironmentVariable(String variable) { //$JUnit
+	public static String getOsEnvironmentVariable(final String variable) { //$JUnit
 		return System.getenv(variable);
     }
 	

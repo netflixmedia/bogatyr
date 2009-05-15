@@ -34,6 +34,7 @@ package ch.sisprocom.bogatyr.helper;
 import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.Authenticator;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -45,26 +46,24 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 
 /**
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
-public abstract class HelperNet { //TODO document in Wiki!
-//	private static final String PROPERTY_HTTP_USE_PROXY   = "http.useProxy"; //$NON-NLS-1$
-	private static final String PROPERTY_HTTP_PROXY_HOST  = "http.proxyHost"; //$NON-NLS-1$
-	private static final String PROPERTY_HTTP_PROXY_PORT  = "http.proxyPort"; //$NON-NLS-1$
+public abstract class HelperNet {
+	public static final String PROPERTY_HTTP_PROXY_HOST  = "http.proxyHost"; //$NON-NLS-1$
+	public static final String PROPERTY_HTTP_PROXY_PORT  = "http.proxyPort"; //$NON-NLS-1$
 
-//	private static final String PROPERTY_HTTPS_USE_PROXY  = "https.useProxy"; //$NON-NLS-1$
-	private static final String PROPERTY_HTTPS_PROXY_HOST = "https.proxyHost"; //$NON-NLS-1$
-	private static final String PROPERTY_HTTPS_PROXY_PORT = "https.proxyPort"; //$NON-NLS-1$
+	public static final String PROPERTY_HTTPS_PROXY_HOST = "https.proxyHost"; //$NON-NLS-1$
+	public static final String PROPERTY_HTTPS_PROXY_PORT = "https.proxyPort"; //$NON-NLS-1$
 
-//	private static final String PROPERTY_FTP_USE_PROXY    = "ftp.useProxy"; //$NON-NLS-1$
-	private static final String PROPERTY_FTP_PROXY_HOST   = "ftp.proxyHost"; //$NON-NLS-1$
-	private static final String PROPERTY_FTP_PROXY_PORT   = "ftp.proxyPort"; //$NON-NLS-1$
+	public static final String PROPERTY_FTP_PROXY_HOST   = "ftp.proxyHost"; //$NON-NLS-1$
+	public static final String PROPERTY_FTP_PROXY_PORT   = "ftp.proxyPort"; //$NON-NLS-1$
 
 	
 	/**
@@ -75,7 +74,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @param username for authentication
      * @param password for authentication
      */
-    public static void enableProxyHttp(final String host, final int port, final String username, final String password) {
+    public static void enableProxyHttp(final String host, final int port, final String username, final String password) { //$JUnit
 		if (!HelperGeneral.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
@@ -97,7 +96,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * Disable VM wide use of a proxy for HTTP.
      *
      */
-    public static void disableProxyHttp() {
+    public static void disableProxyHttp() { //$JUnit
 //        System.clearProperty(PROPERTY_HTTP_USE_PROXY);
         System.clearProperty(PROPERTY_HTTP_PROXY_HOST);
         System.clearProperty(PROPERTY_HTTP_PROXY_PORT);
@@ -111,7 +110,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @param username for authentication
      * @param password for authentication
      */
-    public static void enableProxyHttps(final String host, final int port, final String username, final String password) {
+    public static void enableProxyHttps(final String host, final int port, final String username, final String password) { //$JUnit
 		if (!HelperGeneral.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
@@ -133,7 +132,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * Disable VM wide use of a proxy for HTTPS.
      *
      */
-    public static void disableProxyHttps() {
+    public static void disableProxyHttps() { //$JUnit
 //		System.clearProperty(PROPERTY_HTTPS_USE_PROXY);
         System.clearProperty(PROPERTY_HTTPS_PROXY_HOST);
         System.clearProperty(PROPERTY_HTTPS_PROXY_PORT);
@@ -147,7 +146,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @param username for authentication
      * @param password for authentication
      */
-    public static void enableProxyFtp(final String host, final int port, final String username, final String password) {
+    public static void enableProxyFtp(final String host, final int port, final String username, final String password) { //$JUnit
 		if (!HelperGeneral.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
@@ -169,7 +168,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * Disable VM wide use of a proxy for FTP.
      *
      */
-    public static void disableProxyFtp() {
+    public static void disableProxyFtp() { //$JUnit
 //        System.clearProperty(PROPERTY_FTP_USE_PROXY);
         System.clearProperty(PROPERTY_FTP_PROXY_HOST);
         System.clearProperty(PROPERTY_FTP_PROXY_PORT);
@@ -182,7 +181,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return true/false
      * @throws IOException
      */
-    public static boolean isPingable(final String host) throws IOException {
+    public static boolean isPingable(final String host) throws IOException { //$JUnit
 		if (!HelperGeneral.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
@@ -202,7 +201,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return host name
      * @throws UnknownHostException
      */
-    public static String getHostname(final String ip) throws UnknownHostException {
+    public static String getHostname(final String ip) throws UnknownHostException { //$JUnit
 		if (!HelperGeneral.isValid(ip)) {
 			throw new IllegalArgumentException("ip is null or empty!"); //$NON-NLS-1$
 		}
@@ -218,7 +217,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return host name of the current machine
      * @throws UnknownHostException
      */
-    public static String getLocalHostname() throws UnknownHostException {
+    public static String getLocalHostname() throws UnknownHostException { //$JUnit
 		final InetAddress address = InetAddress.getLocalHost();
 		
 		return address.getHostName();
@@ -231,7 +230,7 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return IP of the host name
      * @throws UnknownHostException
      */
-    public static String getIp(final String host) throws UnknownHostException {
+    public static String getIp(final String host) throws UnknownHostException { //$JUnit
 		if (!HelperGeneral.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
@@ -247,19 +246,19 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return IP of the current machine 
      * @throws UnknownHostException
      */
-    public static String getLocalIp() throws UnknownHostException {
+    public static String getLocalIp() throws UnknownHostException { //$JUnit
 		final InetAddress address = InetAddress.getLocalHost();
 		
 		return address.getHostAddress();
    }
 
     /**
-     * Returns the all IP addresses of the current machine.
+     * Returns all IP addresses of the current machine.
      *
      * @return List with IP addresses of the current machine
      * @throws UnknownHostException
      */
-    public static Collection<String> getLocalIps() throws UnknownHostException {
+    public static Collection<String> getLocalIps() throws UnknownHostException { //$JUnit
     	final Collection<String> list = new ArrayList<String>();
         final String localHost = InetAddress.getLocalHost().getHostName();
 
@@ -267,6 +266,16 @@ public abstract class HelperNet { //TODO document in Wiki!
             list.add(address.getHostAddress());
         }
         return list;
+    }
+
+    /**
+     * Returns all network interfaces of the current machine.
+     *
+     * @return List with network interfaces of the current machine
+     * @throws SocketException
+     */
+    public static List<NetworkInterface> getNetworkInterfaces() throws SocketException {
+    	return Collections.list(NetworkInterface.getNetworkInterfaces());
     }
     
     /**
@@ -276,41 +285,31 @@ public abstract class HelperNet { //TODO document in Wiki!
      * @return MAC address of a given network interface
      * @throws SocketException
      */
-    public static String getMacAddress(NetworkInterface ni) throws SocketException {
+    public static String getMacAddress(final NetworkInterface ni) throws SocketException {
 		if (null == ni) {
 			throw new IllegalArgumentException("ni is null!"); //$NON-NLS-1$
 		}
 		
-		StringBuilder sb = new StringBuilder();
+		final StringBuilder sb = new StringBuilder();
 
-		byte[] hardwareAddress = ni.getHardwareAddress();
+		final byte[] hardwareAddress = ni.getHardwareAddress();
 
 		if (hardwareAddress != null) {
 			for (int ii = 0; ii < hardwareAddress.length; ii++) {
-				sb.append(String.format((0 == ii ? "" : '-') + "%02X", hardwareAddress[ii])); //$NON-NLS-1$ //$NON-NLS-2$
+				sb.append(String.format((0 == ii ? Const.EMPTY_STRING : '-') + "%02X", hardwareAddress[ii])); //$NON-NLS-1$
 			}
 		}
 		return sb.toString();
 	}
 
     /**
-     * Returns the all network interfaces of the current machine.
-     *
-     * @return List with network interfaces of the current machine
-     * @throws SocketException
-     */
-    public static Collection<NetworkInterface> getNetworkInterfaces() throws SocketException {
-    	return Collections.list(NetworkInterface.getNetworkInterfaces());
-    }
-
-    /**
-     * Returns the content of an url.
+     * Returns an {@link InputStream} linked to an {@link URL}.
      *
      * @param url to read
-     * @return byte-array with the content
+     * @return input stream for the content
      * @throws IOException
      */
-    public static byte[] readUrl(final URL url) throws IOException {
+    public static InputStream readUrl(final URL url) throws IOException { //$JUnit
 		if (null == url) {
 			throw new IllegalArgumentException("url is null!"); //$NON-NLS-1$
 		}
@@ -319,19 +318,19 @@ public abstract class HelperNet { //TODO document in Wiki!
 		con.setConnectTimeout(Const.VALUE_2048);
 		con.connect();
 		
-		return HelperIO.readStream(con.getInputStream());
+		return con.getInputStream();
      }
 
     /**
-     * Returns the content of an url with HTTP authentication.
+     * Returns an {@link InputStream} linked to an {@link URL} with HTTP authentication.
      *
      * @param url to read
      * @param username for the HTTP authentication
      * @param password for the HTTP authentication
-     * @return byte-array with the content
+     * @return input stream for the content
      * @throws IOException
      */
-    public static byte[] readUrl(final URL url, final String username, final String password) throws IOException {
+    public static InputStream readUrl(final URL url, final String username, final String password) throws IOException {
 		if (null == url) {
 			throw new IllegalArgumentException("url is null!"); //$NON-NLS-1$
 		}
@@ -347,7 +346,7 @@ public abstract class HelperNet { //TODO document in Wiki!
 		con.setConnectTimeout(Const.VALUE_2048);
 		con.connect();
 		
-		return HelperIO.readStream(con.getInputStream());
+		return con.getInputStream();
     }
     	
     

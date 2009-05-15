@@ -41,14 +41,14 @@ import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 
 
 /**
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
 public abstract class HelperGraphic {
 	
@@ -109,11 +109,11 @@ public abstract class HelperGraphic {
 //	}
 
     /**
-     * Returns all available system {@link Font}.
+     * Returns a {@link Collection} containing all available system {@link Font}.
      *
      * @return List containing all fonts
      */
-    public static List<Font> getAvailableFonts() { //$JUnit
+    public static Collection<Font> getAvailableFonts() { //$JUnit
 		// Get all available fonts from GraphicsEnvironment
 		final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		

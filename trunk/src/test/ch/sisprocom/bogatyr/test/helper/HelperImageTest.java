@@ -49,12 +49,12 @@ import java.awt.Font;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090510
+ * @version 20090516
  */
-public class HelperImageTest { //TODO improve
+public class HelperImageTest {
 	@Test
 	public void testSaveImage() {
-		final Component component = new Button("Hello world", ""); //$NON-NLS-1$ //$NON-NLS-2$
+		final Component component = new Button("Hello world", Const.EMPTY_STRING); //$NON-NLS-1$ 
 		component.setBackground(Color.YELLOW);
 		component.setForeground(Color.BLACK);
 		component.setFont(new Font("Arial", Font.PLAIN, Const.VALUE_16)); //$NON-NLS-1$

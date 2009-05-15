@@ -38,9 +38,9 @@ import java.util.TimerTask;
  * This is a countdown timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
-public class ControllerCountdownTimer extends ControllerTimerAbstract implements IControllerCountdownTimer{ //TODO document in Wiki!
+public class ControllerCountdownTimer extends ControllerTimerAbstract implements IControllerCountdownTimer{
 	long runtime;
 
     /*
