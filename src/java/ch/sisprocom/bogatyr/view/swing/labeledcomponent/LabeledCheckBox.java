@@ -31,21 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 
-import java.awt.event.ActionListener;
+import ch.sisprocom.bogatyr.view.swing.CheckBox;
 
 import javax.swing.AbstractButton;
 import javax.swing.Action;
-
-import ch.sisprocom.bogatyr.view.swing.CheckBox;
+import java.awt.event.ActionListener;
 
 
 /**
  * This is an combined Label with a CheckBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090505
+ * @version 20090516
  */
-public class LabeledCheckBox extends LabeledComponent {  //TODO document in Wiki!
+public class LabeledCheckBox extends LabeledComponent {
 	private static final long serialVersionUID = 2215341067138215010L;
 
 	

@@ -41,9 +41,9 @@ import java.util.Timer;
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 20090503
+ * @version 20090516
  */
-public abstract class ControllerTimerAbstract extends ControllerAbstract implements IListener{ //TODO document in Wiki!
+public abstract class ControllerTimerAbstract extends ControllerAbstract implements IListener{
 	private Collection<ListenerTimer> listListener = new ArrayList<ListenerTimer>();
 
 	private Timer timer = new Timer();
@@ -61,7 +61,7 @@ public abstract class ControllerTimerAbstract extends ControllerAbstract impleme
         return timer;
     }
 
-    public void setTimer(Timer timer) {
+    public void setTimer(final Timer timer) {
         this.timer = timer;
     }
 
@@ -69,7 +69,7 @@ public abstract class ControllerTimerAbstract extends ControllerAbstract impleme
         return time;
     }
 
-    public void setTime(long time) {
+    public void setTime(final long time) {
         this.time = time;
     }
 
@@ -77,7 +77,7 @@ public abstract class ControllerTimerAbstract extends ControllerAbstract impleme
         return interval;
     }
 
-    public void setInterval(long interval) {
+    public void setInterval(final long interval) {
         this.interval = interval;
     }   
     
@@ -85,7 +85,7 @@ public abstract class ControllerTimerAbstract extends ControllerAbstract impleme
 		return isRunning;
 	}
 
-	public void setRunning(boolean isRunning) {
+	public void setRunning(final boolean isRunning) {
 		this.isRunning = isRunning;
 	}
 

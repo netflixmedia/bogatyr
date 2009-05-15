@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.Const;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.text.AttributeSet;
@@ -47,16 +48,16 @@ import java.util.regex.Pattern;
  * This is a NumberField, similar to TextField, but only numeric characters are allowed.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
-public class NumberField extends TextField {
+public class NumberField extends TextField { //$JUnit
 	private static final long serialVersionUID = 4469777330124040925L;
 	
 	private static final Pattern PATTERN = Pattern.compile("[-%'0-9.]+"); //$NON-NLS-1$
 	
 	
 	public NumberField() {
-		this(0, "", Integer.MAX_VALUE); //$NON-NLS-1$
+		this(0, Const.EMPTY_STRING, Integer.MAX_VALUE);
 	}
 
 	public NumberField(final String text, final String toolTip, final int columns) {
@@ -73,7 +74,7 @@ public class NumberField extends TextField {
      * @return Double from the number field 
      */	
 	public Double getDoubleValue() {
-		String value = HelperGeneral.getValidNumericString(getText());
+		final String value = HelperGeneral.getValidNumericString(getText());
 		
 		if (null != value) {
 			return Double.valueOf(value);
@@ -90,7 +91,7 @@ public class NumberField extends TextField {
 		final String value = HelperGeneral.getValidNumericString(getText());
 		
 		if (null != value) {
-			return Integer.valueOf(value);
+			return new BigDecimal(value).intValue();
 		}
 		return null;
 	}
@@ -118,7 +119,7 @@ public class NumberField extends TextField {
 		final String value = HelperGeneral.getValidNumericString(getText());
 		
 		if (null != value) {
-			return Byte.valueOf(value);
+			return new BigDecimal(value).byteValue();
 		}
 		return null;
 	}
@@ -132,7 +133,7 @@ public class NumberField extends TextField {
 		final String value = HelperGeneral.getValidNumericString(getText());
 		
 		if (null != value) {
-			return Long.valueOf(value);
+			return new BigDecimal(value).longValue();
 		}
 		return null;
 	}
@@ -146,7 +147,7 @@ public class NumberField extends TextField {
 		final String value = HelperGeneral.getValidNumericString(getText());
 		
 		if (null != value) {
-			return Short.valueOf(value);
+			return new BigDecimal(value).shortValue();
 		}
 		return null;
 	}
@@ -160,7 +161,7 @@ public class NumberField extends TextField {
 		final String value = HelperGeneral.getValidNumericString(getText());
 		
 		if (null != value) {
-			return new BigInteger(value);
+			return new BigDecimal(value).toBigInteger();
 		}
 		return null;
 	}
@@ -185,7 +186,11 @@ public class NumberField extends TextField {
      * @param number value for the number field 
      */	
 	public void setValue(final Number number) {
-        setText(number.toString());
+		if (null == number) {
+			setText(Const.EMPTY_STRING);
+		} else {
+			setText(number.toString());
+		}
 	}
 	
 	

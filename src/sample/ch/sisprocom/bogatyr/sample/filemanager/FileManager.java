@@ -36,6 +36,7 @@ import ch.sisprocom.bogatyr.controller.localizer.ControllerLocalizerFile;
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
 import ch.sisprocom.bogatyr.controller.property.ControllerProperty;
 import ch.sisprocom.bogatyr.controller.property.IControllerProperty;
+import ch.sisprocom.bogatyr.helper.Const;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 
@@ -49,7 +50,7 @@ import java.io.IOException;
  * @author Stefan Laubenberger
  * @version 20090428
  */
-public class FileManager extends ApplicationAbstract { //TODO document in Wiki!
+public class FileManager extends ApplicationAbstract {
 	// Fixed parameter - e.g. this could be an argument
 	private static final String	ARG_PROPERTY_LOCATION = "cfg/ch/sisprocom/bogatyr/sample/filemanager/standard.properties"; //$NON-NLS-1$
 
@@ -117,7 +118,7 @@ public class FileManager extends ApplicationAbstract { //TODO document in Wiki!
 			System.out.println(file);
 			ii++;
 		}
-		System.out.println(localizer.getValue(RES_FILES) + ' ' + (isDelete ? localizer.getValue(RES_DELETED) : localizer.getValue(RES_FOUND)) + ':' + ii);
+		System.out.println(localizer.getValue(RES_FILES) + Const.SPACE + (isDelete ? localizer.getValue(RES_DELETED) : localizer.getValue(RES_FOUND)) + ':' + ii);
 	}
 	
 	

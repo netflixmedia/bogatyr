@@ -31,21 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 
-import java.awt.event.ActionListener;
-
-import javax.swing.Action;
-import javax.swing.AbstractButton;
-
 import ch.sisprocom.bogatyr.view.swing.RadioButton;
+
+import javax.swing.AbstractButton;
+import javax.swing.Action;
+import java.awt.event.ActionListener;
 
 
 /**
  * This is an combined Label with a RadioButton.
  * 
  * @author Stefan Laubenberger
- * @version 20090505
+ * @version 20090516
  */
-public class LabeledRadioButton extends LabeledComponent { //TODO document in Wiki!
+public class LabeledRadioButton extends LabeledComponent {
 	private static final long serialVersionUID = 3461718081893469685L;
 
 	

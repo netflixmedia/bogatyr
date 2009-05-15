@@ -31,6 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.test.helper.HelperEnvInfoTest;
 import ch.sisprocom.bogatyr.test.helper.HelperGeneralTest;
@@ -38,6 +46,10 @@ import ch.sisprocom.bogatyr.test.helper.HelperGraphicTest;
 import ch.sisprocom.bogatyr.test.helper.HelperIOTest;
 import ch.sisprocom.bogatyr.test.helper.HelperImageTest;
 import ch.sisprocom.bogatyr.test.helper.HelperMathTest;
+import ch.sisprocom.bogatyr.test.helper.HelperNetTest;
+import ch.sisprocom.bogatyr.test.helper.HelperPdfTest;
+import ch.sisprocom.bogatyr.test.helper.HelperSoundTest;
+import ch.sisprocom.bogatyr.test.helper.HelperTimeTest;
 import ch.sisprocom.bogatyr.test.helper.HelperXmlTest;
 import ch.sisprocom.bogatyr.test.helper.context.ContextTest;
 import ch.sisprocom.bogatyr.test.helper.control.ControlBrowserTest;
@@ -47,21 +59,14 @@ import ch.sisprocom.bogatyr.test.helper.crypto.CryptoAsymmTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.CryptoSymmTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.ObfuscatorTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.PublicKeyProviderTest;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
+import ch.sisprocom.bogatyr.test.view.swing.NumberFieldTest;
 
 
 /**
  * Junit test suite
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 20090403
+ * @version 20090516
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
@@ -114,13 +119,15 @@ public class AllBogatyrTests implements Runnable {
 				HelperGraphicTest.class,
 				HelperImageTest.class,
 				HelperMathTest.class,
-//				HelperNetTest.class,
-//				HelperPdfTest.class,
+				HelperNetTest.class,
+				HelperPdfTest.class,
 //				HelperPreferencesTest.class,
-				HelperXmlTest.class
+				HelperSoundTest.class,
+				HelperTimeTest.class,
+				HelperXmlTest.class,
 //				PaginatorTest.class,
 //				PrinterTest.class,
-//				HelperSoundTest.class
+				NumberFieldTest.class
 		);
 		
         System.out.println("** Test run completed **"); //$NON-NLS-1$

@@ -43,7 +43,7 @@ import java.awt.Window;
  * This is an extended JDialog.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
 public class Dialog extends JDialog {
 	private static final long serialVersionUID = -3903296901431213544L;
@@ -56,71 +56,71 @@ public class Dialog extends JDialog {
 		super();
     }
 	
-	public Dialog(Dialog owner, boolean modal) {
+	public Dialog(final Dialog owner, final boolean modal) {
 		super(owner, modal);
 	}
 
-	public Dialog(Dialog owner, String title, boolean modal,
-			GraphicsConfiguration gc) {
+	public Dialog(final Dialog owner, final String title, final boolean modal,
+			final GraphicsConfiguration gc) {
 		super(owner, title, modal, gc);
 	}
 
-	public Dialog(Dialog owner, String title, boolean modal) {
+	public Dialog(final Dialog owner, final String title, final boolean modal) {
 		super(owner, title, modal);
 	}
 
-	public Dialog(Dialog owner, String title) {
+	public Dialog(final Dialog owner, final String title) {
 		super(owner, title);
 	}
 
-	public Dialog(Dialog owner) {
+	public Dialog(final Dialog owner) {
 		super(owner);
 	}
 
-	public Dialog(Frame owner, boolean modal) {
+	public Dialog(final Frame owner, final boolean modal) {
 		super(owner, modal);
 	}
 
-	public Dialog(Frame owner, String title, boolean modal,
-			GraphicsConfiguration gc) {
+	public Dialog(final Frame owner, final String title, final boolean modal,
+			final GraphicsConfiguration gc) {
 		super(owner, title, modal, gc);
 	}
 
-	public Dialog(Frame owner, String title, boolean modal) {
+	public Dialog(final Frame owner, final String title, final boolean modal) {
 		super(owner, title, modal);
 	}
 
-	public Dialog(Frame owner, String title) {
+	public Dialog(final Frame owner, final String title) {
 		super(owner, title);
 	}
 
-	public Dialog(Frame owner) {
+	public Dialog(final Frame owner) {
 		super(owner);
 	}
 
-	public Dialog(Window arg0, ModalityType arg1) {
+	public Dialog(final Window arg0, final ModalityType arg1) {
 		super(arg0, arg1);
 	}
 
-	public Dialog(Window arg0, String arg1, ModalityType arg2,
-			GraphicsConfiguration arg3) {
+	public Dialog(final Window arg0, final String arg1, final ModalityType arg2,
+			final GraphicsConfiguration arg3) {
 		super(arg0, arg1, arg2, arg3);
 	}
 
-	public Dialog(Window arg0, String arg1, ModalityType arg2) {
+	public Dialog(final Window arg0, final String arg1, final ModalityType arg2) {
 		super(arg0, arg1, arg2);
 	}
 
-	public Dialog(Window arg0, String arg1) {
+	public Dialog(final Window arg0, final String arg1) {
 		super(arg0, arg1);
 	}
 
-	public Dialog(Window arg0) {
+	public Dialog(final Window arg0) {
 		super(arg0);
 	}
 
 	public void createAndShowGUI() {
-//		setLocationRelativeTo(frame);
+		setLocationRelativeTo(getOwner());
 		setVisible(true);
 	}
 

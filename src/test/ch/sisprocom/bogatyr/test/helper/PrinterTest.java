@@ -47,13 +47,13 @@ import java.awt.Font;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
 public class PrinterTest {
 	@Test
 	public void testPrint() {
 		try {
-			final Component component = new Button("Hello world", ""); //$NON-NLS-1$ //$NON-NLS-2$
+			final Component component = new Button("Hello world", Const.EMPTY_STRING); //$NON-NLS-1$ 
 			component.setBackground(Color.YELLOW);
 			component.setForeground(Color.BLACK);
             component.setFont(new Font("Arial", Font.PLAIN, Const.VALUE_16)); //$NON-NLS-1$;

@@ -31,20 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 
-import java.awt.event.ActionListener;
-
 import ch.sisprocom.bogatyr.view.swing.ComboBox;
 
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
 
 
 /**
  * This is an combined Label with a ComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090505
+ * @version 20090516
  */
-public class LabeledComboBox extends LabeledComponent { //TODO document in Wiki!
+public class LabeledComboBox extends LabeledComponent {
 	private static final long serialVersionUID = -67296455436983811L;
 	
 	

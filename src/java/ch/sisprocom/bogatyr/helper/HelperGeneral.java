@@ -55,10 +55,10 @@ import java.util.UUID;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090511
+ * @version 20090516
  */
 public abstract class HelperGeneral {
-	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$ //TODO update in Wiki!
+	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
 	private static final char[] RANDOMKEY_SEED_DEFAULT    = {'1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	
 	/**
@@ -438,7 +438,7 @@ public abstract class HelperGeneral {
      * @param text string
      * @return numeric string
      */
-    public static String getValidNumericString(final String text) { //$JUnit //TODO document in Wiki!
+    public static String getValidNumericString(final String text) { //$JUnit
     	
     	if (!isValid(text)) {
     		return null;
@@ -449,18 +449,18 @@ public abstract class HelperGeneral {
     		isNegative = true;
     	}
     	
-    	final String result = text.replaceAll("[^0-9.]+", ""); //$NON-NLS-1$ //$NON-NLS-2$
+    	final String result = text.replaceAll("[^0-9.]+", Const.EMPTY_STRING); //$NON-NLS-1$
 
     	boolean isPeriod = false;
-    	StringBuilder sb = new StringBuilder(result.length());
+    	final StringBuilder sb = new StringBuilder(result.length());
    
     	// remove multiple periods
     	for (int ii = 0; ii < result.length(); ii++) {
-    		char character = result.charAt(ii);
+    		final char character = result.charAt(ii);
    
     		if ('.' == character) {
     			if (!isPeriod) {
-    		  		sb.append('.');
+    		  		sb.append(Const.PERIOD);
     		  		isPeriod = true;
     		 	}
     		} else {

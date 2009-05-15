@@ -40,9 +40,9 @@ import java.util.Collection;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
-public abstract class HelperMath { //TODO document in Wiki!
+public abstract class HelperMath {
 	
 	/**
 	 * Returns the greatest common divisor of two given numbers.
@@ -102,14 +102,14 @@ public abstract class HelperMath { //TODO document in Wiki!
 	        }
 	
 	        // check odd divisors from 3 to the square root of n
-	        for (int i = 3, end = (int)Math.sqrt((double) n); i <= end; i += 2) {
+	        for (int i = 3, end = (int)StrictMath.sqrt((double) n); i <= end; i += 2) {
 	            if (0 == n % i) {
 	                return false;
 	            }
 	        }
 	        return true;
 //        } finally {
-//    		Logger.getInstance().writeMethodExit(HelperMath.class, "isPrime", flag);  //$NON-NLS-1$
+//    		Logger.getInstance().writeMethodExit(HelperStrictMath.class, "isPrime", flag);  //$NON-NLS-1$
 //        }
     }
 
@@ -134,7 +134,7 @@ public abstract class HelperMath { //TODO document in Wiki!
     }
 
 	/**
-     * Calculates all primes in a given range.
+     * Calculates a {@link Collection} containing all primes in a given range.
      * 
      * @param start number of the range
      * @param end number of the range
@@ -169,11 +169,11 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @return int-value
      */	
 	public static int convertDoubleToInt(final double value) { //$JUnit
-		return (int)Math.round(value);
+		return (int)StrictMath.round(value);
 	}
 	
     /**
-     * Logarithm
+     * Calculate the logarithm with a given base.
      *
      * @param base of the logarithm
      * @param value double-value
@@ -205,7 +205,7 @@ public abstract class HelperMath { //TODO document in Wiki!
             dp--;
             powerOfTen *= 10.0D;
 	    }
-        return (double) Math.round(value * powerOfTen) / powerOfTen;
+        return (double) StrictMath.round(value * powerOfTen) / powerOfTen;
 	}
 
     /**
@@ -214,8 +214,8 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @param n int-Value
      * @return random int-value between 0 and n-1
      */
-    public static int getRandom(final int n) {
-    	return (int) (Math.random() * (double) n);
+    public static int getRandom(final int n) { //$JUnit
+    	return (int) (StrictMath.random() * (double) n);
     }
     
     /**
@@ -227,8 +227,12 @@ public abstract class HelperMath { //TODO document in Wiki!
      * @param days elapsed
      * @return calculated amount with a given start amount, interest and elapsed days
      */
-    public static double calcAmount(final double amount, final double interest, final double days) {
-    	return amount * Math.pow(Math.E, (days/360)*interest);
+    public static double calcAmount(final double amount, final double interest, final double days) { //$JUnit
+		 if (0.0D >= days) {
+			 throw new IllegalArgumentException("days value must be positive: " + days); //$NON-NLS-1$
+		 }
+		 
+		 return amount * StrictMath.pow(StrictMath.E, days/360*interest);
     }
 }
 

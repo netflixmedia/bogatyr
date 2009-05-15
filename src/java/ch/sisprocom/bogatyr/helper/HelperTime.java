@@ -41,11 +41,12 @@ import java.util.Date;
  * This is a helper class for time operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
 public abstract class HelperTime {
     public static final int TIME_SERVER_PORT = 37;
 	public static final String DEFAULT_TIME_SERVER = "ptbtime1.ptb.de"; //$NON-NLS-1$
+	
 	
     /**
      * Returns the current atomic time of the default time server.
@@ -53,18 +54,18 @@ public abstract class HelperTime {
      * @return atomic time of the default time server
      * @throws IOException
      */
-	public static Date getAtomicTime() throws IOException {
+	public static Date getAtomicTime() throws IOException { //$JUnit
 		return getAtomicTime(DEFAULT_TIME_SERVER);
 	}
 
     /**
      * Returns the current atomic time of the given time server.
      *
-     * @param host time server
+     * @param host of the time server
      * @return atomic time of the given time server
      * @throws IOException
      */
-	public static Date getAtomicTime(final String host) throws IOException {
+	public static Date getAtomicTime(final String host) throws IOException { //$JUnit
 		if (!HelperGeneral.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}

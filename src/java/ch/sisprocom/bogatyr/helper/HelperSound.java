@@ -60,9 +60,9 @@ import java.util.TimerTask;
  * This is a helper class for sound operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
-public abstract class HelperSound { //TODO document in Wiki!
+public abstract class HelperSound {
 
     /**
      * Returns an audio {@link Clip} from a {@link File} (e.g. "wav").
@@ -90,7 +90,7 @@ public abstract class HelperSound { //TODO document in Wiki!
      * @throws LineUnavailableException
      * @throws UnsupportedAudioFileException
      */
-	public static Clip getClip(final InputStream is) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+	public static Clip getClip(final InputStream is) throws UnsupportedAudioFileException, LineUnavailableException, IOException { //$JUnit
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
@@ -122,7 +122,7 @@ public abstract class HelperSound { //TODO document in Wiki!
      * @throws IOException
      * @throws InvalidMidiDataException
      */
-	public static Sequence getSequence(final InputStream is) throws InvalidMidiDataException, IOException {
+	public static Sequence getSequence(final InputStream is) throws InvalidMidiDataException, IOException { //$JUnit
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
@@ -138,7 +138,7 @@ public abstract class HelperSound { //TODO document in Wiki!
      * @throws MidiUnavailableException
      * @throws InvalidMidiDataException
      */
-	public static Sequencer getSequencer(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
+	public static Sequencer getSequencer(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException { //$JUnit
 		if (null == sequence) {
 			throw new IllegalArgumentException("sequence is null!"); //$NON-NLS-1$
 		}
@@ -166,7 +166,7 @@ public abstract class HelperSound { //TODO document in Wiki!
      *
      * @param clip to play
      */
-	public static void play(final Clip clip) {
+	public static void play(final Clip clip) { //$JUnit
 		if (null == clip) {
 			throw new IllegalArgumentException("clip is null!"); //$NON-NLS-1$
 		}
@@ -188,7 +188,7 @@ public abstract class HelperSound { //TODO document in Wiki!
 	 * @throws InvalidMidiDataException 
 	 * @throws MidiUnavailableException 
      */
-	public static void play(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException {
+	public static void play(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException { //$JUnit
 		if (null == sequence) {
 			throw new IllegalArgumentException("sequence is null!"); //$NON-NLS-1$
 		}
@@ -209,7 +209,7 @@ public abstract class HelperSound { //TODO document in Wiki!
      *
      * @return List of all available audio formats of the current machine
      */
-	public static Collection<Type> getAvailableAudioFormats() {
+	public static Collection<Type> getAvailableAudioFormats() { //$JUnit
     	return Arrays.asList(AudioSystem.getAudioFileTypes());
 	}
 

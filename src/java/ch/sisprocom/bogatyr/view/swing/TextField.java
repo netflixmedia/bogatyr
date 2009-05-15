@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.Const;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.JTextField;
@@ -44,7 +45,7 @@ import javax.swing.text.PlainDocument;
  * This is an extended JTextField.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
 public class TextField extends JTextField implements IComponentActivate {
 	private static final long serialVersionUID = 866371447844640358L;
@@ -53,7 +54,7 @@ public class TextField extends JTextField implements IComponentActivate {
 
 	
 	public TextField() {
-        this("", "", Integer.MAX_VALUE); //$NON-NLS-1$ //$NON-NLS-2$
+        this(Const.EMPTY_STRING, Const.EMPTY_STRING, Integer.MAX_VALUE);
     }
 
 	public TextField(final String text, final String toolTip, final int columns) {

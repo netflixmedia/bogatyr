@@ -46,9 +46,9 @@ import java.util.Properties;
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
-public class ControllerProperty extends ControllerAbstract implements IControllerProperty { //TODO document in Wiki!
+public class ControllerProperty extends ControllerAbstract implements IControllerProperty {
 	private final Properties properties;
 
 	

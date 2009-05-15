@@ -33,6 +33,7 @@ package ch.sisprocom.bogatyr.test.helper.crypto;
 
 import ch.sisprocom.bogatyr.helper.crypto.CryptoSymm;
 import ch.sisprocom.bogatyr.helper.crypto.ICryptoSymm;
+import ch.sisprocom.bogatyr.helper.Const;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -45,7 +46,7 @@ import javax.crypto.SecretKey;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 20090516
  */
 public class CryptoSymmTest {
 	private static final int KEYSIZE = 256;
@@ -90,7 +91,7 @@ public class CryptoSymmTest {
 		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
-			cryptoSymm.encrypt(new byte[0], null);
+			cryptoSymm.encrypt(Const.EMPTY_ARRAY_BYTE, null);
 			fail("input is empty"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 		
@@ -116,7 +117,7 @@ public class CryptoSymmTest {
 		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
-			cryptoSymm.decrypt(new byte[0], null);
+			cryptoSymm.decrypt(Const.EMPTY_ARRAY_BYTE, null);
 			fail("input is empty"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 		

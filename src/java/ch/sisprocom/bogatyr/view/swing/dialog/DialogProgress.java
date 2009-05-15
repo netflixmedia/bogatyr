@@ -43,14 +43,13 @@ import java.awt.Color;
 import java.awt.Frame;
 
 
-
 /**
  * DialogProgress displays a indeterminate progress bar.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
-public class DialogProgress extends Dialog { //TODO document in Wiki!
+public class DialogProgress extends Dialog {
 	private static final long serialVersionUID = 3287183043789350515L;
 	
 	private final JProgressBar progressBar = new ProgressBar();

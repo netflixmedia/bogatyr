@@ -43,7 +43,7 @@ import java.util.List;
  * Creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
 public abstract class ControlProcess {
 	private static final int BUFFER = 1024;
@@ -77,7 +77,7 @@ public abstract class ControlProcess {
 			throw new IllegalArgumentException("commandList is null or empty!"); //$NON-NLS-1$
 		}
 		
-		ProcessBuilder pb = new ProcessBuilder(commandList);
+		final ProcessBuilder pb = new ProcessBuilder(commandList);
 		return pb.start();
 //		return Runtime.getRuntime().exec(command);
 	}

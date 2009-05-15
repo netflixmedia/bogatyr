@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.Const;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 import javax.swing.ComboBoxModel;
@@ -49,7 +50,7 @@ import java.awt.event.KeyEvent;
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
 public class ComboBox extends JComboBox implements IComponentActivate {
 	private static final long serialVersionUID = -3870596701286078140L;
@@ -264,7 +265,7 @@ public class ComboBox extends JComboBox implements IComponentActivate {
 		        // provide feedback to the user that his input has been received but can not be accepted
 		        comboBox.getToolkit().beep(); // when available use: UIManager.getLookAndFeel().provideErrorFeedback(comboBox);
 		    }
-		    setText(item != null ? item.toString() : ""); //$NON-NLS-1$
+		    setText(null == item ? Const.EMPTY_STRING : item.toString());
 
 		    // select the completed part
 		    highlightCompletedText(offs + str.length());

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -46,9 +46,9 @@ import java.util.prefs.Preferences;
  * This is a helper class for preferences.
  * 
  * @author Stefan Laubenberger
- * @version 20081205
+ * @version 20090516
  */
-public abstract class HelperPreferences { //TODO document in Wiki!
+public abstract class HelperPreferences {
 	
 	public static void loadFromFile(final File file) throws IOException, InvalidPreferencesFormatException {
         BufferedInputStream bis = null;

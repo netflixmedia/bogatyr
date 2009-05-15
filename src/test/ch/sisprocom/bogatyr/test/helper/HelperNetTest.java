@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,35 +31,123 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.net.URL;
-
+import ch.sisprocom.bogatyr.helper.HelperNet;
+import static org.junit.Assert.*;
 import org.junit.Test;
 
-import ch.sisprocom.bogatyr.helper.HelperNet;
+import java.net.URL;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20090516
  */
-public class HelperNetTest { //TODO improve
+public class HelperNetTest {
+	@Test
+	public void testEnableDisableProxyHttp() {
+		final String host = "192.168.1.1"; //$NON-NLS-1$
+		final int port = 8080;
+		final String user = "Bogatyr"; //$NON-NLS-1$
+		final String pw = "1234"; //$NON-NLS-1$
+		
+		HelperNet.enableProxyHttp(host, port, user, pw);
+		
+		assertEquals(host, System.getProperty(HelperNet.PROPERTY_HTTP_PROXY_HOST));
+		assertEquals(Integer.toString(port), System.getProperty(HelperNet.PROPERTY_HTTP_PROXY_PORT));
+		
+		HelperNet.disableProxyHttp();
+		
+		assertNull(System.getProperty(HelperNet.PROPERTY_HTTP_PROXY_HOST));
+		assertNull(System.getProperty(HelperNet.PROPERTY_HTTP_PROXY_PORT));
+
+		try {
+			HelperNet.enableProxyHttp(null, port, user, pw);
+			fail("host is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		try {
+			HelperNet.enableProxyHttp(host, port, null, pw);
+			fail("username is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		try {
+			HelperNet.enableProxyHttp(host, port, user, null);
+			fail("password is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+	}
+
+	@Test
+	public void testEnableDisableProxyHttps() {
+		final String host = "192.168.1.1"; //$NON-NLS-1$
+		final int port = 8080;
+		final String user = "Bogatyr"; //$NON-NLS-1$
+		final String pw = "1234"; //$NON-NLS-1$
+		
+		HelperNet.enableProxyHttps(host, port, user, pw);
+		
+		assertEquals(host, System.getProperty(HelperNet.PROPERTY_HTTPS_PROXY_HOST));
+		assertEquals(Integer.toString(port), System.getProperty(HelperNet.PROPERTY_HTTPS_PROXY_PORT));
+		
+		HelperNet.disableProxyHttps();
+		
+		assertNull(System.getProperty(HelperNet.PROPERTY_HTTPS_PROXY_HOST));
+		assertNull(System.getProperty(HelperNet.PROPERTY_HTTPS_PROXY_PORT));
+
+		try {
+			HelperNet.enableProxyHttps(null, port, user, pw);
+			fail("host is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		try {
+			HelperNet.enableProxyHttps(host, port, null, pw);
+			fail("username is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		try {
+			HelperNet.enableProxyHttps(host, port, user, null);
+			fail("password is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+	}
+	
+	@Test
+	public void testEnableDisableProxyFtp() {
+		final String host = "192.168.1.1"; //$NON-NLS-1$
+		final int port = 8080;
+		final String user = "Bogatyr"; //$NON-NLS-1$
+		final String pw = "1234"; //$NON-NLS-1$
+		
+		HelperNet.enableProxyFtp(host, port, user, pw);
+		
+		assertEquals(host, System.getProperty(HelperNet.PROPERTY_FTP_PROXY_HOST));
+		assertEquals(Integer.toString(port), System.getProperty(HelperNet.PROPERTY_FTP_PROXY_PORT));
+		
+		HelperNet.disableProxyFtp();
+		
+		assertNull(System.getProperty(HelperNet.PROPERTY_FTP_PROXY_HOST));
+		assertNull(System.getProperty(HelperNet.PROPERTY_FTP_PROXY_PORT));
+
+		try {
+			HelperNet.enableProxyFtp(null, port, user, pw);
+			fail("host is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		try {
+			HelperNet.enableProxyFtp(host, port, null, pw);
+			fail("username is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		try {
+			HelperNet.enableProxyFtp(host, port, user, null);
+			fail("password is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+	}
+	
 	@Test
 	public void testReadUrl() {
 		try {
-//			System.out.println(HelperNet.readUrl(new URL("http://www.kaywa.com/files/qr_chip_de.pdf")).length);
 			assertNotNull(HelperNet.readUrl(new URL("http://www.sisprocom.ch"))); //$NON-NLS-1$
-
-//			System.out.println(HelperNet.readUrl(new URL("http://www.immopepper.ch:3000/"), "demo", "pepper").length);
-//			assertNotNull(HelperNet.readUrl(new URL("http://www.immopepper.ch:3000/")));
-			assertNotNull(HelperNet.readUrl(new URL("http://www.immopepper.ch:3000/"), "demo", "pepper")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		} catch (Exception ex) {/*fail(ex.getMessage());*/ ex.printStackTrace();}
+		} catch (Exception ex) {fail(ex.getMessage());}
+		
+		try {
+			HelperNet.readUrl(null);
+			fail("url is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 	
 	@Test
@@ -76,53 +164,74 @@ public class HelperNetTest { //TODO improve
 			HelperNet.isPingable("987.654.321.000"); //$NON-NLS-1$
 			fail("host is invalid!"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
-
+		try {
+			HelperNet.isPingable(null);
+			fail("host is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 	
 	@Test
 	public void testGetHostname() {
 		try {
-			assertNotNull(HelperNet.getHostname("209.85.129.99")); //$NON-NLS-1$
-//			System.out.println(HelperNet.getHostname("209.85.129.99"));
+			assertEquals("orwell.ch", HelperNet.getHostname("78.46.88.137")); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (Exception ex) {fail(ex.getMessage());}
+		
+		try {
+			HelperNet.getHostname(null);
+			fail("ip is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
-	
+
 	@Test
 	public void testGetIp() {
 		try {
-			assertNotNull(HelperNet.getIp("www.sisprocom.ch")); //$NON-NLS-1$
+			assertEquals("78.46.88.137", HelperNet.getIp("www.sisprocom.ch")); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (Exception ex) {fail(ex.getMessage());}
+		
+		try {
+			HelperNet.getIp(null);
+			fail("host is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 	
 	@Test
-	public void testGetLocalHostname() {
+	public void testGetLocalHostname() { //TODO improve... but how?
 		try {
 			assertNotNull(HelperNet.getLocalHostname());
-//			System.out.println(HelperNet.getLocalHostname());
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
-//	@Test
-//	public void testGetLocalHostnames() {
-//		try {
-//			assertNotNull(HelperNet.getLocalHostnames());
-//			System.out.println(HelperGeneral.dumpList(HelperNet.getLocalHostnames()));
-//		} catch (Exception ex) {fail(ex.getMessage());}
-//	}
-	
 	@Test
-	public void testGetLocalIp() {
+	public void testGetLocalIp() { //TODO improve... but how?
 		try {
 			assertNotNull(HelperNet.getLocalIp());
-//			System.out.println(HelperNet.getLocalIp());
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 	
 	@Test
-	public void testGetLocalIps() {
+	public void testGetLocalIps() { //TODO improve... but how?
 		try {
 			assertNotNull(HelperNet.getLocalIps());
-//			System.out.println(HelperGeneral.dumpList(HelperNet.getLocalIps()));
 		} catch (Exception ex) {fail(ex.getMessage());}
+	}
+	
+	@Test
+	public void testGetNetworkInterfaces() { //TODO improve... but how?
+		try {
+			assertNotNull(HelperNet.getNetworkInterfaces());
+		} catch (Exception ex) {fail(ex.getMessage());}
+	}
+	
+	
+	@Test
+	public void testGetMacAddress() {
+		try {
+			assertNotNull(HelperNet.getMacAddress(HelperNet.getNetworkInterfaces().get(0)));
+		} catch (Exception ex) {fail(ex.getMessage());}
+		
+		try {
+			HelperNet.getMacAddress(null);
+			fail("ni is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 }

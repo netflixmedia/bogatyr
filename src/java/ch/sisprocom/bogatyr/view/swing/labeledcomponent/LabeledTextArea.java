@@ -35,14 +35,13 @@ import ch.sisprocom.bogatyr.view.swing.TextArea;
 import ch.sisprocom.bogatyr.view.swing.pane.PaneScroll;
 
 
-
 /**
  * This is an combined Label with a TextArea.
  * 
  * @author Stefan Laubenberger
- * @version 20090310
+ * @version 20090516
  */
-public class LabeledTextArea extends LabeledComponent { //TODO document in Wiki!
+public class LabeledTextArea extends LabeledComponent {
 	private static final long serialVersionUID = -3385104817739873049L;
 	
 	

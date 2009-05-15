@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,19 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import ch.sisprocom.bogatyr.helper.HelperSound;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
-import org.junit.Test;
 
 import javax.sound.midi.Sequence;
 import javax.sound.sampled.Clip;
+
+import org.junit.Test;
+
+import ch.sisprocom.bogatyr.helper.HelperSound;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20090516
  */
 public class HelperSoundTest {
 	@Test
@@ -51,6 +54,8 @@ public class HelperSoundTest {
 		try {
 			final Clip clip = HelperSound.getClip(getClass().getResourceAsStream("/res/ch/sisprocom/bogatyr/test/test.wav")); //$NON-NLS-1$
 
+			assertNotNull(clip);
+			
 			HelperSound.play(clip);
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
 	}
@@ -60,10 +65,17 @@ public class HelperSoundTest {
 		try {
 			final Sequence sequence = HelperSound.getSequence(getClass().getResourceAsStream("/res/ch/sisprocom/bogatyr/test/test.mid")); //$NON-NLS-1$
 			
+			assertNotNull(sequence);
+			
 			HelperSound.play(sequence);
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
 	}
-	//TODO complete
+	
+	@Test
+	public void testGetAvailableAudioFormats() {
+		assertNotNull(HelperSound.getAvailableAudioFormats());
+	}
+
 }
 
 

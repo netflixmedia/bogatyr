@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,31 +29,45 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.test.helper.control;
+package ch.sisprocom.bogatyr.test.helper;
 
-import ch.sisprocom.bogatyr.helper.control.ControlBrowser;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import org.junit.Test;
 
-import java.net.URI;
+import ch.sisprocom.bogatyr.helper.HelperTime;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20081027
  */
-public class ControlBrowserTest {
+public class HelperTimeTest {
+	private final DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault()); //$NON-NLS-1$
+	
 	@Test
-	public void testDisplayUrl() {
+	public void testGetAtomicTime() {
 		try {
-			ControlBrowser.browse(new URI("http://www.sisprocom.ch/bogatyr/")); //$NON-NLS-1$
-		} catch (Exception ex) {fail(ex.getMessage());}
-		
+			assertEquals(formatter.format(new Date()), formatter.format(HelperTime.getAtomicTime()));
+		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
+
 		try {
-			ControlBrowser.browse(null);
-			fail("URI is null"); //$NON-NLS-1$
+			assertEquals(formatter.format(new Date()), formatter.format(HelperTime.getAtomicTime("ptbtime2.ptb.de"))); //$NON-NLS-1$
+		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
+
+		try {
+			HelperTime.getAtomicTime(null);
+			fail("host is null!"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 	}
 }
+
+

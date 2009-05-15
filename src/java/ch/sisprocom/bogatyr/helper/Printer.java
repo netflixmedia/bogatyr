@@ -47,9 +47,9 @@ import java.awt.print.PrinterJob;
  * This is a printer class for print operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090516
  */
-public class Printer implements Printable { //TODO document in Wiki!
+public class Printer implements Printable { 
 	private Component componentToBePrinted;
 
 

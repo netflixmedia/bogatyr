@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,31 +29,36 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.test.helper.control;
+package ch.sisprocom.bogatyr.helper.control;
 
-import ch.sisprocom.bogatyr.helper.control.ControlBrowser;
-import static org.junit.Assert.fail;
-import org.junit.Test;
-
+import java.awt.Desktop;
+import java.io.IOException;
 import java.net.URI;
 
 
 /**
- * Junit test
- * 
+ * This control sends an URI to the default mail application.
+ *
  * @author Stefan Laubenberger
  * @version 20090516
  */
-public class ControlBrowserTest {
-	@Test
-	public void testDisplayUrl() {
-		try {
-			ControlBrowser.browse(new URI("http://www.sisprocom.ch/bogatyr/")); //$NON-NLS-1$
-		} catch (Exception ex) {fail(ex.getMessage());}
-		
-		try {
-			ControlBrowser.browse(null);
-			fail("URI is null"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
-	}
+public abstract class ControlMail {
+	
+	/**
+	 * Send an {@link URI} to the default mail application.
+	 *
+	 * @param uri for the mail application (e.g. "yourname@yourmail.com")
+	 * @throws IOException 
+	 */
+	public static void mail(final URI uri) throws IOException { //$JUnit
+		if (Desktop.isDesktopSupported()) {
+			if (null == uri) {
+				throw new IllegalArgumentException("uri is null!"); //$NON-NLS-1$
+			}
+
+			Desktop.getDesktop().mail(uri);
+		} else {
+			throw new RuntimeException("Mail application not supported by your machine!"); //$NON-NLS-1$
+		}
+	}	
 }

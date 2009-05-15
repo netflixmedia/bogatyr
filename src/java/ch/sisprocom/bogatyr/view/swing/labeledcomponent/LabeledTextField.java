@@ -34,14 +34,13 @@ package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 import ch.sisprocom.bogatyr.view.swing.TextField;
 
 
-
 /**
  * This is an combined Label with a TextField.
  * 
  * @author Stefan Laubenberger
- * @version 20090414
+ * @version 20090516
  */
-public class LabeledTextField extends LabeledComponent { //TODO document in Wiki!
+public class LabeledTextField extends LabeledComponent {
 	private static final long serialVersionUID = 1310593497620798003L;
 	
 	public LabeledTextField(final String labelText, final String toolTip, final String text) {

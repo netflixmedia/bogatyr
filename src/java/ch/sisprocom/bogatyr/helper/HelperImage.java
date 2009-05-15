@@ -47,9 +47,9 @@ import java.util.HashSet;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
-public abstract class HelperImage { //TODO document in Wiki!
+public abstract class HelperImage {
 	public static final String TYPE_JPG  = "jpg"; //$NON-NLS-1$
 	public static final String TYPE_PNG  = "png"; //$NON-NLS-1$
 	public static final String TYPE_GIF  = "gif"; //$NON-NLS-1$
@@ -110,7 +110,7 @@ public abstract class HelperImage { //TODO document in Wiki!
 	}
 	
 	/**
-	 * Returns list of all available read formats (e.g. "png", "jpg").
+	 * Returns a {@link Collection} of all available read formats (e.g. "png", "jpg").
 	 * 
 	 * @return list of all available read formats
 	 */
@@ -121,7 +121,7 @@ public abstract class HelperImage { //TODO document in Wiki!
 	}
 
 	/**
-	 * Returns list of all available write formats (e.g. "png", "jpeg").
+	 * Returns a {@link Collection} of all available write formats (e.g. "png", "jpeg").
 	 * 
 	 * @return list of all available write formats
 	 */
@@ -132,7 +132,7 @@ public abstract class HelperImage { //TODO document in Wiki!
 	}
 
 	/**
-	 * Returns list of all available MIME types that can be read (e.g. "image/png", "image/jpeg").
+	 * Returns a {@link Collection} of all available MIME types that can be read (e.g. "image/png", "image/jpeg").
 	 * 
 	 * @return list of all available MIME types that can be read
 	 */
@@ -143,7 +143,7 @@ public abstract class HelperImage { //TODO document in Wiki!
 	}
 
 	/**
-	 * Returns list of all available MIME types that can be written (e.g. "image/png", "image/jpg").
+	 * Returns a {@link Collection} of all available MIME types that can be written (e.g. "image/png", "image/jpg").
 	 * 
 	 * @return list of all available MIME types that can be written
 	 */
@@ -158,7 +158,7 @@ public abstract class HelperImage { //TODO document in Wiki!
 	 * Private methods
 	 */
 	/**
-	 * Converts all strings to lowercase and returns a list containing the unique values.
+	 * Converts all {@link String} to lower case and returns a {@link Collection} containing the unique values.
 	 * 
 	 * @param strings as array
 	 * @return list containing the unique values

@@ -56,7 +56,7 @@ import java.net.URL;
  * SAX handler to parse the update XML files
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
 public class XmlParser extends DefaultHandler {
 	// Resources
@@ -209,7 +209,7 @@ public class XmlParser extends DefaultHandler {
 		final File file = new File(location);
 		
 		try {
-            final byte[] data = file.exists() ? HelperIO.readFile(file) : HelperNet.readUrl(new URL(location));
+            final byte[] data = file.exists() ? HelperIO.readFile(file) : HelperIO.readStream(HelperNet.readUrl(new URL(location)));
 	        HelperIO.writeFile(output, data, false);
 	        
 			JOptionPane.showMessageDialog(null, localizer.getValue(RES_SUCCESS), applicationName, JOptionPane.INFORMATION_MESSAGE);

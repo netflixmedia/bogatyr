@@ -31,22 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.context;
 
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
 
 /**
  * Implementation of the context for applications.
  * 
  * @author Stefan Laubenberger
- * @version 20090507
+ * @version 20090516
  */
-public class Context implements IContext { //TODO document in Wiki!
+public class Context implements IContext {
 	private static final IContext instance = new Context();
 
 	private final Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();

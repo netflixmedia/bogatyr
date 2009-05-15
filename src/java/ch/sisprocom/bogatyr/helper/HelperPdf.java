@@ -53,9 +53,9 @@ import java.io.OutputStream;
  * This is a helper class for PDF operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090516
  */
-public abstract class HelperPdf { //TODO document in Wiki!
+public abstract class HelperPdf {
 
     /**
      * Saves a PDF from a {@link Component} to a {@link File}.
@@ -65,7 +65,7 @@ public abstract class HelperPdf { //TODO document in Wiki!
      * @throws DocumentException
      * @throws IOException
      */
-    public static void savePdfFromComponent(final Component component, final File file) throws IOException, DocumentException {
+    public static void savePdfFromComponent(final Component component, final File file) throws IOException, DocumentException { //$JUnit
 		if (null == component) {
 			throw new IllegalArgumentException("component is null!"); //$NON-NLS-1$
 		}
@@ -100,12 +100,12 @@ public abstract class HelperPdf { //TODO document in Wiki!
     /**
      * Saves a PDF from multiple (X)HTML files to a {@link File}.
      *
-     * @param input Array with (X)HTML files for the PDF
+     * @param input array with (X)HTML files for the PDF
      * @param file output
      * @throws DocumentException
      * @throws IOException
      */
-	public static void savePdfFromHTML(final File[] input, final File file) throws IOException, DocumentException {
+	public static void savePdfFromHTML(final File[] input, final File file) throws IOException, DocumentException { //$JUnit
 		if (!HelperGeneral.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
@@ -131,33 +131,11 @@ public abstract class HelperPdf { //TODO document in Wiki!
 		   }
 	
 		   renderer.finishPDF();
-	
-//		   os.close();
-//		   os = null;
+
 		} finally {
 		   if (os != null) {
 	    	   os.close();
 		   }
 		}
 	}
-
-//	public static void createPdf(Component component, int width, int height, File file) throws FileNotFoundException, DocumentException {
-////		component.setSize(width, height);
-//		Document document = new Document(new Rectangle(width, height));
-//	   
-//	   try {
-//	      PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
-//	      
-//	      document.open();
-//	      PdfContentByte cb = writer.getDirectContent();
-//	      PdfTemplate tp = cb.createTemplate(width, height);
-//	      
-//	      Graphics2D g2d = tp.createGraphics(width, height, new DefaultFontMapper());
-//	      component.paint(g2d);
-//	      g2d.dispose();
-//	      cb.addTemplate(tp, 0, 0);
-//	   } finally {
-//		   document.close();
-//	   }
-//	}
 }

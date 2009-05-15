@@ -31,9 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
+import ch.sisprocom.bogatyr.helper.Const;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperPdf;
-import ch.sisprocom.bogatyr.helper.Const;
 import ch.sisprocom.bogatyr.view.swing.Button;
 import static org.junit.Assert.fail;
 import org.junit.Test;
@@ -42,26 +42,48 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.File;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 2009510
+ * @version 20090516
  */
-public class HelperPdfTest { //TODO improve
+public class HelperPdfTest {
 	@Test
 	public void testCreatePdf() {
+		final Component component = new Button("Hello world", Const.EMPTY_STRING); //$NON-NLS-1$ 
+		component.setBackground(Color.YELLOW);
+		component.setForeground(Color.BLACK);
+		component.setFont(new Font("Arial", Font.PLAIN, Const.VALUE_16)); //$NON-NLS-1$
+		component.setSize(new Dimension(100, 100));
+
 		try {
-			final Component component = new Button("Hello world", ""); //$NON-NLS-1$ //$NON-NLS-2$
-			component.setBackground(Color.YELLOW);
-			component.setForeground(Color.BLACK);
-			component.setFont(new Font("Arial", Font.PLAIN, Const.VALUE_16)); //$NON-NLS-1$
-			component.setSize(new Dimension(100, 100));
-			
 			HelperPdf.savePdfFromComponent(component, HelperIO.getTemporaryFile("bogatyr_HelperPdfTest", "pdf")); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (Exception ex) {fail(ex.getMessage());}
+		
+		try {
+			HelperPdf.savePdfFromComponent(null, HelperIO.getTemporaryFile("bogatyr_HelperPdfTest", "pdf")); //$NON-NLS-1$ //$NON-NLS-2$
+			fail("component is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		try {
+			HelperPdf.savePdfFromComponent(component, null);
+			fail("file is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+	}
+	
+	@Test
+	public void testSavePdfFromHTML() { //TODO improve
+		try {
+			HelperPdf.savePdfFromHTML(null, HelperIO.getTemporaryFile("bogatyr_HelperPdfTest", "pdf")); //$NON-NLS-1$ //$NON-NLS-2$
+			fail("input is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+		try {
+			HelperPdf.savePdfFromHTML(new File[]{HelperIO.getTemporaryFile("bogatyr_HelperPdfTest", "html")}, null); //$NON-NLS-1$ //$NON-NLS-2$
+			fail("file is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 }
 

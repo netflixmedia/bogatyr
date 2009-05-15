@@ -40,7 +40,7 @@ import java.net.URI;
  * This control displays an URI in the default browser.
  *
  * @author Stefan Laubenberger
- * @version 20090507
+ * @version 20090516
  */
 public abstract class ControlBrowser {
 	
@@ -50,11 +50,16 @@ public abstract class ControlBrowser {
 	 * @param uri for the browser (e.g. "http://www.sisprocom.ch/")
 	 * @throws IOException 
 	 */
-	public static void display(final URI uri) throws IOException { //$JUnit
-		if (null == uri) {
-			throw new IllegalArgumentException("uri is null!"); //$NON-NLS-1$
+	public static void browse(final URI uri) throws IOException { //$JUnit
+		if (Desktop.isDesktopSupported()) {
+			if (null == uri) {
+				throw new IllegalArgumentException("uri is null!"); //$NON-NLS-1$
+			}
+
+			Desktop.getDesktop().browse(uri);
+		} else {
+			throw new RuntimeException("Browser not supported by your machine!"); //$NON-NLS-1$
 		}
-		Desktop.getDesktop().browse(uri);
 	}	
 	
 	

@@ -46,13 +46,13 @@ import java.util.UUID;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 20090516
  */
-public class HelperGeneralTest { //TODO improve
+public class HelperGeneralTest {
 	@Test
 	public void testCreateInstance() {
 		try {
-			assertEquals("", HelperGeneral.createInstance(String.class)); //$NON-NLS-1$
+			assertEquals(Const.EMPTY_STRING, HelperGeneral.createInstance(String.class));
 			assertEquals(AllBogatyrTests.DATA, HelperGeneral.createInstance(String.class, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA}));
 		} catch (Exception ex) {fail(ex.getMessage());}
 		
@@ -67,12 +67,12 @@ public class HelperGeneralTest { //TODO improve
 		} catch (Exception ex) {/*nothing to do*/}
 		
 		try {
-			HelperGeneral.createInstance(String.class, new Class[0], new Object[]{AllBogatyrTests.DATA});
+			HelperGeneral.createInstance(String.class, Const.EMPTY_ARRAY_CLASS, new Object[]{AllBogatyrTests.DATA});
 			fail("paramClazzes is empty!"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 	
 		try {
-			HelperGeneral.createInstance(String.class, new Class[]{String.class}, new Object[0]);
+			HelperGeneral.createInstance(String.class, new Class[]{String.class}, Const.EMPTY_ARRAY_OBJECT);
 			fail("params is empty!"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}	
 	}
@@ -81,14 +81,14 @@ public class HelperGeneralTest { //TODO improve
 	@Test
 	public void testIsValidString() {
 		assertFalse(HelperGeneral.isValid(new StringBuilder()));
-		assertFalse(HelperGeneral.isValid("")); //$NON-NLS-1$
+		assertFalse(HelperGeneral.isValid(Const.EMPTY_STRING)); 
 		assertTrue(HelperGeneral.isValid("123")); //$NON-NLS-1$
 	}
 
 	@Test
 	public void testIsStringNumeric() {
 		assertFalse(HelperGeneral.isStringNumeric(null));
-		assertFalse(HelperGeneral.isStringNumeric("")); //$NON-NLS-1$
+		assertFalse(HelperGeneral.isStringNumeric(Const.EMPTY_STRING)); 
 		assertTrue(HelperGeneral.isStringNumeric("123.0")); //$NON-NLS-1$
 		assertTrue(HelperGeneral.isStringNumeric("123")); //$NON-NLS-1$
 		assertTrue(HelperGeneral.isStringNumeric("123.23")); //$NON-NLS-1$
@@ -101,7 +101,7 @@ public class HelperGeneralTest { //TODO improve
 	
 	@Test
 	public void testIsValidArray() {
-		assertFalse(HelperGeneral.isValid(new String[0]));
+		assertFalse(HelperGeneral.isValid(Const.EMPTY_ARRAY_STRING));
 		assertTrue(HelperGeneral.isValid(new String[1]));
 	}
 	
@@ -138,7 +138,7 @@ public class HelperGeneralTest { //TODO improve
 		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
-			HelperGeneral.deserialize(new byte[0]);
+			HelperGeneral.deserialize(Const.EMPTY_ARRAY_BYTE);
 			fail("byte[] is empty"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 	}
@@ -276,7 +276,7 @@ public class HelperGeneralTest { //TODO improve
 	public void testGetValidNumericString() {
         assertNull(HelperGeneral.getValidNumericString(null));
 
-        assertNull(HelperGeneral.getValidNumericString("")); //$NON-NLS-1$
+        assertNull(HelperGeneral.getValidNumericString(Const.EMPTY_STRING)); 
 
 		assertEquals("123.0", HelperGeneral.getValidNumericString("123.0")); //$NON-NLS-1$ //$NON-NLS-2$
 		assertEquals("123.23", HelperGeneral.getValidNumericString("123.23abc")); //$NON-NLS-1$ //$NON-NLS-2$

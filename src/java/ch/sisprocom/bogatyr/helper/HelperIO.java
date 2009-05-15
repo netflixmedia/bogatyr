@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import javax.swing.filechooser.FileSystemView;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -54,15 +55,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.swing.filechooser.FileSystemView;
-
 
 /**
  * This is a helper class for I/O.
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090511
+ * @version 20090516
  */
 public abstract class HelperIO {
 	public static final String DEFAULT_ENCODING = "UTF-8"; //$NON-NLS-1$
@@ -96,7 +95,7 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Search in a path (directory) for files and directories via identifier.
+     * Search in a path (directory) for files and directories via identifier and returns a {@link Collection} containing all {@link File}.
      * 
      * @param path for searching
      * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
@@ -123,7 +122,7 @@ public abstract class HelperIO {
 	}
 
 	/**
-     * Search in a path (directory) for files and directories via identifier.
+     * Search in a path (directory) for files and directories via identifier and returns a {@link Collection} containing all {@link File}..
      * 
      * @param path for searching
      * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
@@ -172,7 +171,7 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Copy a file.
+     * Copy a {@link File}.
      * 
      * @param source file to copy
      * @param dest file
@@ -379,7 +378,7 @@ public abstract class HelperIO {
 			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
 		}
 
-		FileOutputStream fos = new FileOutputStream(file);
+		final FileOutputStream fos = new FileOutputStream(file);
 		final Writer writer = new OutputStreamWriter(fos, encoding); 
 		
 //		final Writer writer = new BufferedWriter(new FileWriter(file));
@@ -559,7 +558,7 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Reads a {@link File} in a list with the chosen encoding.
+     * Reads a {@link File} in a {@link Collection} with the chosen encoding.
      * 
      * @param file for reading
      * @param encoding of the file
@@ -591,7 +590,7 @@ public abstract class HelperIO {
 	}
 
 	/**
-     * Reads a {@link File} in a list with the default encoding (UTF-8).
+     * Reads a {@link File} in a {@link Collection} with the default encoding (UTF-8).
      * 
      * @param file for reading
      * @return List containing the file content
@@ -623,7 +622,7 @@ public abstract class HelperIO {
 	}	
 
 	/**
-     * Concatenates a list of files to one output {@link File}.
+     * Concatenates an array of files to one output {@link File}.
      * 
      * @param fileOutput Output file
      * @param list List with all files
@@ -693,7 +692,7 @@ public abstract class HelperIO {
     }
 
 	/**
-	 * Returns all drive names of the current system.
+	 * Returns a {@link Collection} containing all drive names of the current system.
 	 * 
 	 * @return list containing all drive names of the current system 
 	 */
@@ -708,7 +707,7 @@ public abstract class HelperIO {
 	}
 
 	/**
-	 * Returns all available drives of the current system.
+	 * Returns a {@link Collection} containing all available drives of the current system.
 	 * 
 	 * @return list containing all drive names of the current system 
 	 */

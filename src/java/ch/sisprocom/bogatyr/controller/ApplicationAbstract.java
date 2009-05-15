@@ -38,9 +38,9 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is the skeleton for all Bogatyr applications.
  * 
  * @author Stefan Laubenberger
- * @version 20090304
+ * @version 20090516
  */
-public abstract class ApplicationAbstract implements Runnable { //TODO document in Wiki!
+public abstract class ApplicationAbstract implements Runnable {
 	private final long startTime = System.currentTimeMillis();
 	
 	

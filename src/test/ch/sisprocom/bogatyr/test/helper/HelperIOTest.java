@@ -31,28 +31,24 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.test.AllBogatyrTests;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-
-import org.junit.Test;
-
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090510
+ * @version 20090516
  */
-public class HelperIOTest { //TODO improve and complete
+public class HelperIOTest {
 	@Test
 	public void testgetTemporaryFile() {
 		try {
