@@ -61,11 +61,11 @@ public class HelperPdfTest {
 		component.setSize(new Dimension(100, 100));
 
 		try {
-			HelperPdf.savePdfFromComponent(component, HelperIO.getTemporaryFile("bogatyr_HelperPdfTest", "pdf")); //$NON-NLS-1$ //$NON-NLS-2$
+			HelperPdf.savePdfFromComponent(component, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf")); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (Exception ex) {fail(ex.getMessage());}
 		
 		try {
-			HelperPdf.savePdfFromComponent(null, HelperIO.getTemporaryFile("bogatyr_HelperPdfTest", "pdf")); //$NON-NLS-1$ //$NON-NLS-2$
+			HelperPdf.savePdfFromComponent(null, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf")); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("component is null!"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 		try {
@@ -77,11 +77,11 @@ public class HelperPdfTest {
 	@Test
 	public void testSavePdfFromHTML() { //TODO improve
 		try {
-			HelperPdf.savePdfFromHTML(null, HelperIO.getTemporaryFile("bogatyr_HelperPdfTest", "pdf")); //$NON-NLS-1$ //$NON-NLS-2$
+			HelperPdf.savePdfFromHTML(null, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf")); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("input is null!"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 		try {
-			HelperPdf.savePdfFromHTML(new File[]{HelperIO.getTemporaryFile("bogatyr_HelperPdfTest", "html")}, null); //$NON-NLS-1$ //$NON-NLS-2$
+			HelperPdf.savePdfFromHTML(new File[]{HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".html")}, null); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("file is null!"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 	}

@@ -69,7 +69,7 @@ public class PublicKeyProviderTest {
 	@Test
 	public void testGenerateCertificate() {
 		try {
-			final File file = HelperIO.getTemporaryFile("bogatr_PublicKeyProviderTest", "cer");  //$NON-NLS-1$//$NON-NLS-2$
+			final File file = HelperIO.getTemporaryFile("bogatr_PublicKeyProviderTest", ".cer");  //$NON-NLS-1$//$NON-NLS-2$
 
 			X509Certificate cert = publicKeyProvider.generateCertificate(keyPair, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(), new Date(System.currentTimeMillis() + Const.MILLISECONDS_WEEK));   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 			publicKeyProvider.storeCertificate(cert, file);

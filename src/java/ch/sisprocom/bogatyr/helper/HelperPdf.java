@@ -31,15 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Rectangle;
-import com.lowagie.text.pdf.DefaultFontMapper;
-import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.PdfTemplate;
-import com.lowagie.text.pdf.PdfWriter;
-import org.xhtmlrenderer.pdf.ITextRenderer;
-
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -47,6 +38,19 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.HashMap;
+
+import org.xhtmlrenderer.pdf.ITextRenderer;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Rectangle;
+import com.lowagie.text.pdf.DefaultFontMapper;
+import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
+import com.lowagie.text.pdf.PdfTemplate;
+import com.lowagie.text.pdf.PdfWriter;
 
 
 /**
@@ -138,4 +142,43 @@ public abstract class HelperPdf {
 		   }
 		}
 	}
+	
+    /**
+     * Modifies the meta data of given PDF and stores it in a new {@link File}.
+     * <strong>Meta data example:"</strong>
+     * metadata.put("Title", "Example");
+     * metadata.put("Author", "Stefan Laubenberger");
+     * metadata.put("Subject", "Example PDF meta data");
+     * metadata.put("Keywords", "Example, PDF");
+     * metadata.put("Creator", "http://www.sisprocom.ch/");
+     * metadata.put("Producer", "Silvan Spross");
+     * 
+     * @param source file
+     * @param dest file for the modified PDF
+     * @param metadata list with the new meta data informations
+     * @throws DocumentException
+     * @throws IOException
+     */
+	@SuppressWarnings("unchecked")
+	public static void setMetaData(String source, String dest, HashMap<String, String> metadata) throws IOException, DocumentException {
+		PdfReader reader = null;
+		PdfStamper stamper = null;
+		
+		try {
+			reader = new PdfReader(source);
+			stamper = new PdfStamper(reader, new FileOutputStream(dest));
+			
+			HashMap<String, String> info = reader.getInfo();
+			info.putAll(metadata);
+
+			stamper.setMoreInfo(info);
+		} finally {
+			if (null != stamper) {
+				stamper.close();
+			}
+			if (null != reader) {
+				reader.close();	   
+			}
+		}
+	} 
 }

@@ -34,6 +34,9 @@ package ch.sisprocom.bogatyr.helper.control;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
+
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
@@ -45,7 +48,7 @@ import java.net.URI;
 public abstract class ControlBrowser {
 	
 	/**
-	 * Displays an {@link URI} in the default browser.
+	 * Displays an {@link URI} in the default browser application.
 	 *
 	 * @param uri for the browser (e.g. "http://www.sisprocom.ch/")
 	 * @throws IOException 
@@ -62,6 +65,27 @@ public abstract class ControlBrowser {
 		}
 	}	
 	
+	/**
+	 * Displays an {@link String} in the default browser application.
+	 *
+	 * @param url for the browser (e.g. "www.sisprocom.ch")
+	 * @throws IOException 
+	 * @throws URISyntaxException 
+	 */
+	public static void browse(final String url) throws IOException, URISyntaxException { //$JUnit
+		if (!HelperGeneral.isValid(url)) {
+			throw new IllegalArgumentException("url is null or empty!"); //$NON-NLS-1$
+		}
+		
+		final String prefix = "://"; //$NON-NLS-1$
+		
+		if (url.contains(prefix)) {
+			browse(new URI(url));
+		} else {
+			//best guess as protocol is http
+			browse(new URI("http://" + url)); //$NON-NLS-1$
+		}
+	}	
 	
 	
 	//pre Java6 code

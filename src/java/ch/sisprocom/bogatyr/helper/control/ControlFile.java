@@ -31,6 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.control;
 
+import ch.sisprocom.bogatyr.helper.Const;
+import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
 import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 
@@ -38,6 +40,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 
 /**
  * This control opens, edits and prints data with the default system application.
@@ -46,11 +49,27 @@ import java.io.InputStream;
  * @version 20090516
  */
 public abstract class ControlFile {
+	private static final File PATH = HelperEnvInfo.getOsTempDirectory();
+	private static final String IDENTIFIER = ControlFile.class.getSimpleName();
+	
+	static {
+		try {
+			final Collection<File> list = HelperIO.getFiles(PATH, new String[]{IDENTIFIER}, false);
+			
+			for (File file : list) {
+				HelperIO.delete(file);
+			}
+		} catch (IOException ex) {
+			throw new RuntimeException("temporary files couldn't be deleted: " + ex.getLocalizedMessage()); //$NON-NLS-1$
+		}
+	}
+	
+	
 	/**
 	 * Open a byte-array data with the default system application.
 	 * 
 	 * @param data as byte array
-	 * @param extension of the file (e.g. "pdf")
+	 * @param extension of the file (e.g. ".pdf")
 	 * @throws IOException 
 	 */
 	public static void open(final byte[] data, final String extension) throws IOException {
@@ -61,10 +80,7 @@ public abstract class ControlFile {
 			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
 		}	
 		
-		// first store the data to a temporary file
-		final File temporaryFile = HelperIO.getTemporaryFile("temp", extension); //$NON-NLS-1$
-		HelperIO.writeFile(temporaryFile, data, false);
-		open(temporaryFile);
+		open(createTemporaryFile(data, extension));
 	}
 
 	/**
@@ -73,7 +89,7 @@ public abstract class ControlFile {
 	 * @param file data as file
 	 * @throws IOException 
 	 */
-	public static void open(final File file) throws IOException {
+	public static void open(final File file) throws IOException { //$JUnit
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
 				throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
@@ -89,10 +105,10 @@ public abstract class ControlFile {
 	 * Open an {@link InputStream} with the default system application.
 	 * 
 	 * @param is data as stream
-	 * @param extension of the file (e.g. "pdf")
+	 * @param extension of the file (e.g. ".pdf")
 	 * @throws IOException
 	 */
-	public static void open(final InputStream is, final String extension) throws IOException {
+	public static void open(final InputStream is, final String extension) throws IOException { //$JUnit
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
@@ -107,7 +123,7 @@ public abstract class ControlFile {
 	 * Edit a byte-array data with the default system application.
 	 * 
 	 * @param data as byte array
-	 * @param extension of the file (e.g. "html")
+	 * @param extension of the file (e.g. ".html")
 	 * @throws IOException 
 	 */
 	public static void edit(final byte[] data, final String extension) throws IOException {
@@ -118,10 +134,7 @@ public abstract class ControlFile {
 			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
 		}	
 		
-		// first store the data to a temporary file
-		final File temporaryFile = HelperIO.getTemporaryFile("temp", extension); //$NON-NLS-1$
-		HelperIO.writeFile(temporaryFile, data, false);
-		edit(temporaryFile);
+		edit(createTemporaryFile(data, extension));
 	}
 
 	/**
@@ -130,7 +143,7 @@ public abstract class ControlFile {
 	 * @param file data as file
 	 * @throws IOException 
 	 */
-	public static void edit(final File file) throws IOException {
+	public static void edit(final File file) throws IOException { //$JUnit
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
 				throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
@@ -146,10 +159,10 @@ public abstract class ControlFile {
 	 * Edit an {@link InputStream} with the default system application.
 	 * 
 	 * @param is data as stream
-	 * @param extension of the file (e.g. "html")
+	 * @param extension of the file (e.g. ".html")
 	 * @throws IOException
 	 */
-	public static void edit(final InputStream is, final String extension) throws IOException {
+	public static void edit(final InputStream is, final String extension) throws IOException { //$JUnit
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
@@ -164,7 +177,7 @@ public abstract class ControlFile {
 	 * Print a byte-array data with the default system application.
 	 * 
 	 * @param data as byte array
-	 * @param extension of the file (e.g. "html")
+	 * @param extension of the file (e.g. ".html")
 	 * @throws IOException 
 	 */
 	public static void print(final byte[] data, final String extension) throws IOException {
@@ -175,10 +188,7 @@ public abstract class ControlFile {
 			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
 		}	
 		
-		// first store the data to a temporary file
-		final File temporaryFile = HelperIO.getTemporaryFile("temp", extension); //$NON-NLS-1$
-		HelperIO.writeFile(temporaryFile, data, false);
-		edit(temporaryFile);
+		print(createTemporaryFile(data, extension));
 	}
 
 	/**
@@ -187,7 +197,7 @@ public abstract class ControlFile {
 	 * @param file data as file
 	 * @throws IOException 
 	 */
-	public static void print(final File file) throws IOException {
+	public static void print(final File file) throws IOException { //$JUnit
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
 				throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
@@ -203,10 +213,10 @@ public abstract class ControlFile {
 	 * Print an {@link InputStream} with the default system application.
 	 * 
 	 * @param is data as stream
-	 * @param extension of the file (e.g. "html")
+	 * @param extension of the file (e.g. ".html")
 	 * @throws IOException
 	 */
-	public static void print(final InputStream is, final String extension) throws IOException {
+	public static void print(final InputStream is, final String extension) throws IOException { //$JUnit
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
@@ -216,6 +226,25 @@ public abstract class ControlFile {
 		
 		print(HelperIO.readStream(is), extension);
 	}
+	
+	
+	/*
+	 * Private methods
+	 */
+	private static File createTemporaryFile(final byte[] data, final String extension) throws IOException {
+		File file;
+		if (extension.startsWith(Const.PERIOD)) {
+			file = new File(PATH, IDENTIFIER + System.currentTimeMillis() + extension);
+		} else {
+			file = new File(PATH, IDENTIFIER + System.currentTimeMillis() + Const.PERIOD + extension);
+		}
+
+		HelperIO.writeFile(file, data, false);
+		
+		return file;
+	}
+
+	
 	
 	//pre Java6 code
 	

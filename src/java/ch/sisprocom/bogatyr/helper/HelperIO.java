@@ -86,8 +86,13 @@ public abstract class HelperIO {
 		}
 
 		// Create temp file
-	    final File file = File.createTempFile(name, extension);
-	
+		File file;
+		if (extension.startsWith(Const.PERIOD)) {
+			file = File.createTempFile(name, extension);
+		} else {
+			file = File.createTempFile(name, Const.PERIOD + extension);
+		}
+		
 	    // Delete temp file when program exits
 	    file.deleteOnExit();
 	    
