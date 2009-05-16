@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,11 +31,11 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.control;
 
-import ch.sisprocom.bogatyr.helper.control.ControlBrowser;
 import static org.junit.Assert.fail;
+
 import org.junit.Test;
 
-import java.net.URI;
+import ch.sisprocom.bogatyr.helper.control.ControlFile;
 
 
 /**
@@ -44,16 +44,40 @@ import java.net.URI;
  * @author Stefan Laubenberger
  * @version 20090516
  */
-public class ControlBrowserTest {
+public class ControlFileTest {
 	@Test
-	public void testBrowse() {
+	public void testOpen() {
 		try {
-			ControlBrowser.browse(new URI("http://www.sisprocom.ch/bogatyr/")); //$NON-NLS-1$
+			ControlFile.open(getClass().getResourceAsStream("/res/ch/sisprocom/bogatyr/test/test.txt"), ".txt");  //$NON-NLS-1$//$NON-NLS-2$
 		} catch (Exception ex) {fail(ex.getMessage());}
-
+		
 		try {
-			ControlBrowser.browse("code.google.com/p/bogatyr/"); //$NON-NLS-1$
+			ControlFile.open(null);
+			fail("file is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+	}
+	
+	@Test
+	public void testEdit() {
+		try {
+			ControlFile.edit(getClass().getResourceAsStream("/res/ch/sisprocom/bogatyr/test/test.txt"), ".txt");  //$NON-NLS-1$//$NON-NLS-2$
 		} catch (Exception ex) {fail(ex.getMessage());}
-
+		
+		try {
+			ControlFile.edit(null);
+			fail("file is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
+	}
+	
+	@Test
+	public void testPrint() {
+		try {
+			ControlFile.print(getClass().getResourceAsStream("/res/ch/sisprocom/bogatyr/test/test.txt"), ".txt"); //$NON-NLS-1$ //$NON-NLS-2$
+		} catch (Exception ex) {fail(ex.getMessage());}
+		
+		try {
+			ControlFile.print(null);
+			fail("file is null"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 }

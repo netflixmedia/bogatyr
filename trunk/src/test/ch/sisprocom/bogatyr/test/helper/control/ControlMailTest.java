@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,11 +31,13 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.control;
 
-import ch.sisprocom.bogatyr.helper.control.ControlBrowser;
 import static org.junit.Assert.fail;
-import org.junit.Test;
 
 import java.net.URI;
+
+import org.junit.Test;
+
+import ch.sisprocom.bogatyr.helper.control.ControlMail;
 
 
 /**
@@ -44,16 +46,19 @@ import java.net.URI;
  * @author Stefan Laubenberger
  * @version 20090516
  */
-public class ControlBrowserTest {
+public class ControlMailTest {
 	@Test
-	public void testBrowse() {
+	public void testMail() {
 		try {
-			ControlBrowser.browse(new URI("http://www.sisprocom.ch/bogatyr/")); //$NON-NLS-1$
+			ControlMail.mail();
 		} catch (Exception ex) {fail(ex.getMessage());}
 
 		try {
-			ControlBrowser.browse("code.google.com/p/bogatyr/"); //$NON-NLS-1$
+			ControlMail.mail(new URI("mailto:yourname@yourmail.com")); //$NON-NLS-1$
 		} catch (Exception ex) {fail(ex.getMessage());}
 
+		try {
+			ControlMail.mail("yourname@yourOtherMail.com"); //$NON-NLS-1$
+		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 }

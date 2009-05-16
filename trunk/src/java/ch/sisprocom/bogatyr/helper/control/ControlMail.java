@@ -34,20 +34,36 @@ package ch.sisprocom.bogatyr.helper.control;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
+
+import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
- * This control sends an URI to the default mail application.
+ * This control opens an email address with the default mail application.
  *
  * @author Stefan Laubenberger
  * @version 20090516
  */
 public abstract class ControlMail {
+
+	/**
+	 * Opens the default mail application.
+	 *
+	 * @throws IOException 
+	 */
+	public static void mail() throws IOException { //$JUnit
+		if (Desktop.isDesktopSupported()) {
+			Desktop.getDesktop().mail();
+		} else {
+			throw new RuntimeException("Mail application not supported by your machine!"); //$NON-NLS-1$
+		}
+	}
 	
 	/**
-	 * Send an {@link URI} to the default mail application.
+	 * Opens an email address given as {@link URI} with the default mail application.
 	 *
-	 * @param uri for the mail application (e.g. "yourname@yourmail.com")
+	 * @param uri for the mail application (e.g. "mailto:yourname@yourmail.com"). It supports CC, BCC, SUBJECT, and BODY.
 	 * @throws IOException 
 	 */
 	public static void mail(final URI uri) throws IOException { //$JUnit
@@ -60,5 +76,26 @@ public abstract class ControlMail {
 		} else {
 			throw new RuntimeException("Mail application not supported by your machine!"); //$NON-NLS-1$
 		}
-	}	
+	}
+	
+	/**
+	 * Opens an email address given as {@link String} with the default mail application.
+	 *
+	 * @param emailAddress for the mail application (e.g. "yourname@yourmail.com")
+	 * @throws IOException 
+	 * @throws URISyntaxException 
+	 */
+	public static void mail(final String emailAddress) throws IOException, URISyntaxException { //$JUnit
+		if (!HelperGeneral.isValid(emailAddress)) {
+			throw new IllegalArgumentException("emailAddress is null or empty!"); //$NON-NLS-1$
+		}
+		
+		final String prefix = "mailto:"; //$NON-NLS-1$
+		
+		if (emailAddress.toLowerCase().startsWith(prefix)) {
+			mail(new URI(emailAddress));
+		} else {
+			mail(new URI(prefix + emailAddress));
+		}
+	}
 }

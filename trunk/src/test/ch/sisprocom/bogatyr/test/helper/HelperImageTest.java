@@ -61,11 +61,11 @@ public class HelperImageTest {
 		component.setSize(new Dimension(100, 100));
 
 		try {
-			HelperImage.saveImage(component, HelperImage.TYPE_JPG, HelperIO.getTemporaryFile("bogatyr_HelperImageTest", HelperImage.TYPE_JPG)); //$NON-NLS-1$
+			HelperImage.saveImage(component, HelperImage.TYPE_JPG, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), HelperImage.TYPE_JPG)); //$NON-NLS-1$
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
 		
 		try {
-			HelperImage.saveImage(component, "blabla", HelperIO.getTemporaryFile("bogatyr_HelperImageTest", HelperImage.TYPE_JPG)); //$NON-NLS-1$ //$NON-NLS-2$
+			HelperImage.saveImage(component, "blabla", HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), HelperImage.TYPE_JPG)); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("type is invalid!"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 		try {
