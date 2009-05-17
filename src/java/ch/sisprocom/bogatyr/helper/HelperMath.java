@@ -40,7 +40,7 @@ import java.util.Collection;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090517
  */
 public abstract class HelperMath {
 	
@@ -90,27 +90,23 @@ public abstract class HelperMath {
      * @return true/false
      */	
 	public static boolean isPrime(final int n) { //$JUnit
-//        try {
-			// 2 is the smallest prime
-	        if (2 >= n) {
-	        	return 2 == n;
-	        }
-	
-	        // even numbers other than 2 are not prime
-	        if (0 == n % 2) {
-	            return false;
-	        }
-	
-	        // check odd divisors from 3 to the square root of n
-	        for (int i = 3, end = (int)StrictMath.sqrt((double) n); i <= end; i += 2) {
-	            if (0 == n % i) {
-	                return false;
-	            }
-	        }
-	        return true;
-//        } finally {
-//    		Logger.getInstance().writeMethodExit(HelperStrictMath.class, "isPrime", flag);  //$NON-NLS-1$
-//        }
+		// 2 is the smallest prime
+        if (2 >= n) {
+        	return 2 == n;
+        }
+
+        // even numbers other than 2 are not prime
+        if (0 == n % 2) {
+            return false;
+        }
+
+        // check odd divisors from 3 to the square root of n
+        for (int i = 3, end = (int)StrictMath.sqrt((double) n); i <= end; i += 2) {
+            if (0 == n % i) {
+                return false;
+            }
+        }
+        return true;
     }
 
 	/**
@@ -227,12 +223,164 @@ public abstract class HelperMath {
      * @param days elapsed
      * @return calculated amount with a given start amount, interest and elapsed days
      */
-    public static double calcAmount(final double amount, final double interest, final double days) { //$JUnit
-		 if (0.0D >= days) {
+    public static double calcAmount(final double amount, final double interest, final int days) { //$JUnit
+		 if (0 >= days) {
 			 throw new IllegalArgumentException("days value must be positive: " + days); //$NON-NLS-1$
 		 }
 		 
 		 return amount * StrictMath.pow(StrictMath.E, days/360*interest);
+    }
+    
+	/**
+     * Calculates the factorial (n!) from 0 to n.
+     * 
+     * @param n number to calculate
+     * @return factorial (n!) from 1 to n
+     */	
+	public static int factorial(final int n) {
+        if (0 > n) {
+        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        }
+        
+        if (0 == n) {
+        	return 1;
+        }
+
+        return n * (n + 1) / 2;
+    }
+	
+	/**
+     * Calculates the square factorial from 0 to n^2.
+     * 
+     * @param n number to calculate
+     * @return square factorial from 1 to n^2
+     */	
+	public static int factorialSquare(final int n) {
+        if (0 > n) {
+        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        }
+        
+        if (0 == n) {
+        	return 1;
+        }
+
+        return n * (n + 1) * (2* n + 1) / 6;
+    }
+	
+	/**
+     * Calculates the cubic factorial from 0 to n^3.
+     * 
+     * @param n number to calculate
+     * @return square factorial from 1 to n^3
+     */	
+	public static int factorialCubic(final int n) {
+        if (0 > n) {
+        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        }
+        
+        if (0 == n) {
+        	return 1;
+        }
+
+        return (int) StrictMath.pow(factorial(n), 2.0D);
+    }
+	
+	/**
+     * Calculates the number of connections from n.
+     * 
+     * @param n number to calculate
+     * @return number of connections from n
+     */	
+	public static int calcConnections(final int n) {
+        if (0 >= n) {
+        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        }
+        
+        return n * (n - 1) / 2;
+    }
+
+	/**
+     * Calculates for the given number of persons the probability that two people will share a birthday.
+     * 
+     * @param n number of persons
+     * @return probability that two people will share a birthday
+     */	
+	public static double calcBirthdayProblem(final int n) { //TODO does it also work for other parameters than days p.a.?
+        if (0 >= n) {
+        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        }
+        
+        return factorial(Const.DAYS_YEAR) / (factorial(Const.DAYS_YEAR - n) * StrictMath.pow(Const.DAYS_YEAR, n));
+    }
+
+	/**
+     * Calculates the binomial coefficient ("n choose k").
+     * 
+     * @param n range
+     * @param k subset of n ("n choose k")
+     * @return binomial coefficient
+     */	
+	public static int binomialCoefficient(final int n, final int k) {
+        if (0 > n) {
+        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        }
+        if (0 > k) {
+        	throw new IllegalArgumentException("k value must be positive: " + k); //$NON-NLS-1$
+        }
+		if (k > n) {
+            throw new IllegalArgumentException("n value (" + n + ") must be greater than the k value (" + k + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+  
+        return factorial(n) / (factorial(n - k) * factorial(k));
+    }
+
+	/**
+     * Calculates the sum between the range m - n.
+     * 
+     * @param m start number for the range
+     * @param n end number for the range
+     * @return sum between the range m - n
+     */	
+	public static int sumRange(final int m, final int n) {
+        if (0 > m) {
+        	throw new IllegalArgumentException("m value must be positive: " + m); //$NON-NLS-1$
+        }
+        if (0 > n) {
+        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        }
+		if (m > n) {
+            throw new IllegalArgumentException("n value (" + n + ") must be greater than the m value (" + m + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+        
+        return (m + n) * (n - m + 1) / 2;
+    }
+
+	/**
+     * Calculates the sum of odd numbers between 0 - n.
+     * 
+     * @param n end number for the range
+     * @return sum of odd numbers between 0 - n
+     */	
+	public static int sumOdd(final int n) {
+        if (0 > n) {
+        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        }
+        
+        return (int)StrictMath.pow(n, 2.0D);
+    }
+
+	/**
+     * Calculates the sum of even numbers between 0 - n.
+     * 
+     * @param n number
+     * @return sum of even numbers between 0 - n
+     */	
+	public static int sumEven(final int n) {
+        if (0 > n) {
+        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        }
+        
+        return factorial(n) - sumOdd(n);
     }
 }
 
