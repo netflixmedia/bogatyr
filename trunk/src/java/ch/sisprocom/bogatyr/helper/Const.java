@@ -39,7 +39,7 @@ import java.math.BigInteger;
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090517
  */
 public interface Const {
 	  //characters
@@ -134,11 +134,21 @@ public interface Const {
 	  
 	  //volume units
 	  double FACTOR_VOLUME_PINT_TO_CM3 = 473.176473D; //pint to centimeters^3
+	  double FACTOR_VOLUME_QUART_TO_L = 0.946326D; //quart to liter
 	  double FACTOR_VOLUME_GALLON_TO_L = 3.785411784D; //gallon to liter
 	  double FACTOR_VOLUME_BARREL_TO_L = 158.987294928D; //barrel to liter
 	  double FACTOR_VOLUME_MM3_TO_CM3 = 1000.0D; //millimeters^3 to centimeters^3
 	  double FACTOR_VOLUME_CM3_TO_L = 1000.0D; //centimeters^3 to liter
 	  double FACTOR_VOLUME_L_TO_M3 = 1000.0D; //liter to m^3
+
+	  //weight units
+	  double FACTOR_WEIGHT_OUNCE_TO_G = 28.34952D; //ounce to gram
+	  double FACTOR_WEIGHT_POUND_TO_KG = 0.453592D; //pound to kilogram
+	  double FACTOR_WEIGHT_TON_TO_KG = 907.1847D; //ton to kilogram
+	  double FACTOR_VOLUME_MG_TO_G = 1000.0D; //milligram to gram
+	  double FACTOR_VOLUME_G_TO_KG = 1000.0D; //gram to kilogram
 	  
 	  double FACTOR_GOLDEN_RATIO_A_TO_B = 1.6180339887D; //golden ratio between a and b
+	  
+	  double FACTOR_KCAL_TO_KJ = 4.184D; //kilogram calorie to kilojoule
 }

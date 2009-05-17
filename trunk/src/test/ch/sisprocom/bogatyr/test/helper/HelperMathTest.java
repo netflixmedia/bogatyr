@@ -190,13 +190,13 @@ public class HelperMathTest {
 	
 	@Test
 	public void testCalcAmount() {
-		assertEquals(10055.710162720176D, HelperMath.calcAmount(10000D, 0.04D, 50D), 0.00001D);
-		assertEquals(9944.598480048968D, HelperMath.calcAmount(10000D, -0.04D, 50D), 0.00001D);
-		assertEquals(-9944.598480048968D, HelperMath.calcAmount(-10000D, -0.04D, 50D), 0.00001D);
-		assertEquals(-10055.710162720176D, HelperMath.calcAmount(-10000D, 0.04D, 50D), 0.00001D);
+		assertEquals(10055.710162720176D, HelperMath.calcAmount(10000D, 0.04D, 50), 0.00001D);
+		assertEquals(9944.598480048968D, HelperMath.calcAmount(10000D, -0.04D, 50), 0.00001D);
+		assertEquals(-9944.598480048968D, HelperMath.calcAmount(-10000D, -0.04D, 50), 0.00001D);
+		assertEquals(-10055.710162720176D, HelperMath.calcAmount(-10000D, 0.04D, 50), 0.00001D);
 
 		try {
-			HelperMath.calcAmount(10000D, 0.04D, -50D);
+			HelperMath.calcAmount(10000D, 0.04D, -50);
 			fail("days (-50) must be positive!"); //$NON-NLS-1$
 		} catch (Exception e) {/*nothing to do*/}		
 
