@@ -38,10 +38,10 @@ import ch.sisprocom.bogatyr.helper.Const;
  * Converts different units of length.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090519
  * @see Const
  */
-public abstract class ConverterLength {
+public abstract class ConverterLength { //TODO please complete at your own...
 	public static final int DEFAULT_DPI = 72;
 	
     /**

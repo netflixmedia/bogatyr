@@ -8,7 +8,7 @@
 	<classpathentry kind="lib" path="lib/mqseries/com.ibm.mqbind.jar"/>
 	<classpathentry kind="lib" path="lib/mqseries/connector.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="lib/iText-2.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/iText-2.1.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/bcprov-jdk16-143.jar"/>
 	<classpathentry kind="output" path="bin"/>
