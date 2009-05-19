@@ -228,7 +228,7 @@ public abstract class HelperMath {
 			 throw new IllegalArgumentException("days value must be positive: " + days); //$NON-NLS-1$
 		 }
 		 
-		 return amount * StrictMath.pow(StrictMath.E, days/360*interest);
+		 return amount * StrictMath.pow(StrictMath.E, (double)days/360*interest);
     }
     
 	/**
