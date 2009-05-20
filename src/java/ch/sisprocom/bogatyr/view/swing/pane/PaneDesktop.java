@@ -35,14 +35,14 @@ import java.awt.Component;
 
 import javax.swing.JDesktopPane;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JDesktopPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090506
+ * @version 20090520
  */
 public class PaneDesktop extends JDesktopPane {
 	private static final long serialVersionUID = -1000995349055355841L;
@@ -58,7 +58,7 @@ public class PaneDesktop extends JDesktopPane {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 	@Override

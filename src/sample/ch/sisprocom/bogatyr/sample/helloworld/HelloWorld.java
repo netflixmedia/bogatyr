@@ -36,7 +36,7 @@ import ch.sisprocom.bogatyr.controller.localizer.ControllerLocalizerFile;
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
 import ch.sisprocom.bogatyr.controller.property.ControllerProperty;
 import ch.sisprocom.bogatyr.controller.property.IControllerProperty;
-import ch.sisprocom.bogatyr.helper.Const;
+import ch.sisprocom.bogatyr.helper.HelperString;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +48,7 @@ import java.util.Locale;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090426
+ * @version 20090520
  */
 public class HelloWorld extends ApplicationAbstract { 
 	// Fixed parameter - e.g. this could be an argument
@@ -100,10 +100,10 @@ public class HelloWorld extends ApplicationAbstract {
 		final String username = property.getValue(PROPERTY_USERNAME);
 		
 		localizer.setLocale(Locale.GERMAN);
-		System.out.println(localizer.getValue(RES_WELCOME) + Const.SPACE + username + '!');
+		System.out.println(localizer.getValue(RES_WELCOME) + HelperString.SPACE + username + '!');
 		
 		localizer.setLocale(Locale.ROOT);
-		System.out.println(localizer.getValue(RES_WELCOME) + Const.SPACE + username + '!');
+		System.out.println(localizer.getValue(RES_WELCOME) + HelperString.SPACE + username + '!');
 
 		exit(0);
 	}

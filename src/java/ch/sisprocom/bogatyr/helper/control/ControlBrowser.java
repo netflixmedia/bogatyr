@@ -31,19 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.control;
 
+import ch.sisprocom.bogatyr.helper.HelperString;
+
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
 
 
 /**
  * This control displays an URI in the default browser.
  *
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public abstract class ControlBrowser {
 	
@@ -73,7 +73,7 @@ public abstract class ControlBrowser {
 	 * @throws URISyntaxException 
 	 */
 	public static void browse(final String url) throws IOException, URISyntaxException { //$JUnit
-		if (!HelperGeneral.isValid(url)) {
+		if (!HelperString.isValid(url)) {
 			throw new IllegalArgumentException("url is null or empty!"); //$NON-NLS-1$
 		}
 		

@@ -31,10 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.control;
 
-import ch.sisprocom.bogatyr.helper.Const;
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperString;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -46,17 +46,17 @@ import java.util.Collection;
  * This control opens, edits and prints data with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public abstract class ControlFile {
-	private static final File PATH = HelperEnvInfo.getOsTempDirectory();
+	private static final File PATH = HelperEnvironment.getOsTempDirectory();
 	private static final String IDENTIFIER = ControlFile.class.getSimpleName();
 	
 	static {
 		try {
 			final Collection<File> list = HelperIO.getFiles(PATH, new String[]{IDENTIFIER}, false);
 			
-			for (File file : list) {
+			for (final File file : list) {
 				HelperIO.delete(file);
 			}
 		} catch (IOException ex) {
@@ -73,10 +73,10 @@ public abstract class ControlFile {
 	 * @throws IOException 
 	 */
 	public static void open(final byte[] data, final String extension) throws IOException {
-		if (!HelperGeneral.isValid(data)) {
+		if (!HelperArray.isValid(data)) {
 			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(extension)) {
+		if (!HelperString.isValid(extension)) {
 			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
 		}	
 		
@@ -112,7 +112,7 @@ public abstract class ControlFile {
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(extension)) {
+		if (!HelperString.isValid(extension)) {
 			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -127,10 +127,10 @@ public abstract class ControlFile {
 	 * @throws IOException 
 	 */
 	public static void edit(final byte[] data, final String extension) throws IOException {
-		if (!HelperGeneral.isValid(data)) {
+		if (!HelperArray.isValid(data)) {
 			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(extension)) {
+		if (!HelperString.isValid(extension)) {
 			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
 		}	
 		
@@ -166,7 +166,7 @@ public abstract class ControlFile {
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(extension)) {
+		if (!HelperString.isValid(extension)) {
 			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -181,10 +181,10 @@ public abstract class ControlFile {
 	 * @throws IOException 
 	 */
 	public static void print(final byte[] data, final String extension) throws IOException {
-		if (!HelperGeneral.isValid(data)) {
+		if (!HelperArray.isValid(data)) {
 			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(extension)) {
+		if (!HelperString.isValid(extension)) {
 			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
 		}	
 		
@@ -220,7 +220,7 @@ public abstract class ControlFile {
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(extension)) {
+		if (!HelperString.isValid(extension)) {
 			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -232,11 +232,11 @@ public abstract class ControlFile {
 	 * Private methods
 	 */
 	private static File createTemporaryFile(final byte[] data, final String extension) throws IOException {
-		File file;
-		if (extension.startsWith(Const.PERIOD)) {
+		final File file;
+		if (extension.startsWith(HelperString.PERIOD)) {
 			file = new File(PATH, IDENTIFIER + System.currentTimeMillis() + extension);
 		} else {
-			file = new File(PATH, IDENTIFIER + System.currentTimeMillis() + Const.PERIOD + extension);
+			file = new File(PATH, IDENTIFIER + System.currentTimeMillis() + HelperString.PERIOD + extension);
 		}
 
 		HelperIO.writeFile(file, data, false);

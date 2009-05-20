@@ -29,11 +29,8 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper;
+package ch.sisprocom.bogatyr.helper.printer;
 
-import ch.sisprocom.bogatyr.view.swing.Panel;
-
-import javax.swing.RepaintManager;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -42,12 +39,17 @@ import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 
+import javax.swing.RepaintManager;
+
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.view.swing.Panel;
+
 
 /**
  * This is a printer class for print operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class Printer implements Printable { 
 	private Component componentToBePrinted;
@@ -77,7 +79,7 @@ public class Printer implements Printable {
 	}
 	
 	/**
-	 * The speed and quality of printing suffers dramatically if any of thecontainers have double buffering turned on.
+	 * The speed and quality of printing suffers dramatically if any of the containers have double buffering turned on.
 	 * So this turns if off globally.
      *
      * @param component to disable double buffering
@@ -102,7 +104,7 @@ public class Printer implements Printable {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 
 

@@ -36,8 +36,8 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.converter.ConverterHex;
-import ch.sisprocom.bogatyr.helper.Const;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 
@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class ConverterHexTest {
 	@Test
@@ -61,7 +61,7 @@ public class ConverterHexTest {
 		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
-			ConverterHex.encode(Const.EMPTY_ARRAY_BYTE);
+			ConverterHex.encode(HelperArray.EMPTY_ARRAY_BYTE);
 			fail("byte[] is empty!"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 

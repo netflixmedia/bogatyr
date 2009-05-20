@@ -31,21 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.converter;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.Const;
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperString;
 
 
 /**
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090520
  */
 public abstract class ConverterBase64 {
     private static final String ERROR_ILLEGAL_CHARACTER = "Illegal character in Base64 encoded data"; //$NON-NLS-1$
 
-	private static final char[] map1 = new char[Const.VALUE_64];
-	private static final byte[] map2 = new byte[Const.VALUE_128];
+	private static final char[] map1 = new char[HelperNumber.VALUE_64];
+	private static final byte[] map2 = new byte[HelperNumber.VALUE_128];
 
 	// Mapping table from 6-bit nibbles to Base64 characters.
 	static {
@@ -72,7 +73,7 @@ public abstract class ConverterBase64 {
 		for (int ii = 0; ii < map2.length; ii++) {
 			map2[ii] = (byte) -1;
 		}
-		for (int ii = 0; Const.VALUE_64 > ii; ii++) {
+		for (int ii = 0; HelperNumber.VALUE_64 > ii; ii++) {
 			map2[map1[ii]] = (byte) ii;
 		}
 	}
@@ -85,7 +86,7 @@ public abstract class ConverterBase64 {
 	 * @return String with the Base64 encoded data
 	 */
 	public static String encode(final String input) { //$JUnit
-		if (!HelperGeneral.isValid(input)) {
+		if (!HelperString.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -100,7 +101,7 @@ public abstract class ConverterBase64 {
 	 * @return character array with the Base64 encoded data
 	 */
 	public static char[] encode(final byte[] input) { //$JUnit
-		if (!HelperGeneral.isValid(input)) {
+		if (!HelperArray.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -115,7 +116,7 @@ public abstract class ConverterBase64 {
 	 * @throws IllegalArgumentException
 	 */
 	public static byte[] decode(final String input) { //$JUnit
-		if (!HelperGeneral.isValid(input)) {
+		if (!HelperString.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
 		

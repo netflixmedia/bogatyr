@@ -54,6 +54,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Locale;
 
 
 /**
@@ -61,12 +62,12 @@ import java.util.Scanner;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090516
+ * @version 20090520
  */
 public abstract class HelperIO {
 	public static final String DEFAULT_ENCODING = "UTF-8"; //$NON-NLS-1$
 	
-	private static final byte[] BUFFER = new byte[Const.VALUE_1024];
+	private static final byte[] BUFFER = new byte[HelperNumber.VALUE_1024];
 //	private static final int BUFFER = 1024;
 	
 	/**
@@ -78,19 +79,19 @@ public abstract class HelperIO {
      * @throws IOException
      */	
 	public static File getTemporaryFile(final String name, final String extension) throws IOException { //$JUnit
-		if (!HelperGeneral.isValid(name)) {
+		if (!HelperString.isValid(name)) {
 			throw new IllegalArgumentException("name is null or empty!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(extension)) {
+		if (!HelperString.isValid(extension)) {
 			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
 		}
 
 		// Create temp file
-		File file;
-		if (extension.startsWith(Const.PERIOD)) {
+		final File file;
+		if (extension.startsWith(HelperString.PERIOD)) {
 			file = File.createTempFile(name, extension);
 		} else {
-			file = File.createTempFile(name, Const.PERIOD + extension);
+			file = File.createTempFile(name, HelperString.PERIOD + extension);
 		}
 		
 	    // Delete temp file when program exits
@@ -298,7 +299,7 @@ public abstract class HelperIO {
 //		if (!file.isFile()) {
 //			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 //		}
-		if (!HelperGeneral.isValid(encoding)) {
+		if (!HelperString.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
 		if (null == line) {
@@ -376,7 +377,7 @@ public abstract class HelperIO {
 //		if (!file.isFile()) {
 //			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 //		}
-		if (!HelperGeneral.isValid(encoding)) {
+		if (!HelperString.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
 		if (null == data) {
@@ -525,7 +526,7 @@ public abstract class HelperIO {
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(encoding)) {
+		if (!HelperString.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
 
@@ -539,7 +540,7 @@ public abstract class HelperIO {
 			}
 			
 	    	while (scanner.hasNextLine()){
-	    		contents.append(Const.NEW_LINE);
+	    		contents.append(HelperString.NEW_LINE);
 	    		contents.append(scanner.nextLine());
 //	    		contents.append(System.getProperty("line.separator")); //$NON-NLS-1$
                 
@@ -577,7 +578,7 @@ public abstract class HelperIO {
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(encoding)) {
+		if (!HelperString.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
 
@@ -640,7 +641,7 @@ public abstract class HelperIO {
 //		if (!fileOutput.isFile()) {
 //			throw new IllegalArgumentException("fileOutput is not a file: " + fileOutput); //$NON-NLS-1$
 //		}
-		if (!HelperGeneral.isValid(list)) {
+		if (!HelperArray.isValid(list)) {
 			throw new IllegalArgumentException("list is null or empty!"); //$NON-NLS-1$
 		}
 
@@ -872,7 +873,7 @@ public abstract class HelperIO {
 						fileList.add(file);
 					} else {
 						for (final String id : identifier) {
-							 if (isCaseSensitive && file.getAbsolutePath().contains(id) != isExclude || !isCaseSensitive && file.getAbsolutePath().toUpperCase().contains(id.toUpperCase()) != isExclude) {
+							 if (isCaseSensitive && file.getAbsolutePath().contains(id) != isExclude || !isCaseSensitive && file.getAbsolutePath().toUpperCase(Locale.getDefault()).contains(id.toUpperCase(Locale.getDefault())) != isExclude) {
 								 fileList.add(file);
 							 }
 						}

@@ -40,13 +40,15 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.HelperString;
 
 /**
  * This is a class for wrapping and unwrapping a crypto key.
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 20090520
  */
 public class KeyWrapper implements IKeyWrapper {
 	/*
@@ -54,7 +56,7 @@ public class KeyWrapper implements IKeyWrapper {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 	
@@ -79,10 +81,10 @@ public class KeyWrapper implements IKeyWrapper {
 		if (null == wrapperKey) {
 			throw new IllegalArgumentException("wrapperKey is null!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(wrappedKey)) {
+		if (!HelperArray.isValid(wrappedKey)) {
 			throw new IllegalArgumentException("wrappedKey is null or empty!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(keyAlgorithm)) {
+		if (!HelperString.isValid(keyAlgorithm)) {
 			throw new IllegalArgumentException("keyAlgorithm is null or empty!"); //$NON-NLS-1$
 		}
 		if (0 >= keyType) {

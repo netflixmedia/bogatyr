@@ -36,14 +36,14 @@ import java.awt.Component;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JOptionPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090506
+ * @version 20090520
  */
 public class PaneOption extends JOptionPane {
 	private static final long serialVersionUID = -4947729751470298861L;
@@ -85,7 +85,7 @@ public class PaneOption extends JOptionPane {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 	@Override

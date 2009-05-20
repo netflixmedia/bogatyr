@@ -31,7 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 import static org.junit.Assert.*;
@@ -46,7 +46,7 @@ import java.io.IOException;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class HelperIOTest {
 	@Test
@@ -67,7 +67,7 @@ public class HelperIOTest {
 
 	@Test
 	public void testGetFiles() {
-		assertNotNull(HelperIO.getFiles(HelperEnvInfo.getOsTempDirectory(), null, false, false, false, true, true));
+		assertNotNull(HelperIO.getFiles(HelperEnvironment.getOsTempDirectory(), null, false, false, false, true, true));
 		
 		try {
 			HelperIO.getFiles(null, new String[]{"tmp"}, false, false, false, true, true); //$NON-NLS-1$

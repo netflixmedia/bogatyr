@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,37 +31,40 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import ch.sisprocom.bogatyr.helper.Const;
-import ch.sisprocom.bogatyr.helper.Printer;
-import ch.sisprocom.bogatyr.view.swing.Button;
-import static org.junit.Assert.fail;
+import ch.sisprocom.bogatyr.helper.HelperCollection;
+import static org.junit.Assert.*;
 import org.junit.Test;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
-public class PrinterTest {
+public class HelperCollectionTest {
 	@Test
-	public void testPrint() {
-		try {
-			final Component component = new Button("Hello world", Const.EMPTY_STRING); //$NON-NLS-1$ 
-			component.setBackground(Color.YELLOW);
-			component.setForeground(Color.BLACK);
-            component.setFont(new Font("Arial", Font.PLAIN, Const.VALUE_16)); //$NON-NLS-1$;
-			component.setSize(new Dimension(100, 100));
-			
-			new Printer().print(component);
-		} catch (Exception ex) {fail(ex.getMessage());}
+	public void testIsValidCollection() {
+		final Collection<String> list = new ArrayList<String>();
+
+		assertFalse(HelperCollection.isValid(list));
+		list.add("Hi"); //$NON-NLS-1$
+		assertTrue(HelperCollection.isValid(list));
+	}
+	
+	@Test
+	public void testRemoveDuplicates() {
+		final Collection<String> list = new ArrayList<String>();
+
+		assertEquals(0, HelperCollection.removeDuplicates(list).size());
+		
+		list.add("A"); //$NON-NLS-1$
+		list.add("A"); //$NON-NLS-1$
+		list.add("A"); //$NON-NLS-1$
+		
+		assertEquals(1, HelperCollection.removeDuplicates(list).size());
 	}
 }
-
-

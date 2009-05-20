@@ -33,7 +33,7 @@ package ch.sisprocom.bogatyr.controller.updater;
 
 import ch.sisprocom.bogatyr.controller.ControllerAbstract;
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
-import ch.sisprocom.bogatyr.helper.Const;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -82,7 +82,7 @@ public class ControllerUpdater extends ControllerAbstract implements IController
                 is = new FileInputStream(file);
             } else {
                 final URLConnection con = new URL(updateLocation).openConnection();
-                con.setConnectTimeout(Const.VALUE_2048);
+                con.setConnectTimeout(HelperNumber.VALUE_2048);
                 con.connect();
 
                 is = con.getInputStream();
@@ -91,7 +91,7 @@ public class ControllerUpdater extends ControllerAbstract implements IController
             final SAXParserFactory factory = SAXParserFactory.newInstance();
             final SAXParser saxParser = factory.newSAXParser();
 
-            final DefaultHandler handler = new XmlParser(name, id, version, minorversion, build, this, localizer);
+            final DefaultHandler handler = new XmlParserUpdater(name, id, version, minorversion, build, this, localizer);
 
             saxParser.parse(is, handler);
         } finally {

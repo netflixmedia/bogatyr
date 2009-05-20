@@ -33,13 +33,13 @@ package ch.sisprocom.bogatyr.model;
 
 import java.util.Observable;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 /**
  * This is the skeleton for all models.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090520
  */
 public abstract class ModelAbstract extends Observable {
 	private final long createTime = System.currentTimeMillis();
@@ -59,6 +59,6 @@ public abstract class ModelAbstract extends Observable {
      */
     @Override
     public String toString() {
-        return HelperGeneral.toString(this);
+        return HelperObject.toString(this);
     }
 }

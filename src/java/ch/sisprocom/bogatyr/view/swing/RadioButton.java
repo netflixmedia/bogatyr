@@ -34,14 +34,14 @@ package ch.sisprocom.bogatyr.view.swing;
 import javax.swing.Action;
 import javax.swing.JRadioButton;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JRadioButton.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090520
  */
 public class RadioButton extends JRadioButton implements IComponentActivate {
 	private static final long serialVersionUID = 8676540667794440059L;
@@ -82,7 +82,7 @@ public class RadioButton extends JRadioButton implements IComponentActivate {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 
 	@Override

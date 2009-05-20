@@ -31,22 +31,23 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagLayout;
 import java.awt.LayoutManager;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JPanel.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090520
  */
 public class Panel extends JPanel implements IComponentActivate {
 	private static final long serialVersionUID = 3679443739459084931L;
@@ -136,7 +137,7 @@ public class Panel extends JPanel implements IComponentActivate {
 	
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 	

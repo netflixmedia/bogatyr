@@ -31,24 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.test.helper.HelperEnvInfoTest;
-import ch.sisprocom.bogatyr.test.helper.HelperGeneralTest;
+import ch.sisprocom.bogatyr.helper.HelperCollection;
+import ch.sisprocom.bogatyr.test.helper.HelperArrayTest;
+import ch.sisprocom.bogatyr.test.helper.HelperCollectionTest;
+import ch.sisprocom.bogatyr.test.helper.HelperCryptoTest;
+import ch.sisprocom.bogatyr.test.helper.HelperEnvironmentTest;
 import ch.sisprocom.bogatyr.test.helper.HelperGraphicTest;
 import ch.sisprocom.bogatyr.test.helper.HelperIOTest;
 import ch.sisprocom.bogatyr.test.helper.HelperImageTest;
 import ch.sisprocom.bogatyr.test.helper.HelperMathTest;
 import ch.sisprocom.bogatyr.test.helper.HelperNetTest;
+import ch.sisprocom.bogatyr.test.helper.HelperObjectTest;
 import ch.sisprocom.bogatyr.test.helper.HelperPdfTest;
 import ch.sisprocom.bogatyr.test.helper.HelperSoundTest;
+import ch.sisprocom.bogatyr.test.helper.HelperStringTest;
 import ch.sisprocom.bogatyr.test.helper.HelperTimeTest;
 import ch.sisprocom.bogatyr.test.helper.HelperXmlTest;
 import ch.sisprocom.bogatyr.test.helper.context.ContextTest;
@@ -60,15 +56,23 @@ import ch.sisprocom.bogatyr.test.helper.converter.ConverterHexTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.CryptoAsymmTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.CryptoSymmTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.ObfuscatorTest;
-import ch.sisprocom.bogatyr.test.helper.crypto.PublicKeyProviderTest;
+import ch.sisprocom.bogatyr.test.helper.crypto.ProviderCertificateTest;
+import ch.sisprocom.bogatyr.test.helper.printer.PrinterTest;
 import ch.sisprocom.bogatyr.test.view.swing.NumberFieldTest;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 /**
  * Junit test suite
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ" + //$NON-NLS-1$
@@ -116,21 +120,25 @@ public class AllBogatyrTests implements Runnable {
 				CryptoAsymmTest.class,
 				CryptoSymmTest.class,
 				ObfuscatorTest.class,
-				PublicKeyProviderTest.class,
-				HelperEnvInfoTest.class,
-				HelperGeneralTest.class,
+				ProviderCertificateTest.class,
+				PrinterTest.class,
+//				PaginatorTest.class,
+				HelperArrayTest.class,
+				HelperCollectionTest.class,
+				HelperCryptoTest.class,
+				HelperEnvironmentTest.class,
 				HelperGraphicTest.class,
 				HelperImageTest.class,
 				HelperIOTest.class,
 				HelperMathTest.class,
 				HelperNetTest.class,
+				HelperObjectTest.class,
 				HelperPdfTest.class,
 //				HelperPreferencesTest.class,
 				HelperSoundTest.class,
+				HelperStringTest.class,
 				HelperTimeTest.class,
 				HelperXmlTest.class,
-//				PaginatorTest.class,
-//				PrinterTest.class,
 				NumberFieldTest.class
 		);
 		
@@ -138,7 +146,7 @@ public class AllBogatyrTests implements Runnable {
         System.out.println("Time:\t" + result.getRunTime()); //$NON-NLS-1$
         System.out.println("Total:\t" + result.getRunCount()); //$NON-NLS-1$
         System.out.println("Failed:\t" + result.getFailureCount()); //$NON-NLS-1$
-        System.out.println(HelperGeneral.dump(result.getFailures()));
+        System.out.println(HelperCollection.dump(result.getFailures()));
 	}
 	
 	

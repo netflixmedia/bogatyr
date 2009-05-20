@@ -37,14 +37,14 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JMenuItem;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090520
  */
 public class MenuItem extends JMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
@@ -88,6 +88,6 @@ public class MenuItem extends JMenuItem {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 }

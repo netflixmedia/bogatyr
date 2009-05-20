@@ -53,7 +53,7 @@ import java.util.List;
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public abstract class HelperNet {
 	public static final String PROPERTY_HTTP_PROXY_HOST  = "http.proxyHost"; //$NON-NLS-1$
@@ -75,10 +75,10 @@ public abstract class HelperNet {
      * @param password for authentication
      */
     public static void enableProxyHttp(final String host, final int port, final String username, final String password) { //$JUnit
-		if (!HelperGeneral.isValid(host)) {
+		if (!HelperString.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(username)) {
+		if (!HelperString.isValid(username)) {
 			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
 		}
 		if (null == password) {
@@ -111,10 +111,10 @@ public abstract class HelperNet {
      * @param password for authentication
      */
     public static void enableProxyHttps(final String host, final int port, final String username, final String password) { //$JUnit
-		if (!HelperGeneral.isValid(host)) {
+		if (!HelperString.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(username)) {
+		if (!HelperString.isValid(username)) {
 			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
 		}
 		if (null == password) {
@@ -147,10 +147,10 @@ public abstract class HelperNet {
      * @param password for authentication
      */
     public static void enableProxyFtp(final String host, final int port, final String username, final String password) { //$JUnit
-		if (!HelperGeneral.isValid(host)) {
+		if (!HelperString.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(username)) {
+		if (!HelperString.isValid(username)) {
 			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
 		}
 		if (null == password) {
@@ -182,7 +182,7 @@ public abstract class HelperNet {
      * @throws IOException
      */
     public static boolean isPingable(final String host) throws IOException { //$JUnit
-		if (!HelperGeneral.isValid(host)) {
+		if (!HelperString.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -191,7 +191,7 @@ public abstract class HelperNet {
         // Try to reach the specified address within the timeout period.
         // If during this period the address cannot be
         // reached then the method returns false.
-		return address.isReachable(Const.VALUE_4096);
+		return address.isReachable(HelperNumber.VALUE_4096);
     }
 
     /**
@@ -202,7 +202,7 @@ public abstract class HelperNet {
      * @throws UnknownHostException
      */
     public static String getHostname(final String ip) throws UnknownHostException { //$JUnit
-		if (!HelperGeneral.isValid(ip)) {
+		if (!HelperString.isValid(ip)) {
 			throw new IllegalArgumentException("ip is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -231,7 +231,7 @@ public abstract class HelperNet {
      * @throws UnknownHostException
      */
     public static String getIp(final String host) throws UnknownHostException { //$JUnit
-		if (!HelperGeneral.isValid(host)) {
+		if (!HelperString.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -296,7 +296,7 @@ public abstract class HelperNet {
 
 		if (hardwareAddress != null) {
 			for (int ii = 0; ii < hardwareAddress.length; ii++) {
-				sb.append(String.format((0 == ii ? Const.EMPTY_STRING : '-') + "%02X", hardwareAddress[ii])); //$NON-NLS-1$
+				sb.append(String.format((0 == ii ? HelperString.EMPTY_STRING : '-') + "%02X", hardwareAddress[ii])); //$NON-NLS-1$
 			}
 		}
 		return sb.toString();
@@ -315,7 +315,7 @@ public abstract class HelperNet {
 		}
 		
 		final URLConnection con = url.openConnection();
-		con.setConnectTimeout(Const.VALUE_2048);
+		con.setConnectTimeout(HelperNumber.VALUE_2048);
 		con.connect();
 		
 		return con.getInputStream();
@@ -334,7 +334,7 @@ public abstract class HelperNet {
 		if (null == url) {
 			throw new IllegalArgumentException("url is null!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(username)) {
+		if (!HelperString.isValid(username)) {
 			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
 		}
 		if (null == password) {
@@ -343,7 +343,7 @@ public abstract class HelperNet {
 		
     	final URLConnection con = url.openConnection();
 		con.setRequestProperty("Authorization", "Basic " + ConverterBase64.encode(username + ':' + password)); //$NON-NLS-1$ //$NON-NLS-2$
-		con.setConnectTimeout(Const.VALUE_2048);
+		con.setConnectTimeout(HelperNumber.VALUE_2048);
 		con.connect();
 		
 		return con.getInputStream();

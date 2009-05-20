@@ -54,21 +54,21 @@ public interface IControllerUpdater {
 	void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws Exception;
 
 	/**
-	 * Adds a listener for this timer.
+	 * Adds a listener for this updater.
 	 * 
 	 * @param listener to add
 	 */
 	void addListener(ListenerUpdater listener);
 	
 	/**
-	 * Remove a listener for this timer.
+	 * Remove a listener for this updater.
 	 * 
 	 * @param listener to remove
 	 */
 	void removeListener(ListenerUpdater listener);
 
 	/**
-	 * Remove all listeners for this timer. 
+	 * Remove all listeners for this updater. 
 	 */
 	void removeAllListener();
 }   

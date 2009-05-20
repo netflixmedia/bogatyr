@@ -36,14 +36,14 @@ import java.awt.Component;
 import javax.swing.JTextPane;
 import javax.swing.text.StyledDocument;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JTextPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090506
+ * @version 20090520
  */
 public class PaneText extends JTextPane {
 	private static final long serialVersionUID = -3996840505161218721L;
@@ -63,7 +63,7 @@ public class PaneText extends JTextPane {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 	@Override

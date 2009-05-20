@@ -34,14 +34,14 @@ package ch.sisprocom.bogatyr.view.swing;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JSpinner.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090520
  */
 public class Spinner extends JSpinner implements IComponentActivate {
 	private static final long serialVersionUID = 1637909823592308393L;
@@ -63,7 +63,7 @@ public class Spinner extends JSpinner implements IComponentActivate {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 

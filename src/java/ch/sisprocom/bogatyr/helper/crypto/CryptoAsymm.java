@@ -31,6 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.crypto;
 
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.KeyPair;
@@ -41,20 +49,11 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Security;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
 /**
  * This is a class for asymmetric cryptology via RSA.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090520
  */
 public class CryptoAsymm implements ICryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
@@ -68,7 +67,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 	
@@ -135,7 +134,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 				temp[tempCounter] = input[ii];
 				
 				if (tempCounter == space - 1) {
-					result = HelperGeneral.concatenate(result, encryptInternal(temp, key));
+					result = HelperArray.concatenate(result, encryptInternal(temp, key));
 					tempCounter = 0;
 				} else {
 					if (ii == input.length - 1) { // last byte
@@ -144,7 +143,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 						for (int xx = 0; xx <= tempCounter; xx++) {
 							usedBytes[xx] = input[ii - tempCounter + xx];
 						}
-						result = HelperGeneral.concatenate(result, encryptInternal(usedBytes, key));
+						result = HelperArray.concatenate(result, encryptInternal(usedBytes, key));
 					}
 					tempCounter++;
 				}
@@ -189,7 +188,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 				temp[tempCounter] = data;
 				
 				if (tempCounter == space - 1) {
-					result = HelperGeneral.concatenate(result, decryptInternal(temp, key));
+					result = HelperArray.concatenate(result, decryptInternal(temp, key));
 					tempCounter = 0;
 				} else {
 					tempCounter++;

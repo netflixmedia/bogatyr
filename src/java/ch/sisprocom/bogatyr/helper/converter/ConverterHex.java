@@ -31,15 +31,16 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.converter;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.Const;
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperString;
 
 
 /**
  * Encodes and decodes data to Hex format.
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 20090520
  */
 public abstract class ConverterHex {
     private static final CharSequence DIGITS = "0123456789abcdef"; //$NON-NLS-1$
@@ -51,7 +52,7 @@ public abstract class ConverterHex {
      * @return hex representation of a byte array
      */
     public static String encode(final byte[] input) { //$JUnit
-		if (!HelperGeneral.isValid(input)) {
+		if (!HelperArray.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -74,13 +75,13 @@ public abstract class ConverterHex {
      * @return byte-array representation of a hex string
      */
     public static byte[] decode(final String input) { //$JUnit
-		if (!HelperGeneral.isValid(input)) {
+		if (!HelperString.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
 		final byte[] bts = new byte[input.length() / 2];
 
     	for (int ii = 0; ii < bts.length; ii++) {
-    		bts[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), Const.VALUE_16);
+    		bts[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), HelperNumber.VALUE_16);
     	}
     	return bts;
     }

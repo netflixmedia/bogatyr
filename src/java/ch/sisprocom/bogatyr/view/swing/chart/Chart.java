@@ -82,8 +82,8 @@ public class Chart extends Panel {
 	public Chart(final int maxX, final int maxY, final String[] xAxes, final String[] yAxes, final X_Axis positionXAxis, final Y_Axis positionYAxis) {
 		super();
 		
-		this.xAxes         = xAxes;
-		this.yAxes         = yAxes;
+		this.xAxes         = xAxes.clone();
+		this.yAxes         = yAxes.clone();
 		this.maxX          = maxX;
 		this.maxY          = maxY;
 		this.positionXAxis = positionXAxis;

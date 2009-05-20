@@ -41,6 +41,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Locale;
 
 
 /**
@@ -167,7 +168,7 @@ public abstract class HelperImage {
         final Collection<String> set = new HashSet<String>(strings.length);
         
         for (final String str : strings) {
-            set.add(str.toLowerCase());
+            set.add(str.toLowerCase(Locale.getDefault()));
         }
 
         return set;

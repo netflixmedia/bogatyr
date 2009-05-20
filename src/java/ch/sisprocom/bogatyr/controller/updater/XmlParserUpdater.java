@@ -31,25 +31,27 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.updater;
 
-import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
-import ch.sisprocom.bogatyr.helper.Const;
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperNet;
-import ch.sisprocom.bogatyr.view.swing.chooser.ChooserFile;
-import ch.sisprocom.bogatyr.view.swing.dialog.Dialog;
-import ch.sisprocom.bogatyr.view.swing.dialog.DialogProgress;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import java.io.File;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperNet;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.view.swing.chooser.ChooserFile;
+import ch.sisprocom.bogatyr.view.swing.dialog.Dialog;
+import ch.sisprocom.bogatyr.view.swing.dialog.DialogProgress;
 
 
 /**
@@ -58,7 +60,7 @@ import java.net.URL;
  * @author Stefan Laubenberger
  * @version 20090516
  */
-public class XmlParser extends DefaultHandler {
+public class XmlParserUpdater extends DefaultHandler {
 	// Resources
     private static final String	RES_UPDATE         = "Updater.update"; //$NON-NLS-1$
     private static final String	RES_UPDATE_TEXT    = "Updater.update.text"; //$NON-NLS-1$
@@ -125,7 +127,7 @@ public class XmlParser extends DefaultHandler {
 	private final IControllerLocalizer localizer;
 	
 	
-	public XmlParser(final String applicationName, final String applicationId, final int applicationVersion, final int applicationMinorversion, final int applicationBuild, final ListenerUpdater listener, final IControllerLocalizer localizer) {
+	public XmlParserUpdater(final String applicationName, final String applicationId, final int applicationVersion, final int applicationMinorversion, final int applicationBuild, final ListenerUpdater listener, final IControllerLocalizer localizer) {
 		super();
 		
 		this.applicationName = applicationName;
@@ -142,7 +144,7 @@ public class XmlParser extends DefaultHandler {
 	 * Private methods
 	 */
 	private void update() {
-		if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, localizer.getValue(RES_UPDATE) + Const.NEW_LINE +
+		if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, localizer.getValue(RES_UPDATE) + HelperString.NEW_LINE +
                 localizer.getValue(RES_UPDATE_TEXT), applicationName, JOptionPane.YES_NO_OPTION)) {
 			try {
 				download();
@@ -158,7 +160,7 @@ public class XmlParser extends DefaultHandler {
 	}
 	
 	private void downgrade() {
-		if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, localizer.getValue(RES_DOWNGRADE) + Const.NEW_LINE +
+		if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, localizer.getValue(RES_DOWNGRADE) + HelperString.NEW_LINE +
                 localizer.getValue(RES_DOWNGRADE_TEXT), applicationName, JOptionPane.YES_NO_OPTION)) {
 			try {
 				download();
@@ -174,7 +176,7 @@ public class XmlParser extends DefaultHandler {
 	}
 	
     private void download() throws IOException {
-		File output = new File(HelperEnvInfo.getUserHomeDirectory() + Const.PATH_SEPARATOR + (HelperEnvInfo.isWindowsPlatform() ? name_windows : HelperEnvInfo.isMacPlatform() ? name_osx : name_unix));
+		File output = new File(HelperEnvironment.getUserHomeDirectory() + HelperString.PATH_SEPARATOR + (HelperEnvironment.isWindowsPlatform() ? name_windows : HelperEnvironment.isMacPlatform() ? name_osx : name_unix));
 		boolean isOk = false;
 		
 		while (!isOk) {
@@ -205,7 +207,7 @@ public class XmlParser extends DefaultHandler {
 		final Dialog dialogProgress = new DialogProgress();
 		dialogProgress.createAndShowGUI();
 		
-		final String location = HelperEnvInfo.isWindowsPlatform() ? location_windows : HelperEnvInfo.isMacPlatform() ? location_osx : location_unix;
+		final String location = HelperEnvironment.isWindowsPlatform() ? location_windows : HelperEnvironment.isMacPlatform() ? location_osx : location_unix;
 		final File file = new File(location);
 		
 		try {
@@ -311,22 +313,22 @@ public class XmlParser extends DefaultHandler {
     		id = value;
     		isId = false;
     	} else if (isVersionMin) {
-    		version_min = HelperGeneral.isStringNumeric(value) ? Integer.parseInt(value) : Integer.MIN_VALUE;
+    		version_min = HelperString.isNumeric(value) ? Integer.parseInt(value) : Integer.MIN_VALUE;
     		isVersionMin = false;
     	} else if (isVersionMax) {
-    		version_max = HelperGeneral.isStringNumeric(value) ? Integer.parseInt(value) : Integer.MAX_VALUE;
+    		version_max = HelperString.isNumeric(value) ? Integer.parseInt(value) : Integer.MAX_VALUE;
     		isVersionMax = false;
     	} else if (isMinorVersionMin) {
-    		minorversion_min = HelperGeneral.isStringNumeric(value) ? Integer.parseInt(value) : Integer.MIN_VALUE;
+    		minorversion_min = HelperString.isNumeric(value) ? Integer.parseInt(value) : Integer.MIN_VALUE;
     		isMinorVersionMin = false;
     	} else if (isMinorVersionMax) {
-    		minorversion_max = HelperGeneral.isStringNumeric(value) ? Integer.parseInt(value) : Integer.MAX_VALUE;
+    		minorversion_max = HelperString.isNumeric(value) ? Integer.parseInt(value) : Integer.MAX_VALUE;
     		isMinorVersionMax = false;
     	} else if (isBuildMin) {
-    		build_min = HelperGeneral.isStringNumeric(value) ? Integer.parseInt(value) : Integer.MIN_VALUE;
+    		build_min = HelperString.isNumeric(value) ? Integer.parseInt(value) : Integer.MIN_VALUE;
     		isBuildMin = false;
     	} else if (isBuildMax) {
-    		build_max = HelperGeneral.isStringNumeric(value) ? Integer.parseInt(value) : Integer.MAX_VALUE;
+    		build_max = HelperString.isNumeric(value) ? Integer.parseInt(value) : Integer.MAX_VALUE;
     		isBuildMax = false;
     	} else if (isLocationWindows) {
     		location_windows = value;
@@ -351,6 +353,6 @@ public class XmlParser extends DefaultHandler {
     
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 }

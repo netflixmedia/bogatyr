@@ -31,12 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.crypto;
 
-import ch.sisprocom.bogatyr.helper.Const;
 import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperTime;
 import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
 import ch.sisprocom.bogatyr.helper.crypto.ICryptoAsymm;
-import ch.sisprocom.bogatyr.helper.crypto.IPublicKeyProvider;
-import ch.sisprocom.bogatyr.helper.crypto.PublicKeyProvider;
+import ch.sisprocom.bogatyr.helper.crypto.IProviderCertificate;
+import ch.sisprocom.bogatyr.helper.crypto.ProviderCertificate;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import org.junit.Before;
@@ -52,10 +52,10 @@ import java.util.Date;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
-public class PublicKeyProviderTest {
-	private final IPublicKeyProvider publicKeyProvider = new PublicKeyProvider();
+public class ProviderCertificateTest {
+	private final IProviderCertificate publicKeyProvider = new ProviderCertificate();
 	
 	private KeyPair keyPair;
 	
@@ -71,7 +71,7 @@ public class PublicKeyProviderTest {
 		try {
 			final File file = HelperIO.getTemporaryFile("bogatr_PublicKeyProviderTest", ".cer");  //$NON-NLS-1$//$NON-NLS-2$
 
-			X509Certificate cert = publicKeyProvider.generateCertificate(keyPair, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(), new Date(System.currentTimeMillis() + Const.MILLISECONDS_WEEK));   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+			X509Certificate cert = publicKeyProvider.generateCertificate(keyPair, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(), new Date(System.currentTimeMillis() + HelperTime.MILLISECONDS_WEEK));   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 			publicKeyProvider.storeCertificate(cert, file);
 			cert = publicKeyProvider.getCertificate(file);
 //			System.out.println(HelperGeneral.toString(cert));

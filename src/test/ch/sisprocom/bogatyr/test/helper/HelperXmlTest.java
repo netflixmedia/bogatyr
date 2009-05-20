@@ -36,7 +36,7 @@ import static org.junit.Assert.assertNotSame;
 
 import org.junit.Test;
 
-import ch.sisprocom.bogatyr.helper.Const;
+import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.helper.HelperXml;
 
 
@@ -44,14 +44,14 @@ import ch.sisprocom.bogatyr.helper.HelperXml;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class HelperXmlTest {
 	private static final String INVALID_XML = new String(new byte[]{(byte)0x26});
 	
 	@Test
 	public void testGetValidXmlString() {
-		assertEquals(Const.EMPTY_STRING, HelperXml.getValidXmlString(null)); 
+		assertEquals(HelperString.EMPTY_STRING, HelperXml.getValidXmlString(null)); 
 		assertNotSame(INVALID_XML, HelperXml.getValidXmlString(INVALID_XML));
 	}
 }

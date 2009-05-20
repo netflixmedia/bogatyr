@@ -39,6 +39,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
@@ -57,7 +58,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * This is a helper class for PDF operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public abstract class HelperPdf {
 
@@ -110,7 +111,7 @@ public abstract class HelperPdf {
      * @throws IOException
      */
 	public static void savePdfFromHTML(final File[] input, final File file) throws IOException, DocumentException { //$JUnit
-		if (!HelperGeneral.isValid(input)) {
+		if (!HelperArray.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
 		if (null == file) {
@@ -160,7 +161,7 @@ public abstract class HelperPdf {
      * @throws IOException
      */
 	@SuppressWarnings("unchecked")
-	public static void setMetaData(String source, String dest, HashMap<String, String> metadata) throws IOException, DocumentException {
+	public static void setMetaData(final String source, final String dest, final Map<String,String> metadata) throws IOException, DocumentException {
 		PdfReader reader = null;
 		PdfStamper stamper = null;
 		
@@ -168,7 +169,7 @@ public abstract class HelperPdf {
 			reader = new PdfReader(source);
 			stamper = new PdfStamper(reader, new FileOutputStream(dest));
 			
-			HashMap<String, String> info = reader.getInfo();
+			final HashMap<String, String> info = reader.getInfo();
 			info.putAll(metadata);
 
 			stamper.setMoreInfo(info);

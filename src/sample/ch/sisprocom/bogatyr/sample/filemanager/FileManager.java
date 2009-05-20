@@ -36,9 +36,8 @@ import ch.sisprocom.bogatyr.controller.localizer.ControllerLocalizerFile;
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
 import ch.sisprocom.bogatyr.controller.property.ControllerProperty;
 import ch.sisprocom.bogatyr.controller.property.IControllerProperty;
-import ch.sisprocom.bogatyr.helper.Const;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
 import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperString;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +47,7 @@ import java.io.IOException;
  * Simple file manager using the Bogatyr framework
  * 
  * @author Stefan Laubenberger
- * @version 20090428
+ * @version 20090520
  */
 public class FileManager extends ApplicationAbstract {
 	// Fixed parameter - e.g. this could be an argument
@@ -96,7 +95,7 @@ public class FileManager extends ApplicationAbstract {
 		}
 
  		final String value = property.getValue(PROPERTY_PATH);
-		if (HelperGeneral.isValid(value)) {
+		if (HelperString.isValid(value)) {
             path = new File(value);
 		} else {
 			System.err.println(PROPERTY_PATH + " == 'null'"); //$NON-NLS-1$
@@ -118,7 +117,7 @@ public class FileManager extends ApplicationAbstract {
 			System.out.println(file);
 			ii++;
 		}
-		System.out.println(localizer.getValue(RES_FILES) + Const.SPACE + (isDelete ? localizer.getValue(RES_DELETED) : localizer.getValue(RES_FOUND)) + ':' + ii);
+		System.out.println(localizer.getValue(RES_FILES) + HelperString.SPACE + (isDelete ? localizer.getValue(RES_DELETED) : localizer.getValue(RES_FOUND)) + ':' + ii);
 	}
 	
 	

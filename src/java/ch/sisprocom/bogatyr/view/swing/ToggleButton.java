@@ -35,14 +35,14 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JToggleButton;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JToggleButton.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090520
  */
 public class ToggleButton extends JToggleButton implements IComponentActivate {
 	private static final long serialVersionUID = 7669429243607853809L;
@@ -88,7 +88,7 @@ public class ToggleButton extends JToggleButton implements IComponentActivate {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 

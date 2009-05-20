@@ -31,7 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
@@ -67,6 +67,6 @@ public abstract class ApplicationAbstract implements Runnable {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 }

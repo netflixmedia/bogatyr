@@ -31,19 +31,21 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.converter;
 
-import ch.sisprocom.bogatyr.helper.Const;
-import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
-import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
 import org.junit.Test;
+
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
+import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class ConverterBase64Test {
 	@Test
@@ -59,7 +61,7 @@ public class ConverterBase64Test {
 		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
-			ConverterBase64.encode(Const.EMPTY_ARRAY_BYTE);
+			ConverterBase64.encode(HelperArray.EMPTY_ARRAY_BYTE);
 			fail("byte[] is empty!"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 

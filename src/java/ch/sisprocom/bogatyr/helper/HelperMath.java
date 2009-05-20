@@ -40,7 +40,7 @@ import java.util.Collection;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20090517
+ * @version 20090520
  */
 public abstract class HelperMath {
 	
@@ -228,7 +228,7 @@ public abstract class HelperMath {
 			 throw new IllegalArgumentException("days value must be positive: " + days); //$NON-NLS-1$
 		 }
 		 
-		 return amount * StrictMath.pow(StrictMath.E, (double)days/360*interest);
+		 return amount * StrictMath.pow(StrictMath.E, (double)days / 360.0 * interest);
     }
     
 	/**
@@ -310,7 +310,7 @@ public abstract class HelperMath {
         	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
         }
         
-        return factorial(Const.DAYS_YEAR) / (factorial(Const.DAYS_YEAR - n) * StrictMath.pow(Const.DAYS_YEAR, n));
+        return factorial(HelperTime.DAYS_YEAR) / (factorial(HelperTime.DAYS_YEAR - n) * StrictMath.pow(HelperTime.DAYS_YEAR, n));
     }
 
 	/**
@@ -381,6 +381,26 @@ public abstract class HelperMath {
         }
         
         return factorial(n) - sumOdd(n);
+    }
+	
+	/**
+     * Checks if the given number is odd.
+     * 
+     * @param n number to check
+     * @return true/false
+     */	
+	public static boolean isOdd(final int n) {
+        return 0 != n % 2;
+    }
+
+	/**
+     * Checks if the given number is even.
+     * 
+     * @param n number to check
+     * @return true/false
+     */	
+	public static boolean isEven(final int n) {
+        return !isOdd(n);
     }
 }
 

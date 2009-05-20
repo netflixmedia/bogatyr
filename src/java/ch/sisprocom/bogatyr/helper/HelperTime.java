@@ -34,17 +34,30 @@ package ch.sisprocom.bogatyr.helper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 /**
  * This is a helper class for time operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public abstract class HelperTime {
-    public static final int TIME_SERVER_PORT = 37;
+	public static final int HOUR_DAY = 24;
+	public static final int DAYS_WEEK = 7;
+	public static final int DAYS_YEAR = 365;
+	  
+	public static final long MILLISECONDS_MIN = 60L * 1000L;
+	public static final long MILLISECONDS_HOUR = 60L * MILLISECONDS_MIN;
+	public static final long MILLISECONDS_DAY = HOUR_DAY * MILLISECONDS_HOUR;
+	public static final long MILLISECONDS_WEEK = DAYS_WEEK * MILLISECONDS_DAY;
+	public static final long MILLISECONDS_YEAR = DAYS_YEAR * MILLISECONDS_DAY;
+	public static final long SECONDS_1900_1970 = 2208988800L; //seconds from 1900 until 1970
+	  
+	public static final int TIME_SERVER_PORT = 37;
 	public static final String DEFAULT_TIME_SERVER = "ptbtime1.ptb.de"; //$NON-NLS-1$
 	
 	
@@ -66,7 +79,7 @@ public abstract class HelperTime {
      * @throws IOException
      */
 	public static Date getAtomicTime(final String host) throws IOException { //$JUnit
-		if (!HelperGeneral.isValid(host)) {
+		if (!HelperString.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -83,7 +96,7 @@ public abstract class HelperTime {
 				time ^= (long) is.read() << ii * 8;
 			}
 
-			return new Date((time - Const.SECONDS_1900_1970) * 1000L);
+			return new Date((time - SECONDS_1900_1970) * 1000L);
 		} finally {
 			if (is != null) {
 				is.close();
@@ -93,5 +106,40 @@ public abstract class HelperTime {
                 socket.close();
             }
         }
+    }
+	
+    /**
+     * Create a date with day, month and year as parameters.
+     *
+     * @param day range between 1-31
+     * @param month range between 1-12
+     * @param year 
+     * @return created date
+     */
+    public static Date getDate(final int day, final int month, final int year) {
+    	if (0 > day) {
+    		throw new IllegalArgumentException("day value must be positive: " + day); //$NON-NLS-1$
+    	}
+    	if (0 > month) {
+    		throw new IllegalArgumentException("month value must be positive: " + month); //$NON-NLS-1$
+    	}
+    	if (0 > year) {
+    		throw new IllegalArgumentException("year value must be positive: " + year); //$NON-NLS-1$
+    	}
+    	
+    	final Calendar cal = new GregorianCalendar();
+
+        cal.set(year, month - 1, day);
+
+
+        if (cal.get(Calendar.DAY_OF_MONTH) != day) {
+            throw new IllegalArgumentException("day value invalid: " + day); //$NON-NLS-1$
+        }
+
+        if (cal.get(Calendar.MONTH) != month - 1) {
+            throw new IllegalArgumentException("month value invalid: " + month); //$NON-NLS-1$
+        }
+
+        return cal.getTime();
     }
 }
