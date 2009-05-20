@@ -31,7 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.view.swing;
 
-import ch.sisprocom.bogatyr.helper.Const;
+import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.view.swing.NumberField;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -45,7 +45,7 @@ import java.math.BigInteger;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class NumberFieldTest {
 	@Test
@@ -53,13 +53,13 @@ public class NumberFieldTest {
 		final NumberField field = new NumberField();
 		
 		field.setText("abc"); //$NON-NLS-1$
-		assertEquals(Const.EMPTY_STRING, field.getText()); 
+		assertEquals(HelperString.EMPTY_STRING, field.getText()); 
 
 		field.setText(null);
-		assertEquals(Const.EMPTY_STRING, field.getText());
+		assertEquals(HelperString.EMPTY_STRING, field.getText());
 		
 		field.setValue(null);
-		assertEquals(Const.EMPTY_STRING, field.getText());
+		assertEquals(HelperString.EMPTY_STRING, field.getText());
 		assertNull(field.getDoubleValue());
 		assertNull(field.getIntegerValue());
 		assertNull(field.getFloatValue());

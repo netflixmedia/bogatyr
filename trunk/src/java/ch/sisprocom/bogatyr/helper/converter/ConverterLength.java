@@ -31,18 +31,48 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.converter;
 
-import ch.sisprocom.bogatyr.helper.Const;
 
 
 /**
  * Converts different units of length.
  * 
  * @author Stefan Laubenberger
- * @version 20090519
- * @see Const
+ * @version 20090520
  */
-public abstract class ConverterLength { //TODO please complete at your own...
+public abstract class ConverterLength {
+	private static final double FACTOR_INCH_TO_CM = 2.54D; //inch to centimeters
+	private static final double FACTOR_FOOT_TO_M = 0.3048D; //foot to meters
+	private static final double FACTOR_YARD_TO_M = 0.9144D; //yard to meters
+	private static final double FACTOR_MILE_TO_M = 1609.344D; //mile (terrestrial) to meters
+	private static final double FACTOR_MM_TO_CM = 10.0D; //millimeters to centimeters
+	private static final double FACTOR_CM_TO_M = 100.0D; //centimeters to meters
+	private static final double FACTOR_M_TO_KM = 1000.0D; //meters to kilometers
+
 	public static final int DEFAULT_DPI = 72;
+	
+	public enum ConversionLength {
+		INCH_TO_CM(FACTOR_INCH_TO_CM),
+		CM_TO_INCH(1.0D/FACTOR_INCH_TO_CM),
+		FOOT_TO_M(FACTOR_FOOT_TO_M),
+		M_TO_FOOT(1.0D/FACTOR_FOOT_TO_M),
+		YARD_TO_M(FACTOR_YARD_TO_M),
+		M_TO_YARD(1.0D/FACTOR_YARD_TO_M),
+		MILE_TO_M(FACTOR_MILE_TO_M),
+		M_TO_MILE(1.0D/FACTOR_MILE_TO_M),
+		MM_TO_CM(FACTOR_MM_TO_CM),
+		CM_TO_MM(1.0D/FACTOR_MM_TO_CM),
+		CM_TO_M(FACTOR_CM_TO_M),
+		M_TO_CM(1.0D/FACTOR_CM_TO_M),
+		M_TO_KM(FACTOR_M_TO_KM),
+		KM_TO_M(1.0D/FACTOR_M_TO_KM);
+		
+		ConversionLength(final double factor) {
+			this.factor = factor;
+		}
+		
+		public final double factor;
+	}
+	
 	
     /**
      * Calculates the size in centimeters of the given pixels and the standard DPI (72).
@@ -62,7 +92,7 @@ public abstract class ConverterLength { //TODO please complete at your own...
      * @return size in centimeters of the given pixels
      */
     public static double pixelToCm(final int value, final int dpi) {
-    	return inchToCm(value / dpi); 
+    	return convert(ConversionLength.INCH_TO_CM, (double) (value / dpi));
     }
     
     /**
@@ -83,26 +113,17 @@ public abstract class ConverterLength { //TODO please complete at your own...
      * @return pixels
      */
     public static double cmToPixel(final int value, final int dpi) {
-    	return cmToInch(value) * dpi; 
+    	return convert(ConversionLength.CM_TO_INCH, (double) value) * (double) dpi; 
     }
     
     /**
-     * Converts inch to centimeters.
+     * Converts a value with the given conversion to a new unit.
      * 
-     * @param value in inch
-     * @return value in centimeters
+     * @param conversion factor
+     * @param value
+     * @return value in the new unit
      */
-    public static double inchToCm(final double value) {
-    	return value * Const.FACTOR_LENGTH_INCH_TO_CM; 
-    }
-    
-    /**
-     * Converts centimeters to inch.
-     * 
-     * @param value in centimeters
-     * @return value in inch
-     */
-    public static double cmToInch(final double value) {
-    	return value / Const.FACTOR_LENGTH_INCH_TO_CM; 
+    public static double convert(final ConversionLength conversion, final double value) {
+    	return value * conversion.factor; 
     }
  }

@@ -37,9 +37,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.crypto.IObfuscator;
 import ch.sisprocom.bogatyr.helper.crypto.Obfuscator;
-import ch.sisprocom.bogatyr.helper.Const;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 
@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class ObfuscatorTest {
 	@Test
@@ -63,7 +63,7 @@ public class ObfuscatorTest {
 		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
-			obfuscator.encrypt(Const.EMPTY_ARRAY_BYTE);
+			obfuscator.encrypt(HelperArray.EMPTY_ARRAY_BYTE);
 			fail("byte[] is empty!"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 
@@ -73,7 +73,7 @@ public class ObfuscatorTest {
 		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
-			obfuscator.decrypt(Const.EMPTY_ARRAY_BYTE);
+			obfuscator.decrypt(HelperArray.EMPTY_ARRAY_BYTE);
 			fail("byte[] is empty!"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}	
 	}

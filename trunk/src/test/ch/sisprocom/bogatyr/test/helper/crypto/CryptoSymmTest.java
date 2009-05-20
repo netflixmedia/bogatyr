@@ -31,22 +31,26 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.crypto;
 
-import ch.sisprocom.bogatyr.helper.crypto.CryptoSymm;
-import ch.sisprocom.bogatyr.helper.crypto.ICryptoSymm;
-import ch.sisprocom.bogatyr.helper.Const;
-import ch.sisprocom.bogatyr.test.AllBogatyrTests;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
+import javax.crypto.SecretKey;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.crypto.SecretKey;
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.crypto.CryptoSymm;
+import ch.sisprocom.bogatyr.helper.crypto.ICryptoSymm;
+import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class CryptoSymmTest {
 	private static final int KEYSIZE = 256;
@@ -91,7 +95,7 @@ public class CryptoSymmTest {
 		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
-			cryptoSymm.encrypt(Const.EMPTY_ARRAY_BYTE, null);
+			cryptoSymm.encrypt(HelperArray.EMPTY_ARRAY_BYTE, null);
 			fail("input is empty"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 		
@@ -117,7 +121,7 @@ public class CryptoSymmTest {
 		} catch (Exception ex) {/*nothing to do*/}
 
 		try {
-			cryptoSymm.decrypt(Const.EMPTY_ARRAY_BYTE, null);
+			cryptoSymm.decrypt(HelperArray.EMPTY_ARRAY_BYTE, null);
 			fail("input is empty"); //$NON-NLS-1$
 		} catch (Exception ex) {/*nothing to do*/}
 		

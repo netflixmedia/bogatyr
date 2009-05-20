@@ -31,8 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.helper.Const;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperString;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -48,7 +47,7 @@ import java.util.regex.Pattern;
  * This is a NumberField, similar to TextField, but only numeric characters are allowed.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class NumberField extends TextField { //$JUnit
 	private static final long serialVersionUID = 4469777330124040925L;
@@ -57,7 +56,7 @@ public class NumberField extends TextField { //$JUnit
 	
 	
 	public NumberField() {
-		this(0, Const.EMPTY_STRING, Integer.MAX_VALUE);
+		this(0, HelperString.EMPTY_STRING, Integer.MAX_VALUE);
 	}
 
 	public NumberField(final String text, final String toolTip, final int columns) {
@@ -74,7 +73,7 @@ public class NumberField extends TextField { //$JUnit
      * @return Double from the number field 
      */	
 	public Double getDoubleValue() {
-		final String value = HelperGeneral.getValidNumericString(getText());
+		final String value = HelperString.getValidNumericString(getText());
 		
 		if (null != value) {
 			return Double.valueOf(value);
@@ -88,7 +87,7 @@ public class NumberField extends TextField { //$JUnit
      * @return Integer from the number field 
      */	
 	public Integer getIntegerValue() {
-		final String value = HelperGeneral.getValidNumericString(getText());
+		final String value = HelperString.getValidNumericString(getText());
 		
 		if (null != value) {
 			return new BigDecimal(value).intValue();
@@ -102,7 +101,7 @@ public class NumberField extends TextField { //$JUnit
      * @return Float from the number field 
      */	
 	public Float getFloatValue() {
-		final String value = HelperGeneral.getValidNumericString(getText());
+		final String value = HelperString.getValidNumericString(getText());
 		
 		if (null != value) {
 			return Float.valueOf(value);
@@ -116,7 +115,7 @@ public class NumberField extends TextField { //$JUnit
      * @return Byte from the number field 
      */	
 	public Byte getByteValue() {
-		final String value = HelperGeneral.getValidNumericString(getText());
+		final String value = HelperString.getValidNumericString(getText());
 		
 		if (null != value) {
 			return new BigDecimal(value).byteValue();
@@ -130,7 +129,7 @@ public class NumberField extends TextField { //$JUnit
      * @return Long from the number field 
      */	
 	public Long getLongValue() {
-		final String value = HelperGeneral.getValidNumericString(getText());
+		final String value = HelperString.getValidNumericString(getText());
 		
 		if (null != value) {
 			return new BigDecimal(value).longValue();
@@ -144,7 +143,7 @@ public class NumberField extends TextField { //$JUnit
      * @return Short from the number field 
      */	
 	public Short getShortValue() {
-		final String value = HelperGeneral.getValidNumericString(getText());
+		final String value = HelperString.getValidNumericString(getText());
 		
 		if (null != value) {
 			return new BigDecimal(value).shortValue();
@@ -158,7 +157,7 @@ public class NumberField extends TextField { //$JUnit
      * @return BigInteger from the number field 
      */	
 	public BigInteger getBigIntegerValue() {
-		final String value = HelperGeneral.getValidNumericString(getText());
+		final String value = HelperString.getValidNumericString(getText());
 		
 		if (null != value) {
 			return new BigDecimal(value).toBigInteger();
@@ -172,7 +171,7 @@ public class NumberField extends TextField { //$JUnit
      * @return BigDecimal from the number field 
      */	
 	public BigDecimal getBigDecimalValue() {
-		final String value = HelperGeneral.getValidNumericString(getText());
+		final String value = HelperString.getValidNumericString(getText());
 		
 		if (null != value) {
 			return new BigDecimal(value);
@@ -187,7 +186,7 @@ public class NumberField extends TextField { //$JUnit
      */	
 	public void setValue(final Number number) {
 		if (null == number) {
-			setText(Const.EMPTY_STRING);
+			setText(HelperString.EMPTY_STRING);
 		} else {
 			setText(number.toString());
 		}
@@ -198,7 +197,7 @@ public class NumberField extends TextField { //$JUnit
 	 * Private methods
 	 */	
 	static boolean isStringNumeric(final CharSequence arg) {
-		if (HelperGeneral.isValid(arg)) {
+		if (HelperString.isValid(arg)) {
 			final Matcher matcher = PATTERN.matcher(arg);
 
 			if (matcher.matches()) {

@@ -31,12 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.provider;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
@@ -44,7 +44,7 @@ import java.sql.Statement;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090516
+ * @version 20090520
  */
 public class ProviderSql  implements IProviderSql {
 //	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
@@ -102,7 +102,7 @@ public class ProviderSql  implements IProviderSql {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 	

@@ -31,7 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.control;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperCollection;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +43,7 @@ import java.util.List;
  * Creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public abstract class ControlProcess {
 	private static final int BUFFER = 1024;
@@ -73,7 +73,7 @@ public abstract class ControlProcess {
      * @throws IOException
 	 */
 	public static Process createProcess(final List<String> commandList) throws IOException {
-		if (!HelperGeneral.isValid(commandList)) {
+		if (!HelperCollection.isValid(commandList)) {
 			throw new IllegalArgumentException("commandList is null or empty!"); //$NON-NLS-1$
 		}
 		
@@ -95,8 +95,8 @@ public abstract class ControlProcess {
 	 * @param errorStream If null, error is discarded
 	 */
 	private static void readStandardOutput(final Process process, final OutputStream outputStream, final OutputStream errorStream) {
-		new StreamReader(process.getErrorStream(), errorStream);
-		new StreamReader(process.getInputStream(), outputStream);
+		new StreamReader(process.getErrorStream(), errorStream).start();
+		new StreamReader(process.getInputStream(), outputStream).start();
 	}
 
 	
@@ -118,7 +118,7 @@ public abstract class ControlProcess {
             super();
             is = source;
             os = target;
-			start();
+//			start();
 		}
 
 		@Override

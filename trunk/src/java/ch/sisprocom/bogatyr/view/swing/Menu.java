@@ -34,14 +34,14 @@ package ch.sisprocom.bogatyr.view.swing;
 import javax.swing.Action;
 import javax.swing.JMenu;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JMenu.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090520
  */
 public class Menu extends JMenu {
 	private static final long serialVersionUID = -908869267540163157L;
@@ -70,6 +70,6 @@ public class Menu extends JMenu {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 }

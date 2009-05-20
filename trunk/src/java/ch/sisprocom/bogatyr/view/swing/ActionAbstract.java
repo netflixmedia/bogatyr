@@ -31,7 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
@@ -41,7 +41,7 @@ import javax.swing.Icon;
  * This is an extended AbstractAction.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090520
  */
 public abstract class ActionAbstract extends AbstractAction {
 	private static final long serialVersionUID = -2411318943212390523L;
@@ -81,6 +81,6 @@ public abstract class ActionAbstract extends AbstractAction {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 }

@@ -34,14 +34,14 @@ package ch.sisprocom.bogatyr.view.swing;
 import javax.swing.Action;
 import javax.swing.JCheckBox;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JCheckBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090520
  */
 public class CheckBox extends JCheckBox implements IComponentActivate {
 	private static final long serialVersionUID = -6439735629199643683L;
@@ -82,7 +82,7 @@ public class CheckBox extends JCheckBox implements IComponentActivate {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 	@Override

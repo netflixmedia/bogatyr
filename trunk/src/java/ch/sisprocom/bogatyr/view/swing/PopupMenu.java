@@ -33,14 +33,14 @@ package ch.sisprocom.bogatyr.view.swing;
 
 import javax.swing.JPopupMenu;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JPopupMenu.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090520
  */
 public class PopupMenu extends JPopupMenu {
 	private static final long serialVersionUID = -2117215021680174633L;
@@ -60,6 +60,6 @@ public class PopupMenu extends JPopupMenu {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 }

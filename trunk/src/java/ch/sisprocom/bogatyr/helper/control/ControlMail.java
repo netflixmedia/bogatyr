@@ -31,19 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.control;
 
+import ch.sisprocom.bogatyr.helper.HelperString;
+
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.util.Locale;
 
 
 /**
  * This control opens an email address with the default mail application.
  *
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public abstract class ControlMail {
 
@@ -86,13 +87,13 @@ public abstract class ControlMail {
 	 * @throws URISyntaxException 
 	 */
 	public static void mail(final String emailAddress) throws IOException, URISyntaxException { //$JUnit
-		if (!HelperGeneral.isValid(emailAddress)) {
+		if (!HelperString.isValid(emailAddress)) {
 			throw new IllegalArgumentException("emailAddress is null or empty!"); //$NON-NLS-1$
 		}
 		
 		final String prefix = "mailto:"; //$NON-NLS-1$
 		
-		if (emailAddress.toLowerCase().startsWith(prefix)) {
+		if (emailAddress.toLowerCase(Locale.getDefault()).startsWith(prefix)) {
 			mail(new URI(emailAddress));
 		} else {
 			mail(new URI(prefix + emailAddress));

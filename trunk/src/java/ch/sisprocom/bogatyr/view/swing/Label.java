@@ -34,14 +34,14 @@ package ch.sisprocom.bogatyr.view.swing;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JLabel.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090520
  */
 public class Label extends JLabel {
 	private static final long serialVersionUID = 2440681846691377894L;
@@ -69,7 +69,7 @@ public class Label extends JLabel {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 //	@Override

@@ -44,9 +44,9 @@ import java.util.Date;
  * This interface is to generate, read and save X.509 certificates.
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 20090520
  */
-public interface IPublicKeyProvider {
+public interface IProviderCertificate {
 	/**
      * Get the {@link X509Certificate} out of the given certificate {@link File}.
      * 

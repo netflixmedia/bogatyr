@@ -31,7 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.crypto;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 
@@ -39,7 +39,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * This is a class for obfuscating data with CFB.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090520
  */
 public class Obfuscator implements IObfuscator {
 	private byte pattern = Byte.MAX_VALUE;
@@ -68,7 +68,7 @@ public class Obfuscator implements IObfuscator {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 	

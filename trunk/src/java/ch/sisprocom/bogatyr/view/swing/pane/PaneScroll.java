@@ -31,18 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.pane;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import java.awt.Component;
 
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
-import java.awt.Component;
+
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JScrollPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090520
  */
 public class PaneScroll extends JScrollPane {
 	private static final long serialVersionUID = 544751396135811303L;
@@ -71,7 +72,7 @@ public class PaneScroll extends JScrollPane {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 	@Override

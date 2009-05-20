@@ -48,8 +48,8 @@ public abstract class HelperXml {
      * @return the in String, stripped of non-valid characters
      */
     public static String getValidXmlString(final String in) { //$JUnit
-        if (!HelperGeneral.isValid(in)) { // vacancy test
-            return Const.EMPTY_STRING;
+        if (!HelperString.isValid(in)) { // vacancy test
+            return HelperString.EMPTY_STRING;
         }
        
        	final StringBuilder sb = new StringBuilder(); // Used to hold the output.

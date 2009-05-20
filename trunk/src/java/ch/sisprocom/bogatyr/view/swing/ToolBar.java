@@ -33,14 +33,14 @@ package ch.sisprocom.bogatyr.view.swing;
 
 import javax.swing.JToolBar;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JToolBar.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090520
  */
 public class ToolBar extends JToolBar implements IComponentActivate {
 	private static final long serialVersionUID = 7538391089705088133L;
@@ -70,7 +70,7 @@ public class ToolBar extends JToolBar implements IComponentActivate {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 
 	@Override

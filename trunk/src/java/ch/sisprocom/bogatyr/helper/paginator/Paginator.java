@@ -29,7 +29,10 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper;
+package ch.sisprocom.bogatyr.helper.paginator;
+
+import ch.sisprocom.bogatyr.helper.HelperCollection;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +43,7 @@ import java.util.List;
  * The Paginator splits a list in different pages.
  *
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class Paginator {
     private List<?> list;
@@ -54,7 +57,7 @@ public class Paginator {
     public Paginator(final List<?> list, final int numberPerPage) {
         super();
         
-        this.list = list;
+        this.list = Collections.unmodifiableList(list);
         this.numberPerPage = numberPerPage;
     }
 
@@ -63,7 +66,7 @@ public class Paginator {
     }
 
     public void setList(final List<?> list) {
-        this.list = list;
+        this.list = Collections.unmodifiableList(list);
    }
 
     public int getNumberPerPage() {
@@ -80,7 +83,7 @@ public class Paginator {
      * @return Total number of pages
      */
     public int getNumberOfPages() {
-        if (!HelperGeneral.isValid(list) || 0 == numberPerPage) {
+        if (!HelperCollection.isValid(list) || 0 == numberPerPage) {
             return 0;
         } else if (list.size() < numberPerPage) {
             return 1;
@@ -102,7 +105,7 @@ public class Paginator {
      */
     public List<?> getPage(final int requestedPage) {
         int page = requestedPage;
-        final List<Object> result = new ArrayList<Object>();
+        final List<Object> result = new ArrayList<Object>(numberPerPage);
 
         if (list != null) {
             if (page > getNumberOfPages()) {
@@ -131,6 +134,6 @@ public class Paginator {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 }

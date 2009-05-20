@@ -31,8 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.helper.Const;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.HelperString;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
@@ -44,13 +44,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Locale;
 
 
 /**
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class ComboBox extends JComboBox implements IComponentActivate {
 	private static final long serialVersionUID = -3870596701286078140L;
@@ -101,7 +102,7 @@ public class ComboBox extends JComboBox implements IComponentActivate {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 
 	@Override
@@ -220,7 +221,7 @@ public class ComboBox extends JComboBox implements IComponentActivate {
 		// checks if str1 starts with str2 - ignores case
 		private static boolean startsWithIgnoreCase(final String str1, final String str2) {
 
-		    return str1.toUpperCase().startsWith(str2.toUpperCase());
+		    return str1.toUpperCase(Locale.getDefault()).startsWith(str2.toUpperCase(Locale.getDefault()));
 
 		}
 		
@@ -265,7 +266,7 @@ public class ComboBox extends JComboBox implements IComponentActivate {
 		        // provide feedback to the user that his input has been received but can not be accepted
 		        comboBox.getToolkit().beep(); // when available use: UIManager.getLookAndFeel().provideErrorFeedback(comboBox);
 		    }
-		    setText(null == item ? Const.EMPTY_STRING : item.toString());
+		    setText(null == item ? HelperString.EMPTY_STRING : item.toString());
 
 		    // select the completed part
 		    highlightCompletedText(offs + str.length());

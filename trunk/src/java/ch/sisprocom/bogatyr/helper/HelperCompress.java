@@ -48,10 +48,10 @@ import java.util.zip.ZipOutputStream;
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
-	private static final byte[] BUFFER = new byte[Const.VALUE_1024];
+	private static final byte[] BUFFER = new byte[HelperNumber.VALUE_1024];
 
 	/**
      * Writes a ZIP {@link File} containing a list of {@link File}.
@@ -64,7 +64,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
-		if (!HelperGeneral.isValid(listOfFiles)) {
+		if (!HelperCollection.isValid(listOfFiles)) {
 			throw new IllegalArgumentException("listOfFiles is null or empty!"); //$NON-NLS-1$
 		}
 		

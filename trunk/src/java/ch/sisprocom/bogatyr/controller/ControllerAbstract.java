@@ -31,7 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 /**
  * This is the skeleton for all controllers.
@@ -57,6 +57,6 @@ public abstract class ControllerAbstract {
      */
     @Override
     public String toString() {
-        return HelperGeneral.toString(this);
+        return HelperObject.toString(this);
     }
 }

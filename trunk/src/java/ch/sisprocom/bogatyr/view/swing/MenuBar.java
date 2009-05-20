@@ -31,24 +31,24 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.helper.HelperEnvInfo;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
 import javax.swing.JMenuBar;
 import javax.swing.UIManager;
+
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JMenuBar.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 20090520
  */
 public class MenuBar extends JMenuBar {
 	private static final long serialVersionUID = -5107664209576098148L;
 	
 	static {
-		if (HelperEnvInfo.isMacPlatform()) {
+		if (HelperEnvironment.isMacPlatform()) {
 			//display the menu in MacOS X style
 			try {
 	            System.setProperty("apple.laf.useScreenMenuBar", "true"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -66,6 +66,6 @@ public class MenuBar extends JMenuBar {
       */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 }

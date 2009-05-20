@@ -31,11 +31,11 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.localizer;
 
-import ch.sisprocom.bogatyr.helper.Const;
-
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+
+import ch.sisprocom.bogatyr.helper.HelperString;
 
 
 /**
@@ -92,7 +92,7 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract {
 		try {
 			return bundle.getString(key + POSTFIX_ACCELERATOR);
 		} catch (MissingResourceException ex) {
-			return Const.EMPTY_STRING;
+			return HelperString.EMPTY_STRING;
 		}
 	}
 	
@@ -108,7 +108,7 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract {
 		try {
 			return bundle.getString(key + POSTFIX_TOOLTIP);
 		} catch (MissingResourceException ex) {
-			return Const.EMPTY_STRING;
+			return HelperString.EMPTY_STRING;
 		}
 	}
 	

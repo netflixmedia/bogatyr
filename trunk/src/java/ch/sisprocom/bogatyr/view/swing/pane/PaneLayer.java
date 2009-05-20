@@ -35,14 +35,14 @@ import java.awt.Component;
 
 import javax.swing.JLayeredPane;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JLayeredPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090506
+ * @version 20090520
  */
 public class PaneLayer extends JLayeredPane {
 	private static final long serialVersionUID = -6557519717085237490L;
@@ -58,7 +58,7 @@ public class PaneLayer extends JLayeredPane {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 	

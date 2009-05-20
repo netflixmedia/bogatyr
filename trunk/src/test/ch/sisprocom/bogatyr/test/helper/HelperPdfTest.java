@@ -31,12 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import ch.sisprocom.bogatyr.helper.Const;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperPdf;
-import ch.sisprocom.bogatyr.view.swing.Button;
 import static org.junit.Assert.fail;
-import org.junit.Test;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -44,20 +39,28 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.io.File;
 
+import org.junit.Test;
+
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperPdf;
+import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.view.swing.Button;
+
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class HelperPdfTest {
 	@Test
 	public void testCreatePdf() {
-		final Component component = new Button("Hello world", Const.EMPTY_STRING); //$NON-NLS-1$ 
+		final Component component = new Button("Hello world", HelperString.EMPTY_STRING); //$NON-NLS-1$ 
 		component.setBackground(Color.YELLOW);
 		component.setForeground(Color.BLACK);
-		component.setFont(new Font("Arial", Font.PLAIN, Const.VALUE_16)); //$NON-NLS-1$
+		component.setFont(new Font("Arial", Font.PLAIN, HelperNumber.VALUE_16)); //$NON-NLS-1$
 		component.setSize(new Dimension(100, 100));
 
 		try {

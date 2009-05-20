@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -33,7 +33,7 @@ package ch.sisprocom.bogatyr.view.swing.chart;
 
 import javax.swing.JComponent;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperGeneral;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20081026
+ * @version 20090520
  */
 public class ChartEntry {
 	private final JComponent component;
@@ -83,6 +83,6 @@ public class ChartEntry {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 }

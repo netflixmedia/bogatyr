@@ -31,21 +31,21 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.helper.Const;
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
-
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.HelperString;
+
 
 /**
  * This is an extended JTextField.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
 public class TextField extends JTextField implements IComponentActivate {
 	private static final long serialVersionUID = 866371447844640358L;
@@ -54,7 +54,7 @@ public class TextField extends JTextField implements IComponentActivate {
 
 	
 	public TextField() {
-        this(Const.EMPTY_STRING, Const.EMPTY_STRING, Integer.MAX_VALUE);
+        this(HelperString.EMPTY_STRING, HelperString.EMPTY_STRING, Integer.MAX_VALUE);
     }
 
 	public TextField(final String text, final String toolTip, final int columns) {
@@ -68,7 +68,7 @@ public class TextField extends JTextField implements IComponentActivate {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 	
 	@Override

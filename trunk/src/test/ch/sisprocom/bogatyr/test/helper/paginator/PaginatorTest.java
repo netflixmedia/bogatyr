@@ -29,7 +29,7 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.test.helper;
+package ch.sisprocom.bogatyr.test.helper.paginator;
 
 
 

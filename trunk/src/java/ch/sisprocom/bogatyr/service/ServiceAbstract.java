@@ -32,13 +32,13 @@
 package ch.sisprocom.bogatyr.service;
 
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 /**
  * This is the skeleton for all services.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 20090520
  */
 public abstract class ServiceAbstract {
 	private final long createTime = System.currentTimeMillis();
@@ -58,6 +58,6 @@ public abstract class ServiceAbstract {
      */
     @Override
     public String toString() {
-        return HelperGeneral.toString(this);
+        return HelperObject.toString(this);
     }
 }

@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.helper;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -42,9 +43,9 @@ import java.util.TimeZone;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090520
  */
-public abstract class HelperEnvInfo {
+public abstract class HelperEnvironment {
 	/**
 	 * Returns the used VM memory in bytes.
      *
@@ -144,6 +145,15 @@ public abstract class HelperEnvInfo {
 		return System.getProperties().getProperty("os.version"); //$NON-NLS-1$
 	}
 
+	/**
+	 * Returns a {@link Map} containing containing all Java system properties.
+	 *
+	 * @return map of all Java system properties
+	 */
+	public static Map<Object, Object> getJavaProperties() {
+		return new HashMap<Object, Object>(System.getProperties());
+    }
+	
 	/**
 	 * Returns a {@link Map} containing all system environment variables.
 	 *

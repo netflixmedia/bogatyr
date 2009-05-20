@@ -37,14 +37,14 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JCheckBoxMenuItem;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JCheckBoxMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 20090422
+ * @version 20090520
  */
 public class MenuItemCheckBox extends JCheckBoxMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
@@ -97,6 +97,6 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 	 */
 	@Override
 	public String toString() {
-		return HelperGeneral.toString(this);
+		return HelperObject.toString(this);
 	}
 }
