@@ -27,6 +27,7 @@
  *
  * <s.laubenberger@sisprocom.ch>
  * <s.spross@sisprocom.ch>
+ * <r.wuersch@sisprocom.ch>
  * 
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.crypto;
@@ -41,6 +42,7 @@ import java.io.OutputStream;
 import java.math.BigInteger;
 import java.security.InvalidKeyException;
 import java.security.KeyPair;
+import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SignatureException;
 import java.security.cert.Certificate;
@@ -146,7 +148,7 @@ public class ProviderCertificate implements IProviderCertificate {
     	HelperIO.writeFile(file, cert.getEncoded(), false);
     }
 
-    public X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {
+    public X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws NoSuchAlgorithmException, IllegalStateException, CertificateEncodingException, InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {
 		if (null == pair) {
 			throw new IllegalArgumentException("pair is null!"); //$NON-NLS-1$
 		}
@@ -182,6 +184,6 @@ public class ProviderCertificate implements IProviderCertificate {
 	    certGen.addExtension(X509Extensions.ExtendedKeyUsage, true, new ExtendedKeyUsage(KeyPurposeId.id_kp_serverAuth));
 	    certGen.addExtension(X509Extensions.SubjectAlternativeName, false, new GeneralNames(new GeneralName(GeneralName.rfc822Name, generalName)));
 	
-	    return certGen.generateX509Certificate(pair.getPrivate(), "BC");  //$NON-NLS-1$
+		return certGen.generate(pair.getPrivate(), "BC");
 	}													
 }
