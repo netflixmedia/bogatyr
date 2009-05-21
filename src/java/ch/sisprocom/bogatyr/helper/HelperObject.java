@@ -64,7 +64,6 @@ public abstract class HelperObject {
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
 	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
      */
 	public static <T> T createInstance(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit
 		if (null == clazz) {
@@ -86,7 +85,6 @@ public abstract class HelperObject {
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
 	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
      */
 	public static <T> T createInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit
 		if (null == clazz) {

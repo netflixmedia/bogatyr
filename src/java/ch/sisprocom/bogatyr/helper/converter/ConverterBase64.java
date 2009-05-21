@@ -113,7 +113,6 @@ public abstract class ConverterBase64 {
 	 * 
 	 * @param input Base64 string to be decoded
 	 * @return Array containing the decoded data bytes
-	 * @throws IllegalArgumentException
 	 */
 	public static byte[] decode(final String input) { //$JUnit
 		if (!HelperString.isValid(input)) {
@@ -129,7 +128,6 @@ public abstract class ConverterBase64 {
 	 * 
 	 * @param input character array containing the Base64 encoded data
 	 * @return Array containing the decoded data bytes
-	 * @throws IllegalArgumentException
 	 */
 	public static byte[] decode(final char[] input) { //$JUnit
 		if (null == input || 0 >= input.length) {
