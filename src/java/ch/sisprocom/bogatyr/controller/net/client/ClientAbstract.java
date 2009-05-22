@@ -117,8 +117,6 @@ public abstract class ClientAbstract implements IClient {
     	byte[] result = null;
     	
     	if (!socket.isClosed()) {
-	    	System.out.println(socket.isClosed());
-	        System.out.println(socket.isBound());
 	    	final InputStream is = socket.getInputStream();
 	        byte input;
 	
