@@ -110,7 +110,7 @@ public interface IServer extends Runnable {
 	 * @param serverThread asynchron server thread
 	 * @see Map
 	 */
-	void addServerThread(final UUID uuid, final ThreadServerAbstract serverThread);
+	void addServerThread(final UUID uuid, final IServerThread serverThread);
 
 	/**
 	 * Removes the thread with the given unique key from the {@link #mapThread}.
@@ -126,6 +126,6 @@ public interface IServer extends Runnable {
 	 * @return list containing all threads
 	 * @see Map
 	 */
-	Map<UUID, ThreadServerAbstract> getServerThreads();
+	Map<UUID, IServerThread> getServerThreads();
 }   
 

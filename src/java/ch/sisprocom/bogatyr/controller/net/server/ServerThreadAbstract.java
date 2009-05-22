@@ -31,25 +31,24 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.server;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperCrypto;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.util.UUID;
+
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperCrypto;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @author Silvan Spross
  * @version 20090522
  */
-public abstract class ThreadServerAbstract implements IThreadServer {
+public abstract class ServerThreadAbstract implements IServerThread {
     private final long createTime = System.currentTimeMillis();
 
 	private Thread thread;
@@ -57,12 +56,12 @@ public abstract class ThreadServerAbstract implements IThreadServer {
 	private final UUID uuid = HelperCrypto.getUUID();
 
 	private final Socket socket;
-	private final ServerAbstract server;
+	private final IServer server;
 	
 	private boolean isRunning;
 	
 
-	protected ThreadServerAbstract(final ServerAbstract server, final Socket socket) {
+	protected ServerThreadAbstract(final IServer server, final Socket socket) {
         super();
         this.server = server;
 		this.socket = socket;
@@ -93,7 +92,7 @@ public abstract class ThreadServerAbstract implements IThreadServer {
 		return socket;
 	}
 
-	public ServerAbstract getServer() {
+	public IServer getServer() {
 		return server;
 	}
 
@@ -122,12 +121,13 @@ public abstract class ThreadServerAbstract implements IThreadServer {
 
 	public void stop() throws IOException {
 		isRunning = false;
+
+		socket.close();
 		
 		if (thread != null && thread.isAlive()) {
             thread = null;
         }
 		server.removeServerThread(uuid);
-		socket.close();
 	}  
 
 	public void start() {
@@ -139,6 +139,8 @@ public abstract class ThreadServerAbstract implements IThreadServer {
             thread.setPriority(Thread.MIN_PRIORITY);
             thread.start();
 		}
+		
+//		run();
 	}	
     
 	public boolean isRunning() {
