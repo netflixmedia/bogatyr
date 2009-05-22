@@ -37,7 +37,7 @@ import java.util.Properties;
 
 
 /**
- * Defines the methods for the implementation of the properties
+ * Defines the methods for the implementation of the properties.
  * 
  * @author Stefan Laubenberger
  * @version 20090511

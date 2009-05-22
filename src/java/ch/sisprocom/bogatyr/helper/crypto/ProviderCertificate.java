@@ -184,6 +184,6 @@ public class ProviderCertificate implements IProviderCertificate {
 	    certGen.addExtension(X509Extensions.ExtendedKeyUsage, true, new ExtendedKeyUsage(KeyPurposeId.id_kp_serverAuth));
 	    certGen.addExtension(X509Extensions.SubjectAlternativeName, false, new GeneralNames(new GeneralName(GeneralName.rfc822Name, generalName)));
 	
-		return certGen.generate(pair.getPrivate(), "BC");
+		return certGen.generate(pair.getPrivate(), "BC"); //$NON-NLS-1$
 	}													
 }
