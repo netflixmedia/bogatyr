@@ -29,62 +29,29 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.timer;
-
-
+package ch.sisprocom.bogatyr.controller.net.client;
 
 /**
- * Defines the methods for the implementation of the timer.
+ * ListenerClient
  * 
  * @author Stefan Laubenberger
  * @version 20090522
  */
-public interface IListener {
+public interface ListenerClient {
 	/**
-	 * Adds a listener for this timer.
-	 * 
-	 * @param listener to add
-	 */
-	void addListener(ListenerTimer listener);
-	
-	/**
-	 * Remove a listener for this timer.
-	 * 
-	 * @param listener to remove
-	 */
-	void removeListener(ListenerTimer listener);
-
-	/**
-	 * Remove all listeners for this timer. 
-	 */
-	void removeAllListener();
-	
-	
-	/**
-	 * Returns the running state of the timer.
+	 * Sends the read data from the client.
      *
-     * @return true/false
-     */
-	boolean isRunning();
-
-	/**
-	 * Returns the current interval in ms of the timer.
-	 * 
-	 * @return current time of the timer
+     * @param data read data from the client
 	 */
-    long getInterval();
-
-    /**
-     * Sets the time in ms of the timer.
-     * 
-     * @param time
-     */
-    void setInterval(final long interval);
-    
-
+	void clientStreamRead(byte[] data);
+	
 	/**
-	 * Stops immediately the timer.
+	 * Informs the listener that the client has started.
 	 */
-	void stop();
-}   
-
+	void clientStarted();
+	
+	/**
+	 * Informs the listener that the clientﬂ has stopped.
+	 */
+	void clientStopped();
+}

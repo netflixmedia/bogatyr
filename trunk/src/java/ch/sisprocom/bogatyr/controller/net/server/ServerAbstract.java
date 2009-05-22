@@ -56,7 +56,7 @@ public abstract class ServerAbstract implements IServer {
     private int port;
     private int timeout; //ServerSocketSocket timeout in milliseconds
 
-    private boolean isStopped = true;
+    private boolean isRunning;
 
 
     protected ServerAbstract(final int port, final int timeout) {
@@ -124,7 +124,7 @@ public abstract class ServerAbstract implements IServer {
     }
 
     public void start() throws IOException {
-        isStopped = false;
+    	isRunning = false;
 
         serverSocket = new ServerSocket(port);
 
@@ -134,7 +134,7 @@ public abstract class ServerAbstract implements IServer {
     }
 
     public void stop() throws IOException {
-        isStopped = true;
+    	isRunning = true;
 
         for (final UUID key : getServerThreads().keySet()) {
             final ThreadServerAbstract thread = getServerThreads().get(key);
@@ -144,8 +144,8 @@ public abstract class ServerAbstract implements IServer {
         serverSocket.close();
     }
 
-    public boolean isStopped() {
-        return isStopped;
+    public boolean isRunning() {
+        return isRunning;
     }
 
 
