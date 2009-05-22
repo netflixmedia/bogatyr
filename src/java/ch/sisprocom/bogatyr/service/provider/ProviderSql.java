@@ -37,6 +37,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.HelperString;
 
 
 /**
@@ -44,7 +45,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090520
+ * @version 20090522
  */
 public class ProviderSql  implements IProviderSql {
 //	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
@@ -58,8 +59,8 @@ public class ProviderSql  implements IProviderSql {
 	
 	protected ProviderSql(final String driver, final String url, final String user, final String password) {
         super();
-        this.driver = driver;
-        this.url = url;
+        setDriver(driver);
+        setUrl(url);
         this.user = user;
         this.password = password;
 	}
@@ -81,10 +82,17 @@ public class ProviderSql  implements IProviderSql {
 	}
 
 	public void setDriver(final String driver) {
+    	if (null == driver) {
+    		throw new IllegalArgumentException("driver is null!"); //$NON-NLS-1$
+    	}
+    	
 		this.driver = driver;
 	}
 
 	public void setUrl(final String url) {
+    	if (null == url) {
+    		throw new IllegalArgumentException("url is null!"); //$NON-NLS-1$
+    	}
 		this.url = url;
 	}
 
@@ -134,7 +142,11 @@ public class ProviderSql  implements IProviderSql {
 	 * @throws InstantiationException 
 	 */
     public int executeUpdate(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-        Statement stmt = null;
+    	if (!HelperString.isValid(statement)) {
+    		throw new IllegalArgumentException("statement is null or empty!"); //$NON-NLS-1$
+    	}
+
+    	Statement stmt = null;
         Connection con = null;
         final int result;
         
@@ -167,7 +179,11 @@ public class ProviderSql  implements IProviderSql {
      * @throws InstantiationException 
 	 */
     public boolean execute(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException  {
-        Statement stmt = null;
+    	if (!HelperString.isValid(statement)) {
+    		throw new IllegalArgumentException("statement is null or empty!"); //$NON-NLS-1$
+    	}
+    	
+    	Statement stmt = null;
         Connection con = null;
         final boolean result;
         

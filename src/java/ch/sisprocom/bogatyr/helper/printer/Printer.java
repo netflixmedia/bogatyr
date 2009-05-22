@@ -42,18 +42,17 @@ import java.awt.print.PrinterJob;
 import javax.swing.RepaintManager;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.view.swing.Panel;
 
 
 /**
  * This is a printer class for print operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20090522
  */
 public class Printer implements Printable { 
 	private Component componentToBePrinted;
-
+	private boolean isScaled;
 
     /**
      * Print a component.
@@ -61,8 +60,14 @@ public class Printer implements Printable {
      * @param component for printing
      * @throws PrinterException
      */
-    public synchronized void print(final Component component) throws PrinterException {
-        componentToBePrinted = component;
+    public synchronized void print(final Component component, boolean isScaled) throws PrinterException {
+		if (null == component) {
+			throw new IllegalArgumentException("component is null!"); //$NON-NLS-1$
+		}
+
+    	componentToBePrinted = component;
+    	this.isScaled = isScaled;
+    	
         print();
     }
 
@@ -112,19 +117,25 @@ public class Printer implements Printable {
      * Implemented methods
      */
     public int print(final Graphics graphics, final PageFormat pageFormat, final int pageIndex) {
-		if (0 < pageIndex) {
+		if (null == graphics) {
+			throw new IllegalArgumentException("graphics is null!"); //$NON-NLS-1$
+		}
+		if (null == pageFormat) {
+			throw new IllegalArgumentException("pageFormat is null!"); //$NON-NLS-1$
+		}
+
+    	if (0 < pageIndex) {
 			return NO_SUCH_PAGE;
 		}
 //		componentToBePrinted.setSize((int)(componentToBePrinted.getWidth() * pageFormat.getWidth()/componentToBePrinted.getWidth()), (int)(componentToBePrinted.getHeight() * pageFormat.getHeight()/componentToBePrinted.getHeight()));
 
 		final Graphics2D g2d = (Graphics2D) graphics;
 		g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
-//		g2d.scale(pageFormat.getWidth()/componentToBePrinted.getWidth(), pageFormat.getHeight()/componentToBePrinted.getHeight());
 
-        if (componentToBePrinted == null) {
-            componentToBePrinted = new Panel();
-            //TODO set size of component?
-        }
+		if (isScaled) {
+			g2d.scale(pageFormat.getImageableWidth()/(componentToBePrinted.getWidth() + 1), pageFormat.getImageableHeight()/(componentToBePrinted.getHeight() + 1)); //divide by 0 save
+		}
+
 
         disableDoubleBuffering(componentToBePrinted);
 		componentToBePrinted.paint(g2d);

@@ -41,15 +41,35 @@ import java.util.UUID;
  * Defines the methods for the implementation of the server thread.
  * 
  * @author Stefan Laubenberger
- * @version 20090521
+ * @version 20090522
  */
 public interface IThreadServer extends Runnable {
+	/**
+	 * Returns the current {@link Thread}.
+	 * 
+	 * @return thread
+	 */
 	Thread getThread();
 
+	/**
+	 * Returns the an universally unique identifier {@link UUID} of the thread.
+	 * 
+	 * @return universally unique identifier
+	 */
 	UUID getUuid();
 
+	/**
+	 * Returns the current {@link Socket} of the thread.
+	 * 
+	 * @return socket
+	 */
 	Socket getSocket();
 
+	/**
+	 * Returns the server (owner) of this thread.
+	 * 
+	 * @return server
+	 */
 	ServerAbstract getServer();
 
 	/**

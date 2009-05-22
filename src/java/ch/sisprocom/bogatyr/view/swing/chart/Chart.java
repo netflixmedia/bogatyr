@@ -104,6 +104,9 @@ public class Chart extends Panel {
      * @param entry for the chart
      */
 	public void addEntry(final ChartEntry entry) {
+    	if (null == entry) {
+    		throw new IllegalArgumentException("entry is null!"); //$NON-NLS-1$
+    	}
 		if (entry.getX() + entry.getSizeX() > maxX || entry.getY() + entry.getSizeY() > maxY) {
 			throw new IllegalArgumentException("Component (" + entry.getSizeX() + 'x' + entry.getSizeY() + ") is outside of the defined chart area (" + maxX + 'x' + maxY + ')'); //$NON-NLS-1$ //$NON-NLS-2$
 		}

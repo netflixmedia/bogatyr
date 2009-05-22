@@ -42,23 +42,64 @@ import java.util.UUID;
  * Defines the methods for the implementation of the server.
  * 
  * @author Stefan Laubenberger
- * @version 20090521
+ * @version 20090522
  */
 public interface IServer extends Runnable {
 	
+	/**
+	 * Returns the {@link ServerSocket} of the current server.
+	 * 
+	 * @return server-side socket
+	 */
 	ServerSocket getServerSocket();
 
+	/**
+	 * Returns the port of the {@link ServerSocket}.
+	 * 
+	 * @return port
+	 */
 	int getPort();
 
-	int getTimeout();
-
+	/**
+	 * Sets the port (0 - 65535) for the {@link ServerSocket}.
+	 * 
+	 * @param port for the server
+	 */
 	void setPort(int port);
 
+	/**
+	 * Returns the timeout in ms of the {@link ServerSocket}.
+	 * 
+	 * @return timeout in ms
+	 */
+	int getTimeout();
+
+	/**
+	 * Sets the timeout in ms for the {@link ServerSocket}.
+	 * 
+	 * @param timeout for the server
+	 */
 	void setTimeout(int timeout);
-	void start() throws IOException;
 	
+	/**
+     * Start the server and open the {@link ServerSocket}.
+     * 
+     * @throws IOException
+     */
+	void start() throws IOException;
+
+	/**
+     * Stop the server and close the {@link ServerSocket} and quit all threads.
+     * 
+     * @throws IOException
+     */
 	void stop() throws IOException;
 
+	/**
+	 * Returns the running state of the server.
+	 * 
+	 * @return true/false
+	 */
 	boolean isStopped();
 	
 	/**

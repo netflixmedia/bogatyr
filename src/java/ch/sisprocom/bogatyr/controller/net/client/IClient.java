@@ -39,20 +39,47 @@ import java.net.Socket;
  * Defines the methods for the implementation of the client.
  * 
  * @author Stefan Laubenberger
- * @version 20090521
+ * @version 20090522
  */
 public interface IClient extends Runnable {
 
+	/**
+	 * Returns the host of the {@link Socket}.
+	 * 
+	 * @return host
+	 */
 	String getHost();
-	int getPort();
-	Socket getSocket();
+
+	/**
+	 * Sets the host for the {@link Socket}.
+	 * 
+	 * @param host of the server
+	 */
 	void setHost(String host);
+
+	/**
+	 * Returns the port of the {@link Socket}.
+	 * 
+	 * @return port
+	 */
+	int getPort();
+
+	/**
+	 * Sets the port (0 - 65535) for the {@link Socket}.
+	 * 
+	 * @param port of the server
+	 */
 	void setPort(int port);
-	boolean isStopped();
+
+	/**
+	 * Returns the current {@link Socket} of the client.
+	 * 
+	 * @return socket
+	 */
+	Socket getSocket();
 	
 	/**
      * Start the client and open the {@link Socket}.
-	 * @return 
      * 
      * @throws IOException
      */
@@ -64,6 +91,13 @@ public interface IClient extends Runnable {
      * @throws IOException
      */
 	void stop() throws IOException;
+	
+	/**
+	 * Returns the state of the connection from the client to the server.
+	 * 
+	 * @return true/false
+	 */
+	boolean isStopped();
 
 	/**
      * Reads a socket-stream to a byte-array.

@@ -34,6 +34,8 @@ package ch.sisprocom.bogatyr.controller.updater;
 import ch.sisprocom.bogatyr.controller.ControllerAbstract;
 import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperString;
+
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -54,7 +56,7 @@ import java.util.Collection;
  * This is the updater controller for new Bogatyr-based applications versions.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090522
  */
 public class ControllerUpdater extends ControllerAbstract implements IControllerUpdater, ListenerUpdater {
 	private Collection<ListenerUpdater> listListener = new ArrayList<ListenerUpdater>();
@@ -75,7 +77,17 @@ public class ControllerUpdater extends ControllerAbstract implements IController
       * Checks the update XML file for new versions an update the application if needed.
       */
     public synchronized void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws IOException, ParserConfigurationException, SAXException  {
-        final File file = new File(updateLocation);
+    	if (!HelperString.isValid(name)) {
+    		throw new IllegalArgumentException("name is null or empty!"); //$NON-NLS-1$
+    	}
+    	if (!HelperString.isValid(id)) {
+    		throw new IllegalArgumentException("id is null or empty!"); //$NON-NLS-1$
+    	}
+    	if (!HelperString.isValid(updateLocation)) {
+    		throw new IllegalArgumentException("updateLocation is null or empty!"); //$NON-NLS-1$
+    	}
+
+    	final File file = new File(updateLocation);
         InputStream is = null;
         try {
             if (file.exists()) {
