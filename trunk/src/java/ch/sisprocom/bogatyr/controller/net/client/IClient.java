@@ -39,6 +39,7 @@ import java.net.Socket;
  * Defines the methods for the implementation of the client.
  * 
  * @author Stefan Laubenberger
+ * @author Silvan Spross
  * @version 20090522
  */
 public interface IClient extends Runnable {

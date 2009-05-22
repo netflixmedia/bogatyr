@@ -46,6 +46,7 @@ import java.util.UUID;
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
+ * @author Silvan Spross
  * @version 20090522
  */
 public abstract class ThreadServerAbstract implements IThreadServer {
