@@ -58,6 +58,9 @@ public abstract class ServerAbstract implements IServer {
 
     private boolean isRunning;
 
+    protected ServerAbstract() {
+    	super();
+    }
 
     protected ServerAbstract(final int port, final int timeout) {
         super();

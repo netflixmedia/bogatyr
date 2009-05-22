@@ -58,6 +58,10 @@ public abstract class ClientAbstract implements IClient {
     private Socket socket;
 
     private boolean isRunning;
+    
+    protected ClientAbstract() {
+    	super();
+    }
 
 
     protected ClientAbstract(final String host, final int port) {
