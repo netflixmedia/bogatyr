@@ -77,7 +77,7 @@ public interface IListener {
     /**
      * Sets the time in ms of the timer.
      * 
-     * @param time
+     * @param interval
      */
     void setInterval(final long interval);
     
