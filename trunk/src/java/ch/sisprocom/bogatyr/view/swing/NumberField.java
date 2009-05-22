@@ -59,6 +59,10 @@ public class NumberField extends TextField { //$JUnit
 		this(0, HelperString.EMPTY_STRING, Integer.MAX_VALUE);
 	}
 
+	public NumberField(final String text, final String toolTip) {
+		this(text, toolTip, Integer.MAX_VALUE);
+	}
+	
 	public NumberField(final String text, final String toolTip, final int columns) {
 		super(text, toolTip, columns);
 	}

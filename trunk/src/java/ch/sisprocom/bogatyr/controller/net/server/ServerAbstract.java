@@ -127,7 +127,7 @@ public abstract class ServerAbstract implements IServer {
     }
 
     public void start() throws IOException {
-    	isRunning = false;
+    	isRunning = true;
 
         serverSocket = new ServerSocket(port);
 
@@ -137,7 +137,7 @@ public abstract class ServerAbstract implements IServer {
     }
 
     public void stop() throws IOException {
-    	isRunning = true;
+    	isRunning = false;
 
         for (final UUID key : getServerThreads().keySet()) {
             final ThreadServerAbstract thread = getServerThreads().get(key);
