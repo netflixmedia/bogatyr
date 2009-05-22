@@ -37,9 +37,9 @@ package ch.sisprocom.bogatyr.controller.timer;
  * Defines the methods for the implementation of the timer.
  * 
  * @author Stefan Laubenberger
- * @version 20090304
+ * @version 20090522
  */
-public interface IControllerTimer extends IListener{
+public interface IControllerTimer extends IListener {
 	/**
 	 * Starts immediately the timer with a given interval.
 	 * 
@@ -54,10 +54,19 @@ public interface IControllerTimer extends IListener{
 	 * @param interval of the timer
 	 */
 	void start(final long delay, final long interval);
-
+	
 	/**
-	 * Stops immediately the timer.
+	 * Returns the current time in ms of the timer.
+	 * 
+	 * @return current time of the timer
 	 */
-	void stop();
+    long getTime();
+    
+    /**
+     * Sets the time in ms of the timer.
+     * 
+     * @param time
+     */
+    void setTime(final long time);
 }   
 

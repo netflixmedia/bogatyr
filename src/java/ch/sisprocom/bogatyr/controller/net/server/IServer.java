@@ -96,11 +96,11 @@ public interface IServer extends Runnable {
 	void stop() throws IOException;
 
 	/**
-	 * Returns the running state of the server.
+	 * Returns the state of the server.
 	 * 
 	 * @return true/false
 	 */
-	boolean isStopped();
+    boolean isRunning();
 	
 	/**
 	 * Adds a new thread to the {@link #mapThread}.

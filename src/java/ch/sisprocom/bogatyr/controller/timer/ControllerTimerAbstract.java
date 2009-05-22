@@ -43,11 +43,10 @@ import java.util.Timer;
  * @author Stefan Laubenberger
  * @version 20090516
  */
-public abstract class ControllerTimerAbstract extends ControllerAbstract implements IListener{
+public abstract class ControllerTimerAbstract extends ControllerAbstract implements IListener {
 	private Collection<ListenerTimer> listListener = new ArrayList<ListenerTimer>();
 
 	private Timer timer = new Timer();
-	private long time;
 	private long interval;
 	
 	private boolean isRunning;
@@ -65,29 +64,9 @@ public abstract class ControllerTimerAbstract extends ControllerAbstract impleme
         this.timer = timer;
     }
 
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(final long time) {
-        this.time = time;
-    }
-
-    public long getInterval() {
-        return interval;
-    }
-
-    public void setInterval(final long interval) {
-        this.interval = interval;
-    }   
-    
-    public boolean isRunning() {
-		return isRunning;
-	}
-
-	public void setRunning(final boolean isRunning) {
-		this.isRunning = isRunning;
-	}
+//	public void setRunning(final boolean isRunning) {
+//		this.isRunning = isRunning;
+//	}
 
 	
 	/*
@@ -130,4 +109,16 @@ public abstract class ControllerTimerAbstract extends ControllerAbstract impleme
     public synchronized void removeAllListener() {
         listListener = new ArrayList<ListenerTimer>();
     }
+    
+    public boolean isRunning() {
+		return isRunning;
+	}
+    
+    public long getInterval() {
+        return interval;
+    }
+
+    public void setInterval(final long interval) {
+        this.interval = interval;
+    }   
 }

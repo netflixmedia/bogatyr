@@ -31,13 +31,16 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.client;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import ch.sisprocom.bogatyr.controller.timer.ListenerTimer;
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 /**
  * This is the skeleton for clients.
@@ -48,11 +51,13 @@ import java.net.Socket;
 public abstract class ClientAbstract implements IClient {
     private final long createTime = System.currentTimeMillis();
 
+	private Collection<ListenerClient> listListener = new ArrayList<ListenerClient>();
+
     private String host;
     private int port;
     private Socket socket;
 
-    private boolean isStopped = true;
+    private boolean isRunning;
 
 
     protected ClientAbstract(final String host, final int port) {
@@ -104,13 +109,15 @@ public abstract class ClientAbstract implements IClient {
     }
 
     public void start() throws IOException {
-        isStopped = false;
         socket = new Socket(host, port);
+        
+        fireClientStarted();
     }
 
     public void stop() throws IOException {
-        isStopped = true;
         socket.close();
+        
+        fireClientStopped();
     }
 
     public byte[] readStream() throws IOException {
@@ -141,10 +148,52 @@ public abstract class ClientAbstract implements IClient {
         HelperIO.writeStream(socket.getOutputStream(), HelperArray.concatenate(data, new byte[]{(byte) -1}));
     }
 
-    public boolean isStopped() {
-        return isStopped;
+    public boolean isRunning() {
+        return isRunning;
+    }
+    
+    
+	/*
+	 * Private methods
+	 */
+//	protected void fireTimeChanged(final byte[] data) {
+//		for (final ListenerClient listener : listListener) {
+//			listener.clientStreamRead(data);
+//		}	
+//	}
+	
+	protected void fireClientStarted() {
+		isRunning = true;
+		
+		for (final ListenerClient listener : listListener) {
+			listener.clientStarted();
+		}	
+	}
+	
+	protected void fireClientStopped() {
+		isRunning = false;
+		
+		for (final ListenerClient listener : listListener) {
+			listener.clientStopped();
+		}	
+	}
+
+	
+    /*
+      * Implemented methods
+      */
+    public synchronized void addListener(final ListenerClient listener) {
+        listListener.add(listener);
     }
 
+    public synchronized void removeListener(final ListenerClient listener) {
+        listListener.remove(listener);
+    }
+
+    public synchronized void removeAllListener() {
+        listListener = new ArrayList<ListenerClient>();
+    }
+    
 
     /*
       * Overridden methods

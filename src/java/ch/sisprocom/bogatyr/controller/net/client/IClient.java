@@ -97,7 +97,7 @@ public interface IClient extends Runnable {
 	 * 
 	 * @return true/false
 	 */
-	boolean isStopped();
+    boolean isRunning();
 
 	/**
      * Reads a socket-stream to a byte-array.
@@ -114,5 +114,24 @@ public interface IClient extends Runnable {
      * @throws Exception 
      */
     void writeStream(final byte[] data) throws IOException;
+    
+	/**
+	 * Adds a listener for this client.
+	 * 
+	 * @param listener to add
+	 */
+	void addListener(ListenerClient listener);
+	
+	/**
+	 * Remove a listener for this client.
+	 * 
+	 * @param listener to remove
+	 */
+	void removeListener(ListenerClient listener);
+
+	/**
+	 * Remove all listeners for this client. 
+	 */
+	void removeAllListener();
 }   
 

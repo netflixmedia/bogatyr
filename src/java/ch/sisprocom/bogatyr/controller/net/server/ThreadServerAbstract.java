@@ -58,7 +58,7 @@ public abstract class ThreadServerAbstract implements IThreadServer {
 	private final Socket socket;
 	private final ServerAbstract server;
 	
-	private boolean isStopped = true;
+	private boolean isRunning;
 	
 
 	protected ThreadServerAbstract(final ServerAbstract server, final Socket socket) {
@@ -120,7 +120,7 @@ public abstract class ThreadServerAbstract implements IThreadServer {
     }
 
 	public void stop() throws IOException {
-		isStopped = true;
+		isRunning = true;
 		
 		if (thread != null && thread.isAlive()) {
             thread = null;
@@ -130,7 +130,7 @@ public abstract class ThreadServerAbstract implements IThreadServer {
 	}  
 
 	public void start() {
-		isStopped = false;
+		isRunning = false;
 		
 		if (thread == null) {
 			server.addServerThread(uuid, this);
@@ -140,8 +140,8 @@ public abstract class ThreadServerAbstract implements IThreadServer {
 		}
 	}	
     
-	public boolean isStopped() {
-		return isStopped;
+	public boolean isRunning() {
+		return isRunning;
 	}
 	
 	

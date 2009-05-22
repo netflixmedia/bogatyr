@@ -101,5 +101,10 @@ public interface IThreadServer extends Runnable {
 	 */
 	void start();
     
-	boolean isStopped();
+	/**
+	 * Returns the state of the thread.
+	 * 
+	 * @return true/false
+	 */
+    boolean isRunning();
 }   
