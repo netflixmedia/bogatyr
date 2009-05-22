@@ -51,7 +51,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class ServerAbstract implements IServer {
     private final long createTime = System.currentTimeMillis();
 
-    private final Map<UUID, ThreadServerAbstract> mapThread = new ConcurrentHashMap<UUID, ThreadServerAbstract>();
+    private final Map<UUID, IServerThread> mapThread = new ConcurrentHashMap<UUID, IServerThread>();
 
     private ServerSocket serverSocket;
     private int port;
@@ -115,7 +115,7 @@ public abstract class ServerAbstract implements IServer {
         this.timeout = timeout;
     }
 
-    public void addServerThread(final UUID uuid, final ThreadServerAbstract serverThread) {
+    public void addServerThread(final UUID uuid, final IServerThread serverThread) {
         mapThread.put(uuid, serverThread);
     }
 
@@ -123,7 +123,7 @@ public abstract class ServerAbstract implements IServer {
         mapThread.remove(uuid);
     }
 
-    public Map<UUID, ThreadServerAbstract> getServerThreads() {
+    public Map<UUID, IServerThread> getServerThreads() {
         return Collections.unmodifiableMap(mapThread);
     }
 
@@ -135,17 +135,20 @@ public abstract class ServerAbstract implements IServer {
         if (0 < timeout) {
             serverSocket.setSoTimeout(timeout);
         }
+        
+//        run();
     }
 
     public void stop() throws IOException {
     	isRunning = false;
 
+    	serverSocket.close();
+    	
         for (final UUID key : getServerThreads().keySet()) {
-            final ThreadServerAbstract thread = getServerThreads().get(key);
+            final IServerThread thread = getServerThreads().get(key);
 
             thread.stop();
         }
-        serverSocket.close();
     }
 
     public boolean isRunning() {

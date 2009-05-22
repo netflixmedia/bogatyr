@@ -119,7 +119,9 @@ public abstract class ClientAbstract implements IClient {
     }
 
     public void stop() throws IOException {
-        socket.close();
+        if (null != socket) {
+        	socket.close();
+        }
         
         fireClientStopped();
     }
@@ -160,11 +162,11 @@ public abstract class ClientAbstract implements IClient {
 	/*
 	 * Private methods
 	 */
-//	protected void fireTimeChanged(final byte[] data) {
-//		for (final ListenerClient listener : listListener) {
-//			listener.clientStreamRead(data);
-//		}	
-//	}
+	protected void fireClientStreamRead(byte[] data) {
+		for (final ListenerClient listener : listListener) {
+			listener.clientStreamRead(data);
+		}	
+	}
 	
 	protected void fireClientStarted() {
 		isRunning = true;
