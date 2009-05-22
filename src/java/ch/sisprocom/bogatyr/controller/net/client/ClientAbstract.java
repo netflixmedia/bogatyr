@@ -45,6 +45,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is the skeleton for clients.
  *
  * @author Stefan Laubenberger
+ * @author Silvan Spross
  * @version 20090522
  */
 public abstract class ClientAbstract implements IClient {

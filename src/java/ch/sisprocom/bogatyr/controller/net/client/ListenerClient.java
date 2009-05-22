@@ -35,6 +35,7 @@ package ch.sisprocom.bogatyr.controller.net.client;
  * ListenerClient
  * 
  * @author Stefan Laubenberger
+ * @author Silvan Spross
  * @version 20090522
  */
 public interface ListenerClient {

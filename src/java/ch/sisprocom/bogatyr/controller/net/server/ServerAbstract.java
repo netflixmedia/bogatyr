@@ -45,6 +45,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * This is the skeleton for servers.
  *
  * @author Stefan Laubenberger
+ * @author Silvan Spross
  * @version 20090522
  */
 public abstract class ServerAbstract implements IServer {

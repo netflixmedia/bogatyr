@@ -42,6 +42,7 @@ import java.util.UUID;
  * Defines the methods for the implementation of the server.
  * 
  * @author Stefan Laubenberger
+ * @author Silvan Spross
  * @version 20090522
  */
 public interface IServer extends Runnable {
