@@ -58,8 +58,8 @@ public abstract class ClientAbstract implements IClient {
     protected ClientAbstract(final String host, final int port) {
         super();
 
-        this.host = host;
-        this.port = port;
+        setHost(host);
+        setPort(port);
     }
 
 
@@ -89,10 +89,17 @@ public abstract class ClientAbstract implements IClient {
     }
 
     public void setHost(final String host) {
-        this.host = host;
+    	if (null == host) {
+    		throw new IllegalArgumentException("host is null!"); //$NON-NLS-1$
+    	}
+
+    	this.host = host;
     }
 
     public void setPort(final int port) {
+    	if (0 >= port || 65535 < port) {
+    		throw new IllegalArgumentException("port outside of the valid range (0 - 65535): " + port); //$NON-NLS-1$
+    	}
         this.port = port;
     }
 

@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * Implementation of the context for applications.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20090522
  */
 public class Context implements IContext {
 	private static final IContext instance = new Context();
@@ -74,6 +74,10 @@ public class Context implements IContext {
 	 * Implemented methods
 	 */
 	public void addValue(final Object key, final Object value) { //$JUnit
+		if (null == key) {
+			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+		}
+
 		if (value != null) {
             contextData.put(key, value);
 		} else {

@@ -31,19 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.paginator;
 
-import ch.sisprocom.bogatyr.helper.HelperCollection;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import ch.sisprocom.bogatyr.helper.HelperCollection;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * The Paginator splits a list in different pages.
  *
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20090522
  */
 public class Paginator {
     private List<?> list;
@@ -57,8 +57,8 @@ public class Paginator {
     public Paginator(final List<?> list, final int numberPerPage) {
         super();
         
-        this.list = Collections.unmodifiableList(list);
-        this.numberPerPage = numberPerPage;
+        setList(list);
+        setNumberPerPage(numberPerPage);
     }
 
     public List<?> getList() {
@@ -66,6 +66,10 @@ public class Paginator {
     }
 
     public void setList(final List<?> list) {
+		if (null == list) {
+			throw new IllegalArgumentException("list is null!"); //$NON-NLS-1$
+		}
+
         this.list = Collections.unmodifiableList(list);
    }
 
@@ -74,7 +78,11 @@ public class Paginator {
     }
 
     public void setNumberPerPage(final int numberPerPage) {
-		this.numberPerPage = numberPerPage;
+		if (0 > numberPerPage) {
+			throw new IllegalArgumentException("numberPerPage must be positive: " + numberPerPage); //$NON-NLS-1$
+		}
+
+    	this.numberPerPage = numberPerPage;
     }
 
     /**

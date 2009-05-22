@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.view.swing.Button;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20090522
  */
 public class PrinterTest {
 	@Test
@@ -62,7 +62,9 @@ public class PrinterTest {
             component.setFont(new Font("Arial", Font.PLAIN, HelperNumber.VALUE_16)); //$NON-NLS-1$;
 			component.setSize(new Dimension(100, 100));
 			
-			new Printer().print(component);
+			Printer printer = new Printer();
+			printer.print(component, true);
+			printer.print(component, false);
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 }

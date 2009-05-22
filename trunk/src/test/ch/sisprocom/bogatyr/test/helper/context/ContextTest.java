@@ -70,6 +70,12 @@ public class ContextTest {
 		Context.getInstance().addValue(key2, value);
 		
 		assertEquals(value, Context.getInstance().getValue(key2));
+		
+		//null key
+		try {
+			Context.getInstance().addValue(null, value);
+			fail("key is null!"); //$NON-NLS-1$
+		} catch (Exception ex) {/*nothing to do*/}
 	}
 	
 	@Test

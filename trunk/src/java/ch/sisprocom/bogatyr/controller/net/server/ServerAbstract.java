@@ -62,7 +62,7 @@ public abstract class ServerAbstract implements IServer {
     protected ServerAbstract(final int port, final int timeout) {
         super();
 
-        this.port = port;
+        setPort(port);
         this.timeout = timeout;
     }
 
@@ -100,8 +100,12 @@ public abstract class ServerAbstract implements IServer {
     }
 
     public void setPort(final int port) {
+    	if (0 >= port || 65535 < port) {
+    		throw new IllegalArgumentException("port outside of the valid range (0 - 65535): " + port); //$NON-NLS-1$
+    	}
         this.port = port;
     }
+
 
     public void setTimeout(final int timeout) {
         this.timeout = timeout;
