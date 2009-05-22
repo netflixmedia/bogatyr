@@ -31,27 +31,26 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.server;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.Socket;
-import java.util.UUID;
-
 import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperCrypto;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
+import java.util.UUID;
 
 
 /**
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 20090521
+ * @version 20090522
  */
-public abstract class ThreadServerAbstract implements Runnable { //TODO document in Wiki!
-	private final long startTime = System.currentTimeMillis();
+public abstract class ThreadServerAbstract implements IThreadServer {
+    private final long createTime = System.currentTimeMillis();
 
-	
 	private Thread thread;
 	
 	private final UUID uuid = HelperCrypto.getUUID();
@@ -59,111 +58,92 @@ public abstract class ThreadServerAbstract implements Runnable { //TODO document
 	private final Socket socket;
 	private final ServerAbstract server;
 	
+	private boolean isStopped = true;
+	
 
 	protected ThreadServerAbstract(final ServerAbstract server, final Socket socket) {
         super();
         this.server = server;
 		this.socket = socket;
 	}
-	
+
 	/**
-	 * Get the start time of the thread.
+     * Returns the instantiation time of the server thread.
      *
-     * @return start time of the thread
-	 */
-	public long getStartTime() {
-		return startTime;
+     * @return instantiation time of the controller
+     */
+	public long getCreateTime() {
+		return createTime;
 	}
 
-    protected Socket getSocket() {
+
+	/*
+	 * Implemented methods
+	 */
+	public Thread getThread() {
+		return thread;
+	}
+
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public Socket getSocket() {
 		return socket;
-    }
+	}
 
-	/**
-     * Reads a socket-stream.
-     * 
-     * @return byte array from stream
-	 * @throws IOException
-     */
+	public ServerAbstract getServer() {
+		return server;
+	}
+
 	public byte[] readStream() throws IOException {
-		System.out.println("start readStream: " +  (socket.isConnected() && !socket.isClosed() && socket.isBound()));
-		
-		byte[] temp = null;
-		
-		InputStream in = socket.getInputStream();
-		byte b;
-		do {
-			b = (byte) in.read();
-			  
-			  
-			  if (b != -1) {
-				  temp = HelperArray.concatenate(temp, new byte[]{b});
-			    System.out.println("The next byte is " + b);
-			  }
-			} while (b != -1);
+		final InputStream is = socket.getInputStream();
+		byte[] result = null;
+		byte input;
 
-			System.out.println("end readStream");
-		
-			if (null == temp) { //client lost
+		do {
+			input = (byte) is.read();
+			  
+			  if (-1 != input) {
+				  result = HelperArray.concatenate(result, new byte[]{input});
+			  }
+			} while (-1 != input);
+
+			if (null == result) { //client lost
 				stop();
 			}
-			return temp;
-			
-		
-		
-//		return HelperIO.readStream(socket.getInputStream());
+			return result;
     }
 
-    /**
-     * Writes on a socket-stream.
-     * 
-     * @param key
-     * @param data
-     * @throws IOException 
-     */
     public void writeStream(final byte[] data) throws IOException {
-    	System.out.println("writeStream: " + new String(data));
-    	HelperIO.writeStream(socket.getOutputStream(), HelperArray.concatenate(data, new byte[]{-1}));
-
+    	HelperIO.writeStream(socket.getOutputStream(), HelperArray.concatenate(data, new byte[]{(byte) -1}));
     }
 
-	/**
-	 * Returns the thread.
-     *
-     * @return Thread
-	 */
-	protected Thread getThread() {
-		return thread;
-	}  
-
-	/**
-	 * Stops the thread. And closes the open socket.
-	 * 
-	 * @throws IOException 
-	 */
 	public void stop() throws IOException {
+		isStopped = true;
+		
 		if (thread != null && thread.isAlive()) {
-			server.removeServerThread(uuid);
             thread = null;
         }
+		server.removeServerThread(uuid);
 		socket.close();
-		
-		System.out.println("Thread stopped");
 	}  
 
-	/**
-	 * Starts the thread with {@link Thread#MIN_PRIORITY}.
-	 */
 	public void start() {
+		isStopped = false;
+		
 		if (thread == null) {
 			server.addServerThread(uuid, this);
 			thread = new Thread(this);
             thread.setPriority(Thread.MIN_PRIORITY);
             thread.start();
-            
-            System.out.println("Thread started");
 		}
 	}	
+    
+	public boolean isStopped() {
+		return isStopped;
+	}
+	
 	
 	/*
 	 * Overridden methods

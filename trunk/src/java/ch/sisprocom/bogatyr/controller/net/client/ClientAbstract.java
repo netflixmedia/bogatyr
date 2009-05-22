@@ -1,22 +1,22 @@
 /*******************************************************************************
  * Copyright (c) 2007-2009 by SiSprocom GmbH.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * 
+ *
  * See the GNU General Public License for more details:
  * ----------------------------------------------------
  * <http://www.gnu.org/licenses>
- * 
+ *
  * This distribution is available at:
  * ----------------------------------
  * <http://code.google.com/p/bogatyr/>
  * <http://www.sisprocom.ch/bogatyr/>
- * 
+ *
  * Contact information:
  * --------------------
  * SiSprocom GmbH
@@ -27,96 +27,125 @@
  *
  * <s.laubenberger@sisprocom.ch>
  * <s.spross@sisprocom.ch>
- * 
+ *
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.client;
+
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-
 /**
  * This is the skeleton for clients.
- * 
+ *
  * @author Stefan Laubenberger
- * @version 20090521
+ * @version 20090522
  */
-public abstract class ClientAbstract { //TODO document in Wiki!
-	final private String host;
-	final private int port;
+public abstract class ClientAbstract implements IClient {
+    private final long createTime = System.currentTimeMillis();
+
+    private String host;
+    private int port;
     private Socket socket;
-	
 
-	protected ClientAbstract(final String host, final int port) {
-		super();
+    private boolean isStopped = true;
 
-		this.host = host;
-		this.port = port;
-	}
-	
 
-	/**
-     * Open a stream.
-     * 
-     * @throws IOException
-     */
-	public void start() throws IOException {
-		System.out.println("Client started");
-		socket = new Socket(host, port);
-	}
-	
-	/**
-     * Close a stream.
-     * 
-     * @throws IOException
-     */
-	public void stop() throws IOException {
-		System.out.println("Client stopped");
-		socket.close();
-	}
+    protected ClientAbstract(final String host, final int port) {
+        super();
 
-	/**
-     * Reads a socket-stream.
-     * 
-     * @return byte-array
-	 * @throws IOException 
-     */
-	public byte[] readStream() throws IOException {
-		System.out.println("start readStream");
-		
-		byte[] temp = null;
-		
-		InputStream in = socket.getInputStream();
-		byte b;
-		do {
-			b = (byte) in.read();
-			  
-			  
-			  if (b != -1) {
-				  temp = HelperArray.concatenate(temp, new byte[]{b});
-			    System.out.println("The next byte is " + b);
-			  }
-			} while (b != -1);
-
-			System.out.println("end readStream");
-
-			if (null == temp) { //client lost
-				stop();
-			}
-			return temp;
+        this.host = host;
+        this.port = port;
     }
 
-    /**
-     * Writes on a socket-stream.
-     * 
-     * @param data a byte-array
-     * @throws Exception 
+
+	/**
+     * Returns the instantiation time of the client.
+     *
+     * @return instantiation time of the controller
      */
-    public void writeStream(final byte[] data) throws IOException {
-    	System.out.println("writeStream: " + new String(data));
-    	HelperIO.writeStream(socket.getOutputStream(), HelperArray.concatenate(data, new byte[]{-1}));
+	public long getCreateTime() {
+		return createTime;
 	}
+
+
+    /*
+      * Implemented methods
+      */
+    public String getHost() {
+        return host;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public void setHost(final String host) {
+        this.host = host;
+    }
+
+    public void setPort(final int port) {
+        this.port = port;
+    }
+
+    public void start() throws IOException {
+        isStopped = false;
+        socket = new Socket(host, port);
+    }
+
+    public void stop() throws IOException {
+        isStopped = true;
+        socket.close();
+    }
+
+    public byte[] readStream() throws IOException {
+    	byte[] result = null;
+    	
+    	if (!socket.isClosed()) {
+	    	System.out.println(socket.isClosed());
+	        System.out.println(socket.isBound());
+	    	final InputStream is = socket.getInputStream();
+	        byte input;
+	
+	        do {
+	            input = (byte) is.read();
+	
+	            if (-1 != input) {
+	                result = HelperArray.concatenate(result, new byte[]{input});
+	            }
+	        } while (-1 != input);
+	
+	        if (null == result) { //server lost
+	            stop();
+	        }
+        } else {
+        	stop();
+        }
+        return result;
+    }
+
+    public void writeStream(final byte[] data) throws IOException {
+        HelperIO.writeStream(socket.getOutputStream(), HelperArray.concatenate(data, new byte[]{(byte) -1}));
+    }
+
+    public boolean isStopped() {
+        return isStopped;
+    }
+
+
+    /*
+      * Overridden methods
+      */
+    @Override
+    public String toString() {
+        return HelperObject.toString(this);
+    }
 }
