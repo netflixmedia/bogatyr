@@ -120,7 +120,7 @@ public abstract class ThreadServerAbstract implements IThreadServer {
     }
 
 	public void stop() throws IOException {
-		isRunning = true;
+		isRunning = false;
 		
 		if (thread != null && thread.isAlive()) {
             thread = null;
@@ -130,7 +130,7 @@ public abstract class ThreadServerAbstract implements IThreadServer {
 	}  
 
 	public void start() {
-		isRunning = false;
+		isRunning = true;
 		
 		if (thread == null) {
 			server.addServerThread(uuid, this);
