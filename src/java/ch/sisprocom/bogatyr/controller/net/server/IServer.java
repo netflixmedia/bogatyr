@@ -104,19 +104,17 @@ public interface IServer extends Runnable {
     boolean isRunning();
 	
 	/**
-	 * Adds a new thread to the {@link #mapThread}.
+	 * Adds a new thread to the map.
 	 * 
-	 * @param uniqueKey unique Key for the {@link #mapThread} as Map index
+	 * @param uuid unique key for the {@link Map} index
 	 * @param serverThread asynchron server thread
-	 * @see Map
 	 */
 	void addServerThread(final UUID uuid, final IServerThread serverThread);
 
 	/**
-	 * Removes the thread with the given unique key from the {@link #mapThread}.
+	 * Removes the thread with the given unique key from the {@link Map}.
 	 * 
-	 * @param uniqueKey unique Key for the {@link #mapThread} as Map index
-	 * @see Map
+	 * @param uuid unique key for the map index
 	 */
 	void removeServerThread(final UUID uuid);
 	
@@ -124,7 +122,6 @@ public interface IServer extends Runnable {
 	 * Returns all threads.
 	 * 
 	 * @return list containing all threads
-	 * @see Map
 	 */
 	Map<UUID, IServerThread> getServerThreads();
 }   

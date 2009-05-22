@@ -83,7 +83,6 @@ public interface IServerThread extends Runnable {
     /**
      * Writes on a socket-stream.
      * 
-     * @param key
      * @param data
      * @throws IOException 
      */
