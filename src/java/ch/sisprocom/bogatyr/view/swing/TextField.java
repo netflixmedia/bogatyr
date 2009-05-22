@@ -57,6 +57,10 @@ public class TextField extends JTextField implements IComponentActivate {
         this(HelperString.EMPTY_STRING, HelperString.EMPTY_STRING, Integer.MAX_VALUE);
     }
 
+	public TextField(final String text, final String toolTip) {
+        this(text, toolTip, Integer.MAX_VALUE);
+    }
+	
 	public TextField(final String text, final String toolTip, final int columns) {
         super(text, columns);
         setToolTipText(toolTip);
