@@ -111,8 +111,8 @@ public interface IClient extends Runnable {
     /**
      * Writes on a socket-stream from a byte-array.
      * 
-     * @param data a byte-array
-     * @throws Exception 
+     * @param data to write on a socket
+     * @throws IOException
      */
     void writeStream(final byte[] data) throws IOException;
     

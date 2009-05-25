@@ -21,15 +21,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/crypto/ProviderCertificate.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/crypto/ProviderCertificate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/IClient.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/IClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/IServerThread.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/IServerThread.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/ClientAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/ClientAbstract.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/property/IControllerProperty.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/property/IControllerProperty.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cfg/ch/sisprocom/bogatyr/sample/filemanager/standard.properties" afterPath="$PROJECT_DIR$/cfg/ch/sisprocom/bogatyr/sample/filemanager/standard.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThreadAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThreadAbstract.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ThreadServerAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ThreadServerAbstract.java" />
     </list>
-    <ignored path="Bogatyr.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path="Bogatyr.iws" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="Commander">
@@ -85,32 +86,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ServerAbstract.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerAbstract.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="22" selection-start="1453" selection-end="1453" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ThreadServerAbstract.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ThreadServerAbstract.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="22" selection-start="1530" selection-end="1530" vertical-scroll-proportion="0.33118972">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ClientAbstract.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/ClientAbstract.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="42" selection-start="1703" selection-end="1703" vertical-scroll-proportion="0.0">
+            <state line="68" column="42" selection-start="1953" selection-end="1953" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IClient.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/IClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="113" column="39" selection-start="2566" selection-end="2566" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerAbstract.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerAbstract.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="22" selection-start="1478" selection-end="1478" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IServer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/IServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="17" selection-start="1373" selection-end="1373" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IServerThread.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/IServerThread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="85" column="39" selection-start="2078" selection-end="2078" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerThreadAbstract.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThreadAbstract.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="63" column="70" selection-start="1882" selection-end="1882" vertical-scroll-proportion="0.33105803">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -377,7 +405,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
     </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG" enabled="false" merge="false">
+    <configuration default="true" type="TestNG" factoryName="TestNG" enabled="false" merge="false" runner="emma">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -539,10 +567,10 @@
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288948" sideWeight="0.5" order="6" side_tool="false" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33117816" sideWeight="0.45139813" order="0" side_tool="false" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33117816" sideWeight="0.4527297" order="0" side_tool="false" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756326" sideWeight="0.5" order="1" side_tool="false" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24856322" sideWeight="0.44873503" order="1" side_tool="false" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.53928095" sideWeight="0.5" order="5" side_tool="false" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24856322" sideWeight="0.4527297" order="1" side_tool="false" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5379494" sideWeight="0.5" order="5" side_tool="false" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756326" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
@@ -688,20 +716,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/IThreadServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="17" selection-start="1327" selection-end="1327" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/IServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="17" selection-start="1348" selection-end="1348" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/ControllerAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="0" selection-start="1291" selection-end="1539" vertical-scroll-proportion="0.0">
@@ -709,16 +723,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/IServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="17" selection-start="1373" selection-end="1373" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/IClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="17" selection-start="1296" selection-end="1296" vertical-scroll-proportion="0.0">
+        <state line="113" column="39" selection-start="2566" selection-end="2566" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/IServerThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="39" selection-start="2078" selection-end="2078" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/ClientAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="42" selection-start="1703" selection-end="1703" vertical-scroll-proportion="0.0">
+        <state line="68" column="42" selection-start="1953" selection-end="1953" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -727,16 +755,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="22" selection-start="1453" selection-end="1453" vertical-scroll-proportion="0.0">
+        <state line="50" column="22" selection-start="1478" selection-end="1478" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ThreadServerAbstract.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThreadAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="22" selection-start="1530" selection-end="1530" vertical-scroll-proportion="0.33118972">
+        <state line="63" column="70" selection-start="1882" selection-end="1882" vertical-scroll-proportion="0.33105803">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
