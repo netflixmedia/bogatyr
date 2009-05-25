@@ -44,12 +44,12 @@ import java.util.UUID;
  * @version 20090522
  */
 public interface IServerThread extends Runnable {
-	/**
-	 * Returns the current {@link Thread}.
-	 * 
-	 * @return thread
-	 */
-	Thread getThread();
+//	/**
+//	 * Returns the current {@link Thread}.
+//	 * 
+//	 * @return thread
+//	 */
+//	Thread getThread();
 
 	/**
 	 * Returns the an universally unique identifier {@link UUID} of the thread.
@@ -83,7 +83,7 @@ public interface IServerThread extends Runnable {
     /**
      * Writes on a socket-stream.
      * 
-     * @param data
+     * @param data to write on a socket
      * @throws IOException 
      */
     void writeStream(final byte[] data) throws IOException;

@@ -46,11 +46,13 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090522
+ * @version 20090526
  */
 public abstract class ServerAbstract implements IServer {
     private final long createTime = System.currentTimeMillis();
 
+    private Thread thread;
+    
     private final Map<UUID, IServerThread> mapThread = new ConcurrentHashMap<UUID, IServerThread>();
 
     private ServerSocket serverSocket;
@@ -71,7 +73,7 @@ public abstract class ServerAbstract implements IServer {
     }
 
     protected ServerAbstract(final int port) {
-        this(port, 0); //TODO set default parameters
+        this(port, 0);
     }
 
 	/**
@@ -83,10 +85,19 @@ public abstract class ServerAbstract implements IServer {
 		return createTime;
 	}
 
+	/**
+	 * Returns the current {@link Thread}.
+	 * 
+	 * @return thread
+	 */
+	public Thread getThread() {
+		return thread;
+	}
+	
 
     /*
-      * Implemented methods
-      */
+     * Implemented methods
+     */
     public ServerSocket getServerSocket() {
         return serverSocket;
     }
@@ -97,10 +108,6 @@ public abstract class ServerAbstract implements IServer {
 
     public int getTimeout() {
         return timeout;
-    }
-
-    public void setServerSocket(final ServerSocket serverSocket) {
-        this.serverSocket = serverSocket;
     }
 
     public void setPort(final int port) {
@@ -130,24 +137,37 @@ public abstract class ServerAbstract implements IServer {
     public void start() throws IOException {
     	isRunning = true;
 
-        serverSocket = new ServerSocket(port);
+//		if (thread == null) {
+            serverSocket = new ServerSocket(port);
 
-        if (0 < timeout) {
-            serverSocket.setSoTimeout(timeout);
-        }
-        
+            if (0 < timeout) {
+                serverSocket.setSoTimeout(timeout);
+            }
+            
+			thread = new Thread(this);
+//            thread.setDaemon(true);
+            thread.setPriority(Thread.MIN_PRIORITY);
+            thread.start();
+//		}
 //        run();
     }
 
     public void stop() throws IOException {
     	isRunning = false;
 
-    	serverSocket.close();
-    	
+        if (null != serverSocket) {
+        	serverSocket.close();
+        }
+		
         for (final UUID key : getServerThreads().keySet()) {
             final IServerThread thread = getServerThreads().get(key);
 
             thread.stop();
+        }
+        
+		if (thread != null && thread.isAlive()) {
+            thread.interrupt();
+//			thread = null;
         }
     }
 

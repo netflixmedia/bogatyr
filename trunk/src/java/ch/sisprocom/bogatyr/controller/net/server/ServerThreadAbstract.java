@@ -31,22 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.server;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.Socket;
-import java.util.UUID;
-
 import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperCrypto;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
+import java.util.UUID;
 
 
 /**
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 20090522
+ * @version 20090526
  */
 public abstract class ServerThreadAbstract implements IServerThread {
     private final long createTime = System.currentTimeMillis();
@@ -76,14 +76,19 @@ public abstract class ServerThreadAbstract implements IServerThread {
 		return createTime;
 	}
 
-
-	/*
-	 * Implemented methods
+	/**
+	 * Returns the current {@link Thread}.
+	 * 
+	 * @return thread
 	 */
 	public Thread getThread() {
 		return thread;
 	}
-
+	
+	
+	/*
+	 * Implemented methods
+	 */
 	public UUID getUuid() {
 		return uuid;
 	}
@@ -119,16 +124,6 @@ public abstract class ServerThreadAbstract implements IServerThread {
     	HelperIO.writeStream(socket.getOutputStream(), HelperArray.concatenate(data, new byte[]{(byte) -1}));
     }
 
-	public void stop() throws IOException {
-		isRunning = false;
-
-		socket.close();
-		
-		if (thread != null && thread.isAlive()) {
-            thread = null;
-        }
-		server.removeServerThread(uuid);
-	}  
 
 	public void start() {
 		isRunning = true;
@@ -136,13 +131,32 @@ public abstract class ServerThreadAbstract implements IServerThread {
 		if (thread == null) {
 			server.addServerThread(uuid, this);
 			thread = new Thread(this);
+//			thread.setDaemon(true);
             thread.setPriority(Thread.MIN_PRIORITY);
             thread.start();
 		}
 		
 //		run();
 	}	
-    
+
+	public void stop() throws IOException {
+		isRunning = false;
+
+        if (null != socket) {
+        	socket.close();
+        }
+		
+		server.removeServerThread(uuid);
+		
+		if (thread != null) {
+			if (thread.isAlive()) {
+				thread.interrupt();
+			} else {
+				thread = null;
+			}
+        }
+	}  
+	
 	public boolean isRunning() {
 		return isRunning;
 	}
