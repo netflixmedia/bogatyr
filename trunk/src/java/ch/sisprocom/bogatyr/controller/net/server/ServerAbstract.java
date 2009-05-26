@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.controller.net.server;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -112,7 +113,7 @@ public abstract class ServerAbstract implements IServer {
     }
 
     public void setPort(final int port) {
-    	if (0 >= port || 65535 < port) {
+    	if (0 >= port || HelperNumber.VALUE_65536 <= port) {
     		throw new IllegalArgumentException("port outside of the valid range (0 - 65535): " + port); //$NON-NLS-1$
     	}
         this.port = port;
@@ -147,7 +148,7 @@ public abstract class ServerAbstract implements IServer {
             
 			thread = new Thread(this);
 //            thread.setDaemon(true);
-            thread.setPriority(Thread.MIN_PRIORITY);
+//            thread.setPriority(Thread.MIN_PRIORITY);
             thread.start();
 //		}
 //        run();
@@ -166,9 +167,12 @@ public abstract class ServerAbstract implements IServer {
             thread.stop();
         }
         
-		if (thread != null && thread.isAlive()) {
-            thread.interrupt();
-//			thread = null;
+		if (thread != null) {
+			if (thread.isAlive()) {
+				thread.interrupt();
+			} else {
+				thread = null;
+			}
         }
     }
 

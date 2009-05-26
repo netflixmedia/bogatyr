@@ -31,6 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.printer;
 
+import ch.sisprocom.bogatyr.helper.HelperObject;
+
+import javax.swing.RepaintManager;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -38,10 +41,6 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-
-import javax.swing.RepaintManager;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
@@ -61,7 +60,7 @@ public class Printer implements Printable {
      * @param component for printing
      * @throws PrinterException
      */
-    public synchronized void print(final Component component, boolean isScaled) throws PrinterException {
+    public synchronized void print(final Component component, final boolean isScaled) throws PrinterException {
 		if (null == component) {
 			throw new IllegalArgumentException("component is null!"); //$NON-NLS-1$
 		}
@@ -117,7 +116,7 @@ public class Printer implements Printable {
     /*
      * Implemented methods
      */
-    public int print(final Graphics graphics, final PageFormat pageFormat, final int pageIndex) {
+    public synchronized int print(final Graphics graphics, final PageFormat pageFormat, final int pageIndex) {
 		if (null == graphics) {
 			throw new IllegalArgumentException("graphics is null!"); //$NON-NLS-1$
 		}

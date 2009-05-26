@@ -62,7 +62,7 @@ public class PrinterTest {
             component.setFont(new Font("Arial", Font.PLAIN, HelperNumber.VALUE_16)); //$NON-NLS-1$;
 			component.setSize(new Dimension(100, 100));
 			
-			Printer printer = new Printer();
+			final Printer printer = new Printer();
 			printer.print(component, true);
 			printer.print(component, false);
 		} catch (Exception ex) {fail(ex.getMessage());}

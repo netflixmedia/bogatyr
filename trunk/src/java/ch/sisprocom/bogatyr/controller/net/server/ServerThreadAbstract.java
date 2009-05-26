@@ -133,7 +133,7 @@ public abstract class ServerThreadAbstract implements IServerThread {
 			server.addServerThread(uuid, this);
 			thread = new Thread(this);
 //			thread.setDaemon(true);
-            thread.setPriority(Thread.MIN_PRIORITY);
+//            thread.setPriority(Thread.MIN_PRIORITY);
             thread.start();
 		}
 		

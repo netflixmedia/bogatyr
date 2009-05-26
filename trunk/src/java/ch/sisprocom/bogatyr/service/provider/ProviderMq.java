@@ -33,6 +33,7 @@ package ch.sisprocom.bogatyr.service.provider;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.HelperXml;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import com.ibm.mq.MQEnvironment;
 import com.ibm.mq.MQException;
 import com.ibm.mq.MQGetMessageOptions;
@@ -81,7 +82,7 @@ public class ProviderMq implements IProviderMq {
 	}
 
 	public static void setPort(final int port) {
-    	if (0 >= port || 65535 < port) {
+    	if (0 >= port || HelperNumber.VALUE_65536 <= port) {
     		throw new IllegalArgumentException("port outside of the valid range (0 - 65535): " + port); //$NON-NLS-1$
     	}
  

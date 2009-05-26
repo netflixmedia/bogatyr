@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.helper.crypto;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -86,7 +87,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 	}
 	
 	public KeyPair generateKeyPair(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
-		if (0 >= keysize || 0 != keysize%16) {
+		if (0 >= keysize || 0 != keysize % HelperNumber.VALUE_16) {
 			throw new IllegalArgumentException("keysize is invalid: " + keysize); //$NON-NLS-1$
 		}
 		
@@ -119,7 +120,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
 		}
-    	if (0 >= keysize || 0 != keysize%16) {
+    	if (0 >= keysize || 0 != keysize % HelperNumber.VALUE_16) {
 			throw new IllegalArgumentException("keysize is invalid: " + keysize); //$NON-NLS-1$
 		}
     	
@@ -174,7 +175,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
 		}
-    	if (0 >= keysize || 0 != keysize%16) {
+    	if (0 >= keysize || 0 != keysize % HelperNumber.VALUE_16) {
 			throw new IllegalArgumentException("keysize is invalid: " + keysize); //$NON-NLS-1$
 		}
 

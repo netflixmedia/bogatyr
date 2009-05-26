@@ -38,8 +38,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import ch.sisprocom.bogatyr.helper.HelperString;
-
 
 /**
  * This is a helper class for time operations.

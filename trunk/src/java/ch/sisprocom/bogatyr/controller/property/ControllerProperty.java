@@ -39,7 +39,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Properties;
+import java.util.Properties;import java.util.Collections;
 
 
 /**
@@ -68,7 +68,7 @@ public class ControllerProperty extends ControllerAbstract implements IControlle
 	 * Implemented methods
 	 */
     public Properties getProperties() {
-		return properties;
+		return (Properties) Collections.unmodifiableMap(properties);
 	}
     
     public String getValue(final String key) {
