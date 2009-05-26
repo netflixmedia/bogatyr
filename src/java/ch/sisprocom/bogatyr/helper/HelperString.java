@@ -160,7 +160,7 @@ public abstract class HelperString {
     		return null;
     	}
     	
-    	return isNegative ? Const.NEGATIVE_SIGN + sb.toString() : sb.toString();
+    	return isNegative ? Const.NEGATIVE_SIGN + sb : sb.toString();
     }
     
     /**

@@ -72,7 +72,7 @@ public class ControllerCountdownTimer extends ControllerTimerAbstract implements
 		return runtime;
 	}
 
-	public void setRuntime(long runtime) {
+	public synchronized void setRuntime(final long runtime) {
 		this.runtime = runtime;
 	}
 	
