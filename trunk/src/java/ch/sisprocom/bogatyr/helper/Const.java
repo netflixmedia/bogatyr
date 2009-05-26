@@ -37,7 +37,8 @@ package ch.sisprocom.bogatyr.helper;
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public interface Const {
 	  //algebraic signs
@@ -55,13 +56,6 @@ public interface Const {
 	  double ABSOLUTE_ZERO = -273.15D; //absolute zero in Celsius
 	  double GRAVITY_ON_EARTH = 9.806D; //gravity on earth in m/s^2
 
-	  //weight units
-	  double FACTOR_WEIGHT_OUNCE_TO_G = 28.34952D; //ounce to gram
-	  double FACTOR_WEIGHT_POUND_TO_KG = 0.453592D; //pound to kilogram
-	  double FACTOR_WEIGHT_TON_TO_KG = 907.1847D; //ton to kilogram
-	  double FACTOR_VOLUME_MG_TO_G = 1000.0D; //milligram to gram
-	  double FACTOR_VOLUME_G_TO_KG = 1000.0D; //gram to kilogram
-	  
 	  double FACTOR_GOLDEN_RATIO_A_TO_B = 1.6180339887D; //golden ratio between a and b
 	  
 	  double FACTOR_KCAL_TO_KJ = 4.184D; //kilogram calorie to kilojoule

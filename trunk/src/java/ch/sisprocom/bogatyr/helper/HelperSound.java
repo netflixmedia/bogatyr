@@ -60,7 +60,8 @@ import java.util.TimerTask;
  * This is a helper class for sound operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 0.70 (20090527)
+ * @since 0.50
  */
 public abstract class HelperSound {
 

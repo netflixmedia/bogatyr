@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -42,7 +42,8 @@ import java.util.Locale;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 0.70 (20090527)
+ * @since 0.60
  */
 public abstract class ControllerLocalizerAbstract extends ControllerAbstract implements IControllerLocalizer {
 	private Collection<ListenerLocale> listListener = new ArrayList<ListenerLocale>();

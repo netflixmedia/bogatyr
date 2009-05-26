@@ -35,10 +35,11 @@ import ch.sisprocom.bogatyr.view.swing.NumberField;
 
 
 /**
- * This is an combined Label with a NumberField.
+ * This is a Label combined with a NumberField.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 0.70 (20090527)
+ * @since 0.20
  */
 public class LabeledNumberField extends LabeledComponent {
 	private static final long serialVersionUID = 8536177338219909078L;

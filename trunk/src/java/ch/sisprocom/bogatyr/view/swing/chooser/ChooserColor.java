@@ -43,7 +43,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JColorChooser.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public class ChooserColor extends JColorChooser {
 	private static final long serialVersionUID = 2106701368372263061L;

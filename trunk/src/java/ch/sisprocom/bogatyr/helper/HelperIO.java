@@ -62,7 +62,8 @@ import java.util.Locale;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.10
  */
 public abstract class HelperIO {
 	public static final String DEFAULT_ENCODING = "UTF-8"; //$NON-NLS-1$
@@ -530,26 +531,22 @@ public abstract class HelperIO {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
 
-		final StringBuilder contents = new StringBuilder();
+		final StringBuilder content = new StringBuilder();
 		final Scanner scanner = new Scanner(file, encoding);
-		final String str;
-		
+
 		try {
 			if (scanner.hasNextLine()) {
-				contents.append(scanner.nextLine());
+				content.append(scanner.nextLine());
 			}
-			
+
 	    	while (scanner.hasNextLine()){
-	    		contents.append(HelperString.NEW_LINE);
-	    		contents.append(scanner.nextLine());
-//	    		contents.append(System.getProperty("line.separator")); //$NON-NLS-1$
-                
+	    		content.append(HelperString.NEW_LINE);
+	    		content.append(scanner.nextLine());
             }
-	    	str = contents.toString();
+	    	return content.toString();
 	    } finally {
 	      scanner.close();
 	    }
-		return str;
 	}
 	
 	/**

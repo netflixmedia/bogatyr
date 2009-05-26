@@ -38,7 +38,8 @@ import java.util.Locale;
  * Defines the methods for the implementation of the localizer controller for different languages (i18n standard).
  * 
  * @author Stefan Laubenberger
- * @version 20090430
+ * @version 0.70 (20090527)
+ * @since 0.60
  */
 public interface IControllerLocalizer {
 	/**

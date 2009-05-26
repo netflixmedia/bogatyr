@@ -45,7 +45,8 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090522
+ * @version 0.70 (20090527)
+ * @since 0.30
  */
 public class ProviderSql  implements IProviderSql {
 //	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);

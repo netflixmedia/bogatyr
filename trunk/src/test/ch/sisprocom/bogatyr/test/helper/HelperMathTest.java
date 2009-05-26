@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.helper.HelperMath;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090527
  */
 public class HelperMathTest {
 	@Test
@@ -61,12 +61,20 @@ public class HelperMathTest {
 		try {
 			HelperMath.gcd(-2.0D, 4.0D);
 			fail("a is negative!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 
 		try {
 			HelperMath.gcd(2.0D, -4.0D);
 			fail("b is negative!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
@@ -79,12 +87,20 @@ public class HelperMathTest {
 		try {
 			HelperMath.lcm(-2.0D, 4.0D);
 			fail("a is negative!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 
 		try {
 			HelperMath.lcm(2.0D, -4.0D);
 			fail("b is negative!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
@@ -113,18 +129,23 @@ public class HelperMathTest {
 		assertEquals(0, HelperMath.calcPrimes(0, 0).size());
 		assertEquals(2, HelperMath.calcPrimes(0, 3).size());
 		
-//		try {
-//			HelperMath.calcPrimes(-50, 10);
-//			fail("start value (-50) must be positive"); //$NON-NLS-1$
-//		} catch (Exception e) {/*nothing to do*/}
 		try {
 			HelperMath.calcPrimes(50, -10);
 			fail("end value (-10) must be positive!"); //$NON-NLS-1$
-		} catch (Exception e) {/*nothing to do*/}		
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
 		try {
 			HelperMath.calcPrimes(50, 10);
 			fail("end value (10) must be greater than the start value (50)!"); //$NON-NLS-1$
-		} catch (Exception e) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
@@ -147,11 +168,20 @@ public class HelperMathTest {
 		try {
 			HelperMath.log(1.0, 100.0);
 			fail("base must be greater than 1!"); //$NON-NLS-1$
-		} catch (Exception e) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
 		try {
 			HelperMath.log(10.0, -100.0);
 			fail("value (-100) must be positive!"); //$NON-NLS-1$
-		} catch (Exception e) {/*nothing to do*/}		
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
@@ -198,7 +228,10 @@ public class HelperMathTest {
 		try {
 			HelperMath.calcAmount(10000.0D, 0.04D, -50);
 			fail("days (-50) must be positive!"); //$NON-NLS-1$
-		} catch (Exception e) {/*nothing to do*/}		
-
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }

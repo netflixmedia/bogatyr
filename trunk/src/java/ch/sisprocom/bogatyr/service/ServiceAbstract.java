@@ -38,7 +38,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is the skeleton for all services.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public abstract class ServiceAbstract {
 	private final long createTime = System.currentTimeMillis();

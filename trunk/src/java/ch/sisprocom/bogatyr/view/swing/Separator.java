@@ -42,7 +42,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JSeparator.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.20
  */
 public class Separator extends JSeparator {
 	private static final long serialVersionUID = 544751396135811303L;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -42,7 +42,8 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 0.70 (20090527)
+ * @since 0.60
  */
 public class ControllerLocalizerFile extends ControllerLocalizerAbstract {
 	public static final String POSTFIX_ACCELERATOR = ".accelerator"; //$NON-NLS-1$

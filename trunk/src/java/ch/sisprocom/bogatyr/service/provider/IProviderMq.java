@@ -40,7 +40,8 @@ import com.ibm.mq.MQException;
  * This interface connects to an MQ-Server and allows to send and receive messages.
  * 
  * @author Stefan Laubenberger
- * @version 20090402
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public interface IProviderMq {
    /**

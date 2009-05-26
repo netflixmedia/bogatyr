@@ -35,10 +35,11 @@ import ch.sisprocom.bogatyr.view.swing.TextField;
 
 
 /**
- * This is an combined Label with a TextField.
+ * This is a Label combined with a TextField.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 0.70 (20090527)
+ * @since 0.20
  */
 public class LabeledTextField extends LabeledComponent {
 	private static final long serialVersionUID = 1310593497620798003L;

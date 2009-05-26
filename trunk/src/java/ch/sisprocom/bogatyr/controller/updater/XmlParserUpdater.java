@@ -58,7 +58,8 @@ import ch.sisprocom.bogatyr.view.swing.dialog.DialogProgress;
  * SAX handler to parse the update XML files
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 0.70 (20090527)
+ * @since 0.60
  */
 public class XmlParserUpdater extends DefaultHandler {
 	// Resources

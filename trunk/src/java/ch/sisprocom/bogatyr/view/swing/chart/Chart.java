@@ -52,7 +52,8 @@ import java.util.List;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 0.70 (20090527)
+ * @since 0.50
  */
 public class Chart extends Panel {
 	private static final long serialVersionUID = -4618658256880807781L;

@@ -56,7 +56,8 @@ import java.util.Collection;
  * This is the updater controller for new Bogatyr-based applications versions.
  * 
  * @author Stefan Laubenberger
- * @version 20090522
+ * @version 0.70 (20090527)
+ * @since 0.60
  */
 public class ControllerUpdater extends ControllerAbstract implements IControllerUpdater, ListenerUpdater {
 	private Collection<ListenerUpdater> listListener = new ArrayList<ListenerUpdater>();

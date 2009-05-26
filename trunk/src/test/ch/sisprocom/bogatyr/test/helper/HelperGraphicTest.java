@@ -33,6 +33,7 @@ package ch.sisprocom.bogatyr.test.helper;
 
 import ch.sisprocom.bogatyr.helper.HelperGraphic;
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import java.awt.Color;
@@ -43,7 +44,7 @@ import java.awt.Dimension;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090504
+ * @version 20090527
  */
 public class HelperGraphicTest {
 	@Test
@@ -54,7 +55,11 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getCenter(null);
 			fail("size is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
@@ -70,7 +75,11 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getColorHex(null);
 			fail("color is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 
 //		System.out.println(HelperGraphic.getColorHex(Color.RED));
 	}

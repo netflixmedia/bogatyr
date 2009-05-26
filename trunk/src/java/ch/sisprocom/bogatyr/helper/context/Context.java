@@ -44,7 +44,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * Implementation of the context for applications.
  * 
  * @author Stefan Laubenberger
- * @version 20090522
+ * @version 0.70 (20090527)
+ * @since 0.10
  */
 public class Context implements IContext {
 	private static final IContext instance = new Context();

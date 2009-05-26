@@ -38,12 +38,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import ch.sisprocom.bogatyr.helper.HelperString;
+
 
 /**
  * This is a helper class for time operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public abstract class HelperTime {
 	public static final int HOUR_DAY = 24;
@@ -141,5 +144,15 @@ public abstract class HelperTime {
         }
 
         return cal.getTime();
+    }
+    
+    /**
+     * Create a date with a given offset in ms from the current time.
+     *
+     * @param offSet in ms from the current time
+     * @return created date
+     */
+    public static Date getDate(final long offSet) {
+         return new Date(System.currentTimeMillis() + offSet);
     }
 }

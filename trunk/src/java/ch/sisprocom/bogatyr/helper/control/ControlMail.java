@@ -44,7 +44,8 @@ import java.util.Locale;
  * This control opens an email address with the default mail application.
  *
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public abstract class ControlMail {
 

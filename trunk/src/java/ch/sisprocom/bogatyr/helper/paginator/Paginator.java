@@ -43,7 +43,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * The Paginator splits a list in different pages.
  *
  * @author Stefan Laubenberger
- * @version 20090522
+ * @version 0.70 (20090527)
+ * @since 0.50
  */
 public class Paginator {
     private List<?> list;

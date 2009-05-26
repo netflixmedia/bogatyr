@@ -40,7 +40,8 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.10
  */
 public abstract class ConverterBase64 {
     private static final String ERROR_ILLEGAL_CHARACTER = "Illegal character in Base64 encoded data"; //$NON-NLS-1$

@@ -38,7 +38,8 @@ import java.security.Key;
  * This is an interface for wrapping and unwrapping a crypto key.
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public interface IKeyWrapper {
 	/**

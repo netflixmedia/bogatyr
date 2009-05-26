@@ -39,7 +39,8 @@ import javax.crypto.SecretKey;
  * This is an interface for symmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public interface ICryptoSymm {
 	/**

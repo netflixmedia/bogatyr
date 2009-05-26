@@ -40,7 +40,8 @@ import java.util.Properties;
  * Defines the methods for the implementation of the properties.
  * 
  * @author Stefan Laubenberger
- * @version 20090511
+ * @version 0.70 (20090527)
+ * @since 0.60
  */
 public interface IControllerProperty {
 	/**

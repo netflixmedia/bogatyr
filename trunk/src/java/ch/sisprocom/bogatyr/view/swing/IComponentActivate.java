@@ -38,7 +38,8 @@ package ch.sisprocom.bogatyr.view.swing;
  * Defines the methods for the implementation of activations.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public interface IComponentActivate {
 	/**

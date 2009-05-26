@@ -54,7 +54,8 @@ import java.security.spec.AlgorithmParameterSpec;
  * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.10
  */
 public class CryptoSymm implements ICryptoSymm {
 	public static final String ALGORITHM    = "AES"; //$NON-NLS-1$

@@ -43,7 +43,8 @@ import java.net.URISyntaxException;
  * This control displays an URI in the default browser.
  *
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.20
  */
 public abstract class ControlBrowser {
 	
@@ -86,79 +87,4 @@ public abstract class ControlBrowser {
 			browse(new URI("http://" + url)); //$NON-NLS-1$
 		}
 	}	
-	
-	
-	//pre Java6 code
-	
-//	// Default browser under windows
-//	private static final String WINDOWS_PATH = "rundll32 url.dll,FileProtocolHandler"; //$NON-NLS-1$
-//
-//	// Default browser under unix
-//	private static final String UNIX_PATH = "netscape"; //$NON-NLS-1$
-//	private static final String UNIX_FLAG = "-remote openURL"; //$NON-NLS-1$
-//
-//	
-//	/**
-//	 * Display an url in the browser.
-//	 *
-//	 * @param url for the browser
-//	 * @throws IOException 
-//	 * @throws InterruptedException 
-//	 */
-//	public static void display(final URL url) throws IOException, InterruptedException {
-//		final String urlString = url.toExternalForm();
-//		String cmd;
-//				
-//		if (HelperEnvInfo.isWindowsPlatform()) {
-//			cmd = WINDOWS_PATH + ' ' + url.toExternalForm();
-//
-//			// Test for http or https protocol is necessary or file-urls will not work
-//			if ((urlString.toLowerCase().startsWith("http://") || urlString.toLowerCase().startsWith("https://")) && !urlString.contains("?") && !urlString.contains("#")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-//                cmd += "#"; //$NON-NLS-1$
-//			}
-//			ControlProcess.createProcess(cmd);
-//		} else if (HelperEnvInfo.isMacPlatform()) {
-//			displayOnMac(urlString);
-//		} else {
-//			// Under Unix, Netscape has to be running for the "-remote" command to work. So, we try sending the command and check for an exit value. If the exit command is 0, it worked, otherwise we need to start the browser.
-//			// cmd = 'netscape -remote openURL(http://code.google.com/p/bogatyr)'
-//			cmd = UNIX_PATH + ' ' + UNIX_FLAG + '(' + url + ')';
-//			final Process process = ControlProcess.createProcess(cmd);
-//
-//			// wait for exit code -- if it's 0, command worked, otherwise we need to start the browser
-//			final int exitCode = process.waitFor();
-//
-//			if (0 != exitCode) {
-//				// Command failed, start the browser
-//				// cmd = 'netscape http://code.google.com/p/bogatyr'
-//				cmd = UNIX_PATH + ' ' + url;
-//				ControlProcess.createProcess(cmd);
-//			}
-//		}
-//	}
-//
-//	
-//	/*
-//	 * Private methods
-//	 */
-//	private static void displayOnMac(final String url) {
-//		final Runnable runnable = new Runnable() {
-//
-//			public void run() {
-//				try {
-//					// Call the mac specific method com.apple.eio.FileManager.openURL(url) dynamically
-//					final Class<?> fileManager = Class.forName("com.apple.eio.FileManager"); //$NON-NLS-1$
-//					final Method method = fileManager.getDeclaredMethod("openURL", String.class); //$NON-NLS-1$
-//					method.invoke(null, url);
-//				} catch (Exception ex) {
-//					throw new RuntimeException("Couldn't start the web browser: " + ex.getLocalizedMessage());
-//				}
-//			}
-//		};
-//		final Thread thread = new Thread(runnable);
-//		thread.setDaemon(true);
-//		
-//		// must be called in separate thread because the call of openURL sometimes hangs
-//		thread.start();
-//	}
 }

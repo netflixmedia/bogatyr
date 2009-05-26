@@ -41,7 +41,8 @@ import java.util.UUID;
  * Defines the methods for the implementation of the server thread.
  * 
  * @author Stefan Laubenberger
- * @version 20090522
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public interface IServerThread extends Runnable {
 //	/**

@@ -48,7 +48,8 @@ import java.util.zip.ZipOutputStream;
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.30
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
 	private static final byte[] BUFFER = new byte[HelperNumber.VALUE_1024];

@@ -31,56 +31,49 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.converter;
 
-import ch.sisprocom.bogatyr.helper.converter.ConverterArea.ConversionArea;
 
 
 /**
- * Converts different units of volume.
+ * Converts different units of weight.
  * 
  * @author Stefan Laubenberger
  * @version 0.70 (20090527)
  * @since 0.70
  */
-public abstract class ConverterVolume {
-	private static final double FACTOR_PINT_TO_CM3 = 473.176473D; //pint to centimeters^3
-	private static final double FACTOR_QUART_TO_L = 0.946326D; //quart to liter
-	private static final double FACTOR_GALLON_TO_L = 3.785411784D; //gallon to liter
-	private static final double FACTOR_BARREL_TO_L = 158.987294928D; //barrel to liter
-	private static final double FACTOR_MM3_TO_CM3 = 1000.0D; //millimeters^3 to centimeters^3
-	private static final double FACTOR_CM3_TO_L = 1000.0D; //centimeters^3 to liter
-	private static final double FACTOR_L_TO_M3 = 1000.0D; //liter to m^3
-	
-	public enum ConversionVolume {
-		PINT_TO_CM3(FACTOR_PINT_TO_CM3),
-		CM3_TO_PINT(1.0D/FACTOR_PINT_TO_CM3),
-		QUART_TO_L(FACTOR_QUART_TO_L),
-		L_TO_QUART(1.0D/FACTOR_QUART_TO_L),
-		GALLON_TO_L(FACTOR_GALLON_TO_L),
-		L_TO_GALLON(1.0D/FACTOR_GALLON_TO_L),
-		BARREL_TO_L(FACTOR_BARREL_TO_L),
-		L_TO_BARREL(1.0D/FACTOR_BARREL_TO_L),
-		MM3_TO_CM3(FACTOR_MM3_TO_CM3),
-		CM3_TO_MM3(1.0D/FACTOR_MM3_TO_CM3),
-		CM3_TO_L(FACTOR_CM3_TO_L),
-		L_TO_CM3(1.0D/FACTOR_CM3_TO_L),
-		L_TO_M3(FACTOR_L_TO_M3),
-		M3_TO_L(1.0D/FACTOR_L_TO_M3);
+public abstract class ConverterWeight {
+	private static final double FACTOR_OUNCE_TO_G = 28.34952D; //ounce to gram
+	private static final double FACTOR_POUND_TO_KG = 0.453592D; //pound to kilogram
+	private static final double FACTOR_TON_TO_KG = 907.1847D; //ton to kilogram
+	private static final double FACTOR_MG_TO_G = 1000.0D; //milligram to gram
+	private static final double FACTOR_G_TO_KG = 1000.0D; //gram to kilogram
+
+	public enum ConversionWeight {
+		OUNCE_TO_G(FACTOR_OUNCE_TO_G),
+		G_TO_OUNCE(1.0D/FACTOR_OUNCE_TO_G),
+		POUND_TO_KG(FACTOR_POUND_TO_KG),
+		KG_TO_POUND(1.0D/FACTOR_POUND_TO_KG),
+		TON_TO_KG(FACTOR_TON_TO_KG),
+		KG_TO_TON(1.0D/FACTOR_TON_TO_KG),
+		MG_TO_G(FACTOR_MG_TO_G),
+		G_TO_MG(1.0D/FACTOR_MG_TO_G),
+		G_TO_KG(FACTOR_G_TO_KG),
+		KG_TO_G(1.0D/FACTOR_G_TO_KG);
 		
-		ConversionVolume(final double factor) {
+		ConversionWeight(final double factor) {
 			this.factor = factor;
 		}
 		
 		public final double factor;
 	}
-	
-	/**
+    
+    /**
      * Converts a value with the given conversion to a new unit.
      * 
      * @param conversion factor
      * @param value
      * @return value in the new unit
      */
-    public static double convert(final ConversionArea conversion, final double value) {
+    public static double convert(final ConversionWeight conversion, final double value) {
     	return value * conversion.factor; 
     }
-}
+ }

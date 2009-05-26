@@ -40,7 +40,8 @@ import javax.swing.table.AbstractTableModel;
  * This is an extended AbstractTableModel.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.20
  */
 public class TableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -472247252594891753L;

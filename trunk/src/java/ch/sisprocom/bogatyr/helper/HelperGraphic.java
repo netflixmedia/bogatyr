@@ -48,7 +48,8 @@ import java.util.Collection;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 0.70 (20090527)
+ * @since 0.40
  */
 public abstract class HelperGraphic {
 	

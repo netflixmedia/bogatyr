@@ -37,7 +37,8 @@ package ch.sisprocom.bogatyr.controller.timer;
  * Defines the methods for the implementation of the timer.
  * 
  * @author Stefan Laubenberger
- * @version 20090522
+ * @version 0.70 (20090527)
+ * @since 0.60
  */
 public interface IListener {
 	/**

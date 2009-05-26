@@ -37,7 +37,8 @@ package ch.sisprocom.bogatyr.helper.converter;
  * Converts different units of length.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public abstract class ConverterLength {
 	private static final double FACTOR_INCH_TO_CM = 2.54D; //inch to centimeters

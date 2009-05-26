@@ -39,7 +39,8 @@ import java.awt.Color;
  * Defines the methods for the implementation of fading.
  * 
  * @author Stefan Laubenberger
- * @version 20090429
+ * @version 0.70 (20090527)
+ * @since 0.60
  */
 public interface IComponentFader {
 	/**

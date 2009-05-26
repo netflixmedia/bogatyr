@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20090527
  */
 public class HelperStringTest {
 	@Test
@@ -77,7 +77,11 @@ public class HelperStringTest {
 		try {
 			assertNotNull(HelperString.fillString('1', 0));
             fail("fillLength must be greater than 0"); //$NON-NLS-1$
-        } catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
@@ -87,7 +91,11 @@ public class HelperStringTest {
 		try {
 			HelperString.reverseString(null);
             fail("input is null!"); //$NON-NLS-1$
-        } catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test

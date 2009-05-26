@@ -58,7 +58,8 @@ import com.lowagie.text.pdf.PdfWriter;
  * This is a helper class for PDF operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.50
  */
 public abstract class HelperPdf {
 

@@ -41,7 +41,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JRadioButton.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.20
  */
 public class RadioButton extends JRadioButton implements IComponentActivate {
 	private static final long serialVersionUID = 8676540667794440059L;

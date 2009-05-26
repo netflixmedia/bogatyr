@@ -71,7 +71,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This class generates, reads and save X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.30
  */
 public class ProviderCertificate implements IProviderCertificate {
 	

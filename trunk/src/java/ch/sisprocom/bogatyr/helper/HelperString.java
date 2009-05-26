@@ -35,11 +35,12 @@ import java.math.BigDecimal;
 
 
 /**
- * This is a general helper class for general problems.
+ * This is a helper class for strings.
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public abstract class HelperString {
 	public static final String NEW_LINE = System.getProperty("line.separator"); //$NON-NLS-1$

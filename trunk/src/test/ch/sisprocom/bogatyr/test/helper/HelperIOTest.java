@@ -35,6 +35,7 @@ import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -46,7 +47,7 @@ import java.io.IOException;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20090527
  */
 public class HelperIOTest {
 	@Test
@@ -58,11 +59,20 @@ public class HelperIOTest {
 		try {
 			HelperIO.getTemporaryFile(null, ".tmp"); //$NON-NLS-1$
 			fail("name is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
 		try {
 			HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), null); //$NON-NLS-1$
 			fail("extension is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
@@ -72,11 +82,20 @@ public class HelperIOTest {
 		try {
 			HelperIO.getFiles(null, new String[]{"tmp"}, false, false, false, true, true); //$NON-NLS-1$
 			fail("path is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
 		try {
 			HelperIO.getFiles(new File("*blablabla/asdf"), null, false, false, false, true, true); //$NON-NLS-1$
 			fail("Invalid path"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
@@ -90,17 +109,29 @@ public class HelperIOTest {
 		try {
 			HelperIO.writeLine(null, AllBogatyrTests.DATA);
 			fail("file is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 		
 		try {
 			HelperIO.writeLine(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".txt"), null);  //$NON-NLS-1$//$NON-NLS-2$
 			fail("line is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 		
 		try {
 			HelperIO.writeLine(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".txt"), null, AllBogatyrTests.DATA);  //$NON-NLS-1$//$NON-NLS-2$
 			fail("encoding is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
@@ -114,7 +145,11 @@ public class HelperIOTest {
 		try {
 			HelperIO.readFile(null);
 			fail("file is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
@@ -128,12 +163,20 @@ public class HelperIOTest {
 		try {
 			HelperIO.readFileAsString(null);
 			fail("file is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 		
 		try {
 			HelperIO.readFileAsString(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".string"), null); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("encoding is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	
@@ -152,12 +195,20 @@ public class HelperIOTest {
 		try {
 			HelperIO.readFileAsStream(null, new ByteArrayOutputStream());
 			fail("file is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 		
 		try {
 			HelperIO.readFileAsStream(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".stream"), null);  //$NON-NLS-1$//$NON-NLS-2$
 			fail("os is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }
 

@@ -52,7 +52,7 @@ import ch.sisprocom.bogatyr.view.swing.Button;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20090527
  */
 public class HelperImageTest {
 	@Test
@@ -70,11 +70,20 @@ public class HelperImageTest {
 		try {
 			HelperImage.saveImage(component, "blabla", HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), HelperImage.TYPE_JPG)); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("type is invalid!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
 		try {
 			HelperImage.saveImage(component, HelperImage.TYPE_JPG, null);
 			fail("file is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
