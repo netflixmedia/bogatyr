@@ -48,7 +48,8 @@ import java.util.Locale;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 0.70 (20090527)
+ * @since 0.40
  */
 public abstract class HelperImage {
 	public static final String TYPE_JPG  = "jpg"; //$NON-NLS-1$

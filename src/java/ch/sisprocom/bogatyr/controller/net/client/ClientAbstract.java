@@ -46,7 +46,8 @@ import java.util.Collection;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090526
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public abstract class ClientAbstract implements IClient {
     private final long createTime = System.currentTimeMillis();

@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.helper.HelperTime;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20081027
+ * @version 20090527
  */
 public class HelperTimeTest {
 	private final DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault()); //$NON-NLS-1$
@@ -66,7 +66,11 @@ public class HelperTimeTest {
 		try {
 			HelperTime.getAtomicTime(null);
 			fail("host is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }
 

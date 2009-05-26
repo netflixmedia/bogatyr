@@ -40,7 +40,8 @@ import java.net.Socket;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090522
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public interface IClient extends Runnable {
 

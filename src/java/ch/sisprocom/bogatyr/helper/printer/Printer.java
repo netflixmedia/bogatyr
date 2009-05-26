@@ -48,7 +48,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is a printer class for print operations.
  * 
  * @author Stefan Laubenberger
- * @version 20090522
+ * @version 0.70 (20090527)
+ * @since 0.50
  */
 public class Printer implements Printable { 
 	private Component componentToBePrinted;

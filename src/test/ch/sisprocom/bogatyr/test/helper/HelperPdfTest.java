@@ -52,7 +52,7 @@ import ch.sisprocom.bogatyr.view.swing.Button;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20090527
  */
 public class HelperPdfTest {
 	@Test
@@ -70,11 +70,20 @@ public class HelperPdfTest {
 		try {
 			HelperPdf.savePdfFromComponent(null, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf")); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("component is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
 		try {
 			HelperPdf.savePdfFromComponent(component, null);
 			fail("file is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
@@ -82,11 +91,20 @@ public class HelperPdfTest {
 		try {
 			HelperPdf.savePdfFromHTML(null, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf")); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("input is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
 		try {
 			HelperPdf.savePdfFromHTML(new File[]{HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".html")}, null); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("file is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }
 

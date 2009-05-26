@@ -53,7 +53,8 @@ import java.util.List;
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.50
  */
 public abstract class HelperNet {
 	public static final String PROPERTY_HTTP_PROXY_HOST  = "http.proxyHost"; //$NON-NLS-1$

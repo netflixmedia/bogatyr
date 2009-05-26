@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20090527
  */
 public class HelperObjectTest {
 	@Test
@@ -60,22 +60,38 @@ public class HelperObjectTest {
 		try {
 			HelperObject.createInstance(null);
 			fail("class is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 		
 		try {
 			HelperObject.createInstance(null, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA});
 			fail("class is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 		
 		try {
 			HelperObject.createInstance(String.class, HelperArray.EMPTY_ARRAY_CLASS, new Object[]{AllBogatyrTests.DATA});
 			fail("paramClazzes is empty!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	
 		try {
 			HelperObject.createInstance(String.class, new Class[]{String.class}, HelperArray.EMPTY_ARRAY_OBJECT);
 			fail("params is empty!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}	
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
@@ -87,7 +103,11 @@ public class HelperObjectTest {
 		try {
 			HelperObject.serialize(null);
 			fail("Object is null!"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
@@ -99,11 +119,19 @@ public class HelperObjectTest {
 		try {
 			HelperObject.deserialize(null);
 			fail("byte[] is null"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 
 		try {
 			HelperObject.deserialize(HelperArray.EMPTY_ARRAY_BYTE);
 			fail("byte[] is empty"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }

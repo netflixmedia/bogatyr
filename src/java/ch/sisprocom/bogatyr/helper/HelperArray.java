@@ -38,11 +38,12 @@ import java.util.Collection;
 
 
 /**
- * This is a general helper class for general problems.
+ * This is a helper class for arrays.
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090516
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public abstract class HelperArray {
 	public static final Class<?>[] EMPTY_ARRAY_CLASS = new Class[0];

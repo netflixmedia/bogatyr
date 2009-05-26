@@ -39,7 +39,7 @@ import java.util.UUID;
 
 import org.junit.Test;
 
-import ch.sisprocom.bogatyr.helper.HelperGeneral;
+import ch.sisprocom.bogatyr.helper.HelperCrypto;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
@@ -48,68 +48,92 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20090527
  */
 public class HelperCryptoTest {
 	
 	@Test
 	public void testGetHashCode() {
 		try {
-			assertNotNull(HelperGeneral.getHashCode("MD5", AllBogatyrTests.DATA)); //$NON-NLS-1$
+			assertNotNull(HelperCrypto.getHashCode("MD5", AllBogatyrTests.DATA)); //$NON-NLS-1$
 		} catch (Exception ex) {fail(ex.getMessage());}
 
 		try {
-			HelperGeneral.getHashCode(null, null);
+			HelperCrypto.getHashCode(null, null);
 			fail("algo is null"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 
 		try {
-			HelperGeneral.getHashCode("MD5", null); //$NON-NLS-1$
+			HelperCrypto.getHashCode("MD5", null); //$NON-NLS-1$
 			fail("data is null"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
 	public void testGetHashCodeDefault() {
 		try {
-			assertNotNull(HelperGeneral.getHashCode(AllBogatyrTests.DATA));
+			assertNotNull(HelperCrypto.getHashCode(AllBogatyrTests.DATA));
 		} catch (Exception ex) {fail(ex.getMessage());}
 
 		try {
-			HelperGeneral.getHashCode(null);
+			HelperCrypto.getHashCode(null);
 			fail("data is null"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
     public void testGetRandomKey() {
-        assertNotNull(HelperGeneral.getRandomKey(HelperNumber.VALUE_16, new char[]{'1','2','3'}));
+        assertNotNull(HelperCrypto.getRandomKey(HelperNumber.VALUE_16, new char[]{'1','2','3'}));
 
         try {
-            HelperGeneral.getRandomKey(Integer.MIN_VALUE, new char[]{'1','2','3'});
+        	HelperCrypto.getRandomKey(Integer.MIN_VALUE, new char[]{'1','2','3'});
             fail("digits must be greater than 0"); //$NON-NLS-1$
-        } catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 
         try {
-            HelperGeneral.getRandomKey(HelperNumber.VALUE_16, null);
+        	HelperCrypto.getRandomKey(HelperNumber.VALUE_16, null);
             fail("data is null"); //$NON-NLS-1$
-        } catch (Exception ex) {/*nothing to do*/}
-    }
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+   }
 
 	@Test
     public void testGetRandomKeyDefault() {
-		assertNotNull(HelperGeneral.getRandomKey(HelperNumber.VALUE_16));
+		assertNotNull(HelperCrypto.getRandomKey(HelperNumber.VALUE_16));
 
 		try {
-            HelperGeneral.getRandomKey(Integer.MIN_VALUE);
+			HelperCrypto.getRandomKey(Integer.MIN_VALUE);
             fail("digits must be greater than 0"); //$NON-NLS-1$
-        } catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
     }
 	
 	@Test
     public void testGetUUID() {
-		final UUID a = HelperGeneral.getUUID();
-		final UUID b = HelperGeneral.getUUID();
+		final UUID a = HelperCrypto.getUUID();
+		final UUID b = HelperCrypto.getUUID();
 		
 		assertNotNull(a);
 		assertNotNull(b);

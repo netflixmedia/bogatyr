@@ -43,7 +43,8 @@ import java.util.List;
  * Creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.20
  */
 public abstract class ControlProcess {
 	private static final int BUFFER = 1024;

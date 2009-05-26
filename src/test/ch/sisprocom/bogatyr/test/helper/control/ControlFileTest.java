@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.control.ControlFile;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 20090527
  */
 public class ControlFileTest {
 	@Test
@@ -54,7 +54,11 @@ public class ControlFileTest {
 		try {
 			ControlFile.open(null);
 			fail("file is null"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
@@ -66,7 +70,11 @@ public class ControlFileTest {
 		try {
 			ControlFile.edit(null);
 			fail("file is null"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
@@ -78,6 +86,10 @@ public class ControlFileTest {
 		try {
 			ControlFile.print(null);
 			fail("file is null"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }

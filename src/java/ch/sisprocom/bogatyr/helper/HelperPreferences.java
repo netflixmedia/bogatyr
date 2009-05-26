@@ -46,7 +46,8 @@ import java.util.prefs.Preferences;
  * This is a helper class for preferences.
  * 
  * @author Stefan Laubenberger
- * @version 20090516
+ * @version 0.70 (20090527)
+ * @since 0.50
  */
 public abstract class HelperPreferences {
 	

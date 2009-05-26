@@ -46,7 +46,8 @@ import java.util.Collection;
  * This control opens, edits and prints data with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public abstract class ControlFile {
 	private static final File PATH = HelperEnvironment.getOsTempDirectory();
@@ -243,67 +244,4 @@ public abstract class ControlFile {
 		
 		return file;
 	}
-
-	
-	
-	//pre Java6 code
-	
-
-//	private static final String WINDOWS_PDF_VIEWER_PATH  = "rundll32 url.dll,FileProtocolHandler {0}"; //$NON-NLS-1$
-//	private static final String UNIX_PDF_VIEWER_PATH     = "acroread {0}"; //$NON-NLS-1$
-//
-//
-//	/**
-//	 * Show a PDF (provided as a byte[]) with PDF viewer.
-//	 * 
-//	 * @param pdfContent PDF content as byte array
-//	 * @throws IOException 
-//	 * @throws InterruptedException 
-//	 */
-//	public static void open(final byte[] pdfContent) throws IOException, InterruptedException {
-//		// first store the pdfFileContents to a temporary file
-//		final File temporaryFile = HelperIO.getTemporaryFile("temp", PDF_EXTENSION); //$NON-NLS-1$
-//		HelperIO.writeFileFromBinary(temporaryFile, pdfContent, false);
-//		open(temporaryFile);
-//	}
-//
-//	/**
-//	 * Show a PDF (provided as {@link File}) with PDF viewer.
-//	 * 
-//	 * @param pdfFile PDF content as file
-//	 * @throws InterruptedException 
-//	 * @throws IOException 
-//	 */
-//	public static void open(final File pdfFile) throws  IOException, InterruptedException {
-//		execute(pdfFile.getCanonicalPath());
-//	}
-//	
-//	/**
-//	 * Show a PDF (provided as stream) with PDF viewer.
-//	 * 
-//	 * @param pdfStream PDF content as stream
-//	 * @throws InterruptedException
-//	 * @throws IOException
-//	 */
-//	public static void open(final InputStream pdfStream) throws IOException, InterruptedException {
-//		open(HelperIO.readStream(pdfStream));
-//	}
-//	
-//	
-//	/*
-//	 * Private methods
-//	 */
-//	private static void execute(final String path) throws  IOException, InterruptedException {
-//		final String viewerPath;
-//		if (HelperEnvInfo.isWindowsPlatform()) {
-//			viewerPath = WINDOWS_PDF_VIEWER_PATH;
-//		} else if (HelperEnvInfo.isMacPlatform()) {
-//			ControlBrowser.display(new URL("file://" + path)); //$NON-NLS-1$
-//			return;
-//		} else {
-//			viewerPath = UNIX_PDF_VIEWER_PATH;
-//		}
-//		final String cmd = MessageFormat.format(viewerPath, path);
-//		ControlProcess.createProcess(cmd);
-//	}
 }

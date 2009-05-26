@@ -36,11 +36,12 @@ import java.util.Collection;
 
 
 /**
- * This is a math helper class for math problems
+ * This is a helper class for math problems.
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.40
  */
 public abstract class HelperMath {
 	

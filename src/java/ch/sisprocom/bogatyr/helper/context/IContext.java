@@ -42,7 +42,8 @@ import java.util.Date;
  * Interface for the context in applications.
  * 
  * @author Stefan Laubenberger
- * @version 20090507
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public interface IContext {
 	

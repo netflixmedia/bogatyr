@@ -36,11 +36,12 @@ import java.math.BigInteger;
 
 
 /**
- * This is a math helper class for math problems
+ * This is a helper class for numbers.
  *
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public abstract class HelperNumber {
     public static final int VALUE_8 = 8;

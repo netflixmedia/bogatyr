@@ -37,7 +37,8 @@ import java.io.IOException;
  * ListenerUpdater
  * 
  * @author Stefan Laubenberger
- * @version 20090301
+ * @version 0.70 (20090527)
+ * @since 0.60
  */
 public interface ListenerUpdater {
 	/**

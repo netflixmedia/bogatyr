@@ -39,7 +39,8 @@ import java.security.PublicKey;
  * This is an interface for asymmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public interface ICryptoAsymm {
 	/**

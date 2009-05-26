@@ -39,7 +39,8 @@ import java.sql.SQLException;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090511
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public interface IProviderSql {
 	/**

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -35,7 +35,8 @@ package ch.sisprocom.bogatyr.controller.timer;
  * ListenerTimer
  * 
  * @author Stefan Laubenberger
- * @version 20081127
+ * @version 0.70 (20090527)
+ * @since 0.60
  */
 public interface ListenerTimer {
 	/**

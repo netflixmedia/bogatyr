@@ -36,7 +36,8 @@ package ch.sisprocom.bogatyr.helper.crypto;
  * This is an interface for obfuscating data.
  * 
  * @author Stefan Laubenberger
- * @version 20090508
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public interface IObfuscator {
 	/**

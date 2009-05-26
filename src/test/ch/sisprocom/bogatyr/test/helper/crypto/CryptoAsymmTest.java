@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20090527
  */
 public class CryptoAsymmTest {
 	private static final int KEYSIZE = 512;
@@ -72,18 +72,30 @@ public class CryptoAsymmTest {
 		try {
 			cryptoAsymm.generateKeyPair(0);
 			fail("keysize is 0"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
-
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
 		try {
 			cryptoAsymm.generateKeyPair(Integer.MIN_VALUE);
 			fail("keysize is -1024"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 		
 		try {
 			cryptoAsymm.generateKeyPair(3);
 			fail("keysize is 3"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
-
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
 		try {
 			assertNotNull(cryptoAsymm.generateKeyPair(KEYSIZE));
 		} catch (Exception ex) {fail(ex.getMessage());}
@@ -98,27 +110,47 @@ public class CryptoAsymmTest {
 		try {
 			cryptoAsymm.encrypt(null, null, 0);
 			fail("input is null"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 
 		try {
 			cryptoAsymm.encrypt(HelperArray.EMPTY_ARRAY_BYTE, null, 0);
 			fail("input is empty"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 		
 		try {
 			cryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), null, 0);
 			fail("key is null"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 		
 		try {
 			cryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), keyPair.getPublic(), 0);
 			fail("keysize is 0"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}		
-
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
 		try {
 			assertNotNull(cryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), keyPair.getPublic(), KEYSIZE));
-		} catch (Exception ex) {fail(ex.getMessage());}
-
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
 		try {
 			assertNotNull(cryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), keyPairDefault.getPublic()));
 		} catch (Exception ex) {fail(ex.getMessage());}
@@ -129,23 +161,39 @@ public class CryptoAsymmTest {
 		try {
 			cryptoAsymm.decrypt(null, null, 0);
 			fail("input is null"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
-
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
 		try {
 			cryptoAsymm.decrypt(HelperArray.EMPTY_ARRAY_BYTE, null, 0);
 			fail("input is empty"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 		
 		try {
 			cryptoAsymm.decrypt(AllBogatyrTests.DATA.getBytes(), null, 0);
 			fail("key is null"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 		
 		try {
 			cryptoAsymm.decrypt(AllBogatyrTests.DATA.getBytes(), keyPair.getPrivate(), 0);
 			fail("keysize is 0"); //$NON-NLS-1$
-		} catch (Exception ex) {/*nothing to do*/}		
-
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
 		try {
 			assertEquals(AllBogatyrTests.DATA, new String(cryptoAsymm.decrypt(cryptoAsymm.encrypt(AllBogatyrTests.DATA.getBytes(), keyPair.getPublic(), KEYSIZE), keyPair.getPrivate(), KEYSIZE)));
 		} catch (Exception ex) {fail(ex.getMessage());}

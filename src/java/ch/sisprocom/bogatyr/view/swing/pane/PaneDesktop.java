@@ -42,7 +42,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JDesktopPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public class PaneDesktop extends JDesktopPane {
 	private static final long serialVersionUID = -1000995349055355841L;

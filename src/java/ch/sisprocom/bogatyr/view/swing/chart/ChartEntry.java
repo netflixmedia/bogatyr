@@ -41,7 +41,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.50
  */
 public class ChartEntry {
 	private final JComponent component;

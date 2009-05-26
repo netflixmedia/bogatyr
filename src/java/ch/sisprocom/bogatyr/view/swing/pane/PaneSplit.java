@@ -42,7 +42,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JSplitPane.
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 0.70 (20090527)
+ * @since 0.70
  */
 public class PaneSplit extends JSplitPane {
 	private static final long serialVersionUID = 2243720263917281740L;

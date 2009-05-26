@@ -37,7 +37,8 @@ package ch.sisprocom.bogatyr.controller.updater;
  * Defines the methods for the implementation of the updater.
  * 
  * @author Stefan Laubenberger
- * @version 20090304
+ * @version 0.70 (20090527)
+ * @since 0.60
  */
 public interface IControllerUpdater {
 	/**
