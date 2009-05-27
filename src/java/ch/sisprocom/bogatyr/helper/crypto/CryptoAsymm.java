@@ -54,14 +54,60 @@ import java.security.Security;
  * This is a class for asymmetric cryptology via RSA.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.10
+ * @version 0.8.0 (20090527)
+ * @since 0.1.0
  */
 public class CryptoAsymm implements ICryptoAsymm {
 	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
 	public static final String XFORM     = "RSA/NONE/PKCS1PADDING"; //$NON-NLS-1$
 //	public static final String XFORM     = "RSA/NONE/NoPadding"; //$NON-NLS-1$
 	public static final int DEFAULT_KEYSIZE = 1024;
+
+	
+	/*
+	 * Private methods
+	 */
+	/**
+	 * Encrypt the data with a given {@link Key}.
+	 * 
+	 * @param input data (byte-array) to encrypt
+	 * @param key for the encryption
+	 * @return encrypted byte-array 
+	 * @throws InvalidKeyException 
+	 * @throws BadPaddingException 
+	 * @throws IllegalBlockSizeException 
+	 * @throws NoSuchPaddingException 
+	 * @throws NoSuchProviderException 
+	 * @throws NoSuchAlgorithmException 
+	 * @since 0.1.0
+	 */
+	private static byte[] encryptInternal(final byte[] input, final Key key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
+		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
+		cipher.init(Cipher.ENCRYPT_MODE, key);
+
+		return cipher.doFinal(input);
+	}
+
+	/**
+	 * Decrypt the data with a given {@link Key}.
+	 * 
+	 * @param input data (byte-array) to decrypt
+	 * @param key for the decryption
+	 * @return decrypted byte-array
+	 * @throws NoSuchPaddingException 
+	 * @throws NoSuchProviderException 
+	 * @throws NoSuchAlgorithmException 
+	 * @throws InvalidKeyException 
+	 * @throws BadPaddingException 
+	 * @throws IllegalBlockSizeException 
+	 * @since 0.1.0
+	 */
+	private static byte[] decryptInternal(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
+		cipher.init(Cipher.DECRYPT_MODE, key);
+
+		return cipher.doFinal(input);
+	}
 	
 	
 	/*
@@ -81,6 +127,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 	 * 
 	 * @return generated key pair
 	 * @see KeyPair
+	 * @since 0.1.0
 	 */
 	public KeyPair generateKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
 		return generateKeyPair(DEFAULT_KEYSIZE);
@@ -108,6 +155,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 	 * @param key for the encryption
      * @return encrypted byte-array
 	 * @see PublicKey
+	 * @since 0.1.0
 	 */
     public byte[] encrypt(final byte[] input, final PublicKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit
     	return encrypt(input, key, DEFAULT_KEYSIZE);
@@ -163,6 +211,7 @@ public class CryptoAsymm implements ICryptoAsymm {
 	 * @param input encrypted data as a byte-array
 	 * @param key for the decryption
      * @return decrypted byte-array
+     * @since 0.1.0
 	 */
 	public byte[] decrypt(final byte[] input, final PrivateKey key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit
 		return decrypt(input, key, DEFAULT_KEYSIZE);
@@ -200,49 +249,5 @@ public class CryptoAsymm implements ICryptoAsymm {
 			result = decryptInternal(input, key);
 		}
 		return result;
-	}
-
-	
-	/*
-	 * Private methods
-	 */
-	/**
-	 * Encrypt the data with a given {@link Key}.
-	 * 
-	 * @param input data (byte-array) to encrypt
-	 * @param key for the encryption
-	 * @return encrypted byte-array 
-	 * @throws InvalidKeyException 
-	 * @throws BadPaddingException 
-	 * @throws IllegalBlockSizeException 
-	 * @throws NoSuchPaddingException 
-	 * @throws NoSuchProviderException 
-	 * @throws NoSuchAlgorithmException 
-	 */
-	private static byte[] encryptInternal(final byte[] input, final Key key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
-		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
-		cipher.init(Cipher.ENCRYPT_MODE, key);
-
-		return cipher.doFinal(input);
-	}
-
-	/**
-	 * Decrypt the data with a given {@link Key}.
-	 * 
-	 * @param input data (byte-array) to decrypt
-	 * @param key for the decryption
-	 * @return decrypted byte-array
-	 * @throws NoSuchPaddingException 
-	 * @throws NoSuchProviderException 
-	 * @throws NoSuchAlgorithmException 
-	 * @throws InvalidKeyException 
-	 * @throws BadPaddingException 
-	 * @throws IllegalBlockSizeException 
-	 */
-	private static byte[] decryptInternal(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
-		cipher.init(Cipher.DECRYPT_MODE, key);
-
-		return cipher.doFinal(input);
 	}
 }

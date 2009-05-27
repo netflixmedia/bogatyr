@@ -37,14 +37,15 @@ package ch.sisprocom.bogatyr.controller.timer;
  * Defines the methods for the implementation of the timer.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
 public interface IListener {
 	/**
 	 * Adds a listener for this timer.
 	 * 
 	 * @param listener to add
+	 * @since 0.6.0
 	 */
 	void addListener(ListenerTimer listener);
 	
@@ -52,11 +53,14 @@ public interface IListener {
 	 * Remove a listener for this timer.
 	 * 
 	 * @param listener to remove
+	 * @since 0.6.0
 	 */
 	void removeListener(ListenerTimer listener);
 
 	/**
-	 * Remove all listeners for this timer. 
+	 * Remove all listeners for this timer.
+	 * 
+	 * @since 0.6.0
 	 */
 	void removeAllListener();
 	

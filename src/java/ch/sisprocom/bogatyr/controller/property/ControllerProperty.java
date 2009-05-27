@@ -46,8 +46,8 @@ import java.util.Properties;import java.util.Collections;
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.8.0 (20090527)
+ * @since 0.1.0
  */
 public class ControllerProperty extends ControllerAbstract implements IControllerProperty {
 	private final Properties properties;

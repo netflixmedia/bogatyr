@@ -60,8 +60,8 @@ import java.util.TimerTask;
  * This is a helper class for sound operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.50
+ * @version 0.8.0 (20090528)
+ * @since 0.5.0
  */
 public abstract class HelperSound {
 
@@ -73,6 +73,7 @@ public abstract class HelperSound {
      * @throws IOException
      * @throws LineUnavailableException
      * @throws UnsupportedAudioFileException
+     * @since 0.5.0
      */
     public static Clip getClip(final File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		if (null == file) {
@@ -90,6 +91,7 @@ public abstract class HelperSound {
      * @throws IOException
      * @throws LineUnavailableException
      * @throws UnsupportedAudioFileException
+     * @since 0.5.0
      */
 	public static Clip getClip(final InputStream is) throws UnsupportedAudioFileException, LineUnavailableException, IOException { //$JUnit
 		if (null == is) {
@@ -106,6 +108,7 @@ public abstract class HelperSound {
      * @return Audio sequence
      * @throws IOException
      * @throws InvalidMidiDataException
+     * @since 0.5.0
      */
 	public static Sequence getSequence(final File file) throws InvalidMidiDataException, IOException {
 		if (null == file) {
@@ -122,6 +125,7 @@ public abstract class HelperSound {
      * @return Audio sequence
      * @throws IOException
      * @throws InvalidMidiDataException
+     * @since 0.5.0
      */
 	public static Sequence getSequence(final InputStream is) throws InvalidMidiDataException, IOException { //$JUnit
 		if (null == is) {
@@ -138,6 +142,7 @@ public abstract class HelperSound {
      * @return MIDI sequencer
      * @throws MidiUnavailableException
      * @throws InvalidMidiDataException
+     * @since 0.5.0
      */
 	public static Sequencer getSequencer(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException { //$JUnit
 		if (null == sequence) {
@@ -166,6 +171,7 @@ public abstract class HelperSound {
      * Plays a whole audio {@link Clip} (if no player thread is available).
      *
      * @param clip to play
+     * @since 0.5.0
      */
 	public static void play(final Clip clip) { //$JUnit
 		if (null == clip) {
@@ -188,6 +194,7 @@ public abstract class HelperSound {
      * @param sequence to play
 	 * @throws InvalidMidiDataException 
 	 * @throws MidiUnavailableException 
+	 * @since 0.5.0
      */
 	public static void play(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException { //$JUnit
 		if (null == sequence) {
@@ -209,6 +216,7 @@ public abstract class HelperSound {
      * Returns all available audio formats of the current machine (e.g. "aiff", "wave").
      *
      * @return List of all available audio formats of the current machine
+     * @since 0.5.0
      */
 	public static Collection<Type> getAvailableAudioFormats() { //$JUnit
     	return Arrays.asList(AudioSystem.getAudioFileTypes());

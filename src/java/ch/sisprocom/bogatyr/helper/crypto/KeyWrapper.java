@@ -48,8 +48,8 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * This is a class for wrapping and unwrapping a crypto key.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.30
+ * @version 0.7.0 (20090527)
+ * @since 0.3.0
  */
 public class KeyWrapper implements IKeyWrapper {
 	/*

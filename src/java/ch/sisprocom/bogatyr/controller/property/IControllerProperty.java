@@ -40,14 +40,15 @@ import java.util.Properties;
  * Defines the methods for the implementation of the properties.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.7.0 (20090527)
+ * @since 0.6.0
  */
 public interface IControllerProperty {
 	/**
      * Returns the properties.
      * 
      * @return Properties object
+     * @since 0.6.0
      */
 	Properties getProperties();
     
@@ -55,7 +56,8 @@ public interface IControllerProperty {
      * Returns the value of a property as {@link String}.
      * 
      * @param key of the property
-     * @return String associated to the given key 
+     * @return String associated to the given key
+     * @since 0.6.0
      */
     String getValue(String key);
 
@@ -63,7 +65,8 @@ public interface IControllerProperty {
      * Returns the value of a property as {@link Boolean}.
      * 
      * @param key of the property
-     * @return Boolean associated to the given key 
+     * @return Boolean associated to the given key
+     * @since 0.6.0 
      */
     Boolean getBooleanValue(String key);
     
@@ -71,7 +74,8 @@ public interface IControllerProperty {
      * Returns the value of a property as {@link Double}.
      * 
      * @param key of the property
-     * @return Double associated to the given key 
+     * @return Double associated to the given key
+     * @since 0.7.0 
      */
 	Double getDoubleValue(String key);
 	
@@ -80,6 +84,7 @@ public interface IControllerProperty {
      * 
      * @param key of the property
      * @return Integer associated to the given key 
+     * @since 0.7.0
      */
 	Integer getIntegerValue(String key);
 	
@@ -87,7 +92,8 @@ public interface IControllerProperty {
      * Returns the value of a property as {@link Float}.
      * 
      * @param key of the property
-     * @return Float associated to the given key 
+     * @return Float associated to the given key
+     * @since 0.7.0 
      */
 	Float getFloatValue(String key);
 	
@@ -95,7 +101,8 @@ public interface IControllerProperty {
      * Returns the value of a property as {@link Byte}.
      * 
      * @param key of the property
-     * @return Byte associated to the given key 
+     * @return Byte associated to the given key
+     * @since 0.7.0 
      */
 	Byte getByteValue(String key);
 	
@@ -103,7 +110,8 @@ public interface IControllerProperty {
      * Returns the value of a property as {@link Long}.
      * 
      * @param key of the property
-     * @return Long associated to the given key 
+     * @return Long associated to the given key
+     * @since 0.7.0 
      */
 	Long getLongValue(String key);
 	
@@ -111,7 +119,8 @@ public interface IControllerProperty {
      * Returns the value of a property as {@link Short}.
      * 
      * @param key of the property
-     * @return Short associated to the given key 
+     * @return Short associated to the given key
+     * @since 0.7.0 
      */	
 	Short getShortValue(String key);
 	
@@ -119,7 +128,8 @@ public interface IControllerProperty {
      * Returns the value of a property as {@link BigInteger}.
      * 
      * @param key of the property
-     * @return BigInteger associated to the given key 
+     * @return BigInteger associated to the given key
+     * @since 0.7.0 
      */	
 	BigInteger getBigIntegerValue(String key);
 	
@@ -127,16 +137,9 @@ public interface IControllerProperty {
      * Returns the value of a property as {@link BigDecimal}.
      * 
      * @param key of the property
-     * @return BigDecimal associated to the given key 
+     * @return BigDecimal associated to the given key
+     * @since 0.7.0 
      */	
 	BigDecimal getBigDecimalValue(String key);
-	
-//	/**
-//     * Returns the value of a property as {@link Date} stored as "YYYY-MM-DD".
-//     * 
-//     * @param key of the property
-//     * @return Date associated to the given key 
-//     */	
-//	Date getDateValue(String key);
 }   
 

@@ -38,8 +38,8 @@ import java.util.TimerTask;
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
 public class ControllerTimer extends ControllerTimerAbstract implements IControllerTimer {
 	long time;

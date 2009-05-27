@@ -38,8 +38,8 @@ import ch.sisprocom.bogatyr.view.swing.NumberField;
  * This is a Label combined with a NumberField.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.20
+ * @version 0.8.0 (20090528)
+ * @since 0.2.0
  */
 public class LabeledNumberField extends LabeledComponent {
 	private static final long serialVersionUID = 8536177338219909078L;

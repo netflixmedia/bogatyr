@@ -46,8 +46,8 @@ import java.util.Collection;
  * This control opens, edits and prints data with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class ControlFile {
 	private static final File PATH = HelperEnvironment.getOsTempDirectory();
@@ -72,6 +72,7 @@ public abstract class ControlFile {
 	 * @param data as byte array
 	 * @param extension of the file (e.g. ".pdf")
 	 * @throws IOException 
+	 * @since 0.7.0
 	 */
 	public static void open(final byte[] data, final String extension) throws IOException {
 		if (!HelperArray.isValid(data)) {
@@ -88,7 +89,8 @@ public abstract class ControlFile {
 	 * Open a {@link File} with the default system application.
 	 * 
 	 * @param file data as file
-	 * @throws IOException 
+	 * @throws IOException
+	 * @since 0.7.0
 	 */
 	public static void open(final File file) throws IOException { //$JUnit
 		if (Desktop.isDesktopSupported()) {
@@ -108,6 +110,7 @@ public abstract class ControlFile {
 	 * @param is data as stream
 	 * @param extension of the file (e.g. ".pdf")
 	 * @throws IOException
+	 * @since 0.7.0
 	 */
 	public static void open(final InputStream is, final String extension) throws IOException { //$JUnit
 		if (null == is) {
@@ -125,7 +128,8 @@ public abstract class ControlFile {
 	 * 
 	 * @param data as byte array
 	 * @param extension of the file (e.g. ".html")
-	 * @throws IOException 
+	 * @throws IOException
+	 * @since 0.7.0
 	 */
 	public static void edit(final byte[] data, final String extension) throws IOException {
 		if (!HelperArray.isValid(data)) {
@@ -142,7 +146,8 @@ public abstract class ControlFile {
 	 * Edit a {@link File} with the default system application.
 	 * 
 	 * @param file data as file
-	 * @throws IOException 
+	 * @throws IOException
+	 * @since 0.7.0
 	 */
 	public static void edit(final File file) throws IOException { //$JUnit
 		if (Desktop.isDesktopSupported()) {
@@ -162,6 +167,7 @@ public abstract class ControlFile {
 	 * @param is data as stream
 	 * @param extension of the file (e.g. ".html")
 	 * @throws IOException
+	 * @since 0.7.0
 	 */
 	public static void edit(final InputStream is, final String extension) throws IOException { //$JUnit
 		if (null == is) {
@@ -179,7 +185,8 @@ public abstract class ControlFile {
 	 * 
 	 * @param data as byte array
 	 * @param extension of the file (e.g. ".html")
-	 * @throws IOException 
+	 * @throws IOException
+	 * @since 0.7.0
 	 */
 	public static void print(final byte[] data, final String extension) throws IOException {
 		if (!HelperArray.isValid(data)) {
@@ -196,7 +203,8 @@ public abstract class ControlFile {
 	 * Print a {@link File} with the default system application.
 	 * 
 	 * @param file data as file
-	 * @throws IOException 
+	 * @throws IOException
+	 * @since 0.7.0
 	 */
 	public static void print(final File file) throws IOException { //$JUnit
 		if (Desktop.isDesktopSupported()) {
@@ -216,6 +224,7 @@ public abstract class ControlFile {
 	 * @param is data as stream
 	 * @param extension of the file (e.g. ".html")
 	 * @throws IOException
+	 * @since 0.7.0
 	 */
 	public static void print(final InputStream is, final String extension) throws IOException { //$JUnit
 		if (null == is) {

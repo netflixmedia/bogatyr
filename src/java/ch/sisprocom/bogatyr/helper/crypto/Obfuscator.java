@@ -40,59 +40,13 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is a class for obfuscating data with CFB.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.30
+ * @version 0.8.0 (20090527)
+ * @since 0.3.0
  */
 public class Obfuscator implements IObfuscator {
-	private byte pattern = Byte.MAX_VALUE;
 	
 	public Obfuscator() {
 		super();
-	}
-	
-	public Obfuscator(final byte pattern) {
-		super();
-		
-		this.pattern = pattern;
-	}
-	
-	public byte getPattern() {
-		return pattern;
-	}
-
-	public void setPattern(final byte pattern) {
-		this.pattern = pattern;
-	}
-
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-	public byte[] encrypt(final byte[] input) { //$JUnit
-		return obfuscate(input);
-	}
-
-	public byte[] encrypt(final byte[] input, final byte pattern) { //$JUnit
-		this.pattern = pattern;
-		return obfuscate(input);
-	}
-
-	public byte[] decrypt(final byte[] input) { //$JUnit
-		return unobfuscate(input);
-	}
-
-	public byte[] decrypt(final byte[] input, final byte pattern) { //$JUnit
-		this.pattern = pattern;
-		return unobfuscate(input);
 	}
 
 	
@@ -103,9 +57,11 @@ public class Obfuscator implements IObfuscator {
 	 * Obfuscate the data.
 	 * 
 	 * @param input data (byte-array) to obfuscate
+	 * @param pattern for obfuscating (region: -128 - 127)
      * @return obfuscated data
+     * @since 0.3.0
 	 */
-	private byte[] obfuscate(final byte[] input) {
+	private byte[] obfuscate(final byte[] input, final byte pattern) {
 		if (!HelperArray.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
@@ -123,9 +79,11 @@ public class Obfuscator implements IObfuscator {
 	 * Unobfuscate the data.
 	 * 
 	 * @param input data (byte-array) to unobfuscate
+	 * @param pattern for unobfuscating (region: -128 - 127)
      * @return unobfuscated data
+     * @since 0.3.0
 	 */
-	private byte[] unobfuscate(final byte[] input) {
+	private byte[] unobfuscate(final byte[] input, final byte pattern) {
 		if (!HelperArray.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
@@ -137,5 +95,34 @@ public class Obfuscator implements IObfuscator {
 			result[ii] = (byte)(input[ii] ^ (int) input[ii-1]);
 		}
 		return result;
+	}
+
+	
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperObject.toString(this);
+	}
+	
+	
+	/*
+	 * Implemented methods
+	 */
+	public byte[] encrypt(final byte[] input) { //$JUnit
+		return encrypt(input, Byte.MAX_VALUE);
+	}
+
+	public byte[] encrypt(final byte[] input, final byte pattern) { //$JUnit
+		return obfuscate(input, pattern);
+	}
+
+	public byte[] decrypt(final byte[] input) { //$JUnit
+		return decrypt(input, Byte.MAX_VALUE);
+	}
+
+	public byte[] decrypt(final byte[] input, final byte pattern) { //$JUnit
+		return unobfuscate(input, pattern);
 	}
 }

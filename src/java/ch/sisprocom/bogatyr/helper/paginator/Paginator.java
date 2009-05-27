@@ -43,8 +43,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * The Paginator splits a list in different pages.
  *
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.50
+ * @version 0.8.0 (20090527)
+ * @since 0.5.0
  */
 public class Paginator {
     private List<?> list;
@@ -62,22 +62,45 @@ public class Paginator {
         setNumberPerPage(numberPerPage);
     }
 
+    /**
+     * Returns the list containing the data for the pages.
+     *
+     * @return Total number of pages
+     * @since 0.5.0
+     */
     public List<?> getList() {
 		return Collections.unmodifiableList(list);
     }
 
+    /**
+     * Sets the list containing the data for the pages.
+     * @param list containing the data for the pages
+     * @since 0.5.0
+     */
     public void setList(final List<?> list) {
 		if (null == list) {
 			throw new IllegalArgumentException("list is null!"); //$NON-NLS-1$
 		}
 
         this.list = Collections.unmodifiableList(list);
-   }
+    }
 
+    /**
+     * Returns the total number of elements per page.
+     *
+     * @return number of elements per page
+     * @since 0.5.0
+     */
     public int getNumberPerPage() {
 		return numberPerPage;
     }
 
+    /**
+     * Sets the total number of elements per page.
+     * 
+     * @param numberPerPage elements per page
+     * @since 0.5.0
+     */
     public void setNumberPerPage(final int numberPerPage) {
 		if (0 > numberPerPage) {
 			throw new IllegalArgumentException("numberPerPage must be positive: " + numberPerPage); //$NON-NLS-1$
@@ -89,7 +112,8 @@ public class Paginator {
     /**
      * Returns the total number of pages from the list.
      *
-     * @return Total number of pages
+     * @return total number of pages
+     * @since 0.5.0
      */
     public int getNumberOfPages() {
         if (!HelperCollection.isValid(list) || 0 == numberPerPage) {
@@ -110,7 +134,8 @@ public class Paginator {
      * Returns a requested page from the list.
      *
      * @param requestedPage from the paginator
-     * @return List representing the requested page
+     * @return list representing the requested page
+     * @since 0.5.0
      */
     public List<?> getPage(final int requestedPage) {
         int page = requestedPage;

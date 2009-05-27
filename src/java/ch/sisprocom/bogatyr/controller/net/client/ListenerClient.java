@@ -36,24 +36,29 @@ package ch.sisprocom.bogatyr.controller.net.client;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public interface ListenerClient {
 	/**
 	 * Sends the read data from the client.
      *
      * @param data read data from the client
+     * @since 0.7.0
 	 */
 	void clientStreamRead(byte[] data);
 	
 	/**
 	 * Informs the listener that the client has started.
+	 * 
+	 * @since 0.7.0
 	 */
 	void clientStarted();
 	
 	/**
-	 * Informs the listener that the clientﬂ has stopped.
+	 * Informs the listener that the client has stopped.
+	 * 
+	 * @since 0.7.0
 	 */
 	void clientStopped();
 }

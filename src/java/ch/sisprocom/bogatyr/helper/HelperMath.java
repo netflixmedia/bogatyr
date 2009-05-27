@@ -40,8 +40,8 @@ import java.util.Collection;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.40
+ * @version 0.8.0 (20090527)
+ * @since 0.4.0
  */
 public abstract class HelperMath {
 	
@@ -51,6 +51,7 @@ public abstract class HelperMath {
 	 * @param a first number
 	 * @param b second number
 	 * @return calculated gcd
+	 * @since 0.4.0
 	 */
 	 public static double gcd(final double a, final double b) { //$JUnit
 		 if (0.0D > a) {
@@ -73,6 +74,7 @@ public abstract class HelperMath {
 	 * @param a first number
 	 * @param b second number
 	 * @return calculated lcm
+	 * @since 0.4.0
 	 */
 	 public static double lcm(final double a, final double b) { //$JUnit
 		 if (0.0D > a) {
@@ -89,6 +91,7 @@ public abstract class HelperMath {
      * 
      * @param n number for the check
      * @return true/false
+     * @since 0.5.0
      */	
 	public static boolean isPrime(final int n) { //$JUnit
 		// 2 is the smallest prime
@@ -115,6 +118,7 @@ public abstract class HelperMath {
      * 
      * @param n number for the check
      * @return nearest prime number
+     * @since 0.5.0
      */	
 	public static int calcNearestPrime(final int n) { //$JUnit
 		// 2 is the smallest prime
@@ -136,6 +140,7 @@ public abstract class HelperMath {
      * @param start number of the range
      * @param end number of the range
      * @return list with the calculated prime numbers
+     * @since 0.5.0
      */	
 	public static Collection<Integer> calcPrimes(final int start, final int end) { //$JUnit
 //        if (0 > start) {
@@ -164,6 +169,7 @@ public abstract class HelperMath {
      * 
      * @param value double-value
      * @return int-value
+     * @since 0.4.0
      */	
 	public static int convertDoubleToInt(final double value) { //$JUnit
 		return (int)StrictMath.round(value);
@@ -175,6 +181,7 @@ public abstract class HelperMath {
      * @param base of the logarithm
      * @param value double-value
      * @return double-value
+     * @since 0.4.0
      */	
 	public static double log(final double base, final double value) { //$JUnit
         if (1.0D >= base) {
@@ -193,6 +200,7 @@ public abstract class HelperMath {
      * @param value double-value
      * @param decimalPlace for round
      * @return double-value
+     * @since 0.4.0
      */
     public static double round(final double value, final int decimalPlace) { //$JUnit
 		int dp = decimalPlace;
@@ -210,6 +218,7 @@ public abstract class HelperMath {
      *
      * @param n int-Value
      * @return random int-value between 0 and n-1
+     * @since 0.4.0
      */
     public static int getRandom(final int n) { //$JUnit
     	return (int) (StrictMath.random() * (double) n);
@@ -223,6 +232,7 @@ public abstract class HelperMath {
      * @param interest in % p.a. (e.g. 0.04)
      * @param days elapsed
      * @return calculated amount with a given start amount, interest and elapsed days
+     * @since 0.7.0
      */
     public static double calcAmount(final double amount, final double interest, final int days) { //$JUnit
 		 if (0 >= days) {
@@ -237,6 +247,7 @@ public abstract class HelperMath {
      * 
      * @param n number to calculate
      * @return factorial (n!) from 1 to n
+     * @since 0.7.0
      */	
 	public static int factorial(final int n) {
         if (0 > n) {
@@ -255,6 +266,7 @@ public abstract class HelperMath {
      * 
      * @param n number to calculate
      * @return square factorial from 1 to n^2
+     * @since 0.7.0
      */	
 	public static int factorialSquare(final int n) {
         if (0 > n) {
@@ -273,6 +285,7 @@ public abstract class HelperMath {
      * 
      * @param n number to calculate
      * @return square factorial from 1 to n^3
+     * @since 0.7.0
      */	
 	public static int factorialCubic(final int n) {
         if (0 > n) {
@@ -291,6 +304,7 @@ public abstract class HelperMath {
      * 
      * @param n number to calculate
      * @return number of connections from n
+     * @since 0.7.0
      */	
 	public static int calcConnections(final int n) {
         if (0 >= n) {
@@ -305,6 +319,7 @@ public abstract class HelperMath {
      * 
      * @param n number of persons
      * @return probability that two people will share a birthday
+     * @since 0.7.0
      */	
 	public static double calcBirthdayProblem(final int n) { //TODO does it also work for other parameters than days p.a.?
         if (0 >= n) {
@@ -320,6 +335,7 @@ public abstract class HelperMath {
      * @param n range
      * @param k subset of n ("n choose k")
      * @return binomial coefficient
+     * @since 0.7.0
      */	
 	public static int binomialCoefficient(final int n, final int k) {
         if (0 > n) {
@@ -341,6 +357,7 @@ public abstract class HelperMath {
      * @param m start number for the range
      * @param n end number for the range
      * @return sum between the range m - n
+     * @since 0.7.0
      */	
 	public static int sumRange(final int m, final int n) {
         if (0 > m) {
@@ -361,6 +378,7 @@ public abstract class HelperMath {
      * 
      * @param n end number for the range
      * @return sum of odd numbers between 0 - n
+     * @since 0.7.0
      */	
 	public static int sumOdd(final int n) {
         if (0 > n) {
@@ -375,6 +393,7 @@ public abstract class HelperMath {
      * 
      * @param n number
      * @return sum of even numbers between 0 - n
+     * @since 0.7.0
      */	
 	public static int sumEven(final int n) {
         if (0 > n) {
@@ -389,6 +408,7 @@ public abstract class HelperMath {
      * 
      * @param n number to check
      * @return true/false
+     * @since 0.7.0
      */	
 	public static boolean isOdd(final int n) {
         return 0 != n % 2;
@@ -399,6 +419,7 @@ public abstract class HelperMath {
      * 
      * @param n number to check
      * @return true/false
+     * @since 0.7.0
      */	
 	public static boolean isEven(final int n) {
         return !isOdd(n);

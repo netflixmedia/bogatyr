@@ -37,8 +37,8 @@ package ch.sisprocom.bogatyr.helper.converter;
  * Converts different units of weight.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class ConverterWeight {
 	private static final double FACTOR_OUNCE_TO_G = 28.34952D; //ounce to gram
@@ -72,6 +72,7 @@ public abstract class ConverterWeight {
      * @param conversion factor
      * @param value
      * @return value in the new unit
+     * @since 0.7.0
      */
     public static double convert(final ConversionWeight conversion, final double value) {
     	return value * conversion.factor; 

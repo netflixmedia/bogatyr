@@ -1,22 +1,22 @@
 /*******************************************************************************
  * Copyright (c) 2009 by SiSprocom GmbH.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * 
+ *
  * See the GNU General Public License for more details:
  * ----------------------------------------------------
  * <http://www.gnu.org/licenses>
- * 
+ *
  * This distribution is available at:
  * ----------------------------------
  * <http://code.google.com/p/bogatyr/>
  * <http://www.sisprocom.ch/bogatyr/>
- * 
+ *
  * Contact information:
  * --------------------
  * SiSprocom GmbH
@@ -27,61 +27,56 @@
  *
  * <s.laubenberger@sisprocom.ch>
  * <s.spross@sisprocom.ch>
- * 
+ *
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
+package ch.sisprocom.bogatyr.controller.net.server;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import java.io.IOException;
+import java.net.ServerSocket;
 
-import javax.swing.AbstractAction;
-import javax.swing.Icon;
+import javax.net.ServerSocketFactory;
+import javax.net.ssl.SSLServerSocketFactory;
 
 
 /**
- * This is an extended AbstractAction.
- * 
+ * This is the skeleton for SSL secured servers.
+ *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
- * @since 0.7.0
+ * @author Silvan Spross
+ * @version 0.8.0 (20090527)
+ * @since 0.8.0
  */
-public abstract class ActionAbstract extends AbstractAction {
-	private static final long serialVersionUID = -2411318943212390523L;
+public abstract class ServerSSLAbstract extends ServerAbstract {
+    protected ServerSSLAbstract() {
+    	super();
+    }
 
-//	Action.LONG_DESCRIPTION
-//	Action.ACCELERATOR_KEY
-//	Action.MNEMONIC_KEY
-//	Action.SMALL_ICON
-//	Action.LARGE_ICON_KEY
+    protected ServerSSLAbstract(final int port, final int timeout) {
+        super(port, timeout);
+    }
+
+    protected ServerSSLAbstract(final int port) {
+        super(port);
+    }
 
 
-	protected ActionAbstract() {
-		super();
-	}
-
-	protected ActionAbstract(final String name, final Icon icon) {
-		super(name, icon);
-	}
-
-	protected ActionAbstract(final String name) {
-		super(name);
-	}
-	
-	protected ActionAbstract(final String name, final String toolTip) {
-		super(name);
-		putValue(SHORT_DESCRIPTION, toolTip);
-	}
-
-	protected ActionAbstract(final String name, final String toolTip, final Icon icon) {
-		super(name, icon);
-		putValue(SHORT_DESCRIPTION, toolTip);
-	}
-
-	
 	/*
 	 * Overridden methods
 	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
+    @Override
+	public void start() throws IOException {
+    	setRunning(true);
+
+    	final ServerSocketFactory sslFactory = SSLServerSocketFactory.getDefault();
+    	final ServerSocket serverSocket = sslFactory.createServerSocket(getPort());
+
+        if (0 < getTimeout()) {
+            serverSocket.setSoTimeout(getTimeout());
+        }
+
+    	setServerSocket(serverSocket);
+
+		setThread(new Thread(this));
+        getThread().start();
+    }
 }

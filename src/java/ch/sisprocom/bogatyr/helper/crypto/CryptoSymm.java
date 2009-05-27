@@ -54,14 +54,27 @@ import java.security.spec.AlgorithmParameterSpec;
  * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.10
+ * @version 0.8.0 (20090527)
+ * @since 0.1.0
  */
 public class CryptoSymm implements ICryptoSymm {
 	public static final String ALGORITHM    = "AES"; //$NON-NLS-1$
 	public static final String XFORM        = "AES/CBC/PKCS5Padding"; //$NON-NLS-1$
 	public static final int DEFAULT_KEYSIZE = 128;
-
+	
+	
+	/*
+	 * Private methods
+	 */
+	private static AlgorithmParameterSpec prepareIv() {
+        final byte[] ivBytes = new byte[HelperNumber.VALUE_16];
+        
+        for (int ii = 0; ivBytes.length > ii; ii++) {
+        	ivBytes[ii] = (byte) 0x5a;
+        }
+        return new IvParameterSpec(ivBytes);
+	}
+	
 	
 	/*
 	 * Overridden methods
@@ -80,6 +93,7 @@ public class CryptoSymm implements ICryptoSymm {
 	 * 
      * @return generated secret key
 	 * @see SecretKey
+	 * @since 0.1.0
 	 */
 	public SecretKey generateKey() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
 		return generateKey(DEFAULT_KEYSIZE);
@@ -125,18 +139,5 @@ public class CryptoSymm implements ICryptoSymm {
 		cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
 
 		return cipher.doFinal(input);
-	}
-	
-	
-	/*
-	 * Private methods
-	 */
-	private static AlgorithmParameterSpec prepareIv() {
-        final byte[] ivBytes = new byte[HelperNumber.VALUE_16];
-        
-        for (int ii = 0; ivBytes.length > ii; ii++) {
-        	ivBytes[ii] = (byte) 0x5a;
-        }
-        return new IvParameterSpec(ivBytes);
 	}
 }

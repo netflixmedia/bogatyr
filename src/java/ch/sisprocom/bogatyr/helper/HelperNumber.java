@@ -40,8 +40,8 @@ import java.math.BigInteger;
  *
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class HelperNumber {
     public static final int VALUE_8 = 8;
@@ -65,6 +65,7 @@ public abstract class HelperNumber {
      *
      * @param values 1-n values
      * @return calculated value
+     * @since 0.7.0
      */
     public static BigDecimal multiply(final BigDecimal... values) {
         if (null == values) {
@@ -89,6 +90,7 @@ public abstract class HelperNumber {
      * @param a first value
      * @param b second value
      * @return calculated value
+     * @since 0.7.0
      */
     public static BigDecimal multiply(final BigDecimal a, final BigDecimal b) {
         if (a == null || b == null) {
@@ -102,6 +104,7 @@ public abstract class HelperNumber {
      *
      * @param values 1-n values
      * @return calculated value
+     * @since 0.7.0
      */
     public static BigInteger multiply(final BigInteger... values) {
         if (null == values) {
@@ -126,6 +129,7 @@ public abstract class HelperNumber {
      * @param a first value
      * @param b second value
      * @return calculated value
+     * @since 0.7.0
      */
     public static BigInteger multiply(final BigInteger a, final BigInteger b) {
         if (a == null || b == null) {
@@ -139,6 +143,7 @@ public abstract class HelperNumber {
      *
      * @param values 1-n values
      * @return calculated value
+     * @since 0.7.0
      */
     public static Integer multiply(final Integer... values) {
         if (null == values) {
@@ -163,6 +168,7 @@ public abstract class HelperNumber {
      * @param a first value
      * @param b second value
      * @return calculated value
+     * @since 0.7.0
      */
     public static Integer multiply(final Integer a, final Integer b) {
         if (a == null || b == null) {
@@ -176,6 +182,7 @@ public abstract class HelperNumber {
      *
      * @param values 1-n values
      * @return calculated value
+     * @since 0.7.0
      */
     public static Double multiply(final Double... values) {
         if (null == values) {
@@ -200,6 +207,7 @@ public abstract class HelperNumber {
      * @param a first value
      * @param b second value
      * @return calculated value
+     * @since 0.7.0
      */
     public static Double multiply(final Double a, final Double b) {
         if (a == null || b == null) {
@@ -213,6 +221,7 @@ public abstract class HelperNumber {
      *
      * @param values 1-n values
      * @return calculated value
+     * @since 0.7.0
      */
     public static Float multiply(final Float... values) {
         if (null == values) {
@@ -237,6 +246,7 @@ public abstract class HelperNumber {
      * @param a first value
      * @param b second value
      * @return calculated value
+     * @since 0.7.0
      */
     public static Float multiply(final Float a, final Float b) {
         if (a == null || b == null) {
@@ -250,6 +260,7 @@ public abstract class HelperNumber {
      *
      * @param values 1-n values
      * @return calculated value
+     * @since 0.7.0
      */
     public static Long multiply(final Long... values) {
         if (null == values) {
@@ -274,11 +285,246 @@ public abstract class HelperNumber {
      * @param a first value
      * @param b second value
      * @return calculated value
+     * @since 0.7.0
      */
     public static Long multiply(final Long a, final Long b) {
         if (a == null || b == null) {
             return null;
         }
         return a * b;
+    }
+    
+    /**
+     * Add 1-n {@link BigDecimal} together.
+     *
+     * @param values 1-n values
+     * @return calculated value
+     * @since 0.8.0
+     */
+    public static BigDecimal add(final BigDecimal... values) {
+        if (null == values) {
+            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+        }
+
+        BigDecimal result = null;
+
+        for (int ii = 0; ii < values.length; ii++) {
+            if (0 == ii) {
+                result = values[0];
+            } else {
+                result = add(result, values[ii]);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Add 2 {@link BigDecimal} together.
+     *
+     * @param a first value
+     * @param b second value
+     * @return calculated value
+     * @since 0.8.0
+     */
+    public static BigDecimal add(final BigDecimal a, final BigDecimal b) {
+        if (a == null || b == null) {
+            return null;
+        }
+        return a.add(b);
+    }
+    
+    /**
+     * Add 1-n {@link BigInteger} together.
+     *
+     * @param values 1-n values
+     * @return calculated value
+     * @since 0.8.0
+     */
+    public static BigInteger add(final BigInteger... values) {
+        if (null == values) {
+            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+        }
+
+        BigInteger result = null;
+
+        for (int ii = 0; ii < values.length; ii++) {
+            if (0 == ii) {
+                result = values[0];
+            } else {
+                result = add(result, values[ii]);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Add 2 {@link BigInteger} together.
+     *
+     * @param a first value
+     * @param b second value
+     * @return calculated value
+     * @since 0.8.0
+     */
+    public static BigInteger add(final BigInteger a, final BigInteger b) {
+        if (a == null || b == null) {
+            return null;
+        }
+        return a.add(b);
+    }   
+    
+    /**
+     * Add 1-n {@link Integer} together.
+     *
+     * @param values 1-n values
+     * @return calculated value
+     * @since 0.8.0
+     */
+    public static Integer add(final Integer... values) {
+        if (null == values) {
+            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+        }
+
+        Integer result = null;
+
+        for (int ii = 0; ii < values.length; ii++) {
+            if (0 == ii) {
+                result = values[0];
+            } else {
+                result = add(result, values[ii]);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Add 2 {@link Integer} together.
+     *
+     * @param a first value
+     * @param b second value
+     * @return calculated value
+     * @since 0.8.0
+     */
+    public static Integer add(final Integer a, final Integer b) {
+        if (a == null || b == null) {
+            return null;
+        }
+        return a + b;
+    }  
+    
+    /**
+     * Add 1-n {@link Double} together.
+     *
+     * @param values 1-n values
+     * @return calculated value
+     * @since 0.8.0
+     */
+    public static Double add(final Double... values) {
+        if (null == values) {
+            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+        }
+
+        Double result = null;
+
+        for (int ii = 0; ii < values.length; ii++) {
+            if (0 == ii) {
+                result = values[0];
+            } else {
+                result = add(result, values[ii]);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Add 2 {@link Double} together.
+     *
+     * @param a first value
+     * @param b second value
+     * @return calculated value
+     * @since 0.8.0
+     */
+    public static Double add(final Double a, final Double b) {
+        if (a == null || b == null) {
+            return null;
+        }
+        return a + b;
+    }
+    
+    /**
+     * Add 1-n {@link Float} together.
+     *
+     * @param values 1-n values
+     * @return calculated value
+     * @since 0.8.0
+     */
+    public static Float add(final Float... values) {
+        if (null == values) {
+            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+        }
+
+        Float result = null;
+
+        for (int ii = 0; ii < values.length; ii++) {
+            if (0 == ii) {
+                result = values[0];
+            } else {
+                result = add(result, values[ii]);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Add 2 {@link Float} together.
+     *
+     * @param a first value
+     * @param b second value
+     * @return calculated value
+     * @since 0.8.0
+     */
+    public static Float add(final Float a, final Float b) {
+        if (a == null || b == null) {
+            return null;
+        }
+        return a + b;
+    }
+    
+    /**
+     * Add 1-n {@link Long} together.
+     *
+     * @param values 1-n values
+     * @return calculated value
+     * @since 0.8.0
+     */
+    public static Long add(final Long... values) {
+        if (null == values) {
+            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+        }
+
+        Long result = null;
+
+        for (int ii = 0; ii < values.length; ii++) {
+            if (0 == ii) {
+                result = values[0];
+            } else {
+                result = add(result, values[ii]);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Add 2 {@link Long} together.
+     *
+     * @param a first value
+     * @param b second value
+     * @return calculated value
+     * @since 0.8.0
+     */
+    public static Long add(final Long a, final Long b) {
+        if (a == null || b == null) {
+            return null;
+        }
+        return a + b;
     }
 }

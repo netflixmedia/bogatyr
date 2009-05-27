@@ -40,8 +40,8 @@ import java.net.Socket;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public interface IClient extends Runnable {
 
@@ -49,6 +49,7 @@ public interface IClient extends Runnable {
 	 * Returns the host of the {@link Socket}.
 	 * 
 	 * @return host
+	 * @since 0.7.0
 	 */
 	String getHost();
 
@@ -56,6 +57,7 @@ public interface IClient extends Runnable {
 	 * Sets the host for the {@link Socket}.
 	 * 
 	 * @param host of the server
+	 * @since 0.7.0
 	 */
 	void setHost(String host);
 
@@ -63,6 +65,7 @@ public interface IClient extends Runnable {
 	 * Returns the port of the {@link Socket}.
 	 * 
 	 * @return port
+	 * @since 0.7.0
 	 */
 	int getPort();
 
@@ -70,6 +73,7 @@ public interface IClient extends Runnable {
 	 * Sets the port (0 - 65535) for the {@link Socket}.
 	 * 
 	 * @param port of the server
+	 * @since 0.7.0
 	 */
 	void setPort(int port);
 
@@ -77,6 +81,7 @@ public interface IClient extends Runnable {
 	 * Returns the current {@link Socket} of the client.
 	 * 
 	 * @return socket
+	 * @since 0.7.0
 	 */
 	Socket getSocket();
 	
@@ -84,6 +89,7 @@ public interface IClient extends Runnable {
      * Start the client and open the {@link Socket}.
      * 
      * @throws IOException
+     * @since 0.7.0
      */
 	void start() throws IOException;
 	
@@ -91,6 +97,7 @@ public interface IClient extends Runnable {
      * Stop the client and close the {@link Socket}.
      * 
      * @throws IOException
+     * @since 0.7.0
      */
 	void stop() throws IOException;
 	
@@ -98,6 +105,7 @@ public interface IClient extends Runnable {
 	 * Returns the state of the connection from the client to the server.
 	 * 
 	 * @return true/false
+	 * @since 0.7.0
 	 */
     boolean isRunning();
 
@@ -105,7 +113,8 @@ public interface IClient extends Runnable {
      * Reads a socket-stream to a byte-array.
      * 
      * @return byte-array
-	 * @throws IOException 
+	 * @throws IOException
+	 * @since 0.7.0 
      */
 	byte[] readStream() throws IOException;
 	
@@ -114,6 +123,7 @@ public interface IClient extends Runnable {
      * 
      * @param data to write on a socket
      * @throws IOException
+     * @since 0.7.0
      */
     void writeStream(final byte[] data) throws IOException;
     
@@ -121,6 +131,7 @@ public interface IClient extends Runnable {
 	 * Adds a listener for this client.
 	 * 
 	 * @param listener to add
+	 * @since 0.7.0
 	 */
 	void addListener(ListenerClient listener);
 	
@@ -128,12 +139,14 @@ public interface IClient extends Runnable {
 	 * Remove a listener for this client.
 	 * 
 	 * @param listener to remove
+	 * @since 0.7.0
 	 */
 	void removeListener(ListenerClient listener);
 
 	/**
-	 * Remove all listeners for this client. 
+	 * Remove all listeners for this client.
+	 * 
+	 * @since 0.7.0
 	 */
 	void removeAllListener();
 }   
-

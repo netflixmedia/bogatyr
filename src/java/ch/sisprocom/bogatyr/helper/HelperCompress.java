@@ -48,8 +48,8 @@ import java.util.zip.ZipOutputStream;
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.30
+ * @version 0.7.0 (20090527)
+ * @since 0.3.0
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
 	private static final byte[] BUFFER = new byte[HelperNumber.VALUE_1024];
@@ -60,6 +60,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * @param file for writing
      * @param listOfFiles for the ZIP file
      * @throws IOException
+     * @since 0.3.0
      */	
 	public static void writeZip(final File file, final Collection<File> listOfFiles) throws IOException {
 		if (null == file) {
@@ -118,6 +119,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * @param file to extract
      * @param destinationDirectory for the ZIP file
      * @throws IOException
+     * @since 0.3.0
      */	
 	public static void extractZip(final ZipFile file, final File destinationDirectory) throws IOException { 
 		if (null == file) {

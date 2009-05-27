@@ -44,8 +44,8 @@ import java.util.Date;
  * This interface is to generate, read and save X.509 certificates.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
 public interface IProviderCertificate {
 	/**
@@ -54,6 +54,7 @@ public interface IProviderCertificate {
      * @param file containing the certificate
      * @return certificate
      * @throws Exception
+     * @since 0.6.0
      */
     X509Certificate getCertificate(final File file) throws Exception;
     
@@ -63,6 +64,7 @@ public interface IProviderCertificate {
      * @param is input stream containing the certificate
      * @return certificate
      * @throws Exception
+     * @since 0.6.0
      */
     X509Certificate getCertificate(final InputStream is) throws Exception;
     
@@ -72,6 +74,7 @@ public interface IProviderCertificate {
      * @param cert certificate
      * @param os output stream for the certificate
      * @throws Exception 
+     * @since 0.6.0
      */
     void storeCertificate(final Certificate cert, final OutputStream os) throws Exception;
     
@@ -81,6 +84,7 @@ public interface IProviderCertificate {
      * @param cert certificate
      * @param file for the certificate
      * @throws Exception 
+     * @since 0.6.0
      */
     void storeCertificate(final Certificate cert, final File file) throws Exception;
     
@@ -94,7 +98,8 @@ public interface IProviderCertificate {
      * @param start date of the certificate
      * @param end date of the certificate
      * @return certificate
-     * @throws Exception 
+     * @throws Exception
+     * @since 0.6.0 
      */
     X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws Exception; 
 }

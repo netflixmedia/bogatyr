@@ -36,8 +36,8 @@ package ch.sisprocom.bogatyr.helper.crypto;
  * This is an interface for obfuscating data.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
 public interface IObfuscator {
 	/**
@@ -45,6 +45,7 @@ public interface IObfuscator {
 	 * 
 	 * @param input data (byte-array) to obfuscate
 	 * @return obfuscated byte-array 
+	 * @since 0.6.0
 	 */
 	byte[] encrypt(final byte[] input);
 
@@ -54,6 +55,7 @@ public interface IObfuscator {
 	 * @param input data (byte-array) to obfuscate
 	 * @param pattern for obfuscating (region: -128 - 127)
 	 * @return obfuscated byte-array 
+	 * @since 0.6.0
 	 */
 	byte[] encrypt(final byte[] input, final byte pattern);
 
@@ -62,6 +64,7 @@ public interface IObfuscator {
 	 * 
 	 * @param input data (byte-array) to unobfuscate
 	 * @return unobfuscated byte-array
+	 * @since 0.6.0
 	 */
 	byte[] decrypt(final byte[] input);
 
@@ -72,6 +75,7 @@ public interface IObfuscator {
 	 * @param input data (byte-array) to unobfuscate
 	 * @param pattern for unobfuscating (region: -128 - 127)
 	 * @return unobfuscated byte-array
+	 * @since 0.6.0
 	 */
 	byte[] decrypt(final byte[] input, final byte pattern);
 }

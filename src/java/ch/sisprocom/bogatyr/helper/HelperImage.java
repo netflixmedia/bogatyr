@@ -48,8 +48,8 @@ import java.util.Locale;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.40
+ * @version 0.8.0 (20090527)
+ * @since 0.4.0
  */
 public abstract class HelperImage {
 	public static final String TYPE_JPG  = "jpg"; //$NON-NLS-1$
@@ -64,6 +64,7 @@ public abstract class HelperImage {
      * @param type of the image (e.g. "jpg")
      * @param file location
      * @throws IOException
+     * @since 0.4.0
      */
     public static void saveImage(final RenderedImage image, final String type, final File file) throws IOException { //$JUnit
 		if (null == image) {
@@ -86,6 +87,7 @@ public abstract class HelperImage {
      * @param type of the image (e.g. "jpg")
      * @param file location
      * @throws IOException
+     * @since 0.4.0
      */
 	public static void saveImage(final Component component, final String type, final File file) throws IOException { //$JUnit
 		saveImage(getImage(component), type, file);
@@ -96,6 +98,7 @@ public abstract class HelperImage {
      *
      * @param component for the image
      * @return component as image
+     * @since 0.4.0
      */
 	public static RenderedImage getImage(final Component component) {
 		if (null == component) {
@@ -115,6 +118,7 @@ public abstract class HelperImage {
 	 * Returns a {@link Collection} of all available read formats (e.g. "png", "jpg").
 	 * 
 	 * @return list of all available read formats
+	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageReadFormats() { //$JUnit
 	    final String[] formatNames = ImageIO.getReaderFormatNames();
@@ -126,6 +130,7 @@ public abstract class HelperImage {
 	 * Returns a {@link Collection} of all available write formats (e.g. "png", "jpeg").
 	 * 
 	 * @return list of all available write formats
+	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageWriteFormats() { //$JUnit
 	    final String[] formatNames = ImageIO.getWriterFormatNames();
@@ -137,6 +142,7 @@ public abstract class HelperImage {
 	 * Returns a {@link Collection} of all available MIME types that can be read (e.g. "image/png", "image/jpeg").
 	 * 
 	 * @return list of all available MIME types that can be read
+	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageReadMIMETypes() { //$JUnit
 	    final String[] formatNames = ImageIO.getReaderMIMETypes();
@@ -148,6 +154,7 @@ public abstract class HelperImage {
 	 * Returns a {@link Collection} of all available MIME types that can be written (e.g. "image/png", "image/jpg").
 	 * 
 	 * @return list of all available MIME types that can be written
+	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageWriteMIMETypes() { //$JUnit
 	    final String[] formatNames = ImageIO.getWriterMIMETypes();
@@ -164,6 +171,7 @@ public abstract class HelperImage {
 	 * 
 	 * @param strings as array
 	 * @return list containing the unique values
+	 * @since 0.4.0
 	 */
     private static Collection<String> unique(final String[] strings) {
         final Collection<String> set = new HashSet<String>(strings.length);

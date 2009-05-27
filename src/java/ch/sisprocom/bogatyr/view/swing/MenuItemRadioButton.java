@@ -44,8 +44,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JRadioButtonMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.20
+ * @version 0.8.0 (20090528)
+ * @since 0.2.0
  */
 public class MenuItemRadioButton extends JRadioButtonMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;

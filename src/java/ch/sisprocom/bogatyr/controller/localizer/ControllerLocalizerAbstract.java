@@ -42,29 +42,13 @@ import java.util.Locale;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
 public abstract class ControllerLocalizerAbstract extends ControllerAbstract implements IControllerLocalizer {
 	private Collection<ListenerLocale> listListener = new ArrayList<ListenerLocale>();
 
 	private Locale locale = Locale.getDefault();
-	
-	
-	/*
-	 * Implemented methods
-	 */
-    public synchronized void addListener(final ListenerLocale listener) {
-        listListener.add(listener);
-    }
-
-    public synchronized void removeListener(final ListenerLocale listener) {
-        listListener.remove(listener);
-    }
-
-    public synchronized void removeAllListener() {
-        listListener = new ArrayList<ListenerLocale>();
-    }
 	
 
 	/*
@@ -87,5 +71,17 @@ public abstract class ControllerLocalizerAbstract extends ControllerAbstract imp
     public void setLocale(final Locale locale) {
     	this.locale = locale;
         fireLocaleChanged();
+    }
+    
+    public synchronized void addListener(final ListenerLocale listener) {
+        listListener.add(listener);
+    }
+
+    public synchronized void removeListener(final ListenerLocale listener) {
+        listListener.remove(listener);
+    }
+
+    public synchronized void removeAllListener() {
+        listListener = new ArrayList<ListenerLocale>();
     }
 }

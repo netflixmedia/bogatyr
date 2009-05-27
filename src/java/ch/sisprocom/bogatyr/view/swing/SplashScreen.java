@@ -44,8 +44,8 @@ import java.util.TimerTask;
  * Display a splash-screen manual or for a desired time.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.10
+ * @version 0.8.0 (20090528)
+ * @since 0.1.0
  */
 public class SplashScreen extends Frame {
 	private static final long serialVersionUID = 8819965047277292543L;
@@ -65,6 +65,7 @@ public class SplashScreen extends Frame {
      * Display the splash-screen for the desired time
      *
      * @param displayTime Duration in ms
+     * @since 0.1.0
      */	
 	public void display(final long displayTime) {
 		createAndShowGUI();
@@ -79,6 +80,8 @@ public class SplashScreen extends Frame {
 	
 	/**
      * Display the splash-screen
+     * 
+     * @since 0.1.0
      */	
 	public void display() {
 		createAndShowGUI();

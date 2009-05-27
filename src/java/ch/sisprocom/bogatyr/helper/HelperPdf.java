@@ -58,8 +58,8 @@ import com.lowagie.text.pdf.PdfWriter;
  * This is a helper class for PDF operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.50
+ * @version 0.7.0 (20090527)
+ * @since 0.5.0
  */
 public abstract class HelperPdf {
 
@@ -70,6 +70,7 @@ public abstract class HelperPdf {
      * @param file output
      * @throws DocumentException
      * @throws IOException
+     * @since 0.5.0
      */
     public static void savePdfFromComponent(final Component component, final File file) throws IOException, DocumentException { //$JUnit
 		if (null == component) {
@@ -110,6 +111,7 @@ public abstract class HelperPdf {
      * @param file output
      * @throws DocumentException
      * @throws IOException
+     * @since 0.5.0
      */
 	public static void savePdfFromHTML(final File[] input, final File file) throws IOException, DocumentException { //$JUnit
 		if (!HelperArray.isValid(input)) {
@@ -160,6 +162,7 @@ public abstract class HelperPdf {
      * @param metadata list with the new meta data informations
      * @throws DocumentException
      * @throws IOException
+     * @since 0.7.0
      */
 	@SuppressWarnings("unchecked")
 	public static void setMetaData(final String source, final String dest, final Map<String,String> metadata) throws IOException, DocumentException {

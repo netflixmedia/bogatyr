@@ -52,8 +52,8 @@ import java.util.List;
  * This class connects to an IBM MQ-Server and allows to send and receive messages.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.30
+ * @version 0.8.0 (20090528)
+ * @since 0.3.0
  */
 public class ProviderMq implements IProviderMq {
 

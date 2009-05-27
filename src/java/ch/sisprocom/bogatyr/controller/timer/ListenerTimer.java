@@ -35,24 +35,29 @@ package ch.sisprocom.bogatyr.controller.timer;
  * ListenerTimer
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
 public interface ListenerTimer {
 	/**
 	 * Sends the actual time of the timer/countdown to the listener.
      *
      * @param time actual time of the timer/countdown
+     * @since 0.6.0
 	 */
 	void timeChanged(long time);
 	
 	/**
 	 * Informs the listener that the timer/countdown has started.
+	 * 
+	 * @since 0.6.0
 	 */
 	void timerStarted();
 	
 	/**
 	 * Informs the listener that the timer/countdown has stopped.
+	 * 
+	 * @since 0.6.0
 	 */
 	void timerStopped();
 }

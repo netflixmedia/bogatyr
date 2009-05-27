@@ -37,8 +37,8 @@ package ch.sisprocom.bogatyr.helper.converter;
  * Converts different units of area.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class ConverterArea {
 	private static final double FACTOR_MM2_TO_CM2 = 100.0D; //millimeters^2 to centimeters^2
@@ -87,6 +87,7 @@ public abstract class ConverterArea {
      * @param conversion factor
      * @param value
      * @return value in the new unit
+     * @since 0.7.0
      */
     public static double convert(final ConversionArea conversion, final double value) {
     	return value * conversion.factor; 

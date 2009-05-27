@@ -41,8 +41,8 @@ import java.util.Map;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class HelperCollection {
 	
@@ -51,6 +51,7 @@ public abstract class HelperCollection {
      * 
      * @param arg to check
      * @return true/false
+     * @since 0.7.0
      */
 	public static boolean isValid(final Collection<?> arg) { //$JUnit
         return !(null == arg || arg.isEmpty());
@@ -61,6 +62,7 @@ public abstract class HelperCollection {
 	 * 
 	 * @param list containing duplicate objects
 	 * @return collection without duplicates
+	 * @since 0.7.0
 	 */
     public static <T> Collection<T> removeDuplicates(final Collection<T> list) { //$JUnit
 //		return new ArrayList<T>(new HashSet<T>(list));
@@ -72,6 +74,7 @@ public abstract class HelperCollection {
      * 
      * @param list to dump
      * @return dump string
+     * @since 0.7.0
      */
     public static String dump(final Iterable<?> list) {
         final StringBuilder sb = new StringBuilder();
@@ -88,6 +91,7 @@ public abstract class HelperCollection {
      * 
      * @param map to dump
      * @return dump string
+     * @since 0.7.0
      */
     public static String dump(final Map<?, ?> map) {
         final StringBuilder sb = new StringBuilder();

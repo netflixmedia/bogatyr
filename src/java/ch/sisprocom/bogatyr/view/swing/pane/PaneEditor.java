@@ -44,8 +44,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JEditorPane.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090528)
+ * @since 0.7.0
  */
 public class PaneEditor extends JEditorPane {
 	private static final long serialVersionUID = -3298005917085461997L;

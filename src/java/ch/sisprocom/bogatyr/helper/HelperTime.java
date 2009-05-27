@@ -43,8 +43,8 @@ import java.util.GregorianCalendar;
  * This is a helper class for time operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090528)
+ * @since 0.7.0
  */
 public abstract class HelperTime {
 	public static final int HOUR_DAY = 24;
@@ -67,6 +67,7 @@ public abstract class HelperTime {
      *
      * @return atomic time of the default time server
      * @throws IOException
+     * @since 0.7.0
      */
 	public static Date getAtomicTime() throws IOException { //$JUnit
 		return getAtomicTime(DEFAULT_TIME_SERVER);
@@ -78,6 +79,7 @@ public abstract class HelperTime {
      * @param host of the time server
      * @return atomic time of the given time server
      * @throws IOException
+     * @since 0.7.0
      */
 	public static Date getAtomicTime(final String host) throws IOException { //$JUnit
 		if (!HelperString.isValid(host)) {
@@ -116,6 +118,7 @@ public abstract class HelperTime {
      * @param month range between 1-12
      * @param year 
      * @return created date
+     * @since 0.7.0
      */
     public static Date getDate(final int day, final int month, final int year) {
     	if (0 > day) {
@@ -149,6 +152,7 @@ public abstract class HelperTime {
      *
      * @param offSet in ms from the current time
      * @return created date
+     * @since 0.7.0
      */
     public static Date getDate(final long offSet) {
          return new Date(System.currentTimeMillis() + offSet);

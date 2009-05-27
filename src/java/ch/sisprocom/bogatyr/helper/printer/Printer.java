@@ -47,8 +47,8 @@ import java.awt.print.PrinterJob;
  * This is a printer class for print operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.50
+ * @version 0.7.0 (20090527)
+ * @since 0.5.0
  */
 public class Printer implements Printable { 
 	private Component componentToBePrinted;
@@ -58,7 +58,9 @@ public class Printer implements Printable {
      * Print a component.
      *
      * @param component for printing
+     * @param isScaled true/false to fit the print page
      * @throws PrinterException
+     * @since 0.5.0
      */
     public synchronized void print(final Component component, final boolean isScaled) throws PrinterException {
 		if (null == component) {
@@ -88,6 +90,7 @@ public class Printer implements Printable {
 	 * So this turns if off globally.
      *
      * @param component to disable double buffering
+     * @since 0.5.0
 	 */
 	private static void disableDoubleBuffering(final Component component) {
 		final RepaintManager currentManager = RepaintManager.currentManager(component);
@@ -97,6 +100,7 @@ public class Printer implements Printable {
 	/** Re-enables double buffering globally.
      *
      * @param component to enable double buffering
+     * @since 0.5.0
      */
 	private static void enableDoubleBuffering(final Component component) {
 		final RepaintManager currentManager = RepaintManager.currentManager(component);

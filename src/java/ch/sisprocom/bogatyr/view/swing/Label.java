@@ -41,8 +41,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JLabel.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.20
+ * @version 0.8.0 (20090528)
+ * @since 0.2.0
  */
 public class Label extends JLabel {
 	private static final long serialVersionUID = 2440681846691377894L;

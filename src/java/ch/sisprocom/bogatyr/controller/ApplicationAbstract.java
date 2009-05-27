@@ -38,8 +38,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is the skeleton for all Bogatyr applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.10
+ * @version 0.8.0 (20090527)
+ * @since 0.1.0
  */
 public abstract class ApplicationAbstract implements Runnable {
 	private final long startTime = System.currentTimeMillis();
@@ -49,6 +49,7 @@ public abstract class ApplicationAbstract implements Runnable {
      * Returns the start time of the application.
      * 
      * @return start time of the application
+     * @since 0.1.0
      */	
 	public long getStartTime() {
 		return startTime;
@@ -58,9 +59,9 @@ public abstract class ApplicationAbstract implements Runnable {
      * Terminates the application in a proper way with a return code.
      * 
      * @param returnCode System-Return-Code
+     * @since 0.1.0
      */	
 	public abstract void exit(final int returnCode);
-
 
 	
 	/*

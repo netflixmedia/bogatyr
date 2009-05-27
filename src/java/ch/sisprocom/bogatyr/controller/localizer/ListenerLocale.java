@@ -35,12 +35,14 @@ package ch.sisprocom.bogatyr.controller.localizer;
  * ListenerLocale
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
 public interface ListenerLocale {
 	/**
 	 * Informs the listener that the locale has changed.
+	 * 
+	 * @since 0.6.0
 	 */
 	void localeChanged();
 }

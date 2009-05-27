@@ -43,8 +43,8 @@ import java.net.URISyntaxException;
  * This control displays an URI in the default browser.
  *
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.20
+ * @version 0.8.0 (20090527)
+ * @since 0.2.0
  */
 public abstract class ControlBrowser {
 	
@@ -53,6 +53,7 @@ public abstract class ControlBrowser {
 	 *
 	 * @param uri for the browser (e.g. "http://www.sisprocom.ch/")
 	 * @throws IOException 
+	 * @since 0.2.0
 	 */
 	public static void browse(final URI uri) throws IOException { //$JUnit
 		if (Desktop.isDesktopSupported()) {
@@ -71,7 +72,8 @@ public abstract class ControlBrowser {
 	 *
 	 * @param url for the browser (e.g. "www.sisprocom.ch")
 	 * @throws IOException 
-	 * @throws URISyntaxException 
+	 * @throws URISyntaxException
+	 * @since 0.2.0
 	 */
 	public static void browse(final String url) throws IOException, URISyntaxException { //$JUnit
 		if (!HelperString.isValid(url)) {

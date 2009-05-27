@@ -43,8 +43,8 @@ import java.util.UUID;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public interface IServer extends Runnable {
 	
@@ -52,6 +52,7 @@ public interface IServer extends Runnable {
 	 * Returns the {@link ServerSocket} of the current server.
 	 * 
 	 * @return server-side socket
+	 * @since 0.7.0
 	 */
 	ServerSocket getServerSocket();
 
@@ -59,6 +60,7 @@ public interface IServer extends Runnable {
 	 * Returns the port of the {@link ServerSocket}.
 	 * 
 	 * @return port
+	 * @since 0.7.0
 	 */
 	int getPort();
 
@@ -66,6 +68,7 @@ public interface IServer extends Runnable {
 	 * Sets the port (0 - 65535) for the {@link ServerSocket}.
 	 * 
 	 * @param port for the server
+	 * @since 0.7.0
 	 */
 	void setPort(int port);
 
@@ -73,6 +76,7 @@ public interface IServer extends Runnable {
 	 * Returns the timeout in ms of the {@link ServerSocket}.
 	 * 
 	 * @return timeout in ms
+	 * @since 0.7.0
 	 */
 	int getTimeout();
 
@@ -80,6 +84,7 @@ public interface IServer extends Runnable {
 	 * Sets the timeout in ms for the {@link ServerSocket}.
 	 * 
 	 * @param timeout for the server
+	 * @since 0.7.0
 	 */
 	void setTimeout(int timeout);
 	
@@ -87,6 +92,7 @@ public interface IServer extends Runnable {
      * Start the server and open the {@link ServerSocket}.
      * 
      * @throws IOException
+     * @since 0.7.0
      */
 	void start() throws IOException;
 
@@ -94,6 +100,7 @@ public interface IServer extends Runnable {
      * Stop the server and close the {@link ServerSocket} and quit all threads.
      * 
      * @throws IOException
+     * @since 0.7.0
      */
 	void stop() throws IOException;
 
@@ -101,6 +108,7 @@ public interface IServer extends Runnable {
 	 * Returns the state of the server.
 	 * 
 	 * @return true/false
+	 * @since 0.7.0
 	 */
     boolean isRunning();
 	
@@ -109,6 +117,7 @@ public interface IServer extends Runnable {
 	 * 
 	 * @param uuid unique key for the {@link Map} index
 	 * @param serverThread asynchron server thread
+	 * @since 0.7.0
 	 */
 	void addServerThread(final UUID uuid, final IServerThread serverThread);
 
@@ -116,6 +125,7 @@ public interface IServer extends Runnable {
 	 * Removes the thread with the given unique key from the {@link Map}.
 	 * 
 	 * @param uuid unique key for the map index
+	 * @since 0.7.0
 	 */
 	void removeServerThread(final UUID uuid);
 	
@@ -123,6 +133,7 @@ public interface IServer extends Runnable {
 	 * Returns all threads.
 	 * 
 	 * @return list containing all threads
+	 * @since 0.7.0
 	 */
 	Map<UUID, IServerThread> getServerThreads();
 }   

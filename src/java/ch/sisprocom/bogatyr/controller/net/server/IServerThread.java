@@ -41,21 +41,15 @@ import java.util.UUID;
  * Defines the methods for the implementation of the server thread.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public interface IServerThread extends Runnable {
-//	/**
-//	 * Returns the current {@link Thread}.
-//	 * 
-//	 * @return thread
-//	 */
-//	Thread getThread();
-
 	/**
 	 * Returns the an universally unique identifier {@link UUID} of the thread.
 	 * 
 	 * @return universally unique identifier
+	 * @since 0.7.0
 	 */
 	UUID getUuid();
 
@@ -63,6 +57,7 @@ public interface IServerThread extends Runnable {
 	 * Returns the current {@link Socket} of the thread.
 	 * 
 	 * @return socket
+	 * @since 0.7.0
 	 */
 	Socket getSocket();
 
@@ -70,6 +65,7 @@ public interface IServerThread extends Runnable {
 	 * Returns the server (owner) of this thread.
 	 * 
 	 * @return server
+	 * @since 0.7.0
 	 */
 	IServer getServer();
 
@@ -78,6 +74,7 @@ public interface IServerThread extends Runnable {
      * 
      * @return byte array from stream
 	 * @throws IOException
+	 * @since 0.7.0
      */
 	byte[] readStream() throws IOException;
 
@@ -86,6 +83,7 @@ public interface IServerThread extends Runnable {
      * 
      * @param data to write on a socket
      * @throws IOException 
+     * @since 0.7.0
      */
     void writeStream(final byte[] data) throws IOException;
 
@@ -93,11 +91,14 @@ public interface IServerThread extends Runnable {
 	 * Stops the thread. And closes the open socket.
 	 * 
 	 * @throws IOException 
+	 * @since 0.7.0
 	 */
 	void stop() throws IOException; 
 
 	/**
-	 * Starts the thread with {@link Thread#MIN_PRIORITY}.
+	 * Starts the server thread.
+	 * 
+	 * @since 0.7.0
 	 */
 	void start();
     
@@ -105,6 +106,7 @@ public interface IServerThread extends Runnable {
 	 * Returns the state of the thread.
 	 * 
 	 * @return true/false
+	 * @since 0.7.0
 	 */
     boolean isRunning();
 }   

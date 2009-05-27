@@ -41,8 +41,8 @@ import java.util.UUID;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class HelperCrypto {
 	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
@@ -57,6 +57,7 @@ public abstract class HelperCrypto {
      * @param data to generate a hash
      * @return generated hash value
      * @throws NoSuchAlgorithmException
+     * @since 0.7.0
      */
     public static String getHashCode(final String algo, final Object data) throws NoSuchAlgorithmException { //$JUnit
 		if (!HelperString.isValid(algo)) {
@@ -91,6 +92,7 @@ public abstract class HelperCrypto {
      * @param data to generate a hash
      * @return generated hash value
      * @throws NoSuchAlgorithmException
+     * @since 0.7.0
      */
     public static String getHashCode(final Object data) throws NoSuchAlgorithmException { //$JUnit
     	return getHashCode(HASHCODE_ALGORITHM_SHA256, data);
@@ -103,6 +105,7 @@ public abstract class HelperCrypto {
      * @param digits length of result string
      * @param seed for the string (e.g. "1,2...0,A,B...Z)
      * @return generated unique string
+     * @since 0.7.0
      */
     public static String getRandomKey(final int digits, final char[] seed) { //$JUnit
 		if (0 >= digits) {
@@ -126,6 +129,7 @@ public abstract class HelperCrypto {
      *
      * @param digits length of result string
      * @return generated unique String
+     * @since 0.7.0
      */
     public static String getRandomKey(final int digits) { //$JUnit
     	return getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
@@ -135,6 +139,7 @@ public abstract class HelperCrypto {
      * Generates an universally unique identifier (UUID).
      *
      * @return generated universally unique identifier
+     * @since 0.7.0
      */
     public static UUID getUUID() { //$JUnit
     	return UUID.randomUUID();

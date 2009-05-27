@@ -37,8 +37,8 @@ package ch.sisprocom.bogatyr.helper.converter;
  * Converts different units of length.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class ConverterLength {
 	private static final double FACTOR_INCH_TO_CM = 2.54D; //inch to centimeters
@@ -80,6 +80,7 @@ public abstract class ConverterLength {
      * 
      * @param value pixels to convert in centimeters
      * @return size in centimeters of the given pixels
+     * @since 0.7.0
      */
     public static double pixelToCm(final int value) {
     	return pixelToCm(value, DEFAULT_DPI); 
@@ -91,6 +92,7 @@ public abstract class ConverterLength {
      * @param value pixels to convert in centimeters
      * @param dpi dots per inch
      * @return size in centimeters of the given pixels
+     * @since 0.7.0
      */
     public static double pixelToCm(final int value, final int dpi) {
     	return convert(ConversionLength.INCH_TO_CM, (double) (value / dpi));
@@ -101,6 +103,7 @@ public abstract class ConverterLength {
      * 
      * @param value size in centimeters to convert in pixels
      * @return pixels
+     * @since 0.7.0
      */
     public static double cmToPixel(final int value) {
     	return cmToPixel(value, DEFAULT_DPI); 
@@ -112,6 +115,7 @@ public abstract class ConverterLength {
      * @param value size in centimeters to convert in pixels
      * @param dpi dots per inch
      * @return pixels
+     * @since 0.7.0
      */
     public static double cmToPixel(final int value, final int dpi) {
     	return convert(ConversionLength.CM_TO_INCH, (double) value) * (double) dpi; 
@@ -123,6 +127,7 @@ public abstract class ConverterLength {
      * @param conversion factor
      * @param value
      * @return value in the new unit
+     * @since 0.7.0
      */
     public static double convert(final ConversionLength conversion, final double value) {
     	return value * conversion.factor; 

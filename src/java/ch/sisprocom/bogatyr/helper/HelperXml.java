@@ -36,8 +36,8 @@ package ch.sisprocom.bogatyr.helper;
  * This is a helper class for XML operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.30
+ * @version 0.8.0 (20090528)
+ * @since 0.3.0
  */
 public abstract class HelperXml {
 	/**
@@ -47,6 +47,7 @@ public abstract class HelperXml {
      *
      * @param in the String whose non-valid characters we want to remove
      * @return the in String, stripped of non-valid characters
+     * @since 0.3.0
      */
     public static String getValidXmlString(final String in) { //$JUnit
         if (!HelperString.isValid(in)) { // vacancy test

@@ -47,8 +47,8 @@ import java.awt.Insets;
  * This is a Label combined with a JComponent.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.8.0 (20090528)
+ * @since 0.6.0
  */
 public class LabeledComponent extends Panel {
 	private static final long serialVersionUID = 2215341067138215010L;

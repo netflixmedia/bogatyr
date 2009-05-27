@@ -50,8 +50,8 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class HelperObject {
 	
@@ -65,6 +65,7 @@ public abstract class HelperObject {
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
 	 * @throws InvocationTargetException 
+	 * @since 0.7.0
      */
 	public static <T> T createInstance(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit
 		if (null == clazz) {
@@ -86,6 +87,7 @@ public abstract class HelperObject {
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
 	 * @throws InvocationTargetException 
+	 * @since 0.7.0
      */
 	public static <T> T createInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit
 		if (null == clazz) {
@@ -110,6 +112,7 @@ public abstract class HelperObject {
 	 * @throws IOException
 	 * @see ByteArrayOutputStream
 	 * @see ObjectOutputStream
+	 * @since 0.7.0
 	 */
 	public static byte[] serialize(final Serializable obj) throws IOException { //$JUnit
 		if (null == obj) {
@@ -143,6 +146,7 @@ public abstract class HelperObject {
 	 * @throws ClassNotFoundException
 	 * @see ByteArrayInputStream
 	 * @see ObjectInputStream
+	 * @since 0.7.0
 	 */
 	public static Object deserialize(final byte[] bytes) throws IOException, ClassNotFoundException { //$JUnit
 		if (!HelperArray.isValid(bytes)) {
@@ -169,6 +173,7 @@ public abstract class HelperObject {
      * @param clazz for searching
      * @param methodName to check
      * @return true/false
+     * @since 0.7.0
      */
     public static boolean isMethodAvailable(final Class<?> clazz, final String methodName) {
 		if (null == clazz) {
@@ -191,6 +196,7 @@ public abstract class HelperObject {
      * 
      * @param object to dump
      * @return dumped object string
+     * @since 0.7.0
      */
     public static String toString(final Object object) {
     	final Collection<String> list = new ArrayList<String>();

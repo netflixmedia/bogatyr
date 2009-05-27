@@ -44,15 +44,16 @@ import java.util.Locale;
  * This control opens an email address with the default mail application.
  *
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class ControlMail {
 
 	/**
 	 * Opens the default mail application.
 	 *
-	 * @throws IOException 
+	 * @throws IOException
+	 * @since 0.7.0
 	 */
 	public static void mail() throws IOException { //$JUnit
 		if (Desktop.isDesktopSupported()) {
@@ -66,7 +67,8 @@ public abstract class ControlMail {
 	 * Opens an email address given as {@link URI} with the default mail application.
 	 *
 	 * @param uri for the mail application (e.g. "mailto:yourname@yourmail.com"). It supports CC, BCC, SUBJECT, and BODY.
-	 * @throws IOException 
+	 * @throws IOException
+	 * @since 0.7.0
 	 */
 	public static void mail(final URI uri) throws IOException { //$JUnit
 		if (Desktop.isDesktopSupported()) {
@@ -85,7 +87,8 @@ public abstract class ControlMail {
 	 *
 	 * @param emailAddress for the mail application (e.g. "yourname@yourmail.com")
 	 * @throws IOException 
-	 * @throws URISyntaxException 
+	 * @throws URISyntaxException
+	 * @since 0.7.0
 	 */
 	public static void mail(final String emailAddress) throws IOException, URISyntaxException { //$JUnit
 		if (!HelperString.isValid(emailAddress)) {
