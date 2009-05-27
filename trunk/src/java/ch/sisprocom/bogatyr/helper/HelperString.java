@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 
 
@@ -39,13 +40,11 @@ import java.math.BigDecimal;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class HelperString {
 	public static final String NEW_LINE = System.getProperty("line.separator"); //$NON-NLS-1$
-	public static final String FILE_SEPARATOR = System.getProperty("file.separator"); //$NON-NLS-1$
-	public static final String PATH_SEPARATOR = System.getProperty("path.separator"); //$NON-NLS-1$
 
 	public static final String EMPTY_STRING = ""; //$NON-NLS-1$
 	public static final String TAB = "\t"; //$NON-NLS-1$
@@ -58,24 +57,26 @@ public abstract class HelperString {
 	/**
      * Checks if a {@link CharSequence} is valid.
      * 
-     * @param arg to check
+     * @param input to check
      * @return true/false
+     * @since 0.7.0
      */	
-	public static boolean isValid(final CharSequence arg) { //$JUnit
-        return !(null == arg || 0 == arg.length());
+	public static boolean isValid(final CharSequence input) { //$JUnit
+        return !(null == input || 0 == input.length());
     }
 
 	/**
      * Checks if a {@link String} is full numeric.
      * 
-     * @param arg to check
+     * @param input to check
      * @return true/false
+     * @since 0.7.0
      */	
-	public static boolean isNumeric(final String arg) { //$JUnit
+	public static boolean isNumeric(final String input) { //$JUnit
 		//TODO a bit lazy implemented... improve with regex if possible
-		if (isValid(arg)) {
+		if (isValid(input)) {
 			try{
-				new BigDecimal(arg);
+				new BigDecimal(input);
 				return true;
 			} catch (NumberFormatException ex) {
 				return false;
@@ -90,6 +91,7 @@ public abstract class HelperString {
      * @param fillChar char to fill the string
      * @param fillLength length of the filled string 
      * @return filled string
+     * @since 0.7.0
      */
     public static CharSequence fillString(final char fillChar, final int fillLength) { //$JUnit
 		if (0 >= fillLength) {
@@ -111,6 +113,7 @@ public abstract class HelperString {
      * 
      * @param input string
      * @return reversed string
+     * @since 0.7.0
      */
     public static String reverseString(final String input) { //$JUnit
 		if (null == input) {
@@ -125,6 +128,7 @@ public abstract class HelperString {
      * 
      * @param text string
      * @return numeric string
+     * @since 0.7.0
      */
     public static String getValidNumericString(final String text) { //$JUnit
     	
@@ -133,7 +137,7 @@ public abstract class HelperString {
     	}
 
         boolean isNegative = false;
-        if (text.startsWith(Const.NEGATIVE_SIGN)) {
+        if (text.startsWith(Constants.NEGATIVE_SIGN)) {
     		isNegative = true;
     	}
     	
@@ -160,16 +164,17 @@ public abstract class HelperString {
     		return null;
     	}
     	
-    	return isNegative ? Const.NEGATIVE_SIGN + sb : sb.toString();
+    	return isNegative ? Constants.NEGATIVE_SIGN + sb : sb.toString();
     }
     
     /**
-     * Concatenates strings with a separator (e.g. for CSV export)
+     * Concatenates strings with a separator (e.g. for CSV export).
      *
      * @param strings to concatenate
      * @param separator between the strings
-     * @param trimmed
+     * @param trimmed true/false
      * @return concatenated string
+     * @since 0.7.0
      */
     public static String concatenate(final String[] strings, final char separator, final boolean trimmed) {
         if (!HelperArray.isValid(strings)) {
@@ -193,4 +198,31 @@ public abstract class HelperString {
         }
         return sb.toString();
     }
+    
+    /**
+     * Returns a {@link String} from a given byte-array and encoding.
+     *
+     * @param data for the string
+     * @param length of the string
+     * @param encoding of the given data
+     * @return new string
+     * @throws UnsupportedEncodingException 
+     * @since 0.8.0
+     */
+	public static String toString(final byte[] data, final int length, final String encoding) throws UnsupportedEncodingException {
+		return new String(data, 0, length, encoding);
+	}
+	
+    /**
+     * Returns a byte-array from a given {@link String} and encoding.
+     *
+     * @param input string for the byte-array
+     * @param encoding of the given string
+     * @return string as byte-array
+     * @throws UnsupportedEncodingException 
+     * @since 0.8.0
+     */
+	public static byte[] toBytes(String input, final String encoding) throws UnsupportedEncodingException {
+			return input.getBytes(encoding);
+	}
 }

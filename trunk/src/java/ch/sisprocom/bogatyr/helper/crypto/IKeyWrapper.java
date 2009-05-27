@@ -38,8 +38,8 @@ import java.security.Key;
  * This is an interface for wrapping and unwrapping a crypto key.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
 public interface IKeyWrapper {
 	/**
@@ -49,6 +49,7 @@ public interface IKeyWrapper {
      * @param key e.g. AES-key
      * @return byte-array with the wrapped key
      * @throws Exception
+     * @since 0.6.0
 	 */
 	byte[] wrap(final Key wrapperKey, final Key key) throws Exception;
 	
@@ -61,6 +62,7 @@ public interface IKeyWrapper {
      * @param keyType e.g. Cipher.SECRET_KEY
      * @return unwrapped key
      * @throws Exception
+     * @since 0.6.0
 	 */
 	Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws Exception;
 }

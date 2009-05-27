@@ -44,8 +44,8 @@ import java.awt.event.ActionListener;
  * This is a group to add 1-n components (e.g. useful with JButtons).
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090528)
+ * @since 0.7.0
  */
 public class Group extends Panel {
 	private static final long serialVersionUID = -3557759501854611930L;

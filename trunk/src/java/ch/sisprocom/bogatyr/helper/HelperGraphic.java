@@ -48,8 +48,8 @@ import java.util.Collection;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.40
+ * @version 0.8.0 (20090527)
+ * @since 0.4.0
  */
 public abstract class HelperGraphic {
 	
@@ -57,6 +57,7 @@ public abstract class HelperGraphic {
      * Enable anti-aliasing on a {@link Graphics2D} container.
      * 
      * @param graphics Graphics2D container
+     * @since 0.4.0
      */	
 	public static void enableAntialiasing(final Graphics2D graphics) {
 		if (null == graphics) {
@@ -72,6 +73,7 @@ public abstract class HelperGraphic {
      *
      * @param size Dimension
      * @return Dimension with center coordinates
+     * @since 0.4.0
      */
     public static Dimension getCenter(final Dimension size) { //$JUnit
 		if (null == size) {
@@ -87,6 +89,7 @@ public abstract class HelperGraphic {
      * @param text Text
      * @param graphics Graphic container
      * @return Dimension with text size
+     * @since 0.4.0
      */
 	public static Dimension getTextSize(final String text, final Graphics graphics) {
 		if (null == text) {
@@ -113,6 +116,7 @@ public abstract class HelperGraphic {
      * Returns a {@link Collection} containing all available system {@link Font}.
      *
      * @return List containing all fonts
+     * @since 0.4.0
      */
     public static Collection<Font> getAvailableFonts() { //$JUnit
 		// Get all available fonts from GraphicsEnvironment
@@ -127,6 +131,7 @@ public abstract class HelperGraphic {
      *
      * @param color for the hex value
      * @return hex value of the color
+     * @since 0.4.0
      */
     public static String getColorHex(final Color color) { //$JUnit
 		if (null == color) {

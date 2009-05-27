@@ -29,98 +29,96 @@
  * <s.spross@sisprocom.ch>
  *
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.net.server;
+package ch.sisprocom.bogatyr.controller.net;
 
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.util.Collections;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.util.ArrayList;
+import java.util.Collection;
 
+import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperObject;
-
+import ch.sisprocom.bogatyr.helper.HelperString;
 
 /**
- * This is the skeleton for servers.
+ * This is a datagram controller to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @author Silvan Spross
  * @version 0.8.0 (20090527)
- * @since 0.7.0
+ * @since 0.8.0
  */
-public abstract class ServerAbstract implements IServer {
+public class ControllerDatagram implements IControllerDatagram {
     private final long createTime = System.currentTimeMillis();
 
     private Thread thread;
     
-    private final Map<UUID, IServerThread> mapThread = new ConcurrentHashMap<UUID, IServerThread>();
+	private Collection<ListenerDatagram> listListener = new ArrayList<ListenerDatagram>();
 
-    private ServerSocket serverSocket;
     private int port;
-    private int timeout; //ServerSocketSocket timeout in milliseconds
+    private DatagramSocket socket;
+    final byte[] buffer = new byte[Short.MAX_VALUE];
+    final DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 
     private boolean isRunning;
-
-    protected ServerAbstract() {
+    
+    protected ControllerDatagram() {
     	super();
     }
 
-    protected ServerAbstract(final int port, final int timeout) {
+    protected ControllerDatagram(final int port) {
         super();
 
         setPort(port);
-        this.timeout = timeout;
-    }
-
-    protected ServerAbstract(final int port) {
-        this(port, 0);
     }
 
 	/**
-     * Returns the instantiation time of the server.
+     * Returns the instantiation time of the datagram controller.
      *
-     * @return instantiation time of the server
-     * @since 0.7.0
+     * @return instantiation time of the datagram controller
+     * @since 0.8.0
      */
 	public long getCreateTime() {
 		return createTime;
 	}
 
 	/**
-	 * Returns the current {@link Thread} of the server.
+	 * Returns the current {@link Thread} of the controller.
 	 * 
-	 * @return thread of the server
-	 * @since 0.7.0
+	 * @return thread of the controller
+	 * @since 0.8.0
 	 */
 	public Thread getThread() {
 		return thread;
-	}
+	}	
+    
 
-	/**
-	 * Sets the current {@link Thread} for the server.
-	 * 
-	 * @param thread for the server
-	 * @since 0.8.0
+	/*
+	 * Private methods
 	 */
-    protected void setThread(Thread thread) {
-		this.thread = thread;
+	private void firePacketReceived(final String host, final int port, final String data, final DatagramPacket packet) {
+		for (final ListenerDatagram listener : listListener) {
+			listener.packetReceived(host, port, data, packet);
+		}	
 	}
-
-	/**
-	 * Sets the {@link ServerSocket} for the server.
-	 * @param serverSocket for the server
-	 * @since 0.8.0
-	 */
-    protected void setServerSocket(ServerSocket serverSocket) {
-		this.serverSocket = serverSocket;
+	
+	private void fireStarted() {
+		isRunning = true;
+		
+		for (final ListenerDatagram listener : listListener) {
+			listener.datagramStarted();
+		}	
 	}
-
-	protected void setRunning(boolean isRunning) {
-		this.isRunning = isRunning;
+	
+	private void fireStopped() {
+		isRunning = false;
+		
+		for (final ListenerDatagram listener : listListener) {
+			listener.datagramStopped();
+		}	
 	}
-
+    
 
     /*
      * Overridden methods
@@ -131,19 +129,11 @@ public abstract class ServerAbstract implements IServer {
     }
     
 	
-	/*
+    /*
      * Implemented methods
      */
-    public ServerSocket getServerSocket() {
-        return serverSocket;
-    }
-
     public int getPort() {
         return port;
-    }
-
-    public int getTimeout() {
-        return timeout;
     }
 
     public void setPort(final int port) {
@@ -153,48 +143,21 @@ public abstract class ServerAbstract implements IServer {
         this.port = port;
     }
 
-
-    public void setTimeout(final int timeout) {
-        this.timeout = timeout;
-    }
-
-    public void addServerThread(final UUID uuid, final IServerThread serverThread) {
-        mapThread.put(uuid, serverThread);
-    }
-
-    public void removeServerThread(final UUID uuid) {
-        mapThread.remove(uuid);
-    }
-
-    public Map<UUID, IServerThread> getServerThreads() {
-        return Collections.unmodifiableMap(mapThread);
-    }
-
     public void start() throws IOException {
-        serverSocket = new ServerSocket(port);
-
-        if (0 < timeout) {
-            serverSocket.setSoTimeout(timeout);
-        }
-        
+		socket = new DatagramSocket(port);
+		
 		thread = new Thread(this);
         thread.start();
         
-       	isRunning = true;
+        fireStarted();
     }
 
     public void stop() throws IOException {
-    	isRunning = false;
-
-        if (null != serverSocket) {
-        	serverSocket.close();
+        if (null != socket) {
+        	socket.close();
         }
-		
-        for (final UUID key : getServerThreads().keySet()) {
-            final IServerThread thread = getServerThreads().get(key);
-
-            thread.stop();
-        }
+        
+        fireStopped();
         
 		if (thread != null) {
 			if (thread.isAlive()) {
@@ -207,5 +170,32 @@ public abstract class ServerAbstract implements IServer {
 
     public boolean isRunning() {
         return isRunning;
+    } 
+    
+	@Override
+	public void run() {
+		try	{
+			while(!getThread().isInterrupted()) {
+				socket.receive(packet);
+				
+				firePacketReceived(packet.getAddress().getHostAddress(), port, HelperString.toString(buffer, packet.getLength(), Constants.ENCODING_ASCII), packet);
+			}
+//		} catch (SocketException ex) {
+//			//do nothing
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+    public synchronized void addListener(final ListenerDatagram listener) {
+        listListener.add(listener);
+    }
+
+    public synchronized void removeListener(final ListenerDatagram listener) {
+        listListener.remove(listener);
+    }
+
+    public synchronized void removeAllListener() {
+        listListener = new ArrayList<ListenerDatagram>();
     }
 }

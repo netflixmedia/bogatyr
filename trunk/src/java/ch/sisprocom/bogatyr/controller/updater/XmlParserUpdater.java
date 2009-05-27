@@ -58,8 +58,8 @@ import ch.sisprocom.bogatyr.view.swing.dialog.DialogProgress;
  * SAX handler to parse the update XML files
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
 public class XmlParserUpdater extends DefaultHandler {
 	// Resources
@@ -177,7 +177,7 @@ public class XmlParserUpdater extends DefaultHandler {
 	}
 	
     private void download() throws IOException {
-		File output = new File(HelperEnvironment.getUserHomeDirectory() + HelperString.PATH_SEPARATOR + (HelperEnvironment.isWindowsPlatform() ? name_windows : HelperEnvironment.isMacPlatform() ? name_osx : name_unix));
+		File output = new File(HelperEnvironment.getUserHomeDirectory() + HelperIO.PATH_SEPARATOR + (HelperEnvironment.isWindowsPlatform() ? name_windows : HelperEnvironment.isMacPlatform() ? name_osx : name_unix));
 		boolean isOk = false;
 		
 		while (!isOk) {

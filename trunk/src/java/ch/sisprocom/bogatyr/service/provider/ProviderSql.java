@@ -45,8 +45,8 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.70 (20090527)
- * @since 0.30
+ * @version 0.8.0 (20090528)
+ * @since 0.2.0
  */
 public class ProviderSql  implements IProviderSql {
 //	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
@@ -58,6 +58,10 @@ public class ProviderSql  implements IProviderSql {
 	private String password;
 	
 	
+	protected ProviderSql() {
+        super();
+	}
+	
 	protected ProviderSql(final String driver, final String url, final String user, final String password) {
         super();
         setDriver(driver);
@@ -65,23 +69,53 @@ public class ProviderSql  implements IProviderSql {
         this.user = user;
         this.password = password;
 	}
-	
+
+	/**
+	 * Returns the current db driver class.
+	 * 
+	 * @return db driver class
+	 * @since 0.2.0
+	 */
 	public String getDriver() {
 		return driver;
 	}
 
+	/**
+	 * Returns the current db URL.
+	 * 
+	 * @return db URL
+	 * @since 0.2.0
+	 */
 	public String getUrl() {
 		return url;
 	}
 
+	/**
+	 * Returns the current db user.
+	 * 
+	 * @return db user
+	 * @since 0.2.0
+	 */
 	public String getUser() {
 		return user;
 	}
 
+	/**
+	 * Returns the current db user password.
+	 * 
+	 * @return db user password
+	 * @since 0.2.0
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * Sets the current db driver class
+	 * 
+	 * @param driver db driver class
+	 * @since 0.2.0
+	 */
 	public void setDriver(final String driver) {
     	if (null == driver) {
     		throw new IllegalArgumentException("driver is null!"); //$NON-NLS-1$
@@ -90,6 +124,12 @@ public class ProviderSql  implements IProviderSql {
 		this.driver = driver;
 	}
 
+	/**
+	 * Sets the current db URL.
+	 * 
+	 * @param url db URL
+	 * @since 0.2.0
+	 */
 	public void setUrl(final String url) {
     	if (null == url) {
     		throw new IllegalArgumentException("url is null!"); //$NON-NLS-1$
@@ -97,10 +137,22 @@ public class ProviderSql  implements IProviderSql {
 		this.url = url;
 	}
 
+	/**
+	 * Sets the current db user.
+	 * 
+	 * @param user for the db
+	 * @since 0.2.0
+	 */
 	public void setUser(final String user) {
 		this.user = user;
 	}
 
+	/**
+	 * Sets the current db user password.
+	 * 
+	 * @param password for the user/db
+	 * @since 0.2.0
+	 */
 	public void setPassword(final String password) {
 		this.password = password;
 	}
@@ -118,30 +170,11 @@ public class ProviderSql  implements IProviderSql {
 	/*
 	 * Implemented methods
 	 */	
-	/**
-	 * Connects to a database
-     *
-	 * @return Connection
-	 * @throws ClassNotFoundException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws SQLException 
-	 */
     public Connection connectToDb() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {		
 		Class.forName(driver).newInstance();
 		return DriverManager.getConnection(url, user, password);
 	}
     
-	/**
-	 * Executes an update
-     *
-	 * @param statement string in SQL
-     * @return SQL-Code
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 */
     public int executeUpdate(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
     	if (!HelperString.isValid(statement)) {
     		throw new IllegalArgumentException("statement is null or empty!"); //$NON-NLS-1$
@@ -155,8 +188,6 @@ public class ProviderSql  implements IProviderSql {
 	    	con = connectToDb();
 			stmt = con.createStatement();
 	
-//			log.debug(stmt.toString());
-			
 			result = stmt.executeUpdate(statement);
 		} finally {
 			if (con != null) {
@@ -169,16 +200,6 @@ public class ProviderSql  implements IProviderSql {
 		return result;
     }
 	
-    /**
-	 * Executes an SQL command
-     *
-	 * @param statement string in SQL
-     * @return true/false
-     * @throws SQLException 
-     * @throws ClassNotFoundException 
-     * @throws IllegalAccessException 
-     * @throws InstantiationException 
-	 */
     public boolean execute(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException  {
     	if (!HelperString.isValid(statement)) {
     		throw new IllegalArgumentException("statement is null or empty!"); //$NON-NLS-1$
@@ -192,8 +213,6 @@ public class ProviderSql  implements IProviderSql {
 	    	con = connectToDb();
 			stmt = con.createStatement();
 	
-//			log.debug(stmt.toString());
-			
 			result = stmt.execute(statement);
 		} finally {
 			if (con != null) {

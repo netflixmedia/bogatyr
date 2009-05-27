@@ -42,8 +42,8 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.8.0 (20090527)
+ * @since 0.1.0
  */
 public class ControllerLocalizerFile extends ControllerLocalizerAbstract {
 	public static final String POSTFIX_ACCELERATOR = ".accelerator"; //$NON-NLS-1$
@@ -61,14 +61,34 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract {
         init();
     }
 
+	/**
+	 * Returns the localize base of the resource file.
+	 * 
+	 * @return localize base of the resource file
+	 * @since 0.1.0
+	 */
 	public String getLocalizerBase() {
 		return localizerBase;
 	}
 
+	/**
+	 * Sets the localize base of the resource file.
+	 * 
+	 * @param localizerBase of the resource file
+	 * @since 0.1.0
+	 */
     public synchronized void setLocalizerBase(final String localizerBase) {
         this.localizerBase = localizerBase;
         bundle = ResourceBundle.getBundle(localizerBase, getLocale());
     }
+	
+	
+	/*
+	 * Private methods
+	 */
+	private void init() {
+        bundle = ResourceBundle.getBundle(localizerBase, getLocale());
+	}
 	
 
     /*
@@ -111,13 +131,5 @@ public class ControllerLocalizerFile extends ControllerLocalizerAbstract {
 		} catch (MissingResourceException ex) {
 			return HelperString.EMPTY_STRING;
 		}
-	}
-	
-	
-	/*
-	 * Private methods
-	 */
-	private void init() {
-        bundle = ResourceBundle.getBundle(localizerBase, getLocale());
 	}
 }

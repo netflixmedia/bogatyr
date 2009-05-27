@@ -42,8 +42,8 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class HelperArray {
 	public static final Class<?>[] EMPTY_ARRAY_CLASS = new Class[0];
@@ -64,6 +64,7 @@ public abstract class HelperArray {
      * 
      * @param arg to check
      * @return true/false
+     * @since 0.7.0
      */	
 	public static boolean isValid(final Object[] arg) { //$JUnit
         return !(null == arg || 0 == arg.length);
@@ -74,6 +75,7 @@ public abstract class HelperArray {
      * 
      * @param arg to check
      * @return true/false
+     * @since 0.7.0
      */	
 	public static boolean isValid(final byte[] arg) { //$JUnit
         return !(null == arg || 0 == arg.length);
@@ -85,6 +87,7 @@ public abstract class HelperArray {
 	 * @param inA first array
 	 * @param inB second array
 	 * @return array a & b as one new array
+	 * @since 0.7.0
 	 */
     public static Object[] concatenate(final Object[] inA, final Object[] inB) { //$JUnit
     	Object[] a = inA;
@@ -111,6 +114,7 @@ public abstract class HelperArray {
 	 * @param inA first array
 	 * @param inB second array
 	 * @return array a & b as one new byte-array
+	 * @since 0.7.0
 	 */
     public static byte[] concatenate(final byte[] inA, final byte[] inB) { //$JUnit
     	byte[] a = inA;
@@ -136,6 +140,7 @@ public abstract class HelperArray {
 	 * 
 	 * @param array containing duplicate objects
 	 * @return array without duplicates
+	 * @since 0.7.0
 	 */
     public static Object[] removeDuplicates(final Object[] array) { //$JUnit
 		final Collection<?> list = HelperCollection.removeDuplicates(Arrays.asList(array));
@@ -148,6 +153,7 @@ public abstract class HelperArray {
      * 
      * @param array to dump
      * @return dump string
+     * @since 0.7.0
      */
     public static String dump(final Object[] array) {
 		final StringBuilder sb = new StringBuilder();

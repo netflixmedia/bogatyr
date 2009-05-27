@@ -52,8 +52,8 @@ import java.util.List;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.50
+ * @version 0.8.0 (20090528)
+ * @since 0.5.0
  */
 public class Chart extends Panel {
 	private static final long serialVersionUID = -4618658256880807781L;
@@ -103,6 +103,7 @@ public class Chart extends Panel {
 	 * Adds an entry to the product selection chart.
 	 * 
      * @param entry for the chart
+     * @since 0.5.0
      */
 	public void addEntry(final ChartEntry entry) {
     	if (null == entry) {
@@ -119,6 +120,7 @@ public class Chart extends Panel {
 	 * Returns the color of the grid.
 	 * 
 	 * @return color of the grid
+	 * @since 0.5.0
 	 */
 	public Color getColorGrid() {
 		return colorGrid;
@@ -128,6 +130,7 @@ public class Chart extends Panel {
 	 * Sets the color of the grid.
 	 * 
 	 * @param color of the grid
+	 * @since 0.5.0
 	 */
 	public void setColorGrid(final Color color) {
         colorGrid = color;
@@ -138,6 +141,7 @@ public class Chart extends Panel {
 	 * Returns the state for the borders of all components.
 	 * 
 	 * @return true/false
+	 * @since 0.5.0
 	 */
 	public boolean isOverrideBorders() {
 		return isOverrideBorders;
@@ -147,6 +151,7 @@ public class Chart extends Panel {
 	 * Sets if the borders of all components are overridden.
 	 * 
 	 * @param isOverrideBorders true/false
+	 * @since 0.5.0
 	 */
 	public void setOverrideBorders(final boolean isOverrideBorders) {
 		this.isOverrideBorders = isOverrideBorders;

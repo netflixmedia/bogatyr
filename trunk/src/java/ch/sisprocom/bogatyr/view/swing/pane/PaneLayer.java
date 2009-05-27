@@ -42,8 +42,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JLayeredPane.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090528)
+ * @since 0.7.0
  */
 public class PaneLayer extends JLayeredPane {
 	private static final long serialVersionUID = -6557519717085237490L;

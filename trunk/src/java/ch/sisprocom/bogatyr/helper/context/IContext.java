@@ -42,8 +42,8 @@ import java.util.Date;
  * Interface for the context in applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
 public interface IContext {
 	
@@ -52,6 +52,7 @@ public interface IContext {
      * 
      * @param key for the context
      * @param value associated to the given key 
+     * @since 0.6.0
      */	
 	void addValue(Object key, Object value);
 	
@@ -59,6 +60,7 @@ public interface IContext {
      * Removes a key/value pair from the context.
      * 
      * @param key for the context
+     * @since 0.6.0
      */	
 	void removeValue(Object key);
 	
@@ -66,7 +68,8 @@ public interface IContext {
      * Returns a {@link Object} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Object associated to the given key 
+     * @return Object associated to the given key
+     * @since 0.6.0 
      */	
 	Object getValue(Object key);
 	
@@ -74,7 +77,8 @@ public interface IContext {
      * Returns a {@link String} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return String associated to the given key 
+     * @return String associated to the given key
+     * @since 0.6.0 
      */	
 	String getStringValue(Object key);
 	
@@ -82,7 +86,8 @@ public interface IContext {
      * Returns a {@link Boolean} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Boolean associated to the given key 
+     * @return Boolean associated to the given key
+     * @since 0.7.0 
      */	
 	Boolean getBooleanValue(Object key);
 	
@@ -90,7 +95,8 @@ public interface IContext {
      * Returns a {@link Double} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Double associated to the given key 
+     * @return Double associated to the given key
+     * @since 0.7.0 
      */	
 	Double getDoubleValue(final Object key);
 	
@@ -98,7 +104,8 @@ public interface IContext {
      * Returns an {@link Integer} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Integer associated to the given key 
+     * @return Integer associated to the given key
+     * @since 0.7.0 
      */	
 	Integer getIntegerValue(final Object key);
 	
@@ -106,7 +113,8 @@ public interface IContext {
      * Returns a {@link Float} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Float associated to the given key 
+     * @return Float associated to the given key
+     * @since 0.7.0 
      */	
 	Float getFloatValue(final Object key);
 	
@@ -114,7 +122,8 @@ public interface IContext {
      * Returns a {@link Byte} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Byte associated to the given key 
+     * @return Byte associated to the given key
+     * @since 0.7.0 
      */	
 	Byte getByteValue(final Object key);
 	
@@ -122,7 +131,8 @@ public interface IContext {
      * Returns a {@link Long} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Long associated to the given key 
+     * @return Long associated to the given key
+     * @since 0.7.0 
      */	
 	Long getLongValue(final Object key);
 
@@ -130,7 +140,8 @@ public interface IContext {
      * Returns a {@link Short} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Short associated to the given key 
+     * @return Short associated to the given key
+     * @since 0.7.0 
      */	
 	Short getShortValue(final Object key);
 	
@@ -138,7 +149,8 @@ public interface IContext {
      * Returns a {@link BigInteger} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return BigInteger associated to the given key 
+     * @return BigInteger associated to the given key
+     * @since 0.7.0 
      */	
 	BigInteger getBigIntegerValue(final Object key);
 	
@@ -146,7 +158,8 @@ public interface IContext {
      * Returns a {@link BigDecimal} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return BigDecimal associated to the given key 
+     * @return BigDecimal associated to the given key
+     * @since 0.7.0 
      */	
 	BigDecimal getBigDecimalValue(final Object key);
 
@@ -154,7 +167,8 @@ public interface IContext {
      * Returns a {@link Date} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Date associated to the given key 
+     * @return Date associated to the given key
+     * @since 0.7.0 
      */	
 	Date getDateValue(final Object key);
 }

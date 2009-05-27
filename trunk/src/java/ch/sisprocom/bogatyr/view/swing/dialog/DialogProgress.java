@@ -47,8 +47,8 @@ import java.awt.Frame;
  * DialogProgress displays an indeterminate progress bar.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.50
+ * @version 0.8.0 (20090528)
+ * @since 0.5.0
  */
 public class DialogProgress extends Dialog {
 	private static final long serialVersionUID = 3287183043789350515L;

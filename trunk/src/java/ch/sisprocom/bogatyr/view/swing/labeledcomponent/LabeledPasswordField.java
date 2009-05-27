@@ -38,8 +38,8 @@ import ch.sisprocom.bogatyr.view.swing.PasswordField;
  * This is a Label combined with a TextField.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.8.0 (20090528)
+ * @since 0.6.0
  */
 public class LabeledPasswordField extends LabeledComponent {
 	private static final long serialVersionUID = 1310593497620798003L;

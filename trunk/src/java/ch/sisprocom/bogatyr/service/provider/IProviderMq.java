@@ -40,20 +40,21 @@ import com.ibm.mq.MQException;
  * This interface connects to an MQ-Server and allows to send and receive messages.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090528)
+ * @since 0.6.0
  */
 public interface IProviderMq {
    /**
      * Sends a message to a mq manager and queue.
      *
-     * @param data       to send
+     * @param data to send
      * @param managerOut manager for sending
-     * @param queueOut   queue for sending
-     * @param managerIn  manager for receiving
-     * @param queueIn    queue for receiving
+     * @param queueOut queue for sending
+     * @param managerIn manager for receiving
+     * @param queueIn queue for receiving
      * @throws IOException
      * @throws MQException
+     * @since 0.6.0
      */
     void sendMessage(final byte[] data, final String managerOut, final String queueOut, final String managerIn, final String queueIn) throws Exception;
 
@@ -61,9 +62,10 @@ public interface IProviderMq {
      * Receives messages from a mq manager and queue.
      *
      * @param managerIn manager for receiving
-     * @param queueIn   queue for receiving
+     * @param queueIn queue for receiving
      * @return list containing all messages
      * @throws Exception
+     * @since 0.6.0
      */
     List<byte[]> receiveMessages(final String managerIn, final String queueIn) throws Exception;
 }

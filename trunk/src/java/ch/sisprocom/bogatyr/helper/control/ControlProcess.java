@@ -43,8 +43,8 @@ import java.util.List;
  * Creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.20
+ * @version 0.8.0 (20090527)
+ * @since 0.2.0
  */
 public abstract class ControlProcess {
 	private static final int BUFFER = 1024;
@@ -57,6 +57,7 @@ public abstract class ControlProcess {
 	 * @param errorStream for the standard error output of the process
 	 * @return created process
      * @throws IOException
+     * @since 0.2.0
 	 */
 	public static Process createProcess(final List<String> commandList, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
 		final Process process = createProcess(commandList);
@@ -72,6 +73,7 @@ public abstract class ControlProcess {
 	 * @param commandList arguments to start the process
 	 * @return created process
      * @throws IOException
+     * @since 0.2.0
 	 */
 	public static Process createProcess(final List<String> commandList) throws IOException {
 		if (!HelperCollection.isValid(commandList)) {
@@ -94,6 +96,7 @@ public abstract class ControlProcess {
 	 * @param process to observe
      * @param outputStream If null, output is discarded
 	 * @param errorStream If null, error is discarded
+	 * @since 0.2.0
 	 */
 	private static void readStandardOutput(final Process process, final OutputStream outputStream, final OutputStream errorStream) {
 		new StreamReader(process.getErrorStream(), errorStream).start();

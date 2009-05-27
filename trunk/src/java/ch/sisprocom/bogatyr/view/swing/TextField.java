@@ -45,8 +45,8 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * This is an extended JTextField.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.10
+ * @version 0.8.0 (20090528)
+ * @since 0.1.0
  */
 public class TextField extends JTextField implements IComponentActivate {
 	private static final long serialVersionUID = 866371447844640358L;

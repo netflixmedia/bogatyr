@@ -38,14 +38,15 @@ import java.util.Locale;
  * Defines the methods for the implementation of the localizer controller for different languages (i18n standard).
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
 public interface IControllerLocalizer {
 	/**
 	 * Returns the current locale of the localizer.
 	 * 
 	 * @return current locale of the localizer
+	 * @since 0.6.0
 	 */
 	Locale getLocale();
 	
@@ -53,6 +54,7 @@ public interface IControllerLocalizer {
 	 * Sets the current locale of the localizer.
 	 * 
 	 * @param locale of the localizer
+	 * @since 0.6.0
 	 */
 	void setLocale(Locale locale);
 	
@@ -61,6 +63,7 @@ public interface IControllerLocalizer {
 	 *
      * @param key for the value
 	 * @return value for the key
+	 * @since 0.6.0
 	 */
 	String getValue(String key);
 
@@ -69,6 +72,7 @@ public interface IControllerLocalizer {
 	 *
      * @param key for the accelerator
      * @return accelerator for the key
+     * @since 0.6.0
 	 */
 	String getAccelerator(String key);
 	
@@ -77,6 +81,7 @@ public interface IControllerLocalizer {
 	 *
      * @param key for the mnemonic
 	 * @return mnemonic for the key
+	 * @since 0.6.0
 	 */
 	int getMnemonic(String key);
 	
@@ -85,6 +90,7 @@ public interface IControllerLocalizer {
 	 *
      * @param key for the tooltip
 	 * @return tooltip for the key
+	 * @since 0.6.0
 	 */
 	String getTooltip(String key);
 	
@@ -92,6 +98,7 @@ public interface IControllerLocalizer {
 	 * Adds a listener for this locale.
 	 * 
 	 * @param listener to add
+	 * @since 0.6.0
 	 */
 	void addListener(ListenerLocale listener);
 	
@@ -99,11 +106,13 @@ public interface IControllerLocalizer {
 	 * Remove a listener for this locale.
 	 * 
 	 * @param listener to remove
+	 * @since 0.6.0
 	 */
 	void removeListener(ListenerLocale listener);
 
 	/**
-	 * Remove all listeners for this locale. 
+	 * Remove all listeners for this locale.
+	 * @since 0.6.0 
 	 */
 	void removeAllListener();
 }

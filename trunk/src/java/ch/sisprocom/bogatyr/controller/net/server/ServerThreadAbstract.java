@@ -46,8 +46,8 @@ import java.util.UUID;
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class ServerThreadAbstract implements IServerThread {
     private final long createTime = System.currentTimeMillis();
@@ -71,7 +71,8 @@ public abstract class ServerThreadAbstract implements IServerThread {
 	/**
      * Returns the instantiation time of the server thread.
      *
-     * @return instantiation time of the controller
+     * @return instantiation time of the server thread
+     * @since 0.7.0
      */
 	public long getCreateTime() {
 		return createTime;
@@ -81,9 +82,19 @@ public abstract class ServerThreadAbstract implements IServerThread {
 	 * Returns the current {@link Thread}.
 	 * 
 	 * @return thread
+	 * @since 0.7.0
 	 */
 	public Thread getThread() {
 		return thread;
+	}
+	
+	
+	/*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperObject.toString(this);
 	}
 	
 	
@@ -126,18 +137,13 @@ public abstract class ServerThreadAbstract implements IServerThread {
     }
 
 
-	public void start() {
-		isRunning = true;
-		
+	public void start() {		
 		if (thread == null) {
 			server.addServerThread(uuid, this);
 			thread = new Thread(this);
-//			thread.setDaemon(true);
-//            thread.setPriority(Thread.MIN_PRIORITY);
             thread.start();
 		}
-		
-//		run();
+		isRunning = true;
 	}	
 
 	public void stop() throws IOException {
@@ -160,14 +166,5 @@ public abstract class ServerThreadAbstract implements IServerThread {
 	
 	public boolean isRunning() {
 		return isRunning;
-	}
-	
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }

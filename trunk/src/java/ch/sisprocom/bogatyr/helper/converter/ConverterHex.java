@@ -40,8 +40,8 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * Encodes and decodes data to Hex format.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.10
+ * @version 0.8.0 (20090527)
+ * @since 0.1.0
  */
 public abstract class ConverterHex {
     private static final CharSequence DIGITS = "0123456789abcdef"; //$NON-NLS-1$
@@ -51,6 +51,7 @@ public abstract class ConverterHex {
      * 
      * @param input bytes to be converted
      * @return hex representation of a byte array
+     * @since 0.1.0
      */
     public static String encode(final byte[] input) { //$JUnit
 		if (!HelperArray.isValid(input)) {
@@ -74,6 +75,7 @@ public abstract class ConverterHex {
      * 
      * @param input hex string to be converted
      * @return byte-array representation of a hex string
+     * @since 0.1.0
      */
     public static byte[] decode(final String input) { //$JUnit
 		if (!HelperString.isValid(input)) {

@@ -47,8 +47,8 @@ import java.util.Collection;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class ClientAbstract implements IClient {
     private final long createTime = System.currentTimeMillis();
@@ -79,24 +79,81 @@ public abstract class ClientAbstract implements IClient {
 	/**
      * Returns the instantiation time of the client.
      *
-     * @return instantiation time of the controller
+     * @return instantiation time of the client
+     * @since 0.7.0
      */
 	public long getCreateTime() {
 		return createTime;
 	}
 
 	/**
-	 * Returns the current {@link Thread}.
+	 * Returns the current {@link Thread} of the client.
 	 * 
-	 * @return thread
+	 * @return thread of the client
+	 * @since 0.7.0
 	 */
 	public Thread getThread() {
 		return thread;
 	}	
 	
+	/**
+	 * Sets the current {@link Thread} for the client.
+	 * 
+	 * @param thread for the client
+	 * @since 0.8.0
+	 */
+	protected void setThread(final Thread thread) {
+		this.thread = thread;
+	}
+	
+	/**
+	 * Sets the {@link Socket} for the client.
+	 * @param socket for the client
+	 * @since 0.8.0
+	 */
+    protected void setSocket(Socket socket) {
+		this.socket = socket;
+	}
+
+
+	/*
+	 * Private methods
+	 */
+	protected void fireClientStreamRead(final byte[] data) {
+		for (final ListenerClient listener : listListener) {
+			listener.clientStreamRead(data);
+		}	
+	}
+	
+	protected void fireStarted() {
+		isRunning = true;
+		
+		for (final ListenerClient listener : listListener) {
+			listener.clientStarted();
+		}	
+	}
+	
+	protected void fireStopped() {
+		isRunning = false;
+		
+		for (final ListenerClient listener : listListener) {
+			listener.clientStopped();
+		}	
+	}
+    
+
     /*
-      * Implemented methods
-      */
+     * Overridden methods
+     */
+    @Override
+    public String toString() {
+        return HelperObject.toString(this);
+    }
+    
+	
+    /*
+     * Implemented methods
+     */
     public String getHost() {
         return host;
     }
@@ -125,16 +182,12 @@ public abstract class ClientAbstract implements IClient {
     }
 
     public void start() throws IOException {
-//		if (thread == null) {
-			socket = new Socket(host, port);
-			
-			thread = new Thread(this);
-//			thread.setDaemon(true);
-//            thread.setPriority(Thread.MIN_PRIORITY);
-            thread.start();
-//		}
+		socket = new Socket(host, port);
+		
+		thread = new Thread(this);
+        thread.start();
         
-        fireClientStarted();
+        fireStarted();
     }
 
     public void stop() throws IOException {
@@ -142,7 +195,7 @@ public abstract class ClientAbstract implements IClient {
         	socket.close();
         }
         
-        fireClientStopped();
+        fireStopped();
         
 		if (thread != null) {
 			if (thread.isAlive()) {
@@ -184,37 +237,7 @@ public abstract class ClientAbstract implements IClient {
     public boolean isRunning() {
         return isRunning;
     }
-    
-    
-	/*
-	 * Private methods
-	 */
-	protected void fireClientStreamRead(final byte[] data) {
-		for (final ListenerClient listener : listListener) {
-			listener.clientStreamRead(data);
-		}	
-	}
-	
-	protected void fireClientStarted() {
-		isRunning = true;
-		
-		for (final ListenerClient listener : listListener) {
-			listener.clientStarted();
-		}	
-	}
-	
-	protected void fireClientStopped() {
-		isRunning = false;
-		
-		for (final ListenerClient listener : listListener) {
-			listener.clientStopped();
-		}	
-	}
 
-	
-    /*
-      * Implemented methods
-      */
     public synchronized void addListener(final ListenerClient listener) {
         listListener.add(listener);
     }
@@ -225,14 +248,5 @@ public abstract class ClientAbstract implements IClient {
 
     public synchronized void removeAllListener() {
         listListener = new ArrayList<ListenerClient>();
-    }
-    
-
-    /*
-      * Overridden methods
-      */
-    @Override
-    public String toString() {
-        return HelperObject.toString(this);
     }
 }

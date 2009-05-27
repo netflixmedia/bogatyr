@@ -41,8 +41,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JSpinner.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090528)
+ * @since 0.7.0
  */
 public class Spinner extends JSpinner implements IComponentActivate {
 	private static final long serialVersionUID = 1637909823592308393L;

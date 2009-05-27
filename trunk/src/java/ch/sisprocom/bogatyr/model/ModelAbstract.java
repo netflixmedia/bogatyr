@@ -39,8 +39,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is the skeleton for all models.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090528)
+ * @since 0.7.0
  */
 public abstract class ModelAbstract extends Observable {
 	private final long createTime = System.currentTimeMillis();
@@ -49,6 +49,7 @@ public abstract class ModelAbstract extends Observable {
      * Returns the instantiation time of the model.
      * 
      * @return instantiation time of the model
+     * @since 0.7.0
      */	
 	public long getCreateTime() {
 		return createTime;

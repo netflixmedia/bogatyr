@@ -53,8 +53,8 @@ import java.util.List;
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.50
+ * @version 0.8.0 (20090527)
+ * @since 0.5.0
  */
 public abstract class HelperNet {
 	public static final String PROPERTY_HTTP_PROXY_HOST  = "http.proxyHost"; //$NON-NLS-1$
@@ -74,6 +74,7 @@ public abstract class HelperNet {
      * @param port of the proxy
      * @param username for authentication
      * @param password for authentication
+     * @since 0.5.0
      */
     public static void enableProxyHttp(final String host, final int port, final String username, final String password) { //$JUnit
 		if (!HelperString.isValid(host)) {
@@ -96,6 +97,7 @@ public abstract class HelperNet {
     /**
      * Disable VM wide use of a proxy for HTTP.
      *
+     * @since 0.5.0
      */
     public static void disableProxyHttp() { //$JUnit
 //        System.clearProperty(PROPERTY_HTTP_USE_PROXY);
@@ -110,6 +112,7 @@ public abstract class HelperNet {
      * @param port of the proxy
      * @param username for authentication
      * @param password for authentication
+     * @since 0.5.0
      */
     public static void enableProxyHttps(final String host, final int port, final String username, final String password) { //$JUnit
 		if (!HelperString.isValid(host)) {
@@ -131,7 +134,8 @@ public abstract class HelperNet {
     
     /**
      * Disable VM wide use of a proxy for HTTPS.
-     *
+     * 
+     * @since 0.5.0
      */
     public static void disableProxyHttps() { //$JUnit
 //		System.clearProperty(PROPERTY_HTTPS_USE_PROXY);
@@ -146,6 +150,7 @@ public abstract class HelperNet {
      * @param port of the proxy
      * @param username for authentication
      * @param password for authentication
+     * @since 0.5.0
      */
     public static void enableProxyFtp(final String host, final int port, final String username, final String password) { //$JUnit
 		if (!HelperString.isValid(host)) {
@@ -167,7 +172,8 @@ public abstract class HelperNet {
     
     /**
      * Disable VM wide use of a proxy for FTP.
-     *
+     * 
+     * @since 0.5.0
      */
     public static void disableProxyFtp() { //$JUnit
 //        System.clearProperty(PROPERTY_FTP_USE_PROXY);
@@ -181,6 +187,7 @@ public abstract class HelperNet {
      * @param host for the ping command
      * @return true/false
      * @throws IOException
+     * @since 0.5.0
      */
     public static boolean isPingable(final String host) throws IOException { //$JUnit
 		if (!HelperString.isValid(host)) {
@@ -201,6 +208,7 @@ public abstract class HelperNet {
      * @param ip for host name
      * @return host name
      * @throws UnknownHostException
+     * @since 0.5.0
      */
     public static String getHostname(final String ip) throws UnknownHostException { //$JUnit
 		if (!HelperString.isValid(ip)) {
@@ -217,6 +225,7 @@ public abstract class HelperNet {
      *
      * @return host name of the current machine
      * @throws UnknownHostException
+     * @since 0.5.0
      */
     public static String getLocalHostname() throws UnknownHostException { //$JUnit
 		final InetAddress address = InetAddress.getLocalHost();
@@ -230,6 +239,7 @@ public abstract class HelperNet {
      * @param host for IP
      * @return IP of the host name
      * @throws UnknownHostException
+     * @since 0.5.0
      */
     public static String getIp(final String host) throws UnknownHostException { //$JUnit
 		if (!HelperString.isValid(host)) {
@@ -246,6 +256,7 @@ public abstract class HelperNet {
      *
      * @return IP of the current machine 
      * @throws UnknownHostException
+     * @since 0.5.0
      */
     public static String getLocalIp() throws UnknownHostException { //$JUnit
 		final InetAddress address = InetAddress.getLocalHost();
@@ -258,6 +269,7 @@ public abstract class HelperNet {
      *
      * @return List with IP addresses of the current machine
      * @throws UnknownHostException
+     * @since 0.5.0
      */
     public static Collection<String> getLocalIps() throws UnknownHostException { //$JUnit
     	final Collection<String> list = new ArrayList<String>();
@@ -274,6 +286,7 @@ public abstract class HelperNet {
      *
      * @return List with network interfaces of the current machine
      * @throws SocketException
+     * @since 0.5.0
      */
     public static List<NetworkInterface> getNetworkInterfaces() throws SocketException {
     	return Collections.list(NetworkInterface.getNetworkInterfaces());
@@ -285,6 +298,7 @@ public abstract class HelperNet {
      * @param ni network interface to determine the MAC address
      * @return MAC address of a given network interface
      * @throws SocketException
+     * @since 0.7.0
      */
     public static String getMacAddress(final NetworkInterface ni) throws SocketException {
 		if (null == ni) {
@@ -309,6 +323,7 @@ public abstract class HelperNet {
      * @param url to read
      * @return input stream for the content
      * @throws IOException
+     * @since 0.5.0
      */
     public static InputStream readUrl(final URL url) throws IOException { //$JUnit
 		if (null == url) {
@@ -330,6 +345,7 @@ public abstract class HelperNet {
      * @param password for the HTTP authentication
      * @return input stream for the content
      * @throws IOException
+     * @since 0.5.0
      */
     public static InputStream readUrl(final URL url, final String username, final String password) throws IOException {
 		if (null == url) {

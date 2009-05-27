@@ -42,8 +42,8 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JPasswordField.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.10
+ * @version 0.8.0 (20090528)
+ * @since 0.1.0
  */
 public class PasswordField extends JPasswordField implements IComponentActivate {
 	private static final long serialVersionUID = 4337982428755317915L;

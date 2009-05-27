@@ -39,14 +39,15 @@ import java.awt.Color;
  * Defines the methods for the implementation of fading.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.8.0 (20090528)
+ * @since 0.6.0
  */
 public interface IComponentFader {
 	/**
      * Sets the fading state of the component.
      * 
      * @param isFading fading state
+     * @since 0.6.0
      */
 	void setFading(final boolean isFading);
 	
@@ -54,6 +55,7 @@ public interface IComponentFader {
      * Sets the fading color.
      * 
      * @param colorFader color of the fader
+     * @since 0.6.0
      */
 	void setFaderColor(final Color colorFader);
 	
@@ -61,6 +63,7 @@ public interface IComponentFader {
      * Returns the fading state of the component.
      * 
      * @return true/false
+     * @since 0.6.0
      */
 	boolean isFading();
 }   

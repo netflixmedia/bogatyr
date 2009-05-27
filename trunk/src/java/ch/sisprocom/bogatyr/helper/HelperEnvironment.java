@@ -43,14 +43,15 @@ import java.util.TimeZone;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.10
+ * @version 0.8.0 (20090527)
+ * @since 0.1.0
  */
 public abstract class HelperEnvironment {
 	/**
 	 * Returns the used VM memory in bytes.
      *
      * @return used VM memory
+     * @since 0.5.0
 	 */
 	public static long getMemoryUsed() { //$JUnit
 		return Runtime.getRuntime().totalMemory();
@@ -60,6 +61,7 @@ public abstract class HelperEnvironment {
 	 * Returns the free VM memory in bytes.
      *
      * @return free VM memory
+     * @since 0.5.0
 	 */
 	public static long getMemoryFree() { //$JUnit
 		return Runtime.getRuntime().freeMemory();
@@ -69,6 +71,7 @@ public abstract class HelperEnvironment {
 	 * Returns the maximal memory reserved for the VM in bytes.
      *
      * @return max VM memory
+     * @since 0.5.0
 	 */
 	public static long getMemoryMax() { //$JUnit
 		return Runtime.getRuntime().maxMemory();
@@ -78,6 +81,7 @@ public abstract class HelperEnvironment {
 	 * Returns the current Java version.
      *
      * @return current Java runtime version
+     * @since 0.7.0
 	 */
 	public static String getJavaVersion() { //$JUnit
 		return System.getProperties().getProperty("java.version"); //$NON-NLS-1$
@@ -87,6 +91,7 @@ public abstract class HelperEnvironment {
 	 * Returns the current Java vendor.
      *
      * @return current Java runtime vendor
+     * @since 0.7.0
 	 */
 	public static String getJavaVendor() {
 		return System.getProperties().getProperty("java.vendor"); //$NON-NLS-1$
@@ -96,15 +101,17 @@ public abstract class HelperEnvironment {
 	 * Returns the current class path.
      *
      * @return current class path
+     * @since 0.7.0
 	 */
 	public static String getClassPath() { //$JUnit
 		return System.getProperties().getProperty("java.class.path"); //$NON-NLS-1$
 	}
 	
 	/**
-	 * Returns the current class path.
+	 * Returns the current library path.
      *
-     * @return current class path
+     * @return current library path
+     * @since 0.7.0
 	 */
 	public static String getLibraryPath() { //$JUnit
 		return System.getProperties().getProperty("java.library.path"); //$NON-NLS-1$
@@ -114,6 +121,7 @@ public abstract class HelperEnvironment {
 	 * Returns all available processors for the VM.
      *
      * @return available processors for the VM
+     * @since 0.6.0
 	 */
 	public static int getAvailableProcessors() { //$JUnit
 		return Runtime.getRuntime().availableProcessors();
@@ -123,6 +131,7 @@ public abstract class HelperEnvironment {
 	 * Returns the architecture of the operating system.
      *
      * @return OS architecture
+     * @since 0.1.0
 	 */
 	public static String getOsArch() { //$JUnit
 		return System.getProperties().getProperty("os.arch"); //$NON-NLS-1$
@@ -132,6 +141,7 @@ public abstract class HelperEnvironment {
 	 * Returns the name of the operating system.
      *
      * @return OS name
+     * @since 0.1.0
 	 */
 	public static String getOsName() { //$JUnit
 		return System.getProperties().getProperty("os.name"); //$NON-NLS-1$
@@ -141,6 +151,7 @@ public abstract class HelperEnvironment {
 	 * Returns the version of the operating system.
      *
      * @return OS version
+     * @since 0.1.0
 	 */
 	public static String getOsVersion() { //$JUnit
 		return System.getProperties().getProperty("os.version"); //$NON-NLS-1$
@@ -150,6 +161,7 @@ public abstract class HelperEnvironment {
 	 * Returns a {@link Map} containing containing all Java system properties.
 	 *
 	 * @return map of all Java system properties
+	 * @since 0.1.0
 	 */
 	public static Map<Object, Object> getJavaProperties() {
 		return new HashMap<Object, Object>(System.getProperties());
@@ -159,6 +171,7 @@ public abstract class HelperEnvironment {
 	 * Returns a {@link Map} containing all system environment variables.
 	 *
 	 * @return map of system environment variables
+	 * @since 0.1.0
 	 */
 	public static Map<String, String> getOsEnvironmentVariables() { //$JUnit
 		return System.getenv();
@@ -176,6 +189,7 @@ public abstract class HelperEnvironment {
 	 *
 	 * @param variable of the environment (e.g. PATH)
 	 * @return value of the system environment variable
+	 * @since 0.6.0
 	 */
 	public static String getOsEnvironmentVariable(final String variable) { //$JUnit
 		return System.getenv(variable);
@@ -185,6 +199,7 @@ public abstract class HelperEnvironment {
 	 * Returns the temporary directory of the current machine.
      *
      * @return OS temporary directory
+     * @since 0.5.0
 	 */
 	public static File getOsTempDirectory() { //$JUnit
 		return new File(System.getProperty("java.io.tmpdir")); //$NON-NLS-1$
@@ -194,6 +209,7 @@ public abstract class HelperEnvironment {
 	 * Returns the user home directory of the current user.
      *
      * @return user home directory
+     * @since 0.5.0
 	 */
 	public static File getUserHomeDirectory() { //$JUnit
 		return new File(System.getProperty("user.home")); //$NON-NLS-1$
@@ -203,6 +219,7 @@ public abstract class HelperEnvironment {
 	 * Returns the current user directory.
 	 *
 	 * @return current user directory
+	 * @since 0.5.0
 	 */
 	public static File getUserDirectory() { //$JUnit
 		return new File(System.getProperty("user.dir")); //$NON-NLS-1$
@@ -212,6 +229,7 @@ public abstract class HelperEnvironment {
 	 * Returns the name of the current user.
 	 *
 	 * @return name of the current user
+	 * @since 0.7.0
 	 */
 	public static String getUserName() { //$JUnit
 		return System.getProperty("user.name"); //$NON-NLS-1$
@@ -221,6 +239,7 @@ public abstract class HelperEnvironment {
 	 * Returns the country of the current user.
 	 *
 	 * @return language of the current country
+	 * @since 0.7.0
 	 */
 	public static String getUserCountry() {
 		return System.getProperty("user.country"); //$NON-NLS-1$
@@ -230,6 +249,7 @@ public abstract class HelperEnvironment {
 	 * Returns the language of the current user.
 	 *
 	 * @return language of the current user
+	 * @since 0.7.0
 	 */
 	public static String getUserLanguage() {
 		return System.getProperty("user.language"); //$NON-NLS-1$
@@ -239,6 +259,7 @@ public abstract class HelperEnvironment {
 	 * Returns the time zone of the current user.
 	 *
 	 * @return time zone of the current user
+	 * @since 0.7.0
 	 */
 	public static TimeZone getUserTimezone() {
 //		return System.getProperty("user.timezone"); //$NON-NLS-1$
@@ -250,6 +271,7 @@ public abstract class HelperEnvironment {
 	 * Try to determine if this application is running under a Windows OS.
 	 *
 	 * @return true if this application is running under a Windows OS
+	 * @since 0.1.0
 	 */
 	public static boolean isWindowsPlatform() { //$JUnit
 		return getOsName().contains("Windows"); //$NON-NLS-1$
@@ -259,6 +281,7 @@ public abstract class HelperEnvironment {
 	 * Try to determine if this application is running under Mac OS.
 	 *
 	 * @return true if this application is running under Mac OS
+	 * @since 0.1.0
 	 */
 	public static boolean isMacPlatform() { //$JUnit
 		return getOsName().contains("Mac"); //$NON-NLS-1$
@@ -268,6 +291,7 @@ public abstract class HelperEnvironment {
 	 * Try to determine if this application is running under a UNIX OS.
 	 *
 	 * @return true if this application is running under UNIX
+	 * @since 0.1.0
 	 */
 	public static boolean isUnixPlatform() { //$JUnit
 		return !isWindowsPlatform() && !isMacPlatform(); //this method is a bit dirty, because it could be another system than Unix, but its the best guess...

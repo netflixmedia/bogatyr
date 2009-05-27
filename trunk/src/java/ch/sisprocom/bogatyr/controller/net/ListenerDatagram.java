@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,50 +29,40 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
+package ch.sisprocom.bogatyr.controller.net;
 
-import javax.swing.BoundedRangeModel;
-import javax.swing.JProgressBar;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
+import java.net.DatagramPacket;
 
 /**
- * This is an extended JProgressBar.
+ * ListenerDatagram
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
- * @since 0.2.0
+ * @version 0.80 (20090527)
+ * @since 0.80
  */
-public class ProgressBar extends JProgressBar {
-	private static final long serialVersionUID = -6439735629199643683L;
-	
-	
-	public ProgressBar() {
-		super();
-	}
-	
-	public ProgressBar(final BoundedRangeModel model) {
-		super(model);
-	}
-
-	public ProgressBar(final int start, final int end) {
-		super(start, end);
-	}
-
-	
-	/*
-	 * Overridden methods
+public interface ListenerDatagram {
+	/**
+	 * Informs the listener that a packet was received.
+	 * 
+	 * @param host of the received packet
+	 * @param port of the received packet
+	 * @param data as ASCII encoded string
+	 * @param packet the UDP packet
+	 * @since 0.8.0
 	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}	
+	void packetReceived(String host, int port, String data, DatagramPacket packet);
 	
-//	@Override
-//	public void setToolTipText(final String text) {
-//		if (text != null) {
-//            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
-//        }
-//	}
+	/**
+	 * Informs the listener that the datagram controller has started.
+	 * 
+	 * @since 0.8.0
+	 */
+	void datagramStarted();
+	
+	/**
+	 * Informs the listener that the datagram controller has stopped.
+	 * 
+	 * @since 0.8.0
+	 */
+	void datagramStopped();
 }

@@ -37,17 +37,21 @@ import java.io.IOException;
  * ListenerUpdater
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.60
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
 public interface ListenerUpdater {
 	/**
 	 * The update was successful.
+	 * 
+	 * @since 0.6.0
 	 */
 	void updateSuccessful();
 	
 	/**
 	 * The update was cancelled.
+	 * 
+	 * @since 0.6.0
 	 */
 	void updateCancelled();
 	
@@ -55,16 +59,21 @@ public interface ListenerUpdater {
 	 * The update was failed.
 	 * 
 	 * @param ex Exception containing details of the failure
+	 * @since 0.6.0
 	 */
 	void updateFailed(IOException ex);
 	
 	/**
 	 * The downgrade was successful.
+	 * 
+	 * @since 0.6.0
 	 */
 	void downgradeSuccessful();
 	
 	/**
 	 * The downgrade was cancelled.
+	 * 
+	 * @since 0.6.0
 	 */
 	void downgradeCancelled();
 	
@@ -72,16 +81,21 @@ public interface ListenerUpdater {
 	 * The downgrade was failed.
 	 * 
 	 * @param ex Exception containing details of the failure
+	 * @since 0.6.0
 	 */
 	void downgradeFailed(IOException ex);
 	
 	/**
 	 * The download was cancelled.
+	 * 
+	 * @since 0.6.0
 	 */
 	void downloadCancelled();
 	
 	/**
 	 * The network was not available.
+	 * 
+	 * @since 0.6.0
 	 */
 	void networkNotAvailable();
 }

@@ -39,8 +39,8 @@ import java.security.PublicKey;
  * This is an interface for asymmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
 public interface ICryptoAsymm {
 	/**
@@ -49,6 +49,7 @@ public interface ICryptoAsymm {
 	 * @return generated key pair
 	 * @throws Exception
 	 * @see KeyPair
+	 * @since 0.6.0
 	 */
 	KeyPair generateKeyPair() throws Exception;
 
@@ -59,6 +60,7 @@ public interface ICryptoAsymm {
 	 * @return generated key pair
 	 * @throws Exception
 	 * @see KeyPair
+	 * @since 0.6.0
 	 */
 	KeyPair generateKeyPair(final int keysize) throws Exception;
 
@@ -71,6 +73,7 @@ public interface ICryptoAsymm {
      * @return encrypted byte-array
 	 * @throws Exception  
 	 * @see PublicKey
+	 * @since 0.6.0
 	 */
 	byte[] encrypt(final byte[] input, final PublicKey key) throws Exception;
 	
@@ -83,6 +86,7 @@ public interface ICryptoAsymm {
      * @return encrypted byte-array
 	 * @throws Exception  
 	 * @see PublicKey
+	 * @since 0.6.0
 	 */
 	byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws Exception;
 
@@ -94,6 +98,7 @@ public interface ICryptoAsymm {
 	 * @param key for the decryption
      * @return decrypted byte-array
 	 * @throws Exception 
+	 * @since 0.6.0
 	 */
 	byte[] decrypt(final byte[] input, final PrivateKey key) throws Exception;
 	
@@ -105,6 +110,7 @@ public interface ICryptoAsymm {
 	 * @param keysize in bits (normally modulo 16 = 0, e.g. 1024, 2048)
      * @return decrypted byte-array
 	 * @throws Exception 
+	 * @since 0.6.0
 	 */
 	byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws Exception;
 

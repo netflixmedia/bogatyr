@@ -39,8 +39,8 @@ import javax.crypto.SecretKey;
  * This is an interface for symmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.7.0 (20090527)
+ * @since 0.6.0
  */
 public interface ICryptoSymm {
 	/**
@@ -49,6 +49,7 @@ public interface ICryptoSymm {
      * @return generated secret key
 	 * @throws Exception 
 	 * @see SecretKey 
+	 * @since 0.6.0
 	 */
 	SecretKey generateKey() throws Exception;
 	
@@ -59,6 +60,7 @@ public interface ICryptoSymm {
      * @return generated secret key
 	 * @throws Exception 
 	 * @see SecretKey 
+	 * @since 0.6.0
 	 */
 	SecretKey generateKey(final int keysize) throws Exception;
 	
@@ -70,6 +72,7 @@ public interface ICryptoSymm {
 	 * @return encrypted byte-array 
 	 * @throws Exception 
 	 * @see Key
+	 * @since 0.6.0
 	 */
 	byte[] encrypt(final byte[] input, final Key key) throws Exception;
 	
@@ -81,6 +84,7 @@ public interface ICryptoSymm {
 	 * @return decrypted byte-array
 	 * @throws Exception 
 	 * @see Key
+	 * @since 0.6.0
 	 */
 	byte[] decrypt(final byte[] input, final Key key) throws Exception;
 }

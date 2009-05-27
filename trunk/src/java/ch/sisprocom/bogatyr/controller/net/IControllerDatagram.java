@@ -29,53 +29,80 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.updater;
+package ch.sisprocom.bogatyr.controller.net;
 
+import java.io.IOException;
+import java.net.Socket;
 
 
 /**
- * Defines the methods for the implementation of the updater.
+ * Defines the methods for the implementation of the datagram controller.
  * 
  * @author Stefan Laubenberger
- * @version 0.7.0 (20090527)
- * @since 0.6.0
+ * @version 0.8.0 (20090527)
+ * @since 0.8.0
  */
-public interface IControllerUpdater {
+public interface IControllerDatagram extends Runnable {
 	/**
-	 * Checks the update information for new versions an update the application if needed.
-	 * 
-	 * @param name Name of the application
-	 * @param id Unique id of the application
-	 * @param version Version of the application
-	 * @param minorversion Minor version of the application
-	 * @param build Build of the application
-	 * @param updateLocation Location for the update information
-     * @throws Exception
-     * @since 0.6.0
-	 */
-	void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws Exception;
-
-	/**
-	 * Adds a listener for this updater.
-	 * 
-	 * @param listener to add
-	 * @since 0.6.0
-	 */
-	void addListener(ListenerUpdater listener);
+     * Start the datagram controller on the given port.
+     * 
+     * @throws IOException
+     * @since 0.8.0
+     */
+	void start() throws IOException;
 	
 	/**
-	 * Remove a listener for this updater.
+     * Stop the datagram controller.
+     * 
+     * @throws IOException
+     * @since 0.8.0
+     */
+	void stop() throws IOException;
+	
+	/**
+	 * Returns the state of the datagram controller.
 	 * 
-	 * @param listener to remove
-	 * @since 0.6.0
+	 * @return true/false
+	 * @since 0.8.0
 	 */
-	void removeListener(ListenerUpdater listener);
+    boolean isRunning();
+    
+	/**
+	 * Returns the port of the {@link Socket}.
+	 * 
+	 * @return port
+	 * @since 0.8.0
+	 */
+	int getPort();
 
 	/**
-	 * Remove all listeners for this updater.
+	 * Sets the port (0 - 65535) for the {@link Socket}.
 	 * 
-	 * @since 0.6.0 
+	 * @param port of the server
+	 * @since 0.8.0
+	 */
+	void setPort(int port);
+	
+	/**
+	 * Adds a listener for packets.
+	 * 
+	 * @param listener to add
+	 * @since 0.8.0
+	 */
+	void addListener(ListenerDatagram listener);
+	
+	/**
+	 * Remove a listener for packets.
+	 * 
+	 * @param listener to remove
+	 * @since 0.8.0
+	 */
+	void removeListener(ListenerDatagram listener);
+
+	/**
+	 * Remove all listeners for packets.
+	 * 
+	 * @since 0.8.0 
 	 */
 	void removeAllListener();
-}   
-
+}

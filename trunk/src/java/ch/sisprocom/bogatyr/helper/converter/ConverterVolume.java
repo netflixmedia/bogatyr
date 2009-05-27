@@ -38,8 +38,8 @@ import ch.sisprocom.bogatyr.helper.converter.ConverterArea.ConversionArea;
  * Converts different units of volume.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090527)
+ * @since 0.7.0
  */
 public abstract class ConverterVolume {
 	private static final double FACTOR_PINT_TO_CM3 = 473.176473D; //pint to centimeters^3
@@ -79,6 +79,7 @@ public abstract class ConverterVolume {
      * @param conversion factor
      * @param value
      * @return value in the new unit
+     * @since 0.7.0
      */
     public static double convert(final ConversionArea conversion, final double value) {
     	return value * conversion.factor; 

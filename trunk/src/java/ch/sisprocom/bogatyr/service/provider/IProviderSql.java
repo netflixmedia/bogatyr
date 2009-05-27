@@ -39,8 +39,8 @@ import java.sql.SQLException;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.70 (20090527)
- * @since 0.70
+ * @version 0.8.0 (20090528)
+ * @since 0.6.0
  */
 public interface IProviderSql {
 	/**
@@ -48,6 +48,7 @@ public interface IProviderSql {
      *
 	 * @return Connection
 	 * @throws Exception 
+	 * @since 0.6.0
 	 */
     Connection connectToDb() throws Exception;
     
@@ -57,11 +58,12 @@ public interface IProviderSql {
 	 * @param statement string in SQL
      * @return SQL return code
 	 * @throws Exception 
+	 * @since 0.6.0
 	 */
     int executeUpdate(final String statement) throws Exception;
     
     /**
-	 * Executes an SQL command
+	 * Executes a SQL command
      *
 	 * @param statement string in SQL
      * @return true/false
@@ -69,6 +71,7 @@ public interface IProviderSql {
      * @throws ClassNotFoundException 
      * @throws IllegalAccessException 
      * @throws InstantiationException 
+     * @since 0.6.0
 	 */
     boolean execute(final String statement) throws Exception;
 }

@@ -40,8 +40,8 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 0.70 (20090527)
- * @since 0.10
+ * @version 0.8.0 (20090527)
+ * @since 0.1.0
  */
 public abstract class ConverterBase64 {
     private static final String ERROR_ILLEGAL_CHARACTER = "Illegal character in Base64 encoded data"; //$NON-NLS-1$
@@ -85,6 +85,7 @@ public abstract class ConverterBase64 {
 	 * 
 	 * @param input String to be encoded
 	 * @return String with the Base64 encoded data
+	 * @since 0.1.0
 	 */
 	public static String encode(final String input) { //$JUnit
 		if (!HelperString.isValid(input)) {
@@ -100,6 +101,7 @@ public abstract class ConverterBase64 {
 	 * 
 	 * @param input byte-array to be encoded
 	 * @return character array with the Base64 encoded data
+	 * @since 0.1.0
 	 */
 	public static char[] encode(final byte[] input) { //$JUnit
 		if (!HelperArray.isValid(input)) {
@@ -114,6 +116,7 @@ public abstract class ConverterBase64 {
 	 * 
 	 * @param input Base64 string to be decoded
 	 * @return Array containing the decoded data bytes
+	 * @since 0.1.0
 	 */
 	public static byte[] decode(final String input) { //$JUnit
 		if (!HelperString.isValid(input)) {
@@ -129,6 +132,7 @@ public abstract class ConverterBase64 {
 	 * 
 	 * @param input character array containing the Base64 encoded data
 	 * @return Array containing the decoded data bytes
+	 * @since 0.1.0
 	 */
 	public static byte[] decode(final char[] input) { //$JUnit
 		if (null == input || 0 >= input.length) {
@@ -198,8 +202,9 @@ public abstract class ConverterBase64 {
 	 * No blanks or line breaks are inserted.
 	 * 
 	 * @param in Array containing the data bytes to be encoded
-	 * @param iLen Number of bytes to process in <code>in</code>
+	 * @param iLen Number of bytes to process in
 	 * @return Character array with the Base64 encoded data
+	 * @since 0.1.0
 	 */
 	private static char[] encode(final byte[] in, final int iLen) {
 		final int oDataLen = (iLen * 4 + 2) / 3; // output length without padding
