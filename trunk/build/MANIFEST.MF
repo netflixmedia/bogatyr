@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Implementation-Title: Bogatyr
+Implementation-Version: 0.7.0
+Bundle-Name: Bogatyr
+Bundle-Vendor: sisprocom.ch
+Bundle-Version: 0.7.0

@@ -1,8 +1,0 @@
-###########################
-#  TODO                   #
-#  Version: 20081127      #
-###########################
-
--HelperIO: check free memory before reading?
--Redesign client/server (net part)
--Exception catcher (none or less throw clauses)
