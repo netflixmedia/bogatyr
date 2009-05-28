@@ -46,39 +46,49 @@ import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.helper.control.ControlFile;
 
 /**
- * This is a class to parse Java files and check if a Wiki documentation is available.
- * To find such classes and methods, it must be marked with $Wiki$.
+ * This is a class to parse Java files and check if an example documentation is available.
+ * To find such classes and methods, it must be marked with $Example$.
  *
  * @author Stefan Laubenberger
  * @version 20090528
  */
-public class CheckWiki {
-	private static final String MARKER = "$Wiki$"; //$NON-NLS-1$
+public class CheckExample {
+	private static final String MARKER = "$Example$"; //$NON-NLS-1$
+	private static final String EXTENSION_CSV = ".csv"; //$NON-NLS-1$
+	private static final String EXTENSION_JAVA = ".java"; //$NON-NLS-1$
 	
+	private static final String QUALIFIER_PUBLIC = "public"; //$NON-NLS-1$
+	private static final String QUALIFIER_PROTECTED = "protected"; //$NON-NLS-1$
+	private static final String QUALIFIER_CLASS = "class"; //$NON-NLS-1$
+	private static final String QUALIFIER_INTERFACE = "interface"; //$NON-NLS-1$
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		listJUnit();
-		listNoJUnit();
+		list(true);
+		list(false);
 	}
-
+	
 	/*
-	 * Lists all classes (and methods) with JUnit tests
+	 * Lists all classes (and methods) with or without example documentation tests.
 	 */
-	private static void listJUnit() {
+	private static void list(final boolean isExampleAvailable) {
 		final JFileChooser fc = new JFileChooser();
-
 		fc.addChoosableFileFilter(new FileFilterCsv());
-		fc.setSelectedFile(new File(HelperEnvironment.getUserHomeDirectory(), "JUnitTested.csv"));
-
+		
+		if (isExampleAvailable) {
+			fc.setSelectedFile(new File(HelperEnvironment.getUserHomeDirectory(), "ExampleAvailable" + EXTENSION_CSV));
+		} else {
+			fc.setSelectedFile(new File(HelperEnvironment.getUserHomeDirectory(), "ExampleNotAvailable" + EXTENSION_CSV));
+		}
+		
         if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
         	final File output = fc.getSelectedFile();
         	output.delete();
         	
         	try {
-				final Collection<File>listJava = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), ".java");
+				final Collection<File>listJava = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), EXTENSION_JAVA);
 				final Collection<File>listSvn = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), "svn");
 				listJava.removeAll(listSvn);
 	
@@ -91,18 +101,22 @@ public class CheckWiki {
 				    	while (scanner.hasNextLine()) {
 				    		final String line = scanner.nextLine();
 				    		
-				    		if (null != line && line.contains(MARKER)) {
-				    			HelperIO.writeLine(output, HelperString.concatenate(HelperString.SEMICOLON, file.getAbsolutePath(), line));
+				    		if (isExampleAvailable) {
+					    		if (null != line && line.contains(MARKER)) {
+					    			HelperIO.writeLine(output, HelperString.concatenate(HelperString.SEMICOLON, file.getAbsolutePath(), line));
+					    		}
+				    		} else {
+					    		if (null != line && !line.contains(MARKER) && (line.contains(QUALIFIER_PUBLIC) || line.contains(QUALIFIER_PROTECTED)) && 
+					    				!line.contains(QUALIFIER_CLASS) && !line.contains(QUALIFIER_INTERFACE) && !line.contains(HelperString.SEMICOLON)) {
+					    			HelperIO.writeLine(output, HelperString.concatenate(HelperString.SEMICOLON, file.getAbsolutePath(), line));
+					    		}
 				    		}
-				    		
 			            }
-		
 						scanner.close();
 					}
 				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
 			}
 			
         	if (JOptionPane.showConfirmDialog(null, "Open file with the default application?", "Open file", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -115,56 +129,6 @@ public class CheckWiki {
         }
 	}
 	
-	/*
-	 * Lists all classes (and methods) without JUnit tests
-	 */
-	private static void listNoJUnit() {
-		final JFileChooser fc = new JFileChooser();
-
-		fc.addChoosableFileFilter(new FileFilterCsv());
-		fc.setSelectedFile(new File(HelperEnvironment.getUserHomeDirectory(), "JUnitUntested.csv"));
-
-        if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-        	final File output = fc.getSelectedFile();
-        	output.delete();
-        	
-        	try {
-				final Collection<File>listJava = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), ".java");
-				final Collection<File>listSvn = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), "svn");
-				listJava.removeAll(listSvn);
-	
-				HelperIO.writeLine(output, HelperString.concatenate(HelperString.SEMICOLON, "Class", "Method/Variable"));
-
-				for (final File file : listJava) {
-					if (file.getAbsolutePath().contains("/java/")) { //ignore all sources except the java package
-						Scanner scanner = new Scanner(file);
-						
-				    	while (scanner.hasNextLine()) {
-				    		final String line = scanner.nextLine();
-				    		
-				    		if (null != line && (line.contains("public") || line.contains("protected")) && 
-				    				!line.contains("class") && !line.contains("interface") && !line.contains(MARKER)) {
-				    			HelperIO.writeLine(output, HelperString.concatenate(HelperString.SEMICOLON, file.getAbsolutePath(), line));
-				    		}
-			            }
-						scanner.close();
-					}
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-	       	if (JOptionPane.showConfirmDialog(null, "Open file with the default application?", "Open file", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-	    		try {
-					ControlFile.open(output);
-				} catch (IOException ex) {
-					ex.printStackTrace();
-				}
-	       	}
-        }
-	}
-	
 	
 	/*
 	 * Inner classes
@@ -174,7 +138,7 @@ public class CheckWiki {
         @Override
 		public boolean accept(File file) {
             String filename = file.getName();
-            return filename.endsWith(".csv"); //$NON-NLS-1$
+            return filename.endsWith(EXTENSION_CSV);
         }
 
         @Override
