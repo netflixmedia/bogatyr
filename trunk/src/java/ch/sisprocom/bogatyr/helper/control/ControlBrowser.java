@@ -55,7 +55,7 @@ public abstract class ControlBrowser {
 	 * @throws IOException 
 	 * @since 0.2.0
 	 */
-	public static void browse(final URI uri) throws IOException { //$JUnit
+	public static void browse(final URI uri) throws IOException { //$JUnit$
 		if (Desktop.isDesktopSupported()) {
 			if (null == uri) {
 				throw new IllegalArgumentException("uri is null!"); //$NON-NLS-1$
@@ -75,7 +75,7 @@ public abstract class ControlBrowser {
 	 * @throws URISyntaxException
 	 * @since 0.2.0
 	 */
-	public static void browse(final String url) throws IOException, URISyntaxException { //$JUnit
+	public static void browse(final String url) throws IOException, URISyntaxException { //$JUnit$
 		if (!HelperString.isValid(url)) {
 			throw new IllegalArgumentException("url is null or empty!"); //$NON-NLS-1$
 		}

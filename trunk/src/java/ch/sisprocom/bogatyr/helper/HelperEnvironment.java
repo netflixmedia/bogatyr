@@ -54,7 +54,7 @@ public abstract class HelperEnvironment {
      * @return used VM memory
      * @since 0.5.0
 	 */
-	public static long getMemoryUsed() { //$JUnit
+	public static long getMemoryUsed() { //$JUnit$
 		return Runtime.getRuntime().totalMemory();
 	}
 
@@ -64,7 +64,7 @@ public abstract class HelperEnvironment {
      * @return free VM memory
      * @since 0.5.0
 	 */
-	public static long getMemoryFree() { //$JUnit
+	public static long getMemoryFree() { //$JUnit$
 		return Runtime.getRuntime().freeMemory();
 	}
 
@@ -74,7 +74,7 @@ public abstract class HelperEnvironment {
      * @return max VM memory
      * @since 0.5.0
 	 */
-	public static long getMemoryMax() { //$JUnit
+	public static long getMemoryMax() { //$JUnit$
 		return Runtime.getRuntime().maxMemory();
 	}
 
@@ -84,7 +84,7 @@ public abstract class HelperEnvironment {
      * @return current Java runtime version
      * @since 0.7.0
 	 */
-	public static String getJavaVersion() { //$JUnit
+	public static String getJavaVersion() { //$JUnit$
 		return System.getProperties().getProperty("java.version"); //$NON-NLS-1$
 	}
 
@@ -104,7 +104,7 @@ public abstract class HelperEnvironment {
      * @return current class path
      * @since 0.7.0
 	 */
-	public static String getClassPath() { //$JUnit
+	public static String getClassPath() { //$JUnit$
 		return System.getProperties().getProperty("java.class.path"); //$NON-NLS-1$
 	}
 	
@@ -114,7 +114,7 @@ public abstract class HelperEnvironment {
      * @return current library path
      * @since 0.7.0
 	 */
-	public static String getLibraryPath() { //$JUnit
+	public static String getLibraryPath() { //$JUnit$
 		return System.getProperties().getProperty("java.library.path"); //$NON-NLS-1$
 	}
 	
@@ -133,7 +133,7 @@ public abstract class HelperEnvironment {
 		
 		final Field field = ClassLoader.class.getDeclaredField("usr_paths"); //$NON-NLS-1$
 		field.setAccessible(true);
-		String[] paths = (String[])field.get(null);
+		final String[] paths = (String[])field.get(null);
 		
 		for (int ii = 0; ii < paths.length; ii++) {
 			if (location.equals(paths[ii])) {
@@ -156,7 +156,7 @@ public abstract class HelperEnvironment {
      * @return available processors for the VM
      * @since 0.6.0
 	 */
-	public static int getAvailableProcessors() { //$JUnit
+	public static int getAvailableProcessors() { //$JUnit$
 		return Runtime.getRuntime().availableProcessors();
 	}
 
@@ -166,7 +166,7 @@ public abstract class HelperEnvironment {
      * @return OS architecture
      * @since 0.1.0
 	 */
-	public static String getOsArch() { //$JUnit
+	public static String getOsArch() { //$JUnit$
 		return System.getProperties().getProperty("os.arch"); //$NON-NLS-1$
 	}
 
@@ -176,7 +176,7 @@ public abstract class HelperEnvironment {
      * @return OS name
      * @since 0.1.0
 	 */
-	public static String getOsName() { //$JUnit
+	public static String getOsName() { //$JUnit$
 		return System.getProperties().getProperty("os.name"); //$NON-NLS-1$
 	}
 
@@ -186,7 +186,7 @@ public abstract class HelperEnvironment {
      * @return OS version
      * @since 0.1.0
 	 */
-	public static String getOsVersion() { //$JUnit
+	public static String getOsVersion() { //$JUnit$
 		return System.getProperties().getProperty("os.version"); //$NON-NLS-1$
 	}
 
@@ -206,7 +206,7 @@ public abstract class HelperEnvironment {
 	 * @return map of system environment variables
 	 * @since 0.1.0
 	 */
-	public static Map<String, String> getOsEnvironmentVariables() { //$JUnit
+	public static Map<String, String> getOsEnvironmentVariables() { //$JUnit$
 		return System.getenv();
     }
 
@@ -217,7 +217,7 @@ public abstract class HelperEnvironment {
 	 * @return value of the system environment variable
 	 * @since 0.6.0
 	 */
-	public static String getOsEnvironmentVariable(final String variable) { //$JUnit
+	public static String getOsEnvironmentVariable(final String variable) { //$JUnit$
 		return System.getenv(variable);
     }
 	
@@ -227,7 +227,7 @@ public abstract class HelperEnvironment {
      * @return OS temporary directory
      * @since 0.5.0
 	 */
-	public static File getOsTempDirectory() { //$JUnit
+	public static File getOsTempDirectory() { //$JUnit$
 		return new File(System.getProperty("java.io.tmpdir")); //$NON-NLS-1$
 	}
 	
@@ -237,7 +237,7 @@ public abstract class HelperEnvironment {
      * @return user home directory
      * @since 0.5.0
 	 */
-	public static File getUserHomeDirectory() { //$JUnit
+	public static File getUserHomeDirectory() { //$JUnit$
 		return new File(System.getProperty("user.home")); //$NON-NLS-1$
 	}
 	
@@ -247,7 +247,7 @@ public abstract class HelperEnvironment {
 	 * @return current user directory
 	 * @since 0.5.0
 	 */
-	public static File getUserDirectory() { //$JUnit
+	public static File getUserDirectory() { //$JUnit$
 		return new File(System.getProperty("user.dir")); //$NON-NLS-1$
 	}
 
@@ -257,7 +257,7 @@ public abstract class HelperEnvironment {
 	 * @return name of the current user
 	 * @since 0.7.0
 	 */
-	public static String getUserName() { //$JUnit
+	public static String getUserName() { //$JUnit$
 		return System.getProperty("user.name"); //$NON-NLS-1$
 	}
 
@@ -299,7 +299,7 @@ public abstract class HelperEnvironment {
 	 * @return true if this application is running under a Windows OS
 	 * @since 0.1.0
 	 */
-	public static boolean isWindowsPlatform() { //$JUnit
+	public static boolean isWindowsPlatform() { //$JUnit$
 		return getOsName().contains("Windows"); //$NON-NLS-1$
 	}
 
@@ -309,7 +309,7 @@ public abstract class HelperEnvironment {
 	 * @return true if this application is running under Mac OS
 	 * @since 0.1.0
 	 */
-	public static boolean isMacPlatform() { //$JUnit
+	public static boolean isMacPlatform() { //$JUnit$
 		return getOsName().contains("Mac"); //$NON-NLS-1$
 	}
 	
@@ -319,7 +319,7 @@ public abstract class HelperEnvironment {
 	 * @return true if this application is running under UNIX
 	 * @since 0.1.0
 	 */
-	public static boolean isUnixPlatform() { //$JUnit
+	public static boolean isUnixPlatform() { //$JUnit$
 		return !isWindowsPlatform() && !isMacPlatform(); //this method is a bit dirty, because it could be another system than Unix, but its the best guess...
 	}
 }

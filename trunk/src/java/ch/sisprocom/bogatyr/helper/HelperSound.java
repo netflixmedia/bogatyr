@@ -93,7 +93,7 @@ public abstract class HelperSound {
      * @throws UnsupportedAudioFileException
      * @since 0.5.0
      */
-	public static Clip getClip(final InputStream is) throws UnsupportedAudioFileException, LineUnavailableException, IOException { //$JUnit
+	public static Clip getClip(final InputStream is) throws UnsupportedAudioFileException, LineUnavailableException, IOException { //$JUnit$
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
@@ -127,7 +127,7 @@ public abstract class HelperSound {
      * @throws InvalidMidiDataException
      * @since 0.5.0
      */
-	public static Sequence getSequence(final InputStream is) throws InvalidMidiDataException, IOException { //$JUnit
+	public static Sequence getSequence(final InputStream is) throws InvalidMidiDataException, IOException { //$JUnit$
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
@@ -144,7 +144,7 @@ public abstract class HelperSound {
      * @throws InvalidMidiDataException
      * @since 0.5.0
      */
-	public static Sequencer getSequencer(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException { //$JUnit
+	public static Sequencer getSequencer(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException { //$JUnit$
 		if (null == sequence) {
 			throw new IllegalArgumentException("sequence is null!"); //$NON-NLS-1$
 		}
@@ -173,7 +173,7 @@ public abstract class HelperSound {
      * @param clip to play
      * @since 0.5.0
      */
-	public static void play(final Clip clip) { //$JUnit
+	public static void play(final Clip clip) { //$JUnit$
 		if (null == clip) {
 			throw new IllegalArgumentException("clip is null!"); //$NON-NLS-1$
 		}
@@ -196,7 +196,7 @@ public abstract class HelperSound {
 	 * @throws MidiUnavailableException 
 	 * @since 0.5.0
      */
-	public static void play(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException { //$JUnit
+	public static void play(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException { //$JUnit$
 		if (null == sequence) {
 			throw new IllegalArgumentException("sequence is null!"); //$NON-NLS-1$
 		}
@@ -218,7 +218,7 @@ public abstract class HelperSound {
      * @return List of all available audio formats of the current machine
      * @since 0.5.0
      */
-	public static Collection<Type> getAvailableAudioFormats() { //$JUnit
+	public static Collection<Type> getAvailableAudioFormats() { //$JUnit$
     	return Arrays.asList(AudioSystem.getAudioFileTypes());
 	}
 

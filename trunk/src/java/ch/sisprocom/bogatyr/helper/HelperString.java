@@ -40,7 +40,7 @@ import java.math.BigDecimal;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -52,6 +52,7 @@ public abstract class HelperString {
 	public static final String DOUBLE_QUOTE = "\""; //$NON-NLS-1$
 	public static final String SPACE = " "; //$NON-NLS-1$
 	public static final String PERIOD = "."; //$NON-NLS-1$
+	public static final String COMMA = ","; //$NON-NLS-1$
 	public static final String SEMICOLON = ";"; //$NON-NLS-1$	  
 	
 	/**
@@ -61,7 +62,7 @@ public abstract class HelperString {
      * @return true/false
      * @since 0.7.0
      */	
-	public static boolean isValid(final CharSequence input) { //$JUnit
+	public static boolean isValid(final CharSequence input) { //$JUnit$
         return !(null == input || 0 == input.length());
     }
 
@@ -72,7 +73,7 @@ public abstract class HelperString {
      * @return true/false
      * @since 0.7.0
      */	
-	public static boolean isNumeric(final String input) { //$JUnit
+	public static boolean isNumeric(final String input) { //$JUnit$
 		//TODO a bit lazy implemented... improve with regex if possible
 		if (isValid(input)) {
 			try{
@@ -93,7 +94,7 @@ public abstract class HelperString {
      * @return filled string
      * @since 0.7.0
      */
-    public static CharSequence fillString(final char fillChar, final int fillLength) { //$JUnit
+    public static CharSequence fillString(final char fillChar, final int fillLength) { //$JUnit$
 		if (0 >= fillLength) {
 			throw new IllegalArgumentException("fillLength must be greater than 0: " + fillLength); //$NON-NLS-1$
 		}
@@ -115,7 +116,7 @@ public abstract class HelperString {
      * @return reversed string
      * @since 0.7.0
      */
-    public static String reverseString(final String input) { //$JUnit
+    public static String reverseString(final String input) { //$JUnit$
 		if (null == input) {
 			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
@@ -130,7 +131,7 @@ public abstract class HelperString {
      * @return numeric string
      * @since 0.7.0
      */
-    public static String getValidNumericString(final String text) { //$JUnit
+    public static String getValidNumericString(final String text) { //$JUnit$
     	
     	if (!isValid(text)) {
     		return null;
@@ -176,7 +177,7 @@ public abstract class HelperString {
      * @return concatenated string
      * @since 0.7.0
      */
-    public static String concatenate(final char separator, final boolean isTrimmed, final String... strings) {
+    public static String concatenate(final String separator, final boolean isTrimmed, final String... strings) {
         if (!HelperArray.isValid(strings)) {
         	return null;
         }
@@ -197,6 +198,18 @@ public abstract class HelperString {
             }
         }
         return sb.toString();
+    }
+    
+    /**
+     * Concatenates strings with a separator (e.g. for CSV export).
+     *
+     * @param separator between the strings
+     * @param strings to concatenate
+     * @return concatenated string
+     * @since 0.8.0
+     */
+    public static String concatenate(final String separator, final String... strings) {
+    	return concatenate(separator, true, strings);
     }
     
     /**
@@ -222,7 +235,7 @@ public abstract class HelperString {
      * @throws UnsupportedEncodingException 
      * @since 0.8.0
      */
-	public static byte[] toBytes(String input, final String encoding) throws UnsupportedEncodingException {
+	public static byte[] toBytes(final String input, final String encoding) throws UnsupportedEncodingException {
 			return input.getBytes(encoding);
 	}
 }

@@ -111,7 +111,7 @@ public abstract class ClientAbstract implements IClient {
 	 * @param socket for the client
 	 * @since 0.8.0
 	 */
-    protected void setSocket(Socket socket) {
+    protected void setSocket(final Socket socket) {
 		this.socket = socket;
 	}
 

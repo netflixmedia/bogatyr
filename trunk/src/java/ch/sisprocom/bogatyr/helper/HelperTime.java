@@ -69,7 +69,7 @@ public abstract class HelperTime {
      * @throws IOException
      * @since 0.7.0
      */
-	public static Date getAtomicTime() throws IOException { //$JUnit
+	public static Date getAtomicTime() throws IOException { //$JUnit$
 		return getAtomicTime(DEFAULT_TIME_SERVER);
 	}
 
@@ -81,7 +81,7 @@ public abstract class HelperTime {
      * @throws IOException
      * @since 0.7.0
      */
-	public static Date getAtomicTime(final String host) throws IOException { //$JUnit
+	public static Date getAtomicTime(final String host) throws IOException { //$JUnit$
 		if (!HelperString.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}

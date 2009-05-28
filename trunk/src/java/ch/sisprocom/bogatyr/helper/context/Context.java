@@ -74,7 +74,7 @@ public class Context implements IContext {
 	/*
 	 * Implemented methods
 	 */
-	public void addValue(final Object key, final Object value) { //$JUnit
+	public void addValue(final Object key, final Object value) { //$JUnit$
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
 		}
@@ -86,61 +86,61 @@ public class Context implements IContext {
 		}
 	}
 
-	public void removeValue(final Object key) { //$JUnit
+	public void removeValue(final Object key) { //$JUnit$
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
 		}
 		contextData.remove(key);
 	}
 
-	public Object getValue(final Object key) { //$JUnit
+	public Object getValue(final Object key) { //$JUnit$
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
 		}
 		return contextData.get(key);
 	}
 
-	public String getStringValue(final Object key) { //$JUnit
+	public String getStringValue(final Object key) { //$JUnit$
 		return (String)getValue(key);
     }
 
-	public Boolean getBooleanValue(final Object key) { //$JUnit
+	public Boolean getBooleanValue(final Object key) { //$JUnit$
 		return (Boolean)getValue(key);
     }
 	
-	public Double getDoubleValue(final Object key) { //$JUnit
+	public Double getDoubleValue(final Object key) { //$JUnit$
 		return (Double)getValue(key);
 	}
 	
-	public Integer getIntegerValue(final Object key) { //$JUnit
+	public Integer getIntegerValue(final Object key) { //$JUnit$
 		return (Integer)getValue(key);
 	}
 	
-	public Float getFloatValue(final Object key) { //$JUnit
+	public Float getFloatValue(final Object key) { //$JUnit$
 		return (Float)getValue(key);
 	}
 	
-	public Byte getByteValue(final Object key) { //$JUnit
+	public Byte getByteValue(final Object key) { //$JUnit$
 		return (Byte)getValue(key);
 	}
 	
-	public Long getLongValue(final Object key) { //$JUnit
+	public Long getLongValue(final Object key) { //$JUnit$
 		return (Long)getValue(key);
 	}
 
-	public Short getShortValue(final Object key) { //$JUnit
+	public Short getShortValue(final Object key) { //$JUnit$
 		return (Short)getValue(key);
 	}
 	
-	public BigInteger getBigIntegerValue(final Object key) { //$JUnit
+	public BigInteger getBigIntegerValue(final Object key) { //$JUnit$
 		return (BigInteger)getValue(key);
 	}
 	
-	public BigDecimal getBigDecimalValue(final Object key) { //$JUnit
+	public BigDecimal getBigDecimalValue(final Object key) { //$JUnit$
 		return (BigDecimal)getValue(key);
 	}
 
-	public Date getDateValue(final Object key) { //$JUnit
+	public Date getDateValue(final Object key) { //$JUnit$
 		return (Date)getValue(key);
 	}
 }

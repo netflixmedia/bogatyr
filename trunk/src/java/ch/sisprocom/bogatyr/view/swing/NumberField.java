@@ -50,7 +50,7 @@ import java.util.regex.Pattern;
  * @version 0.8.0 (20090528)
  * @since 0.1.0
  */
-public class NumberField extends TextField { //$JUnit
+public class NumberField extends TextField { //$JUnit$
 	private static final long serialVersionUID = 4469777330124040925L;
 	
 	private static final Pattern PATTERN = Pattern.compile("[-%'0-9.]+"); //$NON-NLS-1$

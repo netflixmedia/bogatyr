@@ -129,11 +129,11 @@ public class CryptoAsymm implements ICryptoAsymm {
 	 * @see KeyPair
 	 * @since 0.1.0
 	 */
-	public KeyPair generateKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
+	public KeyPair generateKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
 		return generateKeyPair(DEFAULT_KEYSIZE);
 	}
 	
-	public KeyPair generateKeyPair(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
+	public KeyPair generateKeyPair(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
 		if (0 >= keysize || 0 != keysize % HelperNumber.VALUE_16) {
 			throw new IllegalArgumentException("keysize is invalid: " + keysize); //$NON-NLS-1$
 		}
@@ -157,11 +157,11 @@ public class CryptoAsymm implements ICryptoAsymm {
 	 * @see PublicKey
 	 * @since 0.1.0
 	 */
-    public byte[] encrypt(final byte[] input, final PublicKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit
+    public byte[] encrypt(final byte[] input, final PublicKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit$
     	return encrypt(input, key, DEFAULT_KEYSIZE);
     }
     
-    public byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit
+    public byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit$
 		if (null == input) {
 			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
@@ -213,11 +213,11 @@ public class CryptoAsymm implements ICryptoAsymm {
      * @return decrypted byte-array
      * @since 0.1.0
 	 */
-	public byte[] decrypt(final byte[] input, final PrivateKey key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit
+	public byte[] decrypt(final byte[] input, final PrivateKey key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		return decrypt(input, key, DEFAULT_KEYSIZE);
 	}
 
-	public byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit
+	public byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		if (null == input) {
 			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}

@@ -87,7 +87,7 @@ public abstract class ConverterBase64 {
 	 * @return String with the Base64 encoded data
 	 * @since 0.1.0
 	 */
-	public static String encode(final String input) { //$JUnit
+	public static String encode(final String input) { //$JUnit$
 		if (!HelperString.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
@@ -103,7 +103,7 @@ public abstract class ConverterBase64 {
 	 * @return character array with the Base64 encoded data
 	 * @since 0.1.0
 	 */
-	public static char[] encode(final byte[] input) { //$JUnit
+	public static char[] encode(final byte[] input) { //$JUnit$
 		if (!HelperArray.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
@@ -118,7 +118,7 @@ public abstract class ConverterBase64 {
 	 * @return Array containing the decoded data bytes
 	 * @since 0.1.0
 	 */
-	public static byte[] decode(final String input) { //$JUnit
+	public static byte[] decode(final String input) { //$JUnit$
 		if (!HelperString.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
@@ -134,7 +134,7 @@ public abstract class ConverterBase64 {
 	 * @return Array containing the decoded data bytes
 	 * @since 0.1.0
 	 */
-	public static byte[] decode(final char[] input) { //$JUnit
+	public static byte[] decode(final char[] input) { //$JUnit$
 		if (null == input || 0 >= input.length) {
 			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
 		}

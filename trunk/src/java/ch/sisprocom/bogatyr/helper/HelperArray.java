@@ -66,7 +66,7 @@ public abstract class HelperArray {
      * @return true/false
      * @since 0.7.0
      */	
-	public static boolean isValid(final Object[] arg) { //$JUnit
+	public static boolean isValid(final Object[] arg) { //$JUnit$
         return !(null == arg || 0 == arg.length);
     }
 	
@@ -77,7 +77,7 @@ public abstract class HelperArray {
      * @return true/false
      * @since 0.7.0
      */	
-	public static boolean isValid(final byte[] arg) { //$JUnit
+	public static boolean isValid(final byte[] arg) { //$JUnit$
         return !(null == arg || 0 == arg.length);
     }
 	
@@ -89,7 +89,7 @@ public abstract class HelperArray {
 	 * @return array a & b as one new array
 	 * @since 0.7.0
 	 */
-    public static Object[] concatenate(final Object[] inA, final Object[] inB) { //$JUnit
+    public static Object[] concatenate(final Object[] inA, final Object[] inB) { //$JUnit$
     	Object[] a = inA;
     	Object[] b = inB;
     	
@@ -116,7 +116,7 @@ public abstract class HelperArray {
 	 * @return array a & b as one new byte-array
 	 * @since 0.7.0
 	 */
-    public static byte[] concatenate(final byte[] inA, final byte[] inB) { //$JUnit
+    public static byte[] concatenate(final byte[] inA, final byte[] inB) { //$JUnit$
     	byte[] a = inA;
     	byte[] b = inB;
     	
@@ -142,7 +142,7 @@ public abstract class HelperArray {
 	 * @return array without duplicates
 	 * @since 0.7.0
 	 */
-    public static Object[] removeDuplicates(final Object[] array) { //$JUnit
+    public static Object[] removeDuplicates(final Object[] array) { //$JUnit$
 		final Collection<?> list = HelperCollection.removeDuplicates(Arrays.asList(array));
 		final Object[] temp = new Object[list.size()];
 		return list.toArray(temp);

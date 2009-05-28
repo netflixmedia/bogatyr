@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
@@ -53,7 +54,7 @@ public abstract class HelperCollection {
      * @return true/false
      * @since 0.7.0
      */
-	public static boolean isValid(final Collection<?> arg) { //$JUnit
+	public static boolean isValid(final Collection<?> arg) { //$JUnit$
         return !(null == arg || arg.isEmpty());
     }
     
@@ -64,7 +65,7 @@ public abstract class HelperCollection {
 	 * @return collection without duplicates
 	 * @since 0.7.0
 	 */
-    public static <T> Collection<T> removeDuplicates(final Collection<T> list) { //$JUnit
+    public static <T> Collection<?> removeDuplicates(final Collection<T> list) { //$JUnit$
 //		return new ArrayList<T>(new HashSet<T>(list));
 		return new HashSet<T>(list);
     }
