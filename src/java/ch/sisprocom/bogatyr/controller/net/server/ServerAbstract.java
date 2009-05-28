@@ -54,7 +54,7 @@ public abstract class ServerAbstract implements IServer, ListenerServerThread {
 
     private Thread thread;
     
-	private Collection<IServerThread> listThread = new HashSet<IServerThread>();
+	private final Collection<IServerThread> listThread = new HashSet<IServerThread>();
 
 //    private final Map<UUID, IServerThread> mapThread = new ConcurrentHashMap<UUID, IServerThread>();
 
@@ -105,7 +105,7 @@ public abstract class ServerAbstract implements IServer, ListenerServerThread {
 	 * @param thread for the server
 	 * @since 0.8.0
 	 */
-    protected void setThread(Thread thread) {
+    protected void setThread(final Thread thread) {
 		this.thread = thread;
 	}
 
@@ -114,11 +114,11 @@ public abstract class ServerAbstract implements IServer, ListenerServerThread {
 	 * @param serverSocket for the server
 	 * @since 0.8.0
 	 */
-    protected void setServerSocket(ServerSocket serverSocket) {
+    protected void setServerSocket(final ServerSocket serverSocket) {
 		this.serverSocket = serverSocket;
 	}
 
-	protected void setRunning(boolean isRunning) {
+	protected void setRunning(final boolean isRunning) {
 		this.isRunning = isRunning;
 	}
 

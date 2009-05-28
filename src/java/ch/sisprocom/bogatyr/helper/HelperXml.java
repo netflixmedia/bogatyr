@@ -49,7 +49,7 @@ public abstract class HelperXml {
      * @return the in String, stripped of non-valid characters
      * @since 0.3.0
      */
-    public static String getValidXmlString(final String in) { //$JUnit
+    public static String getValidXmlString(final String in) { //$JUnit$
         if (!HelperString.isValid(in)) { // vacancy test
             return HelperString.EMPTY_STRING;
         }

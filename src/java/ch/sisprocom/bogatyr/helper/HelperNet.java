@@ -76,7 +76,7 @@ public abstract class HelperNet {
      * @param password for authentication
      * @since 0.5.0
      */
-    public static void enableProxyHttp(final String host, final int port, final String username, final String password) { //$JUnit
+    public static void enableProxyHttp(final String host, final int port, final String username, final String password) { //$JUnit$
 		if (!HelperString.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
@@ -99,7 +99,7 @@ public abstract class HelperNet {
      *
      * @since 0.5.0
      */
-    public static void disableProxyHttp() { //$JUnit
+    public static void disableProxyHttp() { //$JUnit$
 //        System.clearProperty(PROPERTY_HTTP_USE_PROXY);
         System.clearProperty(PROPERTY_HTTP_PROXY_HOST);
         System.clearProperty(PROPERTY_HTTP_PROXY_PORT);
@@ -114,7 +114,7 @@ public abstract class HelperNet {
      * @param password for authentication
      * @since 0.5.0
      */
-    public static void enableProxyHttps(final String host, final int port, final String username, final String password) { //$JUnit
+    public static void enableProxyHttps(final String host, final int port, final String username, final String password) { //$JUnit$
 		if (!HelperString.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
@@ -137,7 +137,7 @@ public abstract class HelperNet {
      * 
      * @since 0.5.0
      */
-    public static void disableProxyHttps() { //$JUnit
+    public static void disableProxyHttps() { //$JUnit$
 //		System.clearProperty(PROPERTY_HTTPS_USE_PROXY);
         System.clearProperty(PROPERTY_HTTPS_PROXY_HOST);
         System.clearProperty(PROPERTY_HTTPS_PROXY_PORT);
@@ -152,7 +152,7 @@ public abstract class HelperNet {
      * @param password for authentication
      * @since 0.5.0
      */
-    public static void enableProxyFtp(final String host, final int port, final String username, final String password) { //$JUnit
+    public static void enableProxyFtp(final String host, final int port, final String username, final String password) { //$JUnit$
 		if (!HelperString.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
@@ -175,7 +175,7 @@ public abstract class HelperNet {
      * 
      * @since 0.5.0
      */
-    public static void disableProxyFtp() { //$JUnit
+    public static void disableProxyFtp() { //$JUnit$
 //        System.clearProperty(PROPERTY_FTP_USE_PROXY);
         System.clearProperty(PROPERTY_FTP_PROXY_HOST);
         System.clearProperty(PROPERTY_FTP_PROXY_PORT);
@@ -189,7 +189,7 @@ public abstract class HelperNet {
      * @throws IOException
      * @since 0.5.0
      */
-    public static boolean isPingable(final String host) throws IOException { //$JUnit
+    public static boolean isPingable(final String host) throws IOException { //$JUnit$
 		if (!HelperString.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
@@ -210,7 +210,7 @@ public abstract class HelperNet {
      * @throws UnknownHostException
      * @since 0.5.0
      */
-    public static String getHostname(final String ip) throws UnknownHostException { //$JUnit
+    public static String getHostname(final String ip) throws UnknownHostException { //$JUnit$
 		if (!HelperString.isValid(ip)) {
 			throw new IllegalArgumentException("ip is null or empty!"); //$NON-NLS-1$
 		}
@@ -227,7 +227,7 @@ public abstract class HelperNet {
      * @throws UnknownHostException
      * @since 0.5.0
      */
-    public static String getLocalHostname() throws UnknownHostException { //$JUnit
+    public static String getLocalHostname() throws UnknownHostException { //$JUnit$
 		final InetAddress address = InetAddress.getLocalHost();
 		
 		return address.getHostName();
@@ -241,7 +241,7 @@ public abstract class HelperNet {
      * @throws UnknownHostException
      * @since 0.5.0
      */
-    public static String getIp(final String host) throws UnknownHostException { //$JUnit
+    public static String getIp(final String host) throws UnknownHostException { //$JUnit$
 		if (!HelperString.isValid(host)) {
 			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
 		}
@@ -258,7 +258,7 @@ public abstract class HelperNet {
      * @throws UnknownHostException
      * @since 0.5.0
      */
-    public static String getLocalIp() throws UnknownHostException { //$JUnit
+    public static String getLocalIp() throws UnknownHostException { //$JUnit$
 		final InetAddress address = InetAddress.getLocalHost();
 		
 		return address.getHostAddress();
@@ -271,7 +271,7 @@ public abstract class HelperNet {
      * @throws UnknownHostException
      * @since 0.5.0
      */
-    public static Collection<String> getLocalIps() throws UnknownHostException { //$JUnit
+    public static Collection<String> getLocalIps() throws UnknownHostException { //$JUnit$
     	final Collection<String> list = new ArrayList<String>();
         final String localHost = InetAddress.getLocalHost().getHostName();
 
@@ -325,7 +325,7 @@ public abstract class HelperNet {
      * @throws IOException
      * @since 0.5.0
      */
-    public static InputStream readUrl(final URL url) throws IOException { //$JUnit
+    public static InputStream readUrl(final URL url) throws IOException { //$JUnit$
 		if (null == url) {
 			throw new IllegalArgumentException("url is null!"); //$NON-NLS-1$
 		}

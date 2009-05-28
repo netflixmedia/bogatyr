@@ -3,6 +3,7 @@
 	<classpathentry kind="src" path="src/java"/>
 	<classpathentry kind="src" path="src/sample"/>
 	<classpathentry kind="src" path="src/test"/>
+	<classpathentry kind="src" path="src/util"/>
 	<classpathentry kind="lib" path="lib/core-renderer.jar"/>
 	<classpathentry kind="lib" path="lib/mqseries/com.ibm.mq.jar"/>
 	<classpathentry kind="lib" path="lib/mqseries/com.ibm.mqbind.jar"/>

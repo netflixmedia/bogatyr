@@ -67,7 +67,7 @@ public abstract class HelperObject {
 	 * @throws InvocationTargetException 
 	 * @since 0.7.0
      */
-	public static <T> T createInstance(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit
+	public static <T> T createInstance(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
 		if (null == clazz) {
 			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
 		}
@@ -89,7 +89,7 @@ public abstract class HelperObject {
 	 * @throws InvocationTargetException 
 	 * @since 0.7.0
      */
-	public static <T> T createInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit
+	public static <T> T createInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
 		if (null == clazz) {
 			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
 		}
@@ -114,7 +114,7 @@ public abstract class HelperObject {
 	 * @see ObjectOutputStream
 	 * @since 0.7.0
 	 */
-	public static byte[] serialize(final Serializable obj) throws IOException { //$JUnit
+	public static byte[] serialize(final Serializable obj) throws IOException { //$JUnit$
 		if (null == obj) {
 			throw new IllegalArgumentException("obj is null!"); //$NON-NLS-1$
 		}	
@@ -148,7 +148,7 @@ public abstract class HelperObject {
 	 * @see ObjectInputStream
 	 * @since 0.7.0
 	 */
-	public static Object deserialize(final byte[] bytes) throws IOException, ClassNotFoundException { //$JUnit
+	public static Object deserialize(final byte[] bytes) throws IOException, ClassNotFoundException { //$JUnit$
 		if (!HelperArray.isValid(bytes)) {
 			throw new IllegalArgumentException("bytes is null or empty!"); //$NON-NLS-1$
 		}

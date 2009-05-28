@@ -110,19 +110,19 @@ public class Obfuscator implements IObfuscator {
 	/*
 	 * Implemented methods
 	 */
-	public byte[] encrypt(final byte[] input) { //$JUnit
+	public byte[] encrypt(final byte[] input) { //$JUnit$
 		return encrypt(input, Byte.MAX_VALUE);
 	}
 
-	public byte[] encrypt(final byte[] input, final byte pattern) { //$JUnit
+	public byte[] encrypt(final byte[] input, final byte pattern) { //$JUnit$
 		return obfuscate(input, pattern);
 	}
 
-	public byte[] decrypt(final byte[] input) { //$JUnit
+	public byte[] decrypt(final byte[] input) { //$JUnit$
 		return decrypt(input, Byte.MAX_VALUE);
 	}
 
-	public byte[] decrypt(final byte[] input, final byte pattern) { //$JUnit
+	public byte[] decrypt(final byte[] input, final byte pattern) { //$JUnit$
 		return unobfuscate(input, pattern);
 	}
 }

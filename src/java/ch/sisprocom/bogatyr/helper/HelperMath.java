@@ -53,7 +53,7 @@ public abstract class HelperMath {
 	 * @return calculated gcd
 	 * @since 0.4.0
 	 */
-	 public static double gcd(final double a, final double b) { //$JUnit
+	 public static double gcd(final double a, final double b) { //$JUnit$
 		 if (0.0D > a) {
 			 throw new IllegalArgumentException("a value must be positive: " + a); //$NON-NLS-1$
 		 }
@@ -76,7 +76,7 @@ public abstract class HelperMath {
 	 * @return calculated lcm
 	 * @since 0.4.0
 	 */
-	 public static double lcm(final double a, final double b) { //$JUnit
+	 public static double lcm(final double a, final double b) { //$JUnit$
 		 if (0.0D > a) {
 			 throw new IllegalArgumentException("a value must be positive: " + a); //$NON-NLS-1$
 		 }
@@ -93,7 +93,7 @@ public abstract class HelperMath {
      * @return true/false
      * @since 0.5.0
      */	
-	public static boolean isPrime(final int n) { //$JUnit
+	public static boolean isPrime(final int n) { //$JUnit$
 		// 2 is the smallest prime
         if (2 >= n) {
         	return 2 == n;
@@ -120,7 +120,7 @@ public abstract class HelperMath {
      * @return nearest prime number
      * @since 0.5.0
      */	
-	public static int calcNearestPrime(final int n) { //$JUnit
+	public static int calcNearestPrime(final int n) { //$JUnit$
 		// 2 is the smallest prime
         if (2 >= n) {
         	return 2;
@@ -142,7 +142,7 @@ public abstract class HelperMath {
      * @return list with the calculated prime numbers
      * @since 0.5.0
      */	
-	public static Collection<Integer> calcPrimes(final int start, final int end) { //$JUnit
+	public static Collection<Integer> calcPrimes(final int start, final int end) { //$JUnit$
 //        if (0 > start) {
 //            throw new IllegalArgumentException("start value must be positive: " + start); //$NON-NLS-1$
 //        }
@@ -171,7 +171,7 @@ public abstract class HelperMath {
      * @return int-value
      * @since 0.4.0
      */	
-	public static int convertDoubleToInt(final double value) { //$JUnit
+	public static int convertDoubleToInt(final double value) { //$JUnit$
 		return (int)StrictMath.round(value);
 	}
 	
@@ -183,7 +183,7 @@ public abstract class HelperMath {
      * @return double-value
      * @since 0.4.0
      */	
-	public static double log(final double base, final double value) { //$JUnit
+	public static double log(final double base, final double value) { //$JUnit$
         if (1.0D >= base) {
             throw new IllegalArgumentException("base must be greater than 1: " + base); //$NON-NLS-1$
         }
@@ -202,7 +202,7 @@ public abstract class HelperMath {
      * @return double-value
      * @since 0.4.0
      */
-    public static double round(final double value, final int decimalPlace) { //$JUnit
+    public static double round(final double value, final int decimalPlace) { //$JUnit$
 		int dp = decimalPlace;
 		double powerOfTen = 1.0D;
 		
@@ -220,7 +220,7 @@ public abstract class HelperMath {
      * @return random int-value between 0 and n-1
      * @since 0.4.0
      */
-    public static int getRandom(final int n) { //$JUnit
+    public static int getRandom(final int n) { //$JUnit$
     	return (int) (StrictMath.random() * (double) n);
     }
     
@@ -234,7 +234,7 @@ public abstract class HelperMath {
      * @return calculated amount with a given start amount, interest and elapsed days
      * @since 0.7.0
      */
-    public static double calcAmount(final double amount, final double interest, final int days) { //$JUnit
+    public static double calcAmount(final double amount, final double interest, final int days) { //$JUnit$
 		 if (0 >= days) {
 			 throw new IllegalArgumentException("days value must be positive: " + days); //$NON-NLS-1$
 		 }

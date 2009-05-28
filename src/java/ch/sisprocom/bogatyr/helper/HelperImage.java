@@ -66,7 +66,7 @@ public abstract class HelperImage {
      * @throws IOException
      * @since 0.4.0
      */
-    public static void saveImage(final File file, final String type, final RenderedImage image) throws IOException { //$JUnit
+    public static void saveImage(final File file, final String type, final RenderedImage image) throws IOException { //$JUnit$
 		if (null == image) {
 			throw new IllegalArgumentException("image is null!"); //$NON-NLS-1$
 		}
@@ -89,7 +89,7 @@ public abstract class HelperImage {
      * @throws IOException
      * @since 0.4.0
      */
-	public static void saveImage(final File file, final String type, final Component component) throws IOException { //$JUnit
+	public static void saveImage(final File file, final String type, final Component component) throws IOException { //$JUnit$
 		saveImage(file, type, getImage(component));
 	} 
     
@@ -120,7 +120,7 @@ public abstract class HelperImage {
 	 * @return list of all available read formats
 	 * @since 0.4.0
 	 */
-	public static Collection<String> getAvailableImageReadFormats() { //$JUnit
+	public static Collection<String> getAvailableImageReadFormats() { //$JUnit$
 	    return unique(ImageIO.getReaderFormatNames());
 	}
 
@@ -130,7 +130,7 @@ public abstract class HelperImage {
 	 * @return list of all available write formats
 	 * @since 0.4.0
 	 */
-	public static Collection<String> getAvailableImageWriteFormats() { //$JUnit
+	public static Collection<String> getAvailableImageWriteFormats() { //$JUnit$
 	    return unique(ImageIO.getWriterFormatNames());
 	}
 
@@ -140,7 +140,7 @@ public abstract class HelperImage {
 	 * @return list of all available MIME types that can be read
 	 * @since 0.4.0
 	 */
-	public static Collection<String> getAvailableImageReadMIMETypes() { //$JUnit
+	public static Collection<String> getAvailableImageReadMIMETypes() { //$JUnit$
 	    return unique(ImageIO.getReaderMIMETypes());
 	}
 
@@ -150,7 +150,7 @@ public abstract class HelperImage {
 	 * @return list of all available MIME types that can be written
 	 * @since 0.4.0
 	 */
-	public static Collection<String> getAvailableImageWriteMIMETypes() { //$JUnit
+	public static Collection<String> getAvailableImageWriteMIMETypes() { //$JUnit$
 	    return unique(ImageIO.getWriterMIMETypes());
 	}
 

@@ -75,7 +75,7 @@ public abstract class HelperGraphic {
      * @return Dimension with center coordinates
      * @since 0.4.0
      */
-    public static Dimension getCenter(final Dimension size) { //$JUnit
+    public static Dimension getCenter(final Dimension size) { //$JUnit$
 		if (null == size) {
 			throw new IllegalArgumentException("size is null!"); //$NON-NLS-1$
 		}
@@ -118,7 +118,7 @@ public abstract class HelperGraphic {
      * @return List containing all fonts
      * @since 0.4.0
      */
-    public static Collection<Font> getAvailableFonts() { //$JUnit
+    public static Collection<Font> getAvailableFonts() { //$JUnit$
 		// Get all available fonts from GraphicsEnvironment
 		final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		
@@ -133,7 +133,7 @@ public abstract class HelperGraphic {
      * @return hex value of the color
      * @since 0.4.0
      */
-    public static String getColorHex(final Color color) { //$JUnit
+    public static String getColorHex(final Color color) { //$JUnit$
 		if (null == color) {
 			throw new IllegalArgumentException("color is null!"); //$NON-NLS-1$
 		}

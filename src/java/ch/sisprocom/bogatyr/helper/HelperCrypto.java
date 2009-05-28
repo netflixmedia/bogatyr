@@ -59,7 +59,7 @@ public abstract class HelperCrypto {
      * @throws NoSuchAlgorithmException
      * @since 0.7.0
      */
-    public static String getHashCode(final String algo, final Object data) throws NoSuchAlgorithmException { //$JUnit
+    public static String getHashCode(final String algo, final Object data) throws NoSuchAlgorithmException { //$JUnit$
 		if (!HelperString.isValid(algo)) {
 			throw new IllegalArgumentException("algo is null or empty!"); //$NON-NLS-1$
 		}
@@ -94,7 +94,7 @@ public abstract class HelperCrypto {
      * @throws NoSuchAlgorithmException
      * @since 0.7.0
      */
-    public static String getHashCode(final Object data) throws NoSuchAlgorithmException { //$JUnit
+    public static String getHashCode(final Object data) throws NoSuchAlgorithmException { //$JUnit$
     	return getHashCode(HASHCODE_ALGORITHM_SHA256, data);
     }
 
@@ -107,7 +107,7 @@ public abstract class HelperCrypto {
      * @return generated unique string
      * @since 0.7.0
      */
-    public static String getRandomKey(final int digits, final char... seed) { //$JUnit
+    public static String getRandomKey(final int digits, final char... seed) { //$JUnit$
 		if (0 >= digits) {
 			throw new IllegalArgumentException("digits must be greater than 0: " + digits); //$NON-NLS-1$
 		}
@@ -131,7 +131,7 @@ public abstract class HelperCrypto {
      * @return generated unique String
      * @since 0.7.0
      */
-    public static String getRandomKey(final int digits) { //$JUnit
+    public static String getRandomKey(final int digits) { //$JUnit$
     	return getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
     }
 
@@ -141,7 +141,7 @@ public abstract class HelperCrypto {
      * @return generated universally unique identifier
      * @since 0.7.0
      */
-    public static UUID getUUID() { //$JUnit
+    public static UUID getUUID() { //$JUnit$
     	return UUID.randomUUID();
     }    
 }

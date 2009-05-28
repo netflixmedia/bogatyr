@@ -55,7 +55,7 @@ public abstract class ControlMail {
 	 * @throws IOException
 	 * @since 0.7.0
 	 */
-	public static void mail() throws IOException { //$JUnit
+	public static void mail() throws IOException { //$JUnit$
 		if (Desktop.isDesktopSupported()) {
 			Desktop.getDesktop().mail();
 		} else {
@@ -70,7 +70,7 @@ public abstract class ControlMail {
 	 * @throws IOException
 	 * @since 0.7.0
 	 */
-	public static void mail(final URI uri) throws IOException { //$JUnit
+	public static void mail(final URI uri) throws IOException { //$JUnit$
 		if (Desktop.isDesktopSupported()) {
 			if (null == uri) {
 				throw new IllegalArgumentException("uri is null!"); //$NON-NLS-1$
@@ -90,7 +90,7 @@ public abstract class ControlMail {
 	 * @throws URISyntaxException
 	 * @since 0.7.0
 	 */
-	public static void mail(final String emailAddress) throws IOException, URISyntaxException { //$JUnit
+	public static void mail(final String emailAddress) throws IOException, URISyntaxException { //$JUnit$
 		if (!HelperString.isValid(emailAddress)) {
 			throw new IllegalArgumentException("emailAddress is null or empty!"); //$NON-NLS-1$
 		}

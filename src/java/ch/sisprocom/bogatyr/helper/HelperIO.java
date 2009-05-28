@@ -81,7 +81,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.5.0
      */	
-	public static File getTemporaryFile(final String name, final String extension) throws IOException { //$JUnit
+	public static File getTemporaryFile(final String name, final String extension) throws IOException { //$JUnit$
 		if (!HelperString.isValid(name)) {
 			throw new IllegalArgumentException("name is null or empty!"); //$NON-NLS-1$
 		}
@@ -116,7 +116,7 @@ public abstract class HelperIO {
      * @return List containing the matched files
      * @since 0.1.0
      */	
-	public static Collection<File> getFiles(final File path, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory, final String... identifiers) { //$JUnit
+	public static Collection<File> getFiles(final File path, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory, final String... identifiers) { //$JUnit$
 		if (null == path) {
 			throw new IllegalArgumentException("path is null!"); //$NON-NLS-1$
 		}
@@ -141,7 +141,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.1.0
      */	
-	public static Collection<File> getFiles(final File path, final boolean isExclude, final String... identifiers) throws IOException { //$JUnit
+	public static Collection<File> getFiles(final File path, final boolean isExclude, final String... identifiers) throws IOException { //$JUnit$
 		return getFiles(path, isExclude, false, true, true, true, identifiers);
 	}
 	
@@ -316,7 +316,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.1.0
      */	
-	public static void writeLine(final File file, final String encoding, final String line) throws IOException { //$JUnit
+	public static void writeLine(final File file, final String encoding, final String line) throws IOException { //$JUnit$
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -350,7 +350,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.1.0
      */	
-	public static void writeLine(final File file, final String line) throws IOException { //$JUnit
+	public static void writeLine(final File file, final String line) throws IOException { //$JUnit$
 		writeLine(file, Constants.ENCODING_DEFAULT, line);
 	}
 
@@ -363,7 +363,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.1.0
      */	
-	public static void writeFile(final File file, final byte[] data, final boolean append) throws IOException { //$JUnit
+	public static void writeFile(final File file, final byte[] data, final boolean append) throws IOException { //$JUnit$
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -397,7 +397,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.1.0
      */	
-	public static void writeFile(final File file, final String data, final String encoding, final boolean append) throws IOException { //$JUnit
+	public static void writeFile(final File file, final String data, final String encoding, final boolean append) throws IOException { //$JUnit$
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -438,7 +438,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.1.0
      */	
-	public static void writeFile(final File file, final String data, final boolean append) throws IOException { //$JUnit
+	public static void writeFile(final File file, final String data, final boolean append) throws IOException { //$JUnit$
 		writeFile(file, data, Constants.ENCODING_DEFAULT, append);
 	}
 	
@@ -451,7 +451,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.1.0
      */	
-	public static void writeFile(final File file, final InputStream is, final boolean append) throws IOException { //$JUnit
+	public static void writeFile(final File file, final InputStream is, final boolean append) throws IOException { //$JUnit$
 		writeFile(file, readStream(is), append);
 	}	
 	
@@ -519,7 +519,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.1.0
      */	
-	public static byte[] readFile(final File file) throws IOException { //$JUnit
+	public static byte[] readFile(final File file) throws IOException { //$JUnit$
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -552,7 +552,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.1.0
      */	
-	public static String readFileAsString(final File file, final String encoding) throws IOException { //$JUnit
+	public static String readFileAsString(final File file, final String encoding) throws IOException { //$JUnit$
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -589,7 +589,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.1.0
      */	
-	public static String readFileAsString(final File file) throws IOException { //$JUnit
+	public static String readFileAsString(final File file) throws IOException { //$JUnit$
 		return readFileAsString(file, Constants.ENCODING_DEFAULT);
 	}
 	
@@ -646,7 +646,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.1.0
      */	
-	public static void readFileAsStream(final File file, final OutputStream os) throws IOException { //$JUnit
+	public static void readFileAsStream(final File file, final OutputStream os) throws IOException { //$JUnit$
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}

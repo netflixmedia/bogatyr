@@ -95,11 +95,11 @@ public class CryptoSymm implements ICryptoSymm {
 	 * @see SecretKey
 	 * @since 0.1.0
 	 */
-	public SecretKey generateKey() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
+	public SecretKey generateKey() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
 		return generateKey(DEFAULT_KEYSIZE);
 	}
 	
-	public SecretKey generateKey(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit
+	public SecretKey generateKey(final int keysize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
     	if (0 >= keysize) {
 			throw new IllegalArgumentException("keysize is invalid: " + keysize); //$NON-NLS-1$
 		}
@@ -113,7 +113,7 @@ public class CryptoSymm implements ICryptoSymm {
 		return kg.generateKey();
 	}
 	
-	public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit
+	public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit$
 		if (null == input) {
 			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
@@ -127,7 +127,7 @@ public class CryptoSymm implements ICryptoSymm {
 		return cipher.doFinal(input);
 	}
 
-	public byte[] decrypt(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException { //$JUnit
+	public byte[] decrypt(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		if (null == input) {
 			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}

@@ -92,7 +92,7 @@ public abstract class ControlFile {
 	 * @throws IOException
 	 * @since 0.7.0
 	 */
-	public static void open(final File file) throws IOException { //$JUnit
+	public static void open(final File file) throws IOException { //$JUnit$
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
 				throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
@@ -112,7 +112,7 @@ public abstract class ControlFile {
 	 * @throws IOException
 	 * @since 0.7.0
 	 */
-	public static void open(final InputStream is, final String extension) throws IOException { //$JUnit
+	public static void open(final InputStream is, final String extension) throws IOException { //$JUnit$
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
@@ -149,7 +149,7 @@ public abstract class ControlFile {
 	 * @throws IOException
 	 * @since 0.7.0
 	 */
-	public static void edit(final File file) throws IOException { //$JUnit
+	public static void edit(final File file) throws IOException { //$JUnit$
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
 				throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
@@ -169,7 +169,7 @@ public abstract class ControlFile {
 	 * @throws IOException
 	 * @since 0.7.0
 	 */
-	public static void edit(final InputStream is, final String extension) throws IOException { //$JUnit
+	public static void edit(final InputStream is, final String extension) throws IOException { //$JUnit$
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
@@ -206,7 +206,7 @@ public abstract class ControlFile {
 	 * @throws IOException
 	 * @since 0.7.0
 	 */
-	public static void print(final File file) throws IOException { //$JUnit
+	public static void print(final File file) throws IOException { //$JUnit$
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
 				throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
@@ -226,7 +226,7 @@ public abstract class ControlFile {
 	 * @throws IOException
 	 * @since 0.7.0
 	 */
-	public static void print(final InputStream is, final String extension) throws IOException { //$JUnit
+	public static void print(final InputStream is, final String extension) throws IOException { //$JUnit$
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}

@@ -72,7 +72,7 @@ public abstract class HelperPdf {
      * @throws IOException
      * @since 0.5.0
      */
-    public static void savePdfFromComponent(final File file, final Component component) throws IOException, DocumentException { //$JUnit
+    public static void savePdfFromComponent(final File file, final Component component) throws IOException, DocumentException { //$JUnit$
 		if (null == component) {
 			throw new IllegalArgumentException("component is null!"); //$NON-NLS-1$
 		}
@@ -113,7 +113,7 @@ public abstract class HelperPdf {
      * @throws IOException
      * @since 0.5.0
      */
-	public static void savePdfFromHTML(final File file, final File... files) throws IOException, DocumentException { //$JUnit
+	public static void savePdfFromHTML(final File file, final File... files) throws IOException, DocumentException { //$JUnit$
 		if (!HelperArray.isValid(files)) {
 			throw new IllegalArgumentException("files is null or empty!"); //$NON-NLS-1$
 		}

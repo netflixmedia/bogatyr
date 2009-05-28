@@ -53,7 +53,7 @@ public abstract class ConverterHex {
      * @return hex representation of a byte array
      * @since 0.1.0
      */
-    public static String encode(final byte[] input) { //$JUnit
+    public static String encode(final byte[] input) { //$JUnit$
 		if (!HelperArray.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
@@ -77,7 +77,7 @@ public abstract class ConverterHex {
      * @return byte-array representation of a hex string
      * @since 0.1.0
      */
-    public static byte[] decode(final String input) { //$JUnit
+    public static byte[] decode(final String input) { //$JUnit$
 		if (!HelperString.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
