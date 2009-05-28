@@ -33,10 +33,9 @@ package ch.sisprocom.bogatyr.controller.net.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashSet;
 
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperObject;
@@ -47,15 +46,17 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.7.0
  */
-public abstract class ServerAbstract implements IServer {
+public abstract class ServerAbstract implements IServer, ListenerServerThread {
     private final long createTime = System.currentTimeMillis();
 
     private Thread thread;
     
-    private final Map<UUID, IServerThread> mapThread = new ConcurrentHashMap<UUID, IServerThread>();
+	private Collection<IServerThread> listThread = new HashSet<IServerThread>();
+
+//    private final Map<UUID, IServerThread> mapThread = new ConcurrentHashMap<UUID, IServerThread>();
 
     private ServerSocket serverSocket;
     private int port;
@@ -158,16 +159,16 @@ public abstract class ServerAbstract implements IServer {
         this.timeout = timeout;
     }
 
-    public void addServerThread(final UUID uuid, final IServerThread serverThread) {
-        mapThread.put(uuid, serverThread);
-    }
-
-    public void removeServerThread(final UUID uuid) {
-        mapThread.remove(uuid);
-    }
-
-    public Map<UUID, IServerThread> getServerThreads() {
-        return Collections.unmodifiableMap(mapThread);
+//    public void addServerThread(final UUID uuid, final IServerThread serverThread) {
+//        mapThread.put(uuid, serverThread);
+//    }
+//
+//    public void removeServerThread(final UUID uuid) {
+//        mapThread.remove(uuid);
+//    }
+//
+    public Collection<IServerThread> getServerThreads() {
+        return Collections.unmodifiableCollection(listThread);
     }
 
     public void start() throws IOException {
@@ -190,10 +191,8 @@ public abstract class ServerAbstract implements IServer {
         	serverSocket.close();
         }
 		
-        for (final UUID key : getServerThreads().keySet()) {
-            final IServerThread thread = getServerThreads().get(key);
-
-            thread.stop();
+        for (final IServerThread thread : listThread) {
+             thread.stop();
         }
         
 		if (thread != null) {
@@ -208,4 +207,12 @@ public abstract class ServerAbstract implements IServer {
     public boolean isRunning() {
         return isRunning;
     }
+    
+	public void serverThreadStarted(final IServerThread serverThread) {
+		listThread.add(serverThread);
+	}
+	
+	public void serverThreadStopped(final IServerThread serverThread) {
+		listThread.remove(serverThread);
+	}
 }

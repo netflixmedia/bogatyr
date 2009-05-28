@@ -34,8 +34,8 @@ package ch.sisprocom.bogatyr.controller.net;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
@@ -54,7 +54,7 @@ public class ControllerDatagram implements IControllerDatagram {
 
     private Thread thread;
     
-	private Collection<ListenerDatagram> listListener = new ArrayList<ListenerDatagram>();
+	private Collection<ListenerDatagram> listListener = new HashSet<ListenerDatagram>();
 
     private int port;
     private DatagramSocket socket;
@@ -196,6 +196,6 @@ public class ControllerDatagram implements IControllerDatagram {
     }
 
     public synchronized void removeAllListener() {
-        listListener = new ArrayList<ListenerDatagram>();
+        listListener = new HashSet<ListenerDatagram>();
     }
 }

@@ -33,7 +33,6 @@ package ch.sisprocom.bogatyr.controller.net.server;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.UUID;
 
 
 
@@ -41,18 +40,10 @@ import java.util.UUID;
  * Defines the methods for the implementation of the server thread.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.7.0
  */
 public interface IServerThread extends Runnable {
-	/**
-	 * Returns the an universally unique identifier {@link UUID} of the thread.
-	 * 
-	 * @return universally unique identifier
-	 * @since 0.7.0
-	 */
-	UUID getUuid();
-
 	/**
 	 * Returns the current {@link Socket} of the thread.
 	 * 
@@ -60,14 +51,6 @@ public interface IServerThread extends Runnable {
 	 * @since 0.7.0
 	 */
 	Socket getSocket();
-
-	/**
-	 * Returns the server (owner) of this thread.
-	 * 
-	 * @return server
-	 * @since 0.7.0
-	 */
-	IServer getServer();
 
 	/**
      * Reads a socket-stream.
@@ -109,4 +92,27 @@ public interface IServerThread extends Runnable {
 	 * @since 0.7.0
 	 */
     boolean isRunning();
+    
+	/**
+	 * Adds a listener for this server thread.
+	 * 
+	 * @param listener to add
+	 * @since 0.8.0
+	 */
+	void addListener(ListenerServerThread listener);
+	
+	/**
+	 * Remove a listener for this server thread.
+	 * 
+	 * @param listener to remove
+	 * @since 0.8.0
+	 */
+	void removeListener(ListenerServerThread listener);
+
+	/**
+	 * Remove all listeners for this server thread.
+	 * 
+	 * @since 0.8.0
+	 */
+	void removeAllListener();
 }   

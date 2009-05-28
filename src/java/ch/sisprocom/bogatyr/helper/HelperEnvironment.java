@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.helper;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
@@ -43,7 +44,7 @@ import java.util.TimeZone;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -118,6 +119,38 @@ public abstract class HelperEnvironment {
 	}
 	
 	/**
+	 * Adds a path to the Java library path.
+	 * 
+	 * @param path to add
+	 * @throws SecurityException
+	 * @throws NoSuchFieldException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 * @since 0.8.0
+	 */
+	public void addPathToLibraryPath(final File path) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+		final String location = path.getAbsolutePath();
+		
+		final Field field = ClassLoader.class.getDeclaredField("usr_paths"); //$NON-NLS-1$
+		field.setAccessible(true);
+		String[] paths = (String[])field.get(null);
+		
+		for (int ii = 0; ii < paths.length; ii++) {
+			if (location.equals(paths[ii])) {
+				return;
+			}
+		}
+		
+		final String[] tmp = new String[paths.length+1];
+		
+		System.arraycopy(paths, 0, tmp, 0, paths.length);
+		tmp[paths.length] = location;
+		field.set(null,tmp);
+		
+		System.setProperty("java.library.path", System.getProperty("java.library.path") + HelperIO.PATH_SEPARATOR + location); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+
+	/**
 	 * Returns all available processors for the VM.
      *
      * @return available processors for the VM
@@ -175,13 +208,6 @@ public abstract class HelperEnvironment {
 	 */
 	public static Map<String, String> getOsEnvironmentVariables() { //$JUnit
 		return System.getenv();
-//		final Map<String, String> map = System.getenv();
-//		final Collection<String> list = new ArrayList<String>(map.size());
-//
-//		for (final Map.Entry<String, String> pair : map.entrySet()) {
-//            list.add(pair.getKey() + '=' + pair.getValue());
-//        }
-//        return list;
     }
 
 	/**
