@@ -33,8 +33,7 @@ package ch.sisprocom.bogatyr.controller.net.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.util.Map;
-import java.util.UUID;
+import java.util.Collection;
 
 
 
@@ -43,7 +42,7 @@ import java.util.UUID;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.7.0
  */
 public interface IServer extends Runnable {
@@ -113,28 +112,11 @@ public interface IServer extends Runnable {
     boolean isRunning();
 	
 	/**
-	 * Adds a new thread to the map.
+	 * Returns all server threads.
 	 * 
-	 * @param uuid unique key for the {@link Map} index
-	 * @param serverThread asynchron server thread
-	 * @since 0.7.0
+	 * @return list containing all server threads
+	 * @since 0.8.0
 	 */
-	void addServerThread(final UUID uuid, final IServerThread serverThread);
-
-	/**
-	 * Removes the thread with the given unique key from the {@link Map}.
-	 * 
-	 * @param uuid unique key for the map index
-	 * @since 0.7.0
-	 */
-	void removeServerThread(final UUID uuid);
-	
-	/**
-	 * Returns all threads.
-	 * 
-	 * @return list containing all threads
-	 * @since 0.7.0
-	 */
-	Map<UUID, IServerThread> getServerThreads();
+	Collection<IServerThread> getServerThreads();
 }   
 

@@ -31,22 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.localizer;
 
-import ch.sisprocom.bogatyr.controller.ControllerAbstract;
-
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Locale;
+
+import ch.sisprocom.bogatyr.controller.ControllerAbstract;
 
 
 /**
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.6.0
  */
 public abstract class ControllerLocalizerAbstract extends ControllerAbstract implements IControllerLocalizer {
-	private Collection<ListenerLocale> listListener = new ArrayList<ListenerLocale>();
+	private Collection<ListenerLocale> listListener = new HashSet<ListenerLocale>();
 
 	private Locale locale = Locale.getDefault();
 	
@@ -82,6 +82,6 @@ public abstract class ControllerLocalizerAbstract extends ControllerAbstract imp
     }
 
     public synchronized void removeAllListener() {
-        listListener = new ArrayList<ListenerLocale>();
+        listListener = new HashSet<ListenerLocale>();
     }
 }

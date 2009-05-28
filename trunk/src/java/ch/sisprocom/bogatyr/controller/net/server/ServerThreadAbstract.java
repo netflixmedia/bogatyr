@@ -31,22 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.server;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperCrypto;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
-import java.util.UUID;
+import java.util.Collection;
+import java.util.HashSet;
+
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.7.0
  */
 public abstract class ServerThreadAbstract implements IServerThread {
@@ -54,17 +54,15 @@ public abstract class ServerThreadAbstract implements IServerThread {
 
 	private Thread thread;
 	
-	private final UUID uuid = HelperCrypto.getUUID();
+	private Collection<ListenerServerThread> listListener = new HashSet<ListenerServerThread>();
 
 	private final Socket socket;
-	private final IServer server;
 	
 	private boolean isRunning;
 	
 
-	protected ServerThreadAbstract(final IServer server, final Socket socket) {
+	protected ServerThreadAbstract(final Socket socket) {
         super();
-        this.server = server;
 		this.socket = socket;
 	}
 
@@ -90,6 +88,32 @@ public abstract class ServerThreadAbstract implements IServerThread {
 	
 	
 	/*
+	 * Private methods
+	 */
+	protected void fireStreamRead(final byte[] data) {
+		for (final ListenerServerThread listener : listListener) {
+			listener.serverThreadStreamRead(data);
+		}	
+	}
+	
+	protected void fireStarted() {
+		isRunning = true;
+		
+		for (final ListenerServerThread listener : listListener) {
+			listener.serverThreadStarted(this);
+		}	
+	}
+	
+	protected void fireStopped() {
+		isRunning = false;
+		
+		for (final ListenerServerThread listener : listListener) {
+			listener.serverThreadStopped(this);
+		}	
+	}
+	
+	
+	/*
 	 * Overridden methods
 	 */
 	@Override
@@ -101,16 +125,8 @@ public abstract class ServerThreadAbstract implements IServerThread {
 	/*
 	 * Implemented methods
 	 */
-	public UUID getUuid() {
-		return uuid;
-	}
-
 	public Socket getSocket() {
 		return socket;
-	}
-
-	public IServer getServer() {
-		return server;
 	}
 
 	public byte[] readStream() throws IOException {
@@ -139,21 +155,19 @@ public abstract class ServerThreadAbstract implements IServerThread {
 
 	public void start() {		
 		if (thread == null) {
-			server.addServerThread(uuid, this);
 			thread = new Thread(this);
             thread.start();
 		}
-		isRunning = true;
+		
+		fireStarted();
 	}	
 
 	public void stop() throws IOException {
-		isRunning = false;
+		fireStopped();
 
         if (null != socket) {
         	socket.close();
         }
-		
-		server.removeServerThread(uuid);
 		
 		if (thread != null) {
 			if (thread.isAlive()) {
@@ -167,4 +181,16 @@ public abstract class ServerThreadAbstract implements IServerThread {
 	public boolean isRunning() {
 		return isRunning;
 	}
+	
+    public synchronized void addListener(final ListenerServerThread listener) {
+        listListener.add(listener);
+    }
+
+    public synchronized void removeListener(final ListenerServerThread listener) {
+        listListener.remove(listener);
+    }
+
+    public synchronized void removeAllListener() {
+        listListener = new HashSet<ListenerServerThread>();
+    }
 }

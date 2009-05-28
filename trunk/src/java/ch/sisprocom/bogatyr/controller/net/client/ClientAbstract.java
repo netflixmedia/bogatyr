@@ -31,23 +31,23 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.client;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 /**
  * This is the skeleton for clients.
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.7.0
  */
 public abstract class ClientAbstract implements IClient {
@@ -55,7 +55,7 @@ public abstract class ClientAbstract implements IClient {
 
     private Thread thread;
     
-	private Collection<ListenerClient> listListener = new ArrayList<ListenerClient>();
+	private Collection<ListenerClient> listListener = new HashSet<ListenerClient>();
 
     private String host;
     private int port;
@@ -119,7 +119,7 @@ public abstract class ClientAbstract implements IClient {
 	/*
 	 * Private methods
 	 */
-	protected void fireClientStreamRead(final byte[] data) {
+	protected void fireStreamRead(final byte[] data) {
 		for (final ListenerClient listener : listListener) {
 			listener.clientStreamRead(data);
 		}	
@@ -247,6 +247,6 @@ public abstract class ClientAbstract implements IClient {
     }
 
     public synchronized void removeAllListener() {
-        listListener = new ArrayList<ListenerClient>();
+        listListener = new HashSet<ListenerClient>();
     }
 }

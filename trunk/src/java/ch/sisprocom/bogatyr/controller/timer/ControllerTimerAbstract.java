@@ -31,11 +31,11 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.timer;
 
-import ch.sisprocom.bogatyr.controller.ControllerAbstract;
-
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Timer;
+
+import ch.sisprocom.bogatyr.controller.ControllerAbstract;
 
 /**
  * This is a timer which informs all added listeners about its state.
@@ -45,7 +45,7 @@ import java.util.Timer;
  * @since 0.6.0
  */
 public abstract class ControllerTimerAbstract extends ControllerAbstract implements IListener {
-	private Collection<ListenerTimer> listListener = new ArrayList<ListenerTimer>();
+	private Collection<ListenerTimer> listListener = new HashSet<ListenerTimer>();
 
 	private Timer timer = new Timer();
 	private long interval;
@@ -116,7 +116,7 @@ public abstract class ControllerTimerAbstract extends ControllerAbstract impleme
     }
 
     public synchronized void removeAllListener() {
-        listListener = new ArrayList<ListenerTimer>();
+        listListener = new HashSet<ListenerTimer>();
     }
     
     public boolean isRunning() {
