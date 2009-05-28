@@ -77,10 +77,10 @@ public class HelperIOTest {
 
 	@Test
 	public void testGetFiles() {
-		assertNotNull(HelperIO.getFiles(HelperEnvironment.getOsTempDirectory(), null, false, false, false, true, true));
+		assertNotNull(HelperIO.getFiles(HelperEnvironment.getOsTempDirectory(), false, false, false, true, true, null));
 		
 		try {
-			HelperIO.getFiles(null, new String[]{"tmp"}, false, false, false, true, true); //$NON-NLS-1$
+			HelperIO.getFiles(null, false, false, false, true, true, "tmp"); //$NON-NLS-1$
 			fail("path is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -89,7 +89,7 @@ public class HelperIOTest {
 		}
 
 		try {
-			HelperIO.getFiles(new File("*blablabla/asdf"), null, false, false, false, true, true); //$NON-NLS-1$
+			HelperIO.getFiles(new File("*blablabla/asdf"), false, false, false, true, true, null); //$NON-NLS-1$
 			fail("Invalid path"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

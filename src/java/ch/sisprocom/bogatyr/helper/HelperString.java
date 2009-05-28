@@ -170,13 +170,13 @@ public abstract class HelperString {
     /**
      * Concatenates strings with a separator (e.g. for CSV export).
      *
-     * @param strings to concatenate
      * @param separator between the strings
-     * @param trimmed true/false
+     * @param isTrimmed true/false
+     * @param strings to concatenate
      * @return concatenated string
      * @since 0.7.0
      */
-    public static String concatenate(final String[] strings, final char separator, final boolean trimmed) {
+    public static String concatenate(final char separator, final boolean isTrimmed, final String... strings) {
         if (!HelperArray.isValid(strings)) {
         	return null;
         }
@@ -189,7 +189,7 @@ public abstract class HelperString {
                     sb.append(separator);
                 }
 
-                if (trimmed) {
+                if (isTrimmed) {
                     sb.append(strValue.trim());
                 } else {
                     sb.append(strValue);

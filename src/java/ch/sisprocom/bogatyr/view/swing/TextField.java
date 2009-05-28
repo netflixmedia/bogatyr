@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import javax.swing.Action;
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -58,6 +59,11 @@ public class TextField extends JTextField implements IComponentActivate {
         this(HelperString.EMPTY_STRING, HelperString.EMPTY_STRING, Integer.MAX_VALUE);
     }
 
+	public TextField(final Action action) {
+        this();
+        setAction(action);
+    }
+	
 	public TextField(final String text, final String toolTip) {
         this(text, toolTip, Integer.MAX_VALUE);
     }

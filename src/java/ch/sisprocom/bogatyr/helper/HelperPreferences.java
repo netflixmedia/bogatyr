@@ -64,7 +64,7 @@ public abstract class HelperPreferences { //TODO complete and test it!
         }
 	}
 	 
-	public static void save(final Preferences prefs, final File file) throws IOException, BackingStoreException {
+	public static void save(final File file, final Preferences prefs) throws IOException, BackingStoreException {
         BufferedOutputStream bos = null;
 
         try {
@@ -77,7 +77,7 @@ public abstract class HelperPreferences { //TODO complete and test it!
         }
 	}	
 	  
-	public static void saveUserNode(final Class<?> clazz, final File file) throws IOException, BackingStoreException {
+	public static void saveUserNode(final File file, final Class<?> clazz) throws IOException, BackingStoreException {
         BufferedOutputStream bos = null;
 
         try {
@@ -90,7 +90,7 @@ public abstract class HelperPreferences { //TODO complete and test it!
         }
 	}	
 	  
-	public static void saveSystemNode(final Class<?> clazz, final File file) throws IOException, BackingStoreException {
+	public static void saveSystemNode(final File file, final Class<?> clazz) throws IOException, BackingStoreException {
         BufferedOutputStream bos = null;
 
         try {

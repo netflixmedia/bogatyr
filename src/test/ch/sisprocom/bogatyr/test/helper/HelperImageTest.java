@@ -52,7 +52,7 @@ import ch.sisprocom.bogatyr.view.swing.Button;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090527
+ * @version 20090528
  */
 public class HelperImageTest {
 	@Test
@@ -64,11 +64,11 @@ public class HelperImageTest {
 		component.setSize(new Dimension(100, 100));
 
 		try {
-			HelperImage.saveImage(component, HelperImage.TYPE_JPG, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), HelperImage.TYPE_JPG)); //$NON-NLS-1$
+			HelperImage.saveImage(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), HelperImage.TYPE_JPG), HelperImage.TYPE_JPG, component); //$NON-NLS-1$
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
 		
 		try {
-			HelperImage.saveImage(component, "blabla", HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), HelperImage.TYPE_JPG)); //$NON-NLS-1$ //$NON-NLS-2$
+			HelperImage.saveImage(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), HelperImage.TYPE_JPG), "blabla", component); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("type is invalid!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -77,7 +77,7 @@ public class HelperImageTest {
 		}
 
 		try {
-			HelperImage.saveImage(component, HelperImage.TYPE_JPG, null);
+			HelperImage.saveImage(null, HelperImage.TYPE_JPG, component);
 			fail("file is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

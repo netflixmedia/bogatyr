@@ -107,10 +107,9 @@ public class FileManager extends ApplicationAbstract {
 
 	private void searchFiles() throws IOException {
 		int ii = 0;
-		final String[] identifier = {property.getValue(PROPERTY_IDENTIFIER)};
 		final boolean isDelete = property.getBooleanValue(PROPERTY_DELETE);
 
-		for (final File file : HelperIO.getFiles(path, identifier, false)) {
+		for (final File file : HelperIO.getFiles(path, false, property.getValue(PROPERTY_IDENTIFIER))) {
 			if (isDelete) {
 				HelperIO.delete(file);
 			}

@@ -37,7 +37,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Collection;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -48,7 +47,7 @@ import java.util.zip.ZipOutputStream;
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.7.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.3.0
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
@@ -58,16 +57,16 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * Writes a ZIP {@link File} containing a list of {@link File}.
      * 
      * @param file for writing
-     * @param listOfFiles for the ZIP file
+     * @param files for the ZIP file
      * @throws IOException
      * @since 0.3.0
      */	
-	public static void writeZip(final File file, final Collection<File> listOfFiles) throws IOException {
+	public static void writeZip(final File file, final File... files) throws IOException {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
-		if (!HelperCollection.isValid(listOfFiles)) {
-			throw new IllegalArgumentException("listOfFiles is null or empty!"); //$NON-NLS-1$
+		if (!HelperArray.isValid(files)) {
+			throw new IllegalArgumentException("files is null or empty!"); //$NON-NLS-1$
 		}
 		
 		ZipOutputStream zos = null;
@@ -76,7 +75,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 			// create a ZipOutputStream to zip the data to
 			zos = new ZipOutputStream(new FileOutputStream(file));
 
-			for (final File entry : listOfFiles) {
+			for (final File entry : files) {
 			addEntry(zos, entry);
 			}
 		} finally {

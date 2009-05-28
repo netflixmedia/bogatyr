@@ -48,7 +48,7 @@ import java.util.Locale;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -60,13 +60,13 @@ public abstract class HelperImage {
     /**
      * Saves an image from a {@link RenderedImage} to a {@link File}.
      *
-     * @param image RenderImage for the image
+     * @param file for the image
      * @param type of the image (e.g. "jpg")
-     * @param file location
+     * @param image RenderImage for the image
      * @throws IOException
      * @since 0.4.0
      */
-    public static void saveImage(final RenderedImage image, final String type, final File file) throws IOException { //$JUnit
+    public static void saveImage(final File file, final String type, final RenderedImage image) throws IOException { //$JUnit
 		if (null == image) {
 			throw new IllegalArgumentException("image is null!"); //$NON-NLS-1$
 		}
@@ -82,15 +82,15 @@ public abstract class HelperImage {
 
     /**
      * Saves an image from a {@link Component} to a {@link File}.
-     *
-     * @param component Component for the image
+     * 
+     * @param file for the image
      * @param type of the image (e.g. "jpg")
-     * @param file location
+     * @param component Component for the image
      * @throws IOException
      * @since 0.4.0
      */
-	public static void saveImage(final Component component, final String type, final File file) throws IOException { //$JUnit
-		saveImage(getImage(component), type, file);
+	public static void saveImage(final File file, final String type, final Component component) throws IOException { //$JUnit
+		saveImage(file, type, getImage(component));
 	} 
     
 	/**
@@ -121,9 +121,7 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageReadFormats() { //$JUnit
-	    final String[] formatNames = ImageIO.getReaderFormatNames();
-	    
-	    return unique(formatNames);
+	    return unique(ImageIO.getReaderFormatNames());
 	}
 
 	/**
@@ -133,9 +131,7 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageWriteFormats() { //$JUnit
-	    final String[] formatNames = ImageIO.getWriterFormatNames();
-	    
-	    return unique(formatNames);
+	    return unique(ImageIO.getWriterFormatNames());
 	}
 
 	/**
@@ -145,9 +141,7 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageReadMIMETypes() { //$JUnit
-	    final String[] formatNames = ImageIO.getReaderMIMETypes();
-	    
-	    return unique(formatNames);
+	    return unique(ImageIO.getReaderMIMETypes());
 	}
 
 	/**
@@ -157,9 +151,7 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageWriteMIMETypes() { //$JUnit
-	    final String[] formatNames = ImageIO.getWriterMIMETypes();
-	    
-	    return unique(formatNames);
+	    return unique(ImageIO.getWriterMIMETypes());
 	}
 
 	
@@ -173,7 +165,7 @@ public abstract class HelperImage {
 	 * @return list containing the unique values
 	 * @since 0.4.0
 	 */
-    private static Collection<String> unique(final String[] strings) {
+    private static Collection<String> unique(final String... strings) {
         final Collection<String> set = new HashSet<String>(strings.length);
         
         for (final String str : strings) {

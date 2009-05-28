@@ -54,7 +54,7 @@ import ch.sisprocom.bogatyr.helper.crypto.ProviderCertificate;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090527
+ * @version 20090528
  */
 public class ProviderCertificateTest {
 	private final IProviderCertificate publicKeyProvider = new ProviderCertificate();
@@ -71,10 +71,10 @@ public class ProviderCertificateTest {
 	@Test
 	public void testGenerateCertificate() {
 		try {
-			final File file = HelperIO.getTemporaryFile("bogatr_PublicKeyProviderTest", ".cer");  //$NON-NLS-1$//$NON-NLS-2$
+			final File file = HelperIO.getTemporaryFile("bogatr_ProviderCertificateTest", ".cer");  //$NON-NLS-1$//$NON-NLS-2$
 
 			X509Certificate cert = publicKeyProvider.generateCertificate(keyPair, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(), new Date(System.currentTimeMillis() + HelperTime.MILLISECONDS_WEEK));   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-			publicKeyProvider.storeCertificate(cert, file);
+			publicKeyProvider.storeCertificate(file, cert);
 			cert = publicKeyProvider.getCertificate(file);
 //			System.out.println(HelperGeneral.toString(cert));
 //			System.out.println(cert.getIssuerDN());

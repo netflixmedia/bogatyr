@@ -37,7 +37,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.io.File;
 
 import org.junit.Test;
 
@@ -52,7 +51,7 @@ import ch.sisprocom.bogatyr.view.swing.Button;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090527
+ * @version 20090528
  */
 public class HelperPdfTest {
 	@Test
@@ -64,11 +63,11 @@ public class HelperPdfTest {
 		component.setSize(new Dimension(100, 100));
 
 		try {
-			HelperPdf.savePdfFromComponent(component, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf")); //$NON-NLS-1$ //$NON-NLS-2$
+			HelperPdf.savePdfFromComponent(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"), component); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (Exception ex) {fail(ex.getMessage());}
 		
 		try {
-			HelperPdf.savePdfFromComponent(null, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf")); //$NON-NLS-1$ //$NON-NLS-2$
+			HelperPdf.savePdfFromComponent(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"), null); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("component is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -77,7 +76,7 @@ public class HelperPdfTest {
 		}
 
 		try {
-			HelperPdf.savePdfFromComponent(component, null);
+			HelperPdf.savePdfFromComponent(null, component);
 			fail("file is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -89,7 +88,7 @@ public class HelperPdfTest {
 	@Test
 	public void testSavePdfFromHTML() { //TODO improve
 		try {
-			HelperPdf.savePdfFromHTML(null, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf")); //$NON-NLS-1$ //$NON-NLS-2$
+			HelperPdf.savePdfFromHTML(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"), null); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("input is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -98,7 +97,7 @@ public class HelperPdfTest {
 		}
 
 		try {
-			HelperPdf.savePdfFromHTML(new File[]{HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".html")}, null); //$NON-NLS-1$ //$NON-NLS-2$
+			HelperPdf.savePdfFromHTML(null, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".html")); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("file is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
