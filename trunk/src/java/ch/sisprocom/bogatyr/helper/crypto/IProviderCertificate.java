@@ -44,7 +44,7 @@ import java.util.Date;
  * This interface is to generate, read and save X.509 certificates.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.6.0
  */
 public interface IProviderCertificate {
@@ -71,22 +71,22 @@ public interface IProviderCertificate {
     /**
      * Store the {@link Certificate} on a {@link OutputStream}.
      * 
-     * @param cert certificate
      * @param os output stream for the certificate
+     * @param cert certificate
      * @throws Exception 
      * @since 0.6.0
      */
-    void storeCertificate(final Certificate cert, final OutputStream os) throws Exception;
+    void storeCertificate(final OutputStream os, final Certificate cert) throws Exception;
     
     /**
      * Store the {@link Certificate} in a {@link File}.
      * 
-     * @param cert certificate
      * @param file for the certificate
+     * @param cert certificate
      * @throws Exception 
      * @since 0.6.0
      */
-    void storeCertificate(final Certificate cert, final File file) throws Exception;
+    void storeCertificate(final File file, final Certificate cert) throws Exception;
     
     /**
      * Generate a {@link X509Certificate} out of the given {@link KeyPair} and parameters.

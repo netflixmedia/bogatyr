@@ -31,19 +31,18 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.control;
 
-import ch.sisprocom.bogatyr.helper.HelperCollection;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.List;
+
+import ch.sisprocom.bogatyr.helper.HelperArray;
 
 
 /**
  * Creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.2.0
  */
 public abstract class ControlProcess {
@@ -52,15 +51,15 @@ public abstract class ControlProcess {
 	/**
 	 * Creates a new process and reads the standard output and standard error.
 	 *
-	 * @param commandList arguments to start the process
      * @param outputStream for the standard output of the process
 	 * @param errorStream for the standard error output of the process
+	 * @param commands arguments to start the process
 	 * @return created process
      * @throws IOException
      * @since 0.2.0
 	 */
-	public static Process createProcess(final List<String> commandList, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
-		final Process process = createProcess(commandList);
+	public static Process createProcess(final OutputStream outputStream, final OutputStream errorStream, final String... commands) throws IOException {
+		final Process process = createProcess(commands);
 
 		readStandardOutput(process, outputStream, errorStream);
 		
@@ -70,17 +69,17 @@ public abstract class ControlProcess {
 	/**
 	 * Creates a new process without reading the standard output and standard error ("fire and forget").
 	 *
-	 * @param commandList arguments to start the process
+	 * @param commands arguments to start the process
 	 * @return created process
      * @throws IOException
      * @since 0.2.0
 	 */
-	public static Process createProcess(final List<String> commandList) throws IOException {
-		if (!HelperCollection.isValid(commandList)) {
-			throw new IllegalArgumentException("commandList is null or empty!"); //$NON-NLS-1$
+	public static Process createProcess(final String... commands) throws IOException {
+		if (!HelperArray.isValid(commands)) {
+			throw new IllegalArgumentException("commands is null or empty!"); //$NON-NLS-1$
 		}
 		
-		final ProcessBuilder pb = new ProcessBuilder(commandList);
+		final ProcessBuilder pb = new ProcessBuilder(commands);
 		return pb.start();
 //		return Runtime.getRuntime().exec(command);
 	}

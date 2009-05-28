@@ -71,7 +71,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This class generates, reads and save X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 0.7.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.3.0
  */
 public class ProviderCertificate implements IProviderCertificate {
@@ -127,23 +127,23 @@ public class ProviderCertificate implements IProviderCertificate {
 		return cert;
     }
     
-    public void storeCertificate(final Certificate cert, final OutputStream os) throws CertificateEncodingException, IOException {
-		if (null == cert) {
-			throw new IllegalArgumentException("cert is null!"); //$NON-NLS-1$
-		}
+    public void storeCertificate(final OutputStream os, final Certificate cert) throws CertificateEncodingException, IOException {
 		if (null == os) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (null == cert) {
+			throw new IllegalArgumentException("cert is null!"); //$NON-NLS-1$
 		}
 		
 		HelperIO.writeStream(os, cert.getEncoded());
     }
     
-    public void storeCertificate(final Certificate cert, final File file) throws CertificateEncodingException, IOException {
-		if (null == cert) {
-			throw new IllegalArgumentException("cert is null!"); //$NON-NLS-1$
-		}
+    public void storeCertificate(final File file, final Certificate cert) throws CertificateEncodingException, IOException {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (null == cert) {
+			throw new IllegalArgumentException("cert is null!"); //$NON-NLS-1$
 		}
 		
     	HelperIO.writeFile(file, cert.getEncoded(), false);

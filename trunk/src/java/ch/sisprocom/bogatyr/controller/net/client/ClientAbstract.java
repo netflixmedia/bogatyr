@@ -191,11 +191,11 @@ public abstract class ClientAbstract implements IClient {
     }
 
     public void stop() throws IOException {
-        if (null != socket) {
+    	fireStopped();
+    	
+    	if (null != socket) {
         	socket.close();
         }
-        
-        fireStopped();
         
 		if (thread != null) {
 			if (thread.isAlive()) {

@@ -107,7 +107,7 @@ public abstract class HelperCrypto {
      * @return generated unique string
      * @since 0.7.0
      */
-    public static String getRandomKey(final int digits, final char[] seed) { //$JUnit
+    public static String getRandomKey(final int digits, final char... seed) { //$JUnit
 		if (0 >= digits) {
 			throw new IllegalArgumentException("digits must be greater than 0: " + digits); //$NON-NLS-1$
 		}

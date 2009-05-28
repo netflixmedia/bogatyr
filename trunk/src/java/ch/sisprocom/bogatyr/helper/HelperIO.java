@@ -104,19 +104,19 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Search in a path (directory) for files and directories via identifier and returns a {@link Collection} containing all {@link File}.
+     * Search in a path (directory) for files and directories via identifiers and returns a {@link Collection} containing all {@link File}.
      * 
      * @param path for searching
-     * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
-     * @param isExclude is the identifier excluded
+     * @param isExclude is the identifiers are excluded
      * @param isCaseSensitive true/false
      * @param isRecursive true/false
      * @param isFile true/false
      * @param isDirectory true/false
-     * @return List containing the path to the matched files
+     * @param identifiers of parts from the file name (if it's "null", all files will be delivered)
+     * @return List containing the matched files
      * @since 0.1.0
      */	
-	public static Collection<File> getFiles(final File path, final String[] identifier, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) { //$JUnit
+	public static Collection<File> getFiles(final File path, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory, final String... identifiers) { //$JUnit
 		if (null == path) {
 			throw new IllegalArgumentException("path is null!"); //$NON-NLS-1$
 		}
@@ -126,25 +126,38 @@ public abstract class HelperIO {
 
 		final List<File> list = new ArrayList<File>();
 
-		getFileNamesRecursion(path, identifier, list, isExclude, isCaseSensitive, isRecursive, isFile, isDirectory);
+		getFileNamesRecursion(path, identifiers, list, isExclude, isCaseSensitive, isRecursive, isFile, isDirectory);
 
 		return list;
 	}
 
 	/**
-     * Search in a path (directory) for files and directories via identifier and returns a {@link Collection} containing all {@link File}..
+     * Search in a path (directory) for files and directories via identifiers and returns a {@link Collection} containing all {@link File}.
      * 
      * @param path for searching
-     * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
-     * @param isExclude is the identifier excluded
-     * @return List containing the path to the matched files
+     * @param isExclude is the identifiers are excluded
+     * @param identifiers of parts from the file name (if it's "null", all files will be delivered)
+     * @return List containing the matched files
      * @throws IOException
      * @since 0.1.0
      */	
-	public static Collection<File> getFiles(final File path, final String[] identifier, final boolean isExclude) throws IOException { //$JUnit
-		return getFiles(path, identifier, isExclude, false, true, true, true);
+	public static Collection<File> getFiles(final File path, final boolean isExclude, final String... identifiers) throws IOException { //$JUnit
+		return getFiles(path, isExclude, false, true, true, true, identifiers);
 	}
-
+	
+	/**
+     * Search in a path (directory) for files and directories via identifiers and returns a {@link Collection} containing all {@link File}.
+     * 
+     * @param path for searching
+     * @param identifiers of parts from the file name (if it's "null", all files will be delivered)
+     * @return List containing the matched files
+     * @throws IOException
+     * @since 0.8.0
+     */	
+	public static Collection<File> getFiles(final File path, final String... identifiers) throws IOException {
+		return getFiles(path, false, false, true, true, true, identifiers);
+	}
+	
 	/**
      * Copy a directory.
      * 
@@ -232,11 +245,10 @@ public abstract class HelperIO {
      * 
      * @param source file/directory to move
      * @param dest file/directory
-     * @return true/false
      * @throws IOException
      * @since 0.1.0
      */	
-	public static boolean move(final File source, final File dest) throws IOException{
+	public static void move(final File source, final File dest) throws IOException{
 		if (null == source) {
 			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
 		}
@@ -249,29 +261,30 @@ public abstract class HelperIO {
 	    } else {
 	    	copyFile(source, dest);
 	    }
-	    return delete(source);
+	    delete(source);
 	}
 
 	/**
-     * Delete a file or directory.
+     * Delete files or directories.
      * 
-     * @param target file/directory to delete
-     * @return true/false
+     * @param files to delete (files/directories)
      * @throws IOException
      * @since 0.1.0
      */	
-	public static boolean delete(final File target) throws IOException{
-		if (null == target) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+	public static void delete(final File... files) throws IOException{
+		if (!HelperArray.isValid(files)) {
+			throw new IllegalArgumentException("files is null or empty!"); //$NON-NLS-1$
 		}
 
-		if (target.isDirectory()) {
-			final File[] childFiles = target.listFiles();
-			for (final File child : childFiles) {
-				delete(child);
+		for (final File target : files) {
+			if (target.isDirectory()) {
+				final File[] childFiles = target.listFiles();
+				for (final File child : childFiles) {
+					delete(child);
+				}
 			}
+			target.delete();
 		}
-		return target.delete();
 	}
 	  
 	/**
@@ -648,21 +661,21 @@ public abstract class HelperIO {
 	}	
 
 	/**
-     * Concatenates an array of files to one output {@link File}.
+     * Concatenates many files to one output {@link File}.
      * 
      * @param fileOutput Output file
-     * @param list List with all files
+     * @param files to concatenate
      * @throws IOException
      * @since 0.2.0
      */	
-	public static void concatenateFiles(final File fileOutput, final File[] list) throws IOException {
+	public static void concatenateFiles(final File fileOutput, final File... files) throws IOException {
 		if (null == fileOutput) {
 			throw new IllegalArgumentException("fileOutput is null!"); //$NON-NLS-1$
 		}
 //		if (!fileOutput.isFile()) {
 //			throw new IllegalArgumentException("fileOutput is not a file: " + fileOutput); //$NON-NLS-1$
 //		}
-		if (!HelperArray.isValid(list)) {
+		if (!HelperArray.isValid(files)) {
 			throw new IllegalArgumentException("list is null or empty!"); //$NON-NLS-1$
 		}
 
@@ -675,7 +688,7 @@ public abstract class HelperIO {
             BufferedReader br = null;
 
             // Process all files that are not the destination file
-            for (final File file : list) {
+            for (final File file : files) {
 
             	if (file.isFile()) {
 	                try {

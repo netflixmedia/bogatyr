@@ -92,7 +92,7 @@ public abstract class ServerThreadAbstract implements IServerThread {
 	 */
 	protected void fireStreamRead(final byte[] data) {
 		for (final ListenerServerThread listener : listListener) {
-			listener.serverThreadStreamRead(data);
+			listener.serverThreadStreamRead(this, data);
 		}	
 	}
 	

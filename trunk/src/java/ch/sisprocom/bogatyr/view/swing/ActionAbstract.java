@@ -49,7 +49,6 @@ public abstract class ActionAbstract extends AbstractAction {
 
 //	Action.LONG_DESCRIPTION
 //	Action.ACCELERATOR_KEY
-//	Action.MNEMONIC_KEY
 //	Action.SMALL_ICON
 //	Action.LARGE_ICON_KEY
 
@@ -70,12 +69,23 @@ public abstract class ActionAbstract extends AbstractAction {
 		super(name);
 		putValue(SHORT_DESCRIPTION, toolTip);
 	}
-
+	
+	protected ActionAbstract(final String name, final String toolTip, final int mnemonic) {
+		super(name);
+		putValue(SHORT_DESCRIPTION, toolTip);
+		putValue(MNEMONIC_KEY, mnemonic);
+	}
+	
 	protected ActionAbstract(final String name, final String toolTip, final Icon icon) {
 		super(name, icon);
 		putValue(SHORT_DESCRIPTION, toolTip);
 	}
-
+	
+	protected ActionAbstract(final String name, final String toolTip, final Icon icon, final int mnemonic) {
+		super(name, icon);
+		putValue(SHORT_DESCRIPTION, toolTip);
+		putValue(MNEMONIC_KEY, mnemonic);
+	}
 	
 	/*
 	 * Overridden methods

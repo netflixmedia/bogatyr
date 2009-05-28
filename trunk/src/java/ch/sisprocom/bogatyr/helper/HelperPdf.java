@@ -58,7 +58,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * This is a helper class for PDF operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.7.0 (20090527)
+ * @version 0.8.0 (20090528)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -66,13 +66,13 @@ public abstract class HelperPdf {
     /**
      * Saves a PDF from a {@link Component} to a {@link File}.
      *
+     * @param file output as PDF
      * @param component for the PDF
-     * @param file output
      * @throws DocumentException
      * @throws IOException
      * @since 0.5.0
      */
-    public static void savePdfFromComponent(final Component component, final File file) throws IOException, DocumentException { //$JUnit
+    public static void savePdfFromComponent(final File file, final Component component) throws IOException, DocumentException { //$JUnit
 		if (null == component) {
 			throw new IllegalArgumentException("component is null!"); //$NON-NLS-1$
 		}
@@ -107,15 +107,15 @@ public abstract class HelperPdf {
     /**
      * Saves a PDF from multiple (X)HTML files to a {@link File}.
      *
-     * @param input array with (X)HTML files for the PDF
-     * @param file output
+     * @param file output as PDF
+     * @param files in (X)HTML format for the PDF
      * @throws DocumentException
      * @throws IOException
      * @since 0.5.0
      */
-	public static void savePdfFromHTML(final File[] input, final File file) throws IOException, DocumentException { //$JUnit
-		if (!HelperArray.isValid(input)) {
-			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+	public static void savePdfFromHTML(final File file, final File... files) throws IOException, DocumentException { //$JUnit
+		if (!HelperArray.isValid(files)) {
+			throw new IllegalArgumentException("files is null or empty!"); //$NON-NLS-1$
 		}
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
@@ -128,12 +128,12 @@ public abstract class HelperPdf {
 	
 		   final ITextRenderer renderer = new ITextRenderer();
 	
-		   renderer.setDocument(input[0]);
+		   renderer.setDocument(files[0]);
 		   renderer.layout();
 		   renderer.createPDF(os, false);
 	
-		   for (int ii = 1; ii < input.length; ii++) {
-		       renderer.setDocument(input[ii]);
+		   for (int ii = 1; ii < files.length; ii++) {
+		       renderer.setDocument(files[ii]);
 		       renderer.layout();
 		       renderer.writeNextDocument();
 		   }

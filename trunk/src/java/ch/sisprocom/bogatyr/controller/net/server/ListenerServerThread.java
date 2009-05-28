@@ -44,10 +44,11 @@ public interface ListenerServerThread {
 	/**
 	 * Sends the read data from the server thread.
      *
+     * @param serverThread as reference
      * @param data read data from the server thread
      * @since 0.8.0
 	 */
-	void serverThreadStreamRead(byte[] data);
+	void serverThreadStreamRead(IServerThread serverThread, byte[] data);
 	
 	/**
 	 * Informs the listener that the server thread has started.

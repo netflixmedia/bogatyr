@@ -55,7 +55,7 @@ public abstract class ControlFile {
 	
 	static {
 		try {
-			final Collection<File> list = HelperIO.getFiles(PATH, new String[]{IDENTIFIER}, false);
+			final Collection<File> list = HelperIO.getFiles(PATH, IDENTIFIER);
 			
 			for (final File file : list) {
 				HelperIO.delete(file);
