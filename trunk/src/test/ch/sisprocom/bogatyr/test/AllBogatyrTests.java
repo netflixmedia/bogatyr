@@ -31,6 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+
 import ch.sisprocom.bogatyr.helper.HelperCollection;
 import ch.sisprocom.bogatyr.test.helper.HelperArrayTest;
 import ch.sisprocom.bogatyr.test.helper.HelperCollectionTest;
@@ -48,31 +56,28 @@ import ch.sisprocom.bogatyr.test.helper.HelperStringTest;
 import ch.sisprocom.bogatyr.test.helper.HelperTimeTest;
 import ch.sisprocom.bogatyr.test.helper.HelperXmlTest;
 import ch.sisprocom.bogatyr.test.helper.context.ContextTest;
-import ch.sisprocom.bogatyr.test.helper.control.ControlBrowserTest;
-import ch.sisprocom.bogatyr.test.helper.control.ControlFileTest;
-import ch.sisprocom.bogatyr.test.helper.control.ControlMailTest;
-import ch.sisprocom.bogatyr.test.helper.converter.ConverterBase64Test;
-import ch.sisprocom.bogatyr.test.helper.converter.ConverterHexTest;
-import ch.sisprocom.bogatyr.test.helper.crypto.CryptoAsymmTest;
-import ch.sisprocom.bogatyr.test.helper.crypto.CryptoSymmTest;
+import ch.sisprocom.bogatyr.test.helper.crypto.CryptoAsymmetricTest;
+import ch.sisprocom.bogatyr.test.helper.crypto.CryptoSymmetricTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.ObfuscatorTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.ProviderCertificateTest;
+import ch.sisprocom.bogatyr.test.helper.encoder.EncoderBase64Test;
+import ch.sisprocom.bogatyr.test.helper.encoder.EncoderHexTest;
+import ch.sisprocom.bogatyr.test.helper.launcher.LauncherBrowserTest;
+import ch.sisprocom.bogatyr.test.helper.launcher.LauncherFileTest;
+import ch.sisprocom.bogatyr.test.helper.launcher.LauncherMailTest;
 import ch.sisprocom.bogatyr.test.helper.printer.PrinterTest;
+import ch.sisprocom.bogatyr.test.helper.unit.UnitAreaTest;
+import ch.sisprocom.bogatyr.test.helper.unit.UnitLengthTest;
+import ch.sisprocom.bogatyr.test.helper.unit.UnitVolumeTest;
+import ch.sisprocom.bogatyr.test.helper.unit.UnitWeightTest;
 import ch.sisprocom.bogatyr.test.view.swing.NumberFieldTest;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 
 /**
  * Junit test suite
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 20090520
+ * @version 20090610
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ" + //$NON-NLS-1$
@@ -112,17 +117,21 @@ public class AllBogatyrTests implements Runnable {
 	public void run() {
 		final Result result = JUnitCore.runClasses(
 				ContextTest.class,
-				ControlBrowserTest.class,
-				ControlFileTest.class,
-				ControlMailTest.class,
-				ConverterBase64Test.class,
-				ConverterHexTest.class,
-				CryptoAsymmTest.class,
-				CryptoSymmTest.class,
+				CryptoAsymmetricTest.class,
+				CryptoSymmetricTest.class,
 				ObfuscatorTest.class,
 				ProviderCertificateTest.class,
-				PrinterTest.class,
+				EncoderBase64Test.class,
+				EncoderHexTest.class,
+				LauncherBrowserTest.class,
+				LauncherFileTest.class,
+				LauncherMailTest.class,
 //				PaginatorTest.class,
+				PrinterTest.class,
+				UnitAreaTest.class,
+				UnitLengthTest.class,
+				UnitVolumeTest.class,
+				UnitWeightTest.class,
 				HelperArrayTest.class,
 				HelperCollectionTest.class,
 				HelperCryptoTest.class,

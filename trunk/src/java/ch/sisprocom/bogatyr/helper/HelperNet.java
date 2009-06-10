@@ -31,8 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import ch.sisprocom.bogatyr.helper.converter.ConverterBase64;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Authenticator;
@@ -48,12 +46,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import ch.sisprocom.bogatyr.helper.encoder.EncoderBase64;
+
 
 /**
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090610)
  * @since 0.5.0
  */
 public abstract class HelperNet {
@@ -359,7 +359,7 @@ public abstract class HelperNet {
 		}
 		
     	final URLConnection con = url.openConnection();
-		con.setRequestProperty("Authorization", "Basic " + ConverterBase64.encode(username + ':' + password)); //$NON-NLS-1$ //$NON-NLS-2$
+		con.setRequestProperty("Authorization", "Basic " + EncoderBase64.encode(username + ':' + password)); //$NON-NLS-1$ //$NON-NLS-2$
 		con.setConnectTimeout(HelperNumber.VALUE_2048);
 		con.connect();
 		

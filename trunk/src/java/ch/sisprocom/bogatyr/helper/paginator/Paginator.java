@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * The Paginator splits a list in different pages.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090610)
  * @since 0.5.0
  */
 public class Paginator {
@@ -69,7 +69,7 @@ public class Paginator {
      * @since 0.5.0
      */
     public List<?> getList() {
-		return Collections.unmodifiableList(list);
+		return list;
     }
 
     /**

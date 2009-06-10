@@ -39,7 +39,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is the skeleton for all models.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20090610)
  * @since 0.7.0
  */
 public abstract class ModelAbstract extends Observable {

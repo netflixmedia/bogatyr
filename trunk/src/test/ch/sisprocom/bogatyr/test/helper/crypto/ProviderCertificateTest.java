@@ -44,8 +44,8 @@ import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperTime;
-import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymm;
-import ch.sisprocom.bogatyr.helper.crypto.ICryptoAsymm;
+import ch.sisprocom.bogatyr.helper.crypto.CryptoRSA;
+import ch.sisprocom.bogatyr.helper.crypto.ICryptoAsymmetric;
 import ch.sisprocom.bogatyr.helper.crypto.IProviderCertificate;
 import ch.sisprocom.bogatyr.helper.crypto.ProviderCertificate;
 
@@ -54,7 +54,7 @@ import ch.sisprocom.bogatyr.helper.crypto.ProviderCertificate;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090528
+ * @version 20090610
  */
 public class ProviderCertificateTest {
 	private final IProviderCertificate publicKeyProvider = new ProviderCertificate();
@@ -64,7 +64,7 @@ public class ProviderCertificateTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		final ICryptoAsymm cryptoAsymm = new CryptoAsymm();
+		final ICryptoAsymmetric cryptoAsymm = new CryptoRSA();
         keyPair = cryptoAsymm.generateKeyPair();
 	}
 	
@@ -74,8 +74,8 @@ public class ProviderCertificateTest {
 			final File file = HelperIO.getTemporaryFile("bogatr_ProviderCertificateTest", ".cer");  //$NON-NLS-1$//$NON-NLS-2$
 
 			X509Certificate cert = publicKeyProvider.generateCertificate(keyPair, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(), new Date(System.currentTimeMillis() + HelperTime.MILLISECONDS_WEEK));   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-			publicKeyProvider.storeCertificate(file, cert);
-			cert = publicKeyProvider.getCertificate(file);
+			publicKeyProvider.writeCertificate(file, cert);
+			cert = publicKeyProvider.readCertificate(file);
 //			System.out.println(HelperGeneral.toString(cert));
 //			System.out.println(cert.getIssuerDN());
 //			System.out.println(cert.getSubjectDN());

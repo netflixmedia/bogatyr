@@ -32,10 +32,10 @@
 package ch.sisprocom.bogatyr.sample.filemanager;
 
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
-import ch.sisprocom.bogatyr.controller.localizer.ControllerLocalizerFile;
-import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
-import ch.sisprocom.bogatyr.controller.property.ControllerProperty;
-import ch.sisprocom.bogatyr.controller.property.IControllerProperty;
+import ch.sisprocom.bogatyr.controller.localizer.LocalizerFile;
+import ch.sisprocom.bogatyr.controller.localizer.ILocalizer;
+import ch.sisprocom.bogatyr.controller.property.PropertyStream;
+import ch.sisprocom.bogatyr.controller.property.IProperty;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperString;
 
@@ -64,8 +64,8 @@ public class FileManager extends ApplicationAbstract {
 	private static final String	RES_DELETED = "FileManager.deleted"; //$NON-NLS-1$
 	private static final String	RES_FOUND   = "FileManager.found"; //$NON-NLS-1$
 
-	private IControllerProperty property;
-	private IControllerLocalizer localizer;
+	private IProperty property;
+	private ILocalizer localizer;
 	
 	private File path; 
 	
@@ -87,7 +87,7 @@ public class FileManager extends ApplicationAbstract {
 	 */
 	private void init() {
 		try {
-			property = new ControllerProperty(new File(ARG_PROPERTY_LOCATION));
+			property = new PropertyStream(new File(ARG_PROPERTY_LOCATION));
 		} catch (IOException ex) {
 			System.err.println("Couldn't process the property file!"); //$NON-NLS-1$
 			ex.printStackTrace();
@@ -102,7 +102,7 @@ public class FileManager extends ApplicationAbstract {
 			exit(10);
 		}
 		
-		localizer = new ControllerLocalizerFile(property.getValue(PROPERTY_LOCALIZER_BASE));
+		localizer = new LocalizerFile(property.getValue(PROPERTY_LOCALIZER_BASE));
 	}
 
 	private void searchFiles() throws IOException {

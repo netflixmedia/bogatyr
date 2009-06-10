@@ -38,8 +38,8 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.crypto.IObfuscator;
-import ch.sisprocom.bogatyr.helper.crypto.Obfuscator;
+import ch.sisprocom.bogatyr.helper.crypto.IScrambler;
+import ch.sisprocom.bogatyr.helper.crypto.Scrambler;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 
@@ -47,18 +47,18 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090527
+ * @version 20090610
  */
 public class ObfuscatorTest {
 	@Test
 	public void testEncryptAndDecrypt() {
-		final IObfuscator obfuscator = new Obfuscator();
-		assertEquals(AllBogatyrTests.DATA, new String(obfuscator.decrypt(obfuscator.encrypt(AllBogatyrTests.DATA.getBytes()))));
-		assertEquals(AllBogatyrTests.DATA, new String(obfuscator.decrypt(obfuscator.encrypt(AllBogatyrTests.DATA.getBytes(), (byte)0x6F), (byte)0x6F)));
-		assertNotSame(AllBogatyrTests.DATA, new String(obfuscator.decrypt(obfuscator.encrypt(AllBogatyrTests.DATA.getBytes(), (byte)0x6F), (byte)0x5F)));
+		final IScrambler obfuscator = new Scrambler();
+		assertEquals(AllBogatyrTests.DATA, new String(obfuscator.unscramble(obfuscator.scramble(AllBogatyrTests.DATA.getBytes()))));
+		assertEquals(AllBogatyrTests.DATA, new String(obfuscator.unscramble(obfuscator.scramble(AllBogatyrTests.DATA.getBytes(), (byte)0x6F), (byte)0x6F)));
+		assertNotSame(AllBogatyrTests.DATA, new String(obfuscator.unscramble(obfuscator.scramble(AllBogatyrTests.DATA.getBytes(), (byte)0x6F), (byte)0x5F)));
 		
 		try {
-			obfuscator.encrypt(null);
+			obfuscator.scramble(null);
 			fail("byte[] is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -67,7 +67,7 @@ public class ObfuscatorTest {
 		}
 
 		try {
-			obfuscator.encrypt(HelperArray.EMPTY_ARRAY_BYTE);
+			obfuscator.scramble(HelperArray.EMPTY_ARRAY_BYTE);
 			fail("byte[] is empty!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -76,7 +76,7 @@ public class ObfuscatorTest {
 		}
 
 		try {
-			obfuscator.decrypt(null);
+			obfuscator.unscramble(null);
 			fail("byte[] is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -85,7 +85,7 @@ public class ObfuscatorTest {
 		}
 
 		try {
-			obfuscator.decrypt(HelperArray.EMPTY_ARRAY_BYTE);
+			obfuscator.unscramble(HelperArray.EMPTY_ARRAY_BYTE);
 			fail("byte[] is empty!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
