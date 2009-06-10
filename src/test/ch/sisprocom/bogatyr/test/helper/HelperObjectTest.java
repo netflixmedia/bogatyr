@@ -32,6 +32,8 @@
 package ch.sisprocom.bogatyr.test.helper;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
@@ -133,5 +135,14 @@ public class HelperObjectTest {
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
+	}
+	
+	@Test
+	public void testIsEquals() {
+		assertTrue(HelperObject.isEquals("A", "A"));  //$NON-NLS-1$//$NON-NLS-2$
+		assertTrue(HelperObject.isEquals(null, null));
+		assertFalse(HelperObject.isEquals("A", "B")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertFalse(HelperObject.isEquals("A", null)); //$NON-NLS-1$
+		assertFalse(HelperObject.isEquals(null, "B")); //$NON-NLS-1$
 	}
 }

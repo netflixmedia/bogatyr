@@ -71,7 +71,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This class generates, reads and save X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20090610)
  * @since 0.3.0
  */
 public class ProviderCertificate implements IProviderCertificate {
@@ -88,7 +88,7 @@ public class ProviderCertificate implements IProviderCertificate {
 	/*
 	 * Implemented methods
 	 */
-    public X509Certificate getCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException {
+    public X509Certificate readCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -99,7 +99,7 @@ public class ProviderCertificate implements IProviderCertificate {
 
         try {
             bis = new BufferedInputStream(fis);
-            cert = getCertificate(bis);
+            cert = readCertificate(bis);
         } finally {
             if (bis != null) {
                 bis.close();
@@ -108,7 +108,7 @@ public class ProviderCertificate implements IProviderCertificate {
         return cert;
     }
 
-    public X509Certificate getCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {    
+    public X509Certificate readCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {    
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
@@ -127,7 +127,7 @@ public class ProviderCertificate implements IProviderCertificate {
 		return cert;
     }
     
-    public void storeCertificate(final OutputStream os, final Certificate cert) throws CertificateEncodingException, IOException {
+    public void writeCertificate(final OutputStream os, final Certificate cert) throws CertificateEncodingException, IOException {
 		if (null == os) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -138,7 +138,7 @@ public class ProviderCertificate implements IProviderCertificate {
 		HelperIO.writeStream(os, cert.getEncoded());
     }
     
-    public void storeCertificate(final File file, final Certificate cert) throws CertificateEncodingException, IOException {
+    public void writeCertificate(final File file, final Certificate cert) throws CertificateEncodingException, IOException {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}

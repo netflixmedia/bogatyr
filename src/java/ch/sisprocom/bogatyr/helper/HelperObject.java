@@ -50,7 +50,7 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090610)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -205,6 +205,19 @@ public abstract class HelperObject {
     	return object.getClass().getName() + list.toString();
     }
 
+
+	/**
+     * Compare if two objects are equals.
+     * 
+     * @param objectA first object to compare
+     * @param objectB second object to compare
+     * @return true/false
+     * @since 0.8.0
+     */	
+	public static <T> boolean isEquals(T objectA, T objectB) { //$JUnit$
+		return !((null == objectB && null != objectA) || (null != objectB && !objectB.equals(objectA)));
+	}
+	
     
     /*
      * Private methods

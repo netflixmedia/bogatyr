@@ -32,10 +32,10 @@
 package ch.sisprocom.bogatyr.sample.helloworld;
 
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
-import ch.sisprocom.bogatyr.controller.localizer.ControllerLocalizerFile;
-import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
-import ch.sisprocom.bogatyr.controller.property.ControllerProperty;
-import ch.sisprocom.bogatyr.controller.property.IControllerProperty;
+import ch.sisprocom.bogatyr.controller.localizer.LocalizerFile;
+import ch.sisprocom.bogatyr.controller.localizer.ILocalizer;
+import ch.sisprocom.bogatyr.controller.property.PropertyStream;
+import ch.sisprocom.bogatyr.controller.property.IProperty;
 import ch.sisprocom.bogatyr.helper.HelperString;
 
 import java.io.File;
@@ -62,8 +62,8 @@ public class HelloWorld extends ApplicationAbstract {
 	private static final String	RES_WELCOME = "HelloWorld.welcome"; //$NON-NLS-1$
 	private static final String	RES_BYE     = "HelloWorld.bye"; //$NON-NLS-1$
 
-	private IControllerProperty property;
-	private IControllerLocalizer localizer;
+	private IProperty property;
+	private ILocalizer localizer;
 	
 	
 	public static void main(final String[] args) {
@@ -83,14 +83,14 @@ public class HelloWorld extends ApplicationAbstract {
 	 */
 	private void init() {
 		try {
-			property = new ControllerProperty(new File(ARG_PROPERTY_LOCATION));
+			property = new PropertyStream(new File(ARG_PROPERTY_LOCATION));
 		} catch (IOException ex) {
 			System.err.println("Couldn't process the property file!"); //$NON-NLS-1$
 			ex.printStackTrace();
 			exit(1);
 		}
 		
-		localizer = new ControllerLocalizerFile(property.getValue(PROPERTY_LOCALIZER_BASE));
+		localizer = new LocalizerFile(property.getValue(PROPERTY_LOCALIZER_BASE));
 	}
 
 	/*

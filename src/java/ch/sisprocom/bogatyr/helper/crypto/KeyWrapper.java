@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * This is a class for wrapping and unwrapping a crypto key.
  * 
  * @author Stefan Laubenberger
- * @version 0.7.0 (20090527)
+ * @version 0.7.0 (20090610)
  * @since 0.3.0
  */
 public class KeyWrapper implements IKeyWrapper {
@@ -72,7 +72,7 @@ public class KeyWrapper implements IKeyWrapper {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
 		}
 		
-		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
+		final Cipher cipher = Cipher.getInstance(CryptoRSA.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.WRAP_MODE, wrapperKey);
 
 		return cipher.wrap(key);
@@ -92,7 +92,7 @@ public class KeyWrapper implements IKeyWrapper {
 			throw new IllegalArgumentException("keyType is invalid: " + keyType); //$NON-NLS-1$
 		}
 		
-		final Cipher cipher = Cipher.getInstance(CryptoAsymm.XFORM, "BC"); //$NON-NLS-1$
+		final Cipher cipher = Cipher.getInstance(CryptoRSA.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.UNWRAP_MODE, wrapperKey);
 
 		return cipher.unwrap(wrappedKey, keyAlgorithm, keyType);

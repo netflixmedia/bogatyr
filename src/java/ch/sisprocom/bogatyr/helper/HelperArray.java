@@ -31,10 +31,13 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 
 /**
@@ -42,7 +45,7 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090610)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -82,30 +85,29 @@ public abstract class HelperArray {
     }
 	
 	/**
-	 * Concatenate two {@link Object} arrays to one array.
+	 * Concatenate 1-n arrays to one array.
 	 * 
-	 * @param inA first array
-	 * @param inB second array
-	 * @return array a & b as one new array
+	 * @param arrays to concatenate
+	 * @return concatenated array
 	 * @since 0.7.0
 	 */
-    public static Object[] concatenate(final Object[] inA, final Object[] inB) { //$JUnit$
-    	Object[] a = inA;
-    	Object[] b = inB;
-    	
-    	if (a == null) {
-            a = EMPTY_ARRAY_OBJECT;
-        }
-
-    	if (b == null) {
-            b = EMPTY_ARRAY_OBJECT;
-        }
-    	
-    	final Object[] result = new Object[a.length + b.length];
-        System.arraycopy(a, 0, result, 0, a.length);
-        System.arraycopy(b, 0, result, a.length, b.length);
+    @SuppressWarnings("unchecked")
+	public static <T> T[] concatenate(final T[]... arrays) { //$JUnit$
+        List<T> result = new ArrayList<T>();
         
-        return result;
+        for (T[] array : arrays) {
+        	if (null != array) {
+        		result.addAll(Arrays.asList(array));
+        	}
+        }
+        
+        T[] array = (T[])Array.newInstance(arrays.getClass().getComponentType().getComponentType(), result.size());
+        
+        for (int ii = 0; ii < result.size(); ii++) {
+        	array[ii] = result.get(ii);
+        }
+        
+        return array;
     }
     
 	/**

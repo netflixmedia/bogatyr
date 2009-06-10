@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20090610)
  * @since 0.7.0
  */
 public abstract class ClientAbstract implements IClient {
@@ -192,10 +192,6 @@ public abstract class ClientAbstract implements IClient {
 
     public void stop() throws IOException {
     	fireStopped();
-    	
-    	if (null != socket) {
-        	socket.close();
-        }
         
 		if (thread != null) {
 			if (thread.isAlive()) {
@@ -203,6 +199,10 @@ public abstract class ClientAbstract implements IClient {
 			} else {
 				thread = null;
 			}
+        }
+		
+    	if (null != socket && !socket.isClosed()) {
+        	socket.close();
         }
     }
 

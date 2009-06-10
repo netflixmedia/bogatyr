@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.helper.HelperArray;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20090610
  */
 public class HelperArrayTest {
 	
@@ -57,10 +57,12 @@ public class HelperArrayTest {
 	
 	@Test
 	public void testConcatenateObjects() {
-    	final Object[] a = {"A"}; //$NON-NLS-1$
-    	final Object[] b = {"B"}; //$NON-NLS-1$
+    	final String[] a = {"A", "B", "C"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+    	final String[] b = {"D", "E"}; //$NON-NLS-1$ //$NON-NLS-2$
 
-    	assertArrayEquals(new String[]{"A", "B"}, HelperArray.concatenate(a, b)); //$NON-NLS-1$ //$NON-NLS-2$
+    	final String[] array = HelperArray.concatenate(a, b);
+
+    	assertArrayEquals(new String[]{"A", "B", "C", "D", "E"}, array); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 
     	assertArrayEquals(b, HelperArray.concatenate(null, b));
 

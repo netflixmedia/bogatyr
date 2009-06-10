@@ -43,14 +43,14 @@ import javax.swing.filechooser.FileFilter;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.helper.control.ControlFile;
+import ch.sisprocom.bogatyr.helper.launcher.LauncherFile;
 
 /**
  * This is a class to parse Java files and check if an example documentation is available.
  * To find such classes and methods, it must be marked with $Example$.
  *
  * @author Stefan Laubenberger
- * @version 20090528
+ * @version 20090610
  */
 public class CheckExample {
 	private static final String MARKER = "$Example$"; //$NON-NLS-1$
@@ -78,9 +78,9 @@ public class CheckExample {
 		fc.addChoosableFileFilter(new FileFilterCsv());
 		
 		if (isExampleAvailable) {
-			fc.setSelectedFile(new File(HelperEnvironment.getUserHomeDirectory(), "ExampleAvailable" + EXTENSION_CSV));
+			fc.setSelectedFile(new File(HelperEnvironment.getUserHomeDirectory(), "ExampleAvailable" + EXTENSION_CSV)); //$NON-NLS-1$
 		} else {
-			fc.setSelectedFile(new File(HelperEnvironment.getUserHomeDirectory(), "ExampleNotAvailable" + EXTENSION_CSV));
+			fc.setSelectedFile(new File(HelperEnvironment.getUserHomeDirectory(), "ExampleNotAvailable" + EXTENSION_CSV)); //$NON-NLS-1$
 		}
 		
         if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
@@ -89,13 +89,13 @@ public class CheckExample {
         	
         	try {
 				final Collection<File>listJava = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), EXTENSION_JAVA);
-				final Collection<File>listSvn = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), "svn");
+				final Collection<File>listSvn = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), "svn"); //$NON-NLS-1$
 				listJava.removeAll(listSvn);
 	
-				HelperIO.writeLine(output, HelperString.concatenate(HelperString.SEMICOLON, "Class", "Method/Variable"));
+				HelperIO.writeLine(output, HelperString.concatenate(HelperString.SEMICOLON, "Class", "Method/Variable")); //$NON-NLS-1$ //$NON-NLS-2$
 				
 				for (final File file : listJava) {
-					if (file.getAbsolutePath().contains("/java/")) { //ignore all sources except the java package
+					if (file.getAbsolutePath().contains("/java/")) { //ignore all sources except the java package //$NON-NLS-1$
 						Scanner scanner = new Scanner(file);
 						
 				    	while (scanner.hasNextLine()) {
@@ -119,9 +119,9 @@ public class CheckExample {
 				ex.printStackTrace();
 			}
 			
-        	if (JOptionPane.showConfirmDialog(null, "Open file with the default application?", "Open file", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        	if (JOptionPane.showConfirmDialog(null, "Open file with the default application?", "Open file", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {  //$NON-NLS-1$//$NON-NLS-2$
         		try {
-					ControlFile.open(output);
+					LauncherFile.open(output);
 				} catch (IOException ex) {
 					ex.printStackTrace();
 				}

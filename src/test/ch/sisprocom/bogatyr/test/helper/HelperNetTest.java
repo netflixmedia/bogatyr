@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.helper.HelperNet;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090527
+ * @version 20090610
  */
 public class HelperNetTest {
 	@Test

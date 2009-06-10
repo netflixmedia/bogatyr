@@ -44,49 +44,49 @@ import java.util.Date;
  * This interface is to generate, read and save X.509 certificates.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20090610)
  * @since 0.6.0
  */
 public interface IProviderCertificate {
 	/**
-     * Get the {@link X509Certificate} out of the given certificate {@link File}.
+     * Reads the {@link X509Certificate} out of the given certificate {@link File}.
      * 
      * @param file containing the certificate
      * @return certificate
      * @throws Exception
      * @since 0.6.0
      */
-    X509Certificate getCertificate(final File file) throws Exception;
+    X509Certificate readCertificate(final File file) throws Exception;
     
     /**
-     * Get the {@link X509Certificate} out of the given certificate {@link InputStream}.
+     * Reads the {@link X509Certificate} out of the given certificate {@link InputStream}.
      * 
      * @param is input stream containing the certificate
      * @return certificate
      * @throws Exception
      * @since 0.6.0
      */
-    X509Certificate getCertificate(final InputStream is) throws Exception;
+    X509Certificate readCertificate(final InputStream is) throws Exception;
     
     /**
-     * Store the {@link Certificate} on a {@link OutputStream}.
+     * Writes the {@link Certificate} on a {@link OutputStream}.
      * 
      * @param os output stream for the certificate
      * @param cert certificate
      * @throws Exception 
      * @since 0.6.0
      */
-    void storeCertificate(final OutputStream os, final Certificate cert) throws Exception;
+    void writeCertificate(final OutputStream os, final Certificate cert) throws Exception;
     
     /**
-     * Store the {@link Certificate} in a {@link File}.
+     * Writes the {@link Certificate} in a {@link File}.
      * 
      * @param file for the certificate
      * @param cert certificate
      * @throws Exception 
      * @since 0.6.0
      */
-    void storeCertificate(final File file, final Certificate cert) throws Exception;
+    void writeCertificate(final File file, final Certificate cert) throws Exception;
     
     /**
      * Generate a {@link X509Certificate} out of the given {@link KeyPair} and parameters.

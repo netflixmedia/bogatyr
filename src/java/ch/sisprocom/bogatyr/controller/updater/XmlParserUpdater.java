@@ -43,7 +43,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import ch.sisprocom.bogatyr.controller.localizer.IControllerLocalizer;
+import ch.sisprocom.bogatyr.controller.localizer.ILocalizer;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperNet;
@@ -58,7 +58,7 @@ import ch.sisprocom.bogatyr.view.swing.dialog.DialogProgress;
  * SAX handler to parse the update XML files
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20090610)
  * @since 0.6.0
  */
 public class XmlParserUpdater extends DefaultHandler {
@@ -125,10 +125,10 @@ public class XmlParserUpdater extends DefaultHandler {
 	private final int applicationBuild;
 	
 	private final ListenerUpdater listener;
-	private final IControllerLocalizer localizer;
+	private final ILocalizer localizer;
 	
 	
-	public XmlParserUpdater(final String applicationName, final String applicationId, final int applicationVersion, final int applicationMinorversion, final int applicationBuild, final ListenerUpdater listener, final IControllerLocalizer localizer) {
+	public XmlParserUpdater(final String applicationName, final String applicationId, final int applicationVersion, final int applicationMinorversion, final int applicationBuild, final ListenerUpdater listener, final ILocalizer localizer) {
 		super();
 		
 		this.applicationName = applicationName;
