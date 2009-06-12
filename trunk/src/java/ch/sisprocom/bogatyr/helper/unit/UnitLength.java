@@ -39,36 +39,20 @@ import ch.sisprocom.bogatyr.helper.HelperMath;
  * Converts different units of length.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20090612)
  * @since 0.7.0
  */
-public abstract class UnitLength {
-	private static final double FACTOR_INCH_TO_CM = 2.54D; //inch to centimeters
-	private static final double FACTOR_FOOT_TO_M = 0.3048D; //foot to meters
-	private static final double FACTOR_YARD_TO_M = 0.9144D; //yard to meters
-	private static final double FACTOR_MILE_TO_M = 1609.344D; //mile (terrestrial) to meters
-	private static final double FACTOR_MM_TO_CM = 10.0D; //millimeters to centimeters
-	private static final double FACTOR_CM_TO_M = 100.0D; //centimeters to meters
-	private static final double FACTOR_M_TO_KM = 1000.0D; //meters to kilometers
+public abstract class UnitLength { //TODO add sea miles
+	public static final double FACTOR_INCH_TO_CM = 2.54D; //inch to centimeters
+	public static final double FACTOR_FOOT_TO_M = 0.3048D; //foot to meters
+	public static final double FACTOR_YARD_TO_M = 0.9144D; //yard to meters
+	public static final double FACTOR_MILE_TO_M = 1609.344D; //mile (terrestrial) to meters
+	public static final double FACTOR_MM_TO_CM = 10.0D; //millimeters to centimeters
+	public static final double FACTOR_CM_TO_M = 100.0D; //centimeters to meters
+	public static final double FACTOR_M_TO_KM = 1000.0D; //meters to kilometers
 
 	public static final int DEFAULT_DPI = 72;
 
-	public enum Length {
-		MM(FACTOR_MM_TO_CM * FACTOR_CM_TO_M),
-		CM(FACTOR_CM_TO_M),
-		M(1.0D),
-		KM(1/FACTOR_M_TO_KM),
-		INCH(FACTOR_CM_TO_M / FACTOR_INCH_TO_CM),
-		FOOT(1/FACTOR_FOOT_TO_M),
-		YARD(1/FACTOR_YARD_TO_M),
-		MILE(1/FACTOR_MILE_TO_M);
-		
-		Length(final double factor) {
-			this.factor = factor;
-		}
-		
-		public final double factor;
-	}
 	
     /**
      * Calculates the size in centimeters of the given pixels and the standard DPI (72).
@@ -77,7 +61,7 @@ public abstract class UnitLength {
      * @return size in centimeters of the given pixels
      * @since 0.7.0
      */
-    public static double pixelToCm(final int value) {
+    public static double pixelToCm(final int value) { //$JUnit$
     	return pixelToCm(value, DEFAULT_DPI); 
     }
     
@@ -89,7 +73,7 @@ public abstract class UnitLength {
      * @return size in centimeters of the given pixels
      * @since 0.7.0
      */
-    public static double pixelToCm(final int value, final int dpi) {
+    public static double pixelToCm(final int value, final int dpi) { //$JUnit$
     	return convert(Length.INCH, Length.CM, value / (double) dpi);
     }
     
@@ -100,7 +84,7 @@ public abstract class UnitLength {
      * @return pixels
      * @since 0.7.0
      */
-    public static int cmToPixel(final double value) {
+    public static int cmToPixel(final double value) { //$JUnit$
     	return cmToPixel(value, DEFAULT_DPI); 
     }
     
@@ -112,7 +96,7 @@ public abstract class UnitLength {
      * @return pixels
      * @since 0.7.0
      */
-    public static int cmToPixel(final double value, final int dpi) {
+    public static int cmToPixel(final double value, final int dpi) { //$JUnit$
     	return HelperMath.convertDoubleToInt(convert(Length.CM, Length.INCH, value) * (double) dpi); 
     }
     
@@ -125,7 +109,7 @@ public abstract class UnitLength {
      * @return value in the new unit
      * @since 0.7.0
      */
-    public static double convert(final Length fromUnit, final Length toUnit, final double value) {
+    public static double convert(final Length fromUnit, final Length toUnit, final double value) { //$JUnit$
 		if (null == fromUnit) {
 			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
 		}
@@ -133,6 +117,6 @@ public abstract class UnitLength {
 			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
 		}
 
-    	return value / fromUnit.factor * toUnit.factor; 
+    	return value / fromUnit.getFactor() * toUnit.getFactor(); 
     }
  }

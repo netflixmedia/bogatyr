@@ -31,22 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.property;
 
-import ch.sisprocom.bogatyr.controller.ControllerAbstract;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Properties;import java.util.Collections;
+import java.util.Properties;
+
+import ch.sisprocom.bogatyr.controller.ControllerAbstract;
 
 
 /**
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20090612)
  * @since 0.1.0
  */
 public class PropertyStream extends ControllerAbstract implements IProperty {
@@ -68,7 +68,7 @@ public class PropertyStream extends ControllerAbstract implements IProperty {
 	 * Implemented methods
 	 */
     public Properties getProperties() {
-		return (Properties) Collections.unmodifiableMap(properties);
+		return properties;
 	}
     
     public String getValue(final String key) {

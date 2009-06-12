@@ -36,45 +36,29 @@ package ch.sisprocom.bogatyr.helper.unit;
  * Converts different units of volume.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20090612)
  * @since 0.7.0
  */
 public abstract class UnitVolume {
-	private static final double FACTOR_MM3_TO_CM3 = 1000.0D; //millimeters^3 to centimeters^3
-	private static final double FACTOR_CM3_TO_L = 1000.0D; //centimeters^3 to liter
-	private static final double FACTOR_L_TO_M3 = 1000.0D; //liter to m^3
-	private static final double FACTOR_PINT_TO_CM3 = 473.176473D; //pint to centimeters^3
-	private static final double FACTOR_QUART_TO_L = 0.946326D; //quart to liter
-	private static final double FACTOR_GALLON_TO_L = 3.785411784D; //gallon to liter
-	private static final double FACTOR_BARREL_TO_L = 158.987294928D; //barrel to liter
+	public static final double FACTOR_MM3_TO_CM3 = 1000.0D; //millimeters^3 to centimeters^3
+	public static final double FACTOR_CM3_TO_L = 1000.0D; //centimeters^3 to liter
+	public static final double FACTOR_L_TO_M3 = 1000.0D; //liter to m^3
+	public static final double FACTOR_PINT_TO_CM3 = 473.176473D; //pint to centimeters^3
+	public static final double FACTOR_QUART_TO_L = 0.946326D; //quart to liter
+	public static final double FACTOR_GALLON_TO_L = 3.785411784D; //gallon to liter
+	public static final double FACTOR_BARREL_TO_L = 158.987294928D; //barrel to liter
 	
-	public enum Volume {
-		MM3(FACTOR_MM3_TO_CM3 * FACTOR_CM3_TO_L),
-		CM3(FACTOR_CM3_TO_L),
-		L(1.0D),
-		M3(1/FACTOR_L_TO_M3),
-		PINT(FACTOR_PINT_TO_CM3 * FACTOR_CM3_TO_L),
-		QUART(FACTOR_QUART_TO_L),
-		GALLON(FACTOR_GALLON_TO_L),
-		BARREL(FACTOR_BARREL_TO_L);
-		
-		Volume(final double factor) {
-			this.factor = factor;
-		}
-		
-		public final double factor;
-	}
 	
     /**
      * Converts a value with a given unit to another unit.
      * 
-     * @param fromUnit length unit
-     * @param toUnit length unit
+     * @param fromUnit volume unit
+     * @param toUnit volume unit
      * @param value in the given unit
      * @return value in the new unit
      * @since 0.7.0
      */
-    public static double convert(final Volume fromUnit, final Volume toUnit, final double value) {
+    public static double convert(final Volume fromUnit, final Volume toUnit, final double value) { //$JUnit$
 		if (null == fromUnit) {
 			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
 		}
@@ -82,6 +66,6 @@ public abstract class UnitVolume {
 			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
 		}
 
-    	return value / fromUnit.factor * toUnit.factor; 
+    	return value / fromUnit.getFactor() * toUnit.getFactor(); 
     }
 }

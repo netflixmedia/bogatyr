@@ -44,19 +44,19 @@ import java.awt.event.ActionListener;
  * This is a group to add 1-n components (e.g. useful with JButtons).
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20090610)
  * @since 0.7.0
  */
 public class Group extends Panel {
 	private static final long serialVersionUID = -3557759501854611930L;
 	
 
-	public Group(final JComponent[] data, final Insets insets) {
+	public Group(final Insets insets, final JComponent... data) {
 		super();
 		createLayout(data, insets, false);
 	}
 	
-	public Group(final JComponent[] data, final Insets insets, final boolean isVertical) {
+	public Group(final Insets insets, final boolean isVertical, final JComponent... data) {
 		super();
 		createLayout(data, insets, isVertical);
 	}
