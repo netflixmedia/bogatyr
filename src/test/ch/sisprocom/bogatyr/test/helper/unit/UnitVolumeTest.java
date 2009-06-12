@@ -37,14 +37,14 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.unit.UnitVolume;
-import ch.sisprocom.bogatyr.helper.unit.UnitVolume.Volume;
+import ch.sisprocom.bogatyr.helper.unit.Volume;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090610
+ * @version 20090612
  */
 public class UnitVolumeTest {
 	@Test

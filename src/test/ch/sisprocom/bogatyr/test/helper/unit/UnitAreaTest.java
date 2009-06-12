@@ -36,15 +36,15 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import ch.sisprocom.bogatyr.helper.unit.Area;
 import ch.sisprocom.bogatyr.helper.unit.UnitArea;
-import ch.sisprocom.bogatyr.helper.unit.UnitArea.Area;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090610
+ * @version 20090612
  */
 public class UnitAreaTest {
 	@Test

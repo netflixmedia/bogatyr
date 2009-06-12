@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JScrollPane.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20090611)
  * @since 0.3.0
  */
 public class PaneScroll extends JScrollPane {
@@ -80,7 +80,7 @@ public class PaneScroll extends JScrollPane {
 	public void setEnabled(final boolean enabled) {
 		super.setEnabled(enabled);
 		
-	    for (final Component component : getComponents()) {
+	    for (final Component component : getViewport().getComponents()) {
 	    	component.setEnabled(enabled);
 	    }
 	}

@@ -38,25 +38,27 @@ package ch.sisprocom.bogatyr.helper.unit;
  * 
  * @author Stefan Laubenberger
  * @version 0.8.0 (20090612)
- * @since 0.7.0
+ * @since 0.8.0
  */
-public abstract class UnitWeight {
-	public static final double FACTOR_MILLIGRAM_TO_GRAM = 1000.0D; //milligram to gram
-	public static final double FACTOR_GRAM_TO_KILOGRAM = 1000.0D; //gram to kilogram
-	public static final double FACTOR_OUNCE_TO_GRAM = 28.34952D; //ounce to gram
-	public static final double FACTOR_POUND_TO_KILOGRAM = 0.453592D; //pound to kilogram
-	public static final double FACTOR_TON_TO_KILOGRAM = 907.1847D; //ton to kilogram
+public abstract class UnitTime {
+	public static final double FACTOR_MILLISECOND_TO_SECOND = 1000.0D; //milliseconds to seconds
+	public static final double FACTOR_SECOND_TO_MINUTE = 60.0D; //seconds to minutes
+	public static final double FACTOR_MINUTE_TO_HOUR = 60.0D; //minutes to hours
+	public static final double FACTOR_HOUR_TO_DAY = 24.0D; //hours to days
+	public static final double FACTOR_DAY_TO_WEEK = 7.0D; //days to weeks
+	public static final double FACTOR_DAY_TO_MONTH = 30.0D; //days to months
+	public static final double FACTOR_DAY_TO_YEAR = 365.0D; //days to years
     
     /**
      * Converts a value with a given unit to another unit.
      * 
-     * @param fromUnit weight unit
-     * @param toUnit weight unit
+     * @param fromUnit time unit
+     * @param toUnit time unit
      * @param value in the given unit
      * @return value in the new unit
-     * @since 0.7.0
+     * @since 0.8.0
      */
-    public static double convert(final Weight fromUnit, final Weight toUnit, final double value) { //$JUnit$
+    public static double convert(final Time fromUnit, final Time toUnit, final double value) {
 		if (null == fromUnit) {
 			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
 		}

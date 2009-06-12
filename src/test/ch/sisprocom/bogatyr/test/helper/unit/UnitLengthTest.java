@@ -36,15 +36,15 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import ch.sisprocom.bogatyr.helper.unit.Length;
 import ch.sisprocom.bogatyr.helper.unit.UnitLength;
-import ch.sisprocom.bogatyr.helper.unit.UnitLength.Length;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090610
+ * @version 20090612
  */
 public class UnitLengthTest {
 	@Test
