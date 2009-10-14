@@ -46,27 +46,38 @@ import java.io.File;
  */
 public class HelperEnvironmentTest {
 	@Test
-	public void testGetMemoryUsed() {
-//		System.out.println("Max:" + (HelperEnvInfo.getMemoryMax() / Const.DIVIDER_MEGABYTE));
-//		System.out.println("Used:" + (HelperEnvInfo.getMemoryUsed() / Const.DIVIDER_MEGABYTE));
-//		System.out.println("Free:" + (HelperEnvInfo.getMemoryFree() / Const.DIVIDER_MEGABYTE));
-		assertNotNull(HelperEnvironment.getMemoryUsed());
-		assertEquals(Runtime.getRuntime().totalMemory(), HelperEnvironment.getMemoryUsed());
-		assertTrue(HelperEnvironment.getMemoryMax() > HelperEnvironment.getMemoryUsed());
+	public void testGetMemoryHeapUsed() {
+		assertNotNull(HelperEnvironment.getMemoryHeapUsed());
+		assertEquals(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(), HelperEnvironment.getMemoryHeapUsed());
+		assertTrue(HelperEnvironment.getMemoryHeapTotal() > HelperEnvironment.getMemoryHeapUsed());
 	}
 	
 	@Test
-	public void testGetMemoryFree() {
-		assertNotNull(HelperEnvironment.getMemoryFree());
-		assertEquals(Runtime.getRuntime().freeMemory(), HelperEnvironment.getMemoryFree());
-		assertTrue(HelperEnvironment.getMemoryMax() > HelperEnvironment.getMemoryFree());
+	public void testGetMemoryHeapFree() {
+		assertNotNull(HelperEnvironment.getMemoryHeapFree());
+		assertEquals(Runtime.getRuntime().freeMemory(), HelperEnvironment.getMemoryHeapFree());
+		assertTrue(HelperEnvironment.getMemoryHeapTotal() >= HelperEnvironment.getMemoryHeapFree());
 	}
 	
 	@Test
-	public void testGetMemoryMax() {
-		assertNotNull(HelperEnvironment.getMemoryMax());
-		assertEquals(Runtime.getRuntime().maxMemory(), HelperEnvironment.getMemoryMax());
-		assertTrue(HelperEnvironment.getMemoryMax() > HelperEnvironment.getMemoryUsed() + HelperEnvironment.getMemoryFree());
+	public void testGetMemoryHeapTotal() {
+		assertNotNull(HelperEnvironment.getMemoryHeapTotal());
+		assertEquals(Runtime.getRuntime().totalMemory(), HelperEnvironment.getMemoryHeapTotal());
+		assertTrue(HelperEnvironment.getMemoryTotal() >= HelperEnvironment.getMemoryHeapTotal());
+	}
+
+	@Test
+	public void testGetMemoryStack() {
+		assertNotNull(HelperEnvironment.getMemoryStack());
+		assertEquals(Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory(), HelperEnvironment.getMemoryStack());
+		assertTrue(HelperEnvironment.getMemoryTotal() >= HelperEnvironment.getMemoryStack());
+	}
+	
+	@Test
+	public void testGetMemoryTotal() {
+		assertNotNull(HelperEnvironment.getMemoryTotal());
+		assertEquals(Runtime.getRuntime().maxMemory(), HelperEnvironment.getMemoryTotal());
+		assertTrue(HelperEnvironment.getMemoryTotal() >= HelperEnvironment.getMemoryHeapTotal() + HelperEnvironment.getMemoryStack());
 	}
 	
 	@Test
