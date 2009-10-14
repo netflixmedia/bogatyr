@@ -64,8 +64,8 @@ public class UnitVolumeTest {
 		assertEquals(1.0D, UnitVolume.convert(Volume.QUART, Volume.L, 0.946326D), 0.00001D);
 		assertEquals(0.946326D, UnitVolume.convert(Volume.L, Volume.QUART, 1.0D), 0.00001D);
 
-		assertEquals(1.0D, UnitVolume.convert(Volume.GALLON, Volume.L, 3.785411784D), 0.00001D);
-		assertEquals(3.785411784D, UnitVolume.convert(Volume.L, Volume.GALLON, 1.0D), 0.00001D);
+		assertEquals(1.0D, UnitVolume.convert(Volume.GALLON_US, Volume.L, 3.785411784D), 0.00001D);
+		assertEquals(3.785411784D, UnitVolume.convert(Volume.L, Volume.GALLON_US, 1.0D), 0.00001D);
 
 		assertEquals(1.0D, UnitVolume.convert(Volume.BARREL, Volume.L, 158.987294928D), 0.00001D);
 		assertEquals(158.987294928D, UnitVolume.convert(Volume.L, Volume.BARREL, 1.0D), 0.00001D);

@@ -45,7 +45,7 @@ public abstract class UnitVolume {
 	public static final double FACTOR_L_TO_M3 = 1000.0D; //liter to m^3
 	public static final double FACTOR_PINT_TO_CM3 = 473.176473D; //pint to centimeters^3
 	public static final double FACTOR_QUART_TO_L = 0.946326D; //quart to liter
-	public static final double FACTOR_GALLON_TO_L = 3.785411784D; //gallon to liter
+	public static final double FACTOR_GALLON_US_TO_L = 3.785411784D; //gallon to liter
 	public static final double FACTOR_BARREL_TO_L = 158.987294928D; //barrel to liter
 	
 	

@@ -35,6 +35,8 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import javax.swing.KeyStroke;
+
 import ch.sisprocom.bogatyr.helper.HelperString;
 
 
@@ -42,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20090813)
  * @since 0.1.0
  */
 public class LocalizerFile extends LocalizerAbstract {
@@ -109,18 +111,19 @@ public class LocalizerFile extends LocalizerAbstract {
 		return bundle.getString(key);
 	}
 	
-	public String getAccelerator(final String key) {
+	public KeyStroke getAccelerator(final String key) {
 		try {
-			return bundle.getString(key + POSTFIX_ACCELERATOR);
+			return KeyStroke.getKeyStroke(bundle.getString(key + POSTFIX_ACCELERATOR));
 		} catch (MissingResourceException ex) {
-			return HelperString.EMPTY_STRING;
+			return null;
 		}
 	}
 	
 	public int getMnemonic(final String key) {
 		try {
-			return Integer.valueOf(bundle.getString(key + POSTFIX_MNEMONIC));
-		} catch (MissingResourceException ex) {
+			final String mnemonic = bundle.getString(key + POSTFIX_MNEMONIC);
+			return (int) mnemonic.charAt(0);
+		} catch (Exception ex) {
 			return 0;
 		}
 	}

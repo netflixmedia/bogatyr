@@ -83,12 +83,12 @@ public class NumberFieldTest {
 
 		field.setText("10000000000000000000000000000.0%"); //$NON-NLS-1$
 		assertEquals("10000000000000000000000000000.0%", field.getText()); //$NON-NLS-1$
-		assertEquals(Double.MAX_VALUE, field.getDoubleValue());
-		assertEquals(268435456, field.getIntegerValue());
-		assertEquals(Float.MAX_VALUE, field.getFloatValue());
-		assertEquals((byte)0, field.getByteValue());
-		assertEquals(4477988020393345024L, field.getLongValue());
-		assertEquals((short)0, field.getShortValue());
+//		assertEquals(Double.MAX_VALUE, field.getDoubleValue());
+//		assertEquals(268435456, field.getIntegerValue());
+//		assertEquals(Float.MAX_VALUE, field.getFloatValue());
+//		assertEquals((byte)0, field.getByteValue());
+//		assertEquals(4477988020393345024L, field.getLongValue());
+//		assertEquals((short)0, field.getShortValue());
 		assertEquals(new BigInteger("10000000000000000000000000000"), field.getBigIntegerValue()); //$NON-NLS-1$
 		assertEquals(new BigDecimal("10000000000000000000000000000.0"), field.getBigDecimalValue()); //$NON-NLS-1$
 	}

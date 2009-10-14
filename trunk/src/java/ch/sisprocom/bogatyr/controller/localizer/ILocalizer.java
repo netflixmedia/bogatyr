@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.localizer;
 
+import javax.swing.KeyStroke;
 import java.util.Locale;
 
 
@@ -68,13 +69,13 @@ public interface ILocalizer {
 	String getValue(String key);
 
 	/**
-	 * Returns the accelerator for a key.
+	 * Returns the accelerator ({@link KeyStroke}) for a key.
 	 *
      * @param key for the accelerator
      * @return accelerator for the key
      * @since 0.6.0
 	 */
-	String getAccelerator(String key);
+	KeyStroke getAccelerator(String key);
 	
 	/**
 	 * Returns the mnemonic for a key.

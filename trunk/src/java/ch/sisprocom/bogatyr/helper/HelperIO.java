@@ -31,7 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import javax.swing.filechooser.FileSystemView;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -51,10 +50,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Locale;
+import java.util.Scanner;
+
+import javax.swing.filechooser.FileSystemView;
 
 
 /**
@@ -104,7 +104,7 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Search in a path (directory) for files and directories via identifiers and returns a {@link Collection} containing all {@link File}.
+     * Search in a path (directory) for files and directories via identifiers and returns a {@link List} containing all {@link File}.
      * 
      * @param path for searching
      * @param isExclude is the identifiers are excluded
@@ -116,7 +116,7 @@ public abstract class HelperIO {
      * @return List containing the matched files
      * @since 0.1.0
      */	
-	public static Collection<File> getFiles(final File path, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory, final String... identifiers) { //$JUnit$
+	public static List<File> getFiles(final File path, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory, final String... identifiers) { //$JUnit$
 		if (null == path) {
 			throw new IllegalArgumentException("path is null!"); //$NON-NLS-1$
 		}
@@ -132,7 +132,7 @@ public abstract class HelperIO {
 	}
 
 	/**
-     * Search in a path (directory) for files and directories via identifiers and returns a {@link Collection} containing all {@link File}.
+     * Search in a path (directory) for files and directories via identifiers and returns a {@link List} containing all {@link File}.
      * 
      * @param path for searching
      * @param isExclude is the identifiers are excluded
@@ -141,12 +141,12 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.1.0
      */	
-	public static Collection<File> getFiles(final File path, final boolean isExclude, final String... identifiers) throws IOException { //$JUnit$
+	public static List<File> getFiles(final File path, final boolean isExclude, final String... identifiers) throws IOException { //$JUnit$
 		return getFiles(path, isExclude, false, true, true, true, identifiers);
 	}
 	
 	/**
-     * Search in a path (directory) for files and directories via identifiers and returns a {@link Collection} containing all {@link File}.
+     * Search in a path (directory) for files and directories via identifiers and returns a {@link List} containing all {@link File}.
      * 
      * @param path for searching
      * @param identifiers of parts from the file name (if it's "null", all files will be delivered)
@@ -154,7 +154,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.8.0
      */	
-	public static Collection<File> getFiles(final File path, final String... identifiers) throws IOException {
+	public static List<File> getFiles(final File path, final String... identifiers) throws IOException {
 		return getFiles(path, false, false, true, true, true, identifiers);
 	}
 	
@@ -594,7 +594,7 @@ public abstract class HelperIO {
 	}
 	
 	/**
-     * Reads a {@link File} in a {@link Collection} with the chosen encoding.
+     * Reads a {@link File} in a {@link List} with the chosen encoding.
      * 
      * @param file for reading
      * @param encoding of the file
@@ -602,7 +602,7 @@ public abstract class HelperIO {
      * @throws IOException
      * @since 0.1.0
      */	
-	public static Collection<String> readFileAsList(final File file, final String encoding) throws IOException {
+	public static List<String> readFileAsList(final File file, final String encoding) throws IOException {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -614,7 +614,7 @@ public abstract class HelperIO {
 		}
 
 		final Scanner scanner = new Scanner(file, encoding);
-		final Collection<String> list = new ArrayList<String>();
+		final List<String> list = new ArrayList<String>();
 		
 		try {
 	    	while (scanner.hasNextLine()){
@@ -627,14 +627,14 @@ public abstract class HelperIO {
 	}
 
 	/**
-     * Reads a {@link File} in a {@link Collection} with the default encoding (UTF-8).
+     * Reads a {@link File} in a {@link List} with the default encoding (UTF-8).
      * 
      * @param file for reading
      * @return List containing the file content
      * @throws IOException
      * @since 0.1.0
      */	
-	public static Collection<String> readFileAsList(final File file) throws IOException {
+	public static List<String> readFileAsList(final File file) throws IOException {
 		return readFileAsList(file, Constants.ENCODING_DEFAULT);
 	}
 	
@@ -733,13 +733,13 @@ public abstract class HelperIO {
     }
 
 	/**
-	 * Returns a {@link Collection} containing all drive names of the current system.
+	 * Returns a {@link List} containing all drive names of the current system.
 	 * 
 	 * @return list containing all drive names of the current system 
 	 * @since 0.7.0
 	 */
-	public static Collection<String> getDriveNames() {
-		final Collection<String> list = new ArrayList<String>(getAvailableDrives().size());
+	public static List<String> getDriveNames() {
+		final List<String> list = new ArrayList<String>(getAvailableDrives().size());
 		final FileSystemView view = FileSystemView.getFileSystemView(); 
 		
 		for (final File file : getAvailableDrives()) { 
@@ -749,12 +749,12 @@ public abstract class HelperIO {
 	}
 
 	/**
-	 * Returns a {@link Collection} containing all available drives of the current system.
+	 * Returns a {@link List} containing all available drives of the current system.
 	 * 
 	 * @return list containing all drive names of the current system 
 	 * @since 0.7.0
 	 */
-	public static Collection<File> getAvailableDrives() {
+	public static List<File> getAvailableDrives() {
 		return Arrays.asList(File.listRoots());
 	}
 	

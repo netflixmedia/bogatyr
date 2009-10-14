@@ -51,7 +51,6 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.view.swing.chooser.ChooserFile;
 import ch.sisprocom.bogatyr.view.swing.dialog.Dialog;
-import ch.sisprocom.bogatyr.view.swing.dialog.DialogProgress;
 
 
 /**
