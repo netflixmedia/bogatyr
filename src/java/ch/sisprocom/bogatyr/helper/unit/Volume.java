@@ -45,7 +45,7 @@ public enum Volume {
 	M3(1.0D/UnitVolume.FACTOR_L_TO_M3), //$JUnit$
 	PINT(UnitVolume.FACTOR_PINT_TO_CM3 * UnitVolume.FACTOR_CM3_TO_L), //$JUnit$
 	QUART(UnitVolume.FACTOR_QUART_TO_L), //$JUnit$
-	GALLON(UnitVolume.FACTOR_GALLON_TO_L), //$JUnit$
+	GALLON_US(UnitVolume.FACTOR_GALLON_US_TO_L), //$JUnit$
 	BARREL(UnitVolume.FACTOR_BARREL_TO_L); //$JUnit$
 
 	private final double factor;

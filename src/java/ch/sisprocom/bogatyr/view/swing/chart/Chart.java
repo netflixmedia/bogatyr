@@ -31,13 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.chart;
 
-import ch.sisprocom.bogatyr.view.swing.Label;
-import ch.sisprocom.bogatyr.view.swing.LabelVertical;
-import ch.sisprocom.bogatyr.view.swing.Panel;
-
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -46,13 +39,20 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComponent;
+import javax.swing.SwingConstants;
+
+import ch.sisprocom.bogatyr.view.swing.Label;
+import ch.sisprocom.bogatyr.view.swing.LabelVertical;
+import ch.sisprocom.bogatyr.view.swing.Panel;
+
 
 /**
  * This is a chart class with labled x- and y-axes.
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20090924)
  * @since 0.5.0
  */
 public class Chart extends Panel {
@@ -67,13 +67,12 @@ public class Chart extends Panel {
 	private Font font;
 	
 	private final String[] xAxes, yAxes;
-	private final int maxX, maxY, gridIntervalX, gridIntervalY;
+	private final int maxX, maxY;
     private final X_Axis positionXAxis;
     private final Y_Axis positionYAxis;
 	private final List<ChartEntry> entries;
 
 	private final boolean isConstructed;
-	private boolean isOverrideBorders = true;
 	
 	
 	public Chart(final int maxX, final int maxY, final String[] xAxes, final String[] yAxes) {
@@ -89,8 +88,6 @@ public class Chart extends Panel {
 		this.maxY          = maxY;
 		this.positionXAxis = positionXAxis;
 		this.positionYAxis = positionYAxis;
-        gridIntervalX = maxX / xAxes.length;
-        gridIntervalY = maxY / yAxes.length;
         entries = new ArrayList<ChartEntry>(maxX * maxY);
         
 		createLayout();
@@ -137,27 +134,6 @@ public class Chart extends Panel {
 		createLayout();
 	}
 
-	/**
-	 * Returns the state for the borders of all components.
-	 * 
-	 * @return true/false
-	 * @since 0.5.0
-	 */
-	public boolean isOverrideBorders() {
-		return isOverrideBorders;
-	}
-
-	/**
-	 * Sets if the borders of all components are overridden.
-	 * 
-	 * @param isOverrideBorders true/false
-	 * @since 0.5.0
-	 */
-	public void setOverrideBorders(final boolean isOverrideBorders) {
-		this.isOverrideBorders = isOverrideBorders;
-		createLayout();
-	}
-
 	
 	/*
 	 * Private methods
@@ -180,15 +156,7 @@ public class Chart extends Panel {
     	gbc.gridheight 	= 1;
     	gbc.weightx 	= 1.0D;
 		gbc.weighty		= 0.0D;
-		if (X_Axis.NORTH == positionXAxis) {
 
-			// Border in the south
-			final JComponent panelXAxis = new Panel(colorBackground);
-			panelXAxis.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorGrid));
-			add(panelXAxis, gbc);
-			
-			gbc.gridy = 0;
-		}
     	add(getXAxis(), gbc);
 
     	// Paint yAxis
@@ -203,11 +171,6 @@ public class Chart extends Panel {
 		} else {
 			gbc.gridy 		= 1;
 			gbc.gridheight 	= maxY;
-
-			// Border in the west
-			final JComponent panelYAxis = new Panel(colorBackground);
-			panelYAxis.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorGrid));
-			add(panelYAxis, gbc);
 			
 			gbc.gridx = maxX + 1;
 		}
@@ -219,11 +182,8 @@ public class Chart extends Panel {
     		gbc.fill 		= GridBagConstraints.BOTH;
 			gbc.gridx 		= entry.getX() + 1; 								// +1 Because of yAxis
 	    	gbc.gridy 		= maxY - entry.getY() - (entry.getSizeY() - 1); 	// - Because of switched axis counting
-//	    	gbc.gridy 		= entry.y + 1;
 	    	gbc.gridwidth 	= entry.getSizeX(); 
 	    	gbc.gridheight 	= entry.getSizeY();
-//	    	gbc.weightx 	= (double) entry.getSizeX();
-//			gbc.weighty		= (double) entry.getSizeY();
 			gbc.weightx 	= 1.0/ (double) maxX;
 			gbc.weighty		= 1.0/ (double) maxY;
 			
@@ -241,32 +201,6 @@ public class Chart extends Panel {
 			final JComponent panelContainer = new Panel(colorBackground);
 			panelContainer.setLayout(new GridLayout(1, 1));
 			
-			// Create borders
-			
-				if (0 == (entry.getX() + 1) % gridIntervalX) {
-					panelContainer.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorGrid));
-					if (component.getBorder() == null || isOverrideBorders) {
-						component.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorBackground));
-					}
-				}
-				
-				if (0 == (entry.getY() + 1) % gridIntervalY) {
-					panelContainer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorGrid));
-					if (component.getBorder() == null || isOverrideBorders) {
-						component.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorBackground));
-					}
-				}
-				
-				if (0 == (entry.getX() + 1) % gridIntervalX && 0 == (entry.getY() + 1) % gridIntervalY) {
-					panelContainer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, colorGrid));
-					if (component.getBorder() == null || isOverrideBorders) {
-						component.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, colorBackground));
-					}
-				}
-				if (component.getBorder() == null) {
-					component.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, colorBackground));
-				} 
-
 			panelContainer.add(component);
 	    	add(panelContainer, gbc);
 		}
@@ -278,26 +212,10 @@ public class Chart extends Panel {
     				gbc.fill 		= GridBagConstraints.BOTH;
     				gbc.gridx 		= x + 1; 					// +1 Because of yAxis
     		    	gbc.gridy 		= maxY - y; 			// - Because of switched axis counting
-//    		    	gbc.gridy 		= y + 1;
     		    	gbc.gridwidth 	= 1;
     		    	gbc.gridheight 	= 1;
-//    		    	gbc.weightx 	= 1.0D;
-//    				gbc.weighty		= 1.0D;
     				
     				final JComponent spacer = new Panel(colorBackground);
-    				
-    				// Create borders
-    				if (0 == (x + 1) % gridIntervalX) {
-    					spacer.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorGrid));
-    				}
-    				
-    				if (0 == (y + 1) % gridIntervalY) {
-    					spacer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorGrid));
-    				}
-    				
-    				if (0 == (x + 1) % gridIntervalX && 0 == (y + 1) % gridIntervalY) {
-    					spacer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, colorGrid));
-    				}
     				
     				add(spacer, gbc);
     			}
@@ -308,12 +226,6 @@ public class Chart extends Panel {
 	private Component getXAxis() {
 		final JComponent panelXAxis = new Panel(colorBackground);
 		panelXAxis.setLayout(new GridLayout(0, xAxes.length));
-		
-		if (X_Axis.SOUTH == positionXAxis) {
-			panelXAxis.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, colorGrid));
-		} else {
-			panelXAxis.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, colorGrid));
-		}
 		
 		// Paint x axis
 		for (final String text : xAxes) {
@@ -331,13 +243,6 @@ public class Chart extends Panel {
 	private Component getYAxis() {
 		final JComponent panelYAxis = new Panel(colorBackground);
 		panelYAxis.setLayout(new GridLayout(yAxes.length, 0));
-		
-		if (Y_Axis.WEST == positionYAxis) {
-			panelYAxis.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, colorGrid));
-			
-		} else {
-			panelYAxis.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, colorGrid));
-		}
 
 		// Paint y axis
 		for (final String text : yAxes) {
