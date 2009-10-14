@@ -31,33 +31,39 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.updater;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
-
 import ch.sisprocom.bogatyr.controller.localizer.ILocalizer;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperNet;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.view.swing.Dialog;
+import ch.sisprocom.bogatyr.view.swing.Panel;
+import ch.sisprocom.bogatyr.view.swing.ProgressBar;
 import ch.sisprocom.bogatyr.view.swing.chooser.ChooserFile;
-import ch.sisprocom.bogatyr.view.swing.dialog.Dialog;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
+import javax.swing.border.BevelBorder;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
+import java.net.SocketTimeoutException;
+import java.net.URL;
 
 
 /**
  * SAX handler to parse the update XML files
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091014)
  * @since 0.6.0
  */
 public class XmlParserUpdater extends DefaultHandler {
@@ -204,7 +210,27 @@ public class XmlParserUpdater extends DefaultHandler {
 
 		}
 		
-		final Dialog dialogProgress = new DialogProgress();
+		final Dialog dialogProgress = new Dialog() {
+			private static final long serialVersionUID = -7337446798220574741L;
+
+			@Override
+			public void createAndShowGUI() {
+				final JComponent panelMain = new Panel(Color.WHITE);
+				panelMain.setLayout(new BorderLayout());
+				panelMain.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, Color.WHITE, Color.DARK_GRAY, Color.GRAY));
+
+				final JProgressBar progressBar = new ProgressBar();
+				progressBar.setIndeterminate(true);
+            
+				panelMain.add(progressBar, BorderLayout.CENTER);
+            
+				add(panelMain, BorderLayout.CENTER);
+            
+				setUndecorated(true);
+				setSize(250, 40);
+				super.createAndShowGUI();
+			}
+		};
 		dialogProgress.createAndShowGUI();
 		
 		final String location = HelperEnvironment.isWindowsPlatform() ? location_windows : HelperEnvironment.isMacPlatform() ? location_osx : location_unix;
