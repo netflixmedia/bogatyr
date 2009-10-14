@@ -49,32 +49,52 @@ import java.util.TimeZone;
  */
 public abstract class HelperEnvironment {
 	/**
-	 * Returns the used VM memory in bytes.
+	 * Returns the used VM heap memory in bytes.
      *
      * @return used VM memory
      * @since 0.5.0
 	 */
-	public static long getMemoryUsed() { //$JUnit$
-		return Runtime.getRuntime().totalMemory();
+	public static long getMemoryHeapUsed() { //$JUnit$
+		return getMemoryHeapTotal() - getMemoryHeapFree();
 	}
 
 	/**
-	 * Returns the free VM memory in bytes.
+	 * Returns the free VM heap memory in bytes.
      *
      * @return free VM memory
      * @since 0.5.0
 	 */
-	public static long getMemoryFree() { //$JUnit$
+	public static long getMemoryHeapFree() { //$JUnit$
 		return Runtime.getRuntime().freeMemory();
 	}
-
+	
 	/**
-	 * Returns the maximal memory reserved for the VM in bytes.
+	 * Returns the maximal reserved VM heap memory in bytes.
+     *
+     * @return max VM memory
+     * @since 0.8.0
+	 */
+	public static long getMemoryHeapTotal() { //$JUnit$
+		return Runtime.getRuntime().totalMemory();
+	}
+	
+	/**
+	 * Returns the reserved VM stack memory in bytes.
+     *
+     * @return max VM memory
+     * @since 0.8.0
+	 */
+	public static long getMemoryStack() { //$JUnit$
+		return getMemoryTotal() - getMemoryHeapTotal();
+	}
+	
+	/**
+	 * Returns the maximal reserved heap&stack VM memory in bytes.
      *
      * @return max VM memory
      * @since 0.5.0
 	 */
-	public static long getMemoryMax() { //$JUnit$
+	public static long getMemoryTotal() { //$JUnit$
 		return Runtime.getRuntime().maxMemory();
 	}
 
