@@ -29,7 +29,7 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing.dialog;
+package ch.sisprocom.bogatyr.view.swing;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
 
