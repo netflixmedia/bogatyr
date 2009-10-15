@@ -31,33 +31,29 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.crypto;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
-import javax.crypto.SecretKey;
-
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.crypto.CryptoAES;
+import ch.sisprocom.bogatyr.helper.crypto.CryptoSymmetric;
+import ch.sisprocom.bogatyr.test.AllBogatyrTests;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.crypto.CryptoAES;
-import ch.sisprocom.bogatyr.helper.crypto.ICryptoSymmetric;
-import ch.sisprocom.bogatyr.test.AllBogatyrTests;
+import javax.crypto.SecretKey;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090610
+ * @version 20091015
  */
 public class CryptoSymmetricTest {
 	private static final int KEYSIZE = 256;
 	
 	private SecretKey secretKey;
 	private SecretKey secretKeyDefault;
-	private ICryptoSymmetric cryptoSymm;
+	private CryptoSymmetric cryptoSymm;
 	
 	@Before
 	public void setUp() throws Exception {

@@ -31,73 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
 
 /**
- * This is a helper class for cryptography (e.g. hash codes).
+ * This is a helper class for cryptography (e.g. random keys).
  * 
  * @author Stefan Laubenberger
- * @author Silvan Spross
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20091015)
  * @since 0.7.0
  */
 public abstract class HelperCrypto {
-	private static final String HASHCODE_ALGORITHM_SHA256 = "SHA-256"; //$NON-NLS-1$
 	private static final char[] RANDOMKEY_SEED_DEFAULT    = {'1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	
    
-    /**
-     * Generates a hash (unique {@link String}) from an input {@link Object}.
-     * This is also used for unique keys.
-     *
-     * @param algo to use
-     * @param data to generate a hash
-     * @return generated hash value
-     * @throws NoSuchAlgorithmException
-     * @since 0.7.0
-     */
-    public static String getHashCode(final String algo, final Object data) throws NoSuchAlgorithmException { //$JUnit$
-		if (!HelperString.isValid(algo)) {
-			throw new IllegalArgumentException("algo is null or empty!"); //$NON-NLS-1$
-		}
-		if (null == data) {
-			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
-		}
-
-    	final MessageDigest algorithm = MessageDigest.getInstance(algo);
-		final byte[] input = HelperObject.toString(data).getBytes();
-
-		algorithm.reset();
-		algorithm.update(input);
-		
-		final byte[] messageDigest = algorithm.digest();
-        final StringBuilder hexString = new StringBuilder();
-
-		for (final byte digest : messageDigest) {
-			final String hex = Integer.toHexString(0xFF & (int) digest);
-			if (1 == hex.length()) {
-				hexString.append('0');
-			}
-			hexString.append(hex);
-		}
-		return hexString.toString();
-	}
-
-    /**
-     * Generates a hash (unique {@link String}) with SHA-256 from an input object.
-     *
-     * @param data to generate a hash
-     * @return generated hash value
-     * @throws NoSuchAlgorithmException
-     * @since 0.7.0
-     */
-    public static String getHashCode(final Object data) throws NoSuchAlgorithmException { //$JUnit$
-    	return getHashCode(HASHCODE_ALGORITHM_SHA256, data);
-    }
-
     /**
      * Generates an unique {@link String} with a given seed.
      * This is used for unique keys (e.g. for product keys).

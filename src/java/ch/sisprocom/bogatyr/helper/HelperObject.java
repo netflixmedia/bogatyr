@@ -50,7 +50,7 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091015)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -119,15 +119,15 @@ public abstract class HelperObject {
 			throw new IllegalArgumentException("obj is null!"); //$NON-NLS-1$
 		}	
 
-		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = null;
 
         try {
-            oos = new ObjectOutputStream(bos);
+            oos = new ObjectOutputStream(baos);
             oos.writeObject(obj);
             oos.flush();
 
-            return bos.toByteArray();
+            return baos.toByteArray();
         } finally {
         	if (oos != null) {
         		oos.close();	

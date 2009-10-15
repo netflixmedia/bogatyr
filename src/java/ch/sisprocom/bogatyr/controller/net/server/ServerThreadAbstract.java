@@ -31,25 +31,25 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.server;
 
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.util.Collection;
 import java.util.HashSet;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
 
 /**
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.7.0
  */
-public abstract class ServerThreadAbstract implements IServerThread {
+public abstract class ServerThreadAbstract implements ServerThread {
     private final long createTime = System.currentTimeMillis();
 
 	private Thread thread;

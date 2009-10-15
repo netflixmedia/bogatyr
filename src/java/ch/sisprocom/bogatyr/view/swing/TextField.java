@@ -31,6 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.HelperString;
+
 import javax.swing.Action;
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
@@ -38,18 +41,15 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.helper.HelperString;
-
 
 /**
  * This is an extended JTextField.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.1.0
  */
-public class TextField extends JTextField implements IComponentActivate {
+public class TextField extends JTextField implements Activatable {
 	private static final long serialVersionUID = 866371447844640358L;
 	
 	private boolean isNotActive;

@@ -31,23 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.event.ActionListener;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import java.awt.event.ActionListener;
 
 
 /**
  * This is an extended JButton.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.2.0
  */
-public class Button extends JButton implements IComponentActivate {
+public class Button extends JButton implements Activatable {
 	private static final long serialVersionUID = -7231487009931166084L;
 	
 	private boolean isNotActive;

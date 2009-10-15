@@ -32,46 +32,47 @@
 package ch.sisprocom.bogatyr.controller.timer;
 
 
-
 /**
- * Defines the methods for the implementation of the timer.
+ * Defines the methods for the implementation of the countdown timer.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091015)
  * @since 0.6.0
  */
-public interface ITimer extends IListener {
+public interface Countdown extends TimeMachine {
 	/**
-	 * Starts immediately the timer with a given interval.
+	 * Starts immediately the countdown with a given runtime and standard interval of 1000ms.
 	 * 
-	 * @param interval of the timer
+	 * @param runtime of the countdown
 	 * @since 0.6.0
 	 */
-	void start(final long interval);
+	void start(final long runtime);
 
 	/**
-	 * Starts the timer with a given delay and interval.
+	 * Start the countdown with a given delay, runtime and interval.
 	 * 
 	 * @param delay until the timer starts
-	 * @param interval of the timer
+	 * @param runtime of the countdown
+	 * @param interval of the countown
 	 * @since 0.6.0
 	 */
-	void start(final long delay, final long interval);
-	
+	void start(final long delay, final long runtime, final long interval);
+    
 	/**
-	 * Returns the current time in ms of the timer.
+	 * Returns the current runtime in ms of the timer.
 	 * 
 	 * @return current time of the timer
 	 * @since 0.6.0
 	 */
-    long getTime();
+    long getRuntime();
     
     /**
-     * Sets the time in ms of the timer.
+     * Sets the runtime in ms of the timer.
      * 
-     * @param time
+     * @param time in ms
      * @since 0.6.0
      */
-    void setTime(final long time);
+    void setRuntime(final long time);
+
 }   
 

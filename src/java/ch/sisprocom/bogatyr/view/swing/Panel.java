@@ -31,26 +31,25 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.GridBagLayout;
-import java.awt.LayoutManager;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.GridBagLayout;
+import java.awt.LayoutManager;
 
 
 /**
  * This is an extended JPanel.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.1.0
  */
-public class Panel extends JPanel implements IComponentActivate {
+public class Panel extends JPanel implements Activatable {
 	private static final long serialVersionUID = 3679443739459084931L;
 	
 	private boolean isNotActive;

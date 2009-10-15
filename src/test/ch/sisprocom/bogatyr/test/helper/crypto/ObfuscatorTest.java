@@ -38,8 +38,8 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.crypto.IScrambler;
 import ch.sisprocom.bogatyr.helper.crypto.Scrambler;
+import ch.sisprocom.bogatyr.helper.crypto.ScramblerImpl;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 
@@ -47,12 +47,12 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090610
+ * @version 20091015
  */
 public class ObfuscatorTest {
 	@Test
 	public void testEncryptAndDecrypt() {
-		final IScrambler obfuscator = new Scrambler();
+		final Scrambler obfuscator = new ScramblerImpl();
 		assertEquals(AllBogatyrTests.DATA, new String(obfuscator.unscramble(obfuscator.scramble(AllBogatyrTests.DATA.getBytes()))));
 		assertEquals(AllBogatyrTests.DATA, new String(obfuscator.unscramble(obfuscator.scramble(AllBogatyrTests.DATA.getBytes(), (byte)0x6F), (byte)0x6F)));
 		assertNotSame(AllBogatyrTests.DATA, new String(obfuscator.unscramble(obfuscator.scramble(AllBogatyrTests.DATA.getBytes(), (byte)0x6F), (byte)0x5F)));

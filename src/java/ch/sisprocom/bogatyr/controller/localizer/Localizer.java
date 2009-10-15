@@ -39,10 +39,10 @@ import java.util.Locale;
  * Defines the methods for the implementation of the localizer for different languages (i18n standard).
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091015)
  * @since 0.6.0
  */
-public interface ILocalizer {
+public interface Localizer {
 	/**
 	 * Returns the current locale of the localizer.
 	 * 

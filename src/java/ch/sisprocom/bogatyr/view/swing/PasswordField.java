@@ -31,21 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.util.Arrays;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 import javax.swing.JPasswordField;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import java.util.Arrays;
 
 
 /**
  * This is an extended JPasswordField.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.1.0
  */
-public class PasswordField extends JPasswordField implements IComponentActivate {
+public class PasswordField extends JPasswordField implements Activatable {
 	private static final long serialVersionUID = 4337982428755317915L;
 	
 	private boolean isNotActive;

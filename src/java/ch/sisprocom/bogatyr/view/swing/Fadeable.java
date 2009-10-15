@@ -29,53 +29,42 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.updater;
+package ch.sisprocom.bogatyr.view.swing;
+
+import java.awt.Color;
 
 
 
 /**
- * Defines the methods for the implementation of the updater.
+ * Defines the methods for the implementation of fading.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091015)
  * @since 0.6.0
  */
-public interface IUpdater {
+public interface Fadeable {
 	/**
-	 * Checks the update information for new versions an update the application if needed.
-	 * 
-	 * @param name Name of the application
-	 * @param id Unique id of the application
-	 * @param version Version of the application
-	 * @param minorversion Minor version of the application
-	 * @param build Build of the application
-	 * @param updateLocation Location for the update information
-     * @throws Exception
+     * Sets the fading state of the component.
+     * 
+     * @param isFading fading state
      * @since 0.6.0
-	 */
-	void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws Exception;
-
-	/**
-	 * Adds a listener for this updater.
-	 * 
-	 * @param listener to add
-	 * @since 0.6.0
-	 */
-	void addListener(ListenerUpdater listener);
+     */
+	void setFading(final boolean isFading);
 	
 	/**
-	 * Remove a listener for this updater.
-	 * 
-	 * @param listener to remove
-	 * @since 0.6.0
-	 */
-	void removeListener(ListenerUpdater listener);
-
+     * Sets the fading color.
+     * 
+     * @param colorFader color of the fader
+     * @since 0.6.0
+     */
+	void setFaderColor(final Color colorFader);
+	
 	/**
-	 * Remove all listeners for this updater.
-	 * 
-	 * @since 0.6.0 
-	 */
-	void removeAllListener();
+     * Returns the fading state of the component.
+     * 
+     * @return true/false
+     * @since 0.6.0
+     */
+	boolean isFading();
 }   
 

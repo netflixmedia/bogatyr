@@ -31,19 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import javax.swing.JToolBar;
-
 import ch.sisprocom.bogatyr.helper.HelperObject;
+
+import javax.swing.JToolBar;
 
 
 /**
  * This is an extended JToolBar.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.7.0
  */
-public class ToolBar extends JToolBar implements IComponentActivate {
+public class ToolBar extends JToolBar implements Activatable {
 	private static final long serialVersionUID = 7538391089705088133L;
 	
 	private boolean isNotActive;

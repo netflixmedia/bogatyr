@@ -40,13 +40,12 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * Encodes and decodes data to Hex format.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20091015)
  * @since 0.1.0
  */
 public abstract class EncoderHex {
-    private static final CharSequence DIGITS = "0123456789abcdef"; //$NON-NLS-1$
 
-    /**
+	/**
      * Encodes a byte-array to a hex {@link String}.
      * 
      * @param input bytes to be converted
@@ -58,16 +57,16 @@ public abstract class EncoderHex {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
 		
-		final StringBuilder buf = new StringBuilder();
-
-        for (int ii = 0; ii != input.length; ii++) {
-
-            final int	v = input[ii] & 0xff;
-
-            buf.append(DIGITS.charAt(v >> 4));
-            buf.append(DIGITS.charAt(v & 0xf));
-        }
-        return buf.toString();
+		final StringBuilder hexString = new StringBuilder();
+		
+		for (final byte digest : input) {
+			final String hex = Integer.toHexString(0xFF & (int) digest);
+			if (1 == hex.length()) {
+				hexString.append('0');
+			}
+			hexString.append(hex);
+		}
+		return hexString.toString();
     }
     
     /**

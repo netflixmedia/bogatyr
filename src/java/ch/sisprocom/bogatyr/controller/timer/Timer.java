@@ -31,57 +31,47 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.timer;
 
-import java.util.TimerTask;
+
 
 /**
- * This is a timer which informs all added listeners about its state.
+ * Defines the methods for the implementation of the timer.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091015)
  * @since 0.6.0
  */
-public class Timer extends TimerAbstract implements ITimer {
-	long time;
-	
-	public long getTime() {
-		return time;
-	}
-
-	public void setTime(final long time) {
-		this.time = time;
-	}
-	
-	
-	/*
-	 * Implemented methods
+public interface Timer extends TimeMachine {
+	/**
+	 * Starts immediately the timer with a given interval.
+	 * 
+	 * @param interval of the timer
+	 * @since 0.6.0
 	 */
-    public synchronized void start(final long interval) {
-        start(0L, interval);
-    }
+	void start(final long interval);
 
-    public synchronized void start(final long delay, final long interval) {
-    	getTimer().cancel();
-
-    	setTimer(new java.util.Timer());
-        setInterval(interval);
-        getTimer().schedule(new Task(), delay, interval);
-        fireTimerStarted();
-    }
-
-    public synchronized void stop() {
-    	getTimer().cancel();
-        fireTimerStopped();
-    }
-	
-	
-	/*
-	 * Inner classes
+	/**
+	 * Starts the timer with a given delay and interval.
+	 * 
+	 * @param delay until the timer starts
+	 * @param interval of the timer
+	 * @since 0.6.0
 	 */
-	class Task extends TimerTask {
-	    @Override
-		public void run() {
-	    	time += getInterval();
-    		fireTimeChanged(time);
-	    }
-	}
-}
+	void start(final long delay, final long interval);
+	
+	/**
+	 * Returns the current time in ms of the timer.
+	 * 
+	 * @return current time of the timer
+	 * @since 0.6.0
+	 */
+    long getTime();
+    
+    /**
+     * Sets the time in ms of the timer.
+     * 
+     * @param time
+     * @since 0.6.0
+     */
+    void setTime(final long time);
+}   
+

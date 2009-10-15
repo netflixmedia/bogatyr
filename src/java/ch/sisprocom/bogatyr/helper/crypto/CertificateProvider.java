@@ -44,10 +44,10 @@ import java.util.Date;
  * This interface is to generate, read and save X.509 certificates.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091015)
  * @since 0.6.0
  */
-public interface IProviderCertificate {
+public interface CertificateProvider {
 	/**
      * Reads the {@link X509Certificate} out of the given certificate {@link File}.
      * 

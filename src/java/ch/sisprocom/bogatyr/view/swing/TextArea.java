@@ -31,20 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.HelperObject;
+
 import javax.swing.JTextArea;
 import javax.swing.text.Document;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JTextArea.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.1.0
  */
-public class TextArea extends JTextArea implements IComponentActivate {
+public class TextArea extends JTextArea implements Activatable {
 	private static final long serialVersionUID = 8509257459382968021L;
 	
 	private boolean isNotActive;

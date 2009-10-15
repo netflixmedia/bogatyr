@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,70 +31,38 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.crypto;
 
-import java.security.InvalidKeyException;
 import java.security.Key;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.helper.HelperString;
 
 /**
- * This is a class for wrapping and unwrapping a crypto key.
+ * This is an interface for wrapping and unwrapping a crypto key.
  * 
  * @author Stefan Laubenberger
- * @version 0.7.0 (20090610)
- * @since 0.3.0
+ * @version 0.8.0 (20091015)
+ * @since 0.6.0
  */
-public class KeyWrapper implements IKeyWrapper {
-	/*
-	 * Overridden methods
+public interface KeyWrapper {
+	/**
+	 * Wrap the {@link Key} with a wrapper {@link Key}.
+	 * 
+	 * @param wrapperKey e.g RSA public-key
+     * @param key e.g. AES-key
+     * @return byte-array with the wrapped key
+     * @throws Exception
+     * @since 0.6.0
 	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
+	byte[] wrap(final Key wrapperKey, final Key key) throws Exception;
 	
-	
-	/*
-	 * Implemented methods
+	/**
+	 * Unwrap and return the {@link Key}.
+	 * 
+	 * @param wrapperKey e.g. RSA private-key
+     * @param wrappedKey as byte-array
+     * @param keyAlgorithm e.g. "AES"
+     * @param keyType e.g. Cipher.SECRET_KEY
+     * @return unwrapped key
+     * @throws Exception
+     * @since 0.6.0
 	 */
-	public byte[] wrap(final Key wrapperKey, final Key key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, NoSuchProviderException {
-		if (null == wrapperKey) {
-			throw new IllegalArgumentException("wrapperKey is null!"); //$NON-NLS-1$
-		}
-		if (null == key) {
-			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
-		}
-		
-		final Cipher cipher = Cipher.getInstance(CryptoRSA.XFORM, "BC"); //$NON-NLS-1$
-		cipher.init(Cipher.WRAP_MODE, wrapperKey);
-
-		return cipher.wrap(key);
-	}
-
-	public Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
-		if (null == wrapperKey) {
-			throw new IllegalArgumentException("wrapperKey is null!"); //$NON-NLS-1$
-		}
-		if (!HelperArray.isValid(wrappedKey)) {
-			throw new IllegalArgumentException("wrappedKey is null or empty!"); //$NON-NLS-1$
-		}
-		if (!HelperString.isValid(keyAlgorithm)) {
-			throw new IllegalArgumentException("keyAlgorithm is null or empty!"); //$NON-NLS-1$
-		}
-		if (0 >= keyType) {
-			throw new IllegalArgumentException("keyType is invalid: " + keyType); //$NON-NLS-1$
-		}
-		
-		final Cipher cipher = Cipher.getInstance(CryptoRSA.XFORM, "BC"); //$NON-NLS-1$
-		cipher.init(Cipher.UNWRAP_MODE, wrapperKey);
-
-		return cipher.unwrap(wrappedKey, keyAlgorithm, keyType);
-	}
+	Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws Exception;
 }

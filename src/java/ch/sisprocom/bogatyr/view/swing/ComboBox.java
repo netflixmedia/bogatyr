@@ -51,10 +51,10 @@ import java.util.Locale;
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.2.0
  */
-public class ComboBox extends JComboBox implements IComponentActivate {
+public class ComboBox extends JComboBox implements Activatable {
 	private static final long serialVersionUID = -3870596701286078140L;
 	
 	private boolean isNotActive;

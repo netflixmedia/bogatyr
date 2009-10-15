@@ -31,7 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.context;
 
-import ch.sisprocom.bogatyr.helper.context.Context;
+import ch.sisprocom.bogatyr.helper.context.ContextImpl;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -45,7 +45,7 @@ import java.util.Date;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090527
+ * @version 20091015
  */
 public class ContextTest {
 	private static final String UNKNOWN_KEY = "lalala"; //$NON-NLS-1$
@@ -58,23 +58,23 @@ public class ContextTest {
 		final String value2 = "Spross"; //$NON-NLS-1$
 		
 		//add key/value pairs
-		Context.getInstance().addValue(key, value);
-		Context.getInstance().addValue(key2, value2);
+		ContextImpl.getInstance().addValue(key, value);
+		ContextImpl.getInstance().addValue(key2, value2);
 		
 		//remove a key
-		Context.getInstance().removeValue(key);
+		ContextImpl.getInstance().removeValue(key);
 		
-		assertNull(Context.getInstance().getValue(key));
-		assertEquals(value2, Context.getInstance().getValue(key2));
+		assertNull(ContextImpl.getInstance().getValue(key));
+		assertEquals(value2, ContextImpl.getInstance().getValue(key2));
 		
 		//add new value to existing key
-		Context.getInstance().addValue(key2, value);
+		ContextImpl.getInstance().addValue(key2, value);
 		
-		assertEquals(value, Context.getInstance().getValue(key2));
+		assertEquals(value, ContextImpl.getInstance().getValue(key2));
 		
 		//null key
 		try {
-			Context.getInstance().addValue(null, value);
+			ContextImpl.getInstance().addValue(null, value);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -88,11 +88,11 @@ public class ContextTest {
 		final String key = "Roman"; //$NON-NLS-1$
 		final String value = "Wuersch"; //$NON-NLS-1$
 		
-		Context.getInstance().addValue(key, value);
+		ContextImpl.getInstance().addValue(key, value);
 		
 		//null key
 		try {
-			Context.getInstance().removeValue(null);
+			ContextImpl.getInstance().removeValue(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -101,14 +101,14 @@ public class ContextTest {
 		}
 		
 		//unknown key
-		Context.getInstance().removeValue(UNKNOWN_KEY);
+		ContextImpl.getInstance().removeValue(UNKNOWN_KEY);
 		
-		assertEquals(value, Context.getInstance().getValue(key));
+		assertEquals(value, ContextImpl.getInstance().getValue(key));
 		
 		//correct key
-		Context.getInstance().removeValue(key);
+		ContextImpl.getInstance().removeValue(key);
 		
-		assertNull(Context.getInstance().getValue(key));
+		assertNull(ContextImpl.getInstance().getValue(key));
 	}
 	
 	@Test
@@ -116,10 +116,10 @@ public class ContextTest {
 		final String key = "boolean"; //$NON-NLS-1$
 		final Boolean value = true;
 		
-		Context.getInstance().addValue(key, value);
+		ContextImpl.getInstance().addValue(key, value);
 		
 		try {
-			Context.getInstance().getBooleanValue(null);
+			ContextImpl.getInstance().getBooleanValue(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -127,8 +127,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(Context.getInstance().getBooleanValue(UNKNOWN_KEY));
-		assertTrue(Context.getInstance().getBooleanValue(key));
+		assertNull(ContextImpl.getInstance().getBooleanValue(UNKNOWN_KEY));
+		assertTrue(ContextImpl.getInstance().getBooleanValue(key));
 	}
 	
 	@Test
@@ -136,10 +136,10 @@ public class ContextTest {
 		final String key = "double"; //$NON-NLS-1$
 		final Double value = 1.0D;
 		
-		Context.getInstance().addValue(key, value);
+		ContextImpl.getInstance().addValue(key, value);
 		
 		try {
-			Context.getInstance().getDoubleValue(null);
+			ContextImpl.getInstance().getDoubleValue(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -147,8 +147,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(Context.getInstance().getDoubleValue(UNKNOWN_KEY));
-		assertEquals(value, Context.getInstance().getDoubleValue(key));
+		assertNull(ContextImpl.getInstance().getDoubleValue(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getDoubleValue(key));
 	}
 	
 	@Test
@@ -156,10 +156,10 @@ public class ContextTest {
 		final String key = "integer"; //$NON-NLS-1$
 		final Integer value = 1;
 		
-		Context.getInstance().addValue(key, value);
+		ContextImpl.getInstance().addValue(key, value);
 		
 		try {
-			Context.getInstance().getIntegerValue(null);
+			ContextImpl.getInstance().getIntegerValue(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -167,8 +167,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(Context.getInstance().getIntegerValue(UNKNOWN_KEY));
-		assertEquals(value, Context.getInstance().getIntegerValue(key));
+		assertNull(ContextImpl.getInstance().getIntegerValue(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getIntegerValue(key));
 	}
 	
 	@Test
@@ -176,10 +176,10 @@ public class ContextTest {
 		final String key = "float"; //$NON-NLS-1$
 		final Float value = 1.0F;
 		
-		Context.getInstance().addValue(key, value);
+		ContextImpl.getInstance().addValue(key, value);
 		
 		try {
-			Context.getInstance().getFloatValue(null);
+			ContextImpl.getInstance().getFloatValue(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -187,8 +187,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(Context.getInstance().getFloatValue(UNKNOWN_KEY));
-		assertEquals(value, Context.getInstance().getFloatValue(key));
+		assertNull(ContextImpl.getInstance().getFloatValue(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getFloatValue(key));
 	}
 	
 	@Test
@@ -196,10 +196,10 @@ public class ContextTest {
 		final String key = "byte"; //$NON-NLS-1$
 		final Byte value = 1;
 		
-		Context.getInstance().addValue(key, value);
+		ContextImpl.getInstance().addValue(key, value);
 		
 		try {
-			Context.getInstance().getByteValue(null);
+			ContextImpl.getInstance().getByteValue(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -207,8 +207,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(Context.getInstance().getByteValue(UNKNOWN_KEY));
-		assertEquals(value, Context.getInstance().getByteValue(key));
+		assertNull(ContextImpl.getInstance().getByteValue(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getByteValue(key));
 	}
 	
 	@Test
@@ -216,10 +216,10 @@ public class ContextTest {
 		final String key = "long"; //$NON-NLS-1$
 		final Long value = 1L;
 		
-		Context.getInstance().addValue(key, value);
+		ContextImpl.getInstance().addValue(key, value);
 		
 		try {
-			Context.getInstance().getLongValue(null);
+			ContextImpl.getInstance().getLongValue(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -227,8 +227,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(Context.getInstance().getLongValue(UNKNOWN_KEY));
-		assertEquals(value, Context.getInstance().getLongValue(key));
+		assertNull(ContextImpl.getInstance().getLongValue(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getLongValue(key));
 	}
 	
 	@Test
@@ -236,10 +236,10 @@ public class ContextTest {
 		final String key = "short"; //$NON-NLS-1$
 		final Short value = 1;
 		
-		Context.getInstance().addValue(key, value);
+		ContextImpl.getInstance().addValue(key, value);
 
 		try {
-			Context.getInstance().getShortValue(null);
+			ContextImpl.getInstance().getShortValue(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -247,8 +247,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(Context.getInstance().getShortValue(UNKNOWN_KEY));
-		assertEquals(value, Context.getInstance().getShortValue(key));
+		assertNull(ContextImpl.getInstance().getShortValue(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getShortValue(key));
 	}
 	
 	@Test
@@ -256,10 +256,10 @@ public class ContextTest {
 		final String key = "BigInteger"; //$NON-NLS-1$
 		final BigInteger value = new BigInteger("1"); //$NON-NLS-1$
 		
-		Context.getInstance().addValue(key, value);
+		ContextImpl.getInstance().addValue(key, value);
 
 		try {
-			Context.getInstance().getBigIntegerValue(null);
+			ContextImpl.getInstance().getBigIntegerValue(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -267,8 +267,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(Context.getInstance().getBigIntegerValue(UNKNOWN_KEY));
-		assertEquals(value, Context.getInstance().getBigIntegerValue(key));
+		assertNull(ContextImpl.getInstance().getBigIntegerValue(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getBigIntegerValue(key));
 	}
 	
 	@Test
@@ -276,10 +276,10 @@ public class ContextTest {
 		final String key = "BigDecimal"; //$NON-NLS-1$
 		final BigDecimal value = new BigDecimal("1.0"); //$NON-NLS-1$
 		
-		Context.getInstance().addValue(key, value);
+		ContextImpl.getInstance().addValue(key, value);
 
 		try {
-			Context.getInstance().getBigDecimalValue(null);
+			ContextImpl.getInstance().getBigDecimalValue(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -287,8 +287,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(Context.getInstance().getBigDecimalValue(UNKNOWN_KEY));
-		assertEquals(value, Context.getInstance().getBigDecimalValue(key));
+		assertNull(ContextImpl.getInstance().getBigDecimalValue(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getBigDecimalValue(key));
 	}
 	
 	@Test
@@ -296,10 +296,10 @@ public class ContextTest {
 		final String key = "Date"; //$NON-NLS-1$
 		final Date value = new Date();
 		
-		Context.getInstance().addValue(key, value);
+		ContextImpl.getInstance().addValue(key, value);
 
 		try {
-			Context.getInstance().getDateValue(null);
+			ContextImpl.getInstance().getDateValue(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -307,7 +307,7 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(Context.getInstance().getDateValue(UNKNOWN_KEY));
-		assertEquals(value, Context.getInstance().getDateValue(key));
+		assertNull(ContextImpl.getInstance().getDateValue(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getDateValue(key));
 	}
 }

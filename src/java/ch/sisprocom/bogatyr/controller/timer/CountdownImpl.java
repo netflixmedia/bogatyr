@@ -38,10 +38,10 @@ import java.util.TimerTask;
  * This is a countdown timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091015)
  * @since 0.6.0
  */
-public class TimerCountdown extends TimerAbstract implements ITimerCountdown{
+public class CountdownImpl extends TimerAbstract implements Countdown {
 	long runtime;
 
 	

@@ -31,20 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.timer;
 
+import ch.sisprocom.bogatyr.controller.ControllerAbstract;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Timer;
-
-import ch.sisprocom.bogatyr.controller.ControllerAbstract;
 
 /**
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091015)
  * @since 0.6.0
  */
-public abstract class TimerAbstract extends ControllerAbstract implements IListener {
+public abstract class TimerAbstract extends ControllerAbstract implements TimeMachine {
 	private Collection<ListenerTimer> listListener = new HashSet<ListenerTimer>();
 
 	private Timer timer = new Timer();

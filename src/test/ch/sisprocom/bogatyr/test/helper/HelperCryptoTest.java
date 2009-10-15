@@ -31,67 +31,21 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.fail;
-
-import java.util.UUID;
-
-import org.junit.Test;
-
 import ch.sisprocom.bogatyr.helper.HelperCrypto;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.test.AllBogatyrTests;
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+import java.util.UUID;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090527
+ * @version 20091015
  */
 public class HelperCryptoTest {
-	
-	@Test
-	public void testGetHashCode() {
-		try {
-			assertNotNull(HelperCrypto.getHashCode("MD5", AllBogatyrTests.DATA)); //$NON-NLS-1$
-		} catch (Exception ex) {fail(ex.getMessage());}
-
-		try {
-			HelperCrypto.getHashCode(null, null);
-			fail("algo is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-
-		try {
-			HelperCrypto.getHashCode("MD5", null); //$NON-NLS-1$
-			fail("data is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	public void testGetHashCodeDefault() {
-		try {
-			assertNotNull(HelperCrypto.getHashCode(AllBogatyrTests.DATA));
-		} catch (Exception ex) {fail(ex.getMessage());}
-
-		try {
-			HelperCrypto.getHashCode(null);
-			fail("data is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-	}
 
 	@Test
     public void testGetRandomKey() {

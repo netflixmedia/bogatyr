@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,98 +31,51 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.crypto;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
-
 
 /**
- * This is a class for obfuscating data with CFB.
+ * This is an interface for scrambling data.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
- * @since 0.3.0
+ * @version 0.8.0 (20091015)
+ * @since 0.6.0
  */
-public class Scrambler implements IScrambler {
-	
-	public Scrambler() {
-		super();
-	}
-
-	
-	/*
-	 * Private methods
-	 */
+public interface Scrambler {
 	/**
-	 * Obfuscate the data.
+	 * Scramble the data with the default pattern.
 	 * 
-	 * @param input data (byte-array) to obfuscate
-	 * @param pattern for obfuscating (region: -128 - 127)
-     * @return obfuscated data
-     * @since 0.3.0
+	 * @param input data (byte-array) to scramble
+	 * @return scrambled byte-array 
+	 * @since 0.6.0
 	 */
-	private byte[] obfuscate(final byte[] input, final byte pattern) {
-		if (!HelperArray.isValid(input)) {
-			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
-		}
-
-		final byte[] result = new byte[input.length];
-		
-		result[0] = (byte)(input[0] ^ (int) pattern);
-		for (int ii = 1; ii < input.length; ii++ ) {
-			result[ii] = (byte)(input[ii] ^ (int) result[ii-1]);
-		}
-		return result;
-	}
+	byte[] scramble(final byte[] input);
 
 	/**
-	 * Unobfuscate the data.
+	 * Scramble the data.
 	 * 
-	 * @param input data (byte-array) to unobfuscate
-	 * @param pattern for unobfuscating (region: -128 - 127)
-     * @return unobfuscated data
-     * @since 0.3.0
+	 * @param input data (byte-array) to scramble
+	 * @param pattern for scrambling (region: -128 - 127)
+	 * @return scrambled byte-array 
+	 * @since 0.6.0
 	 */
-	private byte[] unobfuscate(final byte[] input, final byte pattern) {
-		if (!HelperArray.isValid(input)) {
-			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
-		}
+	byte[] scramble(final byte[] input, final byte pattern);
 
-		final byte[] result = new byte[input.length];
-		
-		result[0] = (byte)(input[0] ^ (int) pattern);
-		for (int ii = 1; ii < input.length; ii++ ) {
-			result[ii] = (byte)(input[ii] ^ (int) input[ii-1]);
-		}
-		return result;
-	}
+	/**
+	 * Unscramble the data.
+	 * 
+	 * @param input data (byte-array) to unscramble
+	 * @return unscrambled byte-array
+	 * @since 0.6.0
+	 */
+	byte[] unscramble(final byte[] input);
 
 	
-	/*
-	 * Overridden methods
+	/**
+	 * Unscramble the data.
+	 * 
+	 * @param input data (byte-array) to unscramble
+	 * @param pattern for unscrambling (region: -128 - 127)
+	 * @return unscrambled byte-array
+	 * @since 0.6.0
 	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-	public byte[] scramble(final byte[] input) { //$JUnit$
-		return scramble(input, Byte.MAX_VALUE);
-	}
-
-	public byte[] scramble(final byte[] input, final byte pattern) { //$JUnit$
-		return obfuscate(input, pattern);
-	}
-
-	public byte[] unscramble(final byte[] input) { //$JUnit$
-		return unscramble(input, Byte.MAX_VALUE);
-	}
-
-	public byte[] unscramble(final byte[] input, final byte pattern) { //$JUnit$
-		return unobfuscate(input, pattern);
-	}
+	byte[] unscramble(final byte[] input, final byte pattern);
 }

@@ -31,20 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.HelperObject;
+
 import javax.swing.Action;
 import javax.swing.JRadioButton;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JRadioButton.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.2.0
  */
-public class RadioButton extends JRadioButton implements IComponentActivate {
+public class RadioButton extends JRadioButton implements Activatable {
 	private static final long serialVersionUID = 8676540667794440059L;
 	
 	private boolean isNotActive;

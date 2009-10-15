@@ -46,60 +46,48 @@ import java.util.prefs.Preferences;
  * This is a helper class for preferences.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.5.0
  */
 public abstract class HelperPreferences { //TODO complete and test it!
 	
 	public static void loadFromFile(final File file) throws IOException, InvalidPreferencesFormatException {
-        BufferedInputStream bis = null;
+        final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 
         try {
-            bis = new BufferedInputStream(new FileInputStream(file));
             Preferences.importPreferences(bis);
         } finally {
-            if (bis != null) {
-                bis.close();
-            }
+            bis.close();
         }
 	}
 	 
 	public static void save(final File file, final Preferences prefs) throws IOException, BackingStoreException {
-        BufferedOutputStream bos = null;
+        final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {
-            bos = new BufferedOutputStream(new FileOutputStream(file));
             prefs.exportNode(bos);
         } finally {
-            if (bos != null) {
-                bos.close();
-            }
+            bos.close();
         }
 	}	
 	  
 	public static void saveUserNode(final File file, final Class<?> clazz) throws IOException, BackingStoreException {
-        BufferedOutputStream bos = null;
+        final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {
-            bos = new BufferedOutputStream(new FileOutputStream(file));
             Preferences.userNodeForPackage(clazz).exportNode(bos);
         } finally {
-            if (bos != null) {
-                bos.close();
-            }
+            bos.close();
         }
 	}	
 	  
 	public static void saveSystemNode(final File file, final Class<?> clazz) throws IOException, BackingStoreException {
-        BufferedOutputStream bos = null;
+        final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {
-            bos = new BufferedOutputStream(new FileOutputStream(file));
             Preferences.systemNodeForPackage(clazz).exportNode(bos);
         } finally {
-            if (bos != null) {
-                bos.close();
-            }
+            bos.close();
         }
 	}	
 }

@@ -31,6 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import javax.swing.filechooser.FileSystemView;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -54,24 +58,21 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import javax.swing.filechooser.FileSystemView;
-
 
 /**
  * This is a helper class for I/O.
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20091015)
  * @since 0.1.0
  */
 public abstract class HelperIO {
 	public static final String FILE_SEPARATOR = System.getProperty("file.separator"); //$NON-NLS-1$
 	public static final String PATH_SEPARATOR = System.getProperty("path.separator"); //$NON-NLS-1$
 
-	private static final byte[] BUFFER = new byte[HelperNumber.VALUE_1024];
-//	private static final int BUFFER = 1024;
-	
+	private static final int DEFAULT_BUFFER_SIZE = HelperNumber.VALUE_1024;
+
 	/**
      * Returns a temporary {@link File} which will be deleted on program exit.
      * 
@@ -204,17 +205,32 @@ public abstract class HelperIO {
      * @since 0.1.0
      */	
 	public static void copyFile(final File source, final File dest) throws IOException{
-		if (null == source) {
-			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
-		}
-		if (!source.isFile()) {
-			throw new IllegalArgumentException("source is not a file: " + source); //$NON-NLS-1$
-		}
-		if (null == dest) {
-			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
-		}
-		
-		if (!dest.exists()) {
+        copyFile(source, dest, DEFAULT_BUFFER_SIZE);
+	}
+
+    /**
+     * Copy a {@link File}.
+     *
+     * @param source file to copy
+     * @param dest file
+     * @param bufferSize in bytes
+     * @throws IOException
+     * @since 0.1.0
+     */
+    public static void copyFile(final File source, final File dest, final int bufferSize) throws IOException{
+        if (null == source) {
+            throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
+        }
+        if (!source.isFile()) {
+            throw new IllegalArgumentException("source is not a file: " + source); //$NON-NLS-1$
+        }
+        if (null == dest) {
+            throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+        }
+
+        final byte[] buffer = new byte[bufferSize];
+
+        if (!dest.exists()) {
             dest.createNewFile();
         }
 
@@ -224,22 +240,21 @@ public abstract class HelperIO {
         try {
             fis = new FileInputStream(source);
             fos = new FileOutputStream(dest);
-//			final byte[] buf = new byte[BUFFER];
-			int len;
-			while (0 < (len = fis.read(BUFFER))) {
-				fos.write(BUFFER, 0, len);
-			}
-			fos.flush();
-		} finally {
-			if (fis != null) {
-				fis.close();
-			}
-			if (fos != null) {
-				fos.close();
-			}
-		}
-	}
-	
+            int len;
+            while (0 < (len = fis.read(buffer))) {
+                fos.write(buffer, 0, len);
+            }
+            fos.flush();
+        } finally {
+            if (fis != null) {
+                fis.close();
+            }
+            if (fos != null) {
+                fos.close();
+            }
+        }
+    }
+
 	/**
      * Move a file or directory.
      * 
@@ -374,16 +389,13 @@ public abstract class HelperIO {
 			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
 		}
 
-		FileOutputStream fos = null;
+		final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file, append));
 		
 		try {
-			fos = new FileOutputStream(file, append);
-			fos.write(data);
-			fos.flush();
+			bos.write(data);
+			bos.flush();
 		} finally {
-			if (fos != null) {
-                fos.close();
-            }
+            bos.close();
 		}
 	}
 	
@@ -411,11 +423,7 @@ public abstract class HelperIO {
 			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
 		}
 
-		final FileOutputStream fos = new FileOutputStream(file);
-		final Writer writer = new OutputStreamWriter(fos, encoding); 
-		
-//		final Writer writer = new BufferedWriter(new FileWriter(file));
-//		final Writer writer = new BufferedWriter(new FileWriter(file));
+		final Writer writer = new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(file)), encoding); 
 	
 	    try {
 	    	if (append) {
@@ -425,7 +433,7 @@ public abstract class HelperIO {
 	    	}
 	    	writer.flush();
 	    } finally {
-	      writer.close();
+	    	writer.close();
 	    }
 	}
 	
@@ -488,29 +496,43 @@ public abstract class HelperIO {
      * @since 0.1.0
      */	
 	public static byte[] readStream(final InputStream is) throws IOException {
-		if (null == is) {
-			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
-		}
-		
-		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		final byte[] result;
-		
-		try {
-//            final byte[] buffer = new byte[BUFFER];
+		return readStream(is, DEFAULT_BUFFER_SIZE);
+	}
+
+    /**
+     * Reads an {@link InputStream} in a byte-array.
+     *
+     * @param is input stream for reading
+     * @param bufferSize in bytes
+     * @return byte-array containing the stream content
+     * @throws IOException
+     * @since 0.1.0
+     */
+    public static byte[] readStream(final InputStream is, final int bufferSize) throws IOException {
+        if (null == is) {
+            throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+        }
+
+        final byte[] buffer = new byte[bufferSize];
+
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final byte[] result;
+
+        try {
             int x;
 
-            while (-1 != (x = is.read(BUFFER, 0, BUFFER.length))) {
-				bos.write(BUFFER, 0, x);
-			}
-            bos.flush();
-            
-            result = bos.toByteArray();
-		} finally {
-			bos.close();
-		}
-		return result;
-	}
-	
+            while (-1 != (x = is.read(buffer, 0, bufferSize))) {
+                baos.write(buffer, 0, x);
+            }
+            baos.flush();
+
+            result = baos.toByteArray();
+        } finally {
+            baos.close();
+        }
+        return result;
+    }
+
 	/**
      * Reads a {@link File} in a byte-array.
      * 
@@ -528,17 +550,14 @@ public abstract class HelperIO {
 		}
 
 		final long length = file.length();
-		FileInputStream fis = null;
+		final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 		final byte[] buffer;
 		
 		try {
-			fis = new FileInputStream(file);
 			buffer = new byte[(int) length];
-			fis.read(buffer, 0, (int) length);
+			bis.read(buffer, 0, (int) length);
 		} finally {
-			if (fis != null) {
-                fis.close();
-            }
+            bis.close();
 		}
 		return buffer;
 	}

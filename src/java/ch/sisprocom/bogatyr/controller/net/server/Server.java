@@ -42,10 +42,10 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.7.0
  */
-public interface IServer extends Runnable {
+public interface Server extends Runnable {
 	
 	/**
 	 * Returns the {@link ServerSocket} of the current server.
@@ -117,6 +117,6 @@ public interface IServer extends Runnable {
 	 * @return list containing all server threads
 	 * @since 0.8.0
 	 */
-	Collection<IServerThread> getServerThreads();
+	Collection<ServerThread> getServerThreads();
 }   
 

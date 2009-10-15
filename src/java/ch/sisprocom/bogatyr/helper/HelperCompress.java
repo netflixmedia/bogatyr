@@ -31,12 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -47,7 +47,7 @@ import java.util.zip.ZipOutputStream;
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.3.0
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
@@ -176,12 +176,9 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	 * Private methods
 	 */
 	private static void addEntry(final ZipOutputStream zos, final File file) throws IOException {
-		FileInputStream fis = null;
-//		byte[] readBuffer = new byte[2156];
+		final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 		
 		try {
-			fis = new FileInputStream(file);
-			
 	        // create a new zip entry 
 			final ZipEntry entry = new ZipEntry(file.getPath());
 	
@@ -191,14 +188,12 @@ public abstract class HelperCompress { //TODO implement GZip for streams
             int bytesIn;
 
             // now write the content of the file to the ZipOutputStream
-            while(-1 != (bytesIn = fis.read(BUFFER))) {
+            while(-1 != (bytesIn = bis.read(BUFFER))) {
 	            zos.write(BUFFER, 0, bytesIn); 
 	        } 
 		} finally {
-			if (fis != null) {
-				// close the stream 
-				fis.close();
-			}
+			// close the stream 
+			bis.close();
 		}
 	}
 	
@@ -211,27 +206,19 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	    else {
 	    	new File(file.getParent()).mkdirs(); 
  
-	    	InputStream  is = null; 
-	    	OutputStream os = null;
+	    	final BufferedInputStream bis = new BufferedInputStream(zipFile.getInputStream(entry));
+	    	final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
  
 	    	try {
-	    		is = zipFile.getInputStream(entry); 
-	    		os = new FileOutputStream( file );
+                int offset;
 
-                int bytesOut;
-
-                while (-1 != (bytesOut = is.read(BUFFER))) { 
-	    			os.write(BUFFER, 0, bytesOut); 
+                while (-1 != (offset = bis.read(BUFFER))) { 
+	    			bos.write(BUFFER, 0, offset); 
 	    		}
 	    	} finally { 
 	    		// close the streams
-	    		if (os != null) {
-	    			os.close(); 
-	    		}
-	    		
-	    		if (is != null) {
-	    			is.close(); 
-	    		}
+    			bos.close(); 
+    			bis.close(); 
 	    	} 
 	    }
 	} 

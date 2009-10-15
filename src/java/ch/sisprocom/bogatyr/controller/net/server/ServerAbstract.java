@@ -31,14 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.server;
 
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
@@ -46,17 +46,17 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.7.0
  */
-public abstract class ServerAbstract implements IServer, ListenerServerThread {
+public abstract class ServerAbstract implements Server, ListenerServerThread {
     private final long createTime = System.currentTimeMillis();
 
     private Thread thread;
     
-	private final Collection<IServerThread> listThread = new HashSet<IServerThread>();
+	private final Collection<ServerThread> listThread = new HashSet<ServerThread>();
 
-//    private final Map<UUID, IServerThread> mapThread = new ConcurrentHashMap<UUID, IServerThread>();
+//    private final Map<UUID, ServerThread> mapThread = new ConcurrentHashMap<UUID, ServerThread>();
 
     private ServerSocket serverSocket;
     private int port;
@@ -159,7 +159,7 @@ public abstract class ServerAbstract implements IServer, ListenerServerThread {
         this.timeout = timeout;
     }
 
-//    public void addServerThread(final UUID uuid, final IServerThread serverThread) {
+//    public void addServerThread(final UUID uuid, final ServerThread serverThread) {
 //        mapThread.put(uuid, serverThread);
 //    }
 //
@@ -167,7 +167,7 @@ public abstract class ServerAbstract implements IServer, ListenerServerThread {
 //        mapThread.remove(uuid);
 //    }
 //
-    public Collection<IServerThread> getServerThreads() {
+    public Collection<ServerThread> getServerThreads() {
         return Collections.unmodifiableCollection(listThread);
     }
 
@@ -191,7 +191,7 @@ public abstract class ServerAbstract implements IServer, ListenerServerThread {
         	serverSocket.close();
         }
 		
-        for (final IServerThread thread : listThread) {
+        for (final ServerThread thread : listThread) {
              thread.stop();
         }
         
@@ -208,11 +208,11 @@ public abstract class ServerAbstract implements IServer, ListenerServerThread {
         return isRunning;
     }
     
-	public void serverThreadStarted(final IServerThread serverThread) {
+	public void serverThreadStarted(final ServerThread serverThread) {
 		listThread.add(serverThread);
 	}
 	
-	public void serverThreadStopped(final IServerThread serverThread) {
+	public void serverThreadStopped(final ServerThread serverThread) {
 		listThread.remove(serverThread);
 	}
 }
