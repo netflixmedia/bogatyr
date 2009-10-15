@@ -31,6 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.property;
 
+import ch.sisprocom.bogatyr.controller.ControllerAbstract;
+
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -39,17 +42,15 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Properties;
 
-import ch.sisprocom.bogatyr.controller.ControllerAbstract;
-
 
 /**
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090612)
+ * @version 0.8.0 (20091015)
  * @since 0.1.0
  */
-public class PropertyStream extends ControllerAbstract implements IProperty {
+public class PropertyStream extends ControllerAbstract implements Property {
 	private final Properties properties;
 
 	
@@ -60,7 +61,7 @@ public class PropertyStream extends ControllerAbstract implements IProperty {
     }
 
     public PropertyStream(final File file) throws IOException {
-    	this(new FileInputStream(file));
+    	this(new BufferedInputStream(new FileInputStream(file)));
     } 
 
 	

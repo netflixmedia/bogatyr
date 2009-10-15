@@ -40,10 +40,10 @@ import java.net.Socket;
  * Defines the methods for the implementation of the server thread.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.7.0
  */
-public interface IServerThread extends Runnable {
+public interface ServerThread extends Runnable {
 	/**
 	 * Returns the current {@link Socket} of the thread.
 	 * 

@@ -31,7 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.updater;
 
-import ch.sisprocom.bogatyr.controller.localizer.ILocalizer;
+import ch.sisprocom.bogatyr.controller.localizer.Localizer;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperNet;
@@ -63,18 +63,18 @@ import java.net.URL;
  * SAX handler to parse the update XML files
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091014)
+ * @version 0.8.0 (20091015)
  * @since 0.6.0
  */
 public class XmlParserUpdater extends DefaultHandler {
 	// Resources
-    private static final String	RES_UPDATE         = "Updater.update"; //$NON-NLS-1$
-    private static final String	RES_UPDATE_TEXT    = "Updater.update.text"; //$NON-NLS-1$
-    private static final String	RES_DOWNGRADE 	   = "Updater.downgrade"; //$NON-NLS-1$
-    private static final String	RES_DOWNGRADE_TEXT = "Updater.downgrade.text"; //$NON-NLS-1$
-    private static final String	RES_FILE 	       = "Updater.file"; //$NON-NLS-1$
-    private static final String	RES_SUCCESS 	   = "Updater.success"; //$NON-NLS-1$
-    private static final String	RES_FAIL     	   = "Updater.fail"; //$NON-NLS-1$
+    private static final String	RES_UPDATE         = "UpdaterImpl.update"; //$NON-NLS-1$
+    private static final String	RES_UPDATE_TEXT    = "UpdaterImpl.update.text"; //$NON-NLS-1$
+    private static final String	RES_DOWNGRADE 	   = "UpdaterImpl.downgrade"; //$NON-NLS-1$
+    private static final String	RES_DOWNGRADE_TEXT = "UpdaterImpl.downgrade.text"; //$NON-NLS-1$
+    private static final String	RES_FILE 	       = "UpdaterImpl.file"; //$NON-NLS-1$
+    private static final String	RES_SUCCESS 	   = "UpdaterImpl.success"; //$NON-NLS-1$
+    private static final String	RES_FAIL     	   = "UpdaterImpl.fail"; //$NON-NLS-1$
 
     // Tags
 	private static final String TAG_APPLICATION      = "application"; //$NON-NLS-1$
@@ -130,10 +130,10 @@ public class XmlParserUpdater extends DefaultHandler {
 	private final int applicationBuild;
 	
 	private final ListenerUpdater listener;
-	private final ILocalizer localizer;
+	private final Localizer localizer;
 	
 	
-	public XmlParserUpdater(final String applicationName, final String applicationId, final int applicationVersion, final int applicationMinorversion, final int applicationBuild, final ListenerUpdater listener, final ILocalizer localizer) {
+	public XmlParserUpdater(final String applicationName, final String applicationId, final int applicationVersion, final int applicationMinorversion, final int applicationBuild, final ListenerUpdater listener, final Localizer localizer) {
 		super();
 		
 		this.applicationName = applicationName;

@@ -34,113 +34,141 @@ package ch.sisprocom.bogatyr.helper.context;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
+
 
 
 /**
- * Implementation of the context for applications.
+ * Interface for the context in applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
- * @since 0.1.0
+ * @version 0.8.0 (20091015)
+ * @since 0.6.0
  */
-public class Context implements IContext {
-	private static final IContext instance = new Context();
+public interface Context {
+	
+	/**
+     * Adds a key/value pair to the context.
+     * 
+     * @param key for the context
+     * @param value associated to the given key 
+     * @since 0.6.0
+     */	
+	void addValue(Object key, Object value);
+	
+	/**
+     * Removes a key/value pair from the context.
+     * 
+     * @param key for the context
+     * @since 0.6.0
+     */	
+	void removeValue(Object key);
+	
+	/**
+     * Returns a {@link Object} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Object associated to the given key
+     * @since 0.6.0 
+     */	
+	Object getValue(Object key);
+	
+	/**
+     * Returns a {@link String} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return String associated to the given key
+     * @since 0.6.0 
+     */	
+	String getStringValue(Object key);
+	
+	/**
+     * Returns a {@link Boolean} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Boolean associated to the given key
+     * @since 0.7.0 
+     */	
+	Boolean getBooleanValue(Object key);
+	
+	/**
+     * Returns a {@link Double} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Double associated to the given key
+     * @since 0.7.0 
+     */	
+	Double getDoubleValue(final Object key);
+	
+	/**
+     * Returns an {@link Integer} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Integer associated to the given key
+     * @since 0.7.0 
+     */	
+	Integer getIntegerValue(final Object key);
+	
+	/**
+     * Returns a {@link Float} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Float associated to the given key
+     * @since 0.7.0 
+     */	
+	Float getFloatValue(final Object key);
+	
+	/**
+     * Returns a {@link Byte} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Byte associated to the given key
+     * @since 0.7.0 
+     */	
+	Byte getByteValue(final Object key);
+	
+	/**
+     * Returns a {@link Long} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Long associated to the given key
+     * @since 0.7.0 
+     */	
+	Long getLongValue(final Object key);
 
-	private final Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();
+	/**
+     * Returns a {@link Short} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Short associated to the given key
+     * @since 0.7.0 
+     */	
+	Short getShortValue(final Object key);
 	
+	/**
+     * Returns a {@link BigInteger} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return BigInteger associated to the given key
+     * @since 0.7.0 
+     */	
+	BigInteger getBigIntegerValue(final Object key);
+	
+	/**
+     * Returns a {@link BigDecimal} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return BigDecimal associated to the given key
+     * @since 0.7.0 
+     */	
+	BigDecimal getBigDecimalValue(final Object key);
 
-    private Context() {
-        super();
-    }
-	
-    public static IContext getInstance() {
-	    return instance;
-    }
-
-	
-    /*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(instance);
-	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-	public void addValue(final Object key, final Object value) { //$JUnit$
-		if (null == key) {
-			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
-		}
-
-		if (value != null) {
-            contextData.put(key, value);
-		} else {
-			removeValue(key);
-		}
-	}
-
-	public void removeValue(final Object key) { //$JUnit$
-		if (null == key) {
-			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
-		}
-		contextData.remove(key);
-	}
-
-	public Object getValue(final Object key) { //$JUnit$
-		if (null == key) {
-			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
-		}
-		return contextData.get(key);
-	}
-
-	public String getStringValue(final Object key) { //$JUnit$
-		return (String)getValue(key);
-    }
-
-	public Boolean getBooleanValue(final Object key) { //$JUnit$
-		return (Boolean)getValue(key);
-    }
-	
-	public Double getDoubleValue(final Object key) { //$JUnit$
-		return (Double)getValue(key);
-	}
-	
-	public Integer getIntegerValue(final Object key) { //$JUnit$
-		return (Integer)getValue(key);
-	}
-	
-	public Float getFloatValue(final Object key) { //$JUnit$
-		return (Float)getValue(key);
-	}
-	
-	public Byte getByteValue(final Object key) { //$JUnit$
-		return (Byte)getValue(key);
-	}
-	
-	public Long getLongValue(final Object key) { //$JUnit$
-		return (Long)getValue(key);
-	}
-
-	public Short getShortValue(final Object key) { //$JUnit$
-		return (Short)getValue(key);
-	}
-	
-	public BigInteger getBigIntegerValue(final Object key) { //$JUnit$
-		return (BigInteger)getValue(key);
-	}
-	
-	public BigDecimal getBigDecimalValue(final Object key) { //$JUnit$
-		return (BigDecimal)getValue(key);
-	}
-
-	public Date getDateValue(final Object key) { //$JUnit$
-		return (Date)getValue(key);
-	}
+	/**
+     * Returns a {@link Date} value associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return Date associated to the given key
+     * @since 0.7.0 
+     */	
+	Date getDateValue(final Object key);
 }

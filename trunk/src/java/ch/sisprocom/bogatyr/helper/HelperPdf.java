@@ -34,10 +34,10 @@ package ch.sisprocom.bogatyr.helper;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,7 +58,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * This is a helper class for PDF operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -82,11 +82,10 @@ public abstract class HelperPdf {
 		
     	final Dimension size = component.getSize();
 		final Document document = new Document(new Rectangle((float) size.width, (float) size.height));
-	    FileOutputStream fos = null;
+		final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {
-            fos = new FileOutputStream(file);
-            final PdfWriter writer = PdfWriter.getInstance(document, fos);
+            final PdfWriter writer = PdfWriter.getInstance(document, bos);
 			      
 			document.open();
 			final PdfContentByte cb = writer.getDirectContent();
@@ -98,9 +97,7 @@ public abstract class HelperPdf {
 			cb.addTemplate(tp, 0.0F, 0.0F);
 		} finally {
 			document.close();
-            if (fos != null) {
-                fos.close();
-            }
+            bos.close();
         }
 	}
 
@@ -121,16 +118,14 @@ public abstract class HelperPdf {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
 		
-		OutputStream os = null;
+		final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
 
 		try {
-		   os = new FileOutputStream(file);
-	
 		   final ITextRenderer renderer = new ITextRenderer();
 	
 		   renderer.setDocument(files[0]);
 		   renderer.layout();
-		   renderer.createPDF(os, false);
+		   renderer.createPDF(bos, false);
 	
 		   for (int ii = 1; ii < files.length; ii++) {
 		       renderer.setDocument(files[ii]);
@@ -141,9 +136,7 @@ public abstract class HelperPdf {
 		   renderer.finishPDF();
 
 		} finally {
-		   if (os != null) {
-	    	   os.close();
-		   }
+		   bos.close();
 		}
 	}
 	

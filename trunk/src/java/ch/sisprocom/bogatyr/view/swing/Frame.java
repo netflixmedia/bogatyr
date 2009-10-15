@@ -31,6 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.HelperObject;
+
+import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -40,19 +43,15 @@ import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
 import java.awt.Image;
 
-import javax.swing.JFrame;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
 
 /**
  * This is an extended JFrame.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.2.0
  */
-public class Frame extends JFrame implements IComponentFader {
+public class Frame extends JFrame implements Fadeable {
 	private static final long serialVersionUID = 7476360387134225315L;
 
 	private boolean isFading;

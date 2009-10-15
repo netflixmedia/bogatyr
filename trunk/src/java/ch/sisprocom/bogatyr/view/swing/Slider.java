@@ -31,25 +31,24 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.HelperObject;
+
+import javax.swing.BoundedRangeModel;
+import javax.swing.JSlider;
 import java.awt.Component;
 import java.awt.Font;
 import java.util.Collections;
 import java.util.Dictionary;
-
-import javax.swing.BoundedRangeModel;
-import javax.swing.JSlider;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JSlider.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.2.0
  */
-public class Slider extends JSlider implements IComponentActivate {
+public class Slider extends JSlider implements Activatable {
 	private static final long serialVersionUID = 8676540667794440059L;
 	
 	private boolean isNotActive;

@@ -31,40 +31,38 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.crypto;
 
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperTime;
+import ch.sisprocom.bogatyr.helper.crypto.CertificateProvider;
+import ch.sisprocom.bogatyr.helper.crypto.CertificateProviderImpl;
+import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymmetric;
+import ch.sisprocom.bogatyr.helper.crypto.CryptoRSA;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.security.KeyPair;
 import java.security.cert.X509Certificate;
 import java.util.Date;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperTime;
-import ch.sisprocom.bogatyr.helper.crypto.CryptoRSA;
-import ch.sisprocom.bogatyr.helper.crypto.ICryptoAsymmetric;
-import ch.sisprocom.bogatyr.helper.crypto.IProviderCertificate;
-import ch.sisprocom.bogatyr.helper.crypto.ProviderCertificate;
-
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090610
+ * @version 20091015
  */
 public class ProviderCertificateTest {
-	private final IProviderCertificate publicKeyProvider = new ProviderCertificate();
+	private final CertificateProvider publicKeyProvider = new CertificateProviderImpl();
 	
 	private KeyPair keyPair;
 	
 	
 	@Before
 	public void setUp() throws Exception {
-		final ICryptoAsymmetric cryptoAsymm = new CryptoRSA();
+		final CryptoAsymmetric cryptoAsymm = new CryptoRSA();
         keyPair = cryptoAsymm.generateKeyPair();
 	}
 	

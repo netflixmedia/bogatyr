@@ -33,9 +33,9 @@ package ch.sisprocom.bogatyr.sample.helloworld;
 
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
 import ch.sisprocom.bogatyr.controller.localizer.LocalizerFile;
-import ch.sisprocom.bogatyr.controller.localizer.ILocalizer;
+import ch.sisprocom.bogatyr.controller.localizer.Localizer;
 import ch.sisprocom.bogatyr.controller.property.PropertyStream;
-import ch.sisprocom.bogatyr.controller.property.IProperty;
+import ch.sisprocom.bogatyr.controller.property.Property;
 import ch.sisprocom.bogatyr.helper.HelperString;
 
 import java.io.File;
@@ -48,7 +48,7 @@ import java.util.Locale;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20090520
+ * @version 20091015
  */
 public class HelloWorld extends ApplicationAbstract { 
 	// Fixed parameter - e.g. this could be an argument
@@ -62,8 +62,8 @@ public class HelloWorld extends ApplicationAbstract {
 	private static final String	RES_WELCOME = "HelloWorld.welcome"; //$NON-NLS-1$
 	private static final String	RES_BYE     = "HelloWorld.bye"; //$NON-NLS-1$
 
-	private IProperty property;
-	private ILocalizer localizer;
+	private Property property;
+	private Localizer localizer;
 	
 	
 	public static void main(final String[] args) {

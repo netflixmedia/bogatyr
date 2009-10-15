@@ -31,26 +31,26 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.client;
 
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.util.Collection;
 import java.util.HashSet;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
 /**
  * This is the skeleton for clients.
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091015)
  * @since 0.7.0
  */
-public abstract class ClientAbstract implements IClient {
+public abstract class ClientAbstract implements Client {
     private final long createTime = System.currentTimeMillis();
 
     private Thread thread;

@@ -39,10 +39,10 @@ import java.security.PublicKey;
  * This is an interface for asymmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091015)
  * @since 0.6.0
  */
-public interface ICryptoAsymmetric {
+public interface CryptoAsymmetric {
 	/**
 	 * Generates a public and a private {@link KeyPair} with the algorithms standard key size.
 	 * 
@@ -62,10 +62,10 @@ public interface ICryptoAsymmetric {
 	 * @see KeyPair
 	 * @since 0.6.0
 	 */
-	KeyPair generateKeyPair(final int keysize) throws Exception;
+	KeyPair generateKeyPair(int keysize) throws Exception;
 
 	/**
-	 * Encrypt the data (byte-array) with a given {@link PublicKey}.
+	 * Encrypt the data (byte-array) with a given {@link PublicKey} and the implementations algorithm.
 	 * Use this method only, if the key has the algorithms standard key size. 
 	 * 
 	 * @param input data to encrypt as a byte-array
@@ -75,23 +75,23 @@ public interface ICryptoAsymmetric {
 	 * @see PublicKey
 	 * @since 0.6.0
 	 */
-	byte[] encrypt(final byte[] input, final PublicKey key) throws Exception;
+	byte[] encrypt(byte[] input, PublicKey key) throws Exception;
 	
 	/**
-	 * Encrypt the data (byte-array) with a given {@link PublicKey} and key size.
+	 * Encrypt the data (byte-array) with a given {@link PublicKey}, key size and the implementations algorithm.
 	 * 
 	 * @param input data to encrypt as a byte-array
 	 * @param key for the encryption
-	 * @param keysize in bits (normally modulo 16 = 0, e.g. 1024, 2048)
+	 * @param keySize in bits (normally modulo 16 = 0, e.g. 1024, 2048)
      * @return encrypted byte-array
 	 * @throws Exception  
 	 * @see PublicKey
 	 * @since 0.6.0
 	 */
-	byte[] encrypt(final byte[] input, final PublicKey key, final int keysize) throws Exception;
+	byte[] encrypt(byte[] input, PublicKey key, int keySize) throws Exception;
 
 	/**
-	 * Decrypt the data (byte-array) with a given {@link PrivateKey}.
+	 * Decrypt the data (byte-array) with a given {@link PrivateKey} and the implementations algorithm.
 	 * Use this method only, if the key has the algorithms standard key size. 
 	 * 
 	 * @param input encrypted data as a byte-array
@@ -100,18 +100,18 @@ public interface ICryptoAsymmetric {
 	 * @throws Exception 
 	 * @since 0.6.0
 	 */
-	byte[] decrypt(final byte[] input, final PrivateKey key) throws Exception;
+	byte[] decrypt(byte[] input, PrivateKey key) throws Exception;
 	
 	/**
-	 * Decrypt the data (byte-array) with a given {@link PrivateKey} and key size.
+	 * Decrypt the data (byte-array) with a given {@link PrivateKey}, key size and the implementations algorithm.
 	 * 
 	 * @param input encrypted data as a byte-array
 	 * @param key for the decryption
-	 * @param keysize in bits (normally modulo 16 = 0, e.g. 1024, 2048)
+	 * @param keySize in bits (normally modulo 16 = 0, e.g. 1024, 2048)
      * @return decrypted byte-array
 	 * @throws Exception 
 	 * @since 0.6.0
 	 */
-	byte[] decrypt(final byte[] input, final PrivateKey key, final int keysize) throws Exception;
+	byte[] decrypt(byte[] input, PrivateKey key, int keySize) throws Exception;
 
 }

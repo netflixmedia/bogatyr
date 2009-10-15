@@ -31,20 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.HelperObject;
+
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JSpinner.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.7.0
  */
-public class Spinner extends JSpinner implements IComponentActivate {
+public class Spinner extends JSpinner implements Activatable {
 	private static final long serialVersionUID = 1637909823592308393L;
 	
 	private boolean isNotActive;

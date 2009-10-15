@@ -31,24 +31,23 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.util.Hashtable;
-import java.util.Vector;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 import javax.swing.JTree;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import java.util.Hashtable;
+import java.util.Vector;
 
 
 /**
  * This is an extended JTree.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.7.0
  */
-public class Tree extends JTree implements IComponentActivate {
+public class Tree extends JTree implements Activatable {
 	private static final long serialVersionUID = -4538444845018995986L;
 	
 	private boolean isNotActive;

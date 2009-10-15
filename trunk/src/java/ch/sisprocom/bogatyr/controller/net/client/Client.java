@@ -40,10 +40,10 @@ import java.net.Socket;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20091015)
  * @since 0.7.0
  */
-public interface IClient extends Runnable {
+public interface Client extends Runnable {
 
 	/**
 	 * Returns the host of the {@link Socket}.

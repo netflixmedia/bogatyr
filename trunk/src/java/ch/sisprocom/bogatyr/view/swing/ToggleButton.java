@@ -31,21 +31,21 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.HelperObject;
+
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JToggleButton;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JToggleButton.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.7.0
  */
-public class ToggleButton extends JToggleButton implements IComponentActivate {
+public class ToggleButton extends JToggleButton implements Activatable {
 	private static final long serialVersionUID = 7669429243607853809L;
 	
 	private boolean isNotActive;

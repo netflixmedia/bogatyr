@@ -31,14 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-
 import ch.sisprocom.bogatyr.helper.HelperCollection;
 import ch.sisprocom.bogatyr.test.helper.HelperArrayTest;
 import ch.sisprocom.bogatyr.test.helper.HelperCollectionTest;
@@ -51,7 +43,6 @@ import ch.sisprocom.bogatyr.test.helper.HelperMathTest;
 import ch.sisprocom.bogatyr.test.helper.HelperNetTest;
 import ch.sisprocom.bogatyr.test.helper.HelperObjectTest;
 import ch.sisprocom.bogatyr.test.helper.HelperPdfTest;
-import ch.sisprocom.bogatyr.test.helper.HelperSoundTest;
 import ch.sisprocom.bogatyr.test.helper.HelperStringTest;
 import ch.sisprocom.bogatyr.test.helper.HelperTimeTest;
 import ch.sisprocom.bogatyr.test.helper.HelperXmlTest;
@@ -65,19 +56,25 @@ import ch.sisprocom.bogatyr.test.helper.encoder.EncoderHexTest;
 import ch.sisprocom.bogatyr.test.helper.launcher.LauncherBrowserTest;
 import ch.sisprocom.bogatyr.test.helper.launcher.LauncherFileTest;
 import ch.sisprocom.bogatyr.test.helper.launcher.LauncherMailTest;
-import ch.sisprocom.bogatyr.test.helper.printer.PrinterTest;
 import ch.sisprocom.bogatyr.test.helper.unit.UnitAreaTest;
 import ch.sisprocom.bogatyr.test.helper.unit.UnitLengthTest;
 import ch.sisprocom.bogatyr.test.helper.unit.UnitVolumeTest;
 import ch.sisprocom.bogatyr.test.helper.unit.UnitWeightTest;
 import ch.sisprocom.bogatyr.test.view.swing.NumberFieldTest;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 /**
  * Junit test suite
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 20090610
+ * @version 20091015
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
@@ -127,7 +124,7 @@ public class AllBogatyrTests implements Runnable {
 				LauncherFileTest.class,
 				LauncherMailTest.class,
 //				PaginatorTest.class,
-				PrinterTest.class,
+//				PrinterTest.class,
 				UnitAreaTest.class,
 				UnitLengthTest.class,
 				UnitVolumeTest.class,
@@ -144,7 +141,7 @@ public class AllBogatyrTests implements Runnable {
 				HelperObjectTest.class,
 				HelperPdfTest.class,
 //				HelperPreferencesTest.class,
-				HelperSoundTest.class,
+//				HelperSoundTest.class,
 				HelperStringTest.class,
 				HelperTimeTest.class,
 				HelperXmlTest.class,

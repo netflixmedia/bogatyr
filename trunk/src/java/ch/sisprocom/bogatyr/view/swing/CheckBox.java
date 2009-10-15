@@ -31,20 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import ch.sisprocom.bogatyr.helper.HelperObject;
+
 import javax.swing.Action;
 import javax.swing.JCheckBox;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JCheckBox.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.2.0
  */
-public class CheckBox extends JCheckBox implements IComponentActivate {
+public class CheckBox extends JCheckBox implements Activatable {
 	private static final long serialVersionUID = -6439735629199643683L;
 	
 	private boolean isNotActive;

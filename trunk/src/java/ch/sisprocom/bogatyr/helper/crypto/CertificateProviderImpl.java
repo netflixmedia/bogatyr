@@ -33,6 +33,18 @@
 package ch.sisprocom.bogatyr.helper.crypto;
 
 
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import org.bouncycastle.asn1.x509.BasicConstraints;
+import org.bouncycastle.asn1.x509.ExtendedKeyUsage;
+import org.bouncycastle.asn1.x509.GeneralName;
+import org.bouncycastle.asn1.x509.GeneralNames;
+import org.bouncycastle.asn1.x509.KeyPurposeId;
+import org.bouncycastle.asn1.x509.KeyUsage;
+import org.bouncycastle.asn1.x509.X509Extensions;
+import org.bouncycastle.x509.X509V3CertificateGenerator;
+
+import javax.security.auth.x500.X500Principal;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -52,29 +64,15 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Date;
 
-import javax.security.auth.x500.X500Principal;
-
-import org.bouncycastle.asn1.x509.BasicConstraints;
-import org.bouncycastle.asn1.x509.ExtendedKeyUsage;
-import org.bouncycastle.asn1.x509.GeneralName;
-import org.bouncycastle.asn1.x509.GeneralNames;
-import org.bouncycastle.asn1.x509.KeyPurposeId;
-import org.bouncycastle.asn1.x509.KeyUsage;
-import org.bouncycastle.asn1.x509.X509Extensions;
-import org.bouncycastle.x509.X509V3CertificateGenerator;
-
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
 
 /**
  * This class generates, reads and save X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091015)
  * @since 0.3.0
  */
-public class ProviderCertificate implements IProviderCertificate {
+public class CertificateProviderImpl implements CertificateProvider {
 	
 	/*
 	 * Overridden methods
@@ -93,17 +91,13 @@ public class ProviderCertificate implements IProviderCertificate {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
 
-    	final FileInputStream fis = new FileInputStream(file);
-        BufferedInputStream bis = null;
+		final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
         final X509Certificate cert;
 
         try {
-            bis = new BufferedInputStream(fis);
-            cert = readCertificate(bis);
+            cert = readCertificate(new BufferedInputStream(new FileInputStream(file)));
         } finally {
-            if (bis != null) {
-                bis.close();
-            }
+            bis.close();
         }
         return cert;
     }

@@ -33,9 +33,9 @@ package ch.sisprocom.bogatyr.sample.filemanager;
 
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
 import ch.sisprocom.bogatyr.controller.localizer.LocalizerFile;
-import ch.sisprocom.bogatyr.controller.localizer.ILocalizer;
+import ch.sisprocom.bogatyr.controller.localizer.Localizer;
 import ch.sisprocom.bogatyr.controller.property.PropertyStream;
-import ch.sisprocom.bogatyr.controller.property.IProperty;
+import ch.sisprocom.bogatyr.controller.property.Property;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperString;
 
@@ -47,7 +47,7 @@ import java.io.IOException;
  * Simple file manager using the Bogatyr framework
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20091015
  */
 public class FileManager extends ApplicationAbstract {
 	// Fixed parameter - e.g. this could be an argument
@@ -64,8 +64,8 @@ public class FileManager extends ApplicationAbstract {
 	private static final String	RES_DELETED = "FileManager.deleted"; //$NON-NLS-1$
 	private static final String	RES_FOUND   = "FileManager.found"; //$NON-NLS-1$
 
-	private IProperty property;
-	private ILocalizer localizer;
+	private Property property;
+	private Localizer localizer;
 	
 	private File path; 
 	

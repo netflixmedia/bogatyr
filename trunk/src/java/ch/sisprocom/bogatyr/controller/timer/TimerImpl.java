@@ -29,40 +29,59 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper.crypto;
+package ch.sisprocom.bogatyr.controller.timer;
 
-import java.security.Key;
-
+import java.util.TimerTask;
 
 /**
- * This is an interface for wrapping and unwrapping a crypto key.
+ * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20091015)
  * @since 0.6.0
  */
-public interface IKeyWrapper {
-	/**
-	 * Wrap the {@link Key} with a wrapper {@link Key}.
-	 * 
-	 * @param wrapperKey e.g RSA public-key
-     * @param key e.g. AES-key
-     * @return byte-array with the wrapped key
-     * @throws Exception
-     * @since 0.6.0
-	 */
-	byte[] wrap(final Key wrapperKey, final Key key) throws Exception;
+public class TimerImpl extends TimerAbstract implements Timer {
+	long time;
 	
-	/**
-	 * Unwrap and return the {@link Key}.
-	 * 
-	 * @param wrapperKey e.g. RSA private-key
-     * @param wrappedKey as byte-array
-     * @param keyAlgorithm e.g. "AES"
-     * @param keyType e.g. Cipher.SECRET_KEY
-     * @return unwrapped key
-     * @throws Exception
-     * @since 0.6.0
+	public long getTime() {
+		return time;
+	}
+
+	public void setTime(final long time) {
+		this.time = time;
+	}
+	
+	
+	/*
+	 * Implemented methods
 	 */
-	Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws Exception;
+    public synchronized void start(final long interval) {
+        start(0L, interval);
+    }
+
+    public synchronized void start(final long delay, final long interval) {
+    	getTimer().cancel();
+
+    	setTimer(new java.util.Timer());
+        setInterval(interval);
+        getTimer().schedule(new Task(), delay, interval);
+        fireTimerStarted();
+    }
+
+    public synchronized void stop() {
+    	getTimer().cancel();
+        fireTimerStopped();
+    }
+	
+	
+	/*
+	 * Inner classes
+	 */
+	class Task extends TimerTask {
+	    @Override
+		public void run() {
+	    	time += getInterval();
+    		fireTimeChanged(time);
+	    }
+	}
 }

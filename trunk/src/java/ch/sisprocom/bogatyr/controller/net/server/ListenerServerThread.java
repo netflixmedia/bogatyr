@@ -37,7 +37,7 @@ package ch.sisprocom.bogatyr.controller.net.server;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.8.0
  */
 public interface ListenerServerThread {
@@ -48,7 +48,7 @@ public interface ListenerServerThread {
      * @param data read data from the server thread
      * @since 0.8.0
 	 */
-	void serverThreadStreamRead(IServerThread serverThread, byte[] data);
+	void serverThreadStreamRead(ServerThread serverThread, byte[] data);
 	
 	/**
 	 * Informs the listener that the server thread has started.
@@ -57,7 +57,7 @@ public interface ListenerServerThread {
      * 
 	 * @since 0.8.0
 	 */
-	void serverThreadStarted(IServerThread serverThread);
+	void serverThreadStarted(ServerThread serverThread);
 	
 	/**
 	 * Informs the listener that the server thread has stopped.
@@ -65,5 +65,5 @@ public interface ListenerServerThread {
 	 * @param serverThread as reference
 	 * @since 0.8.0
 	 */
-	void serverThreadStopped(IServerThread serverThread);
+	void serverThreadStopped(ServerThread serverThread);
 }

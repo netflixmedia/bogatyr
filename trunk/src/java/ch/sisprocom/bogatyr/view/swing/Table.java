@@ -31,24 +31,23 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import java.util.Vector;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import java.util.Vector;
 
 
 /**
  * This is an extended JTable.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091015)
  * @since 0.7.0
  */
-public class Table extends JTable implements IComponentActivate {
+public class Table extends JTable implements Activatable {
 	private static final long serialVersionUID = -1201835867524275584L;
 	
 	private boolean isNotActive;
