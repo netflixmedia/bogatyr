@@ -70,6 +70,8 @@ public abstract class HelperPdf {
      * @param component for the PDF
      * @throws DocumentException
      * @throws IOException
+     * @see File
+     * @see Component
      * @since 0.5.0
      */
     public static void savePdfFromComponent(final File file, final Component component) throws IOException, DocumentException { //$JUnit$
@@ -108,6 +110,7 @@ public abstract class HelperPdf {
      * @param files in (X)HTML format for the PDF
      * @throws DocumentException
      * @throws IOException
+     * @see File
      * @since 0.5.0
      */
 	public static void savePdfFromHTML(final File file, final File... files) throws IOException, DocumentException { //$JUnit$

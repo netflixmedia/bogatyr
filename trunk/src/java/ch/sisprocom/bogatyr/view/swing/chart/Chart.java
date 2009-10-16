@@ -31,6 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.chart;
 
+import ch.sisprocom.bogatyr.view.swing.Label;
+import ch.sisprocom.bogatyr.view.swing.LabelVertical;
+import ch.sisprocom.bogatyr.view.swing.Panel;
+
+import javax.swing.JComponent;
+import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -39,20 +45,13 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JComponent;
-import javax.swing.SwingConstants;
-
-import ch.sisprocom.bogatyr.view.swing.Label;
-import ch.sisprocom.bogatyr.view.swing.LabelVertical;
-import ch.sisprocom.bogatyr.view.swing.Panel;
-
 
 /**
  * This is a chart class with labled x- and y-axes.
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090924)
+ * @version 0.8.0 (20091016)
  * @since 0.5.0
  */
 public class Chart extends Panel {
@@ -66,8 +65,10 @@ public class Chart extends Panel {
 	private Color colorForeground = Color.BLACK;
 	private Font font;
 	
-	private final String[] xAxes, yAxes;
-	private final int maxX, maxY;
+	private final String[] xAxes;
+    private final String[] yAxes;
+	private final int maxX;
+    private final int maxY;
     private final X_Axis positionXAxis;
     private final Y_Axis positionYAxis;
 	private final List<ChartEntry> entries;

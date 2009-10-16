@@ -31,11 +31,13 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.unit;
 
+import ch.sisprocom.bogatyr.helper.HelperObject;
+
 /**
  * Volume units
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090612)
+ * @version 0.8.0 (20091016)
  * @since 0.7.0
  */
 public enum Volume {
@@ -63,5 +65,14 @@ public enum Volume {
 	public double getFactor() {
 		return factor;
 	}
-}	
+
+
+    /*
+	 * Overridden methods
+	 */
+	@Override
+	public String toString() {
+		return HelperObject.toString(this);
+	}
+}
 

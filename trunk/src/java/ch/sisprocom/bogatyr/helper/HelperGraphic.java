@@ -40,6 +40,7 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -57,6 +58,7 @@ public abstract class HelperGraphic {
      * Enable anti-aliasing on a {@link Graphics2D} container.
      * 
      * @param graphics Graphics2D container
+     * @see Graphics2D
      * @since 0.4.0
      */	
 	public static void enableAntialiasing(final Graphics2D graphics) {
@@ -73,6 +75,7 @@ public abstract class HelperGraphic {
      *
      * @param size Dimension
      * @return Dimension with center coordinates
+     * @see Dimension
      * @since 0.4.0
      */
     public static Dimension getCenter(final Dimension size) { //$JUnit$
@@ -89,6 +92,8 @@ public abstract class HelperGraphic {
      * @param text Text
      * @param graphics Graphic container
      * @return Dimension with text size
+     * @see Graphics
+     * @see Dimension
      * @since 0.4.0
      */
 	public static Dimension getTextSize(final String text, final Graphics graphics) {

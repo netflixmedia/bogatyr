@@ -68,6 +68,7 @@ public abstract class LauncherMail {
 	 *
 	 * @param uri for the mail application (e.g. "mailto:yourname@yourmail.com"). It supports CC, BCC, SUBJECT, and BODY.
 	 * @throws IOException
+	 * @see URI
 	 * @since 0.7.0
 	 */
 	public static void mail(final URI uri) throws IOException { //$JUnit$

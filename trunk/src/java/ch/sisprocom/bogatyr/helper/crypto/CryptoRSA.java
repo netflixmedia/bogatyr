@@ -54,7 +54,7 @@ import java.security.Security;
  * This is a class for asymmetric cryptology via RSA.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.1.0
  */
 public class CryptoRSA implements CryptoAsymmetric {
@@ -129,11 +129,13 @@ public class CryptoRSA implements CryptoAsymmetric {
 	 * @see KeyPair
 	 * @since 0.1.0
 	 */
-	public KeyPair generateKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
+	@Override
+    public KeyPair generateKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
 		return generateKeyPair(DEFAULT_KEY_SIZE);
 	}
 	
-	public KeyPair generateKeyPair(final int keySize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
+	@Override
+    public KeyPair generateKeyPair(final int keySize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
 		if (0 >= keySize || 0 != keySize % HelperNumber.VALUE_16) {
 			throw new IllegalArgumentException("keySize is invalid: " + keySize); //$NON-NLS-1$
 		}
@@ -157,10 +159,12 @@ public class CryptoRSA implements CryptoAsymmetric {
 	 * @see PublicKey
 	 * @since 0.1.0
 	 */
+    @Override
     public byte[] encrypt(final byte[] input, final PublicKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit$
     	return encrypt(input, key, DEFAULT_KEY_SIZE);
     }
     
+    @Override
     public byte[] encrypt(final byte[] input, final PublicKey key, final int keySize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit$
 		if (null == input) {
 			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
@@ -213,11 +217,13 @@ public class CryptoRSA implements CryptoAsymmetric {
      * @return decrypted byte-array
      * @since 0.1.0
 	 */
-	public byte[] decrypt(final byte[] input, final PrivateKey key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
+	@Override
+    public byte[] decrypt(final byte[] input, final PrivateKey key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		return decrypt(input, key, DEFAULT_KEY_SIZE);
 	}
 
-	public byte[] decrypt(final byte[] input, final PrivateKey key, final int keySize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
+	@Override
+    public byte[] decrypt(final byte[] input, final PrivateKey key, final int keySize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		if (null == input) {
 			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}

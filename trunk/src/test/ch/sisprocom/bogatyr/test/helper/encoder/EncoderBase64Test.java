@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090610
+ * @version 20091016
  */
 public class EncoderBase64Test {
 	@Test
@@ -56,7 +56,7 @@ public class EncoderBase64Test {
 		assertEquals(AllBogatyrTests.DATA, new String(decoded));
 
 		try {
-			EncoderBase64.encode(new String());
+			EncoderBase64.encode(""); //$NON-NLS-1$
 			fail("String is empty!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -74,7 +74,7 @@ public class EncoderBase64Test {
 		}
 
 		try {
-			EncoderBase64.decode(new String());
+			EncoderBase64.decode(""); //$NON-NLS-1$
 			fail("String is empty!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

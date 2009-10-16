@@ -31,32 +31,26 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.pane;
 
-import java.awt.Component;
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 import javax.swing.JDesktopPane;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import java.awt.Component;
 
 
 /**
  * This is an extended JDesktopPane.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091016)
  * @since 0.7.0
  */
 public class PaneDesktop extends JDesktopPane {
 	private static final long serialVersionUID = -1000995349055355841L;
 
 
-	public PaneDesktop() {
-		super();
-	}
-
-	
-	/*
-	 * Overridden methods
-	 */
+    /*
+      * Overridden methods
+      */
 	@Override
 	public String toString() {
 		return HelperObject.toString(this);

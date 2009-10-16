@@ -46,7 +46,7 @@ public interface Countdown extends TimeMachine {
 	 * @param runtime of the countdown
 	 * @since 0.6.0
 	 */
-	void start(final long runtime);
+	void start(long runtime);
 
 	/**
 	 * Start the countdown with a given delay, runtime and interval.
@@ -56,7 +56,7 @@ public interface Countdown extends TimeMachine {
 	 * @param interval of the countown
 	 * @since 0.6.0
 	 */
-	void start(final long delay, final long runtime, final long interval);
+	void start(long delay, long runtime, long interval);
     
 	/**
 	 * Returns the current runtime in ms of the timer.
@@ -72,7 +72,7 @@ public interface Countdown extends TimeMachine {
      * @param time in ms
      * @since 0.6.0
      */
-    void setRuntime(final long time);
+    void setRuntime(long time);
 
 }   
 

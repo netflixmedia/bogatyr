@@ -46,7 +46,7 @@ import java.awt.image.BufferedImage;
  * This is a vertical Label.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091016)
  * @since 0.2.0
  */
 public class LabelVertical extends Panel implements Icon {
@@ -173,15 +173,18 @@ public class LabelVertical extends Panel implements Icon {
 	/*
 	 * Implemented methods
 	 */
-	public int getIconHeight() {
+	@Override
+    public int getIconHeight() {
 		return getPreferredSize().height;
 	}
  
-	public int getIconWidth() {
+	@Override
+    public int getIconWidth() {
 		return getPreferredSize().width;
 	}
  
-	public void paintIcon(final Component component, final Graphics g, final int x, final int y) {
+	@Override
+    public void paintIcon(final Component component, final Graphics g, final int x, final int y) {
 		final Dimension dimension = getPreferredSize();
 		paintVertical(g, x, y, dimension.width, dimension.height);
 	}

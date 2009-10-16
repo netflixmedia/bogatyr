@@ -57,7 +57,7 @@ import java.util.HashSet;
  * This is the updater for new Bogatyr-based applications versions.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.6.0
  */
 public class UpdaterImpl extends ControllerAbstract implements Updater, ListenerUpdater {
@@ -78,6 +78,7 @@ public class UpdaterImpl extends ControllerAbstract implements Updater, Listener
     /*
       * Checks the update XML file for new versions an update the application if needed.
       */
+    @Override
     public synchronized void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws IOException, ParserConfigurationException, SAXException  {
     	if (!HelperString.isValid(name)) {
     		throw new IllegalArgumentException("name is null or empty!"); //$NON-NLS-1$
@@ -115,61 +116,72 @@ public class UpdaterImpl extends ControllerAbstract implements Updater, Listener
         }
     }
 
+    @Override
     public synchronized void addListener(final ListenerUpdater listener) {
         listListener.add(listener);
     }
 
+    @Override
     public synchronized void removeListener(final ListenerUpdater listener) {
         listListener.remove(listener);
     }
 
+    @Override
     public synchronized void removeAllListener() {
         listListener = new HashSet<ListenerUpdater>();
     }
 
-	public void downgradeCancelled() {
+	@Override
+    public void downgradeCancelled() {
 		for (final ListenerUpdater listener : listListener) {
 			listener.downgradeCancelled();
 		}	
 	}
 
-	public void downgradeFailed(final IOException ex) {
+	@Override
+    public void downgradeFailed(final IOException ex) {
 		for (final ListenerUpdater listener : listListener) {
 			listener.downgradeFailed(ex);
 		}	
 	}
 
-	public void downgradeSuccessful() {
+	@Override
+    public void downgradeSuccessful() {
 		for (final ListenerUpdater listener : listListener) {
 			listener.downgradeSuccessful();
 		}	
 	}
 
-	public void downloadCancelled() {
+	@Override
+    public void downloadCancelled() {
 		for (final ListenerUpdater listener : listListener) {
 			listener.downloadCancelled();
 		}	
 	}
 
-	public void networkNotAvailable() {
+	@Override
+    public void networkNotAvailable() {
 		for (final ListenerUpdater listener : listListener) {
 			listener.networkNotAvailable();
 		}	
 	}
 
-	public void updateCancelled() {
+	@Override
+    public void updateCancelled() {
 		for (final ListenerUpdater listener : listListener) {
 			listener.updateCancelled();
 		}	
 	}
 
-	public void updateFailed(final IOException ex) {
+	@Override
+    public void updateFailed(final IOException ex) {
 		for (final ListenerUpdater listener : listListener) {
 			listener.updateFailed(ex);
 		}	
 	}
 
-	public void updateSuccessful() {
+	@Override
+    public void updateSuccessful() {
 		for (final ListenerUpdater listener : listListener) {
 			listener.updateSuccessful();
 		}	

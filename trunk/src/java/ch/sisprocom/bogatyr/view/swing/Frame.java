@@ -48,7 +48,7 @@ import java.awt.Image;
  * This is an extended JFrame.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.2.0
  */
 public class Frame extends JFrame implements Fadeable {
@@ -124,7 +124,8 @@ public class Frame extends JFrame implements Fadeable {
 	/*
 	 * Implemented methods
 	 */
-	public void setFading(final boolean isFading) {
+	@Override
+    public void setFading(final boolean isFading) {
 		this.isFading = isFading;
 		
 		final Container panelGlass = (Container) getGlassPane();
@@ -148,11 +149,13 @@ public class Frame extends JFrame implements Fadeable {
         repaint();
 	}
 	
-	public void setFaderColor(final Color colorFader) {
+	@Override
+    public void setFaderColor(final Color colorFader) {
 		this.colorFader = colorFader;
 	}
 
-	public boolean isFading() {
+	@Override
+    public boolean isFading() {
 		return isFading;
 	}
 }

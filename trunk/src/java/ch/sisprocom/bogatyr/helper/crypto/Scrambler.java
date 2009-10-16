@@ -47,7 +47,7 @@ public interface Scrambler {
 	 * @return scrambled byte-array 
 	 * @since 0.6.0
 	 */
-	byte[] scramble(final byte[] input);
+	byte[] scramble(byte[] input);
 
 	/**
 	 * Scramble the data.
@@ -57,7 +57,7 @@ public interface Scrambler {
 	 * @return scrambled byte-array 
 	 * @since 0.6.0
 	 */
-	byte[] scramble(final byte[] input, final byte pattern);
+	byte[] scramble(byte[] input, byte pattern);
 
 	/**
 	 * Unscramble the data.
@@ -66,7 +66,7 @@ public interface Scrambler {
 	 * @return unscrambled byte-array
 	 * @since 0.6.0
 	 */
-	byte[] unscramble(final byte[] input);
+	byte[] unscramble(byte[] input);
 
 	
 	/**
@@ -77,5 +77,5 @@ public interface Scrambler {
 	 * @return unscrambled byte-array
 	 * @since 0.6.0
 	 */
-	byte[] unscramble(final byte[] input, final byte pattern);
+	byte[] unscramble(byte[] input, byte pattern);
 }

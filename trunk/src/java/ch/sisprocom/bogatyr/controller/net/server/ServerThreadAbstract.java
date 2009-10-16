@@ -46,7 +46,7 @@ import java.util.HashSet;
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.7.0
  */
 public abstract class ServerThreadAbstract implements ServerThread {
@@ -80,6 +80,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
 	 * Returns the current {@link Thread}.
 	 * 
 	 * @return thread
+	 * @see Thread
 	 * @since 0.7.0
 	 */
 	public Thread getThread() {
@@ -125,11 +126,13 @@ public abstract class ServerThreadAbstract implements ServerThread {
 	/*
 	 * Implemented methods
 	 */
-	public Socket getSocket() {
+	@Override
+    public Socket getSocket() {
 		return socket;
 	}
 
-	public byte[] readStream() throws IOException {
+	@Override
+    public byte[] readStream() throws IOException {
 		final InputStream is = socket.getInputStream();
 		byte[] result = null;
 		byte input;
@@ -148,12 +151,14 @@ public abstract class ServerThreadAbstract implements ServerThread {
 			return result;
     }
 
+    @Override
     public void writeStream(final byte[] data) throws IOException {
     	HelperIO.writeStream(socket.getOutputStream(), HelperArray.concatenate(data, new byte[]{(byte) -1}));
     }
 
 
-	public void start() {		
+	@Override
+    public void start() {
 		if (thread == null) {
 			thread = new Thread(this);
             thread.start();
@@ -162,7 +167,8 @@ public abstract class ServerThreadAbstract implements ServerThread {
 		fireStarted();
 	}	
 
-	public void stop() throws IOException {
+	@Override
+    public void stop() throws IOException {
 		fireStopped();
 
         if (null != socket) {
@@ -178,18 +184,22 @@ public abstract class ServerThreadAbstract implements ServerThread {
         }
 	}  
 	
-	public boolean isRunning() {
+	@Override
+    public boolean isRunning() {
 		return isRunning;
 	}
 	
+    @Override
     public synchronized void addListener(final ListenerServerThread listener) {
         listListener.add(listener);
     }
 
+    @Override
     public synchronized void removeListener(final ListenerServerThread listener) {
         listListener.remove(listener);
     }
 
+    @Override
     public synchronized void removeAllListener() {
         listListener = new HashSet<ListenerServerThread>();
     }

@@ -47,7 +47,7 @@ import java.util.HashSet;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.7.0
  */
 public abstract class ClientAbstract implements Client {
@@ -90,6 +90,7 @@ public abstract class ClientAbstract implements Client {
 	 * Returns the current {@link Thread} of the client.
 	 * 
 	 * @return thread of the client
+	 * @see Thread
 	 * @since 0.7.0
 	 */
 	public Thread getThread() {
@@ -100,6 +101,7 @@ public abstract class ClientAbstract implements Client {
 	 * Sets the current {@link Thread} for the client.
 	 * 
 	 * @param thread for the client
+	 * @see Thread
 	 * @since 0.8.0
 	 */
 	protected void setThread(final Thread thread) {
@@ -109,6 +111,7 @@ public abstract class ClientAbstract implements Client {
 	/**
 	 * Sets the {@link Socket} for the client.
 	 * @param socket for the client
+	 * @see Socket
 	 * @since 0.8.0
 	 */
     protected void setSocket(final Socket socket) {
@@ -154,18 +157,22 @@ public abstract class ClientAbstract implements Client {
     /*
      * Implemented methods
      */
+    @Override
     public String getHost() {
         return host;
     }
 
+    @Override
     public int getPort() {
         return port;
     }
 
+    @Override
     public Socket getSocket() {
         return socket;
     }
 
+    @Override
     public void setHost(final String host) {
     	if (null == host) {
     		throw new IllegalArgumentException("host is null!"); //$NON-NLS-1$
@@ -174,6 +181,7 @@ public abstract class ClientAbstract implements Client {
     	this.host = host;
     }
 
+    @Override
     public void setPort(final int port) {
     	if (0 >= port || HelperNumber.VALUE_65536 <= port) {
     		throw new IllegalArgumentException("port outside of the valid range (0 - 65535): " + port); //$NON-NLS-1$
@@ -181,6 +189,7 @@ public abstract class ClientAbstract implements Client {
         this.port = port;
     }
 
+    @Override
     public void start() throws IOException {
 		socket = new Socket(host, port);
 		
@@ -190,6 +199,7 @@ public abstract class ClientAbstract implements Client {
         fireStarted();
     }
 
+    @Override
     public void stop() throws IOException {
     	fireStopped();
         
@@ -206,46 +216,52 @@ public abstract class ClientAbstract implements Client {
         }
     }
 
+    @Override
     public byte[] readStream() throws IOException {
     	byte[] result = null;
-    	
-    	if (!socket.isClosed()) {
-	    	final InputStream is = socket.getInputStream();
-	        byte input;
-	
-	        do {
-	            input = (byte) is.read();
-	
-	            if (-1 != input) {
-	                result = HelperArray.concatenate(result, new byte[]{input});
-	            }
-	        } while (-1 != input);
-	
-	        if (null == result) { //server lost
-	            stop();
-	        }
+
+        if (socket.isClosed()) {
+            stop();
         } else {
-        	stop();
+            final InputStream is = socket.getInputStream();
+            byte input;
+
+            do {
+                input = (byte) is.read();
+
+                if (-1 != input) {
+                    result = HelperArray.concatenate(result, new byte[]{input});
+                }
+            } while (-1 != input);
+
+            if (null == result) { //server lost
+                stop();
+            }
         }
         return result;
     }
 
+    @Override
     public void writeStream(final byte[] data) throws IOException {
         HelperIO.writeStream(socket.getOutputStream(), HelperArray.concatenate(data, new byte[]{(byte) -1}));
     }
 
+    @Override
     public boolean isRunning() {
         return isRunning;
     }
 
+    @Override
     public synchronized void addListener(final ListenerClient listener) {
         listListener.add(listener);
     }
 
+    @Override
     public synchronized void removeListener(final ListenerClient listener) {
         listListener.remove(listener);
     }
 
+    @Override
     public synchronized void removeAllListener() {
         listListener = new HashSet<ListenerClient>();
     }

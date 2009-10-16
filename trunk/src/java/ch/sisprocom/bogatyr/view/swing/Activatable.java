@@ -48,7 +48,7 @@ public interface Activatable {
      * @param isActive activation state
      * @since 0.7.0
      */
-	void setActive(final boolean isActive);
+	void setActive(boolean isActive);
 	
 	/**
      * Returns the activation state of the component.

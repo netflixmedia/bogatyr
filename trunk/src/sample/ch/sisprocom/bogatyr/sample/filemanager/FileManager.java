@@ -47,7 +47,7 @@ import java.io.IOException;
  * Simple file manager using the Bogatyr framework
  * 
  * @author Stefan Laubenberger
- * @version 20091015
+ * @version 20091016
  */
 public class FileManager extends ApplicationAbstract {
 	// Fixed parameter - e.g. this could be an argument
@@ -123,7 +123,8 @@ public class FileManager extends ApplicationAbstract {
 	/*
 	 * Implemented methods
 	 */
-	public void run() {
+	@Override
+    public void run() {
 		try {
 			searchFiles();
 		} catch (IOException ex) {

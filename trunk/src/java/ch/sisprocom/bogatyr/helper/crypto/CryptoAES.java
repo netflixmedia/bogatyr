@@ -44,12 +44,10 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,7 +64,7 @@ import java.security.spec.AlgorithmParameterSpec;
  * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.1.0
  */
 public class CryptoAES implements CryptoSymmetric {
@@ -120,11 +118,13 @@ public class CryptoAES implements CryptoSymmetric {
 	 * @see SecretKey
 	 * @since 0.1.0
 	 */
-	public SecretKey generateKey() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
+	@Override
+    public SecretKey generateKey() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
 		return generateKey(DEFAULT_KEY_SIZE);
 	}
 	
-	public SecretKey generateKey(final int keySize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
+	@Override
+    public SecretKey generateKey(final int keySize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
     	if (0 >= keySize) {
 			throw new IllegalArgumentException("keySize is invalid: " + keySize); //$NON-NLS-1$
 		}
@@ -138,7 +138,8 @@ public class CryptoAES implements CryptoSymmetric {
 		return kg.generateKey();
 	}
 	
-	public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit$
+	@Override
+    public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit$
 		if (null == input) {
 			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
@@ -149,7 +150,8 @@ public class CryptoAES implements CryptoSymmetric {
 		return getCipherEncrypt(key).doFinal(input);
 	}
 
-	public byte[] decrypt(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
+	@Override
+    public byte[] decrypt(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		if (null == input) {
 			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
@@ -160,51 +162,102 @@ public class CryptoAES implements CryptoSymmetric {
 		return getCipherDecrypt(key).doFinal(input);
 	}
 
-    public void encrypt(InputStream is, OutputStream os, final Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
+    @Override
+    public void encrypt(final InputStream is, OutputStream os, final Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
     	encrypt(is, os, key, DEFAULT_BUFFER_SIZE);
     }
 
+    @Override
     public void encrypt(final InputStream is, OutputStream os, final Key key, final int bufferSize) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IOException {
+        if (null == is) {
+            throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+        }
+        if (null == os) {
+            throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
+        }
+        if (null == key) {
+            throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+        }
+        if (bufferSize < 1) {
+            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
         final byte[] buffer = new byte[bufferSize];
 
         os = new CipherOutputStream(os, getCipherEncrypt(key));
 
-        int offset = 0;
-        while ((offset = is.read(buffer)) >= 0) {
+        int offset  ;
+        while (0 <= (offset = is.read(buffer))) {
         	os.write(buffer, 0, offset);
         }
         os.close();
     }
 
-    public void decrypt(InputStream is, final OutputStream os, final Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
+    @Override
+    public void decrypt(final InputStream is, final OutputStream os, final Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
     	decrypt(is, os, key, DEFAULT_BUFFER_SIZE);
     }
 
-    public void decrypt(InputStream is, final OutputStream os, final Key key, final int bufferSize) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IOException {
+    @Override
+    public void decrypt(final InputStream is, final OutputStream os, final Key key, final int bufferSize) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IOException {
+        if (null == is) {
+            throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+        }
+        if (null == os) {
+            throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
+        }
+        if (null == key) {
+            throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+        }
+        if (bufferSize < 1) {
+            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
         final byte[] buffer = new byte[bufferSize];
 
-        is = new CipherInputStream(is, getCipherDecrypt(key));
-
-        int offset = 0;
-        while ((offset = is.read(buffer)) >= 0) {
-        	os.write(buffer, 0, offset);
+        try {
+        	CipherInputStream cis = new CipherInputStream(is, getCipherDecrypt(key));
+	
+	        int offset  ;
+	        while (0 <= (offset = cis.read(buffer))) {
+	        	os.write(buffer, 0, offset);
+	        }
+        } finally {
+        	os.close();
         }
-        os.close();
     }
 
-	public void encrypt(File input, File output, Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, FileNotFoundException, IOException {
-		encrypt(new BufferedInputStream(new FileInputStream(input)), new BufferedOutputStream(new FileOutputStream(output)), key);
+	@Override
+    public void encrypt(final File input, final File output, final Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
+		encrypt(input, output, key, DEFAULT_BUFFER_SIZE);
 	}
 
-	public void encrypt(File input, File output, Key key, int bufferSize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, FileNotFoundException, IOException {
+	@Override
+    public void encrypt(final File input, final File output, final Key key, final int bufferSize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
+        if (null == input) {
+            throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+        }
+        if (null == output) {
+            throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
+        }
+
 		encrypt(new BufferedInputStream(new FileInputStream(input)), new BufferedOutputStream(new FileOutputStream(output)), key, bufferSize);
 	}
 
-	public void decrypt(File input, File output, Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, FileNotFoundException, IOException {
-		decrypt(new BufferedInputStream(new FileInputStream(input)), new BufferedOutputStream(new FileOutputStream(output)), key);
+	@Override
+    public void decrypt(final File input, final File output, final Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
+        decrypt(input, output, key, DEFAULT_BUFFER_SIZE);
 	}
 	
-	public void decrypt(File input, File output, Key key, int bufferSize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, FileNotFoundException, IOException {
+	@Override
+    public void decrypt(final File input, final File output, final Key key, final int bufferSize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
+        if (null == input) {
+            throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+        }
+        if (null == output) {
+            throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
+        }
+
 		decrypt(new BufferedInputStream(new FileInputStream(input)), new BufferedOutputStream(new FileOutputStream(output)), key, bufferSize);
 	}
 }

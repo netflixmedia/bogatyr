@@ -44,7 +44,7 @@ import java.util.TimeZone;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091016)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -146,6 +146,7 @@ public abstract class HelperEnvironment {
 	 * @throws NoSuchFieldException
 	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
+	 * @see File
 	 * @since 0.8.0
 	 */
 	public void addPathToLibraryPath(final File path) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
@@ -154,12 +155,12 @@ public abstract class HelperEnvironment {
 		final Field field = ClassLoader.class.getDeclaredField("usr_paths"); //$NON-NLS-1$
 		field.setAccessible(true);
 		final String[] paths = (String[])field.get(null);
-		
-		for (int ii = 0; ii < paths.length; ii++) {
-			if (location.equals(paths[ii])) {
-				return;
-			}
-		}
+
+        for (String path1 : paths) {
+            if (location.equals(path1)) {
+                return;
+            }
+        }
 		
 		final String[] tmp = new String[paths.length+1];
 		
@@ -245,6 +246,7 @@ public abstract class HelperEnvironment {
 	 * Returns the temporary directory of the current machine.
      *
      * @return OS temporary directory
+     * @see File
      * @since 0.5.0
 	 */
 	public static File getOsTempDirectory() { //$JUnit$
@@ -255,6 +257,7 @@ public abstract class HelperEnvironment {
 	 * Returns the user home directory of the current user.
      *
      * @return user home directory
+     * @see File
      * @since 0.5.0
 	 */
 	public static File getUserHomeDirectory() { //$JUnit$
@@ -265,6 +268,7 @@ public abstract class HelperEnvironment {
 	 * Returns the current user directory.
 	 *
 	 * @return current user directory
+	 * @see File
 	 * @since 0.5.0
 	 */
 	public static File getUserDirectory() { //$JUnit$
@@ -305,6 +309,7 @@ public abstract class HelperEnvironment {
 	 * Returns the time zone of the current user.
 	 *
 	 * @return time zone of the current user
+	 * @see TimeZone
 	 * @since 0.7.0
 	 */
 	public static TimeZone getUserTimezone() {

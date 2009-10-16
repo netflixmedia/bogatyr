@@ -41,7 +41,7 @@ import java.util.Timer;
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.6.0
  */
 public abstract class TimerAbstract extends ControllerAbstract implements TimeMachine {
@@ -61,6 +61,7 @@ public abstract class TimerAbstract extends ControllerAbstract implements TimeMa
 	 * Returns the current {@link Timer}.
 	 * 
 	 * @return current timer
+	 * @see Timer
 	 * @since 0.6.0
 	 */
 	public Timer getTimer() {
@@ -71,6 +72,7 @@ public abstract class TimerAbstract extends ControllerAbstract implements TimeMa
 	 * Sets the current {@link Timer}.
 	 * 
 	 * @param timer for the implementation
+	 * @see Timer
 	 * @since 0.6.0
 	 */
     public void setTimer(final Timer timer) {
@@ -107,26 +109,32 @@ public abstract class TimerAbstract extends ControllerAbstract implements TimeMa
     /*
      * Implemented methods
      */
+    @Override
     public synchronized void addListener(final ListenerTimer listener) {
         listListener.add(listener);
     }
 
+    @Override
     public synchronized void removeListener(final ListenerTimer listener) {
         listListener.remove(listener);
     }
 
+    @Override
     public synchronized void removeAllListener() {
         listListener = new HashSet<ListenerTimer>();
     }
     
+    @Override
     public boolean isRunning() {
 		return isRunning;
 	}
     
+    @Override
     public long getInterval() {
         return interval;
     }
 
+    @Override
     public void setInterval(final long interval) {
         this.interval = interval;
     }   

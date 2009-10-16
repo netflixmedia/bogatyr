@@ -37,7 +37,7 @@ package ch.sisprocom.bogatyr.controller.updater;
  * Defines the methods for the implementation of the updater.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.6.0
  */
 public interface Updater {
@@ -53,7 +53,7 @@ public interface Updater {
      * @throws Exception
      * @since 0.6.0
 	 */
-	void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws Exception;
+	void update(String name, String id, int version, int minorversion, int build, String updateLocation) throws Exception;
 
 	/**
 	 * Adds a listener for this updater.

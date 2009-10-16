@@ -31,9 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.chart;
 
-import javax.swing.JComponent;
-
 import ch.sisprocom.bogatyr.helper.HelperObject;
+
+import javax.swing.JComponent;
 
 
 /**
@@ -41,12 +41,15 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091016)
  * @since 0.5.0
  */
 public class ChartEntry {
 	private final JComponent component;
-	private final int x, y, sizeX, sizeY;
+	private final int x;
+    private final int y;
+    private final int sizeX;
+    private final int sizeY;
 	
 	
 	public ChartEntry(final JComponent component, final int x, final int y, final int sizeX, final int sizeY) {

@@ -56,7 +56,7 @@ public interface ProviderMq {
      * @throws MQException
      * @since 0.6.0
      */
-    void sendMessage(final byte[] data, final String managerOut, final String queueOut, final String managerIn, final String queueIn) throws Exception;
+    void sendMessage(byte[] data, String managerOut, String queueOut, String managerIn, String queueIn) throws Exception;
 
     /**
      * Receives messages from a mq manager and queue.
@@ -67,5 +67,5 @@ public interface ProviderMq {
      * @throws Exception
      * @since 0.6.0
      */
-    List<byte[]> receiveMessages(final String managerIn, final String queueIn) throws Exception;
+    List<byte[]> receiveMessages(String managerIn, String queueIn) throws Exception;
 }

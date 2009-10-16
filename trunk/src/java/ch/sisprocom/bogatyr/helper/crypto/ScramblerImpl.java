@@ -40,14 +40,10 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is a class for obfuscating data with CFB.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.3.0
  */
 public class ScramblerImpl implements Scrambler {
-	
-	public ScramblerImpl() {
-		super();
-	}
 
 
     /*
@@ -110,19 +106,23 @@ public class ScramblerImpl implements Scrambler {
 	/*
 	 * Implemented methods
 	 */
-	public byte[] scramble(final byte[] input) { //$JUnit$
+	@Override
+    public byte[] scramble(final byte[] input) { //$JUnit$
 		return scramble(input, Byte.MAX_VALUE);
 	}
 
-	public byte[] scramble(final byte[] input, final byte pattern) { //$JUnit$
+	@Override
+    public byte[] scramble(final byte[] input, final byte pattern) { //$JUnit$
 		return obfuscate(input, pattern);
 	}
 
-	public byte[] unscramble(final byte[] input) { //$JUnit$
+	@Override
+    public byte[] unscramble(final byte[] input) { //$JUnit$
 		return unscramble(input, Byte.MAX_VALUE);
 	}
 
-	public byte[] unscramble(final byte[] input, final byte pattern) { //$JUnit$
+	@Override
+    public byte[] unscramble(final byte[] input, final byte pattern) { //$JUnit$
 		return unobfuscate(input, pattern);
 	}
 }

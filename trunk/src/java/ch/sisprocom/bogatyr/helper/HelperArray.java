@@ -45,7 +45,7 @@ import java.util.List;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091016)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -93,15 +93,15 @@ public abstract class HelperArray {
 	 */
     @SuppressWarnings("unchecked")
 	public static <T> T[] concatenate(final T[]... arrays) { //$JUnit$
-        List<T> result = new ArrayList<T>();
+        final List<T> result = new ArrayList<T>();
         
-        for (T[] array : arrays) {
+        for (final T[] array : arrays) {
         	if (null != array) {
         		result.addAll(Arrays.asList(array));
         	}
         }
         
-        T[] array = (T[])Array.newInstance(arrays.getClass().getComponentType().getComponentType(), result.size());
+        final T[] array = (T[])Array.newInstance(arrays.getClass().getComponentType().getComponentType(), result.size());
         
         for (int ii = 0; ii < result.size(); ii++) {
         	array[ii] = result.get(ii);

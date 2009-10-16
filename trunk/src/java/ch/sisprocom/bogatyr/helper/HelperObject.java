@@ -50,7 +50,7 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -65,6 +65,8 @@ public abstract class HelperObject {
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
 	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException
+	 * @see Class
 	 * @since 0.7.0
      */
 	public static <T> T createInstance(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
@@ -87,6 +89,8 @@ public abstract class HelperObject {
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
 	 * @throws InvocationTargetException 
+ 	 * @throws IllegalArgumentException
+ 	 * @see Class
 	 * @since 0.7.0
      */
 	public static <T> T createInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
@@ -105,13 +109,11 @@ public abstract class HelperObject {
 	
 	/**
 	 * Serialize an {@link Object} into a byte-array.
-	 * It uses the {@link ByteArrayOutputStream} and the {@link ObjectOutputStream}.
 	 * 
 	 * @param obj convert into a byte-array.
 	 * @return object as byte-array
 	 * @throws IOException
-	 * @see ByteArrayOutputStream
-	 * @see ObjectOutputStream
+	 * @see Serializable
 	 * @since 0.7.0
 	 */
 	public static byte[] serialize(final Serializable obj) throws IOException { //$JUnit$
@@ -138,14 +140,11 @@ public abstract class HelperObject {
 	
 	/**
 	 * Deserialize a given byte-array into a valid {@link Object}.
-	 * It uses the {@link ByteArrayInputStream} and the {@link ObjectInputStream}.
 	 * 
 	 * @param bytes convert into an object
 	 * @return valid object
 	 * @throws IOException
 	 * @throws ClassNotFoundException
-	 * @see ByteArrayInputStream
-	 * @see ObjectInputStream
 	 * @since 0.7.0
 	 */
 	public static Object deserialize(final byte[] bytes) throws IOException, ClassNotFoundException { //$JUnit$
@@ -173,6 +172,7 @@ public abstract class HelperObject {
      * @param clazz for searching
      * @param methodName to check
      * @return true/false
+     * @see Class
      * @since 0.7.0
      */
     public static boolean isMethodAvailable(final Class<?> clazz, final String methodName) {
@@ -214,7 +214,7 @@ public abstract class HelperObject {
      * @return true/false
      * @since 0.8.0
      */	
-	public static <T> boolean isEquals(T objectA, T objectB) { //$JUnit$
+	public static <T> boolean isEquals(final T objectA, final T objectB) { //$JUnit$
 		return !((null == objectB && null != objectA) || (null != objectB && !objectB.equals(objectA)));
 	}
 	

@@ -60,6 +60,7 @@ public abstract class HelperString {
      * 
      * @param input to check
      * @return true/false
+     * @see CharSequence
      * @since 0.7.0
      */	
 	public static boolean isValid(final CharSequence input) { //$JUnit$

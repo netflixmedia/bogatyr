@@ -41,7 +41,7 @@ import java.util.Arrays;
  * This is an extended JPasswordField.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.1.0
  */
 public class PasswordField extends JPasswordField implements Activatable {
@@ -89,11 +89,13 @@ public class PasswordField extends JPasswordField implements Activatable {
 	/*
 	 * Implemented methods
 	 */	
-	public boolean isActive() {
+	@Override
+    public boolean isActive() {
 		return !isNotActive;
 	}
 
-	public void setActive(final boolean isActive) {
+	@Override
+    public void setActive(final boolean isActive) {
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);

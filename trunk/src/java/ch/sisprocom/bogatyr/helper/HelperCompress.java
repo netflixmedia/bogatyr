@@ -47,11 +47,11 @@ import java.util.zip.ZipOutputStream;
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.3.0
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
-	private static final byte[] BUFFER = new byte[HelperNumber.VALUE_1024];
+	private static final int DEFAULT_BUFFER_SIZE = HelperNumber.VALUE_1024;
 
 	/**
      * Writes a ZIP {@link File} containing a list of {@link File}.
@@ -59,16 +59,33 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * @param file for writing
      * @param files for the ZIP file
      * @throws IOException
+     * @see File 
      * @since 0.3.0
      */	
 	public static void writeZip(final File file, final File... files) throws IOException {
+		writeZip(file, files, DEFAULT_BUFFER_SIZE);
+	}
+	
+	/**
+     * Writes a ZIP {@link File} containing a list of {@link File}.
+     * 
+     * @param file for writing
+     * @param files for the ZIP file
+     * @throws IOException
+     * @see File
+     * @since 0.8.0
+     */	
+	public static void writeZip(final File file, final File[] files, final int bufferSize) throws IOException {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
 		if (!HelperArray.isValid(files)) {
 			throw new IllegalArgumentException("files is null or empty!"); //$NON-NLS-1$
 		}
-		
+        if (bufferSize < 1) {
+            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
 		ZipOutputStream zos = null;
 		
 		try {
@@ -76,7 +93,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 			zos = new ZipOutputStream(new FileOutputStream(file));
 
 			for (final File entry : files) {
-			addEntry(zos, entry);
+			addEntry(zos, entry, bufferSize);
 			}
 		} finally {
 			if (zos != null) {
@@ -118,24 +135,42 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * @param file to extract
      * @param destinationDirectory for the ZIP file
      * @throws IOException
+     * @see File
      * @since 0.3.0
      */	
 	public static void extractZip(final ZipFile file, final File destinationDirectory) throws IOException { 
+		extractZip(file, destinationDirectory, DEFAULT_BUFFER_SIZE); 
+	} 
+	
+	/**
+     * Extracts a ZIP {@link File} to a destination directory.
+     * 
+     * @param file to extract
+     * @param destinationDirectory for the ZIP file
+     * @param bufferSize in bytes
+     * @throws IOException
+     * @see File
+     * @since 0.8.0
+     */	
+	public static void extractZip(final ZipFile file, final File destinationDirectory, final int bufferSize) throws IOException { 
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
 		if (null == destinationDirectory) {
 			throw new IllegalArgumentException("destinationDirectory is null!"); //$NON-NLS-1$
 		}
-		
+        if (bufferSize < 1) {
+            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
 		final Enumeration<? extends ZipEntry> zipEntryEnum = file.entries();
  
         while (zipEntryEnum.hasMoreElements()) { 
           final ZipEntry zipEntry = zipEntryEnum.nextElement();
-          extractEntry(file, zipEntry, destinationDirectory); 
+          extractEntry(file, zipEntry, destinationDirectory, bufferSize); 
         }
 	} 
-
+	
 //	/**
 //     * Read a compressed stream and returns it uncompressed.
 //     * 
@@ -175,8 +210,9 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	/*
 	 * Private methods
 	 */
-	private static void addEntry(final ZipOutputStream zos, final File file) throws IOException {
+	private static void addEntry(final ZipOutputStream zos, final File file, final int bufferSize) throws IOException {
 		final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+		final byte[] buffer = new byte[bufferSize];
 		
 		try {
 	        // create a new zip entry 
@@ -185,11 +221,11 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	        // place the zip entry in the ZipOutputStream object 
 	        zos.putNextEntry(entry); 
 	        
-            int bytesIn;
+            int offset;
 
             // now write the content of the file to the ZipOutputStream
-            while(-1 != (bytesIn = bis.read(BUFFER))) {
-	            zos.write(BUFFER, 0, bytesIn); 
+            while(-1 != (offset = bis.read(buffer))) {
+	            zos.write(buffer, 0, offset); 
 	        } 
 		} finally {
 			// close the stream 
@@ -197,7 +233,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 		}
 	}
 	
-	private static void extractEntry(final ZipFile zipFile, final ZipEntry entry, final File destDir) throws IOException { 
+	private static void extractEntry(final ZipFile zipFile, final ZipEntry entry, final File destDir, final int bufferSize) throws IOException { 
 		final File file = new File(destDir, entry.getName());
  	 
 	    if (entry.isDirectory()) {
@@ -209,11 +245,12 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	    	final BufferedInputStream bis = new BufferedInputStream(zipFile.getInputStream(entry));
 	    	final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
  
+	    	final byte[] buffer = new byte[bufferSize];
+	    	int offset;
+	    	
 	    	try {
-                int offset;
-
-                while (-1 != (offset = bis.read(BUFFER))) { 
-	    			bos.write(BUFFER, 0, offset); 
+                while (-1 != (offset = bis.read(buffer))) { 
+	    			bos.write(buffer, 0, offset); 
 	    		}
 	    	} finally { 
 	    		// close the streams

@@ -32,6 +32,8 @@
 package ch.sisprocom.bogatyr.controller.localizer;
 
 import javax.swing.KeyStroke;
+
+import java.security.KeyPair;
 import java.util.Locale;
 
 
@@ -44,17 +46,19 @@ import java.util.Locale;
  */
 public interface Localizer {
 	/**
-	 * Returns the current locale of the localizer.
+	 * Returns the current locale {@link Locale} of the localizer.
 	 * 
 	 * @return current locale of the localizer
+	 * @see Locale
 	 * @since 0.6.0
 	 */
 	Locale getLocale();
 	
 	/**
-	 * Sets the current locale of the localizer.
+	 * Sets the current locale {@link Locale} of the localizer.
 	 * 
 	 * @param locale of the localizer
+	 * @see Locale
 	 * @since 0.6.0
 	 */
 	void setLocale(Locale locale);
@@ -73,6 +77,7 @@ public interface Localizer {
 	 *
      * @param key for the accelerator
      * @return accelerator for the key
+     * @see KeyStroke
      * @since 0.6.0
 	 */
 	KeyStroke getAccelerator(String key);

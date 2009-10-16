@@ -43,16 +43,16 @@ import java.util.UUID;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091015
+ * @version 20091016
  */
 public class HelperCryptoTest {
 
 	@Test
     public void testGetRandomKey() {
-        assertNotNull(HelperCrypto.getRandomKey(HelperNumber.VALUE_16, new char[]{'1','2','3'}));
+        assertNotNull(HelperCrypto.getRandomKey(HelperNumber.VALUE_16, '1','2','3'));
 
         try {
-        	HelperCrypto.getRandomKey(Integer.MIN_VALUE, new char[]{'1','2','3'});
+        	HelperCrypto.getRandomKey(Integer.MIN_VALUE, '1','2','3');
             fail("digits must be greater than 0"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

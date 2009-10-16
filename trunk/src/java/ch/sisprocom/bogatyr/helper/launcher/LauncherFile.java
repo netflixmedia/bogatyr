@@ -46,7 +46,7 @@ import java.util.Collection;
  * This launcher opens, edits and prints files with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091016)
  * @since 0.7.0
  */
 public abstract class LauncherFile {
@@ -86,6 +86,7 @@ public abstract class LauncherFile {
 	 * 
 	 * @param file data as file
 	 * @throws IOException
+	 * @see File
 	 * @since 0.7.0
 	 */
 	public static void open(final File file) throws IOException { //$JUnit$
@@ -106,6 +107,7 @@ public abstract class LauncherFile {
 	 * @param is data as stream
 	 * @param extension of the file (e.g. ".pdf")
 	 * @throws IOException
+	 * @see InputStream
 	 * @since 0.7.0
 	 */
 	public static void open(final InputStream is, final String extension) throws IOException { //$JUnit$
@@ -143,6 +145,7 @@ public abstract class LauncherFile {
 	 * 
 	 * @param file data as file
 	 * @throws IOException
+	 * @see File
 	 * @since 0.7.0
 	 */
 	public static void edit(final File file) throws IOException { //$JUnit$
@@ -163,6 +166,7 @@ public abstract class LauncherFile {
 	 * @param is data as stream
 	 * @param extension of the file (e.g. ".html")
 	 * @throws IOException
+	 * @see InputStream
 	 * @since 0.7.0
 	 */
 	public static void edit(final InputStream is, final String extension) throws IOException { //$JUnit$
@@ -200,6 +204,7 @@ public abstract class LauncherFile {
 	 * 
 	 * @param file data as file
 	 * @throws IOException
+	 * @see File
 	 * @since 0.7.0
 	 */
 	public static void print(final File file) throws IOException { //$JUnit$
@@ -220,6 +225,7 @@ public abstract class LauncherFile {
 	 * @param is data as stream
 	 * @param extension of the file (e.g. ".html")
 	 * @throws IOException
+	 * @see InputStream
 	 * @since 0.7.0
 	 */
 	public static void print(final InputStream is, final String extension) throws IOException { //$JUnit$
@@ -253,11 +259,7 @@ public abstract class LauncherFile {
 	 */
 	private static File createTemporaryFile(final byte[] data, final String extension) throws IOException {
 		final File file;
-		if (extension.startsWith(HelperString.PERIOD)) {
-			file = new File(PATH, IDENTIFIER + System.currentTimeMillis() + extension);
-		} else {
-			file = new File(PATH, IDENTIFIER + System.currentTimeMillis() + HelperString.PERIOD + extension);
-		}
+        file = extension.startsWith(HelperString.PERIOD) ? new File(PATH, IDENTIFIER + System.currentTimeMillis() + extension) : new File(PATH, IDENTIFIER + System.currentTimeMillis() + HelperString.PERIOD + extension);
 
 		HelperIO.writeFile(file, data, false);
 		

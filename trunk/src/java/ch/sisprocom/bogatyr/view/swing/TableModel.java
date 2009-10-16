@@ -40,7 +40,7 @@ import javax.swing.table.AbstractTableModel;
  * This is an extended AbstractTableModel.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091016)
  * @since 0.2.0
  */
 public class TableModel extends AbstractTableModel {
@@ -61,7 +61,8 @@ public class TableModel extends AbstractTableModel {
 	 * 
 	 * @return number of columns
 	 */
-	public int getColumnCount() {
+	@Override
+    public int getColumnCount() {
 		return columnNames.length;
 	}
 	
@@ -70,7 +71,8 @@ public class TableModel extends AbstractTableModel {
 	 * 
 	 * @return number of rows
 	 */
-	public int getRowCount() {
+	@Override
+    public int getRowCount() {
 		if (data != null) {
 			return data.length;
 		}
@@ -84,7 +86,8 @@ public class TableModel extends AbstractTableModel {
 	 * @param columnIndex column number
 	 * @return object at the specified place in the data array 
 	 */
-	public Object getValueAt(final int rowIndex, final int columnIndex) {
+	@Override
+    public Object getValueAt(final int rowIndex, final int columnIndex) {
 		return data[rowIndex][columnIndex];
 	}
 

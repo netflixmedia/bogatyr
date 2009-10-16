@@ -41,7 +41,7 @@ import javax.swing.JRadioButton;
  * This is an extended JRadioButton.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.2.0
  */
 public class RadioButton extends JRadioButton implements Activatable {
@@ -97,11 +97,13 @@ public class RadioButton extends JRadioButton implements Activatable {
 	/*
 	 * Implemented methods
 	 */	
-	public boolean isActive() {
+	@Override
+    public boolean isActive() {
 		return !isNotActive;
 	}
 
-	public void setActive(final boolean isActive) {
+	@Override
+    public void setActive(final boolean isActive) {
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
