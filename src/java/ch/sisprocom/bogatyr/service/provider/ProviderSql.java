@@ -60,7 +60,7 @@ public interface ProviderSql {
 	 * @throws Exception 
 	 * @since 0.6.0
 	 */
-    int executeUpdate(final String statement) throws Exception;
+    int executeUpdate(String statement) throws Exception;
     
     /**
 	 * Executes a SQL command
@@ -73,5 +73,5 @@ public interface ProviderSql {
      * @throws InstantiationException 
      * @since 0.6.0
 	 */
-    boolean execute(final String statement) throws Exception;
+    boolean execute(String statement) throws Exception;
 }

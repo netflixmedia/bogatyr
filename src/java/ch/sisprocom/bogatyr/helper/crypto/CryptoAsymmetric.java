@@ -98,6 +98,7 @@ public interface CryptoAsymmetric {
 	 * @param key for the decryption
      * @return decrypted byte-array
 	 * @throws Exception 
+	 * @see PrivateKey
 	 * @since 0.6.0
 	 */
 	byte[] decrypt(byte[] input, PrivateKey key) throws Exception;
@@ -109,7 +110,8 @@ public interface CryptoAsymmetric {
 	 * @param key for the decryption
 	 * @param keySize in bits (normally modulo 16 = 0, e.g. 1024, 2048)
      * @return decrypted byte-array
-	 * @throws Exception 
+	 * @throws Exception
+	 * @see PrivateKey 
 	 * @since 0.6.0
 	 */
 	byte[] decrypt(byte[] input, PrivateKey key, int keySize) throws Exception;

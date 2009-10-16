@@ -46,7 +46,7 @@ import java.util.HashSet;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.7.0
  */
 public abstract class ServerAbstract implements Server, ListenerServerThread {
@@ -93,6 +93,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 	 * Returns the current {@link Thread} of the server.
 	 * 
 	 * @return thread of the server
+	 * @see Thread
 	 * @since 0.7.0
 	 */
 	public Thread getThread() {
@@ -103,6 +104,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 	 * Sets the current {@link Thread} for the server.
 	 * 
 	 * @param thread for the server
+	 * @see Thread
 	 * @since 0.8.0
 	 */
     protected void setThread(final Thread thread) {
@@ -112,6 +114,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 	/**
 	 * Sets the {@link ServerSocket} for the server.
 	 * @param serverSocket for the server
+	 * @see ServerSocket
 	 * @since 0.8.0
 	 */
     protected void setServerSocket(final ServerSocket serverSocket) {
@@ -135,18 +138,22 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 	/*
      * Implemented methods
      */
+    @Override
     public ServerSocket getServerSocket() {
         return serverSocket;
     }
 
+    @Override
     public int getPort() {
         return port;
     }
 
+    @Override
     public int getTimeout() {
         return timeout;
     }
 
+    @Override
     public void setPort(final int port) {
     	if (0 >= port || HelperNumber.VALUE_65536 <= port) {
     		throw new IllegalArgumentException("port outside of the valid range (0 - 65535): " + port); //$NON-NLS-1$
@@ -155,6 +162,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
     }
 
 
+    @Override
     public void setTimeout(final int timeout) {
         this.timeout = timeout;
     }
@@ -167,10 +175,12 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 //        mapThread.remove(uuid);
 //    }
 //
+    @Override
     public Collection<ServerThread> getServerThreads() {
         return Collections.unmodifiableCollection(listThread);
     }
 
+    @Override
     public void start() throws IOException {
         serverSocket = new ServerSocket(port);
 
@@ -184,6 +194,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
        	isRunning = true;
     }
 
+    @Override
     public void stop() throws IOException {
     	isRunning = false;
 
@@ -204,15 +215,18 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
         }
     }
 
+    @Override
     public boolean isRunning() {
         return isRunning;
     }
     
-	public void serverThreadStarted(final ServerThread serverThread) {
+	@Override
+    public void serverThreadStarted(final ServerThread serverThread) {
 		listThread.add(serverThread);
 	}
 	
-	public void serverThreadStopped(final ServerThread serverThread) {
+	@Override
+    public void serverThreadStopped(final ServerThread serverThread) {
 		listThread.remove(serverThread);
 	}
 }

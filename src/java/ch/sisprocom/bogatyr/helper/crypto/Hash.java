@@ -34,22 +34,21 @@ package ch.sisprocom.bogatyr.helper.crypto;
 import java.io.File;
 import java.io.InputStream;
 
-import javax.crypto.SecretKey;
-
 /**
  * This is an interface for symmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.8.0
  */
 public interface Hash {
 	
 	/**
 	 * Generates a hash code for a byte-array with the implementations algorithm.
-	 * 
+	 *
+     * @param input byte-array for the hash code
      * @return generated hash code
-	 * @throws Exception 
+	 * @throws Exception
 	 * @since 0.8.0
 	 */
 	String getHash(byte[] input) throws Exception;
@@ -57,9 +56,10 @@ public interface Hash {
 	/**
 	 * Generates a hash code for an input stream {@link InputStream} with the implementations algorithm.
 	 * 
-     * @return generated secret key
+     * @param is input stream for the hash code
+     * @return generated hash code
 	 * @throws Exception 
-	 * @see SecretKey 
+	 * @see InputStream
 	 * @since 0.8.0
 	 */
 	String getHash(InputStream is) throws Exception;
@@ -67,9 +67,11 @@ public interface Hash {
 	/**
 	 * Generates a hash code for an input stream {@link InputStream} with the implementations algorithm.
 	 * 
-     * @return generated secret key
+     * @param is input stream for the hash code
+     * @param bufferSize in bytes
+     * @return generated hash code
 	 * @throws Exception 
-	 * @see SecretKey 
+	 * @see InputStream
 	 * @since 0.8.0
 	 */
 	String getHash(InputStream is, int bufferSize) throws Exception;	
@@ -77,9 +79,10 @@ public interface Hash {
 	/**
 	 * Generates a hash code for an input File {@link File} with the implementations algorithm.
 	 * 
-     * @return generated secret key
+     * @param input byte-array for the hash code
+     * @return generated hash code
 	 * @throws Exception 
-	 * @see SecretKey 
+	 * @see File
 	 * @since 0.8.0
 	 */
 	String getHash(File input) throws Exception;	
@@ -87,9 +90,11 @@ public interface Hash {
 	/**
 	 * Generates a hash code for an input File {@link File} with the implementations algorithm.
 	 * 
-     * @return generated secret key
+     * @param input file for the hash code
+     * @param bufferSize in bytes
+     * @return generated hash code
 	 * @throws Exception 
-	 * @see SecretKey 
+	 * @see File
 	 * @since 0.8.0
 	 */
 	String getHash(File input, int bufferSize) throws Exception;		

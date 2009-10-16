@@ -53,6 +53,7 @@ public abstract class LauncherBrowser {
 	 *
 	 * @param uri for the browser (e.g. "http://www.sisprocom.ch/")
 	 * @throws IOException 
+	 * @see URI
 	 * @since 0.2.0
 	 */
 	public static void browse(final URI uri) throws IOException { //$JUnit$

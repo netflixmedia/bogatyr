@@ -33,6 +33,7 @@ package ch.sisprocom.bogatyr.controller.property;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.Socket;
 import java.util.Properties;
 
 
@@ -45,9 +46,10 @@ import java.util.Properties;
  */
 public interface Property {
 	/**
-     * Returns the properties.
+     * Returns the properties {@link Properties}.
      * 
      * @return Properties object
+     * @see Properties
      * @since 0.6.0
      */
 	Properties getProperties();

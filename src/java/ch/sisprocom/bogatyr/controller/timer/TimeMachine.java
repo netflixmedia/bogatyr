@@ -84,7 +84,7 @@ public interface TimeMachine {
      * 
      * @param interval
      */
-    void setInterval(final long interval);
+    void setInterval(long interval);
     
 
 	/**

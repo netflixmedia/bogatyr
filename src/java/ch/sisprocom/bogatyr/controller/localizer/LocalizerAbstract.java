@@ -42,7 +42,7 @@ import java.util.Locale;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.6.0
  */
 public abstract class LocalizerAbstract extends ControllerAbstract implements Localizer {
@@ -64,23 +64,28 @@ public abstract class LocalizerAbstract extends ControllerAbstract implements Lo
 	/*
 	 * Implemented methods
 	 */
-	public Locale getLocale() {
+	@Override
+    public Locale getLocale() {
 		return locale;
 	}
 	
+    @Override
     public void setLocale(final Locale locale) {
     	this.locale = locale;
         fireLocaleChanged();
     }
     
+    @Override
     public synchronized void addListener(final ListenerLocale listener) {
         listListener.add(listener);
     }
 
+    @Override
     public synchronized void removeListener(final ListenerLocale listener) {
         listListener.remove(listener);
     }
 
+    @Override
     public synchronized void removeAllListener() {
         listListener = new HashSet<ListenerLocale>();
     }

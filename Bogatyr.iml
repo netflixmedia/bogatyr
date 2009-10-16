@@ -58,7 +58,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/iText-2.1.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/iText-2.1.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -68,16 +68,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/bcprov-jdk15-141.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/commons-logging-1.1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/bcprov-jdk16-143.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

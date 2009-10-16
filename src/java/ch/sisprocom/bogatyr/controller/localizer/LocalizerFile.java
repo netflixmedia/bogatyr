@@ -31,20 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.localizer;
 
+import ch.sisprocom.bogatyr.helper.HelperString;
+
+import javax.swing.KeyStroke;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-
-import javax.swing.KeyStroke;
-
-import ch.sisprocom.bogatyr.helper.HelperString;
 
 
 /**
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090813)
+ * @version 0.8.0 (20091016)
  * @since 0.1.0
  */
 public class LocalizerFile extends LocalizerAbstract {
@@ -107,11 +106,13 @@ public class LocalizerFile extends LocalizerAbstract {
 	/*
 	 * Implemented methods
 	 */
-	public String getValue(final String key) {
+	@Override
+    public String getValue(final String key) {
 		return bundle.getString(key);
 	}
 	
-	public KeyStroke getAccelerator(final String key) {
+	@Override
+    public KeyStroke getAccelerator(final String key) {
 		try {
 			return KeyStroke.getKeyStroke(bundle.getString(key + POSTFIX_ACCELERATOR));
 		} catch (MissingResourceException ex) {
@@ -119,7 +120,8 @@ public class LocalizerFile extends LocalizerAbstract {
 		}
 	}
 	
-	public int getMnemonic(final String key) {
+	@Override
+    public int getMnemonic(final String key) {
 		try {
 			final String mnemonic = bundle.getString(key + POSTFIX_MNEMONIC);
 			return (int) mnemonic.charAt(0);
@@ -128,7 +130,8 @@ public class LocalizerFile extends LocalizerAbstract {
 		}
 	}
 
-	public String getTooltip(final String key) {
+	@Override
+    public String getTooltip(final String key) {
 		try {
 			return bundle.getString(key + POSTFIX_TOOLTIP);
 		} catch (MissingResourceException ex) {

@@ -38,7 +38,7 @@ import java.util.TimerTask;
  * This is a countdown timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.6.0
  */
 public class CountdownImpl extends TimerAbstract implements Countdown {
@@ -48,10 +48,12 @@ public class CountdownImpl extends TimerAbstract implements Countdown {
 	/*
      * Implemented methods
      */
+    @Override
     public synchronized void start(final long runtime) {
         start(0L, runtime, 1000L);
     }
 
+    @Override
     public synchronized void start(final long delay, final long runtime, final long interval) {
         getTimer().cancel();
 
@@ -63,16 +65,19 @@ public class CountdownImpl extends TimerAbstract implements Countdown {
         fireTimerStarted();
     }
 
+    @Override
     public synchronized void stop() {
     	getTimer().cancel();
         fireTimerStopped();
     }
 
+    @Override
     public long getRuntime() {
 		return runtime;
 	}
 
-	public synchronized void setRuntime(final long runtime) {
+	@Override
+    public synchronized void setRuntime(final long runtime) {
 		this.runtime = runtime;
 	}
 	

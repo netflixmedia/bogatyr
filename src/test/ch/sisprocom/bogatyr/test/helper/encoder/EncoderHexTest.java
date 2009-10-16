@@ -83,7 +83,7 @@ public class EncoderHexTest {
 		}
 
 		try {
-			EncoderHex.decode(new String());
+			EncoderHex.decode(""); //$NON-NLS-1$
 			fail("String is empty!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

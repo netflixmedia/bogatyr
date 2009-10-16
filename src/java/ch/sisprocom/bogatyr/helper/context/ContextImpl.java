@@ -44,7 +44,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Implementation of the context for applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.1.0
  */
 public class ContextImpl implements Context {
@@ -74,7 +74,8 @@ public class ContextImpl implements Context {
 	/*
 	 * Implemented methods
 	 */
-	public void addValue(final Object key, final Object value) { //$JUnit$
+	@Override
+    public void addValue(final Object key, final Object value) { //$JUnit$
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
 		}
@@ -86,61 +87,74 @@ public class ContextImpl implements Context {
 		}
 	}
 
-	public void removeValue(final Object key) { //$JUnit$
+	@Override
+    public void removeValue(final Object key) { //$JUnit$
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
 		}
 		contextData.remove(key);
 	}
 
-	public Object getValue(final Object key) { //$JUnit$
+	@Override
+    public Object getValue(final Object key) { //$JUnit$
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
 		}
 		return contextData.get(key);
 	}
 
-	public String getStringValue(final Object key) { //$JUnit$
+	@Override
+    public String getStringValue(final Object key) { //$JUnit$
 		return (String)getValue(key);
     }
 
-	public Boolean getBooleanValue(final Object key) { //$JUnit$
+	@Override
+    public Boolean getBooleanValue(final Object key) { //$JUnit$
 		return (Boolean)getValue(key);
     }
 	
-	public Double getDoubleValue(final Object key) { //$JUnit$
+	@Override
+    public Double getDoubleValue(final Object key) { //$JUnit$
 		return (Double)getValue(key);
 	}
 	
-	public Integer getIntegerValue(final Object key) { //$JUnit$
+	@Override
+    public Integer getIntegerValue(final Object key) { //$JUnit$
 		return (Integer)getValue(key);
 	}
 	
-	public Float getFloatValue(final Object key) { //$JUnit$
+	@Override
+    public Float getFloatValue(final Object key) { //$JUnit$
 		return (Float)getValue(key);
 	}
 	
-	public Byte getByteValue(final Object key) { //$JUnit$
+	@Override
+    public Byte getByteValue(final Object key) { //$JUnit$
 		return (Byte)getValue(key);
 	}
 	
-	public Long getLongValue(final Object key) { //$JUnit$
+	@Override
+    public Long getLongValue(final Object key) { //$JUnit$
 		return (Long)getValue(key);
 	}
 
-	public Short getShortValue(final Object key) { //$JUnit$
+	@Override
+    public Short getShortValue(final Object key) { //$JUnit$
 		return (Short)getValue(key);
 	}
 	
-	public BigInteger getBigIntegerValue(final Object key) { //$JUnit$
+	@Override
+    public BigInteger getBigIntegerValue(final Object key) { //$JUnit$
 		return (BigInteger)getValue(key);
 	}
 	
-	public BigDecimal getBigDecimalValue(final Object key) { //$JUnit$
+	@Override
+    public BigDecimal getBigDecimalValue(final Object key) { //$JUnit$
 		return (BigDecimal)getValue(key);
 	}
 
-	public Date getDateValue(final Object key) { //$JUnit$
+	@Override
+    public Date getDateValue(final Object key) { //$JUnit$
 		return (Date)getValue(key);
 	}
 }

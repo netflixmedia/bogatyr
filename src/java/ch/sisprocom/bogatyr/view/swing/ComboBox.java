@@ -51,7 +51,7 @@ import java.util.Locale;
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.2.0
  */
 public class ComboBox extends JComboBox implements Activatable {
@@ -117,11 +117,13 @@ public class ComboBox extends JComboBox implements Activatable {
 	/*
 	 * Implemented methods
 	 */	
-	public boolean isActive() {
+	@Override
+    public boolean isActive() {
 		return !isNotActive;
 	}
 
-	public void setActive(final boolean isActive) {
+	@Override
+    public void setActive(final boolean isActive) {
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -157,6 +159,7 @@ public class ComboBox extends JComboBox implements Activatable {
             myEditor = (JTextComponent) comboBox.getEditor().getEditorComponent();
 
             comboBox.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(final ActionEvent e) {
                     if (!selecting) {
                         highlightCompletedText(0);

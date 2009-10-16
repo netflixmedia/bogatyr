@@ -31,25 +31,24 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.crypto;
 
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.encoder.EncoderHex;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.helper.encoder.EncoderHex;
 
 
 /**
  * This is an implementation for hash code generation with SHA256.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.8.0
  */
 public class HashSHA256 implements Hash {
@@ -70,7 +69,11 @@ public class HashSHA256 implements Hash {
 	 * Implemented methods
 	 */
     @Override
-	public String getHash(byte[] input) throws NoSuchAlgorithmException {
+	public String getHash(final byte[] input) throws NoSuchAlgorithmException {
+        if (null == input) {
+            throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+        }
+
     	final MessageDigest algorithm = MessageDigest.getInstance(HASHCODE_ALGORITHM_SHA256);
 
 		algorithm.reset();
@@ -80,24 +83,35 @@ public class HashSHA256 implements Hash {
 	}
 
 	@Override
-	public String getHash(File input, int bufferSize) throws Exception {
-		return  getHash(new BufferedInputStream(new FileInputStream(input)), bufferSize);
+	public String getHash(final File input) throws NoSuchAlgorithmException, IOException {
+		return getHash(input, DEFAULT_BUFFER_SIZE);
 	}
 
-	@Override
-	public String getHash(File input) throws NoSuchAlgorithmException, FileNotFoundException, IOException {
-		return  getHash(new BufferedInputStream(new FileInputStream(input)));
-	}
+    @Override
+    public String getHash(final File input, final int bufferSize) throws NoSuchAlgorithmException, IOException {
+        if (null == input) {
+            throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+        }
+
+        return getHash(new BufferedInputStream(new FileInputStream(input)), bufferSize);
+    }
 
 	@Override
-	public String getHash(InputStream is, int bufferSize) throws NoSuchAlgorithmException, IOException {
-		final MessageDigest algorithm = MessageDigest.getInstance(HASHCODE_ALGORITHM_SHA256);
+	public String getHash(final InputStream is, final int bufferSize) throws NoSuchAlgorithmException, IOException {
+        if (null == is) {
+            throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+        }
+        if (bufferSize < 1) {
+            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
+        final MessageDigest algorithm = MessageDigest.getInstance(HASHCODE_ALGORITHM_SHA256);
 		algorithm.reset();
 		
-		byte[] buffer = new byte[bufferSize];
+		final byte[] buffer = new byte[bufferSize];
 		
 		int offset = is.read(buffer);
-		while (offset > 0) {
+		while (0 < offset) {
 			algorithm.update(buffer, 0, offset);
 			offset = is.read(buffer);
 		}
@@ -106,7 +120,7 @@ public class HashSHA256 implements Hash {
 	}
 
 	@Override
-	public String getHash(InputStream is) throws NoSuchAlgorithmException, IOException  {
+	public String getHash(final InputStream is) throws NoSuchAlgorithmException, IOException  {
 		return getHash(is, DEFAULT_BUFFER_SIZE);
 	}
 }

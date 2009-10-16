@@ -49,7 +49,7 @@ public interface Fadeable {
      * @param isFading fading state
      * @since 0.6.0
      */
-	void setFading(final boolean isFading);
+	void setFading(boolean isFading);
 	
 	/**
      * Sets the fading color.
@@ -57,7 +57,7 @@ public interface Fadeable {
      * @param colorFader color of the fader
      * @since 0.6.0
      */
-	void setFaderColor(final Color colorFader);
+	void setFaderColor(Color colorFader);
 	
 	/**
      * Returns the fading state of the component.

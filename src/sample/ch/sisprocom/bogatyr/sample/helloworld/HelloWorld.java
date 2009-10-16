@@ -48,7 +48,7 @@ import java.util.Locale;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20091015
+ * @version 20091016
  */
 public class HelloWorld extends ApplicationAbstract { 
 	// Fixed parameter - e.g. this could be an argument
@@ -96,7 +96,8 @@ public class HelloWorld extends ApplicationAbstract {
 	/*
 	 * Implemented methods
 	 */
-	public void run() {
+	@Override
+    public void run() {
 		final String username = property.getValue(PROPERTY_USERNAME);
 		
 		localizer.setLocale(Locale.GERMAN);

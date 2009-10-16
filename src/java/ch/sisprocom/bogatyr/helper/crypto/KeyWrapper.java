@@ -49,9 +49,10 @@ public interface KeyWrapper {
      * @param key e.g. AES-key
      * @return byte-array with the wrapped key
      * @throws Exception
+     * @see Key
      * @since 0.6.0
 	 */
-	byte[] wrap(final Key wrapperKey, final Key key) throws Exception;
+	byte[] wrap(Key wrapperKey, Key key) throws Exception;
 	
 	/**
 	 * Unwrap and return the {@link Key}.
@@ -62,7 +63,8 @@ public interface KeyWrapper {
      * @param keyType e.g. Cipher.SECRET_KEY
      * @return unwrapped key
      * @throws Exception
+     * @see Key
      * @since 0.6.0
 	 */
-	Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws Exception;
+	Key unwrap(Key wrapperKey, byte[] wrappedKey, String keyAlgorithm, int keyType) throws Exception;
 }

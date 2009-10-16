@@ -39,7 +39,7 @@ import java.net.Socket;
  * Defines the methods for the implementation of the datagram dumper.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.8.0
  */
 public interface DatagramDumper extends Runnable {
@@ -54,10 +54,9 @@ public interface DatagramDumper extends Runnable {
 	/**
      * Stop the datagram controller.
      * 
-     * @throws IOException
      * @since 0.8.0
      */
-	void stop() throws IOException;
+	void stop();
 	
 	/**
 	 * Returns the state of the datagram controller.

@@ -64,7 +64,7 @@ import java.util.Scanner;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -80,6 +80,7 @@ public abstract class HelperIO {
      * @param extension of the file (e.g. ".java")
      * @return temporary file
      * @throws IOException
+     * @see File
      * @since 0.5.0
      */	
 	public static File getTemporaryFile(final String name, final String extension) throws IOException { //$JUnit$
@@ -92,11 +93,7 @@ public abstract class HelperIO {
 
 		// Create temp file
 		final File file;
-		if (extension.startsWith(HelperString.PERIOD)) {
-			file = File.createTempFile(name, extension);
-		} else {
-			file = File.createTempFile(name, HelperString.PERIOD + extension);
-		}
+        file = extension.startsWith(HelperString.PERIOD) ? File.createTempFile(name, extension) : File.createTempFile(name, HelperString.PERIOD + extension);
 		
 	    // Delete temp file when program exits
 	    file.deleteOnExit();
@@ -115,6 +112,7 @@ public abstract class HelperIO {
      * @param isDirectory true/false
      * @param identifiers of parts from the file name (if it's "null", all files will be delivered)
      * @return List containing the matched files
+     * @see File
      * @since 0.1.0
      */	
 	public static List<File> getFiles(final File path, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory, final String... identifiers) { //$JUnit$
@@ -139,10 +137,10 @@ public abstract class HelperIO {
      * @param isExclude is the identifiers are excluded
      * @param identifiers of parts from the file name (if it's "null", all files will be delivered)
      * @return List containing the matched files
-     * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
-	public static List<File> getFiles(final File path, final boolean isExclude, final String... identifiers) throws IOException { //$JUnit$
+	public static List<File> getFiles(final File path, final boolean isExclude, final String... identifiers) { //$JUnit$
 		return getFiles(path, isExclude, false, true, true, true, identifiers);
 	}
 	
@@ -152,10 +150,10 @@ public abstract class HelperIO {
      * @param path for searching
      * @param identifiers of parts from the file name (if it's "null", all files will be delivered)
      * @return List containing the matched files
-     * @throws IOException
+     * @see File
      * @since 0.8.0
      */	
-	public static List<File> getFiles(final File path, final String... identifiers) throws IOException {
+	public static List<File> getFiles(final File path, final String... identifiers) {
 		return getFiles(path, false, false, true, true, true, identifiers);
 	}
 	
@@ -165,6 +163,7 @@ public abstract class HelperIO {
      * @param source directory to copy
      * @param dest directory
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static void copyDirectory(final File source, final File dest) throws IOException{
@@ -202,6 +201,7 @@ public abstract class HelperIO {
      * @param source file to copy
      * @param dest file
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static void copyFile(final File source, final File dest) throws IOException{
@@ -215,6 +215,7 @@ public abstract class HelperIO {
      * @param dest file
      * @param bufferSize in bytes
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */
     public static void copyFile(final File source, final File dest, final int bufferSize) throws IOException{
@@ -226,6 +227,9 @@ public abstract class HelperIO {
         }
         if (null == dest) {
             throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+        }
+        if (bufferSize < 1) {
+            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
         final byte[] buffer = new byte[bufferSize];
@@ -261,6 +265,7 @@ public abstract class HelperIO {
      * @param source file/directory to move
      * @param dest file/directory
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static void move(final File source, final File dest) throws IOException{
@@ -284,6 +289,7 @@ public abstract class HelperIO {
      * 
      * @param files to delete (files/directories)
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static void delete(final File... files) throws IOException{
@@ -308,6 +314,7 @@ public abstract class HelperIO {
      * @param source file/directory to rename
      * @param dest file/directory
      * @return true/false
+     * @see File
      * @since 0.1.0
      */	
 	public static boolean rename(final File source, final File dest) {
@@ -329,6 +336,7 @@ public abstract class HelperIO {
      * @param encoding of the file
      * @param line containing the text to write
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static void writeLine(final File file, final String encoding, final String line) throws IOException { //$JUnit$
@@ -363,6 +371,7 @@ public abstract class HelperIO {
      * @param file for writing
      * @param line containing the text to write
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static void writeLine(final File file, final String line) throws IOException { //$JUnit$
@@ -376,6 +385,7 @@ public abstract class HelperIO {
      * @param data byte-array to write
      * @param append to file?
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static void writeFile(final File file, final byte[] data, final boolean append) throws IOException { //$JUnit$
@@ -407,6 +417,7 @@ public abstract class HelperIO {
      * @param encoding of the file
      * @param append to file?
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static void writeFile(final File file, final String data, final String encoding, final boolean append) throws IOException { //$JUnit$
@@ -444,6 +455,7 @@ public abstract class HelperIO {
      * @param data string to write
      * @param append to file?
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static void writeFile(final File file, final String data, final boolean append) throws IOException { //$JUnit$
@@ -457,6 +469,8 @@ public abstract class HelperIO {
      * @param is stream to write
      * @param append to file?
      * @throws IOException
+     * @see File
+     * @see InputStream
      * @since 0.1.0
      */	
 	public static void writeFile(final File file, final InputStream is, final boolean append) throws IOException { //$JUnit$
@@ -469,6 +483,7 @@ public abstract class HelperIO {
      * @param os output stream for writing
      * @param data byte-array for the stream
      * @throws IOException
+     * @see OutputStream
      * @since 0.1.0
      */	
 	public static void writeStream(final OutputStream os, final byte[] data) throws IOException {
@@ -493,6 +508,7 @@ public abstract class HelperIO {
      * @param is input stream for reading
      * @return byte-array containing the stream content
      * @throws IOException
+     * @see InputStream
      * @since 0.1.0
      */	
 	public static byte[] readStream(final InputStream is) throws IOException {
@@ -506,11 +522,15 @@ public abstract class HelperIO {
      * @param bufferSize in bytes
      * @return byte-array containing the stream content
      * @throws IOException
+     * @see InputStream
      * @since 0.1.0
      */
     public static byte[] readStream(final InputStream is, final int bufferSize) throws IOException {
         if (null == is) {
             throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+        }
+        if (bufferSize < 1) {
+            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1");  //$NON-NLS-1$//$NON-NLS-2$
         }
 
         final byte[] buffer = new byte[bufferSize];
@@ -539,6 +559,7 @@ public abstract class HelperIO {
      * @param file for reading
      * @return byte-array containing the file content
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static byte[] readFile(final File file) throws IOException { //$JUnit$
@@ -569,6 +590,7 @@ public abstract class HelperIO {
      * @param encoding of the file
      * @return String containing the file content
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static String readFileAsString(final File file, final String encoding) throws IOException { //$JUnit$
@@ -606,6 +628,7 @@ public abstract class HelperIO {
      * @param file for reading
      * @return String containing the file content
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static String readFileAsString(final File file) throws IOException { //$JUnit$
@@ -619,6 +642,7 @@ public abstract class HelperIO {
      * @param encoding of the file
      * @return List containing the file content
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static List<String> readFileAsList(final File file, final String encoding) throws IOException {
@@ -651,6 +675,7 @@ public abstract class HelperIO {
      * @param file for reading
      * @return List containing the file content
      * @throws IOException
+     * @see File
      * @since 0.1.0
      */	
 	public static List<String> readFileAsList(final File file) throws IOException {
@@ -663,6 +688,8 @@ public abstract class HelperIO {
      * @param file for reading
      * @param os output stream for the file content
      * @throws IOException
+     * @see File
+     * @see OutputStream
      * @since 0.1.0
      */	
 	public static void readFileAsStream(final File file, final OutputStream os) throws IOException { //$JUnit$
@@ -685,6 +712,7 @@ public abstract class HelperIO {
      * @param fileOutput Output file
      * @param files to concatenate
      * @throws IOException
+     * @see File
      * @since 0.2.0
      */	
 	public static void concatenateFiles(final File fileOutput, final File... files) throws IOException {
@@ -741,6 +769,8 @@ public abstract class HelperIO {
 	 * @param file to get the URL
 	 * @return URL representation of a given file
 	 * @throws MalformedURLException 
+	 * @see File
+	 * @see URL
 	 * @since 0.7.0
 	 */
 	public static URL getURL(final File file) throws MalformedURLException {
@@ -771,6 +801,7 @@ public abstract class HelperIO {
 	 * Returns a {@link List} containing all available drives of the current system.
 	 * 
 	 * @return list containing all drive names of the current system 
+	 * @see File
 	 * @since 0.7.0
 	 */
 	public static List<File> getAvailableDrives() {
@@ -791,6 +822,7 @@ public abstract class HelperIO {
 	 * 
 	 * @param file location
 	 * @return total space in bytes
+	 * @see File
 	 * @since 0.7.0
 	 */
 	public static long getSpaceTotal(final File file) {
@@ -806,6 +838,7 @@ public abstract class HelperIO {
 	 * 
 	 * @param file location
 	 * @return free space in bytes
+	 * @see File
 	 * @since 0.7.0
 	 */
 	public static long getSpaceFree(final File file) {
@@ -820,6 +853,7 @@ public abstract class HelperIO {
 	 * 
 	 * @param file location
 	 * @return usable space in bytes
+	 * @see File
 	 * @since 0.7.0
 	 */
 	public static long getSpaceUsable(final File file) {
@@ -835,6 +869,7 @@ public abstract class HelperIO {
 	 * 
 	 * @param file location
 	 * @return used space in bytes
+	 * @see File
 	 * @since 0.7.0
 	 */
 	public static long getSpaceUsed(final File file) {
@@ -850,6 +885,7 @@ public abstract class HelperIO {
 	 * 
 	 * @param file location
 	 * @return true/false
+	 * @see File
 	 * @since 0.7.0
 	 */
 	public static boolean isDrive(final File file) {
@@ -865,6 +901,7 @@ public abstract class HelperIO {
 	 * 
 	 * @param file location
 	 * @return true/false
+	 * @see File
 	 * @since 0.7.0
 	 */
 	public static boolean isRemovableDrive(final File file) {
@@ -880,6 +917,7 @@ public abstract class HelperIO {
 	 * 
 	 * @param file location
 	 * @return true/false
+	 * @see File
 	 * @since 0.7.0
 	 */
 	public static boolean isNetworkDrive(final File file) {
@@ -895,6 +933,8 @@ public abstract class HelperIO {
 	 * 
 	 * @param baos byte-array output stream
 	 * @return Input stream
+	 * @see ByteArrayOutputStream
+	 * @see InputStream
 	 * @since 0.7.0
 	 */
 	public static InputStream convertOutputToInputStream(final ByteArrayOutputStream baos) {
@@ -906,6 +946,8 @@ public abstract class HelperIO {
 	 * 
 	 * @param writer to convert
 	 * @return Reader containing the data of the writer 
+	 * @see Writer
+	 * @see Reader
 	 * @since 0.7.0
 	 */
 	public static Reader convertWriterToReader(final Writer writer) {

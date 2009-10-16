@@ -51,6 +51,7 @@ public interface Server extends Runnable {
 	 * Returns the {@link ServerSocket} of the current server.
 	 * 
 	 * @return server-side socket
+	 * @see ServerSocket
 	 * @since 0.7.0
 	 */
 	ServerSocket getServerSocket();

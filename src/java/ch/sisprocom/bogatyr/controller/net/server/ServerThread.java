@@ -40,7 +40,7 @@ import java.net.Socket;
  * Defines the methods for the implementation of the server thread.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.7.0
  */
 public interface ServerThread extends Runnable {
@@ -48,6 +48,7 @@ public interface ServerThread extends Runnable {
 	 * Returns the current {@link Socket} of the thread.
 	 * 
 	 * @return socket
+	 * @see Socket
 	 * @since 0.7.0
 	 */
 	Socket getSocket();
@@ -68,7 +69,7 @@ public interface ServerThread extends Runnable {
      * @throws IOException 
      * @since 0.7.0
      */
-    void writeStream(final byte[] data) throws IOException;
+    void writeStream(byte[] data) throws IOException;
 
 	/**
 	 * Stops the thread. And closes the open socket.

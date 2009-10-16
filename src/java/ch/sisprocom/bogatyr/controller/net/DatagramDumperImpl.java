@@ -46,7 +46,7 @@ import java.util.HashSet;
  * This is a datagram dumper to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.8.0
  */
 public class DatagramDumperImpl implements DatagramDumper {
@@ -132,10 +132,12 @@ public class DatagramDumperImpl implements DatagramDumper {
     /*
      * Implemented methods
      */
+    @Override
     public int getPort() {
         return port;
     }
 
+    @Override
     public void setPort(final int port) {
     	if (0 >= port || HelperNumber.VALUE_65536 <= port) {
     		throw new IllegalArgumentException("port outside of the valid range (0 - 65535): " + port); //$NON-NLS-1$
@@ -143,6 +145,7 @@ public class DatagramDumperImpl implements DatagramDumper {
         this.port = port;
     }
 
+    @Override
     public void start() throws IOException {
 		socket = new DatagramSocket(port);
 		
@@ -152,7 +155,8 @@ public class DatagramDumperImpl implements DatagramDumper {
         fireStarted();
     }
 
-    public void stop() throws IOException {
+    @Override
+    public void stop() {
         if (null != socket) {
         	socket.close();
         }
@@ -168,6 +172,7 @@ public class DatagramDumperImpl implements DatagramDumper {
         }
     }
 
+    @Override
     public boolean isRunning() {
         return isRunning;
     } 
@@ -187,14 +192,17 @@ public class DatagramDumperImpl implements DatagramDumper {
 		}
 	}
 
+    @Override
     public synchronized void addListener(final ListenerDatagram listener) {
         listListener.add(listener);
     }
 
+    @Override
     public synchronized void removeListener(final ListenerDatagram listener) {
         listListener.remove(listener);
     }
 
+    @Override
     public synchronized void removeAllListener() {
         listListener = new HashSet<ListenerDatagram>();
     }

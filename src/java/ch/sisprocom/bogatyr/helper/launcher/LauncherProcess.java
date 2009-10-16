@@ -36,17 +36,18 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 
 
 /**
  * This launcher creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091016)
  * @since 0.2.0
  */
 public abstract class LauncherProcess {
-	private static final int BUFFER = 1024;
+	private static final int DEFAULT_BUFFER_SIZE = HelperNumber.VALUE_1024;
 	
 	
 //	public static String runProcess(final String... commands) throws IOException {
@@ -62,6 +63,7 @@ public abstract class LauncherProcess {
 	 * @param commands arguments to start the process
 	 * @return created process
      * @throws IOException
+     * @see OutputStream
      * @since 0.2.0
 	 */
 	public static Process createProcess(final OutputStream outputStream, final OutputStream errorStream, final String... commands) throws IOException {
@@ -101,6 +103,8 @@ public abstract class LauncherProcess {
 	 * @param process to observe
      * @param outputStream If null, output is discarded
 	 * @param errorStream If null, error is discarded
+	 * @see Process
+	 * @see OutputStream
 	 * @since 0.2.0
 	 */
 	private static void readStandardOutput(final Process process, final OutputStream outputStream, final OutputStream errorStream) {
@@ -133,11 +137,11 @@ public abstract class LauncherProcess {
 		@Override
 		public void run() {
 			try {
-                final byte[] buffer = new byte[BUFFER];
-                int len;
-				while (-1 != (len = is.read(buffer))) {
+                final byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+                int offset;
+				while (-1 != (offset = is.read(buffer))) {
 					if (os != null) {
-                        os.write(buffer, 0, len);
+                        os.write(buffer, 0, offset);
 					}
 				}
 			} catch (IOException ex) {

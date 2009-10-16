@@ -52,7 +52,7 @@ import java.util.List;
  * This class connects to an IBM MQ-Server and allows to send and receive messages.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.3.0
  */
 public class ProviderMqImpl implements ProviderMq {
@@ -106,7 +106,8 @@ public class ProviderMqImpl implements ProviderMq {
     /*
      * Implemented methods
      */
-	public synchronized void sendMessage(final byte[] data, final String managerOut, final String queueOut, final String managerIn, final String queueIn) throws IOException, MQException {
+	@Override
+    public synchronized void sendMessage(final byte[] data, final String managerOut, final String queueOut, final String managerIn, final String queueIn) throws IOException, MQException {
         final MQQueueManager mqManager = new MQQueueManager(managerOut);
 
         // int options = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_OUTPUT;
@@ -137,6 +138,7 @@ public class ProviderMqImpl implements ProviderMq {
         mqManager.disconnect();
     }
 
+    @Override
     public synchronized List<byte[]> receiveMessages(final String managerIn, final String queueIn) throws MQException, IOException {
         final List<byte[]> list = new ArrayList<byte[]>();
 //		byte[] data;

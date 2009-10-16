@@ -37,17 +37,19 @@ import java.util.TimerTask;
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.6.0
  */
 public class TimerImpl extends TimerAbstract implements Timer {
 	long time;
 	
-	public long getTime() {
+	@Override
+    public long getTime() {
 		return time;
 	}
 
-	public void setTime(final long time) {
+	@Override
+    public void setTime(final long time) {
 		this.time = time;
 	}
 	
@@ -55,10 +57,12 @@ public class TimerImpl extends TimerAbstract implements Timer {
 	/*
 	 * Implemented methods
 	 */
+    @Override
     public synchronized void start(final long interval) {
         start(0L, interval);
     }
 
+    @Override
     public synchronized void start(final long delay, final long interval) {
     	getTimer().cancel();
 
@@ -68,6 +72,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
         fireTimerStarted();
     }
 
+    @Override
     public synchronized void stop() {
     	getTimer().cancel();
         fireTimerStopped();

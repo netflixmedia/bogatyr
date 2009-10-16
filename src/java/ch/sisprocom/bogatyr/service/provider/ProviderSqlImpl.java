@@ -45,7 +45,7 @@ import java.sql.Statement;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.2.0
  */
 public class ProviderSqlImpl implements ProviderSql {
@@ -170,11 +170,13 @@ public class ProviderSqlImpl implements ProviderSql {
 	/*
 	 * Implemented methods
 	 */	
-    public Connection connectToDb() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {		
+    @Override
+    public Connection connectToDb() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Class.forName(driver).newInstance();
 		return DriverManager.getConnection(url, user, password);
 	}
     
+    @Override
     public int executeUpdate(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
     	if (!HelperString.isValid(statement)) {
     		throw new IllegalArgumentException("statement is null or empty!"); //$NON-NLS-1$
@@ -200,6 +202,7 @@ public class ProviderSqlImpl implements ProviderSql {
 		return result;
     }
 	
+    @Override
     public boolean execute(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException  {
     	if (!HelperString.isValid(statement)) {
     		throw new IllegalArgumentException("statement is null or empty!"); //$NON-NLS-1$

@@ -74,7 +74,7 @@ import java.util.Locale;
  * Junit test suite
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 20091015
+ * @version 20091016
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
@@ -111,7 +111,8 @@ public class AllBogatyrTests implements Runnable {
         System.out.println("+-------------------------------+"); //$NON-NLS-1$
     }
     
-	public void run() {
+	@Override
+    public void run() {
 		final Result result = JUnitCore.runClasses(
 				ContextTest.class,
 				CryptoAsymmetricTest.class,

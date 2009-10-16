@@ -40,7 +40,7 @@ import java.math.BigInteger;
  *
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20091016)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
@@ -75,11 +75,7 @@ public abstract class HelperNumber {
         BigDecimal result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            if (0 == ii) {
-                result = values[0];
-            } else {
-                result = multiply(result, values[ii]);
-            }
+            result = 0 == ii ? values[0] : multiply(result, values[ii]);
         }
         return result;
     }
@@ -114,11 +110,7 @@ public abstract class HelperNumber {
         BigInteger result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            if (0 == ii) {
-                result = values[0];
-            } else {
-                result = multiply(result, values[ii]);
-            }
+            result = 0 == ii ? values[0] : multiply(result, values[ii]);
         }
         return result;
     }
@@ -153,11 +145,7 @@ public abstract class HelperNumber {
         Integer result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            if (0 == ii) {
-                result = values[0];
-            } else {
-                result = multiply(result, values[ii]);
-            }
+            result = 0 == ii ? values[0] : multiply(result, values[ii]);
         }
         return result;
     }
@@ -192,11 +180,7 @@ public abstract class HelperNumber {
         Double result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            if (0 == ii) {
-                result = values[0];
-            } else {
-                result = multiply(result, values[ii]);
-            }
+            result = 0 == ii ? values[0] : multiply(result, values[ii]);
         }
         return result;
     }
@@ -231,11 +215,7 @@ public abstract class HelperNumber {
         Float result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            if (0 == ii) {
-                result = values[0];
-            } else {
-                result = multiply(result, values[ii]);
-            }
+            result = 0 == ii ? values[0] : multiply(result, values[ii]);
         }
         return result;
     }
@@ -270,11 +250,7 @@ public abstract class HelperNumber {
         Long result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            if (0 == ii) {
-                result = values[0];
-            } else {
-                result = multiply(result, values[ii]);
-            }
+            result = 0 == ii ? values[0] : multiply(result, values[ii]);
         }
         return result;
     }
@@ -309,11 +285,7 @@ public abstract class HelperNumber {
         BigDecimal result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            if (0 == ii) {
-                result = values[0];
-            } else {
-                result = add(result, values[ii]);
-            }
+            result = 0 == ii ? values[0] : add(result, values[ii]);
         }
         return result;
     }
@@ -348,11 +320,7 @@ public abstract class HelperNumber {
         BigInteger result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            if (0 == ii) {
-                result = values[0];
-            } else {
-                result = add(result, values[ii]);
-            }
+            result = 0 == ii ? values[0] : add(result, values[ii]);
         }
         return result;
     }
@@ -387,11 +355,7 @@ public abstract class HelperNumber {
         Integer result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            if (0 == ii) {
-                result = values[0];
-            } else {
-                result = add(result, values[ii]);
-            }
+            result = 0 == ii ? values[0] : add(result, values[ii]);
         }
         return result;
     }
@@ -426,11 +390,7 @@ public abstract class HelperNumber {
         Double result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            if (0 == ii) {
-                result = values[0];
-            } else {
-                result = add(result, values[ii]);
-            }
+            result = 0 == ii ? values[0] : add(result, values[ii]);
         }
         return result;
     }
@@ -465,11 +425,7 @@ public abstract class HelperNumber {
         Float result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            if (0 == ii) {
-                result = values[0];
-            } else {
-                result = add(result, values[ii]);
-            }
+            result = 0 == ii ? values[0] : add(result, values[ii]);
         }
         return result;
     }
@@ -504,11 +460,7 @@ public abstract class HelperNumber {
         Long result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            if (0 == ii) {
-                result = values[0];
-            } else {
-                result = add(result, values[ii]);
-            }
+            result = 0 == ii ? values[0] : add(result, values[ii]);
         }
         return result;
     }

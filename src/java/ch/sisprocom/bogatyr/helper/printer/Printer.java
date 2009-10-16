@@ -47,7 +47,7 @@ import java.awt.print.PrinterJob;
  * This is a printer class for print operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.7.0 (20090527)
+ * @version 0.7.0 (20091016)
  * @since 0.5.0
  */
 public class Printer implements Printable { 
@@ -55,11 +55,12 @@ public class Printer implements Printable {
 	private boolean isScaled;
 
     /**
-     * Print a component.
+     * Print a component {@link Component}.
      *
      * @param component for printing
      * @param isScaled true/false to fit the print page
      * @throws PrinterException
+     * @see Component
      * @since 0.5.0
      */
     public synchronized void print(final Component component, final boolean isScaled) throws PrinterException {
@@ -120,6 +121,7 @@ public class Printer implements Printable {
     /*
      * Implemented methods
      */
+    @Override
     public synchronized int print(final Graphics graphics, final PageFormat pageFormat, final int pageIndex) {
 		if (null == graphics) {
 			throw new IllegalArgumentException("graphics is null!"); //$NON-NLS-1$

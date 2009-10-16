@@ -47,7 +47,7 @@ import java.security.NoSuchProviderException;
  * This is a class for wrapping and unwrapping a crypto key.
  * 
  * @author Stefan Laubenberger
- * @version 0.7.0 (20091015)
+ * @version 0.7.0 (20091016)
  * @since 0.3.0
  */
 public class KeyWrapperImpl implements KeyWrapper {
@@ -63,7 +63,8 @@ public class KeyWrapperImpl implements KeyWrapper {
 	/*
 	 * Implemented methods
 	 */
-	public byte[] wrap(final Key wrapperKey, final Key key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, NoSuchProviderException {
+	@Override
+    public byte[] wrap(final Key wrapperKey, final Key key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, NoSuchProviderException {
 		if (null == wrapperKey) {
 			throw new IllegalArgumentException("wrapperKey is null!"); //$NON-NLS-1$
 		}
@@ -77,7 +78,8 @@ public class KeyWrapperImpl implements KeyWrapper {
 		return cipher.wrap(key);
 	}
 
-	public Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
+	@Override
+    public Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
 		if (null == wrapperKey) {
 			throw new IllegalArgumentException("wrapperKey is null!"); //$NON-NLS-1$
 		}

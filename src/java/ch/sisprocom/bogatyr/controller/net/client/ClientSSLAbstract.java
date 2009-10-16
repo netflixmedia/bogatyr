@@ -31,16 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.client;
 
-import java.io.IOException;
-
-import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
+import java.io.IOException;
 
 /**
  * This is the skeleton for SSL secured clients.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.8.0 (20091016)
  * @since 0.8.0
  */
 public abstract class ClientSSLAbstract extends ClientAbstract {
@@ -60,7 +58,7 @@ public abstract class ClientSSLAbstract extends ClientAbstract {
     public void start() throws IOException {
         final SSLSocketFactory sslFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
 
-        setSocket((SSLSocket)sslFactory.createSocket(getHost(), getPort()));
+        setSocket(sslFactory.createSocket(getHost(), getPort()));
 
 		setThread(new Thread(this));
         getThread().start();

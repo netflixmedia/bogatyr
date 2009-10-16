@@ -54,9 +54,11 @@ public interface CertificateProvider {
      * @param file containing the certificate
      * @return certificate
      * @throws Exception
+     * @see File
+     * @see X509Certificate
      * @since 0.6.0
      */
-    X509Certificate readCertificate(final File file) throws Exception;
+    X509Certificate readCertificate(File file) throws Exception;
     
     /**
      * Reads the {@link X509Certificate} out of the given certificate {@link InputStream}.
@@ -64,19 +66,23 @@ public interface CertificateProvider {
      * @param is input stream containing the certificate
      * @return certificate
      * @throws Exception
+     * @see InputStream
+     * @see X509Certificate
      * @since 0.6.0
      */
-    X509Certificate readCertificate(final InputStream is) throws Exception;
+    X509Certificate readCertificate(InputStream is) throws Exception;
     
     /**
      * Writes the {@link Certificate} on a {@link OutputStream}.
      * 
      * @param os output stream for the certificate
      * @param cert certificate
-     * @throws Exception 
+     * @throws Exception
+     * @see OutputStream
+     * @see Certificate 
      * @since 0.6.0
      */
-    void writeCertificate(final OutputStream os, final Certificate cert) throws Exception;
+    void writeCertificate(OutputStream os, Certificate cert) throws Exception;
     
     /**
      * Writes the {@link Certificate} in a {@link File}.
@@ -84,9 +90,11 @@ public interface CertificateProvider {
      * @param file for the certificate
      * @param cert certificate
      * @throws Exception 
+     * @see File
+     * @see Certificate 
      * @since 0.6.0
      */
-    void writeCertificate(final File file, final Certificate cert) throws Exception;
+    void writeCertificate(File file, Certificate cert) throws Exception;
     
     /**
      * Generate a {@link X509Certificate} out of the given {@link KeyPair} and parameters.
@@ -101,5 +109,5 @@ public interface CertificateProvider {
      * @throws Exception
      * @since 0.6.0 
      */
-    X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws Exception; 
+    X509Certificate generateCertificate(KeyPair pair, String issuerDN, String subjectDN, String generalName, Date start, Date end) throws Exception;
 }

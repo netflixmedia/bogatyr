@@ -31,6 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import ch.sisprocom.bogatyr.helper.encoder.EncoderBase64;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Authenticator;
@@ -46,14 +48,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import ch.sisprocom.bogatyr.helper.encoder.EncoderBase64;
-
 
 /**
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.8.0 (20091016)
  * @since 0.5.0
  */
 public abstract class HelperNet {
@@ -286,6 +286,7 @@ public abstract class HelperNet {
      *
      * @return List with network interfaces of the current machine
      * @throws SocketException
+     * @see NetworkInterface
      * @since 0.5.0
      */
     public static List<NetworkInterface> getNetworkInterfaces() throws SocketException {
@@ -298,6 +299,7 @@ public abstract class HelperNet {
      * @param ni network interface to determine the MAC address
      * @return MAC address of a given network interface
      * @throws SocketException
+     * @see NetworkInterface
      * @since 0.7.0
      */
     public static String getMacAddress(final NetworkInterface ni) throws SocketException {
@@ -323,6 +325,8 @@ public abstract class HelperNet {
      * @param url to read
      * @return input stream for the content
      * @throws IOException
+     * @see URL
+     * @see InputStream
      * @since 0.5.0
      */
     public static InputStream readUrl(final URL url) throws IOException { //$JUnit$
@@ -338,13 +342,15 @@ public abstract class HelperNet {
      }
 
     /**
-     * Returns an {@link InputStream} linked to an {@link URL} with HTTP authentication.
+     * Returns an {@link InputStream} linked to an {@link URL} with HTTP basic authentication.
      *
      * @param url to read
      * @param username for the HTTP authentication
      * @param password for the HTTP authentication
      * @return input stream for the content
      * @throws IOException
+     * @see URL
+     * @see InputStream
      * @since 0.5.0
      */
     public static InputStream readUrl(final URL url, final String username, final String password) throws IOException {
@@ -379,7 +385,8 @@ public abstract class HelperNet {
      * Inner classes
      */
     static class MyAuthenticator extends Authenticator {
-        private final String username, password;
+        private final String username;
+        private final String password;
 
         MyAuthenticator(final String username, final String password) {
             super();

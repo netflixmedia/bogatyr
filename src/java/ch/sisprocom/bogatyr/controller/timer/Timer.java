@@ -47,7 +47,7 @@ public interface Timer extends TimeMachine {
 	 * @param interval of the timer
 	 * @since 0.6.0
 	 */
-	void start(final long interval);
+	void start(long interval);
 
 	/**
 	 * Starts the timer with a given delay and interval.
@@ -56,7 +56,7 @@ public interface Timer extends TimeMachine {
 	 * @param interval of the timer
 	 * @since 0.6.0
 	 */
-	void start(final long delay, final long interval);
+	void start(long delay, long interval);
 	
 	/**
 	 * Returns the current time in ms of the timer.
@@ -72,6 +72,6 @@ public interface Timer extends TimeMachine {
      * @param time
      * @since 0.6.0
      */
-    void setTime(final long time);
+    void setTime(long time);
 }   
 

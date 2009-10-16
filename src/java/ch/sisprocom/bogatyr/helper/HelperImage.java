@@ -64,6 +64,8 @@ public abstract class HelperImage {
      * @param type of the image (e.g. "jpg")
      * @param image RenderImage for the image
      * @throws IOException
+     * @see File
+     * @see RenderedImage
      * @since 0.4.0
      */
     public static void saveImage(final File file, final String type, final RenderedImage image) throws IOException { //$JUnit$
@@ -87,6 +89,8 @@ public abstract class HelperImage {
      * @param type of the image (e.g. "jpg")
      * @param component Component for the image
      * @throws IOException
+     * @see File
+     * @see Component
      * @since 0.4.0
      */
 	public static void saveImage(final File file, final String type, final Component component) throws IOException { //$JUnit$
@@ -98,6 +102,7 @@ public abstract class HelperImage {
      *
      * @param component for the image
      * @return component as image
+     * @see Component
      * @since 0.4.0
      */
 	public static RenderedImage getImage(final Component component) {

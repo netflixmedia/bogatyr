@@ -69,7 +69,7 @@ import java.util.Date;
  * This class generates, reads and save X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.8.0 (20091016)
  * @since 0.3.0
  */
 public class CertificateProviderImpl implements CertificateProvider {
@@ -86,6 +86,7 @@ public class CertificateProviderImpl implements CertificateProvider {
 	/*
 	 * Implemented methods
 	 */
+    @Override
     public X509Certificate readCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
@@ -102,7 +103,8 @@ public class CertificateProviderImpl implements CertificateProvider {
         return cert;
     }
 
-    public X509Certificate readCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {    
+    @Override
+    public X509Certificate readCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {
 		if (null == is) {
 			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
 		}
@@ -121,6 +123,7 @@ public class CertificateProviderImpl implements CertificateProvider {
 		return cert;
     }
     
+    @Override
     public void writeCertificate(final OutputStream os, final Certificate cert) throws CertificateEncodingException, IOException {
 		if (null == os) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
@@ -132,6 +135,7 @@ public class CertificateProviderImpl implements CertificateProvider {
 		HelperIO.writeStream(os, cert.getEncoded());
     }
     
+    @Override
     public void writeCertificate(final File file, final Certificate cert) throws CertificateEncodingException, IOException {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
@@ -143,6 +147,7 @@ public class CertificateProviderImpl implements CertificateProvider {
     	HelperIO.writeFile(file, cert.getEncoded(), false);
     }
 
+    @Override
     public X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws NoSuchAlgorithmException, IllegalStateException, CertificateEncodingException, InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {
 		if (null == pair) {
 			throw new IllegalArgumentException("pair is null!"); //$NON-NLS-1$

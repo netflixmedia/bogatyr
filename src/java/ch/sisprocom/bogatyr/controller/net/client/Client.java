@@ -125,7 +125,7 @@ public interface Client extends Runnable {
      * @throws IOException
      * @since 0.7.0
      */
-    void writeStream(final byte[] data) throws IOException;
+    void writeStream(byte[] data) throws IOException;
     
 	/**
 	 * Adds a listener for this client.
