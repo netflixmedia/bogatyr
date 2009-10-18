@@ -42,8 +42,8 @@ import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.HelperPdf;
 import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.helper.HelperPdf;
 import ch.sisprocom.bogatyr.view.swing.Button;
 
 
