@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * @author Stefan Laubenberger
  * @version 20091015
  */
-public class ObfuscatorTest {
+public class ScramblerTest {
 	@Test
 	public void testEncryptAndDecrypt() {
 		final Scrambler obfuscator = new ScramblerImpl();

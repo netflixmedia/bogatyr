@@ -54,7 +54,7 @@ import java.util.Date;
  * @author Stefan Laubenberger
  * @version 20091015
  */
-public class ProviderCertificateTest {
+public class CertificateProviderTest {
 	private final CertificateProvider publicKeyProvider = new CertificateProviderImpl();
 	
 	private KeyPair keyPair;
