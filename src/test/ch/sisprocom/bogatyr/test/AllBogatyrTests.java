@@ -42,15 +42,15 @@ import ch.sisprocom.bogatyr.test.helper.HelperImageTest;
 import ch.sisprocom.bogatyr.test.helper.HelperMathTest;
 import ch.sisprocom.bogatyr.test.helper.HelperNetTest;
 import ch.sisprocom.bogatyr.test.helper.HelperObjectTest;
-import ch.sisprocom.bogatyr.test.helper.HelperPdfTest;
+import ch.sisprocom.bogatyr.test.helper.HelperPDFTest;
 import ch.sisprocom.bogatyr.test.helper.HelperStringTest;
 import ch.sisprocom.bogatyr.test.helper.HelperTimeTest;
-import ch.sisprocom.bogatyr.test.helper.HelperXmlTest;
+import ch.sisprocom.bogatyr.test.helper.HelperXMLTest;
 import ch.sisprocom.bogatyr.test.helper.context.ContextTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.CryptoAsymmetricTest;
 import ch.sisprocom.bogatyr.test.helper.crypto.CryptoSymmetricTest;
-import ch.sisprocom.bogatyr.test.helper.crypto.ObfuscatorTest;
-import ch.sisprocom.bogatyr.test.helper.crypto.ProviderCertificateTest;
+import ch.sisprocom.bogatyr.test.helper.crypto.ScramblerTest;
+import ch.sisprocom.bogatyr.test.helper.crypto.CertificateProviderTest;
 import ch.sisprocom.bogatyr.test.helper.encoder.EncoderBase64Test;
 import ch.sisprocom.bogatyr.test.helper.encoder.EncoderHexTest;
 import ch.sisprocom.bogatyr.test.helper.launcher.LauncherBrowserTest;
@@ -117,8 +117,8 @@ public class AllBogatyrTests implements Runnable {
 				ContextTest.class,
 				CryptoAsymmetricTest.class,
 				CryptoSymmetricTest.class,
-				ObfuscatorTest.class,
-				ProviderCertificateTest.class,
+				ScramblerTest.class,
+				CertificateProviderTest.class,
 				EncoderBase64Test.class,
 				EncoderHexTest.class,
 				LauncherBrowserTest.class,
@@ -140,12 +140,12 @@ public class AllBogatyrTests implements Runnable {
 				HelperMathTest.class,
 				HelperNetTest.class,
 				HelperObjectTest.class,
-				HelperPdfTest.class,
+				HelperPDFTest.class,
 //				HelperPreferencesTest.class,
 //				HelperSoundTest.class,
 				HelperStringTest.class,
 				HelperTimeTest.class,
-				HelperXmlTest.class,
+				HelperXMLTest.class,
 				NumberFieldTest.class
 		);
 		

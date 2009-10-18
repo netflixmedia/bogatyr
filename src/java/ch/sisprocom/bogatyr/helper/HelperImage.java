@@ -35,6 +35,7 @@ import javax.imageio.ImageIO;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -48,7 +49,7 @@ import java.util.Locale;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.9.0 (20091019)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -117,6 +118,50 @@ public abstract class HelperImage {
 		component.paint(g2);
        
 		return image;
+	}
+	
+	/**
+     * Scales a {@link BufferedImage}.
+     *
+     * @param image to scale
+     * @param scale for the new image
+     * @return scaled image
+     * @see BufferedImage
+     * @see Image
+     * @since 0.9.0
+     */
+	public static Image getScaledImage(final BufferedImage image, final double scale) {
+		if (null == image) {
+			throw new IllegalArgumentException("image is null!"); //$NON-NLS-1$
+		}
+
+		double width = (double)image.getWidth() / scale;
+		double height = (double)image.getHeight() / scale;
+       
+		System.out.println(scale);
+		System.out.println(width);
+		System.out.println(height);
+		
+		return image.getScaledInstance(HelperMath.convertDoubleToInt(width), HelperMath.convertDoubleToInt(height), Image.SCALE_SMOOTH);
+	}
+	
+	/**
+     * Scales a {@link BufferedImage} to a given size.
+     *
+     * @param image to scale
+     * @param width of the new image
+     * @param height of the new image
+     * @return scaled image
+     * @see BufferedImage
+     * @see Image
+     * @since 0.9.0
+     */
+	public static Image getScaledImage(final BufferedImage image, final Dimension size) {
+		if (null == image) {
+			throw new IllegalArgumentException("image is null!"); //$NON-NLS-1$
+		}
+
+		return image.getScaledInstance(size.width, size.height, Image.SCALE_SMOOTH);
 	}
 	
 	/**
