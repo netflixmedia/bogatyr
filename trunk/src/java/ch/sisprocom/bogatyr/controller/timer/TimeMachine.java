@@ -78,14 +78,13 @@ public interface TimeMachine {
 	 * @return current time of the timer
 	 */
     long getInterval();
-
-    /**
-     * Sets the time in ms of the timer.
-     * 
-     * @param interval
-     */
-    void setInterval(long interval);
-    
+//
+//    /**
+//     * Sets the time in ms of the timer.
+//     * 
+//     * @param interval
+//     */
+//    void setInterval(long interval);
 
 	/**
 	 * Stops immediately the timer.

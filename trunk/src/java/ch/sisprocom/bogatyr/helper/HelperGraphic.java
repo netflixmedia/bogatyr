@@ -49,7 +49,7 @@ import java.util.Collection;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.9.0 (20091019)
  * @since 0.4.0
  */
 public abstract class HelperGraphic {
@@ -86,6 +86,66 @@ public abstract class HelperGraphic {
     	return new Dimension(size.width / 2, size.height / 2);
 	}
 
+    /**
+     * Calculates the scale to fit an input {@link Dimension} to an output dimension.
+     *
+     * @param input dimension
+     * @param output dimension
+     * @return scale to fit the input dimension
+     * @see Dimension
+     * @since 0.9.0
+     */
+    public static double getScale(final Dimension input, final Dimension output) { //$JUnit$
+		if (null == input) {
+			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+		}
+		if (null == output) {
+			throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
+		}
+		
+		final double scaleHeight =  (double)input.getHeight() / (double)output.height;
+		final double scaleWidth =  (double)input.getWidth() / (double)output.width;
+		double scale = 1.0D;
+		
+		if (scaleWidth > scaleHeight) {
+			scale = scaleWidth;
+		} else {
+			scale = scaleHeight;
+		}
+		
+    	return scale;
+	}
+    
+    /**
+     * Calculates the scaled size to fit an input {@link Dimension} to an output dimension.
+     *
+     * @param input dimension
+     * @param output dimension
+     * @return scaled size to fit the input dimension
+     * @see Dimension
+     * @since 0.9.0
+     */
+    public static Dimension getScaledSize(final Dimension input, final Dimension output) { //$JUnit$
+		if (null == input) {
+			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+		}
+		if (null == output) {
+			throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
+		}
+		
+		final double scaleHeight =  (double)input.getHeight() / (double)output.height;
+		final double scaleWidth =  (double)input.getWidth() / (double)output.width;
+		double scale = 1.0D;
+		
+		if (scaleWidth > scaleHeight) {
+			scale = scaleWidth;
+		} else {
+			scale = scaleHeight;
+		}
+		
+		return new Dimension(HelperMath.convertDoubleToInt(input.getWidth() / scale), HelperMath.convertDoubleToInt(input.getHeight() / scale));
+	}    
+    
     /**
      * Get size of a text in a {@link Graphics} container with its current font.
      *

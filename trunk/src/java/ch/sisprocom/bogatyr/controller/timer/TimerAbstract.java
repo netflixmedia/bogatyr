@@ -104,6 +104,10 @@ public abstract class TimerAbstract extends ControllerAbstract implements TimeMa
 			listener.timerStopped();
 		}	
 	}
+	
+    protected void setInterval(final long interval) {
+        this.interval = interval;
+    } 
 
 	
     /*
@@ -132,10 +136,5 @@ public abstract class TimerAbstract extends ControllerAbstract implements TimeMa
     @Override
     public long getInterval() {
         return interval;
-    }
-
-    @Override
-    public void setInterval(final long interval) {
-        this.interval = interval;
-    }   
+    }  
 }
