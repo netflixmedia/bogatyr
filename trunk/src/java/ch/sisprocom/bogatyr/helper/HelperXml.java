@@ -31,12 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+
+
 
 /**
  * This is a helper class for XML operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.9.0 (20091027)
  * @since 0.3.0
  */
 public abstract class HelperXml {
@@ -65,5 +75,73 @@ public abstract class HelperXml {
             }
         }
         return sb.toString();
-    }   
+    }
+    
+	/**
+     * Serialize data to an XML and store it to a file {@link File}.
+     *
+     * @param data (object) to serialize as XML
+     * @param file to store the serialized data
+     * @see File
+     * @since 0.9.0
+     */
+    public static <T> void serialize(final T data, final File file) throws JAXBException {
+		getMarshaller(data.getClass()).marshal(data, file);
+    }
+
+	/**
+     * Serialize data to an XML and store it to an output stream {@link OutputStream}.
+     *
+     * @param data (object) to serialize as XML
+     * @param os output stream to store the serialized data
+     * @see OutputStream
+     * @since 0.9.0
+     */
+    public static <T> void serialize(final T data, final OutputStream os) throws JAXBException {
+		getMarshaller(data.getClass()).marshal(data, os);
+    }
+
+	/**
+     * Deserialize data from a XML file {@link File}.
+     *
+     * @param clazz for the serialized data
+     * @param file containing the serialized data
+     * @return data as object
+     * @see File
+     * @since 0.9.0
+     */
+    public static <T> T deserialize(final Class<T> clazz, final File file) throws JAXBException {
+		return (T)getUnmarshaller(clazz).unmarshal(file);
+    }
+
+	/**
+     * Deserialize data from an input stream {@link InputStream}.
+     *
+     * @param clazz for the serialized data
+     * @param is input stream containing the serialized data
+     * @return data as object
+     * @see InputStream
+     * @since 0.9.0
+     */
+    public static <T> T deserialize(final Class<T> clazz, final InputStream is) throws JAXBException {
+		return (T)getUnmarshaller(clazz).unmarshal(is);
+    }
+    
+    
+    /*
+     * Private methods
+     */
+    private static <T> Marshaller getMarshaller(Class<T> clazz) throws JAXBException {
+		final JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
+		final Marshaller marshaller = jaxbContext.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		
+		return marshaller;
+    }
+    
+    private static <T> Unmarshaller getUnmarshaller(Class<T> clazz) throws JAXBException {
+		JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
+		
+		return jaxbContext.createUnmarshaller();
+    }
 }

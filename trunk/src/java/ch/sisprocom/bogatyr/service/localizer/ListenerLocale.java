@@ -29,39 +29,20 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.model;
-
-import java.io.Serializable;
-import java.util.Observable;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
+package ch.sisprocom.bogatyr.service.localizer;
 
 /**
- * This is the skeleton for all models.
+ * ListenerLocale
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
- * @since 0.7.0
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
-public abstract class ModelAbstract extends Observable implements Serializable {
-	private final long createTime = System.currentTimeMillis();
-	
+public interface ListenerLocale {
 	/**
-     * Returns the instantiation time of the model.
-     * 
-     * @return instantiation time of the model
-     * @since 0.7.0
-     */	
-	public long getCreateTime() {
-		return createTime;
-	}
-	
-	
-    /*
-     * Overridden methods
-     */
-    @Override
-    public String toString() {
-        return HelperObject.toString(this);
-    }
+	 * Informs the listener that the locale has changed.
+	 * 
+	 * @since 0.6.0
+	 */
+	void localeChanged();
 }

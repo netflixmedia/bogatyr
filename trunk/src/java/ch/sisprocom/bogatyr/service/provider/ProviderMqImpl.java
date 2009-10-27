@@ -31,9 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.provider;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.helper.HelperXml;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperXml;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
 import com.ibm.mq.MQEnvironment;
 import com.ibm.mq.MQException;
 import com.ibm.mq.MQGetMessageOptions;
@@ -52,10 +52,10 @@ import java.util.List;
  * This class connects to an IBM MQ-Server and allows to send and receive messages.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091027)
  * @since 0.3.0
  */
-public class ProviderMqImpl implements ProviderMq {
+public class ProviderMqImpl extends ServiceAbstract implements ProviderMq {
 
 	public ProviderMqImpl(final String hostname, final int port, final String channel) {
         super();
@@ -93,15 +93,6 @@ public class ProviderMqImpl implements ProviderMq {
 		MQEnvironment.channel = channel;
 	}
 
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
-	
 	
     /*
      * Implemented methods
