@@ -38,8 +38,8 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.crypto.Scrambler;
-import ch.sisprocom.bogatyr.helper.crypto.ScramblerImpl;
+import ch.sisprocom.bogatyr.service.crypto.Scrambler;
+import ch.sisprocom.bogatyr.service.crypto.ScramblerImpl;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 
@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091015
+ * @version 20091027
  */
 public class ScramblerTest {
 	@Test
