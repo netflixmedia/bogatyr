@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,39 +29,35 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.model;
-
-import java.io.Serializable;
-import java.util.Observable;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
+package ch.sisprocom.bogatyr.service.timer;
 
 /**
- * This is the skeleton for all models.
+ * ListenerTimer
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
- * @since 0.7.0
+ * @version 0.8.0 (20090527)
+ * @since 0.6.0
  */
-public abstract class ModelAbstract extends Observable implements Serializable {
-	private final long createTime = System.currentTimeMillis();
+public interface ListenerTimer {
+	/**
+	 * Sends the actual time of the timer/countdown to the listener.
+     *
+     * @param time actual time of the timer/countdown
+     * @since 0.6.0
+	 */
+	void timeChanged(long time);
 	
 	/**
-     * Returns the instantiation time of the model.
-     * 
-     * @return instantiation time of the model
-     * @since 0.7.0
-     */	
-	public long getCreateTime() {
-		return createTime;
-	}
+	 * Informs the listener that the timer/countdown has started.
+	 * 
+	 * @since 0.6.0
+	 */
+	void timerStarted();
 	
-	
-    /*
-     * Overridden methods
-     */
-    @Override
-    public String toString() {
-        return HelperObject.toString(this);
-    }
+	/**
+	 * Informs the listener that the timer/countdown has stopped.
+	 * 
+	 * @since 0.6.0
+	 */
+	void timerStopped();
 }

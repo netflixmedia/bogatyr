@@ -42,10 +42,10 @@ import java.util.Date;
  * Interface for the context in applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.9.0 (20091019)
  * @since 0.6.0
  */
-public interface Context {
+public interface Context { //$Example$
 	
 	/**
      * Adds a key/value pair to the context.

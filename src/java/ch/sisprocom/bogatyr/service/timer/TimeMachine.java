@@ -29,39 +29,66 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.model;
+package ch.sisprocom.bogatyr.service.timer;
 
-import java.io.Serializable;
-import java.util.Observable;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
 
 /**
- * This is the skeleton for all models.
+ * Defines the methods for the implementation of the timer.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
- * @since 0.7.0
+ * @version 0.8.0 (20091015)
+ * @since 0.6.0
  */
-public abstract class ModelAbstract extends Observable implements Serializable {
-	private final long createTime = System.currentTimeMillis();
+public interface TimeMachine {
+	/**
+	 * Adds a listener for this timer.
+	 * 
+	 * @param listener to add
+	 * @since 0.6.0
+	 */
+	void addListener(ListenerTimer listener);
 	
 	/**
-     * Returns the instantiation time of the model.
-     * 
-     * @return instantiation time of the model
-     * @since 0.7.0
-     */	
-	public long getCreateTime() {
-		return createTime;
-	}
+	 * Remove a listener for this timer.
+	 * 
+	 * @param listener to remove
+	 * @since 0.6.0
+	 */
+	void removeListener(ListenerTimer listener);
+
+	/**
+	 * Remove all listeners for this timer.
+	 * 
+	 * @since 0.6.0
+	 */
+	void removeAllListener();
 	
 	
-    /*
-     * Overridden methods
+	/**
+	 * Returns the running state of the timer.
+     *
+     * @return true/false
      */
-    @Override
-    public String toString() {
-        return HelperObject.toString(this);
-    }
-}
+	boolean isRunning();
+
+	/**
+	 * Returns the current interval in ms of the timer.
+	 * 
+	 * @return current time of the timer
+	 */
+    long getInterval();
+//
+//    /**
+//     * Sets the time in ms of the timer.
+//     * 
+//     * @param interval
+//     */
+//    void setInterval(long interval);
+
+	/**
+	 * Stops immediately the timer.
+	 */
+	void stop();
+}   
+

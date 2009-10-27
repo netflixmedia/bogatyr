@@ -31,8 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.provider;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -45,10 +45,10 @@ import java.sql.Statement;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091027)
  * @since 0.2.0
  */
-public class ProviderSqlImpl implements ProviderSql {
+public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 //	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
 	
 	// Server
@@ -156,16 +156,7 @@ public class ProviderSqlImpl implements ProviderSql {
 	public void setPassword(final String password) {
 		this.password = password;
 	}
- 	
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
-	
+
 	
 	/*
 	 * Implemented methods
