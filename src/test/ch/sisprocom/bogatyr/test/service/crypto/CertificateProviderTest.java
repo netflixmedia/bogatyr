@@ -29,7 +29,7 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.test.helper.crypto;
+package ch.sisprocom.bogatyr.test.service.crypto;
 
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperTime;

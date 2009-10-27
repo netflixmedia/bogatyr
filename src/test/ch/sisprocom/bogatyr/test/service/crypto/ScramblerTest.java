@@ -29,7 +29,7 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.test.helper.crypto;
+package ch.sisprocom.bogatyr.test.service.crypto;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
