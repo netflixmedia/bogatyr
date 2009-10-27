@@ -42,7 +42,7 @@ import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.helper.printer.Printer;
+import ch.sisprocom.bogatyr.service.printer.Printer;
 import ch.sisprocom.bogatyr.view.swing.Button;
 
 
@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.view.swing.Button;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090522
+ * @version 20091027
  */
 public class PrinterTest {
 	@Test

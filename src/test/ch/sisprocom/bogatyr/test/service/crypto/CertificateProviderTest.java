@@ -31,28 +31,30 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.service.crypto;
 
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperTime;
-import ch.sisprocom.bogatyr.helper.crypto.CertificateProvider;
-import ch.sisprocom.bogatyr.helper.crypto.CertificateProviderImpl;
-import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymmetric;
-import ch.sisprocom.bogatyr.helper.crypto.CryptoRSA;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.io.File;
 import java.security.KeyPair;
 import java.security.cert.X509Certificate;
 import java.util.Date;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperTime;
+import ch.sisprocom.bogatyr.service.crypto.CertificateProvider;
+import ch.sisprocom.bogatyr.service.crypto.CertificateProviderImpl;
+import ch.sisprocom.bogatyr.service.crypto.CryptoAsymmetric;
+import ch.sisprocom.bogatyr.service.crypto.CryptoRSA;
+
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091015
+ * @version 20091027
  */
 public class CertificateProviderTest {
 	private final CertificateProvider publicKeyProvider = new CertificateProviderImpl();

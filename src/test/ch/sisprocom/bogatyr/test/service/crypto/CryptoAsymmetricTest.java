@@ -31,22 +31,26 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.service.crypto;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.crypto.CryptoAsymmetric;
-import ch.sisprocom.bogatyr.helper.crypto.CryptoRSA;
-import ch.sisprocom.bogatyr.test.AllBogatyrTests;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
+import java.security.KeyPair;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import java.security.KeyPair;
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.service.crypto.CryptoAsymmetric;
+import ch.sisprocom.bogatyr.service.crypto.CryptoRSA;
+import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091015
+ * @version 20091027
  */
 public class CryptoAsymmetricTest {
 	private static final int KEYSIZE = 512;
