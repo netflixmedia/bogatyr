@@ -32,10 +32,10 @@
 package ch.sisprocom.bogatyr.sample.filemanager;
 
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
-import ch.sisprocom.bogatyr.controller.localizer.LocalizerFile;
-import ch.sisprocom.bogatyr.controller.localizer.Localizer;
-import ch.sisprocom.bogatyr.controller.property.PropertyStream;
-import ch.sisprocom.bogatyr.controller.property.Property;
+import ch.sisprocom.bogatyr.service.localizer.LocalizerFile;
+import ch.sisprocom.bogatyr.service.localizer.Localizer;
+import ch.sisprocom.bogatyr.service.property.PropertyStream;
+import ch.sisprocom.bogatyr.service.property.Property;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperString;
 
