@@ -98,7 +98,7 @@ public abstract class LauncherMail {
 		
 		final String prefix = "mailto:"; //$NON-NLS-1$
 		
-		if (emailAddress.toLowerCase(Locale.getDefault()).startsWith(prefix)) {
+		if (HelperString.startsWith(emailAddress, prefix)) {
 			mail(new URI(emailAddress));
 		} else {
 			mail(new URI(prefix + emailAddress));

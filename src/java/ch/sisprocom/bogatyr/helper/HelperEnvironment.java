@@ -325,7 +325,7 @@ public abstract class HelperEnvironment {
 	 * @since 0.1.0
 	 */
 	public static boolean isWindowsPlatform() { //$JUnit$
-		return getOsName().contains("Windows"); //$NON-NLS-1$
+		return HelperString.contains(getOsName(), "Windows"); //$NON-NLS-1$
 	}
 
 	/**
@@ -335,7 +335,7 @@ public abstract class HelperEnvironment {
 	 * @since 0.1.0
 	 */
 	public static boolean isMacPlatform() { //$JUnit$
-		return getOsName().contains("Mac"); //$NON-NLS-1$
+		return HelperString.contains(getOsName(), "Mac"); //$NON-NLS-1$
 	}
 	
 	/**

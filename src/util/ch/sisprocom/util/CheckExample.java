@@ -143,8 +143,7 @@ public class CheckExample {
 
         @Override
 		public boolean accept(File file) {
-            String filename = file.getName();
-            return filename.endsWith(EXTENSION_CSV);
+            return HelperString.endsWith(file.getName(), EXTENSION_CSV);
         }
 
         @Override
