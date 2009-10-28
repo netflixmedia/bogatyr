@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.helper.launcher.LauncherFile;
  * To find such classes and methods, it must be marked with $JUnit$.
  *
  * @author Stefan Laubenberger
- * @version 20090610
+ * @version 20091028
  */
 public class CheckJUnit {
 	private static final String MARKER = "$JUnit$"; //$NON-NLS-1$
@@ -88,10 +88,14 @@ public class CheckJUnit {
         	output.delete();
         	
         	try {
-				final Collection<File>listJava = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), EXTENSION_JAVA);
-				final Collection<File>listSvn = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), "svn"); //$NON-NLS-1$
-				listJava.removeAll(listSvn);
-	
+           	    final java.io.FileFilter filter = new java.io.FileFilter() { 
+        	    	public boolean accept(File file) { 
+        	    		return HelperString.endsWith(file.getName(), EXTENSION_JAVA) && !HelperString.contains(file.getName(), "svn");
+        	    	} 
+        	    };
+        	    
+        	    final Collection<File>listJava = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), filter, -1);
+		
 				HelperIO.writeLine(output, HelperString.concatenate(HelperString.SEMICOLON, "Class", "Method/Variable"));  //$NON-NLS-1$//$NON-NLS-2$
 				
 				for (final File file : listJava) {
@@ -122,8 +126,10 @@ public class CheckJUnit {
         	if (JOptionPane.showConfirmDialog(null, "Open file with the default application?", "Open file", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {  //$NON-NLS-1$//$NON-NLS-2$
         		try {
 					LauncherFile.open(output);
+					System.exit(0);
 				} catch (IOException ex) {
 					ex.printStackTrace();
+					System.exit(10);
 				}
         	}
         }

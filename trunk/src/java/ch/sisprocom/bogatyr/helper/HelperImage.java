@@ -49,7 +49,7 @@ import java.util.Locale;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091019)
+ * @version 0.9.0 (20091028)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -146,13 +146,13 @@ public abstract class HelperImage {
 	}
 	
 	/**
-     * Scales a {@link BufferedImage} to a given size.
+     * Scales a {@link BufferedImage} to a given size {@link Dimension}.
      *
      * @param image to scale
-     * @param width of the new image
-     * @param height of the new image
+     * @param size of the new image
      * @return scaled image
      * @see BufferedImage
+     * @see Dimension
      * @see Image
      * @since 0.9.0
      */

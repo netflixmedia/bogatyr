@@ -40,7 +40,7 @@ import java.math.BigDecimal;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090528)
+ * @version 0.9.0 (20091028)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -238,5 +238,41 @@ public abstract class HelperString {
      */
 	public static byte[] toBytes(final String input, final String encoding) throws UnsupportedEncodingException {
 			return input.getBytes(encoding);
+	}
+	
+    /**
+     * The same as startsWith() from {@link String}, but ignores the case.
+     *
+     * @param string to inspect
+     * @param prefix to find at the start of the string
+     * @return true/false
+     * @since 0.9.0
+     */
+	public static boolean startsWith(final String string, final String prefix) {
+		return string.matches("(?i)" + prefix + ".*");  //$NON-NLS-1$//$NON-NLS-2$
+	}
+    
+	/**
+     * The same as endsWith() from {@link String}, but ignores the case.
+     *
+     * @param string to inspect
+     * @param suffix to find at the end of the string
+     * @return true/false
+     * @since 0.9.0
+     */
+	public static boolean endsWith(final String string, final String suffix) {
+		return string.matches("(?i).*" + suffix); //$NON-NLS-1$
+	}
+
+	/**
+     * The same as contains() from {@link String}, but ignores the case.
+     *
+     * @param string to inspect
+     * @param part to find in the string
+     * @return true/false
+     * @since 0.9.0
+     */
+	public static boolean contains(final String string, final String part) {
+		return string.matches("(?i).*" + part + ".*");  //$NON-NLS-1$//$NON-NLS-2$
 	}
 }

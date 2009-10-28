@@ -32,13 +32,13 @@
 package ch.sisprocom.bogatyr.helper;
 
 import javax.swing.filechooser.FileSystemView;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -55,7 +55,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -64,7 +63,7 @@ import java.util.Scanner;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091028)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -99,62 +98,6 @@ public abstract class HelperIO {
 	    file.deleteOnExit();
 	    
 	    return file;
-	}
-	
-	/**
-     * Search in a path (directory) for files and directories via identifiers and returns a {@link List} containing all {@link File}.
-     * 
-     * @param path for searching
-     * @param isExclude is the identifiers are excluded
-     * @param isCaseSensitive true/false
-     * @param isRecursive true/false
-     * @param isFile true/false
-     * @param isDirectory true/false
-     * @param identifiers of parts from the file name (if it's "null", all files will be delivered)
-     * @return List containing the matched files
-     * @see File
-     * @since 0.1.0
-     */	
-	public static List<File> getFiles(final File path, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory, final String... identifiers) { //$JUnit$
-		if (null == path) {
-			throw new IllegalArgumentException("path is null!"); //$NON-NLS-1$
-		}
-		if (!path.isDirectory()) {
-            throw new IllegalArgumentException("path is not a directory: " + path); //$NON-NLS-1$
-        }
-
-		final List<File> list = new ArrayList<File>();
-
-		getFileNamesRecursion(path, identifiers, list, isExclude, isCaseSensitive, isRecursive, isFile, isDirectory);
-
-		return list;
-	}
-
-	/**
-     * Search in a path (directory) for files and directories via identifiers and returns a {@link List} containing all {@link File}.
-     * 
-     * @param path for searching
-     * @param isExclude is the identifiers are excluded
-     * @param identifiers of parts from the file name (if it's "null", all files will be delivered)
-     * @return List containing the matched files
-     * @see File
-     * @since 0.1.0
-     */	
-	public static List<File> getFiles(final File path, final boolean isExclude, final String... identifiers) { //$JUnit$
-		return getFiles(path, isExclude, false, true, true, true, identifiers);
-	}
-	
-	/**
-     * Search in a path (directory) for files and directories via identifiers and returns a {@link List} containing all {@link File}.
-     * 
-     * @param path for searching
-     * @param identifiers of parts from the file name (if it's "null", all files will be delivered)
-     * @return List containing the matched files
-     * @see File
-     * @since 0.8.0
-     */	
-	public static List<File> getFiles(final File path, final String... identifiers) {
-		return getFiles(path, false, false, true, true, true, identifiers);
 	}
 	
 	/**
@@ -953,46 +896,41 @@ public abstract class HelperIO {
 	public static Reader convertWriterToReader(final Writer writer) {
 		return new StringReader(writer.toString());
     }
-	
-	
-	/*
-	 * Private methods
-	 */
-	/**
-     * Recursive search method for a path (directories).
-     * 
-     * @param filePath Path
-     * @param identifier array of parts from the file name (if it's "null", all files will be delivered)
-     * @param fileList
-     * @param isExclude true/false
-     * @param isCaseSensitive true/false
-     * @param isRecursive true/false
-     * @param isFile true/false
-     * @param isDirectory true/false
-     * @since 0.1.0
-     */	
-	private static void getFileNamesRecursion(final File filePath, final String[] identifier, final List<File> fileList, final boolean isExclude, final boolean isCaseSensitive, final boolean isRecursive, final boolean isFile, final boolean isDirectory) {
-		final File[] files = filePath.listFiles();
 		
-		if (files != null) {
-			for (final File file : files) {
-				if (isFile == file.isFile() || isDirectory == file.isDirectory()) {
-					if (identifier == null) {
-						fileList.add(file);
-					} else {
-						for (final String id : identifier) {
-							 if (isCaseSensitive && file.getAbsolutePath().contains(id) != isExclude || !isCaseSensitive && file.getAbsolutePath().toUpperCase(Locale.getDefault()).contains(id.toUpperCase(Locale.getDefault())) != isExclude) {
-								 fileList.add(file);
-							 }
-						}
-					}
-				}
-	//			} else if (file.isDirectory() && isRecursive) {
-					if (file.isDirectory() && isRecursive) {
-						getFileNamesRecursion(file, identifier, fileList, isExclude, isCaseSensitive, true, isFile, isDirectory); // Recursion
-					}
-	//			}
-			}
-		}
-	}
+	/**
+     * Searchs in a path (directory) for files and directories via {@link FileFilter} and returns a {@link List} containing all {@link File}.
+     * 
+     * @param path for searching
+     * @param filter for the match criterias. No filter (== null) will return all files.
+     * @param recurseDepth defines how many folder levels the recursion would pass. >= -1 always recurse, 0 only the current folder and any other value will continue recursion until 0 is hit.
+     * @return List containing the matched files
+     * @see File
+     * @see FileFilter
+     * @since 0.1.0
+     */
+    public static List<File> getFiles(final File path, final FileFilter filter, final int recurseDepth) { //$JUnit$
+        if (null == path) {
+            throw new IllegalArgumentException("path is null!"); //$NON-NLS-1$
+        }
+
+        final List<File> files = new ArrayList<File>();
+        final File[] entries = path.listFiles();
+        int recurse = recurseDepth;
+
+        if (null != entries) {
+            for (File entry : entries) {
+
+                if (filter == null || filter.accept(entry)) {
+                    files.add(entry);
+                }
+
+                if ((recurse <= -1) || (recurse > 0 && entry.isDirectory())) {
+                    recurse--;
+                    files.addAll(getFiles(entry, filter, recurse));
+                    recurse++;
+                }
+            }
+        }
+        return files;
+    }
 }
