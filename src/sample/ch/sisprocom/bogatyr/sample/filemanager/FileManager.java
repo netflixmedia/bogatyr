@@ -32,14 +32,15 @@
 package ch.sisprocom.bogatyr.sample.filemanager;
 
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
-import ch.sisprocom.bogatyr.service.localizer.LocalizerFile;
-import ch.sisprocom.bogatyr.service.localizer.Localizer;
-import ch.sisprocom.bogatyr.service.property.PropertyStream;
-import ch.sisprocom.bogatyr.service.property.Property;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.service.localizer.Localizer;
+import ch.sisprocom.bogatyr.service.localizer.LocalizerFile;
+import ch.sisprocom.bogatyr.service.property.Property;
+import ch.sisprocom.bogatyr.service.property.PropertyStream;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 
 
@@ -47,7 +48,7 @@ import java.io.IOException;
  * Simple file manager using the Bogatyr framework
  * 
  * @author Stefan Laubenberger
- * @version 20091016
+ * @version 20091028
  */
 public class FileManager extends ApplicationAbstract {
 	// Fixed parameter - e.g. this could be an argument
@@ -64,7 +65,7 @@ public class FileManager extends ApplicationAbstract {
 	private static final String	RES_DELETED = "FileManager.deleted"; //$NON-NLS-1$
 	private static final String	RES_FOUND   = "FileManager.found"; //$NON-NLS-1$
 
-	private Property property;
+	Property property;
 	private Localizer localizer;
 	
 	private File path; 
@@ -109,7 +110,13 @@ public class FileManager extends ApplicationAbstract {
 		int ii = 0;
 		final boolean isDelete = property.getBooleanValue(PROPERTY_DELETE);
 
-		for (final File file : HelperIO.getFiles(path, false, property.getValue(PROPERTY_IDENTIFIER))) {
+	    final FileFilter filter = new FileFilter() { 
+	    	public boolean accept(File file) { 
+	    		return HelperString.contains(file.getName(), property.getValue(PROPERTY_IDENTIFIER));
+	    	} 
+	    };
+
+		for (final File file : HelperIO.getFiles(path, filter, -1)) {
 			if (isDelete) {
 				HelperIO.delete(file);
 			}

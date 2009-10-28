@@ -38,20 +38,20 @@ import ch.sisprocom.bogatyr.helper.HelperString;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
 
 /**
  * This launcher opens, edits and prints files with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091028)
  * @since 0.7.0
  */
 public abstract class LauncherFile {
 	private static final File PATH = HelperEnvironment.getOsTempDirectory();
-	private static final String IDENTIFIER = LauncherFile.class.getSimpleName();
+	static final String IDENTIFIER = LauncherFile.class.getSimpleName();
 	
 	static {
 		try {
@@ -246,9 +246,13 @@ public abstract class LauncherFile {
 	 * @since 0.8.0
 	 */
 	public static void deleteTemporaryFiles() throws IOException {
-		final Collection<File> list = HelperIO.getFiles(PATH, IDENTIFIER);
+	    final FileFilter filter = new FileFilter() { 
+	    	public boolean accept(File file) { 
+	    		return file.getName().contains(IDENTIFIER);
+	    	} 
+	    }; 
 		
-		for (final File file : list) {
+		for (final File file : HelperIO.getFiles(PATH, filter, -1)) {
 			HelperIO.delete(file);
 		}
 	}
