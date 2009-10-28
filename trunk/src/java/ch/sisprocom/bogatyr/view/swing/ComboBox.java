@@ -203,7 +203,7 @@ public class ComboBox extends JComboBox implements Activatable {
 		    final Object selectedItem = model.getSelectedItem();
 
 		    // only search for a different item if the currently selected does not match
-		    if (selectedItem != null && startsWithIgnoreCase(selectedItem.toString(), pattern)) {
+		    if (selectedItem != null && HelperString.startsWith(selectedItem.toString(), pattern)) {
 		        return selectedItem;
 		    } 
 	        
@@ -213,7 +213,7 @@ public class ComboBox extends JComboBox implements Activatable {
 	            final Object currentItem = model.getElementAt(i);
 
 	            // current item starts with the pattern?
-	            if (startsWithIgnoreCase(currentItem.toString(), pattern)) {
+	            if (HelperString.startsWith(currentItem.toString(), pattern)) {
 	                return currentItem;
 	            }
 	        }
@@ -222,12 +222,6 @@ public class ComboBox extends JComboBox implements Activatable {
 		    return null;
 		}
 
-		// checks if str1 starts with str2 - ignores case
-		private static boolean startsWithIgnoreCase(final String str1, final String str2) {
-
-		    return str1.toUpperCase(Locale.getDefault()).startsWith(str2.toUpperCase(Locale.getDefault()));
-
-		}
 		
 		/*
 		 * Overridden methods
