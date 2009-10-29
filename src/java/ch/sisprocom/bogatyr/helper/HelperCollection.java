@@ -31,9 +31,11 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -41,10 +43,46 @@ import java.util.Map;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20090610)
+ * @version 0.9.0 (20091028)
  * @since 0.7.0
  */
 public abstract class HelperCollection {
+	
+	/**
+     * Returns a {@link List} with the given elements.
+     * 
+     * @param es elements for the list
+     * @return true/false
+     * @since 0.9.0
+     * @see List
+     */
+	public static <E> List<E> getList(final E...es) { //$JUnit$
+        List<E> list = new ArrayList<E>();
+        
+        for (E e : es) {
+        	list.add(e);
+        }
+        
+		return list;
+    }
+
+	/**
+     * Returns a {@link Set} with the given elements.
+     * 
+     * @param es elements for the set
+     * @return true/false
+     * @since 0.9.0
+     * @see Set
+     */
+	public static <E> Set<E> getSet(final E...es) { //$JUnit$
+        Set<E> set = new HashSet<E>();
+        
+        for (E e : es) {
+        	set.add(e);
+        }
+        
+		return set;
+    }
 	
 	/**
      * Checks if a {@link Collection} is valid.
@@ -52,6 +90,7 @@ public abstract class HelperCollection {
      * @param arg to check
      * @return true/false
      * @since 0.7.0
+     * @see Collection
      */
 	public static boolean isValid(final Collection<?> arg) { //$JUnit$
         return !(null == arg || arg.isEmpty());
@@ -63,6 +102,7 @@ public abstract class HelperCollection {
 	 * @param list containing duplicate objects
 	 * @return collection without duplicates
 	 * @since 0.7.0
+	 * @see Collection
 	 */
     public static <T> Collection<?> removeDuplicates(final Collection<T> list) { //$JUnit$
 //		return new ArrayList<T>(new HashSet<T>(list));
@@ -75,31 +115,13 @@ public abstract class HelperCollection {
      * @param list to dump
      * @return dump string
      * @since 0.7.0
+     * @see Iterable
      */
     public static String dump(final Iterable<?> list) {
         final StringBuilder sb = new StringBuilder();
 
         for (final Object value : list) {
             sb.append(value);
-            sb.append(HelperString.NEW_LINE);
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Dump a {@link Map}.
-     * 
-     * @param map to dump
-     * @return dump string
-     * @since 0.7.0
-     */
-    public static String dump(final Map<?, ?> map) {
-        final StringBuilder sb = new StringBuilder();
-
-        for (final Map.Entry<?, ?> pair : map.entrySet()) {
-            sb.append(pair.getKey());
-            sb.append('=');
-            sb.append(pair.getValue());
             sb.append(HelperString.NEW_LINE);
         }
         return sb.toString();

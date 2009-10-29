@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <jardesc>
-<jar path="/Users/slaubenberger/Desktop/Bogatyr_0.80.jar"/>
+<jar path="/Users/slaubenberger/Desktop/Bogatyr_0.90.jar"/>
 <options buildIfNeeded="true" compress="true" descriptionLocation="/Bogatyr/build/build_jar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
 <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
 <selectedProjects/>
