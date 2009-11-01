@@ -155,7 +155,7 @@ public abstract class HelperArray {
      * @return dump string
      * @since 0.7.0
      */
-    public static <T> String dump(final T[] array) {
+    public static <T> String dump(final T[] array) { //$JUnit$
 		final StringBuilder sb = new StringBuilder();
 
         int ii = 0;

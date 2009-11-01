@@ -40,7 +40,7 @@ import java.util.Collection;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.9.0 (20091102)
  * @since 0.4.0
  */
 public abstract class HelperMath {
@@ -249,7 +249,7 @@ public abstract class HelperMath {
      * @return factorial (n!) from 1 to n
      * @since 0.7.0
      */	
-	public static int factorial(final int n) {
+	public static int factorial(final int n) { //$JUnit$
         if (0 > n) {
         	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
         }
@@ -380,7 +380,7 @@ public abstract class HelperMath {
      * @return sum of odd numbers between 0 - n
      * @since 0.7.0
      */	
-	public static int sumOdd(final int n) {
+	public static int sumOdd(final int n) { //$JUnit$
         if (0 > n) {
         	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
         }
@@ -395,12 +395,17 @@ public abstract class HelperMath {
      * @return sum of even numbers between 0 - n
      * @since 0.7.0
      */	
-	public static int sumEven(final int n) {
+	public static int sumEven(final int n) { //$JUnit$
         if (0 > n) {
         	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
         }
         
-        return factorial(n) - sumOdd(n);
+        int sum = 0;
+        for (int ii = 2; ii <= n * 2; ii += 2 ) {
+        	sum += ii;
+        }
+
+        return sum;
     }
 	
 	/**
@@ -410,7 +415,7 @@ public abstract class HelperMath {
      * @return true/false
      * @since 0.7.0
      */	
-	public static boolean isOdd(final int n) {
+	public static boolean isOdd(final int n) { //$JUnit$
         return 0 != n % 2;
     }
 
@@ -421,7 +426,7 @@ public abstract class HelperMath {
      * @return true/false
      * @since 0.7.0
      */	
-	public static boolean isEven(final int n) {
+	public static boolean isEven(final int n) { //$JUnit$
         return !isOdd(n);
     }
 }

@@ -234,4 +234,58 @@ public class HelperMathTest {
 			fail(ex.getMessage());
 		}
 	}
+
+	@Test
+	public void testFactorial() {
+        assertEquals(10, HelperMath.factorial(4));
+        
+		try {
+			HelperMath.factorial(-1);
+			fail("n (-1) must be positive!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testSumOdd() {
+        assertEquals(9, HelperMath.sumOdd(3));
+        
+		try {
+			HelperMath.sumOdd(-1);
+			fail("n (-1) must be positive!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testSumEven() {
+        assertEquals(12, HelperMath.sumEven(3));
+        
+		try {
+			HelperMath.sumEven(-1);
+			fail("n (-1) must be positive!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testIsOdd() {
+        assertFalse(HelperMath.isOdd(4));
+        assertTrue(HelperMath.isOdd(3));
+	}
+	
+	@Test
+	public void testIsEven() {
+        assertTrue(HelperMath.isEven(4));
+        assertFalse(HelperMath.isEven(3));
+	}
 }

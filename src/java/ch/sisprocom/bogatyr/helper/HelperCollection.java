@@ -130,7 +130,7 @@ public abstract class HelperCollection {
      * @see Iterable
      * @since 0.7.0
      */
-    public static <E> String dump(final Iterable<E> iterable) {
+    public static <E> String dump(final Iterable<E> iterable) { //$JUnit$
         final StringBuilder sb = new StringBuilder();
 
         int ii = 0;

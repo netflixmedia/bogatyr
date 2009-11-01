@@ -29,52 +29,44 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper;
+package ch.sisprocom.bogatyr.test.helper;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.HashMap;
 import java.util.Map;
+
+import org.junit.Test;
+
+import ch.sisprocom.bogatyr.helper.HelperMap;
 
 
 /**
- * This is a helper class for maps.
+ * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
- * @since 0.9.0
+ * @version 20091101
  */
-public abstract class HelperMap {
-	/**
-     * Checks if a {@link Map} is valid.
-     * 
-     * @param arg to check
-     * @return true/false
-     * @see Map
-     * @since 0.9.0
-     */
-	public static boolean isValid(final Map<?, ?> arg) { //$JUnit$
-        return !(null == arg || arg.isEmpty());
-    }
-	
-    /**
-     * Dump a {@link Map}.
-     * 
-     * @param map to dump
-     * @return dump string
-     * @see Map
-     * @since 0.7.0
-     */
-    public static String dump(final Map<?, ?> map) { //$JUnit$
-        final StringBuilder sb = new StringBuilder();
+public class HelperMapTest {
+	@Test
+	public void testIsValid() {
+		final Map<String, String> map = new HashMap<String, String>();
 
-        int ii = 0;
-        for (final Map.Entry<?, ?> pair : map.entrySet()) {
-            if (0 < ii) {
-                sb.append(HelperString.NEW_LINE);
-            }
-            sb.append(pair.getKey());
-            sb.append('=');
-            sb.append(pair.getValue());
-        	ii++;
-        }
-        return sb.toString();
-    }
+		assertFalse(HelperMap.isValid(map));
+		map.put("Hi", "Stefan"); //$NON-NLS-1$ //$NON-NLS-2$
+		assertTrue(HelperMap.isValid(map));
+	}
+	
+	@Test
+	public void testDump() {
+		final Map<String, String> map = new HashMap<String, String>();
+
+		map.put("1", "Silvan"); //$NON-NLS-1$ //$NON-NLS-2$
+		map.put("2", "Roman"); //$NON-NLS-1$ //$NON-NLS-2$
+		map.put("3", "Stefan"); //$NON-NLS-1$ //$NON-NLS-2$
+
+		assertNotNull(HelperMap.dump(map));
+	}
 }

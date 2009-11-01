@@ -31,23 +31,28 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import ch.sisprocom.bogatyr.helper.HelperCollection;
-import static org.junit.Assert.*;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import org.junit.Test;
+
+import ch.sisprocom.bogatyr.helper.HelperCollection;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090520
+ * @version 20091101
  */
 public class HelperCollectionTest {
 	@Test
-	public void testIsValidCollection() {
+	public void testIsValid() {
 		final Collection<String> list = new ArrayList<String>();
 
 		assertFalse(HelperCollection.isValid(list));
@@ -57,14 +62,19 @@ public class HelperCollectionTest {
 	
 	@Test
 	public void testRemoveDuplicates() {
-		final Collection<String> list = new ArrayList<String>();
+		Collection<String> list = new ArrayList<String>();
 
 		assertEquals(0, HelperCollection.removeDuplicates(list).size());
-		
-		list.add("A"); //$NON-NLS-1$
-		list.add("A"); //$NON-NLS-1$
-		list.add("A"); //$NON-NLS-1$
+
+		list = HelperCollection.getList("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 		
 		assertEquals(1, HelperCollection.removeDuplicates(list).size());
+	}
+	
+	@Test
+	public void testDump() {
+		Collection<String> list = HelperCollection.getList("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+
+		assertNotNull(HelperCollection.dump(list));
 	}
 }
