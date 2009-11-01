@@ -50,7 +50,7 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091101)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -110,14 +110,14 @@ public abstract class HelperObject {
 	/**
 	 * Serialize an {@link Object} into a byte-array.
 	 * 
-	 * @param obj convert into a byte-array.
+	 * @param object to convert into a byte-array.
 	 * @return object as byte-array
 	 * @throws IOException
 	 * @see Serializable
 	 * @since 0.7.0
 	 */
-	public static byte[] serialize(final Serializable obj) throws IOException { //$JUnit$
-		if (null == obj) {
+	public static byte[] serialize(final Serializable object) throws IOException { //$JUnit$
+		if (null == object) {
 			throw new IllegalArgumentException("obj is null!"); //$NON-NLS-1$
 		}	
 
@@ -126,7 +126,7 @@ public abstract class HelperObject {
 
         try {
             oos = new ObjectOutputStream(baos);
-            oos.writeObject(obj);
+            oos.writeObject(object);
             oos.flush();
 
             return baos.toByteArray();
@@ -139,10 +139,10 @@ public abstract class HelperObject {
 	}
 	
 	/**
-	 * Deserialize a given byte-array into a valid {@link Object}.
+	 * Deserialize a given byte-array into an {@link Object}.
 	 * 
-	 * @param bytes convert into an object
-	 * @return valid object
+	 * @param byte-array to convert into an {@link Object}
+	 * @return {@link Object} from given byte-array
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @since 0.7.0
@@ -167,7 +167,7 @@ public abstract class HelperObject {
 	}
 
 	/**
-     * Checks if a class has the given method name.
+     * Checks if a {@link Class} implements the given method name.
      *
      * @param clazz for searching
      * @param methodName to check
@@ -192,7 +192,7 @@ public abstract class HelperObject {
 
 
     /**
-     * Generic toString() method for {@link Object}  and different purposes.
+     * Generic toString() method for {@link Object} and different purposes.
      * 
      * @param object to dump
      * @return dumped object string

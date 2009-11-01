@@ -44,15 +44,15 @@ import java.util.Date;
  * This interface is to generate, read and save X.509 certificates.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091019)
+ * @version 0.9.0 (20091101)
  * @since 0.6.0
  */
 public interface CertificateProvider { //$Example$
 	/**
-     * Reads the {@link X509Certificate} out of the given certificate {@link File}.
+     * Reads the {@link X509Certificate} out of the given {@link File}.
      * 
-     * @param file containing the certificate
-     * @return certificate
+     * @param file containing the {@link X509Certificate}
+     * @return {@link X509Certificate}
      * @throws Exception
      * @see File
      * @see X509Certificate
@@ -61,10 +61,10 @@ public interface CertificateProvider { //$Example$
     X509Certificate readCertificate(File file) throws Exception;
     
     /**
-     * Reads the {@link X509Certificate} out of the given certificate {@link InputStream}.
+     * Reads the {@link X509Certificate} out of the given {@link InputStream}.
      * 
-     * @param is input stream containing the certificate
-     * @return certificate
+     * @param is {@link InputStream} containing the {@link X509Certificate}
+     * @return {@link X509Certificate}
      * @throws Exception
      * @see InputStream
      * @see X509Certificate
@@ -73,10 +73,10 @@ public interface CertificateProvider { //$Example$
     X509Certificate readCertificate(InputStream is) throws Exception;
     
     /**
-     * Writes the {@link Certificate} on a {@link OutputStream}.
+     * Writes the {@link Certificate} on an {@link OutputStream}.
      * 
-     * @param os output stream for the certificate
-     * @param cert certificate
+     * @param os {@link OutputStream} for the {@link Certificate}
+     * @param cert {@link Certificate}
      * @throws Exception
      * @see OutputStream
      * @see Certificate 
@@ -87,8 +87,8 @@ public interface CertificateProvider { //$Example$
     /**
      * Writes the {@link Certificate} in a {@link File}.
      * 
-     * @param file for the certificate
-     * @param cert certificate
+     * @param file for the {@link Certificate}
+     * @param cert {@link Certificate}
      * @throws Exception 
      * @see File
      * @see Certificate 
@@ -99,14 +99,16 @@ public interface CertificateProvider { //$Example$
     /**
      * Generate a {@link X509Certificate} out of the given {@link KeyPair} and parameters.
      * 
-     * @param pair the keypair for the certificate
+     * @param pair {@link KeyPair} for the {@link X509Certificate}
      * @param issuerDN e.g. "CN=Test Certificate"
      * @param subjectDN e.g. "CN=Test Certificate"
-     * @param generalName of the certificate owner (e.g. yourmail@gmail.com)
-     * @param start date of the certificate
-     * @param end date of the certificate
-     * @return certificate
+     * @param generalName of the {@link X509Certificate} owner (e.g. yourmail@gmail.com)
+     * @param start date of the {@link X509Certificate}
+     * @param end date of the {@link X509Certificate}
+     * @return {@link X509Certificate}
      * @throws Exception
+     * @see KeyPair
+     * @see X509Certificate
      * @since 0.6.0 
      */
     X509Certificate generateCertificate(KeyPair pair, String issuerDN, String subjectDN, String generalName, Date start, Date end) throws Exception;

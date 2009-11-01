@@ -40,14 +40,14 @@ import java.util.Locale;
  * Defines the methods for the implementation of the localizer for different languages (i18n standard).
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.9.0 (20091101)
  * @since 0.6.0
  */
 public interface Localizer {
 	/**
 	 * Returns the current locale {@link Locale} of the localizer.
 	 * 
-	 * @return current locale of the localizer
+	 * @return current {@link Locale} of the localizer
 	 * @see Locale
 	 * @since 0.6.0
 	 */
@@ -75,7 +75,7 @@ public interface Localizer {
 	 * Returns the accelerator ({@link KeyStroke}) for a key.
 	 *
      * @param key for the accelerator
-     * @return accelerator for the key
+     * @return accelerator ({@link KeyStroke}) for the key
      * @see KeyStroke
      * @since 0.6.0
 	 */

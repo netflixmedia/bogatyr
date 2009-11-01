@@ -53,7 +53,7 @@ import java.util.List;
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091101)
  * @since 0.5.0
  */
 public abstract class HelperNet {
@@ -267,7 +267,7 @@ public abstract class HelperNet {
     /**
      * Returns all IP addresses of the current machine.
      *
-     * @return List with IP addresses of the current machine
+     * @return {@link Collection} with IP addresses of the current machine
      * @throws UnknownHostException
      * @since 0.5.0
      */
@@ -284,7 +284,7 @@ public abstract class HelperNet {
     /**
      * Returns all network interfaces of the current machine.
      *
-     * @return List with network interfaces of the current machine
+     * @return {@link List} with network interfaces of the current machine
      * @throws SocketException
      * @see NetworkInterface
      * @since 0.5.0
@@ -296,8 +296,8 @@ public abstract class HelperNet {
     /**
      * Returns the MAC address of a given network interface.
      *
-     * @param ni network interface to determine the MAC address
-     * @return MAC address of a given network interface
+     * @param ni {@link NetworkInterface} to determine the MAC address
+     * @return MAC address of a given {@link NetworkInterface}
      * @throws SocketException
      * @see NetworkInterface
      * @since 0.7.0
@@ -323,7 +323,7 @@ public abstract class HelperNet {
      * Returns an {@link InputStream} linked to an {@link URL}.
      *
      * @param url to read
-     * @return input stream for the content
+     * @return {@link InputStream} for the content
      * @throws IOException
      * @see URL
      * @see InputStream
@@ -347,7 +347,7 @@ public abstract class HelperNet {
      * @param url to read
      * @param username for the HTTP authentication
      * @param password for the HTTP authentication
-     * @return input stream for the content
+     * @return {@link InputStream} for the content
      * @throws IOException
      * @see URL
      * @see InputStream

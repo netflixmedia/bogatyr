@@ -46,7 +46,7 @@ import java.io.InputStream;
  * This launcher opens, edits and prints files with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091028)
+ * @version 0.9.0 (20091101)
  * @since 0.7.0
  */
 public abstract class LauncherFile {
@@ -247,12 +247,13 @@ public abstract class LauncherFile {
 	 */
 	public static void deleteTemporaryFiles() throws IOException {
 	    final FileFilter filter = new FileFilter() { 
-	    	public boolean accept(File file) { 
+	    	@Override
+            public boolean accept(final File file) {
 	    		return file.getName().contains(IDENTIFIER);
 	    	} 
 	    }; 
 		
-		for (final File file : HelperIO.getFiles(PATH, filter, -1)) {
+		for (final File file : HelperIO.getFiles(PATH, filter)) {
 			HelperIO.delete(file);
 		}
 	}

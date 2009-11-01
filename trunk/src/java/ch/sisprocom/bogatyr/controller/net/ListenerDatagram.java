@@ -32,14 +32,13 @@
 package ch.sisprocom.bogatyr.controller.net;
 
 import java.net.DatagramPacket;
-import java.net.Socket;
 
 /**
  * ListenerDatagram
  * 
  * @author Stefan Laubenberger
- * @version 0.80 (20090527)
- * @since 0.80
+ * @version 0.9.0 (20091101)
+ * @since 0.8.0
  */
 public interface ListenerDatagram {
 	/**
@@ -48,7 +47,7 @@ public interface ListenerDatagram {
 	 * @param host of the received packet
 	 * @param port of the received packet
 	 * @param data as ASCII encoded string
-	 * @param packet the UDP packet
+	 * @param packet {@link DatagramPacket}
 	 * @see DatagramPacket
 	 * @since 0.8.0
 	 */

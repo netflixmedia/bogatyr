@@ -41,14 +41,14 @@ import java.security.Key;
  * This is an interface for symmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091019)
+ * @version 0.9.0 (20091101)
  * @since 0.6.0
  */
 public interface CryptoSymmetric { //$Example$
 	/**
 	 * Generates a {@link SecretKey} with the algorithms standard key size.
 	 * 
-     * @return generated secret key
+     * @return generated {@link SecretKey}
 	 * @throws Exception 
 	 * @see SecretKey 
 	 * @since 0.6.0
@@ -59,7 +59,7 @@ public interface CryptoSymmetric { //$Example$
 	 * Generates a {@link SecretKey} with a given key size.
 	 * 
 	 * @param keySize in bits (e.g. 128, 192 or 256)
-     * @return generated secret key
+     * @return generated {@link SecretKey}
 	 * @throws Exception 
 	 * @see SecretKey 
 	 * @since 0.6.0
@@ -91,10 +91,10 @@ public interface CryptoSymmetric { //$Example$
 	byte[] decrypt(byte[] input, Key key) throws Exception;
 	
 	/**
-	 * Encrypt an input stream {@link InputStream} to an output stream {@link OutputStream} with a given {@link Key} and the implementations algorithm.
+	 * Encrypt an {@link InputStream} to an {@link OutputStream} with a given {@link Key} and the implementations algorithm.
 	 * 
-	 * @param is input stream to encrypt
-	 * @param os output stream for the encrypted data
+	 * @param is {@link InputStream} to encrypt
+	 * @param os {@link OutputStream} for the encrypted data
 	 * @param key for the encryption
 	 * @throws Exception 
 	 * @see InputStream
@@ -105,10 +105,10 @@ public interface CryptoSymmetric { //$Example$
 	void encrypt(InputStream is, OutputStream os, Key key) throws Exception;
 
 	/**
-	 * Encrypt an input stream {@link InputStream} to an output stream {@link OutputStream} with a given {@link Key} and the implementations algorithm.
+	 * Encrypt an {@link InputStream} to an {@link OutputStream} with a given {@link Key} and the implementations algorithm.
 	 * 
-	 * @param is input stream to encrypt
-	 * @param os output stream for the encrypted data
+	 * @param is {@link InputStream} to encrypt
+	 * @param os {@link OutputStream} for the encrypted data
 	 * @param key for the encryption
 	 * @param bufferSize in bytes
 	 * @throws Exception 
@@ -120,10 +120,10 @@ public interface CryptoSymmetric { //$Example$
     void encrypt(InputStream is, OutputStream os, Key key, int bufferSize) throws Exception;
 
 	/**
-	 * Decrypt an input stream {@link InputStream} to an output stream {@link OutputStream} with a given {@link Key} and the implementations algorithm.
+	 * Decrypt an {@link InputStream} to an {@link OutputStream} with a given {@link Key} and the implementations algorithm.
 	 * 
-	 * @param is input stream to decrypt
-	 * @param os output stream for the decrypted data
+	 * @param is {@link InputStream} to decrypt
+	 * @param os {@link OutputStream} for the decrypted data
 	 * @param key for the decryption
 	 * @throws Exception 
 	 * @see InputStream
@@ -134,10 +134,10 @@ public interface CryptoSymmetric { //$Example$
     void decrypt(InputStream is, OutputStream os, Key key) throws Exception;
 
 	/**
-	 * Decrypt an input stream {@link InputStream} to an output stream {@link OutputStream} with a given {@link Key} and the implementations algorithm.
+	 * Decrypt an {@link InputStream} to an {@link OutputStream} with a given {@link Key} and the implementations algorithm.
 	 * 
-	 * @param is input stream to decrypt
-	 * @param os output stream for the decrypted data
+	 * @param is {@link InputStream} to decrypt
+	 * @param os {@link OutputStream} for the decrypted data
 	 * @param key for the decryption
 	 * @param bufferSize in bytes
 	 * @throws Exception 
@@ -149,10 +149,10 @@ public interface CryptoSymmetric { //$Example$
     void decrypt(InputStream is, OutputStream os, Key key, int bufferSize) throws Exception;
     
 	/**
-	 * Encrypt an input file {@link File} to an output file with a given {@link Key} and the implementations algorithm.
+	 * Encrypt an input {@link File} to an output {@link File} with a given {@link Key} and the implementations algorithm.
 	 * 
-	 * @param input file to encrypt
-	 * @param output file for the encrypted data
+	 * @param input {@link File} to encrypt
+	 * @param output {@link File} for the encrypted data
 	 * @param key for the encryption
 	 * @throws Exception 
 	 * @see File
@@ -162,10 +162,10 @@ public interface CryptoSymmetric { //$Example$
 	void encrypt(File input, File output, Key key) throws Exception;
 
 	/**
-	 * Encrypt an input file {@link File} to an output file with a given {@link Key} and the implementations algorithm.
+	 * Encrypt an input {@link File} to an output {@link File} with a given {@link Key} and the implementations algorithm.
 	 * 
-	 * @param input file to encrypt
-	 * @param output file for the encrypted data
+	 * @param input {@link File} to encrypt
+	 * @param output {@link File} for the encrypted data
 	 * @param key for the encryption
 	 * @param bufferSize in bytes
 	 * @throws Exception 
@@ -176,10 +176,10 @@ public interface CryptoSymmetric { //$Example$
     void encrypt(File input, File output, Key key, int bufferSize) throws Exception;
 
 	/**
-	 * Decrypt an input file {@link File} to an output file with a given {@link Key} and the implementations algorithm.
+	 * Decrypt an input {@link File} to an output {@link File} with a given {@link Key} and the implementations algorithm.
 	 * 
-	 * @param input file to decrypt
-	 * @param output file for the decrypted data
+	 * @param input {@link File} to decrypt
+	 * @param output {@link File} for the decrypted data
 	 * @param key for the decryption
 	 * @throws Exception 
 	 * @see File
@@ -189,10 +189,10 @@ public interface CryptoSymmetric { //$Example$
     void decrypt(File input, File output, Key key) throws Exception;
 
 	/**
-	 * Decrypt an input file {@link File} to an output file with a given {@link Key} and the implementations algorithm.
+	 * Decrypt an input {@link File} to an output {@link File} with a given {@link Key} and the implementations algorithm.
 	 * 
-	 * @param input file to decrypt
-	 * @param output file for the decrypted data
+	 * @param input {@link File} to decrypt
+	 * @param output {@link File} for the decrypted data
 	 * @param key for the decryption
 	 * @param bufferSize in bytes
 	 * @throws Exception 

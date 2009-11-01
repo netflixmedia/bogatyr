@@ -60,7 +60,7 @@ import java.util.TimerTask;
  * This is a helper class for sound operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.9.0 (20091101)
  * @since 0.5.0
  */
 public abstract class HelperSound {
@@ -69,7 +69,7 @@ public abstract class HelperSound {
      * Returns an audio {@link Clip} from a {@link File} (e.g. "wav").
      *
      * @param file for audio clip
-     * @return Audio clip
+     * @return Audio {@link Clip}
      * @throws IOException
      * @throws LineUnavailableException
      * @throws UnsupportedAudioFileException
@@ -88,8 +88,8 @@ public abstract class HelperSound {
     /**
      * Returns an audio {@link Clip} from a {@link InputStream}.
      *
-     * @param is stream for audio clip
-     * @return Audio clip
+     * @param is {@link InputStream} for audio clip
+     * @return Audio {@link Clip}
      * @throws IOException
      * @throws LineUnavailableException
      * @throws UnsupportedAudioFileException
@@ -109,7 +109,7 @@ public abstract class HelperSound {
      * Returns a {@link Sequence} from a {@link File} (e.g. "mid").
      *
      * @param file for sequence
-     * @return Audio sequence
+     * @return Audio {@link Sequence}
      * @throws IOException
      * @throws InvalidMidiDataException
      * @see File
@@ -127,8 +127,8 @@ public abstract class HelperSound {
     /**
      * Returns a {@link Sequence} from a {@link InputStream}.
      *
-     * @param is stream for sequence
-     * @return Audio sequence
+     * @param is {@link InputStream} for sequence
+     * @return Audio {@link Sequence}
      * @throws IOException
      * @throws InvalidMidiDataException
      * @see InputStream
@@ -146,8 +146,8 @@ public abstract class HelperSound {
     /**
      * Returns a {@link Sequencer} to play a {@link Sequence}.
      *
-     * @param sequence for sequencer
-     * @return MIDI sequencer
+     * @param sequence for {@link Sequencer}
+     * @return MIDI {@link Sequencer}
      * @throws MidiUnavailableException
      * @throws InvalidMidiDataException
      * @see Sequence
@@ -227,7 +227,7 @@ public abstract class HelperSound {
     /**
      * Returns all available audio formats of the current machine (e.g. "aiff", "wave").
      *
-     * @return List of all available audio formats of the current machine
+     * @return {@link Collection} containing all available audio {@link Type} of the current machine
      * @see Type
      * @since 0.5.0
      */

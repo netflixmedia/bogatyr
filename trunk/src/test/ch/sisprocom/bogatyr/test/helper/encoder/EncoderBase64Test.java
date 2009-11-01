@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091016
+ * @version 20091101
  */
 public class EncoderBase64Test {
 	@Test
@@ -83,7 +83,7 @@ public class EncoderBase64Test {
 		}
 
 		try {
-			EncoderBase64.decode(new char[0]);
+			EncoderBase64.decode(HelperArray.EMPTY_ARRAY_CHAR);
 			fail("char[] is empty!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

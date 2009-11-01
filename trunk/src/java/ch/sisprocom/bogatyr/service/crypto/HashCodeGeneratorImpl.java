@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.crypto;
 
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.encoder.EncoderHex;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
@@ -48,7 +49,7 @@ import java.security.NoSuchAlgorithmException;
  * This is an abstract implementation for hash code generation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
+ * @version 0.9.0 (20091101)
  * @since 0.9.0
  */
 public abstract class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
@@ -99,8 +100,11 @@ public abstract class HashCodeGeneratorImpl extends ServiceAbstract implements H
         if (null == is) {
             throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
         }
-        if (bufferSize < 1) {
+        if (1 > bufferSize) {
             throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+        if (bufferSize > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
         final MessageDigest md = MessageDigest.getInstance(hashCode.getAlgorithm());

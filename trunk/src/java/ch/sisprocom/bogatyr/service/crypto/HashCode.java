@@ -37,18 +37,18 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * Hash codes available in BouncyCastle
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091025)
+ * @version 0.9.0 (20091101)
  * @since 0.9.0
  */
 public enum HashCode {
-	MD5("MD5"),
-	SHA1("SHA1"),
-	SHA256("SHA256"),
-	SHA512("SHA512"),
-	RIPEMD160("RIPEMD160"),
-	RIPEMD320("RIPEMD320"),
-	TIGER("Tiger"),
-	WHIRLPOOL("WHIRLPOOL");
+	MD5("MD5"), //$NON-NLS-1$
+	SHA1("SHA1"), //$NON-NLS-1$
+	SHA256("SHA256"), //$NON-NLS-1$
+	SHA512("SHA512"), //$NON-NLS-1$
+	RIPEMD160("RIPEMD160"), //$NON-NLS-1$
+	RIPEMD320("RIPEMD320"), //$NON-NLS-1$
+	TIGER("Tiger"), //$NON-NLS-1$
+	WHIRLPOOL("WHIRLPOOL"); //$NON-NLS-1$
 
 	private final String algorithm;
 	

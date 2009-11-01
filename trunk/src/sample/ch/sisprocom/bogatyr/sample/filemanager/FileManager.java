@@ -48,7 +48,7 @@ import java.io.IOException;
  * Simple file manager using the Bogatyr framework
  * 
  * @author Stefan Laubenberger
- * @version 20091028
+ * @version 20091101
  */
 public class FileManager extends ApplicationAbstract {
 	// Fixed parameter - e.g. this could be an argument
@@ -111,12 +111,13 @@ public class FileManager extends ApplicationAbstract {
 		final boolean isDelete = property.getBooleanValue(PROPERTY_DELETE);
 
 	    final FileFilter filter = new FileFilter() { 
-	    	public boolean accept(File file) { 
+	    	@Override
+            public boolean accept(final File file) {
 	    		return HelperString.contains(file.getName(), property.getValue(PROPERTY_IDENTIFIER));
 	    	} 
 	    };
 
-		for (final File file : HelperIO.getFiles(path, filter, -1)) {
+		for (final File file : HelperIO.getFiles(path, filter)) {
 			if (isDelete) {
 				HelperIO.delete(file);
 			}

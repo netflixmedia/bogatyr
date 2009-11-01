@@ -38,7 +38,7 @@ import java.util.Map;
  * This is a helper class for maps.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091029)
+ * @version 0.9.0 (20091101)
  * @since 0.9.0
  */
 public abstract class HelperMap {
@@ -47,8 +47,8 @@ public abstract class HelperMap {
      * 
      * @param arg to check
      * @return true/false
-     * @since 0.9.0
      * @see Map
+     * @since 0.9.0
      */
 	public static boolean isValid(final Map<?, ?> arg) { //$JUnit$
         return !(null == arg || arg.isEmpty());
@@ -59,8 +59,8 @@ public abstract class HelperMap {
      * 
      * @param map to dump
      * @return dump string
-     * @since 0.7.0
      * @see Map
+     * @since 0.7.0
      */
     public static String dump(final Map<?, ?> map) {
         final StringBuilder sb = new StringBuilder();

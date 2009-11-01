@@ -57,7 +57,7 @@ import java.util.Map;
  * This is a helper class for PDF operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.9.0 (20091101)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -152,15 +152,15 @@ public abstract class HelperPdf {
      * metadata.put("Creator", "http://www.sisprocom.ch/");
      * metadata.put("Producer", "Silvan Spross");
      * 
-     * @param source file
-     * @param dest file for the modified PDF
+     * @param source {@link File}
+     * @param dest {@link File} for the modified PDF
      * @param metadata list with the new meta data informations
      * @throws DocumentException
      * @throws IOException
      * @since 0.7.0
      */
 	@SuppressWarnings("unchecked")
-	public static void setMetaData(final String source, final String dest, final Map<String,String> metadata) throws IOException, DocumentException {
+	public static void setMetaData(final String source, final String dest, final Map<String, String> metadata) throws IOException, DocumentException {
 		PdfReader reader = null;
 		PdfStamper stamper = null;
 		

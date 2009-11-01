@@ -47,7 +47,7 @@ import java.util.zip.ZipOutputStream;
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091101)
  * @since 0.3.0
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
@@ -82,7 +82,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 		if (!HelperArray.isValid(files)) {
 			throw new IllegalArgumentException("files is null or empty!"); //$NON-NLS-1$
 		}
-        if (bufferSize < 1) {
+        if (1 > bufferSize) {
             throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
@@ -159,7 +159,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 		if (null == destinationDirectory) {
 			throw new IllegalArgumentException("destinationDirectory is null!"); //$NON-NLS-1$
 		}
-        if (bufferSize < 1) {
+        if (1 > bufferSize) {
             throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
         }
 

@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.crypto;
 
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -64,7 +65,7 @@ import java.security.spec.AlgorithmParameterSpec;
  * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
+ * @version 0.9.0 (20091101)
  * @since 0.1.0
  */
 public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
@@ -154,7 +155,7 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	}
 
     @Override
-    public void encrypt(final InputStream is, OutputStream os, final Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
+    public void encrypt(final InputStream is, final OutputStream os, final Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
     	encrypt(is, os, key, DEFAULT_BUFFER_SIZE);
     }
 
@@ -169,8 +170,11 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
         if (null == key) {
             throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
         }
-        if (bufferSize < 1) {
+        if (1 > bufferSize) {
             throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+        if (bufferSize > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
         final byte[] buffer = new byte[bufferSize];
@@ -200,14 +204,17 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
         if (null == key) {
             throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
         }
-        if (bufferSize < 1) {
+        if (1 > bufferSize) {
             throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+        if (bufferSize > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
         final byte[] buffer = new byte[bufferSize];
 
         try {
-        	CipherInputStream cis = new CipherInputStream(is, getCipherDecrypt(key));
+        	final CipherInputStream cis = new CipherInputStream(is, getCipherDecrypt(key));
 	
 	        int offset  ;
 	        while (0 <= (offset = cis.read(buffer))) {
