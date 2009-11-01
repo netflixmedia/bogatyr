@@ -21,46 +21,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoAES.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoAES.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/property/Property.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/property/Property.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/ModelAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/ModelAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperNet.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperNet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/localizer/Localizer.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/localizer/Localizer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCode.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperIO.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperIO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperCrypto.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperCrypto.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/ListenerDatagram.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/ListenerDatagram.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperEnvironment.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperEnvironment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoSymmetric.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoSymmetric.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperImage.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/swing/ComboBox.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/swing/ComboBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperString.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperString.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperArray.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperArray.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperGraphic.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperGraphic.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperXml.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperXml.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/ch/sisprocom/bogatyr/sample/filemanager/FileManager.java" afterPath="$PROJECT_DIR$/src/sample/ch/sisprocom/bogatyr/sample/filemanager/FileManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCodeGenerator.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCodeGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/ch/sisprocom/bogatyr/test/helper/encoder/EncoderBase64Test.java" afterPath="$PROJECT_DIR$/src/test/ch/sisprocom/bogatyr/test/helper/encoder/EncoderBase64Test.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/Constants.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/Constants.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperMap.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCodeGeneratorImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCodeGeneratorImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoAsymmetric.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoAsymmetric.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/Server.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/Server.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperObject.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/KeyWrapper.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/KeyWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperCompress.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperCompress.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/MANIFEST.MF" afterPath="$PROJECT_DIR$/build/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/Client.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/ch/sisprocom/util/CheckExample.java" afterPath="$PROJECT_DIR$/src/util/ch/sisprocom/util/CheckExample.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperSound.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperSound.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CertificateProvider.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CertificateProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumperImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumperImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/ch/sisprocom/util/CheckJUnit.java" afterPath="$PROJECT_DIR$/src/util/ch/sisprocom/util/CheckJUnit.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperCollection.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperCollection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/launcher/LauncherMail.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/launcher/LauncherMail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThread.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperPdf.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperPdf.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/launcher/LauncherFile.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/launcher/LauncherFile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperArray.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperIO.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperIO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="Bogatyr.iws" />
@@ -1071,7 +1037,7 @@
     <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="-JavaDoc improvments&#10;-Code analysis and improvements" />
+    <option name="LAST_COMMIT_MESSAGE" value="-JavaDoc bugs fixed" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -1096,6 +1062,7 @@
     <MESSAGE value="-String functions replaced by HelperSring version" />
     <MESSAGE value="-HelperMap added&#10;&#10;HelperCollection:&#10;-method getList(varargs) added&#10;-method getSet(varargs) added&#10;" />
     <MESSAGE value="-JavaDoc improvments&#10;-Code analysis and improvements" />
+    <MESSAGE value="-JavaDoc bugs fixed" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />

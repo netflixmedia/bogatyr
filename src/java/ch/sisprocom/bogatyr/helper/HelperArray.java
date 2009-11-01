@@ -158,10 +158,14 @@ public abstract class HelperArray {
     public static <T> String dump(final T[] array) {
 		final StringBuilder sb = new StringBuilder();
 
-		for (final T element : array) {
-            sb.append(element);
-            sb.append(HelperString.NEW_LINE);
+        int ii = 0;
+        for (final T element : array) {
+            if (0 < ii) {
+                sb.append(HelperString.NEW_LINE);
+            }
+        	sb.append(element);
+        	ii++;
         }
-		return sb.toString();
+        return sb.toString();
     }
 }
