@@ -33,7 +33,6 @@ package ch.sisprocom.bogatyr.helper;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -44,7 +43,7 @@ import java.util.TimeZone;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091101)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -156,7 +155,7 @@ public abstract class HelperEnvironment {
 		field.setAccessible(true);
 		final String[] paths = (String[])field.get(null);
 
-        for (String path1 : paths) {
+        for (final String path1 : paths) {
             if (location.equals(path1)) {
                 return;
             }
@@ -214,17 +213,19 @@ public abstract class HelperEnvironment {
 	/**
 	 * Returns a {@link Map} containing containing all Java system properties.
 	 *
-	 * @return map of all Java system properties
+	 * @return {@link Map} of all Java system properties
+	 * @see Map
 	 * @since 0.1.0
 	 */
 	public static Map<Object, Object> getJavaProperties() {
-		return new HashMap<Object, Object>(System.getProperties());
+		return System.getProperties();
     }
 	
 	/**
 	 * Returns a {@link Map} containing all system environment variables.
 	 *
-	 * @return map of system environment variables
+	 * @return {@link Map} of system environment variables
+	 * @see Map
 	 * @since 0.1.0
 	 */
 	public static Map<String, String> getOsEnvironmentVariables() { //$JUnit$
@@ -306,14 +307,13 @@ public abstract class HelperEnvironment {
 	}
 	
 	/**
-	 * Returns the time zone of the current user.
+	 * Returns the {@link TimeZone} of the current user.
 	 *
-	 * @return time zone of the current user
+	 * @return {@link TimeZone} of the current user
 	 * @see TimeZone
 	 * @since 0.7.0
 	 */
 	public static TimeZone getUserTimezone() {
-//		return System.getProperty("user.timezone"); //$NON-NLS-1$
 		return TimeZone.getDefault();
 		
 	}
@@ -321,7 +321,7 @@ public abstract class HelperEnvironment {
 	/**
 	 * Try to determine if this application is running under a Windows OS.
 	 *
-	 * @return true if this application is running under a Windows OS
+	 * @return true/false
 	 * @since 0.1.0
 	 */
 	public static boolean isWindowsPlatform() { //$JUnit$
@@ -331,7 +331,7 @@ public abstract class HelperEnvironment {
 	/**
 	 * Try to determine if this application is running under Mac OS.
 	 *
-	 * @return true if this application is running under Mac OS
+	 * @return true/false
 	 * @since 0.1.0
 	 */
 	public static boolean isMacPlatform() { //$JUnit$
@@ -341,7 +341,7 @@ public abstract class HelperEnvironment {
 	/**
 	 * Try to determine if this application is running under a UNIX OS.
 	 *
-	 * @return true if this application is running under UNIX
+	 * @return true/false
 	 * @since 0.1.0
 	 */
 	public static boolean isUnixPlatform() { //$JUnit$

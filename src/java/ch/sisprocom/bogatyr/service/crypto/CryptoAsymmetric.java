@@ -39,14 +39,14 @@ import java.security.PublicKey;
  * This is an interface for asymmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091019)
+ * @version 0.9.0 (20091101)
  * @since 0.6.0
  */
 public interface CryptoAsymmetric { //$Example$
 	/**
 	 * Generates a public and a private {@link KeyPair} with the algorithms standard key size.
 	 * 
-	 * @return generated key pair
+	 * @return generated {@link KeyPair}
 	 * @throws Exception
 	 * @see KeyPair
 	 * @since 0.6.0
@@ -57,7 +57,7 @@ public interface CryptoAsymmetric { //$Example$
 	 * Generates a public and a private {@link KeyPair} with a given key size.
 	 * 
 	 * @param keysize in bits (normally modulo 16 = 0, e.g. 1024, 2048)
-	 * @return generated key pair
+	 * @return generated {@link KeyPair}
 	 * @throws Exception
 	 * @see KeyPair
 	 * @since 0.6.0

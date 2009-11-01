@@ -44,14 +44,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Locale;
 
 
 /**
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091101)
  * @since 0.2.0
  */
 public class ComboBox extends JComboBox implements Activatable {

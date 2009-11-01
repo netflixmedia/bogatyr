@@ -38,7 +38,7 @@ import java.util.UUID;
  * This is a helper class for cryptography (e.g. random keys).
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.9.0 (20091101)
  * @since 0.7.0
  */
 public abstract class HelperCrypto {
@@ -83,9 +83,10 @@ public abstract class HelperCrypto {
     }
 
     /**
-     * Generates an universally unique identifier (UUID).
+     * Generates an universally unique identifier ({@link UUID}).
      *
-     * @return generated universally unique identifier
+     * @return generated {@link UUID}
+     * @see UUID
      * @since 0.7.0
      */
     public static UUID getUUID() { //$JUnit$

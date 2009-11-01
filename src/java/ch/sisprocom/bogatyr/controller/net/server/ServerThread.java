@@ -40,14 +40,14 @@ import java.net.Socket;
  * Defines the methods for the implementation of the server thread.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091101)
  * @since 0.7.0
  */
 public interface ServerThread extends Runnable {
 	/**
 	 * Returns the current {@link Socket} of the thread.
 	 * 
-	 * @return socket
+	 * @return {@link Socket}
 	 * @see Socket
 	 * @since 0.7.0
 	 */

@@ -46,7 +46,7 @@ import java.util.HashSet;
  * This is a datagram dumper to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091101)
  * @since 0.8.0
  */
 public class DatagramDumperImpl implements DatagramDumper {
@@ -180,7 +180,7 @@ public class DatagramDumperImpl implements DatagramDumper {
 	@Override
 	public void run() {
 		try	{
-			while(!getThread().isInterrupted()) {
+			while(!thread.isInterrupted()) {
 				socket.receive(packet);
 				
 				firePacketReceived(packet.getAddress().getHostAddress(), port, HelperString.toString(buffer, packet.getLength(), Constants.ENCODING_ASCII), packet);

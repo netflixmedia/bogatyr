@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.helper.launcher.LauncherFile;
  * To find such classes and methods, it must be marked with $JUnit$.
  *
  * @author Stefan Laubenberger
- * @version 20091028
+ * @version 20091101
  */
 public class CheckJUnit {
 	private static final String MARKER = "$JUnit$"; //$NON-NLS-1$
@@ -94,7 +94,7 @@ public class CheckJUnit {
         	    	} 
         	    };
         	    
-        	    final Collection<File>listJava = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), filter, -1);
+        	    final Collection<File>listJava = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), filter);
 		
 				HelperIO.writeLine(output, HelperString.concatenate(HelperString.SEMICOLON, "Class", "Method/Variable"));  //$NON-NLS-1$//$NON-NLS-2$
 				

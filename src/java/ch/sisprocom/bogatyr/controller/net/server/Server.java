@@ -42,7 +42,7 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091015)
+ * @version 0.9.0 (20091101)
  * @since 0.7.0
  */
 public interface Server extends Runnable {
@@ -50,7 +50,7 @@ public interface Server extends Runnable {
 	/**
 	 * Returns the {@link ServerSocket} of the current server.
 	 * 
-	 * @return server-side socket
+	 * @return {@link ServerSocket}
 	 * @see ServerSocket
 	 * @since 0.7.0
 	 */
@@ -115,7 +115,7 @@ public interface Server extends Runnable {
 	/**
 	 * Returns all server threads.
 	 * 
-	 * @return list containing all server threads
+	 * @return {@link Collection} containing all {@link ServerThread}
 	 * @since 0.8.0
 	 */
 	Collection<ServerThread> getServerThreads();

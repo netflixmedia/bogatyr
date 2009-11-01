@@ -40,7 +40,7 @@ import java.net.Socket;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091015)
+ * @version 0.9.0 (20091101)
  * @since 0.7.0
  */
 public interface Client extends Runnable {
@@ -80,7 +80,7 @@ public interface Client extends Runnable {
 	/**
 	 * Returns the current {@link Socket} of the client.
 	 * 
-	 * @return socket
+	 * @return {@link Socket} of the client
 	 * @since 0.7.0
 	 */
 	Socket getSocket();

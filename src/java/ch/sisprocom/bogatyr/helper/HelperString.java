@@ -40,7 +40,7 @@ import java.math.BigDecimal;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091028)
+ * @version 0.9.0 (20091101)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -92,7 +92,7 @@ public abstract class HelperString {
      * 
      * @param fillChar char to fill the string
      * @param fillLength length of the filled string 
-     * @return filled string
+     * @return filled {@link CharSequence}
      * @since 0.7.0
      */
     public static CharSequence fillString(final char fillChar, final int fillLength) { //$JUnit$
@@ -113,8 +113,8 @@ public abstract class HelperString {
     /**
      * Reverses a {@link String}.
      * 
-     * @param input string
-     * @return reversed string
+     * @param input {@link String}
+     * @return reversed {@link String}
      * @since 0.7.0
      */
     public static String reverseString(final String input) { //$JUnit$
@@ -128,8 +128,8 @@ public abstract class HelperString {
     /**
      * Clean a {@link String} to numeric chars.
      * 
-     * @param text string
-     * @return numeric string
+     * @param text {@link String}
+     * @return numeric {@link String}
      * @since 0.7.0
      */
     public static String getValidNumericString(final String text) { //$JUnit$
@@ -175,7 +175,7 @@ public abstract class HelperString {
      * @param separator between the strings
      * @param isTrimmed true/false
      * @param strings to concatenate
-     * @return concatenated string
+     * @return concatenated {@link String}
      * @since 0.7.0
      */
     public static String concatenate(final String separator, final boolean isTrimmed, final String... strings) {
@@ -206,7 +206,7 @@ public abstract class HelperString {
      *
      * @param separator between the strings
      * @param strings to concatenate
-     * @return concatenated string
+     * @return concatenated {@link String}
      * @since 0.8.0
      */
     public static String concatenate(final String separator, final String... strings) {
@@ -216,10 +216,10 @@ public abstract class HelperString {
     /**
      * Returns a {@link String} from a given byte-array and encoding.
      *
-     * @param data for the string
-     * @param length of the string
+     * @param data for the {@link String}
+     * @param length of the {@link String}
      * @param encoding of the given data
-     * @return new string
+     * @return new {@link String}
      * @throws UnsupportedEncodingException 
      * @since 0.8.0
      */
@@ -230,9 +230,9 @@ public abstract class HelperString {
     /**
      * Returns a byte-array from a given {@link String} and encoding.
      *
-     * @param input string for the byte-array
-     * @param encoding of the given string
-     * @return string as byte-array
+     * @param input {@link String} for the byte-array
+     * @param encoding of the given {@link String}
+     * @return {@link String} as byte-array
      * @throws UnsupportedEncodingException 
      * @since 0.8.0
      */

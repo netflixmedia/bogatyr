@@ -37,14 +37,13 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Locale;
 
 
 /**
  * This launcher starts the system mail application.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.9.0 (20091101)
  * @since 0.7.0
  */
 public abstract class LauncherMail {

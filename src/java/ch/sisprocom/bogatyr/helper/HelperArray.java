@@ -36,7 +36,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 
@@ -45,7 +44,7 @@ import java.util.List;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091101)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -57,13 +56,14 @@ public abstract class HelperArray {
 	public static final Integer[] EMPTY_ARRAY_INTEGER = new Integer[0];
 	public static final Float[] EMPTY_ARRAY_FLOAT = new Float[0];
 	public static final byte[] EMPTY_ARRAY_BYTE = new byte[0];
+    public static final char[] EMPTY_ARRAY_CHAR = new char[0];
 	public static final Long[] EMPTY_ARRAY_LONG = new Long[0];
 	public static final Short[] EMPTY_ARRAY_SHORT = new Short[0];
 	public static final BigInteger[] EMPTY_ARRAY_BIG_INTEGER = new BigInteger[0];
 	public static final BigDecimal[] EMPTY_ARRAY_BIG_DECIMAL = new BigDecimal[0];		
 
 	/**
-     * Checks if an {@link Object} array is valid.
+     * Checks if an array is valid.
      * 
      * @param arg to check
      * @return true/false
@@ -138,30 +138,28 @@ public abstract class HelperArray {
     }
 	
     /**
-	 * Removes duplicate objects from an {@link Object} array.
+	 * Removes duplicate objects from an array.
 	 * 
 	 * @param array containing duplicate objects
 	 * @return array without duplicates
 	 * @since 0.7.0
 	 */
-    public static Object[] removeDuplicates(final Object[] array) { //$JUnit$
-		final Collection<?> list = HelperCollection.removeDuplicates(Arrays.asList(array));
-		final Object[] temp = new Object[list.size()];
-		return list.toArray(temp);
+	public static <T> T[] removeDuplicates(final T[] array) { //$JUnit$
+		return HelperCollection.toArray(HelperCollection.removeDuplicates(Arrays.asList(array)));
     }
 
      /**
-     * Dump an {@link Object} array.
+     * Dump an array.
      * 
      * @param array to dump
      * @return dump string
      * @since 0.7.0
      */
-    public static String dump(final Object[] array) {
+    public static <T> String dump(final T[] array) {
 		final StringBuilder sb = new StringBuilder();
 
-		for (final Object value : array) {
-            sb.append(value);
+		for (final T element : array) {
+            sb.append(element);
             sb.append(HelperString.NEW_LINE);
         }
 		return sb.toString();

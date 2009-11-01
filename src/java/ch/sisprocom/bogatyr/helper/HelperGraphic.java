@@ -40,7 +40,6 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
-import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -49,7 +48,7 @@ import java.util.Collection;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091019)
+ * @version 0.9.0 (20091101)
  * @since 0.4.0
  */
 public abstract class HelperGraphic {
@@ -57,7 +56,7 @@ public abstract class HelperGraphic {
 	/**
      * Enable anti-aliasing on a {@link Graphics2D} container.
      * 
-     * @param graphics Graphics2D container
+     * @param graphics {@link Graphics2D} container
      * @see Graphics2D
      * @since 0.4.0
      */	
@@ -73,8 +72,8 @@ public abstract class HelperGraphic {
     /**
      * Calculates the center of a {@link Dimension}.
      *
-     * @param size Dimension
-     * @return Dimension with center coordinates
+     * @param size {@link Dimension} for the calculation
+     * @return {@link Dimension} with center coordinates
      * @see Dimension
      * @since 0.4.0
      */
@@ -87,10 +86,10 @@ public abstract class HelperGraphic {
 	}
 
     /**
-     * Calculates the scale to fit an input {@link Dimension} to an output dimension.
+     * Calculates the scale to fit an input {@link Dimension} to an output {@link Dimension}.
      *
-     * @param input dimension
-     * @param output dimension
+     * @param input {@link Dimension} for the calculation
+     * @param output {@link Dimension} for the calculation
      * @return scale to fit the input dimension
      * @see Dimension
      * @since 0.9.0
@@ -105,7 +104,7 @@ public abstract class HelperGraphic {
 		
 		final double scaleHeight =  (double)input.getHeight() / (double)output.height;
 		final double scaleWidth =  (double)input.getWidth() / (double)output.width;
-		double scale = 1.0D;
+		double scale;
 		
 		if (scaleWidth > scaleHeight) {
 			scale = scaleWidth;
@@ -117,11 +116,11 @@ public abstract class HelperGraphic {
 	}
     
     /**
-     * Calculates the scaled size to fit an input {@link Dimension} to an output dimension.
+     * Calculates the scaled size to fit an input {@link Dimension} to an output {@link Dimension}.
      *
-     * @param input dimension
-     * @param output dimension
-     * @return scaled size to fit the input dimension
+     * @param input {@link Dimension} for the calculation
+     * @param output {@link Dimension} for the calculation
+     * @return scaled {@link Dimension} to fit the input {@link Dimension}
      * @see Dimension
      * @since 0.9.0
      */
@@ -135,7 +134,7 @@ public abstract class HelperGraphic {
 		
 		final double scaleHeight =  (double)input.getHeight() / (double)output.height;
 		final double scaleWidth =  (double)input.getWidth() / (double)output.width;
-		double scale = 1.0D;
+		double scale;
 		
 		if (scaleWidth > scaleHeight) {
 			scale = scaleWidth;
@@ -147,13 +146,14 @@ public abstract class HelperGraphic {
 	}    
     
     /**
-     * Get size of a text in a {@link Graphics} container with its current font.
+     * Calculates the size of a text in a {@link Graphics} container with its current {@link Font}.
      *
-     * @param text Text
-     * @param graphics Graphic container
-     * @return Dimension with text size
+     * @param text for the calculation
+     * @param graphics {@link Graphics} container for the calculation
+     * @return {@link Dimension} with text size
      * @see Graphics
      * @see Dimension
+     * @see Font
      * @since 0.4.0
      */
 	public static Dimension getTextSize(final String text, final Graphics graphics) {
@@ -180,11 +180,11 @@ public abstract class HelperGraphic {
     /**
      * Returns a {@link Collection} containing all available system {@link Font}.
      *
-     * @return List containing all fonts
+     * @return {@link Collection} containing all fonts
+     * @see Font
      * @since 0.4.0
      */
     public static Collection<Font> getAvailableFonts() { //$JUnit$
-		// Get all available fonts from GraphicsEnvironment
 		final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		
 		return Arrays.asList(ge.getAllFonts());

@@ -31,11 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Set;import java.util.Arrays;
 
 
 /**
@@ -43,25 +44,40 @@ import java.util.Set;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091028)
+ * @version 0.9.0 (20091101)
  * @since 0.7.0
  */
 public abstract class HelperCollection {
+
+	/**
+     * Returns a array of the given {@link Collection}.
+     * 
+     * @param collection for the array
+     * @return array with the collection content
+     * @see Collection
+     * @since 0.9.0
+     */
+	@SuppressWarnings("unchecked")
+	public static <E> E[] toArray(final Collection<E> collection) {
+		if (!isValid(collection)) {
+			throw new IllegalArgumentException("collection is null or empty!"); //$NON-NLS-1$
+		}
+		
+		return collection.toArray((E[]) Array.newInstance(collection.iterator().next().getClass(), collection.size()));
+    }
 	
 	/**
      * Returns a {@link List} with the given elements.
      * 
-     * @param es elements for the list
-     * @return true/false
-     * @since 0.9.0
+     * @param elements for the {@link List}
+     * @return {@link List} with the given elements
      * @see List
+     * @since 0.9.0
      */
-	public static <E> List<E> getList(final E...es) { //$JUnit$
-        List<E> list = new ArrayList<E>();
-        
-        for (E e : es) {
-        	list.add(e);
-        }
+	public static <E> List<E> getList(final E...elements) {
+        final List<E> list = new ArrayList<E>();
+
+        list.addAll(Arrays.asList(elements));
         
 		return list;
     }
@@ -69,17 +85,15 @@ public abstract class HelperCollection {
 	/**
      * Returns a {@link Set} with the given elements.
      * 
-     * @param es elements for the set
-     * @return true/false
-     * @since 0.9.0
+     * @param elements for the {@link Set}
+     * @return {@link Set} with the given elements
      * @see Set
+     * @since 0.9.0
      */
-	public static <E> Set<E> getSet(final E...es) { //$JUnit$
-        Set<E> set = new HashSet<E>();
-        
-        for (E e : es) {
-        	set.add(e);
-        }
+	public static <E> Set<E> getSet(final E...elements) {
+        final Set<E> set = new HashSet<E>();
+
+        set.addAll(Arrays.asList(elements));
         
 		return set;
     }
@@ -87,41 +101,40 @@ public abstract class HelperCollection {
 	/**
      * Checks if a {@link Collection} is valid.
      * 
-     * @param arg to check
+     * @param collection to check
      * @return true/false
-     * @since 0.7.0
      * @see Collection
+     * @since 0.7.0
      */
-	public static boolean isValid(final Collection<?> arg) { //$JUnit$
-        return !(null == arg || arg.isEmpty());
+	public static boolean isValid(final Collection<?> collection) { //$JUnit$
+        return !(null == collection || collection.isEmpty());
     }
     
 	/**
 	 * Removes duplicate objects from {@link Collection}.
 	 * 
-	 * @param list containing duplicate objects
-	 * @return collection without duplicates
-	 * @since 0.7.0
+	 * @param collection containing duplicate objects
+	 * @return {@link Collection} without duplicates
 	 * @see Collection
+	 * @since 0.7.0
 	 */
-    public static <T> Collection<?> removeDuplicates(final Collection<T> list) { //$JUnit$
-//		return new ArrayList<T>(new HashSet<T>(list));
-		return new HashSet<T>(list);
+    public static <E> Collection<E> removeDuplicates(final Collection<E> collection) { //$JUnit$
+		return new HashSet<E>(collection);
     }
     
     /**
      * Dump an {@link Iterable}.
      * 
-     * @param list to dump
+     * @param iterable to dump
      * @return dump string
-     * @since 0.7.0
      * @see Iterable
+     * @since 0.7.0
      */
-    public static String dump(final Iterable<?> list) {
+    public static <E> String dump(final Iterable<E> iterable) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Object value : list) {
-            sb.append(value);
+        for (final E element : iterable) {
+            sb.append(element);
             sb.append(HelperString.NEW_LINE);
         }
         return sb.toString();

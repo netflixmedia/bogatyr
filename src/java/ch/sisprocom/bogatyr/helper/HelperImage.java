@@ -49,7 +49,7 @@ import java.util.Locale;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091028)
+ * @version 0.9.0 (20091101)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -63,7 +63,7 @@ public abstract class HelperImage {
      *
      * @param file for the image
      * @param type of the image (e.g. "jpg")
-     * @param image RenderImage for the image
+     * @param image {@link RenderedImage} for the image
      * @throws IOException
      * @see File
      * @see RenderedImage
@@ -88,7 +88,7 @@ public abstract class HelperImage {
      * 
      * @param file for the image
      * @param type of the image (e.g. "jpg")
-     * @param component Component for the image
+     * @param component {@link Component} for the image
      * @throws IOException
      * @see File
      * @see Component
@@ -102,7 +102,8 @@ public abstract class HelperImage {
      * Gets a {@link RenderedImage} from a {@link Component}.
      *
      * @param component for the image
-     * @return component as image
+     * @return {@link Component} as {@link RenderedImage}
+     * @see RenderedImage
      * @see Component
      * @since 0.4.0
      */
@@ -121,11 +122,11 @@ public abstract class HelperImage {
 	}
 	
 	/**
-     * Scales a {@link BufferedImage}.
+     * Scales a {@link BufferedImage} to an {@link Image}.
      *
      * @param image to scale
      * @param scale for the new image
-     * @return scaled image
+     * @return scaled {@link Image}
      * @see BufferedImage
      * @see Image
      * @since 0.9.0
@@ -135,8 +136,8 @@ public abstract class HelperImage {
 			throw new IllegalArgumentException("image is null!"); //$NON-NLS-1$
 		}
 
-		double width = (double)image.getWidth() / scale;
-		double height = (double)image.getHeight() / scale;
+		final double width = (double)image.getWidth() / scale;
+		final double height = (double)image.getHeight() / scale;
        
 		System.out.println(scale);
 		System.out.println(width);
@@ -146,11 +147,11 @@ public abstract class HelperImage {
 	}
 	
 	/**
-     * Scales a {@link BufferedImage} to a given size {@link Dimension}.
+     * Scales a {@link BufferedImage} to an {@link Image} with the given {@link Dimension}.
      *
      * @param image to scale
      * @param size of the new image
-     * @return scaled image
+     * @return scaled {@link Image}
      * @see BufferedImage
      * @see Dimension
      * @see Image
@@ -167,7 +168,7 @@ public abstract class HelperImage {
 	/**
 	 * Returns a {@link Collection} of all available read formats (e.g. "png", "jpg").
 	 * 
-	 * @return list of all available read formats
+	 * @return {@link Collection} containing all available read formats
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageReadFormats() { //$JUnit$
@@ -177,7 +178,7 @@ public abstract class HelperImage {
 	/**
 	 * Returns a {@link Collection} of all available write formats (e.g. "png", "jpeg").
 	 * 
-	 * @return list of all available write formats
+	 * @return {@link Collection} containing all available write formats
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageWriteFormats() { //$JUnit$
@@ -187,7 +188,7 @@ public abstract class HelperImage {
 	/**
 	 * Returns a {@link Collection} of all available MIME types that can be read (e.g. "image/png", "image/jpeg").
 	 * 
-	 * @return list of all available MIME types that can be read
+	 * @return {@link Collection} containing all available MIME types that can be read
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageReadMIMETypes() { //$JUnit$
@@ -197,7 +198,7 @@ public abstract class HelperImage {
 	/**
 	 * Returns a {@link Collection} of all available MIME types that can be written (e.g. "image/png", "image/jpg").
 	 * 
-	 * @return list of all available MIME types that can be written
+	 * @return {@link Collection} containing all available MIME types that can be written
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageWriteMIMETypes() { //$JUnit$
@@ -212,7 +213,7 @@ public abstract class HelperImage {
 	 * Converts all {@link String} to lower case and returns a {@link Collection} containing the unique values.
 	 * 
 	 * @param strings as array
-	 * @return list containing the unique values
+	 * @return {@link Collection} containing the unique values
 	 * @since 0.4.0
 	 */
     private static Collection<String> unique(final String... strings) {

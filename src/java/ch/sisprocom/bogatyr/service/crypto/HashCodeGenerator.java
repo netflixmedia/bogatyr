@@ -38,7 +38,7 @@ import java.io.InputStream;
  * This is an interface for hash code generation.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091101)
  * @since 0.8.0
  */
 public interface HashCodeGenerator {
@@ -54,9 +54,9 @@ public interface HashCodeGenerator {
 	String getHash(byte[] input) throws Exception;
 	
 	/**
-	 * Generates a hash code for an input stream {@link InputStream} with the implementations algorithm.
+	 * Generates a hash code for an {@link InputStream} with the implementations algorithm.
 	 * 
-     * @param is input stream for the hash code
+     * @param is {@link InputStream} for the hash code
      * @return generated hash code
 	 * @throws Exception 
 	 * @see InputStream
@@ -65,9 +65,9 @@ public interface HashCodeGenerator {
 	String getHash(InputStream is) throws Exception;
 	
 	/**
-	 * Generates a hash code for an input stream {@link InputStream} with the implementations algorithm.
+	 * Generates a hash code for an {@link InputStream} with the implementations algorithm.
 	 * 
-     * @param is input stream for the hash code
+     * @param is {@link InputStream} for the hash code
      * @param bufferSize in bytes
      * @return generated hash code
 	 * @throws Exception 
@@ -77,9 +77,9 @@ public interface HashCodeGenerator {
 	String getHash(InputStream is, int bufferSize) throws Exception;	
 
 	/**
-	 * Generates a hash code for an input File {@link File} with the implementations algorithm.
+	 * Generates a hash code for an input {@link File} with the implementations algorithm.
 	 * 
-     * @param input byte-array for the hash code
+     * @param input {@link File} for the hash code
      * @return generated hash code
 	 * @throws Exception 
 	 * @see File
@@ -88,9 +88,9 @@ public interface HashCodeGenerator {
 	String getHash(File input) throws Exception;	
 	
 	/**
-	 * Generates a hash code for an input File {@link File} with the implementations algorithm.
+	 * Generates a hash code for an input {@link File} with the implementations algorithm.
 	 * 
-     * @param input file for the hash code
+     * @param input {@link File} for the hash code
      * @param bufferSize in bytes
      * @return generated hash code
 	 * @throws Exception 

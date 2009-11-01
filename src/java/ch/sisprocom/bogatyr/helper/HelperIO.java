@@ -63,7 +63,7 @@ import java.util.Scanner;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091028)
+ * @version 0.9.0 (20091101)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -104,7 +104,7 @@ public abstract class HelperIO {
      * Copy a directory.
      * 
      * @param source directory to copy
-     * @param dest directory
+     * @param dest directory destination
      * @throws IOException
      * @see File
      * @since 0.1.0
@@ -141,8 +141,8 @@ public abstract class HelperIO {
 	/**
      * Copy a {@link File}.
      * 
-     * @param source file to copy
-     * @param dest file
+     * @param source {@link File} to copy
+     * @param dest {@link File} destination
      * @throws IOException
      * @see File
      * @since 0.1.0
@@ -154,8 +154,8 @@ public abstract class HelperIO {
     /**
      * Copy a {@link File}.
      *
-     * @param source file to copy
-     * @param dest file
+     * @param source {@link File} to copy
+     * @param dest {@link File} detination
      * @param bufferSize in bytes
      * @throws IOException
      * @see File
@@ -171,10 +171,13 @@ public abstract class HelperIO {
         if (null == dest) {
             throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
         }
-        if (bufferSize < 1) {
+        if (1 > bufferSize) {
             throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
         }
-
+        if (bufferSize > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+        
         final byte[] buffer = new byte[bufferSize];
 
         if (!dest.exists()) {
@@ -472,8 +475,11 @@ public abstract class HelperIO {
         if (null == is) {
             throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
         }
-        if (bufferSize < 1) {
+        if (1 > bufferSize) {
             throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1");  //$NON-NLS-1$//$NON-NLS-2$
+        }
+        if (bufferSize > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
         final byte[] buffer = new byte[bufferSize];
@@ -514,6 +520,12 @@ public abstract class HelperIO {
 		}
 
 		final long length = file.length();
+
+		if (length > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("length of file (" + length + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
+		
 		final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 		final byte[] buffer;
 		
@@ -546,6 +558,12 @@ public abstract class HelperIO {
 		if (!HelperString.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
+		
+		final long length = file.length();
+
+		if (length > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("length of file (" + length + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 
 		final StringBuilder content = new StringBuilder();
 		final Scanner scanner = new Scanner(file, encoding);
@@ -583,7 +601,7 @@ public abstract class HelperIO {
      * 
      * @param file for reading
      * @param encoding of the file
-     * @return List containing the file content
+     * @return {@link List} containing the file content
      * @throws IOException
      * @see File
      * @since 0.1.0
@@ -598,6 +616,12 @@ public abstract class HelperIO {
 		if (!HelperString.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
+		
+		final long length = file.length();
+
+		if (length > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("length of file (" + length + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 
 		final Scanner scanner = new Scanner(file, encoding);
 		final List<String> list = new ArrayList<String>();
@@ -616,7 +640,7 @@ public abstract class HelperIO {
      * Reads a {@link File} in a {@link List} with the default encoding (UTF-8).
      * 
      * @param file for reading
-     * @return List containing the file content
+     * @return {@link List} containing the file content
      * @throws IOException
      * @see File
      * @since 0.1.0
@@ -629,7 +653,7 @@ public abstract class HelperIO {
      * Reads a {@link File} into an {@link OutputStream}.
      * 
      * @param file for reading
-     * @param os output stream for the file content
+     * @param os {@link OutputStream} for the file content
      * @throws IOException
      * @see File
      * @see OutputStream
@@ -710,7 +734,7 @@ public abstract class HelperIO {
 	 * Returns the {@link URL} representation of a given {@link File}.
 	 * 
 	 * @param file to get the URL
-	 * @return URL representation of a given file
+	 * @return {@link URL} representation of a given {@link File}
 	 * @throws MalformedURLException 
 	 * @see File
 	 * @see URL
@@ -727,7 +751,7 @@ public abstract class HelperIO {
 	/**
 	 * Returns a {@link List} containing all drive names of the current system.
 	 * 
-	 * @return list containing all drive names of the current system 
+	 * @return {@link List} containing all drive names of the current system 
 	 * @since 0.7.0
 	 */
 	public static List<String> getDriveNames() {
@@ -743,7 +767,7 @@ public abstract class HelperIO {
 	/**
 	 * Returns a {@link List} containing all available drives of the current system.
 	 * 
-	 * @return list containing all drive names of the current system 
+	 * @return {@link List} containing all drive names of the current system 
 	 * @see File
 	 * @since 0.7.0
 	 */
@@ -761,7 +785,7 @@ public abstract class HelperIO {
 //	}
 	
 	/**
-	 * Returns the total space of a given {@link File} location.
+	 * Returns the total space of a given {@link File} location in bytes.
 	 * 
 	 * @param file location
 	 * @return total space in bytes
@@ -773,11 +797,11 @@ public abstract class HelperIO {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
 
-		return file.getTotalSpace(); // / (1024 * 1024);
+		return file.getTotalSpace();
     }
 
 	/**
-	 * Returns the free space of a given {@link File} location.
+	 * Returns the free space of a given {@link File} location in bytes.
 	 * 
 	 * @param file location
 	 * @return free space in bytes
@@ -789,10 +813,11 @@ public abstract class HelperIO {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
 
-        return file.getFreeSpace(); // / (1024 * 1024);
+        return file.getFreeSpace();
      }
 	
-	/** Returns the usable space of a {@link File} file location.
+	/** 
+	 * Returns the usable space of a given {@link File} location in bytes.
 	 * 
 	 * @param file location
 	 * @return usable space in bytes
@@ -804,11 +829,11 @@ public abstract class HelperIO {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
 
-		return file.getUsableSpace(); // / (1024 * 1024);
+		return file.getUsableSpace();
      }
 	 
 	/**
-	 * Returns the used space of a given {@link File} location.
+	 * Returns the used space of a given {@link File} location in bytes.
 	 * 
 	 * @param file location
 	 * @return used space in bytes
@@ -816,15 +841,11 @@ public abstract class HelperIO {
 	 * @since 0.7.0
 	 */
 	public static long getSpaceUsed(final File file) {
-		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
-		}
-
 		return getSpaceTotal(file) - getSpaceFree(file);
      }
 	
 	/**
-	 * Checks a given {@link File} if its a drive.
+	 * Checks a given {@link File} if it is a drive.
 	 * 
 	 * @param file location
 	 * @return true/false
@@ -840,7 +861,7 @@ public abstract class HelperIO {
      }
 	
 	/**
-	 * Checks a given {@link File} if its a removable drive.
+	 * Checks a given {@link File} if it is a removable drive.
 	 * 
 	 * @param file location
 	 * @return true/false
@@ -856,7 +877,7 @@ public abstract class HelperIO {
      }
 	
 	/**
-	 * Checks a given {@link File} if its a network drive.
+	 * Checks a given {@link File} if it is a network drive.
 	 * 
 	 * @param file location
 	 * @return true/false
@@ -875,7 +896,7 @@ public abstract class HelperIO {
 	 * Converts a given {@link ByteArrayOutputStream} to an {@link InputStream}.
 	 * 
 	 * @param baos byte-array output stream
-	 * @return Input stream
+	 * @return {@link InputStream}
 	 * @see ByteArrayOutputStream
 	 * @see InputStream
 	 * @since 0.7.0
@@ -888,7 +909,7 @@ public abstract class HelperIO {
 	 * Converts a given {@link Writer} to a {@link Reader}.
 	 * 
 	 * @param writer to convert
-	 * @return Reader containing the data of the writer 
+	 * @return {@link Reader} containing the data of the {@link Writer} 
 	 * @see Writer
 	 * @see Reader
 	 * @since 0.7.0
@@ -903,7 +924,7 @@ public abstract class HelperIO {
      * @param path for searching
      * @param filter for the match criterias. No filter (== null) will return all files.
      * @param recurseDepth defines how many folder levels the recursion would pass. >= -1 always recurse, 0 only the current folder and any other value will continue recursion until 0 is hit.
-     * @return List containing the matched files
+     * @return {@link List} containing the matched files
      * @see File
      * @see FileFilter
      * @since 0.1.0
@@ -918,13 +939,13 @@ public abstract class HelperIO {
         int recurse = recurseDepth;
 
         if (null != entries) {
-            for (File entry : entries) {
+            for (final File entry : entries) {
 
                 if (filter == null || filter.accept(entry)) {
                     files.add(entry);
                 }
 
-                if ((recurse <= -1) || (recurse > 0 && entry.isDirectory())) {
+                if ((-1 >= recurse) || (0 < recurse && entry.isDirectory())) {
                     recurse--;
                     files.addAll(getFiles(entry, filter, recurse));
                     recurse++;
@@ -932,5 +953,19 @@ public abstract class HelperIO {
             }
         }
         return files;
+    }
+    
+	/**
+     * Searchs in a path (directory) for files and directories via {@link FileFilter} and returns a {@link List} containing all {@link File}.
+     * 
+     * @param path for searching
+     * @param filter for the match criterias. No filter (== null) will return all files.
+     * @return {@link List} containing the matched files
+     * @see File
+     * @see FileFilter
+     * @since 0.9.0
+     */
+    public static List<File> getFiles(final File path, final FileFilter filter) { //$JUnit$
+         return getFiles(path, filter, -1);
     }
 }
