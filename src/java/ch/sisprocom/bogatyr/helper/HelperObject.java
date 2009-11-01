@@ -141,22 +141,22 @@ public abstract class HelperObject {
 	/**
 	 * Deserialize a given byte-array into an {@link Object}.
 	 * 
-	 * @param byte-array to convert into an {@link Object}
+	 * @param data byte-array to convert into an {@link Object}
 	 * @return {@link Object} from given byte-array
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @since 0.7.0
 	 */
-	public static Object deserialize(final byte[] bytes) throws IOException, ClassNotFoundException { //$JUnit$
-		if (!HelperArray.isValid(bytes)) {
-			throw new IllegalArgumentException("bytes is null or empty!"); //$NON-NLS-1$
+	public static Object deserialize(final byte[] data) throws IOException, ClassNotFoundException { //$JUnit$
+		if (!HelperArray.isValid(data)) {
+			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
 		}
 		
 		ObjectInputStream ois = null;
 		final Object obj;
 		
         try {
-            ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
+            ois = new ObjectInputStream(new ByteArrayInputStream(data));
             obj = ois.readObject();
         } finally {
         	if (ois != null) {
