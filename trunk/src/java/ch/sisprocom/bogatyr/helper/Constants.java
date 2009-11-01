@@ -37,12 +37,12 @@ package ch.sisprocom.bogatyr.helper;
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091102)
  * @since 0.7.0
  */
 public interface Constants {
 	//Bogatyr
-	String BOGATYR_VERSION = "0.9.0 (20091101)"; //$NON-NLS-1$
+	String BOGATYR_VERSION = "0.9.0 (20091102)"; //$NON-NLS-1$
 	String BOGATYR_VENDOR = "SiSprocom GmbH"; //$NON-NLS-1$
 	String BOGATYR_URL = "www.sisprocom.ch/bogatyr"; //$NON-NLS-1$
 	String BOGATYR_MAIL = "laubenberger@gmail.com"; //$NON-NLS-1$

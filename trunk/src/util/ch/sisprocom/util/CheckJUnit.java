@@ -66,7 +66,7 @@ public class CheckJUnit {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		list(true);
+//		list(true);
 		list(false);
 	}
 
@@ -126,7 +126,6 @@ public class CheckJUnit {
         	if (JOptionPane.showConfirmDialog(null, "Open file with the default application?", "Open file", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {  //$NON-NLS-1$//$NON-NLS-2$
         		try {
 					LauncherFile.open(output);
-					System.exit(0);
 				} catch (IOException ex) {
 					ex.printStackTrace();
 					System.exit(10);

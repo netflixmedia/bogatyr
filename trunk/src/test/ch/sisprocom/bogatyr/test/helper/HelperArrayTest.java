@@ -35,6 +35,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
@@ -45,12 +46,12 @@ import ch.sisprocom.bogatyr.helper.HelperArray;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090610
+ * @version 20091101
  */
 public class HelperArrayTest {
 	
 	@Test
-	public void testIsValidArray() {
+	public void testIsValid() {
 		assertFalse(HelperArray.isValid(HelperArray.EMPTY_ARRAY_STRING));
 		assertTrue(HelperArray.isValid(new String[1]));
 	}
@@ -88,5 +89,12 @@ public class HelperArrayTest {
 		final String[] array = {"A", "A", "A"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		assertEquals(1, HelperArray.removeDuplicates(array).length);
+	}
+	
+	@Test
+	public void testDump() {
+		final String[] array = {"A", "A", "A"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+
+		assertNotNull(HelperArray.dump(array));
 	}
 }

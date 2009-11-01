@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Implementation-Title: Bogatyr
-Implementation-Version: 0.9.0 (20091101 - Beta)
+Implementation-Version: 0.9.0 (20091102 - Beta)
 Bundle-Name: Bogatyr
 Bundle-Vendor: sisprocom.ch
-Bundle-Version: 0.8.0 (20091101 - Beta)
+Bundle-Version: 0.8.0 (20091102 - Beta)

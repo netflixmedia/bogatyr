@@ -31,6 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+
 import ch.sisprocom.bogatyr.helper.HelperCollection;
 import ch.sisprocom.bogatyr.test.helper.HelperArrayTest;
 import ch.sisprocom.bogatyr.test.helper.HelperCollectionTest;
@@ -39,6 +47,7 @@ import ch.sisprocom.bogatyr.test.helper.HelperEnvironmentTest;
 import ch.sisprocom.bogatyr.test.helper.HelperGraphicTest;
 import ch.sisprocom.bogatyr.test.helper.HelperIOTest;
 import ch.sisprocom.bogatyr.test.helper.HelperImageTest;
+import ch.sisprocom.bogatyr.test.helper.HelperMapTest;
 import ch.sisprocom.bogatyr.test.helper.HelperMathTest;
 import ch.sisprocom.bogatyr.test.helper.HelperNetTest;
 import ch.sisprocom.bogatyr.test.helper.HelperObjectTest;
@@ -47,10 +56,6 @@ import ch.sisprocom.bogatyr.test.helper.HelperStringTest;
 import ch.sisprocom.bogatyr.test.helper.HelperTimeTest;
 import ch.sisprocom.bogatyr.test.helper.HelperXmlTest;
 import ch.sisprocom.bogatyr.test.helper.context.ContextTest;
-import ch.sisprocom.bogatyr.test.service.crypto.CertificateProviderTest;
-import ch.sisprocom.bogatyr.test.service.crypto.CryptoAsymmetricTest;
-import ch.sisprocom.bogatyr.test.service.crypto.CryptoSymmetricTest;
-import ch.sisprocom.bogatyr.test.service.crypto.ScramblerTest;
 import ch.sisprocom.bogatyr.test.helper.encoder.EncoderBase64Test;
 import ch.sisprocom.bogatyr.test.helper.encoder.EncoderHexTest;
 import ch.sisprocom.bogatyr.test.helper.launcher.LauncherBrowserTest;
@@ -60,14 +65,11 @@ import ch.sisprocom.bogatyr.test.helper.unit.UnitAreaTest;
 import ch.sisprocom.bogatyr.test.helper.unit.UnitLengthTest;
 import ch.sisprocom.bogatyr.test.helper.unit.UnitVolumeTest;
 import ch.sisprocom.bogatyr.test.helper.unit.UnitWeightTest;
+import ch.sisprocom.bogatyr.test.service.crypto.CertificateProviderTest;
+import ch.sisprocom.bogatyr.test.service.crypto.CryptoAsymmetricTest;
+import ch.sisprocom.bogatyr.test.service.crypto.CryptoSymmetricTest;
+import ch.sisprocom.bogatyr.test.service.crypto.ScramblerTest;
 import ch.sisprocom.bogatyr.test.view.swing.NumberFieldTest;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 
 /**
@@ -137,6 +139,7 @@ public class AllBogatyrTests implements Runnable {
 				HelperGraphicTest.class,
 				HelperImageTest.class,
 				HelperIOTest.class,
+				HelperMapTest.class,
 				HelperMathTest.class,
 				HelperNetTest.class,
 				HelperObjectTest.class,
