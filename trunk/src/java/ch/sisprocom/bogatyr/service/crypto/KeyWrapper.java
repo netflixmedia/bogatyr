@@ -33,6 +33,8 @@ package ch.sisprocom.bogatyr.service.crypto;
 
 import java.security.Key;
 
+import javax.crypto.Cipher;
+
 
 /**
  * This is an interface for wrapping and unwrapping a crypto key.
