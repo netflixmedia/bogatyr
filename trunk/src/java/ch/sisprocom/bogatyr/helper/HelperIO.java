@@ -565,19 +565,19 @@ public abstract class HelperIO {
             throw new IllegalArgumentException("length of file (" + length + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
-		final StringBuilder content = new StringBuilder();
+		final StringBuilder sb = new StringBuilder();
 		final Scanner scanner = new Scanner(file, encoding);
 
 		try {
-			if (scanner.hasNextLine()) {
-				content.append(scanner.nextLine());
-			}
-
+			int ii = 0;
 	    	while (scanner.hasNextLine()){
-	    		content.append(HelperString.NEW_LINE);
-	    		content.append(scanner.nextLine());
+	            if (0 < ii) {
+	                sb.append(HelperString.NEW_LINE);
+	            }
+	            sb.append(scanner.nextLine());
+	            ii++;
             }
-	    	return content.toString();
+	    	return sb.toString();
 	    } finally {
 	      scanner.close();
 	    }

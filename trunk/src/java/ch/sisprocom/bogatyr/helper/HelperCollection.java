@@ -133,9 +133,13 @@ public abstract class HelperCollection {
     public static <E> String dump(final Iterable<E> iterable) {
         final StringBuilder sb = new StringBuilder();
 
+        int ii = 0;
         for (final E element : iterable) {
-            sb.append(element);
-            sb.append(HelperString.NEW_LINE);
+            if (0 < ii) {
+                sb.append(HelperString.NEW_LINE);
+            }
+        	sb.append(element);
+        	ii++;
         }
         return sb.toString();
     }

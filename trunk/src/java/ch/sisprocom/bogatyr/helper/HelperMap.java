@@ -65,11 +65,15 @@ public abstract class HelperMap {
     public static String dump(final Map<?, ?> map) {
         final StringBuilder sb = new StringBuilder();
 
+        int ii = 0;
         for (final Map.Entry<?, ?> pair : map.entrySet()) {
+            if (0 < ii) {
+                sb.append(HelperString.NEW_LINE);
+            }
             sb.append(pair.getKey());
             sb.append('=');
             sb.append(pair.getValue());
-            sb.append(HelperString.NEW_LINE);
+        	ii++;
         }
         return sb.toString();
     }
