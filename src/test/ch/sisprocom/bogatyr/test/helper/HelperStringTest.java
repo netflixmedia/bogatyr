@@ -47,18 +47,18 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090527
+ * @version 20091103
  */
 public class HelperStringTest {
 	@Test
-	public void testIsValidString() {
+	public void testIsValid() {
 		assertFalse(HelperString.isValid(new StringBuilder()));
 		assertFalse(HelperString.isValid(HelperString.EMPTY_STRING)); 
 		assertTrue(HelperString.isValid("123")); //$NON-NLS-1$
 	}
 
 	@Test
-	public void testIsStringNumeric() {
+	public void testIsNumeric() {
 		assertFalse(HelperString.isNumeric(null));
 		assertFalse(HelperString.isNumeric(HelperString.EMPTY_STRING)); 
 		assertTrue(HelperString.isNumeric("123.0")); //$NON-NLS-1$
@@ -71,11 +71,11 @@ public class HelperStringTest {
 	}
 
 	@Test
-    public void testFillString() {
-		assertEquals(10, HelperString.fillString('1', 10).length());
+    public void testFill() {
+		assertEquals(10, HelperString.fill('1', 10).length());
 		
 		try {
-			assertNotNull(HelperString.fillString('1', 0));
+			assertNotNull(HelperString.fill('1', 0));
             fail("fillLength must be greater than 0"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -85,11 +85,11 @@ public class HelperStringTest {
 	}
 	
 	@Test
-	public void testReverseString() {
-		assertEquals("nafetS", HelperString.reverseString("Stefan")); //$NON-NLS-1$ //$NON-NLS-2$
+	public void testReverse() {
+		assertEquals("nafetS", HelperString.reverse("Stefan")); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		try {
-			HelperString.reverseString(null);
+			HelperString.reverse(null);
             fail("input is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -112,5 +112,57 @@ public class HelperStringTest {
 
         assertNull(HelperString.getValidNumericString(".")); //$NON-NLS-1$
         assertNull(HelperString.getValidNumericString("-")); //$NON-NLS-1$
+	}
+	
+	@Test
+	public void testConcatenate() {
+		assertEquals("StefanLaubenberger", HelperString.concatenate("Stefan", "Laubenberger")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		assertEquals("Stefan Laubenberger", HelperString.concatenate(" ", true, "Stefan", "Laubenberger")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		assertNull(HelperString.concatenate(null));
+	}
+	
+	@Test
+	public void testStartsWith() {
+		assertTrue(HelperString.startsWith("Stefan Laubenberger", "sTe")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertFalse(HelperString.startsWith("Stefan Laubenberger", null)); //$NON-NLS-1$
+		
+		try {
+			HelperString.startsWith(null, "blabla"); //$NON-NLS-1$
+            fail("string is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEndsWith() {
+		assertTrue(HelperString.endsWith("Stefan Laubenberger", "GeR")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertFalse(HelperString.endsWith("Stefan Laubenberger", null)); //$NON-NLS-1$
+		
+		try {
+			HelperString.endsWith(null, "blabla"); //$NON-NLS-1$
+            fail("string is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testContains() {
+		assertTrue(HelperString.contains("Stefan Laubenberger", "lAUb")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertFalse(HelperString.contains("Stefan Laubenberger", null)); //$NON-NLS-1$
+		
+		try {
+			HelperString.contains(null, "blabla"); //$NON-NLS-1$
+            fail("string is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }

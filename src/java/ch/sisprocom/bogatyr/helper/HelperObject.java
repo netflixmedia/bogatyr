@@ -50,7 +50,7 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091103)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -175,11 +175,11 @@ public abstract class HelperObject {
      * @see Class
      * @since 0.7.0
      */
-    public static boolean isMethodAvailable(final Class<?> clazz, final String methodName) {
+    public static boolean isMethodAvailable(final Class<?> clazz, final String methodName) { //$JUnit$
 		if (null == clazz) {
 			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
 		}
-
+		
     	final Method[] methods = clazz.getMethods();
 
         for (final Method method : methods) {

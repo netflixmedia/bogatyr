@@ -40,7 +40,7 @@ import java.math.BigDecimal;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091103)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -95,7 +95,7 @@ public abstract class HelperString {
      * @return filled {@link CharSequence}
      * @since 0.7.0
      */
-    public static CharSequence fillString(final char fillChar, final int fillLength) { //$JUnit$
+    public static CharSequence fill(final char fillChar, final int fillLength) { //$JUnit$
 		if (0 >= fillLength) {
 			throw new IllegalArgumentException("fillLength must be greater than 0: " + fillLength); //$NON-NLS-1$
 		}
@@ -117,7 +117,7 @@ public abstract class HelperString {
      * @return reversed {@link String}
      * @since 0.7.0
      */
-    public static String reverseString(final String input) { //$JUnit$
+    public static String reverse(final String input) { //$JUnit$
 		if (null == input) {
 			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
@@ -133,7 +133,6 @@ public abstract class HelperString {
      * @since 0.7.0
      */
     public static String getValidNumericString(final String text) { //$JUnit$
-    	
     	if (!isValid(text)) {
     		return null;
     	}
@@ -178,7 +177,7 @@ public abstract class HelperString {
      * @return concatenated {@link String}
      * @since 0.7.0
      */
-    public static String concatenate(final String separator, final boolean isTrimmed, final String... strings) {
+    public static String concatenate(final String separator, final boolean isTrimmed, final String... strings) { //$JUnit$
         if (!HelperArray.isValid(strings)) {
         	return null;
         }
@@ -187,7 +186,7 @@ public abstract class HelperString {
         
         for (final String strValue : strings) {
             if (isValid(strValue)) {
-                if (0 < sb.length()) {
+                if (null != separator && 0 < sb.length()) {
                     sb.append(separator);
                 }
 
@@ -200,17 +199,28 @@ public abstract class HelperString {
         }
         return sb.toString();
     }
+//    
+//    /**
+//     * Concatenates strings with a separator (e.g. for CSV export).
+//     *
+//     * @param separator between the strings
+//     * @param strings to concatenate
+//     * @return concatenated {@link String}
+//     * @since 0.8.0
+//     */
+//    public static String concatenate(final String separator, final String... strings) {
+//    	return concatenate(separator, true, strings);
+//    }
     
     /**
-     * Concatenates strings with a separator (e.g. for CSV export).
+     * Concatenates strings.
      *
-     * @param separator between the strings
      * @param strings to concatenate
      * @return concatenated {@link String}
-     * @since 0.8.0
+     * @since 0.9.0
      */
-    public static String concatenate(final String separator, final String... strings) {
-    	return concatenate(separator, true, strings);
+    public static String concatenate(final String... strings) { //$JUnit$
+    	return concatenate(null, true, strings);
     }
     
     /**
@@ -248,7 +258,11 @@ public abstract class HelperString {
      * @return true/false
      * @since 0.9.0
      */
-	public static boolean startsWith(final String string, final String prefix) {
+	public static boolean startsWith(final String string, final String prefix) { //$JUnit$
+		if (null == string) {
+			throw new IllegalArgumentException("string is null!"); //$NON-NLS-1$
+		}
+
 		return string.matches("(?i)" + prefix + ".*");  //$NON-NLS-1$//$NON-NLS-2$
 	}
     
@@ -260,7 +274,11 @@ public abstract class HelperString {
      * @return true/false
      * @since 0.9.0
      */
-	public static boolean endsWith(final String string, final String suffix) {
+	public static boolean endsWith(final String string, final String suffix) { //$JUnit$
+		if (null == string) {
+			throw new IllegalArgumentException("string is null!"); //$NON-NLS-1$
+		}
+
 		return string.matches("(?i).*" + suffix); //$NON-NLS-1$
 	}
 
@@ -272,7 +290,11 @@ public abstract class HelperString {
      * @return true/false
      * @since 0.9.0
      */
-	public static boolean contains(final String string, final String part) {
+	public static boolean contains(final String string, final String part) { //$JUnit$
+		if (null == string) {
+			throw new IllegalArgumentException("string is null!"); //$NON-NLS-1$
+		}
+
 		return string.matches("(?i).*" + part + ".*");  //$NON-NLS-1$//$NON-NLS-2$
 	}
 }

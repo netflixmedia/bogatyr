@@ -36,6 +36,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.math.BigInteger;
+
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperMath;
@@ -237,10 +239,52 @@ public class HelperMathTest {
 
 	@Test
 	public void testFactorial() {
-        assertEquals(10, HelperMath.factorial(4));
+        assertEquals(BigInteger.valueOf(24), HelperMath.factorial(4));
         
 		try {
 			HelperMath.factorial(-1);
+			fail("n (-1) must be positive!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testSum() {
+        assertEquals(10, HelperMath.sum(4));
+        
+		try {
+			HelperMath.sum(-1);
+			fail("n (-1) must be positive!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testSumSquare() {
+        assertEquals(30, HelperMath.sumSquare(4));
+        
+		try {
+			HelperMath.sumSquare(-1);
+			fail("n (-1) must be positive!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testSumCubic() {
+        assertEquals(100, HelperMath.sumCubic(4));
+        
+		try {
+			HelperMath.sumCubic(-1);
 			fail("n (-1) must be positive!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -287,5 +331,65 @@ public class HelperMathTest {
 	public void testIsEven() {
         assertTrue(HelperMath.isEven(4));
         assertFalse(HelperMath.isEven(3));
+	}
+	
+	@Test
+	public void testCalcConnections() {
+        assertEquals(6, HelperMath.calcConnections(4));
+        
+		try {
+			HelperMath.calcConnections(-1);
+			fail("n (-1) must be positive!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void tesBinomialCoefficient() {
+		assertEquals(BigInteger.valueOf(35), HelperMath.binomialCoefficient(7, 3));
+
+		try {
+			HelperMath.binomialCoefficient(-1, 4);
+			fail("n (-1) must be positive!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperMath.binomialCoefficient(3, -1);
+			fail("k (-1) must be positive!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperMath.binomialCoefficient(3, 4);
+			fail("n (3) must be greater than k (4)!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+		
+	@Test
+	public void testCalcBirthdayProblem() {
+        assertEquals(0.50729D, HelperMath.calcBirthdayProblem(23), 0.00001D);
+        
+		try {
+			HelperMath.calcConnections(-1);
+			fail("n (-1) must be positive!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }

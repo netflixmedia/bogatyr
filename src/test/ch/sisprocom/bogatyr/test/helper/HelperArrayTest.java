@@ -34,8 +34,9 @@ package ch.sisprocom.bogatyr.test.helper;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -46,7 +47,7 @@ import ch.sisprocom.bogatyr.helper.HelperArray;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091101
+ * @version 20091102
  */
 public class HelperArrayTest {
 	
@@ -89,6 +90,15 @@ public class HelperArrayTest {
 		final String[] array = {"A", "A", "A"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		assertEquals(1, HelperArray.removeDuplicates(array).length);
+		
+		try {
+			HelperArray.removeDuplicates(null);
+			fail("array is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
@@ -96,5 +106,14 @@ public class HelperArrayTest {
 		final String[] array = {"A", "A", "A"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		assertNotNull(HelperArray.dump(array));
+		
+		try {
+			HelperArray.dump(null);
+			fail("array is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }

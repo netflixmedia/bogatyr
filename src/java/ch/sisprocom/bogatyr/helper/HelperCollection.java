@@ -44,7 +44,7 @@ import java.util.Set;import java.util.Arrays;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091102)
  * @since 0.7.0
  */
 public abstract class HelperCollection {
@@ -58,7 +58,7 @@ public abstract class HelperCollection {
      * @since 0.9.0
      */
 	@SuppressWarnings("unchecked")
-	public static <E> E[] toArray(final Collection<E> collection) {
+	public static <E> E[] toArray(final Collection<E> collection) { //$JUnit$
 		if (!isValid(collection)) {
 			throw new IllegalArgumentException("collection is null or empty!"); //$NON-NLS-1$
 		}
@@ -74,8 +74,12 @@ public abstract class HelperCollection {
      * @see List
      * @since 0.9.0
      */
-	public static <E> List<E> getList(final E...elements) {
-        final List<E> list = new ArrayList<E>();
+	public static <E> List<E> getList(final E...elements) { //$JUnit$
+		final List<E> list = new ArrayList<E>();
+
+		if (null == elements) {
+			return list;
+		}
 
         list.addAll(Arrays.asList(elements));
         
@@ -90,9 +94,13 @@ public abstract class HelperCollection {
      * @see Set
      * @since 0.9.0
      */
-	public static <E> Set<E> getSet(final E...elements) {
-        final Set<E> set = new HashSet<E>();
+	public static <E> Set<E> getSet(final E...elements) { //$JUnit$
+		final Set<E> set = new HashSet<E>();
 
+		if (null == elements) {
+			return set;
+		}
+		
         set.addAll(Arrays.asList(elements));
         
 		return set;
@@ -119,6 +127,10 @@ public abstract class HelperCollection {
 	 * @since 0.7.0
 	 */
     public static <E> Collection<E> removeDuplicates(final Collection<E> collection) { //$JUnit$
+		if (null == collection) {
+			throw new IllegalArgumentException("collection is null!"); //$NON-NLS-1$
+		}
+
 		return new HashSet<E>(collection);
     }
     
@@ -131,7 +143,11 @@ public abstract class HelperCollection {
      * @since 0.7.0
      */
     public static <E> String dump(final Iterable<E> iterable) { //$JUnit$
-        final StringBuilder sb = new StringBuilder();
+		if (null == iterable) {
+			throw new IllegalArgumentException("iterable is null!"); //$NON-NLS-1$
+		}
+
+		final StringBuilder sb = new StringBuilder();
 
         int ii = 0;
         for (final E element : iterable) {

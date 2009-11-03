@@ -35,8 +35,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.Test;
@@ -48,7 +50,7 @@ import ch.sisprocom.bogatyr.helper.HelperCollection;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091101
+ * @version 20091102
  */
 public class HelperCollectionTest {
 	@Test
@@ -69,6 +71,15 @@ public class HelperCollectionTest {
 		list = HelperCollection.getList("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 		
 		assertEquals(1, HelperCollection.removeDuplicates(list).size());
+
+		try {
+			HelperCollection.removeDuplicates(null);
+			fail("collection is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test
@@ -76,5 +87,52 @@ public class HelperCollectionTest {
 		Collection<String> list = HelperCollection.getList("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 
 		assertNotNull(HelperCollection.dump(list));
+		
+		try {
+			HelperCollection.dump(null);
+			fail("iterable is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetList() {
+		Collection<String> list = HelperCollection.getList(null);
+
+		assertEquals(0, list.size());
+
+		list = HelperCollection.getList("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+
+		assertEquals(3, list.size());
+	}
+	
+	@Test
+	public void testGetSet() {
+		Collection<String> list = HelperCollection.getSet(null);
+		assertEquals(0, list.size());
+		
+		list = HelperCollection.getSet("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+
+		assertEquals(1, list.size());
+	}
+	
+	
+	@Test
+	public void testToArray() {
+		String[] array = HelperCollection.toArray(HelperCollection.getList("A", "A", "A")); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+
+		assertTrue(Arrays.equals(new String[]{"A", "A", "A"}, array)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		
+		try {
+			HelperCollection.toArray(null);
+			fail("collection is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }

@@ -31,23 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import ch.sisprocom.bogatyr.helper.HelperMap;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.junit.Test;
-
-import ch.sisprocom.bogatyr.helper.HelperMap;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091101
+ * @version 20091103
  */
 public class HelperMapTest {
 	@Test
@@ -68,5 +64,14 @@ public class HelperMapTest {
 		map.put("3", "Stefan"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		assertNotNull(HelperMap.dump(map));
+		
+		try {
+			HelperMap.dump(null);
+			fail("map is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }
