@@ -36,6 +36,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.TimeZone;
 
 
 /**
@@ -175,6 +176,31 @@ public class HelperEnvironmentTest {
 	@Test
 	public void testIsUnixPlatform() {
 		assertEquals(!HelperEnvironment.isWindowsPlatform() && !HelperEnvironment.isMacPlatform(), HelperEnvironment.isUnixPlatform()); 
+	}
+	
+	@Test
+	public void testGetJavaVendor() {
+		assertEquals(System.getProperties().getProperty("java.vendor"), HelperEnvironment.getJavaVendor()); //$NON-NLS-1$
+	}
+	
+	@Test
+	public void testGetJavaProperties() {
+		assertEquals(System.getProperties(), HelperEnvironment.getJavaProperties());
+	}
+	
+	@Test
+	public void testGetUserCountry() {
+		assertEquals(System.getProperty("user.country"), HelperEnvironment.getUserCountry()); //$NON-NLS-1$
+	}
+	
+	@Test
+	public void testGetUserLanguage() {
+		assertEquals(System.getProperty("user.language"), HelperEnvironment.getUserLanguage()); //$NON-NLS-1$
+	}
+	
+	@Test
+	public void testGetUserTimezone() {
+		assertEquals(TimeZone.getDefault(), HelperEnvironment.getUserTimezone());
 	}
 }
 

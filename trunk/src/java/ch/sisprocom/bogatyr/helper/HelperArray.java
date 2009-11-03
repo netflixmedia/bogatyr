@@ -44,7 +44,7 @@ import java.util.List;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091102)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -145,6 +145,10 @@ public abstract class HelperArray {
 	 * @since 0.7.0
 	 */
 	public static <T> T[] removeDuplicates(final T[] array) { //$JUnit$
+		if (null == array) {
+			throw new IllegalArgumentException("array is null!"); //$NON-NLS-1$
+		}
+		
 		return HelperCollection.toArray(HelperCollection.removeDuplicates(Arrays.asList(array)));
     }
 
@@ -156,6 +160,10 @@ public abstract class HelperArray {
      * @since 0.7.0
      */
     public static <T> String dump(final T[] array) { //$JUnit$
+		if (null == array) {
+			throw new IllegalArgumentException("array is null!"); //$NON-NLS-1$
+		}
+		
 		final StringBuilder sb = new StringBuilder();
 
         int ii = 0;

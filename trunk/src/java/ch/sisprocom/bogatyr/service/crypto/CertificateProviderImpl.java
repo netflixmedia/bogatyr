@@ -69,7 +69,7 @@ import java.util.Date;
  * This class generates, reads and save X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
+ * @version 0.9.0 (20091103)
  * @since 0.3.0
  */
 public class CertificateProviderImpl extends ServiceAbstract implements CertificateProvider {
@@ -77,7 +77,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 	 * Implemented methods
 	 */
     @Override
-    public X509Certificate readCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException {
+    public X509Certificate readCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException { //$JUnit$
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -126,7 +126,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     }
     
     @Override
-    public void writeCertificate(final File file, final Certificate cert) throws CertificateEncodingException, IOException {
+    public void writeCertificate(final File file, final Certificate cert) throws CertificateEncodingException, IOException { //$JUnit$
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
@@ -138,7 +138,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     }
 
     @Override
-    public X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws NoSuchAlgorithmException, IllegalStateException, CertificateEncodingException, InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException {
+    public X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws NoSuchAlgorithmException, IllegalStateException, CertificateEncodingException, InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException { //$JUnit$
 		if (null == pair) {
 			throw new IllegalArgumentException("pair is null!"); //$NON-NLS-1$
 		}

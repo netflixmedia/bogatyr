@@ -43,7 +43,7 @@ import java.util.TimeZone;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091102)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -113,7 +113,7 @@ public abstract class HelperEnvironment {
      * @return current Java runtime vendor
      * @since 0.7.0
 	 */
-	public static String getJavaVendor() {
+	public static String getJavaVendor() { //$JUnit$
 		return System.getProperties().getProperty("java.vendor"); //$NON-NLS-1$
 	}
 	
@@ -217,7 +217,7 @@ public abstract class HelperEnvironment {
 	 * @see Map
 	 * @since 0.1.0
 	 */
-	public static Map<Object, Object> getJavaProperties() {
+	public static Map<Object, Object> getJavaProperties() { //$JUnit$
 		return System.getProperties();
     }
 	
@@ -292,7 +292,7 @@ public abstract class HelperEnvironment {
 	 * @return language of the current country
 	 * @since 0.7.0
 	 */
-	public static String getUserCountry() {
+	public static String getUserCountry() { //$JUnit$
 		return System.getProperty("user.country"); //$NON-NLS-1$
 	}
 	
@@ -302,7 +302,7 @@ public abstract class HelperEnvironment {
 	 * @return language of the current user
 	 * @since 0.7.0
 	 */
-	public static String getUserLanguage() {
+	public static String getUserLanguage() { //$JUnit$
 		return System.getProperty("user.language"); //$NON-NLS-1$
 	}
 	
@@ -313,7 +313,7 @@ public abstract class HelperEnvironment {
 	 * @see TimeZone
 	 * @since 0.7.0
 	 */
-	public static TimeZone getUserTimezone() {
+	public static TimeZone getUserTimezone() { //$JUnit$
 		return TimeZone.getDefault();
 		
 	}

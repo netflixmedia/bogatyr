@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090527
+ * @version 20091103
  */
 public class HelperObjectTest {
 	@Test
@@ -144,5 +144,23 @@ public class HelperObjectTest {
 		assertFalse(HelperObject.isEquals("A", "B")); //$NON-NLS-1$ //$NON-NLS-2$
 		assertFalse(HelperObject.isEquals("A", null)); //$NON-NLS-1$
 		assertFalse(HelperObject.isEquals(null, "B")); //$NON-NLS-1$
+	}
+	
+	
+	@Test
+	public void testIsMethodAvailable() {
+		assertTrue(HelperObject.isMethodAvailable(String.class, "indexOf"));  //$NON-NLS-1$
+		assertFalse(HelperObject.isMethodAvailable(String.class, null));
+		assertFalse(HelperObject.isMethodAvailable(String.class, "blabla"));  //$NON-NLS-1$
+		
+
+		try {
+			assertTrue(HelperObject.isMethodAvailable(null, "indexOf"));  //$NON-NLS-1$
+			fail("clazz is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }

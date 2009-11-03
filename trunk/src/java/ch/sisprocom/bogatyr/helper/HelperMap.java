@@ -38,7 +38,7 @@ import java.util.Map;
  * This is a helper class for maps.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091102)
  * @since 0.9.0
  */
 public abstract class HelperMap {
@@ -63,6 +63,10 @@ public abstract class HelperMap {
      * @since 0.7.0
      */
     public static String dump(final Map<?, ?> map) { //$JUnit$
+		if (null == map) {
+			throw new IllegalArgumentException("map is null!"); //$NON-NLS-1$
+		}
+
         final StringBuilder sb = new StringBuilder();
 
         int ii = 0;

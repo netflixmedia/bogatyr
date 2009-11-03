@@ -76,7 +76,7 @@ import ch.sisprocom.bogatyr.test.view.swing.NumberFieldTest;
  * Junit test suite
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 20091016
+ * @version 20091103
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
@@ -117,10 +117,10 @@ public class AllBogatyrTests implements Runnable {
     public void run() {
 		final Result result = JUnitCore.runClasses(
 				ContextTest.class,
+				CertificateProviderTest.class,
 				CryptoAsymmetricTest.class,
 				CryptoSymmetricTest.class,
 				ScramblerTest.class,
-				CertificateProviderTest.class,
 				EncoderBase64Test.class,
 				EncoderHexTest.class,
 				LauncherBrowserTest.class,

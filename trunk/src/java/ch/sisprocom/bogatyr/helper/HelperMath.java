@@ -31,6 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -40,10 +43,11 @@ import java.util.Collection;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091102)
+ * @version 0.9.0 (20091103)
  * @since 0.4.0
  */
-public abstract class HelperMath {
+public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
+	private static final MathContext MC = new MathContext(16);
 	
 	/**
 	 * Returns the greatest common divisor of two given numbers.
@@ -241,15 +245,35 @@ public abstract class HelperMath {
 		 
 		 return amount * StrictMath.pow(StrictMath.E, (double)days / 360.0 * interest);
     }
-    
-	/**
+	
+    /**
      * Calculates the factorial (n!) from 0 to n.
      * 
      * @param n number to calculate
      * @return factorial (n!) from 1 to n
+     * @since 0.9.0
+     */	
+	public static BigInteger factorial(final int n) { //$JUnit$
+        if (0 > n) {
+        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        }
+
+        BigInteger sum = BigInteger.ONE;
+
+        for (int ii = n; ii > 0; ii--) {
+        	sum = sum.multiply(BigInteger.valueOf(ii));
+        }
+        return sum;
+    }
+	
+	/**
+     * Calculates the Gauss sum from 0 to n.
+     * 
+     * @param n number to calculate
+     * @return Gauss sum from 1 to n
      * @since 0.7.0
      */	
-	public static int factorial(final int n) { //$JUnit$
+	public static int sum(final int n) { //$JUnit$
         if (0 > n) {
         	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
         }
@@ -262,13 +286,13 @@ public abstract class HelperMath {
     }
 	
 	/**
-     * Calculates the square factorial from 0 to n^2.
+     * Calculates the Gauss square sum from 0 to n^2.
      * 
      * @param n number to calculate
-     * @return square factorial from 1 to n^2
+     * @return Gauss square sum from 1 to n^2
      * @since 0.7.0
      */	
-	public static int factorialSquare(final int n) {
+	public static int sumSquare(final int n) { //$JUnit$
         if (0 > n) {
         	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
         }
@@ -281,13 +305,13 @@ public abstract class HelperMath {
     }
 	
 	/**
-     * Calculates the cubic factorial from 0 to n^3.
+     * Calculates the Gauss cubic sum from 0 to n^3.
      * 
      * @param n number to calculate
-     * @return square factorial from 1 to n^3
+     * @return Gauss cubic sum from 1 to n^3
      * @since 0.7.0
      */	
-	public static int factorialCubic(final int n) {
+	public static int sumCubic(final int n) { //$JUnit$
         if (0 > n) {
         	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
         }
@@ -296,59 +320,7 @@ public abstract class HelperMath {
         	return 1;
         }
 
-        return (int) StrictMath.pow(factorial(n), 2.0D);
-    }
-	
-	/**
-     * Calculates the number of connections from n.
-     * 
-     * @param n number to calculate
-     * @return number of connections from n
-     * @since 0.7.0
-     */	
-	public static int calcConnections(final int n) {
-        if (0 >= n) {
-        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
-        }
-        
-        return n * (n - 1) / 2;
-    }
-
-	/**
-     * Calculates for the given number of persons the probability that two people will share a birthday.
-     * 
-     * @param n number of persons
-     * @return probability that two people will share a birthday
-     * @since 0.7.0
-     */	
-	public static double calcBirthdayProblem(final int n) { //TODO does it also work for other parameters than days p.a.?
-        if (0 >= n) {
-        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
-        }
-        
-        return factorial(HelperTime.DAYS_YEAR) / (factorial(HelperTime.DAYS_YEAR - n) * StrictMath.pow(HelperTime.DAYS_YEAR, n));
-    }
-
-	/**
-     * Calculates the binomial coefficient ("n choose k").
-     * 
-     * @param n range
-     * @param k subset of n ("n choose k")
-     * @return binomial coefficient
-     * @since 0.7.0
-     */	
-	public static int binomialCoefficient(final int n, final int k) {
-        if (0 > n) {
-        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
-        }
-        if (0 > k) {
-        	throw new IllegalArgumentException("k value must be positive: " + k); //$NON-NLS-1$
-        }
-		if (k > n) {
-            throw new IllegalArgumentException("n value (" + n + ") must be greater than the k value (" + k + ')'); //$NON-NLS-1$ //$NON-NLS-2$
-        }
-  
-        return factorial(n) / (factorial(n - k) * factorial(k));
+        return (int) StrictMath.pow(sum(n), 2.0D);
     }
 
 	/**
@@ -371,6 +343,66 @@ public abstract class HelperMath {
         }
         
         return (m + n) * (n - m + 1) / 2;
+    }
+	
+	/**
+     * Calculates the number of connections from n.
+     * 
+     * @param n number to calculate
+     * @return number of connections from n
+     * @since 0.7.0
+     */	
+	public static int calcConnections(final int n) { //$JUnit$
+        if (0 >= n) {
+        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        }
+        
+        return n * (n - 1) / 2;
+    }
+
+	/**
+     * Calculates for the given number of persons the probability that two people will share a birthday.
+     * 
+     * @param n number of persons
+     * @return probability that two people will share a birthday
+     * @since 0.7.0
+     */	
+	public static double calcBirthdayProblem(final int n) { //$JUnit$
+        if (0 >= n) {
+        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        }
+        
+      //TODO does it also work for other parameters than days p.a.?
+        
+        BigDecimal term01 = new BigDecimal(factorial(HelperTime.DAYS_YEAR));
+        BigDecimal term02 = new BigDecimal(factorial(HelperTime.DAYS_YEAR - n));
+        BigDecimal term03 = BigDecimal.valueOf(HelperTime.DAYS_YEAR).pow(n);
+        
+        BigDecimal result = BigDecimal.ONE.subtract(term01.divide(term02.multiply(term03), MC));
+
+        return result.doubleValue();
+    }
+
+	/**
+     * Calculates the binomial coefficient ("n choose k").
+     * 
+     * @param n range
+     * @param k subset of n ("n choose k")
+     * @return binomial coefficient
+     * @since 0.7.0
+     */	
+	public static BigInteger binomialCoefficient(final int n, final int k) { //$JUnit$
+        if (0 > n) {
+        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        }
+        if (0 > k) {
+        	throw new IllegalArgumentException("k value must be positive: " + k); //$NON-NLS-1$
+        }
+		if (k > n) {
+            throw new IllegalArgumentException("n value (" + n + ") must be greater than the k value (" + k + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+  
+        return factorial(n).divide(((factorial(n - k).multiply(factorial(k)))));
     }
 
 	/**

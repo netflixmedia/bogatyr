@@ -53,7 +53,7 @@ import java.util.List;
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091103)
  * @since 0.5.0
  */
 public abstract class HelperNet {
@@ -289,7 +289,7 @@ public abstract class HelperNet {
      * @see NetworkInterface
      * @since 0.5.0
      */
-    public static List<NetworkInterface> getNetworkInterfaces() throws SocketException {
+    public static List<NetworkInterface> getNetworkInterfaces() throws SocketException { //$JUnit$
     	return Collections.list(NetworkInterface.getNetworkInterfaces());
     }
     
@@ -302,7 +302,7 @@ public abstract class HelperNet {
      * @see NetworkInterface
      * @since 0.7.0
      */
-    public static String getMacAddress(final NetworkInterface ni) throws SocketException {
+    public static String getMacAddress(final NetworkInterface ni) throws SocketException { //$JUnit$
 		if (null == ni) {
 			throw new IllegalArgumentException("ni is null!"); //$NON-NLS-1$
 		}
