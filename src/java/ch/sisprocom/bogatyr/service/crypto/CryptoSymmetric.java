@@ -31,20 +31,23 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.crypto;
 
-import javax.crypto.SecretKey;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.Key;
 
+import javax.crypto.SecretKey;
+
+import ch.sisprocom.bogatyr.service.Service;
+
 /**
  * This is an interface for symmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091109)
  * @since 0.6.0
  */
-public interface CryptoSymmetric { //$Example$
+public interface CryptoSymmetric extends Service { //$Example$
 	/**
 	 * Generates a {@link SecretKey} with the algorithms standard key size.
 	 * 

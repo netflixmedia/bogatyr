@@ -260,7 +260,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 
         BigInteger sum = BigInteger.ONE;
 
-        for (int ii = n; ii > 0; ii--) {
+        for (int ii = n; 0 < ii; ii--) {
         	sum = sum.multiply(BigInteger.valueOf(ii));
         }
         return sum;

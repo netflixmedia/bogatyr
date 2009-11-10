@@ -38,18 +38,18 @@ import ch.sisprocom.bogatyr.view.swing.NumberField;
  * This is a Label combined with a NumberField.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.9.0 (20091105)
  * @since 0.2.0
  */
 public class LabeledNumberField extends LabeledComponent {
 	private static final long serialVersionUID = 8536177338219909078L;
 
 	public LabeledNumberField(final String labelText, final String toolTip, final Number number) {
-		this(labelText, toolTip, number, Integer.MAX_VALUE);
+		this(labelText, toolTip, number, 255);
 	}
 
 	public LabeledNumberField(final String title, final String labelText, final String toolTip, final Number number) {
-		this(title, labelText, toolTip, number, Integer.MAX_VALUE);
+		this(title, labelText, toolTip, number, 255);
 	}
 	
 	public LabeledNumberField(final String labelText, final String toolTip, final Number number, final int columns) {

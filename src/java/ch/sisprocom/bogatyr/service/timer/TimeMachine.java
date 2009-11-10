@@ -31,16 +31,18 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.timer;
 
+import ch.sisprocom.bogatyr.service.Service;
+
 
 
 /**
  * Defines the methods for the implementation of the timer.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.9.0 (20091109)
  * @since 0.6.0
  */
-public interface TimeMachine {
+public interface TimeMachine extends Service {
 	/**
 	 * Adds a listener for this timer.
 	 * 

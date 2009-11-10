@@ -102,15 +102,11 @@ public abstract class HelperGraphic {
 			throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
 		}
 		
-		final double scaleHeight =  (double)input.getHeight() / (double)output.height;
-		final double scaleWidth =  (double)input.getWidth() / (double)output.width;
+		final double scaleHeight =  input.getHeight() / output.getHeight();
+		final double scaleWidth =  input.getWidth() / output.getWidth();
 		double scale;
-		
-		if (scaleWidth > scaleHeight) {
-			scale = scaleWidth;
-		} else {
-			scale = scaleHeight;
-		}
+
+        scale = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
 		
     	return scale;
 	}
@@ -132,15 +128,11 @@ public abstract class HelperGraphic {
 			throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
 		}
 		
-		final double scaleHeight =  (double)input.getHeight() / (double)output.height;
-		final double scaleWidth =  (double)input.getWidth() / (double)output.width;
+		final double scaleHeight = input.getHeight() / output.getHeight();
+		final double scaleWidth = input.getWidth() / output.getWidth();
 		double scale;
-		
-		if (scaleWidth > scaleHeight) {
-			scale = scaleWidth;
-		} else {
-			scale = scaleHeight;
-		}
+
+        scale = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
 		
 		return new Dimension(HelperMath.convertDoubleToInt(input.getWidth() / scale), HelperMath.convertDoubleToInt(input.getHeight() / scale));
 	}    

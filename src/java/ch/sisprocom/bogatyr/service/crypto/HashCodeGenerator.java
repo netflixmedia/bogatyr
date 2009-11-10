@@ -34,14 +34,16 @@ package ch.sisprocom.bogatyr.service.crypto;
 import java.io.File;
 import java.io.InputStream;
 
+import ch.sisprocom.bogatyr.service.Service;
+
 /**
  * This is an interface for hash code generation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091109)
  * @since 0.8.0
  */
-public interface HashCodeGenerator {
+public interface HashCodeGenerator extends Service {
 	
 	/**
 	 * Generates a hash code for a byte-array with the implementations algorithm.

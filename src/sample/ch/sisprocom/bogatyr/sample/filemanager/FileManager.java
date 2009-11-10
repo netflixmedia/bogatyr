@@ -92,7 +92,7 @@ public class FileManager extends ApplicationAbstract {
 		} catch (IOException ex) {
 			System.err.println("Couldn't process the property file!"); //$NON-NLS-1$
 			ex.printStackTrace();
-			exit(1);
+			System.exit(1);
 		}
 
  		final String value = property.getValue(PROPERTY_PATH);
@@ -100,7 +100,7 @@ public class FileManager extends ApplicationAbstract {
             path = new File(value);
 		} else {
 			System.err.println(PROPERTY_PATH + " == 'null'"); //$NON-NLS-1$
-			exit(10);
+			System.exit(10);
 		}
 		
 		localizer = new LocalizerFile(property.getValue(PROPERTY_LOCALIZER_BASE));
@@ -138,13 +138,8 @@ public class FileManager extends ApplicationAbstract {
 		} catch (IOException ex) {
 			System.err.println("Couldn't process the file search!"); //$NON-NLS-1$
 			ex.printStackTrace();
-			exit(20);
+			System.exit(20);
 		}
-		exit(0);
-	}
-
-	@Override
-	public void exit(final int returnCode) {
-		System.exit(returnCode);
+		System.exit(0);
 	}
 }

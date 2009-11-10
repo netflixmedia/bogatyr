@@ -35,14 +35,16 @@ import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+import ch.sisprocom.bogatyr.service.Service;
+
 /**
  * This is an interface for asymmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091109)
  * @since 0.6.0
  */
-public interface CryptoAsymmetric { //$Example$
+public interface CryptoAsymmetric extends Service { //$Example$
 	/**
 	 * Generates a public and a private {@link KeyPair} with the algorithms standard key size.
 	 * 

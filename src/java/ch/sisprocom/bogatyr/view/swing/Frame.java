@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.view.swing;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.HelperSwing;
 
 import javax.swing.JFrame;
 import java.awt.Color;
@@ -61,6 +62,7 @@ public class Frame extends JFrame implements Fadeable {
 	{
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
+		HelperSwing.setMacOSXMenu();
 	}
 	
 	public Frame() {

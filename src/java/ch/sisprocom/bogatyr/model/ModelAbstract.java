@@ -33,28 +33,26 @@ package ch.sisprocom.bogatyr.model;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
 
-import java.io.Serializable;
 import java.util.Observable;
 
 /**
  * This is the skeleton for all models.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091109)
  * @since 0.7.0
  */
-public abstract class ModelAbstract extends Observable implements Serializable {
+public abstract class ModelAbstract extends Observable implements Model {
 	private static final long serialVersionUID = 3491320587479082917L;
 
 	private final long createTime = System.currentTimeMillis();
 	
-	/**
-     * Returns the instantiation time of the model.
-     * 
-     * @return instantiation time of the model
-     * @since 0.7.0
-     */	
-	public long getCreateTime() {
+	
+    /*
+     * Implemented methods
+     */
+	@Override
+    public long getCreateTime() {
 		return createTime;
 	}
 	

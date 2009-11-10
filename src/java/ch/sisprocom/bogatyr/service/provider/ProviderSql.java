@@ -34,15 +34,17 @@ package ch.sisprocom.bogatyr.service.provider;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import ch.sisprocom.bogatyr.service.Service;
+
 /**
  * This interface provides functions to connect and execute statements on SQL-Server.
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091015)
+ * @version 0.9.0 (20091109)
  * @since 0.6.0
  */
-public interface ProviderSql {
+public interface ProviderSql extends Service {
 	/**
 	 * Connects to a database
      *

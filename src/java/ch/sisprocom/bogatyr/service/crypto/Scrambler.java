@@ -31,15 +31,17 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.crypto;
 
+import ch.sisprocom.bogatyr.service.Service;
+
 
 /**
  * This is an interface for scrambling data.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.9.0 (20091109)
  * @since 0.6.0
  */
-public interface Scrambler {
+public interface Scrambler extends Service {
 	/**
 	 * Scramble the data with the default pattern.
 	 * 

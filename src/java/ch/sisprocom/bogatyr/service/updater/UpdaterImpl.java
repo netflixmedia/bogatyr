@@ -56,7 +56,7 @@ import java.util.HashSet;
  * This is the updater for new Bogatyr-based applications versions.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
+ * @version 0.9.0 (20091109)
  * @since 0.6.0
  */
 public class UpdaterImpl extends ServiceAbstract implements Updater, ListenerUpdater {

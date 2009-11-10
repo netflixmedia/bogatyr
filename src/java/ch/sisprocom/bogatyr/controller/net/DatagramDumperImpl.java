@@ -188,7 +188,8 @@ public class DatagramDumperImpl implements DatagramDumper {
 //		} catch (SocketException ex) {
 //			//do nothing
 		} catch (IOException ex) {
-			ex.printStackTrace();
+            //do nothing
+//			ex.printStackTrace();
 		}
 	}
 

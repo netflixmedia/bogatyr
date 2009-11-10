@@ -148,7 +148,7 @@ public abstract class HelperEnvironment {
 	 * @see File
 	 * @since 0.8.0
 	 */
-	public void addPathToLibraryPath(final File path) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public static void addPathToLibraryPath(final File path) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 		final String location = path.getAbsolutePath();
 		
 		final Field field = ClassLoader.class.getDeclaredField("usr_paths"); //$NON-NLS-1$

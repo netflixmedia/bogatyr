@@ -41,7 +41,7 @@ import javax.swing.JRadioButton;
  * This is an extended JRadioButton.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091105)
  * @since 0.2.0
  */
 public class RadioButton extends JRadioButton implements Activatable {
@@ -66,8 +66,8 @@ public class RadioButton extends JRadioButton implements Activatable {
 		setSelected(isSelected);
 	}
 
-	public RadioButton(final String title, final boolean isSelected, final String toolTip) {
-		super(title, isSelected);
+	public RadioButton(final String text, final boolean isSelected, final String toolTip) {
+		super(text, isSelected);
 		setToolTipText(toolTip);
 	}
 	

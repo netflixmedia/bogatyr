@@ -945,7 +945,7 @@ public abstract class HelperIO {
                     files.add(entry);
                 }
 
-                if ((-1 >= recurse) || (0 < recurse && entry.isDirectory())) {
+                if (-1 >= recurse || (0 < recurse && entry.isDirectory())) {
                     recurse--;
                     files.addAll(getFiles(entry, filter, recurse));
                     recurse++;
