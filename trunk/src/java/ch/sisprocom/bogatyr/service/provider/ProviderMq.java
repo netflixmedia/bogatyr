@@ -31,6 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.provider;
 
+import ch.sisprocom.bogatyr.service.Service;
+
 import com.ibm.mq.MQException;
 
 import java.io.IOException;
@@ -40,10 +42,10 @@ import java.util.List;
  * This interface connects to an MQ-Server and allows to send and receive messages.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.9.0 (20091109)
  * @since 0.6.0
  */
-public interface ProviderMq {
+public interface ProviderMq extends Service {
    /**
      * Sends a message to a mq manager and queue.
      *

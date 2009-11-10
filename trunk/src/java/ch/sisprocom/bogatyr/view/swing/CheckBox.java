@@ -66,8 +66,8 @@ public class CheckBox extends JCheckBox implements Activatable {
 		setSelected(isSelected);
 	}
 	
-	public CheckBox(final String title, final boolean isSelected, final String toolTip) {
-		super(title, isSelected);
+	public CheckBox(final String text, final boolean isSelected, final String toolTip) {
+		super(text, isSelected);
 		setToolTipText(toolTip);
 	}
 	

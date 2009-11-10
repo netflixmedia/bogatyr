@@ -57,7 +57,7 @@ public abstract class EncoderHex {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
 		
-		final StringBuilder hexString = new StringBuilder();
+		final StringBuilder hexString = new StringBuilder(input.length * 2);
 		
 		for (final byte digest : input) {
 			final String hex = Integer.toHexString(0xFF & (int) digest);

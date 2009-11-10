@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,134 +31,66 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.paginator;
 
-import ch.sisprocom.bogatyr.helper.HelperCollection;
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+import ch.sisprocom.bogatyr.service.Service;
 
 
 /**
- * The Paginator splits a list in different pages.
+ * Defines the methods for the implementation of a paginator.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
- * @since 0.5.0
+ * @version 0.9.0 (20091109)
+ * @since 0.9.0
  */
-public class Paginator extends ServiceAbstract {
-    private List<?> list;
-    private int numberPerPage;
-
-
-    public Paginator() {
-        super();
-    }
-
-    public Paginator(final List<?> list, final int numberPerPage) {
-        super();
-        
-        setList(list);
-        setNumberPerPage(numberPerPage);
-    }
-
+public interface Paginator extends Service {
+ 
     /**
      * Returns the list containing the data for the pages.
      *
      * @return Total number of pages
-     * @since 0.5.0
+     * @since 0.9.0
      */
-    public List<?> getList() {
-		return list;
-    }
+    List<?> getList();
 
     /**
      * Sets the list containing the data for the pages.
+     * 
      * @param list containing the data for the pages
-     * @since 0.5.0
+     * @since 0.9.0
      */
-    public void setList(final List<?> list) {
-		if (null == list) {
-			throw new IllegalArgumentException("list is null!"); //$NON-NLS-1$
-		}
-
-        this.list = Collections.unmodifiableList(list);
-    }
+    void setList(final List<?> list);
 
     /**
      * Returns the total number of elements per page.
      *
      * @return number of elements per page
-     * @since 0.5.0
+     * @since 0.9.0
      */
-    public int getNumberPerPage() {
-		return numberPerPage;
-    }
+    int getNumberPerPage();
 
     /**
      * Sets the total number of elements per page.
      * 
      * @param numberPerPage elements per page
-     * @since 0.5.0
+     * @since 0.9.0
      */
-    public void setNumberPerPage(final int numberPerPage) {
-		if (0 > numberPerPage) {
-			throw new IllegalArgumentException("numberPerPage must be positive: " + numberPerPage); //$NON-NLS-1$
-		}
-
-    	this.numberPerPage = numberPerPage;
-    }
-
+    void setNumberPerPage(final int numberPerPage);
+    
     /**
      * Returns the total number of pages from the list.
      *
      * @return total number of pages
-     * @since 0.5.0
+     * @since 0.9.0
      */
-    public int getNumberOfPages() {
-        if (!HelperCollection.isValid(list) || 0 == numberPerPage) {
-            return 0;
-        } else if (list.size() < numberPerPage) {
-            return 1;
-        }
-
-        final int pages = list.size() / numberPerPage;
-
-        if (pages * numberPerPage < list.size()) {
-            return pages + 1;
-        }
-        return pages;
-    }
-
+    int getNumberOfPages();
+    
     /**
      * Returns a requested page from the list.
      *
      * @param requestedPage from the paginator
      * @return list representing the requested page
-     * @since 0.5.0
+     * @since 0.9.0
      */
-    public List<?> getPage(final int requestedPage) {
-        int page = requestedPage;
-        final List<Object> result = new ArrayList<Object>(numberPerPage);
-
-        if (list != null) {
-            if (page > getNumberOfPages()) {
-                page = getNumberOfPages();
-            }
-            if (1 > page) {
-                page = 1;
-            }
-
-            boolean isLoop = true;
-
-            for (int ii = (page - 1) * numberPerPage; ii < page * numberPerPage && isLoop; ii++) {
-                if (list.size() > ii) {
-                    result.add(list.get(ii));
-                } else {
-                    isLoop = false;
-                }
-            }
-        }
-        return result;
-	}
+    List<?> getPage(final int requestedPage);
 }

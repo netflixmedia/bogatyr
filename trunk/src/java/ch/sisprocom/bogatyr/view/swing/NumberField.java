@@ -47,7 +47,7 @@ import java.util.regex.Pattern;
  * This is a NumberField, similar to TextField, but only numeric characters are allowed.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.9.0 (20091105)
  * @since 0.1.0
  */
 public class NumberField extends TextField { //$JUnit$
@@ -57,11 +57,11 @@ public class NumberField extends TextField { //$JUnit$
 	
 	
 	public NumberField() {
-		this(0, HelperString.EMPTY_STRING, Integer.MAX_VALUE);
+		this(0, HelperString.EMPTY_STRING, 255);
 	}
 
 	public NumberField(final String text, final String toolTip) {
-		this(text, toolTip, Integer.MAX_VALUE);
+		this(text, toolTip, 255);
 	}
 	
 	public NumberField(final String text, final String toolTip, final int columns) {

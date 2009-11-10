@@ -35,15 +35,17 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Properties;
 
+import ch.sisprocom.bogatyr.service.Service;
+
 
 /**
  * Defines the methods for the implementation of the properties.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091109)
  * @since 0.6.0
  */
-public interface Property {
+public interface Property extends Service {
 	/**
      * Returns the properties {@link Properties}.
      * 

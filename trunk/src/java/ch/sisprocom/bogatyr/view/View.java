@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,44 +29,32 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
+package ch.sisprocom.bogatyr.view;
 
 
 /**
- * This is the skeleton for all Bogatyr applications.
+ * Defines the methods for all views.
  * 
  * @author Stefan Laubenberger
  * @version 0.9.0 (20091109)
- * @since 0.1.0
+ * @since 0.9.0
  */
-public abstract class ApplicationAbstract implements Application {
-	private final long createTime = System.currentTimeMillis();
+public interface View {
+	
+	/**
+     * Returns the instantiation time of the view.
+     * 
+     * @return instantiation time of the view
+     * @since 0.9.0
+     */	
+	long getCreateTime();
 	
 	
-	/*
-     * Implemented methods
-     */
-	@Override
-    public long getCreateTime() {
-		return createTime;
-	}
+	/**
+     * Layouts the view.
+     * 
+     * @since 0.9.0
+     */	
+	void layout();
 
-//	/**
-//     * Terminates the application in a proper way with a return code.
-//     * 
-//     * @param returnCode System-Return-Code
-//     * @since 0.1.0
-//     */	
-//	public abstract void exit(final int returnCode);
-
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
 }

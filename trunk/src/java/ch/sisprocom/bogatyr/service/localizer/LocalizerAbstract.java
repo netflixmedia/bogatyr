@@ -39,10 +39,10 @@ import java.util.Locale;
 
 
 /**
- * Localizer implementation for file access.
+ * Abstract localizer implementation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
+ * @version 0.9.0 (20091109)
  * @since 0.6.0
  */
 public abstract class LocalizerAbstract extends ServiceAbstract implements Localizer {

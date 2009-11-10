@@ -62,7 +62,7 @@ public abstract class HelperCrypto {
 			throw new IllegalArgumentException("seed is null or empty!"); //$NON-NLS-1$
 		}
 
-    	final StringBuilder sb = new StringBuilder();
+    	final StringBuilder sb = new StringBuilder(digits);
 
         for (int ii = 0; ii < digits; ii++) {
             sb.append(seed[HelperMath.getRandom(seed.length)]);

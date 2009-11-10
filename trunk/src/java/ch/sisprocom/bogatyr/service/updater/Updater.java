@@ -31,16 +31,18 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.updater;
 
+import ch.sisprocom.bogatyr.service.Service;
+
 
 
 /**
  * Defines the methods for the implementation of the updater.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091109)
  * @since 0.6.0
  */
-public interface Updater {
+public interface Updater extends Service {
 	/**
 	 * Checks the update information for new versions an update the application if needed.
 	 * 

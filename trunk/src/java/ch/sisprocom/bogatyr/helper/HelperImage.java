@@ -49,7 +49,7 @@ import java.util.Locale;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091110)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -138,10 +138,6 @@ public abstract class HelperImage {
 
 		final double width = (double)image.getWidth() / scale;
 		final double height = (double)image.getHeight() / scale;
-       
-		System.out.println(scale);
-		System.out.println(width);
-		System.out.println(height);
 		
 		return image.getScaledInstance(HelperMath.convertDoubleToInt(width), HelperMath.convertDoubleToInt(height), Image.SCALE_SMOOTH);
 	}

@@ -63,7 +63,7 @@ public abstract class HelperXml {
             return HelperString.EMPTY_STRING;
         }
        
-       	final StringBuilder sb = new StringBuilder(); // Used to hold the output.
+       	final StringBuilder sb = new StringBuilder(input.length()); // Used to hold the output.
 
         for (final char current : input.toCharArray()) {
 //            if (current != 0x96 && current != 0x9C) { // new

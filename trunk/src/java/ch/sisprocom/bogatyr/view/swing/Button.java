@@ -43,7 +43,7 @@ import java.awt.event.ActionListener;
  * This is an extended JButton.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091105)
  * @since 0.2.0
  */
 public class Button extends JButton implements Activatable {
@@ -60,18 +60,18 @@ public class Button extends JButton implements Activatable {
 		super(action);
 	}
 	
-	public Button(final String title, final String toolTip) {
-		super(title);
+	public Button(final String text, final String toolTip) {
+		super(text);
 		setToolTipText(toolTip);
 	}
 	
-	public Button(final String title, final String toolTip, final ActionListener listener) {
-		this(title, toolTip);
+	public Button(final String text, final String toolTip, final ActionListener listener) {
+		this(text, toolTip);
 		addActionListener(listener);
 	}	
 	
-	public Button(final String title, final Icon icon, final String toolTip, final ActionListener listener) {
-		super(title, icon);
+	public Button(final String text, final Icon icon, final String toolTip, final ActionListener listener) {
+		super(text, icon);
 		setToolTipText(toolTip);
 		addActionListener(listener);
 	}	

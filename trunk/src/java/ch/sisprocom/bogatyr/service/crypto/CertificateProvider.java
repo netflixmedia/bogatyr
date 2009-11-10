@@ -31,6 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.crypto;
 
+import ch.sisprocom.bogatyr.service.Service;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -44,10 +46,10 @@ import java.util.Date;
  * This interface is to generate, read and save X.509 certificates.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091109)
  * @since 0.6.0
  */
-public interface CertificateProvider { //$Example$
+public interface CertificateProvider extends Service { //$Example$
 	/**
      * Reads the {@link X509Certificate} out of the given {@link File}.
      * 

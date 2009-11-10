@@ -39,15 +39,15 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * This is a class for obfuscating data with CFB.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
+ * @version 0.9.0 (20091109)
  * @since 0.3.0
  */
 public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 
-
-    /*
-      * Private methods
-      */
+	
+	/*
+     * Private methods
+     */
 	/**
 	 * Obfuscate the data.
 	 * 
@@ -56,7 +56,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
      * @return obfuscated data
      * @since 0.3.0
 	 */
-	private byte[] obfuscate(final byte[] input, final byte pattern) {
+	private static byte[] obfuscate(final byte[] input, final byte pattern) {
 		if (!HelperArray.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
@@ -78,7 +78,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
      * @return unobfuscated data
      * @since 0.3.0
 	 */
-	private byte[] unobfuscate(final byte[] input, final byte pattern) {
+	private static byte[] unobfuscate(final byte[] input, final byte pattern) {
 		if (!HelperArray.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}

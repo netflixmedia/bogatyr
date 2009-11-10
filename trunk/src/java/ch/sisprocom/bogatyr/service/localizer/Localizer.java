@@ -31,19 +31,21 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.localizer;
 
+import java.util.Locale;
+
 import javax.swing.KeyStroke;
 
-import java.util.Locale;
+import ch.sisprocom.bogatyr.service.Service;
 
 
 /**
  * Defines the methods for the implementation of the localizer for different languages (i18n standard).
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091109)
  * @since 0.6.0
  */
-public interface Localizer {
+public interface Localizer extends Service {
 	/**
 	 * Returns the current locale {@link Locale} of the localizer.
 	 * 

@@ -46,7 +46,7 @@ public enum Weight {
 	KILOGRAM(1.0D), //$JUnit$
 	OUNCE(UnitWeight.FACTOR_OUNCE_TO_GRAM * UnitWeight.FACTOR_GRAM_TO_KILOGRAM), //$JUnit$
 	POUND(UnitWeight.FACTOR_POUND_TO_KILOGRAM), //$JUnit$
-	TON(1.0D/(UnitWeight.FACTOR_TON_TO_KILOGRAM)); //$JUnit$
+	TON(1.0D/UnitWeight.FACTOR_TON_TO_KILOGRAM); //$JUnit$
 
 	private final double factor;
 	

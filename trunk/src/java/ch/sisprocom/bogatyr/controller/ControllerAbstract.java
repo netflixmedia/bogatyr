@@ -37,19 +37,18 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is the skeleton for all controllers.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.9.0 (20091109)
  * @since 0.7.0
  */
-public abstract class ControllerAbstract {
+public abstract class ControllerAbstract implements Controller {
 	private final long createTime = System.currentTimeMillis();
+
 	
-	/**
-     * Returns the instantiation time of the controller.
-     * 
-     * @return instantiation time of the controller
-     * @since 0.7.0
-     */	
-	public long getCreateTime() {
+	/*
+     * Implemented methods
+     */
+	@Override
+    public long getCreateTime() {
 		return createTime;
 	}
 	

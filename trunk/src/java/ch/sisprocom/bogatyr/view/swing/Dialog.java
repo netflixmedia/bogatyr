@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.view.swing;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.HelperSwing;
 
 import javax.swing.JDialog;
 import java.awt.Frame;
@@ -43,7 +44,7 @@ import java.awt.Window;
  * This is an extended JDialog.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.9.0 (20091109)
  * @since 0.4.0
  */
 public class Dialog extends JDialog {
@@ -51,6 +52,7 @@ public class Dialog extends JDialog {
 	
 	{
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		HelperSwing.setMacOSXMenu();
 	}
 	
 	public Dialog() {

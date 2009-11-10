@@ -87,7 +87,7 @@ public class HelloWorld extends ApplicationAbstract {
 		} catch (IOException ex) {
 			System.err.println("Couldn't process the property file!"); //$NON-NLS-1$
 			ex.printStackTrace();
-			exit(1);
+			System.exit(1);
 		}
 		
 		localizer = new LocalizerFile(property.getValue(PROPERTY_LOCALIZER_BASE));
@@ -106,17 +106,12 @@ public class HelloWorld extends ApplicationAbstract {
 		localizer.setLocale(Locale.ROOT);
 		System.out.println(localizer.getValue(RES_WELCOME) + HelperString.SPACE + username + '!');
 
-		exit(0);
-	}
-
-	@Override
-	public void exit(final int returnCode) {
 		localizer.setLocale(Locale.GERMAN);
 		System.out.println(localizer.getValue(RES_BYE));
 		
 		localizer.setLocale(Locale.ROOT);
 		System.out.println(localizer.getValue(RES_BYE));
 		
-		System.exit(returnCode);
+		System.exit(0);
 	}
 }

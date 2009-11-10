@@ -35,15 +35,17 @@ import java.security.Key;
 
 import javax.crypto.Cipher;
 
+import ch.sisprocom.bogatyr.service.Service;
+
 
 /**
  * This is an interface for wrapping and unwrapping a crypto key.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091109)
  * @since 0.6.0
  */
-public interface KeyWrapper {
+public interface KeyWrapper extends Service {
 	/**
 	 * Wrap the {@link Key} with a wrapper {@link Key}.
 	 * 

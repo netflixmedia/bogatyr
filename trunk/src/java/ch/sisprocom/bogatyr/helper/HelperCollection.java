@@ -75,11 +75,11 @@ public abstract class HelperCollection {
      * @since 0.9.0
      */
 	public static <E> List<E> getList(final E...elements) { //$JUnit$
-		final List<E> list = new ArrayList<E>();
-
 		if (null == elements) {
-			return list;
+			return new ArrayList<E>();
 		}
+
+        final List<E> list = new ArrayList<E>(elements.length);
 
         list.addAll(Arrays.asList(elements));
         
@@ -95,12 +95,12 @@ public abstract class HelperCollection {
      * @since 0.9.0
      */
 	public static <E> Set<E> getSet(final E...elements) { //$JUnit$
-		final Set<E> set = new HashSet<E>();
-
 		if (null == elements) {
-			return set;
+			return new HashSet<E>();
 		}
-		
+
+        final Set<E> set = new HashSet<E>(elements.length);
+
         set.addAll(Arrays.asList(elements));
         
 		return set;
