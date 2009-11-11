@@ -29,32 +29,54 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view;
+package ch.sisprocom.bogatyr.service.profiler;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
 /**
- * Defines the methods for all views.
- * 
+ * The implementation for a profiler.
+ *
  * @author Stefan Laubenberger
  * @version 0.9.0 (20091111)
  * @since 0.9.0
  */
-public interface View {
-	
-	/**
-     * Returns the instantiation time of the view.
-     * 
-     * @return instantiation time of the view
-     * @since 0.9.0
-     */	
-	long getCreateTime();
-	
-	
-	/**
-     * Displays the view.
-     * 
-     * @since 0.9.0
-     */	
-	void display();
+public class ProfilerImpl extends ServiceAbstract implements Profiler {
 
+	private final Map<String, Long> profiles =  new HashMap<String, Long>();
+	private long startTime;
+	private long meanTime;
+	private long elapsedTime;
+	
+	
+	@Override
+	public long getElapsedTime() {
+		return elapsedTime;
+	}
+
+	@Override
+	public Map<String, Long> getProfiles() {
+		return profiles;
+	}
+
+	@Override
+	public void profile(final String id) {
+
+		final long currentTime = System.currentTimeMillis() - meanTime;
+		final long elapsed = currentTime - meanTime;
+		profiles.put(id, elapsed);
+
+		elapsedTime += elapsed;
+		meanTime = currentTime;
+	}
+
+	@Override
+	public void start() {
+		profiles.clear();
+		startTime = System.currentTimeMillis();
+		meanTime = startTime;
+	}
 }
