@@ -71,18 +71,30 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	
     @Override
     public void setLocale(final Locale locale) {
+		if (null == locale) {
+			throw new IllegalArgumentException("locale is null!"); //$NON-NLS-1$
+		}
+
     	this.locale = locale;
         fireLocaleChanged();
     }
     
     @Override
     public synchronized void addListener(final ListenerLocale listener) {
-        listListener.add(listener);
+		if (null == listener) {
+			throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+		}
+
+		listListener.add(listener);
     }
 
     @Override
     public synchronized void removeListener(final ListenerLocale listener) {
-        listListener.remove(listener);
+		if (null == listener) {
+			throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+		}
+
+    	listListener.remove(listener);
     }
 
     @Override

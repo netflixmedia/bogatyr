@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.helper.encoder;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperString;
 
@@ -40,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * Encodes and decodes data to Hex format.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.9.0 (20091110)
  * @since 0.1.0
  */
 public abstract class EncoderHex {
@@ -56,6 +57,9 @@ public abstract class EncoderHex {
 		if (!HelperArray.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
+        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 		
 		final StringBuilder hexString = new StringBuilder(input.length * 2);
 		
@@ -80,6 +84,10 @@ public abstract class EncoderHex {
 		if (!HelperString.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
+        if (input.length() * 2 > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("the doubled input (" + input.length() * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
 		final byte[] bts = new byte[input.length() / 2];
 
     	for (int ii = 0; ii < bts.length; ii++) {

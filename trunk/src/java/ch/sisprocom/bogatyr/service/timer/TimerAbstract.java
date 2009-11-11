@@ -41,7 +41,7 @@ import java.util.Timer;
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
+ * @version 0.9.0 (20091111)
  * @since 0.6.0
  */
 public abstract class TimerAbstract extends ServiceAbstract implements TimeMachine {
@@ -76,6 +76,10 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 	 * @since 0.6.0
 	 */
     public void setTimer(final Timer timer) {
+    	if (null == timer) {
+    		throw new IllegalArgumentException("timer is null!"); //$NON-NLS-1$
+    	}
+
         this.timer = timer;
     }
 
@@ -115,12 +119,20 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
      */
     @Override
     public synchronized void addListener(final ListenerTimer listener) {
-        listListener.add(listener);
+    	if (null == listener) {
+    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    	}
+
+    	listListener.add(listener);
     }
 
     @Override
     public synchronized void removeListener(final ListenerTimer listener) {
-        listListener.remove(listener);
+    	if (null == listener) {
+    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    	}
+
+    	listListener.remove(listener);
     }
 
     @Override

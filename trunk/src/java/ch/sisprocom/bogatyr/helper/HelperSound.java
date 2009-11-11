@@ -81,6 +81,9 @@ public abstract class HelperSound {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
+		if (!file.exists()) {
+			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+		}
 		
 		return getClip(AudioSystem.getAudioInputStream(file));
 	}
@@ -119,6 +122,9 @@ public abstract class HelperSound {
 	public static Sequence getSequence(final File file) throws InvalidMidiDataException, IOException {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (!file.exists()) {
+			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
 		}
 		
 		return MidiSystem.getSequence(file);

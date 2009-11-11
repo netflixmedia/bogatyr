@@ -66,10 +66,10 @@ import java.util.Date;
 
 
 /**
- * This class generates, reads and save X.509 certificates.
+ * This class generates, reads and writes X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091103)
+ * @version 0.9.0 (20091111)
  * @since 0.3.0
  */
 public class CertificateProviderImpl extends ServiceAbstract implements CertificateProvider {
@@ -80,6 +80,9 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     public X509Certificate readCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException { //$JUnit$
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (!file.exists()) {
+			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
 		}
 
 		final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
@@ -116,7 +119,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     @Override
     public void writeCertificate(final OutputStream os, final Certificate cert) throws CertificateEncodingException, IOException {
 		if (null == os) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
 		}
 		if (null == cert) {
 			throw new IllegalArgumentException("cert is null!"); //$NON-NLS-1$

@@ -40,10 +40,18 @@ import java.net.Socket;
  * Defines the methods for the implementation of the server thread.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091111)
  * @since 0.7.0
  */
 public interface ServerThread extends Runnable {
+	/**
+     * Returns the instantiation time of the server thread.
+     *
+     * @return instantiation time of the server thread
+     * @since 0.9.0
+     */
+	long getCreateTime();
+	
 	/**
 	 * Returns the current {@link Socket} of the thread.
 	 * 
@@ -52,6 +60,15 @@ public interface ServerThread extends Runnable {
 	 * @since 0.7.0
 	 */
 	Socket getSocket();
+	
+	/**
+	 * Sets the {@link Socket} for the thread.
+	 * 
+	 * @param socket for the client
+	 * @see Socket
+	 * @since 0.9.0
+	 */
+    void setSocket(Socket socket);
 
 	/**
      * Reads a socket-stream.

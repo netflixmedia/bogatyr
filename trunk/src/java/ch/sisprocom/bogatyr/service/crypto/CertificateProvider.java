@@ -43,7 +43,7 @@ import java.util.Date;
 
 
 /**
- * This interface is to generate, read and save X.509 certificates.
+ * This interface is to generate, read and write X.509 certificates.
  * 
  * @author Stefan Laubenberger
  * @version 0.9.0 (20091109)

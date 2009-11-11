@@ -39,10 +39,18 @@ import java.net.Socket;
  * Defines the methods for the implementation of the datagram dumper.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091111)
  * @since 0.8.0
  */
 public interface DatagramDumper extends Runnable {
+    /**
+     * Returns the instantiation time of the datagram controller.
+     *
+     * @return instantiation time of the datagram controller
+     * @since 0.9.0
+     */
+	long getCreateTime();
+
 	/**
      * Start the datagram controller on the given port.
      * 

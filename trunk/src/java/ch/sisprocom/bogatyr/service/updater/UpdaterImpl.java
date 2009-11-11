@@ -117,12 +117,20 @@ public class UpdaterImpl extends ServiceAbstract implements Updater, ListenerUpd
 
     @Override
     public synchronized void addListener(final ListenerUpdater listener) {
-        listListener.add(listener);
+    	if (null == listener) {
+    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    	}
+
+    	listListener.add(listener);
     }
 
     @Override
     public synchronized void removeListener(final ListenerUpdater listener) {
-        listListener.remove(listener);
+    	if (null == listener) {
+    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    	}
+
+    	listListener.remove(listener);
     }
 
     @Override

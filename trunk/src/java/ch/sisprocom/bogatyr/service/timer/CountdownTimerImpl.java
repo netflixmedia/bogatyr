@@ -38,7 +38,7 @@ import java.util.TimerTask;
  * This is a countdown timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
+ * @version 0.9.0 (20091111)
  * @since 0.6.0
  */
 public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer {
@@ -50,12 +50,26 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
      */
     @Override
     public synchronized void start(final long runtime) {
-        start(0L, runtime, 1000L);
+		if (0 > runtime) {
+			throw new IllegalArgumentException("runtime must be positive: " + runtime); //$NON-NLS-1$
+		}
+
+		start(0L, runtime, 1000L);
     }
 
     @Override
     public synchronized void start(final long delay, final long runtime, final long interval) {
-        getTimer().cancel();
+		if (0 > delay) {
+			throw new IllegalArgumentException("delay must be positive: " + delay); //$NON-NLS-1$
+		}
+		if (0 > runtime) {
+			throw new IllegalArgumentException("runtime must be positive: " + runtime); //$NON-NLS-1$
+		}
+		if (0 > interval) {
+			throw new IllegalArgumentException("interval must be positive: " + interval); //$NON-NLS-1$
+		}
+
+    	getTimer().cancel();
 
         setTimer(new Timer());
         this.runtime = runtime;
@@ -78,6 +92,10 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 
 	@Override
     public synchronized void setRuntime(final long runtime) {
+		if (0 > runtime) {
+			throw new IllegalArgumentException("runtime must be positive: " + runtime); //$NON-NLS-1$
+		}
+
 		this.runtime = runtime;
 	}
 	

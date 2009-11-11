@@ -40,11 +40,18 @@ import java.net.Socket;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091111)
  * @since 0.7.0
  */
 public interface Client extends Runnable {
-
+	/**
+     * Returns the instantiation time of the client.
+     *
+     * @return instantiation time of the client
+     * @since 0.9.0
+     */
+	long getCreateTime();
+	
 	/**
 	 * Returns the host of the {@link Socket}.
 	 * 
@@ -84,6 +91,15 @@ public interface Client extends Runnable {
 	 * @since 0.7.0
 	 */
 	Socket getSocket();
+	
+	/**
+	 * Sets the {@link Socket} for the client.
+	 * 
+	 * @param socket for the client
+	 * @see Socket
+	 * @since 0.9.0
+	 */
+    void setSocket(Socket socket);
 	
 	/**
      * Start the client and open the {@link Socket}.

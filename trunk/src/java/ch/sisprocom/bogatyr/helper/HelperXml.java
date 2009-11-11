@@ -45,7 +45,7 @@ import java.io.OutputStream;
  * This is a helper class for XML operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091110)
  * @since 0.3.0
  */
 public abstract class HelperXml {
@@ -85,6 +85,16 @@ public abstract class HelperXml {
      * @since 0.9.0
      */
     public static <T> void serialize(final T data, final File file) throws JAXBException {
+		if (null == data) {
+			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
+		}
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (!file.isFile()) {
+			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		}
+
 		getMarshaller(data.getClass()).marshal(data, file);
     }
 
@@ -97,6 +107,13 @@ public abstract class HelperXml {
      * @since 0.9.0
      */
     public static <T> void serialize(final T data, final OutputStream os) throws JAXBException {
+		if (null == data) {
+			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
+		}
+		if (null == os) {
+			throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
+		}
+
 		getMarshaller(data.getClass()).marshal(data, os);
     }
 
@@ -111,6 +128,19 @@ public abstract class HelperXml {
      */
     @SuppressWarnings("unchecked")
 	public static <T> T deserialize(final Class<T> clazz, final File file) throws JAXBException {
+		if (null == clazz) {
+			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
+		}
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (!file.isFile()) {
+			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		}
+		if (!file.exists()) {
+			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+		}
+
 		return (T)getUnmarshaller(clazz).unmarshal(file);
     }
 
@@ -125,6 +155,13 @@ public abstract class HelperXml {
      */
     @SuppressWarnings("unchecked")
 	public static <T> T deserialize(final Class<T> clazz, final InputStream is) throws JAXBException {
+		if (null == clazz) {
+			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
+		}
+		if (null == is) {
+			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+		}
+
 		return (T)getUnmarshaller(clazz).unmarshal(is);
     }
     

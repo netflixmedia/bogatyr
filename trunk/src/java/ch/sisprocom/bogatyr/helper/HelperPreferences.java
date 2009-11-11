@@ -46,12 +46,12 @@ import java.util.prefs.Preferences;
  * This is a helper class for preferences.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
+ * @version 0.9.0 (20091110)
  * @since 0.5.0
  */
 public abstract class HelperPreferences { //TODO complete and test it!
 	
-	public static void loadFromFile(final File file) throws IOException, InvalidPreferencesFormatException {
+	public static void readFromFile(final File file) throws IOException, InvalidPreferencesFormatException {
         final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 
         try {
@@ -61,7 +61,7 @@ public abstract class HelperPreferences { //TODO complete and test it!
         }
 	}
 	 
-	public static void save(final File file, final Preferences prefs) throws IOException, BackingStoreException {
+	public static void write(final File file, final Preferences prefs) throws IOException, BackingStoreException {
         final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {
@@ -71,7 +71,7 @@ public abstract class HelperPreferences { //TODO complete and test it!
         }
 	}	
 	  
-	public static void saveUserNode(final File file, final Class<?> clazz) throws IOException, BackingStoreException {
+	public static void writeUserNode(final File file, final Class<?> clazz) throws IOException, BackingStoreException {
         final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {
@@ -81,7 +81,7 @@ public abstract class HelperPreferences { //TODO complete and test it!
         }
 	}	
 	  
-	public static void saveSystemNode(final File file, final Class<?> clazz) throws IOException, BackingStoreException {
+	public static void writeSystemNode(final File file, final Class<?> clazz) throws IOException, BackingStoreException {
         final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {

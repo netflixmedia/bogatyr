@@ -63,25 +63,16 @@ public class DatagramDumperImpl implements DatagramDumper {
 
     private boolean isRunning;
     
-    protected DatagramDumperImpl() {
+    
+    public DatagramDumperImpl() {
     	super();
     }
 
-    protected DatagramDumperImpl(final int port) {
+    public DatagramDumperImpl(final int port) {
         super();
 
         setPort(port);
     }
-
-    /**
-     * Returns the instantiation time of the datagram controller.
-     *
-     * @return instantiation time of the datagram controller
-     * @since 0.8.0
-     */
-	public long getCreateTime() {
-		return createTime;
-	}
 
 	/**
 	 * Returns the current {@link Thread} of the controller.
@@ -132,6 +123,11 @@ public class DatagramDumperImpl implements DatagramDumper {
     /*
      * Implemented methods
      */
+    @Override
+    public long getCreateTime() {
+		return createTime;
+	}
+
     @Override
     public int getPort() {
         return port;
@@ -195,12 +191,20 @@ public class DatagramDumperImpl implements DatagramDumper {
 
     @Override
     public synchronized void addListener(final ListenerDatagram listener) {
-        listListener.add(listener);
+    	if (null == listener) {
+    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    	}
+
+    	listListener.add(listener);
     }
 
     @Override
     public synchronized void removeListener(final ListenerDatagram listener) {
-        listListener.remove(listener);
+    	if (null == listener) {
+    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    	}
+
+    	listListener.remove(listener);
     }
 
     @Override

@@ -42,10 +42,17 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091111)
  * @since 0.7.0
  */
 public interface Server extends Runnable {
+	/**
+     * Returns the instantiation time of the server.
+     *
+     * @return instantiation time of the server
+     * @since 0.9.0
+     */
+	long getCreateTime();
 	
 	/**
 	 * Returns the {@link ServerSocket} of the current server.
@@ -56,6 +63,15 @@ public interface Server extends Runnable {
 	 */
 	ServerSocket getServerSocket();
 
+	/**
+	 * Sets the {@link ServerSocket} for the server.
+	 * 
+	 * @param serverSocket for the server
+	 * @see ServerSocket
+	 * @since 0.9.0
+	 */
+    void setServerSocket(ServerSocket serverSocket);
+    
 	/**
 	 * Returns the port of the {@link ServerSocket}.
 	 * 

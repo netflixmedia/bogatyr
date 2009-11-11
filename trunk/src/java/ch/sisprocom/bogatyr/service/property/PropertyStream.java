@@ -47,17 +47,22 @@ import java.util.Properties;
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
+ * @version 0.9.0 (20091111)
  * @since 0.1.0
  */
 public class PropertyStream extends ServiceAbstract implements Property {
 	private final Properties properties;
 
 	
-    public PropertyStream(final InputStream inputStream) throws IOException {
+    public PropertyStream(final InputStream is) throws IOException {
         super();
+       
+        if (null == is) {
+			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+		}
+
         properties = new Properties();
-        properties.load(inputStream);
+        properties.load(is);
     }
 
     public PropertyStream(final File file) throws IOException {

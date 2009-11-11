@@ -31,7 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import javax.imageio.ImageIO;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -40,16 +39,20 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
+
+import javax.imageio.ImageIO;
 
 
 /**
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091110)
+ * @version 0.9.0 (20091111)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -59,7 +62,46 @@ public abstract class HelperImage {
 	public static final String TYPE_BMP  = "bmp"; //$NON-NLS-1$
 
     /**
-     * Saves an image from a {@link RenderedImage} to a {@link File}.
+     * Reads an image from a {@link File} to a {@link BufferedImage}.
+     *
+     * @param file for the image
+     * @return {@link BufferedImage}
+     * @throws IOException
+     * @see File
+     * @see BufferedImage
+     * @since 0.9.0
+     */
+    public static BufferedImage readImage(final File file) throws IOException {
+		if (null == file) {
+			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+		}
+		if (!file.exists()) {
+			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+		}
+
+		return ImageIO.read(file);
+    }
+    
+    /**
+     * Reads an image from an {@link InputStream} to a {@link BufferedImage}.
+     *
+     * @param is input stream for the image
+     * @return {@link BufferedImage}
+     * @throws IOException
+     * @see InputStream
+     * @see BufferedImage
+     * @since 0.9.0
+     */
+    public static BufferedImage readImage(final InputStream is) throws IOException {
+		if (null == is) {
+			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+		}
+
+		return ImageIO.read(is);
+    }  
+    
+	/**
+     * Writes an image from a {@link RenderedImage} to a {@link File}.
      *
      * @param file for the image
      * @param type of the image (e.g. "jpg")
@@ -69,7 +111,7 @@ public abstract class HelperImage {
      * @see RenderedImage
      * @since 0.4.0
      */
-    public static void saveImage(final File file, final String type, final RenderedImage image) throws IOException { //$JUnit$
+    public static void writeImage(final File file, final String type, final RenderedImage image) throws IOException { //$JUnit$
 		if (null == image) {
 			throw new IllegalArgumentException("image is null!"); //$NON-NLS-1$
 		}
@@ -82,21 +124,32 @@ public abstract class HelperImage {
 		
 		ImageIO.write(image, type, file);
     }
-
-    /**
-     * Saves an image from a {@link Component} to a {@link File}.
-     * 
-     * @param file for the image
+    
+	/**
+     * Writes an image from a {@link RenderedImage} to an {@link OutputStream}.
+     *
+     * @param os output stream for the image
      * @param type of the image (e.g. "jpg")
-     * @param component {@link Component} for the image
+     * @param image {@link RenderedImage} for the image
      * @throws IOException
-     * @see File
-     * @see Component
-     * @since 0.4.0
+     * @see OutputStream
+     * @see RenderedImage
+     * @since 0.9.0
      */
-	public static void saveImage(final File file, final String type, final Component component) throws IOException { //$JUnit$
-		saveImage(file, type, getImage(component));
-	} 
+    public static void writeImage(final OutputStream os, final String type, final RenderedImage image) throws IOException {
+		if (null == image) {
+			throw new IllegalArgumentException("image is null!"); //$NON-NLS-1$
+		}
+		if (null == type || !getAvailableImageWriteFormats().contains(type)) {
+			throw new IllegalArgumentException("type is null or invalid: " + type); //$NON-NLS-1$
+		}
+		if (null == os) {
+			throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
+		}
+		
+		ImageIO.write(image, type, os);
+    }
+
     
 	/**
      * Gets a {@link RenderedImage} from a {@link Component}.
