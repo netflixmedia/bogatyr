@@ -20,44 +20,7 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/timer/TimerImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/timer/TimerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/localizer/LocalizerFile.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/localizer/LocalizerFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoAES.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoAES.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThreadAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThreadAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperIO.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperIO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/paginator/PaginatorImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/paginator/PaginatorImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/localizer/LocalizerAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/localizer/LocalizerAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperImage.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/ScramblerImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/ScramblerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperPreferences.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperPreferences.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CertificateProviderImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CertificateProviderImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/encoder/EncoderHex.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/encoder/EncoderHex.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperXml.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperXml.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCodeGenerator.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCodeGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/timer/TimerAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/timer/TimerAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCodeGeneratorImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCodeGeneratorImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/Server.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/Server.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/updater/UpdaterImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/updater/UpdaterImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumper.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoRSA.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoRSA.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/Client.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperSound.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperSound.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CertificateProvider.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CertificateProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/provider/ProviderSqlImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/provider/ProviderSqlImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/ClientAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/ClientAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/property/PropertyStream.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/property/PropertyStream.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumperImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumperImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/encoder/EncoderBase64.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/encoder/EncoderBase64.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/ch/sisprocom/bogatyr/test/helper/HelperPdfTest.java" afterPath="$PROJECT_DIR$/src/test/ch/sisprocom/bogatyr/test/helper/HelperPdfTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/timer/CountdownTimerImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/timer/CountdownTimerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThread.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/ch/sisprocom/bogatyr/test/helper/HelperImageTest.java" afterPath="$PROJECT_DIR$/src/test/ch/sisprocom/bogatyr/test/helper/HelperImageTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperPdf.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperPdf.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/launcher/LauncherFile.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/launcher/LauncherFile.java" />
-    </list>
+    <list default="true" readonly="true" name="Default" comment="" />
     <ignored path="Bogatyr.iws" />
     <ignored path=".idea/workspace.xml" />
   </component>
