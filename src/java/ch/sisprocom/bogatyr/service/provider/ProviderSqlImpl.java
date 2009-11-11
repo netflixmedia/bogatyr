@@ -45,12 +45,10 @@ import java.sql.Statement;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091027)
+ * @version 0.9.0 (20091111)
  * @since 0.2.0
  */
 public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
-//	private static final Logger log = Logger.getLogger(ProviderSqlAbstract.class);
-	
 	// Server
 	private String driver;
 	private String url;
@@ -58,11 +56,11 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	private String password;
 	
 	
-	protected ProviderSqlImpl() {
+	public ProviderSqlImpl() {
         super();
 	}
 	
-	protected ProviderSqlImpl(final String driver, final String url, final String user, final String password) {
+	public ProviderSqlImpl(final String driver, final String url, final String user, final String password) {
         super();
         setDriver(driver);
         setUrl(url);

@@ -63,7 +63,7 @@ import java.util.Scanner;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091110)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -113,11 +113,17 @@ public abstract class HelperIO {
 		if (null == source) {
 			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
 		}
+		if (!source.exists()) {
+			throw new IllegalArgumentException("source doesn't exists: " + source); //$NON-NLS-1$
+		}
 		if (!source.isDirectory()) {
 			throw new IllegalArgumentException("source is not a directory: " + source); //$NON-NLS-1$
 		}
 		if (null == dest) {
 			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+		}
+		if (source.equals(dest)) {
+			throw new IllegalArgumentException("source is equals to dest!"); //$NON-NLS-1$
 		}
 
 		if (!dest.exists()) {
@@ -165,12 +171,18 @@ public abstract class HelperIO {
         if (null == source) {
             throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
         }
-        if (!source.isFile()) {
+		if (!source.exists()) {
+			throw new IllegalArgumentException("source doesn't exists: " + source); //$NON-NLS-1$
+		}
+		if (!source.isFile()) {
             throw new IllegalArgumentException("source is not a file: " + source); //$NON-NLS-1$
         }
         if (null == dest) {
             throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
         }
+		if (source.equals(dest)) {
+			throw new IllegalArgumentException("source is equals to dest!"); //$NON-NLS-1$
+		}
         if (1 > bufferSize) {
             throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
         }
@@ -218,10 +230,16 @@ public abstract class HelperIO {
 		if (null == source) {
 			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
 		}
+		if (!source.exists()) {
+			throw new IllegalArgumentException("source doesn't exists: " + source); //$NON-NLS-1$
+		}
 		if (null == dest) {
 			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
 		}
-
+		if (source.equals(dest)) {
+			throw new IllegalArgumentException("source is equals to dest!"); //$NON-NLS-1$
+		}
+		
 		if (source.isDirectory()) {
 	    	copyDirectory(source, dest);
 	    } else {
@@ -267,8 +285,14 @@ public abstract class HelperIO {
 		if (null == source) {
 			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
 		}
+		if (!source.exists()) {
+			throw new IllegalArgumentException("source doesn't exists: " + source); //$NON-NLS-1$
+		}
 		if (null == dest) {
 			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+		}
+		if (source.equals(dest)) {
+			throw new IllegalArgumentException("source is equals to dest!"); //$NON-NLS-1$
 		}
 
 		return source.renameTo(dest);
@@ -289,9 +313,6 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
-//		if (!file.isFile()) {
-//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
-//		}
 		if (!HelperString.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
@@ -338,9 +359,6 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
-//		if (!file.isFile()) {
-//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
-//		}
 		if (null == data) {
 			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
 		}
@@ -370,9 +388,6 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
-//		if (!file.isFile()) {
-//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
-//		}
 		if (!HelperString.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
@@ -518,13 +533,18 @@ public abstract class HelperIO {
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		}
+		if (!file.exists()) {
+			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+		}
 
 		final long length = file.length();
 
+		if (Integer.MAX_VALUE < length) {
+            throw new IllegalArgumentException("length of file (" + length + ") is to large to process (" + Integer.MAX_VALUE + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 		if (length > HelperEnvironment.getMemoryHeapFree()) {
             throw new IllegalArgumentException("length of file (" + length + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
         }
-
 		
 		final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 		final byte[] buffer;
@@ -554,6 +574,9 @@ public abstract class HelperIO {
 		}
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		}
+		if (!file.exists()) {
+			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
@@ -613,6 +636,9 @@ public abstract class HelperIO {
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		}
+		if (!file.exists()) {
+			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(encoding)) {
 			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
 		}
@@ -666,6 +692,9 @@ public abstract class HelperIO {
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		}
+		if (!file.exists()) {
+			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+		}
 		if (null == os) {
 			throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
 		}
@@ -686,9 +715,6 @@ public abstract class HelperIO {
 		if (null == fileOutput) {
 			throw new IllegalArgumentException("fileOutput is null!"); //$NON-NLS-1$
 		}
-//		if (!fileOutput.isFile()) {
-//			throw new IllegalArgumentException("fileOutput is not a file: " + fileOutput); //$NON-NLS-1$
-//		}
 		if (!HelperArray.isValid(files)) {
 			throw new IllegalArgumentException("list is null or empty!"); //$NON-NLS-1$
 		}
@@ -933,7 +959,7 @@ public abstract class HelperIO {
         if (null == path) {
             throw new IllegalArgumentException("path is null!"); //$NON-NLS-1$
         }
-
+		
         final List<File> files = new ArrayList<File>();
         final File[] entries = path.listFiles();
         int recurse = recurseDepth;

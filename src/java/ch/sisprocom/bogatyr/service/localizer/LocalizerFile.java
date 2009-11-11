@@ -43,7 +43,7 @@ import java.util.ResourceBundle;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091111)
  * @since 0.1.0
  */
 public class LocalizerFile extends LocalizerAbstract {
@@ -57,7 +57,12 @@ public class LocalizerFile extends LocalizerAbstract {
 	
 	public LocalizerFile(final String localizerBase) {
         super();
-        this.localizerBase = localizerBase;
+
+        if (null == localizerBase) {
+			throw new IllegalArgumentException("localizerBase is null!"); //$NON-NLS-1$
+		}
+		
+		this.localizerBase = localizerBase;
 
         init();
     }
@@ -79,7 +84,11 @@ public class LocalizerFile extends LocalizerAbstract {
 	 * @since 0.1.0
 	 */
     public synchronized void setLocalizerBase(final String localizerBase) {
-        this.localizerBase = localizerBase;
+		if (null == localizerBase) {
+			throw new IllegalArgumentException("localizerBase is null!"); //$NON-NLS-1$
+		}
+		
+		this.localizerBase = localizerBase;
         bundle = ResourceBundle.getBundle(localizerBase, getLocale());
     }
 	
@@ -97,7 +106,11 @@ public class LocalizerFile extends LocalizerAbstract {
 	 */
     @Override
 	public synchronized void setLocale(final Locale locale) {
-        bundle = ResourceBundle.getBundle(localizerBase, locale);
+		if (null == locale) {
+			throw new IllegalArgumentException("locale is null!"); //$NON-NLS-1$
+		}
+
+		bundle = ResourceBundle.getBundle(localizerBase, locale);
 
         super.setLocale(locale);
     }
@@ -124,8 +137,9 @@ public class LocalizerFile extends LocalizerAbstract {
     public int getMnemonic(final String key) {
 		try {
 			final String mnemonic = bundle.getString(key + POSTFIX_MNEMONIC);
-			return (int) mnemonic.charAt(0);
-		} catch (Exception ex) {
+			
+			return null == mnemonic ? 0 : (int) mnemonic.charAt(0);
+		} catch (MissingResourceException ex) {
 			return 0;
 		}
 	}

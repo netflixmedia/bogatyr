@@ -57,13 +57,13 @@ import java.util.Map;
  * This is a helper class for PDF operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091110)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
 
     /**
-     * Saves a PDF from a {@link Component} to a {@link File}.
+     * Writes a PDF from a {@link Component} to a {@link File}.
      *
      * @param file output as PDF
      * @param component for the PDF
@@ -73,7 +73,7 @@ public abstract class HelperPdf {
      * @see Component
      * @since 0.5.0
      */
-    public static void savePdfFromComponent(final File file, final Component component) throws IOException, DocumentException { //$JUnit$
+    public static void writePdfFromComponent(final File file, final Component component) throws IOException, DocumentException { //$JUnit$
 		if (null == component) {
 			throw new IllegalArgumentException("component is null!"); //$NON-NLS-1$
 		}
@@ -103,7 +103,7 @@ public abstract class HelperPdf {
 	}
 
     /**
-     * Saves a PDF from multiple (X)HTML files to a {@link File}.
+     * Writes a PDF from multiple (X)HTML files to a {@link File}.
      *
      * @param file output as PDF
      * @param files in (X)HTML format for the PDF
@@ -112,7 +112,7 @@ public abstract class HelperPdf {
      * @see File
      * @since 0.5.0
      */
-	public static void savePdfFromHTML(final File file, final File... files) throws IOException, DocumentException { //$JUnit$
+	public static void writePdfFromHTML(final File file, final File... files) throws IOException, DocumentException { //$JUnit$
 		if (!HelperArray.isValid(files)) {
 			throw new IllegalArgumentException("files is null or empty!"); //$NON-NLS-1$
 		}
@@ -161,6 +161,19 @@ public abstract class HelperPdf {
      */
 	@SuppressWarnings("unchecked")
 	public static void setMetaData(final String source, final String dest, final Map<String, String> metadata) throws IOException, DocumentException {
+		if (null == source) {
+			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
+		}
+		if (null == dest) {
+			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+		}
+		if (!HelperMap.isValid(metadata)) {
+			throw new IllegalArgumentException("metadata is null or empty!"); //$NON-NLS-1$
+		}
+		if (source.equals(dest)) {
+			throw new IllegalArgumentException("source is equals to dest!"); //$NON-NLS-1$
+		}
+
 		PdfReader reader = null;
 		PdfStamper stamper = null;
 		

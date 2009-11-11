@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.service.crypto;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -54,7 +55,7 @@ import java.security.Security;
  * This is a class for asymmetric cryptology via RSA.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
+ * @version 0.9.0 (20091111)
  * @since 0.1.0
  */
 public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
@@ -166,7 +167,10 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
     	if (0 >= keySize || 0 != keySize % HelperNumber.VALUE_16) {
 			throw new IllegalArgumentException("keySize is invalid: " + keySize); //$NON-NLS-1$
 		}
-    	
+        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+   	
     	final int space = keySize/8 - 11;
 		byte[] result = null;
 		final byte[] temp = new byte[space];
@@ -224,6 +228,9 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
     	if (0 >= keySize || 0 != keySize % HelperNumber.VALUE_16) {
 			throw new IllegalArgumentException("keySize is invalid: " + keySize); //$NON-NLS-1$
 		}
+        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 
 		final int space = keySize/8;
 		byte[] result = null;

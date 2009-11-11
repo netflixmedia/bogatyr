@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.helper.encoder;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperString;
 
@@ -40,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.9.0 (20091110)
  * @since 0.1.0
  */
 public abstract class EncoderBase64 {
@@ -91,7 +92,10 @@ public abstract class EncoderBase64 {
 		if (!HelperString.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
-		
+        if (input.length() * 2 > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("the doubled input (" + input.length() * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
 		return new String(encode(input.getBytes()));
 	}
 
@@ -107,6 +111,9 @@ public abstract class EncoderBase64 {
 		if (!HelperArray.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
+        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 		
 		return encode(input, input.length);
 	}
@@ -122,7 +129,10 @@ public abstract class EncoderBase64 {
 		if (!HelperString.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
-		
+        if (input.length() * 2 > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("the doubled input (" + input.length() * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
 		return decode(input.toCharArray());
 	}
 
@@ -138,7 +148,10 @@ public abstract class EncoderBase64 {
 		if (null == input || 0 >= input.length) {
 			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
 		}
-		
+        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+
 		int iLen = input.length;
 
 		if (0 != iLen % 4) {

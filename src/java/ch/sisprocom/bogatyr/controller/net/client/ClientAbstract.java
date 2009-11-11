@@ -47,7 +47,7 @@ import java.util.HashSet;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091111)
  * @since 0.7.0
  */
 public abstract class ClientAbstract implements Client {
@@ -67,24 +67,12 @@ public abstract class ClientAbstract implements Client {
     	super();
     }
 
-
     protected ClientAbstract(final String host, final int port) {
         super();
 
         setHost(host);
         setPort(port);
     }
-
-
-	/**
-     * Returns the instantiation time of the client.
-     *
-     * @return instantiation time of the client
-     * @since 0.7.0
-     */
-	public long getCreateTime() {
-		return createTime;
-	}
 
 	/**
 	 * Returns the current {@link Thread} of the client.
@@ -105,17 +93,11 @@ public abstract class ClientAbstract implements Client {
 	 * @since 0.8.0
 	 */
 	protected void setThread(final Thread thread) {
-		this.thread = thread;
-	}
-	
-	/**
-	 * Sets the {@link Socket} for the client.
-	 * @param socket for the client
-	 * @see Socket
-	 * @since 0.8.0
-	 */
-    protected void setSocket(final Socket socket) {
-		this.socket = socket;
+    	if (null == thread) {
+    		throw new IllegalArgumentException("thread is null!"); //$NON-NLS-1$
+    	}
+
+    	this.thread = thread;
 	}
 
 
@@ -157,7 +139,12 @@ public abstract class ClientAbstract implements Client {
     /*
      * Implemented methods
      */
-    @Override
+	@Override
+	public long getCreateTime() {
+		return createTime;
+	}
+	
+	@Override
     public String getHost() {
         return host;
     }
@@ -186,9 +173,19 @@ public abstract class ClientAbstract implements Client {
     	if (0 >= port || HelperNumber.VALUE_65536 <= port) {
     		throw new IllegalArgumentException("port outside of the valid range (0 - 65535): " + port); //$NON-NLS-1$
     	}
+    	
         this.port = port;
     }
+    
+    @Override
+    public void setSocket(final Socket socket) {
+    	if (null == socket) {
+    		throw new IllegalArgumentException("socket is null!"); //$NON-NLS-1$
+    	}
 
+		this.socket = socket;
+	}
+    
     @Override
     public void start() throws IOException {
 		socket = new Socket(host, port);
@@ -253,12 +250,20 @@ public abstract class ClientAbstract implements Client {
 
     @Override
     public synchronized void addListener(final ListenerClient listener) {
-        listListener.add(listener);
+    	if (null == listener) {
+    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    	}
+
+    	listListener.add(listener);
     }
 
     @Override
     public synchronized void removeListener(final ListenerClient listener) {
-        listListener.remove(listener);
+    	if (null == listener) {
+    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    	}
+
+    	listListener.remove(listener);
     }
 
     @Override

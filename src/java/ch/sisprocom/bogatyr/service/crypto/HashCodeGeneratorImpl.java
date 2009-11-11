@@ -49,28 +49,22 @@ import java.security.NoSuchAlgorithmException;
  * This is an abstract implementation for hash code generation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091111)
  * @since 0.9.0
  */
 public abstract class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
 	private static final int DEFAULT_BUFFER_SIZE = HelperNumber.VALUE_1024;
 
-	private final HashCode hashCode;
-	
-	
-	public HashCodeGeneratorImpl(final HashCode hashCode) {
-		super();
-		this.hashCode = hashCode;
-	}
-
-	
 	/*
 	 * Implemented methods
 	 */
     @Override
-	public String getHash(final byte[] input) throws NoSuchAlgorithmException {
+	public String getHash(final byte[] input, final HashCode hashCode) throws NoSuchAlgorithmException {
         if (null == input) {
             throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+        }
+        if (null == hashCode) {
+            throw new IllegalArgumentException("hashCode is null!"); //$NON-NLS-1$
         }
 
     	final MessageDigest md = MessageDigest.getInstance(hashCode.getAlgorithm());
@@ -82,23 +76,32 @@ public abstract class HashCodeGeneratorImpl extends ServiceAbstract implements H
 	}
 
 	@Override
-	public String getHash(final File input) throws NoSuchAlgorithmException, IOException {
-		return getHash(input, DEFAULT_BUFFER_SIZE);
+	public String getHash(final File input, final HashCode hashCode) throws NoSuchAlgorithmException, IOException {
+		return getHash(input, hashCode, DEFAULT_BUFFER_SIZE);
 	}
 
     @Override
-    public String getHash(final File input, final int bufferSize) throws NoSuchAlgorithmException, IOException {
+    public String getHash(final File input, final HashCode hashCode, final int bufferSize) throws NoSuchAlgorithmException, IOException {
         if (null == input) {
             throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
         }
+		if (!input.exists()) {
+			throw new IllegalArgumentException("input doesn't exists: " + input); //$NON-NLS-1$
+		}
+        if (null == hashCode) {
+            throw new IllegalArgumentException("hashCode is null!"); //$NON-NLS-1$
+        }
 
-        return getHash(new BufferedInputStream(new FileInputStream(input)), bufferSize);
+        return getHash(new BufferedInputStream(new FileInputStream(input)), hashCode, bufferSize);
     }
 
 	@Override
-	public String getHash(final InputStream is, final int bufferSize) throws NoSuchAlgorithmException, IOException {
+	public String getHash(final InputStream is, final HashCode hashCode, final int bufferSize) throws NoSuchAlgorithmException, IOException {
         if (null == is) {
             throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+        }
+        if (null == hashCode) {
+            throw new IllegalArgumentException("hashCode is null!"); //$NON-NLS-1$
         }
         if (1 > bufferSize) {
             throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -122,7 +125,7 @@ public abstract class HashCodeGeneratorImpl extends ServiceAbstract implements H
 	}
 
 	@Override
-	public String getHash(final InputStream is) throws NoSuchAlgorithmException, IOException  {
-		return getHash(is, DEFAULT_BUFFER_SIZE);
+	public String getHash(final InputStream is, final HashCode hashCode) throws NoSuchAlgorithmException, IOException  {
+		return getHash(is, hashCode, DEFAULT_BUFFER_SIZE);
 	}
 }

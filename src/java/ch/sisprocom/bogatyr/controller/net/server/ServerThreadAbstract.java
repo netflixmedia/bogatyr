@@ -46,7 +46,7 @@ import java.util.HashSet;
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091111)
  * @since 0.7.0
  */
 public abstract class ServerThreadAbstract implements ServerThread {
@@ -56,24 +56,14 @@ public abstract class ServerThreadAbstract implements ServerThread {
 	
 	private Collection<ListenerServerThread> listListener = new HashSet<ListenerServerThread>();
 
-	private final Socket socket;
+	private Socket socket;
 	
 	private boolean isRunning;
 	
 
 	protected ServerThreadAbstract(final Socket socket) {
         super();
-		this.socket = socket;
-	}
-
-	/**
-     * Returns the instantiation time of the server thread.
-     *
-     * @return instantiation time of the server thread
-     * @since 0.7.0
-     */
-	public long getCreateTime() {
-		return createTime;
+		setSocket(socket);
 	}
 
 	/**
@@ -86,6 +76,21 @@ public abstract class ServerThreadAbstract implements ServerThread {
 	public Thread getThread() {
 		return thread;
 	}
+	
+	/**
+	 * Sets the current {@link Thread}.
+	 * 
+	 * @param thread for the client
+	 * @see Thread
+	 * @since 0.9.0
+	 */
+	protected void setThread(final Thread thread) {
+    	if (null == thread) {
+    		throw new IllegalArgumentException("thread is null!"); //$NON-NLS-1$
+    	}
+
+    	this.thread = thread;
+	}	
 	
 	
 	/*
@@ -127,8 +132,22 @@ public abstract class ServerThreadAbstract implements ServerThread {
 	 * Implemented methods
 	 */
 	@Override
+	public long getCreateTime() {
+		return createTime;
+	}
+	
+	@Override
     public Socket getSocket() {
 		return socket;
+	}
+    
+    @Override
+    public void setSocket(final Socket socket) {
+    	if (null == socket) {
+    		throw new IllegalArgumentException("socket is null!"); //$NON-NLS-1$
+    	}
+
+		this.socket = socket;
 	}
 
 	@Override
@@ -191,12 +210,20 @@ public abstract class ServerThreadAbstract implements ServerThread {
 	
     @Override
     public synchronized void addListener(final ListenerServerThread listener) {
-        listListener.add(listener);
+    	if (null == listener) {
+    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    	}
+
+    	listListener.add(listener);
     }
 
     @Override
     public synchronized void removeListener(final ListenerServerThread listener) {
-        listListener.remove(listener);
+    	if (null == listener) {
+    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    	}
+
+    	listListener.remove(listener);
     }
 
     @Override

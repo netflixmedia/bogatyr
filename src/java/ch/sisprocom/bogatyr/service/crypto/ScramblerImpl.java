@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.service.crypto;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
@@ -39,7 +40,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * This is a class for obfuscating data with CFB.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091109)
+ * @version 0.9.0 (20091111)
  * @since 0.3.0
  */
 public class ScramblerImpl extends ServiceAbstract implements Scrambler {
@@ -60,6 +61,9 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 		if (!HelperArray.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
+        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 
 		final byte[] result = new byte[input.length];
 		
@@ -82,6 +86,9 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 		if (!HelperArray.isValid(input)) {
 			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
 		}
+        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 
 		final byte[] result = new byte[input.length];
 		

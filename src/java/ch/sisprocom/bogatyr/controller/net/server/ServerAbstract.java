@@ -46,7 +46,7 @@ import java.util.HashSet;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091111)
  * @since 0.7.0
  */
 public abstract class ServerAbstract implements Server, ListenerServerThread {
@@ -72,22 +72,12 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
         super();
 
         setPort(port);
-        this.timeout = timeout;
+        setTimeout(timeout);
     }
 
     protected ServerAbstract(final int port) {
         this(port, 0);
     }
-
-	/**
-     * Returns the instantiation time of the server.
-     *
-     * @return instantiation time of the server
-     * @since 0.7.0
-     */
-	public long getCreateTime() {
-		return createTime;
-	}
 
 	/**
 	 * Returns the current {@link Thread} of the server.
@@ -108,17 +98,11 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 	 * @since 0.8.0
 	 */
     protected void setThread(final Thread thread) {
-		this.thread = thread;
-	}
+    	if (null == thread) {
+    		throw new IllegalArgumentException("thread is null!"); //$NON-NLS-1$
+    	}
 
-	/**
-	 * Sets the {@link ServerSocket} for the server.
-	 * @param serverSocket for the server
-	 * @see ServerSocket
-	 * @since 0.8.0
-	 */
-    protected void setServerSocket(final ServerSocket serverSocket) {
-		this.serverSocket = serverSocket;
+		this.thread = thread;
 	}
 
 	protected void setRunning(final boolean isRunning) {
@@ -138,6 +122,11 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 	/*
      * Implemented methods
      */
+    @Override
+	public long getCreateTime() {
+		return createTime;
+	}
+
     @Override
     public ServerSocket getServerSocket() {
         return serverSocket;
@@ -161,9 +150,21 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
         this.port = port;
     }
 
+    @Override
+    public void setServerSocket(final ServerSocket serverSocket) {
+    	if (null == serverSocket) {
+    		throw new IllegalArgumentException("serverSocket is null!"); //$NON-NLS-1$
+    	}
+
+		this.serverSocket = serverSocket;
+	}
 
     @Override
     public void setTimeout(final int timeout) {
+		if (0 > timeout) {
+			throw new IllegalArgumentException("timeout must be positive: " + timeout); //$NON-NLS-1$
+		}
+
         this.timeout = timeout;
     }
 
@@ -222,11 +223,19 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
     
 	@Override
     public void serverThreadStarted(final ServerThread serverThread) {
+    	if (null == serverThread) {
+    		throw new IllegalArgumentException("serverThread is null!"); //$NON-NLS-1$
+    	}
+
 		listThread.add(serverThread);
 	}
 	
 	@Override
     public void serverThreadStopped(final ServerThread serverThread) {
-		listThread.remove(serverThread);
+    	if (null == serverThread) {
+    		throw new IllegalArgumentException("serverThread is null!"); //$NON-NLS-1$
+    	}
+
+    	listThread.remove(serverThread);
 	}
 }

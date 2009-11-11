@@ -40,64 +40,74 @@ import ch.sisprocom.bogatyr.service.Service;
  * This is an interface for hash code generation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091109)
+ * @version 0.9.0 (20091111)
  * @since 0.8.0
  */
 public interface HashCodeGenerator extends Service {
 	
 	/**
-	 * Generates a hash code for a byte-array with the implementations algorithm.
+	 * Generates a hash code for a byte-array with the given {@link HashCode}.
 	 *
      * @param input byte-array for the hash code
+     * @param hashCode {@link HashCode} algorithm
      * @return generated hash code
 	 * @throws Exception
+	 * @see HashCode
 	 * @since 0.8.0
 	 */
-	String getHash(byte[] input) throws Exception;
+	String getHash(byte[] input, HashCode hashCode) throws Exception;
 	
 	/**
-	 * Generates a hash code for an {@link InputStream} with the implementations algorithm.
+	 * Generates a hash code for an {@link InputStream} with the given {@link HashCode}.
 	 * 
      * @param is {@link InputStream} for the hash code
+     * @param hashCode {@link HashCode} algorithm
      * @return generated hash code
 	 * @throws Exception 
 	 * @see InputStream
+	 * @see HashCode
 	 * @since 0.8.0
 	 */
-	String getHash(InputStream is) throws Exception;
+	String getHash(InputStream is, HashCode hashCode) throws Exception;
 	
 	/**
-	 * Generates a hash code for an {@link InputStream} with the implementations algorithm.
+	 * Generates a hash code for an {@link InputStream} with the given {@link HashCode}.
 	 * 
      * @param is {@link InputStream} for the hash code
+     * @param hashCode {@link HashCode} algorithm
      * @param bufferSize in bytes
      * @return generated hash code
 	 * @throws Exception 
 	 * @see InputStream
+	 * @see HashCode
 	 * @since 0.8.0
 	 */
-	String getHash(InputStream is, int bufferSize) throws Exception;	
+	String getHash(InputStream is, HashCode hashCode, int bufferSize) throws Exception;	
 
 	/**
-	 * Generates a hash code for an input {@link File} with the implementations algorithm.
+	 * Generates a hash code for an input {@link File} with the given {@link HashCode}.
 	 * 
      * @param input {@link File} for the hash code
+     * @param hashCode {@link HashCode} algorithm
      * @return generated hash code
 	 * @throws Exception 
 	 * @see File
+	 * @see HashCode
 	 * @since 0.8.0
 	 */
-	String getHash(File input) throws Exception;	
+	String getHash(File input, HashCode hashCode) throws Exception;	
 	
 	/**
-	 * Generates a hash code for an input {@link File} with the implementations algorithm.
+	 * Generates a hash code for an input {@link File} with the given {@link HashCode}.
 	 * 
      * @param input {@link File} for the hash code
+     * @param hashCode {@link HashCode} algorithm
      * @param bufferSize in bytes
      * @return generated hash code
 	 * @throws Exception 
 	 * @see File
+	 * @see HashCode
 	 * @since 0.8.0
 	 */
-	String getHash(File input, int bufferSize) throws Exception;		
+	String getHash(File input, HashCode hashCode, int bufferSize) throws Exception;		
 }

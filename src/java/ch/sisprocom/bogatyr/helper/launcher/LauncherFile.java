@@ -46,7 +46,7 @@ import java.io.InputStream;
  * This launcher opens, edits and prints files with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091110)
  * @since 0.7.0
  */
 public abstract class LauncherFile {
@@ -93,6 +93,9 @@ public abstract class LauncherFile {
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
 				throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			}
+			if (!file.exists()) {
+				throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
 			}
 
 			Desktop.getDesktop().open(file);
@@ -153,6 +156,9 @@ public abstract class LauncherFile {
 			if (null == file) {
 				throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 			}
+			if (!file.exists()) {
+				throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+			}
 
 			Desktop.getDesktop().edit(file);
 		} else {
@@ -211,6 +217,9 @@ public abstract class LauncherFile {
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
 				throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			}
+			if (!file.exists()) {
+				throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
 			}
 
 			Desktop.getDesktop().print(file);

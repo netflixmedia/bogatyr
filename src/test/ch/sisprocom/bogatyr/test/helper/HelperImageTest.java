@@ -52,11 +52,11 @@ import ch.sisprocom.bogatyr.view.swing.Button;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090528
+ * @version 20091111
  */
 public class HelperImageTest {
 	@Test
-	public void testSaveImage() {
+	public void testWriteImage() {
 		final Component component = new Button("Hello world", HelperString.EMPTY_STRING); //$NON-NLS-1$ 
 		component.setBackground(Color.YELLOW);
 		component.setForeground(Color.BLACK);
@@ -64,11 +64,11 @@ public class HelperImageTest {
 		component.setSize(new Dimension(100, 100));
 
 		try {
-			HelperImage.saveImage(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), HelperImage.TYPE_JPG), HelperImage.TYPE_JPG, component); //$NON-NLS-1$
+			HelperImage.writeImage(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), HelperImage.TYPE_JPG), HelperImage.TYPE_JPG, HelperImage.getImage(component)); //$NON-NLS-1$
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
 		
 		try {
-			HelperImage.saveImage(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), HelperImage.TYPE_JPG), "blabla", component); //$NON-NLS-1$ //$NON-NLS-2$
+			HelperImage.writeImage(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), HelperImage.TYPE_JPG), "blabla", HelperImage.getImage(component)); //$NON-NLS-1$ //$NON-NLS-2$
 			fail("type is invalid!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -76,14 +76,14 @@ public class HelperImageTest {
 			fail(ex.getMessage());
 		}
 
-		try {
-			HelperImage.saveImage(null, HelperImage.TYPE_JPG, component);
-			fail("file is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+//		try {
+//			HelperImage.writeImage(null, HelperImage.TYPE_JPG, HelperImage.getImage(component));
+//			fail("file is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
 	}
 	
 	@Test

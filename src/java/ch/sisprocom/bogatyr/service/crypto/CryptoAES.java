@@ -65,7 +65,7 @@ import java.security.spec.AlgorithmParameterSpec;
  * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091111)
  * @since 0.1.0
  */
 public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
@@ -138,6 +138,9 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
 		}
+        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 
 		return getCipherEncrypt(key).doFinal(input);
 	}
@@ -150,6 +153,9 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
 		}
+        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
+            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 
 		return getCipherDecrypt(key).doFinal(input);
 	}
@@ -235,9 +241,15 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
         if (null == input) {
             throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
         }
-        if (null == output) {
+		if (!input.exists()) {
+			throw new IllegalArgumentException("input doesn't exists: " + input); //$NON-NLS-1$
+		}
+		if (null == output) {
             throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
         }
+		if (input.equals(output)) {
+			throw new IllegalArgumentException("input is equals to output!"); //$NON-NLS-1$
+		}
 
 		encrypt(new BufferedInputStream(new FileInputStream(input)), new BufferedOutputStream(new FileOutputStream(output)), key, bufferSize);
 	}
@@ -252,9 +264,15 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
         if (null == input) {
             throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
         }
+		if (!input.exists()) {
+			throw new IllegalArgumentException("input doesn't exists: " + input); //$NON-NLS-1$
+		}
         if (null == output) {
             throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
         }
+		if (input.equals(output)) {
+			throw new IllegalArgumentException("input is equals to output!"); //$NON-NLS-1$
+		}
 
 		decrypt(new BufferedInputStream(new FileInputStream(input)), new BufferedOutputStream(new FileOutputStream(output)), key, bufferSize);
 	}

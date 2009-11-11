@@ -37,7 +37,7 @@ import java.util.TimerTask;
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091111)
  * @since 0.6.0
  */
 public class TimerImpl extends TimerAbstract implements Timer {
@@ -50,6 +50,10 @@ public class TimerImpl extends TimerAbstract implements Timer {
 
 	@Override
     public void setTime(final long time) {
+		if (0 > time) {
+			throw new IllegalArgumentException("time must be positive: " + time); //$NON-NLS-1$
+		}
+
 		this.time = time;
 	}
 	
@@ -59,11 +63,22 @@ public class TimerImpl extends TimerAbstract implements Timer {
 	 */
     @Override
     public synchronized void start(final long interval) {
-        start(0L, interval);
+		if (0 > interval) {
+			throw new IllegalArgumentException("interval must be positive: " + interval); //$NON-NLS-1$
+		}
+
+		start(0L, interval);
     }
 
     @Override
     public synchronized void start(final long delay, final long interval) {
+		if (0 > delay) {
+			throw new IllegalArgumentException("delay must be positive: " + delay); //$NON-NLS-1$
+		}
+		if (0 > interval) {
+			throw new IllegalArgumentException("interval must be positive: " + interval); //$NON-NLS-1$
+		}
+
     	getTimer().cancel();
 
     	setTimer(new java.util.Timer());
