@@ -37,10 +37,12 @@ package ch.sisprocom.bogatyr.helper.unit;
  * Converts different units of weight.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090612)
+ * @version 0.9.0 (20091116)
  * @since 0.8.0
  */
 public abstract class UnitTime {
+	public static final double FACTOR_NANOSECOND_TO_SECOND = 1000000000.0D; //nanoseconds to seconds
+	public static final double FACTOR_MICROSECOND_TO_SECOND = 1000000.0D; //microseconds to seconds
 	public static final double FACTOR_MILLISECOND_TO_SECOND = 1000.0D; //milliseconds to seconds
 	public static final double FACTOR_SECOND_TO_MINUTE = 60.0D; //seconds to minutes
 	public static final double FACTOR_MINUTE_TO_HOUR = 60.0D; //minutes to hours

@@ -63,14 +63,12 @@ import java.util.Scanner;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091110)
+ * @version 0.9.0 (20091115)
  * @since 0.1.0
  */
 public abstract class HelperIO {
 	public static final String FILE_SEPARATOR = System.getProperty("file.separator"); //$NON-NLS-1$
 	public static final String PATH_SEPARATOR = System.getProperty("path.separator"); //$NON-NLS-1$
-
-	private static final int DEFAULT_BUFFER_SIZE = HelperNumber.VALUE_1024;
 
 	/**
      * Returns a temporary {@link File} which will be deleted on program exit.
@@ -154,7 +152,7 @@ public abstract class HelperIO {
      * @since 0.1.0
      */	
 	public static void copyFile(final File source, final File dest) throws IOException{
-        copyFile(source, dest, DEFAULT_BUFFER_SIZE);
+        copyFile(source, dest, Constants.DEFAULT_FILE_BUFFER_SIZE);
 	}
 
     /**
@@ -191,28 +189,28 @@ public abstract class HelperIO {
         }
         
         final byte[] buffer = new byte[bufferSize];
+//
+//        if (!dest.exists()) {
+//            dest.createNewFile();
+//        }
 
-        if (!dest.exists()) {
-            dest.createNewFile();
-        }
-
-        InputStream fis = null;
-        OutputStream fos = null;
+        InputStream is = null;
+        OutputStream os = null;
 
         try {
-            fis = new FileInputStream(source);
-            fos = new FileOutputStream(dest);
+            is = new FileInputStream(source);
+            os = new FileOutputStream(dest);
             int len;
-            while (0 < (len = fis.read(buffer))) {
-                fos.write(buffer, 0, len);
+            while (0 < (len = is.read(buffer))) {
+                os.write(buffer, 0, len);
             }
-            fos.flush();
+            os.flush();
         } finally {
-            if (fis != null) {
-                fis.close();
+            if (is != null) {
+                is.close();
             }
-            if (fos != null) {
-                fos.close();
+            if (os != null) {
+                os.close();
             }
         }
     }
@@ -473,7 +471,7 @@ public abstract class HelperIO {
      * @since 0.1.0
      */	
 	public static byte[] readStream(final InputStream is) throws IOException {
-		return readStream(is, DEFAULT_BUFFER_SIZE);
+		return readStream(is, Constants.DEFAULT_FILE_BUFFER_SIZE);
 	}
 
     /**

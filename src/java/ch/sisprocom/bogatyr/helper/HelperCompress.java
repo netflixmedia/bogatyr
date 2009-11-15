@@ -51,8 +51,6 @@ import java.util.zip.ZipOutputStream;
  * @since 0.3.0
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
-	private static final int DEFAULT_BUFFER_SIZE = HelperNumber.VALUE_1024;
-
 	/**
      * Writes a ZIP {@link File} containing a list of {@link File}.
      * 
@@ -63,7 +61,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * @since 0.3.0
      */	
 	public static void writeZip(final File file, final File... files) throws IOException {
-		writeZip(file, files, DEFAULT_BUFFER_SIZE);
+		writeZip(file, files, Constants.DEFAULT_FILE_BUFFER_SIZE);
 	}
 	
 	/**
@@ -139,7 +137,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * @since 0.3.0
      */	
 	public static void extractZip(final ZipFile file, final File destinationDirectory) throws IOException { 
-		extractZip(file, destinationDirectory, DEFAULT_BUFFER_SIZE); 
+		extractZip(file, destinationDirectory, Constants.DEFAULT_FILE_BUFFER_SIZE); 
 	} 
 	
 	/**

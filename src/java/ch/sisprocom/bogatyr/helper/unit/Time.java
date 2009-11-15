@@ -37,10 +37,12 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * Time units
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091116)
  * @since 0.8.0
  */
 public enum Time {
+	NANOSECOND(UnitTime.FACTOR_NANOSECOND_TO_SECOND),
+	MICROSECOND(UnitTime.FACTOR_MICROSECOND_TO_SECOND),
 	MILLISECOND(UnitTime.FACTOR_MILLISECOND_TO_SECOND),
 	SECOND(1.0D),
 	MINUTE(1.0D/UnitTime.FACTOR_SECOND_TO_MINUTE),

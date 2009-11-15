@@ -31,11 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.crypto;
 
-import ch.sisprocom.bogatyr.helper.HelperEnvironment;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.encoder.EncoderHex;
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,17 +39,20 @@ import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import ch.sisprocom.bogatyr.helper.Constants;
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
+import ch.sisprocom.bogatyr.helper.encoder.EncoderHex;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
+
 
 /**
  * This is an abstract implementation for hash code generation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20091115)
  * @since 0.9.0
  */
 public abstract class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
-	private static final int DEFAULT_BUFFER_SIZE = HelperNumber.VALUE_1024;
-
 	/*
 	 * Implemented methods
 	 */
@@ -77,7 +75,7 @@ public abstract class HashCodeGeneratorImpl extends ServiceAbstract implements H
 
 	@Override
 	public String getHash(final File input, final HashCode hashCode) throws NoSuchAlgorithmException, IOException {
-		return getHash(input, hashCode, DEFAULT_BUFFER_SIZE);
+		return getHash(input, hashCode, Constants.DEFAULT_FILE_BUFFER_SIZE);
 	}
 
     @Override
@@ -126,6 +124,6 @@ public abstract class HashCodeGeneratorImpl extends ServiceAbstract implements H
 
 	@Override
 	public String getHash(final InputStream is, final HashCode hashCode) throws NoSuchAlgorithmException, IOException  {
-		return getHash(is, hashCode, DEFAULT_BUFFER_SIZE);
+		return getHash(is, hashCode, Constants.DEFAULT_FILE_BUFFER_SIZE);
 	}
 }

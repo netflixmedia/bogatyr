@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.crypto;
 
+import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
@@ -65,15 +66,14 @@ import java.security.spec.AlgorithmParameterSpec;
  * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20091115)
  * @since 0.1.0
  */
 public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	public static final String ALGORITHM    = "AES"; //$NON-NLS-1$
 	public static final String XFORM        = "AES/CBC/PKCS5Padding"; //$NON-NLS-1$
 	public static final int DEFAULT_KEY_SIZE = 128;
-
-    private static final int DEFAULT_BUFFER_SIZE = HelperNumber.VALUE_1024;
+    
 	
 	/*
 	 * Private methods
@@ -162,7 +162,7 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 
     @Override
     public void encrypt(final InputStream is, final OutputStream os, final Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
-    	encrypt(is, os, key, DEFAULT_BUFFER_SIZE);
+    	encrypt(is, os, key, Constants.DEFAULT_FILE_BUFFER_SIZE);
     }
 
     @Override
@@ -196,7 +196,7 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 
     @Override
     public void decrypt(final InputStream is, final OutputStream os, final Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
-    	decrypt(is, os, key, DEFAULT_BUFFER_SIZE);
+    	decrypt(is, os, key, Constants.DEFAULT_FILE_BUFFER_SIZE);
     }
 
     @Override
@@ -233,7 +233,7 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 
 	@Override
     public void encrypt(final File input, final File output, final Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
-		encrypt(input, output, key, DEFAULT_BUFFER_SIZE);
+		encrypt(input, output, key, Constants.DEFAULT_FILE_BUFFER_SIZE);
 	}
 
 	@Override
@@ -256,7 +256,7 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 
 	@Override
     public void decrypt(final File input, final File output, final Key key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
-        decrypt(input, output, key, DEFAULT_BUFFER_SIZE);
+        decrypt(input, output, key, Constants.DEFAULT_FILE_BUFFER_SIZE);
 	}
 	
 	@Override
