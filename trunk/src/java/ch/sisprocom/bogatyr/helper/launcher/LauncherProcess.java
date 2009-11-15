@@ -35,21 +35,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
 
 
 /**
  * This launcher creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.8.0 (20091116)
  * @since 0.2.0
  */
 public abstract class LauncherProcess {
-	private static final int DEFAULT_BUFFER_SIZE = HelperNumber.VALUE_1024;
-	
-	
 //	public static String runProcess(final String... commands) throws IOException {
 //		
 //	}
@@ -137,7 +134,7 @@ public abstract class LauncherProcess {
 		@Override
 		public void run() {
 			try {
-                final byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+                final byte[] buffer = new byte[Constants.DEFAULT_FILE_BUFFER_SIZE];
                 int offset;
 				while (-1 != (offset = is.read(buffer))) {
 					if (os != null) {

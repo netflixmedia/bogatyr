@@ -31,22 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.LayoutManager;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.GridBagLayout;
-import java.awt.LayoutManager;
+
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JPanel.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091112)
  * @since 0.1.0
  */
 public class Panel extends JPanel implements Activatable {
@@ -55,11 +55,7 @@ public class Panel extends JPanel implements Activatable {
 	private boolean isNotActive;
 
 	private String title;
-	
-	{
-		setLayout(new GridBagLayout());
-	}
-	
+		
 	
 	public Panel() {
 		super();
@@ -79,7 +75,12 @@ public class Panel extends JPanel implements Activatable {
 		this();
 		setBackground(color);
 	}
-	
+
+	public Panel(final Color color, final LayoutManager layout) {
+		this(layout);
+		setBackground(color);
+	}
+
 	/**
      * Set the title of the Panel
      * @param title Title of the Panel

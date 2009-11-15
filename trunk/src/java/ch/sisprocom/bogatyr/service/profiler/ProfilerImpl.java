@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * The implementation for a profiler.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20091115)
  * @since 0.9.0
  */
 public class ProfilerImpl extends ServiceAbstract implements Profiler {
@@ -65,7 +65,7 @@ public class ProfilerImpl extends ServiceAbstract implements Profiler {
 	@Override
 	public void profile(final String id) {
 
-		final long currentTime = System.currentTimeMillis() - meanTime;
+		final long currentTime = System.nanoTime();
 		final long elapsed = currentTime - meanTime;
 		profiles.put(id, elapsed);
 
@@ -76,7 +76,7 @@ public class ProfilerImpl extends ServiceAbstract implements Profiler {
 	@Override
 	public void start() {
 		profiles.clear();
-		startTime = System.currentTimeMillis();
+		startTime = System.nanoTime();
 		meanTime = startTime;
 	}
 }
