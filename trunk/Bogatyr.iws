@@ -20,26 +20,7 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoAES.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoAES.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCodeGeneratorImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCodeGeneratorImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/unit/Time.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/unit/Time.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/profiler/ProfilerImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/profiler/ProfilerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/ch/sisprocom/bogatyr/test/service/crypto/ScramblerTest.java" afterPath="$PROJECT_DIR$/src/test/ch/sisprocom/bogatyr/test/service/crypto/ScramblerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperIO.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperIO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/unit/UnitTime.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/unit/UnitTime.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperCompress.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperCompress.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/profiler/Profiler.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/profiler/Profiler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/swing/Panel.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/swing/Panel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/MANIFEST.MF" afterPath="$PROJECT_DIR$/build/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/ScramblerImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/ScramblerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/Constants.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/Scrambler.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/Scrambler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/launcher/LauncherProcess.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/launcher/LauncherProcess.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/unit/Bit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/unit/UnitBit.java" />
-    </list>
+    <list default="true" readonly="true" name="Default" comment="" />
     <ignored path="Bogatyr.iws" />
     <ignored path=".idea/workspace.xml" />
   </component>

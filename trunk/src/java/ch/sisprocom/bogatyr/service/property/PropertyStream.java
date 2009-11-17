@@ -47,7 +47,7 @@ import java.util.Properties;
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20091117)
  * @since 0.1.0
  */
 public class PropertyStream extends ServiceAbstract implements Property {
@@ -85,46 +85,46 @@ public class PropertyStream extends ServiceAbstract implements Property {
 
     @Override
     public Boolean getBooleanValue(final String key) {
-        return Boolean.valueOf(properties.getProperty(key));
+        return properties.getProperty(key) == null ? null : Boolean.valueOf(properties.getProperty(key));
     }
 
 	@Override
     public BigDecimal getBigDecimalValue(final String key) {
-		return new BigDecimal(properties.getProperty(key));
+		return properties.getProperty(key) == null ? null : new BigDecimal(properties.getProperty(key));
 	}
 
 	@Override
     public BigInteger getBigIntegerValue(final String key) {
-		return new BigInteger(properties.getProperty(key));
+		return properties.getProperty(key) == null ? null : new BigInteger(properties.getProperty(key));
 	}
 
 	@Override
     public Byte getByteValue(final String key) {
-		return Byte.valueOf(properties.getProperty(key));	
+		return properties.getProperty(key) == null ? null : Byte.valueOf(properties.getProperty(key));	
 	}
 
 	@Override
     public Double getDoubleValue(final String key) {
-		return Double.valueOf(properties.getProperty(key));
+		return properties.getProperty(key) == null ? null : Double.valueOf(properties.getProperty(key));
 	}
 
 	@Override
     public Float getFloatValue(final String key) {
-		return Float.valueOf(properties.getProperty(key));
+		return properties.getProperty(key) == null ? null : Float.valueOf(properties.getProperty(key));
 	}
 
 	@Override
     public Integer getIntegerValue(final String key) {
-		return Integer.valueOf(properties.getProperty(key));
+		return properties.getProperty(key) == null ? null : Integer.valueOf(properties.getProperty(key));
 	}
 
 	@Override
     public Long getLongValue(final String key) {
-		return Long.valueOf(properties.getProperty(key));
+		return properties.getProperty(key) == null ? null : Long.valueOf(properties.getProperty(key));
 	}
 
 	@Override
     public Short getShortValue(final String key) {
-		return Short.valueOf(properties.getProperty(key));
+		return properties.getProperty(key) == null ? null : Short.valueOf(properties.getProperty(key));
 	}
 }   

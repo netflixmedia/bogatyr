@@ -40,7 +40,7 @@ import ch.sisprocom.bogatyr.service.Service;
  * Defines the methods for the implementation of a profiler.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091115)
+ * @version 0.9.0 (20091116)
  * @since 0.9.0
  */
 public interface Profiler extends Service {
@@ -53,12 +53,13 @@ public interface Profiler extends Service {
 	void start();
 	
 	/**
-	 * Profile an event.
+	 * Profile an event with its elapsed time between start() or the last profile-call and return the elapsed time in ns.
 	 * 
 	 * @param id of the event
+	 * @return elapsed time in ns between start() or the last profile-call
 	 * @since 0.9.0
 	 */
-	void profile(String id);
+	long profile(String id);
 	
 	/**
 	 * Returns a {@link Map} containing all profiled events and their elapsed time in ms.
