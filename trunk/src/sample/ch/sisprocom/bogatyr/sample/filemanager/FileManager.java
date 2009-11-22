@@ -37,7 +37,7 @@ import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.service.localizer.Localizer;
 import ch.sisprocom.bogatyr.service.localizer.LocalizerFile;
 import ch.sisprocom.bogatyr.service.property.Property;
-import ch.sisprocom.bogatyr.service.property.PropertyStream;
+import ch.sisprocom.bogatyr.service.property.PropertyImpl;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -88,7 +88,7 @@ public class FileManager extends ApplicationAbstract {
 	 */
 	private void init() {
 		try {
-			property = new PropertyStream(new File(ARG_PROPERTY_LOCATION));
+			property = new PropertyImpl(new File(ARG_PROPERTY_LOCATION));
 		} catch (IOException ex) {
 			System.err.println("Couldn't process the property file!"); //$NON-NLS-1$
 			ex.printStackTrace();

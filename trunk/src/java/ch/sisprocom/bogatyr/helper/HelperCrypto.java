@@ -38,11 +38,11 @@ import java.util.UUID;
  * This is a helper class for cryptography (e.g. random keys).
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091122)
  * @since 0.7.0
  */
 public abstract class HelperCrypto {
-	private static final char[] RANDOMKEY_SEED_DEFAULT    = {'1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+	private static final char[] DEFAULT_RANDOMKEY_SEED    = {'1','2','3','4','5','6','7','8','9','0','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	
    
     /**
@@ -79,7 +79,7 @@ public abstract class HelperCrypto {
      * @since 0.7.0
      */
     public static String getRandomKey(final int digits) { //$JUnit$
-    	return getRandomKey(digits, RANDOMKEY_SEED_DEFAULT);
+    	return getRandomKey(digits, DEFAULT_RANDOMKEY_SEED);
     }
 
     /**

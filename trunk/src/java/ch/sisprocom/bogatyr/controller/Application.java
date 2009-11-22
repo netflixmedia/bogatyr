@@ -32,11 +32,12 @@
 package ch.sisprocom.bogatyr.controller;
 
 
+
 /**
- * This is the skeleton for all applications.
+ * Defines the methods for all applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091109)
+ * @version 0.9.0 (20091121)
  * @since 0.9.0
  */
 public interface Application extends Runnable {
@@ -48,14 +49,14 @@ public interface Application extends Runnable {
      * @since 0.9.0
      */	
 	long getCreateTime();
-//	
+	
 //	/**
-//     * Returns the model of the controller.
+//     * Returns the model of the application.
 //     * 
-//     * @return model of the controller
+//     * @return model of the application
 //     * @since 0.9.0
 //     */	
-//	<T extends Model> T getModel();
+//	ModelApplication getModel();
 //	
 //	/**
 //     * Returns the view of the controller.

@@ -32,7 +32,7 @@
 package ch.sisprocom.bogatyr.helper.unit;
 
 import ch.sisprocom.bogatyr.helper.HelperMath;
-
+import ch.sisprocom.bogatyr.model.unit.Length;
 
 
 /**
@@ -97,7 +97,7 @@ public abstract class UnitLength { //TODO add sea miles
      * @since 0.7.0
      */
     public static int cmToPixel(final double value, final int dpi) { //$JUnit$
-    	return HelperMath.convertDoubleToInt(convert(Length.CM, Length.INCH, value) * (double) dpi); 
+    	return HelperMath.convertDoubleToInt(convert(Length.CM, Length.INCH, value) * (double) dpi);
     }
     
     /**

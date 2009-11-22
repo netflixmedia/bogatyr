@@ -29,33 +29,39 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper.unit;
+package ch.sisprocom.bogatyr.model.unit;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.unit.UnitArea;
 
 /**
- * Weight units
+ * Area units
  * 
  * @author Stefan Laubenberger
  * @version 0.8.0 (20091016)
  * @since 0.7.0
  */
-public enum Weight {
-	MILLIGRAM(UnitWeight.FACTOR_MILLIGRAM_TO_GRAM * UnitWeight.FACTOR_GRAM_TO_KILOGRAM), //$JUnit$
-	GRAM(UnitWeight.FACTOR_GRAM_TO_KILOGRAM), //$JUnit$
-	KILOGRAM(1.0D), //$JUnit$
-	OUNCE(UnitWeight.FACTOR_OUNCE_TO_GRAM * UnitWeight.FACTOR_GRAM_TO_KILOGRAM), //$JUnit$
-	POUND(UnitWeight.FACTOR_POUND_TO_KILOGRAM), //$JUnit$
-	TON(1.0D/UnitWeight.FACTOR_TON_TO_KILOGRAM); //$JUnit$
+public enum Area {
+	MM2(UnitArea.FACTOR_MM2_TO_CM2 * UnitArea.FACTOR_CM2_TO_M2), //$JUnit$
+	CM2(UnitArea.FACTOR_CM2_TO_M2), //$JUnit$
+	M2(1.0D),
+	AREA(1.0D/UnitArea.FACTOR_M2_TO_AREA), //$JUnit$
+	HECTARE(1.0D/(UnitArea.FACTOR_M2_TO_AREA * UnitArea.FACTOR_AREA_TO_HECTARE)), //$JUnit$
+	KM2(1/(UnitArea.FACTOR_M2_TO_AREA * UnitArea.FACTOR_AREA_TO_HECTARE * UnitArea.FACTOR_HECTARE_TO_KM2)), //$JUnit$
+	FOOT2(UnitArea.FACTOR_FOOT2_TO_M2), //$JUnit$
+	YARD2(UnitArea.FACTOR_YARD2_TO_M2), //$JUnit$
+	PERCH(UnitArea.FACTOR_PERCH_TO_M2), //$JUnit$
+	ACRE(UnitArea.FACTOR_ACRE_TO_M2), //$JUnit$
+	MILE2(1.0D/(UnitArea.FACTOR_M2_TO_AREA * UnitArea.FACTOR_AREA_TO_HECTARE * UnitArea.FACTOR_HECTARE_TO_KM2 * UnitArea.FACTOR_MILE2_TO_KM2)); //$JUnit$
 
 	private final double factor;
 	
-	Weight(final double factor) {
+	Area(final double factor) {
 		this.factor = factor;
 	}
 
     /**
-     * Returns the factor from the unit to the base value (kilogram)
+     * Returns the factor from the unit to the base value (meter^2)
      * 
      * @return factor to the base value
      * @since 0.8.0
@@ -72,5 +78,5 @@ public enum Weight {
 	public String toString() {
 		return HelperObject.toString(this);
 	}
-}
+}	
 

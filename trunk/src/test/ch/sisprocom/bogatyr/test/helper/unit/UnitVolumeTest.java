@@ -37,7 +37,7 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.unit.UnitVolume;
-import ch.sisprocom.bogatyr.helper.unit.Volume;
+import ch.sisprocom.bogatyr.model.unit.Volume;
 
 
 /**

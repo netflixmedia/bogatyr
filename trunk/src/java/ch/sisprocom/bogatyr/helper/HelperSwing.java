@@ -37,6 +37,8 @@ import java.util.Map;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 
+import ch.sisprocom.bogatyr.model.misc.Platform;
+
 
 /**
  * This is a helper class for Swing.
@@ -54,7 +56,7 @@ public abstract class HelperSwing {
      * @since 0.9.0
      */
 	public static void setMacOSXMenu() {
-		if (HelperEnvironment.isMacPlatform()) {
+		if (HelperEnvironment.getPlatform() == Platform.MAC_OSX) {
 			//display the menu in MacOS X style
 			try {
 				System.setProperty("apple.laf.useScreenMenuBar", "true"); //$NON-NLS-1$ //$NON-NLS-2$

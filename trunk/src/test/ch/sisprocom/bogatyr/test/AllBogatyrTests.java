@@ -31,15 +31,13 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
 import ch.sisprocom.bogatyr.helper.HelperCollection;
+import ch.sisprocom.bogatyr.helper.HelperTime;
 import ch.sisprocom.bogatyr.test.helper.HelperArrayTest;
 import ch.sisprocom.bogatyr.test.helper.HelperCollectionTest;
 import ch.sisprocom.bogatyr.test.helper.HelperCryptoTest;
@@ -87,13 +85,11 @@ public class AllBogatyrTests implements Runnable {
 	public static final int ITERATIONS = 1;
 	public static final int THREADS	   = 1;
 
-	private static final DateFormat formatter = new SimpleDateFormat("yyyyMMdd HH:mm:ss.SSS", Locale.getDefault()); //$NON-NLS-1$
-
 	
     public static void main(final String[] args) {
     	System.out.println("+---------------------------+"); //$NON-NLS-1$
     	System.out.println("|  Start all Bogatyr tests  |"); //$NON-NLS-1$
-    	System.out.println("|  " + formatter.format(new Date()) + "    |");  //$NON-NLS-1$//$NON-NLS-2$
+    	System.out.println("|  " + HelperTime.getFormattedDate(new Date(), HelperTime.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND_MILLISECOND) + "    |");  //$NON-NLS-1$//$NON-NLS-2$
     	System.out.println("+---------------------------+"); //$NON-NLS-1$
     	System.out.println("Iterations:\t" + ITERATIONS); //$NON-NLS-1$
     	System.out.println("Threads:\t" + THREADS); //$NON-NLS-1$
@@ -109,7 +105,7 @@ public class AllBogatyrTests implements Runnable {
         
         System.out.println("+-------------------------------+"); //$NON-NLS-1$
         System.out.println("|  All Bogatyr tests completed  |"); //$NON-NLS-1$
-    	System.out.println("|  " + formatter.format(new Date()) + "        |"); //$NON-NLS-1$ //$NON-NLS-2$
+    	System.out.println("|  " + HelperTime.getFormattedDate(new Date(), HelperTime.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND_MILLISECOND) + "        |"); //$NON-NLS-1$ //$NON-NLS-2$
         System.out.println("+-------------------------------+"); //$NON-NLS-1$
     }
     

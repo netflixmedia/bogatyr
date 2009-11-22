@@ -29,45 +29,51 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.service.crypto;
+package ch.sisprocom.bogatyr.model.unit;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.unit.UnitVolume;
 
 /**
- * Hash codes available in BouncyCastle
+ * Volume units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
- * @since 0.9.0
+ * @version 0.8.0 (20091016)
+ * @since 0.7.0
  */
-public enum HashCode {
-	MD5("MD5"), //$NON-NLS-1$
-	SHA1("SHA1"), //$NON-NLS-1$
-	SHA256("SHA256"), //$NON-NLS-1$
-	SHA512("SHA512"), //$NON-NLS-1$
-	RIPEMD160("RIPEMD160"), //$NON-NLS-1$
-	RIPEMD320("RIPEMD320"), //$NON-NLS-1$
-	TIGER("Tiger"), //$NON-NLS-1$
-	WHIRLPOOL("WHIRLPOOL"); //$NON-NLS-1$
+public enum Volume {
+	MM3(UnitVolume.FACTOR_MM3_TO_CM3 * UnitVolume.FACTOR_CM3_TO_L), //$JUnit$
+	CM3(UnitVolume.FACTOR_CM3_TO_L), //$JUnit$
+	L(1.0D),
+	M3(1.0D/UnitVolume.FACTOR_L_TO_M3), //$JUnit$
+	PINT(UnitVolume.FACTOR_PINT_TO_CM3 * UnitVolume.FACTOR_CM3_TO_L), //$JUnit$
+	QUART(UnitVolume.FACTOR_QUART_TO_L), //$JUnit$
+	GALLON_US(UnitVolume.FACTOR_GALLON_US_TO_L), //$JUnit$
+	BARREL(UnitVolume.FACTOR_BARREL_TO_L); //$JUnit$
 
-	private final String algorithm;
+	private final double factor;
 	
-	HashCode(final String algorithm) {
-		this.algorithm = algorithm;
+	Volume(final double factor) {
+		this.factor = factor;
+	}
+
+    /**
+     * Returns the factor from the unit to the base value (liter)
+     * 
+     * @return factor to the base value
+     * @since 0.8.0
+     */
+	public double getFactor() {
+		return factor;
 	}
 
 
-    public String getAlgorithm() {
-		return algorithm;
-	}
-
-
-	/*
+    /*
 	 * Overridden methods
 	 */
 	@Override
 	public String toString() {
 		return HelperObject.toString(this);
 	}
-}	
+}
 

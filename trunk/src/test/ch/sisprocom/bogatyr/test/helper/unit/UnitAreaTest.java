@@ -36,7 +36,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import ch.sisprocom.bogatyr.helper.unit.Area;
+import ch.sisprocom.bogatyr.model.unit.Area;
 import ch.sisprocom.bogatyr.helper.unit.UnitArea;
 
 

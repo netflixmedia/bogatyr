@@ -34,7 +34,7 @@ package ch.sisprocom.bogatyr.sample.helloworld;
 import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
 import ch.sisprocom.bogatyr.service.localizer.LocalizerFile;
 import ch.sisprocom.bogatyr.service.localizer.Localizer;
-import ch.sisprocom.bogatyr.service.property.PropertyStream;
+import ch.sisprocom.bogatyr.service.property.PropertyImpl;
 import ch.sisprocom.bogatyr.service.property.Property;
 import ch.sisprocom.bogatyr.helper.HelperString;
 
@@ -83,7 +83,7 @@ public class HelloWorld extends ApplicationAbstract {
 	 */
 	private void init() {
 		try {
-			property = new PropertyStream(new File(ARG_PROPERTY_LOCATION));
+			property = new PropertyImpl(new File(ARG_PROPERTY_LOCATION));
 		} catch (IOException ex) {
 			System.err.println("Couldn't process the property file!"); //$NON-NLS-1$
 			ex.printStackTrace();

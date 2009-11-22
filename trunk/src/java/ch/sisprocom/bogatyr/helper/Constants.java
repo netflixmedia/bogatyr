@@ -31,21 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import ch.sisprocom.bogatyr.helper.unit.Bit;
+import ch.sisprocom.bogatyr.model.unit.Bit;
 import ch.sisprocom.bogatyr.helper.unit.UnitBit;
-
 
 
 /**
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091115)
+ * @version 0.9.0 (20091122)
  * @since 0.7.0
  */
 public interface Constants {
 	//Bogatyr
-	String BOGATYR_VERSION = "0.9.0 (20091115)"; //$NON-NLS-1$
+	String BOGATYR_VERSION = "0.9.0 (20091122)"; //$NON-NLS-1$
 	String BOGATYR_VENDOR = "SiSprocom GmbH"; //$NON-NLS-1$
 	String BOGATYR_URL = "www.sisprocom.ch/bogatyr"; //$NON-NLS-1$
 	String BOGATYR_MAIL = "laubenberger@gmail.com"; //$NON-NLS-1$

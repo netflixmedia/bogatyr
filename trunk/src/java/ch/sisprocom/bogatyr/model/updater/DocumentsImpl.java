@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,44 +29,48 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller;
+package ch.sisprocom.bogatyr.model.updater;
+
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.model.ModelAbstract;
 
 
 /**
- * This is the skeleton for all Bogatyr applications.
+ * The implementation of the document model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091121)
- * @since 0.1.0
+ * @version 20091122
  */
-public abstract class ApplicationAbstract implements Application {
-	private final long createTime = System.currentTimeMillis();
+public class DocumentsImpl extends ModelAbstract implements Documents {
+	private static final long serialVersionUID = 5020205879710366592L;
+
+	private Map<UUID, Document> mapDocument = new HashMap<UUID, Document>();
+    
 	
-	
-	/*
+    /*
      * Implemented methods
      */
 	@Override
-    public long getCreateTime() {
-		return createTime;
+	public Document getDocument(UUID uuid) {
+		return mapDocument.get(uuid);
 	}
 
-//	/**
-//     * Terminates the application in a proper way with a return code.
-//     * 
-//     * @param returnCode System-Return-Code
-//     * @since 0.1.0
-//     */	
-//	public abstract void exit(final int returnCode);
-
-	
-	/*
-	 * Overridden methods
-	 */
 	@Override
-	public String toString() {
-		return HelperObject.toString(this);
+	public Map<UUID, Document> getDocuments() {
+		return mapDocument;
+	}
+
+	@Override
+	public void setDocuments(Map<UUID, Document> documents) {
+        if (!HelperObject.isEquals(documents, mapDocument)) {
+        	mapDocument = documents;
+            setChanged();
+            notifyObservers(METHOD_SET_DOCUMENTS);
+        }
 	}
 }
