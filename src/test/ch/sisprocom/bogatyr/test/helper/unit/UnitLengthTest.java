@@ -36,7 +36,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import ch.sisprocom.bogatyr.helper.unit.Length;
+import ch.sisprocom.bogatyr.model.unit.Length;
 import ch.sisprocom.bogatyr.helper.unit.UnitLength;
 
 

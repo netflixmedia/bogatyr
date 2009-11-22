@@ -43,6 +43,7 @@ import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.encoder.EncoderHex;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
+import ch.sisprocom.bogatyr.model.crypto.HashCode;
 
 
 /**

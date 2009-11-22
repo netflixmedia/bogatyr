@@ -47,14 +47,14 @@ import java.util.Properties;
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091117)
+ * @version 0.9.0 (20091122)
  * @since 0.1.0
  */
-public class PropertyStream extends ServiceAbstract implements Property {
+public class PropertyImpl extends ServiceAbstract implements Property {
 	private final Properties properties;
 
 	
-    public PropertyStream(final InputStream is) throws IOException {
+    public PropertyImpl(final InputStream is) throws IOException {
         super();
        
         if (null == is) {
@@ -65,14 +65,14 @@ public class PropertyStream extends ServiceAbstract implements Property {
         properties.load(is);
     }
 
-    public PropertyStream(final File file) throws IOException {
+    public PropertyImpl(final File file) throws IOException {
     	this(new BufferedInputStream(new FileInputStream(file)));
-    } 
+    }
 
-	
-	/*
-	 * Implemented methods
-	 */
+
+    /*
+      * Implemented methods
+      */
     @Override
     public Properties getProperties() {
 		return properties;

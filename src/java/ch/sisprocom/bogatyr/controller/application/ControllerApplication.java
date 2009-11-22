@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,44 +29,27 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller;
+package ch.sisprocom.bogatyr.controller.application;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.controller.Controller;
+import ch.sisprocom.bogatyr.controller.worker.ControllerWorker;
 
 
 /**
- * This is the skeleton for all Bogatyr applications.
+ * The interface for the application controller.
  * 
  * @author Stefan Laubenberger
  * @version 0.9.0 (20091121)
- * @since 0.1.0
+ * @since 0.9.0
  */
-public abstract class ApplicationAbstract implements Application {
-	private final long createTime = System.currentTimeMillis();
+public interface ControllerApplication extends Controller {
 	
-	
-	/*
-     * Implemented methods
-     */
-	@Override
-    public long getCreateTime() {
-		return createTime;
-	}
+	void run();
+	void exit(final int returnCode);
 
-//	/**
-//     * Terminates the application in a proper way with a return code.
-//     * 
-//     * @param returnCode System-Return-Code
-//     * @since 0.1.0
-//     */	
-//	public abstract void exit(final int returnCode);
-
+	ch.sisprocom.bogatyr.model.application.ModelApplication getModel();
 	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
+    ControllerWorker getControllerWorker();
+    
+    //TODO add public actions (e.g. save)
 }

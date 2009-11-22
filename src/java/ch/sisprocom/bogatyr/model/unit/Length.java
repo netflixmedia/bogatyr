@@ -29,37 +29,36 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper.unit;
+package ch.sisprocom.bogatyr.model.unit;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.unit.UnitLength;
 
 /**
- * Time units
+ * Length units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091116)
- * @since 0.8.0
+ * @version 0.8.0 (20091016)
+ * @since 0.7.0
  */
-public enum Time {
-	NANOSECOND(UnitTime.FACTOR_NANOSECOND_TO_SECOND),
-	MICROSECOND(UnitTime.FACTOR_MICROSECOND_TO_SECOND),
-	MILLISECOND(UnitTime.FACTOR_MILLISECOND_TO_SECOND),
-	SECOND(1.0D),
-	MINUTE(1.0D/UnitTime.FACTOR_SECOND_TO_MINUTE),
-	HOUR(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR)),
-	DAY(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR * UnitTime.FACTOR_HOUR_TO_DAY)),
-	WEEK(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR * UnitTime.FACTOR_HOUR_TO_DAY * UnitTime.FACTOR_DAY_TO_WEEK)),
-	MONTH(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR * UnitTime.FACTOR_HOUR_TO_DAY * UnitTime.FACTOR_DAY_TO_MONTH)),
-	YEAR(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR * UnitTime.FACTOR_HOUR_TO_DAY * UnitTime.FACTOR_DAY_TO_YEAR));
+public enum Length {
+	MM(UnitLength.FACTOR_MM_TO_CM * UnitLength.FACTOR_CM_TO_M), //$JUnit$
+	CM(UnitLength.FACTOR_CM_TO_M), //$JUnit$
+	M(1.0D),
+	KM(1.0D/UnitLength.FACTOR_M_TO_KM), //$JUnit$
+	INCH(UnitLength.FACTOR_CM_TO_M / UnitLength.FACTOR_INCH_TO_CM), //$JUnit$
+	FOOT(1.0D/UnitLength.FACTOR_FOOT_TO_M), //$JUnit$
+	YARD(1.0D/UnitLength.FACTOR_YARD_TO_M), //$JUnit$
+	MILE(1.0D/UnitLength.FACTOR_MILE_TO_M); //$JUnit$
 
 	private final double factor;
 	
-	Time(final double factor) {
+	Length(final double factor) {
 		this.factor = factor;
 	}
-	
+
     /**
-     * Returns the factor from the unit to the base value (second)
+     * Returns the factor from the unit to the base value (meter)
      * 
      * @return factor to the base value
      * @since 0.8.0
@@ -77,3 +76,4 @@ public enum Time {
 		return HelperObject.toString(this);
 	}
 }
+

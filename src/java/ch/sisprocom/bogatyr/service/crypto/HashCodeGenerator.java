@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.InputStream;
 
 import ch.sisprocom.bogatyr.service.Service;
+import ch.sisprocom.bogatyr.model.crypto.HashCode;
 
 /**
  * This is an interface for hash code generation.
@@ -95,10 +96,10 @@ public interface HashCodeGenerator extends Service {
 	 * @see HashCode
 	 * @since 0.8.0
 	 */
-	String getHash(File input, HashCode hashCode) throws Exception;	
+	String getHash(File input, HashCode hashCode) throws Exception;
 	
 	/**
-	 * Generates a hash code for an input {@link File} with the given {@link HashCode}.
+	 * Generates a hash code for an input {@link File} with the given {@link ch.sisprocom.bogatyr.model.crypto.HashCode}.
 	 * 
      * @param input {@link File} for the hash code
      * @param hashCode {@link HashCode} algorithm

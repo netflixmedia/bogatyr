@@ -29,38 +29,38 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper.unit;
+package ch.sisprocom.bogatyr.model.unit;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.unit.UnitTime;
 
 /**
- * Area units
+ * Time units
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
- * @since 0.7.0
+ * @version 0.9.0 (20091116)
+ * @since 0.8.0
  */
-public enum Area {
-	MM2(UnitArea.FACTOR_MM2_TO_CM2 * UnitArea.FACTOR_CM2_TO_M2), //$JUnit$
-	CM2(UnitArea.FACTOR_CM2_TO_M2), //$JUnit$
-	M2(1.0D),
-	AREA(1.0D/UnitArea.FACTOR_M2_TO_AREA), //$JUnit$
-	HECTARE(1.0D/(UnitArea.FACTOR_M2_TO_AREA * UnitArea.FACTOR_AREA_TO_HECTARE)), //$JUnit$
-	KM2(1/(UnitArea.FACTOR_M2_TO_AREA * UnitArea.FACTOR_AREA_TO_HECTARE * UnitArea.FACTOR_HECTARE_TO_KM2)), //$JUnit$
-	FOOT2(UnitArea.FACTOR_FOOT2_TO_M2), //$JUnit$
-	YARD2(UnitArea.FACTOR_YARD2_TO_M2), //$JUnit$
-	PERCH(UnitArea.FACTOR_PERCH_TO_M2), //$JUnit$
-	ACRE(UnitArea.FACTOR_ACRE_TO_M2), //$JUnit$
-	MILE2(1.0D/(UnitArea.FACTOR_M2_TO_AREA * UnitArea.FACTOR_AREA_TO_HECTARE * UnitArea.FACTOR_HECTARE_TO_KM2 * UnitArea.FACTOR_MILE2_TO_KM2)); //$JUnit$
+public enum Time {
+	NANOSECOND(UnitTime.FACTOR_NANOSECOND_TO_SECOND),
+	MICROSECOND(UnitTime.FACTOR_MICROSECOND_TO_SECOND),
+	MILLISECOND(UnitTime.FACTOR_MILLISECOND_TO_SECOND),
+	SECOND(1.0D),
+	MINUTE(1.0D/UnitTime.FACTOR_SECOND_TO_MINUTE),
+	HOUR(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR)),
+	DAY(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR * UnitTime.FACTOR_HOUR_TO_DAY)),
+	WEEK(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR * UnitTime.FACTOR_HOUR_TO_DAY * UnitTime.FACTOR_DAY_TO_WEEK)),
+	MONTH(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR * UnitTime.FACTOR_HOUR_TO_DAY * UnitTime.FACTOR_DAY_TO_MONTH)),
+	YEAR(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR * UnitTime.FACTOR_HOUR_TO_DAY * UnitTime.FACTOR_DAY_TO_YEAR));
 
 	private final double factor;
 	
-	Area(final double factor) {
+	Time(final double factor) {
 		this.factor = factor;
 	}
-
+	
     /**
-     * Returns the factor from the unit to the base value (meter^2)
+     * Returns the factor from the unit to the base value (second)
      * 
      * @return factor to the base value
      * @since 0.8.0
@@ -77,5 +77,4 @@ public enum Area {
 	public String toString() {
 		return HelperObject.toString(this);
 	}
-}	
-
+}

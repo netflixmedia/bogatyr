@@ -31,7 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.updater;
 
+import ch.sisprocom.bogatyr.model.updater.Document;
+import ch.sisprocom.bogatyr.model.updater.Documents;
 import ch.sisprocom.bogatyr.service.Service;
+
+import java.io.File;
+import java.io.InputStream;
 
 
 
@@ -39,45 +44,15 @@ import ch.sisprocom.bogatyr.service.Service;
  * Defines the methods for the implementation of the updater.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091109)
+ * @version 0.9.0 (20091122)
  * @since 0.6.0
  */
 public interface Updater extends Service {
-	/**
-	 * Checks the update information for new versions an update the application if needed.
-	 * 
-	 * @param name Name of the application
-	 * @param id Unique id of the application
-	 * @param version Version of the application
-	 * @param minorversion Minor version of the application
-	 * @param build Build of the application
-	 * @param updateLocation Location for the update information
-     * @throws Exception
-     * @since 0.6.0
-	 */
-	void update(String name, String id, int version, int minorversion, int build, String updateLocation) throws Exception;
-
-	/**
-	 * Adds a listener for this updater.
-	 * 
-	 * @param listener to add
-	 * @since 0.6.0
-	 */
-	void addListener(ListenerUpdater listener);
+		
+	Documents getDocuments(File file);
 	
-	/**
-	 * Remove a listener for this updater.
-	 * 
-	 * @param listener to remove
-	 * @since 0.6.0
-	 */
-	void removeListener(ListenerUpdater listener);
-
-	/**
-	 * Remove all listeners for this updater.
-	 * 
-	 * @since 0.6.0 
-	 */
-	void removeAllListener();
+	Documents getDocuments(InputStream is);
+	
+	void update(Document document, File destination);
 }   
 

@@ -36,6 +36,8 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.TimeZone;
 
+import ch.sisprocom.bogatyr.model.misc.Platform;
+
 
 /**
  * This class may be used to transmit client environment info to the server and to decide if an operating system corresponds to the Windows, Mac or a Unix operating system. 
@@ -317,14 +319,34 @@ public abstract class HelperEnvironment {
 		return TimeZone.getDefault();
 		
 	}
+
+	/**
+	 * Returns the current platform.
+	 *
+	 * @return {@link Platform}
+	 * @since 0.9.0
+	 */
+	public static Platform getPlatform() {
+		if (isMacPlatform()) {
+			return Platform.MAC_OSX;
+		}
+		if (isWindowsPlatform()) {
+			return Platform.WINDOWS;
+		}
+		return Platform.UNIX; //this is a bit dirty, because it could be another system than Unix, but its the best guess...
+	}
+
 	
+	/*
+	 * Private methods
+	 */
 	/**
 	 * Try to determine if this application is running under a Windows OS.
 	 *
 	 * @return true/false
 	 * @since 0.1.0
 	 */
-	public static boolean isWindowsPlatform() { //$JUnit$
+	private static boolean isWindowsPlatform() {
 		return HelperString.contains(getOsName(), "Windows"); //$NON-NLS-1$
 	}
 
@@ -334,17 +356,17 @@ public abstract class HelperEnvironment {
 	 * @return true/false
 	 * @since 0.1.0
 	 */
-	public static boolean isMacPlatform() { //$JUnit$
+	private static boolean isMacPlatform() {
 		return HelperString.contains(getOsName(), "Mac"); //$NON-NLS-1$
 	}
 	
-	/**
-	 * Try to determine if this application is running under a UNIX OS.
-	 *
-	 * @return true/false
-	 * @since 0.1.0
-	 */
-	public static boolean isUnixPlatform() { //$JUnit$
-		return !isWindowsPlatform() && !isMacPlatform(); //this method is a bit dirty, because it could be another system than Unix, but its the best guess...
-	}
+//	/**
+//	 * Try to determine if this application is running under a UNIX OS.
+//	 *
+//	 * @return true/false
+//	 * @since 0.1.0
+//	 */
+//	public static boolean isUnixPlatform() { //$JUnit$
+//		return !isWindowsPlatform() && !isMacPlatform(); //this method is a bit dirty, because it could be another system than Unix, but its the best guess...
+//	}
 }

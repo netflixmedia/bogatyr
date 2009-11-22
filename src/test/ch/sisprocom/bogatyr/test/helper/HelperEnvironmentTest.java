@@ -163,20 +163,20 @@ public class HelperEnvironmentTest {
 		assertEquals(System.getProperty("user.name"), HelperEnvironment.getUserName()); //$NON-NLS-1$
 	}
 	
-	@Test
-	public void testIsWindowsPlatform() {
-		assertEquals(HelperEnvironment.getOsName().contains("Windows"), HelperEnvironment.isWindowsPlatform()); //$NON-NLS-1$
-	}
-	
-	@Test
-	public void testIsMacPlatform() {
-		assertEquals(HelperEnvironment.getOsName().contains("Mac"), HelperEnvironment.isMacPlatform()); //$NON-NLS-1$
-	}
-	
-	@Test
-	public void testIsUnixPlatform() {
-		assertEquals(!HelperEnvironment.isWindowsPlatform() && !HelperEnvironment.isMacPlatform(), HelperEnvironment.isUnixPlatform()); 
-	}
+//	@Test
+//	public void testIsWindowsPlatform() {
+//		assertEquals(HelperEnvironment.getOsName().contains("Windows"), HelperEnvironment.isWindowsPlatform()); //$NON-NLS-1$
+//	}
+//	
+//	@Test
+//	public void testIsMacPlatform() {
+//		assertEquals(HelperEnvironment.getOsName().contains("Mac"), HelperEnvironment.isMacPlatform()); //$NON-NLS-1$
+//	}
+//	
+//	@Test
+//	public void testIsUnixPlatform() {
+//		assertEquals(!HelperEnvironment.isWindowsPlatform() && !HelperEnvironment.isMacPlatform(), HelperEnvironment.isUnixPlatform()); 
+//	}
 	
 	@Test
 	public void testGetJavaVendor() {

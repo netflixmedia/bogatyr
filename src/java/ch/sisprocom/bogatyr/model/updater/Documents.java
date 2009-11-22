@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,44 +29,50 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller;
+package ch.sisprocom.bogatyr.model.updater;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import java.util.Map;
+import java.util.UUID;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import ch.sisprocom.bogatyr.model.Model;
+import ch.sisprocom.bogatyr.model.misc.Platform;
 
 /**
- * This is the skeleton for all Bogatyr applications.
+ * The interface for the application model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091121)
- * @since 0.1.0
+ * @version 20091122
  */
-public abstract class ApplicationAbstract implements Application {
-	private final long createTime = System.currentTimeMillis();
-	
-	
-	/*
-     * Implemented methods
+@XmlRootElement
+public interface Documents extends Model {
+    String METHOD_SET_DOCUMENTS = "setDocuments";
+
+    /**
+     * Returns all documents.
+     *
+     * @retuns {@link Map} containing all documents
+     * @since 0.9.0
      */
-	@Override
-    public long getCreateTime() {
-		return createTime;
-	}
+    @XmlElement
+    Map<UUID, Document> getDocuments();
 
-//	/**
-//     * Terminates the application in a proper way with a return code.
-//     * 
-//     * @param returnCode System-Return-Code
-//     * @since 0.1.0
-//     */	
-//	public abstract void exit(final int returnCode);
+    /**
+     * Sets all documents.
+     *
+     * @param documents {@link Map} containing all documents
+     * @since 0.9.0
+     */
+    void setDocuments(Map<UUID, Document> documents);
 
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
+	/**
+     * Returns the {@link Document} for a given {@link UUID}.
+     * 
+     * @param uuid for the {@link Document}
+     * @return {@link Document} 
+     * @since 0.9.0
+     */	
+	Document getDocument(UUID uuid);
 }

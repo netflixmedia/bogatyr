@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,44 +29,31 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller;
+package ch.sisprocom.bogatyr.model.worker;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import java.util.List;
+
+import ch.sisprocom.bogatyr.view.swing.worker.WorkerAbstract;
+import ch.sisprocom.bogatyr.model.Model;
 
 
 /**
- * This is the skeleton for all Bogatyr applications.
+ * The interface for the worker model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091121)
- * @since 0.1.0
+ * @version 0.9.0 (20091122)
+ * @since 0.9.0
  */
-public abstract class ApplicationAbstract implements Application {
-	private final long createTime = System.currentTimeMillis();
-	
-	
-	/*
-     * Implemented methods
-     */
-	@Override
-    public long getCreateTime() {
-		return createTime;
-	}
+public interface ModelWorker extends Model {
+    String METHOD_ADD        = "add";
+    String METHOD_REMOVE     = "remove";
+    String METHOD_REMOVE_ALL = "removeAll";
 
-//	/**
-//     * Terminates the application in a proper way with a return code.
-//     * 
-//     * @param returnCode System-Return-Code
-//     * @since 0.1.0
-//     */	
-//	public abstract void exit(final int returnCode);
+    List<WorkerAbstract> getWorkers();
+    
+	<T, V> void add(WorkerAbstract<T, V> worker);
 
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
+	<T, V> void remove(WorkerAbstract<T, V> worker);
+
+	<T, V> void removeAll();
 }

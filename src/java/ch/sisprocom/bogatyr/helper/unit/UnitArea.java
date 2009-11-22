@@ -31,6 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.unit;
 
+import ch.sisprocom.bogatyr.model.unit.Area;
+
 
 /**
  * Converts different units of area.

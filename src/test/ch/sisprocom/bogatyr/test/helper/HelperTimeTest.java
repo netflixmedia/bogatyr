@@ -34,10 +34,7 @@ package ch.sisprocom.bogatyr.test.helper;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import org.junit.Test;
 
@@ -48,19 +45,17 @@ import ch.sisprocom.bogatyr.helper.HelperTime;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090527
+ * @version 20091122
  */
 public class HelperTimeTest {
-	private final DateFormat formatter = new SimpleDateFormat("dd.mm.yyyy", Locale.getDefault()); //$NON-NLS-1$
-	
 	@Test
 	public void testGetAtomicTime() {
 		try {
-			assertEquals(formatter.format(new Date()), formatter.format(HelperTime.getAtomicTime()));
+			assertEquals(HelperTime.getFormattedDate(new Date(), HelperTime.FORMAT_DAY_MONTH_YEAR_HOUR_MINUTE), HelperTime.getFormattedDate(HelperTime.getAtomicTime(), HelperTime.FORMAT_DAY_MONTH_YEAR_HOUR_MINUTE));
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
 
 		try {
-			assertEquals(formatter.format(new Date()), formatter.format(HelperTime.getAtomicTime("ptbtime2.ptb.de"))); //$NON-NLS-1$
+			assertEquals(HelperTime.getFormattedDate(new Date(), HelperTime.FORMAT_DAY_MONTH_YEAR_HOUR_MINUTE), HelperTime.getFormattedDate(HelperTime.getAtomicTime("ptbtime2.ptb.de"), HelperTime.FORMAT_DAY_MONTH_YEAR_HOUR_MINUTE)); //$NON-NLS-1$
 		} catch (Exception ex) {ex.printStackTrace();fail(ex.getMessage());}
 
 		try {

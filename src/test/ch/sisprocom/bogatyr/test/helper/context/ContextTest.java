@@ -31,7 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.context;
 
-import ch.sisprocom.bogatyr.helper.context.ContextImpl;
+import ch.sisprocom.bogatyr.model.context.ContextImpl;
 import static org.junit.Assert.*;
 
 import org.junit.Test;

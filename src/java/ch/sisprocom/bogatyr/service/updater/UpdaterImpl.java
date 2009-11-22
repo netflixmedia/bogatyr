@@ -33,6 +33,8 @@ package ch.sisprocom.bogatyr.service.updater;
 
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.model.updater.Document;
+import ch.sisprocom.bogatyr.model.updater.Documents;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 import ch.sisprocom.bogatyr.service.localizer.Localizer;
 import org.xml.sax.SAXException;
@@ -53,144 +55,74 @@ import java.util.HashSet;
 
 
 /**
- * This is the updater for new Bogatyr-based applications versions.
+ * This is the updater for documents.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091109)
+ * @version 0.9.0 (20091122)
  * @since 0.6.0
  */
-public class UpdaterImpl extends ServiceAbstract implements Updater, ListenerUpdater {
-	private Collection<ListenerUpdater> listListener = new HashSet<ListenerUpdater>();
-
-	private final Localizer localizer;
-	
-	
-	public UpdaterImpl(final Localizer localizer) {
-        super();
-        this.localizer = localizer;
-    }
-
-
+public class UpdaterImpl extends ServiceAbstract implements Updater {
     /*
     * Implemented methods
     */
-    /*
-      * Checks the update XML file for new versions an update the application if needed.
-      */
-    @Override
-    public synchronized void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws IOException, ParserConfigurationException, SAXException  {
-    	if (!HelperString.isValid(name)) {
-    		throw new IllegalArgumentException("name is null or empty!"); //$NON-NLS-1$
-    	}
-    	if (!HelperString.isValid(id)) {
-    		throw new IllegalArgumentException("id is null or empty!"); //$NON-NLS-1$
-    	}
-    	if (!HelperString.isValid(updateLocation)) {
-    		throw new IllegalArgumentException("updateLocation is null or empty!"); //$NON-NLS-1$
-    	}
 
-    	final File file = new File(updateLocation);
-        InputStream is = null;
-        try {
-            if (file.exists()) {
-                is = new BufferedInputStream(new FileInputStream(file));
-            } else {
-                final URLConnection con = new URL(updateLocation).openConnection();
-                con.setConnectTimeout(HelperNumber.VALUE_2048);
-                con.connect();
-
-                is = con.getInputStream();
-            }
-
-            final SAXParserFactory factory = SAXParserFactory.newInstance();
-            final SAXParser saxParser = factory.newSAXParser();
-
-            final DefaultHandler handler = new XmlParserUpdater(name, id, version, minorversion, build, this, localizer);
-
-            saxParser.parse(is, handler);
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-    }
-
-    @Override
-    public synchronized void addListener(final ListenerUpdater listener) {
-    	if (null == listener) {
-    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
-    	}
-
-    	listListener.add(listener);
-    }
+	
+//	/*
+//      * Checks the update XML file for new versions an update the application if needed.
+//      */
+//    @Override
+//    public synchronized void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws IOException, ParserConfigurationException, SAXException  {
+//    	if (!HelperString.isValid(name)) {
+//    		throw new IllegalArgumentException("name is null or empty!"); //$NON-NLS-1$
+//    	}
+//    	if (!HelperString.isValid(id)) {
+//    		throw new IllegalArgumentException("id is null or empty!"); //$NON-NLS-1$
+//    	}
+//    	if (!HelperString.isValid(updateLocation)) {
+//    		throw new IllegalArgumentException("updateLocation is null or empty!"); //$NON-NLS-1$
+//    	}
+//
+//    	final File file = new File(updateLocation);
+//        InputStream is = null;
+//        try {
+//            if (file.exists()) {
+//                is = new BufferedInputStream(new FileInputStream(file));
+//            } else {
+//                final URLConnection con = new URL(updateLocation).openConnection();
+//                con.setConnectTimeout(HelperNumber.VALUE_2048);
+//                con.connect();
+//
+//                is = con.getInputStream();
+//            }
+//
+//            final SAXParserFactory factory = SAXParserFactory.newInstance();
+//            final SAXParser saxParser = factory.newSAXParser();
+//
+//            final DefaultHandler handler = new XmlParserUpdater(name, id, version, minorversion, build, this, localizer);
+//
+//            saxParser.parse(is, handler);
+//        } finally {
+//            if (is != null) {
+//                is.close();
+//            }
+//        }
+//    }
 
     @Override
-    public synchronized void removeListener(final ListenerUpdater listener) {
-    	if (null == listener) {
-    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
-    	}
-
-    	listListener.remove(listener);
-    }
-
-    @Override
-    public synchronized void removeAllListener() {
-        listListener = new HashSet<ListenerUpdater>();
-    }
-
-	@Override
-    public void downgradeCancelled() {
-		for (final ListenerUpdater listener : listListener) {
-			listener.downgradeCancelled();
-		}	
+	public Documents getDocuments(File file) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-    public void downgradeFailed(final IOException ex) {
-		for (final ListenerUpdater listener : listListener) {
-			listener.downgradeFailed(ex);
-		}	
+	public Documents getDocuments(InputStream is) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-    public void downgradeSuccessful() {
-		for (final ListenerUpdater listener : listListener) {
-			listener.downgradeSuccessful();
-		}	
-	}
-
-	@Override
-    public void downloadCancelled() {
-		for (final ListenerUpdater listener : listListener) {
-			listener.downloadCancelled();
-		}	
-	}
-
-	@Override
-    public void networkNotAvailable() {
-		for (final ListenerUpdater listener : listListener) {
-			listener.networkNotAvailable();
-		}	
-	}
-
-	@Override
-    public void updateCancelled() {
-		for (final ListenerUpdater listener : listListener) {
-			listener.updateCancelled();
-		}	
-	}
-
-	@Override
-    public void updateFailed(final IOException ex) {
-		for (final ListenerUpdater listener : listListener) {
-			listener.updateFailed(ex);
-		}	
-	}
-
-	@Override
-    public void updateSuccessful() {
-		for (final ListenerUpdater listener : listListener) {
-			listener.updateSuccessful();
-		}	
+	public void update(Document document, File destination) {
+		// TODO Auto-generated method stub
+		
 	}
 }

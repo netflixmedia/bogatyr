@@ -29,9 +29,10 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper.unit;
+package ch.sisprocom.bogatyr.model.unit;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.unit.UnitBit;
 
 /**
  * Bit units
@@ -42,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  */
 public enum Bit {
 	BIT(1.0D),
-	BYTE(1.0D/UnitBit.FACTOR_BIT_TO_BYTE),
+	BYTE(1.0D/ UnitBit.FACTOR_BIT_TO_BYTE),
 	KILOBIT(1.0D/UnitBit.FACTOR_BIT_TO_KILOBIT),
 	MEGABIT(1.0D/UnitBit.FACTOR_BIT_TO_MEGABIT),
 	GIGABIT(1.0D/UnitBit.FACTOR_BIT_TO_GIGABIT),

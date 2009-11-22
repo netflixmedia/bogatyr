@@ -73,7 +73,7 @@ public class CertificateProviderTest {
 		try {
 			final File file = HelperIO.getTemporaryFile("bogatr_ProviderCertificateTest", ".cer");  //$NON-NLS-1$//$NON-NLS-2$
 
-			X509Certificate cert = publicKeyProvider.generateCertificate(keyPair, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(), new Date(System.currentTimeMillis() + HelperTime.MILLISECONDS_WEEK));   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+			X509Certificate cert = publicKeyProvider.generateCertificate(keyPair, "CN=ISSUER", "CN=SUBJECT", "laubenberger@gmail.com", new Date(), new Date(System.currentTimeMillis() + HelperTime.MILLISECONDS_PER_WEEK));   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 			publicKeyProvider.writeCertificate(file, cert);
 			cert = publicKeyProvider.readCertificate(file);
 //			System.out.println(HelperGeneral.toString(cert));

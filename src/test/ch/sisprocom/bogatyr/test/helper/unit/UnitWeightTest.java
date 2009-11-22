@@ -37,7 +37,7 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.unit.UnitWeight;
-import ch.sisprocom.bogatyr.helper.unit.Weight;
+import ch.sisprocom.bogatyr.model.unit.Weight;
 
 
 /**

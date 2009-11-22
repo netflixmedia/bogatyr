@@ -35,19 +35,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.fail;
 
-import java.io.File;
-
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperMap;
-import ch.sisprocom.bogatyr.helper.unit.Time;
-import ch.sisprocom.bogatyr.helper.unit.UnitTime;
 import ch.sisprocom.bogatyr.service.crypto.Scrambler;
 import ch.sisprocom.bogatyr.service.crypto.ScramblerImpl;
-import ch.sisprocom.bogatyr.service.profiler.Profiler;
-import ch.sisprocom.bogatyr.service.profiler.ProfilerImpl;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 

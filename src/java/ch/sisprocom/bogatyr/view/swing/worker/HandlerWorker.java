@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2009 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,44 +29,22 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
+package ch.sisprocom.bogatyr.view.swing.worker;
 
 /**
- * This is the skeleton for all Bogatyr applications.
+ * This interface is to handle the workers.
  * 
  * @author Stefan Laubenberger
  * @version 0.9.0 (20091121)
- * @since 0.1.0
+ * @since 0.9.0
  */
-public abstract class ApplicationAbstract implements Application {
-	private final long createTime = System.currentTimeMillis();
-	
-	
-	/*
-     * Implemented methods
-     */
-	@Override
-    public long getCreateTime() {
-		return createTime;
-	}
+public interface HandlerWorker {
 
-//	/**
-//     * Terminates the application in a proper way with a return code.
-//     * 
-//     * @param returnCode System-Return-Code
-//     * @since 0.1.0
-//     */	
-//	public abstract void exit(final int returnCode);
+    void addListenerWorker(final ListenerWorker listener);
 
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
+    void removeAllListenerWorker();
+
+    void fireWorkerStart();
+
+    void fireWorkerDone();
 }

@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.controller;
 
 
+
 /**
  * Defines the methods for all controllers.
  * 

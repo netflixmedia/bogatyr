@@ -374,9 +374,9 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
         
       //TODO does it also work for other parameters than days p.a.?
         
-        BigDecimal term01 = new BigDecimal(factorial(HelperTime.DAYS_YEAR));
-        BigDecimal term02 = new BigDecimal(factorial(HelperTime.DAYS_YEAR - n));
-        BigDecimal term03 = BigDecimal.valueOf(HelperTime.DAYS_YEAR).pow(n);
+        BigDecimal term01 = new BigDecimal(factorial(HelperTime.DAYS_PER_YEAR));
+        BigDecimal term02 = new BigDecimal(factorial(HelperTime.DAYS_PER_YEAR - n));
+        BigDecimal term03 = BigDecimal.valueOf(HelperTime.DAYS_PER_YEAR).pow(n);
         
         BigDecimal result = BigDecimal.ONE.subtract(term01.divide(term02.multiply(term03), MC));
 
