@@ -39,10 +39,10 @@ import ch.sisprocom.bogatyr.model.unit.Length;
  * Converts different units of length.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090612)
+ * @version 0.9.0 (20091123)
  * @since 0.7.0
  */
-public abstract class UnitLength { //TODO add sea miles
+public abstract class UnitLength { //TODO add sea miles and replace primitive types by BigDecimal
 	public static final double FACTOR_INCH_TO_CM = 2.54D; //inch to centimeters
 	public static final double FACTOR_FOOT_TO_M = 0.3048D; //foot to meters
 	public static final double FACTOR_YARD_TO_M = 0.9144D; //yard to meters

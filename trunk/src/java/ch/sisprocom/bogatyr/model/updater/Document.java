@@ -52,15 +52,15 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  */
 @XmlRootElement
 public interface Document extends Model {
-	String METHOD_SET_LOCATIONS    	   = "setLocations";
-	String METHOD_SET_HASHS      	   = "setHashs";
-    String METHOD_SET_NAME      	   = "setName";
-    String METHOD_SET_VERSION   	   = "setVersion";
-    String METHOD_SET_BUILD     	   = "setBuild";
-    String METHOD_SET_CREATED		   = "setCreated";
-    String METHOD_SET_MANUFACTURER     = "setManufacturer";
-    String METHOD_SET_MANUFACTURER_URL = "setManufacturerURL";
-    String METHOD_SET_UUID     		   = "setUUID";
+	String METHOD_SET_LOCATIONS    	   = "setLocations"; //$NON-NLS-1$
+	String METHOD_SET_HASHS      	   = "setHashs"; //$NON-NLS-1$
+    String METHOD_SET_NAME      	   = "setName"; //$NON-NLS-1$
+    String METHOD_SET_VERSION   	   = "setVersion"; //$NON-NLS-1$
+    String METHOD_SET_BUILD     	   = "setBuild"; //$NON-NLS-1$
+    String METHOD_SET_CREATED		   = "setCreated"; //$NON-NLS-1$
+    String METHOD_SET_MANUFACTURER     = "setManufacturer"; //$NON-NLS-1$
+    String METHOD_SET_MANUFACTURER_URL = "setManufacturerURL"; //$NON-NLS-1$
+    String METHOD_SET_UUID     		   = "setUUID"; //$NON-NLS-1$
 
 
     /**

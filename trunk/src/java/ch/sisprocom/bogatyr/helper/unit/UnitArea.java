@@ -32,26 +32,30 @@
 package ch.sisprocom.bogatyr.helper.unit;
 
 import ch.sisprocom.bogatyr.model.unit.Area;
+import ch.sisprocom.bogatyr.helper.Constants;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+
+import java.math.BigDecimal;
 
 
 /**
  * Converts different units of area.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090612)
+ * @version 0.9.0 (20091123)
  * @since 0.7.0
  */
 public abstract class UnitArea {
-	public static final double FACTOR_MM2_TO_CM2 = 100.0D; //millimeters^2 to centimeters^2
-	public static final double FACTOR_CM2_TO_M2 = 10000.0D; //centimeters^2 to meters^2
-	public static final double FACTOR_M2_TO_AREA = 100.0D; //meters^2 to area
-	public static final double FACTOR_AREA_TO_HECTARE = 100.0D; //area to hectare
-	public static final double FACTOR_HECTARE_TO_KM2 = 100.0D; //hectare to kilometers^2
-	public static final double FACTOR_FOOT2_TO_M2 = 0.09290304D; //square foot to meters^2
-	public static final double FACTOR_YARD2_TO_M2 = 0.83612736D; //square yard to meters^2
-	public static final double FACTOR_PERCH_TO_M2 = 25.2928526D; //square perch to meters^2
-	public static final double FACTOR_ACRE_TO_M2 = 4046.8564224D; //acre to meters^2
-	public static final double FACTOR_MILE2_TO_KM2 = 2.5899881103D; //square mile (terrestrial) to kilometers^2
+	public static final BigDecimal FACTOR_MM2_TO_CM2 = HelperNumber.BIGDECIMAL_100; //millimeters^2 to centimeters^2
+	public static final BigDecimal FACTOR_CM2_TO_M2 = HelperNumber.BIGDECIMAL_10000; //centimeters^2 to meters^2
+	public static final BigDecimal FACTOR_M2_TO_AREA = HelperNumber.BIGDECIMAL_100; //meters^2 to area
+	public static final BigDecimal FACTOR_AREA_TO_HECTARE = HelperNumber.BIGDECIMAL_100; //area to hectare
+	public static final BigDecimal FACTOR_HECTARE_TO_KM2 = HelperNumber.BIGDECIMAL_100; //hectare to kilometers^2
+	public static final BigDecimal FACTOR_FOOT2_TO_M2 = new BigDecimal("0.09290304", Constants.DEFAULT_MATHCONTEXT); //square foot to meters^2 //$NON-NLS-1$
+	public static final BigDecimal FACTOR_YARD2_TO_M2 = new BigDecimal("0.83612736", Constants.DEFAULT_MATHCONTEXT); //square yard to meters^2 //$NON-NLS-1$
+	public static final BigDecimal FACTOR_PERCH_TO_M2 = new BigDecimal("25.2928526", Constants.DEFAULT_MATHCONTEXT); //square perch to meters^2 //$NON-NLS-1$
+	public static final BigDecimal FACTOR_ACRE_TO_M2 = new BigDecimal("4046.8564224", Constants.DEFAULT_MATHCONTEXT); //acre to meters^2 //$NON-NLS-1$
+	public static final BigDecimal FACTOR_MILE2_TO_KM2 = new BigDecimal("2.5899881103", Constants.DEFAULT_MATHCONTEXT); //square mile (terrestrial) to kilometers^2 //$NON-NLS-1$
 
 	
     /**
@@ -63,7 +67,7 @@ public abstract class UnitArea {
      * @return value in the new unit
      * @since 0.7.0
      */
-    public static double convert(final Area fromUnit, final Area toUnit, final double value) { //$JUnit$
+    public static BigDecimal convert(final Area fromUnit, final Area toUnit, final BigDecimal value) { //$JUnit$
 		if (null == fromUnit) {
 			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
 		}
@@ -71,6 +75,6 @@ public abstract class UnitArea {
 			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
 		}
 
-    	return value / fromUnit.getFactor() * toUnit.getFactor(); 
+    	return value.divide(fromUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
     }
 }

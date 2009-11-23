@@ -38,10 +38,10 @@ import ch.sisprocom.bogatyr.model.unit.Time;
  * Converts different units of weight.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091116)
+ * @version 0.9.0 (20091123)
  * @since 0.8.0
  */
-public abstract class UnitTime {
+public abstract class UnitTime {//TODO replace primitive types by BigDecimal
 	public static final double FACTOR_NANOSECOND_TO_SECOND = 1000000000.0D; //nanoseconds to seconds
 	public static final double FACTOR_MICROSECOND_TO_SECOND = 1000000.0D; //microseconds to seconds
 	public static final double FACTOR_MILLISECOND_TO_SECOND = 1000.0D; //milliseconds to seconds

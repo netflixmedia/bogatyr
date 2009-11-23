@@ -40,6 +40,7 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Dimension2D;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -86,15 +87,15 @@ public abstract class HelperGraphic {
 	}
 
     /**
-     * Calculates the scale to fit an input {@link Dimension} to an output {@link Dimension}.
+     * Calculates the scale to fit an input {@link Dimension2D} to an output {@link Dimension2D}.
      *
-     * @param input {@link Dimension} for the calculation
-     * @param output {@link Dimension} for the calculation
-     * @return scale to fit the input dimension
-     * @see Dimension
+     * @param input {@link Dimension2D} for the calculation
+     * @param output {@link Dimension2D} for the calculation
+     * @return scale to fit the input {@link Dimension2D}
+     * @see Dimension2D
      * @since 0.9.0
      */
-    public static double getScale(final Dimension input, final Dimension output) { //$JUnit$
+    public static double getScale(final Dimension2D input, final Dimension2D output) { //$JUnit$
 		if (null == input) {
 			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
@@ -104,7 +105,7 @@ public abstract class HelperGraphic {
 		
 		final double scaleHeight =  input.getHeight() / output.getHeight();
 		final double scaleWidth =  input.getWidth() / output.getWidth();
-		double scale;
+		final double scale;
 
         scale = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
 		
@@ -112,15 +113,15 @@ public abstract class HelperGraphic {
 	}
     
     /**
-     * Calculates the scaled size to fit an input {@link Dimension} to an output {@link Dimension}.
+     * Calculates the scaled size to fit an input {@link Dimension2D} to an output {@link Dimension2D}.
      *
-     * @param input {@link Dimension} for the calculation
-     * @param output {@link Dimension} for the calculation
-     * @return scaled {@link Dimension} to fit the input {@link Dimension}
-     * @see Dimension
+     * @param input {@link Dimension2D} for the calculation
+     * @param output {@link Dimension2D} for the calculation
+     * @return scaled {@link Dimension2D} to fit the input {@link Dimension2D}
+     * @see Dimension2D
      * @since 0.9.0
      */
-    public static Dimension getScaledSize(final Dimension input, final Dimension output) { //$JUnit$
+    public static Dimension getScaledSize(final Dimension2D input, final Dimension2D output) { //$JUnit$
 		if (null == input) {
 			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
 		}
@@ -130,7 +131,7 @@ public abstract class HelperGraphic {
 		
 		final double scaleHeight = input.getHeight() / output.getHeight();
 		final double scaleWidth = input.getWidth() / output.getWidth();
-		double scale;
+		final double scale;
 
         scale = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
 		

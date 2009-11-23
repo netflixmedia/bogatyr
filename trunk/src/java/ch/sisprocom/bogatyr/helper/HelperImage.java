@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import javax.imageio.ImageIO;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -44,8 +45,6 @@ import java.io.OutputStream;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
-
-import javax.imageio.ImageIO;
 
 
 /**
@@ -196,7 +195,7 @@ public abstract class HelperImage {
 	}
 	
 	/**
-     * Scales a {@link BufferedImage} to an {@link Image} with the given {@link Dimension}.
+     * Scales a {@link Image} to an {@link Image} with the given {@link Dimension}.
      *
      * @param image to scale
      * @param size of the new image
@@ -206,7 +205,7 @@ public abstract class HelperImage {
      * @see Image
      * @since 0.9.0
      */
-	public static Image getScaledImage(final BufferedImage image, final Dimension size) {
+	public static Image getScaledImage(final Image image, final Dimension size) {
 		if (null == image) {
 			throw new IllegalArgumentException("image is null!"); //$NON-NLS-1$
 		}

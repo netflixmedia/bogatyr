@@ -31,12 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.updater;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
+import ch.sisprocom.bogatyr.model.misc.Platform;
 import ch.sisprocom.bogatyr.model.updater.Document;
 import ch.sisprocom.bogatyr.model.updater.Documents;
 import ch.sisprocom.bogatyr.service.Service;
-
-import java.io.File;
-import java.io.InputStream;
 
 
 
@@ -49,10 +51,12 @@ import java.io.InputStream;
  */
 public interface Updater extends Service {
 		
-	Documents getDocuments(File file);
+	Documents getDocuments(File file) throws Exception;
 	
-	Documents getDocuments(InputStream is);
+	Documents getDocuments(InputStream is) throws Exception;
 	
-	void update(Document document, File destination);
+	void update(Document document, File dest) throws IOException;
+	
+	void update(Document document, Platform platform, File dest) throws IOException;
 }   
 

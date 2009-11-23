@@ -128,7 +128,7 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 	
 	@Override
     public KeyPair generateKeyPair(final int keySize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
-		if (0 >= keySize || 0 != keySize % HelperNumber.VALUE_16) {
+		if (0 >= keySize || 0 != keySize % HelperNumber.INT_16) {
 			throw new IllegalArgumentException("keySize is invalid: " + keySize); //$NON-NLS-1$
 		}
 		
@@ -164,7 +164,7 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
 		}
-    	if (0 >= keySize || 0 != keySize % HelperNumber.VALUE_16) {
+    	if (0 >= keySize || 0 != keySize % HelperNumber.INT_16) {
 			throw new IllegalArgumentException("keySize is invalid: " + keySize); //$NON-NLS-1$
 		}
         if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
@@ -225,7 +225,7 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 		if (null == key) {
 			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
 		}
-    	if (0 >= keySize || 0 != keySize % HelperNumber.VALUE_16) {
+    	if (0 >= keySize || 0 != keySize % HelperNumber.INT_16) {
 			throw new IllegalArgumentException("keySize is invalid: " + keySize); //$NON-NLS-1$
 		}
         if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {

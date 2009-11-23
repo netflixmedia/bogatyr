@@ -32,17 +32,17 @@
 package ch.sisprocom.bogatyr.model.updater;
 
 
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.model.ModelAbstract;
+import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.model.misc.Platform;
+
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.model.ModelAbstract;
-import ch.sisprocom.bogatyr.model.crypto.HashCode;
-import ch.sisprocom.bogatyr.model.misc.Platform;
 
 
 /**
@@ -80,7 +80,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	@Override
-	public String getLocation(Platform platform) {
+	public String getLocation(final Platform platform) {
 		return mapLocation.get(platform);
 	}
 
@@ -90,7 +90,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	@Override
-	public void setLocations(Map<Platform, String> locations) {
+	public void setLocations(final Map<Platform, String> locations) {
         if (!HelperObject.isEquals(locations, mapLocation)) {
     		mapLocation = locations;
             setChanged();
@@ -104,7 +104,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 	
 	@Override
-	public String getHash(HashCode hashCode) {
+	public String getHash(final HashCode hashCode) {
 		return mapHash.get(hashCode);
 	}
 
@@ -114,7 +114,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	@Override
-	public void setHashs(Map<HashCode, String> hashs) {
+	public void setHashs(final Map<HashCode, String> hashs) {
         if (!HelperObject.isEquals(hashs, mapHash)) {
     		mapHash = hashs;
             setChanged();
@@ -153,7 +153,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	@Override
-	public void setBuild(int build) {
+	public void setBuild(final int build) {
         if (build != this.build) {
             this.build = build;
             setChanged();
@@ -161,7 +161,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
         }
 	}
 	@Override
-	public void setCreated(Date created) {
+	public void setCreated(final Date created) {
         if (!HelperObject.isEquals(created, this.created)) {
             this.created = created;
             setChanged();
@@ -170,7 +170,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	@Override
-	public void setManufacturer(String manufacturer) {
+	public void setManufacturer(final String manufacturer) {
         if (!HelperObject.isEquals(manufacturer, this.manufacturer)) {
             this.manufacturer = manufacturer;
             setChanged();
@@ -179,16 +179,16 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	@Override
-	public void setManufacturerURL(URL url) {
-        if (!HelperObject.isEquals(url, this.manufacturerURL)) {
-            this.manufacturerURL = url;
+	public void setManufacturerURL(final URL url) {
+        if (!HelperObject.isEquals(url, manufacturerURL)) {
+            manufacturerURL = url;
             setChanged();
             notifyObservers(METHOD_SET_MANUFACTURER_URL);
         }
 	}
 
 	@Override
-	public void setUUID(UUID uuid) {
+	public void setUUID(final UUID uuid) {
         if (!HelperObject.isEquals(uuid, this.uuid)) {
             this.uuid = uuid;
             setChanged();
@@ -197,7 +197,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	@Override
-	public void setName(String name) {
+	public void setName(final String name) {
         if (!HelperObject.isEquals(name, this.name)) {
             this.name = name;
             setChanged();
@@ -206,7 +206,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	@Override
-	public void setVersion(BigDecimal version) {
+	public void setVersion(final BigDecimal version) {
         if (!HelperObject.isEquals(version, this.version)) {
             this.version = version;
             setChanged();

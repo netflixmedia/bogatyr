@@ -38,10 +38,10 @@ import ch.sisprocom.bogatyr.model.unit.Volume;
  * Converts different units of volume.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090612)
+ * @version 0.9.0 (20091123)
  * @since 0.7.0
  */
-public abstract class UnitVolume {
+public abstract class UnitVolume {//TODO replace primitive types by BigDecimal
 	public static final double FACTOR_MM3_TO_CM3 = 1000.0D; //millimeters^3 to centimeters^3
 	public static final double FACTOR_CM3_TO_L = 1000.0D; //centimeters^3 to liter
 	public static final double FACTOR_L_TO_M3 = 1000.0D; //liter to m^3

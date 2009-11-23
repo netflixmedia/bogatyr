@@ -31,27 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.updater;
 
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperNet;
+import ch.sisprocom.bogatyr.helper.HelperXml;
+import ch.sisprocom.bogatyr.model.misc.Platform;
 import ch.sisprocom.bogatyr.model.updater.Document;
 import ch.sisprocom.bogatyr.model.updater.Documents;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
-import ch.sisprocom.bogatyr.service.localizer.Localizer;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import java.io.BufferedInputStream;
+import javax.xml.bind.JAXBException;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.net.URLConnection;
-import java.util.Collection;
-import java.util.HashSet;
 
 
 /**
@@ -65,64 +58,56 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
     /*
     * Implemented methods
     */
-
-	
-//	/*
-//      * Checks the update XML file for new versions an update the application if needed.
-//      */
-//    @Override
-//    public synchronized void update(final String name, final String id, final int version, final int minorversion, final int build, final String updateLocation) throws IOException, ParserConfigurationException, SAXException  {
-//    	if (!HelperString.isValid(name)) {
-//    		throw new IllegalArgumentException("name is null or empty!"); //$NON-NLS-1$
-//    	}
-//    	if (!HelperString.isValid(id)) {
-//    		throw new IllegalArgumentException("id is null or empty!"); //$NON-NLS-1$
-//    	}
-//    	if (!HelperString.isValid(updateLocation)) {
-//    		throw new IllegalArgumentException("updateLocation is null or empty!"); //$NON-NLS-1$
-//    	}
-//
-//    	final File file = new File(updateLocation);
-//        InputStream is = null;
-//        try {
-//            if (file.exists()) {
-//                is = new BufferedInputStream(new FileInputStream(file));
-//            } else {
-//                final URLConnection con = new URL(updateLocation).openConnection();
-//                con.setConnectTimeout(HelperNumber.VALUE_2048);
-//                con.connect();
-//
-//                is = con.getInputStream();
-//            }
-//
-//            final SAXParserFactory factory = SAXParserFactory.newInstance();
-//            final SAXParser saxParser = factory.newSAXParser();
-//
-//            final DefaultHandler handler = new XmlParserUpdater(name, id, version, minorversion, build, this, localizer);
-//
-//            saxParser.parse(is, handler);
-//        } finally {
-//            if (is != null) {
-//                is.close();
-//            }
-//        }
-//    }
-
     @Override
-	public Documents getDocuments(File file) {
-		// TODO Auto-generated method stub
-		return null;
+	public Documents getDocuments(final File file) throws JAXBException {
+    	return HelperXml.deserialize(Documents.class, file);
+    }
+
+	@Override
+	public Documents getDocuments(final InputStream is) throws JAXBException {
+		return HelperXml.deserialize(Documents.class, is);
 	}
 
 	@Override
-	public Documents getDocuments(InputStream is) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void update(Document document, File destination) {
-		// TODO Auto-generated method stub
+	public void update(final Document document, final Platform platform, final File dest) throws IOException {
+        if (null == document) {
+            throw new IllegalArgumentException("document is null!"); //$NON-NLS-1$
+        }
+        if (null == platform) {
+            throw new IllegalArgumentException("platform is null!"); //$NON-NLS-1$
+        }
+        if (null == dest) {
+            throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+        }
 		
+		String location = document.getLocation(platform);
+		
+		if (location == null && Platform.ANY != platform) {
+			location = document.getLocation(Platform.ANY);
+		}
+		
+		if (location == null) {
+            throw new IllegalArgumentException("no valid location found!"); //$NON-NLS-1$
+		}
+		
+        final File source = new File(location);
+
+        if (source.exists()) {
+    		if (source.equals(dest)) {
+    			throw new IllegalArgumentException("location is equals to dest!"); //$NON-NLS-1$
+    		}
+            HelperIO.copyFile(source, dest);
+        } else {
+        	HelperIO.writeFile(dest, HelperNet.readUrl(new URL(location)), false);
+        }
+	}
+
+	@Override
+	public void update(final Document document, final File dest) throws IOException {
+        if (null == document) {
+            throw new IllegalArgumentException("document is null!"); //$NON-NLS-1$
+        }
+
+        update(document, document.getLocation(HelperEnvironment.getPlatform()) == null ? Platform.ANY : HelperEnvironment.getPlatform(), dest);
 	}
 }

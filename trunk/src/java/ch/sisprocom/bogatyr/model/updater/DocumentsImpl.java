@@ -56,7 +56,7 @@ public class DocumentsImpl extends ModelAbstract implements Documents {
      * Implemented methods
      */
 	@Override
-	public Document getDocument(UUID uuid) {
+	public Document getDocument(final UUID uuid) {
 		return mapDocument.get(uuid);
 	}
 
@@ -66,7 +66,7 @@ public class DocumentsImpl extends ModelAbstract implements Documents {
 	}
 
 	@Override
-	public void setDocuments(Map<UUID, Document> documents) {
+	public void setDocuments(final Map<UUID, Document> documents) {
         if (!HelperObject.isEquals(documents, mapDocument)) {
         	mapDocument = documents;
             setChanged();

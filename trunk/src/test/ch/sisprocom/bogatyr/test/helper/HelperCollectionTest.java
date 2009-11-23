@@ -84,7 +84,7 @@ public class HelperCollectionTest {
 	
 	@Test
 	public void testDump() {
-		Collection<String> list = HelperCollection.getList("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		final Collection<String> list = HelperCollection.getList("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 
 		assertNotNull(HelperCollection.dump(list));
 		
@@ -122,7 +122,7 @@ public class HelperCollectionTest {
 	
 	@Test
 	public void testToArray() {
-		String[] array = HelperCollection.toArray(HelperCollection.getList("A", "A", "A")); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		final String[] array = HelperCollection.toArray(HelperCollection.getList("A", "A", "A")); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 
 		assertTrue(Arrays.equals(new String[]{"A", "A", "A"}, array)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		

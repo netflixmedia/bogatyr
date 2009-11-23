@@ -47,8 +47,8 @@ import ch.sisprocom.bogatyr.helper.HelperString;
 public abstract class EncoderBase64 {
     private static final String ERROR_ILLEGAL_CHARACTER = "Illegal character in Base64 encoded data"; //$NON-NLS-1$
 
-	private static final char[] map1 = new char[HelperNumber.VALUE_64];
-	private static final byte[] map2 = new byte[HelperNumber.VALUE_128];
+	private static final char[] map1 = new char[HelperNumber.INT_64];
+	private static final byte[] map2 = new byte[HelperNumber.INT_128];
 
 	// Mapping table from 6-bit nibbles to Base64 characters.
 	static {
@@ -75,7 +75,7 @@ public abstract class EncoderBase64 {
 		for (int ii = 0; ii < map2.length; ii++) {
 			map2[ii] = (byte) -1;
 		}
-		for (int ii = 0; HelperNumber.VALUE_64 > ii; ii++) {
+		for (int ii = 0; HelperNumber.INT_64 > ii; ii++) {
 			map2[map1[ii]] = (byte) ii;
 		}
 	}

@@ -31,10 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.profiler;
 
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
 /**
@@ -47,7 +47,6 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
 public class ProfilerImpl extends ServiceAbstract implements Profiler {
 
 	private final Map<String, Long> profiles =  new HashMap<String, Long>();
-	private long startTime;
 	private long meanTime;
 	private long elapsedTime;
 	
@@ -78,7 +77,6 @@ public class ProfilerImpl extends ServiceAbstract implements Profiler {
 	@Override
 	public void start() {
 		profiles.clear();
-		startTime = System.nanoTime();
-		meanTime = startTime;
+		meanTime = System.nanoTime();
 	}
 }

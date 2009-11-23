@@ -144,7 +144,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 
     @Override
     public void setPort(final int port) {
-    	if (0 >= port || HelperNumber.VALUE_65536 <= port) {
+    	if (0 >= port || HelperNumber.INT_65536 <= port) {
     		throw new IllegalArgumentException("port outside of the valid range (0 - 65535): " + port); //$NON-NLS-1$
     	}
         this.port = port;

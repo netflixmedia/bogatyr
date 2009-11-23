@@ -45,10 +45,12 @@ import java.util.concurrent.ConcurrentHashMap;
  * Implementation of the context for applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091021)
+ * @version 0.9.0 (20091022)
  * @since 0.1.0
  */
 public class ContextImpl extends ModelAbstract implements Context {
+	private static final long serialVersionUID = 5570878557994873482L;
+
 	private static final Context INSTANCE = new ContextImpl();
 
 	private Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();

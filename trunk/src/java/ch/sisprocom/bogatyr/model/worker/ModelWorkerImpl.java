@@ -32,11 +32,11 @@
 package ch.sisprocom.bogatyr.model.worker;
 
 
+import ch.sisprocom.bogatyr.model.ModelAbstract;
+import ch.sisprocom.bogatyr.view.swing.worker.WorkerAbstract;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import ch.sisprocom.bogatyr.view.swing.worker.WorkerAbstract;
-import ch.sisprocom.bogatyr.model.ModelAbstract;
 
 
 /**
@@ -59,16 +59,19 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 	/*
      * Implemented methods
      */
+    @Override
     public List<WorkerAbstract> getWorkers() {
 		return listWorker;
 	}
 
+    @Override
     public <T, V> void add(final WorkerAbstract<T, V> worker) {
     	listWorker.add(worker);
         setChanged();
         notifyObservers(METHOD_ADD);
     }
 
+    @Override
     public <T, V> void remove(final WorkerAbstract<T, V> worker) {
         worker.cancel(true);
         listWorker.remove(worker);
@@ -76,6 +79,7 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
         notifyObservers(METHOD_REMOVE);
     }
 
+    @Override
     public <T, V> void removeAll() {
         for (final WorkerAbstract<T, V> worker : listWorker) {
             worker.cancel(true);

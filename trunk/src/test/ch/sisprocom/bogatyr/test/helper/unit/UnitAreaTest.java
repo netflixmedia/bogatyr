@@ -31,56 +31,59 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.unit;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import ch.sisprocom.bogatyr.model.unit.Area;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.unit.UnitArea;
+import ch.sisprocom.bogatyr.model.unit.Area;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090612
+ * @version 20091123
  */
 public class UnitAreaTest {
 	@Test
 	public void testConvert() {
-		assertEquals(1.0D, UnitArea.convert(Area.MM2, Area.CM2, 100.0D), 0.00001D);
-		assertEquals(100.0D, UnitArea.convert(Area.CM2, Area.MM2, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.MM2, Area.CM2, HelperNumber.BIGDECIMAL_100)) == 0);
+		assertTrue(HelperNumber.BIGDECIMAL_100.compareTo(UnitArea.convert(Area.CM2, Area.MM2, BigDecimal.ONE)) == 0);
+
+		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.CM2, Area.M2, HelperNumber.BIGDECIMAL_10000)) == 0);
+		assertTrue(HelperNumber.BIGDECIMAL_10000.compareTo(UnitArea.convert(Area.M2, Area.CM2, BigDecimal.ONE)) == 0);
 		
-		assertEquals(1.0D, UnitArea.convert(Area.CM2, Area.M2, 10000.0D), 0.00001D);
-		assertEquals(10000.0D, UnitArea.convert(Area.M2, Area.CM2, 1.0D), 0.00001D);
+		assertTrue(HelperNumber.BIGDECIMAL_100.compareTo(UnitArea.convert(Area.AREA, Area.M2, BigDecimal.ONE)) == 0);
+		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.M2, Area.AREA, HelperNumber.BIGDECIMAL_100)) == 0);
 
-		assertEquals(100.0D, UnitArea.convert(Area.AREA, Area.M2, 1.0D), 0.00001D);
-		assertEquals(1.0D, UnitArea.convert(Area.M2, Area.AREA, 100.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.AREA, Area.HECTARE, HelperNumber.BIGDECIMAL_100)) == 0);
+		assertTrue(HelperNumber.BIGDECIMAL_100.compareTo(UnitArea.convert(Area.HECTARE, Area.AREA, BigDecimal.ONE)) == 0);
 
-		assertEquals(1.0D, UnitArea.convert(Area.AREA, Area.HECTARE, 100.0D), 0.00001D);
-		assertEquals(100.0D, UnitArea.convert(Area.HECTARE, Area.AREA, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.HECTARE, Area.KM2, HelperNumber.BIGDECIMAL_100)) == 0);
+		assertTrue(HelperNumber.BIGDECIMAL_100.compareTo(UnitArea.convert(Area.KM2, Area.HECTARE, BigDecimal.ONE)) == 0);
 
-		assertEquals(1.0D, UnitArea.convert(Area.HECTARE, Area.KM2, 100.0D), 0.00001D);
-		assertEquals(100.0D, UnitArea.convert(Area.KM2, Area.HECTARE, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.FOOT2, Area.M2, new BigDecimal("0.09290304"))) == 0); //$NON-NLS-1$
+		assertTrue(new BigDecimal("0.09290304").compareTo(UnitArea.convert(Area.M2, Area.FOOT2, BigDecimal.ONE)) == 0); //$NON-NLS-1$
 
-		assertEquals(1.0D, UnitArea.convert(Area.FOOT2, Area.M2, 0.09290304D), 0.00001D);
-		assertEquals(0.09290304D, UnitArea.convert(Area.M2, Area.FOOT2, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.YARD2, Area.M2, new BigDecimal("0.83612736"))) == 0); //$NON-NLS-1$
+		assertTrue(new BigDecimal("0.83612736").compareTo(UnitArea.convert(Area.M2, Area.YARD2, BigDecimal.ONE)) == 0); //$NON-NLS-1$
 
-		assertEquals(1.0D, UnitArea.convert(Area.YARD2, Area.M2, 0.83612736D), 0.00001D);
-		assertEquals(0.83612736D, UnitArea.convert(Area.M2, Area.YARD2, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.PERCH, Area.M2, new BigDecimal("25.2928526"))) == 0); //$NON-NLS-1$
+		assertTrue(new BigDecimal("25.2928526").compareTo(UnitArea.convert(Area.M2, Area.PERCH, BigDecimal.ONE)) == 0); //$NON-NLS-1$
 
-		assertEquals(1.0D, UnitArea.convert(Area.PERCH, Area.M2, 25.2928526D), 0.00001D);
-		assertEquals(25.2928526D, UnitArea.convert(Area.M2, Area.PERCH, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.ACRE, Area.M2, new BigDecimal("4046.8564224"))) == 0); //$NON-NLS-1$
+		assertTrue(new BigDecimal("4046.8564224").compareTo(UnitArea.convert(Area.M2, Area.ACRE, BigDecimal.ONE)) == 0); //$NON-NLS-1$
 
-		assertEquals(1.0D, UnitArea.convert(Area.ACRE, Area.M2, 4046.8564224D), 0.00001D);
-		assertEquals(4046.8564224D, UnitArea.convert(Area.M2, Area.ACRE, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.KM2, Area.MILE2, new BigDecimal("2.5899881103"))) == 0); //$NON-NLS-1$
+		assertTrue(new BigDecimal("2.5899881103").compareTo(UnitArea.convert(Area.MILE2, Area.KM2, BigDecimal.ONE)) == 0); //$NON-NLS-1$
 
-		assertEquals(2.5899881103D, UnitArea.convert(Area.MILE2, Area.KM2, 1.0D), 0.00001D);
-		assertEquals(1.0D, UnitArea.convert(Area.KM2, Area.MILE2, 2.5899881103D), 0.00001D);
-		
 		try {
-			UnitArea.convert(null, null, 1.0D);
+			UnitArea.convert(null, null, BigDecimal.ONE);
 			fail("fromUnit is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -89,7 +92,7 @@ public class UnitAreaTest {
 		}
 		
 		try {
-			UnitArea.convert(Area.KM2, null, 1.0D);
+			UnitArea.convert(Area.KM2, null, BigDecimal.ONE);
 			fail("toUnit is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
