@@ -31,24 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.updater;
 
-import java.util.Map;
-import java.util.UUID;
+import ch.sisprocom.bogatyr.model.Model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import ch.sisprocom.bogatyr.model.Model;
-import ch.sisprocom.bogatyr.model.misc.Platform;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * The interface for the application model.
  * 
  * @author Stefan Laubenberger
- * @version 20091122
+ * @version 20091123
  */
 @XmlRootElement
 public interface Documents extends Model {
-    String METHOD_SET_DOCUMENTS = "setDocuments";
+    String METHOD_SET_DOCUMENTS = "setDocuments"; //$NON-NLS-1$
 
     /**
      * Returns all documents.

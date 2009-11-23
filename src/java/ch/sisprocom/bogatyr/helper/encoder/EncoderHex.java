@@ -91,7 +91,7 @@ public abstract class EncoderHex {
 		final byte[] bts = new byte[input.length() / 2];
 
     	for (int ii = 0; ii < bts.length; ii++) {
-    		bts[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), HelperNumber.VALUE_16);
+    		bts[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), HelperNumber.INT_16);
     	}
     	return bts;
     }

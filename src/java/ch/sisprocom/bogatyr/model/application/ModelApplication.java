@@ -49,23 +49,24 @@ import ch.sisprocom.bogatyr.service.property.Property;
  * The interface for the application model.
  * 
  * @author Stefan Laubenberger
- * @version 20091122
+ * @version 0.9.0 (20091023)
+ * @since 0.6.0
  */
 @XmlRootElement
 public interface ModelApplication extends Model {
-	String METHOD_SET_HASHS      	   = "setHashs";
-    String METHOD_ADD_HASH             = "addHash";
-    String METHOD_REMOVE_HASH	       = "removeHash";
-    String METHOD_SET_NAME      	   = "setName";
-    String METHOD_SET_VERSION   	   = "setVersion";
-    String METHOD_SET_BUILD     	   = "setBuild";
-    String METHOD_SET_CREATED		   = "setCreated";
-    String METHOD_SET_MANUFACTURER     = "setManufacturer";
-    String METHOD_SET_MANUFACTURER_URL = "setManufacturerURL";
-    String METHOD_SET_UUID     		   = "setUUID";
-    String METHOD_SET_DEBUG     	   = "setDebug";
-    String METHOD_SET_PROPERTY  	   = "setProperty";
-    String METHOD_SET_LOCALIZER 	   = "setLocalizer";
+	String METHOD_SET_HASHS      	   = "setHashs"; //$NON-NLS-1$
+    String METHOD_ADD_HASH             = "addHash"; //$NON-NLS-1$
+    String METHOD_REMOVE_HASH	       = "removeHash"; //$NON-NLS-1$
+    String METHOD_SET_NAME      	   = "setName"; //$NON-NLS-1$
+    String METHOD_SET_VERSION   	   = "setVersion"; //$NON-NLS-1$
+    String METHOD_SET_BUILD     	   = "setBuild"; //$NON-NLS-1$
+    String METHOD_SET_CREATED		   = "setCreated"; //$NON-NLS-1$
+    String METHOD_SET_MANUFACTURER     = "setManufacturer"; //$NON-NLS-1$
+    String METHOD_SET_MANUFACTURER_URL = "setManufacturerURL"; //$NON-NLS-1$
+    String METHOD_SET_UUID     		   = "setUUID"; //$NON-NLS-1$
+    String METHOD_SET_DEBUG     	   = "setDebug"; //$NON-NLS-1$
+    String METHOD_SET_PROPERTY  	   = "setProperty"; //$NON-NLS-1$
+    String METHOD_SET_LOCALIZER 	   = "setLocalizer"; //$NON-NLS-1$
 	
     /**
      * Returns all hashs.

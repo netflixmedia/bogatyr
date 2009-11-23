@@ -199,7 +199,7 @@ public abstract class HelperNet {
         // Try to reach the specified address within the timeout period.
         // If during this period the address cannot be
         // reached then the method returns false.
-		return address.isReachable(HelperNumber.VALUE_4096);
+		return address.isReachable(HelperNumber.INT_4096);
     }
 
     /**
@@ -335,7 +335,7 @@ public abstract class HelperNet {
 		}
 		
 		final URLConnection con = url.openConnection();
-		con.setConnectTimeout(HelperNumber.VALUE_2048);
+		con.setConnectTimeout(HelperNumber.INT_2048);
 		con.connect();
 		
 		return con.getInputStream();
@@ -366,7 +366,7 @@ public abstract class HelperNet {
 		
     	final URLConnection con = url.openConnection();
 		con.setRequestProperty("Authorization", "Basic " + EncoderBase64.encode(username + ':' + password)); //$NON-NLS-1$ //$NON-NLS-2$
-		con.setConnectTimeout(HelperNumber.VALUE_2048);
+		con.setConnectTimeout(HelperNumber.INT_2048);
 		con.connect();
 		
 		return con.getInputStream();

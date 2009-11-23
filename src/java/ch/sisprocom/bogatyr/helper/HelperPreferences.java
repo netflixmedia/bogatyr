@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.FilterOutputStream;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.InvalidPreferencesFormatException;
 import java.util.prefs.Preferences;
@@ -46,7 +47,7 @@ import java.util.prefs.Preferences;
  * This is a helper class for preferences.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091110)
+ * @version 0.9.0 (20091123)
  * @since 0.5.0
  */
 public abstract class HelperPreferences { //TODO complete and test it!
@@ -62,32 +63,32 @@ public abstract class HelperPreferences { //TODO complete and test it!
 	}
 	 
 	public static void write(final File file, final Preferences prefs) throws IOException, BackingStoreException {
-        final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+        final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {
-            prefs.exportNode(bos);
+            prefs.exportNode(fos);
         } finally {
-            bos.close();
+            fos.close();
         }
 	}	
 	  
 	public static void writeUserNode(final File file, final Class<?> clazz) throws IOException, BackingStoreException {
-        final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+        final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {
-            Preferences.userNodeForPackage(clazz).exportNode(bos);
+            Preferences.userNodeForPackage(clazz).exportNode(fos);
         } finally {
-            bos.close();
+            fos.close();
         }
 	}	
 	  
 	public static void writeSystemNode(final File file, final Class<?> clazz) throws IOException, BackingStoreException {
-        final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+        final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {
-            Preferences.systemNodeForPackage(clazz).exportNode(bos);
+            Preferences.systemNodeForPackage(clazz).exportNode(fos);
         } finally {
-            bos.close();
+            fos.close();
         }
 	}	
 }

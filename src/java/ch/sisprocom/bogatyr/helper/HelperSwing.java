@@ -56,7 +56,7 @@ public abstract class HelperSwing {
      * @since 0.9.0
      */
 	public static void setMacOSXMenu() {
-		if (HelperEnvironment.getPlatform() == Platform.MAC_OSX) {
+		if (Platform.MAC_OSX == HelperEnvironment.getPlatform()) {
 			//display the menu in MacOS X style
 			try {
 				System.setProperty("apple.laf.useScreenMenuBar", "true"); //$NON-NLS-1$ //$NON-NLS-2$

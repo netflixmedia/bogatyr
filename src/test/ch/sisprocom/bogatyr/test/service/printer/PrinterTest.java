@@ -59,7 +59,7 @@ public class PrinterTest {
 			final Component component = new Button("Hello world", HelperString.EMPTY_STRING); //$NON-NLS-1$ 
 			component.setBackground(Color.YELLOW);
 			component.setForeground(Color.BLACK);
-            component.setFont(new Font("Arial", Font.PLAIN, HelperNumber.VALUE_16)); //$NON-NLS-1$;
+            component.setFont(new Font("Arial", Font.PLAIN, HelperNumber.INT_16)); //$NON-NLS-1$;
 			component.setSize(new Dimension(100, 100));
 			
 			final Printer printer = new Printer();

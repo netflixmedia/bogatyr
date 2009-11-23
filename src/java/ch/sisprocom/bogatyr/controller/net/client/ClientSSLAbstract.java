@@ -31,7 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.client;
 
-import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.SSLSocketFactory;import javax.net.SocketFactory;
 import java.io.IOException;
 
 /**
@@ -56,7 +56,7 @@ public abstract class ClientSSLAbstract extends ClientAbstract {
      */
     @Override
     public void start() throws IOException {
-        final SSLSocketFactory sslFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+        final SocketFactory sslFactory = SSLSocketFactory.getDefault();
 
         setSocket(sslFactory.createSocket(getHost(), getPort()));
 

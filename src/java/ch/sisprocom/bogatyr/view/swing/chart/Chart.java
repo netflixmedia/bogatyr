@@ -216,9 +216,7 @@ public class Chart extends Panel {
     		    	gbc.gridwidth 	= 1;
     		    	gbc.gridheight 	= 1;
     				
-    				final JComponent spacer = new Panel(colorBackground);
-    				
-    				add(spacer, gbc);
+    				add(new Panel(colorBackground), gbc);
     			}
     		}
 		}

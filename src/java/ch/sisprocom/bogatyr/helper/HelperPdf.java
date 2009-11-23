@@ -49,6 +49,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.FilterOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -83,10 +84,10 @@ public abstract class HelperPdf {
 		
     	final Dimension size = component.getSize();
 		final Document document = new Document(new Rectangle((float) size.width, (float) size.height));
-		final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {
-            final PdfWriter writer = PdfWriter.getInstance(document, bos);
+            final PdfWriter writer = PdfWriter.getInstance(document, fos);
 			      
 			document.open();
 			final PdfContentByte cb = writer.getDirectContent();
@@ -98,7 +99,7 @@ public abstract class HelperPdf {
 			cb.addTemplate(tp, 0.0F, 0.0F);
 		} finally {
 			document.close();
-            bos.close();
+            fos.close();
         }
 	}
 
@@ -120,14 +121,14 @@ public abstract class HelperPdf {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
 		}
 		
-		final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
 
 		try {
 		   final ITextRenderer renderer = new ITextRenderer();
 	
 		   renderer.setDocument(files[0]);
 		   renderer.layout();
-		   renderer.createPDF(bos, false);
+		   renderer.createPDF(fos, false);
 	
 		   for (int ii = 1; ii < files.length; ii++) {
 		       renderer.setDocument(files[ii]);
@@ -138,7 +139,7 @@ public abstract class HelperPdf {
 		   renderer.finishPDF();
 
 		} finally {
-		   bos.close();
+		   fos.close();
 		}
 	}
 	

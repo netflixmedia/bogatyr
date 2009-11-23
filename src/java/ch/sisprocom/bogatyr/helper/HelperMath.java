@@ -33,7 +33,6 @@ package ch.sisprocom.bogatyr.helper;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -43,12 +42,10 @@ import java.util.Collection;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091103)
+ * @version 0.9.0 (20091123)
  * @since 0.4.0
  */
 public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
-	private static final MathContext MC = new MathContext(16);
-	
 	/**
 	 * Returns the greatest common divisor of two given numbers.
 	 * 
@@ -374,11 +371,11 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
         
       //TODO does it also work for other parameters than days p.a.?
         
-        BigDecimal term01 = new BigDecimal(factorial(HelperTime.DAYS_PER_YEAR));
-        BigDecimal term02 = new BigDecimal(factorial(HelperTime.DAYS_PER_YEAR - n));
-        BigDecimal term03 = BigDecimal.valueOf(HelperTime.DAYS_PER_YEAR).pow(n);
+        final BigDecimal term01 = new BigDecimal(factorial(HelperTime.DAYS_PER_YEAR));
+        final BigDecimal term02 = new BigDecimal(factorial(HelperTime.DAYS_PER_YEAR - n));
+        final BigDecimal term03 = BigDecimal.valueOf(HelperTime.DAYS_PER_YEAR).pow(n);
         
-        BigDecimal result = BigDecimal.ONE.subtract(term01.divide(term02.multiply(term03), MC));
+        final BigDecimal result = BigDecimal.ONE.subtract(term01.divide(term02.multiply(term03, Constants.DEFAULT_MATHCONTEXT), Constants.DEFAULT_MATHCONTEXT));
 
         return result.doubleValue();
     }

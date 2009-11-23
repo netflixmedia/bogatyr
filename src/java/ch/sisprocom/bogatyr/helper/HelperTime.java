@@ -188,7 +188,7 @@ public abstract class HelperTime {
      * @see DateFormat
      * @since 0.9.0
      */
-    public static Date getDate(final String date, DateFormat format) throws ParseException {
+    public static Date getDate(final String date, final DateFormat format) throws ParseException {
     	return format.parse(date);
     }
 
@@ -201,7 +201,7 @@ public abstract class HelperTime {
      * @see DateFormat
      * @since 0.9.0
      */
-    public static String getFormattedDate(final long time, DateFormat format) {
+    public static String getFormattedDate(final long time, final DateFormat format) {
     	return format.format(new Date(time));
     }
     
@@ -215,7 +215,7 @@ public abstract class HelperTime {
      * @see DateFormat
      * @since 0.9.0
      */
-    public static String getFormattedDate(final Date date, DateFormat format) {
+    public static String getFormattedDate(final Date date, final DateFormat format) {
     	return format.format(date);
     }
 }

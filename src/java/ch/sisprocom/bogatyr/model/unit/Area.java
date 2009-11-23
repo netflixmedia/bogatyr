@@ -31,32 +31,35 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.unit;
 
+import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.unit.UnitArea;
+
+import java.math.BigDecimal;
 
 /**
  * Area units
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091123)
  * @since 0.7.0
  */
 public enum Area {
-	MM2(UnitArea.FACTOR_MM2_TO_CM2 * UnitArea.FACTOR_CM2_TO_M2), //$JUnit$
+	MM2(UnitArea.FACTOR_MM2_TO_CM2.multiply(UnitArea.FACTOR_CM2_TO_M2, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	CM2(UnitArea.FACTOR_CM2_TO_M2), //$JUnit$
-	M2(1.0D),
-	AREA(1.0D/UnitArea.FACTOR_M2_TO_AREA), //$JUnit$
-	HECTARE(1.0D/(UnitArea.FACTOR_M2_TO_AREA * UnitArea.FACTOR_AREA_TO_HECTARE)), //$JUnit$
-	KM2(1/(UnitArea.FACTOR_M2_TO_AREA * UnitArea.FACTOR_AREA_TO_HECTARE * UnitArea.FACTOR_HECTARE_TO_KM2)), //$JUnit$
+	M2(BigDecimal.ONE),
+	AREA(BigDecimal.ONE.divide(UnitArea.FACTOR_M2_TO_AREA, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	HECTARE(BigDecimal.ONE.divide((UnitArea.FACTOR_M2_TO_AREA.multiply(UnitArea.FACTOR_AREA_TO_HECTARE, Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	KM2(BigDecimal.ONE.divide((UnitArea.FACTOR_M2_TO_AREA.multiply(UnitArea.FACTOR_AREA_TO_HECTARE, Constants.DEFAULT_MATHCONTEXT).multiply(UnitArea.FACTOR_HECTARE_TO_KM2, Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	FOOT2(UnitArea.FACTOR_FOOT2_TO_M2), //$JUnit$
 	YARD2(UnitArea.FACTOR_YARD2_TO_M2), //$JUnit$
 	PERCH(UnitArea.FACTOR_PERCH_TO_M2), //$JUnit$
 	ACRE(UnitArea.FACTOR_ACRE_TO_M2), //$JUnit$
-	MILE2(1.0D/(UnitArea.FACTOR_M2_TO_AREA * UnitArea.FACTOR_AREA_TO_HECTARE * UnitArea.FACTOR_HECTARE_TO_KM2 * UnitArea.FACTOR_MILE2_TO_KM2)); //$JUnit$
+	MILE2(BigDecimal.ONE.divide((UnitArea.FACTOR_M2_TO_AREA.multiply(UnitArea.FACTOR_AREA_TO_HECTARE, Constants.DEFAULT_MATHCONTEXT).multiply(UnitArea.FACTOR_HECTARE_TO_KM2, Constants.DEFAULT_MATHCONTEXT).multiply(UnitArea.FACTOR_MILE2_TO_KM2, Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)); //$JUnit$
 
-	private final double factor;
+	private final BigDecimal factor;
 	
-	Area(final double factor) {
+	Area(final BigDecimal factor) {
 		this.factor = factor;
 	}
 
@@ -66,7 +69,7 @@ public enum Area {
      * @return factor to the base value
      * @since 0.8.0
      */
-	public double getFactor() {
+	public BigDecimal getFactor() {
 		return factor;
 	}
 

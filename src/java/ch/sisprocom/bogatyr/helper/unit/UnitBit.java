@@ -38,10 +38,10 @@ import ch.sisprocom.bogatyr.model.unit.Bit;
  * Converts different units of bit.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091115)
+ * @version 0.9.0 (20091123)
  * @since 0.9.0
  */
-public abstract class UnitBit {
+public abstract class UnitBit { //TODO replace primitive types by BigDecimal
 	public static final double FACTOR_BIT_TO_BYTE = 8.0D; //bit to byte
 
 	public static final double FACTOR_BIT_TO_KILOBIT  = 10E2;

@@ -40,24 +40,31 @@ import java.math.BigInteger;
  *
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091123)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
-    public static final int VALUE_8 = 8;
-    public static final int VALUE_16 = 16;
-    public static final int VALUE_32 = 32;
-    public static final int VALUE_64 = 64;
-    public static final int VALUE_128 = 128;
-    public static final int VALUE_256 = 256;
-    public static final int VALUE_512 = 512;
-    public static final int VALUE_1024 = 1024;
-    public static final int VALUE_2048 = 2048;
-    public static final int VALUE_4096 = 4096;
-    public static final int VALUE_8192 = 8192;
-    public static final int VALUE_16384 = 16384;
-    public static final int VALUE_32768 = 32768;
-    public static final int VALUE_65536 = 65536;
+    public static final BigDecimal BIGDECIMAL_100 = new BigDecimal("100", Constants.DEFAULT_MATHCONTEXT); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_1000 = new BigDecimal("1000", Constants.DEFAULT_MATHCONTEXT); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_10000 = new BigDecimal("10000", Constants.DEFAULT_MATHCONTEXT); //$NON-NLS-1$
+
+    public static final int INT_10 = 10;
+    public static final int INT_100 = 100;
+    public static final int INT_1000 = 1000;
+    public static final int INT_8 = 8;
+    public static final int INT_16 = 16;
+    public static final int INT_32 = 32;
+    public static final int INT_64 = 64;
+    public static final int INT_128 = 128;
+    public static final int INT_256 = 256;
+    public static final int INT_512 = 512;
+    public static final int INT_1024 = 1024;
+    public static final int INT_2048 = 2048;
+    public static final int INT_4096 = 4096;
+    public static final int INT_8192 = 8192;
+    public static final int INT_16384 = 16384;
+    public static final int INT_32768 = 32768;
+    public static final int INT_65536 = 65536;
 
 
     /**
@@ -92,7 +99,7 @@ public abstract class HelperNumber {
         if (a == null || b == null) {
             return null;
         }
-        return a.multiply(b);
+        return a.multiply(b, Constants.DEFAULT_MATHCONTEXT);
     }
 
     /**

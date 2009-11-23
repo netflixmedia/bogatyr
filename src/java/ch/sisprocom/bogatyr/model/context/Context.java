@@ -44,13 +44,13 @@ import java.util.Map;
  * Interface for the context in applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091021)
+ * @version 0.9.0 (20091023)
  * @since 0.6.0
  */
 public interface Context extends Model {
-    String METHOD_SET_DATA     = "setData";
-    String METHOD_ADD_VALUE    = "addValue";
-    String METHOD_REMOVE_VALUE = "removeValue";
+    String METHOD_SET_DATA     = "setData"; //$NON-NLS-1$
+    String METHOD_ADD_VALUE    = "addValue"; //$NON-NLS-1$
+    String METHOD_REMOVE_VALUE = "removeValue"; //$NON-NLS-1$
 
     /**
      * Returns the data of the context.

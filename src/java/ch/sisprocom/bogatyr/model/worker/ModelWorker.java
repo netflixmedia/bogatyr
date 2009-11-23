@@ -41,13 +41,13 @@ import ch.sisprocom.bogatyr.model.Model;
  * The interface for the worker model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091122)
+ * @version 0.9.0 (20091123)
  * @since 0.9.0
  */
 public interface ModelWorker extends Model {
-    String METHOD_ADD        = "add";
-    String METHOD_REMOVE     = "remove";
-    String METHOD_REMOVE_ALL = "removeAll";
+    String METHOD_ADD        = "add"; //$NON-NLS-1$
+    String METHOD_REMOVE     = "remove"; //$NON-NLS-1$
+    String METHOD_REMOVE_ALL = "removeAll"; //$NON-NLS-1$
 
     List<WorkerAbstract> getWorkers();
     

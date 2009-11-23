@@ -49,7 +49,7 @@ public class HelperCryptoTest {
 
 	@Test
     public void testGetRandomKey() {
-        assertNotNull(HelperCrypto.getRandomKey(HelperNumber.VALUE_16, '1','2','3'));
+        assertNotNull(HelperCrypto.getRandomKey(HelperNumber.INT_16, '1','2','3'));
 
         try {
         	HelperCrypto.getRandomKey(Integer.MIN_VALUE, '1','2','3');
@@ -61,7 +61,7 @@ public class HelperCryptoTest {
 		}
 
         try {
-        	HelperCrypto.getRandomKey(HelperNumber.VALUE_16, null);
+        	HelperCrypto.getRandomKey(HelperNumber.INT_16, null);
             fail("data is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -72,7 +72,7 @@ public class HelperCryptoTest {
 
 	@Test
     public void testGetRandomKeyDefault() {
-		assertNotNull(HelperCrypto.getRandomKey(HelperNumber.VALUE_16));
+		assertNotNull(HelperCrypto.getRandomKey(HelperNumber.INT_16));
 
 		try {
 			HelperCrypto.getRandomKey(Integer.MIN_VALUE);

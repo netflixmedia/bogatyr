@@ -82,7 +82,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 	
 	@Override
-	public String getHash(HashCode hashCode) {
+	public String getHash(final HashCode hashCode) {
 		return mapHash.get(hashCode);
 	}
 
@@ -92,7 +92,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
-	public void setHashs(Map<HashCode, String> hashs) {
+	public void setHashs(final Map<HashCode, String> hashs) {
         if (!HelperObject.isEquals(hashs, mapHash)) {
     		mapHash = hashs;
             setChanged();
@@ -101,14 +101,14 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
-	public void addHash(HashCode hashCode, String hash) {
+	public void addHash(final HashCode hashCode, final String hash) {
 		mapHash.put(hashCode, hash);
         setChanged();
         notifyObservers(METHOD_ADD_HASH);
 	}
 
 	@Override
-	public void removeHash(HashCode hashCode) {
+	public void removeHash(final HashCode hashCode) {
 		mapHash.remove(hashCode);
         setChanged();
         notifyObservers(METHOD_REMOVE_HASH);
@@ -160,7 +160,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
-	public void setBuild(int build) {
+	public void setBuild(final int build) {
         if (build != this.build) {
             this.build = build;
             setChanged();
@@ -168,7 +168,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
         }
 	}
 	@Override
-	public void setCreated(Date created) {
+	public void setCreated(final Date created) {
         if (!HelperObject.isEquals(created, this.created)) {
             this.created = created;
             setChanged();
@@ -177,7 +177,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
-	public void setManufacturer(String manufacturer) {
+	public void setManufacturer(final String manufacturer) {
         if (!HelperObject.isEquals(manufacturer, this.manufacturer)) {
             this.manufacturer = manufacturer;
             setChanged();
@@ -186,16 +186,16 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
-	public void setManufacturerURL(URL url) {
-        if (!HelperObject.isEquals(url, this.manufacturerURL)) {
-            this.manufacturerURL = url;
+	public void setManufacturerURL(final URL url) {
+        if (!HelperObject.isEquals(url, manufacturerURL)) {
+            manufacturerURL = url;
             setChanged();
             notifyObservers(METHOD_SET_MANUFACTURER_URL);
         }
 	}
 
 	@Override
-	public void setUUID(UUID uuid) {
+	public void setUUID(final UUID uuid) {
         if (!HelperObject.isEquals(uuid, this.uuid)) {
             this.uuid = uuid;
             setChanged();
@@ -204,7 +204,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
-	public void setDebug(boolean isDebug) {
+	public void setDebug(final boolean isDebug) {
         if (isDebug != this.isDebug) {
             this.isDebug = isDebug;
             setChanged();
@@ -213,7 +213,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
-	public void setLocalizer(Localizer localizer) {
+	public void setLocalizer(final Localizer localizer) {
         if (!HelperObject.isEquals(localizer, this.localizer)) {
             this.localizer = localizer;
             setChanged();
@@ -222,7 +222,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
-	public void setName(String name) {
+	public void setName(final String name) {
         if (!HelperObject.isEquals(name, this.name)) {
             this.name = name;
             setChanged();
@@ -231,7 +231,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
-	public void setProperty(Property property) {
+	public void setProperty(final Property property) {
         if (!HelperObject.isEquals(property, this.property)) {
             this.property = property;
             setChanged();
@@ -240,7 +240,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
-	public void setVersion(BigDecimal version) {
+	public void setVersion(final BigDecimal version) {
         if (!HelperObject.isEquals(version, this.version)) {
             this.version = version;
             setChanged();
