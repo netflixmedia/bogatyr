@@ -41,14 +41,19 @@ import java.awt.Component;
  * This is an extended JDesktopPane.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091123)
  * @since 0.7.0
  */
 public class PaneDesktop extends JDesktopPane {
 	private static final long serialVersionUID = -1000995349055355841L;
 
 
-    /*
+	public PaneDesktop() {
+		super();
+	}
+
+    
+	/*
       * Overridden methods
       */
 	@Override

@@ -31,6 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.unit;
 
+import java.math.BigDecimal;
+
+import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.unit.UnitWeight;
 
@@ -38,20 +41,20 @@ import ch.sisprocom.bogatyr.helper.unit.UnitWeight;
  * Weight units
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091202)
  * @since 0.7.0
  */
 public enum Weight {
-	MILLIGRAM(UnitWeight.FACTOR_MILLIGRAM_TO_GRAM * UnitWeight.FACTOR_GRAM_TO_KILOGRAM), //$JUnit$
+	MILLIGRAM(UnitWeight.FACTOR_MILLIGRAM_TO_GRAM.multiply(UnitWeight.FACTOR_GRAM_TO_KILOGRAM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	GRAM(UnitWeight.FACTOR_GRAM_TO_KILOGRAM), //$JUnit$
-	KILOGRAM(1.0D), //$JUnit$
-	OUNCE(UnitWeight.FACTOR_OUNCE_TO_GRAM * UnitWeight.FACTOR_GRAM_TO_KILOGRAM), //$JUnit$
+	KILOGRAM(BigDecimal.ONE), //$JUnit$
+	OUNCE(UnitWeight.FACTOR_OUNCE_TO_GRAM.multiply(UnitWeight.FACTOR_GRAM_TO_KILOGRAM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	POUND(UnitWeight.FACTOR_POUND_TO_KILOGRAM), //$JUnit$
-	TON(1.0D/UnitWeight.FACTOR_TON_TO_KILOGRAM); //$JUnit$
+	TON(BigDecimal.ONE.divide(UnitWeight.FACTOR_TON_TO_KILOGRAM, Constants.DEFAULT_MATHCONTEXT)); //$JUnit$
 
-	private final double factor;
+	private final BigDecimal factor;
 	
-	Weight(final double factor) {
+	Weight(final BigDecimal factor) {
 		this.factor = factor;
 	}
 
@@ -61,7 +64,7 @@ public enum Weight {
      * @return factor to the base value
      * @since 0.8.0
      */
-	public double getFactor() {
+	public BigDecimal getFactor() {
 		return factor;
 	}
 

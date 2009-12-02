@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JScrollPane.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090611)
+ * @version 0.9.0 (20091123)
  * @since 0.3.0
  */
 public class PaneScroll extends JScrollPane {
@@ -53,7 +53,7 @@ public class PaneScroll extends JScrollPane {
 		setWheelScrollingEnabled(true);
 	}
 	
-	
+
 	public PaneScroll() {
 		super();
     }
@@ -66,6 +66,16 @@ public class PaneScroll extends JScrollPane {
 		this(component);
 		setBorder(border);
     }
+	
+	public PaneScroll(Component view, int vsbPolicy, int hsbPolicy) {
+		super(view, vsbPolicy, hsbPolicy);
+		// TODO Auto-generated constructor stub
+	}
+
+	public PaneScroll(int vsbPolicy, int hsbPolicy) {
+		super(vsbPolicy, hsbPolicy);
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	/*

@@ -42,7 +42,7 @@ import javax.swing.JToggleButton;
  * This is an extended JToggleButton.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091123)
  * @since 0.7.0
  */
 public class ToggleButton extends JToggleButton implements Activatable {
@@ -55,8 +55,8 @@ public class ToggleButton extends JToggleButton implements Activatable {
 		super();
 	}
 	
-	public ToggleButton(final Action a) {
-		super(a);
+	public ToggleButton(final Action action) {
+		super(action);
 	}
 
 	public ToggleButton(final Icon icon, final boolean selected) {

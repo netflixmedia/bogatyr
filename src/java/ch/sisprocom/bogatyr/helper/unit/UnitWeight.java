@@ -31,6 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.unit;
 
+import java.math.BigDecimal;
+
+import ch.sisprocom.bogatyr.helper.Constants;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.model.unit.Weight;
 
 
@@ -38,15 +42,15 @@ import ch.sisprocom.bogatyr.model.unit.Weight;
  * Converts different units of weight.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091203)
  * @since 0.7.0
  */
-public abstract class UnitWeight {//TODO replace primitive types by BigDecimal
-	public static final double FACTOR_MILLIGRAM_TO_GRAM = 1000.0D; //milligram to gram
-	public static final double FACTOR_GRAM_TO_KILOGRAM = 1000.0D; //gram to kilogram
-	public static final double FACTOR_OUNCE_TO_GRAM = 28.34952D; //ounce to gram
-	public static final double FACTOR_POUND_TO_KILOGRAM = 0.453592D; //pound to kilogram
-	public static final double FACTOR_TON_TO_KILOGRAM = 907.1847D; //ton to kilogram
+public abstract class UnitWeight {
+	public static final BigDecimal FACTOR_MILLIGRAM_TO_GRAM = HelperNumber.BIGDECIMAL_1000; //milligram to gram
+	public static final BigDecimal FACTOR_GRAM_TO_KILOGRAM  = HelperNumber.BIGDECIMAL_1000; //gram to kilogram
+	public static final BigDecimal FACTOR_OUNCE_TO_GRAM 	= new BigDecimal("28.34952"); //ounce to gram //$NON-NLS-1$
+	public static final BigDecimal FACTOR_POUND_TO_KILOGRAM = new BigDecimal("0.453592"); //pound to kilogram //$NON-NLS-1$
+	public static final BigDecimal FACTOR_TON_TO_KILOGRAM 	= new BigDecimal("907.1847"); //ton to kilogram //$NON-NLS-1$
     
     /**
      * Converts a value with a given unit to another unit.
@@ -57,14 +61,17 @@ public abstract class UnitWeight {//TODO replace primitive types by BigDecimal
      * @return value in the new unit
      * @since 0.7.0
      */
-    public static double convert(final Weight fromUnit, final Weight toUnit, final double value) { //$JUnit$
+    public static BigDecimal convert(final Weight fromUnit, final Weight toUnit, final BigDecimal value) { //$JUnit$
 		if (null == fromUnit) {
 			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
 		}
 		if (null == toUnit) {
 			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
 		}
+		if (null == value) {
+			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
+		}
 
-    	return value / fromUnit.getFactor() * toUnit.getFactor(); 
-    }
+    	return value.divide(fromUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+   }
  }

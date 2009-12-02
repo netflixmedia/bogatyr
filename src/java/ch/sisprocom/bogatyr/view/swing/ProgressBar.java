@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JProgressBar.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.9.0 (20091123)
  * @since 0.2.0
  */
 public class ProgressBar extends JProgressBar {
@@ -54,6 +54,14 @@ public class ProgressBar extends JProgressBar {
 	
 	public ProgressBar(final BoundedRangeModel model) {
 		super(model);
+	}
+
+	public ProgressBar(int orientation, int min, int max) {
+		super(orientation, min, max);
+	}
+
+	public ProgressBar(int orientation) {
+		super(orientation);
 	}
 
 	public ProgressBar(final int start, final int end) {

@@ -79,7 +79,12 @@ public class MenuBar extends JMenuBar {
 //	}
 
 
-    /*
+    public MenuBar() {
+		super();
+	}
+
+    
+	/*
       * Overridden methods
       */
 	@Override

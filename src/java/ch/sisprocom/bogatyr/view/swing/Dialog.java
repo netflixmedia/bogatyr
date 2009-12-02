@@ -44,7 +44,7 @@ import java.awt.Window;
  * This is an extended JDialog.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091109)
+ * @version 0.9.0 (20091123)
  * @since 0.4.0
  */
 public class Dialog extends JDialog {

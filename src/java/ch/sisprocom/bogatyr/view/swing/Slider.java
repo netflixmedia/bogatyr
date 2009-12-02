@@ -45,7 +45,7 @@ import java.util.Dictionary;
  * This is an extended JSlider.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091123)
  * @since 0.2.0
  */
 public class Slider extends JSlider implements Activatable {
@@ -62,12 +62,33 @@ public class Slider extends JSlider implements Activatable {
 		super(model);
 	}
 
+	public Slider(int orientation, int min, int max, int value) {
+		super(orientation, min, max, value);
+	}
+
+	public Slider(int min, int max, int value) {
+		super(min, max, value);
+	}
+
+	public Slider(int min, int max) {
+		super(min, max);
+	}
+
+	public Slider(int orientation) {
+		super(orientation);
+	}
+
+	public Slider(final BoundedRangeModel model, final String toolTip) {
+		this(model);
+		setToolTipText(toolTip);
+	}
+	
 	public Slider(final int minValue, final int maxValue, final int currentValue, final String toolTip) {
 		this(minValue, maxValue, currentValue, HORIZONTAL, toolTip);
 	}
 
 	public Slider(final int minValue, final int maxValue, final int currentValue, final int orientation, final String toolTip) {
-		super(orientation, minValue, maxValue, currentValue);
+		this(orientation, minValue, maxValue, currentValue);
 		setToolTipText(toolTip);
 	}
 

@@ -31,11 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper.unit;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.math.BigDecimal;
 
 import org.junit.Test;
 
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.unit.UnitVolume;
 import ch.sisprocom.bogatyr.model.unit.Volume;
 
@@ -44,34 +47,34 @@ import ch.sisprocom.bogatyr.model.unit.Volume;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090612
+ * @version 20091202
  */
 public class UnitVolumeTest {
 	@Test
 	public void testConvert() {
-		assertEquals(1.0D, UnitVolume.convert(Volume.MM3, Volume.CM3, 1000.0D), 0.00001D);
-		assertEquals(1000.0D, UnitVolume.convert(Volume.CM3, Volume.MM3, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.MM3, Volume.CM3, HelperNumber.BIGDECIMAL_1000)) == 0);
+		assertTrue(HelperNumber.BIGDECIMAL_1000.compareTo(UnitVolume.convert(Volume.CM3, Volume.MM3, BigDecimal.ONE)) == 0);
 
-		assertEquals(1.0D, UnitVolume.convert(Volume.CM3, Volume.L, 1000.0D), 0.00001D);
-		assertEquals(1000.0D, UnitVolume.convert(Volume.L, Volume.CM3, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.CM3, Volume.L, HelperNumber.BIGDECIMAL_1000)) == 0);
+		assertTrue(HelperNumber.BIGDECIMAL_1000.compareTo(UnitVolume.convert(Volume.L, Volume.CM3, BigDecimal.ONE)) == 0);
 
-		assertEquals(1.0D, UnitVolume.convert(Volume.L, Volume.M3, 1000.0D), 0.00001D);
-		assertEquals(1000.0D, UnitVolume.convert(Volume.M3, Volume.L, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.L, Volume.M3, HelperNumber.BIGDECIMAL_1000)) == 0);
+		assertTrue(HelperNumber.BIGDECIMAL_1000.compareTo(UnitVolume.convert(Volume.M3, Volume.L, BigDecimal.ONE)) == 0);
 
-		assertEquals(1.0D, UnitVolume.convert(Volume.PINT, Volume.CM3, 473.176473D), 0.00001D);
-		assertEquals(473.176473D, UnitVolume.convert(Volume.CM3, Volume.PINT, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.PINT, Volume.CM3, new BigDecimal("473.176473"))) == 0); //$NON-NLS-1$
+		assertTrue(new BigDecimal("473.176473").compareTo(UnitVolume.convert(Volume.CM3, Volume.PINT, BigDecimal.ONE)) == 0); //$NON-NLS-1$
 
-		assertEquals(1.0D, UnitVolume.convert(Volume.QUART, Volume.L, 0.946326D), 0.00001D);
-		assertEquals(0.946326D, UnitVolume.convert(Volume.L, Volume.QUART, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.QUART, Volume.L, new BigDecimal("0.946326"))) == 0); //$NON-NLS-1$
+		assertTrue(new BigDecimal("0.946326").compareTo(UnitVolume.convert(Volume.L, Volume.QUART, BigDecimal.ONE)) == 0); //$NON-NLS-1$
 
-		assertEquals(1.0D, UnitVolume.convert(Volume.GALLON_US, Volume.L, 3.785411784D), 0.00001D);
-		assertEquals(3.785411784D, UnitVolume.convert(Volume.L, Volume.GALLON_US, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.GALLON_US, Volume.L, new BigDecimal("3.785411784"))) == 0); //$NON-NLS-1$
+		assertTrue(new BigDecimal("3.785411784").compareTo(UnitVolume.convert(Volume.L, Volume.GALLON_US, BigDecimal.ONE)) == 0); //$NON-NLS-1$
 
-		assertEquals(1.0D, UnitVolume.convert(Volume.BARREL, Volume.L, 158.987294928D), 0.00001D);
-		assertEquals(158.987294928D, UnitVolume.convert(Volume.L, Volume.BARREL, 1.0D), 0.00001D);
+		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.BARREL, Volume.L, new BigDecimal("158.987294928"))) == 0); //$NON-NLS-1$
+		assertTrue(new BigDecimal("158.987294928").compareTo(UnitVolume.convert(Volume.L, Volume.BARREL, BigDecimal.ONE)) == 0); //$NON-NLS-1$
 		
 		try {
-			UnitVolume.convert(null, null, 1.0D);
+			UnitVolume.convert(null, null, BigDecimal.ONE);
 			fail("fromUnit is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -80,12 +83,21 @@ public class UnitVolumeTest {
 		}
 		
 		try {
-			UnitVolume.convert(Volume.M3, null, 1.0D);
+			UnitVolume.convert(Volume.M3, null, BigDecimal.ONE);
 			fail("toUnit is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
+		
+		try {
+			UnitVolume.convert(Volume.M3, Volume.CM3, null);
+			fail("value is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}	
 	}
 }

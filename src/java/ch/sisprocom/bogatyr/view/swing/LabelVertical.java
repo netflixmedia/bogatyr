@@ -46,7 +46,7 @@ import java.awt.image.BufferedImage;
  * This is a vertical Label.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091105)
+ * @version 0.9.0 (20091123)
  * @since 0.2.0
  */
 public class LabelVertical extends Panel implements Icon {
@@ -61,14 +61,30 @@ public class LabelVertical extends Panel implements Icon {
 		super();
 	}
 	
+	public LabelVertical(Icon icon, int horizontalAlignment) {
+		this();
+        label = new Label(icon, horizontalAlignment);
+	}
+
+	public LabelVertical(String text, Icon icon, int horizontalAlignment) {
+		this();
+        label = new Label(text, icon, horizontalAlignment);
+
+	}
+
+	public LabelVertical(final Icon icon) {
+		this();
+        label = new Label(icon);
+	}
+	
 	public LabelVertical(final String text) {
 		this();
         label = new Label(text);
 	}
 	
-	public LabelVertical(final String text, final int alignment) {
+	public LabelVertical(final String text, final int horizontalAlignment) {
 		this();
-        label = new Label(text, alignment);
+        label = new Label(text, horizontalAlignment);
 	}
 	
 	// Delegate these methods to the Label...

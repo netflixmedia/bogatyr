@@ -35,6 +35,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 import org.junit.Test;
 
@@ -47,9 +49,11 @@ import ch.sisprocom.bogatyr.model.unit.Area;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091123
+ * @version 20091203
  */
 public class UnitAreaTest {
+	private static final MathContext MC = new MathContext(5, RoundingMode.HALF_EVEN);
+	
 	@Test
 	public void testConvert() {
 		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.MM2, Area.CM2, HelperNumber.BIGDECIMAL_100)) == 0);
@@ -79,7 +83,7 @@ public class UnitAreaTest {
 		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.ACRE, Area.M2, new BigDecimal("4046.8564224"))) == 0); //$NON-NLS-1$
 		assertTrue(new BigDecimal("4046.8564224").compareTo(UnitArea.convert(Area.M2, Area.ACRE, BigDecimal.ONE)) == 0); //$NON-NLS-1$
 
-		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.KM2, Area.MILE2, new BigDecimal("2.5899881103"))) == 0); //$NON-NLS-1$
+		assertTrue(BigDecimal.ONE.compareTo(UnitArea.convert(Area.KM2, Area.MILE2, new BigDecimal("2.5899881103")).round(MC)) == 0); //$NON-NLS-1$
 		assertTrue(new BigDecimal("2.5899881103").compareTo(UnitArea.convert(Area.MILE2, Area.KM2, BigDecimal.ONE)) == 0); //$NON-NLS-1$
 
 		try {
@@ -94,6 +98,15 @@ public class UnitAreaTest {
 		try {
 			UnitArea.convert(Area.KM2, null, BigDecimal.ONE);
 			fail("toUnit is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			UnitArea.convert(Area.KM2, Area.M2, null);
+			fail("value is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {

@@ -46,7 +46,7 @@ import javax.swing.text.PlainDocument;
  * This is an extended JTextField.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091123)
  * @since 0.1.0
  */
 public class TextField extends JTextField implements Activatable {
@@ -64,12 +64,28 @@ public class TextField extends JTextField implements Activatable {
         setAction(action);
     }
 	
+	public TextField(Document doc, String text, int columns) {
+		super(doc, text, columns);
+	}
+
+	public TextField(int columns) {
+		super(columns);
+	}
+
+	public TextField(String text, int columns) {
+		super(text, columns);
+	}
+
+	public TextField(String text) {
+		super(text);
+	}
+
 	public TextField(final String text, final String toolTip) {
         this(text, toolTip, Integer.MAX_VALUE);
     }
 	
 	public TextField(final String text, final String toolTip, final int columns) {
-        super(text, columns);
+        this(text, columns);
         setToolTipText(toolTip);
     }
 	

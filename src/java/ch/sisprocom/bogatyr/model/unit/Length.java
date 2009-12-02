@@ -31,6 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.unit;
 
+import java.math.BigDecimal;
+
+import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.unit.UnitLength;
 
@@ -38,22 +41,23 @@ import ch.sisprocom.bogatyr.helper.unit.UnitLength;
  * Length units
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091202)
  * @since 0.7.0
  */
 public enum Length {
-	MM(UnitLength.FACTOR_MM_TO_CM * UnitLength.FACTOR_CM_TO_M), //$JUnit$
+	MM(UnitLength.FACTOR_MM_TO_CM.multiply(UnitLength.FACTOR_CM_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	CM(UnitLength.FACTOR_CM_TO_M), //$JUnit$
-	M(1.0D),
-	KM(1.0D/UnitLength.FACTOR_M_TO_KM), //$JUnit$
-	INCH(UnitLength.FACTOR_CM_TO_M / UnitLength.FACTOR_INCH_TO_CM), //$JUnit$
-	FOOT(1.0D/UnitLength.FACTOR_FOOT_TO_M), //$JUnit$
-	YARD(1.0D/UnitLength.FACTOR_YARD_TO_M), //$JUnit$
-	MILE(1.0D/UnitLength.FACTOR_MILE_TO_M); //$JUnit$
+	M(BigDecimal.ONE),
+	KM(BigDecimal.ONE.divide(UnitLength.FACTOR_M_TO_KM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	INCH(UnitLength.FACTOR_CM_TO_M.divide(UnitLength.FACTOR_INCH_TO_CM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	FOOT(BigDecimal.ONE.divide(UnitLength.FACTOR_FOOT_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	YARD(BigDecimal.ONE.divide(UnitLength.FACTOR_YARD_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	MILE(BigDecimal.ONE.divide(UnitLength.FACTOR_MILE_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	NAUTICAL_MILE(BigDecimal.ONE.divide(UnitLength.FACTOR_NAUTICAL_MILE_TO_M, Constants.DEFAULT_MATHCONTEXT)); //$JUnit$
 
-	private final double factor;
+	private final BigDecimal factor;
 	
-	Length(final double factor) {
+	Length(final BigDecimal factor) {
 		this.factor = factor;
 	}
 
@@ -63,7 +67,7 @@ public enum Length {
      * @return factor to the base value
      * @since 0.8.0
      */
-	public double getFactor() {
+	public BigDecimal getFactor() {
 		return factor;
 	}
 

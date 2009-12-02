@@ -31,6 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.unit;
 
+import java.math.BigDecimal;
+
+import ch.sisprocom.bogatyr.helper.Constants;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.model.unit.Volume;
 
 
@@ -38,17 +42,17 @@ import ch.sisprocom.bogatyr.model.unit.Volume;
  * Converts different units of volume.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091203)
  * @since 0.7.0
  */
-public abstract class UnitVolume {//TODO replace primitive types by BigDecimal
-	public static final double FACTOR_MM3_TO_CM3 = 1000.0D; //millimeters^3 to centimeters^3
-	public static final double FACTOR_CM3_TO_L = 1000.0D; //centimeters^3 to liter
-	public static final double FACTOR_L_TO_M3 = 1000.0D; //liter to m^3
-	public static final double FACTOR_PINT_TO_CM3 = 473.176473D; //pint to centimeters^3
-	public static final double FACTOR_QUART_TO_L = 0.946326D; //quart to liter
-	public static final double FACTOR_GALLON_US_TO_L = 3.785411784D; //gallon to liter
-	public static final double FACTOR_BARREL_TO_L = 158.987294928D; //barrel to liter
+public abstract class UnitVolume {
+	public static final BigDecimal FACTOR_MM3_TO_CM3 	 = HelperNumber.BIGDECIMAL_1000; //millimeters^3 to centimeters^3
+	public static final BigDecimal FACTOR_CM3_TO_L 		 = HelperNumber.BIGDECIMAL_1000; //centimeters^3 to liter
+	public static final BigDecimal FACTOR_L_TO_M3 		 = HelperNumber.BIGDECIMAL_1000; //liter to m^3
+	public static final BigDecimal FACTOR_PINT_TO_CM3	 = new BigDecimal("473.176473"); //pint to centimeters^3 //$NON-NLS-1$
+	public static final BigDecimal FACTOR_QUART_TO_L 	 = new BigDecimal("0.946326"); //quart to liter //$NON-NLS-1$
+	public static final BigDecimal FACTOR_GALLON_US_TO_L = new BigDecimal("3.785411784"); //gallon to liter //$NON-NLS-1$
+	public static final BigDecimal FACTOR_BARREL_TO_L 	 = new BigDecimal("158.987294928"); //barrel to liter //$NON-NLS-1$
 	
 	
     /**
@@ -60,14 +64,17 @@ public abstract class UnitVolume {//TODO replace primitive types by BigDecimal
      * @return value in the new unit
      * @since 0.7.0
      */
-    public static double convert(final Volume fromUnit, final Volume toUnit, final double value) { //$JUnit$
+    public static BigDecimal convert(final Volume fromUnit, final Volume toUnit, final BigDecimal value) { //$JUnit$
 		if (null == fromUnit) {
 			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
 		}
 		if (null == toUnit) {
 			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
 		}
+		if (null == value) {
+			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
+		}
 
-    	return value / fromUnit.getFactor() * toUnit.getFactor(); 
+    	return value.divide(fromUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
     }
 }

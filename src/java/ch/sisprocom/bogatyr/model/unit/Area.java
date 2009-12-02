@@ -41,7 +41,7 @@ import java.math.BigDecimal;
  * Area units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091202)
  * @since 0.7.0
  */
 public enum Area {

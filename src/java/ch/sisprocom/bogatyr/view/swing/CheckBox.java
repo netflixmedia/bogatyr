@@ -34,6 +34,7 @@ package ch.sisprocom.bogatyr.view.swing;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 
 import javax.swing.Action;
+import javax.swing.Icon;
 import javax.swing.JCheckBox;
 
 
@@ -41,7 +42,7 @@ import javax.swing.JCheckBox;
  * This is an extended JCheckBox.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091123)
  * @since 0.2.0
  */
 public class CheckBox extends JCheckBox implements Activatable {
@@ -54,6 +55,34 @@ public class CheckBox extends JCheckBox implements Activatable {
 		super();
 	}	
 	
+	public CheckBox(Action action) {
+		super(action);
+	}
+
+	public CheckBox(Icon icon, boolean selected) {
+		super(icon, selected);
+	}
+
+	public CheckBox(Icon icon) {
+		super(icon);
+	}
+
+	public CheckBox(String text, boolean selected) {
+		super(text, selected);
+	}
+
+	public CheckBox(String text, Icon icon, boolean selected) {
+		super(text, icon, selected);
+	}
+
+	public CheckBox(String text, Icon icon) {
+		super(text, icon);
+	}
+
+	public CheckBox(String text) {
+		super(text);
+	}
+
 	public CheckBox(final boolean isSelected) {
 		super();
 		
@@ -61,18 +90,18 @@ public class CheckBox extends JCheckBox implements Activatable {
 	}
 	
 	public CheckBox(final boolean isSelected, final Action action) {
-		super(action);
+		this(action);
 		
 		setSelected(isSelected);
 	}
 	
 	public CheckBox(final String text, final boolean isSelected, final String toolTip) {
-		super(text, isSelected);
+		this(text, isSelected);
 		setToolTipText(toolTip);
 	}
 	
 	public CheckBox(final boolean isSelected, final String toolTip) {
-		super();
+		this();
 		setSelected(isSelected);
 		setToolTipText(toolTip);
 	}

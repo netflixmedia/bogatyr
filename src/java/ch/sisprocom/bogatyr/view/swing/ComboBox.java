@@ -44,13 +44,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Vector;
 
 
 /**
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091123)
  * @since 0.2.0
  */
 public class ComboBox extends JComboBox implements Activatable {
@@ -65,13 +66,27 @@ public class ComboBox extends JComboBox implements Activatable {
 		createLayout();
 	}
 	
-	public ComboBox(final ComboBoxModel model) {
+	public ComboBox(ComboBoxModel model) {
 		super(model);
+	}
+
+	public ComboBox(Object[] data) {
+		super(data);
+	}
+
+	public ComboBox(Vector<?> data) {
+		super(data);
+	}
+
+	public ComboBox(final ComboBoxModel model, final String toolTip) {
+		this(model);
+		
+		setToolTipText(toolTip);
 		createLayout();
 	}
 
 	public ComboBox(final Object[] data, final String toolTip) {
-		super(data);
+		this(data);
 		
 		if (data != null) {
 //			setSelectedIndex(0);

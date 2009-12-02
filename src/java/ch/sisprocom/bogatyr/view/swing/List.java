@@ -42,7 +42,7 @@ import java.util.Vector;
  * This is an extended JList.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091123)
  * @since 0.7.0
  */
 public class List extends JList implements Activatable {
@@ -66,7 +66,17 @@ public class List extends JList implements Activatable {
 	public List(final Vector<?> listData) {
 		super(listData);
 	}
+	
+	public List(final ListModel dataModel, final String toolTip) {
+		this(dataModel);
+		setToolTipText(toolTip);
+	}
 
+	public List(final Object[] listData, final String toolTip) {
+		this(listData);
+		setToolTipText(toolTip);
+	}
+	
 	
 	/*
 	 * Overridden methods
