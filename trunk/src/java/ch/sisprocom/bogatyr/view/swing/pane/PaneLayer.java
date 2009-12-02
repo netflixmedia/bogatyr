@@ -41,14 +41,19 @@ import java.awt.Component;
  * This is an extended JLayeredPane.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091123)
  * @since 0.7.0
  */
 public class PaneLayer extends JLayeredPane {
 	private static final long serialVersionUID = -6557519717085237490L;
 
 
-    /*
+    public PaneLayer() {
+		super();
+	}
+
+
+	/*
       * Overridden methods
       */
 	@Override

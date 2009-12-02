@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JLabel.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091105)
+ * @version 0.9.0 (20091123)
  * @since 0.2.0
  */
 public class Label extends JLabel {
@@ -52,6 +52,14 @@ public class Label extends JLabel {
 		super();
 	}
 
+	public Label(Icon icon, int horizontalAlignment) {
+		super(icon, horizontalAlignment);
+	}
+
+	public Label(String text, Icon icon, int horizontalAlignment) {
+		super(text, icon, horizontalAlignment);
+	}
+
 	public Label(final Icon icon) {
 		super(icon);
 	}
@@ -60,8 +68,8 @@ public class Label extends JLabel {
 		super(text);
 	}
 
-	public Label(final String text, final int alignment) {
-		super(text, alignment);
+	public Label(final String text, final int horizontalAlignment) {
+		super(text, horizontalAlignment);
 	}
 
 	

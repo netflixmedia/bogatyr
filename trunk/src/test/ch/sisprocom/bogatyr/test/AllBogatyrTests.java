@@ -89,7 +89,7 @@ public class AllBogatyrTests implements Runnable {
     public static void main(final String[] args) {
     	System.out.println("+---------------------------+"); //$NON-NLS-1$
     	System.out.println("|  Start all Bogatyr tests  |"); //$NON-NLS-1$
-    	System.out.println("|  " + HelperTime.getFormattedDate(new Date(), HelperTime.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND_MILLISECOND) + "    |");  //$NON-NLS-1$//$NON-NLS-2$
+    	System.out.println("|  " + HelperTime.getFormattedDate(new Date(), HelperTime.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND_MILLISECOND) + "  |");  //$NON-NLS-1$//$NON-NLS-2$
     	System.out.println("+---------------------------+"); //$NON-NLS-1$
     	System.out.println("Iterations:\t" + ITERATIONS); //$NON-NLS-1$
     	System.out.println("Threads:\t" + THREADS); //$NON-NLS-1$
@@ -105,7 +105,7 @@ public class AllBogatyrTests implements Runnable {
         
         System.out.println("+-------------------------------+"); //$NON-NLS-1$
         System.out.println("|  All Bogatyr tests completed  |"); //$NON-NLS-1$
-    	System.out.println("|  " + HelperTime.getFormattedDate(new Date(), HelperTime.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND_MILLISECOND) + "        |"); //$NON-NLS-1$ //$NON-NLS-2$
+    	System.out.println("|  " + HelperTime.getFormattedDate(new Date(), HelperTime.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND_MILLISECOND) + "      |"); //$NON-NLS-1$ //$NON-NLS-2$
         System.out.println("+-------------------------------+"); //$NON-NLS-1$
     }
     

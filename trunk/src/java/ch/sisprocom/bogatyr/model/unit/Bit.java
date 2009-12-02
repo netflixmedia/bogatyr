@@ -31,6 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.unit;
 
+import java.math.BigDecimal;
+
+import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.unit.UnitBit;
 
@@ -38,49 +41,49 @@ import ch.sisprocom.bogatyr.helper.unit.UnitBit;
  * Bit units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091115)
+ * @version 0.9.0 (20091126)
  * @since 0.9.0
  */
 public enum Bit {
-	BIT(1.0D),
-	BYTE(1.0D/ UnitBit.FACTOR_BIT_TO_BYTE),
-	KILOBIT(1.0D/UnitBit.FACTOR_BIT_TO_KILOBIT),
-	MEGABIT(1.0D/UnitBit.FACTOR_BIT_TO_MEGABIT),
-	GIGABIT(1.0D/UnitBit.FACTOR_BIT_TO_GIGABIT),
-	TERABIT(1.0D/UnitBit.FACTOR_BIT_TO_TERABIT),
-	PETABIT(1.0D/UnitBit.FACTOR_BIT_TO_PETABIT),
-	EXABIT(1.0D/UnitBit.FACTOR_BIT_TO_EXABIT),
-	ZETTABIT(1.0D/UnitBit.FACTOR_BIT_TO_ZETTABIT),
-	YOTTABIT(1.0D/UnitBit.FACTOR_BIT_TO_YOTTABIT),
-	KILOBYTE(1.0D/UnitBit.FACTOR_BIT_TO_KILOBYTE),
-	MEGABYTE(1.0D/UnitBit.FACTOR_BIT_TO_MEGABYTE),
-	GIGABYTE(1.0D/UnitBit.FACTOR_BIT_TO_GIGABYTE),
-	TERABYTE(1.0D/UnitBit.FACTOR_BIT_TO_TERABYTE),
-	PETABYTE(1.0D/UnitBit.FACTOR_BIT_TO_PETABYTE),
-	EXABYTE(1.0D/UnitBit.FACTOR_BIT_TO_EXABYTE),
-	ZETTABYTE(1.0D/UnitBit.FACTOR_BIT_TO_ZETTABYTE),
-	YOTTABYTE(1.0D/UnitBit.FACTOR_BIT_TO_YOTTABYTE),
-	KIBIBIT(1.0D/UnitBit.FACTOR_BIT_TO_KIBIBIT),
-	MEBIBIT(1.0D/UnitBit.FACTOR_BIT_TO_MEBIBIT),
-	GIBIBIT(1.0D/UnitBit.FACTOR_BIT_TO_GIBIBIT),
-	TEBIBIT(1.0D/UnitBit.FACTOR_BIT_TO_TEBIBIT),
-	PEBIBIT(1.0D/UnitBit.FACTOR_BIT_TO_PEBIBIT),
-	EXBIBIT(1.0D/UnitBit.FACTOR_BIT_TO_EXBIBIT),
-	ZEBIBIT(1.0D/UnitBit.FACTOR_BIT_TO_ZEBIBIT),
-	YOBIBIT(1.0D/UnitBit.FACTOR_BIT_TO_YOBIBIT),
-	KIBIBYTE(1.0D/UnitBit.FACTOR_BIT_TO_KIBIBYTE),
-	MEBIBYTE(1.0D/UnitBit.FACTOR_BIT_TO_MEBIBYTE),
-	GIBIBYTE(1.0D/UnitBit.FACTOR_BIT_TO_GIBIBYTE),
-	TEBIBYTE(1.0D/UnitBit.FACTOR_BIT_TO_TEBIBYTE),
-	PEBIBYTE(1.0D/UnitBit.FACTOR_BIT_TO_PEBIBYTE),
-	EXBIBYTE(1.0D/UnitBit.FACTOR_BIT_TO_EXBIBYTE),
-	ZEBIBYTE(1.0D/UnitBit.FACTOR_BIT_TO_ZEBIBYTE),
-	YOBIBYTE(1.0D/UnitBit.FACTOR_BIT_TO_YOBIBYTE);
+	BIT(BigDecimal.ONE),
+	BYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_BYTE, Constants.DEFAULT_MATHCONTEXT)),
+	KILOBIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_KILOBIT, Constants.DEFAULT_MATHCONTEXT)),
+	MEGABIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_MEGABIT, Constants.DEFAULT_MATHCONTEXT)),
+	GIGABIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_GIGABIT, Constants.DEFAULT_MATHCONTEXT)),
+	TERABIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_TERABIT, Constants.DEFAULT_MATHCONTEXT)),
+	PETABIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_PETABIT, Constants.DEFAULT_MATHCONTEXT)),
+	EXABIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_EXABIT, Constants.DEFAULT_MATHCONTEXT)),
+	ZETTABIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_ZETTABIT, Constants.DEFAULT_MATHCONTEXT)),
+	YOTTABIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_YOTTABIT, Constants.DEFAULT_MATHCONTEXT)),
+	KILOBYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_KILOBYTE, Constants.DEFAULT_MATHCONTEXT)),
+	MEGABYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_MEGABYTE, Constants.DEFAULT_MATHCONTEXT)),
+	GIGABYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_GIGABYTE, Constants.DEFAULT_MATHCONTEXT)),
+	TERABYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_TERABYTE, Constants.DEFAULT_MATHCONTEXT)),
+	PETABYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_PETABYTE, Constants.DEFAULT_MATHCONTEXT)),
+	EXABYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_EXABYTE, Constants.DEFAULT_MATHCONTEXT)),
+	ZETTABYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_ZETTABYTE, Constants.DEFAULT_MATHCONTEXT)),
+	YOTTABYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_YOTTABYTE, Constants.DEFAULT_MATHCONTEXT)),
+	KIBIBIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_KIBIBIT, Constants.DEFAULT_MATHCONTEXT)),
+	MEBIBIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_MEBIBIT, Constants.DEFAULT_MATHCONTEXT)),
+	GIBIBIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_GIBIBIT, Constants.DEFAULT_MATHCONTEXT)),
+	TEBIBIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_TEBIBIT, Constants.DEFAULT_MATHCONTEXT)),
+	PEBIBIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_PEBIBIT, Constants.DEFAULT_MATHCONTEXT)),
+	EXBIBIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_EXBIBIT, Constants.DEFAULT_MATHCONTEXT)),
+	ZEBIBIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_ZEBIBIT, Constants.DEFAULT_MATHCONTEXT)),
+	YOBIBIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_YOBIBIT, Constants.DEFAULT_MATHCONTEXT)),
+	KIBIBYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_KIBIBYTE, Constants.DEFAULT_MATHCONTEXT)),
+	MEBIBYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_MEBIBYTE, Constants.DEFAULT_MATHCONTEXT)),
+	GIBIBYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_GIBIBYTE, Constants.DEFAULT_MATHCONTEXT)),
+	TEBIBYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_TEBIBYTE, Constants.DEFAULT_MATHCONTEXT)),
+	PEBIBYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_PEBIBYTE, Constants.DEFAULT_MATHCONTEXT)),
+	EXBIBYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_EXBIBYTE, Constants.DEFAULT_MATHCONTEXT)),
+	ZEBIBYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_ZEBIBYTE, Constants.DEFAULT_MATHCONTEXT)),
+	YOBIBYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_YOBIBYTE, Constants.DEFAULT_MATHCONTEXT));
 	
 
-	private final double factor;
+	private final BigDecimal factor;
 	
-	Bit(final double factor) {
+	Bit(final BigDecimal factor) {
 		this.factor = factor;
 	}
 
@@ -90,7 +93,7 @@ public enum Bit {
      * @return factor to the base value
      * @since 0.9.0
      */
-	public double getFactor() {
+	public BigDecimal getFactor() {
 		return factor;
 	}
 

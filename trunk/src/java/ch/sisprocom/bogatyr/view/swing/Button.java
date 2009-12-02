@@ -31,19 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import java.awt.event.ActionListener;
 
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
+
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JButton.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091105)
+ * @version 0.9.0 (20091123)
  * @since 0.2.0
  */
 public class Button extends JButton implements Activatable {
@@ -60,8 +61,20 @@ public class Button extends JButton implements Activatable {
 		super(action);
 	}
 	
-	public Button(final String text, final String toolTip) {
+	public Button(Icon icon) {
+		super(icon);
+	}
+
+	public Button(String text, Icon icon) {
+		super(text, icon);
+	}
+
+	public Button(String text) {
 		super(text);
+	}
+	
+	public Button(final String text, final String toolTip) {
+		this(text);
 		setToolTipText(toolTip);
 	}
 	
@@ -71,11 +84,11 @@ public class Button extends JButton implements Activatable {
 	}	
 	
 	public Button(final String text, final Icon icon, final String toolTip, final ActionListener listener) {
-		super(text, icon);
+		this(text, icon);
 		setToolTipText(toolTip);
 		addActionListener(listener);
 	}	
-	
+
 	
 	/*
 	 * Overridden methods

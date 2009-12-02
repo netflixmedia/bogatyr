@@ -41,7 +41,7 @@ import javax.swing.text.Document;
  * This is an extended JTextArea.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091123)
  * @since 0.1.0
  */
 public class TextArea extends JTextArea implements Activatable {
@@ -54,11 +54,22 @@ public class TextArea extends JTextArea implements Activatable {
 		setWrapStyleWord(true);
 	}
 	
-	
     public TextArea() {
         super();
     }
     
+	public TextArea(Document doc, String text, int rows, int columns) {
+		super(doc, text, rows, columns);
+	}
+
+	public TextArea(int rows, int columns) {
+		super(rows, columns);
+	}
+
+	public TextArea(String text, int rows, int columns) {
+		super(text, rows, columns);
+	}
+
 	public TextArea(final Document doc) {
 		super(doc);
 	}
@@ -69,7 +80,7 @@ public class TextArea extends JTextArea implements Activatable {
     }
 
     public TextArea(final String text, final String toolTip, final int rows, final int columns) {
-        super(text, rows, columns);
+        this(text, rows, columns);
         setToolTipText(toolTip);
     }
 	

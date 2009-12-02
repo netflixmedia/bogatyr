@@ -38,33 +38,51 @@ import java.math.BigInteger;
 /**
  * This is a helper class for numbers.
  *
- * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091202)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
-    public static final BigDecimal BIGDECIMAL_100 = new BigDecimal("100", Constants.DEFAULT_MATHCONTEXT); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_1000 = new BigDecimal("1000", Constants.DEFAULT_MATHCONTEXT); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_10000 = new BigDecimal("10000", Constants.DEFAULT_MATHCONTEXT); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_100 	  = new BigDecimal("100"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_1000 	  = new BigDecimal("1000"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_10000   = new BigDecimal("10000"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_100000  = new BigDecimal("100000"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_1000000 = new BigDecimal("1000000"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_8 	  = new BigDecimal("8"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_16 	  = new BigDecimal("16"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_32 	  = new BigDecimal("32"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_64 	  = new BigDecimal("64"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_128 	  = new BigDecimal("128"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_256 	  = new BigDecimal("256"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_512 	  = new BigDecimal("512"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_1024 	  = new BigDecimal("1024"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_2048 	  = new BigDecimal("2048"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_4096 	  = new BigDecimal("4096"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_8192 	  = new BigDecimal("8192"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_16384   = new BigDecimal("16384"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_32768   = new BigDecimal("32768"); //$NON-NLS-1$
+    public static final BigDecimal BIGDECIMAL_65536   = new BigDecimal("65536"); //$NON-NLS-1$
 
-    public static final int INT_10 = 10;
-    public static final int INT_100 = 100;
-    public static final int INT_1000 = 1000;
-    public static final int INT_8 = 8;
-    public static final int INT_16 = 16;
-    public static final int INT_32 = 32;
-    public static final int INT_64 = 64;
-    public static final int INT_128 = 128;
-    public static final int INT_256 = 256;
-    public static final int INT_512 = 512;
-    public static final int INT_1024 = 1024;
-    public static final int INT_2048 = 2048;
-    public static final int INT_4096 = 4096;
-    public static final int INT_8192 = 8192;
-    public static final int INT_16384 = 16384;
-    public static final int INT_32768 = 32768;
-    public static final int INT_65536 = 65536;
+    public static final int INT_10 		= 10;
+    public static final int INT_100 	= 100;
+    public static final int INT_1000 	= 1000;
+    public static final int INT_10000 	= 10000;
+    public static final int INT_100000 	= 100000;
+    public static final int INT_1000000 = 1000000;
+    public static final int INT_8 		= 8;
+    public static final int INT_16 		= 16;
+    public static final int INT_32 		= 32;
+    public static final int INT_64 		= 64;
+    public static final int INT_128 	= 128;
+    public static final int INT_256 	= 256;
+    public static final int INT_512 	= 512;
+    public static final int INT_1024 	= 1024;
+    public static final int INT_2048 	= 2048;
+    public static final int INT_4096 	= 4096;
+    public static final int INT_8192 	= 8192;
+    public static final int INT_16384 	= 16384;
+    public static final int INT_32768 	= 32768;
+    public static final int INT_65536 	= 65536;
 
 
     /**

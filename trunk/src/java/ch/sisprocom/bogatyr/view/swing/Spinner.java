@@ -41,7 +41,7 @@ import javax.swing.SpinnerModel;
  * This is an extended JSpinner.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091123)
  * @since 0.7.0
  */
 public class Spinner extends JSpinner implements Activatable {
@@ -57,7 +57,11 @@ public class Spinner extends JSpinner implements Activatable {
 	public Spinner(final SpinnerModel model) {
 		super(model);
 	}
-
+	
+	public Spinner(final SpinnerModel model, final String toolTip) {
+		this(model);
+		setToolTipText(toolTip);
+	}
 
 	/*
 	 * Overridden methods

@@ -31,7 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.unit;
 
-import ch.sisprocom.bogatyr.helper.HelperMath;
+import java.math.BigDecimal;
+
+import ch.sisprocom.bogatyr.helper.Constants;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.model.unit.Length;
 
 
@@ -39,19 +42,20 @@ import ch.sisprocom.bogatyr.model.unit.Length;
  * Converts different units of length.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091203)
  * @since 0.7.0
  */
-public abstract class UnitLength { //TODO add sea miles and replace primitive types by BigDecimal
-	public static final double FACTOR_INCH_TO_CM = 2.54D; //inch to centimeters
-	public static final double FACTOR_FOOT_TO_M = 0.3048D; //foot to meters
-	public static final double FACTOR_YARD_TO_M = 0.9144D; //yard to meters
-	public static final double FACTOR_MILE_TO_M = 1609.344D; //mile (terrestrial) to meters
-	public static final double FACTOR_MM_TO_CM = 10.0D; //millimeters to centimeters
-	public static final double FACTOR_CM_TO_M = 100.0D; //centimeters to meters
-	public static final double FACTOR_M_TO_KM = 1000.0D; //meters to kilometers
+public abstract class UnitLength {
+	public static final BigDecimal FACTOR_INCH_TO_CM 		 = new BigDecimal("2.54"); //inch to centimeters //$NON-NLS-1$
+	public static final BigDecimal FACTOR_FOOT_TO_M 		 = new BigDecimal("0.3048"); //foot to meters //$NON-NLS-1$
+	public static final BigDecimal FACTOR_YARD_TO_M 		 = new BigDecimal("0.9144"); //yard to meters //$NON-NLS-1$
+	public static final BigDecimal FACTOR_MILE_TO_M 		 = new BigDecimal("1609.344"); //mile (terrestrial) to meters //$NON-NLS-1$
+	public static final BigDecimal FACTOR_NAUTICAL_MILE_TO_M = new BigDecimal("1852"); //nautical mile to meters //$NON-NLS-1$
+	public static final BigDecimal FACTOR_MM_TO_CM 			 = BigDecimal.TEN; //millimeters to centimeters
+	public static final BigDecimal FACTOR_CM_TO_M 			 = HelperNumber.BIGDECIMAL_100; //centimeters to meters
+	public static final BigDecimal FACTOR_M_TO_KM 			 = HelperNumber.BIGDECIMAL_1000; //meters to kilometers
 
-	public static final int DEFAULT_DPI = 72;
+	public static final BigDecimal DEFAULT_DPI = new BigDecimal("72"); //$NON-NLS-1$
 
 	
     /**
@@ -61,7 +65,7 @@ public abstract class UnitLength { //TODO add sea miles and replace primitive ty
      * @return size in centimeters of the given pixels
      * @since 0.7.0
      */
-    public static double pixelToCm(final int value) { //$JUnit$
+    public static BigDecimal pixelToCm(final BigDecimal value) { //$JUnit$
     	return pixelToCm(value, DEFAULT_DPI); 
     }
     
@@ -73,8 +77,8 @@ public abstract class UnitLength { //TODO add sea miles and replace primitive ty
      * @return size in centimeters of the given pixels
      * @since 0.7.0
      */
-    public static double pixelToCm(final int value, final int dpi) { //$JUnit$
-    	return convert(Length.INCH, Length.CM, value / (double) dpi);
+    public static BigDecimal pixelToCm(final BigDecimal value, final BigDecimal dpi) { //$JUnit$
+    	return convert(Length.INCH, Length.CM, value).divide(dpi, Constants.DEFAULT_MATHCONTEXT);
     }
     
     /**
@@ -84,7 +88,7 @@ public abstract class UnitLength { //TODO add sea miles and replace primitive ty
      * @return pixels
      * @since 0.7.0
      */
-    public static int cmToPixel(final double value) { //$JUnit$
+    public static BigDecimal cmToPixel(final BigDecimal value) { //$JUnit$
     	return cmToPixel(value, DEFAULT_DPI); 
     }
     
@@ -96,10 +100,56 @@ public abstract class UnitLength { //TODO add sea miles and replace primitive ty
      * @return pixels
      * @since 0.7.0
      */
-    public static int cmToPixel(final double value, final int dpi) { //$JUnit$
-    	return HelperMath.convertDoubleToInt(convert(Length.CM, Length.INCH, value) * (double) dpi);
+    public static BigDecimal cmToPixel(final BigDecimal value, final BigDecimal dpi) { //$JUnit$
+    	return convert(Length.CM, Length.INCH, value).multiply(dpi, Constants.DEFAULT_MATHCONTEXT);
+    }
+
+    /**
+     * Calculates the size in inches of the given pixels and the standard DPI (72).
+     * 
+     * @param value pixels to convert in inches
+     * @return size in inches of the given pixels
+     * @since 0.9.0
+     */
+    public static BigDecimal pixelToInch(final BigDecimal value) { //$JUnit$
+    	return pixelToInch(value, DEFAULT_DPI); 
     }
     
+    /**
+     * Calculates the size in inches of the given pixels and DPI.
+     * 
+     * @param value pixels to convert in inches
+     * @param dpi dots per inch
+     * @return size in inches of the given pixels
+     * @since 0.9.0
+     */
+    public static BigDecimal pixelToInch(final BigDecimal value, final BigDecimal dpi) { //$JUnit$
+    	return value.divide(dpi, Constants.DEFAULT_MATHCONTEXT);
+    }
+    
+    /**
+     * Calculates the pixels of the given size (in inches) and the standard DPI (72).
+     * 
+     * @param value size in inches to convert in pixels
+     * @return pixels
+     * @since 0.9.0
+     */
+    public static BigDecimal inchToPixel(final BigDecimal value) {
+    	return inchToPixel(value, DEFAULT_DPI); 
+    }
+    
+    /**
+     * Calculates the pixels of the given size (in inches) and DPI.
+     * 
+     * @param value size in inches to convert in pixels
+     * @param dpi dots per inch
+     * @return pixels
+     * @since 0.9.0
+     */
+    public static BigDecimal inchToPixel(final BigDecimal value, final BigDecimal dpi) {
+    	return value.multiply(dpi, Constants.DEFAULT_MATHCONTEXT);
+    }
+   
     /**
      * Converts a value with a given unit to another unit.
      * 
@@ -109,14 +159,17 @@ public abstract class UnitLength { //TODO add sea miles and replace primitive ty
      * @return value in the new unit
      * @since 0.7.0
      */
-    public static double convert(final Length fromUnit, final Length toUnit, final double value) { //$JUnit$
+    public static BigDecimal convert(final Length fromUnit, final Length toUnit, final BigDecimal value) { //$JUnit$
 		if (null == fromUnit) {
 			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
 		}
 		if (null == toUnit) {
 			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
 		}
+		if (null == value) {
+			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
+		}
 
-    	return value / fromUnit.getFactor() * toUnit.getFactor(); 
+    	return value.divide(fromUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
     }
  }

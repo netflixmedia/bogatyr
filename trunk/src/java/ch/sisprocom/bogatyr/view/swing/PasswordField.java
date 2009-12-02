@@ -34,6 +34,8 @@ package ch.sisprocom.bogatyr.view.swing;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 
 import javax.swing.JPasswordField;
+import javax.swing.text.Document;
+
 import java.util.Arrays;
 
 
@@ -41,7 +43,7 @@ import java.util.Arrays;
  * This is an extended JPasswordField.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20091123)
  * @since 0.1.0
  */
 public class PasswordField extends JPasswordField implements Activatable {
@@ -53,6 +55,18 @@ public class PasswordField extends JPasswordField implements Activatable {
 	public PasswordField() {
         super();
     }
+
+	public PasswordField(Document doc, String text, int columns) {
+		super(doc, text, columns);
+	}
+
+	public PasswordField(int columns) {
+		super(columns);
+	}
+
+	public PasswordField(String text, int columns) {
+		super(text, columns);
+	}
 
 	public PasswordField(final String toolTip) {
         super();

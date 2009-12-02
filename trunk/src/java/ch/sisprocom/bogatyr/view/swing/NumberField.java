@@ -33,6 +33,7 @@ package ch.sisprocom.bogatyr.view.swing;
 
 import ch.sisprocom.bogatyr.helper.HelperString;
 
+import javax.swing.Action;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -47,7 +48,7 @@ import java.util.regex.Pattern;
  * This is a NumberField, similar to TextField, but only numeric characters are allowed.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091105)
+ * @version 0.9.0 (20091123)
  * @since 0.1.0
  */
 public class NumberField extends TextField { //$JUnit$
@@ -58,6 +59,10 @@ public class NumberField extends TextField { //$JUnit$
 	
 	public NumberField() {
 		this(0, HelperString.EMPTY_STRING, 255);
+	}
+
+	public NumberField(Action action) {
+		super(action);
 	}
 
 	public NumberField(final String text, final String toolTip) {

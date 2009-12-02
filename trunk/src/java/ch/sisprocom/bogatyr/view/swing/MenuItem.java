@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.9.0 (20091123)
  * @since 0.2.0
  */
 public class MenuItem extends JMenuItem {
@@ -55,12 +55,28 @@ public class MenuItem extends JMenuItem {
 		super();
     }
 	
+	public MenuItem(Icon icon) {
+		super(icon);
+	}
+
+	public MenuItem(String text, Icon icon) {
+		super(text, icon);
+	}
+
+	public MenuItem(String text, int mnemonic) {
+		super(text, mnemonic);
+	}
+
+	public MenuItem(String text) {
+		super(text);
+	}
+
 	public MenuItem(final Action action) {
 		super(action);
 	}
 
 	public MenuItem(final String text, final Icon image, final int mnemonic, final String toolTip) {
-		super(text);
+		this(text);
 		
 		// Add the optional icon
 		if (image != null) {

@@ -34,6 +34,7 @@ package ch.sisprocom.bogatyr.view.swing;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 
 import javax.swing.Action;
+import javax.swing.Icon;
 import javax.swing.JRadioButton;
 
 
@@ -41,7 +42,7 @@ import javax.swing.JRadioButton;
  * This is an extended JRadioButton.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091105)
+ * @version 0.9.0 (20091123)
  * @since 0.2.0
  */
 public class RadioButton extends JRadioButton implements Activatable {
@@ -54,6 +55,34 @@ public class RadioButton extends JRadioButton implements Activatable {
 		super();
 	}
 	
+	public RadioButton(Action action) {
+		super(action);
+	}
+
+	public RadioButton(Icon icon, boolean selected) {
+		super(icon, selected);
+	}
+
+	public RadioButton(Icon icon) {
+		super(icon);
+	}
+
+	public RadioButton(String text, boolean selected) {
+		super(text, selected);
+	}
+
+	public RadioButton(String text, Icon icon, boolean selected) {
+		super(text, icon, selected);
+	}
+
+	public RadioButton(String text, Icon icon) {
+		super(text, icon);
+	}
+
+	public RadioButton(String text) {
+		super(text);
+	}
+
 	public RadioButton(final boolean isSelected) {
 		super();
 		
@@ -61,13 +90,13 @@ public class RadioButton extends JRadioButton implements Activatable {
 	}
 	
 	public RadioButton(final boolean isSelected, final Action action) {
-		super(action);
+		this(action);
 		
 		setSelected(isSelected);
 	}
 
 	public RadioButton(final String text, final boolean isSelected, final String toolTip) {
-		super(text, isSelected);
+		this(text, isSelected);
 		setToolTipText(toolTip);
 	}
 	

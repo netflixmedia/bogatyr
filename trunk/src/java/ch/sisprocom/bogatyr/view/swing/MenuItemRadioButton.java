@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JRadioButtonMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.9.0 (20091123)
  * @since 0.2.0
  */
 public class MenuItemRadioButton extends JRadioButtonMenuItem {
@@ -55,6 +55,34 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 		super();
     }
 	
+	public MenuItemRadioButton(Action action) {
+		super(action);
+	}
+
+	public MenuItemRadioButton(Icon icon, boolean selected) {
+		super(icon, selected);
+	}
+
+	public MenuItemRadioButton(Icon icon) {
+		super(icon);
+	}
+
+	public MenuItemRadioButton(String text, boolean selected) {
+		super(text, selected);
+	}
+
+	public MenuItemRadioButton(String text, Icon icon, boolean selected) {
+		super(text, icon, selected);
+	}
+
+	public MenuItemRadioButton(String text, Icon icon) {
+		super(text, icon);
+	}
+
+	public MenuItemRadioButton(String text) {
+		super(text);
+	}
+
 	public MenuItemRadioButton(final boolean isSelected) {
 		super();
 		
@@ -62,13 +90,13 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 	}
 	
 	public MenuItemRadioButton(final boolean isSelected, final Action action) {
-		super(action);
+		this(action);
 		
 		setSelected(isSelected);
 	}
 
 	public MenuItemRadioButton(final String text, final Icon image, final int mnemonic, final String toolTip, final boolean isSelected) {
-		super(text);
+		this(text);
 		
 		// Add the optional icon
 		if (image != null) {

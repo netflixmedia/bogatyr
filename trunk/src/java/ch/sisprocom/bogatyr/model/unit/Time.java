@@ -31,6 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.unit;
 
+import java.math.BigDecimal;
+
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.unit.UnitTime;
 
@@ -38,24 +40,24 @@ import ch.sisprocom.bogatyr.helper.unit.UnitTime;
  * Time units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091116)
+ * @version 0.9.0 (20091126)
  * @since 0.8.0
  */
 public enum Time {
 	NANOSECOND(UnitTime.FACTOR_NANOSECOND_TO_SECOND),
 	MICROSECOND(UnitTime.FACTOR_MICROSECOND_TO_SECOND),
 	MILLISECOND(UnitTime.FACTOR_MILLISECOND_TO_SECOND),
-	SECOND(1.0D),
-	MINUTE(1.0D/UnitTime.FACTOR_SECOND_TO_MINUTE),
-	HOUR(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR)),
-	DAY(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR * UnitTime.FACTOR_HOUR_TO_DAY)),
-	WEEK(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR * UnitTime.FACTOR_HOUR_TO_DAY * UnitTime.FACTOR_DAY_TO_WEEK)),
-	MONTH(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR * UnitTime.FACTOR_HOUR_TO_DAY * UnitTime.FACTOR_DAY_TO_MONTH)),
-	YEAR(1.0D/(UnitTime.FACTOR_SECOND_TO_MINUTE * UnitTime.FACTOR_MINUTE_TO_HOUR * UnitTime.FACTOR_HOUR_TO_DAY * UnitTime.FACTOR_DAY_TO_YEAR));
+	SECOND(BigDecimal.ONE),
+	MINUTE(BigDecimal.ONE.divide(UnitTime.FACTOR_SECOND_TO_MINUTE)),
+	HOUR(BigDecimal.ONE.divide((UnitTime.FACTOR_SECOND_TO_MINUTE.multiply(UnitTime.FACTOR_MINUTE_TO_HOUR)))),
+	DAY(BigDecimal.ONE.divide((UnitTime.FACTOR_SECOND_TO_MINUTE.multiply(UnitTime.FACTOR_MINUTE_TO_HOUR.multiply(UnitTime.FACTOR_HOUR_TO_DAY))))),
+	WEEK(BigDecimal.ONE.divide((UnitTime.FACTOR_SECOND_TO_MINUTE.multiply(UnitTime.FACTOR_MINUTE_TO_HOUR.multiply(UnitTime.FACTOR_HOUR_TO_DAY.multiply(UnitTime.FACTOR_DAY_TO_WEEK)))))),
+	MONTH(BigDecimal.ONE.divide((UnitTime.FACTOR_SECOND_TO_MINUTE.multiply(UnitTime.FACTOR_MINUTE_TO_HOUR.multiply(UnitTime.FACTOR_HOUR_TO_DAY.multiply(UnitTime.FACTOR_DAY_TO_MONTH)))))),
+	YEAR(BigDecimal.ONE.divide((UnitTime.FACTOR_SECOND_TO_MINUTE.multiply(UnitTime.FACTOR_MINUTE_TO_HOUR.multiply(UnitTime.FACTOR_HOUR_TO_DAY.multiply(UnitTime.FACTOR_DAY_TO_YEAR))))));
 
-	private final double factor;
+	private final BigDecimal factor;
 	
-	Time(final double factor) {
+	Time(final BigDecimal factor) {
 		this.factor = factor;
 	}
 	
@@ -65,7 +67,7 @@ public enum Time {
      * @return factor to the base value
      * @since 0.8.0
      */
-	public double getFactor() {
+	public BigDecimal getFactor() {
 		return factor;
 	}
 

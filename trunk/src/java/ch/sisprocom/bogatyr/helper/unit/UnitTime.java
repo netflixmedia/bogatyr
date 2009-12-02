@@ -31,6 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.unit;
 
+import java.math.BigDecimal;
+
+import ch.sisprocom.bogatyr.helper.Constants;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.model.unit.Time;
 
 
@@ -38,19 +42,19 @@ import ch.sisprocom.bogatyr.model.unit.Time;
  * Converts different units of weight.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091203)
  * @since 0.8.0
  */
-public abstract class UnitTime {//TODO replace primitive types by BigDecimal
-	public static final double FACTOR_NANOSECOND_TO_SECOND = 1000000000.0D; //nanoseconds to seconds
-	public static final double FACTOR_MICROSECOND_TO_SECOND = 1000000.0D; //microseconds to seconds
-	public static final double FACTOR_MILLISECOND_TO_SECOND = 1000.0D; //milliseconds to seconds
-	public static final double FACTOR_SECOND_TO_MINUTE = 60.0D; //seconds to minutes
-	public static final double FACTOR_MINUTE_TO_HOUR = 60.0D; //minutes to hours
-	public static final double FACTOR_HOUR_TO_DAY = 24.0D; //hours to days
-	public static final double FACTOR_DAY_TO_WEEK = 7.0D; //days to weeks
-	public static final double FACTOR_DAY_TO_MONTH = 30.0D; //days to months
-	public static final double FACTOR_DAY_TO_YEAR = 365.0D; //days to years
+public abstract class UnitTime {
+	public static final BigDecimal FACTOR_NANOSECOND_TO_SECOND 	= new BigDecimal("1000000000"); //nanoseconds to seconds //$NON-NLS-1$
+	public static final BigDecimal FACTOR_MICROSECOND_TO_SECOND = HelperNumber.BIGDECIMAL_1000000; //microseconds to seconds
+	public static final BigDecimal FACTOR_MILLISECOND_TO_SECOND = HelperNumber.BIGDECIMAL_1000; //milliseconds to seconds
+	public static final BigDecimal FACTOR_SECOND_TO_MINUTE 		= new BigDecimal("60"); //seconds to minutes //$NON-NLS-1$
+	public static final BigDecimal FACTOR_MINUTE_TO_HOUR 		= new BigDecimal("60"); //minutes to hours //$NON-NLS-1$
+	public static final BigDecimal FACTOR_HOUR_TO_DAY 			= new BigDecimal("24"); //hours to days //$NON-NLS-1$
+	public static final BigDecimal FACTOR_DAY_TO_WEEK 			= new BigDecimal("7"); //days to weeks //$NON-NLS-1$
+	public static final BigDecimal FACTOR_DAY_TO_MONTH 			= new BigDecimal("30"); //days to months //$NON-NLS-1$
+	public static final BigDecimal FACTOR_DAY_TO_YEAR 			= new BigDecimal("365"); //days to years //$NON-NLS-1$
     
     /**
      * Converts a value with a given unit to another unit.
@@ -61,14 +65,17 @@ public abstract class UnitTime {//TODO replace primitive types by BigDecimal
      * @return value in the new unit
      * @since 0.8.0
      */
-    public static double convert(final Time fromUnit, final Time toUnit, final double value) {
+    public static BigDecimal convert(final Time fromUnit, final Time toUnit, final BigDecimal value) {
 		if (null == fromUnit) {
 			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
 		}
 		if (null == toUnit) {
 			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
 		}
+		if (null == value) {
+			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
+		}
 
-    	return value / fromUnit.getFactor() * toUnit.getFactor(); 
+    	return value.divide(fromUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
     }
  }
