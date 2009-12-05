@@ -29,48 +29,43 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.model.updater;
-
+package ch.sisprocom.bogatyr.model.updater.adapter;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.model.ModelAbstract;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
+import ch.sisprocom.bogatyr.helper.xml.XmlEntry;
+import ch.sisprocom.bogatyr.helper.xml.XmlMap;
+import ch.sisprocom.bogatyr.model.crypto.HashCode;
 
 /**
- * The implementation of the document model.
+ * Map adapter for the key {@link HashCode} and value {@link String}.
  * 
  * @author Stefan Laubenberger
- * @version 20091122
+ * @version 0.9.0 (20091205)
+ * @since 0.9.0
  */
-public class DocumentsImpl extends ModelAbstract implements Documents {
-	private static final long serialVersionUID = 5020205879710366592L;
-
-	private Map<UUID, Document> mapDocument = new HashMap<UUID, Document>();
-    
-	
-    /*
-     * Implemented methods
-     */
-	@Override
-	public Document getDocument(final UUID uuid) {
-		return mapDocument.get(uuid);
-	}
+public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCode, String>> {
 
 	@Override
-	public Map<UUID, Document> getDocuments() {
-		return mapDocument;
-	}
-
-	@Override
-	public void setDocuments(final Map<UUID, Document> documents) {
-        if (!HelperObject.isEquals(documents, mapDocument)) {
-        	mapDocument = documents;
-            setChanged();
-            notifyObservers(METHOD_SET_DOCUMENTS);
+	public XmlMap marshal(Map<HashCode, String> map) throws Exception {
+		XmlMap myMap = new XmlMap();
+        List<XmlEntry> list = myMap.getEntrys();
+        for (Map.Entry<HashCode, String> entry : map.entrySet() ) {
+            list.add(new XmlEntry(entry.getKey().toString(), entry.getValue()));
         }
+        return myMap;
+	}
+
+	@Override
+	public Map<HashCode, String> unmarshal(XmlMap myMap) throws Exception {
+        Map<HashCode, String> map = new HashMap<HashCode, String>();
+        for (XmlEntry entry : myMap.getEntrys() ) {
+            map.put(HashCode.valueOf(entry.getKey()), entry.getValue());
+        }
+        return map;
 	}
 }

@@ -37,9 +37,6 @@ import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import ch.sisprocom.bogatyr.model.Model;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
 import ch.sisprocom.bogatyr.model.misc.Platform;
@@ -48,9 +45,9 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * The interface for the document model.
  * 
  * @author Stefan Laubenberger
- * @version 20091122
+ * @version 0.9.0 (20091205)
+ * @since 0.9.0
  */
-@XmlRootElement
 public interface Document extends Model {
 	String METHOD_SET_LOCATIONS    	   = "setLocations"; //$NON-NLS-1$
 	String METHOD_SET_HASHS      	   = "setHashs"; //$NON-NLS-1$
@@ -69,7 +66,6 @@ public interface Document extends Model {
      * @retuns {@link Map} containing all locations
      * @since 0.9.0
      */
-    @XmlElement
     Map<Platform, String> getLocations();
 
     /**
@@ -103,7 +99,6 @@ public interface Document extends Model {
      * @retuns {@link Map} containing all hashs
      * @since 0.9.0
      */
-    @XmlElement
     Map<HashCode, String> getHashs();
 
     /**
@@ -131,31 +126,24 @@ public interface Document extends Model {
      */	
 	String getHash();
 
-	@XmlElement
 	String getName();
 	void setName(String name);
     
-	@XmlElement
     BigDecimal getVersion();
     void setVersion(BigDecimal version);
 
-	@XmlElement
     Integer getBuild();
     void setBuild(int build);
 
-	@XmlElement
     Date getCreated();
     void setCreated(Date created);
     
-	@XmlElement
     String getManufacturer();
     void setManufacturer(String manufacturer);
 
-	@XmlElement
     URL getManufacturerURL();
     void setManufacturerURL(URL url);
 
-	@XmlElement
     UUID getUUID();
     void setUUID(UUID uuid);
 }

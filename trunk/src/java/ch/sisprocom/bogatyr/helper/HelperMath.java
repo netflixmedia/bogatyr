@@ -42,7 +42,7 @@ import java.util.Collection;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091203)
  * @since 0.4.0
  */
 public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
@@ -54,19 +54,19 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @return calculated gcd
 	 * @since 0.4.0
 	 */
-	 public static double gcd(final double a, final double b) { //$JUnit$
-		 if (0.0D > a) {
+	 public static BigDecimal gcd(final BigDecimal a, final BigDecimal b) { //$JUnit$
+		 if (BigDecimal.ZERO.compareTo(a) > 0) {
 			 throw new IllegalArgumentException("a value must be positive: " + a); //$NON-NLS-1$
 		 }
-		 if (0.0D > b) {
+		 if (BigDecimal.ZERO.compareTo(b) > 0) {
 			 throw new IllegalArgumentException("b value must be positive: " + b); //$NON-NLS-1$
 		 }
 		 
-		 if (a == b) {
+		 if (a.equals(b)) {
 			 return a;
 		 }
 		 
-		 return 0.0D == b ? a : gcd(b, a % b);
+		 return BigDecimal.ZERO.compareTo(b) == 0 ? a : gcd(b, a.remainder(b));
 	 } 
 
 	 /**
@@ -77,14 +77,15 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @return calculated lcm
 	 * @since 0.4.0
 	 */
-	 public static double lcm(final double a, final double b) { //$JUnit$
-		 if (0.0D > a) {
+	 public static BigDecimal lcm(final BigDecimal a, final BigDecimal b) { //$JUnit$
+		 if (BigDecimal.ZERO.compareTo(a) >= 0) {
 			 throw new IllegalArgumentException("a value must be positive: " + a); //$NON-NLS-1$
 		 }
-		 if (0.0D > b) {
+		 if (BigDecimal.ZERO.compareTo(b) >= 0) {
 			 throw new IllegalArgumentException("b value must be positive: " + b); //$NON-NLS-1$
 		 }
-		 return a * b / gcd(a, b);
+		 
+		 return a.multiply(b, Constants.DEFAULT_MATHCONTEXT).divide(gcd(a, b), Constants.DEFAULT_MATHCONTEXT);
 	 }
 	 
 	/**
