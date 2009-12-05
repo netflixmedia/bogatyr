@@ -37,7 +37,6 @@ import java.io.InputStream;
 
 import ch.sisprocom.bogatyr.model.misc.Platform;
 import ch.sisprocom.bogatyr.model.updater.Document;
-import ch.sisprocom.bogatyr.model.updater.Documents;
 import ch.sisprocom.bogatyr.service.Service;
 
 
@@ -46,14 +45,14 @@ import ch.sisprocom.bogatyr.service.Service;
  * Defines the methods for the implementation of the updater.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091122)
+ * @version 0.9.0 (20091205)
  * @since 0.6.0
  */
 public interface Updater extends Service {
 		
-	Documents getDocuments(File file) throws Exception;
+	Document getDocument(File file) throws Exception;
 	
-	Documents getDocuments(InputStream is) throws Exception;
+	Document getDocument(InputStream is) throws Exception;
 	
 	void update(Document document, File dest) throws IOException;
 	

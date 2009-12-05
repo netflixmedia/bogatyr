@@ -36,6 +36,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.junit.Test;
@@ -47,21 +48,47 @@ import ch.sisprocom.bogatyr.helper.HelperMath;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090527
+ * @version 20091203
  */
 public class HelperMathTest {
+//	@Test
+//	public void testGcd() {
+//		assertEquals(2.0D, HelperMath.gcd(2.0D, 4.0D), 0.00001D);
+//		assertEquals(2.0D, HelperMath.gcd(2.0D, 2.0D), 0.00001D);
+//		assertEquals(2.0D, HelperMath.gcd(4.0D, 2.0D), 0.00001D);
+//		assertEquals(2.0D, HelperMath.gcd(2.0D, 2.0D), 0.00001D);
+//		assertEquals(2.5D, HelperMath.gcd(2.5D, 5.0D), 0.00001D);
+//		assertEquals(0.0D, HelperMath.gcd(0.0D, 0.0D), 0.00001D);
+//		assertEquals(Double.MAX_VALUE, HelperMath.gcd(Double.MAX_VALUE, Double.MAX_VALUE), 0.00001D);
+//		
+//		try {
+//			HelperMath.gcd(-2.0D, 4.0D);
+//			fail("a is negative!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+//
+//		try {
+//			HelperMath.gcd(2.0D, -4.0D);
+//			fail("b is negative!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+//	}
 	@Test
 	public void testGcd() {
-		assertEquals(2.0D, HelperMath.gcd(2.0D, 4.0D), 0.00001D);
-		assertEquals(2.0D, HelperMath.gcd(2.0D, 2.0D), 0.00001D);
-		assertEquals(2.0D, HelperMath.gcd(4.0D, 2.0D), 0.00001D);
-		assertEquals(2.0D, HelperMath.gcd(2.0D, 2.0D), 0.00001D);
-		assertEquals(2.5D, HelperMath.gcd(2.5D, 5.0D), 0.00001D);
-		assertEquals(0.0D, HelperMath.gcd(0.0D, 0.0D), 0.00001D);
-		assertEquals(Double.MAX_VALUE, HelperMath.gcd(Double.MAX_VALUE, Double.MAX_VALUE), 0.00001D);
+		assertTrue(new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("2"), new BigDecimal("4"))) == 0);
+		assertTrue(new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("2"), new BigDecimal("2"))) == 0);
+		assertTrue(new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("4"), new BigDecimal("2"))) == 0);
+		assertTrue(new BigDecimal("2.5").compareTo(HelperMath.gcd(new BigDecimal("2.5"), new BigDecimal("5"))) == 0);
+		assertTrue(BigDecimal.ZERO.compareTo(HelperMath.gcd(BigDecimal.ZERO, BigDecimal.ZERO)) == 0);
 		
 		try {
-			HelperMath.gcd(-2.0D, 4.0D);
+			HelperMath.gcd(new BigDecimal("-2"), BigDecimal.ZERO);
 			fail("a is negative!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -70,7 +97,7 @@ public class HelperMathTest {
 		}
 
 		try {
-			HelperMath.gcd(2.0D, -4.0D);
+			HelperMath.gcd(BigDecimal.ZERO, new BigDecimal("-2"));
 			fail("b is negative!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -79,15 +106,39 @@ public class HelperMathTest {
 		}
 	}
 	
+//	@Test
+//	public void testLcm() {
+//		assertEquals(10.0D, HelperMath.lcm(2.0D, 5.0D), 0.00001D);
+//		assertEquals(10.0D, HelperMath.lcm(5.0D, 2.0D), 0.00001D);
+//		assertEquals(Double.NaN, HelperMath.lcm(0.0D, 0.0D), 0.00001D);
+//		assertEquals(Double.POSITIVE_INFINITY, HelperMath.lcm(Double.MAX_VALUE, Double.MAX_VALUE), 0.00001D);
+//	
+//		try {
+//			HelperMath.lcm(-2.0D, 4.0D);
+//			fail("a is negative!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+//
+//		try {
+//			HelperMath.lcm(2.0D, -4.0D);
+//			fail("b is negative!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+//	}
+	
 	@Test
 	public void testLcm() {
-		assertEquals(10.0D, HelperMath.lcm(2.0D, 5.0D), 0.00001D);
-		assertEquals(10.0D, HelperMath.lcm(5.0D, 2.0D), 0.00001D);
-		assertEquals(Double.NaN, HelperMath.lcm(0.0D, 0.0D), 0.00001D);
-		assertEquals(Double.POSITIVE_INFINITY, HelperMath.lcm(Double.MAX_VALUE, Double.MAX_VALUE), 0.00001D);
-	
+		assertTrue(BigDecimal.TEN.compareTo(HelperMath.lcm(new BigDecimal("2"), new BigDecimal("5"))) == 0);
+		assertTrue(BigDecimal.TEN.compareTo(HelperMath.lcm(new BigDecimal("5"), new BigDecimal("2"))) == 0);
+		
 		try {
-			HelperMath.lcm(-2.0D, 4.0D);
+			HelperMath.lcm(new BigDecimal("-2"), BigDecimal.ZERO);
 			fail("a is negative!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -96,7 +147,7 @@ public class HelperMathTest {
 		}
 
 		try {
-			HelperMath.lcm(2.0D, -4.0D);
+			HelperMath.lcm(BigDecimal.ZERO, new BigDecimal("-2"));
 			fail("b is negative!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

@@ -31,13 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 
 
@@ -45,7 +46,7 @@ import java.io.OutputStream;
  * This is a helper class for XML operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091110)
+ * @version 0.9.0 (20091203)
  * @since 0.3.0
  */
 public abstract class HelperXml {
@@ -90,9 +91,6 @@ public abstract class HelperXml {
 		}
 		if (null == file) {
 			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
-		}
-		if (!file.isFile()) {
-			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		}
 
 		getMarshaller(data.getClass()).marshal(data, file);
@@ -163,6 +161,7 @@ public abstract class HelperXml {
 		}
 
 		return (T)getUnmarshaller(clazz).unmarshal(is);
+		
     }
     
     
@@ -172,6 +171,7 @@ public abstract class HelperXml {
     private static <T> Marshaller getMarshaller(final Class<T> clazz) throws JAXBException {
 		final JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
 		final Marshaller marshaller = jaxbContext.createMarshaller();
+//		marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		
 		return marshaller;

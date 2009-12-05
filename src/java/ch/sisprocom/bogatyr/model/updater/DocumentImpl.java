@@ -32,11 +32,6 @@
 package ch.sisprocom.bogatyr.model.updater;
 
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.model.ModelAbstract;
-import ch.sisprocom.bogatyr.model.crypto.HashCode;
-import ch.sisprocom.bogatyr.model.misc.Platform;
-
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Date;
@@ -44,13 +39,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.model.ModelAbstract;
+import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.model.misc.Platform;
+import ch.sisprocom.bogatyr.model.updater.adapter.MapAdapterHashCode;
+import ch.sisprocom.bogatyr.model.updater.adapter.MapAdapterPlatform;
+
 
 /**
  * The implementation of the document model.
  * 
  * @author Stefan Laubenberger
- * @version 20091122
+ * @version 0.9.0 (20091205)
+ * @since 0.9.0
  */
+@XmlRootElement
 public class DocumentImpl extends ModelAbstract implements Document {
 	private static final long serialVersionUID = -2826684498598090349L;
 
@@ -70,25 +78,28 @@ public class DocumentImpl extends ModelAbstract implements Document {
      * Implemented methods
      */
 	@Override
+    @XmlElement
 	public Integer getBuild() {
 		return build;
 	}
 	
-	@Override
+    @Override
 	public String getLocation() {
 		return getLocation(Platform.ANY);
 	}
 
-	@Override
+    @Override
 	public String getLocation(final Platform platform) {
 		return mapLocation.get(platform);
 	}
 
-	@Override
+    @Override
+    @XmlElement
+    @XmlJavaTypeAdapter(MapAdapterPlatform.class)
 	public Map<Platform, String> getLocations() {
 		return mapLocation;
 	}
-
+    
 	@Override
 	public void setLocations(final Map<Platform, String> locations) {
         if (!HelperObject.isEquals(locations, mapLocation)) {
@@ -103,12 +114,14 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		return getHash(HashCode.SHA256);
 	}
 	
-	@Override
+    @Override
 	public String getHash(final HashCode hashCode) {
 		return mapHash.get(hashCode);
 	}
-
-	@Override
+    
+    @Override
+    @XmlElement
+    @XmlJavaTypeAdapter(MapAdapterHashCode.class)
 	public Map<HashCode, String> getHashs() {
 		return mapHash;
 	}
@@ -123,31 +136,37 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	@Override
+    @XmlElement
 	public Date getCreated() {
 		return created;
 	}
 
 	@Override
+    @XmlElement
 	public String getManufacturer() {
 		return manufacturer;
 	}
 
 	@Override
+    @XmlElement
 	public URL getManufacturerURL() {
 		return manufacturerURL;
 	}
 
 	@Override
+    @XmlElement
 	public UUID getUUID() {
 		return uuid;
 	}
-
+    
 	@Override
+    @XmlElement
 	public String getName() {
 		return name;
 	}
 
 	@Override
+    @XmlElement
 	public BigDecimal getVersion() {
 		return version;
 	}
@@ -160,6 +179,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
             notifyObservers(METHOD_SET_BUILD);
         }
 	}
+
 	@Override
 	public void setCreated(final Date created) {
         if (!HelperObject.isEquals(created, this.created)) {

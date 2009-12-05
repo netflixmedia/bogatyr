@@ -37,7 +37,6 @@ import ch.sisprocom.bogatyr.helper.HelperNet;
 import ch.sisprocom.bogatyr.helper.HelperXml;
 import ch.sisprocom.bogatyr.model.misc.Platform;
 import ch.sisprocom.bogatyr.model.updater.Document;
-import ch.sisprocom.bogatyr.model.updater.Documents;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 import javax.xml.bind.JAXBException;
@@ -51,7 +50,7 @@ import java.net.URL;
  * This is the updater for documents.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091122)
+ * @version 0.9.0 (20091205)
  * @since 0.6.0
  */
 public class UpdaterImpl extends ServiceAbstract implements Updater {
@@ -59,13 +58,13 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
     * Implemented methods
     */
     @Override
-	public Documents getDocuments(final File file) throws JAXBException {
-    	return HelperXml.deserialize(Documents.class, file);
+	public Document getDocument(final File file) throws JAXBException {
+    	return HelperXml.deserialize(Document.class, file);
     }
 
 	@Override
-	public Documents getDocuments(final InputStream is) throws JAXBException {
-		return HelperXml.deserialize(Documents.class, is);
+	public Document getDocument(final InputStream is) throws JAXBException {
+		return HelperXml.deserialize(Document.class, is);
 	}
 
 	@Override
