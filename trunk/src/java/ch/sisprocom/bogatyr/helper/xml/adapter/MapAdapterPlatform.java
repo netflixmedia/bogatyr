@@ -29,7 +29,7 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.model.updater.adapter;
+package ch.sisprocom.bogatyr.helper.xml.adapter;
 
 import java.util.HashMap;
 import java.util.List;

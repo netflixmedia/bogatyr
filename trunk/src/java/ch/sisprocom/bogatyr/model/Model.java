@@ -31,7 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
@@ -41,10 +40,9 @@ import java.util.Observer;
  * It also contains all methods from the {@link Observable} class.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091109)
+ * @version 0.9.0 (20091205)
  * @since 0.9.0
  */
-@XmlRootElement()
 public interface Model extends Serializable {
 	
 	/**

@@ -31,26 +31,25 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.context;
 
-import ch.sisprocom.bogatyr.model.Model;
-
-import javax.xml.bind.annotation.XmlElement;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.Map;
+
+import ch.sisprocom.bogatyr.model.Model;
 
 
 /**
  * Interface for the context in applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091023)
+ * @version 0.9.0 (20091206)
  * @since 0.6.0
  */
 public interface Context extends Model {
-    String METHOD_SET_DATA     = "setData"; //$NON-NLS-1$
-    String METHOD_ADD_VALUE    = "addValue"; //$NON-NLS-1$
-    String METHOD_REMOVE_VALUE = "removeValue"; //$NON-NLS-1$
+    String MEMBER_DATA     	   = Context.class.getName() + ".data"; //$NON-NLS-1$
+    String METHOD_ADD_VALUE    = Context.class.getName() + ".addValue()"; //$NON-NLS-1$
+    String METHOD_REMOVE_VALUE = Context.class.getName() + ".removeValue()"; //$NON-NLS-1$
 
     /**
      * Returns the data of the context.
@@ -58,7 +57,6 @@ public interface Context extends Model {
      * @retuns {@link Map} containing the data
      * @since 0.9.0
      */
-    @XmlElement
     Map<Object, Object> getData();
 
     /**

@@ -29,39 +29,33 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.model;
+package ch.sisprocom.bogatyr.model.misc;
 
-import java.util.Observable;
+import java.net.URL;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import ch.sisprocom.bogatyr.model.Model;
 
 /**
- * This is the skeleton for all models.
+ * The interface for the manufacturer model.
  * 
  * @author Stefan Laubenberger
  * @version 0.9.0 (20091206)
- * @since 0.7.0
+ * @since 0.9.0
  */
-public abstract class ModelAbstract extends Observable implements Model {
-	private static final long serialVersionUID = 3491320587479082917L;
+@XmlJavaTypeAdapter(ManufacturerImpl.XmlAdapter.class)
+public interface Manufacturer extends Model {
+    String MEMBER_NAME = Manufacturer.class.getName() + ".name"; //$NON-NLS-1$
+    String MEMBER_URL  = Manufacturer.class.getName() + ".url"; //$NON-NLS-1$
+    String MEMBER_MAIL = Manufacturer.class.getName() + ".mail"; //$NON-NLS-1$
 
-	private final long createTime = System.currentTimeMillis();
-	
-	
-    /*
-     * Implemented methods
-     */
-	@Override
-    public long getCreateTime() {
-		return createTime;
-	}
-	
-	
-    /*
-     * Overridden methods
-     */
-    @Override
-    public String toString() {
-        return HelperObject.toString(this);
-    }
+    String getName();
+    void setName(String name);
+
+    URL getURL();
+    void setURL(URL url);
+
+    String getMail();
+    void setMail(String mail);
 }

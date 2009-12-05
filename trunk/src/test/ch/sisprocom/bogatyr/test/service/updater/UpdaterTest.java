@@ -31,60 +31,58 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.service.updater;
 
-import ch.sisprocom.bogatyr.helper.HelperCrypto;
-import ch.sisprocom.bogatyr.helper.HelperXml;
-import ch.sisprocom.bogatyr.model.crypto.HashCode;
-import ch.sisprocom.bogatyr.model.misc.Platform;
-import ch.sisprocom.bogatyr.model.updater.Document;
-import ch.sisprocom.bogatyr.model.updater.DocumentImpl;
-import org.junit.Before;
-import org.junit.Test;
-
 import java.io.File;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import ch.sisprocom.bogatyr.helper.Constants;
+import ch.sisprocom.bogatyr.helper.HelperCrypto;
+import ch.sisprocom.bogatyr.helper.HelperXml;
+import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.model.misc.ManufacturerImpl;
+import ch.sisprocom.bogatyr.model.misc.Platform;
+import ch.sisprocom.bogatyr.model.updater.Document;
+import ch.sisprocom.bogatyr.model.updater.DocumentImpl;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091205
+ * @version 20091206
  */
 public class UpdaterTest {
 	@Before
 	public void setUp() throws Exception {
-		DocumentImpl doc = new DocumentImpl();
-		Map<UUID, Document> documents = new HashMap<UUID, Document>();
+		Document doc = new DocumentImpl();
 		
 		Map<Platform, String> locations = new HashMap<Platform, String>();
-		locations.put(Platform.WINDOWS, "www.ms.com");
-		locations.put(Platform.MAC_OSX, "www.apple.com");
-		locations.put(Platform.UNIX, "www.unix.com");
+		locations.put(Platform.ANY, "http://code.google.com/p/bogatyr/downloads/list");
+//		locations.put(Platform.WINDOWS, "www.ms.com");
+//		locations.put(Platform.MAC_OSX, "www.apple.com");
+//		locations.put(Platform.UNIX, "www.unix.com");
 		doc.setLocations(locations);
 
 		Map<HashCode, String> hashs = new HashMap<HashCode, String>();
-		hashs.put(HashCode.MD5, "md5");
-		hashs.put(HashCode.SHA256, "sha256");
+//		hashs.put(HashCode.MD5, "MD5-Hashvalue");
+		hashs.put(HashCode.SHA256, "SHA256-Hashvalue");
 		doc.setHashs(hashs);
 		
-		doc.setBuild(123);
+		doc.setName(Constants.BOGATYR_NAME);
+		doc.setVersion(Constants.BOGATYR_VERSION);
+		doc.setBuild(Constants.BOGATYR_BUILD);
+		doc.setManufacturer(Constants.BOGATYR_MANUFACTURER);
 		doc.setCreated(new Date());
-		doc.setManufacturer("SiSprocom GmbH");
-		doc.setManufacturerURL(new URL("http://www.sisprocom.ch"));
-		doc.setName("Bogatyr");
 		doc.setUUID(HelperCrypto.getUUID());
-		doc.setVersion(new BigDecimal("1.01"));
-		
-		documents.put(doc.getUUID(), doc);
 		
 		HelperXml.serialize(doc, new File("/Users/Shared/Transfer/test.xml"));
 //		HelperXml.serialize(docs, new File("/Users/Shared/Transfer/test.xml"));
-
 		
 		Document doc2 = HelperXml.deserialize(DocumentImpl.class, new File("/Users/Shared/Transfer/test.xml"));
 
