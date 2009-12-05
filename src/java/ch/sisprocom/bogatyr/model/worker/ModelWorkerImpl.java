@@ -43,17 +43,13 @@ import java.util.List;
  * The implementation of the worker model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091121)
+ * @version 0.9.0 (20091206)
  * @since 0.9.0
  */
 public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 	private static final long serialVersionUID = -2826684498598090349L;
 
 	private List<WorkerAbstract> listWorker = new ArrayList<WorkerAbstract>();
-
-    public ModelWorkerImpl() {
-        super();
-    }
  
 
 	/*

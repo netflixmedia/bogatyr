@@ -33,15 +33,21 @@ package ch.sisprocom.bogatyr.model.application;
 
 
 import java.math.BigDecimal;
-import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.xml.adapter.MapAdapterHashCode;
 import ch.sisprocom.bogatyr.model.ModelAbstract;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.model.misc.Manufacturer;
 import ch.sisprocom.bogatyr.service.localizer.Localizer;
 import ch.sisprocom.bogatyr.service.property.Property;
 
@@ -50,8 +56,11 @@ import ch.sisprocom.bogatyr.service.property.Property;
  * The implementation of the application model.
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 20091122
+ * @version 0.9.0 (20091206)
+ * @since 0.9.0
  */
+@XmlType(propOrder={"name", "version", "build", "created", "manufacturer", "UUID", "debug", "hashs"})
+@XmlRootElement(name = "application")
 public class ModelApplicationImpl extends ModelAbstract implements ModelApplication {
 	private static final long serialVersionUID = -2826684498598090349L;
 
@@ -60,8 +69,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	private BigDecimal version;
 	private int build;
 	private Date created;
-	private String manufacturer;
-	private URL manufacturerURL;
+	private Manufacturer manufacturer;
 	private UUID uuid;
 	private boolean isDebug;
 	private Localizer localizer;
@@ -71,6 +79,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
     /*
      * Implemented methods
      */
+	@XmlElement
 	@Override
 	public Integer getBuild() {
 		return build;
@@ -87,6 +96,8 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
+	@XmlElement
+    @XmlJavaTypeAdapter(MapAdapterHashCode.class)
 	public Map<HashCode, String> getHashs() {
 		return mapHash;
 	}
@@ -96,7 +107,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
         if (!HelperObject.isEquals(hashs, mapHash)) {
     		mapHash = hashs;
             setChanged();
-            notifyObservers(METHOD_SET_HASHS);
+            notifyObservers(MEMBER_HASHS);
         }
 	}
 
@@ -115,21 +126,19 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
+	@XmlElement
 	public Date getCreated() {
 		return created;
 	}
 
 	@Override
-	public String getManufacturer() {
+	@XmlElement
+	public Manufacturer getManufacturer() {
 		return manufacturer;
 	}
 
 	@Override
-	public URL getManufacturerURL() {
-		return manufacturerURL;
-	}
-
-	@Override
+	@XmlElement
 	public UUID getUUID() {
 		return uuid;
 	}
@@ -140,6 +149,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
+	@XmlElement
 	public String getName() {
 		return name;
 	}
@@ -150,11 +160,13 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
+	@XmlElement
 	public BigDecimal getVersion() {
 		return version;
 	}
 
 	@Override
+	@XmlElement
 	public Boolean isDebug() {
 		return isDebug;
 	}
@@ -164,7 +176,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
         if (build != this.build) {
             this.build = build;
             setChanged();
-            notifyObservers(METHOD_SET_BUILD);
+            notifyObservers(MEMBER_BUILD);
         }
 	}
 	@Override
@@ -172,25 +184,16 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
         if (!HelperObject.isEquals(created, this.created)) {
             this.created = created;
             setChanged();
-            notifyObservers(METHOD_SET_CREATED);
+            notifyObservers(MEMBER_CREATED);
         }
 	}
 
 	@Override
-	public void setManufacturer(final String manufacturer) {
+	public void setManufacturer(final Manufacturer manufacturer) {
         if (!HelperObject.isEquals(manufacturer, this.manufacturer)) {
             this.manufacturer = manufacturer;
             setChanged();
-            notifyObservers(METHOD_SET_MANUFACTURER);
-        }
-	}
-
-	@Override
-	public void setManufacturerURL(final URL url) {
-        if (!HelperObject.isEquals(url, manufacturerURL)) {
-            manufacturerURL = url;
-            setChanged();
-            notifyObservers(METHOD_SET_MANUFACTURER_URL);
+            notifyObservers(MEMBER_MANUFACTURER);
         }
 	}
 
@@ -199,7 +202,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
         if (!HelperObject.isEquals(uuid, this.uuid)) {
             this.uuid = uuid;
             setChanged();
-            notifyObservers(METHOD_SET_UUID);
+            notifyObservers(MEMBER_UUID);
         }
 	}
 
@@ -208,7 +211,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
         if (isDebug != this.isDebug) {
             this.isDebug = isDebug;
             setChanged();
-            notifyObservers(METHOD_SET_DEBUG);
+            notifyObservers(MEMBER_DEBUG);
         }
 	}
 
@@ -217,7 +220,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
         if (!HelperObject.isEquals(localizer, this.localizer)) {
             this.localizer = localizer;
             setChanged();
-            notifyObservers(METHOD_SET_LOCALIZER);
+            notifyObservers(MEMBER_LOCALIZER);
         }
 	}
 
@@ -226,7 +229,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
         if (!HelperObject.isEquals(name, this.name)) {
             this.name = name;
             setChanged();
-            notifyObservers(METHOD_SET_NAME);
+            notifyObservers(MEMBER_NAME);
         }
 	}
 
@@ -235,7 +238,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
         if (!HelperObject.isEquals(property, this.property)) {
             this.property = property;
             setChanged();
-            notifyObservers(METHOD_SET_PROPERTY);
+            notifyObservers(MEMBER_PROPERTY);
         }
 	}
 
@@ -244,7 +247,24 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
         if (!HelperObject.isEquals(version, this.version)) {
             this.version = version;
             setChanged();
-            notifyObservers(METHOD_SET_VERSION);
+            notifyObservers(MEMBER_VERSION);
         }
+	}
+	
+	
+	/*
+	 * Inner classes
+	 */
+	public static class XmlAdapter extends javax.xml.bind.annotation.adapters.XmlAdapter<ModelApplicationImpl, ModelApplication> {
+
+		@Override
+		public ModelApplicationImpl marshal(final ModelApplication model) {
+			return (ModelApplicationImpl) model;
+		}
+
+		@Override
+		public ModelApplication unmarshal(final ModelApplicationImpl model) {
+			return model;
+		}
 	}
 }

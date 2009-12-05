@@ -32,32 +32,34 @@
 package ch.sisprocom.bogatyr.model.updater;
 
 import java.math.BigDecimal;
-import java.net.URL;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import ch.sisprocom.bogatyr.model.Model;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.model.misc.Manufacturer;
 import ch.sisprocom.bogatyr.model.misc.Platform;
 
 /**
  * The interface for the document model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091205)
+ * @version 0.9.0 (20091206)
  * @since 0.9.0
  */
+@XmlJavaTypeAdapter(DocumentImpl.XmlAdapter.class)
 public interface Document extends Model {
-	String METHOD_SET_LOCATIONS    	   = "setLocations"; //$NON-NLS-1$
-	String METHOD_SET_HASHS      	   = "setHashs"; //$NON-NLS-1$
-    String METHOD_SET_NAME      	   = "setName"; //$NON-NLS-1$
-    String METHOD_SET_VERSION   	   = "setVersion"; //$NON-NLS-1$
-    String METHOD_SET_BUILD     	   = "setBuild"; //$NON-NLS-1$
-    String METHOD_SET_CREATED		   = "setCreated"; //$NON-NLS-1$
-    String METHOD_SET_MANUFACTURER     = "setManufacturer"; //$NON-NLS-1$
-    String METHOD_SET_MANUFACTURER_URL = "setManufacturerURL"; //$NON-NLS-1$
-    String METHOD_SET_UUID     		   = "setUUID"; //$NON-NLS-1$
+	String MEMBER_LOCATIONS    = Document.class.getName() + ".locations"; //$NON-NLS-1$
+	String MEMBER_HASHS        = Document.class.getName() + ".hashs"; //$NON-NLS-1$
+    String MEMBER_NAME     	   = Document.class.getName() + ".name"; //$NON-NLS-1$
+    String MEMBER_VERSION      = Document.class.getName() + ".version"; //$NON-NLS-1$
+    String MEMBER_BUILD        = Document.class.getName() + ".build"; //$NON-NLS-1$
+    String MEMBER_CREATED	   = Document.class.getName() + ".created"; //$NON-NLS-1$
+    String MEMBER_MANUFACTURER = Document.class.getName() + ".manufacturer"; //$NON-NLS-1$
+    String MEMBER_UUID     	   = Document.class.getName() + ".UUID"; //$NON-NLS-1$
 
 
     /**
@@ -138,11 +140,8 @@ public interface Document extends Model {
     Date getCreated();
     void setCreated(Date created);
     
-    String getManufacturer();
-    void setManufacturer(String manufacturer);
-
-    URL getManufacturerURL();
-    void setManufacturerURL(URL url);
+    Manufacturer getManufacturer();
+    void setManufacturer(Manufacturer manufacturer);
 
     UUID getUUID();
     void setUUID(UUID uuid);

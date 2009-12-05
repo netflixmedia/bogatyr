@@ -32,16 +32,15 @@
 package ch.sisprocom.bogatyr.model.application;
 
 import java.math.BigDecimal;
-import java.net.URL;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ch.sisprocom.bogatyr.model.Model;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.model.misc.Manufacturer;
 import ch.sisprocom.bogatyr.service.localizer.Localizer;
 import ch.sisprocom.bogatyr.service.property.Property;
 
@@ -49,24 +48,23 @@ import ch.sisprocom.bogatyr.service.property.Property;
  * The interface for the application model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091023)
- * @since 0.6.0
+ * @version 0.9.0 (20091206)
+ * @since 0.9.0
  */
-@XmlRootElement
+@XmlJavaTypeAdapter(ModelApplicationImpl.XmlAdapter.class)
 public interface ModelApplication extends Model {
-	String METHOD_SET_HASHS      	   = "setHashs"; //$NON-NLS-1$
-    String METHOD_ADD_HASH             = "addHash"; //$NON-NLS-1$
-    String METHOD_REMOVE_HASH	       = "removeHash"; //$NON-NLS-1$
-    String METHOD_SET_NAME      	   = "setName"; //$NON-NLS-1$
-    String METHOD_SET_VERSION   	   = "setVersion"; //$NON-NLS-1$
-    String METHOD_SET_BUILD     	   = "setBuild"; //$NON-NLS-1$
-    String METHOD_SET_CREATED		   = "setCreated"; //$NON-NLS-1$
-    String METHOD_SET_MANUFACTURER     = "setManufacturer"; //$NON-NLS-1$
-    String METHOD_SET_MANUFACTURER_URL = "setManufacturerURL"; //$NON-NLS-1$
-    String METHOD_SET_UUID     		   = "setUUID"; //$NON-NLS-1$
-    String METHOD_SET_DEBUG     	   = "setDebug"; //$NON-NLS-1$
-    String METHOD_SET_PROPERTY  	   = "setProperty"; //$NON-NLS-1$
-    String METHOD_SET_LOCALIZER 	   = "setLocalizer"; //$NON-NLS-1$
+	String MEMBER_HASHS      	   = ModelApplication.class.getName() + ".hashs"; //$NON-NLS-1$
+	String MEMBER_NAME      	   = ModelApplication.class.getName() + ".name"; //$NON-NLS-1$
+    String MEMBER_VERSION   	   = ModelApplication.class.getName() + ".version"; //$NON-NLS-1$
+    String MEMBER_BUILD     	   = ModelApplication.class.getName() + ".build"; //$NON-NLS-1$
+    String MEMBER_CREATED		   = ModelApplication.class.getName() + ".created"; //$NON-NLS-1$
+    String MEMBER_MANUFACTURER     = ModelApplication.class.getName() + ".manufacturer"; //$NON-NLS-1$
+    String MEMBER_UUID     		   = ModelApplication.class.getName() + ".UUID"; //$NON-NLS-1$
+    String MEMBER_DEBUG     	   = ModelApplication.class.getName() + ".debug"; //$NON-NLS-1$
+    String MEMBER_PROPERTY  	   = ModelApplication.class.getName() + ".property"; //$NON-NLS-1$
+    String MEMBER_LOCALIZER 	   = ModelApplication.class.getName() + ".localizer"; //$NON-NLS-1$
+    String METHOD_ADD_HASH         = ModelApplication.class.getName() + ".addHash()"; //$NON-NLS-1$
+    String METHOD_REMOVE_HASH	   = ModelApplication.class.getName() + ".removeHash()"; //$NON-NLS-1$
 	
     /**
      * Returns all hashs.
@@ -74,7 +72,6 @@ public interface ModelApplication extends Model {
      * @retuns {@link Map} containing all hashs
      * @since 0.9.0
      */
-    @XmlElement
     Map<HashCode, String> getHashs();
 
     /**
@@ -106,35 +103,24 @@ public interface ModelApplication extends Model {
 
 	void removeHash(HashCode hashCode);
 	
-	@XmlElement
 	String getName();
 	void setName(String name);
     
-	@XmlElement
     BigDecimal getVersion();
     void setVersion(BigDecimal version);
 
-	@XmlElement
     Integer getBuild();
     void setBuild(int build);
 
-	@XmlElement
     Date getCreated();
     void setCreated(Date created);
     
-	@XmlElement
-    String getManufacturer();
-    void setManufacturer(String manufacturer);
+    Manufacturer getManufacturer();
+    void setManufacturer(Manufacturer manufacturer);
 
-	@XmlElement
-    URL getManufacturerURL();
-    void setManufacturerURL(URL url);
-
-	@XmlElement
     UUID getUUID();
     void setUUID(UUID uuid);
 
-	@XmlElement
     Boolean isDebug();
     void setDebug(boolean isDebug);
 

@@ -33,7 +33,6 @@ package ch.sisprocom.bogatyr.model.updater;
 
 
 import java.math.BigDecimal;
-import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,24 +40,27 @@ import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.xml.adapter.MapAdapterHashCode;
+import ch.sisprocom.bogatyr.helper.xml.adapter.MapAdapterPlatform;
 import ch.sisprocom.bogatyr.model.ModelAbstract;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.model.misc.Manufacturer;
 import ch.sisprocom.bogatyr.model.misc.Platform;
-import ch.sisprocom.bogatyr.model.updater.adapter.MapAdapterHashCode;
-import ch.sisprocom.bogatyr.model.updater.adapter.MapAdapterPlatform;
 
 
 /**
  * The implementation of the document model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091205)
+ * @version 0.9.0 (20091206)
  * @since 0.9.0
  */
-@XmlRootElement
+@XmlType(propOrder={"name", "version", "build", "created", "manufacturer", "UUID", "locations", "hashs"})
+@XmlRootElement(name = "document")
 public class DocumentImpl extends ModelAbstract implements Document {
 	private static final long serialVersionUID = -2826684498598090349L;
 
@@ -68,8 +70,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	private BigDecimal version;
 	private int build;
 	private Date created;
-	private String manufacturer;
-	private URL manufacturerURL;
+	private Manufacturer manufacturer;
 	private UUID uuid;
 
     
@@ -105,7 +106,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
         if (!HelperObject.isEquals(locations, mapLocation)) {
     		mapLocation = locations;
             setChanged();
-            notifyObservers(METHOD_SET_LOCATIONS);
+            notifyObservers(MEMBER_LOCATIONS);
         }
 	}
 
@@ -131,7 +132,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
         if (!HelperObject.isEquals(hashs, mapHash)) {
     		mapHash = hashs;
             setChanged();
-            notifyObservers(METHOD_SET_HASHS);
+            notifyObservers(MEMBER_HASHS);
         }
 	}
 
@@ -143,14 +144,9 @@ public class DocumentImpl extends ModelAbstract implements Document {
 
 	@Override
     @XmlElement
-	public String getManufacturer() {
+//    @XmlAnyElement
+	public Manufacturer getManufacturer() {
 		return manufacturer;
-	}
-
-	@Override
-    @XmlElement
-	public URL getManufacturerURL() {
-		return manufacturerURL;
 	}
 
 	@Override
@@ -176,7 +172,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
         if (build != this.build) {
             this.build = build;
             setChanged();
-            notifyObservers(METHOD_SET_BUILD);
+            notifyObservers(MEMBER_BUILD);
         }
 	}
 
@@ -185,25 +181,16 @@ public class DocumentImpl extends ModelAbstract implements Document {
         if (!HelperObject.isEquals(created, this.created)) {
             this.created = created;
             setChanged();
-            notifyObservers(METHOD_SET_CREATED);
+            notifyObservers(MEMBER_CREATED);
         }
 	}
 
 	@Override
-	public void setManufacturer(final String manufacturer) {
+	public void setManufacturer(final Manufacturer manufacturer) {
         if (!HelperObject.isEquals(manufacturer, this.manufacturer)) {
             this.manufacturer = manufacturer;
             setChanged();
-            notifyObservers(METHOD_SET_MANUFACTURER);
-        }
-	}
-
-	@Override
-	public void setManufacturerURL(final URL url) {
-        if (!HelperObject.isEquals(url, manufacturerURL)) {
-            manufacturerURL = url;
-            setChanged();
-            notifyObservers(METHOD_SET_MANUFACTURER_URL);
+            notifyObservers(MEMBER_MANUFACTURER);
         }
 	}
 
@@ -212,7 +199,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
         if (!HelperObject.isEquals(uuid, this.uuid)) {
             this.uuid = uuid;
             setChanged();
-            notifyObservers(METHOD_SET_UUID);
+            notifyObservers(MEMBER_UUID);
         }
 	}
 
@@ -221,7 +208,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
         if (!HelperObject.isEquals(name, this.name)) {
             this.name = name;
             setChanged();
-            notifyObservers(METHOD_SET_NAME);
+            notifyObservers(MEMBER_NAME);
         }
 	}
 
@@ -230,7 +217,24 @@ public class DocumentImpl extends ModelAbstract implements Document {
         if (!HelperObject.isEquals(version, this.version)) {
             this.version = version;
             setChanged();
-            notifyObservers(METHOD_SET_VERSION);
+            notifyObservers(MEMBER_VERSION);
         }
+	}
+	
+	
+	/*
+	 * Inner classes
+	 */
+	public static class XmlAdapter extends javax.xml.bind.annotation.adapters.XmlAdapter<DocumentImpl, Document> {
+
+		@Override
+		public DocumentImpl marshal(final Document model) {
+			return (DocumentImpl) model;
+		}
+
+		@Override
+		public Document unmarshal(final DocumentImpl model) {
+			return model;
+		}
 	}
 }

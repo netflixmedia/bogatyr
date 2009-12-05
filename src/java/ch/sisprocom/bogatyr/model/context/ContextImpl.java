@@ -31,21 +31,21 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.context;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.model.ModelAbstract;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.model.ModelAbstract;
+
 
 /**
  * Implementation of the context for applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091022)
+ * @version 0.9.0 (20091205)
  * @since 0.1.0
  */
 public class ContextImpl extends ModelAbstract implements Context {
@@ -87,7 +87,7 @@ public class ContextImpl extends ModelAbstract implements Context {
         if (!HelperObject.isEquals(data, contextData)) {
             contextData = data;
             setChanged();
-            notifyObservers(METHOD_SET_DATA);
+            notifyObservers(MEMBER_DATA);
         }
 
     }
