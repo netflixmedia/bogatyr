@@ -29,38 +29,29 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.application;
+package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.model.application.ModelApplication;
-import ch.sisprocom.bogatyr.model.application.ModelApplicationImpl;
-import ch.sisprocom.bogatyr.controller.ControllerAbstract;
-import ch.sisprocom.bogatyr.controller.worker.ControllerWorker;
-import ch.sisprocom.bogatyr.controller.worker.ControllerWorkerImpl;
 
 /**
- * The skeleton for the application controller.
+ * Defines the methods for the implementation of display and hide components.
  * 
  * @author Stefan Laubenberger
  * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
-public abstract class ControllerApplicationAbstract extends ControllerAbstract implements ControllerApplication {
-	
-	final ModelApplication model = new ModelApplicationImpl();
-	
-    private final ControllerWorker controllerWorker = new ControllerWorkerImpl();
-
-
-    /*
-     * Implemented methods
+public interface Displayable {
+	/**
+     * Creates and displays the component.
+     * 
+     * @since 0.9.0
      */
-    @Override
-    public ModelApplication getModel() {
-		return model;
-	}
+	void createAndShowGUI();
 	
-    @Override
-	public ControllerWorker getControllerWorker() {
-        return controllerWorker;
-    }
-}
+	/**
+     * Clears and hides the component.
+     * 
+     * @since 0.9.0
+     */
+	void clearAndHide();
+}   
+

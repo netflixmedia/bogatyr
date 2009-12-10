@@ -41,10 +41,10 @@ import java.math.BigDecimal;
  * Area units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091202)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
-public enum Area {
+public enum Area implements Unit {
 	MM2(UnitArea.FACTOR_MM2_TO_CM2.multiply(UnitArea.FACTOR_CM2_TO_M2, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	CM2(UnitArea.FACTOR_CM2_TO_M2), //$JUnit$
 	M2(BigDecimal.ONE),
@@ -63,16 +63,6 @@ public enum Area {
 		this.factor = factor;
 	}
 
-    /**
-     * Returns the factor from the unit to the base value (meter^2)
-     * 
-     * @return factor to the base value
-     * @since 0.8.0
-     */
-	public BigDecimal getFactor() {
-		return factor;
-	}
-
 
     /*
 	 * Overridden methods
@@ -80,6 +70,15 @@ public enum Area {
 	@Override
 	public String toString() {
 		return HelperObject.toString(this);
+	}
+	
+
+	/*
+	 * Implemented methods
+	 */
+	@Override
+	public BigDecimal getFactor() {
+		return factor;
 	}
 }	
 

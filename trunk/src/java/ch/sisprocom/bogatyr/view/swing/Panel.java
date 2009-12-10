@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JPanel.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.1.0
  */
 public class Panel extends JPanel implements Activatable {
@@ -61,11 +61,11 @@ public class Panel extends JPanel implements Activatable {
 		super();
 	}
 
-	public Panel(boolean isDoubleBuffered) {
+	public Panel(final boolean isDoubleBuffered) {
 		super(isDoubleBuffered);
 	}
 
-	public Panel(LayoutManager layout, boolean isDoubleBuffered) {
+	public Panel(final LayoutManager layout, final boolean isDoubleBuffered) {
 		super(layout, isDoubleBuffered);
 	}
 

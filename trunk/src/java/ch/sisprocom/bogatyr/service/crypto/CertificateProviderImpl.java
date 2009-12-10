@@ -69,7 +69,7 @@ import java.util.Date;
  * This class generates, reads and writes X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20091210)
  * @since 0.3.0
  */
 public class CertificateProviderImpl extends ServiceAbstract implements CertificateProvider {
@@ -85,13 +85,16 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
 		}
 
-		final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+		BufferedInputStream bis = null;
         final X509Certificate cert;
 
         try {
+            bis = new BufferedInputStream(new FileInputStream(file));
             cert = readCertificate(new BufferedInputStream(new FileInputStream(file)));
         } finally {
-            bis.close();
+            if (null != bis) {
+                bis.close();
+            }
         }
         return cert;
     }

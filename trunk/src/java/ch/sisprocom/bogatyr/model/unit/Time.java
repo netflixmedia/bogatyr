@@ -40,10 +40,10 @@ import ch.sisprocom.bogatyr.helper.unit.UnitTime;
  * Time units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091126)
+ * @version 0.9.0 (20091210)
  * @since 0.8.0
  */
-public enum Time {
+public enum Time implements Unit {
 	NANOSECOND(UnitTime.FACTOR_NANOSECOND_TO_SECOND),
 	MICROSECOND(UnitTime.FACTOR_MICROSECOND_TO_SECOND),
 	MILLISECOND(UnitTime.FACTOR_MILLISECOND_TO_SECOND),
@@ -60,16 +60,6 @@ public enum Time {
 	Time(final BigDecimal factor) {
 		this.factor = factor;
 	}
-	
-    /**
-     * Returns the factor from the unit to the base value (second)
-     * 
-     * @return factor to the base value
-     * @since 0.8.0
-     */
-	public BigDecimal getFactor() {
-		return factor;
-	}
 
 
     /*
@@ -78,5 +68,14 @@ public enum Time {
 	@Override
 	public String toString() {
 		return HelperObject.toString(this);
+	}
+
+	
+	/*
+	 * Implemented methods
+	 */
+	@Override
+	public BigDecimal getFactor() {
+		return factor;
 	}
 }

@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.helper.launcher.LauncherFile;
  * To find such classes and methods, it must be marked with $JUnit$.
  *
  * @author Stefan Laubenberger
- * @version 20091101
+ * @version 20091210
  */
 public class CheckJUnit {
 	private static final String MARKER = "$JUnit$"; //$NON-NLS-1$
@@ -65,7 +65,7 @@ public class CheckJUnit {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 //		list(true);
 		list(false);
 	}
@@ -83,13 +83,13 @@ public class CheckJUnit {
 			fc.setSelectedFile(new File(HelperEnvironment.getUserHomeDirectory(), "JUnitUntested" + EXTENSION_CSV)); //$NON-NLS-1$
 		}
 		
-        if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+        if (JFileChooser.APPROVE_OPTION == fc.showSaveDialog(null)) {
         	final File output = fc.getSelectedFile();
         	output.delete();
         	
         	try {
            	    final java.io.FileFilter filter = new java.io.FileFilter() { 
-        	    	public boolean accept(File file) { 
+        	    	public boolean accept(final File file) {
         	    		return HelperString.endsWith(file.getName(), EXTENSION_JAVA) && !HelperString.contains(file.getName(), "svn");
         	    	} 
         	    };
@@ -100,7 +100,7 @@ public class CheckJUnit {
 				
 				for (final File file : listJava) {
 					if (file.getAbsolutePath().contains("/java/")) { //ignore all sources except the java package //$NON-NLS-1$
-						Scanner scanner = new Scanner(file);
+						final Scanner scanner = new Scanner(file);
 						
 				    	while (scanner.hasNextLine()) {
 				    		final String line = scanner.nextLine();
@@ -123,7 +123,7 @@ public class CheckJUnit {
 				ex.printStackTrace();
 			}
 			
-        	if (JOptionPane.showConfirmDialog(null, "Open file with the default application?", "Open file", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {  //$NON-NLS-1$//$NON-NLS-2$
+        	if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Open file with the default application?", "Open file", JOptionPane.YES_NO_OPTION)) {  //$NON-NLS-1$//$NON-NLS-2$
         		try {
 					LauncherFile.open(output);
 				} catch (IOException ex) {
@@ -141,7 +141,7 @@ public class CheckJUnit {
 	static class FileFilterCsv extends FileFilter {
 
         @Override
-		public boolean accept(File file) {
+		public boolean accept(final File file) {
             return HelperString.endsWith(file.getName(), EXTENSION_CSV);
         }
 

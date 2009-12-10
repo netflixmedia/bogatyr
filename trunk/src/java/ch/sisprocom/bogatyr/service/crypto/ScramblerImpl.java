@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * This is a class for obfuscating data with CFB.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091116)
+ * @version 0.9.0 (20091210)
  * @since 0.3.0
  */
 public class ScramblerImpl extends ServiceAbstract implements Scrambler {
@@ -145,10 +145,10 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
             }
             os.flush();
         } finally {
-            if (is != null) {
+            if (null != is) {
                 is.close();
             }
-            if (os != null) {
+            if (null != os) {
                 os.close();
             }
         }
@@ -193,10 +193,10 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
             }
             os.flush();
         } finally {
-            if (is != null) {
+            if (null != is) {
                 is.close();
             }
-            if (os != null) {
+            if (null != os) {
                 os.close();
             }
         }

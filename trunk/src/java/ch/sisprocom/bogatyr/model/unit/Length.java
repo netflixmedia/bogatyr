@@ -41,10 +41,10 @@ import ch.sisprocom.bogatyr.helper.unit.UnitLength;
  * Length units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091202)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
-public enum Length {
+public enum Length implements Unit {
 	MM(UnitLength.FACTOR_MM_TO_CM.multiply(UnitLength.FACTOR_CM_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	CM(UnitLength.FACTOR_CM_TO_M), //$JUnit$
 	M(BigDecimal.ONE),
@@ -61,23 +61,22 @@ public enum Length {
 		this.factor = factor;
 	}
 
-    /**
-     * Returns the factor from the unit to the base value (meter)
-     * 
-     * @return factor to the base value
-     * @since 0.8.0
-     */
-	public BigDecimal getFactor() {
-		return factor;
-	}
-
-
+	
     /*
 	 * Overridden methods
 	 */
 	@Override
 	public String toString() {
 		return HelperObject.toString(this);
+	}
+
+	
+	/*
+	 * Implemented methods
+	 */
+	@Override
+	public BigDecimal getFactor() {
+		return factor;
 	}
 }
 

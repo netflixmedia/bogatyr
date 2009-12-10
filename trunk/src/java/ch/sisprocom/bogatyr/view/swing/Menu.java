@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JMenu.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.2.0
  */
 public class Menu extends JMenu {
@@ -52,11 +52,11 @@ public class Menu extends JMenu {
 		super();
     }
 	
-	public Menu(String text, boolean b) {
+	public Menu(final String text, final boolean b) {
 		super(text, b);
 	}
 
-	public Menu(String text) {
+	public Menu(final String text) {
 		super(text);
 	}
 

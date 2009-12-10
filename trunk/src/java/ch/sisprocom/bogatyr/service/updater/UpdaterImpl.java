@@ -50,7 +50,7 @@ import java.net.URL;
  * This is the updater for documents.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091205)
+ * @version 0.9.0 (20091210)
  * @since 0.6.0
  */
 public class UpdaterImpl extends ServiceAbstract implements Updater {
@@ -81,11 +81,11 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 		
 		String location = document.getLocation(platform);
 		
-		if (location == null && Platform.ANY != platform) {
+		if (null == location && Platform.ANY != platform) {
 			location = document.getLocation(Platform.ANY);
 		}
 		
-		if (location == null) {
+		if (null == location) {
             throw new IllegalArgumentException("no valid location found!"); //$NON-NLS-1$
 		}
 		
@@ -107,6 +107,6 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
             throw new IllegalArgumentException("document is null!"); //$NON-NLS-1$
         }
 
-        update(document, document.getLocation(HelperEnvironment.getPlatform()) == null ? Platform.ANY : HelperEnvironment.getPlatform(), dest);
+        update(document, null == document.getLocation(HelperEnvironment.getPlatform()) ? Platform.ANY : HelperEnvironment.getPlatform(), dest);
 	}
 }

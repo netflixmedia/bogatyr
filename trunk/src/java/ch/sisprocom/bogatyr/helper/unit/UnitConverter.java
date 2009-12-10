@@ -29,38 +29,42 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.application;
+package ch.sisprocom.bogatyr.helper.unit;
 
-import ch.sisprocom.bogatyr.model.application.ModelApplication;
-import ch.sisprocom.bogatyr.model.application.ModelApplicationImpl;
-import ch.sisprocom.bogatyr.controller.ControllerAbstract;
-import ch.sisprocom.bogatyr.controller.worker.ControllerWorker;
-import ch.sisprocom.bogatyr.controller.worker.ControllerWorkerImpl;
+import java.math.BigDecimal;
+
+import ch.sisprocom.bogatyr.helper.Constants;
+import ch.sisprocom.bogatyr.model.unit.Unit;
+
 
 /**
- * The skeleton for the application controller.
+ * Converts different units.
  * 
  * @author Stefan Laubenberger
  * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
-public abstract class ControllerApplicationAbstract extends ControllerAbstract implements ControllerApplication {
-	
-	final ModelApplication model = new ModelApplicationImpl();
-	
-    private final ControllerWorker controllerWorker = new ControllerWorkerImpl();
-
-
-    /*
-     * Implemented methods
+public abstract class UnitConverter {   
+    /**
+     * Converts a value with a given unit to another unit.
+     * 
+     * @param fromUnit input unit
+     * @param toUnit output unit
+     * @param value in the given unit
+     * @return value in the new unit
+     * @since 0.9.0
      */
-    @Override
-    public ModelApplication getModel() {
-		return model;
-	}
-	
-    @Override
-	public ControllerWorker getControllerWorker() {
-        return controllerWorker;
-    }
-}
+    protected static <T extends Unit> BigDecimal convert(final T fromUnit, final T toUnit, final BigDecimal value) { //$JUnit$
+		if (null == fromUnit) {
+			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
+		}
+		if (null == toUnit) {
+			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
+		}
+		if (null == value) {
+			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
+		}
+
+    	return value.divide(fromUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+   }
+ }

@@ -47,7 +47,7 @@ import java.awt.Insets;
  * This is a Label combined with a JComponent.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091210)
  * @since 0.6.0
  */
 public class LabeledComponent extends Panel {
@@ -120,11 +120,11 @@ public class LabeledComponent extends Panel {
 	public void setBackground(final Color bg) {
 		super.setBackground(bg);
 		
-		if (label != null) {
+		if (null != label) {
 			label.setBackground(bg);
 		}
 		
-        if (component != null) {
+        if (null != component) {
             component.setBackground(bg);
         }
 	}
@@ -133,11 +133,11 @@ public class LabeledComponent extends Panel {
 	public void setForeground(final Color fg) {
 		super.setForeground(fg);
 
-		if (label != null) {
+		if (null != label) {
 			label.setForeground(fg);
 		}
 		
-        if (component != null) {
+        if (null != component) {
 			component.setForeground(fg);
         }
 	}
@@ -146,11 +146,11 @@ public class LabeledComponent extends Panel {
 	public void setFont(final Font font) {
 		super.setFont(font);
 		
-		if (label != null) {
+		if (null != label) {
 			label.setFont(font);
 		}
 
-        if (component != null) {
+        if (null != component) {
 			component.setFont(font);
         }
 	}

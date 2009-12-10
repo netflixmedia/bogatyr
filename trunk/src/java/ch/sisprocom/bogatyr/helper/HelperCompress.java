@@ -47,7 +47,7 @@ import java.util.zip.ZipOutputStream;
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091210)
  * @since 0.3.0
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
@@ -94,8 +94,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 			addEntry(zos, entry, bufferSize);
 			}
 		} finally {
-			if (zos != null) {
-				//close the stream 
+			if (null != zos) {
 			    zos.close();
 			} 
 		}
@@ -209,10 +208,12 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	 * Private methods
 	 */
 	private static void addEntry(final ZipOutputStream zos, final File file, final int bufferSize) throws IOException {
-		final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+		BufferedInputStream bis = null;
 		final byte[] buffer = new byte[bufferSize];
-		
+
 		try {
+            bis = new BufferedInputStream(new FileInputStream(file));
+
 	        // create a new zip entry 
 			final ZipEntry entry = new ZipEntry(file.getPath());
 	
@@ -226,8 +227,9 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	            zos.write(buffer, 0, offset); 
 	        } 
 		} finally {
-			// close the stream 
-			bis.close();
+			if (null != bis) {
+                bis.close();
+            }
 		}
 	}
 	
@@ -240,20 +242,26 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	    else {
 	    	new File(file.getParent()).mkdirs(); 
  
-	    	final BufferedInputStream bis = new BufferedInputStream(zipFile.getInputStream(entry));
-	    	final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+	    	BufferedInputStream bis = null;
+	    	BufferedOutputStream bos = null;
  
 	    	final byte[] buffer = new byte[bufferSize];
 	    	int offset;
 	    	
 	    	try {
+                bis = new BufferedInputStream(zipFile.getInputStream(entry));
+                bos = new BufferedOutputStream(new FileOutputStream(file));
+
                 while (-1 != (offset = bis.read(buffer))) { 
 	    			bos.write(buffer, 0, offset); 
 	    		}
 	    	} finally { 
-	    		// close the streams
-    			bos.close(); 
-    			bis.close(); 
+    			if (null != bos) {
+                    bos.close();
+                }
+                if (null != bis) {
+    			    bis.close();
+                }
 	    	} 
 	    }
 	} 

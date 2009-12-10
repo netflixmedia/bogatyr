@@ -47,7 +47,7 @@ import java.util.Locale;
  * This is a helper class for time operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091122)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
 public abstract class HelperTime {
@@ -119,11 +119,11 @@ public abstract class HelperTime {
 
 			return new Date((time - SECONDS_BETWEEN_1900_AND_1970) * 1000L);
 		} finally {
-			if (is != null) {
+			if (null != is) {
 				is.close();
 			}
 			
-			if (socket != null) {
+			if (null != socket) {
                 socket.close();
             }
         }

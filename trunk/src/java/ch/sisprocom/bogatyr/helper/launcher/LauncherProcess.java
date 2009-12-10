@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperArray;
  * This launcher creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091116)
+ * @version 0.8.0 (20091210)
  * @since 0.2.0
  */
 public abstract class LauncherProcess {
@@ -137,7 +137,7 @@ public abstract class LauncherProcess {
                 final byte[] buffer = new byte[Constants.DEFAULT_FILE_BUFFER_SIZE];
                 int offset;
 				while (-1 != (offset = is.read(buffer))) {
-					if (os != null) {
+					if (null != os) {
                         os.write(buffer, 0, offset);
 					}
 				}

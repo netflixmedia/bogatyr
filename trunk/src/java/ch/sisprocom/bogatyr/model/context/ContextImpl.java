@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.model.ModelAbstract;
  * Implementation of the context for applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091205)
+ * @version 0.9.0 (20091210)
  * @since 0.1.0
  */
 public class ContextImpl extends ModelAbstract implements Context {
@@ -53,7 +53,7 @@ public class ContextImpl extends ModelAbstract implements Context {
 
 	private static final Context INSTANCE = new ContextImpl();
 
-	private Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();
+	private transient Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();
 
 
     private ContextImpl() {
@@ -99,7 +99,7 @@ public class ContextImpl extends ModelAbstract implements Context {
 		}
 
         setChanged();
-		if (value != null) {
+		if (null != value) {
             contextData.put(key, value);
             notifyObservers(METHOD_ADD_VALUE);
 		} else {

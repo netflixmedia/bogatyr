@@ -56,7 +56,7 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * The implementation of the document model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091206)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
 @XmlType(propOrder={"name", "version", "build", "created", "manufacturer", "UUID", "locations", "hashs"})
@@ -73,8 +73,11 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	private Manufacturer manufacturer;
 	private UUID uuid;
 
-    
-	
+    public DocumentImpl() {
+        super();
+    }
+
+
     /*
      * Implemented methods
      */

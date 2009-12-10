@@ -44,7 +44,7 @@ import java.util.TimerTask;
  * Display a splash-screen manual or for a desired time.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.8.0 (20091210)
  * @since 0.1.0
  */
 public class SplashScreen extends Frame {
@@ -92,7 +92,7 @@ public class SplashScreen extends Frame {
 	 * Private methods
 	 */
 	private void createLayout() {
-        if (splash != null && MediaTracker.COMPLETE == splash.getImageLoadStatus()) {
+        if (null != splash && MediaTracker.COMPLETE == splash.getImageLoadStatus()) {
 			
 			final Component label = new Label(splash);
 //			splash.setImageObserver(label);

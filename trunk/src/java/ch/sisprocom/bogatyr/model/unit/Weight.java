@@ -41,10 +41,10 @@ import ch.sisprocom.bogatyr.helper.unit.UnitWeight;
  * Weight units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091202)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
-public enum Weight {
+public enum Weight implements Unit {
 	MILLIGRAM(UnitWeight.FACTOR_MILLIGRAM_TO_GRAM.multiply(UnitWeight.FACTOR_GRAM_TO_KILOGRAM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	GRAM(UnitWeight.FACTOR_GRAM_TO_KILOGRAM), //$JUnit$
 	KILOGRAM(BigDecimal.ONE), //$JUnit$
@@ -58,23 +58,22 @@ public enum Weight {
 		this.factor = factor;
 	}
 
-    /**
-     * Returns the factor from the unit to the base value (kilogram)
-     * 
-     * @return factor to the base value
-     * @since 0.8.0
-     */
-	public BigDecimal getFactor() {
-		return factor;
-	}
-
-
+	
     /*
 	 * Overridden methods
 	 */
 	@Override
 	public String toString() {
 		return HelperObject.toString(this);
+	}
+
+	
+	/*
+	 * Implemented methods
+	 */
+	@Override
+	public BigDecimal getFactor() {
+		return factor;
 	}
 }
 

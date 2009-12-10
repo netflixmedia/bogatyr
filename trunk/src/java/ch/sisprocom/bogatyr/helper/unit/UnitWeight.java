@@ -33,7 +33,6 @@ package ch.sisprocom.bogatyr.helper.unit;
 
 import java.math.BigDecimal;
 
-import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.model.unit.Weight;
 
@@ -42,10 +41,10 @@ import ch.sisprocom.bogatyr.model.unit.Weight;
  * Converts different units of weight.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091203)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
-public abstract class UnitWeight {
+public abstract class UnitWeight extends UnitConverter {
 	public static final BigDecimal FACTOR_MILLIGRAM_TO_GRAM = HelperNumber.BIGDECIMAL_1000; //milligram to gram
 	public static final BigDecimal FACTOR_GRAM_TO_KILOGRAM  = HelperNumber.BIGDECIMAL_1000; //gram to kilogram
 	public static final BigDecimal FACTOR_OUNCE_TO_GRAM 	= new BigDecimal("28.34952"); //ounce to gram //$NON-NLS-1$
@@ -62,16 +61,6 @@ public abstract class UnitWeight {
      * @since 0.7.0
      */
     public static BigDecimal convert(final Weight fromUnit, final Weight toUnit, final BigDecimal value) { //$JUnit$
-		if (null == fromUnit) {
-			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
-		}
-		if (null == toUnit) {
-			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
-		}
-		if (null == value) {
-			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
-		}
-
-    	return value.divide(fromUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+    	return UnitConverter.convert(fromUnit, toUnit, value); 
    }
  }

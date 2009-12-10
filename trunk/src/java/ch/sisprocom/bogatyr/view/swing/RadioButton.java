@@ -42,7 +42,7 @@ import javax.swing.JRadioButton;
  * This is an extended JRadioButton.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.2.0
  */
 public class RadioButton extends JRadioButton implements Activatable {
@@ -55,31 +55,31 @@ public class RadioButton extends JRadioButton implements Activatable {
 		super();
 	}
 	
-	public RadioButton(Action action) {
+	public RadioButton(final Action action) {
 		super(action);
 	}
 
-	public RadioButton(Icon icon, boolean selected) {
+	public RadioButton(final Icon icon, final boolean selected) {
 		super(icon, selected);
 	}
 
-	public RadioButton(Icon icon) {
+	public RadioButton(final Icon icon) {
 		super(icon);
 	}
 
-	public RadioButton(String text, boolean selected) {
+	public RadioButton(final String text, final boolean selected) {
 		super(text, selected);
 	}
 
-	public RadioButton(String text, Icon icon, boolean selected) {
+	public RadioButton(final String text, final Icon icon, final boolean selected) {
 		super(text, icon, selected);
 	}
 
-	public RadioButton(String text, Icon icon) {
+	public RadioButton(final String text, final Icon icon) {
 		super(text, icon);
 	}
 
-	public RadioButton(String text) {
+	public RadioButton(final String text) {
 		super(text);
 	}
 

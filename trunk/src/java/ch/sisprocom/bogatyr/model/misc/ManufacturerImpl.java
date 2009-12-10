@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.model.ModelAbstract;
  * The implementation of the manufacturer model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091206)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
 @XmlType(propOrder={"name", "URL", "mail"})
@@ -63,7 +63,7 @@ public class ManufacturerImpl extends ModelAbstract implements Manufacturer {
 		super();
 	}
 
-	public ManufacturerImpl(String name, String mail, URL url) {
+	public ManufacturerImpl(final String name, final String mail, final URL url) {
 		super();
 		this.name = name;
 		this.mail = mail;
@@ -103,7 +103,7 @@ public class ManufacturerImpl extends ModelAbstract implements Manufacturer {
 	}
 
 	@Override
-	public void setMail(String mail) {
+	public void setMail(final String mail) {
         if (!HelperObject.isEquals(mail, this.mail)) {
             this.mail = mail;
             setChanged();

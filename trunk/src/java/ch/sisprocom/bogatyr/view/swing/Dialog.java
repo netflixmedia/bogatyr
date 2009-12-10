@@ -44,10 +44,10 @@ import java.awt.Window;
  * This is an extended JDialog.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.4.0
  */
-public class Dialog extends JDialog {
+public class Dialog extends JDialog implements Displayable {
 	private static final long serialVersionUID = -3903296901431213544L;
 	
 	{
@@ -121,15 +121,6 @@ public class Dialog extends JDialog {
 	public Dialog(final Window arg0) {
 		super(arg0);
 	}
-
-	public void createAndShowGUI() {
-		setLocationRelativeTo(getOwner());
-		setVisible(true);
-	}
-
-	public void clearAndHide() {
-		dispose();
-	}
 	
 	
 	/*
@@ -139,4 +130,19 @@ public class Dialog extends JDialog {
 	public String toString() {
 		return HelperObject.toString(this);
 	} 
+
+	
+	/*
+	 * Implemented methods
+	 */
+	@Override
+	public void createAndShowGUI() {
+		setLocationRelativeTo(getOwner());
+		setVisible(true);
+	}
+
+	@Override
+	public void clearAndHide() {
+		dispose();
+	}
 }

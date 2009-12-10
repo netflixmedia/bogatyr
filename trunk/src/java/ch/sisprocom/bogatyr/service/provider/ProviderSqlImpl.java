@@ -34,7 +34,7 @@ package ch.sisprocom.bogatyr.service.provider;
 import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
-import java.sql.Connection;
+import java.lang.reflect.InvocationTargetException;import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -45,7 +45,7 @@ import java.sql.Statement;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20091210)
  * @since 0.2.0
  */
 public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
@@ -160,13 +160,13 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 * Implemented methods
 	 */	
     @Override
-    public Connection connectToDb() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		Class.forName(driver).newInstance();
+    public Connection connectToDb() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchMethodException, InvocationTargetException {
+        Class.forName(driver).getConstructor().newInstance();
 		return DriverManager.getConnection(url, user, password);
 	}
     
     @Override
-    public int executeUpdate(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+    public int executeUpdate(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchMethodException, InvocationTargetException {
     	if (!HelperString.isValid(statement)) {
     		throw new IllegalArgumentException("statement is null or empty!"); //$NON-NLS-1$
     	}
@@ -181,10 +181,10 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	
 			result = stmt.executeUpdate(statement);
 		} finally {
-			if (con != null) {
+			if (null != con) {
                 con.close();
             }
-			if (stmt != null) {
+			if (null != stmt) {
                 stmt.close();
             }
 		}
@@ -192,7 +192,7 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
     }
 	
     @Override
-    public boolean execute(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException  {
+    public boolean execute(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchMethodException, InvocationTargetException  {
     	if (!HelperString.isValid(statement)) {
     		throw new IllegalArgumentException("statement is null or empty!"); //$NON-NLS-1$
     	}
@@ -207,10 +207,10 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	
 			result = stmt.execute(statement);
 		} finally {
-			if (con != null) {
+			if (null != con) {
                 con.close();
             }
-			if (stmt != null) {
+			if (null != stmt) {
                 stmt.close();
             }
 		}

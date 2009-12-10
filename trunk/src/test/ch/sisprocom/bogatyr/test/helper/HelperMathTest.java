@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.helper.HelperMath;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091203
+ * @version 20091210
  */
 public class HelperMathTest {
 //	@Test
@@ -81,14 +81,14 @@ public class HelperMathTest {
 //	}
 	@Test
 	public void testGcd() {
-		assertTrue(new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("2"), new BigDecimal("4"))) == 0);
-		assertTrue(new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("2"), new BigDecimal("2"))) == 0);
-		assertTrue(new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("4"), new BigDecimal("2"))) == 0);
-		assertTrue(new BigDecimal("2.5").compareTo(HelperMath.gcd(new BigDecimal("2.5"), new BigDecimal("5"))) == 0);
-		assertTrue(BigDecimal.ZERO.compareTo(HelperMath.gcd(BigDecimal.ZERO, BigDecimal.ZERO)) == 0);
+		assertTrue(0 == new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("2"), new BigDecimal("4"))));   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+		assertTrue(0 == new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("2"), new BigDecimal("2")))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		assertTrue(0 == new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("4"), new BigDecimal("2"))));   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+		assertTrue(0 == new BigDecimal("2.5").compareTo(HelperMath.gcd(new BigDecimal("2.5"), new BigDecimal("5"))));  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		assertTrue(0 == BigDecimal.ZERO.compareTo(HelperMath.gcd(BigDecimal.ZERO, BigDecimal.ZERO)));
 		
 		try {
-			HelperMath.gcd(new BigDecimal("-2"), BigDecimal.ZERO);
+			HelperMath.gcd(new BigDecimal("-2"), BigDecimal.ZERO); //$NON-NLS-1$
 			fail("a is negative!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -97,7 +97,7 @@ public class HelperMathTest {
 		}
 
 		try {
-			HelperMath.gcd(BigDecimal.ZERO, new BigDecimal("-2"));
+			HelperMath.gcd(BigDecimal.ZERO, new BigDecimal("-2")); //$NON-NLS-1$
 			fail("b is negative!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -134,11 +134,11 @@ public class HelperMathTest {
 	
 	@Test
 	public void testLcm() {
-		assertTrue(BigDecimal.TEN.compareTo(HelperMath.lcm(new BigDecimal("2"), new BigDecimal("5"))) == 0);
-		assertTrue(BigDecimal.TEN.compareTo(HelperMath.lcm(new BigDecimal("5"), new BigDecimal("2"))) == 0);
+		assertTrue(0 == BigDecimal.TEN.compareTo(HelperMath.lcm(new BigDecimal("2"), new BigDecimal("5"))));  //$NON-NLS-1$//$NON-NLS-2$
+		assertTrue(0 == BigDecimal.TEN.compareTo(HelperMath.lcm(new BigDecimal("5"), new BigDecimal("2")))); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		try {
-			HelperMath.lcm(new BigDecimal("-2"), BigDecimal.ZERO);
+			HelperMath.lcm(new BigDecimal("-2"), BigDecimal.ZERO); //$NON-NLS-1$
 			fail("a is negative!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -147,7 +147,7 @@ public class HelperMathTest {
 		}
 
 		try {
-			HelperMath.lcm(BigDecimal.ZERO, new BigDecimal("-2"));
+			HelperMath.lcm(BigDecimal.ZERO, new BigDecimal("-2")); //$NON-NLS-1$
 			fail("b is negative!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

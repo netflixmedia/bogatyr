@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.service.property.Property;
  * The interface for the application model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091206)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
 @XmlJavaTypeAdapter(ModelApplicationImpl.XmlAdapter.class)
@@ -69,7 +69,7 @@ public interface ModelApplication extends Model {
     /**
      * Returns all hashs.
      *
-     * @retuns {@link Map} containing all hashs
+     * @return {@link Map} containing all hashs
      * @since 0.9.0
      */
     Map<HashCode, String> getHashs();

@@ -53,7 +53,7 @@ public interface CountdownTimer extends TimeMachine {
 	 * 
 	 * @param delay until the timer starts
 	 * @param runtime of the countdown
-	 * @param interval of the countown
+	 * @param interval of the countdown
 	 * @since 0.6.0
 	 */
 	void start(long delay, long runtime, long interval);

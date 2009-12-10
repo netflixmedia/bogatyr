@@ -53,7 +53,7 @@ import java.util.List;
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091103)
+ * @version 0.9.0 (20091210)
  * @since 0.5.0
  */
 public abstract class HelperNet {
@@ -311,7 +311,7 @@ public abstract class HelperNet {
 
 		final byte[] hardwareAddress = ni.getHardwareAddress();
 
-		if (hardwareAddress != null) {
+		if (null != hardwareAddress) {
 			for (int ii = 0; ii < hardwareAddress.length; ii++) {
 				sb.append(String.format((0 == ii ? HelperString.EMPTY_STRING : '-') + "%02X", hardwareAddress[ii])); //$NON-NLS-1$
 			}

@@ -56,7 +56,7 @@ import ch.sisprocom.bogatyr.service.property.Property;
  * The implementation of the application model.
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 0.9.0 (20091206)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
 @XmlType(propOrder={"name", "version", "build", "created", "manufacturer", "UUID", "debug", "hashs"})
@@ -64,7 +64,7 @@ import ch.sisprocom.bogatyr.service.property.Property;
 public class ModelApplicationImpl extends ModelAbstract implements ModelApplication {
 	private static final long serialVersionUID = -2826684498598090349L;
 
-	private Map<HashCode, String> mapHash = new HashMap<HashCode, String>();
+	private Map<HashCode, String> mapHash = new HashMap<HashCode, String>(3);
 	private String name;
 	private BigDecimal version;
 	private int build;
@@ -72,8 +72,12 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	private Manufacturer manufacturer;
 	private UUID uuid;
 	private boolean isDebug;
-	private Localizer localizer;
-	private Property property;
+	private transient Localizer localizer;
+	private transient Property property;
+
+    public ModelApplicationImpl() {
+        super();
+    }
     
 	
     /*

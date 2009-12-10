@@ -32,8 +32,6 @@
 package ch.sisprocom.bogatyr.test.service.updater;
 
 import java.io.File;
-import java.math.BigDecimal;
-import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +43,6 @@ import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperCrypto;
 import ch.sisprocom.bogatyr.helper.HelperXml;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
-import ch.sisprocom.bogatyr.model.misc.ManufacturerImpl;
 import ch.sisprocom.bogatyr.model.misc.Platform;
 import ch.sisprocom.bogatyr.model.updater.Document;
 import ch.sisprocom.bogatyr.model.updater.DocumentImpl;
@@ -55,21 +52,21 @@ import ch.sisprocom.bogatyr.model.updater.DocumentImpl;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091206
+ * @version 20091210
  */
 public class UpdaterTest {
 	@Before
 	public void setUp() throws Exception {
-		Document doc = new DocumentImpl();
+		final Document doc = new DocumentImpl();
 		
-		Map<Platform, String> locations = new HashMap<Platform, String>();
+		final Map<Platform, String> locations = new HashMap<Platform, String>(3);
 		locations.put(Platform.ANY, "http://code.google.com/p/bogatyr/downloads/list");
 //		locations.put(Platform.WINDOWS, "www.ms.com");
 //		locations.put(Platform.MAC_OSX, "www.apple.com");
 //		locations.put(Platform.UNIX, "www.unix.com");
 		doc.setLocations(locations);
 
-		Map<HashCode, String> hashs = new HashMap<HashCode, String>();
+		final Map<HashCode, String> hashs = new HashMap<HashCode, String>(3);
 //		hashs.put(HashCode.MD5, "MD5-Hashvalue");
 		hashs.put(HashCode.SHA256, "SHA256-Hashvalue");
 		doc.setHashs(hashs);
@@ -84,7 +81,7 @@ public class UpdaterTest {
 		HelperXml.serialize(doc, new File("/Users/Shared/Transfer/test.xml"));
 //		HelperXml.serialize(docs, new File("/Users/Shared/Transfer/test.xml"));
 		
-		Document doc2 = HelperXml.deserialize(DocumentImpl.class, new File("/Users/Shared/Transfer/test.xml"));
+		final Document doc2 = HelperXml.deserialize(DocumentImpl.class, new File("/Users/Shared/Transfer/test.xml"));
 
 		System.out.println(doc2);
 	}

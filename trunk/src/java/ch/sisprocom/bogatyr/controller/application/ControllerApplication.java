@@ -32,14 +32,14 @@
 package ch.sisprocom.bogatyr.controller.application;
 
 import ch.sisprocom.bogatyr.controller.Controller;
-import ch.sisprocom.bogatyr.controller.worker.ControllerWorker;
+import ch.sisprocom.bogatyr.controller.worker.ControllerWorker;import ch.sisprocom.bogatyr.model.application.ModelApplication;
 
 
 /**
  * The interface for the application controller.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091121)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
 public interface ControllerApplication extends Controller {
@@ -47,7 +47,7 @@ public interface ControllerApplication extends Controller {
 	void run();
 	void exit(final int returnCode);
 
-	ch.sisprocom.bogatyr.model.application.ModelApplication getModel();
+	ModelApplication getModel();
 	
     ControllerWorker getControllerWorker();
     

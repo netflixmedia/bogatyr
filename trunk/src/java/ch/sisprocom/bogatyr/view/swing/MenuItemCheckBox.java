@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JCheckBoxMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.2.0
  */
 public class MenuItemCheckBox extends JCheckBoxMenuItem {
@@ -55,27 +55,27 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 		super();
     }
 	
-	public MenuItemCheckBox(Action action) {
+	public MenuItemCheckBox(final Action action) {
 		super(action);
 	}
 
-	public MenuItemCheckBox(Icon icon) {
+	public MenuItemCheckBox(final Icon icon) {
 		super(icon);
 	}
 
-	public MenuItemCheckBox(String text, boolean selected) {
+	public MenuItemCheckBox(final String text, final boolean selected) {
 		super(text, selected);
 	}
 
-	public MenuItemCheckBox(String text, Icon icon, boolean selected) {
+	public MenuItemCheckBox(final String text, final Icon icon, final boolean selected) {
 		super(text, icon, selected);
 	}
 
-	public MenuItemCheckBox(String text, Icon icon) {
+	public MenuItemCheckBox(final String text, final Icon icon) {
 		super(text, icon);
 	}
 
-	public MenuItemCheckBox(String text) {
+	public MenuItemCheckBox(final String text) {
 		super(text);
 	}
 
@@ -95,7 +95,7 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 		this(text);
 		
 		// Add the optional icon
-		if (image != null) {
+		if (null != image) {
             setIcon(image);
         }
 
@@ -105,7 +105,7 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 		}
 
 		// Add the optional tool tip text
-		if (toolTip != null) {
+		if (null != toolTip) {
 			setToolTipText(toolTip);
 		}
 		setSelected(isSelected);

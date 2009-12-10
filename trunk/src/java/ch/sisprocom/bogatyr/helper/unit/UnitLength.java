@@ -42,10 +42,10 @@ import ch.sisprocom.bogatyr.model.unit.Length;
  * Converts different units of length.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091203)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
-public abstract class UnitLength {
+public abstract class UnitLength extends UnitConverter {
 	public static final BigDecimal FACTOR_INCH_TO_CM 		 = new BigDecimal("2.54"); //inch to centimeters //$NON-NLS-1$
 	public static final BigDecimal FACTOR_FOOT_TO_M 		 = new BigDecimal("0.3048"); //foot to meters //$NON-NLS-1$
 	public static final BigDecimal FACTOR_YARD_TO_M 		 = new BigDecimal("0.9144"); //yard to meters //$NON-NLS-1$
@@ -160,16 +160,6 @@ public abstract class UnitLength {
      * @since 0.7.0
      */
     public static BigDecimal convert(final Length fromUnit, final Length toUnit, final BigDecimal value) { //$JUnit$
-		if (null == fromUnit) {
-			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
-		}
-		if (null == toUnit) {
-			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
-		}
-		if (null == value) {
-			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
-		}
-
-    	return value.divide(fromUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+    	return UnitConverter.convert(fromUnit, toUnit, value); 
     }
  }

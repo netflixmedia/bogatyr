@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.controller.ControllerAbstract;
  * The implementation of the worker controller.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091121)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
 public class ControllerWorkerImpl extends ControllerAbstract implements ControllerWorker {

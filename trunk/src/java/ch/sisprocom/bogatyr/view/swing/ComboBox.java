@@ -51,7 +51,7 @@ import java.util.Vector;
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.2.0
  */
 public class ComboBox extends JComboBox implements Activatable {
@@ -66,15 +66,15 @@ public class ComboBox extends JComboBox implements Activatable {
 		createLayout();
 	}
 	
-	public ComboBox(ComboBoxModel model) {
+	public ComboBox(final ComboBoxModel model) {
 		super(model);
 	}
 
-	public ComboBox(Object[] data) {
+	public ComboBox(final Object[] data) {
 		super(data);
 	}
 
-	public ComboBox(Vector<?> data) {
+	public ComboBox(final Vector<?> data) {
 		super(data);
 	}
 
@@ -88,7 +88,7 @@ public class ComboBox extends JComboBox implements Activatable {
 	public ComboBox(final Object[] data, final String toolTip) {
 		this(data);
 		
-		if (data != null) {
+		if (null != data) {
 //			setSelectedIndex(0);
 			setSelectedIndex(-1);
 		}
@@ -217,7 +217,7 @@ public class ComboBox extends JComboBox implements Activatable {
 		    final Object selectedItem = model.getSelectedItem();
 
 		    // only search for a different item if the currently selected does not match
-		    if (selectedItem != null && HelperString.startsWith(selectedItem.toString(), pattern)) {
+		    if (null != selectedItem && HelperString.startsWith(selectedItem.toString(), pattern)) {
 		        return selectedItem;
 		    } 
 	        
@@ -265,7 +265,7 @@ public class ComboBox extends JComboBox implements Activatable {
 		    // lookup and select a matching item
 		    Object item = lookupItem(getText(0, getLength()));
 
-		    if (item != null) {
+		    if (null != item) {
 		        setSelectedItem(item);
 		    } else {
 

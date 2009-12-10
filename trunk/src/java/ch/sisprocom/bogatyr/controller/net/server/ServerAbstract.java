@@ -46,7 +46,7 @@ import java.util.HashSet;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
 public abstract class ServerAbstract implements Server, ListenerServerThread {
@@ -207,7 +207,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
              thread.stop();
         }
         
-		if (thread != null) {
+		if (null != thread) {
 			if (thread.isAlive()) {
 				thread.interrupt();
 			} else {
