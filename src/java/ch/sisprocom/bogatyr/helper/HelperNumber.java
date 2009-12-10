@@ -39,7 +39,7 @@ import java.math.BigInteger;
  * This is a helper class for numbers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091202)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
@@ -114,7 +114,7 @@ public abstract class HelperNumber {
      * @since 0.7.0
      */
     public static BigDecimal multiply(final BigDecimal a, final BigDecimal b) {
-        if (a == null || b == null) {
+        if (null == a || null == b) {
             return null;
         }
         return a.multiply(b, Constants.DEFAULT_MATHCONTEXT);
@@ -149,7 +149,7 @@ public abstract class HelperNumber {
      * @since 0.7.0
      */
     public static BigInteger multiply(final BigInteger a, final BigInteger b) {
-        if (a == null || b == null) {
+        if (null == a || null == b) {
             return null;
         }
         return a.multiply(b);
@@ -184,7 +184,7 @@ public abstract class HelperNumber {
      * @since 0.7.0
      */
     public static Integer multiply(final Integer a, final Integer b) {
-        if (a == null || b == null) {
+        if (null == a || null == b) {
             return null;
         }
         return a * b;
@@ -219,7 +219,7 @@ public abstract class HelperNumber {
      * @since 0.7.0
      */
     public static Double multiply(final Double a, final Double b) {
-        if (a == null || b == null) {
+        if (null == a || null == b) {
             return null;
         }
         return a * b;
@@ -254,7 +254,7 @@ public abstract class HelperNumber {
      * @since 0.7.0
      */
     public static Float multiply(final Float a, final Float b) {
-        if (a == null || b == null) {
+        if (null == a || null == b) {
             return null;
         }
         return a * b;
@@ -289,7 +289,7 @@ public abstract class HelperNumber {
      * @since 0.7.0
      */
     public static Long multiply(final Long a, final Long b) {
-        if (a == null || b == null) {
+        if (null == a || null == b) {
             return null;
         }
         return a * b;
@@ -324,7 +324,7 @@ public abstract class HelperNumber {
      * @since 0.8.0
      */
     public static BigDecimal add(final BigDecimal a, final BigDecimal b) {
-        if (a == null || b == null) {
+        if (null == a || null == b) {
             return null;
         }
         return a.add(b);
@@ -359,7 +359,7 @@ public abstract class HelperNumber {
      * @since 0.8.0
      */
     public static BigInteger add(final BigInteger a, final BigInteger b) {
-        if (a == null || b == null) {
+        if (null == a || null == b) {
             return null;
         }
         return a.add(b);
@@ -394,7 +394,7 @@ public abstract class HelperNumber {
      * @since 0.8.0
      */
     public static Integer add(final Integer a, final Integer b) {
-        if (a == null || b == null) {
+        if (null == a || null == b) {
             return null;
         }
         return a + b;
@@ -429,7 +429,7 @@ public abstract class HelperNumber {
      * @since 0.8.0
      */
     public static Double add(final Double a, final Double b) {
-        if (a == null || b == null) {
+        if (null == a || null == b) {
             return null;
         }
         return a + b;
@@ -464,7 +464,7 @@ public abstract class HelperNumber {
      * @since 0.8.0
      */
     public static Float add(final Float a, final Float b) {
-        if (a == null || b == null) {
+        if (null == a || null == b) {
             return null;
         }
         return a + b;
@@ -499,7 +499,7 @@ public abstract class HelperNumber {
      * @since 0.8.0
      */
     public static Long add(final Long a, final Long b) {
-        if (a == null || b == null) {
+        if (null == a || null == b) {
             return null;
         }
         return a + b;

@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * The interface for the document model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091206)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
 @XmlJavaTypeAdapter(DocumentImpl.XmlAdapter.class)
@@ -65,7 +65,7 @@ public interface Document extends Model {
     /**
      * Returns all locations.
      *
-     * @retuns {@link Map} containing all locations
+     * @return {@link Map} containing all locations
      * @since 0.9.0
      */
     Map<Platform, String> getLocations();
@@ -98,7 +98,7 @@ public interface Document extends Model {
 	/**
      * Returns all hashs.
      *
-     * @retuns {@link Map} containing all hashs
+     * @return {@link Map} containing all hashs
      * @since 0.9.0
      */
     Map<HashCode, String> getHashs();

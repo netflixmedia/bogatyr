@@ -33,7 +33,6 @@ package ch.sisprocom.bogatyr.helper.unit;
 
 import java.math.BigDecimal;
 
-import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.model.unit.Bit;
 
@@ -42,10 +41,10 @@ import ch.sisprocom.bogatyr.model.unit.Bit;
  * Converts different units of bit.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091203)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
-public abstract class UnitBit {
+public abstract class UnitBit extends UnitConverter {
 	public static final BigDecimal FACTOR_BIT_TO_BYTE = HelperNumber.BIGDECIMAL_8; //bit to byte
 
 	public static final BigDecimal FACTOR_BIT_TO_KILOBIT  = new BigDecimal("10E2"); //$NON-NLS-1$
@@ -95,16 +94,6 @@ public abstract class UnitBit {
      * @since 0.9.0
      */
     public static BigDecimal convert(final Bit fromUnit, final Bit toUnit, final BigDecimal value) {
-		if (null == fromUnit) {
-			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
-		}
-		if (null == toUnit) {
-			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
-		}
-		if (null == value) {
-			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
-		}
-
-    	return value.divide(fromUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+    	return UnitConverter.convert(fromUnit, toUnit, value); 
     }
 }

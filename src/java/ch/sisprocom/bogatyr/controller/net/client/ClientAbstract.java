@@ -47,7 +47,7 @@ import java.util.HashSet;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
 public abstract class ClientAbstract implements Client {
@@ -200,7 +200,7 @@ public abstract class ClientAbstract implements Client {
     public void stop() throws IOException {
     	fireStopped();
         
-		if (thread != null) {
+		if (null != thread) {
 			if (thread.isAlive()) {
 				thread.interrupt();
 			} else {

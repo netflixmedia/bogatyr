@@ -33,49 +33,20 @@ package ch.sisprocom.bogatyr.model.unit;
 
 import java.math.BigDecimal;
 
-import ch.sisprocom.bogatyr.helper.Constants;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.helper.unit.UnitVolume;
-
 /**
- * Volume units
+ * Defines the methods for units.
  * 
  * @author Stefan Laubenberger
  * @version 0.9.0 (20091210)
- * @since 0.7.0
+ * @since 0.9.0
  */
-public enum Volume implements Unit {
-	MM3(UnitVolume.FACTOR_MM3_TO_CM3.multiply(UnitVolume.FACTOR_CM3_TO_L, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	CM3(UnitVolume.FACTOR_CM3_TO_L), //$JUnit$
-	L(BigDecimal.ONE),
-	M3(BigDecimal.ONE.divide(UnitVolume.FACTOR_L_TO_M3, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	PINT(UnitVolume.FACTOR_PINT_TO_CM3.multiply(UnitVolume.FACTOR_CM3_TO_L, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	QUART(UnitVolume.FACTOR_QUART_TO_L), //$JUnit$
-	GALLON_US(UnitVolume.FACTOR_GALLON_US_TO_L), //$JUnit$
-	BARREL(UnitVolume.FACTOR_BARREL_TO_L); //$JUnit$
-
-	private final BigDecimal factor;
-	
-	Volume(final BigDecimal factor) {
-		this.factor = factor;
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
-
-	
-	/*
-	 * Implemented methods
-	 */
-	@Override
-	public BigDecimal getFactor() {
-		return factor;
-	}
-}
+public interface Unit {
+   /**
+     * Returns the factor from the unit to the base value
+     * 
+     * @return factor to the base value
+     * @since 0.9.0
+     */
+	BigDecimal getFactor();
+}	
 

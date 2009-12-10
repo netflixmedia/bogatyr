@@ -31,24 +31,24 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
+import javax.swing.KeyStroke;
+
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended AbstractAction.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
 public abstract class ActionAbstract extends AbstractAction {
 	private static final long serialVersionUID = -2411318943212390523L;
 
 //	Action.LONG_DESCRIPTION
-//	Action.ACCELERATOR_KEY
 //	Action.SMALL_ICON
 //	Action.LARGE_ICON_KEY
 
@@ -86,6 +86,17 @@ public abstract class ActionAbstract extends AbstractAction {
 		putValue(SHORT_DESCRIPTION, toolTip);
 		putValue(MNEMONIC_KEY, mnemonic);
 	}
+
+	protected ActionAbstract(final String name, final String toolTip, final int mnemonic, final KeyStroke accelerator) {
+		this(name, toolTip, mnemonic);
+		putValue(ACCELERATOR_KEY, accelerator);
+	}
+	
+	protected ActionAbstract(final String name, final String toolTip, final Icon icon, final int mnemonic, final KeyStroke accelerator) {
+		this(name, toolTip, icon, mnemonic);
+		putValue(ACCELERATOR_KEY, accelerator);
+	}
+
 	
 	/*
 	 * Overridden methods

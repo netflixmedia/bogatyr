@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.model.Model;
  * Interface for the context in applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091206)
+ * @version 0.9.0 (20091210)
  * @since 0.6.0
  */
 public interface Context extends Model {
@@ -54,7 +54,7 @@ public interface Context extends Model {
     /**
      * Returns the data of the context.
      *
-     * @retuns {@link Map} containing the data
+     * @return {@link Map} containing the data
      * @since 0.9.0
      */
     Map<Object, Object> getData();

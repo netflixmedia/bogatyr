@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JRadioButtonMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.2.0
  */
 public class MenuItemRadioButton extends JRadioButtonMenuItem {
@@ -55,31 +55,31 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 		super();
     }
 	
-	public MenuItemRadioButton(Action action) {
+	public MenuItemRadioButton(final Action action) {
 		super(action);
 	}
 
-	public MenuItemRadioButton(Icon icon, boolean selected) {
+	public MenuItemRadioButton(final Icon icon, final boolean selected) {
 		super(icon, selected);
 	}
 
-	public MenuItemRadioButton(Icon icon) {
+	public MenuItemRadioButton(final Icon icon) {
 		super(icon);
 	}
 
-	public MenuItemRadioButton(String text, boolean selected) {
+	public MenuItemRadioButton(final String text, final boolean selected) {
 		super(text, selected);
 	}
 
-	public MenuItemRadioButton(String text, Icon icon, boolean selected) {
+	public MenuItemRadioButton(final String text, final Icon icon, final boolean selected) {
 		super(text, icon, selected);
 	}
 
-	public MenuItemRadioButton(String text, Icon icon) {
+	public MenuItemRadioButton(final String text, final Icon icon) {
 		super(text, icon);
 	}
 
-	public MenuItemRadioButton(String text) {
+	public MenuItemRadioButton(final String text) {
 		super(text);
 	}
 
@@ -99,7 +99,7 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 		this(text);
 		
 		// Add the optional icon
-		if (image != null) {
+		if (null != image) {
             setIcon(image);
         }
 
@@ -109,7 +109,7 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 		}
 
 		// Add the optional tool tip text
-		if (toolTip != null) {
+		if (null != toolTip) {
 			setToolTipText(toolTip);
 		}
 		setSelected(isSelected);

@@ -39,13 +39,17 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is the skeleton for all models.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091206)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
 public abstract class ModelAbstract extends Observable implements Model {
 	private static final long serialVersionUID = 3491320587479082917L;
 
 	private final long createTime = System.currentTimeMillis();
+
+    protected ModelAbstract() {
+        super();
+    }
 	
 	
     /*

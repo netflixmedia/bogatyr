@@ -43,7 +43,7 @@ import java.util.Arrays;
  * This is an extended JPasswordField.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.1.0
  */
 public class PasswordField extends JPasswordField implements Activatable {
@@ -56,15 +56,15 @@ public class PasswordField extends JPasswordField implements Activatable {
         super();
     }
 
-	public PasswordField(Document doc, String text, int columns) {
+	public PasswordField(final Document doc, final String text, final int columns) {
 		super(doc, text, columns);
 	}
 
-	public PasswordField(int columns) {
+	public PasswordField(final int columns) {
 		super(columns);
 	}
 
-	public PasswordField(String text, int columns) {
+	public PasswordField(final String text, final int columns) {
 		super(text, columns);
 	}
 

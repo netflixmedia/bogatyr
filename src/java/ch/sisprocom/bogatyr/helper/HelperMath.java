@@ -42,7 +42,7 @@ import java.util.Collection;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091203)
+ * @version 0.9.0 (20091210)
  * @since 0.4.0
  */
 public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
@@ -55,18 +55,18 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.4.0
 	 */
 	 public static BigDecimal gcd(final BigDecimal a, final BigDecimal b) { //$JUnit$
-		 if (BigDecimal.ZERO.compareTo(a) > 0) {
+		 if (0 < BigDecimal.ZERO.compareTo(a)) {
 			 throw new IllegalArgumentException("a value must be positive: " + a); //$NON-NLS-1$
 		 }
-		 if (BigDecimal.ZERO.compareTo(b) > 0) {
+		 if (0 < BigDecimal.ZERO.compareTo(b)) {
 			 throw new IllegalArgumentException("b value must be positive: " + b); //$NON-NLS-1$
 		 }
 		 
-		 if (a.equals(b)) {
+		 if (a.compareTo(b) == 0) {
 			 return a;
 		 }
 		 
-		 return BigDecimal.ZERO.compareTo(b) == 0 ? a : gcd(b, a.remainder(b));
+		 return 0 == BigDecimal.ZERO.compareTo(b) ? a : gcd(b, a.remainder(b));
 	 } 
 
 	 /**
@@ -78,10 +78,10 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.4.0
 	 */
 	 public static BigDecimal lcm(final BigDecimal a, final BigDecimal b) { //$JUnit$
-		 if (BigDecimal.ZERO.compareTo(a) >= 0) {
+		 if (0 <= BigDecimal.ZERO.compareTo(a)) {
 			 throw new IllegalArgumentException("a value must be positive: " + a); //$NON-NLS-1$
 		 }
-		 if (BigDecimal.ZERO.compareTo(b) >= 0) {
+		 if (0 <= BigDecimal.ZERO.compareTo(b)) {
 			 throw new IllegalArgumentException("b value must be positive: " + b); //$NON-NLS-1$
 		 }
 		 

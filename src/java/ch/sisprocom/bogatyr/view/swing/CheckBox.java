@@ -42,7 +42,7 @@ import javax.swing.JCheckBox;
  * This is an extended JCheckBox.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.2.0
  */
 public class CheckBox extends JCheckBox implements Activatable {
@@ -55,31 +55,31 @@ public class CheckBox extends JCheckBox implements Activatable {
 		super();
 	}	
 	
-	public CheckBox(Action action) {
+	public CheckBox(final Action action) {
 		super(action);
 	}
 
-	public CheckBox(Icon icon, boolean selected) {
+	public CheckBox(final Icon icon, final boolean selected) {
 		super(icon, selected);
 	}
 
-	public CheckBox(Icon icon) {
+	public CheckBox(final Icon icon) {
 		super(icon);
 	}
 
-	public CheckBox(String text, boolean selected) {
+	public CheckBox(final String text, final boolean selected) {
 		super(text, selected);
 	}
 
-	public CheckBox(String text, Icon icon, boolean selected) {
+	public CheckBox(final String text, final Icon icon, final boolean selected) {
 		super(text, icon, selected);
 	}
 
-	public CheckBox(String text, Icon icon) {
+	public CheckBox(final String text, final Icon icon) {
 		super(text, icon);
 	}
 
-	public CheckBox(String text) {
+	public CheckBox(final String text) {
 		super(text);
 	}
 

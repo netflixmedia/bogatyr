@@ -49,27 +49,27 @@ import ch.sisprocom.bogatyr.model.unit.Weight;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091202
+ * @version 20091210
  */
 public class UnitWeightTest {
 	private static final MathContext MC = new MathContext(5, RoundingMode.HALF_EVEN);
 
 	@Test
 	public void testConvert() {
-		assertTrue(BigDecimal.ONE.compareTo(UnitWeight.convert(Weight.MILLIGRAM, Weight.GRAM, HelperNumber.BIGDECIMAL_1000)) == 0);
-		assertTrue(HelperNumber.BIGDECIMAL_1000.compareTo(UnitWeight.convert(Weight.GRAM, Weight.MILLIGRAM, BigDecimal.ONE)) == 0);
+		assertTrue(0 == BigDecimal.ONE.compareTo(UnitWeight.convert(Weight.MILLIGRAM, Weight.GRAM, HelperNumber.BIGDECIMAL_1000)));
+		assertTrue(0 == HelperNumber.BIGDECIMAL_1000.compareTo(UnitWeight.convert(Weight.GRAM, Weight.MILLIGRAM, BigDecimal.ONE)));
 
-		assertTrue(BigDecimal.ONE.compareTo(UnitWeight.convert(Weight.GRAM, Weight.KILOGRAM, HelperNumber.BIGDECIMAL_1000)) == 0);
-		assertTrue(HelperNumber.BIGDECIMAL_1000.compareTo(UnitWeight.convert(Weight.KILOGRAM, Weight.GRAM, BigDecimal.ONE)) == 0);
+		assertTrue(0 == BigDecimal.ONE.compareTo(UnitWeight.convert(Weight.GRAM, Weight.KILOGRAM, HelperNumber.BIGDECIMAL_1000)));
+		assertTrue(0 == HelperNumber.BIGDECIMAL_1000.compareTo(UnitWeight.convert(Weight.KILOGRAM, Weight.GRAM, BigDecimal.ONE)));
 
-		assertTrue(BigDecimal.ONE.compareTo(UnitWeight.convert(Weight.OUNCE, Weight.GRAM, new BigDecimal("28.34952"))) == 0); //$NON-NLS-1$
-		assertTrue(new BigDecimal("28.34952").compareTo(UnitWeight.convert(Weight.GRAM, Weight.OUNCE, BigDecimal.ONE)) == 0); //$NON-NLS-1$
+		assertTrue(0 == BigDecimal.ONE.compareTo(UnitWeight.convert(Weight.OUNCE, Weight.GRAM, new BigDecimal("28.34952")))); //$NON-NLS-1$
+		assertTrue(0 == new BigDecimal("28.34952").compareTo(UnitWeight.convert(Weight.GRAM, Weight.OUNCE, BigDecimal.ONE))); //$NON-NLS-1$
 
-		assertTrue(BigDecimal.ONE.compareTo(UnitWeight.convert(Weight.POUND, Weight.KILOGRAM, new BigDecimal("0.453592"))) == 0); //$NON-NLS-1$
-		assertTrue(new BigDecimal("0.453592").compareTo(UnitWeight.convert(Weight.KILOGRAM, Weight.POUND, BigDecimal.ONE)) == 0); //$NON-NLS-1$
+		assertTrue(0 == BigDecimal.ONE.compareTo(UnitWeight.convert(Weight.POUND, Weight.KILOGRAM, new BigDecimal("0.453592")))); //$NON-NLS-1$
+		assertTrue(0 == new BigDecimal("0.453592").compareTo(UnitWeight.convert(Weight.KILOGRAM, Weight.POUND, BigDecimal.ONE))); //$NON-NLS-1$
 
-		assertTrue(new BigDecimal("907.1847").compareTo(UnitWeight.convert(Weight.TON, Weight.KILOGRAM, BigDecimal.ONE)) == 0); //$NON-NLS-1$
-		assertTrue(BigDecimal.ONE.compareTo(UnitWeight.convert(Weight.KILOGRAM, Weight.TON, new BigDecimal("907.1847")).round(MC)) == 0); //$NON-NLS-1$
+		assertTrue(0 == new BigDecimal("907.1847").compareTo(UnitWeight.convert(Weight.TON, Weight.KILOGRAM, BigDecimal.ONE))); //$NON-NLS-1$
+		assertTrue(0 == BigDecimal.ONE.compareTo(UnitWeight.convert(Weight.KILOGRAM, Weight.TON, new BigDecimal("907.1847")).round(MC))); //$NON-NLS-1$
 
 		try {
 			UnitWeight.convert(null, null, BigDecimal.ONE);

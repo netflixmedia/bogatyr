@@ -43,7 +43,7 @@ import java.util.ResourceBundle;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20091210)
  * @since 0.1.0
  */
 public class LocalizerFile extends LocalizerAbstract {
@@ -83,7 +83,7 @@ public class LocalizerFile extends LocalizerAbstract {
 	 * @param localizerBase of the resource file
 	 * @since 0.1.0
 	 */
-    public synchronized void setLocalizerBase(final String localizerBase) {
+    public void setLocalizerBase(final String localizerBase) {
 		if (null == localizerBase) {
 			throw new IllegalArgumentException("localizerBase is null!"); //$NON-NLS-1$
 		}
@@ -105,7 +105,7 @@ public class LocalizerFile extends LocalizerAbstract {
 	 * Overridden methods
 	 */
     @Override
-	public synchronized void setLocale(final Locale locale) {
+	public void setLocale(final Locale locale) {
 		if (null == locale) {
 			throw new IllegalArgumentException("locale is null!"); //$NON-NLS-1$
 		}

@@ -41,7 +41,7 @@ import javax.swing.text.Document;
  * This is an extended JTextArea.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.1.0
  */
 public class TextArea extends JTextArea implements Activatable {
@@ -49,7 +49,7 @@ public class TextArea extends JTextArea implements Activatable {
 	
 	private boolean isNotActive;
 
-	{
+    {
 		setLineWrap(true);
 		setWrapStyleWord(true);
 	}
@@ -58,15 +58,15 @@ public class TextArea extends JTextArea implements Activatable {
         super();
     }
     
-	public TextArea(Document doc, String text, int rows, int columns) {
+	public TextArea(final Document doc, final String text, final int rows, final int columns) {
 		super(doc, text, rows, columns);
 	}
 
-	public TextArea(int rows, int columns) {
+	public TextArea(final int rows, final int columns) {
 		super(rows, columns);
 	}
 
-	public TextArea(String text, int rows, int columns) {
+	public TextArea(final String text, final int rows, final int columns) {
 		super(text, rows, columns);
 	}
 

@@ -74,7 +74,7 @@ import ch.sisprocom.bogatyr.test.view.swing.NumberFieldTest;
  * Junit test suite
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 20091103
+ * @version 20091210
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
@@ -160,7 +160,7 @@ public class AllBogatyrTests implements Runnable {
 	 * Private methods
 	 */
     private static void runThreads (final AllBogatyrTests[] runnables) {
-        if (runnables == null) {
+        if (null == runnables) {
            throw new IllegalArgumentException("runnables == null"); //$NON-NLS-1$
         }
         Thread[] threads = new Thread[runnables.length];

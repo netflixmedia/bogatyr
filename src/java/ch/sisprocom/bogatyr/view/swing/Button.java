@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JButton.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.2.0
  */
 public class Button extends JButton implements Activatable {
@@ -61,15 +61,15 @@ public class Button extends JButton implements Activatable {
 		super(action);
 	}
 	
-	public Button(Icon icon) {
+	public Button(final Icon icon) {
 		super(icon);
 	}
 
-	public Button(String text, Icon icon) {
+	public Button(final String text, final Icon icon) {
 		super(text, icon);
 	}
 
-	public Button(String text) {
+	public Button(final String text) {
 		super(text);
 	}
 	

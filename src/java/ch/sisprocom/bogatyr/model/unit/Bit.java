@@ -41,10 +41,10 @@ import ch.sisprocom.bogatyr.helper.unit.UnitBit;
  * Bit units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091126)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
-public enum Bit {
+public enum Bit implements Unit {
 	BIT(BigDecimal.ONE),
 	BYTE(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_BYTE, Constants.DEFAULT_MATHCONTEXT)),
 	KILOBIT(BigDecimal.ONE.divide(UnitBit.FACTOR_BIT_TO_KILOBIT, Constants.DEFAULT_MATHCONTEXT)),
@@ -87,16 +87,6 @@ public enum Bit {
 		this.factor = factor;
 	}
 
-    /**
-     * Returns the factor from the unit to the base value (bit)
-     * 
-     * @return factor to the base value
-     * @since 0.9.0
-     */
-	public BigDecimal getFactor() {
-		return factor;
-	}
-
 
     /*
 	 * Overridden methods
@@ -104,6 +94,15 @@ public enum Bit {
 	@Override
 	public String toString() {
 		return HelperObject.toString(this);
+	}
+	
+	
+	/*
+	 * Implemented methods
+	 */
+	@Override
+	public BigDecimal getFactor() {
+		return factor;
 	}
 }	
 

@@ -51,7 +51,7 @@ import java.util.List;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.8.0 (20091210)
  * @since 0.5.0
  */
 public class Chart extends Panel {
@@ -231,7 +231,7 @@ public class Chart extends Panel {
 			final Component label = new Label(text, SwingConstants.CENTER);
 			label.setBackground(colorBackground);
 			label.setForeground(colorForeground);
-			if (font != null) {
+			if (null != font) {
 				label.setFont(font);
 			}
 			panelXAxis.add(label);
@@ -248,7 +248,7 @@ public class Chart extends Panel {
 			final Component label = new LabelVertical(text, SwingConstants.CENTER);
 			label.setBackground(colorBackground);
 			label.setForeground(colorForeground);
-			if (font != null) {
+			if (null != font) {
 				label.setFont(font);
 			}
 			panelYAxis.add(label);

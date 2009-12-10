@@ -63,7 +63,7 @@ import java.util.Scanner;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091115)
+ * @version 0.9.0 (20091210)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -206,10 +206,10 @@ public abstract class HelperIO {
             }
             os.flush();
         } finally {
-            if (is != null) {
+            if (null != is) {
                 is.close();
             }
-            if (os != null) {
+            if (null != os) {
                 os.close();
             }
         }
@@ -324,7 +324,7 @@ public abstract class HelperIO {
 			pw.println(line);
 			pw.flush();
 		} finally {
-			if (pw != null) {
+			if (null != pw) {
                 pw.close();
             }
 		}
@@ -544,14 +544,17 @@ public abstract class HelperIO {
             throw new IllegalArgumentException("length of file (" + length + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
         }
 		
-		final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+		BufferedInputStream bis = null;
 		final byte[] buffer;
 		
 		try {
+            bis = new BufferedInputStream(new FileInputStream(file));
 			buffer = new byte[(int) length];
 			bis.read(buffer, 0, (int) length);
 		} finally {
-            bis.close();
+            if (null != bis) {
+                bis.close();
+            }
 		}
 		return buffer;
 	}
@@ -736,19 +739,19 @@ public abstract class HelperIO {
 	                    // Read each line from the input file
 	                    String line = br.readLine();
 	
-	                    while (line != null) {
+	                    while (null != line) {
 	                        pw.println(line);
 	                        line = br.readLine();
 	                    }
 	                } finally {
-	                    if (br != null) {
+	                    if (null != br) {
 	                        br.close();
 	                    }
 	                }
             	}
             }
 	    } finally {
-	    	if (pw != null) {
+	    	if (null != pw) {
                 pw.close();
             }
 	    }
@@ -965,7 +968,7 @@ public abstract class HelperIO {
         if (null != entries) {
             for (final File entry : entries) {
 
-                if (filter == null || filter.accept(entry)) {
+                if (null == filter || filter.accept(entry)) {
                     files.add(entry);
                 }
 

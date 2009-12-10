@@ -45,7 +45,7 @@ import java.util.Dictionary;
  * This is an extended JSlider.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.2.0
  */
 public class Slider extends JSlider implements Activatable {
@@ -62,19 +62,19 @@ public class Slider extends JSlider implements Activatable {
 		super(model);
 	}
 
-	public Slider(int orientation, int min, int max, int value) {
+	public Slider(final int orientation, final int min, final int max, final int value) {
 		super(orientation, min, max, value);
 	}
 
-	public Slider(int min, int max, int value) {
+	public Slider(final int min, final int max, final int value) {
 		super(min, max, value);
 	}
 
-	public Slider(int min, int max) {
+	public Slider(final int min, final int max) {
 		super(min, max);
 	}
 
-	public Slider(int orientation) {
+	public Slider(final int orientation) {
 		super(orientation);
 	}
 
@@ -113,7 +113,7 @@ public class Slider extends JSlider implements Activatable {
 		super.setFont(font);
 		
 		final Dictionary<?, ?> dict = getLabelTable();
-		if (dict != null) {
+		if (null != dict) {
 			for (final Object element : Collections.list(dict.elements())) {
 				if (element instanceof Component) {
 					((Component) element).setFont( font );

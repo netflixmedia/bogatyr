@@ -47,31 +47,31 @@ import ch.sisprocom.bogatyr.model.unit.Volume;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091202
+ * @version 20091210
  */
 public class UnitVolumeTest {
 	@Test
 	public void testConvert() {
-		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.MM3, Volume.CM3, HelperNumber.BIGDECIMAL_1000)) == 0);
-		assertTrue(HelperNumber.BIGDECIMAL_1000.compareTo(UnitVolume.convert(Volume.CM3, Volume.MM3, BigDecimal.ONE)) == 0);
+		assertTrue(0 == BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.MM3, Volume.CM3, HelperNumber.BIGDECIMAL_1000)));
+		assertTrue(0 == HelperNumber.BIGDECIMAL_1000.compareTo(UnitVolume.convert(Volume.CM3, Volume.MM3, BigDecimal.ONE)));
 
-		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.CM3, Volume.L, HelperNumber.BIGDECIMAL_1000)) == 0);
-		assertTrue(HelperNumber.BIGDECIMAL_1000.compareTo(UnitVolume.convert(Volume.L, Volume.CM3, BigDecimal.ONE)) == 0);
+		assertTrue(0 == BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.CM3, Volume.L, HelperNumber.BIGDECIMAL_1000)));
+		assertTrue(0 == HelperNumber.BIGDECIMAL_1000.compareTo(UnitVolume.convert(Volume.L, Volume.CM3, BigDecimal.ONE)));
 
-		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.L, Volume.M3, HelperNumber.BIGDECIMAL_1000)) == 0);
-		assertTrue(HelperNumber.BIGDECIMAL_1000.compareTo(UnitVolume.convert(Volume.M3, Volume.L, BigDecimal.ONE)) == 0);
+		assertTrue(0 == BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.L, Volume.M3, HelperNumber.BIGDECIMAL_1000)));
+		assertTrue(0 == HelperNumber.BIGDECIMAL_1000.compareTo(UnitVolume.convert(Volume.M3, Volume.L, BigDecimal.ONE)));
 
-		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.PINT, Volume.CM3, new BigDecimal("473.176473"))) == 0); //$NON-NLS-1$
-		assertTrue(new BigDecimal("473.176473").compareTo(UnitVolume.convert(Volume.CM3, Volume.PINT, BigDecimal.ONE)) == 0); //$NON-NLS-1$
+		assertTrue(0 == BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.PINT, Volume.CM3, new BigDecimal("473.176473")))); //$NON-NLS-1$
+		assertTrue(0 == new BigDecimal("473.176473").compareTo(UnitVolume.convert(Volume.CM3, Volume.PINT, BigDecimal.ONE))); //$NON-NLS-1$
 
-		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.QUART, Volume.L, new BigDecimal("0.946326"))) == 0); //$NON-NLS-1$
-		assertTrue(new BigDecimal("0.946326").compareTo(UnitVolume.convert(Volume.L, Volume.QUART, BigDecimal.ONE)) == 0); //$NON-NLS-1$
+		assertTrue(0 == BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.QUART, Volume.L, new BigDecimal("0.946326")))); //$NON-NLS-1$
+		assertTrue(0 == new BigDecimal("0.946326").compareTo(UnitVolume.convert(Volume.L, Volume.QUART, BigDecimal.ONE))); //$NON-NLS-1$
 
-		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.GALLON_US, Volume.L, new BigDecimal("3.785411784"))) == 0); //$NON-NLS-1$
-		assertTrue(new BigDecimal("3.785411784").compareTo(UnitVolume.convert(Volume.L, Volume.GALLON_US, BigDecimal.ONE)) == 0); //$NON-NLS-1$
+		assertTrue(0 == BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.GALLON_US, Volume.L, new BigDecimal("3.785411784")))); //$NON-NLS-1$
+		assertTrue(0 == new BigDecimal("3.785411784").compareTo(UnitVolume.convert(Volume.L, Volume.GALLON_US, BigDecimal.ONE))); //$NON-NLS-1$
 
-		assertTrue(BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.BARREL, Volume.L, new BigDecimal("158.987294928"))) == 0); //$NON-NLS-1$
-		assertTrue(new BigDecimal("158.987294928").compareTo(UnitVolume.convert(Volume.L, Volume.BARREL, BigDecimal.ONE)) == 0); //$NON-NLS-1$
+		assertTrue(0 == BigDecimal.ONE.compareTo(UnitVolume.convert(Volume.BARREL, Volume.L, new BigDecimal("158.987294928")))); //$NON-NLS-1$
+		assertTrue(0 == new BigDecimal("158.987294928").compareTo(UnitVolume.convert(Volume.L, Volume.BARREL, BigDecimal.ONE))); //$NON-NLS-1$
 		
 		try {
 			UnitVolume.convert(null, null, BigDecimal.ONE);

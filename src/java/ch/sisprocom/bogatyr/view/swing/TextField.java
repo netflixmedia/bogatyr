@@ -46,7 +46,7 @@ import javax.swing.text.PlainDocument;
  * This is an extended JTextField.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.1.0
  */
 public class TextField extends JTextField implements Activatable {
@@ -64,19 +64,19 @@ public class TextField extends JTextField implements Activatable {
         setAction(action);
     }
 	
-	public TextField(Document doc, String text, int columns) {
+	public TextField(final Document doc, final String text, final int columns) {
 		super(doc, text, columns);
 	}
 
-	public TextField(int columns) {
+	public TextField(final int columns) {
 		super(columns);
 	}
 
-	public TextField(String text, int columns) {
+	public TextField(final String text, final int columns) {
 		super(text, columns);
 	}
 
-	public TextField(String text) {
+	public TextField(final String text) {
 		super(text);
 	}
 
@@ -147,7 +147,7 @@ public class TextField extends JTextField implements Activatable {
 		@Override
 		public void insertString(final int offs, final String str, final AttributeSet a) throws BadLocationException {
 
-			if (str != null && str.length() + offs <= getColumns()) {
+			if (null != str && str.length() + offs <= getColumns()) {
 				super.insertString(offs, str, a);
 			}
 		}

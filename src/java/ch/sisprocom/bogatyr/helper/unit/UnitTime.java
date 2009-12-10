@@ -33,7 +33,6 @@ package ch.sisprocom.bogatyr.helper.unit;
 
 import java.math.BigDecimal;
 
-import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.model.unit.Time;
 
@@ -42,10 +41,10 @@ import ch.sisprocom.bogatyr.model.unit.Time;
  * Converts different units of weight.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091203)
+ * @version 0.9.0 (20091210)
  * @since 0.8.0
  */
-public abstract class UnitTime {
+public abstract class UnitTime extends UnitConverter {
 	public static final BigDecimal FACTOR_NANOSECOND_TO_SECOND 	= new BigDecimal("1000000000"); //nanoseconds to seconds //$NON-NLS-1$
 	public static final BigDecimal FACTOR_MICROSECOND_TO_SECOND = HelperNumber.BIGDECIMAL_1000000; //microseconds to seconds
 	public static final BigDecimal FACTOR_MILLISECOND_TO_SECOND = HelperNumber.BIGDECIMAL_1000; //milliseconds to seconds
@@ -66,16 +65,6 @@ public abstract class UnitTime {
      * @since 0.8.0
      */
     public static BigDecimal convert(final Time fromUnit, final Time toUnit, final BigDecimal value) {
-		if (null == fromUnit) {
-			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
-		}
-		if (null == toUnit) {
-			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
-		}
-		if (null == value) {
-			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
-		}
-
-    	return value.divide(fromUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+    	return UnitConverter.convert(fromUnit, toUnit, value); 
     }
  }

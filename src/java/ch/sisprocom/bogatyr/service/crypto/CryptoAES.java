@@ -66,7 +66,7 @@ import java.security.spec.AlgorithmParameterSpec;
  * This is a class for symmetric cryptology via AES.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091115)
+ * @version 0.9.0 (20091210)
  * @since 0.1.0
  */
 public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
@@ -218,9 +218,10 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
         }
 
         final byte[] buffer = new byte[bufferSize];
+        CipherInputStream cis = null;
 
         try {
-        	final CipherInputStream cis = new CipherInputStream(is, getCipherDecrypt(key));
+        	cis = new CipherInputStream(is, getCipherDecrypt(key));
 	
 	        int offset  ;
 	        while (0 <= (offset = cis.read(buffer))) {
@@ -228,6 +229,9 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	        }
         } finally {
         	os.close();
+            if (null != cis) {
+                cis.close();
+            }
         }
     }
 

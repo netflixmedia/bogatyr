@@ -49,10 +49,10 @@ import java.awt.Image;
  * This is an extended JFrame.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.8.0 (20091210)
  * @since 0.2.0
  */
-public class Frame extends JFrame implements Fadeable {
+public class Frame extends JFrame implements Fadeable, Displayable {
 	private static final long serialVersionUID = 7476360387134225315L;
 
 	private boolean isFading;
@@ -87,14 +87,6 @@ public class Frame extends JFrame implements Fadeable {
         setIconImage(icon);
     }
 	
-	public void createAndShowGUI() {
-		setVisible(true);
-	}
-
-	public void clearAndHide() {
-		dispose();
-	}
-	
 //	/**
 //     * Refresh the frame (validate() and repaint() in one method)
 //     */	
@@ -126,6 +118,16 @@ public class Frame extends JFrame implements Fadeable {
 	/*
 	 * Implemented methods
 	 */
+	@Override
+	public void createAndShowGUI() {
+		setVisible(true);
+	}
+
+	@Override
+	public void clearAndHide() {
+		dispose();
+	}
+	
 	@Override
     public void setFading(final boolean isFading) {
 		this.isFading = isFading;

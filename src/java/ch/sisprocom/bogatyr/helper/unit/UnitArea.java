@@ -31,21 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.unit;
 
-import ch.sisprocom.bogatyr.model.unit.Area;
-import ch.sisprocom.bogatyr.helper.Constants;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-
 import java.math.BigDecimal;
+
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.model.unit.Area;
 
 
 /**
  * Converts different units of area.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091202)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
-public abstract class UnitArea {
+public abstract class UnitArea extends UnitConverter {
 	public static final BigDecimal FACTOR_MM2_TO_CM2 	  = HelperNumber.BIGDECIMAL_100; //millimeters^2 to centimeters^2
 	public static final BigDecimal FACTOR_CM2_TO_M2 	  = HelperNumber.BIGDECIMAL_10000; //centimeters^2 to meters^2
 	public static final BigDecimal FACTOR_M2_TO_AREA 	  = HelperNumber.BIGDECIMAL_100; //meters^2 to area
@@ -68,16 +67,6 @@ public abstract class UnitArea {
      * @since 0.7.0
      */
     public static BigDecimal convert(final Area fromUnit, final Area toUnit, final BigDecimal value) { //$JUnit$
-		if (null == fromUnit) {
-			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
-		}
-		if (null == toUnit) {
-			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
-		}
-		if (null == value) {
-			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
-		}
-
-    	return value.divide(fromUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+    	return UnitConverter.convert(fromUnit, toUnit, value); 
     }
 }

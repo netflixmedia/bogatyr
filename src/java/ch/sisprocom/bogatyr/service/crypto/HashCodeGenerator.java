@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.model.crypto.HashCode;
  * This is an interface for hash code generation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20091210)
  * @since 0.8.0
  */
 public interface HashCodeGenerator extends Service {
@@ -99,7 +99,7 @@ public interface HashCodeGenerator extends Service {
 	String getHash(File input, HashCode hashCode) throws Exception;
 	
 	/**
-	 * Generates a hash code for an input {@link File} with the given {@link ch.sisprocom.bogatyr.model.crypto.HashCode}.
+	 * Generates a hash code for an input {@link File} with the given {@link HashCode}.
 	 * 
      * @param input {@link File} for the hash code
      * @param hashCode {@link HashCode} algorithm

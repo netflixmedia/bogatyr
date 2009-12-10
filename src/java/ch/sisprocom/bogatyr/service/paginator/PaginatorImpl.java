@@ -43,7 +43,7 @@ import java.util.List;
  * The implementation for a paginator.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20091210)
  * @since 0.5.0
  */
 public class PaginatorImpl extends ServiceAbstract implements Paginator {
@@ -119,7 +119,7 @@ public class PaginatorImpl extends ServiceAbstract implements Paginator {
 		int page = requestedPage;
         final List<Object> result = new ArrayList<Object>(numberPerPage);
 
-        if (list != null) {
+        if (null != list) {
             if (page > getNumberOfPages()) {
                 page = getNumberOfPages();
             }

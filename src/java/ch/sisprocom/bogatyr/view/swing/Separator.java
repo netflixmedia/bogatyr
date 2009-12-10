@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JSeparator.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20091210)
  * @since 0.2.0
  */
 public class Separator extends JSeparator {
@@ -53,7 +53,7 @@ public class Separator extends JSeparator {
 		super();
 	}
 
-	public Separator(int orientation) {
+	public Separator(final int orientation) {
 		super(orientation);
 	}
 

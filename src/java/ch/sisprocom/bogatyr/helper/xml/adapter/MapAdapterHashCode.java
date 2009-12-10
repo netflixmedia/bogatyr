@@ -45,25 +45,25 @@ import ch.sisprocom.bogatyr.model.crypto.HashCode;
  * Map adapter for the key {@link HashCode} and value {@link String}.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091205)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
 public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCode, String>> {
 
 	@Override
-	public XmlMap marshal(Map<HashCode, String> map) throws Exception {
-		XmlMap myMap = new XmlMap();
-        List<XmlEntry> list = myMap.getEntrys();
-        for (Map.Entry<HashCode, String> entry : map.entrySet() ) {
+	public XmlMap marshal(final Map<HashCode, String> map) throws Exception {
+		final XmlMap myMap = new XmlMap();
+        final List<XmlEntry> list = myMap.getEntries();
+        for (final Map.Entry<HashCode, String> entry : map.entrySet() ) {
             list.add(new XmlEntry(entry.getKey().toString(), entry.getValue()));
         }
         return myMap;
 	}
 
 	@Override
-	public Map<HashCode, String> unmarshal(XmlMap myMap) throws Exception {
-        Map<HashCode, String> map = new HashMap<HashCode, String>();
-        for (XmlEntry entry : myMap.getEntrys() ) {
+	public Map<HashCode, String> unmarshal(final XmlMap myMap) throws Exception {
+        final Map<HashCode, String> map = new HashMap<HashCode, String>(myMap.getEntries().size());
+        for (final XmlEntry entry : myMap.getEntries() ) {
             map.put(HashCode.valueOf(entry.getKey()), entry.getValue());
         }
         return map;

@@ -46,7 +46,7 @@ import java.util.HashSet;
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
 public abstract class ServerThreadAbstract implements ServerThread {
@@ -178,7 +178,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
 
 	@Override
     public void start() {
-		if (thread == null) {
+		if (null == thread) {
 			thread = new Thread(this);
             thread.start();
 		}
@@ -194,7 +194,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
         	socket.close();
         }
 		
-		if (thread != null) {
+		if (null != thread) {
 			if (thread.isAlive()) {
 				thread.interrupt();
 			} else {

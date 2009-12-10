@@ -45,25 +45,25 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * Map adapter for the key {@link Platform} and value {@link String}.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091205)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
 public class MapAdapterPlatform extends XmlAdapter<XmlMap, Map<Platform, String>> {
 
 	@Override
-	public XmlMap marshal(Map<Platform, String> map) throws Exception {
-		XmlMap myMap = new XmlMap();
-        List<XmlEntry> list = myMap.getEntrys();
-        for (Map.Entry<Platform, String> entry : map.entrySet() ) {
+	public XmlMap marshal(final Map<Platform, String> map) throws Exception {
+		final XmlMap myMap = new XmlMap();
+        final List<XmlEntry> list = myMap.getEntries();
+        for (final Map.Entry<Platform, String> entry : map.entrySet() ) {
             list.add(new XmlEntry(entry.getKey().toString(), entry.getValue()));
         }
         return myMap;
 	}
 
 	@Override
-	public Map<Platform, String> unmarshal(XmlMap myMap) throws Exception {
-        Map<Platform, String> map = new HashMap<Platform, String>();
-        for (XmlEntry entry : myMap.getEntrys() ) {
+	public Map<Platform, String> unmarshal(final XmlMap myMap) throws Exception {
+        final Map<Platform, String> map = new HashMap<Platform, String>(myMap.getEntries().size());
+        for (final XmlEntry entry : myMap.getEntries() ) {
             map.put(Platform.valueOf(entry.getKey()), entry.getValue());
         }
         return map;

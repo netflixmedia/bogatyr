@@ -39,7 +39,7 @@ import ch.sisprocom.bogatyr.controller.Controller;
  * The interface for the worker controller.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091121)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
 public interface ControllerWorker extends Controller {

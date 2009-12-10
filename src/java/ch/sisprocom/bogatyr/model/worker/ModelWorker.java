@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.view.swing.worker.WorkerAbstract;
  * The interface for the worker model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091206)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
 public interface ModelWorker extends Model {
@@ -51,9 +51,9 @@ public interface ModelWorker extends Model {
 
     List<WorkerAbstract> getWorkers();
     
-	<T, V> void add(WorkerAbstract<T, V> worker);
+	void add(WorkerAbstract worker);
 
-	<T, V> void remove(WorkerAbstract<T, V> worker);
+	void remove(WorkerAbstract worker);
 
-	<T, V> void removeAll();
+	void removeAll();
 }

@@ -44,7 +44,7 @@ import java.util.List;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091102)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -122,11 +122,11 @@ public abstract class HelperArray {
     	byte[] a = inA;
     	byte[] b = inB;
     	
-    	if (a == null) {
+    	if (null == a) {
             a = EMPTY_ARRAY_BYTE;
         }
 
-    	if (b == null) {
+    	if (null == b) {
             b = EMPTY_ARRAY_BYTE;
         }
     	

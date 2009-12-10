@@ -33,7 +33,6 @@ package ch.sisprocom.bogatyr.helper.unit;
 
 import java.math.BigDecimal;
 
-import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.model.unit.Volume;
 
@@ -42,10 +41,10 @@ import ch.sisprocom.bogatyr.model.unit.Volume;
  * Converts different units of volume.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091203)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
-public abstract class UnitVolume {
+public abstract class UnitVolume extends UnitConverter {
 	public static final BigDecimal FACTOR_MM3_TO_CM3 	 = HelperNumber.BIGDECIMAL_1000; //millimeters^3 to centimeters^3
 	public static final BigDecimal FACTOR_CM3_TO_L 		 = HelperNumber.BIGDECIMAL_1000; //centimeters^3 to liter
 	public static final BigDecimal FACTOR_L_TO_M3 		 = HelperNumber.BIGDECIMAL_1000; //liter to m^3
@@ -65,16 +64,6 @@ public abstract class UnitVolume {
      * @since 0.7.0
      */
     public static BigDecimal convert(final Volume fromUnit, final Volume toUnit, final BigDecimal value) { //$JUnit$
-		if (null == fromUnit) {
-			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
-		}
-		if (null == toUnit) {
-			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
-		}
-		if (null == value) {
-			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
-		}
-
-    	return value.divide(fromUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+    	return UnitConverter.convert(fromUnit, toUnit, value); 
     }
 }

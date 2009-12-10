@@ -44,7 +44,7 @@ import java.util.Set;import java.util.Arrays;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091102)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
 public abstract class HelperCollection {
@@ -76,7 +76,7 @@ public abstract class HelperCollection {
      */
 	public static <E> List<E> getList(final E...elements) { //$JUnit$
 		if (null == elements) {
-			return new ArrayList<E>();
+			return new ArrayList<E>(0);
 		}
 
         final List<E> list = new ArrayList<E>(elements.length);
@@ -96,7 +96,7 @@ public abstract class HelperCollection {
      */
 	public static <E> Set<E> getSet(final E...elements) { //$JUnit$
 		if (null == elements) {
-			return new HashSet<E>();
+			return new HashSet<E>(0);
 		}
 
         final Set<E> set = new HashSet<E>(elements.length);

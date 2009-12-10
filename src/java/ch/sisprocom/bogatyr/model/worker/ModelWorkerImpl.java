@@ -43,13 +43,13 @@ import java.util.List;
  * The implementation of the worker model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091206)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
 public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 	private static final long serialVersionUID = -2826684498598090349L;
 
-	private List<WorkerAbstract> listWorker = new ArrayList<WorkerAbstract>();
+	private transient List<WorkerAbstract> listWorker = new ArrayList<WorkerAbstract>();
  
 
 	/*
@@ -61,14 +61,14 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 	}
 
     @Override
-    public <T, V> void add(final WorkerAbstract<T, V> worker) {
+    public void add(final WorkerAbstract worker) {
     	listWorker.add(worker);
         setChanged();
         notifyObservers(METHOD_ADD);
     }
 
     @Override
-    public <T, V> void remove(final WorkerAbstract<T, V> worker) {
+    public void remove(final WorkerAbstract worker) {
         worker.cancel(true);
         listWorker.remove(worker);
         setChanged();
@@ -76,8 +76,8 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
     }
 
     @Override
-    public <T, V> void removeAll() {
-        for (final WorkerAbstract<T, V> worker : listWorker) {
+    public void removeAll() {
+        for (final WorkerAbstract worker : listWorker) {
             worker.cancel(true);
         }
 

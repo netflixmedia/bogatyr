@@ -37,7 +37,7 @@ import javax.swing.SwingWorker;
  * This class represents a skeleton for the worker.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091121)
+ * @version 0.9.0 (20091210)
  * @since 0.9.0
  */
 public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> {
@@ -62,7 +62,7 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> {
     }
 
     public void start() {
-        if (handlerWorker != null) {
+        if (null != handlerWorker) {
             handlerWorker.fireWorkerStart();
         }
         
@@ -75,7 +75,7 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> {
      */
     @Override
     protected void done() {
-    	if (handlerWorker != null) {
+    	if (null != handlerWorker) {
             handlerWorker.fireWorkerDone();
         }
     }

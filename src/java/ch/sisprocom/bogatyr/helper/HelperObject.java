@@ -50,7 +50,7 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091103)
+ * @version 0.9.0 (20091210)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -131,7 +131,7 @@ public abstract class HelperObject {
 
             return baos.toByteArray();
         } finally {
-        	if (oos != null) {
+        	if (null != oos) {
         		oos.close();	
         	}
 //                bos.close();
@@ -159,7 +159,7 @@ public abstract class HelperObject {
             ois = new ObjectInputStream(new ByteArrayInputStream(data));
             obj = ois.readObject();
         } finally {
-        	if (ois != null) {
+        	if (null != ois) {
         		ois.close();
         	}
         }
