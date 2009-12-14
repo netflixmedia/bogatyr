@@ -31,34 +31,36 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.Rectangle;
-import com.lowagie.text.pdf.DefaultFontMapper;
-import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.PdfReader;
-import com.lowagie.text.pdf.PdfStamper;
-import com.lowagie.text.pdf.PdfTemplate;
-import com.lowagie.text.pdf.PdfWriter;
-import org.xhtmlrenderer.pdf.ITextRenderer;
-
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.FilterOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.xhtmlrenderer.pdf.ITextRenderer;
+
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Rectangle;
+import com.lowagie.text.pdf.DefaultFontMapper;
+import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfEncryptor;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
+import com.lowagie.text.pdf.PdfTemplate;
+import com.lowagie.text.pdf.PdfWriter;
 
 
 /**
  * This is a helper class for PDF operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091110)
+ * @version 0.9.0 (20091214)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -161,7 +163,7 @@ public abstract class HelperPdf {
      * @since 0.7.0
      */
 	@SuppressWarnings("unchecked")
-	public static void setMetaData(final String source, final String dest, final Map<String, String> metadata) throws IOException, DocumentException {
+	public static void setMetaData(final File source, final File dest, final Map<String, String> metadata) throws IOException, DocumentException {
 		if (null == source) {
 			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
 		}
@@ -179,7 +181,7 @@ public abstract class HelperPdf {
 		PdfStamper stamper = null;
 		
 		try {
-			reader = new PdfReader(source);
+			reader = new PdfReader(source.getAbsolutePath());
 			stamper = new PdfStamper(reader, new FileOutputStream(dest));
 			
 			final HashMap<String, String> info = reader.getInfo();
@@ -190,6 +192,44 @@ public abstract class HelperPdf {
 			if (null != stamper) {
 				stamper.close();
 			}
+			if (null != reader) {
+				reader.close();	   
+			}
+		}
+	} 
+	
+	/**
+     * Removes all locks and restrictions from a PDF.
+     * 
+     * @param source {@link File}
+     * @param dest {@link File} for the unlocked PDF
+     * @param user of the source {@link File}
+     * @param password of the source {@link File}
+     * @throws DocumentException
+     * @throws IOException
+     * @since 0.9.0
+     */
+	public static void unlock(final File source, final File dest, final byte[] user, final byte[] password) throws IOException, DocumentException {
+		if (null == source) {
+			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
+		}
+		if (null == dest) {
+			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+		}
+		if (source.equals(dest)) {
+			throw new IllegalArgumentException("source is equals to dest!"); //$NON-NLS-1$
+		}
+
+		PdfReader reader = null;
+		
+		try {
+			reader = new PdfReader(source.getAbsolutePath());
+			PdfEncryptor.encrypt(reader, new FileOutputStream(dest), user, password,
+					PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY
+			        | PdfWriter.ALLOW_DEGRADED_PRINTING | PdfWriter.ALLOW_FILL_IN
+			        | PdfWriter.ALLOW_MODIFY_ANNOTATIONS | PdfWriter.ALLOW_MODIFY_CONTENTS
+			        | PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, false);
+		} finally {
 			if (null != reader) {
 				reader.close();	   
 			}

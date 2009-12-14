@@ -31,7 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import javax.swing.filechooser.FileSystemView;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -57,13 +56,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.filechooser.FileSystemView;
+
 
 /**
  * This is a helper class for I/O.
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091214)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -189,10 +190,12 @@ public abstract class HelperIO {
         }
         
         final byte[] buffer = new byte[bufferSize];
-//
-//        if (!dest.exists()) {
-//            dest.createNewFile();
-//        }
+
+        if (!dest.exists()) {
+        	dest.mkdirs();
+        	dest.delete();
+            dest.createNewFile();
+        }
 
         InputStream is = null;
         OutputStream os = null;
@@ -995,4 +998,22 @@ public abstract class HelperIO {
     public static List<File> getFiles(final File path, final FileFilter filter) { //$JUnit$
          return getFiles(path, filter, -1);
     }
-}
+    
+	/**
+     * Searchs in a path (directory) for all files and directories and returns a {@link List} containing all {@link File}.
+     * 
+     * @param path for searching
+     * @return {@link List} containing the found files
+     * @see File
+     * @since 0.9.0
+     */
+    public static List<File> getFiles(final File path) { //$JUnit$
+	    final FileFilter filter = new FileFilter() { 
+	    	@Override
+            public boolean accept(final File file) {
+	    		return true;
+	    	} 
+	    }; 
+	    
+    	return getFiles(path, filter, -1);
+    }}

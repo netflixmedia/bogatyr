@@ -37,29 +37,27 @@ import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import ch.sisprocom.bogatyr.helper.unit.UnitBit;
 import ch.sisprocom.bogatyr.model.misc.Manufacturer;
 import ch.sisprocom.bogatyr.model.misc.ManufacturerImpl;
-import ch.sisprocom.bogatyr.model.unit.Bit;
 
 
 /**
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091206)
+ * @version 0.9.0 (20091214)
  * @since 0.7.0
  */
-public abstract class Constants {
+public class Constants {
 	//Bogatyr specific
 	public static final String BOGATYR_NAME		 		  = "Bogatyr"; //$NON-NLS-1$
 	public static final BigDecimal BOGATYR_VERSION 		  = new BigDecimal("0.9"); //$NON-NLS-1$
-	public static final int BOGATYR_BUILD 				  = 209;
+	public static final int BOGATYR_BUILD 				  = 211;
 	public static final Manufacturer BOGATYR_MANUFACTURER = new ManufacturerImpl();
 
-//	MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
+//	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
 	public static final MathContext DEFAULT_MATHCONTEXT = new MathContext(34, RoundingMode.DOWN);
-	public static final int DEFAULT_FILE_BUFFER_SIZE = UnitBit.convert(Bit.MEBIBYTE, Bit.BYTE, BigDecimal.ONE).intValue();
+	public static final int DEFAULT_FILE_BUFFER_SIZE = 1048576; //1MB
 	
 	//algebraic signs
 	public static final int POSITIVE 	 	 = 1;
@@ -86,7 +84,6 @@ public abstract class Constants {
 	static {
 		BOGATYR_MANUFACTURER.setName("SiSprocom GmbH"); //$NON-NLS-1$
 		BOGATYR_MANUFACTURER.setMail("laubenberger@gmail.com"); //$NON-NLS-1$
-		
 		try {
 			BOGATYR_MANUFACTURER.setURL(new URL("http://www.sisprocom.ch/bogatyr")); //$NON-NLS-1$
 		} catch (MalformedURLException ex) {
