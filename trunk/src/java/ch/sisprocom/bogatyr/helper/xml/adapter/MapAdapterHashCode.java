@@ -53,7 +53,7 @@ public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCode, String>
 	public XmlMap marshal(final Map<HashCode, String> map) throws Exception {
 		final XmlMap xmlMap = new XmlMap();
         for (final Map.Entry<HashCode, String> entry : map.entrySet() ) {
-        	xmlMap.getEntries().add(new XmlEntry(entry.getKey().toString(), entry.getValue()));
+        	xmlMap.getEntries().add(new XmlEntry(entry.getKey().name(), entry.getValue()));
         }
         return xmlMap;
 	}

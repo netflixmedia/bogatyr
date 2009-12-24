@@ -53,7 +53,7 @@ public class MapAdapterPlatform extends XmlAdapter<XmlMap, Map<Platform, String>
 	public XmlMap marshal(final Map<Platform, String> map) throws Exception {
 		final XmlMap xmlMap = new XmlMap();
         for (final Map.Entry<Platform, String> entry : map.entrySet() ) {
-        	xmlMap.getEntries().add(new XmlEntry(entry.getKey().toString(), entry.getValue()));
+        	xmlMap.getEntries().add(new XmlEntry(entry.getKey().name(), entry.getValue()));
         }
         return xmlMap;
 	}

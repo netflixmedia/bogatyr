@@ -52,7 +52,7 @@ public abstract class Constants {
 	//Bogatyr specific
 	public static final String BOGATYR_NAME		 		  = "Bogatyr"; //$NON-NLS-1$
 	public static final BigDecimal BOGATYR_VERSION 		  = new BigDecimal("0.9"); //$NON-NLS-1$
-	public static final int BOGATYR_BUILD 				  = 212;
+	public static final int BOGATYR_BUILD 				  = 213;
 	public static final Manufacturer BOGATYR_MANUFACTURER = new ManufacturerImpl();
 
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
