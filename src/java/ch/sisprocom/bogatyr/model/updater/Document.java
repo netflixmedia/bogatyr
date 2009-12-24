@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * The interface for the document model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.9.0
  */
 @XmlJavaTypeAdapter(DocumentImpl.XmlAdapter.class)
@@ -134,7 +134,7 @@ public interface Document extends Model {
     BigDecimal getVersion();
     void setVersion(BigDecimal version);
 
-    Integer getBuild();
+    int getBuild();
     void setBuild(int build);
 
     Date getCreated();

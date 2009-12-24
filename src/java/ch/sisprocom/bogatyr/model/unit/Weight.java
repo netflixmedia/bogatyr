@@ -34,14 +34,13 @@ package ch.sisprocom.bogatyr.model.unit;
 import java.math.BigDecimal;
 
 import ch.sisprocom.bogatyr.helper.Constants;
-import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.unit.UnitWeight;
 
 /**
  * Weight units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.7.0
  */
 public enum Weight implements Unit {
@@ -56,15 +55,6 @@ public enum Weight implements Unit {
 	
 	Weight(final BigDecimal factor) {
 		this.factor = factor;
-	}
-
-	
-    /*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 
 	

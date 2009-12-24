@@ -34,8 +34,6 @@ package ch.sisprocom.bogatyr.helper.xml;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -44,15 +42,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * 
  * @author Stefan Laubenberger
  * @author Roman Wuersch
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.9.0
  */
-@XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "map")
 public class XmlMap {
+	@XmlElement(name = "entry", required = true)
     private final List<XmlEntry> entries = new ArrayList<XmlEntry>();
     
-    @XmlElement(name = "entry", required = true)
     public List<XmlEntry> getEntries() {
         return entries;
     }

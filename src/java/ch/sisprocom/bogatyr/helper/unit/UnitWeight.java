@@ -41,10 +41,10 @@ import ch.sisprocom.bogatyr.model.unit.Weight;
  * Converts different units of weight.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.7.0
  */
-public abstract class UnitWeight extends UnitConverter {
+public abstract class UnitWeight {
 	public static final BigDecimal FACTOR_MILLIGRAM_TO_GRAM = HelperNumber.BIGDECIMAL_1000; //milligram to gram
 	public static final BigDecimal FACTOR_GRAM_TO_KILOGRAM  = HelperNumber.BIGDECIMAL_1000; //gram to kilogram
 	public static final BigDecimal FACTOR_OUNCE_TO_GRAM 	= new BigDecimal("28.34952"); //ounce to gram //$NON-NLS-1$

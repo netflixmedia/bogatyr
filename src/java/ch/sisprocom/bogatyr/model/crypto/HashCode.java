@@ -31,13 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.crypto;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
 
 /**
  * Hash codes available in BouncyCastle
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091224)
  * @since 0.9.0
  */
 public enum HashCode {
@@ -59,15 +58,6 @@ public enum HashCode {
 
     public String getAlgorithm() {
 		return algorithm;
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }	
 

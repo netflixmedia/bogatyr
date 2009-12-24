@@ -49,7 +49,7 @@ import java.util.Collection;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20091224)
  * @since 0.4.0
  */
 public abstract class HelperGraphic {
@@ -105,11 +105,8 @@ public abstract class HelperGraphic {
 		
 		final double scaleHeight =  input.getHeight() / output.getHeight();
 		final double scaleWidth =  input.getWidth() / output.getWidth();
-		final double scale;
 
-        scale = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
-		
-    	return scale;
+        return scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
 	}
     
     /**
@@ -131,9 +128,7 @@ public abstract class HelperGraphic {
 		
 		final double scaleHeight = input.getHeight() / output.getHeight();
 		final double scaleWidth = input.getWidth() / output.getWidth();
-		final double scale;
-
-        scale = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
+        final double scale = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
 		
 		return new Dimension(HelperMath.convertDoubleToInt(input.getWidth() / scale), HelperMath.convertDoubleToInt(input.getHeight() / scale));
 	}    

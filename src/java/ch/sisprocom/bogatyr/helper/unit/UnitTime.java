@@ -41,10 +41,10 @@ import ch.sisprocom.bogatyr.model.unit.Time;
  * Converts different units of weight.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.8.0
  */
-public abstract class UnitTime extends UnitConverter {
+public abstract class UnitTime {
 	public static final BigDecimal FACTOR_NANOSECOND_TO_SECOND 	= new BigDecimal("1000000000"); //nanoseconds to seconds //$NON-NLS-1$
 	public static final BigDecimal FACTOR_MICROSECOND_TO_SECOND = HelperNumber.BIGDECIMAL_1000000; //microseconds to seconds
 	public static final BigDecimal FACTOR_MILLISECOND_TO_SECOND = HelperNumber.BIGDECIMAL_1000; //milliseconds to seconds

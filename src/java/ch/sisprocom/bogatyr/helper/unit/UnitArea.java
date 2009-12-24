@@ -41,10 +41,10 @@ import ch.sisprocom.bogatyr.model.unit.Area;
  * Converts different units of area.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.7.0
  */
-public abstract class UnitArea extends UnitConverter {
+public abstract class UnitArea {
 	public static final BigDecimal FACTOR_MM2_TO_CM2 	  = HelperNumber.BIGDECIMAL_100; //millimeters^2 to centimeters^2
 	public static final BigDecimal FACTOR_CM2_TO_M2 	  = HelperNumber.BIGDECIMAL_10000; //centimeters^2 to meters^2
 	public static final BigDecimal FACTOR_M2_TO_AREA 	  = HelperNumber.BIGDECIMAL_100; //meters^2 to area

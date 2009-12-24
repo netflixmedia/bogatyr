@@ -47,7 +47,7 @@ import java.util.zip.ZipOutputStream;
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.3.0
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
@@ -103,7 +103,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 //	/**
 //     * Writes a compressed stream.
 //     * 
-//     * @param os OutputStram to compress
+//     * @param os OutputStream to compress
 //     * @return Compressed OutputStream
 //     * @throws java.io.IOException
 //     */	
@@ -246,13 +246,13 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	    	BufferedOutputStream bos = null;
  
 	    	final byte[] buffer = new byte[bufferSize];
-	    	int offset;
 	    	
 	    	try {
                 bis = new BufferedInputStream(zipFile.getInputStream(entry));
                 bos = new BufferedOutputStream(new FileOutputStream(file));
 
-                while (-1 != (offset = bis.read(buffer))) { 
+                int offset;
+                while (-1 != (offset = bis.read(buffer))) {
 	    			bos.write(buffer, 0, offset); 
 	    		}
 	    	} finally { 

@@ -33,14 +33,13 @@ package ch.sisprocom.bogatyr.model.unit;
 
 import java.math.BigDecimal;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.unit.UnitTime;
 
 /**
  * Time units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.8.0
  */
 public enum Time implements Unit {
@@ -59,15 +58,6 @@ public enum Time implements Unit {
 	
 	Time(final BigDecimal factor) {
 		this.factor = factor;
-	}
-
-
-    /*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 
 	

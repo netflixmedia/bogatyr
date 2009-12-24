@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.service.property.Property;
  * The interface for the application model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.9.0
  */
 @XmlJavaTypeAdapter(ModelApplicationImpl.XmlAdapter.class)
@@ -109,7 +109,7 @@ public interface ModelApplication extends Model {
     BigDecimal getVersion();
     void setVersion(BigDecimal version);
 
-    Integer getBuild();
+    int getBuild();
     void setBuild(int build);
 
     Date getCreated();

@@ -32,7 +32,6 @@
 package ch.sisprocom.bogatyr.helper.xml.adapter;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
@@ -45,25 +44,24 @@ import ch.sisprocom.bogatyr.model.crypto.HashCode;
  * Map adapter for the key {@link HashCode} and value {@link String}.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.9.0
  */
 public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCode, String>> {
 
 	@Override
 	public XmlMap marshal(final Map<HashCode, String> map) throws Exception {
-		final XmlMap myMap = new XmlMap();
-        final List<XmlEntry> list = myMap.getEntries();
+		final XmlMap xmlMap = new XmlMap();
         for (final Map.Entry<HashCode, String> entry : map.entrySet() ) {
-            list.add(new XmlEntry(entry.getKey().toString(), entry.getValue()));
+        	xmlMap.getEntries().add(new XmlEntry(entry.getKey().toString(), entry.getValue()));
         }
-        return myMap;
+        return xmlMap;
 	}
 
 	@Override
-	public Map<HashCode, String> unmarshal(final XmlMap myMap) throws Exception {
-        final Map<HashCode, String> map = new HashMap<HashCode, String>(myMap.getEntries().size());
-        for (final XmlEntry entry : myMap.getEntries() ) {
+	public Map<HashCode, String> unmarshal(final XmlMap xmlMap) throws Exception {
+		final Map<HashCode, String> map = new HashMap<HashCode, String>(xmlMap.getEntries().size());
+        for (final XmlEntry entry : xmlMap.getEntries() ) {
             map.put(HashCode.valueOf(entry.getKey()), entry.getValue());
         }
         return map;

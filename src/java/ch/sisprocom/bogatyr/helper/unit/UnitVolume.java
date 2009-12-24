@@ -41,10 +41,10 @@ import ch.sisprocom.bogatyr.model.unit.Volume;
  * Converts different units of volume.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.7.0
  */
-public abstract class UnitVolume extends UnitConverter {
+public abstract class UnitVolume {
 	public static final BigDecimal FACTOR_MM3_TO_CM3 	 = HelperNumber.BIGDECIMAL_1000; //millimeters^3 to centimeters^3
 	public static final BigDecimal FACTOR_CM3_TO_L 		 = HelperNumber.BIGDECIMAL_1000; //centimeters^3 to liter
 	public static final BigDecimal FACTOR_L_TO_M3 		 = HelperNumber.BIGDECIMAL_1000; //liter to m^3
