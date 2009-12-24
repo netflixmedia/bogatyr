@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.model.unit.Unit;
  * Converts different units.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.9.0
  */
 public abstract class UnitConverter {   
@@ -54,7 +54,7 @@ public abstract class UnitConverter {
      * @return value in the new unit
      * @since 0.9.0
      */
-    protected static <T extends Unit> BigDecimal convert(final T fromUnit, final T toUnit, final BigDecimal value) { //$JUnit$
+    public static <T extends Unit> BigDecimal convert(final T fromUnit, final T toUnit, final BigDecimal value) { //$JUnit$
 		if (null == fromUnit) {
 			throw new IllegalArgumentException("fromUnit is null!"); //$NON-NLS-1$
 		}

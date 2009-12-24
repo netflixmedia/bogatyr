@@ -42,7 +42,7 @@ import java.util.Collection;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.4.0
  */
 public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
@@ -62,7 +62,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 			 throw new IllegalArgumentException("b value must be positive: " + b); //$NON-NLS-1$
 		 }
 		 
-		 if (a.compareTo(b) == 0) {
+		 if (0 == a.compareTo(b)) {
 			 return a;
 		 }
 		 

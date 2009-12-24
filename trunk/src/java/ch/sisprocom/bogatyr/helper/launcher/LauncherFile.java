@@ -46,7 +46,7 @@ import java.io.InputStream;
  * This launcher opens, edits and prints files with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091110)
+ * @version 0.9.0 (20091224)
  * @since 0.7.0
  */
 public abstract class LauncherFile {
@@ -272,8 +272,7 @@ public abstract class LauncherFile {
 	 * Private methods
 	 */
 	private static File createTemporaryFile(final byte[] data, final String extension) throws IOException {
-		final File file;
-        file = extension.startsWith(HelperString.PERIOD) ? new File(PATH, IDENTIFIER + System.currentTimeMillis() + extension) : new File(PATH, IDENTIFIER + System.currentTimeMillis() + HelperString.PERIOD + extension);
+		final File file = extension.startsWith(HelperString.PERIOD) ? new File(PATH, IDENTIFIER + System.currentTimeMillis() + extension) : new File(PATH, IDENTIFIER + System.currentTimeMillis() + HelperString.PERIOD + extension);
 
 		HelperIO.writeFile(file, data, false);
 		

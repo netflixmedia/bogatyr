@@ -31,13 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.misc;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
 
 /**
  * Possible platforms
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091121)
+ * @version 0.9.0 (20091224)
  * @since 0.9.0
  */
 public enum Platform {
@@ -55,15 +54,6 @@ public enum Platform {
 
     public String getName() {
 		return name;
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }	
 

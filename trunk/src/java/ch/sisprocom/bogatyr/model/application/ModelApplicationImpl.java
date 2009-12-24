@@ -56,11 +56,11 @@ import ch.sisprocom.bogatyr.service.property.Property;
  * The implementation of the application model.
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.9.0
  */
-@XmlType(propOrder={"name", "version", "build", "created", "manufacturer", "UUID", "debug", "hashs"})
 @XmlRootElement(name = "application")
+@XmlType(propOrder={"name", "version", "build", "created", "manufacturer", "UUID", "debug", "hashs"})
 public class ModelApplicationImpl extends ModelAbstract implements ModelApplication {
 	private static final long serialVersionUID = -2826684498598090349L;
 
@@ -80,12 +80,78 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
     }
     
 	
-    /*
+	/*
+     * Overridden methods
+     */
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + build;
+		result = prime * result + ((created == null) ? 0 : created.hashCode());
+		result = prime * result + (isDebug ? 1231 : 1237);
+		result = prime * result
+				+ ((manufacturer == null) ? 0 : manufacturer.hashCode());
+		result = prime * result + ((mapHash == null) ? 0 : mapHash.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+		result = prime * result + ((version == null) ? 0 : version.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ModelApplicationImpl other = (ModelApplicationImpl) obj;
+		if (build != other.build)
+			return false;
+		if (created == null) {
+			if (other.created != null)
+				return false;
+		} else if (!created.equals(other.created))
+			return false;
+		if (isDebug != other.isDebug)
+			return false;
+		if (manufacturer == null) {
+			if (other.manufacturer != null)
+				return false;
+		} else if (!manufacturer.equals(other.manufacturer))
+			return false;
+		if (mapHash == null) {
+			if (other.mapHash != null)
+				return false;
+		} else if (!mapHash.equals(other.mapHash))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
+			return false;
+		if (version == null) {
+			if (other.version != null)
+				return false;
+		} else if (!version.equals(other.version))
+			return false;
+		return true;
+	}
+
+
+	/*
      * Implemented methods
      */
 	@XmlElement
 	@Override
-	public Integer getBuild() {
+	public int getBuild() {
 		return build;
 	}
 	

@@ -41,10 +41,10 @@ import ch.sisprocom.bogatyr.model.unit.Bit;
  * Converts different units of bit.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.9.0
  */
-public abstract class UnitBit extends UnitConverter {
+public abstract class UnitBit {
 	public static final BigDecimal FACTOR_BIT_TO_BYTE = HelperNumber.BIGDECIMAL_8; //bit to byte
 
 	public static final BigDecimal FACTOR_BIT_TO_KILOBIT  = new BigDecimal("10E2"); //$NON-NLS-1$

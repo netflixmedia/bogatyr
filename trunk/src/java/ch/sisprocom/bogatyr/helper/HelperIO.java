@@ -64,7 +64,7 @@ import javax.swing.filechooser.FileSystemView;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091214)
+ * @version 0.9.0 (20091224)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -90,8 +90,7 @@ public abstract class HelperIO {
 		}
 
 		// Create temp file
-		final File file;
-        file = extension.startsWith(HelperString.PERIOD) ? File.createTempFile(name, extension) : File.createTempFile(name, HelperString.PERIOD + extension);
+		final File file = extension.startsWith(HelperString.PERIOD) ? File.createTempFile(name, extension) : File.createTempFile(name, HelperString.PERIOD + extension);
 		
 	    // Delete temp file when program exits
 	    file.deleteOnExit();
@@ -160,7 +159,7 @@ public abstract class HelperIO {
      * Copy a {@link File}.
      *
      * @param source {@link File} to copy
-     * @param dest {@link File} detination
+     * @param dest {@link File} destination
      * @param bufferSize in bytes
      * @throws IOException
      * @see File

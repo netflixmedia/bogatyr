@@ -47,11 +47,11 @@ import java.util.List;
 
 
 /**
- * This is a chart class with labled x- and y-axes.
+ * This is a chart class with labeled x- and y-axes.
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091210)
+ * @version 0.8.0 (20091224)
  * @since 0.5.0
  */
 public class Chart extends Panel {

@@ -42,10 +42,10 @@ import ch.sisprocom.bogatyr.model.unit.Length;
  * Converts different units of length.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20091224)
  * @since 0.7.0
  */
-public abstract class UnitLength extends UnitConverter {
+public abstract class UnitLength {
 	public static final BigDecimal FACTOR_INCH_TO_CM 		 = new BigDecimal("2.54"); //inch to centimeters //$NON-NLS-1$
 	public static final BigDecimal FACTOR_FOOT_TO_M 		 = new BigDecimal("0.3048"); //foot to meters //$NON-NLS-1$
 	public static final BigDecimal FACTOR_YARD_TO_M 		 = new BigDecimal("0.9144"); //yard to meters //$NON-NLS-1$
