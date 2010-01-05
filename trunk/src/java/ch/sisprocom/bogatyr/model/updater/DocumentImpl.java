@@ -49,7 +49,9 @@ import ch.sisprocom.bogatyr.helper.xml.adapter.MapAdapterPlatform;
 import ch.sisprocom.bogatyr.model.ModelAbstract;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
 import ch.sisprocom.bogatyr.model.misc.Manufacturer;
+import ch.sisprocom.bogatyr.model.misc.Owner;
 import ch.sisprocom.bogatyr.model.misc.Platform;
+import ch.sisprocom.bogatyr.model.misc.Publisher;
 
 
 /**
@@ -60,7 +62,7 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * @since 0.9.0
  */
 @XmlRootElement(name = "document")
-@XmlType(propOrder={"name", "version", "build", "created", "manufacturer", "UUID", "locations", "hashs"})
+@XmlType(propOrder={"name", "version", "build", "created", "manufacturer", "owner", "publisher", "UUID", "locations", "hashs"})
 public class DocumentImpl extends ModelAbstract implements Document {
 	private static final long serialVersionUID = -2826684498598090349L;
 
@@ -71,6 +73,8 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	private int build;
 	private Date created;
 	private Manufacturer manufacturer;
+	private Owner owner;
+	private Publisher publisher;
 	private UUID uuid;
 
     public DocumentImpl() {
@@ -93,10 +97,14 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		result = prime * result
 				+ ((mapLocation == null) ? 0 : mapLocation.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
+		result = prime * result
+				+ ((publisher == null) ? 0 : publisher.hashCode());
 		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -134,6 +142,16 @@ public class DocumentImpl extends ModelAbstract implements Document {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (owner == null) {
+			if (other.owner != null)
+				return false;
+		} else if (!owner.equals(other.owner))
+			return false;
+		if (publisher == null) {
+			if (other.publisher != null)
+				return false;
+		} else if (!publisher.equals(other.publisher))
+			return false;
 		if (uuid == null) {
 			if (other.uuid != null)
 				return false;
@@ -156,8 +174,8 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	public int getBuild() {
 		return build;
 	}
-	
-    @Override
+
+	@Override
 	public String getLocation() {
 		return getLocation(Platform.ANY);
 	}
@@ -224,6 +242,18 @@ public class DocumentImpl extends ModelAbstract implements Document {
 
 	@Override
     @XmlElement
+	public Owner getOwner() {
+		return owner;
+	}
+
+	@Override
+    @XmlElement
+	public Publisher getPublisher() {
+		return publisher;
+	}
+
+	@Override
+    @XmlElement
 	public UUID getUUID() {
 		return uuid;
 	}
@@ -264,6 +294,24 @@ public class DocumentImpl extends ModelAbstract implements Document {
             this.manufacturer = manufacturer;
             setChanged();
             notifyObservers(MEMBER_MANUFACTURER);
+        }
+	}
+
+	@Override
+	public void setOwner(final Owner owner) {
+        if (!HelperObject.isEquals(owner, this.owner)) {
+            this.owner = owner;
+            setChanged();
+            notifyObservers(MEMBER_OWNER);
+        }
+	}
+
+	@Override
+	public void setPublisher(final Publisher publisher) {
+        if (!HelperObject.isEquals(publisher, this.publisher)) {
+            this.publisher = publisher;
+            setChanged();
+            notifyObservers(MEMBER_PUBLISHER);
         }
 	}
 

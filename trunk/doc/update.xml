@@ -2,23 +2,45 @@
 <document>
     <name>Bogatyr</name>
     <version>0.9</version>
-    <build>209</build>
-    <created>2009-12-06T03:41:39.687+07:00</created>
+    <build>214</build>
+    <created>2010-01-05T01:35:01.493+01:00</created>
     <manufacturer>
         <name>SiSprocom GmbH</name>
         <URL>http://www.sisprocom.ch/bogatyr</URL>
         <mail>laubenberger@gmail.com</mail>
     </manufacturer>
-    <UUID>1f74a4d0-561a-4454-8e9f-d638bfbfa4f2</UUID>
+    <owner>
+        <name>SiSprocom GmbH</name>
+        <URL>http://www.sisprocom.ch</URL>
+        <mail>info@sisprocom.ch</mail>
+    </owner>
+    <publisher>
+        <name>SiSprocom GmbH</name>
+        <URL>http://www.sisprocom.ch</URL>
+        <mail>info@sisprocom.ch</mail>
+    </publisher>
+    <UUID>3e213421-4d8f-45bc-94b3-f5f6637be68a</UUID>
     <locations>
         <entry>
-            <key>ch.sisprocom.bogatyr.model.misc.Platform[ANY=ch.sisprocom.bogatyr.model.misc.Platform, MAC_OSX=ch.sisprocom.bogatyr.model.misc.Platform, WINDOWS=ch.sisprocom.bogatyr.model.misc.Platform, UNIX=ch.sisprocom.bogatyr.model.misc.Platform, name=Any platform, ENUM$VALUES=[Lch.sisprocom.bogatyr.model.misc.Platform;@36b60b93]</key>
-            <value>http://code.google.com/p/bogatyr/downloads/list</value>
+            <key>MAC_OSX</key>
+            <value>www.apple.com</value>
+        </entry>
+        <entry>
+            <key>UNIX</key>
+            <value>www.unix.com</value>
+        </entry>
+        <entry>
+            <key>WINDOWS</key>
+            <value>www.ms.com</value>
         </entry>
     </locations>
     <hashs>
         <entry>
-            <key>ch.sisprocom.bogatyr.model.crypto.HashCode[MD5=ch.sisprocom.bogatyr.model.crypto.HashCode, SHA1=ch.sisprocom.bogatyr.model.crypto.HashCode, SHA256=ch.sisprocom.bogatyr.model.crypto.HashCode, SHA512=ch.sisprocom.bogatyr.model.crypto.HashCode, RIPEMD160=ch.sisprocom.bogatyr.model.crypto.HashCode, RIPEMD320=ch.sisprocom.bogatyr.model.crypto.HashCode, TIGER=ch.sisprocom.bogatyr.model.crypto.HashCode, WHIRLPOOL=ch.sisprocom.bogatyr.model.crypto.HashCode, algorithm=SHA256, ENUM$VALUES=[Lch.sisprocom.bogatyr.model.crypto.HashCode;@527736bd]</key>
+            <key>MD5</key>
+            <value>MD5-Hashvalue</value>
+        </entry>
+        <entry>
+            <key>SHA256</key>
             <value>SHA256-Hashvalue</value>
         </entry>
     </hashs>
