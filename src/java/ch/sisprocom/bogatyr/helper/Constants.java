@@ -39,21 +39,27 @@ import java.net.URL;
 
 import ch.sisprocom.bogatyr.model.misc.Manufacturer;
 import ch.sisprocom.bogatyr.model.misc.ManufacturerImpl;
+import ch.sisprocom.bogatyr.model.misc.Owner;
+import ch.sisprocom.bogatyr.model.misc.OwnerImpl;
+import ch.sisprocom.bogatyr.model.misc.Publisher;
+import ch.sisprocom.bogatyr.model.misc.PublisherImpl;
 
 
 /**
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.0 (20100105)
  * @since 0.7.0
  */
 public abstract class Constants {
 	//Bogatyr specific
 	public static final String BOGATYR_NAME		 		  = "Bogatyr"; //$NON-NLS-1$
 	public static final BigDecimal BOGATYR_VERSION 		  = new BigDecimal("0.9"); //$NON-NLS-1$
-	public static final int BOGATYR_BUILD 				  = 213;
+	public static final int BOGATYR_BUILD 				  = 214;
 	public static final Manufacturer BOGATYR_MANUFACTURER = new ManufacturerImpl();
+	public static final Owner BOGATYR_OWNER 			  = new OwnerImpl();
+	public static final Publisher BOGATYR_PUBLISHER		  = new PublisherImpl();
 
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
 	public static final MathContext DEFAULT_MATHCONTEXT = new MathContext(34, RoundingMode.DOWN);
@@ -84,8 +90,14 @@ public abstract class Constants {
 	static {
 		BOGATYR_MANUFACTURER.setName("SiSprocom GmbH"); //$NON-NLS-1$
 		BOGATYR_MANUFACTURER.setMail("laubenberger@gmail.com"); //$NON-NLS-1$
+		BOGATYR_OWNER.setName("SiSprocom GmbH"); //$NON-NLS-1$
+		BOGATYR_OWNER.setMail("info@sisprocom.ch"); //$NON-NLS-1$
+		BOGATYR_PUBLISHER.setName("SiSprocom GmbH"); //$NON-NLS-1$
+		BOGATYR_PUBLISHER.setMail("info@sisprocom.ch"); //$NON-NLS-1$
 		try {
 			BOGATYR_MANUFACTURER.setURL(new URL("http://www.sisprocom.ch/bogatyr")); //$NON-NLS-1$
+			BOGATYR_OWNER.setURL(new URL("http://www.sisprocom.ch")); //$NON-NLS-1$
+			BOGATYR_PUBLISHER.setURL(new URL("http://www.sisprocom.ch")); //$NON-NLS-1$
 		} catch (MalformedURLException ex) {
 			// should never happen!
 			ex.printStackTrace();

@@ -52,7 +52,7 @@ import ch.sisprocom.bogatyr.model.updater.DocumentImpl;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091224
+ * @version 20100105
  */
 public class UpdaterTest {
 	@Before
@@ -75,6 +75,8 @@ public class UpdaterTest {
 		doc.setVersion(Constants.BOGATYR_VERSION);
 		doc.setBuild(Constants.BOGATYR_BUILD);
 		doc.setManufacturer(Constants.BOGATYR_MANUFACTURER);
+		doc.setOwner(Constants.BOGATYR_OWNER);
+		doc.setPublisher(Constants.BOGATYR_PUBLISHER);
 		doc.setCreated(new Date());
 		doc.setUUID(HelperCrypto.getUUID());
 		
@@ -83,7 +85,7 @@ public class UpdaterTest {
 		try {
 			HelperXml.serialize(doc, new File("/Users/Shared/Transfer/test.xml"));
 	//		HelperXml.serialize(docs, new File("/Users/Shared/Transfer/test.xml"));
-			
+			System.out.println("hi");
 			final Document doc2 = HelperXml.deserialize(DocumentImpl.class, new File("/Users/Shared/Transfer/test.xml"));
 	
 			System.out.println(doc2.getHashs());
@@ -94,6 +96,15 @@ public class UpdaterTest {
 		}
 	}
 
+	public static void main(String[] args) {
+		try {
+			new UpdaterTest().setUp();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	@Test
 	public void testGetDocuments() {
 	}

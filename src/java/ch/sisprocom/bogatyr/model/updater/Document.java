@@ -41,13 +41,15 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import ch.sisprocom.bogatyr.model.Model;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
 import ch.sisprocom.bogatyr.model.misc.Manufacturer;
+import ch.sisprocom.bogatyr.model.misc.Owner;
 import ch.sisprocom.bogatyr.model.misc.Platform;
+import ch.sisprocom.bogatyr.model.misc.Publisher;
 
 /**
  * The interface for the document model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.0 (20100105)
  * @since 0.9.0
  */
 @XmlJavaTypeAdapter(DocumentImpl.XmlAdapter.class)
@@ -59,6 +61,8 @@ public interface Document extends Model {
     String MEMBER_BUILD        = Document.class.getName() + ".build"; //$NON-NLS-1$
     String MEMBER_CREATED	   = Document.class.getName() + ".created"; //$NON-NLS-1$
     String MEMBER_MANUFACTURER = Document.class.getName() + ".manufacturer"; //$NON-NLS-1$
+    String MEMBER_OWNER		   = Document.class.getName() + ".owner"; //$NON-NLS-1$
+    String MEMBER_PUBLISHER    = Document.class.getName() + ".publisher"; //$NON-NLS-1$
     String MEMBER_UUID     	   = Document.class.getName() + ".UUID"; //$NON-NLS-1$
 
 
@@ -142,7 +146,13 @@ public interface Document extends Model {
     
     Manufacturer getManufacturer();
     void setManufacturer(Manufacturer manufacturer);
-
+    
+    Owner getOwner();
+    void setOwner(Owner owner);
+    
+    Publisher getPublisher();
+    void setPublisher(Publisher publisher);
+    
     UUID getUUID();
     void setUUID(UUID uuid);
 }
