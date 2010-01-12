@@ -41,7 +41,6 @@ import java.math.RoundingMode;
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.unit.UnitLength;
 import ch.sisprocom.bogatyr.model.unit.Length;
 
 
@@ -49,71 +48,62 @@ import ch.sisprocom.bogatyr.model.unit.Length;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091210
+ * @version 20100112
  */
 public class UnitLengthTest {
 	private static final MathContext MC = new MathContext(5, RoundingMode.HALF_EVEN);
 	
-	@Test
-	public void testPixelToCm() {
-		assertTrue(0 == new BigDecimal("28.222").compareTo(UnitLength.pixelToCm(new BigDecimal("800")).round(MC))); //$NON-NLS-1$ //$NON-NLS-2$
-	}
-	
-	@Test
-	public void testCmToPixel() {
-		assertTrue(0 == new BigDecimal("799.99").compareTo(UnitLength.cmToPixel(new BigDecimal("28.222")).round(MC))); //$NON-NLS-1$ //$NON-NLS-2$
-	}
-
-	@Test
-	public void testPixelToInch() {
-		assertTrue(0 == BigDecimal.ONE.compareTo(UnitLength.pixelToInch(new BigDecimal("72")))); //$NON-NLS-1$
-	}
-	
-	@Test
-	public void testInchToPixel() {
-		assertTrue(0 == new BigDecimal("72").compareTo(UnitLength.inchToPixel(BigDecimal.ONE))); //$NON-NLS-1$
-	}
+//	@Test
+//	public void testPixelToCm() {
+//		assertTrue(0 == new BigDecimal("28.222").compareTo(UnitLength.pixelToCm(new BigDecimal("800")).round(MC))); //$NON-NLS-1$ //$NON-NLS-2$
+//	}
+//	
+//	@Test
+//	public void testCmToPixel() {
+//		assertTrue(0 == new BigDecimal("799.99").compareTo(UnitLength.cmToPixel(new BigDecimal("28.222")).round(MC))); //$NON-NLS-1$ //$NON-NLS-2$
+//	}
+//
+//	@Test
+//	public void testPixelToInch() {
+//		assertTrue(0 == BigDecimal.ONE.compareTo(UnitLength.pixelToInch(new BigDecimal("72")))); //$NON-NLS-1$
+//	}
+//	
+//	@Test
+//	public void testInchToPixel() {
+//		assertTrue(0 == new BigDecimal("72").compareTo(UnitLength.inchToPixel(BigDecimal.ONE))); //$NON-NLS-1$
+//	}
 	
 	@Test
 	public void testConvert() {
-		assertTrue(0 == new BigDecimal("0.1").compareTo(UnitLength.convert(Length.MM, Length.CM, BigDecimal.ONE))); //$NON-NLS-1$
-		assertTrue(0 == BigDecimal.ONE.compareTo(UnitLength.convert(Length.CM, Length.MM, new BigDecimal("0.1")))); //$NON-NLS-1$
+		assertTrue(0 == new BigDecimal("0.1").compareTo(Length.MM.convertTo(Length.CM, BigDecimal.ONE))); //$NON-NLS-1$
+		assertTrue(0 == BigDecimal.ONE.compareTo(Length.CM.convertTo(Length.MM, new BigDecimal("0.1")))); //$NON-NLS-1$
 
-		assertTrue(0 == BigDecimal.TEN.compareTo(UnitLength.convert(Length.CM, Length.MM, BigDecimal.ONE)));
-		assertTrue(0 == BigDecimal.ONE.compareTo(UnitLength.convert(Length.MM, Length.CM, BigDecimal.TEN)));
+		assertTrue(0 == BigDecimal.TEN.compareTo(Length.CM.convertTo(Length.MM, BigDecimal.ONE)));
+		assertTrue(0 == BigDecimal.ONE.compareTo(Length.MM.convertTo(Length.CM, BigDecimal.TEN)));
 
-		assertTrue(0 == new BigDecimal("0.01").compareTo(UnitLength.convert(Length.CM, Length.M, BigDecimal.ONE))); //$NON-NLS-1$
-		assertTrue(0 == HelperNumber.BIGDECIMAL_100.compareTo(UnitLength.convert(Length.M, Length.CM, BigDecimal.ONE)));
+		assertTrue(0 == new BigDecimal("0.01").compareTo(Length.CM.convertTo(Length.M, BigDecimal.ONE))); //$NON-NLS-1$
+		assertTrue(0 == HelperNumber.BIGDECIMAL_100.compareTo(Length.M.convertTo(Length.CM, BigDecimal.ONE)));
 
-		assertTrue(0 == HelperNumber.BIGDECIMAL_100000.compareTo(UnitLength.convert(Length.KM, Length.CM, BigDecimal.ONE)));
-		assertTrue(0 == BigDecimal.ONE.compareTo(UnitLength.convert(Length.CM, Length.KM, HelperNumber.BIGDECIMAL_100000)));
+		assertTrue(0 == HelperNumber.BIGDECIMAL_100000.compareTo(Length.KM.convertTo(Length.CM, BigDecimal.ONE)));
+		assertTrue(0 == BigDecimal.ONE.compareTo(Length.CM.convertTo(Length.KM, HelperNumber.BIGDECIMAL_100000)));
 
-		assertTrue(0 == new BigDecimal("2.54").compareTo(UnitLength.convert(Length.INCH, Length.CM, BigDecimal.ONE))); //$NON-NLS-1$
-		assertTrue(0 == BigDecimal.ONE.compareTo(UnitLength.convert(Length.CM, Length.INCH, new BigDecimal("2.54")).round(MC))); //$NON-NLS-1$
+		assertTrue(0 == new BigDecimal("2.54").compareTo(Length.INCH.convertTo(Length.CM, BigDecimal.ONE))); //$NON-NLS-1$
+		assertTrue(0 == BigDecimal.ONE.compareTo(Length.CM.convertTo(Length.INCH, new BigDecimal("2.54")).round(MC))); //$NON-NLS-1$
 
-		assertTrue(0 == new BigDecimal("30.48").compareTo(UnitLength.convert(Length.FOOT, Length.CM, BigDecimal.ONE))); //$NON-NLS-1$
-		assertTrue(0 == BigDecimal.ONE.compareTo(UnitLength.convert(Length.CM, Length.FOOT, new BigDecimal("30.48")).round(MC))); //$NON-NLS-1$
+		assertTrue(0 == new BigDecimal("30.48").compareTo(Length.FOOT.convertTo(Length.CM, BigDecimal.ONE))); //$NON-NLS-1$
+		assertTrue(0 == BigDecimal.ONE.compareTo(Length.CM.convertTo(Length.FOOT, new BigDecimal("30.48")).round(MC))); //$NON-NLS-1$
 
-		assertTrue(0 == new BigDecimal("91.44").compareTo(UnitLength.convert(Length.YARD, Length.CM, BigDecimal.ONE))); //$NON-NLS-1$
-		assertTrue(0 == BigDecimal.ONE.compareTo(UnitLength.convert(Length.CM, Length.YARD, new BigDecimal("91.44")).round(MC))); //$NON-NLS-1$
+		assertTrue(0 == new BigDecimal("91.44").compareTo(Length.YARD.convertTo(Length.CM, BigDecimal.ONE))); //$NON-NLS-1$
+		assertTrue(0 == BigDecimal.ONE.compareTo(Length.CM.convertTo(Length.YARD, new BigDecimal("91.44")).round(MC))); //$NON-NLS-1$
 
-		assertTrue(0 == new BigDecimal("1.609344").compareTo(UnitLength.convert(Length.MILE, Length.KM, BigDecimal.ONE))); //$NON-NLS-1$
-		assertTrue(0 == BigDecimal.ONE.compareTo(UnitLength.convert(Length.KM, Length.MILE, new BigDecimal("1.609344")).round(MC))); //$NON-NLS-1$
+		assertTrue(0 == new BigDecimal("1.609344").compareTo(Length.MILE.convertTo(Length.KM, BigDecimal.ONE))); //$NON-NLS-1$
+		assertTrue(0 == BigDecimal.ONE.compareTo(Length.KM.convertTo(Length.MILE, new BigDecimal("1.609344")).round(MC))); //$NON-NLS-1$
 
-		assertTrue(0 == new BigDecimal("1.852").compareTo(UnitLength.convert(Length.NAUTICAL_MILE, Length.KM, BigDecimal.ONE))); //$NON-NLS-1$
-		assertTrue(0 == BigDecimal.ONE.compareTo(UnitLength.convert(Length.KM, Length.NAUTICAL_MILE, new BigDecimal("1.852")).round(MC))); //$NON-NLS-1$
-
-		try {
-			UnitLength.convert(null, null, BigDecimal.ONE);
-			fail("fromUnit is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+		assertTrue(0 == new BigDecimal("1.852").compareTo(Length.NAUTICAL_MILE.convertTo(Length.KM, BigDecimal.ONE))); //$NON-NLS-1$
+		assertTrue(0 == BigDecimal.ONE.compareTo(Length.KM.convertTo(Length.NAUTICAL_MILE, new BigDecimal("1.852")).round(MC))); //$NON-NLS-1$
 		
 		try {
-			UnitLength.convert(Length.KM, null, BigDecimal.ONE);
+			Length.KM.convertTo(null, BigDecimal.ONE);
 			fail("toUnit is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -122,7 +112,7 @@ public class UnitLengthTest {
 		}
 		
 		try {
-			UnitLength.convert(Length.KM, Length.M, null);
+			Length.KM.convertTo(Length.M, null);
 			fail("value is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

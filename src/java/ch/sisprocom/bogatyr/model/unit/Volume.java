@@ -34,24 +34,23 @@ package ch.sisprocom.bogatyr.model.unit;
 import java.math.BigDecimal;
 
 import ch.sisprocom.bogatyr.helper.Constants;
-import ch.sisprocom.bogatyr.helper.unit.UnitVolume;
 
 /**
  * Volume units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.0 (20100112)
  * @since 0.7.0
  */
-public enum Volume implements Unit {
-	MM3(UnitVolume.FACTOR_MM3_TO_CM3.multiply(UnitVolume.FACTOR_CM3_TO_L, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	CM3(UnitVolume.FACTOR_CM3_TO_L), //$JUnit$
+public enum Volume {
+	MM3(Constants.FACTOR_MM3_TO_CM3.multiply(Constants.FACTOR_CM3_TO_L, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	CM3(Constants.FACTOR_CM3_TO_L), //$JUnit$
 	L(BigDecimal.ONE),
-	M3(BigDecimal.ONE.divide(UnitVolume.FACTOR_L_TO_M3, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	PINT(UnitVolume.FACTOR_PINT_TO_CM3.multiply(UnitVolume.FACTOR_CM3_TO_L, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	QUART(UnitVolume.FACTOR_QUART_TO_L), //$JUnit$
-	GALLON_US(UnitVolume.FACTOR_GALLON_US_TO_L), //$JUnit$
-	BARREL(UnitVolume.FACTOR_BARREL_TO_L); //$JUnit$
+	M3(BigDecimal.ONE.divide(Constants.FACTOR_L_TO_M3, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	PINT(Constants.FACTOR_PINT_TO_CM3.multiply(Constants.FACTOR_CM3_TO_L, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	QUART(Constants.FACTOR_QUART_TO_L), //$JUnit$
+	GALLON_US(Constants.FACTOR_GALLON_US_TO_L), //$JUnit$
+	BARREL(Constants.FACTOR_BARREL_TO_L); //$JUnit$
 
 	private final BigDecimal factor;
 	
@@ -59,12 +58,26 @@ public enum Volume implements Unit {
 		this.factor = factor;
 	}
 
-	
-	/*
-	 * Implemented methods
-	 */
-	@Override
-	public BigDecimal getFactor() {
+	/**
+     * Converts a volume value to another unit.
+     * 
+     * @param toUnit resulting volume unit
+     * @param value in the given unit
+     * @return value in the resulting unit
+     * @since 0.9.0
+     */
+	public BigDecimal convertTo(final Volume toUnit, final BigDecimal value) { //$JUnit$
+		if (null == toUnit) {
+			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
+		}
+		if (null == value) {
+			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
+		}
+
+		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+    }	
+
+	BigDecimal getFactor() {
 		return factor;
 	}
 }

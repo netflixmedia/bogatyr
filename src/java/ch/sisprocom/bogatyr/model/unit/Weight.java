@@ -34,35 +34,48 @@ package ch.sisprocom.bogatyr.model.unit;
 import java.math.BigDecimal;
 
 import ch.sisprocom.bogatyr.helper.Constants;
-import ch.sisprocom.bogatyr.helper.unit.UnitWeight;
 
 /**
  * Weight units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.0 (20100112)
  * @since 0.7.0
  */
-public enum Weight implements Unit {
-	MILLIGRAM(UnitWeight.FACTOR_MILLIGRAM_TO_GRAM.multiply(UnitWeight.FACTOR_GRAM_TO_KILOGRAM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	GRAM(UnitWeight.FACTOR_GRAM_TO_KILOGRAM), //$JUnit$
+public enum Weight {
+	MILLIGRAM(Constants.FACTOR_MILLIGRAM_TO_GRAM.multiply(Constants.FACTOR_GRAM_TO_KILOGRAM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	GRAM(Constants.FACTOR_GRAM_TO_KILOGRAM), //$JUnit$
 	KILOGRAM(BigDecimal.ONE), //$JUnit$
-	OUNCE(UnitWeight.FACTOR_OUNCE_TO_GRAM.multiply(UnitWeight.FACTOR_GRAM_TO_KILOGRAM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	POUND(UnitWeight.FACTOR_POUND_TO_KILOGRAM), //$JUnit$
-	TON(BigDecimal.ONE.divide(UnitWeight.FACTOR_TON_TO_KILOGRAM, Constants.DEFAULT_MATHCONTEXT)); //$JUnit$
+	OUNCE(Constants.FACTOR_OUNCE_TO_GRAM.multiply(Constants.FACTOR_GRAM_TO_KILOGRAM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	POUND(Constants.FACTOR_POUND_TO_KILOGRAM), //$JUnit$
+	TON(BigDecimal.ONE.divide(Constants.FACTOR_TON_TO_KILOGRAM, Constants.DEFAULT_MATHCONTEXT)); //$JUnit$
 
 	private final BigDecimal factor;
 	
 	Weight(final BigDecimal factor) {
 		this.factor = factor;
 	}
-
 	
-	/*
-	 * Implemented methods
-	 */
-	@Override
-	public BigDecimal getFactor() {
+	/**
+     * Converts a weight value to another unit.
+     * 
+     * @param toUnit resulting weight unit
+     * @param value in the given unit
+     * @return value in the resulting unit
+     * @since 0.9.0
+     */
+	public BigDecimal convertTo(final Weight toUnit, final BigDecimal value) { //$JUnit$
+		if (null == toUnit) {
+			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
+		}
+		if (null == value) {
+			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
+		}
+
+		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+    }	
+
+	BigDecimal getFactor() {
 		return factor;
 	}
 }

@@ -34,25 +34,24 @@ package ch.sisprocom.bogatyr.model.unit;
 import java.math.BigDecimal;
 
 import ch.sisprocom.bogatyr.helper.Constants;
-import ch.sisprocom.bogatyr.helper.unit.UnitLength;
 
 /**
  * Length units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.0 (20100112)
  * @since 0.7.0
  */
-public enum Length implements Unit {
-	MM(UnitLength.FACTOR_MM_TO_CM.multiply(UnitLength.FACTOR_CM_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	CM(UnitLength.FACTOR_CM_TO_M), //$JUnit$
+public enum Length {
+	MM(Constants.FACTOR_MM_TO_CM.multiply(Constants.FACTOR_CM_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	CM(Constants.FACTOR_CM_TO_M), //$JUnit$
 	M(BigDecimal.ONE),
-	KM(BigDecimal.ONE.divide(UnitLength.FACTOR_M_TO_KM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	INCH(UnitLength.FACTOR_CM_TO_M.divide(UnitLength.FACTOR_INCH_TO_CM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	FOOT(BigDecimal.ONE.divide(UnitLength.FACTOR_FOOT_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	YARD(BigDecimal.ONE.divide(UnitLength.FACTOR_YARD_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	MILE(BigDecimal.ONE.divide(UnitLength.FACTOR_MILE_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	NAUTICAL_MILE(BigDecimal.ONE.divide(UnitLength.FACTOR_NAUTICAL_MILE_TO_M, Constants.DEFAULT_MATHCONTEXT)); //$JUnit$
+	KM(BigDecimal.ONE.divide(Constants.FACTOR_M_TO_KM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	INCH(Constants.FACTOR_CM_TO_M.divide(Constants.FACTOR_INCH_TO_CM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	FOOT(BigDecimal.ONE.divide(Constants.FACTOR_FOOT_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	YARD(BigDecimal.ONE.divide(Constants.FACTOR_YARD_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	MILE(BigDecimal.ONE.divide(Constants.FACTOR_MILE_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	NAUTICAL_MILE(BigDecimal.ONE.divide(Constants.FACTOR_NAUTICAL_MILE_TO_M, Constants.DEFAULT_MATHCONTEXT)); //$JUnit$
 
 	private final BigDecimal factor;
 	
@@ -60,12 +59,26 @@ public enum Length implements Unit {
 		this.factor = factor;
 	}
 
-	
-	/*
-	 * Implemented methods
-	 */
-	@Override
-	public BigDecimal getFactor() {
+	/**
+     * Converts a length value to another unit.
+     * 
+     * @param toUnit resulting length unit
+     * @param value in the given unit
+     * @return value in the resulting unit
+     * @since 0.9.0
+     */
+	public BigDecimal convertTo(final Length toUnit, final BigDecimal value) { //$JUnit$
+		if (null == toUnit) {
+			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
+		}
+		if (null == value) {
+			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
+		}
+
+		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+    }	
+
+	BigDecimal getFactor() {
 		return factor;
 	}
 }
