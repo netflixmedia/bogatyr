@@ -33,39 +33,54 @@ package ch.sisprocom.bogatyr.model.unit;
 
 import java.math.BigDecimal;
 
-import ch.sisprocom.bogatyr.helper.unit.UnitTime;
+import ch.sisprocom.bogatyr.helper.Constants;
+
 
 /**
  * Time units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.0 (20100112)
  * @since 0.8.0
  */
-public enum Time implements Unit {
-	NANOSECOND(UnitTime.FACTOR_NANOSECOND_TO_SECOND),
-	MICROSECOND(UnitTime.FACTOR_MICROSECOND_TO_SECOND),
-	MILLISECOND(UnitTime.FACTOR_MILLISECOND_TO_SECOND),
+public enum Time {
+	NANOSECOND(Constants.FACTOR_NANOSECOND_TO_SECOND),
+	MICROSECOND(Constants.FACTOR_MICROSECOND_TO_SECOND),
+	MILLISECOND(Constants.FACTOR_MILLISECOND_TO_SECOND),
 	SECOND(BigDecimal.ONE),
-	MINUTE(BigDecimal.ONE.divide(UnitTime.FACTOR_SECOND_TO_MINUTE)),
-	HOUR(BigDecimal.ONE.divide((UnitTime.FACTOR_SECOND_TO_MINUTE.multiply(UnitTime.FACTOR_MINUTE_TO_HOUR)))),
-	DAY(BigDecimal.ONE.divide((UnitTime.FACTOR_SECOND_TO_MINUTE.multiply(UnitTime.FACTOR_MINUTE_TO_HOUR.multiply(UnitTime.FACTOR_HOUR_TO_DAY))))),
-	WEEK(BigDecimal.ONE.divide((UnitTime.FACTOR_SECOND_TO_MINUTE.multiply(UnitTime.FACTOR_MINUTE_TO_HOUR.multiply(UnitTime.FACTOR_HOUR_TO_DAY.multiply(UnitTime.FACTOR_DAY_TO_WEEK)))))),
-	MONTH(BigDecimal.ONE.divide((UnitTime.FACTOR_SECOND_TO_MINUTE.multiply(UnitTime.FACTOR_MINUTE_TO_HOUR.multiply(UnitTime.FACTOR_HOUR_TO_DAY.multiply(UnitTime.FACTOR_DAY_TO_MONTH)))))),
-	YEAR(BigDecimal.ONE.divide((UnitTime.FACTOR_SECOND_TO_MINUTE.multiply(UnitTime.FACTOR_MINUTE_TO_HOUR.multiply(UnitTime.FACTOR_HOUR_TO_DAY.multiply(UnitTime.FACTOR_DAY_TO_YEAR))))));
+	MINUTE(BigDecimal.ONE.divide(Constants.FACTOR_SECOND_TO_MINUTE)),
+	HOUR(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR)))),
+	DAY(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR.multiply(Constants.FACTOR_HOUR_TO_DAY))))),
+	WEEK(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR.multiply(Constants.FACTOR_HOUR_TO_DAY.multiply(Constants.FACTOR_DAY_TO_WEEK)))))),
+	MONTH(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR.multiply(Constants.FACTOR_HOUR_TO_DAY.multiply(Constants.FACTOR_DAY_TO_MONTH)))))),
+	YEAR(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR.multiply(Constants.FACTOR_HOUR_TO_DAY.multiply(Constants.FACTOR_DAY_TO_YEAR))))));
 
 	private final BigDecimal factor;
 	
 	Time(final BigDecimal factor) {
 		this.factor = factor;
 	}
-
 	
-	/*
-	 * Implemented methods
-	 */
-	@Override
-	public BigDecimal getFactor() {
+	/**
+     * Converts a time value to another unit.
+     * 
+     * @param toUnit resulting time unit
+     * @param value in the given unit
+     * @return value in the resulting unit
+     * @since 0.9.0
+     */
+	public BigDecimal convertTo(final Time toUnit, final BigDecimal value) { //$JUnit$
+		if (null == toUnit) {
+			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
+		}
+		if (null == value) {
+			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
+		}
+
+		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+    }	
+
+	BigDecimal getFactor() {
 		return factor;
 	}
 }

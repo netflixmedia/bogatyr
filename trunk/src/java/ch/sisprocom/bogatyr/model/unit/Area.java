@@ -34,40 +34,54 @@ package ch.sisprocom.bogatyr.model.unit;
 import java.math.BigDecimal;
 
 import ch.sisprocom.bogatyr.helper.Constants;
-import ch.sisprocom.bogatyr.helper.unit.UnitArea;
+
 
 /**
  * Area units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.0 (20100112)
  * @since 0.7.0
  */
-public enum Area implements Unit {
-	MM2(UnitArea.FACTOR_MM2_TO_CM2.multiply(UnitArea.FACTOR_CM2_TO_M2, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	CM2(UnitArea.FACTOR_CM2_TO_M2), //$JUnit$
+public enum Area {
+	MM2(Constants.FACTOR_MM2_TO_CM2.multiply(Constants.FACTOR_CM2_TO_M2, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	CM2(Constants.FACTOR_CM2_TO_M2), //$JUnit$
 	M2(BigDecimal.ONE),
-	AREA(BigDecimal.ONE.divide(UnitArea.FACTOR_M2_TO_AREA, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	HECTARE(BigDecimal.ONE.divide((UnitArea.FACTOR_M2_TO_AREA.multiply(UnitArea.FACTOR_AREA_TO_HECTARE, Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	KM2(BigDecimal.ONE.divide((UnitArea.FACTOR_M2_TO_AREA.multiply(UnitArea.FACTOR_AREA_TO_HECTARE, Constants.DEFAULT_MATHCONTEXT).multiply(UnitArea.FACTOR_HECTARE_TO_KM2, Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
-	FOOT2(UnitArea.FACTOR_FOOT2_TO_M2), //$JUnit$
-	YARD2(UnitArea.FACTOR_YARD2_TO_M2), //$JUnit$
-	PERCH(UnitArea.FACTOR_PERCH_TO_M2), //$JUnit$
-	ACRE(UnitArea.FACTOR_ACRE_TO_M2), //$JUnit$
-	MILE2(BigDecimal.ONE.divide((UnitArea.FACTOR_M2_TO_AREA.multiply(UnitArea.FACTOR_AREA_TO_HECTARE, Constants.DEFAULT_MATHCONTEXT).multiply(UnitArea.FACTOR_HECTARE_TO_KM2, Constants.DEFAULT_MATHCONTEXT).multiply(UnitArea.FACTOR_MILE2_TO_KM2, Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)); //$JUnit$
+	AREA(BigDecimal.ONE.divide(Constants.FACTOR_M2_TO_AREA, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	HECTARE(BigDecimal.ONE.divide((Constants.FACTOR_M2_TO_AREA.multiply(Constants.FACTOR_AREA_TO_HECTARE, Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	KM2(BigDecimal.ONE.divide((Constants.FACTOR_M2_TO_AREA.multiply(Constants.FACTOR_AREA_TO_HECTARE, Constants.DEFAULT_MATHCONTEXT).multiply(Constants.FACTOR_HECTARE_TO_KM2, Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
+	FOOT2(Constants.FACTOR_FOOT2_TO_M2), //$JUnit$
+	YARD2(Constants.FACTOR_YARD2_TO_M2), //$JUnit$
+	PERCH(Constants.FACTOR_PERCH_TO_M2), //$JUnit$
+	ACRE(Constants.FACTOR_ACRE_TO_M2), //$JUnit$
+	MILE2(BigDecimal.ONE.divide((Constants.FACTOR_M2_TO_AREA.multiply(Constants.FACTOR_AREA_TO_HECTARE, Constants.DEFAULT_MATHCONTEXT).multiply(Constants.FACTOR_HECTARE_TO_KM2, Constants.DEFAULT_MATHCONTEXT).multiply(Constants.FACTOR_MILE2_TO_KM2, Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)); //$JUnit$
 
 	private final BigDecimal factor;
 	
 	Area(final BigDecimal factor) {
 		this.factor = factor;
 	}
-	
+    
+	/**
+     * Converts an area value to another unit.
+     * 
+     * @param toUnit resulting area unit
+     * @param value in the given unit
+     * @return value in the resulting unit
+     * @since 0.9.0
+     */
+	public BigDecimal convertTo(final Area toUnit, final BigDecimal value) { //$JUnit$
+		if (null == toUnit) {
+			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
+		}
+		if (null == value) {
+			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
+		}
 
-	/*
-	 * Implemented methods
-	 */
-	@Override
-	public BigDecimal getFactor() {
+		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+    }	
+
+	BigDecimal getFactor() {
 		return factor;
 	}
 }	

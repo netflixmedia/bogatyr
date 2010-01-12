@@ -50,7 +50,7 @@ public interface Manufacturer extends Model {
 //    String MEMBER_STREET  = Manufacturer.class.getName() + ".street"; //$NON-NLS-1$
 //    String MEMBER_ZIP 	  = Manufacturer.class.getName() + ".zip"; //$NON-NLS-1$
 //    String MEMBER_CITY 	  = Manufacturer.class.getName() + ".city"; //$NON-NLS-1$
-//    String MEMBER_COUNTRY = Manufacturer.class.getName() + ".city"; //$NON-NLS-1$
+//    String MEMBER_COUNTRY = Manufacturer.class.getName() + ".country"; //$NON-NLS-1$
     String MEMBER_URL  	  = Manufacturer.class.getName() + ".url"; //$NON-NLS-1$
     String MEMBER_MAIL 	  = Manufacturer.class.getName() + ".mail"; //$NON-NLS-1$
 
