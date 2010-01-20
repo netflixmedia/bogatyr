@@ -48,6 +48,8 @@ import ch.sisprocom.bogatyr.helper.xml.adapter.MapAdapterHashCode;
 import ch.sisprocom.bogatyr.model.ModelAbstract;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
 import ch.sisprocom.bogatyr.model.misc.Manufacturer;
+import ch.sisprocom.bogatyr.model.worker.ModelWorker;
+import ch.sisprocom.bogatyr.model.worker.ModelWorkerImpl;
 import ch.sisprocom.bogatyr.service.localizer.Localizer;
 import ch.sisprocom.bogatyr.service.property.Property;
 
@@ -56,7 +58,7 @@ import ch.sisprocom.bogatyr.service.property.Property;
  * The implementation of the application model.
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.0 (20100120)
  * @since 0.9.0
  */
 @XmlRootElement(name = "application")
@@ -74,7 +76,9 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	private boolean isDebug;
 	private transient Localizer localizer;
 	private transient Property property;
+	private final transient ModelWorker modelWorker = new ModelWorkerImpl();
 
+	
     public ModelApplicationImpl() {
         super();
     }
@@ -83,7 +87,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	/*
      * Overridden methods
      */
-    @Override
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -154,7 +158,7 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	public int getBuild() {
 		return build;
 	}
-	
+
 	@Override
 	public String getHash() {
 		return getHash(HashCode.SHA256);
@@ -233,6 +237,11 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	@XmlElement
 	public BigDecimal getVersion() {
 		return version;
+	}
+
+	@Override
+	public ModelWorker getModelWorker() {
+		return modelWorker;
 	}
 
 	@Override

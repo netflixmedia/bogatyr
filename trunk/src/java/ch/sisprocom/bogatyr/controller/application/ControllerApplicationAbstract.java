@@ -31,25 +31,21 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.application;
 
+import ch.sisprocom.bogatyr.controller.ControllerAbstract;
 import ch.sisprocom.bogatyr.model.application.ModelApplication;
 import ch.sisprocom.bogatyr.model.application.ModelApplicationImpl;
-import ch.sisprocom.bogatyr.controller.ControllerAbstract;
-import ch.sisprocom.bogatyr.controller.worker.ControllerWorker;
-import ch.sisprocom.bogatyr.controller.worker.ControllerWorkerImpl;
 
 /**
  * The skeleton for the application controller.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100120)
  * @since 0.9.0
  */
 public abstract class ControllerApplicationAbstract extends ControllerAbstract implements ControllerApplication {
 	
 	final ModelApplication model = new ModelApplicationImpl();
 	
-    private final ControllerWorker controllerWorker = new ControllerWorkerImpl();
-
 
     /*
      * Implemented methods
@@ -58,9 +54,4 @@ public abstract class ControllerApplicationAbstract extends ControllerAbstract i
     public ModelApplication getModel() {
 		return model;
 	}
-	
-    @Override
-	public ControllerWorker getControllerWorker() {
-        return controllerWorker;
-    }
 }
