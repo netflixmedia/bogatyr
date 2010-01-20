@@ -31,29 +31,31 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 
-import ch.sisprocom.bogatyr.view.swing.Label;
-import ch.sisprocom.bogatyr.view.swing.Panel;
-
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JRadioButton;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+
+import ch.sisprocom.bogatyr.view.swing.Label;
+import ch.sisprocom.bogatyr.view.swing.Panel;
 
 
 /**
  * This is a Label combined with a JComponent.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091210)
+ * @version 0.8.0 (20100119)
  * @since 0.6.0
  */
 public class LabeledComponent extends Panel {
 	private static final long serialVersionUID = 2215341067138215010L;
 
-	private final Label label = new Label();
+	private final JLabel label = new Label();
 	private final JComponent component;
 
 	
@@ -77,11 +79,11 @@ public class LabeledComponent extends Panel {
 		setToolTipText(toolTip);
 	}
 
-	public Label getLabel() {
+	public JLabel getLabel() {
 		return label;
 	}
 
-	public Object getComponent() {
+	public JComponent getComponent() {
 		return component;
 	}
   

@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import ch.sisprocom.bogatyr.model.Model;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
 import ch.sisprocom.bogatyr.model.misc.Manufacturer;
+import ch.sisprocom.bogatyr.model.worker.ModelWorker;
 import ch.sisprocom.bogatyr.service.localizer.Localizer;
 import ch.sisprocom.bogatyr.service.property.Property;
 
@@ -63,6 +64,7 @@ public interface ModelApplication extends Model {
     String MEMBER_DEBUG     	   = ModelApplication.class.getName() + ".debug"; //$NON-NLS-1$
     String MEMBER_PROPERTY  	   = ModelApplication.class.getName() + ".property"; //$NON-NLS-1$
     String MEMBER_LOCALIZER 	   = ModelApplication.class.getName() + ".localizer"; //$NON-NLS-1$
+    String MEMBER_MODEL_WORKER	   = ModelApplication.class.getName() + ".modelWorker"; //$NON-NLS-1$
     String METHOD_ADD_HASH         = ModelApplication.class.getName() + ".addHash()"; //$NON-NLS-1$
     String METHOD_REMOVE_HASH	   = ModelApplication.class.getName() + ".removeHash()"; //$NON-NLS-1$
 	
@@ -129,4 +131,6 @@ public interface ModelApplication extends Model {
 
     void setLocalizer(Localizer localizer);
     Localizer getLocalizer(); 
+    
+    ModelWorker getModelWorker(); 
 }
