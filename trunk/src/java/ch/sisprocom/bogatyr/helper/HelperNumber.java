@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -39,7 +39,7 @@ import java.math.BigInteger;
  * This is a helper class for numbers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100126)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
@@ -504,4 +504,110 @@ public abstract class HelperNumber {
         }
         return a + b;
     }
+    
+	/**
+     * Returns a {@link Double} value from a {@link String}.
+     * 
+     * @param text value to convert
+     * @return {@link Double} from the {@link String} 
+     */	
+	public static Double getDouble(final String text) {
+		final String value = HelperString.getValidNumericString(text);
+		
+		return null == value ? null : Double.valueOf(value);
+	}
+	
+	/**
+     * Returns a {@link Integer} value from a {@link String}.
+     * 
+     * @param text value to convert
+     * @return {@link Integer} from the {@link String} 
+     */	
+	public static Integer getInteger(final String text) {
+		final String value = HelperString.getValidNumericString(text);
+		
+		return null == value ? null : Integer.valueOf(value);
+	}
+	
+	/**
+     * Returns a {@link Float} value from a {@link String}.
+     * 
+     * @param text value to convert
+     * @return {@link Float} from the {@link String}
+     */	
+	public static Float getFloat(final String text) {
+		final String value = HelperString.getValidNumericString(text);
+		
+		return null == value ? null : Float.valueOf(value);
+	}
+	
+	/**
+     * Returns a {@link Byte} value from a {@link String}.
+     * 
+     * @param text value to convert
+     * @return {@link Byte} from the {@link String}
+     */	
+	public static Byte getByte(final String text) {
+		final String value = HelperString.getValidNumericString(text);
+		
+		return null == value ? null : Byte.valueOf(text);
+	}
+	
+	/**
+     * Returns a {@link Long} value from a {@link String}.
+     * 
+     * @param text value to convert
+     * @return {@link Long} from the {@link String}
+     */	
+	public static Long getLong(final String text) {
+		final String value = HelperString.getValidNumericString(text);
+		
+		return null == value ? null : Long.valueOf(value);
+	}
+	
+	/**
+     * Returns a {@link Short} value from a {@link String}.
+     * 
+     * @param text value to convert
+     * @return {@link Short} from the {@link String} 
+     */	
+	public static Short getShort(final String text) {
+		final String value = HelperString.getValidNumericString(text);
+		
+		return null == value ? null : Short.valueOf(text);
+	}
+	
+	/**
+     * Returns a {@link BigInteger} value from a {@link String}.
+     * 
+     * @param text value to convert
+     * @return {@link BigInteger} from the {@link String} 
+     */	
+	public static BigInteger getBigInteger(final String text) {
+		final String value = HelperString.getValidNumericString(text);
+		
+		return null == value ? null : new BigInteger(value);
+	}
+	
+	/**
+     * Returns a {@link BigDecimal} value from a {@link String}.
+     * 
+     * @param text value to convert
+     * @return {@link BigDecimal} from the {@link String}
+     */	
+	public static BigDecimal getBigDecimal(final String text) {
+		final String value = HelperString.getValidNumericString(text);
+		
+		return null == value ? null : new BigDecimal(value);
+	}
+	
+	/**
+     * Returns a {@link String} value from a {@link Number}.
+     * 
+     * @param number value to convert
+     * @return {@link String} from the {@link Number}
+     */	
+	public static String getString(final Number number) {
+		return null == number ? HelperString.EMPTY_STRING : number.toString();
+	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -67,14 +67,13 @@ import ch.sisprocom.bogatyr.test.service.crypto.CertificateProviderTest;
 import ch.sisprocom.bogatyr.test.service.crypto.CryptoAsymmetricTest;
 import ch.sisprocom.bogatyr.test.service.crypto.CryptoSymmetricTest;
 import ch.sisprocom.bogatyr.test.service.crypto.ScramblerTest;
-import ch.sisprocom.bogatyr.test.view.swing.NumberFieldTest;
 
 
 /**
  * Junit test suite
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 20091210
+ * @version 20100126
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
@@ -144,8 +143,7 @@ public class AllBogatyrTests implements Runnable {
 //				HelperSoundTest.class,
 				HelperStringTest.class,
 				HelperTimeTest.class,
-				HelperXmlTest.class,
-				NumberFieldTest.class
+				HelperXmlTest.class
 		);
 		
         System.out.println("** Test run completed **"); //$NON-NLS-1$

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.property;
 
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 import java.io.BufferedInputStream;
@@ -47,7 +48,7 @@ import java.util.Properties;
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100129)
  * @since 0.1.0
  */
 public class PropertyImpl extends ServiceAbstract implements Property {
@@ -90,41 +91,41 @@ public class PropertyImpl extends ServiceAbstract implements Property {
 
 	@Override
     public BigDecimal getBigDecimalValue(final String key) {
-		return null == properties.getProperty(key) ? null : new BigDecimal(properties.getProperty(key));
+		return HelperNumber.getBigDecimal(properties.getProperty(key));
 	}
 
 	@Override
     public BigInteger getBigIntegerValue(final String key) {
-		return null == properties.getProperty(key) ? null : new BigInteger(properties.getProperty(key));
+		return HelperNumber.getBigInteger(properties.getProperty(key));
 	}
 
 	@Override
     public Byte getByteValue(final String key) {
-		return null == properties.getProperty(key) ? null : Byte.valueOf(properties.getProperty(key));
+		return HelperNumber.getByte(properties.getProperty(key));
 	}
 
 	@Override
     public Double getDoubleValue(final String key) {
-		return null == properties.getProperty(key) ? null : Double.valueOf(properties.getProperty(key));
+		return HelperNumber.getDouble(properties.getProperty(key));
 	}
 
 	@Override
     public Float getFloatValue(final String key) {
-		return null == properties.getProperty(key) ? null : Float.valueOf(properties.getProperty(key));
+		return HelperNumber.getFloat(properties.getProperty(key));
 	}
 
 	@Override
     public Integer getIntegerValue(final String key) {
-		return null == properties.getProperty(key) ? null : Integer.valueOf(properties.getProperty(key));
+		return HelperNumber.getInteger(properties.getProperty(key));
 	}
 
 	@Override
     public Long getLongValue(final String key) {
-		return null == properties.getProperty(key) ? null : Long.valueOf(properties.getProperty(key));
+		return HelperNumber.getLong(properties.getProperty(key));
 	}
 
 	@Override
     public Short getShortValue(final String key) {
-		return null == properties.getProperty(key) ? null : Short.valueOf(properties.getProperty(key));
+		return HelperNumber.getShort(properties.getProperty(key));
 	}
 }   

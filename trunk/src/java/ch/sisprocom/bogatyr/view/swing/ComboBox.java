@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -51,7 +51,7 @@ import java.util.Vector;
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100129)
  * @since 0.2.0
  */
 public class ComboBox extends JComboBox implements Activatable {
@@ -222,9 +222,9 @@ public class ComboBox extends JComboBox implements Activatable {
 		    } 
 	        
 		    // iterate over all items
-	        for (int i=0, n=model.getSize(); i < n; i++) {
+	        for (int ii = 0, n = model.getSize(); ii < n; ii++) {
 
-	            final Object currentItem = model.getElementAt(i);
+	            final Object currentItem = model.getElementAt(ii);
 
 	            // current item starts with the pattern?
 	            if (HelperString.startsWith(currentItem.toString(), pattern)) {
