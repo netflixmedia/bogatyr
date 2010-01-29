@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,22 +31,17 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.helper.HelperString;
-
-import javax.swing.Action;
 import javax.swing.JTextField;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
-import javax.swing.text.PlainDocument;
+
+import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JTextField.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100126)
  * @since 0.1.0
  */
 public class TextField extends JTextField implements Activatable {
@@ -55,37 +50,40 @@ public class TextField extends JTextField implements Activatable {
 	private boolean isNotActive;
 
 	
-	public TextField() {
-        this(HelperString.EMPTY_STRING, HelperString.EMPTY_STRING, Integer.MAX_VALUE);
-    }
+	public TextField() { //super class constructor
+		super();
+	}
 
-	public TextField(final Action action) {
-        this();
-        setAction(action);
-    }
-	
-	public TextField(final Document doc, final String text, final int columns) {
+	public TextField(final Document doc, final String text, final int columns) { //super class constructor
 		super(doc, text, columns);
 	}
 
-	public TextField(final int columns) {
+	public TextField(final int columns) { //super class constructor
 		super(columns);
 	}
 
-	public TextField(final String text, final int columns) {
+	public TextField(final String text, final int columns) { //super class constructor
 		super(text, columns);
 	}
 
-	public TextField(final String text) {
+	public TextField(final String text) { //super class constructor
 		super(text);
 	}
-
-	public TextField(final String text, final String toolTip) {
-        this(text, toolTip, Integer.MAX_VALUE);
-    }
 	
-	public TextField(final String text, final String toolTip, final int columns) {
-        this(text, columns);
+	public TextField(final String text, final String toolTip) {
+        this(text);
+        setToolTipText(toolTip);
+    }
+
+	public TextField(final String text, final String toolTip, final Document document) {
+        this(text);
+        setDocument(document);
+        setToolTipText(toolTip);
+    }
+
+	public TextField(final String toolTip, final Document document) {
+        this();
+        setDocument(document);
         setToolTipText(toolTip);
     }
 	
@@ -98,10 +96,10 @@ public class TextField extends JTextField implements Activatable {
 		return HelperObject.toString(this);
 	}
 	
-	@Override
-	protected Document createDefaultModel() {
-    	return new TextFieldDocument();
-    }
+//	@Override
+//	protected Document createDefaultModel() {
+//    	return DocumentFactory.createNumberDocument(getColumns());
+//    }
 
 	@Override
 	public void setEnabled(final boolean isEnabled) {
@@ -137,19 +135,19 @@ public class TextField extends JTextField implements Activatable {
 //        }
 //	}
 
-
-    /*
-     * Inner classes
-     */
-    class TextFieldDocument extends PlainDocument {
-    	private static final long serialVersionUID = -9060548395031856257L;
-
-		@Override
-		public void insertString(final int offs, final String str, final AttributeSet a) throws BadLocationException {
-
-			if (null != str && str.length() + offs <= getColumns()) {
-				super.insertString(offs, str, a);
-			}
-		}
-    }
+//
+//    /*
+//     * Inner classes
+//     */
+//    class TextFieldDocument extends PlainDocument {
+//    	private static final long serialVersionUID = -9060548395031856257L;
+//
+//		@Override
+//		public void insertString(final int offs, final String str, final AttributeSet a) throws BadLocationException {
+//
+//			if (null != str && str.length() + offs <= getColumns()) {
+//				super.insertString(offs, str, a);
+//			}
+//		}
+//    }
 }

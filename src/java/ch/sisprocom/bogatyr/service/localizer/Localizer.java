@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,6 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.localizer;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Locale;
 
 import javax.swing.KeyStroke;
@@ -42,7 +44,7 @@ import ch.sisprocom.bogatyr.service.Service;
  * Defines the methods for the implementation of the localizer for different languages (i18n standard).
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091109)
+ * @version 0.9.0 (20100129)
  * @since 0.6.0
  */
 public interface Localizer extends Service {
@@ -72,6 +74,87 @@ public interface Localizer extends Service {
 	 * @since 0.6.0
 	 */
 	String getValue(String key);
+	
+	/**
+     * Returns the value of a key as {@link Boolean}.
+     * 
+     * @param key
+     * @return {@link Boolean} associated to the given key
+     * @since 0.9.0 
+     */
+    Boolean getBooleanValue(String key);
+    
+	/**
+     * Returns the value of a key as {@link Double}.
+     * 
+     * @param key
+     * @return {@link Double} associated to the given key
+     * @since 0.9.0 
+     */
+	Double getDoubleValue(String key);
+	
+	/**
+     * Returns the value of a key as {@link Integer}.
+     * 
+     * @param key
+     * @return {@link Integer} associated to the given key 
+     * @since 0.9.0
+     */
+	Integer getIntegerValue(String key);
+	
+	/**
+     * Returns the value of a key as {@link Float}.
+     * 
+     * @param key
+     * @return {@link Float} associated to the given key
+     * @since 0.9.0 
+     */
+	Float getFloatValue(String key);
+	
+	/**
+     * Returns the value of a key as {@link Byte}.
+     * 
+     * @param key
+     * @return {@link Byte} associated to the given key
+     * @since 0.9.0 
+     */
+	Byte getByteValue(String key);
+	
+	/**
+     * Returns the value of a key as {@link Long}.
+     * 
+     * @param key
+     * @return {@link Long} associated to the given key
+     * @since 0.9.0 
+     */
+	Long getLongValue(String key);
+	
+	/**
+     * Returns the value of a key as {@link Short}.
+     * 
+     * @param key
+     * @return {@link Short} associated to the given key
+     * @since 0.9.0 
+     */	
+	Short getShortValue(String key);
+	
+	/**
+     * Returns the value of a key as {@link BigInteger}.
+     * 
+     * @param key
+     * @return {@link BigInteger} associated to the given key
+     * @since 0.9.0 
+     */	
+	BigInteger getBigIntegerValue(String key);
+	
+	/**
+     * Returns the value of a key as {@link BigDecimal}.
+     * 
+     * @param key
+     * @return {@link BigDecimal} associated to the given key
+     * @since 0.9.0 
+     */	
+	BigDecimal getBigDecimalValue(String key);
 
 	/**
 	 * Returns the accelerator ({@link KeyStroke}) for a key.

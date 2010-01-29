@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,6 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.labeledcomponent;
 
+import javax.swing.text.Document;
+
 import ch.sisprocom.bogatyr.view.swing.TextField;
 
 
@@ -38,26 +40,26 @@ import ch.sisprocom.bogatyr.view.swing.TextField;
  * This is a Label combined with a TextField.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090528)
+ * @version 0.9.0 (20010126)
  * @since 0.2.0
  */
 public class LabeledTextField extends LabeledComponent {
 	private static final long serialVersionUID = 1310593497620798003L;
 	
 	public LabeledTextField(final String labelText, final String toolTip, final String text) {
-		this(labelText, toolTip, text, Integer.MAX_VALUE);
+		super(labelText, toolTip, new TextField(text, toolTip));
 	}
 
 	public LabeledTextField(final String title, final String labelText, final String toolTip, final String text) {
-		this(title, labelText, toolTip, text, Integer.MAX_VALUE);
+		super(title, labelText, toolTip, new TextField(text, toolTip));
 	}
 	
-	public LabeledTextField(final String labelText, final String toolTip, final String text, final int columns) {
-		super(labelText, toolTip, new TextField(text, toolTip, columns));
+	public LabeledTextField(final String labelText, final String toolTip, final String text, final Document document) {
+		super(labelText, toolTip, new TextField(text, toolTip, document));
 	}
 
-	public LabeledTextField(final String title, final String labelText, final String toolTip, final String text, final int columns) {
-		super(title, labelText, toolTip, new TextField(text, toolTip, columns));
+	public LabeledTextField(final String title, final String labelText, final String toolTip, final String text, final Document document) {
+		super(title, labelText, toolTip, new TextField(text, toolTip, document));
 	}
 
 	public TextField getTextField() {

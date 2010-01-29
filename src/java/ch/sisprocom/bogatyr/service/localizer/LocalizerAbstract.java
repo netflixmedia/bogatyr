@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,8 +31,11 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.localizer;
 
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
@@ -42,7 +45,7 @@ import java.util.Locale;
  * Abstract localizer implementation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091109)
+ * @version 0.9.0 (20100129)
  * @since 0.6.0
  */
 public abstract class LocalizerAbstract extends ServiceAbstract implements Localizer {
@@ -64,6 +67,51 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	/*
 	 * Implemented methods
 	 */
+    @Override
+    public Boolean getBooleanValue(final String key) {
+        return null == getValue(key) ? null : Boolean.valueOf(getValue(key));
+    }
+
+	@Override
+    public BigDecimal getBigDecimalValue(final String key) {
+		return HelperNumber.getBigDecimal(getValue(key));
+	}
+
+	@Override
+    public BigInteger getBigIntegerValue(final String key) {
+		return HelperNumber.getBigInteger(getValue(key));
+	}
+
+	@Override
+    public Byte getByteValue(final String key) {
+		return HelperNumber.getByte(getValue(key));
+	}
+
+	@Override
+    public Double getDoubleValue(final String key) {
+		return HelperNumber.getDouble(getValue(key));
+	}
+
+	@Override
+    public Float getFloatValue(final String key) {
+		return HelperNumber.getFloat(getValue(key));
+	}
+
+	@Override
+    public Integer getIntegerValue(final String key) {
+		return HelperNumber.getInteger(getValue(key));
+	}
+
+	@Override
+    public Long getLongValue(final String key) {
+		return HelperNumber.getLong(getValue(key));
+	}
+
+	@Override
+    public Short getShortValue(final String key) {
+		return HelperNumber.getShort(getValue(key));
+	}
+
 	@Override
     public Locale getLocale() {
 		return locale;

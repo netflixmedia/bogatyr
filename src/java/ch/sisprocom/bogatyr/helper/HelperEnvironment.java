@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091102)
+ * @version 0.9.0 (20100128)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -118,6 +118,26 @@ public abstract class HelperEnvironment {
 	public static String getJavaVendor() { //$JUnit$
 		return System.getProperties().getProperty("java.vendor"); //$NON-NLS-1$
 	}
+	
+	/**
+	 * Returns the current Java VM name.
+     *
+     * @return current Java VM name
+     * @since 0.9.0
+	 */
+	public static String getJavaVmName() { //$JUnit$
+		return System.getProperties().getProperty("java.vm.name"); //$NON-NLS-1$
+	}	
+	
+	/**
+	 * Returns the current Java VM version.
+     *
+     * @return current Java VM version
+     * @since 0.9.0
+	 */
+	public static String getJavaVmVersion() { //$JUnit$
+		return System.getProperties().getProperty("java.vm.version"); //$NON-NLS-1$
+	}	
 	
 	/**
 	 * Returns the current class path.
