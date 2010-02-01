@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -40,7 +40,7 @@ import ch.sisprocom.bogatyr.helper.Constants;
  * Area units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100112)
+ * @version 0.9.0 (20100202)
  * @since 0.7.0
  */
 public enum Area {
@@ -78,7 +78,7 @@ public enum Area {
 			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
 		}
 
-		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.getFactor(), Constants.DEFAULT_MATHCONTEXT); 
+		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.factor, Constants.DEFAULT_MATHCONTEXT);
     }	
 
 	BigDecimal getFactor() {

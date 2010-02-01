@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -34,8 +34,12 @@ package ch.sisprocom.bogatyr.helper;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.ObjectStreamClass;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
@@ -43,6 +47,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Queue;
 
 
 /**
@@ -50,7 +56,7 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100202)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -190,7 +196,6 @@ public abstract class HelperObject {
         return false;
     }
 
-
     /**
      * Generic toString() method for {@link Object} and different purposes.
      * 
@@ -205,7 +210,6 @@ public abstract class HelperObject {
     	return object.getClass().getName() + list.toString();
     }
 
-
 	/**
      * Compare if two objects are equals.
      * 
@@ -217,6 +221,27 @@ public abstract class HelperObject {
 	public static <T> boolean isEquals(final T objectA, final T objectB) { //$JUnit$
 		return !((null == objectB && null != objectA) || (null != objectB && !objectB.equals(objectA)));
 	}
+	
+	/**
+     * Clones an object via serialize (deep clone).
+     * 
+     * @param original to clone
+     * @return cloned object
+     * @since 0.9.0
+     */	
+	public static <T extends Serializable> T clone(final T original) throws IOException, ClassNotFoundException {
+		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		final CloneOutput cout = new CloneOutput(baos);
+		cout.writeObject(original);
+		final byte[] bytes = baos.toByteArray();
+		
+		final ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+		final CloneInput cin = new CloneInput(bais, cout);
+	
+		@SuppressWarnings("unchecked") final
+        T clone = (T) cin.readObject();
+		return clone;
+    }
 	
     
     /*
@@ -258,5 +283,52 @@ public abstract class HelperObject {
 ////    	if (clazz.getSuperclass() != null) {    		
 //    		toString(object, clazz.getSuperclass(), list);
 //    	}
+    }
+    
+    
+    /*
+     * Inner classes
+     */
+    private static class CloneOutput extends ObjectOutputStream {
+    	final Queue<Class<?>> classQueue = new LinkedList<Class<?>>();
+
+    	CloneOutput(final OutputStream os) throws IOException {
+    		super(os);
+    	}
+
+		@Override
+		protected void annotateClass(final Class<?> c) {
+		    classQueue.add(c);
+		}
+	
+		@Override
+		protected void annotateProxyClass(final Class<?> c) {
+		    classQueue.add(c);
+		}
+    }
+
+    private static class CloneInput extends ObjectInputStream {
+    	private final CloneOutput output;
+
+		CloneInput(final InputStream is, final CloneOutput output) throws IOException {
+		    super(is);
+		    this.output = output;
+		}
+
+    	@Override
+    	protected Class<?> resolveClass(final ObjectStreamClass osc) throws IOException, ClassNotFoundException {
+		    final Class<?> c = output.classQueue.poll();
+		    final String expected = osc.getName();
+		    final String found = (null == c) ? null : c.getName();
+		    if (!expected.equals(found)) {
+		    	throw new InvalidClassException("Classes desynchronized - found: " + found + " when expecting: " + expected);
+		    }
+		    return c;
+    	}
+
+    	@Override
+    	protected Class<?> resolveProxyClass(final String[] interfaceNames) throws IOException, ClassNotFoundException {
+    	    return output.classQueue.poll();
+    	}
     }
 }

@@ -31,8 +31,11 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.localizer;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
@@ -68,48 +71,69 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	 * Implemented methods
 	 */
     @Override
-    public Boolean getBooleanValue(final String key) {
+    public Boolean getBoolean(final String key) {
         return null == getValue(key) ? null : Boolean.valueOf(getValue(key));
     }
 
 	@Override
-    public BigDecimal getBigDecimalValue(final String key) {
+    public BigDecimal getBigDecimal(final String key) {
 		return HelperNumber.getBigDecimal(getValue(key));
 	}
 
 	@Override
-    public BigInteger getBigIntegerValue(final String key) {
+    public BigInteger getBigInteger(final String key) {
 		return HelperNumber.getBigInteger(getValue(key));
 	}
 
 	@Override
-    public Byte getByteValue(final String key) {
+    public Byte getByte(final String key) {
 		return HelperNumber.getByte(getValue(key));
 	}
 
 	@Override
-    public Double getDoubleValue(final String key) {
+    public Double getDouble(final String key) {
 		return HelperNumber.getDouble(getValue(key));
 	}
 
 	@Override
-    public Float getFloatValue(final String key) {
+    public Float getFloat(final String key) {
 		return HelperNumber.getFloat(getValue(key));
 	}
 
 	@Override
-    public Integer getIntegerValue(final String key) {
+    public Integer getInteger(final String key) {
 		return HelperNumber.getInteger(getValue(key));
 	}
 
 	@Override
-    public Long getLongValue(final String key) {
+    public Long getLong(final String key) {
 		return HelperNumber.getLong(getValue(key));
 	}
 
 	@Override
-    public Short getShortValue(final String key) {
+    public Short getShort(final String key) {
 		return HelperNumber.getShort(getValue(key));
+	}
+
+	@Override
+    public File getFile(final String key) {
+		final String file = getValue(key);
+		
+		return null == file ? null : new File(file);
+	}
+
+	@Override
+    public URL getURL(final String key) {
+		final String url = getValue(key);
+		
+		if (null != url) {
+			try {
+				return new URL(url);
+			} catch (MalformedURLException e) {
+				// do nothing
+			}
+		}
+		return null;
 	}
 
 	@Override

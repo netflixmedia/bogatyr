@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.model.ModelAbstract;
  * The implementation of the owner model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100105)
+ * @version 0.9.0 (20100202)
  * @since 0.9.0
  */
 @XmlRootElement(name = "owner")
@@ -78,33 +78,33 @@ public class OwnerImpl extends ModelAbstract implements Owner {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((mail == null) ? 0 : mail.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		result = prime * result + ((null == mail) ? 0 : mail.hashCode());
+		result = prime * result + ((null == name) ? 0 : name.hashCode());
+		result = prime * result + ((null == url) ? 0 : url.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (null == obj)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OwnerImpl other = (OwnerImpl) obj;
-		if (mail == null) {
-			if (other.mail != null)
+		final OwnerImpl other = (OwnerImpl) obj;
+		if (null == mail) {
+			if (null != other.mail)
 				return false;
 		} else if (!mail.equals(other.mail))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (null == name) {
+			if (null != other.name)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (url == null) {
-			if (other.url != null)
+		if (null == url) {
+			if (null != other.url)
 				return false;
 		} else if (!url.equals(other.url))
 			return false;

@@ -31,8 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.localizer;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.URL;
 import java.util.Locale;
 
 import javax.swing.KeyStroke;
@@ -83,7 +85,7 @@ public interface Localizer extends Service, HolderListener<ListenerLocale> {
      * @return {@link Boolean} associated to the given key
      * @since 0.9.0 
      */
-    Boolean getBooleanValue(String key);
+    Boolean getBoolean(String key);
     
 	/**
      * Returns the value of a key as {@link Double}.
@@ -92,7 +94,7 @@ public interface Localizer extends Service, HolderListener<ListenerLocale> {
      * @return {@link Double} associated to the given key
      * @since 0.9.0 
      */
-	Double getDoubleValue(String key);
+	Double getDouble(String key);
 	
 	/**
      * Returns the value of a key as {@link Integer}.
@@ -101,7 +103,7 @@ public interface Localizer extends Service, HolderListener<ListenerLocale> {
      * @return {@link Integer} associated to the given key 
      * @since 0.9.0
      */
-	Integer getIntegerValue(String key);
+	Integer getInteger(String key);
 	
 	/**
      * Returns the value of a key as {@link Float}.
@@ -110,7 +112,7 @@ public interface Localizer extends Service, HolderListener<ListenerLocale> {
      * @return {@link Float} associated to the given key
      * @since 0.9.0 
      */
-	Float getFloatValue(String key);
+	Float getFloat(String key);
 	
 	/**
      * Returns the value of a key as {@link Byte}.
@@ -119,7 +121,7 @@ public interface Localizer extends Service, HolderListener<ListenerLocale> {
      * @return {@link Byte} associated to the given key
      * @since 0.9.0 
      */
-	Byte getByteValue(String key);
+	Byte getByte(String key);
 	
 	/**
      * Returns the value of a key as {@link Long}.
@@ -128,7 +130,7 @@ public interface Localizer extends Service, HolderListener<ListenerLocale> {
      * @return {@link Long} associated to the given key
      * @since 0.9.0 
      */
-	Long getLongValue(String key);
+	Long getLong(String key);
 	
 	/**
      * Returns the value of a key as {@link Short}.
@@ -137,7 +139,7 @@ public interface Localizer extends Service, HolderListener<ListenerLocale> {
      * @return {@link Short} associated to the given key
      * @since 0.9.0 
      */	
-	Short getShortValue(String key);
+	Short getShort(String key);
 	
 	/**
      * Returns the value of a key as {@link BigInteger}.
@@ -146,7 +148,7 @@ public interface Localizer extends Service, HolderListener<ListenerLocale> {
      * @return {@link BigInteger} associated to the given key
      * @since 0.9.0 
      */	
-	BigInteger getBigIntegerValue(String key);
+	BigInteger getBigInteger(String key);
 	
 	/**
      * Returns the value of a key as {@link BigDecimal}.
@@ -155,7 +157,7 @@ public interface Localizer extends Service, HolderListener<ListenerLocale> {
      * @return {@link BigDecimal} associated to the given key
      * @since 0.9.0 
      */	
-	BigDecimal getBigDecimalValue(String key);
+	BigDecimal getBigDecimal(String key);
 
 	/**
 	 * Returns the accelerator ({@link KeyStroke}) for a key.
@@ -185,25 +187,22 @@ public interface Localizer extends Service, HolderListener<ListenerLocale> {
 	 */
 	String getTooltip(String key);
 	
-//	/**
-//	 * Adds a listener for this locale.
-//	 * 
-//	 * @param listener to add
-//	 * @since 0.6.0
-//	 */
-//	void addListener(ListenerLocale listener);
-//	
-//	/**
-//	 * Remove a listener for this locale.
-//	 * 
-//	 * @param listener to remove
-//	 * @since 0.6.0
-//	 */
-//	void removeListener(ListenerLocale listener);
-//
-//	/**
-//	 * Remove all listeners for this locale.
-//	 * @since 0.6.0 
-//	 */
-//	void removeAllListener();
+	/**
+     * Returns the {@link File} for a key.
+     * 
+     * @param key
+     * @return {@link File} associated to the given key
+     * @since 0.9.0 
+     */	
+	File getFile(String key);
+	
+	/**
+     * Returns the {@link URL} for a key.
+     * 
+     * @param key
+     * @return {@link URL} associated to the given key
+     * @since 0.9.0 
+     */	
+	URL getURL(String key);
+
 }

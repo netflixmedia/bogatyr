@@ -119,7 +119,7 @@ public class ContextTest {
 		ContextImpl.getInstance().addValue(key, value);
 		
 		try {
-			ContextImpl.getInstance().getBooleanValue(null);
+			ContextImpl.getInstance().getBoolean(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -127,8 +127,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(ContextImpl.getInstance().getBooleanValue(UNKNOWN_KEY));
-		assertTrue(ContextImpl.getInstance().getBooleanValue(key));
+		assertNull(ContextImpl.getInstance().getBoolean(UNKNOWN_KEY));
+		assertTrue(ContextImpl.getInstance().getBoolean(key));
 	}
 	
 	@Test
@@ -139,7 +139,7 @@ public class ContextTest {
 		ContextImpl.getInstance().addValue(key, value);
 		
 		try {
-			ContextImpl.getInstance().getDoubleValue(null);
+			ContextImpl.getInstance().getDouble(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -147,8 +147,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(ContextImpl.getInstance().getDoubleValue(UNKNOWN_KEY));
-		assertEquals(value, ContextImpl.getInstance().getDoubleValue(key));
+		assertNull(ContextImpl.getInstance().getDouble(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getDouble(key));
 	}
 	
 	@Test
@@ -159,7 +159,7 @@ public class ContextTest {
 		ContextImpl.getInstance().addValue(key, value);
 		
 		try {
-			ContextImpl.getInstance().getIntegerValue(null);
+			ContextImpl.getInstance().getInteger(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -167,8 +167,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(ContextImpl.getInstance().getIntegerValue(UNKNOWN_KEY));
-		assertEquals(value, ContextImpl.getInstance().getIntegerValue(key));
+		assertNull(ContextImpl.getInstance().getInteger(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getInteger(key));
 	}
 	
 	@Test
@@ -179,7 +179,7 @@ public class ContextTest {
 		ContextImpl.getInstance().addValue(key, value);
 		
 		try {
-			ContextImpl.getInstance().getFloatValue(null);
+			ContextImpl.getInstance().getFloat(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -187,8 +187,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(ContextImpl.getInstance().getFloatValue(UNKNOWN_KEY));
-		assertEquals(value, ContextImpl.getInstance().getFloatValue(key));
+		assertNull(ContextImpl.getInstance().getFloat(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getFloat(key));
 	}
 	
 	@Test
@@ -199,7 +199,7 @@ public class ContextTest {
 		ContextImpl.getInstance().addValue(key, value);
 		
 		try {
-			ContextImpl.getInstance().getByteValue(null);
+			ContextImpl.getInstance().getByte(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -207,8 +207,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(ContextImpl.getInstance().getByteValue(UNKNOWN_KEY));
-		assertEquals(value, ContextImpl.getInstance().getByteValue(key));
+		assertNull(ContextImpl.getInstance().getByte(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getByte(key));
 	}
 	
 	@Test
@@ -219,7 +219,7 @@ public class ContextTest {
 		ContextImpl.getInstance().addValue(key, value);
 		
 		try {
-			ContextImpl.getInstance().getLongValue(null);
+			ContextImpl.getInstance().getLong(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -227,8 +227,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(ContextImpl.getInstance().getLongValue(UNKNOWN_KEY));
-		assertEquals(value, ContextImpl.getInstance().getLongValue(key));
+		assertNull(ContextImpl.getInstance().getLong(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getLong(key));
 	}
 	
 	@Test
@@ -239,7 +239,7 @@ public class ContextTest {
 		ContextImpl.getInstance().addValue(key, value);
 
 		try {
-			ContextImpl.getInstance().getShortValue(null);
+			ContextImpl.getInstance().getShort(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -247,8 +247,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(ContextImpl.getInstance().getShortValue(UNKNOWN_KEY));
-		assertEquals(value, ContextImpl.getInstance().getShortValue(key));
+		assertNull(ContextImpl.getInstance().getShort(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getShort(key));
 	}
 	
 	@Test
@@ -259,7 +259,7 @@ public class ContextTest {
 		ContextImpl.getInstance().addValue(key, value);
 
 		try {
-			ContextImpl.getInstance().getBigIntegerValue(null);
+			ContextImpl.getInstance().getBigInteger(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -267,8 +267,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(ContextImpl.getInstance().getBigIntegerValue(UNKNOWN_KEY));
-		assertEquals(value, ContextImpl.getInstance().getBigIntegerValue(key));
+		assertNull(ContextImpl.getInstance().getBigInteger(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getBigInteger(key));
 	}
 	
 	@Test
@@ -279,7 +279,7 @@ public class ContextTest {
 		ContextImpl.getInstance().addValue(key, value);
 
 		try {
-			ContextImpl.getInstance().getBigDecimalValue(null);
+			ContextImpl.getInstance().getBigDecimal(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -287,8 +287,8 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(ContextImpl.getInstance().getBigDecimalValue(UNKNOWN_KEY));
-		assertEquals(value, ContextImpl.getInstance().getBigDecimalValue(key));
+		assertNull(ContextImpl.getInstance().getBigDecimal(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getBigDecimal(key));
 	}
 	
 	@Test
@@ -299,7 +299,7 @@ public class ContextTest {
 		ContextImpl.getInstance().addValue(key, value);
 
 		try {
-			ContextImpl.getInstance().getDateValue(null);
+			ContextImpl.getInstance().getDate(null);
 			fail("key is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -307,7 +307,7 @@ public class ContextTest {
 			fail(ex.getMessage());
 		}
 
-		assertNull(ContextImpl.getInstance().getDateValue(UNKNOWN_KEY));
-		assertEquals(value, ContextImpl.getInstance().getDateValue(key));
+		assertNull(ContextImpl.getInstance().getDate(UNKNOWN_KEY));
+		assertEquals(value, ContextImpl.getInstance().getDate(key));
 	}
 }

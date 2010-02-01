@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,8 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.property;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.URL;
 import java.util.Properties;
 
 import ch.sisprocom.bogatyr.service.Service;
@@ -42,7 +44,7 @@ import ch.sisprocom.bogatyr.service.Service;
  * Defines the methods for the implementation of the properties.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091109)
+ * @version 0.9.0 (20100201)
  * @since 0.6.0
  */
 public interface Property extends Service {
@@ -71,7 +73,7 @@ public interface Property extends Service {
      * @return {@link Boolean} associated to the given key
      * @since 0.6.0 
      */
-    Boolean getBooleanValue(String key);
+    Boolean getBoolean(String key);
     
 	/**
      * Returns the value of a property as {@link Double}.
@@ -80,7 +82,7 @@ public interface Property extends Service {
      * @return {@link Double} associated to the given key
      * @since 0.7.0 
      */
-	Double getDoubleValue(String key);
+	Double getDouble(String key);
 	
 	/**
      * Returns the value of a property as {@link Integer}.
@@ -89,7 +91,7 @@ public interface Property extends Service {
      * @return {@link Integer} associated to the given key 
      * @since 0.7.0
      */
-	Integer getIntegerValue(String key);
+	Integer getInteger(String key);
 	
 	/**
      * Returns the value of a property as {@link Float}.
@@ -98,7 +100,7 @@ public interface Property extends Service {
      * @return {@link Float} associated to the given key
      * @since 0.7.0 
      */
-	Float getFloatValue(String key);
+	Float getFloat(String key);
 	
 	/**
      * Returns the value of a property as {@link Byte}.
@@ -107,7 +109,7 @@ public interface Property extends Service {
      * @return {@link Byte} associated to the given key
      * @since 0.7.0 
      */
-	Byte getByteValue(String key);
+	Byte getByte(String key);
 	
 	/**
      * Returns the value of a property as {@link Long}.
@@ -116,7 +118,7 @@ public interface Property extends Service {
      * @return {@link Long} associated to the given key
      * @since 0.7.0 
      */
-	Long getLongValue(String key);
+	Long getLong(String key);
 	
 	/**
      * Returns the value of a property as {@link Short}.
@@ -125,7 +127,7 @@ public interface Property extends Service {
      * @return {@link Short} associated to the given key
      * @since 0.7.0 
      */	
-	Short getShortValue(String key);
+	Short getShort(String key);
 	
 	/**
      * Returns the value of a property as {@link BigInteger}.
@@ -134,7 +136,7 @@ public interface Property extends Service {
      * @return {@link BigInteger} associated to the given key
      * @since 0.7.0 
      */	
-	BigInteger getBigIntegerValue(String key);
+	BigInteger getBigInteger(String key);
 	
 	/**
      * Returns the value of a property as {@link BigDecimal}.
@@ -143,6 +145,24 @@ public interface Property extends Service {
      * @return {@link BigDecimal} associated to the given key
      * @since 0.7.0 
      */	
-	BigDecimal getBigDecimalValue(String key);
+	BigDecimal getBigDecimal(String key);
+	
+	/**
+     * Returns the value of a property as {@link File}.
+     * 
+     * @param key for the property
+     * @return {@link File} associated to the given key
+     * @since 0.9.0 
+     */	
+	File getFile(String key);
+	
+	/**
+     * Returns the value of a property as {@link URL}.
+     * 
+     * @param key for the property
+     * @return {@link URL} associated to the given key
+     * @since 0.9.0 
+     */	
+	URL getURL(String key);
 }   
 

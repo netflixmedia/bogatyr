@@ -92,59 +92,59 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + build;
-		result = prime * result + ((created == null) ? 0 : created.hashCode());
+		result = prime * result + ((null == created) ? 0 : created.hashCode());
 		result = prime * result + (isDebug ? 1231 : 1237);
 		result = prime * result
-				+ ((manufacturer == null) ? 0 : manufacturer.hashCode());
-		result = prime * result + ((mapHash == null) ? 0 : mapHash.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
-		result = prime * result + ((version == null) ? 0 : version.hashCode());
+				+ ((null == manufacturer) ? 0 : manufacturer.hashCode());
+		result = prime * result + ((null == mapHash) ? 0 : mapHash.hashCode());
+		result = prime * result + ((null == name) ? 0 : name.hashCode());
+		result = prime * result + ((null == uuid) ? 0 : uuid.hashCode());
+		result = prime * result + ((null == version) ? 0 : version.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (null == obj)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ModelApplicationImpl other = (ModelApplicationImpl) obj;
+		final ModelApplicationImpl other = (ModelApplicationImpl) obj;
 		if (build != other.build)
 			return false;
-		if (created == null) {
-			if (other.created != null)
+		if (null == created) {
+			if (null != other.created)
 				return false;
 		} else if (!created.equals(other.created))
 			return false;
 		if (isDebug != other.isDebug)
 			return false;
-		if (manufacturer == null) {
-			if (other.manufacturer != null)
+		if (null == manufacturer) {
+			if (null != other.manufacturer)
 				return false;
 		} else if (!manufacturer.equals(other.manufacturer))
 			return false;
-		if (mapHash == null) {
-			if (other.mapHash != null)
+		if (null == mapHash) {
+			if (null != other.mapHash)
 				return false;
 		} else if (!mapHash.equals(other.mapHash))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (null == name) {
+			if (null != other.name)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (uuid == null) {
-			if (other.uuid != null)
+		if (null == uuid) {
+			if (null != other.uuid)
 				return false;
 		} else if (!uuid.equals(other.uuid))
 			return false;
-		if (version == null) {
-			if (other.version != null)
+		if (null == version) {
+			if (null != other.version)
 				return false;
-		} else if (!version.equals(other.version))
+		} else if (!(version.compareTo(other.version) == 0))
 			return false;
 		return true;
 	}

@@ -66,27 +66,27 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 		init();
 	}
 
-	public FormattedTextField(AbstractFormatter formatter) {
+	public FormattedTextField(final AbstractFormatter formatter) {
 		super(formatter);
 		init();
 	}
 
-	public FormattedTextField(AbstractFormatterFactory factory, Object currentValue) {
+	public FormattedTextField(final AbstractFormatterFactory factory, final Object currentValue) {
 		super(factory, currentValue);
 		init();
 	}
 
-	public FormattedTextField(AbstractFormatterFactory factory) {
+	public FormattedTextField(final AbstractFormatterFactory factory) {
 		super(factory);
 		init();
 	}
 
-	public FormattedTextField(Format format) {
+	public FormattedTextField(final Format format) {
 		super(format);
 		init();
 	}
 
-	public FormattedTextField(Object value) {
+	public FormattedTextField(final Object value) {
 		super(value);
 		init();
 	}
@@ -95,12 +95,12 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 	/*
 	 * Own constructors
 	 */
-	public FormattedTextField(Object value, final String toolTip, AbstractFormatterFactory formatterFactory, final boolean isNumeric) {
+	public FormattedTextField(final Object value, final String toolTip, final AbstractFormatterFactory formatterFactory, final boolean isNumeric) {
 		this(toolTip, formatterFactory, isNumeric);
 		setValue(value);
 	}
 
-	public FormattedTextField(final String toolTip, AbstractFormatterFactory formatterFactory, final boolean isNumeric) {
+	public FormattedTextField(final String toolTip, final AbstractFormatterFactory formatterFactory, final boolean isNumeric) {
 		super(formatterFactory);
 		setToolTipText(toolTip);
 		init();
@@ -109,7 +109,7 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 			addKeyListener(new KeyAdapter() {
 				
 				@Override
-				public void keyTyped(KeyEvent e) {
+				public void keyTyped(final KeyEvent e) {
 					final char key = e.getKeyChar();
 					
 					if (!Character.isDigit(key) &&
@@ -132,7 +132,7 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 	private void init() {
 		addFocusListener(new FocusAdapter() {
 			@Override
-			public void focusLost(FocusEvent arg0) {
+			public void focusLost(final FocusEvent arg0) {
 				try {
 					commitEdit();
 				} catch (ParseException e) {

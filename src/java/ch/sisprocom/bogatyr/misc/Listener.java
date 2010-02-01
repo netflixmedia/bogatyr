@@ -42,4 +42,5 @@ package ch.sisprocom.bogatyr.misc;
  * @since 0.9.0
  */
 public interface Listener {
+	//marker interface, only used as type definition for listeners
 }   
