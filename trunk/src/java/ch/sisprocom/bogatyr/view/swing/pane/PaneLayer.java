@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -41,13 +41,15 @@ import java.awt.Component;
  * This is an extended JLayeredPane.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20100201)
  * @since 0.7.0
  */
 public class PaneLayer extends JLayeredPane {
 	private static final long serialVersionUID = -6557519717085237490L;
 
-
+	/*
+	 * Superclass constructors
+	 */
     public PaneLayer() {
 		super();
 	}

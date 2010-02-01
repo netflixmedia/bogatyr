@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,33 +29,29 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
-
-
+package ch.sisprocom.bogatyr.misc;
 
 
 /**
- * Defines the methods for the implementation of activations.
+ * Defines the methods for the implementation of display and hide components.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091015)
- * @since 0.7.0
+ * @version 0.9.0 (20100201)
+ * @since 0.9.0
  */
-public interface Activatable {
+public interface Displayable {
 	/**
-     * Sets the activation state of the component.
+     * Creates and displays the component.
      * 
-     * @param isActive activation state
-     * @since 0.7.0
+     * @since 0.9.0
      */
-	void setActive(boolean isActive);
+	void createAndShowGUI();
 	
 	/**
-     * Returns the activation state of the component.
+     * Clears and hides the component.
      * 
-     * @return true/false
-     * @since 0.7.0
+     * @since 0.9.0
      */
-	boolean isActive();
+	void clearAndHide();
 }   
 

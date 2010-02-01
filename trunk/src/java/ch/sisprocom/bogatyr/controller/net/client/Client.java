@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -34,16 +34,18 @@ package ch.sisprocom.bogatyr.controller.net.client;
 import java.io.IOException;
 import java.net.Socket;
 
+import ch.sisprocom.bogatyr.misc.HolderListener;
+
 
 /**
  * Defines the methods for the implementation of the client.
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20100201)
  * @since 0.7.0
  */
-public interface Client extends Runnable {
+public interface Client extends Runnable, HolderListener<ListenerClient> {
 	/**
      * Returns the instantiation time of the client.
      *
@@ -142,27 +144,4 @@ public interface Client extends Runnable {
      * @since 0.7.0
      */
     void writeStream(byte[] data) throws IOException;
-    
-	/**
-	 * Adds a listener for this client.
-	 * 
-	 * @param listener to add
-	 * @since 0.7.0
-	 */
-	void addListener(ListenerClient listener);
-	
-	/**
-	 * Remove a listener for this client.
-	 * 
-	 * @param listener to remove
-	 * @since 0.7.0
-	 */
-	void removeListener(ListenerClient listener);
-
-	/**
-	 * Remove all listeners for this client.
-	 * 
-	 * @since 0.7.0
-	 */
-	void removeAllListener();
 }   

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -34,15 +34,17 @@ package ch.sisprocom.bogatyr.controller.net;
 import java.io.IOException;
 import java.net.Socket;
 
+import ch.sisprocom.bogatyr.misc.HolderListener;
+
 
 /**
  * Defines the methods for the implementation of the datagram dumper.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20100201)
  * @since 0.8.0
  */
-public interface DatagramDumper extends Runnable {
+public interface DatagramDumper extends Runnable, HolderListener<ListenerDatagram> {
     /**
      * Returns the instantiation time of the datagram controller.
      *
@@ -89,27 +91,4 @@ public interface DatagramDumper extends Runnable {
 	 * @since 0.8.0
 	 */
 	void setPort(int port);
-	
-	/**
-	 * Adds a listener for packets.
-	 * 
-	 * @param listener to add
-	 * @since 0.8.0
-	 */
-	void addListener(ListenerDatagram listener);
-	
-	/**
-	 * Remove a listener for packets.
-	 * 
-	 * @param listener to remove
-	 * @since 0.8.0
-	 */
-	void removeListener(ListenerDatagram listener);
-
-	/**
-	 * Remove all listeners for packets.
-	 * 
-	 * @since 0.8.0 
-	 */
-	void removeAllListener();
 }

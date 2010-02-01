@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,14 +31,16 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.localizer;
 
+import ch.sisprocom.bogatyr.misc.Listener;
+
 /**
  * ListenerLocale
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090527)
+ * @version 0.9.0 (20100201)
  * @since 0.6.0
  */
-public interface ListenerLocale {
+public interface ListenerLocale extends Listener {
 	/**
 	 * Informs the listener that the locale has changed.
 	 * 

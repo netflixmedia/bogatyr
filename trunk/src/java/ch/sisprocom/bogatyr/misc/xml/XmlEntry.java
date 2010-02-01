@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,29 +29,49 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing;
+package ch.sisprocom.bogatyr.misc.xml;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * Defines the methods for the implementation of display and hide components.
+ * XML entry representation for a map entry.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @author Roman Wuersch
+ * @version 0.9.0 (20100201)
  * @since 0.9.0
  */
-public interface Displayable {
-	/**
-     * Creates and displays the component.
-     * 
-     * @since 0.9.0
-     */
-	void createAndShowGUI();
-	
-	/**
-     * Clears and hides the component.
-     * 
-     * @since 0.9.0
-     */
-	void clearAndHide();
-}   
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder={"key", "value"})
+@XmlRootElement(name = "entry")
+public class XmlEntry {
+	@XmlElement(name = "key", required = true)
+    private final String key;
+	@XmlElement(name = "value", required = true)
+    private final String value;
+    
+    public XmlEntry() {
+        super();
+        key = null;
+        value = null;
+    }
 
+    public XmlEntry(final String key, final String value) {
+        super();
+        this.key = key;
+        this.value = value;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public String getValue() {
+        return value;
+    }
+}

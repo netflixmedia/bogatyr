@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -47,7 +47,7 @@ import java.util.HashSet;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100201)
  * @since 0.7.0
  */
 public abstract class ClientAbstract implements Client {
@@ -258,7 +258,7 @@ public abstract class ClientAbstract implements Client {
     }
 
     @Override
-    public synchronized void removeListener(final ListenerClient listener) {
+    public synchronized void deleteListener(final ListenerClient listener) {
     	if (null == listener) {
     		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
     	}
@@ -267,7 +267,12 @@ public abstract class ClientAbstract implements Client {
     }
 
     @Override
-    public synchronized void removeAllListener() {
+    public synchronized void deleteListeners() {
         listListener = new HashSet<ListenerClient>();
+    }
+    
+    @Override
+    public int countListeners() {
+    	return listListener.size();
     }
 }

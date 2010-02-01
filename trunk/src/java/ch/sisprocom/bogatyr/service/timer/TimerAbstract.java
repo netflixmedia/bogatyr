@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -41,7 +41,7 @@ import java.util.Timer;
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20100201)
  * @since 0.6.0
  */
 public abstract class TimerAbstract extends ServiceAbstract implements TimeMachine {
@@ -118,6 +118,16 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
      * Implemented methods
      */
     @Override
+    public boolean isRunning() {
+    	return isRunning;
+    }
+    
+    @Override
+    public long getInterval() {
+    	return interval;
+    }  
+
+    @Override
     public synchronized void addListener(final ListenerTimer listener) {
     	if (null == listener) {
     		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
@@ -127,7 +137,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
     }
 
     @Override
-    public synchronized void removeListener(final ListenerTimer listener) {
+    public synchronized void deleteListener(final ListenerTimer listener) {
     	if (null == listener) {
     		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
     	}
@@ -136,17 +146,12 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
     }
 
     @Override
-    public synchronized void removeAllListener() {
+    public synchronized void deleteListeners() {
         listListener = new HashSet<ListenerTimer>();
     }
-    
+
     @Override
-    public boolean isRunning() {
-		return isRunning;
-	}
-    
-    @Override
-    public long getInterval() {
-        return interval;
-    }  
+    public int countListeners() {
+    	return listListener.size();
+    }
 }

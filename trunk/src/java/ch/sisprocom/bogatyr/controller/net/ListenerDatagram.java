@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -33,14 +33,16 @@ package ch.sisprocom.bogatyr.controller.net;
 
 import java.net.DatagramPacket;
 
+import ch.sisprocom.bogatyr.misc.Listener;
+
 /**
  * ListenerDatagram
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20100201)
  * @since 0.8.0
  */
-public interface ListenerDatagram {
+public interface ListenerDatagram extends Listener {
 	/**
 	 * Informs the listener that a packet {@link DatagramPacket} was received.
 	 * 

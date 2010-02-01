@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -46,7 +46,7 @@ import java.util.HashSet;
  * This is a datagram dumper to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100201)
  * @since 0.8.0
  */
 public class DatagramDumperImpl implements DatagramDumper {
@@ -199,7 +199,7 @@ public class DatagramDumperImpl implements DatagramDumper {
     }
 
     @Override
-    public synchronized void removeListener(final ListenerDatagram listener) {
+    public synchronized void deleteListener(final ListenerDatagram listener) {
     	if (null == listener) {
     		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
     	}
@@ -208,7 +208,12 @@ public class DatagramDumperImpl implements DatagramDumper {
     }
 
     @Override
-    public synchronized void removeAllListener() {
+    public synchronized void deleteListeners() {
         listListener = new HashSet<ListenerDatagram>();
+    }
+    
+    @Override
+    public int countListeners() {
+    	return listListener.size();
     }
 }

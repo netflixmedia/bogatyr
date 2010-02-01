@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -46,7 +46,7 @@ import java.util.HashSet;
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100201)
  * @since 0.7.0
  */
 public abstract class ServerThreadAbstract implements ServerThread {
@@ -218,7 +218,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
     }
 
     @Override
-    public synchronized void removeListener(final ListenerServerThread listener) {
+    public synchronized void deleteListener(final ListenerServerThread listener) {
     	if (null == listener) {
     		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
     	}
@@ -227,7 +227,12 @@ public abstract class ServerThreadAbstract implements ServerThread {
     }
 
     @Override
-    public synchronized void removeAllListener() {
+    public synchronized void deleteListeners() {
         listListener = new HashSet<ListenerServerThread>();
+    }
+    
+    @Override
+    public int countListeners() {
+    	return listListener.size();
     }
 }

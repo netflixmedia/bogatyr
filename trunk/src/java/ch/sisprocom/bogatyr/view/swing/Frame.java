@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -33,6 +33,8 @@ package ch.sisprocom.bogatyr.view.swing;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.HelperSwing;
+import ch.sisprocom.bogatyr.misc.Displayable;
+import ch.sisprocom.bogatyr.misc.Fadeable;
 
 import javax.swing.JFrame;
 import java.awt.Color;
@@ -49,7 +51,7 @@ import java.awt.Image;
  * This is an extended JFrame.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091210)
+ * @version 0.9.0 (20100201)
  * @since 0.2.0
  */
 public class Frame extends JFrame implements Fadeable, Displayable {
@@ -65,6 +67,9 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 		HelperSwing.setMacOSXMenu();
 	}
 	
+	/*
+	 * Superclass constructors
+	 */
 	public Frame() {
 		super();
     }
@@ -81,6 +86,9 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 		super(title);
 	}
 	
+	/*
+	 * Own constructors
+	 */
 	public Frame(final String title, final Image icon) {
 		this();
 		setTitle(title);

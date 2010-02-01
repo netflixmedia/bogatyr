@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,28 +29,33 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper.xml;
+package ch.sisprocom.bogatyr.misc;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
- * XML map representation for a map.
+ * Defines the methods for the implementation of activations.
  * 
  * @author Stefan Laubenberger
- * @author Roman Wuersch
- * @version 0.9.0 (20091224)
- * @since 0.9.0
+ * @version 0.9.0 (20100201)
+ * @since 0.7.0
  */
-@XmlRootElement(name = "map")
-public class XmlMap {
-	@XmlElement(name = "entry", required = true)
-    private final List<XmlEntry> entries = new ArrayList<XmlEntry>();
-    
-    public List<XmlEntry> getEntries() {
-        return entries;
-    }
-}
+public interface Activatable {
+	/**
+     * Sets the activation state of the component.
+     * 
+     * @param isActive activation state
+     * @since 0.7.0
+     */
+	void setActive(boolean isActive);
+	
+	/**
+     * Returns the activation state of the component.
+     * 
+     * @return true/false
+     * @since 0.7.0
+     */
+	boolean isActive();
+}   
+

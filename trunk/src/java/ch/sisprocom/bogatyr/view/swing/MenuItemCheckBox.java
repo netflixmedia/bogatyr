@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -44,13 +44,15 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JCheckBoxMenuItem.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100201)
  * @since 0.2.0
  */
 public class MenuItemCheckBox extends JCheckBoxMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
 	
-	
+	/*
+	 * Superclass constructors
+	 */
 	public MenuItemCheckBox() {
 		super();
     }
@@ -79,6 +81,9 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 		super(text);
 	}
 
+	/*
+	 * Own constructors
+	 */
 	public MenuItemCheckBox(final boolean isSelected) {
 		super();
 		

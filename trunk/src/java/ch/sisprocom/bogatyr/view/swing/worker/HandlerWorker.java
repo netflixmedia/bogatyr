@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,19 +31,16 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.worker;
 
+import ch.sisprocom.bogatyr.misc.HolderListener;
+
 /**
  * This interface is to handle the workers.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091121)
+ * @version 0.9.0 (20100201)
  * @since 0.9.0
  */
-public interface HandlerWorker {
-
-    void addListenerWorker(final ListenerWorker listener);
-
-    void removeAllListenerWorker();
-
+public interface HandlerWorker extends HolderListener<ListenerWorker> {
     void fireWorkerStart();
 
     void fireWorkerDone();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,22 +29,22 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper.xml.adapter;
+package ch.sisprocom.bogatyr.misc.xml.adapter;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import ch.sisprocom.bogatyr.helper.xml.XmlEntry;
-import ch.sisprocom.bogatyr.helper.xml.XmlMap;
+import ch.sisprocom.bogatyr.misc.xml.XmlEntry;
+import ch.sisprocom.bogatyr.misc.xml.XmlMap;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
 
 /**
  * Map adapter for the key {@link HashCode} and value {@link String}.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.0 (20100201)
  * @since 0.9.0
  */
 public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCode, String>> {

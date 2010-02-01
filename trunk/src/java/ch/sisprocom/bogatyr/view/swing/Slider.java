@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.view.swing;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Activatable;
 
 import javax.swing.BoundedRangeModel;
 import javax.swing.JSlider;
@@ -45,7 +46,7 @@ import java.util.Dictionary;
  * This is an extended JSlider.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100201)
  * @since 0.2.0
  */
 public class Slider extends JSlider implements Activatable {
@@ -53,7 +54,9 @@ public class Slider extends JSlider implements Activatable {
 	
 	private boolean isNotActive;
 	
-
+	/*
+	 * Superclass constructors
+	 */
 	public Slider() {
 		super();
 	}
@@ -77,7 +80,10 @@ public class Slider extends JSlider implements Activatable {
 	public Slider(final int orientation) {
 		super(orientation);
 	}
-
+	
+	/*
+	 * Own constructors
+	 */
 	public Slider(final BoundedRangeModel model, final String toolTip) {
 		this(model);
 		setToolTipText(toolTip);
