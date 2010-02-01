@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.view.swing;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Activatable;
 
 import javax.swing.JTree;
 import javax.swing.tree.TreeModel;
@@ -44,7 +45,7 @@ import java.util.Vector;
  * This is an extended JTree.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20100201)
  * @since 0.7.0
  */
 public class Tree extends JTree implements Activatable {
@@ -52,7 +53,9 @@ public class Tree extends JTree implements Activatable {
 	
 	private boolean isNotActive;
 
-
+	/*
+	 * Superclass constructors
+	 */
 	public Tree() {
 		super();
 	}

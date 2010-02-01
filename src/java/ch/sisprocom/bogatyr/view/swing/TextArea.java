@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.view.swing;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Activatable;
 
 import javax.swing.JTextArea;
 import javax.swing.text.Document;
@@ -41,7 +42,7 @@ import javax.swing.text.Document;
  * This is an extended JTextArea.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100201)
  * @since 0.1.0
  */
 public class TextArea extends JTextArea implements Activatable {
@@ -54,6 +55,9 @@ public class TextArea extends JTextArea implements Activatable {
 		setWrapStyleWord(true);
 	}
 	
+	/*
+	 * Superclass constructors
+	 */
     public TextArea() {
         super();
     }
@@ -73,7 +77,10 @@ public class TextArea extends JTextArea implements Activatable {
 	public TextArea(final Document doc) {
 		super(doc);
 	}
-
+	
+	/*
+	 * Own constructors
+	 */
 	public TextArea(final String toolTip) {
         this();
         setToolTipText(toolTip);

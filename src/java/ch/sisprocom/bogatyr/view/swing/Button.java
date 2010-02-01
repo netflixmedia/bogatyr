@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -38,13 +38,14 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Activatable;
 
 
 /**
  * This is an extended JButton.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100201)
  * @since 0.2.0
  */
 public class Button extends JButton implements Activatable {
@@ -52,7 +53,9 @@ public class Button extends JButton implements Activatable {
 	
 	private boolean isNotActive;
 
-	
+	/*
+	 * Superclass constructors
+	 */
 	public Button() {
 		super();
 	}
@@ -73,6 +76,9 @@ public class Button extends JButton implements Activatable {
 		super(text);
 	}
 	
+	/*
+	 * Own constructors
+	 */
 	public Button(final String text, final String toolTip) {
 		this(text);
 		setToolTipText(toolTip);

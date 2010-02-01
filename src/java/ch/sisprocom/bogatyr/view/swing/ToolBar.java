@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.view.swing;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Activatable;
 
 import javax.swing.JToolBar;
 
@@ -40,7 +41,7 @@ import javax.swing.JToolBar;
  * This is an extended JToolBar.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091016)
+ * @version 0.9.0 (20100201)
  * @since 0.7.0
  */
 public class ToolBar extends JToolBar implements Activatable {
@@ -48,7 +49,9 @@ public class ToolBar extends JToolBar implements Activatable {
 	
 	private boolean isNotActive;
 
-
+	/*
+	 * Superclass constructors
+	 */
 	public ToolBar() {
 		super();
 	}

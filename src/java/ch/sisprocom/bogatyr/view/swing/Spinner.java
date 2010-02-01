@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.view.swing;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Activatable;
 
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
@@ -41,7 +42,7 @@ import javax.swing.SpinnerModel;
  * This is an extended JSpinner.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.0 (20100201)
  * @since 0.7.0
  */
 public class Spinner extends JSpinner implements Activatable {
@@ -49,7 +50,9 @@ public class Spinner extends JSpinner implements Activatable {
 	
 	private boolean isNotActive;
 
-	
+	/*
+	 * Superclass constructors
+	 */
 	public Spinner() {
 		super();
 	}
@@ -58,6 +61,9 @@ public class Spinner extends JSpinner implements Activatable {
 		super(model);
 	}
 	
+	/*
+	 * Own constructors
+	 */
 	public Spinner(final SpinnerModel model, final String toolTip) {
 		this(model);
 		setToolTipText(toolTip);

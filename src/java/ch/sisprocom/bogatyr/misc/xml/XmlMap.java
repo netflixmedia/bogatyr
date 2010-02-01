@@ -29,20 +29,28 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.view.swing.worker;
+package ch.sisprocom.bogatyr.misc.xml;
 
-import ch.sisprocom.bogatyr.misc.Listener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * This listener informs the listeners about the current work state.
+ * XML map representation for a map.
  * 
  * @author Stefan Laubenberger
+ * @author Roman Wuersch
  * @version 0.9.0 (20100201)
  * @since 0.9.0
  */
-public interface ListenerWorker extends Listener {
-
-    void start();
-
-    void done();
+@XmlRootElement(name = "map")
+public class XmlMap {
+	@XmlElement(name = "entry", required = true)
+    private final List<XmlEntry> entries = new ArrayList<XmlEntry>();
+    
+    public List<XmlEntry> getEntries() {
+        return entries;
+    }
 }

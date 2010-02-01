@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -44,8 +44,8 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.helper.xml.adapter.MapAdapterHashCode;
-import ch.sisprocom.bogatyr.helper.xml.adapter.MapAdapterPlatform;
+import ch.sisprocom.bogatyr.misc.xml.adapter.MapAdapterHashCode;
+import ch.sisprocom.bogatyr.misc.xml.adapter.MapAdapterPlatform;
 import ch.sisprocom.bogatyr.model.ModelAbstract;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
 import ch.sisprocom.bogatyr.model.misc.Manufacturer;
@@ -58,7 +58,7 @@ import ch.sisprocom.bogatyr.model.misc.Publisher;
  * The implementation of the document model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091223)
+ * @version 0.9.0 (20100201)
  * @since 0.9.0
  */
 @XmlRootElement(name = "document")

@@ -37,6 +37,7 @@ import java.util.Locale;
 
 import javax.swing.KeyStroke;
 
+import ch.sisprocom.bogatyr.misc.HolderListener;
 import ch.sisprocom.bogatyr.service.Service;
 
 
@@ -44,10 +45,10 @@ import ch.sisprocom.bogatyr.service.Service;
  * Defines the methods for the implementation of the localizer for different languages (i18n standard).
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100129)
+ * @version 0.9.0 (20100201)
  * @since 0.6.0
  */
-public interface Localizer extends Service {
+public interface Localizer extends Service, HolderListener<ListenerLocale> {
 	/**
 	 * Returns the current locale {@link Locale} of the localizer.
 	 * 
@@ -184,25 +185,25 @@ public interface Localizer extends Service {
 	 */
 	String getTooltip(String key);
 	
-	/**
-	 * Adds a listener for this locale.
-	 * 
-	 * @param listener to add
-	 * @since 0.6.0
-	 */
-	void addListener(ListenerLocale listener);
-	
-	/**
-	 * Remove a listener for this locale.
-	 * 
-	 * @param listener to remove
-	 * @since 0.6.0
-	 */
-	void removeListener(ListenerLocale listener);
-
-	/**
-	 * Remove all listeners for this locale.
-	 * @since 0.6.0 
-	 */
-	void removeAllListener();
+//	/**
+//	 * Adds a listener for this locale.
+//	 * 
+//	 * @param listener to add
+//	 * @since 0.6.0
+//	 */
+//	void addListener(ListenerLocale listener);
+//	
+//	/**
+//	 * Remove a listener for this locale.
+//	 * 
+//	 * @param listener to remove
+//	 * @since 0.6.0
+//	 */
+//	void removeListener(ListenerLocale listener);
+//
+//	/**
+//	 * Remove all listeners for this locale.
+//	 * @since 0.6.0 
+//	 */
+//	void removeAllListener();
 }

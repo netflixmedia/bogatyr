@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -33,20 +33,22 @@ package ch.sisprocom.bogatyr.controller.application;
 
 import ch.sisprocom.bogatyr.controller.ControllerAbstract;
 import ch.sisprocom.bogatyr.model.application.ModelApplication;
-import ch.sisprocom.bogatyr.model.application.ModelApplicationImpl;
 
 /**
  * The skeleton for the application controller.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100120)
+ * @version 0.9.0 (20100201)
  * @since 0.9.0
  */
 public abstract class ControllerApplicationAbstract extends ControllerAbstract implements ControllerApplication {
+	final ModelApplication model;
 	
-	final ModelApplication model = new ModelApplicationImpl();
-	
+	protected ControllerApplicationAbstract(final ModelApplication model) {
+		this.model = model;
+	}
 
+	
     /*
      * Implemented methods
      */

@@ -35,13 +35,14 @@ import javax.swing.JTextField;
 import javax.swing.text.Document;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Activatable;
 
 
 /**
  * This is an extended JTextField.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100126)
+ * @version 0.9.0 (20100201)
  * @since 0.1.0
  */
 public class TextField extends JTextField implements Activatable {
@@ -49,27 +50,32 @@ public class TextField extends JTextField implements Activatable {
 	
 	private boolean isNotActive;
 
-	
-	public TextField() { //super class constructor
+	/*
+	 * Superclass constructors
+	 */
+	public TextField() {
 		super();
 	}
 
-	public TextField(final Document doc, final String text, final int columns) { //super class constructor
+	public TextField(final Document doc, final String text, final int columns) {
 		super(doc, text, columns);
 	}
 
-	public TextField(final int columns) { //super class constructor
+	public TextField(final int columns) {
 		super(columns);
 	}
 
-	public TextField(final String text, final int columns) { //super class constructor
+	public TextField(final String text, final int columns) {
 		super(text, columns);
 	}
 
-	public TextField(final String text) { //super class constructor
+	public TextField(final String text) {
 		super(text);
 	}
 	
+	/*
+	 * Own constructors
+	 */
 	public TextField(final String text, final String toolTip) {
         this(text);
         setToolTipText(toolTip);

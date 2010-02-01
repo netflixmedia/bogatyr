@@ -31,21 +31,21 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.localizer;
 
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
 
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
+
 
 /**
  * Abstract localizer implementation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100129)
+ * @version 0.9.0 (20100201)
  * @since 0.6.0
  */
 public abstract class LocalizerAbstract extends ServiceAbstract implements Localizer {
@@ -136,8 +136,8 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 		listListener.add(listener);
     }
 
-    @Override
-    public synchronized void removeListener(final ListenerLocale listener) {
+	@Override
+    public void deleteListener(final ListenerLocale listener) {
 		if (null == listener) {
 			throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
 		}
@@ -146,7 +146,12 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
     }
 
     @Override
-    public synchronized void removeAllListener() {
+    public synchronized void deleteListeners() {
         listListener = new HashSet<ListenerLocale>();
+    }
+
+    @Override
+    public int countListeners() {
+    	return listListener.size();
     }
 }

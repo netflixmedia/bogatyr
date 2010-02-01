@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended AbstractAction.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100201)
  * @since 0.7.0
  */
 public abstract class ActionAbstract extends AbstractAction {
@@ -52,7 +52,9 @@ public abstract class ActionAbstract extends AbstractAction {
 //	Action.SMALL_ICON
 //	Action.LARGE_ICON_KEY
 
-
+	/*
+	 * Superclass constructors
+	 */
 	protected ActionAbstract() {
 		super();
 	}
@@ -64,7 +66,10 @@ public abstract class ActionAbstract extends AbstractAction {
 	protected ActionAbstract(final String name) {
 		super(name);
 	}
-	
+
+	/*
+	 * Own constructors
+	 */
 	protected ActionAbstract(final String name, final String toolTip) {
 		super(name);
 		putValue(SHORT_DESCRIPTION, toolTip);

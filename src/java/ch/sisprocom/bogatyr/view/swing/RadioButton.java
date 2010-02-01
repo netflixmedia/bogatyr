@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.view.swing;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Activatable;
 
 import javax.swing.Action;
 import javax.swing.Icon;
@@ -42,7 +43,7 @@ import javax.swing.JRadioButton;
  * This is an extended JRadioButton.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100201)
  * @since 0.2.0
  */
 public class RadioButton extends JRadioButton implements Activatable {
@@ -50,7 +51,9 @@ public class RadioButton extends JRadioButton implements Activatable {
 	
 	private boolean isNotActive;
 
-
+	/*
+	 * Superclass constructors
+	 */
 	public RadioButton() {
 		super();
 	}
@@ -82,7 +85,10 @@ public class RadioButton extends JRadioButton implements Activatable {
 	public RadioButton(final String text) {
 		super(text);
 	}
-
+	
+	/*
+	 * Own constructors
+	 */
 	public RadioButton(final boolean isSelected) {
 		super();
 		

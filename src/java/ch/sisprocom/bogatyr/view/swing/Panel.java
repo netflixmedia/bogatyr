@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -40,13 +40,14 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Activatable;
 
 
 /**
  * This is an extended JPanel.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100201)
  * @since 0.1.0
  */
 public class Panel extends JPanel implements Activatable {
@@ -56,7 +57,9 @@ public class Panel extends JPanel implements Activatable {
 
 	private String title;
 		
-	
+	/*
+	 * Superclass constructors
+	 */
 	public Panel() {
 		super();
 	}
@@ -73,6 +76,9 @@ public class Panel extends JPanel implements Activatable {
 		super(layout);
 	}
 
+	/*
+	 * Own constructors
+	 */
 	public Panel(final String title) {
 		this();
 		this.title = title;

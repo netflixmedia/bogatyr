@@ -33,6 +33,7 @@ package ch.sisprocom.bogatyr.view.swing;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.misc.Activatable;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
@@ -51,7 +52,7 @@ import java.util.Vector;
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100129)
+ * @version 0.9.0 (20100201)
  * @since 0.2.0
  */
 public class ComboBox extends JComboBox implements Activatable {
@@ -59,7 +60,9 @@ public class ComboBox extends JComboBox implements Activatable {
 	
 	private boolean isNotActive;
 
-	
+	/*
+	 * Superclass constructors
+	 */
 	public ComboBox() {
 		super();
 		
@@ -78,6 +81,9 @@ public class ComboBox extends JComboBox implements Activatable {
 		super(data);
 	}
 
+	/*
+	 * Own constructors
+	 */
 	public ComboBox(final ComboBoxModel model, final String toolTip) {
 		this(model);
 		

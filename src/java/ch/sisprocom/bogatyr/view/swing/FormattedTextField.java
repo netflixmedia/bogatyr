@@ -42,13 +42,14 @@ import javax.swing.JFormattedTextField;
 
 import ch.sisprocom.bogatyr.helper.HelperKeyboard;
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Activatable;
 
 
 /**
  * This is an extended JFormattedTextField.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100128)
+ * @version 0.9.0 (20100201)
  * @since 0.9.0
  */
 public class FormattedTextField extends JFormattedTextField implements Activatable {
