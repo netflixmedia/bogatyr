@@ -41,6 +41,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 
 
@@ -48,7 +50,7 @@ import java.util.Properties;
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100129)
+ * @version 0.9.0 (20100201)
  * @since 0.1.0
  */
 public class PropertyImpl extends ServiceAbstract implements Property {
@@ -85,47 +87,68 @@ public class PropertyImpl extends ServiceAbstract implements Property {
     }
 
     @Override
-    public Boolean getBooleanValue(final String key) {
+    public Boolean getBoolean(final String key) {
         return null == properties.getProperty(key) ? null : Boolean.valueOf(properties.getProperty(key));
     }
 
 	@Override
-    public BigDecimal getBigDecimalValue(final String key) {
+    public BigDecimal getBigDecimal(final String key) {
 		return HelperNumber.getBigDecimal(properties.getProperty(key));
 	}
 
 	@Override
-    public BigInteger getBigIntegerValue(final String key) {
+    public BigInteger getBigInteger(final String key) {
 		return HelperNumber.getBigInteger(properties.getProperty(key));
 	}
 
 	@Override
-    public Byte getByteValue(final String key) {
+    public Byte getByte(final String key) {
 		return HelperNumber.getByte(properties.getProperty(key));
 	}
 
 	@Override
-    public Double getDoubleValue(final String key) {
+    public Double getDouble(final String key) {
 		return HelperNumber.getDouble(properties.getProperty(key));
 	}
 
 	@Override
-    public Float getFloatValue(final String key) {
+    public Float getFloat(final String key) {
 		return HelperNumber.getFloat(properties.getProperty(key));
 	}
 
 	@Override
-    public Integer getIntegerValue(final String key) {
+    public Integer getInteger(final String key) {
 		return HelperNumber.getInteger(properties.getProperty(key));
 	}
 
 	@Override
-    public Long getLongValue(final String key) {
+    public Long getLong(final String key) {
 		return HelperNumber.getLong(properties.getProperty(key));
 	}
 
 	@Override
-    public Short getShortValue(final String key) {
+    public Short getShort(final String key) {
 		return HelperNumber.getShort(properties.getProperty(key));
+	}
+
+	@Override
+    public File getFile(final String key) {
+		final String file = properties.getProperty(key);
+		
+		return null == file ? null : new File(file);
+	}
+
+	@Override
+    public URL getURL(final String key) {
+		final String url = properties.getProperty(key);
+		
+		if (null != url) {
+			try {
+				return new URL(url);
+			} catch (MalformedURLException e) {
+				// do nothing
+			}
+		}
+		return null;
 	}
 }   

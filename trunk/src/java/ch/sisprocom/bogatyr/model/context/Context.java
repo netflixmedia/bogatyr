@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,8 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.context;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.URL;
 import java.util.Date;
 import java.util.Map;
 
@@ -43,7 +45,7 @@ import ch.sisprocom.bogatyr.model.Model;
  * Interface for the context in applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100202)
  * @since 0.6.0
  */
 public interface Context extends Model {
@@ -94,101 +96,119 @@ public interface Context extends Model {
 	Object getValue(Object key);
 	
 	/**
-     * Returns a {@link String} value associated to the given key from the context.
+     * Returns a {@link String} associated to the given key from the context.
      * 
      * @param key for the context
-     * @return String associated to the given key
+     * @return {@link String} associated to the given key
      * @since 0.6.0 
      */	
-	String getStringValue(Object key);
+	String getString(Object key);
 	
 	/**
      * Returns a {@link Boolean} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Boolean associated to the given key
+     * @return {@link Boolean} associated to the given key
      * @since 0.7.0 
      */	
-	Boolean getBooleanValue(Object key);
+	Boolean getBoolean(Object key);
 	
 	/**
      * Returns a {@link Double} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Double associated to the given key
+     * @return {@link Double} associated to the given key
      * @since 0.7.0 
      */	
-	Double getDoubleValue(Object key);
+	Double getDouble(Object key);
 	
 	/**
      * Returns an {@link Integer} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Integer associated to the given key
+     * @return {@link Integer} associated to the given key
      * @since 0.7.0 
      */	
-	Integer getIntegerValue(Object key);
+	Integer getInteger(Object key);
 	
 	/**
      * Returns a {@link Float} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Float associated to the given key
+     * @return {@link Float} associated to the given key
      * @since 0.7.0 
      */	
-	Float getFloatValue(Object key);
+	Float getFloat(Object key);
 	
 	/**
      * Returns a {@link Byte} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Byte associated to the given key
+     * @return {@link Byte} associated to the given key
      * @since 0.7.0 
      */	
-	Byte getByteValue(Object key);
+	Byte getByte(Object key);
 	
 	/**
      * Returns a {@link Long} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Long associated to the given key
+     * @return {@link Long} associated to the given key
      * @since 0.7.0 
      */	
-	Long getLongValue(Object key);
+	Long getLong(Object key);
 
 	/**
      * Returns a {@link Short} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Short associated to the given key
+     * @return {@link Short} associated to the given key
      * @since 0.7.0 
      */	
-	Short getShortValue(Object key);
+	Short getShort(Object key);
 	
 	/**
      * Returns a {@link BigInteger} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return BigInteger associated to the given key
+     * @return {@link BigInteger} associated to the given key
      * @since 0.7.0 
      */	
-	BigInteger getBigIntegerValue(Object key);
+	BigInteger getBigInteger(Object key);
 	
 	/**
      * Returns a {@link BigDecimal} value associated to the given key from the context.
      * 
      * @param key for the context
-     * @return BigDecimal associated to the given key
+     * @return {@link BigDecimal} associated to the given key
      * @since 0.7.0 
      */	
-	BigDecimal getBigDecimalValue(Object key);
+	BigDecimal getBigDecimal(Object key);
 
 	/**
-     * Returns a {@link Date} value associated to the given key from the context.
+     * Returns a {@link Date} associated to the given key from the context.
      * 
      * @param key for the context
-     * @return Date associated to the given key
+     * @return {@link Date} associated to the given key
      * @since 0.7.0 
      */	
-	Date getDateValue(Object key);
+	Date getDate(Object key);
+	
+	/**
+     * Returns a {@link File} associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return {@link File} associated to the given key
+     * @since 0.9.0 
+     */	
+	File getFile(Object key);
+	
+	/**
+     * Returns a {@link URL} associated to the given key from the context.
+     * 
+     * @param key for the context
+     * @return {@link URL} associated to the given key
+     * @since 0.9.0 
+     */	
+	URL getURL(Object key);
 }

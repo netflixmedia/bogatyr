@@ -45,8 +45,9 @@ public abstract class ControllerApplicationAbstract extends ControllerAbstract i
 	final ModelApplication model;
 	
 	protected ControllerApplicationAbstract(final ModelApplication model) {
-		this.model = model;
-	}
+        super();
+        this.model = model;
+    }
 
 	
     /*

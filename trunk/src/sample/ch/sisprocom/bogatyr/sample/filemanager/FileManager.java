@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -48,7 +48,7 @@ import java.io.IOException;
  * Simple file manager using the Bogatyr framework
  * 
  * @author Stefan Laubenberger
- * @version 20091101
+ * @version 20100202
  */
 public class FileManager extends ApplicationAbstract {
 	// Fixed parameter - e.g. this could be an argument
@@ -108,7 +108,7 @@ public class FileManager extends ApplicationAbstract {
 
 	private void searchFiles() throws IOException {
 		int ii = 0;
-		final boolean isDelete = property.getBooleanValue(PROPERTY_DELETE);
+		final boolean isDelete = property.getBoolean(PROPERTY_DELETE);
 
 	    final FileFilter filter = new FileFilter() { 
 	    	@Override

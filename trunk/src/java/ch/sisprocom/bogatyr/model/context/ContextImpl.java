@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,8 +31,10 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.context;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.net.URL;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -45,7 +47,7 @@ import ch.sisprocom.bogatyr.model.ModelAbstract;
  * Implementation of the context for applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100202)
  * @since 0.1.0
  */
 public class ContextImpl extends ModelAbstract implements Context {
@@ -127,57 +129,99 @@ public class ContextImpl extends ModelAbstract implements Context {
 	}
 
 	@Override
-    public String getStringValue(final Object key) { //$JUnit$
-		return (String)getValue(key);
+    public String getString(final Object key) { //$JUnit$
+		final Object obj = getValue(key);
+		
+		if (null == obj) {
+			return null;
+		}
+		if (obj instanceof String) {
+			return (String)obj;
+		}
+		return obj.toString();
     }
 
 	@Override
-    public Boolean getBooleanValue(final Object key) { //$JUnit$
-		return (Boolean)getValue(key);
+    public Boolean getBoolean(final Object key) { //$JUnit$
+		final Object obj = getValue(key);
+
+		return null != obj && obj instanceof Boolean ? (Boolean)obj : null;
     }
 	
 	@Override
-    public Double getDoubleValue(final Object key) { //$JUnit$
-		return (Double)getValue(key);
+    public Double getDouble(final Object key) { //$JUnit$
+		final Object obj = getValue(key);
+
+		return null != obj && obj instanceof Double ? (Double)obj : null;
 	}
 	
 	@Override
-    public Integer getIntegerValue(final Object key) { //$JUnit$
-		return (Integer)getValue(key);
+    public Integer getInteger(final Object key) { //$JUnit$
+		final Object obj = getValue(key);
+
+		return null != obj && obj instanceof Integer ? (Integer)obj : null;
 	}
 	
 	@Override
-    public Float getFloatValue(final Object key) { //$JUnit$
-		return (Float)getValue(key);
+    public Float getFloat(final Object key) { //$JUnit$
+		final Object obj = getValue(key);
+
+		return null != obj && obj instanceof Float ? (Float)obj : null;
 	}
 	
 	@Override
-    public Byte getByteValue(final Object key) { //$JUnit$
-		return (Byte)getValue(key);
+    public Byte getByte(final Object key) { //$JUnit$
+		final Object obj = getValue(key);
+
+		return null != obj && obj instanceof Byte ? (Byte)obj : null;
 	}
 	
 	@Override
-    public Long getLongValue(final Object key) { //$JUnit$
-		return (Long)getValue(key);
+    public Long getLong(final Object key) { //$JUnit$
+		final Object obj = getValue(key);
+
+		return null != obj && obj instanceof Long ? (Long)obj : null;
 	}
 
 	@Override
-    public Short getShortValue(final Object key) { //$JUnit$
-		return (Short)getValue(key);
+    public Short getShort(final Object key) { //$JUnit$
+		final Object obj = getValue(key);
+
+		return null != obj && obj instanceof Short ? (Short)obj : null;
 	}
 	
 	@Override
-    public BigInteger getBigIntegerValue(final Object key) { //$JUnit$
-		return (BigInteger)getValue(key);
+    public BigInteger getBigInteger(final Object key) { //$JUnit$
+		final Object obj = getValue(key);
+
+		return null != obj && obj instanceof BigInteger ? (BigInteger)obj : null;
 	}
 	
 	@Override
-    public BigDecimal getBigDecimalValue(final Object key) { //$JUnit$
-		return (BigDecimal)getValue(key);
+    public BigDecimal getBigDecimal(final Object key) { //$JUnit$
+		final Object obj = getValue(key);
+
+		return null != obj && obj instanceof BigDecimal ? (BigDecimal)obj : null;
 	}
 
 	@Override
-    public Date getDateValue(final Object key) { //$JUnit$
-		return (Date)getValue(key);
+    public Date getDate(final Object key) { //$JUnit$
+		final Object obj = getValue(key);
+
+		return null != obj && obj instanceof Date ? (Date)obj : null;
+	}
+
+	@Override
+    public File getFile(final Object key) {
+		final Object obj = getValue(key);
+
+		return null != obj && obj instanceof File ? (File)obj : null;
+	}
+	
+	@Override
+    public URL getURL(final Object key) {
+		final Object obj = getValue(key);
+
+		return null != obj && obj instanceof URL ? (URL)obj : null;
 	}
 }

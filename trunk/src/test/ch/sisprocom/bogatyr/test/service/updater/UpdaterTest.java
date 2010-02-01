@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -52,7 +52,7 @@ import ch.sisprocom.bogatyr.model.updater.DocumentImpl;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100105
+ * @version 20100202
  */
 public class UpdaterTest {
 	@Before
@@ -96,7 +96,7 @@ public class UpdaterTest {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		try {
 			new UpdaterTest().setUp();
 		} catch (Exception e) {
