@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -37,6 +37,9 @@ import java.net.Socket;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositive;
 
 
 /**
@@ -85,7 +88,7 @@ public abstract class HelperTime {
      */
 	public static Date getAtomicTime(final String host) throws IOException { //$JUnit$
 		if (!HelperString.isValid(host)) {
-			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
 		
 		Socket socket = null;
@@ -125,13 +128,13 @@ public abstract class HelperTime {
      */
     public static Date getDate(final int day, final int month, final int year) {
     	if (0 > day) {
-    		throw new IllegalArgumentException("day value must be positive: " + day); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentMustBePositive("day", day); //$NON-NLS-1$
     	}
     	if (0 > month) {
-    		throw new IllegalArgumentException("month value must be positive: " + month); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentMustBePositive("month", month); //$NON-NLS-1$
     	}
     	if (0 > year) {
-    		throw new IllegalArgumentException("year value must be positive: " + year); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentMustBePositive("year", year); //$NON-NLS-1$
     	}
     	
     	final Calendar cal = new GregorianCalendar();

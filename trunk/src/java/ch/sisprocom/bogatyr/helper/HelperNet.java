@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -30,8 +30,6 @@
  * 
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
-
-import ch.sisprocom.bogatyr.helper.encoder.EncoderBase64;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,6 +45,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import ch.sisprocom.bogatyr.helper.encoder.EncoderBase64;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
 
 
 /**
@@ -78,13 +80,13 @@ public abstract class HelperNet {
      */
     public static void enableProxyHttp(final String host, final int port, final String username, final String password) { //$JUnit$
 		if (!HelperString.isValid(host)) {
-			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(username)) {
-			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("username"); //$NON-NLS-1$
 		}
 		if (null == password) {
-			throw new IllegalArgumentException("password is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("password"); //$NON-NLS-1$
 		}
 		
 //    	System.setProperty(PROPERTY_HTTP_USE_PROXY, "true"); //$NON-NLS-1$
@@ -116,13 +118,13 @@ public abstract class HelperNet {
      */
     public static void enableProxyHttps(final String host, final int port, final String username, final String password) { //$JUnit$
 		if (!HelperString.isValid(host)) {
-			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(username)) {
-			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("username"); //$NON-NLS-1$
 		}
 		if (null == password) {
-			throw new IllegalArgumentException("password is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("password"); //$NON-NLS-1$
 		}
 		
 //		System.setProperty(PROPERTY_HTTPS_USE_PROXY, "true"); //$NON-NLS-1$
@@ -154,13 +156,13 @@ public abstract class HelperNet {
      */
     public static void enableProxyFtp(final String host, final int port, final String username, final String password) { //$JUnit$
 		if (!HelperString.isValid(host)) {
-			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(username)) {
-			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("username"); //$NON-NLS-1$
 		}
 		if (null == password) {
-			throw new IllegalArgumentException("password is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("password"); //$NON-NLS-1$
 		}
 		
 //		System.setProperty(PROPERTY_FTP_USE_PROXY, "true"); //$NON-NLS-1$
@@ -191,7 +193,7 @@ public abstract class HelperNet {
      */
     public static boolean isPingable(final String host) throws IOException { //$JUnit$
 		if (!HelperString.isValid(host)) {
-			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
 		
     	final InetAddress address = InetAddress.getByName(host);
@@ -212,7 +214,7 @@ public abstract class HelperNet {
      */
     public static String getHostname(final String ip) throws UnknownHostException { //$JUnit$
 		if (!HelperString.isValid(ip)) {
-			throw new IllegalArgumentException("ip is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("ip"); //$NON-NLS-1$
 		}
 		
 		final InetAddress address = InetAddress.getByName(ip);
@@ -243,7 +245,7 @@ public abstract class HelperNet {
      */
     public static String getIp(final String host) throws UnknownHostException { //$JUnit$
 		if (!HelperString.isValid(host)) {
-			throw new IllegalArgumentException("host is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
 		
 		final InetAddress address = InetAddress.getByName(host);
@@ -304,7 +306,7 @@ public abstract class HelperNet {
      */
     public static String getMacAddress(final NetworkInterface ni) throws SocketException { //$JUnit$
 		if (null == ni) {
-			throw new IllegalArgumentException("ni is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("ni"); //$NON-NLS-1$
 		}
 		
 		final StringBuilder sb = new StringBuilder();
@@ -331,7 +333,7 @@ public abstract class HelperNet {
      */
     public static InputStream readUrl(final URL url) throws IOException { //$JUnit$
 		if (null == url) {
-			throw new IllegalArgumentException("url is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("url"); //$NON-NLS-1$
 		}
 		
 		final URLConnection con = url.openConnection();
@@ -355,13 +357,13 @@ public abstract class HelperNet {
      */
     public static InputStream readUrl(final URL url, final String username, final String password) throws IOException {
 		if (null == url) {
-			throw new IllegalArgumentException("url is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("url"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(username)) {
-			throw new IllegalArgumentException("username is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("username"); //$NON-NLS-1$
 		}
 		if (null == password) {
-			throw new IllegalArgumentException("password is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("password"); //$NON-NLS-1$
 		}
 		
     	final URLConnection con = url.openConnection();

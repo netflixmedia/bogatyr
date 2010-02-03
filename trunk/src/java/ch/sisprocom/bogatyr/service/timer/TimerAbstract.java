@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,11 +31,12 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.timer;
 
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Timer;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 /**
  * This is a timer which informs all added listeners about its state.
@@ -77,7 +78,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 	 */
     public void setTimer(final Timer timer) {
     	if (null == timer) {
-    		throw new IllegalArgumentException("timer is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("timer"); //$NON-NLS-1$
     	}
 
         this.timer = timer;
@@ -130,7 +131,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
     @Override
     public synchronized void addListener(final ListenerTimer listener) {
     	if (null == listener) {
-    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.add(listener);
@@ -139,7 +140,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
     @Override
     public synchronized void deleteListener(final ListenerTimer listener) {
     	if (null == listener) {
-    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.remove(listener);

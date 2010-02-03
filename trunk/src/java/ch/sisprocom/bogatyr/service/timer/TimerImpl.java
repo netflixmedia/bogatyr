@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -32,6 +32,8 @@
 package ch.sisprocom.bogatyr.service.timer;
 
 import java.util.TimerTask;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositive;
 
 /**
  * This is a timer which informs all added listeners about its state.
@@ -51,7 +53,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
 	@Override
     public void setTime(final long time) {
 		if (0 > time) {
-			throw new IllegalArgumentException("time must be positive: " + time); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentMustBePositive("time", time); //$NON-NLS-1$
 		}
 
 		this.time = time;
@@ -64,7 +66,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
     @Override
     public synchronized void start(final long interval) {
 		if (0 > interval) {
-			throw new IllegalArgumentException("interval must be positive: " + interval); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentMustBePositive("interval", interval); //$NON-NLS-1$
 		}
 
 		start(0L, interval);
@@ -73,10 +75,10 @@ public class TimerImpl extends TimerAbstract implements Timer {
     @Override
     public synchronized void start(final long delay, final long interval) {
 		if (0 > delay) {
-			throw new IllegalArgumentException("delay must be positive: " + delay); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentMustBePositive("delay", delay); //$NON-NLS-1$
 		}
 		if (0 > interval) {
-			throw new IllegalArgumentException("interval must be positive: " + interval); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentMustBePositive("interval", interval); //$NON-NLS-1$
 		}
 
     	getTimer().cancel();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -35,6 +35,8 @@ import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentExceedsVmMemory;
 
 
 /**
@@ -55,10 +57,10 @@ public abstract class EncoderHex {
      */
     public static String encode(final byte[] input) { //$JUnit$
 		if (!HelperArray.isValid(input)) {
-			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
-        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
         }
 		
 		final StringBuilder hexString = new StringBuilder(input.length * 2);
@@ -82,10 +84,10 @@ public abstract class EncoderHex {
      */
     public static byte[] decode(final String input) { //$JUnit$
 		if (!HelperString.isValid(input)) {
-			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
-        if (input.length() * 2 > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("the doubled input (" + input.length() * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (input.length() * 2 > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
         }
 
 		final byte[] bts = new byte[input.length() / 2];

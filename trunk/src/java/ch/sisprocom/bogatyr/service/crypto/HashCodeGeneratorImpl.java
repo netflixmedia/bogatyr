@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -42,8 +42,12 @@ import java.security.NoSuchAlgorithmException;
 import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.encoder.EncoderHex;
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentExceedsVmMemory;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBeGreaterThanOne;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
 /**
@@ -60,10 +64,10 @@ public abstract class HashCodeGeneratorImpl extends ServiceAbstract implements H
     @Override
 	public String getHash(final byte[] input, final HashCode hashCode) throws NoSuchAlgorithmException {
         if (null == input) {
-            throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
         }
         if (null == hashCode) {
-            throw new IllegalArgumentException("hashCode is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("hashCode"); //$NON-NLS-1$
         }
 
     	final MessageDigest md = MessageDigest.getInstance(hashCode.getAlgorithm());
@@ -82,13 +86,13 @@ public abstract class HashCodeGeneratorImpl extends ServiceAbstract implements H
     @Override
     public String getHash(final File input, final HashCode hashCode, final int bufferSize) throws NoSuchAlgorithmException, IOException {
         if (null == input) {
-            throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
         }
 		if (!input.exists()) {
-			throw new IllegalArgumentException("input doesn't exists: " + input); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(input);
 		}
         if (null == hashCode) {
-            throw new IllegalArgumentException("hashCode is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("hashCode"); //$NON-NLS-1$
         }
 
         return getHash(new BufferedInputStream(new FileInputStream(input)), hashCode, bufferSize);
@@ -97,16 +101,16 @@ public abstract class HashCodeGeneratorImpl extends ServiceAbstract implements H
 	@Override
 	public String getHash(final InputStream is, final HashCode hashCode, final int bufferSize) throws NoSuchAlgorithmException, IOException {
         if (null == is) {
-            throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
         }
         if (null == hashCode) {
-            throw new IllegalArgumentException("hashCode is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("hashCode"); //$NON-NLS-1$
         }
         if (1 > bufferSize) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
         }
-        if (bufferSize > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (bufferSize > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionArgumentExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
         }
 
         final MessageDigest md = MessageDigest.getInstance(hashCode.getAlgorithm());

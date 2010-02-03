@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -36,6 +36,8 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import javax.swing.KeyStroke;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 
 
 /**
@@ -58,7 +60,7 @@ public class LocalizerFile extends LocalizerAbstract {
         super();
 
         if (null == localizerBase) {
-			throw new IllegalArgumentException("localizerBase is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("localizerBase"); //$NON-NLS-1$
 		}
 		
 		this.localizerBase = localizerBase;
@@ -84,7 +86,7 @@ public class LocalizerFile extends LocalizerAbstract {
 	 */
     public void setLocalizerBase(final String localizerBase) {
 		if (null == localizerBase) {
-			throw new IllegalArgumentException("localizerBase is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("localizerBase"); //$NON-NLS-1$
 		}
 		
 		this.localizerBase = localizerBase;
@@ -106,7 +108,7 @@ public class LocalizerFile extends LocalizerAbstract {
     @Override
 	public void setLocale(final Locale locale) {
 		if (null == locale) {
-			throw new IllegalArgumentException("locale is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("locale"); //$NON-NLS-1$
 		}
 
 		bundle = ResourceBundle.getBundle(localizerBase, locale);

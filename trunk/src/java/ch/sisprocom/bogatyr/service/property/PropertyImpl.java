@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -30,9 +30,6 @@
  * 
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.property;
-
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -44,6 +41,10 @@ import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
+
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
 /**
@@ -61,7 +62,7 @@ public class PropertyImpl extends ServiceAbstract implements Property {
         super();
        
         if (null == is) {
-			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
 		}
 
         properties = new Properties();

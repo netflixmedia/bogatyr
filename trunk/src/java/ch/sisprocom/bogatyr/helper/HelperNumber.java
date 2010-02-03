@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -33,6 +33,8 @@ package ch.sisprocom.bogatyr.helper;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 
 
 /**
@@ -94,7 +96,7 @@ public abstract class HelperNumber {
      */
     public static BigDecimal multiply(final BigDecimal... values) {
         if (null == values) {
-            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
         }
 
         BigDecimal result = null;
@@ -129,7 +131,7 @@ public abstract class HelperNumber {
      */
     public static BigInteger multiply(final BigInteger... values) {
         if (null == values) {
-            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
         }
 
         BigInteger result = null;
@@ -164,7 +166,7 @@ public abstract class HelperNumber {
      */
     public static Integer multiply(final Integer... values) {
         if (null == values) {
-            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
         }
 
         Integer result = null;
@@ -199,7 +201,7 @@ public abstract class HelperNumber {
      */
     public static Double multiply(final Double... values) {
         if (null == values) {
-            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
         }
 
         Double result = null;
@@ -234,7 +236,7 @@ public abstract class HelperNumber {
      */
     public static Float multiply(final Float... values) {
         if (null == values) {
-            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
         }
 
         Float result = null;
@@ -269,7 +271,7 @@ public abstract class HelperNumber {
      */
     public static Long multiply(final Long... values) {
         if (null == values) {
-            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
         }
 
         Long result = null;
@@ -304,7 +306,7 @@ public abstract class HelperNumber {
      */
     public static BigDecimal add(final BigDecimal... values) {
         if (null == values) {
-            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
         }
 
         BigDecimal result = null;
@@ -339,7 +341,7 @@ public abstract class HelperNumber {
      */
     public static BigInteger add(final BigInteger... values) {
         if (null == values) {
-            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
         }
 
         BigInteger result = null;
@@ -374,7 +376,7 @@ public abstract class HelperNumber {
      */
     public static Integer add(final Integer... values) {
         if (null == values) {
-            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
         }
 
         Integer result = null;
@@ -409,7 +411,7 @@ public abstract class HelperNumber {
      */
     public static Double add(final Double... values) {
         if (null == values) {
-            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
         }
 
         Double result = null;
@@ -444,7 +446,7 @@ public abstract class HelperNumber {
      */
     public static Float add(final Float... values) {
         if (null == values) {
-            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
         }
 
         Float result = null;
@@ -479,7 +481,7 @@ public abstract class HelperNumber {
      */
     public static Long add(final Long... values) {
         if (null == values) {
-            throw new IllegalArgumentException("values is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
         }
 
         Long result = null;

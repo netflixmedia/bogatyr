@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -41,6 +41,12 @@ import java.io.OutputStream;
 import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentExceedsVmMemory;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBeGreaterThanOne;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionInputEqualsOutput;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
@@ -67,10 +73,10 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 	 */
 	private static byte[] obfuscate(final byte[] input, final byte pattern) {
 		if (!HelperArray.isValid(input)) {
-			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
-        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
         }
 
 		final byte[] result = new byte[input.length];
@@ -92,10 +98,10 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 	 */
 	private static byte[] unobfuscate(final byte[] input, final byte pattern) {
 		if (!HelperArray.isValid(input)) {
-			throw new IllegalArgumentException("input is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
-        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
         }
 
 		final byte[] result = new byte[input.length];
@@ -109,22 +115,22 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 
 	private static void obfuscate(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
         if (null == input) {
-            throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
         }
 		if (!input.exists()) {
-			throw new IllegalArgumentException("input doesn't exists: " + input); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(input);
 		}
 		if (null == output) {
-            throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("output"); //$NON-NLS-1$
         }
 		if (input.equals(output)) {
-			throw new IllegalArgumentException("input is equals to output!"); //$NON-NLS-1$
+			throw new RuntimeExceptionInputEqualsOutput("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
         if (1 > bufferSize) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
         }
-        if (bufferSize > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (bufferSize > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionArgumentExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
         }
 		
         final byte[] buffer = new byte[bufferSize];
@@ -157,22 +163,22 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 
 	private static void unobfuscate(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
         if (null == input) {
-            throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
         }
 		if (!input.exists()) {
-			throw new IllegalArgumentException("input doesn't exists: " + input); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(input);
 		}
 		if (null == output) {
-            throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("output"); //$NON-NLS-1$
         }
 		if (input.equals(output)) {
-			throw new IllegalArgumentException("input is equals to output!"); //$NON-NLS-1$
+			throw new RuntimeExceptionInputEqualsOutput("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
         if (1 > bufferSize) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
         }
-        if (bufferSize > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (bufferSize > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionArgumentExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
         }
 
 		final byte[] buffer = new byte[bufferSize];

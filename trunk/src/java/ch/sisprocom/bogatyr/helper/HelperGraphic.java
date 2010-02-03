@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -39,10 +39,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
-import java.awt.geom.Rectangle2D;
 import java.awt.geom.Dimension2D;
+import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
 import java.util.Collection;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 
 
 /**
@@ -63,7 +65,7 @@ public abstract class HelperGraphic {
      */	
 	public static void enableAntialiasing(final Graphics2D graphics) {
 		if (null == graphics) {
-			throw new IllegalArgumentException("graphics is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("graphics"); //$NON-NLS-1$
 		}
 		
 		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -80,7 +82,7 @@ public abstract class HelperGraphic {
      */
     public static Dimension getCenter(final Dimension size) { //$JUnit$
 		if (null == size) {
-			throw new IllegalArgumentException("size is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("size"); //$NON-NLS-1$
 		}
 
     	return new Dimension(size.width / 2, size.height / 2);
@@ -97,10 +99,10 @@ public abstract class HelperGraphic {
      */
     public static double getScale(final Dimension2D input, final Dimension2D output) { //$JUnit$
 		if (null == input) {
-			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
 		}
 		if (null == output) {
-			throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("output"); //$NON-NLS-1$
 		}
 		
 		final double scaleHeight =  input.getHeight() / output.getHeight();
@@ -120,10 +122,10 @@ public abstract class HelperGraphic {
      */
     public static Dimension getScaledSize(final Dimension2D input, final Dimension2D output) { //$JUnit$
 		if (null == input) {
-			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
 		}
 		if (null == output) {
-			throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("output"); //$NON-NLS-1$
 		}
 		
 		final double scaleHeight = input.getHeight() / output.getHeight();
@@ -146,10 +148,10 @@ public abstract class HelperGraphic {
      */
 	public static Dimension getTextSize(final String text, final Graphics graphics) {
 		if (null == text) {
-			throw new IllegalArgumentException("text is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("text"); //$NON-NLS-1$
 		}
 		if (null == graphics) {
-			throw new IllegalArgumentException("graphics is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("graphics"); //$NON-NLS-1$
 		}
 		
 		final FontMetrics fm = graphics.getFontMetrics(graphics.getFont());
@@ -188,7 +190,7 @@ public abstract class HelperGraphic {
      */
     public static String getColorHex(final Color color) { //$JUnit$
 		if (null == color) {
-			throw new IllegalArgumentException("color is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("color"); //$NON-NLS-1$
 		}
 		
     	return Integer.toHexString(color.getRGB() & 0x00ffffff); 

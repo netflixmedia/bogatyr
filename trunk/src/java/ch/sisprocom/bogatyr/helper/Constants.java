@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -56,7 +56,7 @@ public abstract class Constants {
 	//Bogatyr specific
 	public static final String BOGATYR_NAME		 		  = "Bogatyr"; //$NON-NLS-1$
 	public static final BigDecimal BOGATYR_VERSION 		  = new BigDecimal("0.9"); //$NON-NLS-1$
-	public static final int BOGATYR_BUILD 				  = 221;
+	public static final int BOGATYR_BUILD 				  = 222;
 	public static final Manufacturer BOGATYR_MANUFACTURER = new ManufacturerImpl();
 	public static final Owner BOGATYR_OWNER 			  = new OwnerImpl();
 	public static final Publisher BOGATYR_PUBLISHER		  = new PublisherImpl();

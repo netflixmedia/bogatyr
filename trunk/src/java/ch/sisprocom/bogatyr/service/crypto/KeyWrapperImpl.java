@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,17 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.crypto;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
-
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 /**
  * This is a class for wrapping and unwrapping a crypto key.
@@ -57,10 +60,10 @@ public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
 	@Override
     public byte[] wrap(final Key wrapperKey, final Key key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, NoSuchProviderException {
 		if (null == wrapperKey) {
-			throw new IllegalArgumentException("wrapperKey is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("wrapperKey"); //$NON-NLS-1$
 		}
 		if (null == key) {
-			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
 		}
 		
 		final Cipher cipher = Cipher.getInstance(CryptoRSA.XFORM, "BC"); //$NON-NLS-1$
@@ -72,13 +75,13 @@ public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
 	@Override
     public Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
 		if (null == wrapperKey) {
-			throw new IllegalArgumentException("wrapperKey is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("wrapperKey"); //$NON-NLS-1$
 		}
 		if (!HelperArray.isValid(wrappedKey)) {
-			throw new IllegalArgumentException("wrappedKey is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("wrappedKey"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(keyAlgorithm)) {
-			throw new IllegalArgumentException("keyAlgorithm is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("keyAlgorithm"); //$NON-NLS-1$
 		}
 		if (0 >= keyType) {
 			throw new IllegalArgumentException("keyType is invalid: " + keyType); //$NON-NLS-1$

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,9 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.printer;
 
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
-
-import javax.swing.RepaintManager;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -41,6 +38,11 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+
+import javax.swing.RepaintManager;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
 /**
@@ -65,7 +67,7 @@ public class Printer extends ServiceAbstract implements Printable {
      */
     public synchronized void print(final Component component, final boolean isScaled) throws PrinterException {
 		if (null == component) {
-			throw new IllegalArgumentException("component is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("component"); //$NON-NLS-1$
 		}
 
     	componentToBePrinted = component;
@@ -115,10 +117,10 @@ public class Printer extends ServiceAbstract implements Printable {
     @Override
     public synchronized int print(final Graphics graphics, final PageFormat pageFormat, final int pageIndex) {
 		if (null == graphics) {
-			throw new IllegalArgumentException("graphics is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("graphics"); //$NON-NLS-1$
 		}
 		if (null == pageFormat) {
-			throw new IllegalArgumentException("pageFormat is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("pageFormat"); //$NON-NLS-1$
 		}
 
     	if (0 < pageIndex) {

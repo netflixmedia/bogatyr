@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -49,53 +49,92 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
+//	/**
+//	 * Returns the used VM heap memory in bytes.
+//     *
+//     * @return used VM memory
+//     * @since 0.5.0
+//	 */
+//	public static long getMemoryHeapUsed() { //$JUnit$
+//		return getMemoryHeapTotal() - getMemoryHeapFree();
+//	}
+//
+//	/**
+//	 * Returns the free VM heap memory in bytes.
+//     *
+//     * @return free VM memory
+//     * @since 0.5.0
+//	 */
+//	public static long getMemoryHeapFree() { //$JUnit$
+//		return Runtime.getRuntime().freeMemory();
+//	}
+//	
+//	/**
+//	 * Returns the maximal reserved VM heap memory in bytes.
+//     *
+//     * @return max VM memory
+//     * @since 0.8.0
+//	 */
+//	public static long getMemoryHeapTotal() { //$JUnit$
+//		return Runtime.getRuntime().totalMemory();
+//	}
+//	
+//	/**
+//	 * Returns the reserved VM stack memory in bytes.
+//     *
+//     * @return max VM memory
+//     * @since 0.8.0
+//	 */
+//	public static long getMemoryStack() { //$JUnit$
+//		return getMemoryTotal() - getMemoryHeapTotal();
+//	}
+//	
+//	/**
+//	 * Returns the maximal reserved heap&stack VM memory in bytes.
+//     *
+//     * @return max VM memory
+//     * @since 0.5.0
+//	 */
+//	public static long getMemoryTotal() { //$JUnit$
+//		return Runtime.getRuntime().maxMemory();
+//	}
 	/**
-	 * Returns the used VM heap memory in bytes.
+	 * Returns the used VM memory in bytes.
      *
      * @return used VM memory
-     * @since 0.5.0
+     * @since 0.9.0
 	 */
-	public static long getMemoryHeapUsed() { //$JUnit$
-		return getMemoryHeapTotal() - getMemoryHeapFree();
+	public static long getMemoryUsed() {
+		return getMemoryTotal() - getMemoryFree();
 	}
 
 	/**
-	 * Returns the free VM heap memory in bytes.
+	 * Returns the free VM memory in bytes.
      *
      * @return free VM memory
-     * @since 0.5.0
+     * @since 0.9.0
 	 */
-	public static long getMemoryHeapFree() { //$JUnit$
+	public static long getMemoryFree() {
 		return Runtime.getRuntime().freeMemory();
 	}
 	
 	/**
-	 * Returns the maximal reserved VM heap memory in bytes.
+	 * Returns the current total VM memory in bytes.
      *
-     * @return max VM memory
-     * @since 0.8.0
+     * @return current total VM memory
+     * @since 0.9.0
 	 */
-	public static long getMemoryHeapTotal() { //$JUnit$
+	public static long getMemoryTotal() {
 		return Runtime.getRuntime().totalMemory();
 	}
 	
 	/**
-	 * Returns the reserved VM stack memory in bytes.
+	 * Returns the maximal reserved VM memory in bytes.
      *
      * @return max VM memory
-     * @since 0.8.0
+     * @since 0.9.0
 	 */
-	public static long getMemoryStack() { //$JUnit$
-		return getMemoryTotal() - getMemoryHeapTotal();
-	}
-	
-	/**
-	 * Returns the maximal reserved heap&stack VM memory in bytes.
-     *
-     * @return max VM memory
-     * @since 0.5.0
-	 */
-	public static long getMemoryTotal() { //$JUnit$
+	public static long getMemoryMax() {
 		return Runtime.getRuntime().maxMemory();
 	}
 
@@ -165,12 +204,11 @@ public abstract class HelperEnvironment {
 	 * @param path to add
 	 * @throws SecurityException
 	 * @throws NoSuchFieldException
-	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
 	 * @see File
 	 * @since 0.8.0
 	 */
-	public static void addPathToLibraryPath(final File path) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public static void addPathToLibraryPath(final File path) throws SecurityException, NoSuchFieldException, IllegalAccessException {
 		final String location = path.getAbsolutePath();
 		
 		final Field field = ClassLoader.class.getDeclaredField("usr_paths"); //$NON-NLS-1$

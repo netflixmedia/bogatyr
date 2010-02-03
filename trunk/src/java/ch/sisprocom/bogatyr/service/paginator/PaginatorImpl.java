@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,12 +31,13 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.paginator;
 
-import ch.sisprocom.bogatyr.helper.HelperCollection;
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import ch.sisprocom.bogatyr.helper.HelperCollection;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
 /**
@@ -74,7 +75,7 @@ public class PaginatorImpl extends ServiceAbstract implements Paginator {
     @Override
     public void setList(final List<?> list) {
 		if (null == list) {
-			throw new IllegalArgumentException("list is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("list"); //$NON-NLS-1$
 		}
 
         this.list = Collections.unmodifiableList(list);

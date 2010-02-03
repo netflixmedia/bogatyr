@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -47,6 +47,8 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
 import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
 
 
 /**
@@ -88,6 +90,10 @@ public abstract class FormatFactory {
      * @since 0.9.0
      */	
 	public static NumberFormat createNumberFormat(final String pattern) {
+		if (!HelperString.isValid(pattern)) {
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("pattern"); //$NON-NLS-1$
+		}
+
 		return new DecimalFormat(pattern);
 	}
 
@@ -122,6 +128,10 @@ public abstract class FormatFactory {
      * @since 0.9.0
      */	
 	public static DateFormat createDateFormat(final String pattern) {
+		if (!HelperString.isValid(pattern)) {
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("pattern"); //$NON-NLS-1$
+		}
+
 		return new SimpleDateFormat(pattern, Locale.getDefault());
 	}
 
@@ -135,6 +145,10 @@ public abstract class FormatFactory {
      * @since 0.9.0
      */	
 	public static NumberFormatter createNumberFormatterDisplay(final NumberFormat format) {
+		if (null == format) {
+			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
+		}
+
 		return new NumberFormatter(format);
 	}
 
@@ -148,6 +162,10 @@ public abstract class FormatFactory {
      * @since 0.9.0
      */	
 	public static NumberFormatter createNumberFormatterEdit(final NumberFormat format) {
+		if (null == format) {
+			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
+		}
+
 		return new NumberFormatter(format) {
 			private static final long serialVersionUID = 1315478587371973936L;
 
@@ -174,6 +192,10 @@ public abstract class FormatFactory {
      * @since 0.9.0
      */	
 	public static NumberFormatter createPercentFormatterDisplay(final NumberFormat format) {
+		if (null == format) {
+			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
+		}
+
 		return new NumberFormatter(format);
 	}
 
@@ -187,6 +209,10 @@ public abstract class FormatFactory {
      * @since 0.9.0
      */	
 	public static NumberFormatter createPercentFormatterEdit(final NumberFormat format) {
+		if (null == format) {
+			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
+		}
+
 		return new NumberFormatter(format) {
 			private static final long serialVersionUID = 1315478587371973936L;
 
@@ -231,6 +257,10 @@ public abstract class FormatFactory {
      * @since 0.9.0
      */	
 	public static DateFormatter createDateFormatterDisplay(final DateFormat format) {
+		if (null == format) {
+			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
+		}
+
 		return new DateFormatter(format);
 	}
 	
@@ -244,6 +274,10 @@ public abstract class FormatFactory {
      * @since 0.9.0
      */	
 	public static DateFormatter createDateFormatterEdit(final DateFormat format) {
+		if (null == format) {
+			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
+		}
+
 		return new DateFormatter(format);
 	}
 
@@ -252,23 +286,22 @@ public abstract class FormatFactory {
      * 
      * @param format for the formatter
      * @return created {@link MaskFormatter}
+	 * @throws ParseException 
      * @see MaskFormatter
      * @since 0.9.0
      */	
-	public static MaskFormatter createMaskFormatter(final String format) {
-		try {
-			return new MaskFormatter(format) {
-				private static final long serialVersionUID = 5212947957420446007L;
-
-				{
-					setPlaceholderCharacter('_');
-				}
-			};
-		} catch (ParseException e) {
-			// do nothing
-//			e.printStackTrace();
+	public static MaskFormatter createMaskFormatter(final String format) throws ParseException {
+		if (null == format) {
+			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
 		}
-		return null;
+
+		return new MaskFormatter(format) {
+			private static final long serialVersionUID = 5212947957420446007L;
+
+			{
+				setPlaceholderCharacter('_');
+			}
+		};
 	}
 
 	/**
@@ -281,6 +314,10 @@ public abstract class FormatFactory {
      * @since 0.9.0
      */	
 	public static DefaultFormatter createRegexFormatter(final Pattern regex) {
+		if (null == regex) {
+			throw new RuntimeExceptionArgumentIsNull("regex"); //$NON-NLS-1$
+		}
+
 		return new DefaultFormatter() {
 			private static final long serialVersionUID = 2665033244806980400L;
 
@@ -301,7 +338,7 @@ public abstract class FormatFactory {
 			    matcher.reset(string);
 			
 			    if (!matcher.matches()) {
-			    	throw new ParseException("does not match regex", 0);
+			    	throw new ParseException("does not match regex", 0); //$NON-NLS-1$
 			    }
 			    return super.stringToValue(string);
 			}

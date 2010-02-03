@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -32,6 +32,8 @@
 package ch.sisprocom.bogatyr.helper;
 
 import java.util.UUID;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
 
 
 /**
@@ -59,7 +61,7 @@ public abstract class HelperCrypto {
 			throw new IllegalArgumentException("digits must be greater than 0: " + digits); //$NON-NLS-1$
 		}
 		if (null == seed || 0 == seed.length) {
-			throw new IllegalArgumentException("seed is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("seed"); //$NON-NLS-1$
 		}
 
     	final StringBuilder sb = new StringBuilder(digits);

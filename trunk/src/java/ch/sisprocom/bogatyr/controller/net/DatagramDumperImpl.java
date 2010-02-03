@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -35,6 +35,7 @@ import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -192,7 +193,7 @@ public class DatagramDumperImpl implements DatagramDumper {
     @Override
     public synchronized void addListener(final ListenerDatagram listener) {
     	if (null == listener) {
-    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.add(listener);
@@ -201,7 +202,7 @@ public class DatagramDumperImpl implements DatagramDumper {
     @Override
     public synchronized void deleteListener(final ListenerDatagram listener) {
     	if (null == listener) {
-    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.remove(listener);

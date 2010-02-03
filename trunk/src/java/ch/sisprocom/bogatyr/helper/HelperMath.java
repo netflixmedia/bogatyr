@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -35,6 +35,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBeGreaterThanOne;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositive;
 
 
 /**
@@ -56,10 +59,10 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 */
 	 public static BigDecimal gcd(final BigDecimal a, final BigDecimal b) { //$JUnit$
 		 if (0 < BigDecimal.ZERO.compareTo(a)) {
-			 throw new IllegalArgumentException("a value must be positive: " + a); //$NON-NLS-1$
+			 throw new RuntimeExceptionArgumentMustBePositive("a", a); //$NON-NLS-1$
 		 }
 		 if (0 < BigDecimal.ZERO.compareTo(b)) {
-			 throw new IllegalArgumentException("b value must be positive: " + b); //$NON-NLS-1$
+			 throw new RuntimeExceptionArgumentMustBePositive("b", b); //$NON-NLS-1$
 		 }
 		 
 		 if (0 == a.compareTo(b)) {
@@ -79,10 +82,10 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 */
 	 public static BigDecimal lcm(final BigDecimal a, final BigDecimal b) { //$JUnit$
 		 if (0 <= BigDecimal.ZERO.compareTo(a)) {
-			 throw new IllegalArgumentException("a value must be positive: " + a); //$NON-NLS-1$
+			 throw new RuntimeExceptionArgumentMustBePositive("a", a); //$NON-NLS-1$
 		 }
 		 if (0 <= BigDecimal.ZERO.compareTo(b)) {
-			 throw new IllegalArgumentException("b value must be positive: " + b); //$NON-NLS-1$
+			 throw new RuntimeExceptionArgumentMustBePositive("b", b); //$NON-NLS-1$
 		 }
 		 
 		 return a.multiply(b, Constants.DEFAULT_MATHCONTEXT).divide(gcd(a, b), Constants.DEFAULT_MATHCONTEXT);
@@ -149,7 +152,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 //            throw new IllegalArgumentException("start value must be positive: " + start); //$NON-NLS-1$
 //        }
         if (0 > end) {
-            throw new IllegalArgumentException("end value must be positive: " + end); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentMustBePositive("end", end); //$NON-NLS-1$
         }
 		if (start > end) {
             throw new IllegalArgumentException("end value (" + end + ") must be greater than the start value (" + start + ')'); //$NON-NLS-1$ //$NON-NLS-2$
@@ -187,10 +190,10 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static double log(final double base, final double value) { //$JUnit$
         if (1.0D >= base) {
-            throw new IllegalArgumentException("base must be greater than 1: " + base); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("base", base); //$NON-NLS-1$
         }
         if (0.0D >= value) {
-            throw new IllegalArgumentException("value must be positive: " + value); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentMustBePositive("value", value); //$NON-NLS-1$
         }
 
 		return StrictMath.log(value) / StrictMath.log(base);
@@ -238,7 +241,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */
     public static double calcAmount(final double amount, final double interest, final int days) { //$JUnit$
 		 if (0 >= days) {
-			 throw new IllegalArgumentException("days value must be positive: " + days); //$NON-NLS-1$
+			 throw new RuntimeExceptionArgumentMustBePositive("days", days); //$NON-NLS-1$
 		 }
 		 
 		 return amount * StrictMath.pow(StrictMath.E, (double)days / 360.0 * interest);
@@ -253,7 +256,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static BigInteger factorial(final int n) { //$JUnit$
         if (0 > n) {
-        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
         }
 
         BigInteger sum = BigInteger.ONE;
@@ -273,7 +276,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int sum(final int n) { //$JUnit$
         if (0 > n) {
-        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
         }
         
         if (0 == n) {
@@ -292,7 +295,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int sumSquare(final int n) { //$JUnit$
         if (0 > n) {
-        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
         }
         
         if (0 == n) {
@@ -311,7 +314,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int sumCubic(final int n) { //$JUnit$
         if (0 > n) {
-        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
         }
         
         if (0 == n) {
@@ -331,10 +334,10 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int sumRange(final int m, final int n) {
         if (0 > m) {
-        	throw new IllegalArgumentException("m value must be positive: " + m); //$NON-NLS-1$
+        	throw new RuntimeExceptionArgumentMustBePositive("m", m); //$NON-NLS-1$
         }
         if (0 > n) {
-        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
         }
 		if (m > n) {
             throw new IllegalArgumentException("n value (" + n + ") must be greater than the m value (" + m + ')'); //$NON-NLS-1$ //$NON-NLS-2$
@@ -352,7 +355,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int calcConnections(final int n) { //$JUnit$
         if (0 >= n) {
-        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
         }
         
         return n * (n - 1) / 2;
@@ -367,7 +370,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static double calcBirthdayProblem(final int n) { //$JUnit$
         if (0 >= n) {
-        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
         }
         
       //TODO does it also work for other parameters than days p.a.?
@@ -391,10 +394,10 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static BigInteger binomialCoefficient(final int n, final int k) { //$JUnit$
         if (0 > n) {
-        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
         }
         if (0 > k) {
-        	throw new IllegalArgumentException("k value must be positive: " + k); //$NON-NLS-1$
+        	throw new RuntimeExceptionArgumentMustBePositive("k", k); //$NON-NLS-1$
         }
 		if (k > n) {
             throw new IllegalArgumentException("n value (" + n + ") must be greater than the k value (" + k + ')'); //$NON-NLS-1$ //$NON-NLS-2$
@@ -412,7 +415,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int sumOdd(final int n) { //$JUnit$
         if (0 > n) {
-        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
         }
         
         return (int)StrictMath.pow(n, 2.0D);
@@ -427,7 +430,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int sumEven(final int n) { //$JUnit$
         if (0 > n) {
-        	throw new IllegalArgumentException("n value must be positive: " + n); //$NON-NLS-1$
+        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
         }
         
         int sum = 0;

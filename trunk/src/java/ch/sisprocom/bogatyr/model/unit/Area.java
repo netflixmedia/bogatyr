@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -34,6 +34,7 @@ package ch.sisprocom.bogatyr.model.unit;
 import java.math.BigDecimal;
 
 import ch.sisprocom.bogatyr.helper.Constants;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 
 
 /**
@@ -72,10 +73,10 @@ public enum Area {
      */
 	public BigDecimal convertTo(final Area toUnit, final BigDecimal value) { //$JUnit$
 		if (null == toUnit) {
-			throw new IllegalArgumentException("toUnit is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("toUnit"); //$NON-NLS-1$
 		}
 		if (null == value) {
-			throw new IllegalArgumentException("value is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
 		}
 
 		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.factor, Constants.DEFAULT_MATHCONTEXT);

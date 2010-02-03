@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,21 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.crypto;
 
-import ch.sisprocom.bogatyr.helper.Constants;
-import ch.sisprocom.bogatyr.helper.HelperEnvironment;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.CipherInputStream;
-import javax.crypto.CipherOutputStream;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.IvParameterSpec;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -62,11 +47,34 @@ import java.security.NoSuchProviderException;
 import java.security.Security;
 import java.security.spec.AlgorithmParameterSpec;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
+import javax.crypto.CipherOutputStream;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import ch.sisprocom.bogatyr.helper.Constants;
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentExceedsVmMemory;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBeGreaterThanOne;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionInputEqualsOutput;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
+
 /**
  * This is a class for symmetric cryptology via AES.
+ * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100203)
  * @since 0.1.0
  */
 public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
@@ -133,13 +141,13 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	@Override
     public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit$
 		if (null == input) {
-			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
-			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
 		}
-        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
         }
 
 		return getCipherEncrypt(key).doFinal(input);
@@ -148,13 +156,13 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	@Override
     public byte[] decrypt(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		if (null == input) {
-			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
-			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
 		}
-        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
         }
 
 		return getCipherDecrypt(key).doFinal(input);
@@ -168,19 +176,19 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
     @Override
     public void encrypt(final InputStream is, OutputStream os, final Key key, final int bufferSize) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IOException {
         if (null == is) {
-            throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
         }
         if (null == os) {
-            throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("os"); //$NON-NLS-1$
         }
         if (null == key) {
-            throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
         }
         if (1 > bufferSize) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
         }
-        if (bufferSize > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (bufferSize > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionArgumentExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
         }
 
         final byte[] buffer = new byte[bufferSize];
@@ -202,19 +210,19 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
     @Override
     public void decrypt(final InputStream is, final OutputStream os, final Key key, final int bufferSize) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IOException {
         if (null == is) {
-            throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
         }
         if (null == os) {
-            throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("os"); //$NON-NLS-1$
         }
         if (null == key) {
-            throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
         }
         if (1 > bufferSize) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
         }
-        if (bufferSize > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (bufferSize > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionArgumentExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
         }
 
         final byte[] buffer = new byte[bufferSize];
@@ -243,16 +251,16 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	@Override
     public void encrypt(final File input, final File output, final Key key, final int bufferSize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
         if (null == input) {
-            throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
         }
 		if (!input.exists()) {
-			throw new IllegalArgumentException("input doesn't exists: " + input); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(input);
 		}
 		if (null == output) {
-            throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("output"); //$NON-NLS-1$
         }
 		if (input.equals(output)) {
-			throw new IllegalArgumentException("input is equals to output!"); //$NON-NLS-1$
+			throw new RuntimeExceptionInputEqualsOutput("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		encrypt(new BufferedInputStream(new FileInputStream(input)), new BufferedOutputStream(new FileOutputStream(output)), key, bufferSize);
@@ -266,16 +274,16 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	@Override
     public void decrypt(final File input, final File output, final Key key, final int bufferSize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
         if (null == input) {
-            throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
         }
 		if (!input.exists()) {
-			throw new IllegalArgumentException("input doesn't exists: " + input); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(input);
 		}
         if (null == output) {
-            throw new IllegalArgumentException("output is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("output"); //$NON-NLS-1$
         }
 		if (input.equals(output)) {
-			throw new IllegalArgumentException("input is equals to output!"); //$NON-NLS-1$
+			throw new RuntimeExceptionInputEqualsOutput("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		decrypt(new BufferedInputStream(new FileInputStream(input)), new BufferedOutputStream(new FileOutputStream(output)), key, bufferSize);

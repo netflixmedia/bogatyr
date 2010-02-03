@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -34,6 +34,7 @@ package ch.sisprocom.bogatyr.controller.net.server;
 import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -86,7 +87,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
 	 */
 	protected void setThread(final Thread thread) {
     	if (null == thread) {
-    		throw new IllegalArgumentException("thread is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("thread"); //$NON-NLS-1$
     	}
 
     	this.thread = thread;
@@ -144,7 +145,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
     @Override
     public void setSocket(final Socket socket) {
     	if (null == socket) {
-    		throw new IllegalArgumentException("socket is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("socket"); //$NON-NLS-1$
     	}
 
 		this.socket = socket;
@@ -211,7 +212,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
     @Override
     public synchronized void addListener(final ListenerServerThread listener) {
     	if (null == listener) {
-    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.add(listener);
@@ -220,7 +221,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
     @Override
     public synchronized void deleteListener(final ListenerServerThread listener) {
     	if (null == listener) {
-    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.remove(listener);
