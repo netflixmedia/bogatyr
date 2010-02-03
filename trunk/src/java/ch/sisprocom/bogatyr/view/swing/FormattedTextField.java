@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.misc.Activatable;
  * This is an extended JFormattedTextField.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100202)
  * @since 0.9.0
  */
 public class FormattedTextField extends JFormattedTextField implements Activatable {
@@ -101,30 +101,32 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 	}
 
 	public FormattedTextField(final String toolTip, final AbstractFormatterFactory formatterFactory, final boolean isNumeric) {
-		super(formatterFactory);
+		this(formatterFactory);
 		setToolTipText(toolTip);
-		init();
 		
 		if (isNumeric) {
-			addKeyListener(new KeyAdapter() {
-				
-				@Override
-				public void keyTyped(final KeyEvent e) {
-					final char key = e.getKeyChar();
-					
-					if (!Character.isDigit(key) &&
-						'.' != key &&
-						'-' != key &&
-						'+' != key &&
-						!HelperKeyboard.isNonPrintableKey(e.getKeyCode())) {
-						
-						e.consume();
-					}
-				}
-			});
+			allowOnlyNumericInput();
 		}
 	}
 
+	public FormattedTextField(final String toolTip, final Format format, final boolean isNumeric) {
+		this(format);
+		setToolTipText(toolTip);
+		
+		if (isNumeric) {
+			allowOnlyNumericInput();
+		}
+	}
+	
+	public FormattedTextField(final String toolTip, final AbstractFormatter formatter, final boolean isNumeric) {
+		this(formatter);
+		setToolTipText(toolTip);
+		
+		if (isNumeric) {
+			allowOnlyNumericInput();
+		}
+	}
+	
 	
 	/*
 	 * Private methods
@@ -142,6 +144,24 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 		});
 	}
 
+	private void allowOnlyNumericInput() {
+		addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyTyped(final KeyEvent e) {
+				final char key = e.getKeyChar();
+				
+				if (!Character.isDigit(key) &&
+					'.' != key &&
+					'-' != key &&
+					'+' != key &&
+					!HelperKeyboard.isNonPrintableKey(e.getKeyCode())) {
+					
+					e.consume();
+				}
+			}
+		});
+	}
 	
 	/*
 	 * Overridden methods

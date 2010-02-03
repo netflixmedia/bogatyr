@@ -40,7 +40,7 @@ import ch.sisprocom.bogatyr.view.swing.TextField;
  * This is a Label combined with a TextField.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100203)
  * @since 0.2.0
  */
 public class LabeledTextField extends LabeledComponent {
@@ -54,12 +54,12 @@ public class LabeledTextField extends LabeledComponent {
 		super(title, labelText, toolTip, new TextField(text, toolTip));
 	}
 	
-	public LabeledTextField(final String labelText, final String toolTip, final String text, final Document document) {
-		super(labelText, toolTip, new TextField(text, toolTip, document));
+	public LabeledTextField(final String labelText, final String toolTip, final String text, final Document document, final int columns) {
+		super(labelText, toolTip, new TextField(text, toolTip, document, columns));
 	}
 
-	public LabeledTextField(final String title, final String labelText, final String toolTip, final String text, final Document document) {
-		super(title, labelText, toolTip, new TextField(text, toolTip, document));
+	public LabeledTextField(final String title, final String labelText, final String toolTip, final String text, final Document document, final int columns) {
+		super(title, labelText, toolTip, new TextField(text, toolTip, document, columns));
 	}
 
 	public TextField getTextField() {

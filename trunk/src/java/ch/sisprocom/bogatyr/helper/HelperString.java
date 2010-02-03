@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -40,20 +40,20 @@ import java.math.BigDecimal;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091103)
+ * @version 0.9.0 (20100203)
  * @since 0.7.0
  */
 public abstract class HelperString {
 	public static final String NEW_LINE = System.getProperty("line.separator"); //$NON-NLS-1$
 
 	public static final String EMPTY_STRING = ""; //$NON-NLS-1$
-	public static final String TAB = "\t"; //$NON-NLS-1$
+	public static final String TAB 			= "\t"; //$NON-NLS-1$
 	public static final String SINGLE_QUOTE = "'"; //$NON-NLS-1$
 	public static final String DOUBLE_QUOTE = "\""; //$NON-NLS-1$
-	public static final String SPACE = " "; //$NON-NLS-1$
-	public static final String PERIOD = "."; //$NON-NLS-1$
-	public static final String COMMA = ","; //$NON-NLS-1$
-	public static final String SEMICOLON = ";"; //$NON-NLS-1$	  
+	public static final String SPACE 		= " "; //$NON-NLS-1$
+	public static final String PERIOD 		= "."; //$NON-NLS-1$
+	public static final String COMMA 		= ","; //$NON-NLS-1$
+	public static final String SEMICOLON 	= ";"; //$NON-NLS-1$	  
 	
 	/**
      * Checks if a {@link CharSequence} is valid.

@@ -49,14 +49,14 @@ import ch.sisprocom.bogatyr.model.misc.PublisherImpl;
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100202)
+ * @version 0.9.0 (20100203)
  * @since 0.7.0
  */
 public abstract class Constants {
 	//Bogatyr specific
 	public static final String BOGATYR_NAME		 		  = "Bogatyr"; //$NON-NLS-1$
 	public static final BigDecimal BOGATYR_VERSION 		  = new BigDecimal("0.9"); //$NON-NLS-1$
-	public static final int BOGATYR_BUILD 				  = 220;
+	public static final int BOGATYR_BUILD 				  = 221;
 	public static final Manufacturer BOGATYR_MANUFACTURER = new ManufacturerImpl();
 	public static final Owner BOGATYR_OWNER 			  = new OwnerImpl();
 	public static final Publisher BOGATYR_PUBLISHER		  = new PublisherImpl();
@@ -64,8 +64,8 @@ public abstract class Constants {
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
 	public static final MathContext DEFAULT_MATHCONTEXT = new MathContext(34, RoundingMode.DOWN);
-	public static final int DEFAULT_FILE_BUFFER_SIZE = 1048576; //1MB
-	public static final BigDecimal DEFAULT_DPI = new BigDecimal("72"); //$NON-NLS-1$
+	public static final int DEFAULT_FILE_BUFFER_SIZE 	= 1048576; //1MB
+	public static final BigDecimal DEFAULT_DPI 			= new BigDecimal("72"); //$NON-NLS-1$
 	
 	//algebraic signs
 	public static final int POSITIVE 	 	 = 1;

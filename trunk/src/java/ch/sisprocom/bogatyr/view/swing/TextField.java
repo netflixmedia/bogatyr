@@ -81,15 +81,15 @@ public class TextField extends JTextField implements Activatable {
         setToolTipText(toolTip);
     }
 
-	public TextField(final String text, final String toolTip, final Document document) {
-        this(text);
-        setDocument(document);
+	public TextField(final String text, final String toolTip, final Document document, final int columns) {
+        this(document, text, columns);
         setToolTipText(toolTip);
     }
 
-	public TextField(final String toolTip, final Document document) {
+	public TextField(final String toolTip, final Document document, final int columns) {
         this();
         setDocument(document);
+        setColumns(columns);
         setToolTipText(toolTip);
     }
 	

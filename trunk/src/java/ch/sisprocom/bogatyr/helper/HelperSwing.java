@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,9 +31,11 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JSlider;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 
@@ -44,7 +46,7 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * This is a helper class for Swing.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091110)
+ * @version 0.9.0 (20100203)
  * @since 0.9.0
  */
 public abstract class HelperSwing {
@@ -83,4 +85,57 @@ public abstract class HelperSwing {
 		    }
 		}
 	}
+	
+	/**
+     * Calculates the minimum value for a {@link JSlider} with a given tick.
+     * 
+     * @param minValue minimum value
+     * @param tick of the {@link JSlider}
+     * @return calculated minimum value
+     * @see JSlider
+     * @since 0.9.0
+     */	
+    public static int calculateSliderMin(final BigDecimal minValue, final BigDecimal tick) {
+        return minValue.divide(tick, Constants.DEFAULT_MATHCONTEXT).intValue();
+    }
+
+	/**
+     * Calculates the maximum value for a {@link JSlider} with a given tick.
+     * 
+     * @param maxValue maximum value
+     * @param tick of the {@link JSlider}
+     * @return calculated maximum value
+     * @see JSlider
+     * @since 0.9.0
+     */	
+    public static int calculateSliderMax(final BigDecimal maxValue, final BigDecimal tick) {
+        return maxValue.divide(tick, Constants.DEFAULT_MATHCONTEXT).intValue();
+    }
+
+	/**
+     * Calculates the current value for a {@link JSlider} with a given tick.
+     * 
+     * @param value current value
+     * @param tick of the {@link JSlider}
+     * @return calculated current value
+     * @see JSlider
+     * @since 0.9.0
+     */	
+    public static int calculateSliderValue(final BigDecimal value, final BigDecimal tick) {
+        return value.divide(tick, Constants.DEFAULT_MATHCONTEXT).intValue();
+    }
+
+	/**
+     * Calculates the current value of a {@link JSlider} with a given tick.
+     * 
+     * @param slider with the current value
+     * @param tick of the {@link JSlider}
+     * @return calculated current value
+     * @see JSlider
+     * @since 0.9.0
+     */	
+    public static BigDecimal calculateValueFromSlider(final JSlider slider, final BigDecimal tick) {
+        return new BigDecimal(slider.getValue()).multiply(tick, Constants.DEFAULT_MATHCONTEXT);
+    }
+
 }
