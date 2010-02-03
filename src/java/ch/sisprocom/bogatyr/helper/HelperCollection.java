@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -33,10 +33,14 @@ package ch.sisprocom.bogatyr.helper;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;import java.util.Arrays;
+import java.util.Set;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
 
 
 /**
@@ -60,7 +64,7 @@ public abstract class HelperCollection {
 	@SuppressWarnings("unchecked")
 	public static <E> E[] toArray(final Collection<E> collection) { //$JUnit$
 		if (!isValid(collection)) {
-			throw new IllegalArgumentException("collection is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("collection"); //$NON-NLS-1$
 		}
 		
 		return collection.toArray((E[]) Array.newInstance(collection.iterator().next().getClass(), collection.size()));
@@ -128,7 +132,7 @@ public abstract class HelperCollection {
 	 */
     public static <E> Collection<E> removeDuplicates(final Collection<E> collection) { //$JUnit$
 		if (null == collection) {
-			throw new IllegalArgumentException("collection is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("collection"); //$NON-NLS-1$
 		}
 
 		return new HashSet<E>(collection);
@@ -144,7 +148,7 @@ public abstract class HelperCollection {
      */
     public static <E> String dump(final Iterable<E> iterable) { //$JUnit$
 		if (null == iterable) {
-			throw new IllegalArgumentException("iterable is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("iterable"); //$NON-NLS-1$
 		}
 
 		final StringBuilder sb = new StringBuilder();

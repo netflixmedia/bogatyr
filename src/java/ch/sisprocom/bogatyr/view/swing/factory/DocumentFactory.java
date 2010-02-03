@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -39,6 +39,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
 import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositive;
 
 
 /**
@@ -60,7 +61,11 @@ public abstract class DocumentFactory {
      * @since 0.9.0
      */	
 	public static PlainDocument createTextDocument(final int length) {
-		return new PlainDocument() {
+		 if (length <= 0) {
+			 throw new RuntimeExceptionArgumentMustBePositive("length", length); //$NON-NLS-1$
+		 }
+
+		 return new PlainDocument() {
 			private static final long serialVersionUID = -5008928912535075396L;
 
 			@Override
@@ -81,6 +86,10 @@ public abstract class DocumentFactory {
      * @since 0.9.0
      */	
 	public static PlainDocument createNumberDocument(final int length) {
+		 if (length <= 0) {
+			 throw new RuntimeExceptionArgumentMustBePositive("length", length); //$NON-NLS-1$
+		 }
+
 		return new PlainDocument() {
 			private static final long serialVersionUID = 3766889554419497713L;
 

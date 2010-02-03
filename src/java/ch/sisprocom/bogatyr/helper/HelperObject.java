@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -50,6 +50,9 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+
 
 /**
  * This is a helper class for objects.
@@ -71,13 +74,12 @@ public abstract class HelperObject {
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
 	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException
 	 * @see Class
 	 * @since 0.7.0
      */
-	public static <T> T createInstance(final Class<T> clazz) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
+	public static <T> T createInstance(final Class<T> clazz) throws SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
 		if (null == clazz) {
-			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("clazz"); //$NON-NLS-1$
 		}
 		
 		return clazz.getConstructor(HelperArray.EMPTY_ARRAY_CLASS).newInstance();
@@ -95,19 +97,18 @@ public abstract class HelperObject {
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
 	 * @throws InvocationTargetException 
- 	 * @throws IllegalArgumentException
  	 * @see Class
 	 * @since 0.7.0
      */
-	public static <T> T createInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
+	public static <T> T createInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
 		if (null == clazz) {
-			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("clazz"); //$NON-NLS-1$
 		}
 		if (null == paramClazzes) {
-			throw new IllegalArgumentException("paramClazzes is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("paramClazzes"); //$NON-NLS-1$
 		}
 		if (null == params) {
-			throw new IllegalArgumentException("params is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("params"); //$NON-NLS-1$
 		}
 		
 		return clazz.getConstructor(paramClazzes).newInstance(params);
@@ -124,7 +125,7 @@ public abstract class HelperObject {
 	 */
 	public static byte[] serialize(final Serializable object) throws IOException { //$JUnit$
 		if (null == object) {
-			throw new IllegalArgumentException("obj is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("obj"); //$NON-NLS-1$
 		}	
 
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -155,7 +156,7 @@ public abstract class HelperObject {
 	 */
 	public static Object deserialize(final byte[] data) throws IOException, ClassNotFoundException { //$JUnit$
 		if (!HelperArray.isValid(data)) {
-			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("data"); //$NON-NLS-1$
 		}
 		
 		ObjectInputStream ois = null;
@@ -183,7 +184,7 @@ public abstract class HelperObject {
      */
     public static boolean isMethodAvailable(final Class<?> clazz, final String methodName) { //$JUnit$
 		if (null == clazz) {
-			throw new IllegalArgumentException("clazz is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("clazz"); //$NON-NLS-1$
 		}
 		
     	final Method[] methods = clazz.getMethods();
@@ -321,7 +322,7 @@ public abstract class HelperObject {
 		    final String expected = osc.getName();
 		    final String found = (null == c) ? null : c.getName();
 		    if (!expected.equals(found)) {
-		    	throw new InvalidClassException("Classes desynchronized - found: " + found + " when expecting: " + expected);
+		    	throw new InvalidClassException("Classes desynchronized - found: " + found + " when expecting: " + expected); //$NON-NLS-1$ //$NON-NLS-2$
 		    }
 		    return c;
     	}

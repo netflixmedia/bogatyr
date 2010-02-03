@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,12 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.chart;
 
-import ch.sisprocom.bogatyr.view.swing.Label;
-import ch.sisprocom.bogatyr.view.swing.LabelVertical;
-import ch.sisprocom.bogatyr.view.swing.Panel;
-
-import javax.swing.JComponent;
-import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -44,6 +38,14 @@ import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JComponent;
+import javax.swing.SwingConstants;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.view.swing.Label;
+import ch.sisprocom.bogatyr.view.swing.LabelVertical;
+import ch.sisprocom.bogatyr.view.swing.Panel;
 
 
 /**
@@ -105,7 +107,7 @@ public class Chart extends Panel {
      */
 	public void addEntry(final ChartEntry entry) {
     	if (null == entry) {
-    		throw new IllegalArgumentException("entry is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("entry"); //$NON-NLS-1$
     	}
 		if (entry.getX() + entry.getSizeX() > maxX || entry.getY() + entry.getSizeY() > maxY) {
 			throw new IllegalArgumentException("Component (" + entry.getSizeX() + 'x' + entry.getSizeY() + ") is outside of the defined chart area (" + maxX + 'x' + maxY + ')'); //$NON-NLS-1$ //$NON-NLS-2$

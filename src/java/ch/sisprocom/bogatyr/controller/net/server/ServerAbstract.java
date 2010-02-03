@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,14 +31,16 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.server;
 
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositive;
 
 
 /**
@@ -99,7 +101,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 	 */
     protected void setThread(final Thread thread) {
     	if (null == thread) {
-    		throw new IllegalArgumentException("thread is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("thread"); //$NON-NLS-1$
     	}
 
 		this.thread = thread;
@@ -153,7 +155,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
     @Override
     public void setServerSocket(final ServerSocket serverSocket) {
     	if (null == serverSocket) {
-    		throw new IllegalArgumentException("serverSocket is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("serverSocket"); //$NON-NLS-1$
     	}
 
 		this.serverSocket = serverSocket;
@@ -162,7 +164,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
     @Override
     public void setTimeout(final int timeout) {
 		if (0 > timeout) {
-			throw new IllegalArgumentException("timeout must be positive: " + timeout); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentMustBePositive("timeout", timeout); //$NON-NLS-1$
 		}
 
         this.timeout = timeout;
@@ -224,7 +226,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 	@Override
     public void serverThreadStarted(final ServerThread serverThread) {
     	if (null == serverThread) {
-    		throw new IllegalArgumentException("serverThread is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("serverThread"); //$NON-NLS-1$
     	}
 
 		listThread.add(serverThread);
@@ -233,7 +235,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 	@Override
     public void serverThreadStopped(final ServerThread serverThread) {
     	if (null == serverThread) {
-    		throw new IllegalArgumentException("serverThread is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("serverThread"); //$NON-NLS-1$
     	}
 
     	listThread.remove(serverThread);

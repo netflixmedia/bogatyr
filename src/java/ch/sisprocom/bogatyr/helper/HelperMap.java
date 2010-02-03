@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -32,6 +32,8 @@
 package ch.sisprocom.bogatyr.helper;
 
 import java.util.Map;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 
 
 /**
@@ -64,7 +66,7 @@ public abstract class HelperMap {
      */
     public static String dump(final Map<?, ?> map) { //$JUnit$
 		if (null == map) {
-			throw new IllegalArgumentException("map is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("map"); //$NON-NLS-1$
 		}
 
         final StringBuilder sb = new StringBuilder();

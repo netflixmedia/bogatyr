@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -33,18 +33,6 @@
 package ch.sisprocom.bogatyr.service.crypto;
 
 
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
-import org.bouncycastle.asn1.x509.BasicConstraints;
-import org.bouncycastle.asn1.x509.ExtendedKeyUsage;
-import org.bouncycastle.asn1.x509.GeneralName;
-import org.bouncycastle.asn1.x509.GeneralNames;
-import org.bouncycastle.asn1.x509.KeyPurposeId;
-import org.bouncycastle.asn1.x509.KeyUsage;
-import org.bouncycastle.asn1.x509.X509Extensions;
-import org.bouncycastle.x509.X509V3CertificateGenerator;
-
-import javax.security.auth.x500.X500Principal;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -64,12 +52,29 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Date;
 
+import javax.security.auth.x500.X500Principal;
+
+import org.bouncycastle.asn1.x509.BasicConstraints;
+import org.bouncycastle.asn1.x509.ExtendedKeyUsage;
+import org.bouncycastle.asn1.x509.GeneralName;
+import org.bouncycastle.asn1.x509.GeneralNames;
+import org.bouncycastle.asn1.x509.KeyPurposeId;
+import org.bouncycastle.asn1.x509.KeyUsage;
+import org.bouncycastle.asn1.x509.X509Extensions;
+import org.bouncycastle.x509.X509V3CertificateGenerator;
+
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
+
 
 /**
  * This class generates, reads and writes X.509 certificates.
+ * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100203)
  * @since 0.3.0
  */
 public class CertificateProviderImpl extends ServiceAbstract implements CertificateProvider {
@@ -79,10 +84,10 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     @Override
     public X509Certificate readCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException { //$JUnit$
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		if (!file.exists()) {
-			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(file);
 		}
 
 		BufferedInputStream bis = null;
@@ -102,7 +107,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     @Override
     public X509Certificate readCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {
 		if (null == is) {
-			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
 		}
 		
 		final X509Certificate cert;
@@ -122,10 +127,10 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     @Override
     public void writeCertificate(final OutputStream os, final Certificate cert) throws CertificateEncodingException, IOException {
 		if (null == os) {
-			throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("os"); //$NON-NLS-1$
 		}
 		if (null == cert) {
-			throw new IllegalArgumentException("cert is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("cert"); //$NON-NLS-1$
 		}
 		
 		HelperIO.writeStream(os, cert.getEncoded());
@@ -134,10 +139,10 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     @Override
     public void writeCertificate(final File file, final Certificate cert) throws CertificateEncodingException, IOException { //$JUnit$
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		if (null == cert) {
-			throw new IllegalArgumentException("cert is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("cert"); //$NON-NLS-1$
 		}
 		
     	HelperIO.writeFile(file, cert.getEncoded(), false);
@@ -146,22 +151,22 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     @Override
     public X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws NoSuchAlgorithmException, IllegalStateException, CertificateEncodingException, InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException { //$JUnit$
 		if (null == pair) {
-			throw new IllegalArgumentException("pair is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("pair"); //$NON-NLS-1$
 		}
 		if (null == issuerDN) {
-			throw new IllegalArgumentException("issuerDN is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("issuerDN"); //$NON-NLS-1$
 		}
 		if (null == subjectDN) {
-			throw new IllegalArgumentException("subjectDN is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("subjectDN"); //$NON-NLS-1$
 		}
 		if (null == generalName) {
-			throw new IllegalArgumentException("generalName is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("generalName"); //$NON-NLS-1$
 		}
 		if (null == start) {
-			throw new IllegalArgumentException("start is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("start"); //$NON-NLS-1$
 		}
 		if (null == end) {
-			throw new IllegalArgumentException("end is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("end"); //$NON-NLS-1$
 		}
 		
 	    // generate the certificate

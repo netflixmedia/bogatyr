@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,12 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.launcher;
 
-import ch.sisprocom.bogatyr.helper.HelperString;
-
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+
+import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
 
 
 /**
@@ -59,7 +61,7 @@ public abstract class LauncherBrowser {
 	public static void browse(final URI uri) throws IOException { //$JUnit$
 		if (Desktop.isDesktopSupported()) {
 			if (null == uri) {
-				throw new IllegalArgumentException("uri is null!"); //$NON-NLS-1$
+				throw new RuntimeExceptionArgumentIsNull("uri"); //$NON-NLS-1$
 			}
 
 			Desktop.getDesktop().browse(uri);
@@ -78,7 +80,7 @@ public abstract class LauncherBrowser {
 	 */
 	public static void browse(final String url) throws IOException, URISyntaxException { //$JUnit$
 		if (!HelperString.isValid(url)) {
-			throw new IllegalArgumentException("url is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("url"); //$NON-NLS-1$
 		}
 		
 		final String prefix = "://"; //$NON-NLS-1$

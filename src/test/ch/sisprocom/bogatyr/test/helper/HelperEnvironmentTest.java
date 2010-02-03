@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -46,40 +46,40 @@ import java.util.TimeZone;
  * @version 20090520
  */
 public class HelperEnvironmentTest {
-	@Test
-	public void testGetMemoryHeapUsed() {
-		assertNotNull(HelperEnvironment.getMemoryHeapUsed());
-		assertEquals(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(), HelperEnvironment.getMemoryHeapUsed());
-		assertTrue(HelperEnvironment.getMemoryHeapTotal() > HelperEnvironment.getMemoryHeapUsed());
-	}
-	
-	@Test
-	public void testGetMemoryHeapFree() {
-		assertNotNull(HelperEnvironment.getMemoryHeapFree());
-		assertEquals(Runtime.getRuntime().freeMemory(), HelperEnvironment.getMemoryHeapFree());
-		assertTrue(HelperEnvironment.getMemoryHeapTotal() >= HelperEnvironment.getMemoryHeapFree());
-	}
-	
-	@Test
-	public void testGetMemoryHeapTotal() {
-		assertNotNull(HelperEnvironment.getMemoryHeapTotal());
-		assertEquals(Runtime.getRuntime().totalMemory(), HelperEnvironment.getMemoryHeapTotal());
-		assertTrue(HelperEnvironment.getMemoryTotal() >= HelperEnvironment.getMemoryHeapTotal());
-	}
-
-	@Test
-	public void testGetMemoryStack() {
-		assertNotNull(HelperEnvironment.getMemoryStack());
-		assertEquals(Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory(), HelperEnvironment.getMemoryStack());
-		assertTrue(HelperEnvironment.getMemoryTotal() >= HelperEnvironment.getMemoryStack());
-	}
-	
-	@Test
-	public void testGetMemoryTotal() {
-		assertNotNull(HelperEnvironment.getMemoryTotal());
-		assertEquals(Runtime.getRuntime().maxMemory(), HelperEnvironment.getMemoryTotal());
-		assertTrue(HelperEnvironment.getMemoryTotal() >= HelperEnvironment.getMemoryHeapTotal() + HelperEnvironment.getMemoryStack());
-	}
+//	@Test
+//	public void testGetMemoryHeapUsed() {
+//		assertNotNull(HelperEnvironment.getMemoryHeapUsed());
+//		assertEquals(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(), HelperEnvironment.getMemoryHeapUsed());
+//		assertTrue(HelperEnvironment.getMemoryHeapTotal() > HelperEnvironment.getMemoryHeapUsed());
+//	}
+//	
+//	@Test
+//	public void testGetMemoryHeapFree() {
+//		assertNotNull(HelperEnvironment.getMemoryHeapFree());
+//		assertEquals(Runtime.getRuntime().freeMemory(), HelperEnvironment.getMemoryHeapFree());
+//		assertTrue(HelperEnvironment.getMemoryHeapTotal() >= HelperEnvironment.getMemoryHeapFree());
+//	}
+//	
+//	@Test
+//	public void testGetMemoryHeapTotal() {
+//		assertNotNull(HelperEnvironment.getMemoryHeapTotal());
+//		assertEquals(Runtime.getRuntime().totalMemory(), HelperEnvironment.getMemoryHeapTotal());
+//		assertTrue(HelperEnvironment.getMemoryTotal() >= HelperEnvironment.getMemoryHeapTotal());
+//	}
+//
+//	@Test
+//	public void testGetMemoryStack() {
+//		assertNotNull(HelperEnvironment.getMemoryStack());
+//		assertEquals(Runtime.getRuntime().maxMemory() - Runtime.getRuntime().totalMemory(), HelperEnvironment.getMemoryStack());
+//		assertTrue(HelperEnvironment.getMemoryTotal() >= HelperEnvironment.getMemoryStack());
+//	}
+//	
+//	@Test
+//	public void testGetMemoryTotal() {
+//		assertNotNull(HelperEnvironment.getMemoryTotal());
+//		assertEquals(Runtime.getRuntime().maxMemory(), HelperEnvironment.getMemoryTotal());
+//		assertTrue(HelperEnvironment.getMemoryTotal() >= HelperEnvironment.getMemoryHeapTotal() + HelperEnvironment.getMemoryStack());
+//	}
 	
 	@Test
 	public void testGetJavaVersion() {

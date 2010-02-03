@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -58,6 +58,14 @@ import java.util.Scanner;
 
 import javax.swing.filechooser.FileSystemView;
 
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentExceedsVmMemory;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBeGreaterThanOne;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileSizeExceedsVmMemory;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionInputEqualsOutput;
+
 
 /**
  * This is a helper class for I/O.
@@ -83,10 +91,10 @@ public abstract class HelperIO {
      */	
 	public static File getTemporaryFile(final String name, final String extension) throws IOException { //$JUnit$
 		if (!HelperString.isValid(name)) {
-			throw new IllegalArgumentException("name is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("name"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(extension)) {
-			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("extension"); //$NON-NLS-1$
 		}
 
 		// Create temp file
@@ -109,19 +117,19 @@ public abstract class HelperIO {
      */	
 	public static void copyDirectory(final File source, final File dest) throws IOException{
 		if (null == source) {
-			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("source"); //$NON-NLS-1$
 		}
 		if (!source.exists()) {
-			throw new IllegalArgumentException("source doesn't exists: " + source); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(source);
 		}
 		if (!source.isDirectory()) {
 			throw new IllegalArgumentException("source is not a directory: " + source); //$NON-NLS-1$
 		}
 		if (null == dest) {
-			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("dest"); //$NON-NLS-1$
 		}
 		if (source.equals(dest)) {
-			throw new IllegalArgumentException("source is equals to dest!"); //$NON-NLS-1$
+			throw new RuntimeExceptionInputEqualsOutput("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		if (!dest.exists()) {
@@ -167,25 +175,25 @@ public abstract class HelperIO {
      */
     public static void copyFile(final File source, final File dest, final int bufferSize) throws IOException{
         if (null == source) {
-            throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("source"); //$NON-NLS-1$
         }
 		if (!source.exists()) {
-			throw new IllegalArgumentException("source doesn't exists: " + source); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(source);
 		}
 		if (!source.isFile()) {
             throw new IllegalArgumentException("source is not a file: " + source); //$NON-NLS-1$
         }
         if (null == dest) {
-            throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("dest"); //$NON-NLS-1$
         }
 		if (source.equals(dest)) {
-			throw new IllegalArgumentException("source is equals to dest!"); //$NON-NLS-1$
+			throw new RuntimeExceptionInputEqualsOutput("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
         if (1 > bufferSize) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
         }
-        if (bufferSize > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (bufferSize > HelperEnvironment.getMemoryFree()) {
+        	throw new RuntimeExceptionArgumentExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
         }
         
         final byte[] buffer = new byte[bufferSize];
@@ -228,16 +236,16 @@ public abstract class HelperIO {
      */	
 	public static void move(final File source, final File dest) throws IOException{
 		if (null == source) {
-			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("source"); //$NON-NLS-1$
 		}
 		if (!source.exists()) {
-			throw new IllegalArgumentException("source doesn't exists: " + source); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(source);
 		}
 		if (null == dest) {
-			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("dest"); //$NON-NLS-1$
 		}
 		if (source.equals(dest)) {
-			throw new IllegalArgumentException("source is equals to dest!"); //$NON-NLS-1$
+			throw new RuntimeExceptionInputEqualsOutput("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
 		if (source.isDirectory()) {
@@ -258,7 +266,7 @@ public abstract class HelperIO {
      */	
 	public static void delete(final File... files) throws IOException{
 		if (!HelperArray.isValid(files)) {
-			throw new IllegalArgumentException("files is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("files"); //$NON-NLS-1$
 		}
 
 		for (final File target : files) {
@@ -283,16 +291,16 @@ public abstract class HelperIO {
      */	
 	public static boolean rename(final File source, final File dest) {
 		if (null == source) {
-			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("source"); //$NON-NLS-1$
 		}
 		if (!source.exists()) {
-			throw new IllegalArgumentException("source doesn't exists: " + source); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(source);
 		}
 		if (null == dest) {
-			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("dest"); //$NON-NLS-1$
 		}
 		if (source.equals(dest)) {
-			throw new IllegalArgumentException("source is equals to dest!"); //$NON-NLS-1$
+			throw new RuntimeExceptionInputEqualsOutput("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		return source.renameTo(dest);
@@ -311,13 +319,13 @@ public abstract class HelperIO {
      */	
 	public static void writeLine(final File file, final String encoding, final String line) throws IOException { //$JUnit$
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(encoding)) {
-			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("encoding"); //$NON-NLS-1$
 		}
 		if (null == line) {
-			throw new IllegalArgumentException("line is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("line"); //$NON-NLS-1$
 		}
 
         PrintWriter pw = null;
@@ -357,10 +365,10 @@ public abstract class HelperIO {
      */	
 	public static void writeFile(final File file, final byte[] data, final boolean append) throws IOException { //$JUnit$
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		if (null == data) {
-			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("data"); //$NON-NLS-1$
 		}
 
 		final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file, append));
@@ -386,13 +394,13 @@ public abstract class HelperIO {
      */	
 	public static void writeFile(final File file, final String data, final String encoding, final boolean append) throws IOException { //$JUnit$
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(encoding)) {
-			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("encoding"); //$NON-NLS-1$
 		}
 		if (null == data) {
-			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("data"); //$NON-NLS-1$
 		}
 
 		final Writer writer = new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(file)), encoding); 
@@ -449,10 +457,10 @@ public abstract class HelperIO {
      */	
 	public static void writeStream(final OutputStream os, final byte[] data) throws IOException {
 		if (null == os) {
-			throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("os"); //$NON-NLS-1$
 		}
 		if (null == data) {
-			throw new IllegalArgumentException("data is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("data"); //$NON-NLS-1$
 		}
 
 //	    try {
@@ -488,13 +496,13 @@ public abstract class HelperIO {
      */
     public static byte[] readStream(final InputStream is, final int bufferSize) throws IOException {
         if (null == is) {
-            throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
         }
         if (1 > bufferSize) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1");  //$NON-NLS-1$//$NON-NLS-2$
+            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
         }
-        if (bufferSize > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (bufferSize > HelperEnvironment.getMemoryFree()) {
+        	throw new RuntimeExceptionArgumentExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
         }
 
         final byte[] buffer = new byte[bufferSize];
@@ -528,13 +536,13 @@ public abstract class HelperIO {
      */	
 	public static byte[] readFile(final File file) throws IOException { //$JUnit$
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		}
 		if (!file.exists()) {
-			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(file);
 		}
 
 		final long length = file.length();
@@ -542,8 +550,8 @@ public abstract class HelperIO {
 		if (Integer.MAX_VALUE < length) {
             throw new IllegalArgumentException("length of file (" + length + ") is to large to process (" + Integer.MAX_VALUE + ')'); //$NON-NLS-1$ //$NON-NLS-2$
         }
-		if (length > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("length of file (" + length + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+		if (length > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionFileSizeExceedsVmMemory(file);
         }
 		
 		BufferedInputStream bis = null;
@@ -573,22 +581,22 @@ public abstract class HelperIO {
      */	
 	public static String readFileAsString(final File file, final String encoding) throws IOException { //$JUnit$
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		}
 		if (!file.exists()) {
-			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(file);
 		}
 		if (!HelperString.isValid(encoding)) {
-			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("encoding"); //$NON-NLS-1$
 		}
 		
 		final long length = file.length();
 
-		if (length > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("length of file (" + length + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+		if (length > HelperEnvironment.getMemoryFree()) {
+            throw new IllegalArgumentException("length of file (" + length + ") exceeds the free VM memory (" + HelperEnvironment.getMemoryFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
 		final StringBuilder sb = new StringBuilder();
@@ -634,22 +642,19 @@ public abstract class HelperIO {
      */	
 	public static List<String> readFileAsList(final File file, final String encoding) throws IOException {
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		}
 		if (!file.exists()) {
-			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(file);
 		}
 		if (!HelperString.isValid(encoding)) {
-			throw new IllegalArgumentException("encoding is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("encoding"); //$NON-NLS-1$
 		}
-		
-		final long length = file.length();
-
-		if (length > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("length of file (" + length + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+		if (file.length() > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionFileSizeExceedsVmMemory(file);
         }
 
 		final Scanner scanner = new Scanner(file, encoding);
@@ -690,16 +695,16 @@ public abstract class HelperIO {
      */	
 	public static void readFileAsStream(final File file, final OutputStream os) throws IOException { //$JUnit$
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		}
 		if (!file.exists()) {
-			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(file);
 		}
 		if (null == os) {
-			throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("os"); //$NON-NLS-1$
 		}
 
 		writeStream(os, readFile(file));
@@ -716,10 +721,10 @@ public abstract class HelperIO {
      */	
 	public static void concatenateFiles(final File fileOutput, final File... files) throws IOException {
 		if (null == fileOutput) {
-			throw new IllegalArgumentException("fileOutput is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("fileOutput"); //$NON-NLS-1$
 		}
 		if (!HelperArray.isValid(files)) {
-			throw new IllegalArgumentException("list is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("list"); //$NON-NLS-1$
 		}
 
 		// Create output stream
@@ -771,7 +776,7 @@ public abstract class HelperIO {
 	 */
 	public static URL getURL(final File file) throws MalformedURLException {
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 
         return file.toURI().toURL();
@@ -823,7 +828,7 @@ public abstract class HelperIO {
 	 */
 	public static long getSpaceTotal(final File file) {
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 
 		return file.getTotalSpace();
@@ -839,7 +844,7 @@ public abstract class HelperIO {
 	 */
 	public static long getSpaceFree(final File file) {
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 
         return file.getFreeSpace();
@@ -855,7 +860,7 @@ public abstract class HelperIO {
 	 */
 	public static long getSpaceUsable(final File file) {
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 
 		return file.getUsableSpace();
@@ -883,7 +888,7 @@ public abstract class HelperIO {
 	 */
 	public static boolean isDrive(final File file) {
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 
 		return FileSystemView.getFileSystemView().isDrive(file);
@@ -899,7 +904,7 @@ public abstract class HelperIO {
 	 */
 	public static boolean isRemovableDrive(final File file) {
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 
 		return FileSystemView.getFileSystemView().isFloppyDrive(file);
@@ -915,7 +920,7 @@ public abstract class HelperIO {
 	 */
 	public static boolean isNetworkDrive(final File file) {
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 
 		return FileSystemView.getFileSystemView().isComputerNode(file);
@@ -960,7 +965,7 @@ public abstract class HelperIO {
      */
     public static List<File> getFiles(final File path, final FileFilter filter, final int recurseDepth) { //$JUnit$
         if (null == path) {
-            throw new IllegalArgumentException("path is null!"); //$NON-NLS-1$
+            throw new RuntimeExceptionArgumentIsNull("path"); //$NON-NLS-1$
         }
 		
         final List<File> files = new ArrayList<File>();

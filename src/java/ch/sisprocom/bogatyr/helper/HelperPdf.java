@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -44,6 +44,10 @@ import java.util.Map;
 
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionInputEqualsOutput;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Rectangle;
@@ -58,9 +62,10 @@ import com.lowagie.text.pdf.PdfWriter;
 
 /**
  * This is a helper class for PDF operations.
- * 
+ * <strong>Note:</strong> This class needs <a href="http://itextpdf.com/">iText</a> to work.
+ *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091214)
+ * @version 0.9.0 (20100203)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -78,10 +83,10 @@ public abstract class HelperPdf {
      */
     public static void writePdfFromComponent(final File file, final Component component) throws IOException, DocumentException { //$JUnit$
 		if (null == component) {
-			throw new IllegalArgumentException("component is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("component"); //$NON-NLS-1$
 		}
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		
     	final Dimension size = component.getSize();
@@ -107,6 +112,7 @@ public abstract class HelperPdf {
 
     /**
      * Writes a PDF from multiple (X)HTML files to a {@link File}.
+     * <strong>Note:</strong> This method needs <a href="https://xhtmlrenderer.dev.java.net/">XHTML</a> to work.
      *
      * @param file output as PDF
      * @param files in (X)HTML format for the PDF
@@ -117,10 +123,10 @@ public abstract class HelperPdf {
      */
 	public static void writePdfFromHTML(final File file, final File... files) throws IOException, DocumentException { //$JUnit$
 		if (!HelperArray.isValid(files)) {
-			throw new IllegalArgumentException("files is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("files"); //$NON-NLS-1$
 		}
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		
 		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
@@ -165,16 +171,16 @@ public abstract class HelperPdf {
 	@SuppressWarnings("unchecked")
 	public static void setMetaData(final File source, final File dest, final Map<String, String> metadata) throws IOException, DocumentException {
 		if (null == source) {
-			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("source"); //$NON-NLS-1$
 		}
 		if (null == dest) {
-			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("dest"); //$NON-NLS-1$
 		}
 		if (!HelperMap.isValid(metadata)) {
-			throw new IllegalArgumentException("metadata is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("metadata"); //$NON-NLS-1$
 		}
 		if (source.equals(dest)) {
-			throw new IllegalArgumentException("source is equals to dest!"); //$NON-NLS-1$
+			throw new RuntimeExceptionInputEqualsOutput("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		PdfReader reader = null;
@@ -211,13 +217,13 @@ public abstract class HelperPdf {
      */
 	public static void unlock(final File source, final File dest, final byte[] user, final byte[] password) throws IOException, DocumentException {
 		if (null == source) {
-			throw new IllegalArgumentException("source is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("source"); //$NON-NLS-1$
 		}
 		if (null == dest) {
-			throw new IllegalArgumentException("dest is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("dest"); //$NON-NLS-1$
 		}
 		if (source.equals(dest)) {
-			throw new IllegalArgumentException("source is equals to dest!"); //$NON-NLS-1$
+			throw new RuntimeExceptionInputEqualsOutput("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		PdfReader reader = null;

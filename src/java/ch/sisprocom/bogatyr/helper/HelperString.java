@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -33,6 +33,8 @@ package ch.sisprocom.bogatyr.helper;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 
 
 /**
@@ -119,7 +121,7 @@ public abstract class HelperString {
      */
     public static String reverse(final String input) { //$JUnit$
 		if (null == input) {
-			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
 		}
 
     	return new StringBuilder(input).reverse().toString();
@@ -260,7 +262,7 @@ public abstract class HelperString {
      */
 	public static boolean startsWith(final String string, final String prefix) { //$JUnit$
 		if (null == string) {
-			throw new IllegalArgumentException("string is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("string"); //$NON-NLS-1$
 		}
 
 		return string.matches("(?i)" + prefix + ".*");  //$NON-NLS-1$//$NON-NLS-2$
@@ -276,7 +278,7 @@ public abstract class HelperString {
      */
 	public static boolean endsWith(final String string, final String suffix) { //$JUnit$
 		if (null == string) {
-			throw new IllegalArgumentException("string is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("string"); //$NON-NLS-1$
 		}
 
 		return string.matches("(?i).*" + suffix); //$NON-NLS-1$
@@ -292,7 +294,7 @@ public abstract class HelperString {
      */
 	public static boolean contains(final String string, final String part) { //$JUnit$
 		if (null == string) {
-			throw new IllegalArgumentException("string is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("string"); //$NON-NLS-1$
 		}
 
 		return string.matches("(?i).*" + part + ".*");  //$NON-NLS-1$//$NON-NLS-2$

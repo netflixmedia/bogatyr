@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,16 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.launcher;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperEnvironment;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperString;
-
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
+
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
 
 /**
  * This launcher opens, edits and prints files with the default system application.
@@ -72,10 +75,10 @@ public abstract class LauncherFile {
 	 */
 	public static void open(final byte[] data, final String extension) throws IOException {
 		if (!HelperArray.isValid(data)) {
-			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("data"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(extension)) {
-			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("extension"); //$NON-NLS-1$
 		}	
 		
 		open(createTemporaryFile(data, extension));
@@ -92,10 +95,10 @@ public abstract class LauncherFile {
 	public static void open(final File file) throws IOException { //$JUnit$
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
-				throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+				throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 			}
 			if (!file.exists()) {
-				throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+				throw new RuntimeExceptionFileNotFound(file);
 			}
 
 			Desktop.getDesktop().open(file);
@@ -115,10 +118,10 @@ public abstract class LauncherFile {
 	 */
 	public static void open(final InputStream is, final String extension) throws IOException { //$JUnit$
 		if (null == is) {
-			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(extension)) {
-			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("extension"); //$NON-NLS-1$
 		}
 		
 		open(HelperIO.readStream(is), extension);
@@ -134,10 +137,10 @@ public abstract class LauncherFile {
 	 */
 	public static void edit(final byte[] data, final String extension) throws IOException {
 		if (!HelperArray.isValid(data)) {
-			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("data"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(extension)) {
-			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("extension"); //$NON-NLS-1$
 		}	
 		
 		edit(createTemporaryFile(data, extension));
@@ -154,10 +157,10 @@ public abstract class LauncherFile {
 	public static void edit(final File file) throws IOException { //$JUnit$
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
-				throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+				throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 			}
 			if (!file.exists()) {
-				throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+				throw new RuntimeExceptionFileNotFound(file);
 			}
 
 			Desktop.getDesktop().edit(file);
@@ -177,10 +180,10 @@ public abstract class LauncherFile {
 	 */
 	public static void edit(final InputStream is, final String extension) throws IOException { //$JUnit$
 		if (null == is) {
-			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(extension)) {
-			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("extension"); //$NON-NLS-1$
 		}
 		
 		edit(HelperIO.readStream(is), extension);
@@ -196,10 +199,10 @@ public abstract class LauncherFile {
 	 */
 	public static void print(final byte[] data, final String extension) throws IOException {
 		if (!HelperArray.isValid(data)) {
-			throw new IllegalArgumentException("data is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("data"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(extension)) {
-			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("extension"); //$NON-NLS-1$
 		}	
 		
 		print(createTemporaryFile(data, extension));
@@ -216,10 +219,10 @@ public abstract class LauncherFile {
 	public static void print(final File file) throws IOException { //$JUnit$
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
-				throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+				throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 			}
 			if (!file.exists()) {
-				throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+				throw new RuntimeExceptionFileNotFound(file);
 			}
 
 			Desktop.getDesktop().print(file);
@@ -239,10 +242,10 @@ public abstract class LauncherFile {
 	 */
 	public static void print(final InputStream is, final String extension) throws IOException { //$JUnit$
 		if (null == is) {
-			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(extension)) {
-			throw new IllegalArgumentException("extension is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("extension"); //$NON-NLS-1$
 		}
 		
 		print(HelperIO.readStream(is), extension);

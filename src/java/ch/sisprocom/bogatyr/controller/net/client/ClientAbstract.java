@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,16 +31,17 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.client;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.util.Collection;
 import java.util.HashSet;
+
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 
 /**
  * This is the skeleton for clients.
@@ -94,7 +95,7 @@ public abstract class ClientAbstract implements Client {
 	 */
 	protected void setThread(final Thread thread) {
     	if (null == thread) {
-    		throw new IllegalArgumentException("thread is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("thread"); //$NON-NLS-1$
     	}
 
     	this.thread = thread;
@@ -162,7 +163,7 @@ public abstract class ClientAbstract implements Client {
     @Override
     public void setHost(final String host) {
     	if (null == host) {
-    		throw new IllegalArgumentException("host is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("host"); //$NON-NLS-1$
     	}
 
     	this.host = host;
@@ -180,7 +181,7 @@ public abstract class ClientAbstract implements Client {
     @Override
     public void setSocket(final Socket socket) {
     	if (null == socket) {
-    		throw new IllegalArgumentException("socket is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("socket"); //$NON-NLS-1$
     	}
 
 		this.socket = socket;
@@ -251,7 +252,7 @@ public abstract class ClientAbstract implements Client {
     @Override
     public synchronized void addListener(final ListenerClient listener) {
     	if (null == listener) {
-    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.add(listener);
@@ -260,7 +261,7 @@ public abstract class ClientAbstract implements Client {
     @Override
     public synchronized void deleteListener(final ListenerClient listener) {
     	if (null == listener) {
-    		throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.remove(listener);

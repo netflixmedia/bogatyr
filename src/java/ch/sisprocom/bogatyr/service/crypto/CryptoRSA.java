@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,16 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.crypto;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperEnvironment;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.KeyPair;
@@ -51,11 +41,26 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Security;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperEnvironment;
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentExceedsVmMemory;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
+
 /**
  * This is a class for asymmetric cryptology via RSA.
+ * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20100203)
  * @since 0.1.0
  */
 public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
@@ -159,16 +164,16 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
     @Override
     public byte[] encrypt(final byte[] input, final PublicKey key, final int keySize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit$
 		if (null == input) {
-			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
-			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
 		}
     	if (0 >= keySize || 0 != keySize % HelperNumber.INT_16) {
 			throw new IllegalArgumentException("keySize is invalid: " + keySize); //$NON-NLS-1$
 		}
-        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
         }
    	
     	final int space = keySize/8 - 11;
@@ -220,16 +225,16 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 	@Override
     public byte[] decrypt(final byte[] input, final PrivateKey key, final int keySize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		if (null == input) {
-			throw new IllegalArgumentException("input is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
-			throw new IllegalArgumentException("key is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
 		}
     	if (0 >= keySize || 0 != keySize % HelperNumber.INT_16) {
 			throw new IllegalArgumentException("keySize is invalid: " + keySize); //$NON-NLS-1$
 		}
-        if (input.length * 2 > HelperEnvironment.getMemoryHeapFree()) {
-            throw new IllegalArgumentException("the doubled input (" + input.length * 2 + ") exceeds the free VM heap memory (" + HelperEnvironment.getMemoryHeapFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+        if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
+        	throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
         }
 
 		final int space = keySize/8;

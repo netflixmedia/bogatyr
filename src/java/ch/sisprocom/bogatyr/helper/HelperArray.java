@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -37,6 +37,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 
 
 /**
@@ -146,7 +148,7 @@ public abstract class HelperArray {
 	 */
 	public static <T> T[] removeDuplicates(final T[] array) { //$JUnit$
 		if (null == array) {
-			throw new IllegalArgumentException("array is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("array"); //$NON-NLS-1$
 		}
 		
 		return HelperCollection.toArray(HelperCollection.removeDuplicates(Arrays.asList(array)));
@@ -161,7 +163,7 @@ public abstract class HelperArray {
      */
     public static <T> String dump(final T[] array) { //$JUnit$
 		if (null == array) {
-			throw new IllegalArgumentException("array is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("array"); //$NON-NLS-1$
 		}
 		
 		final StringBuilder sb = new StringBuilder();

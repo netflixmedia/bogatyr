@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,12 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.launcher;
 
-import ch.sisprocom.bogatyr.helper.HelperString;
-
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+
+import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
 
 
 /**
@@ -73,7 +75,7 @@ public abstract class LauncherMail {
 	public static void mail(final URI uri) throws IOException { //$JUnit$
 		if (Desktop.isDesktopSupported()) {
 			if (null == uri) {
-				throw new IllegalArgumentException("uri is null!"); //$NON-NLS-1$
+				throw new RuntimeExceptionArgumentIsNull("uri"); //$NON-NLS-1$
 			}
 
 			Desktop.getDesktop().mail(uri);
@@ -92,7 +94,7 @@ public abstract class LauncherMail {
 	 */
 	public static void mail(final String emailAddress) throws IOException, URISyntaxException { //$JUnit$
 		if (!HelperString.isValid(emailAddress)) {
-			throw new IllegalArgumentException("emailAddress is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("emailAddress"); //$NON-NLS-1$
 		}
 		
 		final String prefix = "mailto:"; //$NON-NLS-1$

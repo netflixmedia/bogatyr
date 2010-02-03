@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -50,9 +50,10 @@ import java.util.List;
 
 /**
  * This class connects to an IBM MQ-Server and allows to send and receive messages.
- * 
+ * <strong>Note:</strong> This class needs <a href="http://www-01.ibm.com/software/integration/wmqfamily//">IBM MQSeries</a> to work.
+ *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
+ * @version 0.9.0 (20100203)
  * @since 0.3.0
  */
 public class ProviderMqImpl extends ServiceAbstract implements ProviderMq {

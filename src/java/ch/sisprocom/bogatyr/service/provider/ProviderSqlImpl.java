@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,13 +31,16 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.provider;
 
-import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
-
-import java.lang.reflect.InvocationTargetException;import java.sql.Connection;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import ch.sisprocom.bogatyr.helper.HelperString;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
 /**
@@ -116,7 +119,7 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 */
 	public void setDriver(final String driver) {
     	if (null == driver) {
-    		throw new IllegalArgumentException("driver is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("driver"); //$NON-NLS-1$
     	}
     	
 		this.driver = driver;
@@ -130,7 +133,7 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 */
 	public void setUrl(final String url) {
     	if (null == url) {
-    		throw new IllegalArgumentException("url is null!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNull("url"); //$NON-NLS-1$
     	}
 		this.url = url;
 	}
@@ -168,7 +171,7 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
     @Override
     public int executeUpdate(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchMethodException, InvocationTargetException {
     	if (!HelperString.isValid(statement)) {
-    		throw new IllegalArgumentException("statement is null or empty!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNullOrEmpty("statement"); //$NON-NLS-1$
     	}
 
     	Statement stmt = null;
@@ -194,7 +197,7 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
     @Override
     public boolean execute(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchMethodException, InvocationTargetException  {
     	if (!HelperString.isValid(statement)) {
-    		throw new IllegalArgumentException("statement is null or empty!"); //$NON-NLS-1$
+    		throw new RuntimeExceptionArgumentIsNullOrEmpty("statement"); //$NON-NLS-1$
     	}
     	
     	Statement stmt = null;

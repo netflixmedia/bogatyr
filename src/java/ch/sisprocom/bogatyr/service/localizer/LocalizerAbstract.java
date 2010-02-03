@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -41,6 +41,7 @@ import java.util.HashSet;
 import java.util.Locale;
 
 import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
@@ -144,7 +145,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
     @Override
     public void setLocale(final Locale locale) {
 		if (null == locale) {
-			throw new IllegalArgumentException("locale is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("locale"); //$NON-NLS-1$
 		}
 
     	this.locale = locale;
@@ -154,7 +155,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
     @Override
     public synchronized void addListener(final ListenerLocale listener) {
 		if (null == listener) {
-			throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listListener.add(listener);
@@ -163,7 +164,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	@Override
     public void deleteListener(final ListenerLocale listener) {
 		if (null == listener) {
-			throw new IllegalArgumentException("listener is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
 		}
 
     	listListener.remove(listener);

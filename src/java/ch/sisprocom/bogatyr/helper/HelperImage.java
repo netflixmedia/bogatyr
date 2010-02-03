@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -31,7 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import javax.imageio.ImageIO;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -45,6 +44,11 @@ import java.io.OutputStream;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
+
+import javax.imageio.ImageIO;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
 
 
 /**
@@ -72,10 +76,10 @@ public abstract class HelperImage {
      */
     public static BufferedImage readImage(final File file) throws IOException {
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		if (!file.exists()) {
-			throw new IllegalArgumentException("file doesn't exists: " + file); //$NON-NLS-1$
+			throw new RuntimeExceptionFileNotFound(file);
 		}
 
 		return ImageIO.read(file);
@@ -93,7 +97,7 @@ public abstract class HelperImage {
      */
     public static BufferedImage readImage(final InputStream is) throws IOException {
 		if (null == is) {
-			throw new IllegalArgumentException("is is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
 		}
 
 		return ImageIO.read(is);
@@ -112,13 +116,13 @@ public abstract class HelperImage {
      */
     public static void writeImage(final File file, final String type, final RenderedImage image) throws IOException { //$JUnit$
 		if (null == image) {
-			throw new IllegalArgumentException("image is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("image"); //$NON-NLS-1$
 		}
 		if (null == type || !getAvailableImageWriteFormats().contains(type)) {
 			throw new IllegalArgumentException("type is null or invalid: " + type); //$NON-NLS-1$
 		}
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		
 		ImageIO.write(image, type, file);
@@ -137,13 +141,13 @@ public abstract class HelperImage {
      */
     public static void writeImage(final OutputStream os, final String type, final RenderedImage image) throws IOException {
 		if (null == image) {
-			throw new IllegalArgumentException("image is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("image"); //$NON-NLS-1$
 		}
 		if (null == type || !getAvailableImageWriteFormats().contains(type)) {
 			throw new IllegalArgumentException("type is null or invalid: " + type); //$NON-NLS-1$
 		}
 		if (null == os) {
-			throw new IllegalArgumentException("os is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("os"); //$NON-NLS-1$
 		}
 		
 		ImageIO.write(image, type, os);
@@ -161,7 +165,7 @@ public abstract class HelperImage {
      */
 	public static RenderedImage getImage(final Component component) {
 		if (null == component) {
-			throw new IllegalArgumentException("component is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("component"); //$NON-NLS-1$
 		}
 
 		final Dimension size = component.getSize();
@@ -185,7 +189,7 @@ public abstract class HelperImage {
      */
 	public static Image getScaledImage(final BufferedImage image, final double scale) {
 		if (null == image) {
-			throw new IllegalArgumentException("image is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("image"); //$NON-NLS-1$
 		}
 
 		final double width = (double)image.getWidth() / scale;
@@ -207,7 +211,7 @@ public abstract class HelperImage {
      */
 	public static Image getScaledImage(final Image image, final Dimension size) {
 		if (null == image) {
-			throw new IllegalArgumentException("image is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("image"); //$NON-NLS-1$
 		}
 
 		return image.getScaledInstance(size.width, size.height, Image.SCALE_SMOOTH);

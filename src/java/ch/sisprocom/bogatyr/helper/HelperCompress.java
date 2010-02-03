@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2009 by SiSprocom GmbH.
+ * Copyright (c) 2008-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -20,8 +20,8 @@
  * Contact information:
  * --------------------
  * SiSprocom GmbH
- * Badenerstrasse 47 
- * CH-8004 Zuerich
+ * Grubenstrasse 9 
+ * CH-8045 Zuerich
  *
  * <http://www.sisprocom.ch>
  *
@@ -41,6 +41,10 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
+
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBeGreaterThanOne;
 
 
 /**
@@ -75,14 +79,14 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      */	
 	public static void writeZip(final File file, final File[] files, final int bufferSize) throws IOException {
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		if (!HelperArray.isValid(files)) {
-			throw new IllegalArgumentException("files is null or empty!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNullOrEmpty("files"); //$NON-NLS-1$
 		}
         if (1 > bufferSize) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
-        }
+             throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
+       }
 
 		ZipOutputStream zos = null;
 		
@@ -151,13 +155,13 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      */	
 	public static void extractZip(final ZipFile file, final File destinationDirectory, final int bufferSize) throws IOException { 
 		if (null == file) {
-			throw new IllegalArgumentException("file is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
 		}
 		if (null == destinationDirectory) {
-			throw new IllegalArgumentException("destinationDirectory is null!"); //$NON-NLS-1$
+			throw new RuntimeExceptionArgumentIsNull("destinationDirectory"); //$NON-NLS-1$
 		}
         if (1 > bufferSize) {
-            throw new IllegalArgumentException("bufferSize (" + bufferSize + ") must be greater than 1"); //$NON-NLS-1$ //$NON-NLS-2$
+            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
         }
 
 		final Enumeration<? extends ZipEntry> zipEntryEnum = file.entries();
