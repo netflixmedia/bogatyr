@@ -42,15 +42,23 @@ import ch.sisprocom.bogatyr.helper.HelperString;
 
 
 /**
- * This is an document factory.
+ * This is a document factory.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100126)
+ * @version 0.9.0 (20100203)
  * @since 0.9.0
  */
 public abstract class DocumentFactory {
 	private static final Pattern PATTERN = Pattern.compile("[-%'0-9.]+"); //$NON-NLS-1$
 
+	/**
+     * Creates a {@link PlainDocument} (text) with a given length.
+     * 
+     * @param length of the input
+     * @return created {@link PlainDocument}
+     * @see PlainDocument
+     * @since 0.9.0
+     */	
 	public static PlainDocument createTextDocument(final int length) {
 		return new PlainDocument() {
 			private static final long serialVersionUID = -5008928912535075396L;
@@ -64,6 +72,14 @@ public abstract class DocumentFactory {
 		};
 	}
 	
+	/**
+     * Creates a {@link PlainDocument} (numeric) with a given length.
+     * 
+     * @param length of the input
+     * @return created {@link PlainDocument}
+     * @see PlainDocument
+     * @since 0.9.0
+     */	
 	public static PlainDocument createNumberDocument(final int length) {
 		return new PlainDocument() {
 			private static final long serialVersionUID = 3766889554419497713L;

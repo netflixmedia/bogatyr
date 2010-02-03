@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -34,20 +34,16 @@ package ch.sisprocom.bogatyr.helper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 
 /**
  * This is a helper class for time operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100203)
  * @since 0.7.0
  */
 public abstract class HelperTime {
@@ -64,18 +60,6 @@ public abstract class HelperTime {
 	
 	public static final int TIME_SERVER_PORT = 37;
 	public static final String DEFAULT_TIME_SERVER = "ptbtime1.ptb.de"; //$NON-NLS-1$
-
-	public static final DateFormat FORMAT_DAY_MONTH_YEAR = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()); //$NON-NLS-1$
-	public static final DateFormat FORMAT_YEAR_MONTH_DAY = new SimpleDateFormat("yyyy.MM.dd", Locale.getDefault()); //$NON-NLS-1$
-	public static final DateFormat FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE = new SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.getDefault()); //$NON-NLS-1$
-	public static final DateFormat FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.getDefault()); //$NON-NLS-1$
-	public static final DateFormat FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND_MILLISECOND = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS", Locale.getDefault()); //$NON-NLS-1$
-	public static final DateFormat FORMAT_DAY_MONTH_YEAR_HOUR_MINUTE = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()); //$NON-NLS-1$
-	public static final DateFormat FORMAT_DAY_MONTH_YEAR_HOUR_MINUTE_SECOND = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.getDefault()); //$NON-NLS-1$
-	public static final DateFormat FORMAT_DAY_MONTH_YEAR_HOUR_MINUTE_SECOND_MILLISECOND = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss.SSS", Locale.getDefault()); //$NON-NLS-1$
-	public static final DateFormat FORMAT_HOUR_MINUTE = new SimpleDateFormat("HH:mm", Locale.getDefault()); //$NON-NLS-1$
-	public static final DateFormat FORMAT_HOUR_MINUTE_SECOND = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()); //$NON-NLS-1$
-	public static final DateFormat FORMAT_HOUR_MINUTE_SECOND_MILLISECOND = new SimpleDateFormat("HH:mm:ss.SSS", Locale.getDefault()); //$NON-NLS-1$
 
 	
     /**
@@ -178,44 +162,44 @@ public abstract class HelperTime {
          return new Date(System.currentTimeMillis() + offSet);
     }
     
-    /**
-     * Create a date with a given input {@link String} and a {@link DateFormat}.
-     *
-     * @param date as {@link String}
-     * @param format {@link DateFormat} for the date
-     * @return parsed date
-     * @throws ParseException 
-     * @see DateFormat
-     * @since 0.9.0
-     */
-    public static Date getDate(final String date, final DateFormat format) throws ParseException {
-    	return format.parse(date);
-    }
-
-    /**
-     * Create an formatted date with a given time in ms and a {@link DateFormat}.
-     *
-     * @param time in ms to format
-     * @param format {@link DateFormat} for the date
-     * @return formatted date
-     * @see DateFormat
-     * @since 0.9.0
-     */
-    public static String getFormattedDate(final long time, final DateFormat format) {
-    	return format.format(new Date(time));
-    }
-    
-    /**
-     * Create an formatted date with a given {@link Date} and a {@link DateFormat}.
-     *
-     * @param date to format
-     * @param format {@link DateFormat} for the date
-     * @return formatted date
-     * @see Date
-     * @see DateFormat
-     * @since 0.9.0
-     */
-    public static String getFormattedDate(final Date date, final DateFormat format) {
-    	return format.format(date);
-    }
+//    /**
+//     * Create a date with a given input {@link String} and a {@link DateFormat}.
+//     *
+//     * @param date as {@link String}
+//     * @param format {@link DateFormat} for the date
+//     * @return parsed date
+//     * @throws ParseException 
+//     * @see DateFormat
+//     * @since 0.9.0
+//     */
+//    public static Date getDate(final String date, final DateFormat format) throws ParseException {
+//    	return format.parse(date);
+//    }
+//
+//    /**
+//     * Create an formatted date with a given time in ms and a {@link DateFormat}.
+//     *
+//     * @param time in ms to format
+//     * @param format {@link DateFormat} for the date
+//     * @return formatted date
+//     * @see DateFormat
+//     * @since 0.9.0
+//     */
+//    public static String getFormattedDate(final long time, final DateFormat format) {
+//    	return format.format(new Date(time));
+//    }
+//    
+//    /**
+//     * Create an formatted date with a given {@link Date} and a {@link DateFormat}.
+//     *
+//     * @param date to format
+//     * @param format {@link DateFormat} for the date
+//     * @return formatted date
+//     * @see Date
+//     * @see DateFormat
+//     * @since 0.9.0
+//     */
+//    public static String getFormattedDate(final Date date, final DateFormat format) {
+//    	return format.format(date);
+//    }
 }

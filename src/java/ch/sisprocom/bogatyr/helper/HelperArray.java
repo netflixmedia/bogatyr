@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007-2009 by SiSprocom GmbH.
+ * Copyright (c) 2007-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -44,21 +44,21 @@ import java.util.List;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100203)
  * @since 0.7.0
  */
 public abstract class HelperArray {
-	public static final Class<?>[] EMPTY_ARRAY_CLASS = new Class[0];
-	public static final Object[] EMPTY_ARRAY_OBJECT = new Object[0];
-	public static final String[] EMPTY_ARRAY_STRING = new String[0];
-	public static final Boolean[] EMPTY_ARRAY_BOOLEAN = new Boolean[0];
-	public static final Double[] EMPTY_ARRAY_DOUBLE = new Double[0];
-	public static final Integer[] EMPTY_ARRAY_INTEGER = new Integer[0];
-	public static final Float[] EMPTY_ARRAY_FLOAT = new Float[0];
-	public static final byte[] EMPTY_ARRAY_BYTE = new byte[0];
-    public static final char[] EMPTY_ARRAY_CHAR = new char[0];
-	public static final Long[] EMPTY_ARRAY_LONG = new Long[0];
-	public static final Short[] EMPTY_ARRAY_SHORT = new Short[0];
+	public static final Class<?>[] EMPTY_ARRAY_CLASS 		 = new Class[0];
+	public static final Object[] EMPTY_ARRAY_OBJECT 		 = new Object[0];
+	public static final String[] EMPTY_ARRAY_STRING 		 = new String[0];
+	public static final Boolean[] EMPTY_ARRAY_BOOLEAN 		 = new Boolean[0];
+	public static final Double[] EMPTY_ARRAY_DOUBLE 		 = new Double[0];
+	public static final Integer[] EMPTY_ARRAY_INTEGER 		 = new Integer[0];
+	public static final Float[] EMPTY_ARRAY_FLOAT 			 = new Float[0];
+	public static final byte[] EMPTY_ARRAY_BYTE 			 = new byte[0];
+    public static final char[] EMPTY_ARRAY_CHAR 			 = new char[0];
+	public static final Long[] EMPTY_ARRAY_LONG 			 = new Long[0];
+	public static final Short[] EMPTY_ARRAY_SHORT 			 = new Short[0];
 	public static final BigInteger[] EMPTY_ARRAY_BIG_INTEGER = new BigInteger[0];
 	public static final BigDecimal[] EMPTY_ARRAY_BIG_DECIMAL = new BigDecimal[0];		
 

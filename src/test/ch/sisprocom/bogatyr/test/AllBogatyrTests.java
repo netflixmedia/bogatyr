@@ -31,13 +31,13 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
 import ch.sisprocom.bogatyr.helper.HelperCollection;
-import ch.sisprocom.bogatyr.helper.HelperTime;
 import ch.sisprocom.bogatyr.test.helper.HelperArrayTest;
 import ch.sisprocom.bogatyr.test.helper.HelperCollectionTest;
 import ch.sisprocom.bogatyr.test.helper.HelperCryptoTest;
@@ -67,13 +67,14 @@ import ch.sisprocom.bogatyr.test.service.crypto.CertificateProviderTest;
 import ch.sisprocom.bogatyr.test.service.crypto.CryptoAsymmetricTest;
 import ch.sisprocom.bogatyr.test.service.crypto.CryptoSymmetricTest;
 import ch.sisprocom.bogatyr.test.service.crypto.ScramblerTest;
+import ch.sisprocom.bogatyr.view.swing.factory.FormatFactory;
 
 
 /**
  * Junit test suite
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 20100126
+ * @version 20100203
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ" + //$NON-NLS-1$
@@ -86,9 +87,11 @@ public class AllBogatyrTests implements Runnable {
 
 	
     public static void main(final String[] args) {
+    	final DateFormat df = FormatFactory.createDateFormat(FormatFactory.PATTERN_DATE_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND_MILLISECOND);
+    	
     	System.out.println("+---------------------------+"); //$NON-NLS-1$
     	System.out.println("|  Start all Bogatyr tests  |"); //$NON-NLS-1$
-    	System.out.println("|  " + HelperTime.getFormattedDate(new Date(), HelperTime.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND_MILLISECOND) + "  |");  //$NON-NLS-1$//$NON-NLS-2$
+    	System.out.println("|  " + df.format(new Date()) + "  |");  //$NON-NLS-1$//$NON-NLS-2$
     	System.out.println("+---------------------------+"); //$NON-NLS-1$
     	System.out.println("Iterations:\t" + ITERATIONS); //$NON-NLS-1$
     	System.out.println("Threads:\t" + THREADS); //$NON-NLS-1$
@@ -104,7 +107,7 @@ public class AllBogatyrTests implements Runnable {
         
         System.out.println("+-------------------------------+"); //$NON-NLS-1$
         System.out.println("|  All Bogatyr tests completed  |"); //$NON-NLS-1$
-    	System.out.println("|  " + HelperTime.getFormattedDate(new Date(), HelperTime.FORMAT_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND_MILLISECOND) + "      |"); //$NON-NLS-1$ //$NON-NLS-2$
+    	System.out.println("|  " + df.format(new Date()) + "      |"); //$NON-NLS-1$ //$NON-NLS-2$
         System.out.println("+-------------------------------+"); //$NON-NLS-1$
     }
     
