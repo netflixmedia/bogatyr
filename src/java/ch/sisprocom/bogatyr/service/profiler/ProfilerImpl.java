@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -41,7 +41,7 @@ import java.util.Map;
  * The implementation of a profiler.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091116)
+ * @version 0.9.0 (20100203)
  * @since 0.9.0
  */
 public class ProfilerImpl extends ServiceAbstract implements Profiler {
@@ -50,7 +50,16 @@ public class ProfilerImpl extends ServiceAbstract implements Profiler {
 	private long meanTime;
 	private long elapsedTime;
 	
+	public ProfilerImpl() {
+		super();
+		
+		start();
+	}
 	
+	
+	/*
+	 * Implemented methods
+	 */
 	@Override
 	public long getElapsedTime() {
 		return elapsedTime;

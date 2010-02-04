@@ -32,7 +32,6 @@
 package ch.sisprocom.bogatyr.test.helper.unit;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -48,7 +47,7 @@ import ch.sisprocom.bogatyr.model.unit.Weight;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100112
+ * @version 20100204
  */
 public class UnitWeightTest {
 	private static final MathContext MC = new MathContext(5, RoundingMode.HALF_EVEN);
@@ -70,22 +69,22 @@ public class UnitWeightTest {
 		assertTrue(0 == new BigDecimal("907.1847").compareTo(Weight.TON.convertTo(Weight.KILOGRAM, BigDecimal.ONE))); //$NON-NLS-1$
 		assertTrue(0 == BigDecimal.ONE.compareTo(Weight.KILOGRAM.convertTo(Weight.TON, new BigDecimal("907.1847")).round(MC))); //$NON-NLS-1$
 		
-		try {
-			Weight.GRAM.convertTo(null, BigDecimal.ONE);
-			fail("toUnit is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-		
-		try {
-			Weight.GRAM.convertTo(Weight.KILOGRAM, null);
-			fail("value is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}	
+//		try {
+//			Weight.GRAM.convertTo(null, BigDecimal.ONE);
+//			fail("toUnit is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+//		
+//		try {
+//			Weight.GRAM.convertTo(Weight.KILOGRAM, null);
+//			fail("value is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}	
 	}
 }

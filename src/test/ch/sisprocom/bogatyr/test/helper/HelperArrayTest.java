@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.helper.HelperArray;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091102
+ * @version 20100204
  */
 public class HelperArrayTest {
 	
@@ -61,14 +61,15 @@ public class HelperArrayTest {
 	public void testConcatenateObjects() {
     	final String[] a = {"A", "B", "C"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
     	final String[] b = {"D", "E"}; //$NON-NLS-1$ //$NON-NLS-2$
+    	final String[] c = {"F", "G"}; //$NON-NLS-1$ //$NON-NLS-2$
+    	
+    	final String[] array = HelperArray.concatenate(a, b, c);
 
-    	final String[] array = HelperArray.concatenate(a, b);
+    	assertArrayEquals(new String[]{"A", "B", "C", "D", "E", "F", "G"}, array); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 
-    	assertArrayEquals(new String[]{"A", "B", "C", "D", "E"}, array); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+//    	assertArrayEquals(b, HelperArray.concatenate(null, b));
 
-    	assertArrayEquals(b, HelperArray.concatenate(null, b));
-
-    	assertArrayEquals(a, HelperArray.concatenate(a, null));
+//    	assertArrayEquals(a, HelperArray.concatenate(a, null));
 
 	}
 	

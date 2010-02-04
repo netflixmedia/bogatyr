@@ -64,10 +64,15 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * @since 0.1.0
  */
 public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
-	public static final String ALGORITHM = "RSA"; //$NON-NLS-1$
-	public static final String XFORM     = "RSA/NONE/PKCS1PADDING"; //$NON-NLS-1$
-//	public static final String XFORM     = "RSA/NONE/NoPadding"; //$NON-NLS-1$
+	public static final String ALGORITHM 	 = "RSA"; //$NON-NLS-1$
+	public static final String XFORM     	 = "RSA/NONE/PKCS1PADDING"; //$NON-NLS-1$
 	public static final int DEFAULT_KEY_SIZE = 1024;
+
+	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
+
+	static {
+		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
+	}
 
 	
 	/*
@@ -88,7 +93,7 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 	 * @since 0.1.0
 	 */
 	private static byte[] encryptInternal(final byte[] input, final Key key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
-		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
+		final Cipher cipher = Cipher.getInstance(XFORM, PROVIDER);
 		cipher.init(Cipher.ENCRYPT_MODE, key);
 
 		return cipher.doFinal(input);
@@ -109,7 +114,7 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 	 * @since 0.1.0
 	 */
 	private static byte[] decryptInternal(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
+		final Cipher cipher = Cipher.getInstance(XFORM, PROVIDER);
 		cipher.init(Cipher.DECRYPT_MODE, key);
 
 		return cipher.doFinal(input);
@@ -137,10 +142,8 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 			throw new IllegalArgumentException("keySize is invalid: " + keySize); //$NON-NLS-1$
 		}
 		
-		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
-
 		// Generate a key-pair
-		final KeyPairGenerator kpg = KeyPairGenerator.getInstance(ALGORITHM, "BC"); //$NON-NLS-1$
+		final KeyPairGenerator kpg = KeyPairGenerator.getInstance(ALGORITHM, PROVIDER);
 		kpg.initialize(keySize);
 
 		return kpg.generateKeyPair();

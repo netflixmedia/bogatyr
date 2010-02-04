@@ -56,7 +56,7 @@ public abstract class Constants {
 	//Bogatyr specific
 	public static final String BOGATYR_NAME		 		  = "Bogatyr"; //$NON-NLS-1$
 	public static final BigDecimal BOGATYR_VERSION 		  = new BigDecimal("0.9"); //$NON-NLS-1$
-	public static final int BOGATYR_BUILD 				  = 222;
+	public static final int BOGATYR_BUILD 				  = 223;
 	public static final Manufacturer BOGATYR_MANUFACTURER = new ManufacturerImpl();
 	public static final Owner BOGATYR_OWNER 			  = new OwnerImpl();
 	public static final Publisher BOGATYR_PUBLISHER		  = new PublisherImpl();
@@ -64,7 +64,7 @@ public abstract class Constants {
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
 	public static final MathContext DEFAULT_MATHCONTEXT = new MathContext(34, RoundingMode.DOWN);
-	public static final int DEFAULT_FILE_BUFFER_SIZE 	= 1048576; //1MB
+	public static final int DEFAULT_FILE_BUFFER_SIZE 	= HelperNumber.INT_32768; //32kB
 	public static final BigDecimal DEFAULT_DPI 			= new BigDecimal("72"); //$NON-NLS-1$
 	
 	//algebraic signs

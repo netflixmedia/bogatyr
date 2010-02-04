@@ -31,7 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100203)
+ * @version 0.9.0 (20100204)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -93,9 +92,16 @@ public abstract class HelperArray {
 	 * @return concatenated array
 	 * @since 0.7.0
 	 */
-    @SuppressWarnings("unchecked")
-	public static <T> T[] concatenate(final T[]... arrays) { //$JUnit$
+	public static <T> T[] concatenate(final T[] array1, final T[]... arrays) { //$JUnit$
+        if (null == array1) {
+            throw new RuntimeExceptionArgumentIsNull("array1"); //$NON-NLS-1$
+        }
+        if (null == arrays) {
+            throw new RuntimeExceptionArgumentIsNull("arrays"); //$NON-NLS-1$
+        }
         final List<T> result = new ArrayList<T>();
+        
+        result.addAll(Arrays.asList(array1));
         
         for (final T[] array : arrays) {
         	if (null != array) {
@@ -103,13 +109,14 @@ public abstract class HelperArray {
         	}
         }
         
-        final T[] array = (T[])Array.newInstance(arrays.getClass().getComponentType().getComponentType(), result.size());
-        
-        for (int ii = 0; ii < result.size(); ii++) {
-        	array[ii] = result.get(ii);
-        }
-        
-        return array;
+//        final T[] array = (T[])Array.newInstance(arrays.getClass().getComponentType().getComponentType(), result.size());
+//        
+//        for (int ii = 0; ii < result.size(); ii++) {
+//        	array[ii] = result.get(ii);
+//        }
+//        
+//        return array;
+        return result.toArray(array1);
     }
     
 	/**

@@ -54,7 +54,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * This is a class for obfuscating data with CFB.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (200100203)
  * @since 0.3.0
  */
 public class ScramblerImpl extends ServiceAbstract implements Scrambler {
@@ -141,13 +141,16 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
         try {
             is = new FileInputStream(input);
             os = new FileOutputStream(output);
-            int len;
+            int offset;
             byte lastByte = pattern;
-            while (0 < (len = is.read(buffer))) {
-                            	
-            	os.write(obfuscate(buffer, lastByte), 0, len);
+            byte[] result;
+            while (0 < (offset = is.read(buffer))) {
+
+            	result = obfuscate(buffer, lastByte);
             	
-            	lastByte = buffer[buffer.length -1];
+            	os.write(result, 0, offset);
+
+            	lastByte = result[result.length - 1];
             }
             os.flush();
         } finally {
@@ -189,13 +192,13 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 		try {
             is = new FileInputStream(input);
             os = new FileOutputStream(output);
-            int len;
+            int offset;
             byte lastByte = pattern;
-            while (0 < (len = is.read(buffer))) {
-                            	
-            	os.write(unobfuscate(buffer, lastByte), 0, len);
+            while (0 < (offset = is.read(buffer))) {
+                
+            	os.write(unobfuscate(buffer, lastByte), 0, offset);
             	
-            	lastByte = buffer[buffer.length -1];
+            	lastByte = buffer[buffer.length - 1];
             }
             os.flush();
         } finally {

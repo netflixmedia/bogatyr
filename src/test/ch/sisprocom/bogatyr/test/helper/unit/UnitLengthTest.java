@@ -32,7 +32,6 @@
 package ch.sisprocom.bogatyr.test.helper.unit;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -48,7 +47,7 @@ import ch.sisprocom.bogatyr.model.unit.Length;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100112
+ * @version 20100204
  */
 public class UnitLengthTest {
 	private static final MathContext MC = new MathContext(5, RoundingMode.HALF_EVEN);
@@ -102,22 +101,22 @@ public class UnitLengthTest {
 		assertTrue(0 == new BigDecimal("1.852").compareTo(Length.NAUTICAL_MILE.convertTo(Length.KM, BigDecimal.ONE))); //$NON-NLS-1$
 		assertTrue(0 == BigDecimal.ONE.compareTo(Length.KM.convertTo(Length.NAUTICAL_MILE, new BigDecimal("1.852")).round(MC))); //$NON-NLS-1$
 		
-		try {
-			Length.KM.convertTo(null, BigDecimal.ONE);
-			fail("toUnit is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-		
-		try {
-			Length.KM.convertTo(Length.M, null);
-			fail("value is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+//		try {
+//			Length.KM.convertTo(null, BigDecimal.ONE);
+//			fail("toUnit is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+//		
+//		try {
+//			Length.KM.convertTo(Length.M, null);
+//			fail("value is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
 	}
 }
