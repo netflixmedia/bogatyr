@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.model.unit;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
@@ -41,20 +42,20 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
  * Time units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100202)
+ * @version 0.9.0 (20100203)
  * @since 0.8.0
  */
-public enum Time {
+public enum Time implements Unit<Time> {
 	NANOSECOND(Constants.FACTOR_NANOSECOND_TO_SECOND),
 	MICROSECOND(Constants.FACTOR_MICROSECOND_TO_SECOND),
 	MILLISECOND(Constants.FACTOR_MILLISECOND_TO_SECOND),
 	SECOND(BigDecimal.ONE),
-	MINUTE(BigDecimal.ONE.divide(Constants.FACTOR_SECOND_TO_MINUTE)),
-	HOUR(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR)))),
-	DAY(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR.multiply(Constants.FACTOR_HOUR_TO_DAY))))),
-	WEEK(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR.multiply(Constants.FACTOR_HOUR_TO_DAY.multiply(Constants.FACTOR_DAY_TO_WEEK)))))),
-	MONTH(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR.multiply(Constants.FACTOR_HOUR_TO_DAY.multiply(Constants.FACTOR_DAY_TO_MONTH)))))),
-	YEAR(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR.multiply(Constants.FACTOR_HOUR_TO_DAY.multiply(Constants.FACTOR_DAY_TO_YEAR))))));
+	MINUTE(BigDecimal.ONE.divide(Constants.FACTOR_SECOND_TO_MINUTE, Constants.DEFAULT_MATHCONTEXT)),
+	HOUR(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR, Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)),
+	DAY(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR.multiply(Constants.FACTOR_HOUR_TO_DAY), Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)),
+	WEEK(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR.multiply(Constants.FACTOR_HOUR_TO_DAY.multiply(Constants.FACTOR_DAY_TO_WEEK)), Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)),
+	MONTH(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR.multiply(Constants.FACTOR_HOUR_TO_DAY.multiply(Constants.FACTOR_DAY_TO_MONTH), Constants.DEFAULT_MATHCONTEXT), Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)),
+	YEAR(BigDecimal.ONE.divide((Constants.FACTOR_SECOND_TO_MINUTE.multiply(Constants.FACTOR_MINUTE_TO_HOUR.multiply(Constants.FACTOR_HOUR_TO_DAY.multiply(Constants.FACTOR_DAY_TO_YEAR), Constants.DEFAULT_MATHCONTEXT), Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT));
 
 	private final BigDecimal factor;
 	
@@ -62,14 +63,15 @@ public enum Time {
 		this.factor = factor;
 	}
 	
-	/**
-     * Converts a time value to another unit.
-     * 
-     * @param toUnit resulting time unit
-     * @param value in the given unit
-     * @return value in the resulting unit
-     * @since 0.9.0
-     */
+	BigDecimal getFactor() {
+		return factor;
+	}
+	
+	
+	/*
+	 * Implemented methods
+	 */
+	@Override
 	public BigDecimal convertTo(final Time toUnit, final BigDecimal value) { //$JUnit$
 		if (null == toUnit) {
 			throw new RuntimeExceptionArgumentIsNull("toUnit"); //$NON-NLS-1$
@@ -81,7 +83,66 @@ public enum Time {
 		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.factor, Constants.DEFAULT_MATHCONTEXT);
     }	
 
-	BigDecimal getFactor() {
-		return factor;
+	@Override
+	public BigInteger convertTo(final Time toUnit, final BigInteger value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).toBigInteger();
 	}
+
+	@Override
+	public Byte convertTo(final Time toUnit, final Byte value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).byteValue();
+	}
+
+	@Override
+	public Double convertTo(final Time toUnit, final Double value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).doubleValue();
+	}
+
+	@Override
+	public Float convertTo(final Time toUnit, final Float value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).floatValue();
+	}
+
+	@Override
+	public Integer convertTo(final Time toUnit, final Integer value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).intValue();
+	}
+
+	@Override
+	public Long convertTo(final Time toUnit, final Long value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).longValue();
+	}
+
+	@Override
+	public Short convertTo(final Time toUnit, final Short value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).shortValue();
+	}	
 }

@@ -32,7 +32,6 @@
 package ch.sisprocom.bogatyr.test.helper.unit;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
 
@@ -46,7 +45,7 @@ import ch.sisprocom.bogatyr.model.unit.Volume;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100112
+ * @version 20100204
  */
 public class UnitVolumeTest {
 	@Test
@@ -72,22 +71,22 @@ public class UnitVolumeTest {
 		assertTrue(0 == BigDecimal.ONE.compareTo(Volume.BARREL.convertTo(Volume.L, new BigDecimal("158.987294928")))); //$NON-NLS-1$
 		assertTrue(0 == new BigDecimal("158.987294928").compareTo(Volume.L.convertTo(Volume.BARREL, BigDecimal.ONE))); //$NON-NLS-1$
 		
-		try {
-			Volume.M3.convertTo(null, BigDecimal.ONE);
-			fail("toUnit is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-		
-		try {
-			Volume.M3.convertTo(Volume.CM3, null);
-			fail("value is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}	
+//		try {
+//			Volume.M3.convertTo(null, BigDecimal.ONE);
+//			fail("toUnit is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+//		
+//		try {
+//			Volume.M3.convertTo(Volume.CM3, null);
+//			fail("value is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}	
 	}
 }

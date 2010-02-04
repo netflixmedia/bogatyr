@@ -43,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 public class RuntimeExceptionArgumentExceedsVmMemory extends IllegalArgumentException {
 	private static final long serialVersionUID = 1150311302870054754L;
 	
-	public RuntimeExceptionArgumentExceedsVmMemory(final String argument, long size) {
+	public RuntimeExceptionArgumentExceedsVmMemory(final String argument, final long size) {
 		super(argument + " (" + size + ") exceeds the free VM memory (" + HelperEnvironment.getMemoryFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 }

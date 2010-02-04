@@ -105,19 +105,39 @@ public abstract class HelperEnvironment {
      * @since 0.9.0
 	 */
 	public static long getMemoryUsed() {
-		return getMemoryTotal() - getMemoryFree();
+		return getMemoryTotal() - Runtime.getRuntime().freeMemory();
 	}
-
+	
+//	/**
+//	 * Returns the used VM memory in bytes.
+//     *
+//     * @return used VM memory
+//     * @since 0.9.0
+//	 */
+//	public static long getMemoryUsed() {
+//		return getMemoryTotal() - getMemoryFree();
+//	}
+	
 	/**
-	 * Returns the free VM memory in bytes.
+	 * Returns the maximal free VM memory in bytes.
      *
      * @return free VM memory
      * @since 0.9.0
 	 */
 	public static long getMemoryFree() {
-		return Runtime.getRuntime().freeMemory();
+		return getMemoryMax() - getMemoryUsed();
 	}
 	
+//	/**
+//	 * Returns the free VM memory in bytes.
+//     *
+//     * @return free VM memory
+//     * @since 0.9.0
+//	 */
+//	public static long getMemoryFree() {
+//		return Runtime.getRuntime().freeMemory();
+//	}
+
 	/**
 	 * Returns the current total VM memory in bytes.
      *
@@ -128,6 +148,15 @@ public abstract class HelperEnvironment {
 		return Runtime.getRuntime().totalMemory();
 	}
 	
+//	/**
+//	 * Returns the maximal reserved VM memory in bytes.
+//     *
+//     * @return max VM memory
+//     * @since 0.9.0
+//	 */
+//	public static long getMemoryMax() {
+//		return Runtime.getRuntime().maxMemory();
+//	}
 	/**
 	 * Returns the maximal reserved VM memory in bytes.
      *
@@ -137,7 +166,7 @@ public abstract class HelperEnvironment {
 	public static long getMemoryMax() {
 		return Runtime.getRuntime().maxMemory();
 	}
-
+	
 	/**
 	 * Returns the current Java version.
      *

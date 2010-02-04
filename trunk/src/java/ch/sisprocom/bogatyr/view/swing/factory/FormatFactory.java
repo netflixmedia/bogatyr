@@ -69,6 +69,7 @@ public abstract class FormatFactory {
 	public static final String PATTERN_DATE_HOUR_MINUTE 								  = "HH:mm"; //$NON-NLS-1$
 	public static final String PATTERN_DATE_HOUR_MINUTE_SECOND 							  = "HH:mm:ss"; //$NON-NLS-1$
 	public static final String PATTERN_DATE_HOUR_MINUTE_SECOND_MILLISECOND 				  = "HH:mm:ss.SSS"; //$NON-NLS-1$
+	public static final String PATTERN_DATE_TEXT						 				  = "EEEEE, dd. MMMMM yyyy"; //$NON-NLS-1$
 
 	/**
      * Creates a default {@link NumberFormat}.

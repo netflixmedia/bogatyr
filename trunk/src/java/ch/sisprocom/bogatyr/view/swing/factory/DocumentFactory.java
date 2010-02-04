@@ -61,7 +61,7 @@ public abstract class DocumentFactory {
      * @since 0.9.0
      */	
 	public static PlainDocument createTextDocument(final int length) {
-		 if (length <= 0) {
+		 if (0 >= length) {
 			 throw new RuntimeExceptionArgumentMustBePositive("length", length); //$NON-NLS-1$
 		 }
 
@@ -86,7 +86,7 @@ public abstract class DocumentFactory {
      * @since 0.9.0
      */	
 	public static PlainDocument createNumberDocument(final int length) {
-		 if (length <= 0) {
+		 if (0 >= length) {
 			 throw new RuntimeExceptionArgumentMustBePositive("length", length); //$NON-NLS-1$
 		 }
 

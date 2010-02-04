@@ -237,10 +237,10 @@ public abstract class HelperObject {
 		final byte[] bytes = baos.toByteArray();
 		
 		final ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-		final CloneInput cin = new CloneInput(bais, cout);
+		final ObjectInputStream ois = new CloneInput(bais, cout);
 	
 		@SuppressWarnings("unchecked") final
-        T clone = (T) cin.readObject();
+        T clone = (T) ois.readObject();
 		return clone;
     }
 	

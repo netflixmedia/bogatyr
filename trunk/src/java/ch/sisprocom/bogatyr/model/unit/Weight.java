@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.model.unit;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
@@ -40,10 +41,10 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
  * Weight units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100202)
+ * @version 0.9.0 (20100203)
  * @since 0.7.0
  */
-public enum Weight {
+public enum Weight implements Unit<Weight> {
 	MILLIGRAM(Constants.FACTOR_MILLIGRAM_TO_GRAM.multiply(Constants.FACTOR_GRAM_TO_KILOGRAM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	GRAM(Constants.FACTOR_GRAM_TO_KILOGRAM), //$JUnit$
 	KILOGRAM(BigDecimal.ONE), //$JUnit$
@@ -57,14 +58,15 @@ public enum Weight {
 		this.factor = factor;
 	}
 	
-	/**
-     * Converts a weight value to another unit.
-     * 
-     * @param toUnit resulting weight unit
-     * @param value in the given unit
-     * @return value in the resulting unit
-     * @since 0.9.0
-     */
+	BigDecimal getFactor() {
+		return factor;
+	}
+
+	
+	/*
+	 * Implemented methods
+	 */
+	@Override
 	public BigDecimal convertTo(final Weight toUnit, final BigDecimal value) { //$JUnit$
 		if (null == toUnit) {
 			throw new RuntimeExceptionArgumentIsNull("toUnit"); //$NON-NLS-1$
@@ -76,8 +78,67 @@ public enum Weight {
 		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.factor, Constants.DEFAULT_MATHCONTEXT);
     }	
 
-	BigDecimal getFactor() {
-		return factor;
+	@Override
+	public BigInteger convertTo(final Weight toUnit, final BigInteger value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).toBigInteger();
 	}
+
+	@Override
+	public Byte convertTo(final Weight toUnit, final Byte value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).byteValue();
+	}
+
+	@Override
+	public Double convertTo(final Weight toUnit, final Double value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).doubleValue();
+	}
+
+	@Override
+	public Float convertTo(final Weight toUnit, final Float value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).floatValue();
+	}
+
+	@Override
+	public Integer convertTo(final Weight toUnit, final Integer value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).intValue();
+	}
+
+	@Override
+	public Long convertTo(final Weight toUnit, final Long value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).longValue();
+	}
+
+	@Override
+	public Short convertTo(final Weight toUnit, final Short value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).shortValue();
+	}	
 }
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,7 +32,6 @@
 package ch.sisprocom.bogatyr.test.helper.unit;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -48,7 +47,7 @@ import ch.sisprocom.bogatyr.model.unit.Area;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100107
+ * @version 20100204
  */
 public class UnitAreaTest {
 	private static final MathContext MC = new MathContext(5, RoundingMode.HALF_EVEN);
@@ -85,22 +84,22 @@ public class UnitAreaTest {
 		assertTrue(0 == BigDecimal.ONE.compareTo(Area.KM2.convertTo(Area.MILE2, new BigDecimal("2.5899881103")).round(MC))); //$NON-NLS-1$
 		assertTrue(0 == new BigDecimal("2.5899881103").compareTo(Area.MILE2.convertTo(Area.KM2, BigDecimal.ONE))); //$NON-NLS-1$
 		
-		try {
-			Area.KM2.convertTo(null, BigDecimal.ONE);
-			fail("toUnit is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-		
-		try {
-			Area.KM2.convertTo(Area.M2, null);
-			fail("value is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+//		try {
+//			Area.KM2.convertTo(null, BigDecimal.ONE);
+//			fail("toUnit is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+//		
+//		try {
+//			Area.KM2.convertTo(Area.M2, null);
+//			fail("value is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
 	}
 }

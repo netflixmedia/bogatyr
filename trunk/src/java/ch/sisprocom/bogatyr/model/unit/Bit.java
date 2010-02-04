@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.model.unit;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
@@ -40,10 +41,10 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
  * Bit units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100202)
+ * @version 0.9.0 (20100203)
  * @since 0.9.0
  */
-public enum Bit {
+public enum Bit implements Unit<Bit> {
 	BIT(BigDecimal.ONE),
 	BYTE(BigDecimal.ONE.divide(Constants.FACTOR_BIT_TO_BYTE, Constants.DEFAULT_MATHCONTEXT)),
 	KILOBIT(BigDecimal.ONE.divide(Constants.FACTOR_BIT_TO_KILOBIT, Constants.DEFAULT_MATHCONTEXT)),
@@ -86,14 +87,15 @@ public enum Bit {
 		this.factor = factor;
 	}
 
-	/**
-     * Converts a bit value to another unit.
-     * 
-     * @param toUnit resulting bit unit
-     * @param value in the given unit
-     * @return value in the resulting unit
-     * @since 0.9.0
-     */
+	BigDecimal getFactor() {
+		return factor;
+	}
+
+	
+	/*
+	 * Implemented methods
+	 */
+	@Override
 	public BigDecimal convertTo(final Bit toUnit, final BigDecimal value) { //$JUnit$
 		if (null == toUnit) {
 			throw new RuntimeExceptionArgumentIsNull("toUnit"); //$NON-NLS-1$
@@ -103,10 +105,69 @@ public enum Bit {
 		}
 
 		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.factor, Constants.DEFAULT_MATHCONTEXT);
-    }	
+    }
 
-	BigDecimal getFactor() {
-		return factor;
+	@Override
+	public BigInteger convertTo(final Bit toUnit, final BigInteger value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).toBigInteger();
 	}
+
+	@Override
+	public Byte convertTo(final Bit toUnit, final Byte value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).byteValue();
+	}
+
+	@Override
+	public Double convertTo(final Bit toUnit, final Double value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).doubleValue();
+	}
+
+	@Override
+	public Float convertTo(final Bit toUnit, final Float value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).floatValue();
+	}
+
+	@Override
+	public Integer convertTo(final Bit toUnit, final Integer value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).intValue();
+	}
+
+	@Override
+	public Long convertTo(final Bit toUnit, final Long value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).longValue();
+	}
+
+	@Override
+	public Short convertTo(final Bit toUnit, final Short value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).shortValue();
+	}	
 }	
 

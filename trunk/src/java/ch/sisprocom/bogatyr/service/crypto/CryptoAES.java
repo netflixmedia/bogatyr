@@ -82,6 +82,12 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	public static final String XFORM        = "AES/CBC/PKCS5Padding"; //$NON-NLS-1$
 	public static final int DEFAULT_KEY_SIZE = 128;
     
+	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
+
+	static {
+		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
+	}
+
 	
 	/*
 	 * Private methods
@@ -96,13 +102,13 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	}
 	
 	private static Cipher getCipherEncrypt(final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
-		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
+		final Cipher cipher = Cipher.getInstance(XFORM, PROVIDER);
 		cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
 		return cipher;
 	}
 
 	private static Cipher getCipherDecrypt(final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
-		final Cipher cipher = Cipher.getInstance(XFORM, "BC"); //$NON-NLS-1$
+		final Cipher cipher = Cipher.getInstance(XFORM, PROVIDER);
 		cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
 		return cipher;
 	}
@@ -129,10 +135,8 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 			throw new IllegalArgumentException("keySize is invalid: " + keySize); //$NON-NLS-1$
 		}
 
-    	Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
-
 		// Generate a key
-		final KeyGenerator kg = KeyGenerator.getInstance(ALGORITHM, "BC"); //$NON-NLS-1$
+		final KeyGenerator kg = KeyGenerator.getInstance(ALGORITHM, PROVIDER);
 		kg.init(keySize);
 		
 		return kg.generateKey();

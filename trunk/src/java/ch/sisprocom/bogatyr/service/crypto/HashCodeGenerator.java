@@ -111,4 +111,70 @@ public interface HashCodeGenerator extends Service {
 	 * @since 0.8.0
 	 */
 	String getHash(File input, HashCode hashCode, int bufferSize) throws Exception;		
+	
+	/**
+	 * Generates a hash code for a byte-array with the given {@link HashCode}.
+	 * This method generates a fast hash code over the data (e.g. compare different data)
+	 * 
+     * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
+	 *
+     * @param input byte-array for the hash code
+     * @param hashCode {@link HashCode} algorithm
+     * @param parts for the hash code data
+     * @param partSize of the hash code data
+     * @return generated hash code
+	 * @throws Exception
+	 * @see HashCode
+	 * @since 0.9.0
+	 */
+	String getFastHash(byte[] input, HashCode hashCode, int parts, int partSize) throws Exception;
+	
+	/**
+	 * Generates a hash code for a byte-array with the given {@link HashCode}.
+	 * This method generates a fast hash code over the data (e.g. compare different data)
+	 * 
+     * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
+	 *
+     * @param input byte-array for the hash code
+     * @param hashCode {@link HashCode} algorithm
+     * @return generated hash code
+	 * @throws Exception
+	 * @see HashCode
+	 * @since 0.9.0
+	 */
+	String getFastHash(byte[] input, HashCode hashCode) throws Exception;
+
+	/**
+	 * Generates a fast hash code for an input {@link File} with the given {@link HashCode}.
+	 * This method generates a fast hash code over the {@link File} (e.g. find same file containing the same data)
+	 * 
+     * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
+     *
+     * @param input {@link File} for the hash code
+     * @param hashCode {@link HashCode} algorithm
+     * @param parts for the hash code data
+     * @param partSize of the hash code data
+     * @return generated hash code
+	 * @throws Exception 
+	 * @see File
+	 * @see HashCode
+	 * @since 0.9.0
+	 */
+	String getFastHash(File input, HashCode hashCode, int parts, int partSize) throws Exception;
+
+	/**
+	 * Generates a fast hash code for an input {@link File} with the given {@link HashCode}.
+	 * This method generates a fast hash code over the {@link File} (e.g. find same file containing the same data)
+	 * 
+     * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
+     *
+     * @param input {@link File} for the hash code
+     * @param hashCode {@link HashCode} algorithm
+     * @return generated hash code
+	 * @throws Exception 
+	 * @see File
+	 * @see HashCode
+	 * @since 0.9.0
+	 */
+	String getFastHash(File input, HashCode hashCode) throws Exception;
 }

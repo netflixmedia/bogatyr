@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.model.unit;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
@@ -41,10 +42,10 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
  * Area units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100202)
+ * @version 0.9.0 (20100203)
  * @since 0.7.0
  */
-public enum Area {
+public enum Area implements Unit<Area> {
 	MM2(Constants.FACTOR_MM2_TO_CM2.multiply(Constants.FACTOR_CM2_TO_M2, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	CM2(Constants.FACTOR_CM2_TO_M2), //$JUnit$
 	M2(BigDecimal.ONE),
@@ -63,14 +64,15 @@ public enum Area {
 		this.factor = factor;
 	}
     
-	/**
-     * Converts an area value to another unit.
-     * 
-     * @param toUnit resulting area unit
-     * @param value in the given unit
-     * @return value in the resulting unit
-     * @since 0.9.0
-     */
+	BigDecimal getFactor() {
+		return factor;
+	}
+	
+	
+	/*
+	 * Implemented methods
+	 */
+	@Override
 	public BigDecimal convertTo(final Area toUnit, final BigDecimal value) { //$JUnit$
 		if (null == toUnit) {
 			throw new RuntimeExceptionArgumentIsNull("toUnit"); //$NON-NLS-1$
@@ -80,10 +82,69 @@ public enum Area {
 		}
 
 		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.factor, Constants.DEFAULT_MATHCONTEXT);
-    }	
+    }
 
-	BigDecimal getFactor() {
-		return factor;
+	@Override
+	public BigInteger convertTo(final Area toUnit, final BigInteger value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).toBigInteger();
 	}
+
+	@Override
+	public Byte convertTo(final Area toUnit, final Byte value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).byteValue();
+	}
+
+	@Override
+	public Double convertTo(final Area toUnit, final Double value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).doubleValue();
+	}
+
+	@Override
+	public Float convertTo(final Area toUnit, final Float value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).floatValue();
+	}
+
+	@Override
+	public Integer convertTo(final Area toUnit, final Integer value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).intValue();
+	}
+
+	@Override
+	public Long convertTo(final Area toUnit, final Long value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).longValue();
+	}
+
+	@Override
+	public Short convertTo(final Area toUnit, final Short value) {
+		if (null == value) {
+			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+		}
+
+		return convertTo(toUnit, new BigDecimal(value)).shortValue();
+	}	
 }	
 
