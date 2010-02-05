@@ -184,7 +184,7 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 	
 	@Override
 	public String getFastHash(final byte[] input, final HashCode hashCode) throws Exception {
-		return getFastHash(input, hashCode, 8, HelperNumber.INT_1024);
+		return getFastHash(input, hashCode, 16, HelperNumber.INT_2048);
 	}
 
 	@Override
@@ -229,6 +229,6 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 	
 	@Override
 	public String getFastHash(final File input, final HashCode hashCode) throws Exception {
-		return getFastHash(input, hashCode, 8, HelperNumber.INT_1024);
+		return getFastHash(input, hashCode, 16, HelperNumber.INT_2048);
 	}
 }

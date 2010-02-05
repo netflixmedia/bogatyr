@@ -61,14 +61,14 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 	}
 
     @Override
-    public void add(final WorkerAbstract worker) {
+    public void add(final WorkerAbstract<?, ?> worker) {
     	listWorker.add(worker);
         setChanged();
         notifyObservers(METHOD_ADD);
     }
 
     @Override
-    public void remove(final WorkerAbstract worker) {
+    public void remove(final WorkerAbstract<?, ?> worker) {
         worker.cancel(true);
         listWorker.remove(worker);
         setChanged();
@@ -77,7 +77,7 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 
     @Override
     public void removeAll() {
-        for (final WorkerAbstract worker : listWorker) {
+        for (final WorkerAbstract<?, ?> worker : listWorker) {
             worker.cancel(true);
         }
 

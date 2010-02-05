@@ -39,6 +39,7 @@ import java.util.HashSet;
 
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Event;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositive;
 
@@ -224,20 +225,20 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
     }
     
 	@Override
-    public void serverThreadStarted(final ServerThread serverThread) {
-    	if (null == serverThread) {
-    		throw new RuntimeExceptionArgumentIsNull("serverThread"); //$NON-NLS-1$
+    public void serverThreadStarted(final Event<ServerThread> event) {
+    	if (null == event) {
+    		throw new RuntimeExceptionArgumentIsNull("event"); //$NON-NLS-1$
     	}
 
-		listThread.add(serverThread);
+		listThread.add(event.getSource());
 	}
 	
 	@Override
-    public void serverThreadStopped(final ServerThread serverThread) {
-    	if (null == serverThread) {
-    		throw new RuntimeExceptionArgumentIsNull("serverThread"); //$NON-NLS-1$
+    public void serverThreadStopped(final Event<ServerThread> event) {
+    	if (null == event) {
+    		throw new RuntimeExceptionArgumentIsNull("event"); //$NON-NLS-1$
     	}
 
-    	listThread.remove(serverThread);
+    	listThread.remove(event.getSource());
 	}
 }

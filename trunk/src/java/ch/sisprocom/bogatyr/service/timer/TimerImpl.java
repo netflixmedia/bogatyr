@@ -103,7 +103,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
 	    @Override
 		public void run() {
 	    	time += getInterval();
-    		fireTimeChanged(time);
+    		fireTimeChanged();
 	    }
 	}
 }

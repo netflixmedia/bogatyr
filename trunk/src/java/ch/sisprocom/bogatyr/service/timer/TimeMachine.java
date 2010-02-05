@@ -40,7 +40,7 @@ import ch.sisprocom.bogatyr.service.Service;
  * Defines the methods for the implementation of the timer.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100205)
  * @since 0.6.0
  */
 public interface TimeMachine extends Service, HolderListener<ListenerTimer> {
@@ -69,5 +69,21 @@ public interface TimeMachine extends Service, HolderListener<ListenerTimer> {
 	 * Stops immediately the timer.
 	 */
 	void stop();
+	
+	/**
+	 * Returns the current time in ms of the timer.
+	 * 
+	 * @return current time of the timer
+	 * @since 0.6.0
+	 */
+    long getTime();
+    
+    /**
+     * Sets the time in ms of the timer.
+     * 
+     * @param time
+     * @since 0.6.0
+     */
+    void setTime(long time);
 }   
 

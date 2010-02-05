@@ -33,39 +33,39 @@ package ch.sisprocom.bogatyr.controller.net;
 
 import java.net.DatagramPacket;
 
+import ch.sisprocom.bogatyr.misc.Event;
 import ch.sisprocom.bogatyr.misc.Listener;
 
 /**
  * ListenerDatagram
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100205)
  * @since 0.8.0
  */
 public interface ListenerDatagram extends Listener {
 	/**
-	 * Informs the listener that a packet {@link DatagramPacket} was received.
+	 * Informs the listener that a {@link DatagramPacket} was received.
 	 * 
-	 * @param host of the received packet
-	 * @param port of the received packet
-	 * @param data as ASCII encoded string
-	 * @param packet {@link DatagramPacket}
+	 * @param event for the listener
 	 * @see DatagramPacket
 	 * @since 0.8.0
 	 */
-	void packetReceived(String host, int port, String data, DatagramPacket packet);
+	void packetReceived(Event<DatagramDumper> event);
 	
 	/**
 	 * Informs the listener that the datagram controller has started.
 	 * 
+	 * @param event for the listener
 	 * @since 0.8.0
 	 */
-	void datagramStarted();
+	void datagramStarted(Event<DatagramDumper> event);
 	
 	/**
 	 * Informs the listener that the datagram controller has stopped.
 	 * 
+	 * @param event for the listener
 	 * @since 0.8.0
 	 */
-	void datagramStopped();
+	void datagramStopped(Event<DatagramDumper> event);
 }

@@ -31,7 +31,9 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.server;
 
+import ch.sisprocom.bogatyr.misc.Event;
 import ch.sisprocom.bogatyr.misc.Listener;
+
 
 
 /**
@@ -39,33 +41,31 @@ import ch.sisprocom.bogatyr.misc.Listener;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100205)
  * @since 0.8.0
  */
 public interface ListenerServerThread extends Listener {
 	/**
 	 * Sends the read data from the server thread.
      *
-     * @param serverThread as reference
-     * @param data read data from the server thread
+ 	 * @param event for the listener
      * @since 0.8.0
 	 */
-	void serverThreadStreamRead(ServerThread serverThread, byte[] data);
+	void serverThreadStreamRead(Event<ServerThread> event);
 	
 	/**
 	 * Informs the listener that the server thread has started.
 	 * 
-     * @param serverThread as reference
-     * 
+	 * @param event for the listener
 	 * @since 0.8.0
 	 */
-	void serverThreadStarted(ServerThread serverThread);
+	void serverThreadStarted(Event<ServerThread> event);
 	
 	/**
 	 * Informs the listener that the server thread has stopped.
 	 * 
-	 * @param serverThread as reference
+	 * @param event for the listener
 	 * @since 0.8.0
 	 */
-	void serverThreadStopped(ServerThread serverThread);
+	void serverThreadStopped(Event<ServerThread> event);
 }

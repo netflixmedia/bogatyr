@@ -31,16 +31,17 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.server;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.util.Collection;
 import java.util.HashSet;
+
+import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.helper.HelperIO;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Event;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 
 
 /**
@@ -53,6 +54,8 @@ import java.util.HashSet;
 public abstract class ServerThreadAbstract implements ServerThread {
     private final long createTime = System.currentTimeMillis();
 
+    private final Event<ServerThread> event = new Event<ServerThread>(this);
+    
 	private Thread thread;
 	
 	private Collection<ListenerServerThread> listListener = new HashSet<ListenerServerThread>();
@@ -97,9 +100,9 @@ public abstract class ServerThreadAbstract implements ServerThread {
 	/*
 	 * Private methods
 	 */
-	protected void fireStreamRead(final byte[] data) {
+	protected void fireStreamRead() {
 		for (final ListenerServerThread listener : listListener) {
-			listener.serverThreadStreamRead(this, data);
+			listener.serverThreadStreamRead(event);
 		}	
 	}
 	
@@ -107,7 +110,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
 		isRunning = true;
 		
 		for (final ListenerServerThread listener : listListener) {
-			listener.serverThreadStarted(this);
+			listener.serverThreadStarted(event);
 		}	
 	}
 	
@@ -115,7 +118,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
 		isRunning = false;
 		
 		for (final ListenerServerThread listener : listListener) {
-			listener.serverThreadStopped(this);
+			listener.serverThreadStopped(event);
 		}	
 	}
 	

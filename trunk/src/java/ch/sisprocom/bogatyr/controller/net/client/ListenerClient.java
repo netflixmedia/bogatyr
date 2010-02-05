@@ -31,6 +31,7 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net.client;
 
+import ch.sisprocom.bogatyr.misc.Event;
 import ch.sisprocom.bogatyr.misc.Listener;
 
 /**
@@ -38,7 +39,7 @@ import ch.sisprocom.bogatyr.misc.Listener;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100205)
  * @since 0.7.0
  */
 public interface ListenerClient extends Listener {
@@ -48,19 +49,19 @@ public interface ListenerClient extends Listener {
      * @param data read data from the client
      * @since 0.7.0
 	 */
-	void clientStreamRead(byte[] data);
+	void clientStreamRead(Event<Client> event);
 	
 	/**
 	 * Informs the listener that the client has started.
 	 * 
 	 * @since 0.7.0
 	 */
-	void clientStarted();
+	void clientStarted(Event<Client> event);
 	
 	/**
 	 * Informs the listener that the client has stopped.
 	 * 
 	 * @since 0.7.0
 	 */
-	void clientStopped();
+	void clientStopped(Event<Client> event);
 }

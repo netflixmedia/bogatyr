@@ -33,11 +33,12 @@ package ch.sisprocom.bogatyr.misc;
 
 
 
+
 /**
  * Defines the methods for the listener holder (observable).
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100205)
  * @since 0.9.0
  */
 public interface HolderListener <L extends Listener> {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,31 +29,34 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.model.worker;
+package ch.sisprocom.bogatyr.misc;
 
-import java.util.List;
+import java.util.EventObject;
 
-import ch.sisprocom.bogatyr.model.Model;
-import ch.sisprocom.bogatyr.view.swing.worker.WorkerAbstract;
+
 
 
 /**
- * The interface for the worker model.
+ * Event class for all listeners.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100205)
  * @since 0.9.0
  */
-public interface ModelWorker extends Model {
-    String METHOD_ADD        = ModelWorker.class.getName() + ".add()"; //$NON-NLS-1$
-    String METHOD_REMOVE     = ModelWorker.class.getName() + ".remove()"; //$NON-NLS-1$
-    String METHOD_REMOVE_ALL = ModelWorker.class.getName() + ".removeAll()"; //$NON-NLS-1$
+public class Event <T> extends EventObject {
+	private static final long serialVersionUID = 249139459845904231L;
 
-    List<WorkerAbstract> getWorkers();
-    
-	void add(WorkerAbstract<?, ?> worker);
+//	private final T source;
+	
+	public Event(final T source) {
+		super(source);
+	
+//		this.source = source;
+	}
 
-	void remove(WorkerAbstract<?, ?> worker);
-
-	void removeAll();
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public T getSource() {
+		return (T)super.getSource();
+	}
+}   

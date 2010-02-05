@@ -97,7 +97,7 @@ public abstract class HelperArray {
             throw new RuntimeExceptionArgumentIsNull("array1"); //$NON-NLS-1$
         }
         if (null == arrays) {
-            throw new RuntimeExceptionArgumentIsNull("arrays"); //$NON-NLS-1$
+        	return array1;
         }
         final List<T> result = new ArrayList<T>();
         

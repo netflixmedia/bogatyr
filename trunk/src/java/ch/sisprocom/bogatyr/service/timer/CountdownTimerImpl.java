@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -40,7 +40,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositiv
  * This is a countdown timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20100205)
  * @since 0.6.0
  */
 public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer {
@@ -88,12 +88,12 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
     }
 
     @Override
-    public long getRuntime() {
+    public long getTime() {
 		return runtime;
 	}
 
 	@Override
-    public synchronized void setRuntime(final long runtime) {
+    public synchronized void setTime(final long runtime) {
 		if (0 > runtime) {
 			throw new IllegalArgumentException("runtime must be positive: " + runtime); //$NON-NLS-1$
 		}
@@ -110,7 +110,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 		public void run() {
 			if (0L < runtime) {
 				runtime -= getInterval();
-				fireTimeChanged(runtime);
+				fireTimeChanged();
 			} else {
 				fireTimerStopped();
 				getTimer().cancel();
