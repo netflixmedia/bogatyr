@@ -55,6 +55,14 @@ public interface Client extends Runnable, HolderListener<ListenerClient> {
 	long getCreateTime();
 	
 	/**
+	 * Returns the current data from readStream().
+	 * 
+	 * @return current readed data
+	 * @since 0.9.0
+	 */
+	byte[] getData();
+	
+	/**
 	 * Returns the host of the {@link Socket}.
 	 * 
 	 * @return host

@@ -31,28 +31,29 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller.net;
 
-import ch.sisprocom.bogatyr.helper.Constants;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.Collection;
 import java.util.HashSet;
 
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Event;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+
 /**
  * This is a datagram dumper to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100205)
  * @since 0.8.0
  */
 public class DatagramDumperImpl implements DatagramDumper {
     private final long createTime = System.currentTimeMillis();
 
+    private final Event<DatagramDumper> event = new Event<DatagramDumper>(this);
+    
     private Thread thread;
     
 	private Collection<ListenerDatagram> listListener = new HashSet<ListenerDatagram>();
@@ -89,9 +90,9 @@ public class DatagramDumperImpl implements DatagramDumper {
 	/*
 	 * Private methods
 	 */
-	private void firePacketReceived(final String host, final int port, final String data, final DatagramPacket packet) {
+	private void firePacketReceived() {
 		for (final ListenerDatagram listener : listListener) {
-			listener.packetReceived(host, port, data, packet);
+			listener.packetReceived(event);
 		}	
 	}
 	
@@ -99,7 +100,7 @@ public class DatagramDumperImpl implements DatagramDumper {
 		isRunning = true;
 		
 		for (final ListenerDatagram listener : listListener) {
-			listener.datagramStarted();
+			listener.datagramStarted(event);
 		}	
 	}
 	
@@ -107,7 +108,7 @@ public class DatagramDumperImpl implements DatagramDumper {
 		isRunning = false;
 		
 		for (final ListenerDatagram listener : listListener) {
-			listener.datagramStopped();
+			listener.datagramStopped(event);
 		}	
 	}
     
@@ -130,6 +131,11 @@ public class DatagramDumperImpl implements DatagramDumper {
 	}
 
     @Override
+	public DatagramPacket getPacket() {
+		return packet;
+	}
+
+	@Override
     public int getPort() {
         return port;
     }
@@ -180,7 +186,7 @@ public class DatagramDumperImpl implements DatagramDumper {
 			while(!thread.isInterrupted()) {
 				socket.receive(packet);
 				
-				firePacketReceived(packet.getAddress().getHostAddress(), port, HelperString.toString(buffer, packet.getLength(), Constants.ENCODING_ASCII), packet);
+				firePacketReceived();
 			}
 //		} catch (SocketException ex) {
 //			//do nothing

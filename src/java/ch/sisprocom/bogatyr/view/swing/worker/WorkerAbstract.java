@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,52 +31,109 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing.worker;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 import javax.swing.SwingWorker;
+
+import ch.sisprocom.bogatyr.misc.Event;
+import ch.sisprocom.bogatyr.misc.HolderListener;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 
 /**
  * This class represents a skeleton for the worker.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100205)
  * @since 0.9.0
  */
-public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> {
-    private HandlerWorker handlerWorker;
+public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements HolderListener<ListenerWorker> {
+	private Collection<ListenerWorker> listListener = new HashSet<ListenerWorker>();
+	
+    private final Event<WorkerAbstract> event = new Event<WorkerAbstract>(this);
 
     protected WorkerAbstract() {
         super();
     }
 
-    protected WorkerAbstract(final HandlerWorker handlerWorker) {
-        super();
-
-        this.handlerWorker = handlerWorker;
-    }
-
-    public HandlerWorker getHandlerWorker() {
-        return handlerWorker;
-    }
-
-    public void setHandlerWorker(final HandlerWorker handlerWorker) {
-        this.handlerWorker = handlerWorker;
-    }
-
-    public void start() {
-        if (null != handlerWorker) {
-            handlerWorker.fireWorkerStart();
-        }
-        
-        execute();
-    }
-
     
-    /*
-     * Overridden methods
-     */
-    @Override
-    protected void done() {
-    	if (null != handlerWorker) {
-            handlerWorker.fireWorkerDone();
-        }
-    }
+	/*
+	 * Private methods
+	 */
+	protected void fireWorkerStart() {
+		for (final ListenerWorker listener : listListener) {
+			listener.start(event);
+		}	
+	}
+
+	protected void fireWorkerDone() {
+		for (final ListenerWorker listener : listListener) {
+			listener.done(event);
+		}	
+	}
+	
+	
+	/*
+	 * Implemented methods
+	 */
+	@Override
+	public void addListener(final ListenerWorker listener) {
+    	if (null == listener) {
+    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
+    	}
+
+    	listListener.add(listener);
+	}
+	
+	@Override
+	public int countListeners() {
+		return listListener.size();
+	}
+	
+	@Override
+	public void deleteListener(final ListenerWorker listener) {
+    	if (null == listener) {
+    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
+    	}
+
+    	listListener.remove(listener);
+ 	}
+	
+	@Override
+	public void deleteListeners() {
+        listListener = new HashSet<ListenerWorker>();
+	}
+
+//    protected WorkerAbstract(final HandlerWorker handlerWorker) {
+//        super();
+//
+//        this.handlerWorker = handlerWorker;
+//    }
+//
+//    public HandlerWorker getHandlerWorker() {
+//        return handlerWorker;
+//    }
+//
+//    public void setHandlerWorker(final HandlerWorker handlerWorker) {
+//        this.handlerWorker = handlerWorker;
+//    }
+//
+//    public void start() {
+//        if (null != handlerWorker) {
+//            handlerWorker.fireWorkerStart();
+//        }
+//        
+//        execute();
+//    }
+//
+//    
+//    /*
+//     * Overridden methods
+//     */
+//    @Override
+//    protected void done() {
+//    	if (null != handlerWorker) {
+//            handlerWorker.fireWorkerDone();
+//        }
+//    }
 }

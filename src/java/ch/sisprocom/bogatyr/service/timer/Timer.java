@@ -58,20 +58,20 @@ public interface Timer extends TimeMachine {
 	 */
 	void start(long delay, long interval);
 	
-	/**
-	 * Returns the current time in ms of the timer.
-	 * 
-	 * @return current time of the timer
-	 * @since 0.6.0
-	 */
-    long getTime();
-    
-    /**
-     * Sets the time in ms of the timer.
-     * 
-     * @param time
-     * @since 0.6.0
-     */
-    void setTime(long time);
+//	/**
+//	 * Returns the current time in ms of the timer.
+//	 * 
+//	 * @return current time of the timer
+//	 * @since 0.6.0
+//	 */
+//    long getTime();
+//    
+//    /**
+//     * Sets the time in ms of the timer.
+//     * 
+//     * @param time
+//     * @since 0.6.0
+//     */
+//    void setTime(long time);
 }   
 

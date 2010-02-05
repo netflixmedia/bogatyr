@@ -41,6 +41,7 @@ import java.util.HashSet;
 import java.util.Locale;
 
 import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.misc.Event;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
@@ -49,12 +50,14 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * Abstract localizer implementation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100205)
  * @since 0.6.0
  */
 public abstract class LocalizerAbstract extends ServiceAbstract implements Localizer {
 	private Collection<ListenerLocale> listListener = new HashSet<ListenerLocale>();
 
+	private final Event<Localizer> event = new Event<Localizer>(this);
+	
 	private Locale locale = Locale.getDefault();
 	
 
@@ -63,7 +66,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	 */
 	private void fireLocaleChanged() {
 		for (final ListenerLocale listener : listListener) {
-			listener.localeChanged();
+			listener.localeChanged(event);
 		}	
 	}
 

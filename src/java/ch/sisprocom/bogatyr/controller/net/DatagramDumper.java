@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.controller.net;
 
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.Socket;
 
 import ch.sisprocom.bogatyr.misc.HolderListener;
@@ -91,4 +92,13 @@ public interface DatagramDumper extends Runnable, HolderListener<ListenerDatagra
 	 * @since 0.8.0
 	 */
 	void setPort(int port);
+	
+	/**
+	 * Returns the current {@link DatagramPacket}.
+	 * 
+	 * @return current {@link DatagramPacket}
+	 * @see DatagramPacket
+	 * @since 0.9.0
+	 */
+	DatagramPacket getPacket();
 }

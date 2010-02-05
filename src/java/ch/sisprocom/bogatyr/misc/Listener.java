@@ -31,6 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.misc;
 
+import java.util.EventListener;
+
 
 
 
@@ -38,9 +40,9 @@ package ch.sisprocom.bogatyr.misc;
  * Type definition for listeners.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100205)
  * @since 0.9.0
  */
-public interface Listener {
+public interface Listener extends EventListener {
 	//marker interface, only used as type definition for listeners
 }   

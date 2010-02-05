@@ -41,6 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.Event;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 
 /**
@@ -54,6 +55,8 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 public abstract class ClientAbstract implements Client {
     private final long createTime = System.currentTimeMillis();
 
+    private final Event<Client> event = new Event<Client>(this);
+    
     private Thread thread;
     
 	private Collection<ListenerClient> listListener = new HashSet<ListenerClient>();
@@ -105,9 +108,9 @@ public abstract class ClientAbstract implements Client {
 	/*
 	 * Private methods
 	 */
-	protected void fireStreamRead(final byte[] data) {
+	protected void fireStreamRead() {
 		for (final ListenerClient listener : listListener) {
-			listener.clientStreamRead(data);
+			listener.clientStreamRead(event);
 		}	
 	}
 	
@@ -115,7 +118,7 @@ public abstract class ClientAbstract implements Client {
 		isRunning = true;
 		
 		for (final ListenerClient listener : listListener) {
-			listener.clientStarted();
+			listener.clientStarted(event);
 		}	
 	}
 	
@@ -123,7 +126,7 @@ public abstract class ClientAbstract implements Client {
 		isRunning = false;
 		
 		for (final ListenerClient listener : listListener) {
-			listener.clientStopped();
+			listener.clientStopped(event);
 		}	
 	}
     

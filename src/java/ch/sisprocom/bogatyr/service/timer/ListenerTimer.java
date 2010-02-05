@@ -31,13 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.timer;
 
+import ch.sisprocom.bogatyr.misc.Event;
 import ch.sisprocom.bogatyr.misc.Listener;
 
 /**
  * ListenerTimer
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100205)
  * @since 0.6.0
  */
 public interface ListenerTimer extends Listener {
@@ -47,19 +48,19 @@ public interface ListenerTimer extends Listener {
      * @param time actual time of the timer/countdown
      * @since 0.6.0
 	 */
-	void timeChanged(long time);
+	void timeChanged(Event<TimeMachine> event);
 	
 	/**
 	 * Informs the listener that the timer/countdown has started.
 	 * 
 	 * @since 0.6.0
 	 */
-	void timerStarted();
+	void timerStarted(Event<TimeMachine> event);
 	
 	/**
 	 * Informs the listener that the timer/countdown has stopped.
 	 * 
 	 * @since 0.6.0
 	 */
-	void timerStopped();
+	void timerStopped(Event<TimeMachine> event);
 }

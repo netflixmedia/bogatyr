@@ -31,13 +31,14 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.localizer;
 
+import ch.sisprocom.bogatyr.misc.Event;
 import ch.sisprocom.bogatyr.misc.Listener;
 
 /**
  * ListenerLocale
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100205)
  * @since 0.6.0
  */
 public interface ListenerLocale extends Listener {
@@ -46,5 +47,5 @@ public interface ListenerLocale extends Listener {
 	 * 
 	 * @since 0.6.0
 	 */
-	void localeChanged();
+	void localeChanged(Event<Localizer> event);
 }

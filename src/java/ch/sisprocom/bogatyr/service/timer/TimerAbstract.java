@@ -35,6 +35,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Timer;
 
+import ch.sisprocom.bogatyr.misc.Event;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
@@ -47,6 +48,8 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  */
 public abstract class TimerAbstract extends ServiceAbstract implements TimeMachine {
 	private Collection<ListenerTimer> listListener = new HashSet<ListenerTimer>();
+
+    private final Event<TimeMachine> event = new Event<TimeMachine>(this);
 
 	private Timer timer = new Timer();
 	private long interval;
@@ -88,9 +91,9 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 	/*
 	 * Private methods
 	 */
-	protected void fireTimeChanged(final long time) {
+	protected void fireTimeChanged() {
 		for (final ListenerTimer listener : listListener) {
-			listener.timeChanged(time);
+			listener.timeChanged(event);
 		}	
 	}
 	
@@ -98,7 +101,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 		isRunning = true;
 		
 		for (final ListenerTimer listener : listListener) {
-			listener.timerStarted();
+			listener.timerStarted(event);
 		}	
 	}
 	
@@ -106,7 +109,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 		isRunning = false;
 		
 		for (final ListenerTimer listener : listListener) {
-			listener.timerStopped();
+			listener.timerStopped(event);
 		}	
 	}
 	

@@ -58,21 +58,21 @@ public interface CountdownTimer extends TimeMachine {
 	 */
 	void start(long delay, long runtime, long interval);
     
-	/**
-	 * Returns the current runtime in ms of the timer.
-	 * 
-	 * @return current time of the timer
-	 * @since 0.6.0
-	 */
-    long getRuntime();
-    
-    /**
-     * Sets the runtime in ms of the timer.
-     * 
-     * @param time in ms
-     * @since 0.6.0
-     */
-    void setRuntime(long time);
+//	/**
+//	 * Returns the current runtime in ms of the timer.
+//	 * 
+//	 * @return current time of the timer
+//	 * @since 0.6.0
+//	 */
+//    long getRuntime();
+//    
+//    /**
+//     * Sets the runtime in ms of the timer.
+//     * 
+//     * @param time in ms
+//     * @since 0.6.0
+//     */
+//    void setRuntime(long time);
 
 }   
 
