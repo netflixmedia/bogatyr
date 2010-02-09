@@ -524,7 +524,7 @@ public abstract class HelperNumber {
 	public static Double getDouble(final String text) {
 		final String value = HelperString.getValidNumericString(text);
 		
-		return null == value ? null : Double.valueOf(value);
+		return null == value ? null : new BigDecimal(value).doubleValue();
 	}
 	
 	/**
@@ -536,7 +536,7 @@ public abstract class HelperNumber {
 	public static Integer getInteger(final String text) {
 		final String value = HelperString.getValidNumericString(text);
 		
-		return null == value ? null : Integer.valueOf(value);
+		return null == value ? null : new BigDecimal(value).intValue();
 	}
 	
 	/**
@@ -548,7 +548,7 @@ public abstract class HelperNumber {
 	public static Float getFloat(final String text) {
 		final String value = HelperString.getValidNumericString(text);
 		
-		return null == value ? null : Float.valueOf(value);
+		return null == value ? null : new BigDecimal(value).floatValue();
 	}
 	
 	/**
@@ -560,7 +560,7 @@ public abstract class HelperNumber {
 	public static Byte getByte(final String text) {
 		final String value = HelperString.getValidNumericString(text);
 		
-		return null == value ? null : Byte.valueOf(value);
+		return null == value ? null : new BigDecimal(value).byteValue();
 	}
 	
 	/**
@@ -572,7 +572,7 @@ public abstract class HelperNumber {
 	public static Long getLong(final String text) {
 		final String value = HelperString.getValidNumericString(text);
 		
-		return null == value ? null : Long.valueOf(value);
+		return null == value ? null : new BigDecimal(value).longValue();
 	}
 	
 	/**
@@ -584,7 +584,7 @@ public abstract class HelperNumber {
 	public static Short getShort(final String text) {
 		final String value = HelperString.getValidNumericString(text);
 		
-		return null == value ? null : Short.valueOf(value);
+		return null == value ? null : new BigDecimal(value).shortValue();
 	}
 	
 	/**
