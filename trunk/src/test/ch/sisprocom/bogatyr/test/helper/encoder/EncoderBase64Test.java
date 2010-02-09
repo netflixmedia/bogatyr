@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091101
+ * @version 20100209
  */
 public class EncoderBase64Test {
 	@Test
@@ -55,41 +55,41 @@ public class EncoderBase64Test {
 		
 		assertEquals(AllBogatyrTests.DATA, new String(decoded));
 
-		try {
-			EncoderBase64.encode(""); //$NON-NLS-1$
-			fail("String is empty!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-
-		try {
-			EncoderBase64.encode(HelperArray.EMPTY_ARRAY_BYTE);
-			fail("byte[] is empty!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-
-		try {
-			EncoderBase64.decode(""); //$NON-NLS-1$
-			fail("String is empty!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-
-		try {
-			EncoderBase64.decode(HelperArray.EMPTY_ARRAY_CHAR);
-			fail("char[] is empty!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+//		try {
+//			EncoderBase64.encode(""); //$NON-NLS-1$
+//			fail("String is empty!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+//
+//		try {
+//			EncoderBase64.encode(HelperArray.EMPTY_ARRAY_BYTE);
+//			fail("byte[] is empty!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+//
+//		try {
+//			EncoderBase64.decode(""); //$NON-NLS-1$
+//			fail("String is empty!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+//
+//		try {
+//			EncoderBase64.decode(HelperArray.EMPTY_ARRAY_CHAR);
+//			fail("char[] is empty!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
 	}
 }
 

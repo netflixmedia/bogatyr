@@ -36,8 +36,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBeGreaterThanOne;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositive;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 
 /**
@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositiv
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.0 (20100209)
  * @since 0.4.0
  */
 public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
@@ -57,19 +57,29 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @return calculated gcd
 	 * @since 0.4.0
 	 */
-	 public static BigDecimal gcd(final BigDecimal a, final BigDecimal b) { //$JUnit$
-		 if (0 < BigDecimal.ZERO.compareTo(a)) {
-			 throw new RuntimeExceptionArgumentMustBePositive("a", a); //$NON-NLS-1$
-		 }
-		 if (0 < BigDecimal.ZERO.compareTo(b)) {
-			 throw new RuntimeExceptionArgumentMustBePositive("b", b); //$NON-NLS-1$
-		 }
+	 public static <T extends Number> BigDecimal gcd(final T a, final T b) { //$JUnit$
+		if (null == a) {
+			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
+		}
+		if (null == b) {
+			throw new RuntimeExceptionIsNull("b"); //$NON-NLS-1$
+		}
+
+		final BigDecimal numberA = new BigDecimal(a.toString());
+		final BigDecimal numberB = new BigDecimal(b.toString());
 		 
-		 if (0 == a.compareTo(b)) {
-			 return a;
-		 }
+		if (0 < BigDecimal.ZERO.compareTo(numberA)) {
+			throw new RuntimeExceptionMustBeGreater("a", a, 0); //$NON-NLS-1$
+		}
+		if (0 < BigDecimal.ZERO.compareTo(numberB)) {
+			 throw new RuntimeExceptionMustBeGreater("b", b, 0); //$NON-NLS-1$
+		}
 		 
-		 return 0 == BigDecimal.ZERO.compareTo(b) ? a : gcd(b, a.remainder(b));
+		if (0 == numberA.compareTo(numberB)) {
+			return numberA;
+		}
+		 
+		return 0 == BigDecimal.ZERO.compareTo(numberB) ? numberA : gcd(numberB, numberA.remainder(numberB));
 	 } 
 
 	 /**
@@ -80,16 +90,26 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @return calculated lcm
 	 * @since 0.4.0
 	 */
-	 public static BigDecimal lcm(final BigDecimal a, final BigDecimal b) { //$JUnit$
-		 if (0 <= BigDecimal.ZERO.compareTo(a)) {
-			 throw new RuntimeExceptionArgumentMustBePositive("a", a); //$NON-NLS-1$
-		 }
-		 if (0 <= BigDecimal.ZERO.compareTo(b)) {
-			 throw new RuntimeExceptionArgumentMustBePositive("b", b); //$NON-NLS-1$
-		 }
+	 public static <T extends Number> BigDecimal lcm(final T a, final T b) { //$JUnit$
+		if (null == a) {
+			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
+		}
+		if (null == b) {
+			throw new RuntimeExceptionIsNull("b"); //$NON-NLS-1$
+		}
+		
+		final BigDecimal numberA = new BigDecimal(a.toString());
+		final BigDecimal numberB = new BigDecimal(b.toString());
+
+		if (0 <= BigDecimal.ZERO.compareTo(numberA)) {
+			throw new RuntimeExceptionMustBeGreater("a", a, 0); //$NON-NLS-1$
+		}
+		if (0 <= BigDecimal.ZERO.compareTo(numberB)) {
+			throw new RuntimeExceptionMustBeGreater("b", b, 0); //$NON-NLS-1$
+		}
 		 
-		 return a.multiply(b, Constants.DEFAULT_MATHCONTEXT).divide(gcd(a, b), Constants.DEFAULT_MATHCONTEXT);
-	 }
+		return numberA.multiply(numberB, Constants.DEFAULT_MATHCONTEXT).divide(gcd(a, b), Constants.DEFAULT_MATHCONTEXT);
+	}
 	 
 	/**
      * Checks if a number is a prime.
@@ -152,7 +172,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 //            throw new IllegalArgumentException("start value must be positive: " + start); //$NON-NLS-1$
 //        }
         if (0 > end) {
-            throw new RuntimeExceptionArgumentMustBePositive("end", end); //$NON-NLS-1$
+            throw new RuntimeExceptionMustBeGreater("end", end, 0); //$NON-NLS-1$
         }
 		if (start > end) {
             throw new IllegalArgumentException("end value (" + end + ") must be greater than the start value (" + start + ')'); //$NON-NLS-1$ //$NON-NLS-2$
@@ -190,10 +210,10 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static double log(final double base, final double value) { //$JUnit$
         if (1.0D >= base) {
-            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("base", base); //$NON-NLS-1$
+            throw new RuntimeExceptionMustBeGreater("base", base, 1); //$NON-NLS-1$
         }
         if (0.0D >= value) {
-            throw new RuntimeExceptionArgumentMustBePositive("value", value); //$NON-NLS-1$
+            throw new RuntimeExceptionMustBeGreater("value", value, 0); //$NON-NLS-1$
         }
 
 		return StrictMath.log(value) / StrictMath.log(base);
@@ -241,7 +261,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */
     public static double calcAmount(final double amount, final double interest, final int days) { //$JUnit$
 		 if (0 >= days) {
-			 throw new RuntimeExceptionArgumentMustBePositive("days", days); //$NON-NLS-1$
+			 throw new RuntimeExceptionMustBeGreater("days", days, 0); //$NON-NLS-1$
 		 }
 		 
 		 return amount * StrictMath.pow(StrictMath.E, (double)days / 360.0 * interest);
@@ -256,7 +276,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static BigInteger factorial(final int n) { //$JUnit$
         if (0 > n) {
-        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
+        	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
 
         BigInteger sum = BigInteger.ONE;
@@ -276,7 +296,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int sum(final int n) { //$JUnit$
         if (0 > n) {
-        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
+        	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
         if (0 == n) {
@@ -295,7 +315,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int sumSquare(final int n) { //$JUnit$
         if (0 > n) {
-        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
+        	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
         if (0 == n) {
@@ -314,7 +334,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int sumCubic(final int n) { //$JUnit$
         if (0 > n) {
-        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
+        	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
         if (0 == n) {
@@ -334,10 +354,10 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int sumRange(final int m, final int n) {
         if (0 > m) {
-        	throw new RuntimeExceptionArgumentMustBePositive("m", m); //$NON-NLS-1$
+        	throw new RuntimeExceptionMustBeGreater("m", m, 0); //$NON-NLS-1$
         }
         if (0 > n) {
-        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
+        	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
 		if (m > n) {
             throw new IllegalArgumentException("n value (" + n + ") must be greater than the m value (" + m + ')'); //$NON-NLS-1$ //$NON-NLS-2$
@@ -355,7 +375,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int calcConnections(final int n) { //$JUnit$
         if (0 >= n) {
-        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
+        	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
         return n * (n - 1) / 2;
@@ -370,7 +390,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static double calcBirthdayProblem(final int n) { //$JUnit$
         if (0 >= n) {
-        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
+        	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
       //TODO does it also work for other parameters than days p.a.?
@@ -394,10 +414,10 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static BigInteger binomialCoefficient(final int n, final int k) { //$JUnit$
         if (0 > n) {
-        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
+        	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         if (0 > k) {
-        	throw new RuntimeExceptionArgumentMustBePositive("k", k); //$NON-NLS-1$
+        	throw new RuntimeExceptionMustBeGreater("k", k, 0); //$NON-NLS-1$
         }
 		if (k > n) {
             throw new IllegalArgumentException("n value (" + n + ") must be greater than the k value (" + k + ')'); //$NON-NLS-1$ //$NON-NLS-2$
@@ -415,7 +435,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int sumOdd(final int n) { //$JUnit$
         if (0 > n) {
-        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
+        	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
         return (int)StrictMath.pow(n, 2.0D);
@@ -430,7 +450,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */	
 	public static int sumEven(final int n) { //$JUnit$
         if (0 > n) {
-        	throw new RuntimeExceptionArgumentMustBePositive("n", n); //$NON-NLS-1$
+        	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
         int sum = 0;

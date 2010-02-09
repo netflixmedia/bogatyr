@@ -42,16 +42,16 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBeGreaterThanOne;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 
 /**
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.0 (20100209)
  * @since 0.3.0
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
@@ -79,13 +79,13 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      */	
 	public static void writeZip(final File file, final File[] files, final int bufferSize) throws IOException {
 		if (null == file) {
-			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 		if (!HelperArray.isValid(files)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("files"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
 		}
         if (1 > bufferSize) {
-             throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
+             throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
        }
 
 		ZipOutputStream zos = null;
@@ -155,13 +155,13 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      */	
 	public static void extractZip(final ZipFile file, final File destinationDirectory, final int bufferSize) throws IOException { 
 		if (null == file) {
-			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 		if (null == destinationDirectory) {
-			throw new RuntimeExceptionArgumentIsNull("destinationDirectory"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("destinationDirectory"); //$NON-NLS-1$
 		}
         if (1 > bufferSize) {
-            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
+            throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
         }
 
 		final Enumeration<? extends ZipEntry> zipEntryEnum = file.entries();

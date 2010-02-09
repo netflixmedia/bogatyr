@@ -34,13 +34,13 @@ package ch.sisprocom.bogatyr.service.timer;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositive;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 /**
  * This is a countdown timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100205)
+ * @version 0.9.0 (20100209)
  * @since 0.6.0
  */
 public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer {
@@ -53,7 +53,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
     @Override
     public synchronized void start(final long runtime) {
 		if (0 > runtime) {
-			throw new RuntimeExceptionArgumentMustBePositive("runtime", runtime); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("runtime", runtime, 0); //$NON-NLS-1$
 		}
 
 		start(0L, runtime, 1000L);
@@ -62,13 +62,13 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
     @Override
     public synchronized void start(final long delay, final long runtime, final long interval) {
 		if (0 > delay) {
-			throw new RuntimeExceptionArgumentMustBePositive("delay", delay); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("delay", delay, 0); //$NON-NLS-1$
 		}
 		if (0 > runtime) {
-			throw new RuntimeExceptionArgumentMustBePositive("runtime", runtime); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("runtime", runtime, 0); //$NON-NLS-1$
 		}
 		if (0 > interval) {
-			throw new RuntimeExceptionArgumentMustBePositive("interval", interval); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("interval", interval, 0); //$NON-NLS-1$
 		}
 
     	getTimer().cancel();
@@ -95,7 +95,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 	@Override
     public synchronized void setTime(final long runtime) {
 		if (0 > runtime) {
-			throw new IllegalArgumentException("runtime must be positive: " + runtime); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("runtime", runtime, 0); //$NON-NLS-1$
 		}
 
 		this.runtime = runtime;

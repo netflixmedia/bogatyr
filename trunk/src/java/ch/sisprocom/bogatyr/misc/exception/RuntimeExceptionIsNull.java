@@ -32,16 +32,16 @@
 package ch.sisprocom.bogatyr.misc.exception;
 
 /**
- * This runtime exception is thrown if an argument value not positive.
+ * This runtime exception is thrown if an argument is null.
  * 
  * @author Stefan Laubenberger
  * @version 0.9.0 (20100203)
  * @since 0.9.0
  */
-public class RuntimeExceptionArgumentMustBePositive extends IllegalArgumentException {
-	private static final long serialVersionUID = -8251735601253549510L;
+public class RuntimeExceptionIsNull extends IllegalArgumentException {
+	private static final long serialVersionUID = 8539788707176531770L;
 
-	public RuntimeExceptionArgumentMustBePositive(final String argument, final Number value) {
-		super(argument + " (" + value + ") must be positive");  //$NON-NLS-1$//$NON-NLS-2$
+	public RuntimeExceptionIsNull(final String argument) {
+		super(argument + " is null!"); //$NON-NLS-1$
 	}
 }

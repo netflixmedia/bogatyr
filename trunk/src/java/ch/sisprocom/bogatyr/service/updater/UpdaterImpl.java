@@ -42,8 +42,8 @@ import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperNet;
 import ch.sisprocom.bogatyr.helper.HelperXml;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionInputEqualsOutput;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import ch.sisprocom.bogatyr.model.misc.Platform;
 import ch.sisprocom.bogatyr.model.updater.Document;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
@@ -73,13 +73,13 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 	@Override
 	public void update(final Document document, final Platform platform, final File dest) throws IOException {
         if (null == document) {
-            throw new RuntimeExceptionArgumentIsNull("document"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("document"); //$NON-NLS-1$
         }
         if (null == platform) {
-            throw new RuntimeExceptionArgumentIsNull("platform"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("platform"); //$NON-NLS-1$
         }
         if (null == dest) {
-            throw new RuntimeExceptionArgumentIsNull("dest"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
         }
 		
 		String location = document.getLocation(platform);
@@ -96,7 +96,7 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 
         if (source.exists()) {
     		if (source.equals(dest)) {
-    			throw new RuntimeExceptionInputEqualsOutput("location", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
+    			throw new RuntimeExceptionIsEquals("location", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
     		}
             HelperIO.copyFile(source, dest);
         } else {
@@ -107,7 +107,7 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 	@Override
 	public void update(final Document document, final File dest) throws IOException {
         if (null == document) {
-            throw new RuntimeExceptionArgumentIsNull("document"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("document"); //$NON-NLS-1$
         }
 
         update(document, null == document.getLocation(HelperEnvironment.getPlatform()) ? Platform.ANY : HelperEnvironment.getPlatform(), dest);

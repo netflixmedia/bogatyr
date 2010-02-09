@@ -62,11 +62,11 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentExceedsVmMemory;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBeGreaterThanOne;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionInputEqualsOutput;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 /**
@@ -74,7 +74,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100203)
+ * @version 0.9.0 (20100209)
  * @since 0.1.0
  */
 public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
@@ -131,8 +131,8 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	
 	@Override
     public SecretKey generateKey(final int keySize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
-    	if (0 >= keySize) {
-			throw new IllegalArgumentException("keySize is invalid: " + keySize); //$NON-NLS-1$
+		if (0 >= keySize) {
+			throw new RuntimeExceptionMustBeGreater("keySize", keySize, 0); //$NON-NLS-1$
 		}
 
 		// Generate a key
@@ -145,13 +145,13 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	@Override
     public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit$
 		if (null == input) {
-			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
-			throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
         if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
-            throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
+            throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
         }
 
 		return getCipherEncrypt(key).doFinal(input);
@@ -160,13 +160,13 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	@Override
     public byte[] decrypt(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		if (null == input) {
-			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
-			throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
         if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
-            throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
+            throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
         }
 
 		return getCipherDecrypt(key).doFinal(input);
@@ -180,19 +180,19 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
     @Override
     public void encrypt(final InputStream is, OutputStream os, final Key key, final int bufferSize) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IOException {
         if (null == is) {
-            throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
         }
         if (null == os) {
-            throw new RuntimeExceptionArgumentIsNull("os"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
         }
         if (null == key) {
-            throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
         }
         if (1 > bufferSize) {
-            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
+            throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
         }
         if (bufferSize > HelperEnvironment.getMemoryFree()) {
-            throw new RuntimeExceptionArgumentExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
+            throw new RuntimeExceptionExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
         }
 
         final byte[] buffer = new byte[bufferSize];
@@ -214,19 +214,19 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
     @Override
     public void decrypt(final InputStream is, final OutputStream os, final Key key, final int bufferSize) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IOException {
         if (null == is) {
-            throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
         }
         if (null == os) {
-            throw new RuntimeExceptionArgumentIsNull("os"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
         }
         if (null == key) {
-            throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
         }
         if (1 > bufferSize) {
-            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
+            throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
         }
         if (bufferSize > HelperEnvironment.getMemoryFree()) {
-            throw new RuntimeExceptionArgumentExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
+            throw new RuntimeExceptionExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
         }
 
         final byte[] buffer = new byte[bufferSize];
@@ -255,16 +255,16 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	@Override
     public void encrypt(final File input, final File output, final Key key, final int bufferSize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
         if (null == input) {
-            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
-		if (!input.exists()) {
-			throw new RuntimeExceptionFileNotFound(input);
-		}
+//		if (!input.exists()) {
+//			throw new RuntimeExceptionFileNotFound(input);
+//		}
 		if (null == output) {
-            throw new RuntimeExceptionArgumentIsNull("output"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
         }
 		if (input.equals(output)) {
-			throw new RuntimeExceptionInputEqualsOutput("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		encrypt(new BufferedInputStream(new FileInputStream(input)), new BufferedOutputStream(new FileOutputStream(output)), key, bufferSize);
@@ -278,16 +278,16 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	@Override
     public void decrypt(final File input, final File output, final Key key, final int bufferSize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidAlgorithmParameterException, IOException {
         if (null == input) {
-            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
-		if (!input.exists()) {
-			throw new RuntimeExceptionFileNotFound(input);
-		}
+//		if (!input.exists()) {
+//			throw new RuntimeExceptionFileNotFound(input);
+//		}
         if (null == output) {
-            throw new RuntimeExceptionArgumentIsNull("output"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
         }
 		if (input.equals(output)) {
-			throw new RuntimeExceptionInputEqualsOutput("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		decrypt(new BufferedInputStream(new FileInputStream(input)), new BufferedOutputStream(new FileOutputStream(output)), key, bufferSize);

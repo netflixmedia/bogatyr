@@ -40,13 +40,15 @@ import java.util.HashSet;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.misc.Event;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 
 /**
  * This is a datagram dumper to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100205)
+ * @version 0.9.0 (20100209)
  * @since 0.8.0
  */
 public class DatagramDumperImpl implements DatagramDumper {
@@ -142,10 +144,14 @@ public class DatagramDumperImpl implements DatagramDumper {
 
     @Override
     public void setPort(final int port) {
-    	if (0 >= port || HelperNumber.INT_65536 <= port) {
-    		throw new IllegalArgumentException("port outside of the valid range (0 - 65535): " + port); //$NON-NLS-1$
+    	if (0 >= port) {
+    		throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
     	}
-        this.port = port;
+		if (HelperNumber.INT_65536 <= port) {
+    		throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
+    	}
+
+		this.port = port;
     }
 
     @Override
@@ -199,7 +205,7 @@ public class DatagramDumperImpl implements DatagramDumper {
     @Override
     public synchronized void addListener(final ListenerDatagram listener) {
     	if (null == listener) {
-    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.add(listener);
@@ -208,7 +214,7 @@ public class DatagramDumperImpl implements DatagramDumper {
     @Override
     public synchronized void deleteListener(final ListenerDatagram listener) {
     	if (null == listener) {
-    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.remove(listener);

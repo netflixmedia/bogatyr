@@ -50,8 +50,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 
 /**
@@ -59,7 +59,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100202)
+ * @version 0.9.0 (20100209)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -79,7 +79,7 @@ public abstract class HelperObject {
      */
 	public static <T> T createInstance(final Class<T> clazz) throws SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
 		if (null == clazz) {
-			throw new RuntimeExceptionArgumentIsNull("clazz"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
 		
 		return clazz.getConstructor(HelperArray.EMPTY_ARRAY_CLASS).newInstance();
@@ -102,13 +102,13 @@ public abstract class HelperObject {
      */
 	public static <T> T createInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
 		if (null == clazz) {
-			throw new RuntimeExceptionArgumentIsNull("clazz"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
 		if (null == paramClazzes) {
-			throw new RuntimeExceptionArgumentIsNull("paramClazzes"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("paramClazzes"); //$NON-NLS-1$
 		}
 		if (null == params) {
-			throw new RuntimeExceptionArgumentIsNull("params"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("params"); //$NON-NLS-1$
 		}
 		
 		return clazz.getConstructor(paramClazzes).newInstance(params);
@@ -125,7 +125,7 @@ public abstract class HelperObject {
 	 */
 	public static byte[] serialize(final Serializable object) throws IOException { //$JUnit$
 		if (null == object) {
-			throw new RuntimeExceptionArgumentIsNull("obj"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
 		}	
 
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -156,7 +156,7 @@ public abstract class HelperObject {
 	 */
 	public static Object deserialize(final byte[] data) throws IOException, ClassNotFoundException { //$JUnit$
 		if (!HelperArray.isValid(data)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("data"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("data"); //$NON-NLS-1$
 		}
 		
 		ObjectInputStream ois = null;
@@ -184,7 +184,7 @@ public abstract class HelperObject {
      */
     public static boolean isMethodAvailable(final Class<?> clazz, final String methodName) { //$JUnit$
 		if (null == clazz) {
-			throw new RuntimeExceptionArgumentIsNull("clazz"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
 		
     	final Method[] methods = clazz.getMethods();
@@ -205,10 +205,13 @@ public abstract class HelperObject {
      * @since 0.7.0
      */
     public static String toString(final Object object) {
-    	final Collection<String> list = new ArrayList<String>();
-    	toString(object, list);
-
-    	return object.getClass().getName() + list.toString();
+    	if (null != object) {
+	    	final Collection<String> list = new ArrayList<String>();
+	    	toString(object, list);
+	
+	    	return object.getClass().getName() + list.toString();
+    	}
+    	return null;
     }
 
 	/**
@@ -231,17 +234,20 @@ public abstract class HelperObject {
      * @since 0.9.0
      */	
 	public static <T extends Serializable> T clone(final T original) throws IOException, ClassNotFoundException {
-		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		final CloneOutput cout = new CloneOutput(baos);
-		cout.writeObject(original);
-		final byte[] bytes = baos.toByteArray();
+		if (null != original) {
+			final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			final CloneOutput cout = new CloneOutput(baos);
+			cout.writeObject(original);
+			final byte[] bytes = baos.toByteArray();
+			
+			final ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+			final ObjectInputStream ois = new CloneInput(bais, cout);
 		
-		final ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-		final ObjectInputStream ois = new CloneInput(bais, cout);
-	
-		@SuppressWarnings("unchecked") final
-        T clone = (T) ois.readObject();
-		return clone;
+			@SuppressWarnings("unchecked") final
+	        T clone = (T) ois.readObject();
+			return clone;
+		}
+		return null;
     }
 	
     

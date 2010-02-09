@@ -37,7 +37,7 @@ import java.io.OutputStream;
 
 import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 
 /**
@@ -82,7 +82,7 @@ public abstract class LauncherProcess {
 	 */
 	public static Process createProcess(final String... commands) throws IOException {
 		if (!HelperArray.isValid(commands)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("commands"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("commands"); //$NON-NLS-1$
 		}
 		
 		final ProcessBuilder pb = new ProcessBuilder(commands);

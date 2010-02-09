@@ -47,7 +47,7 @@ import java.io.IOException;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090527
+ * @version 20100209
  */
 public class HelperIOTest {
 	@Test
@@ -106,14 +106,14 @@ public class HelperIOTest {
 			fail(ex.getMessage());
 		}
 		
-		try {
-			HelperIO.writeLine(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".txt"), null);  //$NON-NLS-1$//$NON-NLS-2$
-			fail("line is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+//		try {
+//			HelperIO.writeLine(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".txt"), null);  //$NON-NLS-1$//$NON-NLS-2$
+//			fail("line is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
 		
 		try {
 			HelperIO.writeLine(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".txt"), null, AllBogatyrTests.DATA);  //$NON-NLS-1$//$NON-NLS-2$

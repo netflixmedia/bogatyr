@@ -36,7 +36,7 @@ import java.util.HashSet;
 import java.util.Timer;
 
 import ch.sisprocom.bogatyr.misc.Event;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 /**
@@ -81,7 +81,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 	 */
     public void setTimer(final Timer timer) {
     	if (null == timer) {
-    		throw new RuntimeExceptionArgumentIsNull("timer"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("timer"); //$NON-NLS-1$
     	}
 
         this.timer = timer;
@@ -134,7 +134,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
     @Override
     public synchronized void addListener(final ListenerTimer listener) {
     	if (null == listener) {
-    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.add(listener);
@@ -143,7 +143,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
     @Override
     public synchronized void deleteListener(final ListenerTimer listener) {
     	if (null == listener) {
-    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.remove(listener);

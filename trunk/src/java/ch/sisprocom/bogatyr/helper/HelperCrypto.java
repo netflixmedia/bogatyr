@@ -33,14 +33,15 @@ package ch.sisprocom.bogatyr.helper;
 
 import java.util.UUID;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 
 /**
  * This is a helper class for cryptography (e.g. random keys).
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091122)
+ * @version 0.9.0 (20100209)
  * @since 0.7.0
  */
 public abstract class HelperCrypto {
@@ -58,10 +59,10 @@ public abstract class HelperCrypto {
      */
     public static String getRandomKey(final int digits, final char... seed) { //$JUnit$
 		if (0 >= digits) {
-			throw new IllegalArgumentException("digits must be greater than 0: " + digits); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("digits", digits, 0); //$NON-NLS-1$
 		}
-		if (null == seed || 0 == seed.length) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("seed"); //$NON-NLS-1$
+		if (!HelperArray.isValid(seed)) {
+			throw new RuntimeExceptionIsNullOrEmpty("seed"); //$NON-NLS-1$
 		}
 
     	final StringBuilder sb = new StringBuilder(digits);

@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.misc.Event;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
 /**
@@ -90,7 +90,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
 	 */
 	protected void setThread(final Thread thread) {
     	if (null == thread) {
-    		throw new RuntimeExceptionArgumentIsNull("thread"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("thread"); //$NON-NLS-1$
     	}
 
     	this.thread = thread;
@@ -148,7 +148,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
     @Override
     public void setSocket(final Socket socket) {
     	if (null == socket) {
-    		throw new RuntimeExceptionArgumentIsNull("socket"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("socket"); //$NON-NLS-1$
     	}
 
 		this.socket = socket;
@@ -215,7 +215,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
     @Override
     public synchronized void addListener(final ListenerServerThread listener) {
     	if (null == listener) {
-    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.add(listener);
@@ -224,7 +224,7 @@ public abstract class ServerThreadAbstract implements ServerThread {
     @Override
     public synchronized void deleteListener(final ListenerServerThread listener) {
     	if (null == listener) {
-    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.remove(listener);

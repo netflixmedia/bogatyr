@@ -33,6 +33,8 @@ package ch.sisprocom.bogatyr.service.provider;
 
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperXml;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 import com.ibm.mq.MQEnvironment;
 import com.ibm.mq.MQException;
@@ -53,7 +55,7 @@ import java.util.List;
  * <strong>Note:</strong> This class needs <a href="http://www-01.ibm.com/software/integration/wmqfamily//">IBM MQSeries</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100203)
+ * @version 0.9.0 (20100209)
  * @since 0.3.0
  */
 public class ProviderMqImpl extends ServiceAbstract implements ProviderMq {
@@ -83,8 +85,11 @@ public class ProviderMqImpl extends ServiceAbstract implements ProviderMq {
 	}
 
 	public static void setPort(final int port) {
-    	if (0 >= port || HelperNumber.INT_65536 <= port) {
-    		throw new IllegalArgumentException("port outside of the valid range (0 - 65535): " + port); //$NON-NLS-1$
+    	if (0 >= port) {
+    		throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
+    	}
+		if (HelperNumber.INT_65536 <= port) {
+    		throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
     	}
  
 		MQEnvironment.port = port;

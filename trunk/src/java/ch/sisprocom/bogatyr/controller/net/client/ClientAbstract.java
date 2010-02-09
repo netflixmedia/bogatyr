@@ -42,14 +42,16 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.misc.Event;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 
 /**
  * This is the skeleton for clients.
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100209)
  * @since 0.7.0
  */
 public abstract class ClientAbstract implements Client {
@@ -98,7 +100,7 @@ public abstract class ClientAbstract implements Client {
 	 */
 	protected void setThread(final Thread thread) {
     	if (null == thread) {
-    		throw new RuntimeExceptionArgumentIsNull("thread"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("thread"); //$NON-NLS-1$
     	}
 
     	this.thread = thread;
@@ -166,7 +168,7 @@ public abstract class ClientAbstract implements Client {
     @Override
     public void setHost(final String host) {
     	if (null == host) {
-    		throw new RuntimeExceptionArgumentIsNull("host"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("host"); //$NON-NLS-1$
     	}
 
     	this.host = host;
@@ -174,8 +176,11 @@ public abstract class ClientAbstract implements Client {
 
     @Override
     public void setPort(final int port) {
-    	if (0 >= port || HelperNumber.INT_65536 <= port) {
-    		throw new IllegalArgumentException("port outside of the valid range (0 - 65535): " + port); //$NON-NLS-1$
+    	if (0 >= port) {
+    		throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
+    	}
+		if (HelperNumber.INT_65536 <= port) {
+    		throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
     	}
     	
         this.port = port;
@@ -184,7 +189,7 @@ public abstract class ClientAbstract implements Client {
     @Override
     public void setSocket(final Socket socket) {
     	if (null == socket) {
-    		throw new RuntimeExceptionArgumentIsNull("socket"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("socket"); //$NON-NLS-1$
     	}
 
 		this.socket = socket;
@@ -255,7 +260,7 @@ public abstract class ClientAbstract implements Client {
     @Override
     public synchronized void addListener(final ListenerClient listener) {
     	if (null == listener) {
-    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.add(listener);
@@ -264,7 +269,7 @@ public abstract class ClientAbstract implements Client {
     @Override
     public synchronized void deleteListener(final ListenerClient listener) {
     	if (null == listener) {
-    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.remove(listener);

@@ -35,13 +35,13 @@ package ch.sisprocom.bogatyr.misc.exception;
  * This runtime exception is thrown if an input argument is equals to an output argument.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100203)
+ * @version 0.9.0 (20100209)
  * @since 0.9.0
  */
-public class RuntimeExceptionInputEqualsOutput extends IllegalArgumentException {
+public class RuntimeExceptionIsEquals extends IllegalArgumentException {
 	private static final long serialVersionUID = -3055488683655986508L;
 
-	public RuntimeExceptionInputEqualsOutput(final String input, final String output) {
+	public RuntimeExceptionIsEquals(final String input, final String output) {
 		super(input + " is equals to " + output); //$NON-NLS-1$
 	}
 }

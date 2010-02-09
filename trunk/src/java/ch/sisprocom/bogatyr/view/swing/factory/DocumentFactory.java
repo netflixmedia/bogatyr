@@ -39,14 +39,14 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
 import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositive;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 
 /**
  * This is a document factory.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100203)
+ * @version 0.9.0 (20100209)
  * @since 0.9.0
  */
 public abstract class DocumentFactory {
@@ -62,7 +62,7 @@ public abstract class DocumentFactory {
      */	
 	public static PlainDocument createTextDocument(final int length) {
 		 if (0 >= length) {
-			 throw new RuntimeExceptionArgumentMustBePositive("length", length); //$NON-NLS-1$
+			 throw new RuntimeExceptionMustBeGreater("length", length, 0); //$NON-NLS-1$
 		 }
 
 		 return new PlainDocument() {
@@ -87,7 +87,7 @@ public abstract class DocumentFactory {
      */	
 	public static PlainDocument createNumberDocument(final int length) {
 		 if (0 >= length) {
-			 throw new RuntimeExceptionArgumentMustBePositive("length", length); //$NON-NLS-1$
+			 throw new RuntimeExceptionMustBeGreater("length", length, 0); //$NON-NLS-1$
 		 }
 
 		return new PlainDocument() {

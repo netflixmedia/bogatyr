@@ -38,19 +38,19 @@ import javax.swing.SwingWorker;
 
 import ch.sisprocom.bogatyr.misc.Event;
 import ch.sisprocom.bogatyr.misc.HolderListener;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 /**
  * This class represents a skeleton for the worker.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100205)
+ * @version 0.9.0 (20100209)
  * @since 0.9.0
  */
-public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements HolderListener<ListenerWorker> {
+public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker, HolderListener<ListenerWorker> {
 	private Collection<ListenerWorker> listListener = new HashSet<ListenerWorker>();
 	
-    private final Event<WorkerAbstract> event = new Event<WorkerAbstract>(this);
+    private final Event<Worker> event = new Event<Worker>(this);
 
     protected WorkerAbstract() {
         super();
@@ -79,7 +79,7 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 	@Override
 	public void addListener(final ListenerWorker listener) {
     	if (null == listener) {
-    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.add(listener);
@@ -93,7 +93,7 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 	@Override
 	public void deleteListener(final ListenerWorker listener) {
     	if (null == listener) {
-    		throw new RuntimeExceptionArgumentIsNull("listener"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
     	}
 
     	listListener.remove(listener);

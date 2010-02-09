@@ -37,8 +37,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 
 /**
@@ -61,7 +61,7 @@ public abstract class LauncherBrowser {
 	public static void browse(final URI uri) throws IOException { //$JUnit$
 		if (Desktop.isDesktopSupported()) {
 			if (null == uri) {
-				throw new RuntimeExceptionArgumentIsNull("uri"); //$NON-NLS-1$
+				throw new RuntimeExceptionIsNull("uri"); //$NON-NLS-1$
 			}
 
 			Desktop.getDesktop().browse(uri);
@@ -80,7 +80,7 @@ public abstract class LauncherBrowser {
 	 */
 	public static void browse(final String url) throws IOException, URISyntaxException { //$JUnit$
 		if (!HelperString.isValid(url)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("url"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("url"); //$NON-NLS-1$
 		}
 		
 		final String prefix = "://"; //$NON-NLS-1$

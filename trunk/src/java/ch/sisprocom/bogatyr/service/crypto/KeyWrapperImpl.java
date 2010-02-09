@@ -42,8 +42,8 @@ import javax.crypto.NoSuchPaddingException;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 /**
@@ -60,10 +60,10 @@ public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
 	@Override
     public byte[] wrap(final Key wrapperKey, final Key key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, NoSuchProviderException {
 		if (null == wrapperKey) {
-			throw new RuntimeExceptionArgumentIsNull("wrapperKey"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("wrapperKey"); //$NON-NLS-1$
 		}
 		if (null == key) {
-			throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
 		
 		final Cipher cipher = Cipher.getInstance(CryptoRSA.XFORM, "BC"); //$NON-NLS-1$
@@ -75,13 +75,13 @@ public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
 	@Override
     public Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
 		if (null == wrapperKey) {
-			throw new RuntimeExceptionArgumentIsNull("wrapperKey"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("wrapperKey"); //$NON-NLS-1$
 		}
 		if (!HelperArray.isValid(wrappedKey)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("wrappedKey"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("wrappedKey"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(keyAlgorithm)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("keyAlgorithm"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("keyAlgorithm"); //$NON-NLS-1$
 		}
 		if (0 >= keyType) {
 			throw new IllegalArgumentException("keyType is invalid: " + keyType); //$NON-NLS-1$

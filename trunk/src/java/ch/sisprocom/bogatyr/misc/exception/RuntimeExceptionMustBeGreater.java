@@ -32,16 +32,16 @@
 package ch.sisprocom.bogatyr.misc.exception;
 
 /**
- * This runtime exception is thrown if an argument is null or empty.
+ * This runtime exception is thrown if an argument value is smaller than a given minimum value.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100203)
+ * @version 0.9.0 (20100209)
  * @since 0.9.0
  */
-public class RuntimeExceptionArgumentIsNullOrEmpty extends IllegalArgumentException {
-	private static final long serialVersionUID = 6974645627720904297L;
+public class RuntimeExceptionMustBeGreater extends IllegalArgumentException {
+	private static final long serialVersionUID = -8251735601253549510L;
 
-	public RuntimeExceptionArgumentIsNullOrEmpty(final String argument) {
-		super(argument + " is null or empty!"); //$NON-NLS-1$
+	public RuntimeExceptionMustBeGreater(final String argument, final Number currentValue, final Number minValue) {
+		super(argument + " (" + currentValue + ") must be greater than " + minValue); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 }

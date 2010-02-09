@@ -56,7 +56,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.AudioFileFormat.Type;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
 
 
@@ -83,11 +83,11 @@ public abstract class HelperSound {
      */
     public static Clip getClip(final File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		if (null == file) {
-			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-		if (!file.exists()) {
-			throw new RuntimeExceptionFileNotFound(file);
-		}
+//		if (!file.exists()) {
+//			throw new RuntimeExceptionFileNotFound(file);
+//		}
 		
 		return getClip(AudioSystem.getAudioInputStream(file));
 	}
@@ -106,7 +106,7 @@ public abstract class HelperSound {
      */
 	public static Clip getClip(final InputStream is) throws UnsupportedAudioFileException, LineUnavailableException, IOException { //$JUnit$
 		if (null == is) {
-			throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
 		
 		return getClip(AudioSystem.getAudioInputStream(is));
@@ -125,11 +125,11 @@ public abstract class HelperSound {
      */
 	public static Sequence getSequence(final File file) throws InvalidMidiDataException, IOException {
 		if (null == file) {
-			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-		if (!file.exists()) {
-			throw new RuntimeExceptionFileNotFound(file);
-		}
+//		if (!file.exists()) {
+//			throw new RuntimeExceptionFileNotFound(file);
+//		}
 		
 		return MidiSystem.getSequence(file);
 	}
@@ -147,7 +147,7 @@ public abstract class HelperSound {
      */
 	public static Sequence getSequence(final InputStream is) throws InvalidMidiDataException, IOException { //$JUnit$
 		if (null == is) {
-			throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
 		
 		return MidiSystem.getSequence(is);
@@ -166,7 +166,7 @@ public abstract class HelperSound {
      */
 	public static Sequencer getSequencer(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException { //$JUnit$
 		if (null == sequence) {
-			throw new RuntimeExceptionArgumentIsNull("sequence"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("sequence"); //$NON-NLS-1$
 		}
 		
 		final Sequencer sequencer = MidiSystem.getSequencer();  // Used to play sequences
@@ -196,7 +196,7 @@ public abstract class HelperSound {
      */
 	public static void play(final Clip clip) { //$JUnit$
 		if (null == clip) {
-			throw new RuntimeExceptionArgumentIsNull("clip"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("clip"); //$NON-NLS-1$
 		}
 		
 		clip.start();
@@ -220,7 +220,7 @@ public abstract class HelperSound {
      */
 	public static void play(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException { //$JUnit$
 		if (null == sequence) {
-			throw new RuntimeExceptionArgumentIsNull("sequence"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("sequence"); //$NON-NLS-1$
 		}
 		
 		final Sequencer sequencer = getSequencer(sequence);

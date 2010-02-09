@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009-2010 by SiSprocom GmbH.
+ * Copyright (c) 2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,38 +29,36 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.controller.net.client;
+package ch.sisprocom.bogatyr.view.swing.worker;
 
-import ch.sisprocom.bogatyr.misc.Event;
-import ch.sisprocom.bogatyr.misc.Listener;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
+import javax.swing.SwingWorker.StateValue;
+
+
 
 /**
- * ListenerClient
+ * Type definition for workers.
  * 
  * @author Stefan Laubenberger
- * @author Silvan Spross
  * @version 0.9.0 (20100209)
- * @since 0.7.0
+ * @since 0.9.0
  */
-public interface ListenerClient extends Listener {
-	/**
-	 * Sends the read data from the client.
-     *
-     * @since 0.7.0
-	 */
-	void clientStreamRead(Event<Client> event);
+public interface Worker {
+	//marker interface, only used as type definition for workers
 	
-	/**
-	 * Informs the listener that the client has started.
-	 * 
-	 * @since 0.7.0
-	 */
-	void clientStarted(Event<Client> event);
-	
-	/**
-	 * Informs the listener that the client has stopped.
-	 * 
-	 * @since 0.7.0
-	 */
-	void clientStopped(Event<Client> event);
-}
+	//methods from SwingWorker
+	boolean cancel(boolean mayInterruptIfRunning);
+	int getProgress();
+	void execute();
+	boolean isCancelled();
+	boolean isDone();
+//	T get() throws InterruptedException, ExecutionException;
+//	T get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException;
+	void addPropertyChangeListener(PropertyChangeListener listener);
+	void removePropertyChangeListener(PropertyChangeListener listener);
+	void firePropertyChange(String propertyName, Object oldValue, Object newValue);
+	PropertyChangeSupport getPropertyChangeSupport();
+	StateValue getState();
+}   

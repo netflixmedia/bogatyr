@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -33,14 +33,12 @@ package ch.sisprocom.bogatyr.helper;
 
 import java.util.Map;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-
 
 /**
  * This is a helper class for maps.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091102)
+ * @version 0.9.0 (20100209)
  * @since 0.9.0
  */
 public abstract class HelperMap {
@@ -65,22 +63,25 @@ public abstract class HelperMap {
      * @since 0.7.0
      */
     public static String dump(final Map<?, ?> map) { //$JUnit$
-		if (null == map) {
-			throw new RuntimeExceptionArgumentIsNull("map"); //$NON-NLS-1$
-		}
+//		if (null == map) {
+//			throw new RuntimeExceptionArgumentIsNull("map"); //$NON-NLS-1$
+//		}
 
-        final StringBuilder sb = new StringBuilder();
-
-        int ii = 0;
-        for (final Map.Entry<?, ?> pair : map.entrySet()) {
-            if (0 < ii) {
-                sb.append(HelperString.NEW_LINE);
-            }
-            sb.append(pair.getKey());
-            sb.append('=');
-            sb.append(pair.getValue());
-        	ii++;
-        }
-        return sb.toString();
+		if (null != map) {
+	        final StringBuilder sb = new StringBuilder();
+	
+	        int ii = 0;
+	        for (final Map.Entry<?, ?> pair : map.entrySet()) {
+	            if (0 < ii) {
+	                sb.append(HelperString.NEW_LINE);
+	            }
+	            sb.append(pair.getKey());
+	            sb.append('=');
+	            sb.append(pair.getValue());
+	        	ii++;
+	        }
+	        return sb.toString();
+			}
+		return null;
     }
 }

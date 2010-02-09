@@ -37,8 +37,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 
 /**
@@ -75,7 +75,7 @@ public abstract class LauncherMail {
 	public static void mail(final URI uri) throws IOException { //$JUnit$
 		if (Desktop.isDesktopSupported()) {
 			if (null == uri) {
-				throw new RuntimeExceptionArgumentIsNull("uri"); //$NON-NLS-1$
+				throw new RuntimeExceptionIsNull("uri"); //$NON-NLS-1$
 			}
 
 			Desktop.getDesktop().mail(uri);
@@ -94,7 +94,7 @@ public abstract class LauncherMail {
 	 */
 	public static void mail(final String emailAddress) throws IOException, URISyntaxException { //$JUnit$
 		if (!HelperString.isValid(emailAddress)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("emailAddress"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("emailAddress"); //$NON-NLS-1$
 		}
 		
 		final String prefix = "mailto:"; //$NON-NLS-1$

@@ -32,16 +32,16 @@
 package ch.sisprocom.bogatyr.misc.exception;
 
 /**
- * This runtime exception is thrown if an argument is null.
+ * This runtime exception is thrown if an argument is null or empty.
  * 
  * @author Stefan Laubenberger
  * @version 0.9.0 (20100203)
  * @since 0.9.0
  */
-public class RuntimeExceptionArgumentIsNull extends IllegalArgumentException {
-	private static final long serialVersionUID = 8539788707176531770L;
+public class RuntimeExceptionIsNullOrEmpty extends IllegalArgumentException {
+	private static final long serialVersionUID = 6974645627720904297L;
 
-	public RuntimeExceptionArgumentIsNull(final String argument) {
-		super(argument + " is null!"); //$NON-NLS-1$
+	public RuntimeExceptionIsNullOrEmpty(final String argument) {
+		super(argument + " is null or empty!"); //$NON-NLS-1$
 	}
 }

@@ -39,8 +39,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 
 /**
@@ -48,7 +47,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100209)
  * @since 0.7.0
  */
 public abstract class HelperCollection {
@@ -64,9 +63,8 @@ public abstract class HelperCollection {
 	@SuppressWarnings("unchecked")
 	public static <E> E[] toArray(final Collection<E> collection) { //$JUnit$
 		if (!isValid(collection)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("collection"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("collection"); //$NON-NLS-1$
 		}
-		
 		return collection.toArray((E[]) Array.newInstance(collection.iterator().next().getClass(), collection.size()));
     }
 	
@@ -131,11 +129,13 @@ public abstract class HelperCollection {
 	 * @since 0.7.0
 	 */
     public static <E> Collection<E> removeDuplicates(final Collection<E> collection) { //$JUnit$
-		if (null == collection) {
-			throw new RuntimeExceptionArgumentIsNull("collection"); //$NON-NLS-1$
+//		if (null == collection) {
+//			throw new RuntimeExceptionArgumentIsNull("collection"); //$NON-NLS-1$
+//		}
+		if (null != collection) {
+			return new HashSet<E>(collection);
 		}
-
-		return new HashSet<E>(collection);
+		return null;
     }
     
     /**
@@ -147,20 +147,23 @@ public abstract class HelperCollection {
      * @since 0.7.0
      */
     public static <E> String dump(final Iterable<E> iterable) { //$JUnit$
-		if (null == iterable) {
-			throw new RuntimeExceptionArgumentIsNull("iterable"); //$NON-NLS-1$
-		}
+//		if (null == iterable) {
+//			throw new RuntimeExceptionArgumentIsNull("iterable"); //$NON-NLS-1$
+//		}
 
-		final StringBuilder sb = new StringBuilder();
-
-        int ii = 0;
-        for (final E element : iterable) {
-            if (0 < ii) {
-                sb.append(HelperString.NEW_LINE);
-            }
-        	sb.append(element);
-        	ii++;
-        }
-        return sb.toString();
+    	if (null != iterable) {
+			final StringBuilder sb = new StringBuilder();
+	
+	        int ii = 0;
+	        for (final E element : iterable) {
+	            if (0 < ii) {
+	                sb.append(HelperString.NEW_LINE);
+	            }
+	        	sb.append(element);
+	        	ii++;
+	        }
+	        return sb.toString();
+    	}
+    	return null;
     }
 }

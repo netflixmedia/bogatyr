@@ -38,8 +38,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
@@ -119,7 +119,7 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 */
 	public void setDriver(final String driver) {
     	if (null == driver) {
-    		throw new RuntimeExceptionArgumentIsNull("driver"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("driver"); //$NON-NLS-1$
     	}
     	
 		this.driver = driver;
@@ -133,7 +133,7 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 */
 	public void setUrl(final String url) {
     	if (null == url) {
-    		throw new RuntimeExceptionArgumentIsNull("url"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("url"); //$NON-NLS-1$
     	}
 		this.url = url;
 	}
@@ -171,7 +171,7 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
     @Override
     public int executeUpdate(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchMethodException, InvocationTargetException {
     	if (!HelperString.isValid(statement)) {
-    		throw new RuntimeExceptionArgumentIsNullOrEmpty("statement"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNullOrEmpty("statement"); //$NON-NLS-1$
     	}
 
     	Statement stmt = null;
@@ -197,7 +197,7 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
     @Override
     public boolean execute(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchMethodException, InvocationTargetException  {
     	if (!HelperString.isValid(statement)) {
-    		throw new RuntimeExceptionArgumentIsNullOrEmpty("statement"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNullOrEmpty("statement"); //$NON-NLS-1$
     	}
     	
     	Statement stmt = null;

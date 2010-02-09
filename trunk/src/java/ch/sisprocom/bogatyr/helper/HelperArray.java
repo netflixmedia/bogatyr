@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
 /**
@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100204)
+ * @version 0.9.0 (20100209)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -86,6 +86,17 @@ public abstract class HelperArray {
     }
 	
 	/**
+     * Checks if a char-array is valid.
+     * 
+     * @param arg to check
+     * @return true/false
+     * @since 0.9.0
+     */	
+	public static boolean isValid(final char[] arg) { //$JUnit$
+        return !(null == arg || 0 == arg.length);
+    }
+
+	/**
 	 * Concatenate 1-n arrays to one array.
 	 * 
 	 * @param arrays to concatenate
@@ -94,9 +105,9 @@ public abstract class HelperArray {
 	 */
 	public static <T> T[] concatenate(final T[] array1, final T[]... arrays) { //$JUnit$
         if (null == array1) {
-            throw new RuntimeExceptionArgumentIsNull("array1"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("array1"); //$NON-NLS-1$
         }
-        if (null == arrays) {
+        if (!isValid(arrays)) {
         	return array1;
         }
         final List<T> result = new ArrayList<T>();
@@ -154,11 +165,13 @@ public abstract class HelperArray {
 	 * @since 0.7.0
 	 */
 	public static <T> T[] removeDuplicates(final T[] array) { //$JUnit$
-		if (null == array) {
-			throw new RuntimeExceptionArgumentIsNull("array"); //$NON-NLS-1$
+//		if (null == array) {
+//			throw new RuntimeExceptionArgumentIsNull("array"); //$NON-NLS-1$
+//		}
+		if (null != array) {
+			return HelperCollection.toArray(HelperCollection.removeDuplicates(Arrays.asList(array)));
 		}
-		
-		return HelperCollection.toArray(HelperCollection.removeDuplicates(Arrays.asList(array)));
+		return null;
     }
 
      /**
@@ -169,20 +182,23 @@ public abstract class HelperArray {
      * @since 0.7.0
      */
     public static <T> String dump(final T[] array) { //$JUnit$
-		if (null == array) {
-			throw new RuntimeExceptionArgumentIsNull("array"); //$NON-NLS-1$
-		}
+//		if (null == array) {
+//			throw new RuntimeExceptionArgumentIsNull("array"); //$NON-NLS-1$
+//		}
 		
-		final StringBuilder sb = new StringBuilder();
+    	if (null != array) {
+    		final StringBuilder sb = new StringBuilder();
 
-        int ii = 0;
-        for (final T element : array) {
-            if (0 < ii) {
-                sb.append(HelperString.NEW_LINE);
-            }
-        	sb.append(element);
-        	ii++;
-        }
-        return sb.toString();
+	        int ii = 0;
+	        for (final T element : array) {
+	            if (0 < ii) {
+	                sb.append(HelperString.NEW_LINE);
+	            }
+	        	sb.append(element);
+	        	ii++;
+	        }
+	        return sb.toString();
+    	}
+    	return null;
     }
 }

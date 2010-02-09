@@ -44,14 +44,14 @@ import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
 import java.util.Collection;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
 /**
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.0 (20100209)
  * @since 0.4.0
  */
 public abstract class HelperGraphic {
@@ -65,7 +65,7 @@ public abstract class HelperGraphic {
      */	
 	public static void enableAntialiasing(final Graphics2D graphics) {
 		if (null == graphics) {
-			throw new RuntimeExceptionArgumentIsNull("graphics"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("graphics"); //$NON-NLS-1$
 		}
 		
 		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -73,7 +73,7 @@ public abstract class HelperGraphic {
 	}
 
     /**
-     * Calculates the center of a {@link Dimension}.
+     * Calculates the center of given a {@link Dimension}.
      *
      * @param size {@link Dimension} for the calculation
      * @return {@link Dimension} with center coordinates
@@ -81,11 +81,14 @@ public abstract class HelperGraphic {
      * @since 0.4.0
      */
     public static Dimension getCenter(final Dimension size) { //$JUnit$
-		if (null == size) {
-			throw new RuntimeExceptionArgumentIsNull("size"); //$NON-NLS-1$
-		}
+//		if (null == size) {
+//			throw new RuntimeExceptionArgumentIsNull("size"); //$NON-NLS-1$
+//		}
 
-    	return new Dimension(size.width / 2, size.height / 2);
+		if (null != size) {
+			return new Dimension(size.width / 2, size.height / 2);
+		}
+		return null;
 	}
 
     /**
@@ -99,10 +102,10 @@ public abstract class HelperGraphic {
      */
     public static double getScale(final Dimension2D input, final Dimension2D output) { //$JUnit$
 		if (null == input) {
-			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 		if (null == output) {
-			throw new RuntimeExceptionArgumentIsNull("output"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
 		}
 		
 		final double scaleHeight =  input.getHeight() / output.getHeight();
@@ -122,10 +125,10 @@ public abstract class HelperGraphic {
      */
     public static Dimension getScaledSize(final Dimension2D input, final Dimension2D output) { //$JUnit$
 		if (null == input) {
-			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 		if (null == output) {
-			throw new RuntimeExceptionArgumentIsNull("output"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
 		}
 		
 		final double scaleHeight = input.getHeight() / output.getHeight();
@@ -148,10 +151,10 @@ public abstract class HelperGraphic {
      */
 	public static Dimension getTextSize(final String text, final Graphics graphics) {
 		if (null == text) {
-			throw new RuntimeExceptionArgumentIsNull("text"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("text"); //$NON-NLS-1$
 		}
 		if (null == graphics) {
-			throw new RuntimeExceptionArgumentIsNull("graphics"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("graphics"); //$NON-NLS-1$
 		}
 		
 		final FontMetrics fm = graphics.getFontMetrics(graphics.getFont());
@@ -190,7 +193,7 @@ public abstract class HelperGraphic {
      */
     public static String getColorHex(final Color color) { //$JUnit$
 		if (null == color) {
-			throw new RuntimeExceptionArgumentIsNull("color"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("color"); //$NON-NLS-1$
 		}
 		
     	return Integer.toHexString(color.getRGB() & 0x00ffffff); 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.helper.HelperString;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091103
+ * @version 20100209
  */
 public class HelperStringTest {
 	@Test
@@ -88,14 +88,14 @@ public class HelperStringTest {
 	public void testReverse() {
 		assertEquals("nafetS", HelperString.reverse("Stefan")); //$NON-NLS-1$ //$NON-NLS-2$
 		
-		try {
-			HelperString.reverse(null);
-            fail("input is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+//		try {
+//			HelperString.reverse(null);
+//            fail("input is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
 	}
 	
 	@Test

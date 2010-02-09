@@ -43,7 +43,7 @@ import java.net.URL;
 import java.util.Properties;
 
 import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
@@ -62,7 +62,7 @@ public class PropertyImpl extends ServiceAbstract implements Property {
         super();
        
         if (null == is) {
-			throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
 
         properties = new Properties();
