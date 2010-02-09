@@ -36,6 +36,7 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.TimeZone;
 
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.model.misc.Platform;
 
 
@@ -45,7 +46,7 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100128)
+ * @version 0.9.0 (20100209)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -238,6 +239,10 @@ public abstract class HelperEnvironment {
 	 * @since 0.8.0
 	 */
 	public static void addPathToLibraryPath(final File path) throws SecurityException, NoSuchFieldException, IllegalAccessException {
+        if (null == path) {
+            throw new RuntimeExceptionIsNull("path"); //$NON-NLS-1$
+        }
+
 		final String location = path.getAbsolutePath();
 		
 		final Field field = ClassLoader.class.getDeclaredField("usr_paths"); //$NON-NLS-1$

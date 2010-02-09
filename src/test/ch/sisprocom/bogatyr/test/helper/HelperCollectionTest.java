@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.helper.HelperCollection;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091102
+ * @version 20100209
  */
 public class HelperCollectionTest {
 	@Test
@@ -72,14 +72,14 @@ public class HelperCollectionTest {
 		
 		assertEquals(1, HelperCollection.removeDuplicates(list).size());
 
-		try {
-			HelperCollection.removeDuplicates(null);
-			fail("collection is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+//		try {
+//			HelperCollection.removeDuplicates(null);
+//			fail("collection is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
 	}
 	
 	@Test
@@ -88,14 +88,14 @@ public class HelperCollectionTest {
 
 		assertNotNull(HelperCollection.dump(list));
 		
-		try {
-			HelperCollection.dump(null);
-			fail("iterable is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+//		try {
+//			HelperCollection.dump(null);
+//			fail("iterable is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
 	}
 	
 	@Test

@@ -42,7 +42,7 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.view.swing.Label;
 import ch.sisprocom.bogatyr.view.swing.LabelVertical;
 import ch.sisprocom.bogatyr.view.swing.Panel;
@@ -107,7 +107,7 @@ public class Chart extends Panel {
      */
 	public void addEntry(final ChartEntry entry) {
     	if (null == entry) {
-    		throw new RuntimeExceptionArgumentIsNull("entry"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("entry"); //$NON-NLS-1$
     	}
 		if (entry.getX() + entry.getSizeX() > maxX || entry.getY() + entry.getSizeY() > maxY) {
 			throw new IllegalArgumentException("Component (" + entry.getSizeX() + 'x' + entry.getSizeY() + ") is outside of the defined chart area (" + maxX + 'x' + maxY + ')'); //$NON-NLS-1$ //$NON-NLS-2$

@@ -36,7 +36,8 @@ import java.util.Collections;
 import java.util.List;
 
 import ch.sisprocom.bogatyr.helper.HelperCollection;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
@@ -44,7 +45,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * The implementation for a paginator.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100209)
  * @since 0.5.0
  */
 public class PaginatorImpl extends ServiceAbstract implements Paginator {
@@ -75,7 +76,7 @@ public class PaginatorImpl extends ServiceAbstract implements Paginator {
     @Override
     public void setList(final List<?> list) {
 		if (null == list) {
-			throw new RuntimeExceptionArgumentIsNull("list"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("list"); //$NON-NLS-1$
 		}
 
         this.list = Collections.unmodifiableList(list);
@@ -89,7 +90,7 @@ public class PaginatorImpl extends ServiceAbstract implements Paginator {
     @Override
     public void setNumberPerPage(final int numberPerPage) {
 		if (0 > numberPerPage) {
-			throw new IllegalArgumentException("numberPerPage must be positive: " + numberPerPage); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("numberPerPage", numberPerPage, 0); //$NON-NLS-1$
 		}
 
     	this.numberPerPage = numberPerPage;
@@ -114,7 +115,7 @@ public class PaginatorImpl extends ServiceAbstract implements Paginator {
     @Override
     public List<?> getPage(final int requestedPage) {
 		if (0 > requestedPage) {
-			throw new IllegalArgumentException("requestedPage must be positive: " + requestedPage); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("requestedPage", requestedPage, 0); //$NON-NLS-1$
 		}
 
 		int page = requestedPage;

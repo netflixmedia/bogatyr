@@ -38,12 +38,12 @@ import ch.sisprocom.bogatyr.misc.Listener;
  * This listener informs the listeners about the current work state.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100205)
+ * @version 0.9.0 (20100209)
  * @since 0.9.0
  */
 public interface ListenerWorker extends Listener {
 
-    void start(Event<WorkerAbstract> event);
+    void start(Event<Worker> event);
 
-    void done(Event<WorkerAbstract> event);
+    void done(Event<Worker> event);
 }

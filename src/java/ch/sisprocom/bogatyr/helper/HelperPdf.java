@@ -44,9 +44,10 @@ import java.util.Map;
 
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionInputEqualsOutput;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -65,7 +66,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * <strong>Note:</strong> This class needs <a href="http://itextpdf.com/">iText</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100203)
+ * @version 0.9.0 (20100209)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -82,11 +83,11 @@ public abstract class HelperPdf {
      * @since 0.5.0
      */
     public static void writePdfFromComponent(final File file, final Component component) throws IOException, DocumentException { //$JUnit$
+    	if (null == file) {
+    		throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+    	}
 		if (null == component) {
-			throw new RuntimeExceptionArgumentIsNull("component"); //$NON-NLS-1$
-		}
-		if (null == file) {
-			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("component"); //$NON-NLS-1$
 		}
 		
     	final Dimension size = component.getSize();
@@ -122,11 +123,11 @@ public abstract class HelperPdf {
      * @since 0.5.0
      */
 	public static void writePdfFromHTML(final File file, final File... files) throws IOException, DocumentException { //$JUnit$
-		if (!HelperArray.isValid(files)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("files"); //$NON-NLS-1$
-		}
 		if (null == file) {
-			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
+		if (!HelperArray.isValid(files)) {
+			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
 		}
 		
 		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
@@ -171,16 +172,19 @@ public abstract class HelperPdf {
 	@SuppressWarnings("unchecked")
 	public static void setMetaData(final File source, final File dest, final Map<String, String> metadata) throws IOException, DocumentException {
 		if (null == source) {
-			throw new RuntimeExceptionArgumentIsNull("source"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
+//		if (!source.exists()) {
+//			throw new RuntimeExceptionFileNotFound(source);
+//		}
 		if (null == dest) {
-			throw new RuntimeExceptionArgumentIsNull("dest"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
 		if (!HelperMap.isValid(metadata)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("metadata"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("metadata"); //$NON-NLS-1$
 		}
 		if (source.equals(dest)) {
-			throw new RuntimeExceptionInputEqualsOutput("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		PdfReader reader = null;
@@ -217,13 +221,16 @@ public abstract class HelperPdf {
      */
 	public static void unlock(final File source, final File dest, final byte[] user, final byte[] password) throws IOException, DocumentException {
 		if (null == source) {
-			throw new RuntimeExceptionArgumentIsNull("source"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
+//		if (!source.exists()) {
+//			throw new RuntimeExceptionFileNotFound(source);
+//		}
 		if (null == dest) {
-			throw new RuntimeExceptionArgumentIsNull("dest"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
 		if (source.equals(dest)) {
-			throw new RuntimeExceptionInputEqualsOutput("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		PdfReader reader = null;

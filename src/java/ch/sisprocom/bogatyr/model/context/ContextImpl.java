@@ -40,7 +40,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.model.ModelAbstract;
 
 
@@ -98,7 +98,7 @@ public class ContextImpl extends ModelAbstract implements Context {
     @Override
     public void addValue(final Object key, final Object value) { //$JUnit$
 		if (null == key) {
-			throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
 
         setChanged();
@@ -114,7 +114,7 @@ public class ContextImpl extends ModelAbstract implements Context {
 	@Override
     public void removeValue(final Object key) { //$JUnit$
 		if (null == key) {
-			throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
 		contextData.remove(key);
         setChanged();
@@ -124,7 +124,7 @@ public class ContextImpl extends ModelAbstract implements Context {
 	@Override
     public Object getValue(final Object key) { //$JUnit$
 		if (null == key) {
-			throw new RuntimeExceptionArgumentIsNull("key"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
 		return contextData.get(key);
 	}

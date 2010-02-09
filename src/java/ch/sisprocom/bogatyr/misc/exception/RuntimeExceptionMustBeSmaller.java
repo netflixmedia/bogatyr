@@ -31,19 +31,17 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.misc.exception;
 
-import ch.sisprocom.bogatyr.helper.HelperEnvironment;
-
 /**
- * This runtime exception is thrown if an argument exceeds the VM memory (e.g. large Byte arrays).
+ * This runtime exception is thrown if an argument value is greater than a given maximum value.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100203)
+ * @version 0.9.0 (20100209)
  * @since 0.9.0
  */
-public class RuntimeExceptionArgumentExceedsVmMemory extends IllegalArgumentException {
-	private static final long serialVersionUID = 1150311302870054754L;
-	
-	public RuntimeExceptionArgumentExceedsVmMemory(final String argument, final long size) {
-		super(argument + " (" + size + ") exceeds the free VM memory (" + HelperEnvironment.getMemoryFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+public class RuntimeExceptionMustBeSmaller extends IllegalArgumentException {
+	private static final long serialVersionUID = -8251735601253549510L;
+
+	public RuntimeExceptionMustBeSmaller(final String argument, final Number currentValue, final Number maxValue) {
+		super(argument + " (" + currentValue + ") must be smaller than " + maxValue); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 }

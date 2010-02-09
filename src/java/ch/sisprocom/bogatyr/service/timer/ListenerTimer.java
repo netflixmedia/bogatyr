@@ -38,14 +38,13 @@ import ch.sisprocom.bogatyr.misc.Listener;
  * ListenerTimer
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100205)
+ * @version 0.9.0 (20100209)
  * @since 0.6.0
  */
 public interface ListenerTimer extends Listener {
 	/**
 	 * Sends the actual time of the timer/countdown to the listener.
      *
-     * @param time actual time of the timer/countdown
      * @since 0.6.0
 	 */
 	void timeChanged(Event<TimeMachine> event);

@@ -47,7 +47,7 @@ import java.util.Locale;
 
 import javax.imageio.ImageIO;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
 
 
@@ -76,11 +76,11 @@ public abstract class HelperImage {
      */
     public static BufferedImage readImage(final File file) throws IOException {
 		if (null == file) {
-			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-		if (!file.exists()) {
-			throw new RuntimeExceptionFileNotFound(file);
-		}
+//		if (!file.exists()) {
+//			throw new RuntimeExceptionFileNotFound(file);
+//		}
 
 		return ImageIO.read(file);
     }
@@ -97,7 +97,7 @@ public abstract class HelperImage {
      */
     public static BufferedImage readImage(final InputStream is) throws IOException {
 		if (null == is) {
-			throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
 
 		return ImageIO.read(is);
@@ -116,13 +116,13 @@ public abstract class HelperImage {
      */
     public static void writeImage(final File file, final String type, final RenderedImage image) throws IOException { //$JUnit$
 		if (null == image) {
-			throw new RuntimeExceptionArgumentIsNull("image"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
 		}
 		if (null == type || !getAvailableImageWriteFormats().contains(type)) {
 			throw new IllegalArgumentException("type is null or invalid: " + type); //$NON-NLS-1$
 		}
 		if (null == file) {
-			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 		
 		ImageIO.write(image, type, file);
@@ -141,13 +141,13 @@ public abstract class HelperImage {
      */
     public static void writeImage(final OutputStream os, final String type, final RenderedImage image) throws IOException {
 		if (null == image) {
-			throw new RuntimeExceptionArgumentIsNull("image"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
 		}
 		if (null == type || !getAvailableImageWriteFormats().contains(type)) {
 			throw new IllegalArgumentException("type is null or invalid: " + type); //$NON-NLS-1$
 		}
 		if (null == os) {
-			throw new RuntimeExceptionArgumentIsNull("os"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
 		}
 		
 		ImageIO.write(image, type, os);
@@ -165,7 +165,7 @@ public abstract class HelperImage {
      */
 	public static RenderedImage getImage(final Component component) {
 		if (null == component) {
-			throw new RuntimeExceptionArgumentIsNull("component"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("component"); //$NON-NLS-1$
 		}
 
 		final Dimension size = component.getSize();
@@ -189,7 +189,7 @@ public abstract class HelperImage {
      */
 	public static Image getScaledImage(final BufferedImage image, final double scale) {
 		if (null == image) {
-			throw new RuntimeExceptionArgumentIsNull("image"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
 		}
 
 		final double width = (double)image.getWidth() / scale;
@@ -211,7 +211,7 @@ public abstract class HelperImage {
      */
 	public static Image getScaledImage(final Image image, final Dimension size) {
 		if (null == image) {
-			throw new RuntimeExceptionArgumentIsNull("image"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
 		}
 
 		return image.getScaledInstance(size.width, size.height, Image.SCALE_SMOOTH);

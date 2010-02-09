@@ -29,7 +29,7 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.test.helper.context;
+package ch.sisprocom.bogatyr.test.model.context;
 
 import ch.sisprocom.bogatyr.model.context.ContextImpl;
 import static org.junit.Assert.*;
@@ -45,7 +45,7 @@ import java.util.Date;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091015
+ * @version 20100209
  */
 public class ContextTest {
 	private static final String UNKNOWN_KEY = "lalala"; //$NON-NLS-1$

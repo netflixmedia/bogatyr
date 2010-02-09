@@ -41,7 +41,7 @@ import java.awt.print.PrinterJob;
 
 import javax.swing.RepaintManager;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
@@ -67,7 +67,7 @@ public class Printer extends ServiceAbstract implements Printable {
      */
     public synchronized void print(final Component component, final boolean isScaled) throws PrinterException {
 		if (null == component) {
-			throw new RuntimeExceptionArgumentIsNull("component"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("component"); //$NON-NLS-1$
 		}
 
     	componentToBePrinted = component;
@@ -117,10 +117,10 @@ public class Printer extends ServiceAbstract implements Printable {
     @Override
     public synchronized int print(final Graphics graphics, final PageFormat pageFormat, final int pageIndex) {
 		if (null == graphics) {
-			throw new RuntimeExceptionArgumentIsNull("graphics"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("graphics"); //$NON-NLS-1$
 		}
 		if (null == pageFormat) {
-			throw new RuntimeExceptionArgumentIsNull("pageFormat"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("pageFormat"); //$NON-NLS-1$
 		}
 
     	if (0 < pageIndex) {

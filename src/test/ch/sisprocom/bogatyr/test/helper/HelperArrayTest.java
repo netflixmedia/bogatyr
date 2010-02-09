@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.helper.HelperArray;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100204
+ * @version 20100209
  */
 public class HelperArrayTest {
 	
@@ -92,14 +92,14 @@ public class HelperArrayTest {
 
 		assertEquals(1, HelperArray.removeDuplicates(array).length);
 		
-		try {
-			HelperArray.removeDuplicates(null);
-			fail("array is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+//		try {
+//			HelperArray.removeDuplicates(null);
+//			fail("array is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
 	}
 	
 	@Test
@@ -108,13 +108,13 @@ public class HelperArrayTest {
 
 		assertNotNull(HelperArray.dump(array));
 		
-		try {
-			HelperArray.dump(null);
-			fail("array is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+//		try {
+//			HelperArray.dump(null);
+//			fail("array is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
 	}
 }

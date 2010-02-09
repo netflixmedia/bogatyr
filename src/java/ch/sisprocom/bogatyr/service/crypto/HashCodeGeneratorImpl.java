@@ -50,10 +50,9 @@ import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.encoder.EncoderHex;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentExceedsVmMemory;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBeGreaterThanOne;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositive;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
@@ -80,10 +79,10 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
     @Override
 	public String getHash(final byte[] input, final HashCode hashCode) throws NoSuchAlgorithmException, NoSuchProviderException {
         if (null == input) {
-            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
         if (null == hashCode) {
-            throw new RuntimeExceptionArgumentIsNull("hashCode"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("hashCode"); //$NON-NLS-1$
         }
 
     	final MessageDigest md = MessageDigest.getInstance(hashCode.getAlgorithm(), PROVIDER);
@@ -102,13 +101,13 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
     @Override
     public String getHash(final File input, final HashCode hashCode, final int bufferSize) throws NoSuchAlgorithmException, IOException, NoSuchProviderException {
         if (null == input) {
-            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
-		if (!input.exists()) {
-			throw new RuntimeExceptionFileNotFound(input);
-		}
+//		if (!input.exists()) {
+//			throw new RuntimeExceptionFileNotFound(input);
+//		}
         if (null == hashCode) {
-            throw new RuntimeExceptionArgumentIsNull("hashCode"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("hashCode"); //$NON-NLS-1$
         }
 
         return getHash(new BufferedInputStream(new FileInputStream(input)), hashCode, bufferSize);
@@ -117,16 +116,16 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 	@Override
 	public String getHash(final InputStream is, final HashCode hashCode, final int bufferSize) throws NoSuchAlgorithmException, IOException, NoSuchProviderException {
         if (null == is) {
-            throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
         }
         if (null == hashCode) {
-            throw new RuntimeExceptionArgumentIsNull("hashCode"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("hashCode"); //$NON-NLS-1$
         }
         if (1 > bufferSize) {
-            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
+            throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
         }
         if (bufferSize > HelperEnvironment.getMemoryFree()) {
-            throw new RuntimeExceptionArgumentExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
+            throw new RuntimeExceptionExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
         }
 
         final MessageDigest md = MessageDigest.getInstance(hashCode.getAlgorithm(), PROVIDER);
@@ -151,16 +150,16 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 	@Override
 	public String getFastHash(final byte[] input, final HashCode hashCode, final int parts, final int partSize) throws Exception {
         if (null == input) {
-            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
         if (null == hashCode) {
-            throw new RuntimeExceptionArgumentIsNull("hashCode"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("hashCode"); //$NON-NLS-1$
         }
         if (0 > parts) {
-            throw new RuntimeExceptionArgumentMustBePositive("parts", parts); //$NON-NLS-1$
+            throw new RuntimeExceptionMustBeGreater("parts", parts, 0); //$NON-NLS-1$
         }
         if (0 > partSize) {
-            throw new RuntimeExceptionArgumentMustBePositive("partSize", partSize); //$NON-NLS-1$
+            throw new RuntimeExceptionMustBeGreater("partSize", partSize, 0); //$NON-NLS-1$
         }
 
 		
@@ -168,7 +167,7 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 			return getHash(input, hashCode); 
 		}
 		
-		byte[] result = null;
+		byte[] result = Integer.toString(input.length).getBytes();
 		final int offset = (int) (input.length / parts - partSize);
 		int position = 0;
 		
@@ -190,19 +189,19 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 	@Override
 	public String getFastHash(final File input, final HashCode hashCode, final int parts, final int partSize) throws Exception {
         if (null == input) {
-            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
-        if (!input.exists()) {
-        	throw new RuntimeExceptionFileNotFound(input);
-        }
+//        if (!input.exists()) {
+//        	throw new RuntimeExceptionFileNotFound(input);
+//        }
         if (null == hashCode) {
-            throw new RuntimeExceptionArgumentIsNull("hashCode"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("hashCode"); //$NON-NLS-1$
         }
         if (0 > parts) {
-            throw new RuntimeExceptionArgumentMustBePositive("parts", parts); //$NON-NLS-1$
+            throw new RuntimeExceptionMustBeGreater("parts", parts, 0); //$NON-NLS-1$
         }
         if (0 > partSize) {
-            throw new RuntimeExceptionArgumentMustBePositive("partSize", partSize); //$NON-NLS-1$
+            throw new RuntimeExceptionMustBeGreater("partSize", partSize, 0); //$NON-NLS-1$
         }
 
 		
@@ -211,7 +210,7 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 		}
 		
 		final byte[] buffer = new byte[partSize];
-		byte[] result = null;
+		byte[] result = Long.toString(input.length()).getBytes();
 		final int offset = (int) (input.length() / parts - partSize);
 		
 		final RandomAccessFile raf = new RandomAccessFile(input, "r");  //$NON-NLS-1$

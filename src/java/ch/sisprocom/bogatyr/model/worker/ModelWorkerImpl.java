@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,43 +32,43 @@
 package ch.sisprocom.bogatyr.model.worker;
 
 
-import ch.sisprocom.bogatyr.model.ModelAbstract;
-import ch.sisprocom.bogatyr.view.swing.worker.WorkerAbstract;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import ch.sisprocom.bogatyr.model.ModelAbstract;
+import ch.sisprocom.bogatyr.view.swing.worker.Worker;
 
 
 /**
  * The implementation of the worker model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100209)
  * @since 0.9.0
  */
 public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 	private static final long serialVersionUID = -2826684498598090349L;
 
-	private transient List<WorkerAbstract> listWorker = new ArrayList<WorkerAbstract>();
+	private transient List<Worker> listWorker = new ArrayList<Worker>();
  
 
 	/*
      * Implemented methods
      */
     @Override
-    public List<WorkerAbstract> getWorkers() {
+    public List<Worker> getWorkers() {
 		return listWorker;
 	}
 
     @Override
-    public void add(final WorkerAbstract<?, ?> worker) {
+    public void add(final Worker worker) {
     	listWorker.add(worker);
         setChanged();
         notifyObservers(METHOD_ADD);
     }
 
     @Override
-    public void remove(final WorkerAbstract<?, ?> worker) {
+    public void remove(final Worker worker) {
         worker.cancel(true);
         listWorker.remove(worker);
         setChanged();
@@ -77,11 +77,11 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 
     @Override
     public void removeAll() {
-        for (final WorkerAbstract<?, ?> worker : listWorker) {
+        for (final Worker worker : listWorker) {
             worker.cancel(true);
         }
 
-        listWorker = new ArrayList<WorkerAbstract>();
+        listWorker = new ArrayList<Worker>();
         setChanged();
         notifyObservers(METHOD_REMOVE_ALL);
     }

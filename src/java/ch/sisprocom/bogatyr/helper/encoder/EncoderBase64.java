@@ -31,19 +31,16 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.encoder;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentExceedsVmMemory;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 
 
 /**
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091110)
+ * @version 0.9.0 (20100209)
  * @since 0.1.0
  */
 public abstract class EncoderBase64 {
@@ -91,14 +88,17 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static String encode(final String input) { //$JUnit$
-		if (!HelperString.isValid(input)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
-		}
-        if (input.length() * 2 > HelperEnvironment.getMemoryFree()) {
-            throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
+//		if (!HelperString.isValid(input)) {
+//			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
+//		}
+        if (null != input) {
+			if (input.length() * 2 > HelperEnvironment.getMemoryFree()) {
+	            throw new RuntimeExceptionExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
+	        }
+	
+			return new String(encode(input.getBytes()));
         }
-
-		return new String(encode(input.getBytes()));
+        return null;
 	}
 
 	/**
@@ -110,14 +110,17 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static char[] encode(final byte[] input) { //$JUnit$
-		if (!HelperArray.isValid(input)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
-		}
-        if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
-        	throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
-        }
+//		if (!HelperArray.isValid(input)) {
+//			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
+//		}
+		if (null != input) {
+			if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
+				throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
+			}
 		
-		return encode(input, input.length);
+			return encode(input, input.length);
+		}
+		return null;
 	}
 
 	/**
@@ -128,14 +131,17 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static byte[] decode(final String input) { //$JUnit$
-		if (!HelperString.isValid(input)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
+//		if (!HelperString.isValid(input)) {
+//			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
+//		}
+		if (null != input) {
+			if (input.length() * 2 > HelperEnvironment.getMemoryFree()) {
+	        	throw new RuntimeExceptionExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
+	        }
+	
+			return decode(input.toCharArray());
 		}
-        if (input.length() * 2 > HelperEnvironment.getMemoryFree()) {
-        	throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
-        }
-
-		return decode(input.toCharArray());
+		return null;
 	}
 
 	/**
@@ -147,65 +153,68 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static byte[] decode(final char[] input) { //$JUnit$
-		if (null == input || 0 >= input.length) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("data"); //$NON-NLS-1$
+//		if (null == input || 0 >= input.length) {
+//			throw new RuntimeExceptionArgumentIsNullOrEmpty("data"); //$NON-NLS-1$
+//		}
+		if (null != input) {
+			if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
+	        	throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
+	        }
+	
+			int iLen = input.length;
+	
+			if (0 != iLen % 4) {
+	            throw new IllegalArgumentException("Length of Base64 encoded input string is not a multiple of 4"); //$NON-NLS-1$
+	        }
+			
+			while (0 < iLen && '=' == input[iLen - 1]) {
+				iLen--;
+			}
+			
+			final int oLen = iLen * 3 / 4;
+			final byte[] out = new byte[oLen];
+	
+	        int ip = 0;
+	        int op = 0;
+	        while (ip < iLen) {
+				final int i0 = input[ip];
+	            ip++;
+	            final int i1 = input[ip];
+	            ip++;
+	            final int i2 = (int) (ip < iLen ? input[ip] : 'A');
+	            ip++;
+	            final int i3 = (int) (ip < iLen ? input[ip] : 'A');
+	            ip++;
+	
+	            if (Byte.MAX_VALUE < i0 || Byte.MAX_VALUE < i1 || Byte.MAX_VALUE < i2 || Byte.MAX_VALUE < i3) {
+	                throw new IllegalArgumentException(ERROR_ILLEGAL_CHARACTER);
+	            }
+				final int b0 = map2[i0];
+				final int b1 = map2[i1];
+				final int b2 = map2[i2];
+				final int b3 = map2[i3];
+	
+				if (0 > b0 || 0 > b1 || 0 > b2 || 0 > b3) {
+	                throw new IllegalArgumentException(ERROR_ILLEGAL_CHARACTER);
+	            }
+	
+				final int o0 = b0 << 2 | b1 >>> 4;
+				final int o1 = (b1 & 0xf) << 4 | b2 >>> 2;
+				final int o2 = (b2 & 3) << 6 | b3;
+				out[op] = (byte) o0;
+	            op++;
+	            if (op < oLen) {
+	                out[op] = (byte) o1;
+	                op++;
+	            }
+				if (op < oLen) {
+	                out[op] = (byte) o2;
+	                op++;
+	            }
+			}
+			return out;
 		}
-        if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
-        	throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
-        }
-
-		int iLen = input.length;
-
-		if (0 != iLen % 4) {
-            throw new IllegalArgumentException("Length of Base64 encoded input string is not a multiple of 4"); //$NON-NLS-1$
-        }
-		
-		while (0 < iLen && '=' == input[iLen - 1]) {
-			iLen--;
-		}
-		
-		final int oLen = iLen * 3 / 4;
-		final byte[] out = new byte[oLen];
-
-        int ip = 0;
-        int op = 0;
-        while (ip < iLen) {
-			final int i0 = input[ip];
-            ip++;
-            final int i1 = input[ip];
-            ip++;
-            final int i2 = (int) (ip < iLen ? input[ip] : 'A');
-            ip++;
-            final int i3 = (int) (ip < iLen ? input[ip] : 'A');
-            ip++;
-
-            if (Byte.MAX_VALUE < i0 || Byte.MAX_VALUE < i1 || Byte.MAX_VALUE < i2 || Byte.MAX_VALUE < i3) {
-                throw new IllegalArgumentException(ERROR_ILLEGAL_CHARACTER);
-            }
-			final int b0 = map2[i0];
-			final int b1 = map2[i1];
-			final int b2 = map2[i2];
-			final int b3 = map2[i3];
-
-			if (0 > b0 || 0 > b1 || 0 > b2 || 0 > b3) {
-                throw new IllegalArgumentException(ERROR_ILLEGAL_CHARACTER);
-            }
-
-			final int o0 = b0 << 2 | b1 >>> 4;
-			final int o1 = (b1 & 0xf) << 4 | b2 >>> 2;
-			final int o2 = (b2 & 3) << 6 | b3;
-			out[op] = (byte) o0;
-            op++;
-            if (op < oLen) {
-                out[op] = (byte) o1;
-                op++;
-            }
-			if (op < oLen) {
-                out[op] = (byte) o2;
-                op++;
-            }
-		}
-		return out;
+		return null;
 	}
 	
 	

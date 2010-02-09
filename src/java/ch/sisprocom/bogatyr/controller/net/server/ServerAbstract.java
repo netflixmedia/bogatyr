@@ -40,8 +40,9 @@ import java.util.HashSet;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.misc.Event;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositive;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 
 
 /**
@@ -49,7 +50,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositiv
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100209)
  * @since 0.7.0
  */
 public abstract class ServerAbstract implements Server, ListenerServerThread {
@@ -102,7 +103,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 	 */
     protected void setThread(final Thread thread) {
     	if (null == thread) {
-    		throw new RuntimeExceptionArgumentIsNull("thread"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("thread"); //$NON-NLS-1$
     	}
 
 		this.thread = thread;
@@ -147,16 +148,20 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 
     @Override
     public void setPort(final int port) {
-    	if (0 >= port || HelperNumber.INT_65536 <= port) {
-    		throw new IllegalArgumentException("port outside of the valid range (0 - 65535): " + port); //$NON-NLS-1$
+    	if (0 >= port) {
+    		throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
     	}
-        this.port = port;
+		if (HelperNumber.INT_65536 <= port) {
+    		throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
+    	}
+      
+		this.port = port;
     }
 
     @Override
     public void setServerSocket(final ServerSocket serverSocket) {
     	if (null == serverSocket) {
-    		throw new RuntimeExceptionArgumentIsNull("serverSocket"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("serverSocket"); //$NON-NLS-1$
     	}
 
 		this.serverSocket = serverSocket;
@@ -165,7 +170,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
     @Override
     public void setTimeout(final int timeout) {
 		if (0 > timeout) {
-			throw new RuntimeExceptionArgumentMustBePositive("timeout", timeout); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("timeout", timeout, 0); //$NON-NLS-1$
 		}
 
         this.timeout = timeout;
@@ -227,7 +232,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 	@Override
     public void serverThreadStarted(final Event<ServerThread> event) {
     	if (null == event) {
-    		throw new RuntimeExceptionArgumentIsNull("event"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("event"); //$NON-NLS-1$
     	}
 
 		listThread.add(event.getSource());
@@ -236,7 +241,7 @@ public abstract class ServerAbstract implements Server, ListenerServerThread {
 	@Override
     public void serverThreadStopped(final Event<ServerThread> event) {
     	if (null == event) {
-    		throw new RuntimeExceptionArgumentIsNull("event"); //$NON-NLS-1$
+    		throw new RuntimeExceptionIsNull("event"); //$NON-NLS-1$
     	}
 
     	listThread.remove(event.getSource());

@@ -38,15 +38,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositive;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 
 
 /**
  * This is a helper class for time operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100203)
+ * @version 0.9.0 (20100209)
  * @since 0.7.0
  */
 public abstract class HelperTime {
@@ -88,7 +89,7 @@ public abstract class HelperTime {
      */
 	public static Date getAtomicTime(final String host) throws IOException { //$JUnit$
 		if (!HelperString.isValid(host)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("host"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
 		
 		Socket socket = null;
@@ -128,13 +129,22 @@ public abstract class HelperTime {
      */
     public static Date getDate(final int day, final int month, final int year) {
     	if (0 > day) {
-    		throw new RuntimeExceptionArgumentMustBePositive("day", day); //$NON-NLS-1$
+    		throw new RuntimeExceptionMustBeGreater("day", day, 0); //$NON-NLS-1$
+    	}
+    	if (31 < day) {
+    		throw new RuntimeExceptionMustBeSmaller("day", day, 31); //$NON-NLS-1$
     	}
     	if (0 > month) {
-    		throw new RuntimeExceptionArgumentMustBePositive("month", month); //$NON-NLS-1$
+    		throw new RuntimeExceptionMustBeGreater("month", month, 0); //$NON-NLS-1$
+    	}
+    	if (12 < month) {
+    		throw new RuntimeExceptionMustBeSmaller("month", month, 12); //$NON-NLS-1$
     	}
     	if (0 > year) {
-    		throw new RuntimeExceptionArgumentMustBePositive("year", year); //$NON-NLS-1$
+    		throw new RuntimeExceptionMustBeGreater("year", year, 0); //$NON-NLS-1$
+    	}
+    	if (9999 < year) {
+    		throw new RuntimeExceptionMustBeSmaller("year", year, 9999); //$NON-NLS-1$
     	}
     	
     	final Calendar cal = new GregorianCalendar();

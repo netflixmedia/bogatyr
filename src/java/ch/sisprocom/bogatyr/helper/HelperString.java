@@ -34,7 +34,9 @@ package ch.sisprocom.bogatyr.helper;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 
 /**
@@ -42,7 +44,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100203)
+ * @version 0.9.0 (20100209)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -99,7 +101,7 @@ public abstract class HelperString {
      */
     public static CharSequence fill(final char fillChar, final int fillLength) { //$JUnit$
 		if (0 >= fillLength) {
-			throw new IllegalArgumentException("fillLength must be greater than 0: " + fillLength); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("fillLength", fillLength, 0); //$NON-NLS-1$
 		}
 
     	int length = fillLength;
@@ -120,11 +122,14 @@ public abstract class HelperString {
      * @since 0.7.0
      */
     public static String reverse(final String input) { //$JUnit$
-		if (null == input) {
-			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
-		}
+//		if (null == input) {
+//			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
+//		}
 
-    	return new StringBuilder(input).reverse().toString();
+		if (null != input) {
+			return new StringBuilder(input).reverse().toString();
+		}
+		return null;
     }
 
     /**
@@ -229,14 +234,22 @@ public abstract class HelperString {
      * Returns a {@link String} from a given byte-array and encoding.
      *
      * @param data for the {@link String}
-     * @param length of the {@link String}
+//     * @param length of the {@link String}
      * @param encoding of the given data
      * @return new {@link String}
      * @throws UnsupportedEncodingException 
      * @since 0.8.0
      */
-	public static String toString(final byte[] data, final int length, final String encoding) throws UnsupportedEncodingException {
-		return new String(data, 0, length, encoding);
+	public static String toString(final byte[] data, /*final int length, */final String encoding) throws UnsupportedEncodingException {
+		if (null != data) {
+			if (!isValid(encoding)) {
+				throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
+			}
+	
+	//		return new String(data, 0, length, encoding);
+			return new String(data, encoding);
+		}
+		return null;
 	}
 	
     /**
@@ -249,7 +262,14 @@ public abstract class HelperString {
      * @since 0.8.0
      */
 	public static byte[] toBytes(final String input, final String encoding) throws UnsupportedEncodingException {
+		if (null != input) {
+			if (!isValid(encoding)) {
+				throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
+			}
+	
 			return input.getBytes(encoding);
+		}
+		return null;
 	}
 	
     /**
@@ -262,7 +282,7 @@ public abstract class HelperString {
      */
 	public static boolean startsWith(final String string, final String prefix) { //$JUnit$
 		if (null == string) {
-			throw new RuntimeExceptionArgumentIsNull("string"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
 		}
 
 		return string.matches("(?i)" + prefix + ".*");  //$NON-NLS-1$//$NON-NLS-2$
@@ -278,7 +298,7 @@ public abstract class HelperString {
      */
 	public static boolean endsWith(final String string, final String suffix) { //$JUnit$
 		if (null == string) {
-			throw new RuntimeExceptionArgumentIsNull("string"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
 		}
 
 		return string.matches("(?i).*" + suffix); //$NON-NLS-1$
@@ -294,7 +314,7 @@ public abstract class HelperString {
      */
 	public static boolean contains(final String string, final String part) { //$JUnit$
 		if (null == string) {
-			throw new RuntimeExceptionArgumentIsNull("string"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
 		}
 
 		return string.matches("(?i).*" + part + ".*");  //$NON-NLS-1$//$NON-NLS-2$

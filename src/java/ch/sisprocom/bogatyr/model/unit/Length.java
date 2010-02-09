@@ -32,16 +32,15 @@
 package ch.sisprocom.bogatyr.model.unit;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 import ch.sisprocom.bogatyr.helper.Constants;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 /**
  * Length units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100202)
+ * @version 0.9.0 (20100209)
  * @since 0.7.0
  */
 public enum Length implements Unit<Length> {
@@ -70,78 +69,93 @@ public enum Length implements Unit<Length> {
 	 * Implemented methods
 	 */
 	@Override
-	public BigDecimal convertTo(final Length toUnit, final BigDecimal value) { //$JUnit$
+	public <T extends Number> BigDecimal convertTo(final Length toUnit, final T value) {
 		if (null == toUnit) {
-			throw new RuntimeExceptionArgumentIsNull("toUnit"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("toUnit"); //$NON-NLS-1$
 		}
 		if (null == value) {
-			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("value"); //$NON-NLS-1$
 		}
-
-		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.factor, Constants.DEFAULT_MATHCONTEXT);
-    }
-
-	@Override
-	public BigInteger convertTo(final Length toUnit, final BigInteger value) {
-		if (null == value) {
-			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
-		}
-
-		return convertTo(toUnit, new BigDecimal(value)).toBigInteger();
+		
+		final BigDecimal intValue = new BigDecimal(value.toString());
+		
+		return toUnit == this ? intValue : intValue.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.factor, Constants.DEFAULT_MATHCONTEXT);
 	}
-
-	@Override
-	public Byte convertTo(final Length toUnit, final Byte value) {
-		if (null == value) {
-			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
-		}
-
-		return convertTo(toUnit, new BigDecimal(value)).byteValue();
-	}
-
-	@Override
-	public Double convertTo(final Length toUnit, final Double value) {
-		if (null == value) {
-			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
-		}
-
-		return convertTo(toUnit, new BigDecimal(value)).doubleValue();
-	}
-
-	@Override
-	public Float convertTo(final Length toUnit, final Float value) {
-		if (null == value) {
-			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
-		}
-
-		return convertTo(toUnit, new BigDecimal(value)).floatValue();
-	}
-
-	@Override
-	public Integer convertTo(final Length toUnit, final Integer value) {
-		if (null == value) {
-			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
-		}
-
-		return convertTo(toUnit, new BigDecimal(value)).intValue();
-	}
-
-	@Override
-	public Long convertTo(final Length toUnit, final Long value) {
-		if (null == value) {
-			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
-		}
-
-		return convertTo(toUnit, new BigDecimal(value)).longValue();
-	}
-
-	@Override
-	public Short convertTo(final Length toUnit, final Short value) {
-		if (null == value) {
-			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
-		}
-
-		return convertTo(toUnit, new BigDecimal(value)).shortValue();
-	}	
+//	
+//	@Override
+//	public BigDecimal convertTo(final Length toUnit, final BigDecimal value) { //$JUnit$
+//		if (null == toUnit) {
+//			throw new RuntimeExceptionArgumentIsNull("toUnit"); //$NON-NLS-1$
+//		}
+//		if (null == value) {
+//			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+//		}
+//
+//		return toUnit == this ? value : value.divide(factor, Constants.DEFAULT_MATHCONTEXT).multiply(toUnit.factor, Constants.DEFAULT_MATHCONTEXT);
+//    }
+//
+//
+//	@Override
+//	public BigInteger convertTo(final Length toUnit, final BigInteger value) {
+//		if (null == value) {
+//			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+//		}
+//
+//		return convertTo(toUnit, new BigDecimal(value)).toBigInteger();
+//	}
+//
+//	@Override
+//	public Byte convertTo(final Length toUnit, final Byte value) {
+//		if (null == value) {
+//			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+//		}
+//
+//		return convertTo(toUnit, new BigDecimal(value)).byteValue();
+//	}
+//
+//	@Override
+//	public Double convertTo(final Length toUnit, final Double value) {
+//		if (null == value) {
+//			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+//		}
+//
+//		return convertTo(toUnit, new BigDecimal(value)).doubleValue();
+//	}
+//
+//	@Override
+//	public Float convertTo(final Length toUnit, final Float value) {
+//		if (null == value) {
+//			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+//		}
+//
+//		return convertTo(toUnit, new BigDecimal(value)).floatValue();
+//	}
+//
+//	@Override
+//	public Integer convertTo(final Length toUnit, final Integer value) {
+//		if (null == value) {
+//			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+//		}
+//
+//		return convertTo(toUnit, new BigDecimal(value)).intValue();
+//	}
+//
+//	@Override
+//	public Long convertTo(final Length toUnit, final Long value) {
+//		if (null == value) {
+//			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+//		}
+//
+//		return convertTo(toUnit, new BigDecimal(value)).longValue();
+//	}
+//
+//	@Override
+//	public Short convertTo(final Length toUnit, final Short value) {
+//		if (null == value) {
+//			throw new RuntimeExceptionArgumentIsNull("value"); //$NON-NLS-1$
+//		}
+//
+//		return convertTo(toUnit, new BigDecimal(value)).shortValue();
+//	}	
 }
 

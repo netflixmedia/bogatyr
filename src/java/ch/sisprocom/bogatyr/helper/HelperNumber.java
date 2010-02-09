@@ -34,14 +34,14 @@ package ch.sisprocom.bogatyr.helper;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
 /**
  * This is a helper class for numbers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100126)
+ * @version 0.9.0 (20100209)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
@@ -88,424 +88,432 @@ public abstract class HelperNumber {
 
 
     /**
-     * Multiply 1-n {@link BigDecimal} together.
+     * Multiply 1-n values together.
      *
      * @param values 1-n values
      * @return calculated value
      * @since 0.7.0
      */
-    public static BigDecimal multiply(final BigDecimal... values) {
+    public static <T extends Number> BigDecimal multiply(final T... values) {
         if (null == values) {
-            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("values"); //$NON-NLS-1$
         }
 
         BigDecimal result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            result = 0 == ii ? values[0] : multiply(result, values[ii]);
+            result = new BigDecimal((0 == ii ? values[0] : multiply(result, values[ii])).toString());
         }
         return result;
     }
 
     /**
-     * Multiply 2 {@link BigDecimal} together.
+     * Multiply two values together.
      *
      * @param a first value
      * @param b second value
      * @return calculated value
      * @since 0.7.0
      */
-    public static BigDecimal multiply(final BigDecimal a, final BigDecimal b) {
+    public static <T extends Number> BigDecimal multiply(final T a, final T b) {
         if (null == a || null == b) {
             return null;
         }
-        return a.multiply(b, Constants.DEFAULT_MATHCONTEXT);
+        
+		final BigDecimal numberA = new BigDecimal(a.toString());
+		final BigDecimal numberB = new BigDecimal(b.toString());
+
+        return numberA.multiply(numberB, Constants.DEFAULT_MATHCONTEXT);
     }
 
-    /**
-     * Multiply 1-n {@link BigInteger} together.
-     *
-     * @param values 1-n values
-     * @return calculated value
-     * @since 0.7.0
-     */
-    public static BigInteger multiply(final BigInteger... values) {
-        if (null == values) {
-            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
-        }
-
-        BigInteger result = null;
-
-        for (int ii = 0; ii < values.length; ii++) {
-            result = 0 == ii ? values[0] : multiply(result, values[ii]);
-        }
-        return result;
-    }
-
-    /**
-     * Multiply 2 {@link BigInteger} together.
-     *
-     * @param a first value
-     * @param b second value
-     * @return calculated value
-     * @since 0.7.0
-     */
-    public static BigInteger multiply(final BigInteger a, final BigInteger b) {
-        if (null == a || null == b) {
-            return null;
-        }
-        return a.multiply(b);
-    }
-
-    /**
-     * Multiply 1-n {@link Integer} together.
-     *
-     * @param values 1-n values
-     * @return calculated value
-     * @since 0.7.0
-     */
-    public static Integer multiply(final Integer... values) {
-        if (null == values) {
-            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
-        }
-
-        Integer result = null;
-
-        for (int ii = 0; ii < values.length; ii++) {
-            result = 0 == ii ? values[0] : multiply(result, values[ii]);
-        }
-        return result;
-    }
-
-    /**
-     * Multiply 2 {@link Integer} together.
-     *
-     * @param a first value
-     * @param b second value
-     * @return calculated value
-     * @since 0.7.0
-     */
-    public static Integer multiply(final Integer a, final Integer b) {
-        if (null == a || null == b) {
-            return null;
-        }
-        return a * b;
-    }
-
-    /**
-     * Multiply 1-n {@link Double} together.
-     *
-     * @param values 1-n values
-     * @return calculated value
-     * @since 0.7.0
-     */
-    public static Double multiply(final Double... values) {
-        if (null == values) {
-            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
-        }
-
-        Double result = null;
-
-        for (int ii = 0; ii < values.length; ii++) {
-            result = 0 == ii ? values[0] : multiply(result, values[ii]);
-        }
-        return result;
-    }
-
-    /**
-     * Multiply 2 {@link Double} together.
-     *
-     * @param a first value
-     * @param b second value
-     * @return calculated value
-     * @since 0.7.0
-     */
-    public static Double multiply(final Double a, final Double b) {
-        if (null == a || null == b) {
-            return null;
-        }
-        return a * b;
-    }
-
-    /**
-     * Multiply 1-n {@link Float} together.
-     *
-     * @param values 1-n values
-     * @return calculated value
-     * @since 0.7.0
-     */
-    public static Float multiply(final Float... values) {
-        if (null == values) {
-            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
-        }
-
-        Float result = null;
-
-        for (int ii = 0; ii < values.length; ii++) {
-            result = 0 == ii ? values[0] : multiply(result, values[ii]);
-        }
-        return result;
-    }
-
-    /**
-     * Multiply 2 {@link Float} together.
-     *
-     * @param a first value
-     * @param b second value
-     * @return calculated value
-     * @since 0.7.0
-     */
-    public static Float multiply(final Float a, final Float b) {
-        if (null == a || null == b) {
-            return null;
-        }
-        return a * b;
-    }
-
-    /**
-     * Multiply 1-n {@link Long} together.
-     *
-     * @param values 1-n values
-     * @return calculated value
-     * @since 0.7.0
-     */
-    public static Long multiply(final Long... values) {
-        if (null == values) {
-            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
-        }
-
-        Long result = null;
-
-        for (int ii = 0; ii < values.length; ii++) {
-            result = 0 == ii ? values[0] : multiply(result, values[ii]);
-        }
-        return result;
-    }
-
-    /**
-     * Multiply 2 {@link Long} together.
-     *
-     * @param a first value
-     * @param b second value
-     * @return calculated value
-     * @since 0.7.0
-     */
-    public static Long multiply(final Long a, final Long b) {
-        if (null == a || null == b) {
-            return null;
-        }
-        return a * b;
-    }
+//    /**
+//     * Multiply 1-n {@link BigInteger} together.
+//     *
+//     * @param values 1-n values
+//     * @return calculated value
+//     * @since 0.7.0
+//     */
+//    public static BigInteger multiply(final BigInteger... values) {
+//        if (null == values) {
+//            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
+//        }
+//
+//        BigInteger result = null;
+//
+//        for (int ii = 0; ii < values.length; ii++) {
+//            result = 0 == ii ? values[0] : multiply(result, values[ii]);
+//        }
+//        return result;
+//    }
+//
+//    /**
+//     * Multiply 2 {@link BigInteger} together.
+//     *
+//     * @param a first value
+//     * @param b second value
+//     * @return calculated value
+//     * @since 0.7.0
+//     */
+//    public static BigInteger multiply(final BigInteger a, final BigInteger b) {
+//        if (null == a || null == b) {
+//            return null;
+//        }
+//        return a.multiply(b);
+//    }
+//
+//    /**
+//     * Multiply 1-n {@link Integer} together.
+//     *
+//     * @param values 1-n values
+//     * @return calculated value
+//     * @since 0.7.0
+//     */
+//    public static Integer multiply(final Integer... values) {
+//        if (null == values) {
+//            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
+//        }
+//
+//        Integer result = null;
+//
+//        for (int ii = 0; ii < values.length; ii++) {
+//            result = 0 == ii ? values[0] : multiply(result, values[ii]);
+//        }
+//        return result;
+//    }
+//
+//    /**
+//     * Multiply 2 {@link Integer} together.
+//     *
+//     * @param a first value
+//     * @param b second value
+//     * @return calculated value
+//     * @since 0.7.0
+//     */
+//    public static Integer multiply(final Integer a, final Integer b) {
+//        if (null == a || null == b) {
+//            return null;
+//        }
+//        return a * b;
+//    }
+//
+//    /**
+//     * Multiply 1-n {@link Double} together.
+//     *
+//     * @param values 1-n values
+//     * @return calculated value
+//     * @since 0.7.0
+//     */
+//    public static Double multiply(final Double... values) {
+//        if (null == values) {
+//            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
+//        }
+//
+//        Double result = null;
+//
+//        for (int ii = 0; ii < values.length; ii++) {
+//            result = 0 == ii ? values[0] : multiply(result, values[ii]);
+//        }
+//        return result;
+//    }
+//
+//    /**
+//     * Multiply 2 {@link Double} together.
+//     *
+//     * @param a first value
+//     * @param b second value
+//     * @return calculated value
+//     * @since 0.7.0
+//     */
+//    public static Double multiply(final Double a, final Double b) {
+//        if (null == a || null == b) {
+//            return null;
+//        }
+//        return a * b;
+//    }
+//
+//    /**
+//     * Multiply 1-n {@link Float} together.
+//     *
+//     * @param values 1-n values
+//     * @return calculated value
+//     * @since 0.7.0
+//     */
+//    public static Float multiply(final Float... values) {
+//        if (null == values) {
+//            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
+//        }
+//
+//        Float result = null;
+//
+//        for (int ii = 0; ii < values.length; ii++) {
+//            result = 0 == ii ? values[0] : multiply(result, values[ii]);
+//        }
+//        return result;
+//    }
+//
+//    /**
+//     * Multiply 2 {@link Float} together.
+//     *
+//     * @param a first value
+//     * @param b second value
+//     * @return calculated value
+//     * @since 0.7.0
+//     */
+//    public static Float multiply(final Float a, final Float b) {
+//        if (null == a || null == b) {
+//            return null;
+//        }
+//        return a * b;
+//    }
+//
+//    /**
+//     * Multiply 1-n {@link Long} together.
+//     *
+//     * @param values 1-n values
+//     * @return calculated value
+//     * @since 0.7.0
+//     */
+//    public static Long multiply(final Long... values) {
+//        if (null == values) {
+//            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
+//        }
+//
+//        Long result = null;
+//
+//        for (int ii = 0; ii < values.length; ii++) {
+//            result = 0 == ii ? values[0] : multiply(result, values[ii]);
+//        }
+//        return result;
+//    }
+//
+//    /**
+//     * Multiply 2 {@link Long} together.
+//     *
+//     * @param a first value
+//     * @param b second value
+//     * @return calculated value
+//     * @since 0.7.0
+//     */
+//    public static Long multiply(final Long a, final Long b) {
+//        if (null == a || null == b) {
+//            return null;
+//        }
+//        return a * b;
+//    }
     
     /**
-     * Add 1-n {@link BigDecimal} together.
+     * Add 1-n values together.
      *
      * @param values 1-n values
      * @return calculated value
      * @since 0.8.0
      */
-    public static BigDecimal add(final BigDecimal... values) {
+    public static <T extends Number> BigDecimal add(final T... values) {
         if (null == values) {
-            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("values"); //$NON-NLS-1$
         }
 
         BigDecimal result = null;
 
         for (int ii = 0; ii < values.length; ii++) {
-            result = 0 == ii ? values[0] : add(result, values[ii]);
+            result = new BigDecimal((0 == ii ? values[0] : add(result, values[ii])).toString());
         }
         return result;
     }
 
     /**
-     * Add 2 {@link BigDecimal} together.
+     * Add two values together.
      *
      * @param a first value
      * @param b second value
      * @return calculated value
      * @since 0.8.0
      */
-    public static BigDecimal add(final BigDecimal a, final BigDecimal b) {
+    public static <T extends Number> BigDecimal add(final T a, final T b) {
         if (null == a || null == b) {
             return null;
         }
-        return a.add(b);
+        
+		final BigDecimal numberA = new BigDecimal(a.toString());
+		final BigDecimal numberB = new BigDecimal(a.toString());
+
+        return numberA.add(numberB);
     }
     
-    /**
-     * Add 1-n {@link BigInteger} together.
-     *
-     * @param values 1-n values
-     * @return calculated value
-     * @since 0.8.0
-     */
-    public static BigInteger add(final BigInteger... values) {
-        if (null == values) {
-            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
-        }
-
-        BigInteger result = null;
-
-        for (int ii = 0; ii < values.length; ii++) {
-            result = 0 == ii ? values[0] : add(result, values[ii]);
-        }
-        return result;
-    }
-
-    /**
-     * Add 2 {@link BigInteger} together.
-     *
-     * @param a first value
-     * @param b second value
-     * @return calculated value
-     * @since 0.8.0
-     */
-    public static BigInteger add(final BigInteger a, final BigInteger b) {
-        if (null == a || null == b) {
-            return null;
-        }
-        return a.add(b);
-    }   
-    
-    /**
-     * Add 1-n {@link Integer} together.
-     *
-     * @param values 1-n values
-     * @return calculated value
-     * @since 0.8.0
-     */
-    public static Integer add(final Integer... values) {
-        if (null == values) {
-            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
-        }
-
-        Integer result = null;
-
-        for (int ii = 0; ii < values.length; ii++) {
-            result = 0 == ii ? values[0] : add(result, values[ii]);
-        }
-        return result;
-    }
-
-    /**
-     * Add 2 {@link Integer} together.
-     *
-     * @param a first value
-     * @param b second value
-     * @return calculated value
-     * @since 0.8.0
-     */
-    public static Integer add(final Integer a, final Integer b) {
-        if (null == a || null == b) {
-            return null;
-        }
-        return a + b;
-    }  
-    
-    /**
-     * Add 1-n {@link Double} together.
-     *
-     * @param values 1-n values
-     * @return calculated value
-     * @since 0.8.0
-     */
-    public static Double add(final Double... values) {
-        if (null == values) {
-            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
-        }
-
-        Double result = null;
-
-        for (int ii = 0; ii < values.length; ii++) {
-            result = 0 == ii ? values[0] : add(result, values[ii]);
-        }
-        return result;
-    }
-
-    /**
-     * Add 2 {@link Double} together.
-     *
-     * @param a first value
-     * @param b second value
-     * @return calculated value
-     * @since 0.8.0
-     */
-    public static Double add(final Double a, final Double b) {
-        if (null == a || null == b) {
-            return null;
-        }
-        return a + b;
-    }
-    
-    /**
-     * Add 1-n {@link Float} together.
-     *
-     * @param values 1-n values
-     * @return calculated value
-     * @since 0.8.0
-     */
-    public static Float add(final Float... values) {
-        if (null == values) {
-            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
-        }
-
-        Float result = null;
-
-        for (int ii = 0; ii < values.length; ii++) {
-            result = 0 == ii ? values[0] : add(result, values[ii]);
-        }
-        return result;
-    }
-
-    /**
-     * Add 2 {@link Float} together.
-     *
-     * @param a first value
-     * @param b second value
-     * @return calculated value
-     * @since 0.8.0
-     */
-    public static Float add(final Float a, final Float b) {
-        if (null == a || null == b) {
-            return null;
-        }
-        return a + b;
-    }
-    
-    /**
-     * Add 1-n {@link Long} together.
-     *
-     * @param values 1-n values
-     * @return calculated value
-     * @since 0.8.0
-     */
-    public static Long add(final Long... values) {
-        if (null == values) {
-            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
-        }
-
-        Long result = null;
-
-        for (int ii = 0; ii < values.length; ii++) {
-            result = 0 == ii ? values[0] : add(result, values[ii]);
-        }
-        return result;
-    }
-
-    /**
-     * Add 2 {@link Long} together.
-     *
-     * @param a first value
-     * @param b second value
-     * @return calculated value
-     * @since 0.8.0
-     */
-    public static Long add(final Long a, final Long b) {
-        if (null == a || null == b) {
-            return null;
-        }
-        return a + b;
-    }
+//    /**
+//     * Add 1-n {@link BigInteger} together.
+//     *
+//     * @param values 1-n values
+//     * @return calculated value
+//     * @since 0.8.0
+//     */
+//    public static BigInteger add(final BigInteger... values) {
+//        if (null == values) {
+//            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
+//        }
+//
+//        BigInteger result = null;
+//
+//        for (int ii = 0; ii < values.length; ii++) {
+//            result = 0 == ii ? values[0] : add(result, values[ii]);
+//        }
+//        return result;
+//    }
+//
+//    /**
+//     * Add 2 {@link BigInteger} together.
+//     *
+//     * @param a first value
+//     * @param b second value
+//     * @return calculated value
+//     * @since 0.8.0
+//     */
+//    public static BigInteger add(final BigInteger a, final BigInteger b) {
+//        if (null == a || null == b) {
+//            return null;
+//        }
+//        return a.add(b);
+//    }   
+//    
+//    /**
+//     * Add 1-n {@link Integer} together.
+//     *
+//     * @param values 1-n values
+//     * @return calculated value
+//     * @since 0.8.0
+//     */
+//    public static Integer add(final Integer... values) {
+//        if (null == values) {
+//            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
+//        }
+//
+//        Integer result = null;
+//
+//        for (int ii = 0; ii < values.length; ii++) {
+//            result = 0 == ii ? values[0] : add(result, values[ii]);
+//        }
+//        return result;
+//    }
+//
+//    /**
+//     * Add 2 {@link Integer} together.
+//     *
+//     * @param a first value
+//     * @param b second value
+//     * @return calculated value
+//     * @since 0.8.0
+//     */
+//    public static Integer add(final Integer a, final Integer b) {
+//        if (null == a || null == b) {
+//            return null;
+//        }
+//        return a + b;
+//    }  
+//    
+//    /**
+//     * Add 1-n {@link Double} together.
+//     *
+//     * @param values 1-n values
+//     * @return calculated value
+//     * @since 0.8.0
+//     */
+//    public static Double add(final Double... values) {
+//        if (null == values) {
+//            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
+//        }
+//
+//        Double result = null;
+//
+//        for (int ii = 0; ii < values.length; ii++) {
+//            result = 0 == ii ? values[0] : add(result, values[ii]);
+//        }
+//        return result;
+//    }
+//
+//    /**
+//     * Add 2 {@link Double} together.
+//     *
+//     * @param a first value
+//     * @param b second value
+//     * @return calculated value
+//     * @since 0.8.0
+//     */
+//    public static Double add(final Double a, final Double b) {
+//        if (null == a || null == b) {
+//            return null;
+//        }
+//        return a + b;
+//    }
+//    
+//    /**
+//     * Add 1-n {@link Float} together.
+//     *
+//     * @param values 1-n values
+//     * @return calculated value
+//     * @since 0.8.0
+//     */
+//    public static Float add(final Float... values) {
+//        if (null == values) {
+//            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
+//        }
+//
+//        Float result = null;
+//
+//        for (int ii = 0; ii < values.length; ii++) {
+//            result = 0 == ii ? values[0] : add(result, values[ii]);
+//        }
+//        return result;
+//    }
+//
+//    /**
+//     * Add 2 {@link Float} together.
+//     *
+//     * @param a first value
+//     * @param b second value
+//     * @return calculated value
+//     * @since 0.8.0
+//     */
+//    public static Float add(final Float a, final Float b) {
+//        if (null == a || null == b) {
+//            return null;
+//        }
+//        return a + b;
+//    }
+//    
+//    /**
+//     * Add 1-n {@link Long} together.
+//     *
+//     * @param values 1-n values
+//     * @return calculated value
+//     * @since 0.8.0
+//     */
+//    public static Long add(final Long... values) {
+//        if (null == values) {
+//            throw new RuntimeExceptionArgumentIsNull("values"); //$NON-NLS-1$
+//        }
+//
+//        Long result = null;
+//
+//        for (int ii = 0; ii < values.length; ii++) {
+//            result = 0 == ii ? values[0] : add(result, values[ii]);
+//        }
+//        return result;
+//    }
+//
+//    /**
+//     * Add 2 {@link Long} together.
+//     *
+//     * @param a first value
+//     * @param b second value
+//     * @return calculated value
+//     * @since 0.8.0
+//     */
+//    public static Long add(final Long a, final Long b) {
+//        if (null == a || null == b) {
+//            return null;
+//        }
+//        return a + b;
+//    }
     
 	/**
      * Returns a {@link Double} value from a {@link String}.
@@ -552,7 +560,7 @@ public abstract class HelperNumber {
 	public static Byte getByte(final String text) {
 		final String value = HelperString.getValidNumericString(text);
 		
-		return null == value ? null : Byte.valueOf(text);
+		return null == value ? null : Byte.valueOf(value);
 	}
 	
 	/**
@@ -576,7 +584,7 @@ public abstract class HelperNumber {
 	public static Short getShort(final String text) {
 		final String value = HelperString.getValidNumericString(text);
 		
-		return null == value ? null : Short.valueOf(text);
+		return null == value ? null : Short.valueOf(value);
 	}
 	
 	/**

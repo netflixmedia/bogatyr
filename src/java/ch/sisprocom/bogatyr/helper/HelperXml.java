@@ -40,7 +40,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
 
 
@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
  * This is a helper class for XML operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091203)
+ * @version 0.9.0 (20100209)
  * @since 0.3.0
  */
 public abstract class HelperXml {
@@ -90,10 +90,10 @@ public abstract class HelperXml {
      */
     public static <T> void serialize(final T data, final File file) throws JAXBException {
 		if (null == data) {
-			throw new RuntimeExceptionArgumentIsNull("data"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
 		if (null == file) {
-			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 
 		getMarshaller(data.getClass()).marshal(data, file);
@@ -109,10 +109,10 @@ public abstract class HelperXml {
      */
     public static <T> void serialize(final T data, final OutputStream os) throws JAXBException {
 		if (null == data) {
-			throw new RuntimeExceptionArgumentIsNull("data"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
 		if (null == os) {
-			throw new RuntimeExceptionArgumentIsNull("os"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
 		}
 
 		getMarshaller(data.getClass()).marshal(data, os);
@@ -130,17 +130,17 @@ public abstract class HelperXml {
     @SuppressWarnings("unchecked")
 	public static <T> T deserialize(final Class<T> clazz, final File file) throws JAXBException {
 		if (null == clazz) {
-			throw new RuntimeExceptionArgumentIsNull("clazz"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
 		if (null == file) {
-			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-		if (!file.isFile()) {
-			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
-		}
-		if (!file.exists()) {
-			throw new RuntimeExceptionFileNotFound(file);
-		}
+//		if (!file.exists()) {
+//			throw new RuntimeExceptionFileNotFound(file);
+//		}
+//		if (!file.isFile()) {
+//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+//		}
 
 		return (T)getUnmarshaller(clazz).unmarshal(file);
     }
@@ -157,10 +157,10 @@ public abstract class HelperXml {
     @SuppressWarnings("unchecked")
 	public static <T> T deserialize(final Class<T> clazz, final InputStream is) throws JAXBException {
 		if (null == clazz) {
-			throw new RuntimeExceptionArgumentIsNull("clazz"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
 		if (null == is) {
-			throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
 
 		return (T)getUnmarshaller(clazz).unmarshal(is);

@@ -64,7 +64,7 @@ import org.bouncycastle.asn1.x509.X509Extensions;
 import org.bouncycastle.x509.X509V3CertificateGenerator;
 
 import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
@@ -84,11 +84,11 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     @Override
     public X509Certificate readCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException { //$JUnit$
 		if (null == file) {
-			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-		if (!file.exists()) {
-			throw new RuntimeExceptionFileNotFound(file);
-		}
+//		if (!file.exists()) {
+//			throw new RuntimeExceptionFileNotFound(file);
+//		}
 
 		BufferedInputStream bis = null;
         final X509Certificate cert;
@@ -107,7 +107,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     @Override
     public X509Certificate readCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {
 		if (null == is) {
-			throw new RuntimeExceptionArgumentIsNull("is"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
 		
 		final X509Certificate cert;
@@ -127,10 +127,10 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     @Override
     public void writeCertificate(final OutputStream os, final Certificate cert) throws CertificateEncodingException, IOException {
 		if (null == os) {
-			throw new RuntimeExceptionArgumentIsNull("os"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
 		}
 		if (null == cert) {
-			throw new RuntimeExceptionArgumentIsNull("cert"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("cert"); //$NON-NLS-1$
 		}
 		
 		HelperIO.writeStream(os, cert.getEncoded());
@@ -139,10 +139,10 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     @Override
     public void writeCertificate(final File file, final Certificate cert) throws CertificateEncodingException, IOException { //$JUnit$
 		if (null == file) {
-			throw new RuntimeExceptionArgumentIsNull("file"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 		if (null == cert) {
-			throw new RuntimeExceptionArgumentIsNull("cert"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("cert"); //$NON-NLS-1$
 		}
 		
     	HelperIO.writeFile(file, cert.getEncoded(), false);
@@ -151,22 +151,22 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     @Override
     public X509Certificate generateCertificate(final KeyPair pair, final String issuerDN, final String subjectDN, final String generalName, final Date start, final Date end) throws NoSuchAlgorithmException, IllegalStateException, CertificateEncodingException, InvalidKeyException, NoSuchProviderException, SecurityException, SignatureException { //$JUnit$
 		if (null == pair) {
-			throw new RuntimeExceptionArgumentIsNull("pair"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("pair"); //$NON-NLS-1$
 		}
 		if (null == issuerDN) {
-			throw new RuntimeExceptionArgumentIsNull("issuerDN"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("issuerDN"); //$NON-NLS-1$
 		}
 		if (null == subjectDN) {
-			throw new RuntimeExceptionArgumentIsNull("subjectDN"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("subjectDN"); //$NON-NLS-1$
 		}
 		if (null == generalName) {
-			throw new RuntimeExceptionArgumentIsNull("generalName"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("generalName"); //$NON-NLS-1$
 		}
 		if (null == start) {
-			throw new RuntimeExceptionArgumentIsNull("start"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("start"); //$NON-NLS-1$
 		}
 		if (null == end) {
-			throw new RuntimeExceptionArgumentIsNull("end"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("end"); //$NON-NLS-1$
 		}
 		
 	    // generate the certificate

@@ -47,8 +47,8 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
 import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 
 /**
@@ -92,7 +92,7 @@ public abstract class FormatFactory {
      */	
 	public static NumberFormat createNumberFormat(final String pattern) {
 		if (!HelperString.isValid(pattern)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("pattern"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("pattern"); //$NON-NLS-1$
 		}
 
 		return new DecimalFormat(pattern);
@@ -130,7 +130,7 @@ public abstract class FormatFactory {
      */	
 	public static DateFormat createDateFormat(final String pattern) {
 		if (!HelperString.isValid(pattern)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("pattern"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("pattern"); //$NON-NLS-1$
 		}
 
 		return new SimpleDateFormat(pattern, Locale.getDefault());
@@ -147,7 +147,7 @@ public abstract class FormatFactory {
      */	
 	public static NumberFormatter createNumberFormatterDisplay(final NumberFormat format) {
 		if (null == format) {
-			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
 		return new NumberFormatter(format);
@@ -164,7 +164,7 @@ public abstract class FormatFactory {
      */	
 	public static NumberFormatter createNumberFormatterEdit(final NumberFormat format) {
 		if (null == format) {
-			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
 		return new NumberFormatter(format) {
@@ -194,7 +194,7 @@ public abstract class FormatFactory {
      */	
 	public static NumberFormatter createPercentFormatterDisplay(final NumberFormat format) {
 		if (null == format) {
-			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
 		return new NumberFormatter(format);
@@ -211,7 +211,7 @@ public abstract class FormatFactory {
      */	
 	public static NumberFormatter createPercentFormatterEdit(final NumberFormat format) {
 		if (null == format) {
-			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
 		return new NumberFormatter(format) {
@@ -259,7 +259,7 @@ public abstract class FormatFactory {
      */	
 	public static DateFormatter createDateFormatterDisplay(final DateFormat format) {
 		if (null == format) {
-			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
 		return new DateFormatter(format);
@@ -276,7 +276,7 @@ public abstract class FormatFactory {
      */	
 	public static DateFormatter createDateFormatterEdit(final DateFormat format) {
 		if (null == format) {
-			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
 		return new DateFormatter(format);
@@ -293,7 +293,7 @@ public abstract class FormatFactory {
      */	
 	public static MaskFormatter createMaskFormatter(final String format) throws ParseException {
 		if (null == format) {
-			throw new RuntimeExceptionArgumentIsNull("format"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
 		return new MaskFormatter(format) {
@@ -316,7 +316,7 @@ public abstract class FormatFactory {
      */	
 	public static DefaultFormatter createRegexFormatter(final Pattern regex) {
 		if (null == regex) {
-			throw new RuntimeExceptionArgumentIsNull("regex"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("regex"); //$NON-NLS-1$
 		}
 
 		return new DefaultFormatter() {

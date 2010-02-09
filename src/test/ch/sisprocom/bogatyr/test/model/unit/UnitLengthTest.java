@@ -29,7 +29,7 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.test.helper.unit;
+package ch.sisprocom.bogatyr.test.model.unit;
 
 import static org.junit.Assert.assertTrue;
 
@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.model.unit.Length;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100204
+ * @version 20100209
  */
 public class UnitLengthTest {
 	private static final MathContext MC = new MathContext(5, RoundingMode.HALF_EVEN);

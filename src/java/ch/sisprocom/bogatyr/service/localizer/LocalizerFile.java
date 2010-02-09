@@ -37,7 +37,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.KeyStroke;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
 /**
@@ -60,7 +60,7 @@ public class LocalizerFile extends LocalizerAbstract {
         super();
 
         if (null == localizerBase) {
-			throw new RuntimeExceptionArgumentIsNull("localizerBase"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("localizerBase"); //$NON-NLS-1$
 		}
 		
 		this.localizerBase = localizerBase;
@@ -86,7 +86,7 @@ public class LocalizerFile extends LocalizerAbstract {
 	 */
     public void setLocalizerBase(final String localizerBase) {
 		if (null == localizerBase) {
-			throw new RuntimeExceptionArgumentIsNull("localizerBase"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("localizerBase"); //$NON-NLS-1$
 		}
 		
 		this.localizerBase = localizerBase;
@@ -108,7 +108,7 @@ public class LocalizerFile extends LocalizerAbstract {
     @Override
 	public void setLocale(final Locale locale) {
 		if (null == locale) {
-			throw new RuntimeExceptionArgumentIsNull("locale"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNull("locale"); //$NON-NLS-1$
 		}
 
 		bundle = ResourceBundle.getBundle(localizerBase, locale);

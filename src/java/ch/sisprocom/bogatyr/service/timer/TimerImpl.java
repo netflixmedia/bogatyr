@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -33,13 +33,13 @@ package ch.sisprocom.bogatyr.service.timer;
 
 import java.util.TimerTask;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBePositive;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 /**
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20100209)
  * @since 0.6.0
  */
 public class TimerImpl extends TimerAbstract implements Timer {
@@ -53,7 +53,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
 	@Override
     public void setTime(final long time) {
 		if (0 > time) {
-			throw new RuntimeExceptionArgumentMustBePositive("time", time); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("time", time, 0); //$NON-NLS-1$
 		}
 
 		this.time = time;
@@ -66,7 +66,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
     @Override
     public synchronized void start(final long interval) {
 		if (0 > interval) {
-			throw new RuntimeExceptionArgumentMustBePositive("interval", interval); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("interval", interval, 0); //$NON-NLS-1$
 		}
 
 		start(0L, interval);
@@ -75,10 +75,10 @@ public class TimerImpl extends TimerAbstract implements Timer {
     @Override
     public synchronized void start(final long delay, final long interval) {
 		if (0 > delay) {
-			throw new RuntimeExceptionArgumentMustBePositive("delay", delay); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("delay", delay, 0); //$NON-NLS-1$
 		}
 		if (0 > interval) {
-			throw new RuntimeExceptionArgumentMustBePositive("interval", interval); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeGreater("interval", interval, 0); //$NON-NLS-1$
 		}
 
     	getTimer().cancel();

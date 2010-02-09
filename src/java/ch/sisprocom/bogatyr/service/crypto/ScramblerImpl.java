@@ -41,12 +41,12 @@ import java.io.OutputStream;
 import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentExceedsVmMemory;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentIsNullOrEmpty;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionArgumentMustBeGreaterThanOne;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionInputEqualsOutput;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
@@ -54,7 +54,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * This is a class for obfuscating data with CFB.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (200100203)
+ * @version 0.9.0 (20100209)
  * @since 0.3.0
  */
 public class ScramblerImpl extends ServiceAbstract implements Scrambler {
@@ -73,10 +73,10 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 	 */
 	private static byte[] obfuscate(final byte[] input, final byte pattern) {
 		if (!HelperArray.isValid(input)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
         if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
-            throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
+            throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
         }
 
 		final byte[] result = new byte[input.length];
@@ -98,10 +98,10 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 	 */
 	private static byte[] unobfuscate(final byte[] input, final byte pattern) {
 		if (!HelperArray.isValid(input)) {
-			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
         if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
-            throw new RuntimeExceptionArgumentExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
+            throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
         }
 
 		final byte[] result = new byte[input.length];
@@ -115,22 +115,22 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 
 	private static void obfuscate(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
         if (null == input) {
-            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
-		if (!input.exists()) {
-			throw new RuntimeExceptionFileNotFound(input);
-		}
+//		if (!input.exists()) {
+//			throw new RuntimeExceptionFileNotFound(input);
+//		}
 		if (null == output) {
-            throw new RuntimeExceptionArgumentIsNull("output"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
         }
 		if (input.equals(output)) {
-			throw new RuntimeExceptionInputEqualsOutput("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
         if (1 > bufferSize) {
-            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
+            throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
         }
         if (bufferSize > HelperEnvironment.getMemoryFree()) {
-            throw new RuntimeExceptionArgumentExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
+            throw new RuntimeExceptionExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
         }
 		
         final byte[] buffer = new byte[bufferSize];
@@ -166,22 +166,22 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 
 	private static void unobfuscate(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
         if (null == input) {
-            throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
-		if (!input.exists()) {
-			throw new RuntimeExceptionFileNotFound(input);
-		}
+//		if (!input.exists()) {
+//			throw new RuntimeExceptionFileNotFound(input);
+//		}
 		if (null == output) {
-            throw new RuntimeExceptionArgumentIsNull("output"); //$NON-NLS-1$
+            throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
         }
 		if (input.equals(output)) {
-			throw new RuntimeExceptionInputEqualsOutput("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
         if (1 > bufferSize) {
-            throw new RuntimeExceptionArgumentMustBeGreaterThanOne("bufferSize", bufferSize); //$NON-NLS-1$
+            throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
         }
         if (bufferSize > HelperEnvironment.getMemoryFree()) {
-            throw new RuntimeExceptionArgumentExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
+            throw new RuntimeExceptionExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
         }
 
 		final byte[] buffer = new byte[bufferSize];
