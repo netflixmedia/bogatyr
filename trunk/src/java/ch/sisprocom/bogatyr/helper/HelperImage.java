@@ -48,7 +48,6 @@ import java.util.Locale;
 import javax.imageio.ImageIO;
 
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
 
 
 /**

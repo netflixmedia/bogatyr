@@ -53,7 +53,6 @@ import ch.sisprocom.bogatyr.helper.encoder.EncoderHex;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
@@ -63,7 +62,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100203)
+ * @version 0.9.0 (20100211)
  * @since 0.9.0
  */
 public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
@@ -168,7 +167,7 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 		}
 		
 		byte[] result = Integer.toString(input.length).getBytes();
-		final int offset = (int) (input.length / parts - partSize);
+		final int offset = input.length / parts - partSize;
 		int position = 0;
 		
 		for (int ii = 0; ii < parts; ii++) {

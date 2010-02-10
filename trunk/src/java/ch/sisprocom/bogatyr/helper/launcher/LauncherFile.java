@@ -43,7 +43,6 @@ import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
 
 /**
  * This launcher opens, edits and prints files with the default system application.
