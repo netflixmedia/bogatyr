@@ -52,7 +52,7 @@ import java.util.Vector;
  * This is an extended JComboBox.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100211)
  * @since 0.2.0
  */
 public class ComboBox extends JComboBox implements Activatable {
@@ -110,11 +110,8 @@ public class ComboBox extends JComboBox implements Activatable {
 	private void createLayout() {
 		setEditable(true);
 
-		// get the combo boxes editor component
-        final JTextComponent editor = (JTextComponent) getEditor().getEditorComponent();
-
-        // change the editor's document
-        editor.setDocument(new ComboBoxPopup(this));
+        // get the combo boxes editor component and change the editor's document
+        ((JTextComponent) getEditor().getEditorComponent()).setDocument(new ComboBoxPopup(this));
 	}
 	
 	

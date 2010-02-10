@@ -44,10 +44,9 @@ import java.util.Map;
 
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionFileNotFound;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;

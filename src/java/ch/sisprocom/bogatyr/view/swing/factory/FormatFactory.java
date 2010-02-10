@@ -55,7 +55,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a format factory.
  * 
  * @author Stefan Laubenberger
- * @version 20100203
+ * @version 20100210
  */
 public abstract class FormatFactory {
 	public static final String PATTERN_DATE_DAY_MONTH_YEAR 								  = "dd.MM.yyyy"; //$NON-NLS-1$
@@ -150,7 +150,13 @@ public abstract class FormatFactory {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
-		return new NumberFormatter(format);
+		return new NumberFormatter(format) {
+			private static final long serialVersionUID = -8279122736069976223L;
+
+			{
+				setCommitsOnValidEdit(true);
+			}
+		};
 	}
 
 	/**
@@ -171,6 +177,7 @@ public abstract class FormatFactory {
 			private static final long serialVersionUID = 1315478587371973936L;
 
 			{
+				setCommitsOnValidEdit(true);
 				setValueClass(BigDecimal.class);
 			}
 
@@ -197,7 +204,13 @@ public abstract class FormatFactory {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
-		return new NumberFormatter(format);
+		return new NumberFormatter(format) {
+			private static final long serialVersionUID = 1104014354379282093L;
+
+			{
+				setCommitsOnValidEdit(true);
+			}
+		};
 	}
 
 	/**
@@ -218,6 +231,7 @@ public abstract class FormatFactory {
 			private static final long serialVersionUID = 1315478587371973936L;
 
 			{
+				setCommitsOnValidEdit(true);
 				setValueClass(BigDecimal.class);
 			}
 
@@ -262,7 +276,13 @@ public abstract class FormatFactory {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
-		return new DateFormatter(format);
+		return new DateFormatter(format) {
+			private static final long serialVersionUID = 8705680761187261160L;
+
+			{
+				setCommitsOnValidEdit(true);
+			}
+		};
 	}
 	
 	/**
@@ -279,7 +299,13 @@ public abstract class FormatFactory {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
-		return new DateFormatter(format);
+		return new DateFormatter(format) {
+			private static final long serialVersionUID = 8705680761187261160L;
+
+			{
+				setCommitsOnValidEdit(true);
+			}
+		};
 	}
 
 	/**
@@ -300,6 +326,7 @@ public abstract class FormatFactory {
 			private static final long serialVersionUID = 5212947957420446007L;
 
 			{
+				setCommitsOnValidEdit(true);
 				setPlaceholderCharacter('_');
 			}
 		};
@@ -322,9 +349,10 @@ public abstract class FormatFactory {
 		return new DefaultFormatter() {
 			private static final long serialVersionUID = 2665033244806980400L;
 
-			Matcher matcher;
+			transient Matcher matcher;
 
 			{
+				setCommitsOnValidEdit(true);
 				setOverwriteMode(false);
 				matcher = regex.matcher(""); //$NON-NLS-1$
 			}

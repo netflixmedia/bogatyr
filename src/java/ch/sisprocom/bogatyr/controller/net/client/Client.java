@@ -42,7 +42,7 @@ import ch.sisprocom.bogatyr.misc.HolderListener;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100211)
  * @since 0.7.0
  */
 public interface Client extends Runnable, HolderListener<ListenerClient> {
@@ -57,7 +57,7 @@ public interface Client extends Runnable, HolderListener<ListenerClient> {
 	/**
 	 * Returns the current data from readStream().
 	 * 
-	 * @return current readed data
+	 * @return current read data
 	 * @since 0.9.0
 	 */
 	byte[] getData();
