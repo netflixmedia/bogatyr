@@ -59,7 +59,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -160,17 +160,15 @@ public abstract class HelperObject {
 		}
 		
 		ObjectInputStream ois = null;
-		final Object obj;
 		
         try {
             ois = new ObjectInputStream(new ByteArrayInputStream(data));
-            obj = ois.readObject();
+            return ois.readObject();
         } finally {
         	if (null != ois) {
         		ois.close();
         	}
         }
-        return obj;
 	}
 
 	/**
@@ -233,19 +231,29 @@ public abstract class HelperObject {
      * @return cloned object
      * @since 0.9.0
      */	
+	@SuppressWarnings("unchecked")
 	public static <T extends Serializable> T clone(final T original) throws IOException, ClassNotFoundException {
 		if (null != original) {
 			final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			final CloneOutput cout = new CloneOutput(baos);
-			cout.writeObject(original);
-			final byte[] bytes = baos.toByteArray();
-			
-			final ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-			final ObjectInputStream ois = new CloneInput(bais, cout);
-		
-			@SuppressWarnings("unchecked") final
-	        T clone = (T) ois.readObject();
-			return clone;
+            CloneOutput co = null;
+            ObjectInputStream ois = null;
+
+            try {
+                co = new CloneOutput(baos);
+			    co.writeObject(original);
+
+    			final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+                ois = new CloneInput(bais, co);
+
+                return (T) ois.readObject();
+            } finally {
+                if (null != co) {
+                    co.close();
+                }
+                if (null != ois) {
+                    ois.close();
+                }
+            }
 		}
 		return null;
     }

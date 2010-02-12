@@ -38,10 +38,10 @@ import java.math.BigDecimal;
  * This is an interface to define all methods of an unit.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.9.0
  */
-public interface Unit <U extends Unit<?>> {
+public interface Unit<U extends Unit<?>> {
 	/**
      * Converts a value to another unit.
      * 

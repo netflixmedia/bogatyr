@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -40,10 +40,10 @@ import ch.sisprocom.bogatyr.service.Service;
  * Defines the methods for the implementation of a profiler.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091116)
+ * @version 0.9.0 (20100212)
  * @since 0.9.0
  */
-public interface Profiler extends Service {
+public interface Profiler<T> extends Service {
 
 	/**
 	 * Starts the profiler.
@@ -55,11 +55,11 @@ public interface Profiler extends Service {
 	/**
 	 * Profile an event with its elapsed time between start() or the last profile-call and return the elapsed time in ns.
 	 * 
-	 * @param id of the event
+	 * @param event to profile
 	 * @return elapsed time in ns between start() or the last profile-call
 	 * @since 0.9.0
 	 */
-	long profile(String id);
+	long profile(T event);
 	
 	/**
 	 * Returns a {@link Map} containing all profiled events and their elapsed time in ms.
@@ -67,7 +67,7 @@ public interface Profiler extends Service {
 	 * @return {@link Map} containing all events and their elapsed time in ns
 	 * @since 0.9.0
 	 */
-	Map<String, Long> getProfiles();
+	Map<T, Long> getProfiles();
 
 	/**
 	 * Returns the elapsed time in ns for all profiled events.

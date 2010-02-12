@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100212)
  * @since 0.2.0
  */
 public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
@@ -176,13 +176,12 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 
     	Statement stmt = null;
         Connection con = null;
-        final int result;
         
         try {
 	    	con = connectToDb();
 			stmt = con.createStatement();
 	
-			result = stmt.executeUpdate(statement);
+			return stmt.executeUpdate(statement);
 		} finally {
 			if (null != con) {
                 con.close();
@@ -191,7 +190,6 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
                 stmt.close();
             }
 		}
-		return result;
     }
 	
     @Override
@@ -202,13 +200,12 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
     	
     	Statement stmt = null;
         Connection con = null;
-        final boolean result;
         
         try {
 	    	con = connectToDb();
 			stmt = con.createStatement();
 	
-			result = stmt.execute(statement);
+			return stmt.execute(statement);
 		} finally {
 			if (null != con) {
                 con.close();
@@ -217,6 +214,5 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
                 stmt.close();
             }
 		}
-		return result;
     }  
 }

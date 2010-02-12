@@ -40,10 +40,10 @@ import java.util.EventObject;
  * Event class for all listeners.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100205)
+ * @version 0.9.0 (20100212)
  * @since 0.9.0
  */
-public class Event <T> extends EventObject {
+public class Event<T> extends EventObject {
 	private static final long serialVersionUID = 249139459845904231L;
 
 //	private final T source;

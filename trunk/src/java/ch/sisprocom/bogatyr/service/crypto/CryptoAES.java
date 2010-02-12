@@ -73,7 +73,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.1.0
  */
 public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
@@ -266,7 +266,21 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		encrypt(new BufferedInputStream(new FileInputStream(input)), new BufferedOutputStream(new FileOutputStream(output)), key, bufferSize);
+		BufferedInputStream bis = null;
+		BufferedOutputStream bos = null;
+		
+        try {
+        	bis = new BufferedInputStream(new FileInputStream(input));
+        	bos = new BufferedOutputStream(new FileOutputStream(output));
+        	encrypt(bis, bos, key, bufferSize);
+        } finally {
+        	if (null != bos) {
+        		bos.close();
+        	}
+        	if (null != bis) {
+        		bis.close();
+        	}
+        }
 	}
 
 	@Override
@@ -289,6 +303,20 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		decrypt(new BufferedInputStream(new FileInputStream(input)), new BufferedOutputStream(new FileOutputStream(output)), key, bufferSize);
+		BufferedInputStream bis = null;
+		BufferedOutputStream bos = null;
+		
+        try {
+        	bis = new BufferedInputStream(new FileInputStream(input));
+        	bos = new BufferedOutputStream(new FileOutputStream(output));
+        	decrypt(bis, bos, key, bufferSize);
+        } finally {
+        	if (null != bos) {
+        		bos.close();
+        	}
+        	if (null != bis) {
+        		bis.close();
+        	}
+        }
 	}
 }

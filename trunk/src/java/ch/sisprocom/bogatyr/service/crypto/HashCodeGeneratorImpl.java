@@ -62,7 +62,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100211)
+ * @version 0.9.0 (20100212)
  * @since 0.9.0
  */
 public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
@@ -109,7 +109,16 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
             throw new RuntimeExceptionIsNull("hashCode"); //$NON-NLS-1$
         }
 
-        return getHash(new BufferedInputStream(new FileInputStream(input)), hashCode, bufferSize);
+        BufferedInputStream bis = null;
+
+        try {
+        	bis = new BufferedInputStream(new FileInputStream(input));
+        	return getHash(bis, hashCode, bufferSize);
+        } finally {
+        	if (null != bis) {
+        		bis.close();
+        	}
+        }
     }
 
 	@Override
@@ -212,16 +221,23 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 		byte[] result = Long.toString(input.length()).getBytes();
 		final int offset = (int) (input.length() / parts - partSize);
 		
-		final RandomAccessFile raf = new RandomAccessFile(input, "r");  //$NON-NLS-1$
-		
-		for (int ii = 0; ii < parts; ii++) {
-			raf.read(buffer);
-			
-			result = HelperArray.concatenate(result, buffer);
-			
-			raf.seek(offset);
+		RandomAccessFile raf = null; 
+
+		try {
+			raf = new RandomAccessFile(input, "r");  //$NON-NLS-1$
+
+			for (int ii = 0; ii < parts; ii++) {
+				raf.read(buffer);
+				
+				result = HelperArray.concatenate(result, buffer);
+				
+				raf.seek(offset);
+			}
+		} finally {
+			if (null != raf) {
+				raf.close();
+			}
 		}
-		
 		return getHash(result, hashCode);
 	}
 	
