@@ -33,14 +33,14 @@ package ch.sisprocom.bogatyr.model.unit;
 
 import java.math.BigDecimal;
 
-import ch.sisprocom.bogatyr.helper.Constants;
+import ch.sisprocom.bogatyr.misc.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 /**
  * Weight units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.7.0
  */
 public enum Weight implements Unit<Weight> {

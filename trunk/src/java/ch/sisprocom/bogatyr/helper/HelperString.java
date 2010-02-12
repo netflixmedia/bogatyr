@@ -34,6 +34,7 @@ package ch.sisprocom.bogatyr.helper;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 
+import ch.sisprocom.bogatyr.misc.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
@@ -44,7 +45,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.7.0
  */
 public abstract class HelperString {

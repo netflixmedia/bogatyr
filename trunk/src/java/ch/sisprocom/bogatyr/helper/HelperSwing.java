@@ -39,6 +39,7 @@ import javax.swing.JSlider;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 
+import ch.sisprocom.bogatyr.misc.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.model.misc.Platform;
 
@@ -47,7 +48,7 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * This is a helper class for Swing.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.9.0
  */
 public abstract class HelperSwing {

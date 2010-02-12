@@ -67,22 +67,22 @@ public abstract class ModelAbstract extends Observable implements Model {
 		int result = 1;
 		result = prime
 				* result
-				+ ((instantiationDate == null) ? 0 : instantiationDate
+				+ ((null == instantiationDate) ? 0 : instantiationDate
 						.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (null == obj)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ModelAbstract other = (ModelAbstract) obj;
-		if (instantiationDate == null) {
-			if (other.instantiationDate != null)
+		final ModelAbstract other = (ModelAbstract) obj;
+		if (null == instantiationDate) {
+			if (null != other.instantiationDate)
 				return false;
 		} else if (!instantiationDate.equals(other.instantiationDate))
 			return false;
@@ -100,7 +100,7 @@ public abstract class ModelAbstract extends Observable implements Model {
 	}
 
     @Override
-	public void setInstantiationDate(Date instantiationDate) {
+	public void setInstantiationDate(final Date instantiationDate) {
 		this.instantiationDate = instantiationDate;
 	}
 

@@ -70,11 +70,19 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 	public static final int DEFAULT_KEY_SIZE = 1024;
 
 	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
-
+	
+	private final Cipher cipher;
+	private final KeyPairGenerator kpg;
+	
 	static {
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 	}
 
+	public CryptoRSA() throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
+        super();
+        cipher = Cipher.getInstance(XFORM, PROVIDER);
+        kpg = KeyPairGenerator.getInstance(ALGORITHM, PROVIDER);
+    }
 	
 	/*
 	 * Private methods
@@ -86,15 +94,14 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 	 * @param key for the encryption
 	 * @return encrypted byte-array 
 	 * @throws InvalidKeyException 
+	 * @throws InvalidKeyException 
 	 * @throws BadPaddingException 
 	 * @throws IllegalBlockSizeException 
-	 * @throws NoSuchPaddingException 
-	 * @throws NoSuchProviderException 
-	 * @throws NoSuchAlgorithmException 
+	 * @throws BadPaddingException 
+	 * @throws IllegalBlockSizeException 
 	 * @since 0.1.0
 	 */
-	private static byte[] encryptInternal(final byte[] input, final Key key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
-		final Cipher cipher = Cipher.getInstance(XFORM, PROVIDER);
+	private byte[] encryptInternal(final byte[] input, final Key key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		cipher.init(Cipher.ENCRYPT_MODE, key);
 
 		return cipher.doFinal(input);
@@ -106,16 +113,12 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 	 * @param input data (byte-array) to decrypt
 	 * @param key for the decryption
 	 * @return decrypted byte-array
-	 * @throws NoSuchPaddingException 
-	 * @throws NoSuchProviderException 
-	 * @throws NoSuchAlgorithmException 
 	 * @throws InvalidKeyException 
 	 * @throws BadPaddingException 
 	 * @throws IllegalBlockSizeException 
 	 * @since 0.1.0
 	 */
-	private static byte[] decryptInternal(final byte[] input, final Key key) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-		final Cipher cipher = Cipher.getInstance(XFORM, PROVIDER);
+	private byte[] decryptInternal(final byte[] input, final Key key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		cipher.init(Cipher.DECRYPT_MODE, key);
 
 		return cipher.doFinal(input);
@@ -133,22 +136,20 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 	 * @since 0.1.0
 	 */
 	@Override
-    public KeyPair generateKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
+    public KeyPair generateKeyPair() { //$JUnit$
 		return generateKeyPair(DEFAULT_KEY_SIZE);
 	}
 	
 	@Override
-    public KeyPair generateKeyPair(final int keySize) throws NoSuchAlgorithmException, NoSuchProviderException { //$JUnit$
+    public KeyPair generateKeyPair(final int keySize) { //$JUnit$
 		if (0 >= keySize) {
 			throw new RuntimeExceptionMustBeGreater("keySize", keySize, 0); //$NON-NLS-1$
 		}
 		if (0 != keySize % HelperNumber.NUMBER_16.intValue()) {
             throw new IllegalArgumentException("keySize is not a multiple of 16"); //$NON-NLS-1$
         }
-
 		
 		// Generate a key-pair
-		final KeyPairGenerator kpg = KeyPairGenerator.getInstance(ALGORITHM, PROVIDER);
 		kpg.initialize(keySize);
 
 		return kpg.generateKeyPair();
@@ -165,12 +166,12 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 	 * @since 0.1.0
 	 */
     @Override
-    public byte[] encrypt(final byte[] input, final PublicKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit$
+    public byte[] encrypt(final byte[] input, final PublicKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
     	return encrypt(input, key, DEFAULT_KEY_SIZE);
     }
     
     @Override
-    public byte[] encrypt(final byte[] input, final PublicKey key, final int keySize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException { //$JUnit$
+    public byte[] encrypt(final byte[] input, final PublicKey key, final int keySize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -229,12 +230,12 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
      * @since 0.1.0
 	 */
 	@Override
-    public byte[] decrypt(final byte[] input, final PrivateKey key) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
+    public byte[] decrypt(final byte[] input, final PrivateKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		return decrypt(input, key, DEFAULT_KEY_SIZE);
 	}
 
 	@Override
-    public byte[] decrypt(final byte[] input, final PrivateKey key, final int keySize) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
+    public byte[] decrypt(final byte[] input, final PrivateKey key, final int keySize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,16 +32,17 @@
 package ch.sisprocom.bogatyr.service.crypto;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
-import ch.sisprocom.bogatyr.service.Service;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.service.Service;
 
 /**
  * This is an interface for hash code generation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100212)
  * @since 0.8.0
  */
 public interface HashCodeGenerator extends Service {
@@ -50,67 +51,62 @@ public interface HashCodeGenerator extends Service {
 	 * Generates a hash code for a byte-array with the given {@link HashCode}.
 	 *
      * @param input byte-array for the hash code
-     * @param hashCode {@link HashCode} algorithm
      * @return generated hash code
 	 * @throws Exception
 	 * @see HashCode
 	 * @since 0.8.0
 	 */
-	String getHash(byte[] input, HashCode hashCode) throws Exception;
+	String getHash(byte[] input);
 	
 	/**
 	 * Generates a hash code for an {@link InputStream} with the given {@link HashCode}.
 	 * 
      * @param is {@link InputStream} for the hash code
-     * @param hashCode {@link HashCode} algorithm
      * @return generated hash code
-	 * @throws Exception 
+	 * @throws IOException 
 	 * @see InputStream
 	 * @see HashCode
 	 * @since 0.8.0
 	 */
-	String getHash(InputStream is, HashCode hashCode) throws Exception;
+	String getHash(InputStream is) throws IOException;
 	
 	/**
 	 * Generates a hash code for an {@link InputStream} with the given {@link HashCode}.
 	 * 
      * @param is {@link InputStream} for the hash code
-     * @param hashCode {@link HashCode} algorithm
      * @param bufferSize in bytes
      * @return generated hash code
-	 * @throws Exception 
+	 * @throws IOException 
 	 * @see InputStream
 	 * @see HashCode
 	 * @since 0.8.0
 	 */
-	String getHash(InputStream is, HashCode hashCode, int bufferSize) throws Exception;	
+	String getHash(InputStream is, int bufferSize) throws IOException;	
 
 	/**
 	 * Generates a hash code for an input {@link File} with the given {@link HashCode}.
 	 * 
      * @param input {@link File} for the hash code
-     * @param hashCode {@link HashCode} algorithm
      * @return generated hash code
-	 * @throws Exception 
+	 * @throws IOException 
 	 * @see File
 	 * @see HashCode
 	 * @since 0.8.0
 	 */
-	String getHash(File input, HashCode hashCode) throws Exception;
+	String getHash(File input) throws IOException;
 	
 	/**
 	 * Generates a hash code for an input {@link File} with the given {@link HashCode}.
 	 * 
      * @param input {@link File} for the hash code
-     * @param hashCode {@link HashCode} algorithm
      * @param bufferSize in bytes
      * @return generated hash code
-	 * @throws Exception 
+	 * @throws IOException 
 	 * @see File
 	 * @see HashCode
 	 * @since 0.8.0
 	 */
-	String getHash(File input, HashCode hashCode, int bufferSize) throws Exception;		
+	String getHash(File input, int bufferSize) throws IOException;		
 	
 	/**
 	 * Generates a hash code for a byte-array with the given {@link HashCode}.
@@ -119,7 +115,6 @@ public interface HashCodeGenerator extends Service {
      * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
 	 *
      * @param input byte-array for the hash code
-     * @param hashCode {@link HashCode} algorithm
      * @param parts for the hash code data
      * @param partSize of the hash code data
      * @return generated hash code
@@ -127,7 +122,7 @@ public interface HashCodeGenerator extends Service {
 	 * @see HashCode
 	 * @since 0.9.0
 	 */
-	String getFastHash(byte[] input, HashCode hashCode, int parts, int partSize) throws Exception;
+	String getFastHash(byte[] input, int parts, int partSize);
 	
 	/**
 	 * Generates a hash code for a byte-array with the given {@link HashCode}.
@@ -136,13 +131,12 @@ public interface HashCodeGenerator extends Service {
      * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
 	 *
      * @param input byte-array for the hash code
-     * @param hashCode {@link HashCode} algorithm
      * @return generated hash code
 	 * @throws Exception
 	 * @see HashCode
 	 * @since 0.9.0
 	 */
-	String getFastHash(byte[] input, HashCode hashCode) throws Exception;
+	String getFastHash(byte[] input);
 
 	/**
 	 * Generates a fast hash code for an input {@link File} with the given {@link HashCode}.
@@ -151,16 +145,15 @@ public interface HashCodeGenerator extends Service {
      * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
      *
      * @param input {@link File} for the hash code
-     * @param hashCode {@link HashCode} algorithm
      * @param parts for the hash code data
      * @param partSize of the hash code data
      * @return generated hash code
-	 * @throws Exception 
+	 * @throws IOException 
 	 * @see File
 	 * @see HashCode
 	 * @since 0.9.0
 	 */
-	String getFastHash(File input, HashCode hashCode, int parts, int partSize) throws Exception;
+	String getFastHash(File input, int parts, int partSize) throws IOException;
 
 	/**
 	 * Generates a fast hash code for an input {@link File} with the given {@link HashCode}.
@@ -169,12 +162,11 @@ public interface HashCodeGenerator extends Service {
      * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
      *
      * @param input {@link File} for the hash code
-     * @param hashCode {@link HashCode} algorithm
      * @return generated hash code
-	 * @throws Exception 
+	 * @throws IOException 
 	 * @see File
 	 * @see HashCode
 	 * @since 0.9.0
 	 */
-	String getFastHash(File input, HashCode hashCode) throws Exception;
+	String getFastHash(File input) throws IOException;
 }

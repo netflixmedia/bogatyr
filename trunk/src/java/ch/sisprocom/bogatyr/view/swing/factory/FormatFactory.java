@@ -242,8 +242,7 @@ public abstract class FormatFactory {
 	              throws ParseException {
 	            Number number = (Number)o;
 	            if (null != number) {
-	                final double d = number.doubleValue() * HelperNumber.NUMBER_100.doubleValue();
-	                number = new Double(d);
+	                number = number.doubleValue() * HelperNumber.NUMBER_100.doubleValue();
 	            }
 	            return super.valueToString(number);
 	        }
@@ -255,9 +254,7 @@ public abstract class FormatFactory {
 	        	if (null != text) {
 	        		Number number = new BigDecimal(HelperString.getValidNumericString(s));
 
-	                final double d = number.doubleValue() / HelperNumber.NUMBER_100.doubleValue();
-	                number = new Double(d);
-	                return number;
+	                return number.doubleValue() / HelperNumber.NUMBER_100.doubleValue();
 	        	}
 	        	return null;
 	        }

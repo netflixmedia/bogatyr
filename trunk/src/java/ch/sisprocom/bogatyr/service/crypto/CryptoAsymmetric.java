@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.service.Service;
  * This is an interface for asymmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091109)
+ * @version 0.9.0 (20100212)
  * @since 0.6.0
  */
 public interface CryptoAsymmetric extends Service { //$Example$
@@ -49,22 +49,20 @@ public interface CryptoAsymmetric extends Service { //$Example$
 	 * Generates a public and a private {@link KeyPair} with the algorithms standard key size.
 	 * 
 	 * @return generated {@link KeyPair}
-	 * @throws Exception
 	 * @see KeyPair
 	 * @since 0.6.0
 	 */
-	KeyPair generateKeyPair() throws Exception;
+	KeyPair generateKeyPair();
 
 	/**
 	 * Generates a public and a private {@link KeyPair} with a given key size.
 	 * 
 	 * @param keysize in bits (normally modulo 16 = 0, e.g. 1024, 2048)
 	 * @return generated {@link KeyPair}
-	 * @throws Exception
 	 * @see KeyPair
 	 * @since 0.6.0
 	 */
-	KeyPair generateKeyPair(int keysize) throws Exception;
+	KeyPair generateKeyPair(int keysize);
 
 	/**
 	 * Encrypt the data (byte-array) with a given {@link PublicKey} and the implementations algorithm.
