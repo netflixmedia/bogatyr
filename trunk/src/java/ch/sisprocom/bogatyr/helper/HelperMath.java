@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.4.0
  */
 public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
@@ -209,10 +209,10 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @since 0.4.0
      */	
 	public static double log(final double base, final double value) { //$JUnit$
-        if (1.0D >= base) {
+        if (HelperNumber.NUMBER_1.doubleValue() >= base) {
             throw new RuntimeExceptionMustBeGreater("base", base, 1); //$NON-NLS-1$
         }
-        if (0.0D >= value) {
+        if (HelperNumber.NUMBER_0.doubleValue() >= value) {
             throw new RuntimeExceptionMustBeGreater("value", value, 0); //$NON-NLS-1$
         }
 
@@ -229,11 +229,11 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */
     public static double round(final double value, final int decimalPlace) { //$JUnit$
 		int dp = decimalPlace;
-		double powerOfTen = 1.0D;
+		double powerOfTen = HelperNumber.NUMBER_1.doubleValue();
 		
 	    while (0 < dp) {
             dp--;
-            powerOfTen *= 10.0D;
+            powerOfTen *= HelperNumber.NUMBER_10.doubleValue();
 	    }
         return (double) StrictMath.round(value * powerOfTen) / powerOfTen;
 	}
@@ -341,7 +341,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
         	return 1;
         }
 
-        return (int) StrictMath.pow(sum(n), 2.0D);
+        return (int) StrictMath.pow(sum(n), HelperNumber.NUMBER_2.doubleValue());
     }
 
 	/**
@@ -438,7 +438,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
         	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
-        return (int)StrictMath.pow(n, 2.0D);
+        return (int)StrictMath.pow(n, HelperNumber.NUMBER_2.doubleValue());
     }
 
 	/**

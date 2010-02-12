@@ -61,7 +61,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.1.0
  */
 public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
@@ -142,7 +142,7 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 		if (0 >= keySize) {
 			throw new RuntimeExceptionMustBeGreater("keySize", keySize, 0); //$NON-NLS-1$
 		}
-		if (0 != keySize % HelperNumber.INT_16) {
+		if (0 != keySize % HelperNumber.NUMBER_16.intValue()) {
             throw new IllegalArgumentException("keySize is not a multiple of 16"); //$NON-NLS-1$
         }
 
@@ -180,7 +180,7 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 		if (0 >= keySize) {
 			throw new RuntimeExceptionMustBeGreater("keySize", keySize, 0); //$NON-NLS-1$
 		}
-		if (0 != keySize % HelperNumber.INT_16) {
+		if (0 != keySize % HelperNumber.NUMBER_16.intValue()) {
             throw new IllegalArgumentException("keySize is not a multiple of 16"); //$NON-NLS-1$
         }
         if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
@@ -244,7 +244,7 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 		if (0 >= keySize) {
 			throw new RuntimeExceptionMustBeGreater("keySize", keySize, 0); //$NON-NLS-1$
 		}
-		if (0 != keySize % HelperNumber.INT_16) {
+		if (0 != keySize % HelperNumber.NUMBER_16.intValue()) {
             throw new IllegalArgumentException("keySize is not a multiple of 16"); //$NON-NLS-1$
         }
         if (input.length * 2 > HelperEnvironment.getMemoryFree()) {

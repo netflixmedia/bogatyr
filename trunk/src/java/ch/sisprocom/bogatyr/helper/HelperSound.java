@@ -63,7 +63,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for sound operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.0 (20100212)
  * @since 0.5.0
  */
 public abstract class HelperSound {
@@ -205,7 +205,7 @@ public abstract class HelperSound {
 			public void run() {
 				clip.stop();
 			}
-		}, clip.getMicrosecondLength()/1000L);
+		}, clip.getMicrosecondLength() / HelperNumber.NUMBER_1000.longValue());
 	}
 
 	/**

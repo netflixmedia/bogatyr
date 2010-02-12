@@ -131,8 +131,8 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
     	if (0 >= port) {
     		throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
     	}
-		if (HelperNumber.INT_65536 <= port) {
-    		throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
+		if (HelperNumber.NUMBER_65536.intValue() <= port) {
+    		throw new RuntimeExceptionMustBeSmaller("port", port, HelperNumber.NUMBER_65535); //$NON-NLS-1$
     	}
 
 		this.port = port;

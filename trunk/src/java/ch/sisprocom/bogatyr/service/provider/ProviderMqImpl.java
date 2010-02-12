@@ -55,7 +55,7 @@ import java.util.List;
  * <strong>Note:</strong> This class needs <a href="http://www-01.ibm.com/software/integration/wmqfamily//">IBM MQSeries</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.3.0
  */
 public class ProviderMqImpl extends ServiceAbstract implements ProviderMq {
@@ -88,8 +88,8 @@ public class ProviderMqImpl extends ServiceAbstract implements ProviderMq {
     	if (0 >= port) {
     		throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
     	}
-		if (HelperNumber.INT_65536 <= port) {
-    		throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
+		if (HelperNumber.NUMBER_65536.intValue() <= port) {
+    		throw new RuntimeExceptionMustBeSmaller("port", port, HelperNumber.NUMBER_65535); //$NON-NLS-1$
     	}
  
 		MQEnvironment.port = port;

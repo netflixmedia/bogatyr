@@ -70,7 +70,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -608,7 +608,7 @@ public abstract class HelperIO {
 		final long length = file.length();
 
 		if (length > HelperEnvironment.getMemoryFree()) {
-            throw new IllegalArgumentException("length of file (" + length + ") exceeds the free VM memory (" + HelperEnvironment.getMemoryFree() + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+            throw new RuntimeExceptionExceedsVmMemory("file", file.length()); //$NON-NLS-1$
         }
 
 		final StringBuilder sb = new StringBuilder();

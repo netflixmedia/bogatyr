@@ -46,6 +46,7 @@ import javax.swing.text.DefaultFormatter;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
@@ -55,7 +56,8 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a format factory.
  * 
  * @author Stefan Laubenberger
- * @version 20100210
+ * @version 0.9.0 (20100212)
+ * @since 0.9.0
  */
 public abstract class FormatFactory {
 	public static final String PATTERN_DATE_DAY_MONTH_YEAR 								  = "dd.MM.yyyy"; //$NON-NLS-1$
@@ -240,7 +242,7 @@ public abstract class FormatFactory {
 	              throws ParseException {
 	            Number number = (Number)o;
 	            if (null != number) {
-	                final double d = number.doubleValue() * 100.0;
+	                final double d = number.doubleValue() * HelperNumber.NUMBER_100.doubleValue();
 	                number = new Double(d);
 	            }
 	            return super.valueToString(number);
@@ -253,7 +255,7 @@ public abstract class FormatFactory {
 	        	if (null != text) {
 	        		Number number = new BigDecimal(HelperString.getValidNumericString(s));
 
-	                final double d = number.doubleValue() / 100.0;
+	                final double d = number.doubleValue() / HelperNumber.NUMBER_100.doubleValue();
 	                number = new Double(d);
 	                return number;
 	        	}

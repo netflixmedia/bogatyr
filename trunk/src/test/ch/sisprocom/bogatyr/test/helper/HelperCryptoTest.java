@@ -43,13 +43,13 @@ import java.util.UUID;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091016
+ * @version 20100212
  */
 public class HelperCryptoTest {
 
 	@Test
     public void testGetRandomKey() {
-        assertNotNull(HelperCrypto.getRandomKey(HelperNumber.INT_16, '1','2','3'));
+        assertNotNull(HelperCrypto.getRandomKey(HelperNumber.NUMBER_16.intValue(), '1','2','3'));
 
         try {
         	HelperCrypto.getRandomKey(Integer.MIN_VALUE, '1','2','3');
@@ -61,7 +61,7 @@ public class HelperCryptoTest {
 		}
 
         try {
-        	HelperCrypto.getRandomKey(HelperNumber.INT_16, null);
+        	HelperCrypto.getRandomKey(HelperNumber.NUMBER_16.intValue(), null);
             fail("data is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -72,7 +72,7 @@ public class HelperCryptoTest {
 
 	@Test
     public void testGetRandomKeyDefault() {
-		assertNotNull(HelperCrypto.getRandomKey(HelperNumber.INT_16));
+		assertNotNull(HelperCrypto.getRandomKey(HelperNumber.NUMBER_16.intValue()));
 
 		try {
 			HelperCrypto.getRandomKey(Integer.MIN_VALUE);

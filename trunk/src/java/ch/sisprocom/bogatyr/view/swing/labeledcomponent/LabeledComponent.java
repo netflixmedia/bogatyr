@@ -41,6 +41,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.view.swing.Label;
 import ch.sisprocom.bogatyr.view.swing.Panel;
 
@@ -49,7 +50,7 @@ import ch.sisprocom.bogatyr.view.swing.Panel;
  * This is a Label combined with a JComponent.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20100119)
+ * @version 0.8.0 (20100212)
  * @since 0.6.0
  */
 public class LabeledComponent extends Panel {
@@ -99,14 +100,14 @@ public class LabeledComponent extends Panel {
 	    if (component instanceof JCheckBox || component instanceof JRadioButton) {
 			add(component, gbc);
 
-			gbc.weightx = 1.0D;
+			gbc.weightx = HelperNumber.NUMBER_1.doubleValue();
 			gbc.gridx = 1;
 			gbc.insets = new Insets(0, 0, 0, 0);
 			add(label, gbc);	    	
 	    } else {
 			add(label, gbc);
 			
-			gbc.weightx = 1.0D;
+			gbc.weightx = HelperNumber.NUMBER_1.doubleValue();
 			gbc.gridx = 1;
 			gbc.insets = new Insets(0, 0, 0, 0);
 			add(component, gbc);

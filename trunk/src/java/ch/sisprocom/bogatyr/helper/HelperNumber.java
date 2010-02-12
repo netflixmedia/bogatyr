@@ -41,52 +41,60 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for numbers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
-    public static final BigDecimal BIGDECIMAL_100 	  = new BigDecimal("100"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_1000 	  = new BigDecimal("1000"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_10000   = new BigDecimal("10000"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_100000  = new BigDecimal("100000"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_1000000 = new BigDecimal("1000000"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_8 	  = new BigDecimal("8"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_16 	  = new BigDecimal("16"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_32 	  = new BigDecimal("32"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_64 	  = new BigDecimal("64"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_128 	  = new BigDecimal("128"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_256 	  = new BigDecimal("256"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_512 	  = new BigDecimal("512"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_1024 	  = new BigDecimal("1024"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_2048 	  = new BigDecimal("2048"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_4096 	  = new BigDecimal("4096"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_8192 	  = new BigDecimal("8192"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_16384   = new BigDecimal("16384"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_32768   = new BigDecimal("32768"); //$NON-NLS-1$
-    public static final BigDecimal BIGDECIMAL_65536   = new BigDecimal("65536"); //$NON-NLS-1$
-
-    public static final int INT_10 		= 10;
-    public static final int INT_100 	= 100;
-    public static final int INT_1000 	= 1000;
-    public static final int INT_10000 	= 10000;
-    public static final int INT_100000 	= 100000;
-    public static final int INT_1000000 = 1000000;
-    public static final int INT_8 		= 8;
-    public static final int INT_16 		= 16;
-    public static final int INT_32 		= 32;
-    public static final int INT_64 		= 64;
-    public static final int INT_128 	= 128;
-    public static final int INT_256 	= 256;
-    public static final int INT_512 	= 512;
-    public static final int INT_1024 	= 1024;
-    public static final int INT_2048 	= 2048;
-    public static final int INT_4096 	= 4096;
-    public static final int INT_8192 	= 8192;
-    public static final int INT_16384 	= 16384;
-    public static final int INT_32768 	= 32768;
-    public static final int INT_65536 	= 65536;
-
-
+    public static final BigDecimal NUMBER_0 	  = BigDecimal.ZERO;
+    public static final BigDecimal NUMBER_1 	  = BigDecimal.ONE;
+    public static final BigDecimal NUMBER_2 	  = new BigDecimal("2"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_3 	  = new BigDecimal("3"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_4 	  = new BigDecimal("4"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_5 	  = new BigDecimal("5"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_6 	  = new BigDecimal("6"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_7 	  = new BigDecimal("7"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_8 	  = new BigDecimal("8"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_9 	  = new BigDecimal("9"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_10 	  = BigDecimal.TEN;
+    public static final BigDecimal NUMBER_100 	  = new BigDecimal("100"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_1000 	  = new BigDecimal("1000"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_10000   = new BigDecimal("10000"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_100000  = new BigDecimal("100000"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_1000000 = new BigDecimal("1000000"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_15 	  = new BigDecimal("15"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_16 	  = new BigDecimal("16"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_31 	  = new BigDecimal("31"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_32 	  = new BigDecimal("32"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_63 	  = new BigDecimal("63"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_64 	  = new BigDecimal("64"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_127 	  = new BigDecimal("127"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_128 	  = new BigDecimal("128"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_255 	  = new BigDecimal("255"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_256 	  = new BigDecimal("256"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_511 	  = new BigDecimal("511"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_512 	  = new BigDecimal("512"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_1023 	  = new BigDecimal("1023"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_1024 	  = new BigDecimal("1024"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_2047 	  = new BigDecimal("2047"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_2048 	  = new BigDecimal("2048"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_4095 	  = new BigDecimal("4095"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_4096 	  = new BigDecimal("4096"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_8191 	  = new BigDecimal("8191"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_8192 	  = new BigDecimal("8192"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_16383   = new BigDecimal("16383"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_16384   = new BigDecimal("16384"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_32767   = new BigDecimal("32767"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_32768   = new BigDecimal("32768"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_65535   = new BigDecimal("65535"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_65536   = new BigDecimal("65536"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_131071   = new BigDecimal("131071"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_131072   = new BigDecimal("131072"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_262143   = new BigDecimal("262143"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_262144   = new BigDecimal("262144"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_16777215 = new BigDecimal("16777215"); //$NON-NLS-1$
+    public static final BigDecimal NUMBER_16777216 = new BigDecimal("16777216"); //$NON-NLS-1$
+    
+ 
     /**
      * Multiply 1-n values together.
      *

@@ -45,19 +45,19 @@ import ch.sisprocom.bogatyr.model.unit.Volume;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100209
+ * @version 20100212
  */
 public class UnitVolumeTest {
 	@Test
 	public void testConvert() {
-		assertTrue(0 == BigDecimal.ONE.compareTo(Volume.MM3.convertTo(Volume.CM3, HelperNumber.BIGDECIMAL_1000)));
-		assertTrue(0 == HelperNumber.BIGDECIMAL_1000.compareTo(Volume.CM3.convertTo(Volume.MM3, BigDecimal.ONE)));
+		assertTrue(0 == BigDecimal.ONE.compareTo(Volume.MM3.convertTo(Volume.CM3, HelperNumber.NUMBER_1000)));
+		assertTrue(0 == HelperNumber.NUMBER_1000.compareTo(Volume.CM3.convertTo(Volume.MM3, BigDecimal.ONE)));
 
-		assertTrue(0 == BigDecimal.ONE.compareTo(Volume.CM3.convertTo(Volume.L, HelperNumber.BIGDECIMAL_1000)));
-		assertTrue(0 == HelperNumber.BIGDECIMAL_1000.compareTo(Volume.L.convertTo(Volume.CM3, BigDecimal.ONE)));
+		assertTrue(0 == BigDecimal.ONE.compareTo(Volume.CM3.convertTo(Volume.L, HelperNumber.NUMBER_1000)));
+		assertTrue(0 == HelperNumber.NUMBER_1000.compareTo(Volume.L.convertTo(Volume.CM3, BigDecimal.ONE)));
 
-		assertTrue(0 == BigDecimal.ONE.compareTo(Volume.L.convertTo(Volume.M3, HelperNumber.BIGDECIMAL_1000)));
-		assertTrue(0 == HelperNumber.BIGDECIMAL_1000.compareTo(Volume.M3.convertTo(Volume.L, BigDecimal.ONE)));
+		assertTrue(0 == BigDecimal.ONE.compareTo(Volume.L.convertTo(Volume.M3, HelperNumber.NUMBER_1000)));
+		assertTrue(0 == HelperNumber.NUMBER_1000.compareTo(Volume.M3.convertTo(Volume.L, BigDecimal.ONE)));
 
 		assertTrue(0 == BigDecimal.ONE.compareTo(Volume.PINT.convertTo(Volume.CM3, new BigDecimal("473.176473")))); //$NON-NLS-1$
 		assertTrue(0 == new BigDecimal("473.176473").compareTo(Volume.CM3.convertTo(Volume.PINT, BigDecimal.ONE))); //$NON-NLS-1$

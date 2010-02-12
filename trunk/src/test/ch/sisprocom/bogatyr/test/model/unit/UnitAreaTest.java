@@ -47,27 +47,27 @@ import ch.sisprocom.bogatyr.model.unit.Area;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100209
+ * @version 20100212
  */
 public class UnitAreaTest {
 	private static final MathContext MC = new MathContext(5, RoundingMode.HALF_EVEN);
 	
 	@Test
 	public void testConvert() {
-		assertTrue(0 == BigDecimal.ONE.compareTo(Area.MM2.convertTo(Area.CM2, HelperNumber.BIGDECIMAL_100)));
-		assertTrue(0 == HelperNumber.BIGDECIMAL_100.compareTo(Area.CM2.convertTo(Area.MM2, BigDecimal.ONE)));
+		assertTrue(0 == BigDecimal.ONE.compareTo(Area.MM2.convertTo(Area.CM2, HelperNumber.NUMBER_100)));
+		assertTrue(0 == HelperNumber.NUMBER_100.compareTo(Area.CM2.convertTo(Area.MM2, BigDecimal.ONE)));
 
-		assertTrue(0 == BigDecimal.ONE.compareTo(Area.CM2.convertTo(Area.M2, HelperNumber.BIGDECIMAL_10000)));
-		assertTrue(0 == HelperNumber.BIGDECIMAL_10000.compareTo(Area.M2.convertTo(Area.CM2, BigDecimal.ONE)));
+		assertTrue(0 == BigDecimal.ONE.compareTo(Area.CM2.convertTo(Area.M2, HelperNumber.NUMBER_10000)));
+		assertTrue(0 == HelperNumber.NUMBER_10000.compareTo(Area.M2.convertTo(Area.CM2, BigDecimal.ONE)));
 		
-		assertTrue(0 == HelperNumber.BIGDECIMAL_100.compareTo(Area.AREA.convertTo(Area.M2, BigDecimal.ONE)));
-		assertTrue(0 == BigDecimal.ONE.compareTo(Area.M2.convertTo(Area.AREA, HelperNumber.BIGDECIMAL_100)));
+		assertTrue(0 == HelperNumber.NUMBER_100.compareTo(Area.AREA.convertTo(Area.M2, BigDecimal.ONE)));
+		assertTrue(0 == BigDecimal.ONE.compareTo(Area.M2.convertTo(Area.AREA, HelperNumber.NUMBER_100)));
 
-		assertTrue(0 == BigDecimal.ONE.compareTo(Area.AREA.convertTo(Area.HECTARE, HelperNumber.BIGDECIMAL_100)));
-		assertTrue(0 == HelperNumber.BIGDECIMAL_100.compareTo(Area.HECTARE.convertTo(Area.AREA, BigDecimal.ONE)));
+		assertTrue(0 == BigDecimal.ONE.compareTo(Area.AREA.convertTo(Area.HECTARE, HelperNumber.NUMBER_100)));
+		assertTrue(0 == HelperNumber.NUMBER_100.compareTo(Area.HECTARE.convertTo(Area.AREA, BigDecimal.ONE)));
 
-		assertTrue(0 == BigDecimal.ONE.compareTo(Area.HECTARE.convertTo(Area.KM2, HelperNumber.BIGDECIMAL_100)));
-		assertTrue(0 == HelperNumber.BIGDECIMAL_100.compareTo(Area.KM2.convertTo(Area.HECTARE, BigDecimal.ONE)));
+		assertTrue(0 == BigDecimal.ONE.compareTo(Area.HECTARE.convertTo(Area.KM2, HelperNumber.NUMBER_100)));
+		assertTrue(0 == HelperNumber.NUMBER_100.compareTo(Area.KM2.convertTo(Area.HECTARE, BigDecimal.ONE)));
 
 		assertTrue(0 == BigDecimal.ONE.compareTo(Area.FOOT2.convertTo(Area.M2, new BigDecimal("0.09290304")))); //$NON-NLS-1$
 		assertTrue(0 == new BigDecimal("0.09290304").compareTo(Area.M2.convertTo(Area.FOOT2, BigDecimal.ONE))); //$NON-NLS-1$

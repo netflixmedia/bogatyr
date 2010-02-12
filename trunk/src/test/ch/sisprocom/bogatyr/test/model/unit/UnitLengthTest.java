@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.model.unit.Length;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100209
+ * @version 20100212
  */
 public class UnitLengthTest {
 	private static final MathContext MC = new MathContext(5, RoundingMode.HALF_EVEN);
@@ -81,10 +81,10 @@ public class UnitLengthTest {
 		assertTrue(0 == BigDecimal.ONE.compareTo(Length.MM.convertTo(Length.CM, BigDecimal.TEN)));
 
 		assertTrue(0 == new BigDecimal("0.01").compareTo(Length.CM.convertTo(Length.M, BigDecimal.ONE))); //$NON-NLS-1$
-		assertTrue(0 == HelperNumber.BIGDECIMAL_100.compareTo(Length.M.convertTo(Length.CM, BigDecimal.ONE)));
+		assertTrue(0 == HelperNumber.NUMBER_100.compareTo(Length.M.convertTo(Length.CM, BigDecimal.ONE)));
 
-		assertTrue(0 == HelperNumber.BIGDECIMAL_100000.compareTo(Length.KM.convertTo(Length.CM, BigDecimal.ONE)));
-		assertTrue(0 == BigDecimal.ONE.compareTo(Length.CM.convertTo(Length.KM, HelperNumber.BIGDECIMAL_100000)));
+		assertTrue(0 == HelperNumber.NUMBER_100000.compareTo(Length.KM.convertTo(Length.CM, BigDecimal.ONE)));
+		assertTrue(0 == BigDecimal.ONE.compareTo(Length.CM.convertTo(Length.KM, HelperNumber.NUMBER_100000)));
 
 		assertTrue(0 == new BigDecimal("2.54").compareTo(Length.INCH.convertTo(Length.CM, BigDecimal.ONE))); //$NON-NLS-1$
 		assertTrue(0 == BigDecimal.ONE.compareTo(Length.CM.convertTo(Length.INCH, new BigDecimal("2.54")).round(MC))); //$NON-NLS-1$

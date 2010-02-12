@@ -31,12 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.helper.HelperSwing;
-import ch.sisprocom.bogatyr.misc.Displayable;
-import ch.sisprocom.bogatyr.misc.Fadeable;
-
-import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -46,12 +40,20 @@ import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
 import java.awt.Image;
 
+import javax.swing.JFrame;
+
+import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.HelperSwing;
+import ch.sisprocom.bogatyr.misc.Displayable;
+import ch.sisprocom.bogatyr.misc.Fadeable;
+
 
 /**
  * This is an extended JFrame.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100212)
  * @since 0.2.0
  */
 public class Frame extends JFrame implements Fadeable, Displayable {
@@ -150,8 +152,8 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 	
 	        final GridBagConstraints gbc = new GridBagConstraints();
 	        gbc.fill    = GridBagConstraints.BOTH;
-	        gbc.weighty = 1.0D;
-	        gbc.weightx = 1.0D;
+	        gbc.weighty = HelperNumber.NUMBER_1.doubleValue();
+	        gbc.weightx = HelperNumber.NUMBER_1.doubleValue();
 	
 //	    if (isFading) {
 	        panelGlass.add(new Panel(colorFader), gbc);
