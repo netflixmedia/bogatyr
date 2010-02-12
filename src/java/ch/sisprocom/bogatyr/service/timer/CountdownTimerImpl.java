@@ -34,13 +34,14 @@ package ch.sisprocom.bogatyr.service.timer;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 /**
  * This is a countdown timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.6.0
  */
 public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer {
@@ -52,11 +53,11 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
      */
     @Override
     public synchronized void start(final long runtime) {
-		if (0 > runtime) {
+		if (HelperNumber.NUMBER_0.longValue() > runtime) {
 			throw new RuntimeExceptionMustBeGreater("runtime", runtime, 0); //$NON-NLS-1$
 		}
 
-		start(0L, runtime, 1000L);
+		start(HelperNumber.NUMBER_0.longValue(), runtime, HelperNumber.NUMBER_1000.longValue());
     }
 
     @Override
@@ -108,7 +109,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 	class TaskCountdown extends TimerTask {
 		@Override
 		public void run() {
-			if (0L < runtime) {
+			if (HelperNumber.NUMBER_0.longValue() < runtime) {
 				runtime -= getInterval();
 				fireTimeChanged();
 			} else {

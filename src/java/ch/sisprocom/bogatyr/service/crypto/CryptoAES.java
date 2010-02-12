@@ -92,7 +92,7 @@ public class CryptoAES  extends ServiceAbstract implements CryptoSymmetric {
 	 * Private methods
 	 */
 	private static AlgorithmParameterSpec prepareIv() {
-        final byte[] ivBytes = new byte[HelperNumber.INT_16];
+        final byte[] ivBytes = new byte[HelperNumber.NUMBER_16.intValue()];
         
         for (int ii = 0; ivBytes.length > ii; ii++) {
         	ivBytes[ii] = (byte) 0x5a;

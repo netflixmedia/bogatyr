@@ -47,18 +47,18 @@ import ch.sisprocom.bogatyr.model.unit.Weight;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100209
+ * @version 20100212
  */
 public class UnitWeightTest {
 	private static final MathContext MC = new MathContext(5, RoundingMode.HALF_EVEN);
 
 	@Test
 	public void testConvert() {
-		assertTrue(0 == BigDecimal.ONE.compareTo(Weight.MILLIGRAM.convertTo(Weight.GRAM, HelperNumber.BIGDECIMAL_1000)));
-		assertTrue(0 == HelperNumber.BIGDECIMAL_1000.compareTo(Weight.GRAM.convertTo(Weight.MILLIGRAM, BigDecimal.ONE)));
+		assertTrue(0 == BigDecimal.ONE.compareTo(Weight.MILLIGRAM.convertTo(Weight.GRAM, HelperNumber.NUMBER_1000)));
+		assertTrue(0 == HelperNumber.NUMBER_1000.compareTo(Weight.GRAM.convertTo(Weight.MILLIGRAM, BigDecimal.ONE)));
 
-		assertTrue(0 == BigDecimal.ONE.compareTo(Weight.GRAM.convertTo(Weight.KILOGRAM, HelperNumber.BIGDECIMAL_1000)));
-		assertTrue(0 == HelperNumber.BIGDECIMAL_1000.compareTo(Weight.KILOGRAM.convertTo(Weight.GRAM, BigDecimal.ONE)));
+		assertTrue(0 == BigDecimal.ONE.compareTo(Weight.GRAM.convertTo(Weight.KILOGRAM, HelperNumber.NUMBER_1000)));
+		assertTrue(0 == HelperNumber.NUMBER_1000.compareTo(Weight.KILOGRAM.convertTo(Weight.GRAM, BigDecimal.ONE)));
 
 		assertTrue(0 == BigDecimal.ONE.compareTo(Weight.OUNCE.convertTo(Weight.GRAM, new BigDecimal("28.34952")))); //$NON-NLS-1$
 		assertTrue(0 == new BigDecimal("28.34952").compareTo(Weight.GRAM.convertTo(Weight.OUNCE, BigDecimal.ONE))); //$NON-NLS-1$

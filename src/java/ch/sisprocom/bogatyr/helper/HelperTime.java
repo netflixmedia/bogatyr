@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
  * This is a helper class for time operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.7.0
  */
 public abstract class HelperTime {
@@ -55,7 +55,7 @@ public abstract class HelperTime {
 	public static final int DAYS_PER_WEEK = 7;
 	public static final int DAYS_PER_YEAR = 365;
 	  
-	public static final long MILLISECONDS_PER_MINUTE = 60L * 1000L;
+	public static final long MILLISECONDS_PER_MINUTE = 60L * HelperNumber.NUMBER_1000.longValue();
 	public static final long MILLISECONDS_PER_HOUR = 60L * MILLISECONDS_PER_MINUTE;
 	public static final long MILLISECONDS_PER_DAY = HOURS_PER_DAY * MILLISECONDS_PER_HOUR;
 	public static final long MILLISECONDS_PER_WEEK = DAYS_PER_WEEK * MILLISECONDS_PER_DAY;
@@ -99,13 +99,13 @@ public abstract class HelperTime {
 			socket = new Socket(host, TIME_SERVER_PORT);
 			is = socket.getInputStream();
 
-            long time = 0L;
+            long time = HelperNumber.NUMBER_0.longValue();
 
             for (int ii = 3; 0 <= ii; ii-- ) {
 				time ^= (long) is.read() << ii * 8;
 			}
 
-			return new Date((time - SECONDS_BETWEEN_1900_AND_1970) * 1000L);
+			return new Date((time - SECONDS_BETWEEN_1900_AND_1970) * HelperNumber.NUMBER_1000.longValue());
 		} finally {
 			if (null != is) {
 				is.close();
