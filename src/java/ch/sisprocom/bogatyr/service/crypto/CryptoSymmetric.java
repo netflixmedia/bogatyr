@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.service.Service;
  * This is an interface for symmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091109)
+ * @version 0.9.0 (20100212)
  * @since 0.6.0
  */
 public interface CryptoSymmetric extends Service { //$Example$
@@ -52,22 +52,20 @@ public interface CryptoSymmetric extends Service { //$Example$
 	 * Generates a {@link SecretKey} with the algorithms standard key size.
 	 * 
      * @return generated {@link SecretKey}
-	 * @throws Exception 
 	 * @see SecretKey 
 	 * @since 0.6.0
 	 */
-	SecretKey generateKey() throws Exception;
+	SecretKey generateKey();
 	
 	/**
 	 * Generates a {@link SecretKey} with a given key size.
 	 * 
 	 * @param keySize in bits (e.g. 128, 192 or 256)
      * @return generated {@link SecretKey}
-	 * @throws Exception 
 	 * @see SecretKey 
 	 * @since 0.6.0
 	 */
-	SecretKey generateKey(int keySize) throws Exception;
+	SecretKey generateKey(int keySize);
 	
 	/**
 	 * Encrypt the data (byte-array) with a given {@link Key} and the implementations algorithm.

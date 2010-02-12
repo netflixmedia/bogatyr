@@ -35,7 +35,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import ch.sisprocom.bogatyr.helper.Constants;
+import ch.sisprocom.bogatyr.misc.Constants;
 import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091210)
+ * @version 0.8.0 (20100212)
  * @since 0.2.0
  */
 public abstract class LauncherProcess {

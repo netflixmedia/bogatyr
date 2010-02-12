@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,6 +32,7 @@
 package ch.sisprocom.bogatyr.service.crypto;
 
 import java.io.File;
+import java.io.IOException;
 
 import ch.sisprocom.bogatyr.service.Service;
 
@@ -40,7 +41,7 @@ import ch.sisprocom.bogatyr.service.Service;
  * This is an interface for scrambling data.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091116)
+ * @version 0.9.0 (20100212)
  * @since 0.6.0
  */
 public interface Scrambler extends Service {
@@ -70,11 +71,11 @@ public interface Scrambler extends Service {
 	 * @param input {@link File} to scramble
 	 * @param output {@link File} for the scrambled data
 	 * @param pattern for scrambling (region: -128 - 127)
-	 * @throws Exception 
+	 * @throws IOException 
 	 * @see File
 	 * @since 0.9.0
 	 */
-	void scramble(File input, File output, byte pattern) throws Exception;
+	void scramble(File input, File output, byte pattern) throws IOException;
 
 	/**
 	 * Scramble an input {@link File} to an output {@link File}.
@@ -83,11 +84,11 @@ public interface Scrambler extends Service {
 	 * @param output {@link File} for the scrambled data
 	 * @param pattern for scrambling (region: -128 - 127)
 	 * @param bufferSize in bytes
-	 * @throws Exception 
+	 * @throws IOException 
 	 * @see File
 	 * @since 0.9.0
 	 */
-	void scramble(File input, File output, byte pattern, int bufferSize) throws Exception;
+	void scramble(File input, File output, byte pattern, int bufferSize) throws IOException;
 
 	/**
 	 * Unscramble an input {@link File} to an output {@link File}.
@@ -95,11 +96,11 @@ public interface Scrambler extends Service {
 	 * @param input {@link File} to unscramble
 	 * @param output {@link File} for the unscrambled data
 	 * @param pattern for unscrambling (region: -128 - 127)
-	 * @throws Exception 
+	 * @throws IOException 
 	 * @see File
 	 * @since 0.9.0
 	 */
-	void unscramble(File input, File output, byte pattern) throws Exception;
+	void unscramble(File input, File output, byte pattern) throws IOException;
 
 	/**
 	 * Unscramble an input {@link File} to an output {@link File}.
@@ -108,9 +109,9 @@ public interface Scrambler extends Service {
 	 * @param output {@link File} for the unscrambled data
 	 * @param pattern for unscrambling (region: -128 - 127)
 	 * @param bufferSize in bytes
-	 * @throws Exception 
+	 * @throws IOException 
 	 * @see File
 	 * @since 0.9.0
 	 */
-	void unscramble(File input, File output, byte pattern, int bufferSize) throws Exception;
+	void unscramble(File input, File output, byte pattern, int bufferSize) throws IOException;
 }

@@ -34,6 +34,7 @@ package ch.sisprocom.bogatyr.helper;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import ch.sisprocom.bogatyr.misc.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 

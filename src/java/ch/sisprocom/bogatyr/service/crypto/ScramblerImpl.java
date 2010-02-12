@@ -38,7 +38,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import ch.sisprocom.bogatyr.helper.Constants;
+import ch.sisprocom.bogatyr.misc.Constants;
 import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
@@ -144,7 +144,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
             byte lastByte = pattern;
             while (0 < (offset = is.read(buffer))) {
 
-                byte[] result = obfuscate(buffer, lastByte);
+                final byte[] result = obfuscate(buffer, lastByte);
             	
             	os.write(result, 0, offset);
 

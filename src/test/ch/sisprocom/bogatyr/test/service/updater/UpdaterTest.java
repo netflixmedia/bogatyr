@@ -36,10 +36,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import ch.sisprocom.bogatyr.misc.Constants;
 import org.junit.Before;
 import org.junit.Test;
 
-import ch.sisprocom.bogatyr.helper.Constants;
 import ch.sisprocom.bogatyr.helper.HelperCrypto;
 import ch.sisprocom.bogatyr.helper.HelperXml;
 import ch.sisprocom.bogatyr.model.crypto.HashCode;

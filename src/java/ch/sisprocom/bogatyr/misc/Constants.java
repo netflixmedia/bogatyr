@@ -29,7 +29,7 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.helper;
+package ch.sisprocom.bogatyr.misc;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -37,6 +37,7 @@ import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.model.misc.Manufacturer;
 import ch.sisprocom.bogatyr.model.misc.ManufacturerImpl;
 import ch.sisprocom.bogatyr.model.misc.Owner;
@@ -56,7 +57,7 @@ public abstract class Constants {
 	//Bogatyr specific
 	public static final String BOGATYR_NAME		 		  = "Bogatyr"; //$NON-NLS-1$
 	public static final BigDecimal BOGATYR_VERSION 		  = new BigDecimal("0.9"); //$NON-NLS-1$
-	public static final int BOGATYR_BUILD 				  = 232;
+	public static final int BOGATYR_BUILD 				  = 233;
 	public static final Manufacturer BOGATYR_MANUFACTURER = new ManufacturerImpl();
 	public static final Owner BOGATYR_OWNER 			  = new OwnerImpl();
 	public static final Publisher BOGATYR_PUBLISHER		  = new PublisherImpl();

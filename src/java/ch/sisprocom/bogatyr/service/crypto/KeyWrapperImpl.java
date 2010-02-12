@@ -48,17 +48,28 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 /**
  * This is a class for wrapping and unwrapping a crypto key.
+ * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
+ * @version 0.9.0 (20100212)
  * @since 0.3.0
  */
 public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
+	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
+
+	private final Cipher cipher;
+	
+	public KeyWrapperImpl() throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
+        super();
+        cipher = Cipher.getInstance(CryptoRSA.XFORM, PROVIDER);
+    }
+	
+	
 	/*
 	 * Implemented methods
 	 */
 	@Override
-    public byte[] wrap(final Key wrapperKey, final Key key) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, NoSuchProviderException {
+    public byte[] wrap(final Key wrapperKey, final Key key) throws InvalidKeyException, IllegalBlockSizeException {
 		if (null == wrapperKey) {
 			throw new RuntimeExceptionIsNull("wrapperKey"); //$NON-NLS-1$
 		}
@@ -66,14 +77,13 @@ public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
 		
-		final Cipher cipher = Cipher.getInstance(CryptoRSA.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.WRAP_MODE, wrapperKey);
 
 		return cipher.wrap(key);
 	}
 
 	@Override
-    public Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException {
+    public Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException {
 		if (null == wrapperKey) {
 			throw new RuntimeExceptionIsNull("wrapperKey"); //$NON-NLS-1$
 		}
@@ -87,7 +97,6 @@ public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
 			throw new IllegalArgumentException("keyType is invalid: " + keyType); //$NON-NLS-1$
 		}
 		
-		final Cipher cipher = Cipher.getInstance(CryptoRSA.XFORM, "BC"); //$NON-NLS-1$
 		cipher.init(Cipher.UNWRAP_MODE, wrapperKey);
 
 		return cipher.unwrap(wrappedKey, keyAlgorithm, keyType);
