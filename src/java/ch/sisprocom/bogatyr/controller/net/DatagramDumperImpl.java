@@ -38,22 +38,20 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.misc.Event;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
+import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
 
 /**
  * This is a datagram dumper to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.8.0
  */
-public class DatagramDumperImpl implements DatagramDumper {
-    private final long createTime = System.currentTimeMillis();
-
+public class DatagramDumperImpl extends ExtendedObjectAbstract implements DatagramDumper {
     private final Event<DatagramDumper> event = new Event<DatagramDumper>(this);
     
     private Thread thread;
@@ -114,24 +112,10 @@ public class DatagramDumperImpl implements DatagramDumper {
 		}	
 	}
     
-
-    /*
-     * Overridden methods
-     */
-    @Override
-    public String toString() {
-        return HelperObject.toString(this);
-    }
-    
-	
+ 
     /*
      * Implemented methods
      */
-    @Override
-    public long getCreateTime() {
-		return createTime;
-	}
-
     @Override
 	public DatagramPacket getPacket() {
 		return packet;

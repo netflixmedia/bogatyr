@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -35,6 +35,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Collection;
 
+import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObject;
+
 
 
 /**
@@ -42,18 +44,10 @@ import java.util.Collection;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20091111)
+ * @version 0.9.0 (20100212)
  * @since 0.7.0
  */
-public interface Server extends Runnable {
-	/**
-     * Returns the instantiation time of the server.
-     *
-     * @return instantiation time of the server
-     * @since 0.9.0
-     */
-	long getCreateTime();
-	
+public interface Server extends ExtendedObject, Runnable {
 	/**
 	 * Returns the {@link ServerSocket} of the current server.
 	 * 

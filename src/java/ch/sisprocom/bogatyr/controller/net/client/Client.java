@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import ch.sisprocom.bogatyr.misc.HolderListener;
+import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObject;
 
 
 /**
@@ -42,18 +43,10 @@ import ch.sisprocom.bogatyr.misc.HolderListener;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100211)
+ * @version 0.9.0 (20100212)
  * @since 0.7.0
  */
-public interface Client extends Runnable, HolderListener<ListenerClient> {
-	/**
-     * Returns the instantiation time of the client.
-     *
-     * @return instantiation time of the client
-     * @since 0.9.0
-     */
-	long getCreateTime();
-	
+public interface Client extends ExtendedObject, Runnable, HolderListener<ListenerClient> {
 	/**
 	 * Returns the current data from readStream().
 	 * 

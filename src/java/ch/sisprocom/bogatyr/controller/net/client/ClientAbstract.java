@@ -40,23 +40,21 @@ import java.util.HashSet;
 import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.misc.Event;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
+import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
 
 /**
  * This is the skeleton for clients.
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.7.0
  */
-public abstract class ClientAbstract implements Client {
-    private final long createTime = System.currentTimeMillis();
-
+public abstract class ClientAbstract extends ExtendedObjectAbstract implements Client {
     private final Event<Client> event = new Event<Client>(this);
     
     private Thread thread;
@@ -132,24 +130,10 @@ public abstract class ClientAbstract implements Client {
 		}	
 	}
     
-
-    /*
-     * Overridden methods
-     */
-    @Override
-    public String toString() {
-        return HelperObject.toString(this);
-    }
-    
 	
     /*
      * Implemented methods
      */
-	@Override
-	public long getCreateTime() {
-		return createTime;
-	}
-	
 	@Override
     public String getHost() {
         return host;

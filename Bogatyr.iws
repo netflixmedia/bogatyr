@@ -21,22 +21,34 @@
   </component>
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="6099473d-4163-40d6-a2ae-9afd78c1b030" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/Application.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/Application.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThreadAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThreadAbstract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/ServiceAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/ServiceAbstract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/Service.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/Service.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerAbstract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThread.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThread.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/ClientAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/ClientAbstract.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/misc/extendedObject/ExtendedObjectAbstract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/View.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/View.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/Model.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/Model.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/ControllerAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/ControllerAbstract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/ApplicationAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/ApplicationAbstract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/ModelAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/ModelAbstract.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/misc/extendedObject" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/misc/HolderListener.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/misc/HolderListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/profiler/Profiler.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/profiler/Profiler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/ScramblerImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/ScramblerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperPdf.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperPdf.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoAES.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoAES.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/unit/Unit.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/unit/Unit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CertificateProviderImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CertificateProviderImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCodeGeneratorImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCodeGeneratorImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/provider/ProviderSqlImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/provider/ProviderSqlImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/misc/Event.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/misc/Event.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/profiler/ProfilerImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/profiler/ProfilerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperObject.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/Client.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/Client.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumperImpl.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumperImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bcprov-jdk16-145.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/Server.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/Server.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/Controller.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/Controller.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/misc/extendedObject/ExtendedObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumper.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/ViewAbstract.java" afterPath="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/ViewAbstract.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/bcprov-jdk16-143.jar" afterPath="" />
     </list>
-    <ignored path=".idea/workspace.xml" />
     <ignored path="Bogatyr.iws" />
+    <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,17 +124,7 @@
   </component>
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="CertificateProviderImpl.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CertificateProviderImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="26" selection-start="2638" selection-end="2638" vertical-scroll-proportion="0.24305555">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -132,22 +134,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/unit/Volume.java" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/unit/Weight.java" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/swing/worker/WorkerAbstract.java" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperString.java" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperNumber.java" />
-        <option value="$PROJECT_DIR$/build/MANIFEST.MF" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/Constants.java" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/swing/factory/FormatFactory.java" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/Client.java" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/swing/ComboBox.java" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/HashCodeGeneratorImpl.java" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoAES.java" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CertificateProviderImpl.java" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperObject.java" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperPdf.java" />
-        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/ScramblerImpl.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/ClientAbstract.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/Controller.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/ControllerAbstract.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumper.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumperImpl.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/misc/extendedObject/ExtendedObject.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/misc/extendedObject/ExtendedObjectAbstract.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/Model.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/Server.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThread.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerAbstract.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThreadAbstract.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/Service.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/ServiceAbstract.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/View.java" />
+        <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/ViewAbstract.java" />
       </list>
     </option>
   </component>
@@ -795,8 +797,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Favorites" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -976,6 +976,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Favorites" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1325,7 +1327,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1920" height="1054" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32976446" sideWeight="0.0" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1339,9 +1341,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24658519" sideWeight="0.602122" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977018" sideWeight="0.6627409" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977018" sideWeight="0.6627409" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3875803" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3262317" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1350,6 +1351,7 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31905782" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32867885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3875803" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsManagerConfiguration">
@@ -1448,114 +1450,114 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperCompress.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="249" column="52" selection-start="7664" selection-end="7696" vertical-scroll-proportion="0.0">
+        <state line="1" column="26" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperObject.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/ControllerAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="246" column="22" selection-start="7493" selection-end="7493" vertical-scroll-proportion="0.0">
+        <state line="1" column="26" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperPdf.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="249" column="18" selection-start="8111" selection-end="8111" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Home/../Classes/classes.jar!/java/util/Properties.class">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/DatagramDumperImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="29" selection-start="788" selection-end="788" vertical-scroll-proportion="0.33200794">
+        <state line="50" column="27" selection-start="1759" selection-end="1759" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/property/PropertyImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/misc/extendedObject/ExtendedObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="22" selection-start="2064" selection-end="2064" vertical-scroll-proportion="0.0">
+        <state line="42" column="27" selection-start="1227" selection-end="1227" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/timer/CountdownTimerImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/misc/extendedObject/ExtendedObjectAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="13" selection-start="1404" selection-end="1404" vertical-scroll-proportion="0.1589404">
+        <state line="41" column="27" selection-start="1286" selection-end="1286" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CryptoAES.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="13" selection-start="2798" selection-end="2798" vertical-scroll-proportion="0.17508417">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/application/ModelApplicationImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/ModelAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="13" selection-start="2221" selection-end="2221" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperKeyboard.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="22" selection-start="1236" selection-end="1236" vertical-scroll-proportion="0.0">
+        <state line="1" column="26" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/helper/HelperIO.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="22" selection-start="2373" selection-end="2373" vertical-scroll-proportion="0.0">
+        <state line="45" column="27" selection-start="1406" selection-end="1406" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/updater/DocumentImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="13" selection-start="2207" selection-end="2207" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/ScramblerImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/server/ServerThreadAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="12" selection-start="4796" selection-end="4796" vertical-scroll-proportion="0.0">
+        <state line="50" column="27" selection-start="1621" selection-end="1621" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/swing/worker/Worker.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/Service.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="4" selection-start="1463" selection-end="1463" vertical-scroll-proportion="0.0">
+        <state line="1" column="26" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/ch/sisprocom/bogatyr/sample/filemanager/FileManager.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/ServiceAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="29" selection-start="3081" selection-end="3081" vertical-scroll-proportion="0.0">
+        <state line="1" column="26" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/controller/net/client/ClientAbstract.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/View.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="58" selection-start="2009" selection-end="2009" vertical-scroll-proportion="0.18984547">
+        <state line="1" column="26" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/service/crypto/CertificateProviderImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/view/ViewAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="26" selection-start="2638" selection-end="2638" vertical-scroll-proportion="0.24305555">
+        <state line="1" column="26" selection-start="107" selection-end="107" vertical-scroll-proportion="0.020304568">
           <folding />
         </state>
       </provider>
