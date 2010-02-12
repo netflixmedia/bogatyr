@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import ch.sisprocom.bogatyr.misc.HolderListener;
+import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObject;
 
 
 
@@ -42,18 +43,10 @@ import ch.sisprocom.bogatyr.misc.HolderListener;
  * Defines the methods for the implementation of the server thread.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100212)
  * @since 0.7.0
  */
-public interface ServerThread extends Runnable, HolderListener<ListenerServerThread> {
-	/**
-     * Returns the instantiation time of the server thread.
-     *
-     * @return instantiation time of the server thread
-     * @since 0.9.0
-     */
-	long getCreateTime();
-	
+public interface ServerThread extends ExtendedObject, Runnable, HolderListener<ListenerServerThread> {
 	/**
 	 * Returns the current data from readStream().
 	 * 

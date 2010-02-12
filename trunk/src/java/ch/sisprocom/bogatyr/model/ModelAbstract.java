@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,37 +31,81 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model;
 
+import java.util.Date;
 import java.util.Observable;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import ch.sisprocom.bogatyr.helper.HelperObject;
+
+import com.sun.xml.internal.txw2.annotation.XmlElement;
 
 /**
  * This is the skeleton for all models.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.0 (20100212)
  * @since 0.7.0
  */
+@XmlRootElement(name = "model")
 public abstract class ModelAbstract extends Observable implements Model {
 	private static final long serialVersionUID = 3491320587479082917L;
 
-	private final long createTime = System.currentTimeMillis();
+	private Date instantiationDate = new Date();
 
     protected ModelAbstract() {
         super();
     }
+
+    
+    /*
+     * Overridden methods
+     */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime
+				* result
+				+ ((instantiationDate == null) ? 0 : instantiationDate
+						.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ModelAbstract other = (ModelAbstract) obj;
+		if (instantiationDate == null) {
+			if (other.instantiationDate != null)
+				return false;
+		} else if (!instantiationDate.equals(other.instantiationDate))
+			return false;
+		return true;
+	}
 	
 	
     /*
      * Implemented methods
      */
-	@Override
-    public long getCreateTime() {
-		return createTime;
+    @Override
+    @XmlElement
+	public Date getInstantiationDate() {
+		return instantiationDate;
 	}
-	
-	
-    /*
+
+    @Override
+	public void setInstantiationDate(Date instantiationDate) {
+		this.instantiationDate = instantiationDate;
+	}
+
+
+	/*
      * Overridden methods
      */
     @Override

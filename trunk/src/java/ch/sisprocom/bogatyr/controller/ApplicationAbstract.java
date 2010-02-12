@@ -31,42 +31,16 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller;
 
-import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
 
 
 /**
  * This is the skeleton for all Bogatyr applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091121)
+ * @version 0.9.0 (20100212)
  * @since 0.1.0
  */
-public abstract class ApplicationAbstract implements Application {
-	private final long createTime = System.currentTimeMillis();
-	
-	
-	/*
-     * Implemented methods
-     */
-	@Override
-    public long getCreateTime() {
-		return createTime;
-	}
-
-//	/**
-//     * Terminates the application in a proper way with a return code.
-//     * 
-//     * @param returnCode System-Return-Code
-//     * @since 0.1.0
-//     */	
-//	public abstract void exit(final int returnCode);
-
-	
-	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
+public abstract class ApplicationAbstract extends ExtendedObjectAbstract implements Application {
+	//atm nothing here
 }

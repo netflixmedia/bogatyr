@@ -39,21 +39,19 @@ import java.util.HashSet;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.misc.Event;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
 
 
 /**
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100212)
  * @since 0.7.0
  */
-public abstract class ServerThreadAbstract implements ServerThread {
-    private final long createTime = System.currentTimeMillis();
-
+public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implements ServerThread {
     private final Event<ServerThread> event = new Event<ServerThread>(this);
     
 	private Thread thread;
@@ -124,22 +122,8 @@ public abstract class ServerThreadAbstract implements ServerThread {
 	
 	
 	/*
-	 * Overridden methods
-	 */
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
-	
-	
-	/*
 	 * Implemented methods
 	 */
-	@Override
-	public long getCreateTime() {
-		return createTime;
-	}
-	
 	@Override
     public Socket getSocket() {
 		return socket;

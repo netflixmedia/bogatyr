@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,25 +31,18 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.controller;
 
+import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObject;
+
 
 
 /**
  * Defines the methods for all applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091121)
+ * @version 0.9.0 (20100212)
  * @since 0.9.0
  */
-public interface Application extends Runnable {
-	
-	/**
-     * Returns the instantiation time of the application.
-     * 
-     * @return instantiation time of the application
-     * @since 0.9.0
-     */	
-	long getCreateTime();
-	
+public interface Application extends ExtendedObject, Runnable {
 //	/**
 //     * Returns the model of the application.
 //     * 

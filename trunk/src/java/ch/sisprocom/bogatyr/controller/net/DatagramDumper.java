@@ -36,24 +36,17 @@ import java.net.DatagramPacket;
 import java.net.Socket;
 
 import ch.sisprocom.bogatyr.misc.HolderListener;
+import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObject;
 
 
 /**
  * Defines the methods for the implementation of the datagram dumper.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.0 (20100212)
  * @since 0.8.0
  */
-public interface DatagramDumper extends Runnable, HolderListener<ListenerDatagram> {
-    /**
-     * Returns the instantiation time of the datagram controller.
-     *
-     * @return instantiation time of the datagram controller
-     * @since 0.9.0
-     */
-	long getCreateTime();
-
+public interface DatagramDumper extends ExtendedObject, Runnable, HolderListener<ListenerDatagram> {
 	/**
      * Start the datagram controller on the given port.
      * 

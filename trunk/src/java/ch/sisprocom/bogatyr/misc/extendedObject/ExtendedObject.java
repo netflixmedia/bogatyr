@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009-2010 by SiSprocom GmbH.
+ * Copyright (c) 2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,27 +29,26 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.model;
+package ch.sisprocom.bogatyr.misc.extendedObject;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import ch.sisprocom.bogatyr.misc.HolderObserver;
-import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObject;
+
+
 
 /**
- * Defines the methods for all models.
+ * Definition for an extended object.
  * 
  * @author Stefan Laubenberger
  * @version 0.9.0 (20100212)
  * @since 0.9.0
  */
-public interface Model extends ExtendedObject, Serializable, HolderObserver {
+public interface ExtendedObject {
 	/**
-     * Sets the instantiation date of the model.
+     * Returns the instantiation date of the object.
      * 
-     * @param instantiationDate of the model
+     * @return instantiation date of the object
      * @since 0.9.0
      */	
-	void setInstantiationDate(Date instantiationDate);
-}
+	Date getInstantiationDate();	
+}   
