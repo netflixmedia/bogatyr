@@ -31,22 +31,22 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.profiler;
 
-import ch.sisprocom.bogatyr.service.ServiceAbstract;
-
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
 /**
  * The implementation of a profiler.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100203)
+ * @version 0.9.0 (20100212)
  * @since 0.9.0
  */
-public class ProfilerImpl extends ServiceAbstract implements Profiler {
+public class ProfilerImpl<T> extends ServiceAbstract implements Profiler<T> {
 
-	private final Map<String, Long> profiles =  new HashMap<String, Long>();
+	private final Map<T, Long> profiles =  new ConcurrentHashMap<T, Long>();
 	private long meanTime;
 	private long elapsedTime;
 	
@@ -66,16 +66,16 @@ public class ProfilerImpl extends ServiceAbstract implements Profiler {
 	}
 
 	@Override
-	public Map<String, Long> getProfiles() {
+	public Map<T, Long> getProfiles() {
 		return profiles;
 	}
 
 	@Override
-	public long profile(final String id) {
+	public long profile(final T event) {
 
 		final long currentTime = System.nanoTime();
 		final long elapsed = currentTime - meanTime;
-		profiles.put(id, elapsed);
+		profiles.put(event, elapsed);
 
 		elapsedTime += elapsed;
 		meanTime = currentTime;

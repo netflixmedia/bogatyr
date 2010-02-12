@@ -73,10 +73,12 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100203)
+ * @version 0.9.0 (20100212)
  * @since 0.3.0
  */
 public class CertificateProviderImpl extends ServiceAbstract implements CertificateProvider {
+	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
+	
 	/*
 	 * Implemented methods
 	 */
@@ -90,17 +92,15 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 //		}
 
 		BufferedInputStream bis = null;
-        final X509Certificate cert;
 
         try {
             bis = new BufferedInputStream(new FileInputStream(file));
-            cert = readCertificate(new BufferedInputStream(new FileInputStream(file)));
+            return readCertificate(new BufferedInputStream(new FileInputStream(file)));
         } finally {
             if (null != bis) {
                 bis.close();
             }
         }
-        return cert;
     }
 
     @Override
@@ -109,18 +109,15 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
 		
-		final X509Certificate cert;
-		
     	try {
             // Generate the certificate factory
-            final CertificateFactory cf = CertificateFactory.getInstance("X.509", "BC"); //$NON-NLS-1$ //$NON-NLS-2$
+            final CertificateFactory cf = CertificateFactory.getInstance("X.509", PROVIDER); //$NON-NLS-1$
 
             // get the certificate
-            cert = (X509Certificate)cf.generateCertificate(is);
+            return (X509Certificate)cf.generateCertificate(is);
         } finally {
             is.close();
         }
-		return cert;
     }
     
     @Override
@@ -184,6 +181,6 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 	    certGen.addExtension(X509Extensions.ExtendedKeyUsage, true, new ExtendedKeyUsage(KeyPurposeId.id_kp_serverAuth));
 	    certGen.addExtension(X509Extensions.SubjectAlternativeName, false, new GeneralNames(new GeneralName(GeneralName.rfc822Name, generalName)));
 	
-		return certGen.generate(pair.getPrivate(), "BC"); //$NON-NLS-1$
+		return certGen.generate(pair.getPrivate(), PROVIDER);
 	}													
 }

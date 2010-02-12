@@ -39,6 +39,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FilterOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,7 +66,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * <strong>Note:</strong> This class needs <a href="http://itextpdf.com/">iText</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.0 (20100212)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -233,16 +234,22 @@ public abstract class HelperPdf {
 		}
 
 		PdfReader reader = null;
+        OutputStream os = null;
 		
 		try {
 			reader = new PdfReader(source.getAbsolutePath());
-			PdfEncryptor.encrypt(reader, new FileOutputStream(dest), user, password,
+            os = new FileOutputStream(dest);
+
+			PdfEncryptor.encrypt(reader, os, user, password,
 					PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY
 			        | PdfWriter.ALLOW_DEGRADED_PRINTING | PdfWriter.ALLOW_FILL_IN
 			        | PdfWriter.ALLOW_MODIFY_ANNOTATIONS | PdfWriter.ALLOW_MODIFY_CONTENTS
 			        | PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, false);
 		} finally {
-			if (null != reader) {
+			if (null != os) {
+				os.close();
+			}
+            if (null != reader) {
 				reader.close();	   
 			}
 		}
