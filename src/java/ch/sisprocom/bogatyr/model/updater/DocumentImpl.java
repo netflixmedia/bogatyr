@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.misc.xml.adapter.MapAdapterHashCode;
 import ch.sisprocom.bogatyr.misc.xml.adapter.MapAdapterPlatform;
 import ch.sisprocom.bogatyr.model.ModelAbstract;
-import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
 import ch.sisprocom.bogatyr.model.misc.Manufacturer;
 import ch.sisprocom.bogatyr.model.misc.Owner;
 import ch.sisprocom.bogatyr.model.misc.Platform;
@@ -58,7 +58,7 @@ import ch.sisprocom.bogatyr.model.misc.Publisher;
  * The implementation of the document model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.1 (20100215)
  * @since 0.9.0
  */
 @XmlRootElement(name = "document")
@@ -67,7 +67,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	private static final long serialVersionUID = -2826684498598090349L;
 
 	private Map<Platform, String> mapLocation = new HashMap<Platform, String>();
-	private Map<HashCode, String> mapHash = new HashMap<HashCode, String>();
+	private Map<HashCodeAlgo, String> mapHash = new HashMap<HashCodeAlgo, String>();
 	private String name;
 	private BigDecimal version;
 	private int build;
@@ -203,23 +203,23 @@ public class DocumentImpl extends ModelAbstract implements Document {
 
 	@Override
 	public String getHash() {
-		return getHash(HashCode.SHA256);
+		return getHash(HashCodeAlgo.SHA256);
 	}
 	
     @Override
-	public String getHash(final HashCode hashCode) {
-		return mapHash.get(hashCode);
+	public String getHash(final HashCodeAlgo hashCodeAlgo) {
+		return mapHash.get(hashCodeAlgo);
 	}
     
     @Override
     @XmlElement
     @XmlJavaTypeAdapter(MapAdapterHashCode.class)
-	public Map<HashCode, String> getHashs() {
+	public Map<HashCodeAlgo, String> getHashs() {
 		return mapHash;
 	}
 
 	@Override
-	public void setHashs(final Map<HashCode, String> hashs) {
+	public void setHashs(final Map<HashCodeAlgo, String> hashs) {
         if (!HelperObject.isEquals(hashs, mapHash)) {
     		mapHash = hashs;
             setChanged();

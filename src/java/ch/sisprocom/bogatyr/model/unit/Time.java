@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Time units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.8.0
  */
 public enum Time implements Unit<Time> {
@@ -71,7 +71,7 @@ public enum Time implements Unit<Time> {
 	 * Implemented methods
 	 */
 	@Override
-	public <T extends Number> BigDecimal convertTo(final Time toUnit, final T value) {
+	public BigDecimal convertTo(final Time toUnit, final Number value) {
 		if (null == toUnit) {
 			throw new RuntimeExceptionIsNull("toUnit"); //$NON-NLS-1$
 		}

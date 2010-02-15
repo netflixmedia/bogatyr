@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.7.0
  */
 public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implements ServerThread {
@@ -166,10 +166,10 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 
 	@Override
     public void start() {
-		if (null == thread) {
+//		if (null == thread) {
 			thread = new Thread(this);
             thread.start();
-		}
+//		}
 		
 		fireStarted();
 	}	
@@ -178,15 +178,15 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
     public void stop() throws IOException {
 		fireStopped();
 
-        if (null != socket) {
+        if (null != socket && !socket.isClosed()) {
         	socket.close();
         }
 		
 		if (null != thread) {
 			if (thread.isAlive()) {
 				thread.interrupt();
-			} else {
-				thread = null;
+//			} else {
+//				thread = null;
 			}
         }
 	}  
@@ -198,20 +198,16 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 	
     @Override
     public synchronized void addListener(final ListenerServerThread listener) {
-    	if (null == listener) {
-    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
+    	if (null != listener) {
+    		listListener.add(listener);
     	}
-
-    	listListener.add(listener);
     }
 
     @Override
     public synchronized void deleteListener(final ListenerServerThread listener) {
-    	if (null == listener) {
-    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
+    	if (null != listener) {
+    		listListener.remove(listener);
     	}
-
-    	listListener.remove(listener);
     }
 
     @Override

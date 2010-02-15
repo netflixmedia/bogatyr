@@ -39,7 +39,6 @@ import java.util.HashSet;
 
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.misc.Event;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
@@ -48,7 +47,7 @@ import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  * This is a datagram dumper to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.8.0
  */
 public class DatagramDumperImpl extends ExtendedObjectAbstract implements DatagramDumper {
@@ -132,7 +131,7 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
     		throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
     	}
 		if (HelperNumber.NUMBER_65536.intValue() <= port) {
-    		throw new RuntimeExceptionMustBeSmaller("port", port, HelperNumber.NUMBER_65535); //$NON-NLS-1$
+    		throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
     	}
 
 		this.port = port;
@@ -150,11 +149,11 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 
     @Override
     public void stop() {
-        if (null != socket) {
+        fireStopped();
+
+        if (null != socket && !socket.isClosed()) {
         	socket.close();
         }
-        
-        fireStopped();
         
 		if (null != thread) {
 			if (thread.isAlive()) {
@@ -188,20 +187,16 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 
     @Override
     public synchronized void addListener(final ListenerDatagram listener) {
-    	if (null == listener) {
-    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
+    	if (null != listener) {
+    		listListener.add(listener);
     	}
-
-    	listListener.add(listener);
     }
 
     @Override
     public synchronized void deleteListener(final ListenerDatagram listener) {
-    	if (null == listener) {
-    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
+    	if (null != listener) {
+    		listListener.remove(listener);
     	}
-
-    	listListener.remove(listener);
     }
 
     @Override

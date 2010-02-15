@@ -40,6 +40,8 @@ import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Security;
+import java.security.Signature;
+import java.security.SignatureException;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -50,10 +52,11 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+import ch.sisprocom.bogatyr.model.crypto.CryptoAsymmetricAlgo;
+import ch.sisprocom.bogatyr.model.crypto.SignatureAlgo;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 /**
@@ -61,15 +64,13 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.1.0
  */
-public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
-	public static final String ALGORITHM 	 = "RSA"; //$NON-NLS-1$
-	public static final String XFORM     	 = "RSA/NONE/PKCS1PADDING"; //$NON-NLS-1$
-	public static final int DEFAULT_KEY_SIZE = 1024;
-
+public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymmetric {
 	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
+	
+	private final CryptoAsymmetricAlgo algorithm;
 	
 	private final Cipher cipher;
 	private final KeyPairGenerator kpg;
@@ -78,10 +79,11 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 	}
 
-	public CryptoRSA() throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
+	public CryptoAsymmetricImpl(final CryptoAsymmetricAlgo algorithm) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
         super();
-        cipher = Cipher.getInstance(XFORM, PROVIDER);
-        kpg = KeyPairGenerator.getInstance(ALGORITHM, PROVIDER);
+        this.algorithm = algorithm;
+        cipher = Cipher.getInstance(algorithm.getXform(), PROVIDER);
+        kpg = KeyPairGenerator.getInstance(algorithm.getAlgorithm(), PROVIDER);
     }
 	
 	/*
@@ -137,7 +139,7 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 	 */
 	@Override
     public KeyPair generateKeyPair() { //$JUnit$
-		return generateKeyPair(DEFAULT_KEY_SIZE);
+		return generateKeyPair(algorithm.getDefaultKeysize());
 	}
 	
 	@Override
@@ -145,14 +147,39 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 		if (0 >= keySize) {
 			throw new RuntimeExceptionMustBeGreater("keySize", keySize, 0); //$NON-NLS-1$
 		}
-		if (0 != keySize % HelperNumber.NUMBER_16.intValue()) {
-            throw new IllegalArgumentException("keySize is not a multiple of 16"); //$NON-NLS-1$
+		if (0 != keySize % 8) {
+            throw new IllegalArgumentException("keySize is not a multiple of 8"); //$NON-NLS-1$
         }
 		
 		// Generate a key-pair
 		kpg.initialize(keySize);
 
 		return kpg.generateKeyPair();
+	}
+
+	@Override
+	public byte[] generateSignature(SignatureAlgo algoritm, byte[] input, PrivateKey key) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+        final Signature sig = Signature.getInstance(algoritm.getAlgorithm());
+        sig.initSign(key);
+        sig.update(input);
+        
+        return sig.sign();
+	}
+
+	@Override
+	public boolean isValidSignature(SignatureAlgo algoritm, byte[] signature, byte[] input, PublicKey key) throws InvalidKeyException, SignatureException, NoSuchAlgorithmException {
+        final Signature sig = Signature.getInstance(algoritm.getAlgorithm());
+        sig.initVerify(key);
+        sig.update(input);
+
+        try {
+            if (sig.verify(signature)) {
+                return true;
+            }
+        } catch (SignatureException se) {
+            return false;
+        }
+        return false;
 	}
 
 	/**
@@ -167,7 +194,7 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 	 */
     @Override
     public byte[] encrypt(final byte[] input, final PublicKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
-    	return encrypt(input, key, DEFAULT_KEY_SIZE);
+    	return encrypt(input, key, algorithm.getDefaultKeysize());
     }
     
     @Override
@@ -181,8 +208,8 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 		if (0 >= keySize) {
 			throw new RuntimeExceptionMustBeGreater("keySize", keySize, 0); //$NON-NLS-1$
 		}
-		if (0 != keySize % HelperNumber.NUMBER_16.intValue()) {
-            throw new IllegalArgumentException("keySize is not a multiple of 16"); //$NON-NLS-1$
+		if (0 != keySize % 8) {
+            throw new IllegalArgumentException("keySize is not a multiple of 8"); //$NON-NLS-1$
         }
         if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
             throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
@@ -231,7 +258,7 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 	 */
 	@Override
     public byte[] decrypt(final byte[] input, final PrivateKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
-		return decrypt(input, key, DEFAULT_KEY_SIZE);
+		return decrypt(input, key, algorithm.getDefaultKeysize());
 	}
 
 	@Override
@@ -245,8 +272,8 @@ public class CryptoRSA extends ServiceAbstract implements CryptoAsymmetric {
 		if (0 >= keySize) {
 			throw new RuntimeExceptionMustBeGreater("keySize", keySize, 0); //$NON-NLS-1$
 		}
-		if (0 != keySize % HelperNumber.NUMBER_16.intValue()) {
-            throw new IllegalArgumentException("keySize is not a multiple of 16"); //$NON-NLS-1$
+		if (0 != keySize % 8) {
+            throw new IllegalArgumentException("keySize is not a multiple of 8"); //$NON-NLS-1$
         }
         if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
         	throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$

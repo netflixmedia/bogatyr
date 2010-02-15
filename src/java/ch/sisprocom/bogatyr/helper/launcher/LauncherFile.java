@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher opens, edits and prints files with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.1 (20100215)
  * @since 0.7.0
  */
 public abstract class LauncherFile {
@@ -96,9 +96,6 @@ public abstract class LauncherFile {
 			if (null == file) {
 				throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 			}
-//			if (!file.exists()) {
-//				throw new RuntimeExceptionFileNotFound(file);
-//			}
 
 			Desktop.getDesktop().open(file);
 		} else {
@@ -158,9 +155,6 @@ public abstract class LauncherFile {
 			if (null == file) {
 				throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 			}
-//			if (!file.exists()) {
-//				throw new RuntimeExceptionFileNotFound(file);
-//			}
 
 			Desktop.getDesktop().edit(file);
 		} else {
@@ -220,9 +214,6 @@ public abstract class LauncherFile {
 			if (null == file) {
 				throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 			}
-//			if (!file.exists()) {
-//				throw new RuntimeExceptionFileNotFound(file);
-//			}
 
 			Desktop.getDesktop().print(file);
 		} else {

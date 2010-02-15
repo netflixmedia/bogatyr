@@ -43,17 +43,15 @@ import java.security.NoSuchProviderException;
 import java.security.Security;
 import java.util.Arrays;
 
-import ch.sisprocom.bogatyr.misc.Constants;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.helper.encoder.EncoderHex;
+import ch.sisprocom.bogatyr.misc.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
-import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
@@ -62,7 +60,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.9.0
  */
 public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
@@ -74,16 +72,16 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 	}
 	
-	public HashCodeGeneratorImpl(final HashCode hashCode) throws NoSuchAlgorithmException, NoSuchProviderException {
+	public HashCodeGeneratorImpl(final HashCodeAlgo algorithm) throws NoSuchAlgorithmException, NoSuchProviderException {
         super();
-        md = MessageDigest.getInstance(hashCode.getAlgorithm(), PROVIDER);
+        md = MessageDigest.getInstance(algorithm.getAlgorithm(), PROVIDER);
     }
 	
 	/*
 	 * Implemented methods
 	 */
     @Override
-	public String getHash(final byte[] input) {
+	public byte[] getHash(final byte[] input) {
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
@@ -93,16 +91,16 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 		md.reset();
 		md.update(input);
 		
-		return EncoderHex.encode(md.digest());
+		return md.digest();
 	}
 
 	@Override
-	public String getHash(final File input) throws IOException {
+	public byte[] getHash(final File input) throws IOException {
 		return getHash(input, Constants.DEFAULT_FILE_BUFFER_SIZE);
 	}
 
     @Override
-    public String getHash(final File input, final int bufferSize) throws IOException {
+    public byte[] getHash(final File input, final int bufferSize) throws IOException {
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
@@ -123,7 +121,7 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
     }
 
 	@Override
-	public String getHash(final InputStream is, final int bufferSize) throws IOException {
+	public byte[] getHash(final InputStream is, final int bufferSize) throws IOException {
         if (null == is) {
             throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
         }
@@ -145,16 +143,16 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 			offset = is.read(buffer);
 		}
 		
-		return EncoderHex.encode(md.digest());
+		return md.digest();
 	}
 
 	@Override
-	public String getHash(final InputStream is) throws IOException  {
+	public byte[] getHash(final InputStream is) throws IOException  {
 		return getHash(is, Constants.DEFAULT_FILE_BUFFER_SIZE);
 	}
 
 	@Override
-	public String getFastHash(final byte[] input, final int parts, final int partSize) {
+	public byte[] getFastHash(final byte[] input, final int parts, final int partSize) {
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
@@ -185,12 +183,12 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 	}
 	
 	@Override
-	public String getFastHash(final byte[] input) {
-		return getFastHash(input, HelperNumber.NUMBER_16.intValue(), HelperNumber.NUMBER_2048.intValue());
+	public byte[] getFastHash(final byte[] input) {
+		return getFastHash(input, 16, 2048);
 	}
 
 	@Override
-	public String getFastHash(final File input, final int parts, final int partSize) throws IOException {
+	public byte[] getFastHash(final File input, final int parts, final int partSize) throws IOException {
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
@@ -234,7 +232,7 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 	}
 	
 	@Override
-	public String getFastHash(final File input) throws IOException {
-		return getFastHash(input, HelperNumber.NUMBER_16.intValue(), HelperNumber.NUMBER_2048.intValue());
+	public byte[] getFastHash(final File input) throws IOException {
+		return getFastHash(input, 16, 2048);
 	}
 }

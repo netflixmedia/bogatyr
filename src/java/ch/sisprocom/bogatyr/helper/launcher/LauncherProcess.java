@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.2.0
  */
 public abstract class LauncherProcess {
@@ -106,15 +106,15 @@ public abstract class LauncherProcess {
 	 * @since 0.2.0
 	 */
 	private static void readStandardOutput(final Process process, final OutputStream outputStream, final OutputStream errorStream) {
-		new StreamReader(process.getErrorStream(), errorStream).start();
-		new StreamReader(process.getInputStream(), outputStream).start();
+		new Thread(new StreamReader(process.getErrorStream(), errorStream)).start();
+		new Thread(new StreamReader(process.getInputStream(), outputStream)).start();
 	}
 
 	
 	/*
 	 * Inner classes
 	 */
-	static class StreamReader extends Thread {
+	static class StreamReader implements Runnable {
 		private final InputStream is;
 		private final OutputStream os;
 

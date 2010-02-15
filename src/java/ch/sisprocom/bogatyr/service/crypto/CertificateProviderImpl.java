@@ -73,7 +73,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.3.0
  */
 public class CertificateProviderImpl extends ServiceAbstract implements CertificateProvider {
@@ -87,9 +87,6 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.exists()) {
-//			throw new RuntimeExceptionFileNotFound(file);
-//		}
 
 		BufferedInputStream bis = null;
 

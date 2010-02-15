@@ -39,7 +39,7 @@ import java.util.UUID;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ch.sisprocom.bogatyr.model.Model;
-import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
 import ch.sisprocom.bogatyr.model.misc.Manufacturer;
 import ch.sisprocom.bogatyr.model.worker.ModelWorker;
 import ch.sisprocom.bogatyr.service.localizer.Localizer;
@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.service.property.Property;
  * The interface for the application model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091224)
+ * @version 0.9.1 (20100215)
  * @since 0.9.0
  */
 @XmlJavaTypeAdapter(ModelApplicationImpl.XmlAdapter.class)
@@ -74,7 +74,7 @@ public interface ModelApplication extends Model {
      * @return {@link Map} containing all hashs
      * @since 0.9.0
      */
-    Map<HashCode, String> getHashs();
+    Map<HashCodeAlgo, String> getHashs();
 
     /**
      * Sets all hashs.
@@ -82,16 +82,16 @@ public interface ModelApplication extends Model {
      * @param hashs {@link Map} containing all hashs
      * @since 0.9.0
      */
-    void setHashs(Map<HashCode, String> hashs);
+    void setHashs(Map<HashCodeAlgo, String> hashs);
 
     /**
-     * Returns the hash for a given {@link HashCode}.
+     * Returns the hash for a given {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo}.
      * 
-     * @param hashCode for the hash
+     * @param hashCodeAlgo for the hash
      * @return hash 
      * @since 0.9.0
      */	
-	String getHash(HashCode hashCode);
+	String getHash(HashCodeAlgo hashCodeAlgo);
 
 	/**
      * Returns the default hash (generated with SHA256).
@@ -101,9 +101,9 @@ public interface ModelApplication extends Model {
      */	
 	String getHash();
 	
-	void addHash(HashCode hashCode, String hash);
+	void addHash(HashCodeAlgo hashCodeAlgo, String hash);
 
-	void removeHash(HashCode hashCode);
+	void removeHash(HashCodeAlgo hashCodeAlgo);
 	
 	String getName();
 	void setName(String name);

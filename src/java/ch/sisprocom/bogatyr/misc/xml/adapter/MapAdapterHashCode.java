@@ -38,31 +38,31 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import ch.sisprocom.bogatyr.misc.xml.XmlEntry;
 import ch.sisprocom.bogatyr.misc.xml.XmlMap;
-import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
 
 /**
- * Map adapter for the key {@link HashCode} and value {@link String}.
+ * Map adapter for the key {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo} and value {@link String}.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.1 (20100215)
  * @since 0.9.0
  */
-public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCode, String>> {
+public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCodeAlgo, String>> {
 
 	@Override
-	public XmlMap marshal(final Map<HashCode, String> map) throws Exception {
+	public XmlMap marshal(final Map<HashCodeAlgo, String> map) throws Exception {
 		final XmlMap xmlMap = new XmlMap();
-        for (final Map.Entry<HashCode, String> entry : map.entrySet() ) {
+        for (final Map.Entry<HashCodeAlgo, String> entry : map.entrySet() ) {
         	xmlMap.getEntries().add(new XmlEntry(entry.getKey().name(), entry.getValue()));
         }
         return xmlMap;
 	}
 
 	@Override
-	public Map<HashCode, String> unmarshal(final XmlMap xmlMap) throws Exception {
-		final Map<HashCode, String> map = new HashMap<HashCode, String>(xmlMap.getEntries().size());
+	public Map<HashCodeAlgo, String> unmarshal(final XmlMap xmlMap) throws Exception {
+		final Map<HashCodeAlgo, String> map = new HashMap<HashCodeAlgo, String>(xmlMap.getEntries().size());
         for (final XmlEntry entry : xmlMap.getEntries() ) {
-            map.put(HashCode.valueOf(entry.getKey()), entry.getValue());
+            map.put(HashCodeAlgo.valueOf(entry.getKey()), entry.getValue());
         }
         return map;
 	}

@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * This is a helper class for Swing.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.9.0
  */
 public abstract class HelperSwing {
@@ -97,7 +97,7 @@ public abstract class HelperSwing {
      * @see JSlider
      * @since 0.9.0
      */	
-    public static <T extends Number> int calculateSliderMin(final T minValue, final T tick) {
+    public static int calculateSliderMin(final Number minValue, final Number tick) {
         if (null == minValue) {
             throw new RuntimeExceptionIsNull("minValue"); //$NON-NLS-1$
         }
@@ -120,7 +120,7 @@ public abstract class HelperSwing {
      * @see JSlider
      * @since 0.9.0
      */	
-    public static <T extends Number> int calculateSliderMax(final T maxValue, final T tick) {
+    public static int calculateSliderMax(final Number maxValue, final Number tick) {
         if (null == maxValue) {
             throw new RuntimeExceptionIsNull("maxValue"); //$NON-NLS-1$
         }
@@ -143,7 +143,7 @@ public abstract class HelperSwing {
      * @see JSlider
      * @since 0.9.0
      */	
-    public static <T extends Number> int calculateSliderValue(final T value, final T tick) {
+    public static int calculateSliderValue(final Number value, final Number tick) {
         if (null == value) {
             throw new RuntimeExceptionIsNull("value"); //$NON-NLS-1$
         }
@@ -166,7 +166,7 @@ public abstract class HelperSwing {
      * @see JSlider
      * @since 0.9.0
      */	
-    public static <T extends Number> BigDecimal calculateValueFromSlider(final JSlider slider, final T tick) {
+    public static BigDecimal calculateValueFromSlider(final JSlider slider, final Number tick) {
         if (null == slider) {
             throw new RuntimeExceptionIsNull("slider"); //$NON-NLS-1$
         }

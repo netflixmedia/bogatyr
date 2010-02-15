@@ -35,13 +35,14 @@ import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+import ch.sisprocom.bogatyr.model.crypto.SignatureAlgo;
 import ch.sisprocom.bogatyr.service.Service;
 
 /**
  * This is an interface for asymmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.6.0
  */
 public interface CryptoAsymmetric extends Service { //$Example$
@@ -63,6 +64,33 @@ public interface CryptoAsymmetric extends Service { //$Example$
 	 * @since 0.6.0
 	 */
 	KeyPair generateKeyPair(int keysize);
+
+	/**
+	 * Generates a signature from the data and the given {@link PrivateKey}.
+	 * 
+	 * @param algoritm for the signature
+	 * @param input data for the signature as a byte-array
+	 * @param key {@link PrivateKey} for the signature
+	 * @return generated signature as byte-array
+	 * @throws Exception
+	 * @see PrivateKey
+	 * @since 0.9.1
+	 */
+	byte[] generateSignature(SignatureAlgo algoritm, byte[] input, PrivateKey key) throws Exception;
+
+	/**
+	 * Verifys an signature with a given input and {@link PublicKey}.
+	 * 
+	 * @param algoritm of the signature
+	 * @param signature to verify
+	 * @param input data to verify with the signature as a byte-array
+	 * @param key {@link PublicKey} to verify the signature
+	 * @return true/false
+	 * @throws Exception
+	 * @see PublicKey
+	 * @since 0.9.1
+	 */
+	boolean isValidSignature(SignatureAlgo algoritm, byte[] signature, byte[] input, PublicKey key) throws Exception;
 
 	/**
 	 * Encrypt the data (byte-array) with a given {@link PublicKey} and the implementations algorithm.

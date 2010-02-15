@@ -51,7 +51,7 @@ import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.7.0
  */
 public abstract class ClientAbstract extends ExtendedObjectAbstract implements Client {
@@ -164,7 +164,7 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
     		throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
     	}
 		if (HelperNumber.NUMBER_65536.intValue() <= port) {
-    		throw new RuntimeExceptionMustBeSmaller("port", port, HelperNumber.NUMBER_65535); //$NON-NLS-1$
+    		throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
     	}
     	
         this.port = port;
@@ -193,16 +193,16 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
     public void stop() throws IOException {
     	fireStopped();
         
+        if (null != socket && !socket.isClosed()) {
+            socket.close();
+        }
+
 		if (null != thread) {
 			if (thread.isAlive()) {
 				thread.interrupt();
-			} else {
-				thread = null;
+//			} else {
+//				thread = null;
 			}
-        }
-		
-    	if (null != socket && !socket.isClosed()) {
-        	socket.close();
         }
     }
 
@@ -243,20 +243,16 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 
     @Override
     public synchronized void addListener(final ListenerClient listener) {
-    	if (null == listener) {
-    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
+    	if (null != listener) {
+    		listListener.add(listener);
     	}
-
-    	listListener.add(listener);
     }
 
     @Override
     public synchronized void deleteListener(final ListenerClient listener) {
-    	if (null == listener) {
-    		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
+    	if (null != listener) {
+    		listListener.remove(listener);
     	}
-
-    	listListener.remove(listener);
     }
 
     @Override

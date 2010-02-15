@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100209)
+ * @version 0.9.1 (20100215)
  * @since 0.7.0
  */
 public abstract class HelperCollection {
@@ -81,11 +81,7 @@ public abstract class HelperCollection {
 			return new ArrayList<E>(0);
 		}
 
-        final List<E> list = new ArrayList<E>(elements.length);
-
-        list.addAll(Arrays.asList(elements));
-        
-		return list;
+ 		return Arrays.asList(elements);
     }
 
 	/**
@@ -129,9 +125,6 @@ public abstract class HelperCollection {
 	 * @since 0.7.0
 	 */
     public static <E> Collection<E> removeDuplicates(final Collection<E> collection) { //$JUnit$
-//		if (null == collection) {
-//			throw new RuntimeExceptionArgumentIsNull("collection"); //$NON-NLS-1$
-//		}
 		if (null != collection) {
 			return new HashSet<E>(collection);
 		}
@@ -147,10 +140,6 @@ public abstract class HelperCollection {
      * @since 0.7.0
      */
     public static <E> String dump(final Iterable<E> iterable) { //$JUnit$
-//		if (null == iterable) {
-//			throw new RuntimeExceptionArgumentIsNull("iterable"); //$NON-NLS-1$
-//		}
-
     	if (null != iterable) {
 			final StringBuilder sb = new StringBuilder();
 	

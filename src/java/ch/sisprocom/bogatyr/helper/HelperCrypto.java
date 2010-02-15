@@ -31,6 +31,13 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import java.security.Provider;
+import java.security.Security;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
@@ -41,7 +48,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a helper class for cryptography (e.g. random keys).
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.1 (20100215)
  * @since 0.7.0
  */
 public abstract class HelperCrypto {
@@ -94,5 +101,131 @@ public abstract class HelperCrypto {
      */
     public static UUID getUUID() { //$JUnit$
     	return UUID.randomUUID();
-    }    
+    }  
+    
+    /**
+     * Returns all installed security {@link Provider}.
+     *
+     * @return installed security {@link Provider}
+     * @see {@link Provider}
+     * @since 0.9.1
+     */
+    public static Collection<Provider> getProviders() {
+    	return Arrays.asList(Security.getProviders());
+    }
+    
+    /**
+     * Returns a {@link Collection} of all available ciphers for a given security {@link Provider}.
+     *
+     * @param provider for the data
+     * @return {@link Collection} containing all available ciphers
+     * @see {@link Provider}
+     * @since 0.9.1
+     */
+    public static Collection<String> getCiphers(final Provider provider) {
+    	return getInformation(provider, "Cipher."); //$NON-NLS-1$
+    }
+    
+    /**
+     * Returns a {@link Collection} of all available key agreements for a given security {@link Provider}.
+     *
+     * @param provider for the data
+     * @return {@link Collection} containing all available key agreements
+     * @see {@link Provider}
+     * @since 0.9.1
+     */
+    public static Collection<String> getKeyAgreements(final Provider provider) {
+        return getInformation(provider, "KeyAgreement."); //$NON-NLS-1$
+    }
+    
+    /**
+     * Returns a {@link Collection} of all available macs for a given security {@link Provider}.
+     *
+     * @param provider for the data
+     * @return {@link Collection} containing all available macs
+     * @see {@link Provider}
+     * @since 0.9.1
+     */
+    public static Collection<String> getMacs(final Provider provider) {
+        return getInformation(provider, "Mac."); //$NON-NLS-1$
+    }
+    
+    /**
+     * Returns a {@link Collection} of all available message digests for a given security {@link Provider}.
+     *
+     * @param provider for the data
+     * @return {@link Collection} containing all available message digests
+     * @see {@link Provider}
+     * @since 0.9.1
+     */
+    public static Collection<String> getMessageDigests(final Provider provider) {
+        return getInformation(provider, "MessageDigest."); //$NON-NLS-1$
+    }
+    
+    /**
+     * Returns a {@link Collection} of all available signatures for a given security {@link Provider}.
+     *
+     * @param provider for the data
+     * @return {@link Collection} containing all available signatures
+     * @see {@link Provider}
+     * @since 0.9.1
+     */
+    public static Collection<String> getSignatures(final Provider provider) {
+        return getInformation(provider, "Signature."); //$NON-NLS-1$
+    }
+    
+    /**
+     * Returns a {@link Collection} of all available key pair generators for a given security {@link Provider}.
+     *
+     * @param provider for the data
+     * @return {@link Collection} containing all available key pair generators
+     * @see {@link Provider}
+     * @since 0.9.1
+     */
+   public static Collection<String> getKeyPairGenerators(final Provider provider) {
+        return getInformation(provider, "KeyPairGenerator."); //$NON-NLS-1$
+    }
+    
+   /**
+    * Returns a {@link Collection} of all available key factories for a given security {@link Provider}.
+    *
+    * @param provider for the data
+    * @return {@link Collection} containing all available key factories
+    * @see {@link Provider}
+    * @since 0.9.1
+    */
+    public static Collection<String> getKeyFactories(final Provider provider) {
+        return getInformation(provider, "KeyFactory."); //$NON-NLS-1$
+    }
+    
+    /**
+     * Returns a {@link Collection} of all available key generators for a given security {@link Provider}.
+     *
+     * @param provider for the data
+     * @return {@link Collection} containing all available key generators
+     * @see {@link Provider}
+     * @since 0.9.1
+     */
+    public static Collection<String> getKeyGenerators(final Provider provider) {
+        return getInformation(provider, "KeyGenerator."); //$NON-NLS-1$
+    }
+
+    
+    /*
+     * Private methods
+     */
+    private static Collection<String> getInformation(final Provider provider, final String id) {
+    	final Set<String> set = new HashSet<String>();
+
+    	if (null != provider) {
+            for (final Map.Entry<?, ?> pair : provider.entrySet()) {
+	        	final String entry = (String) pair.getKey();
+	        	
+	        	if (HelperString.startsWith(entry, id) && !HelperString.isNumeric(entry.substring(id.length(), id.length() + 1))) {
+	        		set.add(entry.substring(id.length()));
+	            }
+	        }
+    	}
+    	return set;
+    }
 }

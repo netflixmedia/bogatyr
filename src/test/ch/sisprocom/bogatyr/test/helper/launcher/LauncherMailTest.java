@@ -37,6 +37,7 @@ import java.net.URI;
 
 import org.junit.Test;
 
+import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.helper.launcher.LauncherMail;
 
 
@@ -44,7 +45,7 @@ import ch.sisprocom.bogatyr.helper.launcher.LauncherMail;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090610
+ * @version 20100215
  */
 public class LauncherMailTest {
 	@Test
@@ -58,7 +59,7 @@ public class LauncherMailTest {
 		} catch (Exception ex) {fail(ex.getMessage());}
 
 		try {
-			LauncherMail.mail("yourname@yourOtherMail.com"); //$NON-NLS-1$
+			LauncherMail.mail("Test", "This is a testäöäü:" + HelperString.NEW_LINE + "Yeah, new line is here!", "yourname@yourOtherMail.com", "anothername@anotherMail.com"); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 }

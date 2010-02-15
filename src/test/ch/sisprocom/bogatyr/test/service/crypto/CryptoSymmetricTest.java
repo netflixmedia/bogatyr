@@ -41,8 +41,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
-import ch.sisprocom.bogatyr.service.crypto.CryptoAES;
+import ch.sisprocom.bogatyr.model.crypto.CryptoSymmetricAlgo;
 import ch.sisprocom.bogatyr.service.crypto.CryptoSymmetric;
+import ch.sisprocom.bogatyr.service.crypto.CryptoSymmetricImpl;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 
@@ -50,10 +51,10 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091027
+ * @version 20100215
  */
 public class CryptoSymmetricTest {
-	private static final int KEYSIZE = 256;
+//	private static final int KEYSIZE = 256;
 	
 	private SecretKey secretKey;
 	private SecretKey secretKeyDefault;
@@ -61,8 +62,8 @@ public class CryptoSymmetricTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		cryptoSymm = new CryptoAES();
-        secretKey = cryptoSymm.generateKey(KEYSIZE);
+		cryptoSymm = new CryptoSymmetricImpl(CryptoSymmetricAlgo.XTEA);
+        secretKey = cryptoSymm.generateKey();
         secretKeyDefault = cryptoSymm.generateKey();
 	}
 
@@ -87,7 +88,7 @@ public class CryptoSymmetricTest {
 		}
 		
 		try {
-			assertNotNull(cryptoSymm.generateKey(KEYSIZE));
+			assertNotNull(cryptoSymm.generateKey());
 		} catch (Exception ex) {fail(ex.getMessage());}
 		
 		try {

@@ -36,7 +36,6 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.TimeZone;
 
-import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.model.misc.Platform;
 
 
@@ -46,59 +45,10 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.1 (20100215)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
-//	/**
-//	 * Returns the used VM heap memory in bytes.
-//     *
-//     * @return used VM memory
-//     * @since 0.5.0
-//	 */
-//	public static long getMemoryHeapUsed() { //$JUnit$
-//		return getMemoryHeapTotal() - getMemoryHeapFree();
-//	}
-//
-//	/**
-//	 * Returns the free VM heap memory in bytes.
-//     *
-//     * @return free VM memory
-//     * @since 0.5.0
-//	 */
-//	public static long getMemoryHeapFree() { //$JUnit$
-//		return Runtime.getRuntime().freeMemory();
-//	}
-//	
-//	/**
-//	 * Returns the maximal reserved VM heap memory in bytes.
-//     *
-//     * @return max VM memory
-//     * @since 0.8.0
-//	 */
-//	public static long getMemoryHeapTotal() { //$JUnit$
-//		return Runtime.getRuntime().totalMemory();
-//	}
-//	
-//	/**
-//	 * Returns the reserved VM stack memory in bytes.
-//     *
-//     * @return max VM memory
-//     * @since 0.8.0
-//	 */
-//	public static long getMemoryStack() { //$JUnit$
-//		return getMemoryTotal() - getMemoryHeapTotal();
-//	}
-//	
-//	/**
-//	 * Returns the maximal reserved heap&stack VM memory in bytes.
-//     *
-//     * @return max VM memory
-//     * @since 0.5.0
-//	 */
-//	public static long getMemoryTotal() { //$JUnit$
-//		return Runtime.getRuntime().maxMemory();
-//	}
 	/**
 	 * Returns the used VM memory in bytes.
      *
@@ -109,16 +59,6 @@ public abstract class HelperEnvironment {
 		return getMemoryTotal() - Runtime.getRuntime().freeMemory();
 	}
 	
-//	/**
-//	 * Returns the used VM memory in bytes.
-//     *
-//     * @return used VM memory
-//     * @since 0.9.0
-//	 */
-//	public static long getMemoryUsed() {
-//		return getMemoryTotal() - getMemoryFree();
-//	}
-	
 	/**
 	 * Returns the maximal free VM memory in bytes.
      *
@@ -128,16 +68,6 @@ public abstract class HelperEnvironment {
 	public static long getMemoryFree() {
 		return getMemoryMax() - getMemoryUsed();
 	}
-	
-//	/**
-//	 * Returns the free VM memory in bytes.
-//     *
-//     * @return free VM memory
-//     * @since 0.9.0
-//	 */
-//	public static long getMemoryFree() {
-//		return Runtime.getRuntime().freeMemory();
-//	}
 
 	/**
 	 * Returns the current total VM memory in bytes.
@@ -148,16 +78,7 @@ public abstract class HelperEnvironment {
 	public static long getMemoryTotal() {
 		return Runtime.getRuntime().totalMemory();
 	}
-	
-//	/**
-//	 * Returns the maximal reserved VM memory in bytes.
-//     *
-//     * @return max VM memory
-//     * @since 0.9.0
-//	 */
-//	public static long getMemoryMax() {
-//		return Runtime.getRuntime().maxMemory();
-//	}
+
 	/**
 	 * Returns the maximal reserved VM memory in bytes.
      *
@@ -239,29 +160,27 @@ public abstract class HelperEnvironment {
 	 * @since 0.8.0
 	 */
 	public static void addPathToLibraryPath(final File path) throws SecurityException, NoSuchFieldException, IllegalAccessException {
-        if (null == path) {
-            throw new RuntimeExceptionIsNull("path"); //$NON-NLS-1$
+        if (null != path) {
+			final String location = path.getAbsolutePath();
+			
+			final Field field = ClassLoader.class.getDeclaredField("usr_paths"); //$NON-NLS-1$
+			field.setAccessible(true);
+			final String[] paths = (String[])field.get(null);
+	
+	        for (final String path1 : paths) {
+	            if (location.equals(path1)) {
+	                return;
+	            }
+	        }
+			
+			final String[] tmp = new String[paths.length+1];
+			
+			System.arraycopy(paths, 0, tmp, 0, paths.length);
+			tmp[paths.length] = location;
+			field.set(null,tmp);
+			
+			System.setProperty("java.library.path", System.getProperty("java.library.path") + HelperIO.PATH_SEPARATOR + location); //$NON-NLS-1$ //$NON-NLS-2$
         }
-
-		final String location = path.getAbsolutePath();
-		
-		final Field field = ClassLoader.class.getDeclaredField("usr_paths"); //$NON-NLS-1$
-		field.setAccessible(true);
-		final String[] paths = (String[])field.get(null);
-
-        for (final String path1 : paths) {
-            if (location.equals(path1)) {
-                return;
-            }
-        }
-		
-		final String[] tmp = new String[paths.length+1];
-		
-		System.arraycopy(paths, 0, tmp, 0, paths.length);
-		tmp[paths.length] = location;
-		field.set(null,tmp);
-		
-		System.setProperty("java.library.path", System.getProperty("java.library.path") + HelperIO.PATH_SEPARATOR + location); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -451,14 +370,4 @@ public abstract class HelperEnvironment {
 	private static boolean isMacPlatform() {
 		return HelperString.contains(getOsName(), "Mac"); //$NON-NLS-1$
 	}
-	
-//	/**
-//	 * Try to determine if this application is running under a UNIX OS.
-//	 *
-//	 * @return true/false
-//	 * @since 0.1.0
-//	 */
-//	public static boolean isUnixPlatform() { //$JUnit$
-//		return !isWindowsPlatform() && !isMacPlatform(); //this method is a bit dirty, because it could be another system than Unix, but its the best guess...
-//	}
 }

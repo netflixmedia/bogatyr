@@ -41,8 +41,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperArray;
+import ch.sisprocom.bogatyr.model.crypto.CryptoAsymmetricAlgo;
 import ch.sisprocom.bogatyr.service.crypto.CryptoAsymmetric;
-import ch.sisprocom.bogatyr.service.crypto.CryptoRSA;
+import ch.sisprocom.bogatyr.service.crypto.CryptoAsymmetricImpl;
 import ch.sisprocom.bogatyr.test.AllBogatyrTests;
 
 
@@ -50,7 +51,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091027
+ * @version 20100215
  */
 public class CryptoAsymmetricTest {
 	private static final int KEYSIZE = 512;
@@ -62,7 +63,7 @@ public class CryptoAsymmetricTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		cryptoAsymm = new CryptoRSA();
+		cryptoAsymm = new CryptoAsymmetricImpl(CryptoAsymmetricAlgo.RSA);
         keyPair = cryptoAsymm.generateKeyPair(KEYSIZE);
         keyPairDefault = cryptoAsymm.generateKeyPair();
 	}

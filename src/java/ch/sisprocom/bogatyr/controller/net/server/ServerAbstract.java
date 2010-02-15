@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.7.0
  */
 public abstract class ServerAbstract extends ExtendedObjectAbstract implements Server, ListenerServerThread {
@@ -136,7 +136,7 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
     		throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
     	}
 		if (HelperNumber.NUMBER_65536.intValue() <= port) {
-    		throw new RuntimeExceptionMustBeSmaller("port", port, HelperNumber.NUMBER_65535); //$NON-NLS-1$
+    		throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
     	}
       
 		this.port = port;
@@ -191,7 +191,7 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
     public void stop() throws IOException {
     	isRunning = false;
 
-        if (null != serverSocket) {
+        if (null != serverSocket && !serverSocket.isClosed()) {
         	serverSocket.close();
         }
 		
@@ -202,8 +202,8 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 		if (null != thread) {
 			if (thread.isAlive()) {
 				thread.interrupt();
-			} else {
-				thread = null;
+//			} else {
+//				thread = null;
 			}
         }
     }

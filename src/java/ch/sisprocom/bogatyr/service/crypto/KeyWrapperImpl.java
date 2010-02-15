@@ -44,6 +44,7 @@ import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+import ch.sisprocom.bogatyr.model.crypto.CryptoAsymmetricAlgo;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 /**
@@ -51,7 +52,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100214)
  * @since 0.3.0
  */
 public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
@@ -59,9 +60,9 @@ public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
 
 	private final Cipher cipher;
 	
-	public KeyWrapperImpl() throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
+	public KeyWrapperImpl(final CryptoAsymmetricAlgo algorithm) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
         super();
-        cipher = Cipher.getInstance(CryptoRSA.XFORM, PROVIDER);
+        cipher = Cipher.getInstance(algorithm.getXform(), PROVIDER);
     }
 	
 	

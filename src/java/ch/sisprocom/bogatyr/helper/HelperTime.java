@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
  * This is a helper class for time operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.7.0
  */
 public abstract class HelperTime {
@@ -99,7 +99,7 @@ public abstract class HelperTime {
 			socket = new Socket(host, TIME_SERVER_PORT);
 			is = socket.getInputStream();
 
-            long time = HelperNumber.NUMBER_0.longValue();
+            long time = 0L;
 
             for (int ii = 3; 0 <= ii; ii-- ) {
 				time ^= (long) is.read() << ii * 8;

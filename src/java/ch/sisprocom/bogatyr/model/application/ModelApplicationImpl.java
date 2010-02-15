@@ -46,7 +46,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.misc.xml.adapter.MapAdapterHashCode;
 import ch.sisprocom.bogatyr.model.ModelAbstract;
-import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
 import ch.sisprocom.bogatyr.model.misc.Manufacturer;
 import ch.sisprocom.bogatyr.model.worker.ModelWorker;
 import ch.sisprocom.bogatyr.model.worker.ModelWorkerImpl;
@@ -58,7 +58,7 @@ import ch.sisprocom.bogatyr.service.property.Property;
  * The implementation of the application model.
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.1 (20100215)
  * @since 0.9.0
  */
 @XmlRootElement(name = "application")
@@ -66,7 +66,7 @@ import ch.sisprocom.bogatyr.service.property.Property;
 public class ModelApplicationImpl extends ModelAbstract implements ModelApplication {
 	private static final long serialVersionUID = -2826684498598090349L;
 
-	private Map<HashCode, String> mapHash = new HashMap<HashCode, String>(3);
+	private Map<HashCodeAlgo, String> mapHash = new HashMap<HashCodeAlgo, String>(3);
 	private String name;
 	private BigDecimal version;
 	private int build;
@@ -161,23 +161,23 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 
 	@Override
 	public String getHash() {
-		return getHash(HashCode.SHA256);
+		return getHash(HashCodeAlgo.SHA256);
 	}
 	
 	@Override
-	public String getHash(final HashCode hashCode) {
-		return mapHash.get(hashCode);
+	public String getHash(final HashCodeAlgo hashCodeAlgo) {
+		return mapHash.get(hashCodeAlgo);
 	}
 
 	@Override
 	@XmlElement
     @XmlJavaTypeAdapter(MapAdapterHashCode.class)
-	public Map<HashCode, String> getHashs() {
+	public Map<HashCodeAlgo, String> getHashs() {
 		return mapHash;
 	}
 
 	@Override
-	public void setHashs(final Map<HashCode, String> hashs) {
+	public void setHashs(final Map<HashCodeAlgo, String> hashs) {
         if (!HelperObject.isEquals(hashs, mapHash)) {
     		mapHash = hashs;
             setChanged();
@@ -186,15 +186,15 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
-	public void addHash(final HashCode hashCode, final String hash) {
-		mapHash.put(hashCode, hash);
+	public void addHash(final HashCodeAlgo hashCodeAlgo, final String hash) {
+		mapHash.put(hashCodeAlgo, hash);
         setChanged();
         notifyObservers(METHOD_ADD_HASH);
 	}
 
 	@Override
-	public void removeHash(final HashCode hashCode) {
-		mapHash.remove(hashCode);
+	public void removeHash(final HashCodeAlgo hashCodeAlgo) {
+		mapHash.remove(hashCodeAlgo);
         setChanged();
         notifyObservers(METHOD_REMOVE_HASH);
 	}

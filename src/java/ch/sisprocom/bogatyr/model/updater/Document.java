@@ -39,7 +39,7 @@ import java.util.UUID;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ch.sisprocom.bogatyr.model.Model;
-import ch.sisprocom.bogatyr.model.crypto.HashCode;
+import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
 import ch.sisprocom.bogatyr.model.misc.Manufacturer;
 import ch.sisprocom.bogatyr.model.misc.Owner;
 import ch.sisprocom.bogatyr.model.misc.Platform;
@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.model.misc.Publisher;
  * The interface for the document model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100105)
+ * @version 0.9.1 (20100215)
  * @since 0.9.0
  */
 @XmlJavaTypeAdapter(DocumentImpl.XmlAdapter.class)
@@ -105,7 +105,7 @@ public interface Document extends Model {
      * @return {@link Map} containing all hashs
      * @since 0.9.0
      */
-    Map<HashCode, String> getHashs();
+    Map<HashCodeAlgo, String> getHashs();
 
     /**
      * Sets all hashs.
@@ -113,16 +113,16 @@ public interface Document extends Model {
      * @param hashs {@link Map} containing all hashs
      * @since 0.9.0
      */
-    void setHashs(Map<HashCode, String> hashs);
+    void setHashs(Map<HashCodeAlgo, String> hashs);
 
     /**
-     * Returns the hash for a given {@link HashCode}.
+     * Returns the hash for a given {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo}.
      * 
-     * @param hashCode for the hash
+     * @param hashCodeAlgo for the hash
      * @return hash 
      * @since 0.9.0
      */	
-	String getHash(HashCode hashCode);
+	String getHash(HashCodeAlgo hashCodeAlgo);
 
 	/**
      * Returns the default hash (generated with SHA256).
