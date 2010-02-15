@@ -46,6 +46,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Security;
 import java.security.spec.AlgorithmParameterSpec;
+import java.util.Arrays;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -56,16 +57,19 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
-import ch.sisprocom.bogatyr.misc.Constants;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.misc.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
+import ch.sisprocom.bogatyr.model.crypto.CryptoSymmetricAlgo;
+import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 /**
@@ -73,36 +77,37 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.1.0
  */
-public class CryptoAES extends ServiceAbstract implements CryptoSymmetric {
-	public static final String ALGORITHM    = "AES"; //$NON-NLS-1$
-	public static final String XFORM        = "AES/CBC/PKCS5Padding"; //$NON-NLS-1$
-	public static final int DEFAULT_KEY_SIZE = 128;
-    
+public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmetric {
 	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
 
+	private final CryptoSymmetricAlgo algorithm;
+	
 	private final Cipher cipher;
 	private final KeyGenerator kg;
-
+	private final HashCodeGenerator hcg;
+	
 	static {
 		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
 	}
 
-	public CryptoAES() throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
+	public CryptoSymmetricImpl(final CryptoSymmetricAlgo algorithm) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
         super();
-        cipher = Cipher.getInstance(XFORM, PROVIDER);
-        kg = KeyGenerator.getInstance(ALGORITHM, PROVIDER);
+        this.algorithm = algorithm;
+        cipher = Cipher.getInstance(algorithm.getXform(), PROVIDER);
+        kg = KeyGenerator.getInstance(algorithm.getAlgorithm(), PROVIDER);
+        hcg = new HashCodeGeneratorImpl(HashCodeAlgo.SHA512);
     }
 	
 	/*
 	 * Private methods
 	 */
-	private static AlgorithmParameterSpec prepareIv() {
-        final byte[] ivBytes = new byte[HelperNumber.NUMBER_16.intValue()];
+	private AlgorithmParameterSpec prepareIv() {
+        final byte[] ivBytes = new byte[algorithm.getIvSize()];
         
-        for (int ii = 0; ivBytes.length > ii; ii++) {
+        for (int ii = 0; algorithm.getIvSize() > ii; ii++) {
         	ivBytes[ii] = (byte) 0x5a;
         }
         return new IvParameterSpec(ivBytes);
@@ -121,7 +126,7 @@ public class CryptoAES extends ServiceAbstract implements CryptoSymmetric {
 	 */
 	@Override
     public SecretKey generateKey() { //$JUnit$
-		return generateKey(DEFAULT_KEY_SIZE);
+		return generateKey(algorithm.getDefaultKeysize());
 	}
 	
 	@Override
@@ -129,6 +134,9 @@ public class CryptoAES extends ServiceAbstract implements CryptoSymmetric {
 		if (0 >= keySize) {
 			throw new RuntimeExceptionMustBeGreater("keySize", keySize, 0); //$NON-NLS-1$
 		}
+		if (0 != keySize % 8) {
+            throw new IllegalArgumentException("keySize is not a multiple of 8"); //$NON-NLS-1$
+        }
 
 		// Generate a key
 		kg.init(keySize);
@@ -136,6 +144,26 @@ public class CryptoAES extends ServiceAbstract implements CryptoSymmetric {
 		return kg.generateKey();
 	}
 	
+	@Override
+	public SecretKey generateKey(final byte[] password) {
+		return generateKey(password, algorithm.getDefaultKeysize());
+	}
+
+	@Override
+	public SecretKey generateKey(final byte[] password, final int keySize) {
+		if (0 >= keySize) {
+			throw new RuntimeExceptionMustBeGreater("keySize", keySize, 0); //$NON-NLS-1$
+		}
+		if (512 < keySize) {
+			throw new RuntimeExceptionMustBeSmaller("keySize", keySize, 512); //$NON-NLS-1$
+		}
+		if (0 != keySize % 8) {
+            throw new IllegalArgumentException("keySize is not a multiple of 8"); //$NON-NLS-1$
+        }
+
+		return new SecretKeySpec(Arrays.copyOfRange(hcg.getHash(password), 0, keySize / 8), algorithm.getAlgorithm());
+	}
+
 	@Override
     public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException { //$JUnit$
 		if (null == input) {
@@ -149,6 +177,7 @@ public class CryptoAES extends ServiceAbstract implements CryptoSymmetric {
         }
         
         cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
+//        cipher.init(Cipher.ENCRYPT_MODE, key);
 		return cipher.doFinal(input);
 	}
 
@@ -165,6 +194,7 @@ public class CryptoAES extends ServiceAbstract implements CryptoSymmetric {
         }
 
         cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
+//        cipher.init(Cipher.DECRYPT_MODE, key);
 		return cipher.doFinal(input);
 	}
 
@@ -194,6 +224,7 @@ public class CryptoAES extends ServiceAbstract implements CryptoSymmetric {
         final byte[] buffer = new byte[bufferSize];
 
         cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
+//        cipher.init(Cipher.ENCRYPT_MODE, key);
         os = new CipherOutputStream(os, cipher);
 
         int offset  ;
@@ -231,6 +262,7 @@ public class CryptoAES extends ServiceAbstract implements CryptoSymmetric {
 
         try {
         	cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
+//        	cipher.init(Cipher.DECRYPT_MODE, key);
         	cis = new CipherInputStream(is, cipher);
 	
 	        int offset  ;

@@ -55,7 +55,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.5.0
  */
 public abstract class HelperNet {
@@ -201,7 +201,7 @@ public abstract class HelperNet {
         // Try to reach the specified address within the timeout period.
         // If during this period the address cannot be
         // reached then the method returns false.
-		return address.isReachable(HelperNumber.NUMBER_4096.intValue());
+		return address.isReachable(4000);
     }
 
     /**
@@ -337,7 +337,7 @@ public abstract class HelperNet {
 		}
 		
 		final URLConnection con = url.openConnection();
-		con.setConnectTimeout(HelperNumber.NUMBER_2048.intValue());
+		con.setConnectTimeout(2000);
 		con.connect();
 		
 		return con.getInputStream();
@@ -368,7 +368,7 @@ public abstract class HelperNet {
 		
     	final URLConnection con = url.openConnection();
 		con.setRequestProperty("Authorization", "Basic " + EncoderBase64.encode(username + ':' + password)); //$NON-NLS-1$ //$NON-NLS-2$
-		con.setConnectTimeout(HelperNumber.NUMBER_2048.intValue());
+		con.setConnectTimeout(2000);
 		con.connect();
 		
 		return con.getInputStream();

@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.service.Service;
  * This is an interface for symmetric cryptology.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.6.0
  */
 public interface CryptoSymmetric extends Service { //$Example$
@@ -67,6 +67,27 @@ public interface CryptoSymmetric extends Service { //$Example$
 	 */
 	SecretKey generateKey(int keySize);
 	
+	/**
+	 * Generates a {@link SecretKey} with password and key size.
+	 * 
+	 * @param password for the key
+	 * @param keySize in bits (e.g. 128, 192 or 256)
+     * @return generated {@link SecretKey}
+	 * @see SecretKey 
+	 * @since 0.9.1
+	 */
+	SecretKey generateKey(byte[] password, int keySize);
+
+	/**
+	 * Generates a {@link SecretKey} with password and the algorithms standard key size.
+	 * 
+	 * @param password for the key
+     * @return generated {@link SecretKey}
+	 * @see SecretKey 
+	 * @since 0.9.1
+	 */
+	SecretKey generateKey(byte[] password);
+
 	/**
 	 * Encrypt the data (byte-array) with a given {@link Key} and the implementations algorithm.
 	 * 

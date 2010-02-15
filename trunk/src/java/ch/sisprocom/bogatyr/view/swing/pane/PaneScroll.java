@@ -36,7 +36,6 @@ import java.awt.Component;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 
-import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperObject;
 
 
@@ -44,7 +43,7 @@ import ch.sisprocom.bogatyr.helper.HelperObject;
  * This is an extended JScrollPane.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.3.0
  */
 public class PaneScroll extends JScrollPane {
@@ -52,8 +51,8 @@ public class PaneScroll extends JScrollPane {
 	
 	{
 		setWheelScrollingEnabled(true);
-		getVerticalScrollBar().setUnitIncrement(HelperNumber.NUMBER_16.intValue());
-		getHorizontalScrollBar().setUnitIncrement(HelperNumber.NUMBER_16.intValue());
+		getVerticalScrollBar().setUnitIncrement(16);
+		getHorizontalScrollBar().setUnitIncrement(16);
 	}
 	
 	/*

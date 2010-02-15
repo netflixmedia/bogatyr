@@ -50,14 +50,14 @@ import ch.sisprocom.bogatyr.model.misc.PublisherImpl;
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.7.0
  */
 public abstract class Constants {
 	//Bogatyr specific
 	public static final String BOGATYR_NAME		 		  = "Bogatyr"; //$NON-NLS-1$
-	public static final BigDecimal BOGATYR_VERSION 		  = new BigDecimal("0.9"); //$NON-NLS-1$
-	public static final int BOGATYR_BUILD 				  = 233;
+	public static final BigDecimal BOGATYR_VERSION 		  = new BigDecimal("0.91"); //$NON-NLS-1$
+	public static final int BOGATYR_BUILD 				  = 234;
 	public static final Manufacturer BOGATYR_MANUFACTURER = new ManufacturerImpl();
 	public static final Owner BOGATYR_OWNER 			  = new OwnerImpl();
 	public static final Publisher BOGATYR_PUBLISHER		  = new PublisherImpl();
@@ -106,15 +106,15 @@ public abstract class Constants {
 	public static final BigDecimal FACTOR_MILE2_TO_KM2 	  = new BigDecimal("2.5899881103"); //square mile (terrestrial) to kilometers^2 //$NON-NLS-1$
 	
 	//bit
-	public static final BigDecimal FACTOR_BIT_TO_BYTE = HelperNumber.NUMBER_8; //bit to byte
-	public static final BigDecimal FACTOR_BIT_TO_KILOBIT  = new BigDecimal("10E2"); //$NON-NLS-1$
-	public static final BigDecimal FACTOR_BIT_TO_MEGABIT  = new BigDecimal("10E5"); //$NON-NLS-1$
-	public static final BigDecimal FACTOR_BIT_TO_GIGABIT  = new BigDecimal("10E8"); //$NON-NLS-1$
-	public static final BigDecimal FACTOR_BIT_TO_TERABIT  = new BigDecimal("10E11"); //$NON-NLS-1$
-	public static final BigDecimal FACTOR_BIT_TO_PETABIT  = new BigDecimal("10E14"); //$NON-NLS-1$
-	public static final BigDecimal FACTOR_BIT_TO_EXABIT   = new BigDecimal("10E17"); //$NON-NLS-1$
-	public static final BigDecimal FACTOR_BIT_TO_ZETTABIT = new BigDecimal("10E20"); //$NON-NLS-1$
-	public static final BigDecimal FACTOR_BIT_TO_YOTTABIT = new BigDecimal("10E23"); //$NON-NLS-1$
+	public static final BigDecimal FACTOR_BIT_TO_BYTE 	   = HelperNumber.NUMBER_8; //bit to byte
+	public static final BigDecimal FACTOR_BIT_TO_KILOBIT   = new BigDecimal("10E2"); //$NON-NLS-1$
+	public static final BigDecimal FACTOR_BIT_TO_MEGABIT   = new BigDecimal("10E5"); //$NON-NLS-1$
+	public static final BigDecimal FACTOR_BIT_TO_GIGABIT   = new BigDecimal("10E8"); //$NON-NLS-1$
+	public static final BigDecimal FACTOR_BIT_TO_TERABIT   = new BigDecimal("10E11"); //$NON-NLS-1$
+	public static final BigDecimal FACTOR_BIT_TO_PETABIT   = new BigDecimal("10E14"); //$NON-NLS-1$
+	public static final BigDecimal FACTOR_BIT_TO_EXABIT    = new BigDecimal("10E17"); //$NON-NLS-1$
+	public static final BigDecimal FACTOR_BIT_TO_ZETTABIT  = new BigDecimal("10E20"); //$NON-NLS-1$
+	public static final BigDecimal FACTOR_BIT_TO_YOTTABIT  = new BigDecimal("10E23"); //$NON-NLS-1$
 	public static final BigDecimal FACTOR_BIT_TO_KILOBYTE  = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_KILOBIT);
 	public static final BigDecimal FACTOR_BIT_TO_MEGABYTE  = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_MEGABIT);
 	public static final BigDecimal FACTOR_BIT_TO_GIGABYTE  = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_GIGABIT);
@@ -123,22 +123,22 @@ public abstract class Constants {
 	public static final BigDecimal FACTOR_BIT_TO_EXABYTE   = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_EXABIT);
 	public static final BigDecimal FACTOR_BIT_TO_ZETTABYTE = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_ZETTABIT);
 	public static final BigDecimal FACTOR_BIT_TO_YOTTABYTE = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_YOTTABIT);
-	public static final BigDecimal FACTOR_BIT_TO_KIBIBIT = HelperNumber.NUMBER_1024;
-	public static final BigDecimal FACTOR_BIT_TO_MEBIBIT = FACTOR_BIT_TO_KIBIBIT.multiply(HelperNumber.NUMBER_1024);
-	public static final BigDecimal FACTOR_BIT_TO_GIBIBIT = FACTOR_BIT_TO_MEBIBIT.multiply(HelperNumber.NUMBER_1024);
-	public static final BigDecimal FACTOR_BIT_TO_TEBIBIT = FACTOR_BIT_TO_GIBIBIT.multiply(HelperNumber.NUMBER_1024);
-	public static final BigDecimal FACTOR_BIT_TO_PEBIBIT = FACTOR_BIT_TO_TEBIBIT.multiply(HelperNumber.NUMBER_1024);
-	public static final BigDecimal FACTOR_BIT_TO_EXBIBIT = FACTOR_BIT_TO_PEBIBIT.multiply(HelperNumber.NUMBER_1024);
-	public static final BigDecimal FACTOR_BIT_TO_ZEBIBIT = FACTOR_BIT_TO_EXBIBIT.multiply(HelperNumber.NUMBER_1024);
-	public static final BigDecimal FACTOR_BIT_TO_YOBIBIT = FACTOR_BIT_TO_ZEBIBIT.multiply(HelperNumber.NUMBER_1024);
-	public static final BigDecimal FACTOR_BIT_TO_KIBIBYTE = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_KIBIBIT);
-	public static final BigDecimal FACTOR_BIT_TO_MEBIBYTE = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_MEBIBIT);
-	public static final BigDecimal FACTOR_BIT_TO_GIBIBYTE = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_GIBIBIT);
-	public static final BigDecimal FACTOR_BIT_TO_TEBIBYTE = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_TEBIBIT);
-	public static final BigDecimal FACTOR_BIT_TO_PEBIBYTE = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_PEBIBIT);
-	public static final BigDecimal FACTOR_BIT_TO_EXBIBYTE = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_EXBIBIT);
-	public static final BigDecimal FACTOR_BIT_TO_ZEBIBYTE = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_ZEBIBIT);
-	public static final BigDecimal FACTOR_BIT_TO_YOBIBYTE = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_YOBIBIT);
+	public static final BigDecimal FACTOR_BIT_TO_KIBIBIT   = HelperNumber.NUMBER_1024;
+	public static final BigDecimal FACTOR_BIT_TO_MEBIBIT   = FACTOR_BIT_TO_KIBIBIT.multiply(HelperNumber.NUMBER_1024);
+	public static final BigDecimal FACTOR_BIT_TO_GIBIBIT   = FACTOR_BIT_TO_MEBIBIT.multiply(HelperNumber.NUMBER_1024);
+	public static final BigDecimal FACTOR_BIT_TO_TEBIBIT   = FACTOR_BIT_TO_GIBIBIT.multiply(HelperNumber.NUMBER_1024);
+	public static final BigDecimal FACTOR_BIT_TO_PEBIBIT   = FACTOR_BIT_TO_TEBIBIT.multiply(HelperNumber.NUMBER_1024);
+	public static final BigDecimal FACTOR_BIT_TO_EXBIBIT   = FACTOR_BIT_TO_PEBIBIT.multiply(HelperNumber.NUMBER_1024);
+	public static final BigDecimal FACTOR_BIT_TO_ZEBIBIT   = FACTOR_BIT_TO_EXBIBIT.multiply(HelperNumber.NUMBER_1024);
+	public static final BigDecimal FACTOR_BIT_TO_YOBIBIT   = FACTOR_BIT_TO_ZEBIBIT.multiply(HelperNumber.NUMBER_1024);
+	public static final BigDecimal FACTOR_BIT_TO_KIBIBYTE  = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_KIBIBIT);
+	public static final BigDecimal FACTOR_BIT_TO_MEBIBYTE  = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_MEBIBIT);
+	public static final BigDecimal FACTOR_BIT_TO_GIBIBYTE  = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_GIBIBIT);
+	public static final BigDecimal FACTOR_BIT_TO_TEBIBYTE  = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_TEBIBIT);
+	public static final BigDecimal FACTOR_BIT_TO_PEBIBYTE  = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_PEBIBIT);
+	public static final BigDecimal FACTOR_BIT_TO_EXBIBYTE  = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_EXBIBIT);
+	public static final BigDecimal FACTOR_BIT_TO_ZEBIBYTE  = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_ZEBIBIT);
+	public static final BigDecimal FACTOR_BIT_TO_YOBIBYTE  = FACTOR_BIT_TO_BYTE.multiply(FACTOR_BIT_TO_YOBIBIT);
 	
 	//length
 	public static final BigDecimal FACTOR_INCH_TO_CM 		 = new BigDecimal("2.54"); //inch to centimeters //$NON-NLS-1$

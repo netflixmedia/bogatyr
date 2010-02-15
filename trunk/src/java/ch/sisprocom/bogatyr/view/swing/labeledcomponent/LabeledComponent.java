@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -41,7 +41,6 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
-import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.view.swing.Label;
 import ch.sisprocom.bogatyr.view.swing.Panel;
 
@@ -50,7 +49,7 @@ import ch.sisprocom.bogatyr.view.swing.Panel;
  * This is a Label combined with a JComponent.
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.6.0
  */
 public class LabeledComponent extends Panel {
@@ -100,14 +99,14 @@ public class LabeledComponent extends Panel {
 	    if (component instanceof JCheckBox || component instanceof JRadioButton) {
 			add(component, gbc);
 
-			gbc.weightx = HelperNumber.NUMBER_1.doubleValue();
+			gbc.weightx = 1.0D;
 			gbc.gridx = 1;
 			gbc.insets = new Insets(0, 0, 0, 0);
 			add(label, gbc);	    	
 	    } else {
 			add(label, gbc);
 			
-			gbc.weightx = HelperNumber.NUMBER_1.doubleValue();
+			gbc.weightx = 1.0D;
 			gbc.gridx = 1;
 			gbc.insets = new Insets(0, 0, 0, 0);
 			add(component, gbc);

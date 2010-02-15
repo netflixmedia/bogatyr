@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -192,16 +192,16 @@ public abstract class HelperString {
 
         final StringBuilder sb = new StringBuilder();
         
-        for (final String strValue : strings) {
-            if (isValid(strValue)) {
+        for (final String string : strings) {
+            if (isValid(string)) {
                 if (null != separator && 0 < sb.length()) {
                     sb.append(separator);
                 }
 
                 if (isTrimmed) {
-                    sb.append(strValue.trim());
+                    sb.append(string.trim());
                 } else {
-                    sb.append(strValue);
+                    sb.append(string);
                 }
             }
         }

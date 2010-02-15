@@ -32,7 +32,6 @@
 package ch.sisprocom.bogatyr.helper.encoder;
 
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 
 
@@ -40,7 +39,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
  * Encodes and decodes data to Hex format.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.1.0
  */
 public abstract class EncoderHex {
@@ -53,9 +52,6 @@ public abstract class EncoderHex {
      * @since 0.1.0
      */
     public static String encode(final byte[] input) { //$JUnit$
-//		if (!HelperArray.isValid(input)) {
-//			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
-//		}
     	if (null != input) {
     		if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
 	            throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
@@ -83,9 +79,6 @@ public abstract class EncoderHex {
      * @since 0.1.0
      */
     public static byte[] decode(final String input) { //$JUnit$
-//		if (!HelperString.isValid(input)) {
-//			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
-//		}
 		if (null != input) {
 			if (input.length() * 2 > HelperEnvironment.getMemoryFree()) {
 	            throw new RuntimeExceptionExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
@@ -94,7 +87,7 @@ public abstract class EncoderHex {
 			final byte[] bts = new byte[input.length() / 2];
 	
 	    	for (int ii = 0; ii < bts.length; ii++) {
-	    		bts[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), HelperNumber.NUMBER_16.intValue());
+	    		bts[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), 16);
 	    	}
 	    	return bts;
 		}

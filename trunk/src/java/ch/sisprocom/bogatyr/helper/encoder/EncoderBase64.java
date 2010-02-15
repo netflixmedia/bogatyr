@@ -32,7 +32,6 @@
 package ch.sisprocom.bogatyr.helper.encoder;
 
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 
 
@@ -40,14 +39,14 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.1.0
  */
 public abstract class EncoderBase64 {
     private static final String ERROR_ILLEGAL_CHARACTER = "Illegal character in Base64 encoded data"; //$NON-NLS-1$
 
-	private static final char[] map1 = new char[HelperNumber.NUMBER_64.intValue()];
-	private static final byte[] map2 = new byte[HelperNumber.NUMBER_128.intValue()];
+	private static final char[] map1 = new char[64];
+	private static final byte[] map2 = new byte[128];
 
 	// Mapping table from 6-bit nibbles to Base64 characters.
 	static {
@@ -74,7 +73,7 @@ public abstract class EncoderBase64 {
 		for (int ii = 0; ii < map2.length; ii++) {
 			map2[ii] = (byte) -1;
 		}
-		for (int ii = 0; HelperNumber.NUMBER_64.intValue() > ii; ii++) {
+		for (int ii = 0; 64 > ii; ii++) {
 			map2[map1[ii]] = (byte) ii;
 		}
 	}
@@ -88,9 +87,6 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static String encode(final String input) { //$JUnit$
-//		if (!HelperString.isValid(input)) {
-//			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
-//		}
         if (null != input) {
 			if (input.length() * 2 > HelperEnvironment.getMemoryFree()) {
 	            throw new RuntimeExceptionExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
@@ -110,9 +106,6 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static char[] encode(final byte[] input) { //$JUnit$
-//		if (!HelperArray.isValid(input)) {
-//			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
-//		}
 		if (null != input) {
 			if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
 				throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
@@ -131,9 +124,6 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static byte[] decode(final String input) { //$JUnit$
-//		if (!HelperString.isValid(input)) {
-//			throw new RuntimeExceptionArgumentIsNullOrEmpty("input"); //$NON-NLS-1$
-//		}
 		if (null != input) {
 			if (input.length() * 2 > HelperEnvironment.getMemoryFree()) {
 	        	throw new RuntimeExceptionExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
@@ -153,9 +143,6 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static byte[] decode(final char[] input) { //$JUnit$
-//		if (null == input || 0 >= input.length) {
-//			throw new RuntimeExceptionArgumentIsNullOrEmpty("data"); //$NON-NLS-1$
-//		}
 		if (null != input) {
 			if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
 	        	throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$

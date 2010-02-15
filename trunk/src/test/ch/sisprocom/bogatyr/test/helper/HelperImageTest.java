@@ -43,7 +43,6 @@ import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperImage;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.view.swing.Button;
 
@@ -52,7 +51,7 @@ import ch.sisprocom.bogatyr.view.swing.Button;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091111
+ * @version 20100215
  */
 public class HelperImageTest {
 	@Test
@@ -60,7 +59,7 @@ public class HelperImageTest {
 		final Component component = new Button("Hello world", HelperString.EMPTY_STRING); //$NON-NLS-1$ 
 		component.setBackground(Color.YELLOW);
 		component.setForeground(Color.BLACK);
-		component.setFont(new Font("Arial", Font.PLAIN, HelperNumber.NUMBER_16.intValue())); //$NON-NLS-1$
+		component.setFont(new Font("Arial", Font.PLAIN, 16)); //$NON-NLS-1$
 		component.setSize(new Dimension(100, 100));
 
 		try {

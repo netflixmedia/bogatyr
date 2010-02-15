@@ -31,25 +31,28 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.test.helper;
 
-import ch.sisprocom.bogatyr.helper.HelperCrypto;
-import ch.sisprocom.bogatyr.helper.HelperNumber;
-import static org.junit.Assert.*;
-import org.junit.Test;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.fail;
 
 import java.util.UUID;
+
+import org.junit.Test;
+
+import ch.sisprocom.bogatyr.helper.HelperCrypto;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100212
+ * @version 20100215
  */
 public class HelperCryptoTest {
 
 	@Test
     public void testGetRandomKey() {
-        assertNotNull(HelperCrypto.getRandomKey(HelperNumber.NUMBER_16.intValue(), '1','2','3'));
+        assertNotNull(HelperCrypto.getRandomKey(16, '1','2','3'));
 
         try {
         	HelperCrypto.getRandomKey(Integer.MIN_VALUE, '1','2','3');
@@ -61,7 +64,7 @@ public class HelperCryptoTest {
 		}
 
         try {
-        	HelperCrypto.getRandomKey(HelperNumber.NUMBER_16.intValue(), null);
+        	HelperCrypto.getRandomKey(16, null);
             fail("data is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -72,7 +75,7 @@ public class HelperCryptoTest {
 
 	@Test
     public void testGetRandomKeyDefault() {
-		assertNotNull(HelperCrypto.getRandomKey(HelperNumber.NUMBER_16.intValue()));
+		assertNotNull(HelperCrypto.getRandomKey(16));
 
 		try {
 			HelperCrypto.getRandomKey(Integer.MIN_VALUE);

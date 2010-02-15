@@ -31,6 +31,8 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 
 
@@ -38,7 +40,7 @@ import java.util.Map;
  * This is a helper class for maps.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.1 (20100215)
  * @since 0.9.0
  */
 public abstract class HelperMap {
@@ -55,6 +57,48 @@ public abstract class HelperMap {
     }
 	
     /**
+     * Get all keys from a {@link Map}.
+     * 
+     * @param map to dump
+     * @return keys from a {@link Map}
+     * @see Map
+     * @since 0.9.1
+     */
+    public static <K, V> Collection<K> getKeys(final Map<K, V> map) {
+		if (null != map) {
+	        
+			Collection<K> set = new ArrayList<K>(map.size());
+
+			for (final Map.Entry<K, V> pair : map.entrySet()) {
+				set.add(pair.getKey());
+			}
+	        return set;
+		}
+		return null;
+    }
+   
+    /**
+     * Get all values from a {@link Map}.
+     * 
+     * @param map to dump
+     * @return values from a {@link Map}
+     * @see Map
+     * @since 0.9.1
+     */
+    public static <K, V> Collection<V> getValues(final Map<K, V> map) {
+		if (null != map) {
+	        
+			Collection<V> set = new ArrayList<V>(map.size());
+
+			for (final Map.Entry<K, V> pair : map.entrySet()) {
+				set.add(pair.getValue());
+			}
+	        return set;
+		}
+		return null;
+    }
+
+    /**
      * Dump a {@link Map}.
      * 
      * @param map to dump
@@ -63,10 +107,6 @@ public abstract class HelperMap {
      * @since 0.7.0
      */
     public static String dump(final Map<?, ?> map) { //$JUnit$
-//		if (null == map) {
-//			throw new RuntimeExceptionArgumentIsNull("map"); //$NON-NLS-1$
-//		}
-
 		if (null != map) {
 	        final StringBuilder sb = new StringBuilder();
 	

@@ -38,7 +38,7 @@ import java.math.BigDecimal;
  * This is an interface to define all methods of an unit.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.9.0
  */
 public interface Unit<U extends Unit<?>> {
@@ -50,7 +50,7 @@ public interface Unit<U extends Unit<?>> {
      * @return {@link BigDecimal} value in the resulting unit
      * @since 0.9.0
      */
-    <T extends Number> BigDecimal convertTo(U toUnit, T value);
+    BigDecimal convertTo(U toUnit, Number value);
 
 //    /**
 //     * Converts a {@link BigDecimal} value to another unit.

@@ -42,7 +42,6 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 
-import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.view.swing.Label;
 import ch.sisprocom.bogatyr.view.swing.LabelVertical;
@@ -54,7 +53,7 @@ import ch.sisprocom.bogatyr.view.swing.Panel;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.8.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.5.0
  */
 public class Chart extends Panel {
@@ -158,8 +157,8 @@ public class Chart extends Panel {
 		gbc.gridy = maxY + 1;
     	gbc.gridwidth 	= maxX;
     	gbc.gridheight 	= 1;
-    	gbc.weightx 	= HelperNumber.NUMBER_1.doubleValue();
-		gbc.weighty		= HelperNumber.NUMBER_0.doubleValue();
+    	gbc.weightx 	= 1.0D;
+		gbc.weighty		= 0.0D;
 
     	add(getXAxis(), gbc);
 
@@ -167,8 +166,8 @@ public class Chart extends Panel {
 		gbc.fill = GridBagConstraints.VERTICAL;
 		gbc.gridx = 0;
 		gbc.gridwidth = 1;
-    	gbc.weightx = HelperNumber.NUMBER_0.doubleValue();
-		gbc.weighty = HelperNumber.NUMBER_1.doubleValue();
+    	gbc.weightx = 0.0D;
+		gbc.weighty = 1.0D;
 		if (Y_Axis.WEST == positionYAxis) {
             gbc.gridy = X_Axis.SOUTH == positionXAxis ? 0 : 1;
 			gbc.gridheight 	= maxY + 1;

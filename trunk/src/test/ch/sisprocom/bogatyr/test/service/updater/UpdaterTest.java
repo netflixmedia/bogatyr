@@ -37,12 +37,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ch.sisprocom.bogatyr.misc.Constants;
+import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
 import org.junit.Before;
 import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperCrypto;
 import ch.sisprocom.bogatyr.helper.HelperXml;
-import ch.sisprocom.bogatyr.model.crypto.HashCode;
 import ch.sisprocom.bogatyr.model.misc.Platform;
 import ch.sisprocom.bogatyr.model.updater.Document;
 import ch.sisprocom.bogatyr.model.updater.DocumentImpl;
@@ -52,7 +52,7 @@ import ch.sisprocom.bogatyr.model.updater.DocumentImpl;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100202
+ * @version 20100215
  */
 public class UpdaterTest {
 	@Before
@@ -66,9 +66,9 @@ public class UpdaterTest {
 		locations.put(Platform.UNIX, "www.unix.com");
 		doc.setLocations(locations);
 
-		final Map<HashCode, String> hashs = new HashMap<HashCode, String>(3);
-		hashs.put(HashCode.MD5, "MD5-Hashvalue");
-		hashs.put(HashCode.SHA256, "SHA256-Hashvalue");
+		final Map<HashCodeAlgo, String> hashs = new HashMap<HashCodeAlgo, String>(3);
+		hashs.put(HashCodeAlgo.MD5, "MD5-Hashvalue");
+		hashs.put(HashCodeAlgo.SHA256, "SHA256-Hashvalue");
 		doc.setHashs(hashs);
 		
 		doc.setName(Constants.BOGATYR_NAME);

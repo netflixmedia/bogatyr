@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * 
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.4.0
  */
 public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
@@ -58,7 +58,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @return calculated gcd
 	 * @since 0.4.0
 	 */
-	 public static <T extends Number> BigDecimal gcd(final T a, final T b) { //$JUnit$
+	 public static BigDecimal gcd(final Number a, final Number b) { //$JUnit$
 		if (null == a) {
 			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
 		}
@@ -91,7 +91,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @return calculated lcm
 	 * @since 0.4.0
 	 */
-	 public static <T extends Number> BigDecimal lcm(final T a, final T b) { //$JUnit$
+	 public static BigDecimal lcm(final Number a, final Number b) { //$JUnit$
 		if (null == a) {
 			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
 		}
@@ -119,20 +119,20 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @return true/false
      * @since 0.5.0
      */	
-	public static boolean isPrime(final int n) { //$JUnit$
+	public static boolean isPrime(final long n) { //$JUnit$
 		// 2 is the smallest prime
-        if (2 >= n) {
-        	return 2 == n;
+        if (2L >= n) {
+        	return 2L == n;
         }
 
         // even numbers other than 2 are not prime
-        if (0 == n % 2) {
+        if (0L == n % 2L) {
             return false;
         }
 
         // check odd divisors from 3 to the square root of n
-        for (int i = 3, end = (int)StrictMath.sqrt((double) n); i <= end; i += 2) {
-            if (0 == n % i) {
+        for (long ii = 3L, end = (long)StrictMath.sqrt((double) n); ii <= end; ii += 2L) {
+            if (0L == n % ii) {
                 return false;
             }
         }
@@ -146,13 +146,13 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @return nearest prime number
      * @since 0.5.0
      */	
-	public static int calcNearestPrime(final int n) { //$JUnit$
+	public static long calcNearestPrime(final long n) { //$JUnit$
 		// 2 is the smallest prime
-        if (2 >= n) {
-        	return 2;
+        if (2L >= n) {
+        	return 2L;
         }
         
-		int number = n;
+		long number = n;
         
 		while (!isPrime(number)) {
             number++;
@@ -210,10 +210,10 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @since 0.4.0
      */	
 	public static double log(final double base, final double value) { //$JUnit$
-        if (HelperNumber.NUMBER_1.doubleValue() >= base) {
+        if (1.0D >= base) {
             throw new RuntimeExceptionMustBeGreater("base", base, 1); //$NON-NLS-1$
         }
-        if (HelperNumber.NUMBER_0.doubleValue() >= value) {
+        if (0.0D >= value) {
             throw new RuntimeExceptionMustBeGreater("value", value, 0); //$NON-NLS-1$
         }
 
@@ -230,13 +230,13 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      */
     public static double round(final double value, final int decimalPlace) { //$JUnit$
 		int dp = decimalPlace;
-		double powerOfTen = HelperNumber.NUMBER_1.doubleValue();
+		double powerOfTen = 1.0D;
 		
 	    while (0 < dp) {
             dp--;
-            powerOfTen *= HelperNumber.NUMBER_10.doubleValue();
+            powerOfTen *= 10.0D;
 	    }
-        return (double) StrictMath.round(value * powerOfTen) / powerOfTen;
+        return (double)StrictMath.round(value * powerOfTen) / powerOfTen;
 	}
 
     /**
@@ -247,7 +247,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @since 0.4.0
      */
     public static int getRandom(final int n) { //$JUnit$
-    	return (int) (StrictMath.random() * (double) n);
+    	return (int)(StrictMath.random() * (double) n);
     }
     
     /**
@@ -265,7 +265,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 			 throw new RuntimeExceptionMustBeGreater("days", days, 0); //$NON-NLS-1$
 		 }
 		 
-		 return amount * StrictMath.pow(StrictMath.E, (double)days / 360.0 * interest);
+		 return amount * StrictMath.pow(StrictMath.E, (double)days / 360.0D * interest);
     }
 	
     /**
@@ -275,14 +275,14 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @return factorial (n!) from 1 to n
      * @since 0.9.0
      */	
-	public static BigInteger factorial(final int n) { //$JUnit$
-        if (0 > n) {
+	public static BigInteger factorial(final long n) { //$JUnit$
+        if (0L > n) {
         	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
 
         BigInteger sum = BigInteger.ONE;
 
-        for (int ii = n; 0 < ii; ii--) {
+        for (long ii = n; 0L < ii; ii--) {
         	sum = sum.multiply(BigInteger.valueOf(ii));
         }
         return sum;
@@ -295,16 +295,16 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @return Gauss sum from 1 to n
      * @since 0.7.0
      */	
-	public static int sum(final int n) { //$JUnit$
-        if (0 > n) {
+	public static long sum(final long n) { //$JUnit$
+        if (0L > n) {
         	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
-        if (0 == n) {
-        	return 1;
+        if (0L == n) {
+        	return 1L;
         }
 
-        return n * (n + 1) / 2;
+        return n * (n + 1L) / 2L;
     }
 	
 	/**
@@ -314,16 +314,16 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @return Gauss square sum from 1 to n^2
      * @since 0.7.0
      */	
-	public static int sumSquare(final int n) { //$JUnit$
-        if (0 > n) {
+	public static long sumSquare(final long n) { //$JUnit$
+        if (0L > n) {
         	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
-        if (0 == n) {
-        	return 1;
+        if (0L == n) {
+        	return 1L;
         }
 
-        return n * (n + 1) * (2* n + 1) / 6;
+        return n * (n + 1L) * (2L * n + 1L) / 6L;
     }
 	
 	/**
@@ -333,16 +333,16 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @return Gauss cubic sum from 1 to n^3
      * @since 0.7.0
      */	
-	public static int sumCubic(final int n) { //$JUnit$
-        if (0 > n) {
+	public static long sumCubic(final long n) { //$JUnit$
+        if (0L > n) {
         	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
-        if (0 == n) {
-        	return 1;
+        if (0L == n) {
+        	return 1L;
         }
 
-        return (int) StrictMath.pow(sum(n), HelperNumber.NUMBER_2.doubleValue());
+        return (long)StrictMath.pow(sum(n), 2.0D);
     }
 
 	/**
@@ -353,18 +353,18 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @return sum between the range m - n
      * @since 0.7.0
      */	
-	public static int sumRange(final int m, final int n) {
-        if (0 > m) {
+	public static long sumRange(final long m, final long n) {
+        if (0L > m) {
         	throw new RuntimeExceptionMustBeGreater("m", m, 0); //$NON-NLS-1$
         }
-        if (0 > n) {
+        if (0L > n) {
         	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
 		if (m > n) {
             throw new IllegalArgumentException("n value (" + n + ") must be greater than the m value (" + m + ')'); //$NON-NLS-1$ //$NON-NLS-2$
         }
         
-        return (m + n) * (n - m + 1) / 2;
+        return (m + n) * (n - m + 1L) / 2L;
     }
 	
 	/**
@@ -374,12 +374,12 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @return number of connections from n
      * @since 0.7.0
      */	
-	public static int calcConnections(final int n) { //$JUnit$
-        if (0 >= n) {
+	public static long calcConnections(final long n) { //$JUnit$
+        if (0L >= n) {
         	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
-        return n * (n - 1) / 2;
+        return n * (n - 1L) / 2L;
     }
 
 	/**
@@ -413,11 +413,11 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @return binomial coefficient
      * @since 0.7.0
      */	
-	public static BigInteger binomialCoefficient(final int n, final int k) { //$JUnit$
-        if (0 > n) {
+	public static BigInteger binomialCoefficient(final long n, final long k) { //$JUnit$
+        if (0L > n) {
         	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
-        if (0 > k) {
+        if (0L > k) {
         	throw new RuntimeExceptionMustBeGreater("k", k, 0); //$NON-NLS-1$
         }
 		if (k > n) {
@@ -434,12 +434,12 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @return sum of odd numbers between 0 - n
      * @since 0.7.0
      */	
-	public static int sumOdd(final int n) { //$JUnit$
-        if (0 > n) {
+	public static long sumOdd(final long n) { //$JUnit$
+        if (0L > n) {
         	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
-        return (int)StrictMath.pow(n, HelperNumber.NUMBER_2.doubleValue());
+        return (long)StrictMath.pow(n, 2.0D);
     }
 
 	/**
@@ -449,13 +449,13 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @return sum of even numbers between 0 - n
      * @since 0.7.0
      */	
-	public static int sumEven(final int n) { //$JUnit$
-        if (0 > n) {
+	public static long sumEven(final long n) { //$JUnit$
+        if (0L > n) {
         	throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
         }
         
-        int sum = 0;
-        for (int ii = 2; ii <= n * 2; ii += 2 ) {
+        long sum = 0;
+        for (long ii = 2L; ii <= n * 2L; ii += 2L) {
         	sum += ii;
         }
 
@@ -469,8 +469,8 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @return true/false
      * @since 0.7.0
      */	
-	public static boolean isOdd(final int n) { //$JUnit$
-        return 0 != n % 2;
+	public static boolean isOdd(final long n) { //$JUnit$
+        return 0L != n % 2L;
     }
 
 	/**
@@ -480,7 +480,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
      * @return true/false
      * @since 0.7.0
      */	
-	public static boolean isEven(final int n) { //$JUnit$
+	public static boolean isEven(final long n) { //$JUnit$
         return !isOdd(n);
     }
 }

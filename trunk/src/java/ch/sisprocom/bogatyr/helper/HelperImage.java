@@ -54,7 +54,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091111)
+ * @version 0.9.1 (20100215)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -77,9 +77,6 @@ public abstract class HelperImage {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.exists()) {
-//			throw new RuntimeExceptionFileNotFound(file);
-//		}
 
 		return ImageIO.read(file);
     }
@@ -114,14 +111,14 @@ public abstract class HelperImage {
      * @since 0.4.0
      */
     public static void writeImage(final File file, final String type, final RenderedImage image) throws IOException { //$JUnit$
+    	if (null == file) {
+    		throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+    	}
 		if (null == image) {
 			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
 		}
 		if (null == type || !getAvailableImageWriteFormats().contains(type)) {
 			throw new IllegalArgumentException("type is null or invalid: " + type); //$NON-NLS-1$
-		}
-		if (null == file) {
-			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 		
 		ImageIO.write(image, type, file);

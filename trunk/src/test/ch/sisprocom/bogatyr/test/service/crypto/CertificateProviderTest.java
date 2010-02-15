@@ -44,17 +44,18 @@ import org.junit.Test;
 
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperTime;
+import ch.sisprocom.bogatyr.model.crypto.CryptoAsymmetricAlgo;
 import ch.sisprocom.bogatyr.service.crypto.CertificateProvider;
 import ch.sisprocom.bogatyr.service.crypto.CertificateProviderImpl;
 import ch.sisprocom.bogatyr.service.crypto.CryptoAsymmetric;
-import ch.sisprocom.bogatyr.service.crypto.CryptoRSA;
+import ch.sisprocom.bogatyr.service.crypto.CryptoAsymmetricImpl;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091027
+ * @version 20100215
  */
 public class CertificateProviderTest {
 	private final CertificateProvider publicKeyProvider = new CertificateProviderImpl();
@@ -64,7 +65,7 @@ public class CertificateProviderTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		final CryptoAsymmetric cryptoAsymm = new CryptoRSA();
+		final CryptoAsymmetric cryptoAsymm = new CryptoAsymmetricImpl(CryptoAsymmetricAlgo.RSA);
         keyPair = cryptoAsymm.generateKeyPair();
 	}
 	

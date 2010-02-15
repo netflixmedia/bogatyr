@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100209)
+ * @version 0.9.1 (20100215)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -165,9 +165,6 @@ public abstract class HelperArray {
 	 * @since 0.7.0
 	 */
 	public static <T> T[] removeDuplicates(final T[] array) { //$JUnit$
-//		if (null == array) {
-//			throw new RuntimeExceptionArgumentIsNull("array"); //$NON-NLS-1$
-//		}
 		if (null != array) {
 			return HelperCollection.toArray(HelperCollection.removeDuplicates(Arrays.asList(array)));
 		}
@@ -182,10 +179,6 @@ public abstract class HelperArray {
      * @since 0.7.0
      */
     public static <T> String dump(final T[] array) { //$JUnit$
-//		if (null == array) {
-//			throw new RuntimeExceptionArgumentIsNull("array"); //$NON-NLS-1$
-//		}
-		
     	if (null != array) {
     		final StringBuilder sb = new StringBuilder();
 

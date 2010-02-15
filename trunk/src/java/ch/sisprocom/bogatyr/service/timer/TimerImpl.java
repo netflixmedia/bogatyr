@@ -33,14 +33,13 @@ package ch.sisprocom.bogatyr.service.timer;
 
 import java.util.TimerTask;
 
-import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 /**
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.6.0
  */
 public class TimerImpl extends TimerAbstract implements Timer {
@@ -70,7 +69,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
 			throw new RuntimeExceptionMustBeGreater("interval", interval, 0); //$NON-NLS-1$
 		}
 
-		start(HelperNumber.NUMBER_0.longValue(), interval);
+		start(0L, interval);
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
@@ -45,7 +46,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher starts the system mail application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091101)
+ * @version 0.9.1 (20100215)
  * @since 0.7.0
  */
 public abstract class LauncherMail {
@@ -85,24 +86,58 @@ public abstract class LauncherMail {
 	}
 	
 	/**
-	 * Opens an email address given as {@link String} with the default mail application.
+	 * Opens an email with a given subject, body and addresses with the default mail application.
 	 *
-	 * @param emailAddress for the mail application (e.g. "yourname@yourmail.com")
+	 * @param subject for the mail
+	 * @param body for the mail
+	 * @param emailAddresses for the mail (e.g. "yourname@yourmail.com")
 	 * @throws IOException 
 	 * @throws URISyntaxException
 	 * @since 0.7.0
 	 */
-	public static void mail(final String emailAddress) throws IOException, URISyntaxException { //$JUnit$
-		if (!HelperString.isValid(emailAddress)) {
-			throw new RuntimeExceptionIsNullOrEmpty("emailAddress"); //$NON-NLS-1$
+	public static void mail(final String subject, final String body, final String... emailAddresses) throws IOException, URISyntaxException { //$JUnit$
+		if (!HelperArray.isValid(emailAddresses)) {
+			throw new RuntimeExceptionIsNullOrEmpty("emailAddresses"); //$NON-NLS-1$
 		}
-		
+
+        final StringBuilder sb = new StringBuilder();
+        int ii = 0;
+        for (String address : emailAddresses) {
+            if (0 < ii) {
+                sb.append(HelperString.COMMA);
+            }
+            sb.append(address);
+            ii++;
+
+        }
+        sb.append("?subject="); //$NON-NLS-1$
+        sb.append(getValidText(subject));
+        sb.append("&body="); //$NON-NLS-1$
+        sb.append(getValidText(body).replace(HelperString.NEW_LINE, "%0A")); //$NON-NLS-1$
+        
+        final String addresses = sb.toString();
+
 		final String prefix = "mailto:"; //$NON-NLS-1$
 		
-		if (HelperString.startsWith(emailAddress, prefix)) {
-			mail(new URI(emailAddress));
-		} else {
-			mail(new URI(prefix + emailAddress));
+		mail(new URI(prefix + addresses.replaceAll(" ", "%20")));   //$NON-NLS-1$//$NON-NLS-2$
+	}
+	
+	private static String getValidText(final String input) {
+	    if (null != input) {
+			final StringBuffer sb = new StringBuffer(input.length());
+	
+		    for (char c : input.toCharArray()) {
+		    	int ci = 0xffff & c;
+	            if (ci < 160 ) {
+	                // nothing special only 7 Bit
+	                sb.append(c);
+	            } else {
+	                // Not 7 Bit use the unicode system
+	                sb.append("?"); //$NON-NLS-1$
+	            }
+            }
+		    return sb.toString();
 		}
+	    return null;
 	}
 }

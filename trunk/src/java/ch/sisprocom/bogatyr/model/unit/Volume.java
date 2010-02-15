@@ -40,7 +40,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Volume units
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100215)
  * @since 0.7.0
  */
 public enum Volume implements Unit<Volume> {
@@ -68,7 +68,7 @@ public enum Volume implements Unit<Volume> {
 	 * Implemented methods
 	 */
 	@Override
-	public <T extends Number> BigDecimal convertTo(final Volume toUnit, final T value) {
+	public BigDecimal convertTo(final Volume toUnit, final Number value) {
 		if (null == toUnit) {
 			throw new RuntimeExceptionIsNull("toUnit"); //$NON-NLS-1$
 		}
