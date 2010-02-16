@@ -174,9 +174,6 @@ public abstract class HelperPdf {
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
-//		if (!source.exists()) {
-//			throw new RuntimeExceptionFileNotFound(source);
-//		}
 		if (null == dest) {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
@@ -223,9 +220,6 @@ public abstract class HelperPdf {
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
-//		if (!source.exists()) {
-//			throw new RuntimeExceptionFileNotFound(source);
-//		}
 		if (null == dest) {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}

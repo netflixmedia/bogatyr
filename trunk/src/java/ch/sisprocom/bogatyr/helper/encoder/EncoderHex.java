@@ -33,13 +33,14 @@ package ch.sisprocom.bogatyr.helper.encoder;
 
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
 /**
  * Encodes and decodes data to Hex format.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.1.0
  */
 public abstract class EncoderHex {
@@ -52,23 +53,23 @@ public abstract class EncoderHex {
      * @since 0.1.0
      */
     public static String encode(final byte[] input) { //$JUnit$
-    	if (null != input) {
-    		if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
-	            throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
-	        }
-			
-			final StringBuilder hexString = new StringBuilder(input.length * 2);
-			
-			for (final byte digest : input) {
-				final String hex = Integer.toHexString(0xFF & (int) digest);
-				if (1 == hex.length()) {
-					hexString.append('0');
-				}
-				hexString.append(hex);
+        if (null == input) {
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+        }
+		if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
+        }
+		
+		final StringBuilder hexString = new StringBuilder(input.length * 2);
+		
+		for (final byte digest : input) {
+			final String hex = Integer.toHexString(0xFF & (int) digest);
+			if (1 == hex.length()) {
+				hexString.append('0');
 			}
-			return hexString.toString();
-    	}
-    	return null;
+			hexString.append(hex);
+		}
+		return hexString.toString();
     }
     
     /**
@@ -79,18 +80,18 @@ public abstract class EncoderHex {
      * @since 0.1.0
      */
     public static byte[] decode(final String input) { //$JUnit$
-		if (null != input) {
-			if (input.length() * 2 > HelperEnvironment.getMemoryFree()) {
-	            throw new RuntimeExceptionExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
-	        }
-	
-			final byte[] bts = new byte[input.length() / 2];
-	
-	    	for (int ii = 0; ii < bts.length; ii++) {
-	    		bts[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), 16);
-	    	}
-	    	return bts;
-		}
-		return null;
+        if (null == input) {
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+        }
+		if (input.length() * 2 > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
+        }
+
+		final byte[] bts = new byte[input.length() / 2];
+
+    	for (int ii = 0; ii < bts.length; ii++) {
+    		bts[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), 16);
+    	}
+    	return bts;
     }
 }

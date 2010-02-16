@@ -51,7 +51,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.4.0
  */
 public abstract class HelperGraphic {
@@ -64,10 +64,12 @@ public abstract class HelperGraphic {
      * @since 0.4.0
      */	
 	public static void enableAntialiasing(final Graphics2D graphics) {
-		if (null != graphics) {
-			graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		if (null == graphics) {
+			throw new RuntimeExceptionIsNull("graphics"); //$NON-NLS-1$
 		}
+
+		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 	}
 
     /**
@@ -79,14 +81,11 @@ public abstract class HelperGraphic {
      * @since 0.4.0
      */
     public static Dimension getCenter(final Dimension size) { //$JUnit$
-//		if (null == size) {
-//			throw new RuntimeExceptionArgumentIsNull("size"); //$NON-NLS-1$
-//		}
-
-		if (null != size) {
-			return new Dimension(size.width / 2, size.height / 2);
+		if (null == size) {
+			throw new RuntimeExceptionIsNull("size"); //$NON-NLS-1$
 		}
-		return null;
+
+		return new Dimension(size.width / 2, size.height / 2);
 	}
 
     /**

@@ -56,7 +56,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a format factory.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100216)
  * @since 0.9.0
  */
 public abstract class FormatFactory {
@@ -252,7 +252,7 @@ public abstract class FormatFactory {
 	        	final String text = HelperString.getValidNumericString(s);
 	        	
 	        	if (null != text) {
-	        		Number number = new BigDecimal(HelperString.getValidNumericString(s));
+	        		final Number number = new BigDecimal(HelperString.getValidNumericString(s));
 
 	                return number.doubleValue() / HelperNumber.NUMBER_100.doubleValue();
 	        	}

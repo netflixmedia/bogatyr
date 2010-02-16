@@ -31,11 +31,20 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.service.provider;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperNumber;
+import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.helper.HelperXml;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
+
 import com.ibm.mq.MQEnvironment;
 import com.ibm.mq.MQException;
 import com.ibm.mq.MQGetMessageOptions;
@@ -45,17 +54,13 @@ import com.ibm.mq.MQQueue;
 import com.ibm.mq.MQQueueManager;
 import com.ibm.mqbind.MQC;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * This class connects to an IBM MQ-Server and allows to send and receive messages.
  * <strong>Note:</strong> This class needs <a href="http://www-01.ibm.com/software/integration/wmqfamily//">IBM MQSeries</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.3.0
  */
 public class ProviderMqImpl extends ServiceAbstract implements ProviderMq {
@@ -63,9 +68,9 @@ public class ProviderMqImpl extends ServiceAbstract implements ProviderMq {
 	public ProviderMqImpl(final String hostname, final int port, final String channel) {
         super();
         // set up MQ environment
-        MQEnvironment.hostname = hostname;
+        setHostname(hostname);
         setPort(port);
-        MQEnvironment.channel = channel;
+        setChannel(channel);
     }
 
     public static String getHostname() {
@@ -81,6 +86,10 @@ public class ProviderMqImpl extends ServiceAbstract implements ProviderMq {
 	}
 
 	public static void setHostname(final String hostname) {
+		if (null == hostname) {
+			throw new RuntimeExceptionIsNull("hostname"); //$NON-NLS-1$
+		}
+
 		MQEnvironment.hostname = hostname;
 	}
 
@@ -96,6 +105,10 @@ public class ProviderMqImpl extends ServiceAbstract implements ProviderMq {
 	}
 
 	public static void setChannel(final String channel) {
+		if (null == channel) {
+			throw new RuntimeExceptionIsNull("channel"); //$NON-NLS-1$
+		}
+
 		MQEnvironment.channel = channel;
 	}
 
@@ -105,7 +118,23 @@ public class ProviderMqImpl extends ServiceAbstract implements ProviderMq {
      */
 	@Override
     public synchronized void sendMessage(final byte[] data, final String managerOut, final String queueOut, final String managerIn, final String queueIn) throws IOException, MQException {
-        final MQQueueManager mqManager = new MQQueueManager(managerOut);
+		if (!HelperArray.isValid(data)) {
+			throw new RuntimeExceptionIsNullOrEmpty("data"); //$NON-NLS-1$
+		}
+		if (!HelperString.isValid(managerOut)) {
+			throw new RuntimeExceptionIsNullOrEmpty("managerOut"); //$NON-NLS-1$
+		}
+		if (!HelperString.isValid(queueOut)) {
+			throw new RuntimeExceptionIsNullOrEmpty("queueOut"); //$NON-NLS-1$
+		}
+		if (!HelperString.isValid(managerIn)) {
+			throw new RuntimeExceptionIsNullOrEmpty("managerIn"); //$NON-NLS-1$
+		}
+		if (!HelperString.isValid(queueIn)) {
+			throw new RuntimeExceptionIsNullOrEmpty("queueIn"); //$NON-NLS-1$
+		}
+
+		final MQQueueManager mqManager = new MQQueueManager(managerOut);
 
         // int options = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_OUTPUT;
         final int options = MQC.MQOO_OUTPUT;
@@ -137,7 +166,14 @@ public class ProviderMqImpl extends ServiceAbstract implements ProviderMq {
 
     @Override
     public synchronized List<byte[]> receiveMessages(final String managerIn, final String queueIn) throws MQException, IOException {
-        final List<byte[]> list = new ArrayList<byte[]>();
+		if (!HelperString.isValid(managerIn)) {
+			throw new RuntimeExceptionIsNullOrEmpty("managerIn"); //$NON-NLS-1$
+		}
+		if (!HelperString.isValid(queueIn)) {
+			throw new RuntimeExceptionIsNullOrEmpty("queueIn"); //$NON-NLS-1$
+		}
+
+		final List<byte[]> list = new ArrayList<byte[]>();
 //		byte[] data;
 
         // create a connection to the queue manager

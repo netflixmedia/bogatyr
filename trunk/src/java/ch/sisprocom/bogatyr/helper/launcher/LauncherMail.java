@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher starts the system mail application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.7.0
  */
 public abstract class LauncherMail {
@@ -96,19 +96,22 @@ public abstract class LauncherMail {
 	 * @since 0.7.0
 	 */
 	public static void mail(final String subject, final String body, final String... emailAddresses) throws IOException, URISyntaxException { //$JUnit$
+		if (null == subject) {
+			throw new RuntimeExceptionIsNull("subject"); //$NON-NLS-1$
+		}
+		if (null == body) {
+			throw new RuntimeExceptionIsNull("body"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(emailAddresses)) {
 			throw new RuntimeExceptionIsNullOrEmpty("emailAddresses"); //$NON-NLS-1$
 		}
 
         final StringBuilder sb = new StringBuilder();
-        int ii = 0;
-        for (String address : emailAddresses) {
-            if (0 < ii) {
+        for (final String address : emailAddresses) {
+            if (0 < sb.length()) {
                 sb.append(HelperString.COMMA);
             }
             sb.append(address);
-            ii++;
-
         }
         sb.append("?subject="); //$NON-NLS-1$
         sb.append(getValidText(subject));
@@ -122,22 +125,23 @@ public abstract class LauncherMail {
 		mail(new URI(prefix + addresses.replaceAll(" ", "%20")));   //$NON-NLS-1$//$NON-NLS-2$
 	}
 	
-	private static String getValidText(final String input) {
-	    if (null != input) {
-			final StringBuffer sb = new StringBuffer(input.length());
 	
-		    for (char c : input.toCharArray()) {
-		    	int ci = 0xffff & c;
-	            if (ci < 160 ) {
-	                // nothing special only 7 Bit
-	                sb.append(c);
-	            } else {
-	                // Not 7 Bit use the unicode system
-	                sb.append("?"); //$NON-NLS-1$
-	            }
+	/*
+	 * Private methods
+	 */
+	private static String getValidText(final String input) {
+		final StringBuffer sb = new StringBuffer(input.length());
+
+	    for (final char c : input.toCharArray()) {
+	    	final int ci = 0xffff & c;
+            if (160 > ci) {
+                // nothing special only 7 Bit
+                sb.append(c);
+            } else {
+                // Not 7 Bit - replace thru ?
+                sb.append("?"); //$NON-NLS-1$
             }
-		    return sb.toString();
-		}
-	    return null;
+        }
+	    return sb.toString();
 	}
 }

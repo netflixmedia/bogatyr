@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.helper.HelperArray;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100209
+ * @version 20100216
  */
 public class HelperArrayTest {
 	
@@ -63,7 +63,7 @@ public class HelperArrayTest {
     	final String[] c = {"F", "G"}; //$NON-NLS-1$ //$NON-NLS-2$
     	
     	final String[] array = HelperArray.concatenate(a, b, c);
-
+    	
     	assertArrayEquals(new String[]{"A", "B", "C", "D", "E", "F", "G"}, array); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 
 //    	assertArrayEquals(b, HelperArray.concatenate(null, b));
@@ -76,12 +76,15 @@ public class HelperArrayTest {
 	public void testConcatenateBytes() {
     	final byte[] a = {1};
     	final byte[] b = {2};
+    	final byte[] c = {3};
 
-    	assertArrayEquals(new byte[]{1, 2}, HelperArray.concatenate(a, b));
+    	final byte[] array = HelperArray.concatenate(a, b, c);
+    	
+    	assertArrayEquals(new byte[]{1, 2, 3}, array);
 
-    	assertArrayEquals(b, HelperArray.concatenate(null, b));
-
-    	assertArrayEquals(a, HelperArray.concatenate(a, null));
+//    	assertArrayEquals(b, HelperArray.concatenate(null, b));
+//
+//    	assertArrayEquals(a, HelperArray.concatenate(a, null));
 
 	}
 	

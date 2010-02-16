@@ -84,9 +84,6 @@ public abstract class HelperSound {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.exists()) {
-//			throw new RuntimeExceptionFileNotFound(file);
-//		}
 		
 		return getClip(AudioSystem.getAudioInputStream(file));
 	}
@@ -126,9 +123,6 @@ public abstract class HelperSound {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.exists()) {
-//			throw new RuntimeExceptionFileNotFound(file);
-//		}
 		
 		return MidiSystem.getSequence(file);
 	}

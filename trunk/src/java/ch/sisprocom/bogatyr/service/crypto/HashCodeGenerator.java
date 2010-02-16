@@ -35,80 +35,76 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
 import ch.sisprocom.bogatyr.service.Service;
 
 /**
  * This is an interface for hash code generation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.8.0
  */
 public interface HashCodeGenerator extends Service {
 	
 	/**
-	 * Generates a hash code for a byte-array with the given {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo}.
+	 * Generates a hash code for a byte-array.
 	 *
      * @param input byte-array for the hash code
      * @return generated hash code
-	 * @throws Exception
-	 * @see ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo
 	 * @since 0.8.0
 	 */
 	byte[] getHash(byte[] input);
 	
 	/**
-	 * Generates a hash code for an {@link InputStream} with the given {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo}.
+	 * Generates a hash code for an {@link InputStream}.
 	 * 
      * @param is {@link InputStream} for the hash code
      * @return generated hash code
 	 * @throws IOException 
 	 * @see InputStream
-	 * @see ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo
 	 * @since 0.8.0
 	 */
 	byte[] getHash(InputStream is) throws IOException;
 	
 	/**
-	 * Generates a hash code for an {@link InputStream} with the given {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo}.
+	 * Generates a hash code for an {@link InputStream}.
 	 * 
      * @param is {@link InputStream} for the hash code
      * @param bufferSize in bytes
      * @return generated hash code
 	 * @throws IOException 
 	 * @see InputStream
-	 * @see ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo
 	 * @since 0.8.0
 	 */
 	byte[] getHash(InputStream is, int bufferSize) throws IOException;	
 
 	/**
-	 * Generates a hash code for an input {@link File} with the given {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo}.
+	 * Generates a hash code for an input {@link File}.
 	 * 
      * @param input {@link File} for the hash code
      * @return generated hash code
 	 * @throws IOException 
 	 * @see File
-	 * @see ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo
 	 * @since 0.8.0
 	 */
 	byte[] getHash(File input) throws IOException;
 	
 	/**
-	 * Generates a hash code for an input {@link File} with the given {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo}.
+	 * Generates a hash code for an input {@link File} with the given {@link HashCodeAlgo}.
 	 * 
      * @param input {@link File} for the hash code
      * @param bufferSize in bytes
      * @return generated hash code
 	 * @throws IOException 
 	 * @see File
-	 * @see ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo
+	 * @see HashCodeAlgo
 	 * @since 0.8.0
 	 */
 	byte[] getHash(File input, int bufferSize) throws IOException;		
 	
 	/**
-	 * Generates a hash code for a byte-array with the given {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo}.
+	 * Generates a hash code for a byte-array.
 	 * This method generates a fast hash code over the data (e.g. compare different data)
 	 * 
      * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
@@ -117,28 +113,24 @@ public interface HashCodeGenerator extends Service {
      * @param parts for the hash code data
      * @param partSize of the hash code data
      * @return generated hash code
-	 * @throws Exception
-	 * @see ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo
 	 * @since 0.9.0
 	 */
 	byte[] getFastHash(byte[] input, int parts, int partSize);
 	
 	/**
-	 * Generates a hash code for a byte-array with the given {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo}.
+	 * Generates a hash code for a byte-array with the standard settings.
 	 * This method generates a fast hash code over the data (e.g. compare different data)
 	 * 
      * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
 	 *
      * @param input byte-array for the hash code
      * @return generated hash code
-	 * @throws Exception
-	 * @see ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo
 	 * @since 0.9.0
 	 */
 	byte[] getFastHash(byte[] input);
 
 	/**
-	 * Generates a fast hash code for an input {@link File} with the given {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo}.
+	 * Generates a fast hash code for an input {@link File}.
 	 * This method generates a fast hash code over the {@link File} (e.g. find same file containing the same data)
 	 * 
      * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
@@ -149,13 +141,12 @@ public interface HashCodeGenerator extends Service {
      * @return generated hash code
 	 * @throws IOException 
 	 * @see File
-	 * @see ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo
 	 * @since 0.9.0
 	 */
 	byte[] getFastHash(File input, int parts, int partSize) throws IOException;
 
 	/**
-	 * Generates a fast hash code for an input {@link File} with the given {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo}.
+	 * Generates a fast hash code for an input {@link File} with standard settings.
 	 * This method generates a fast hash code over the {@link File} (e.g. find same file containing the same data)
 	 * 
      * <strong>Warning:</strong> Don't use this method to verify the integrity of data. It doesn't use the complete data to generate the hash code.
@@ -164,7 +155,6 @@ public interface HashCodeGenerator extends Service {
      * @return generated hash code
 	 * @throws IOException 
 	 * @see File
-	 * @see ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo
 	 * @since 0.9.0
 	 */
 	byte[] getFastHash(File input) throws IOException;

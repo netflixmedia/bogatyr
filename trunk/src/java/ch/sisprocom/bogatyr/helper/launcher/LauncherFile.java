@@ -37,7 +37,6 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
 
-import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.helper.HelperIO;
 import ch.sisprocom.bogatyr.helper.HelperString;
@@ -48,7 +47,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher opens, edits and prints files with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.7.0
  */
 public abstract class LauncherFile {
@@ -73,8 +72,8 @@ public abstract class LauncherFile {
 	 * @since 0.7.0
 	 */
 	public static void open(final byte[] data, final String extension) throws IOException {
-		if (!HelperArray.isValid(data)) {
-			throw new RuntimeExceptionIsNullOrEmpty("data"); //$NON-NLS-1$
+		if (null == data) {
+			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(extension)) {
 			throw new RuntimeExceptionIsNullOrEmpty("extension"); //$NON-NLS-1$
@@ -132,8 +131,8 @@ public abstract class LauncherFile {
 	 * @since 0.7.0
 	 */
 	public static void edit(final byte[] data, final String extension) throws IOException {
-		if (!HelperArray.isValid(data)) {
-			throw new RuntimeExceptionIsNullOrEmpty("data"); //$NON-NLS-1$
+		if (null == data) {
+			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(extension)) {
 			throw new RuntimeExceptionIsNullOrEmpty("extension"); //$NON-NLS-1$
@@ -191,8 +190,8 @@ public abstract class LauncherFile {
 	 * @since 0.7.0
 	 */
 	public static void print(final byte[] data, final String extension) throws IOException {
-		if (!HelperArray.isValid(data)) {
-			throw new RuntimeExceptionIsNullOrEmpty("data"); //$NON-NLS-1$
+		if (null == data) {
+			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(extension)) {
 			throw new RuntimeExceptionIsNullOrEmpty("extension"); //$NON-NLS-1$

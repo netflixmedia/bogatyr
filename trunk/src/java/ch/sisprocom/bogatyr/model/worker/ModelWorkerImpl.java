@@ -35,6 +35,7 @@ package ch.sisprocom.bogatyr.model.worker;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.model.ModelAbstract;
 import ch.sisprocom.bogatyr.view.swing.worker.Worker;
 
@@ -43,7 +44,7 @@ import ch.sisprocom.bogatyr.view.swing.worker.Worker;
  * The implementation of the worker model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.1 (20100216)
  * @since 0.9.0
  */
 public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
@@ -55,28 +56,36 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 	/*
      * Implemented methods
      */
-    @Override
-    public List<Worker> getWorkers() {
-		return listWorker;
-	}
+//    @Override
+//    public List<Worker> getWorkers() {
+//		return listWorker;
+//	}
 
     @Override
-    public void add(final Worker worker) {
-    	listWorker.add(worker);
+    public synchronized void add(final Worker worker) {
+		if (null == worker) {
+			throw new RuntimeExceptionIsNull("worker"); //$NON-NLS-1$
+		}
+
+		listWorker.add(worker);
         setChanged();
         notifyObservers(METHOD_ADD);
     }
 
     @Override
-    public void remove(final Worker worker) {
-        worker.cancel(true);
+    public synchronized void remove(final Worker worker) {
+		if (null == worker) {
+			throw new RuntimeExceptionIsNull("worker"); //$NON-NLS-1$
+		}
+
+		worker.cancel(true);
         listWorker.remove(worker);
         setChanged();
         notifyObservers(METHOD_REMOVE);
     }
 
     @Override
-    public void removeAll() {
+    public synchronized void removeAll() {
         for (final Worker worker : listWorker) {
             worker.cancel(true);
         }
@@ -85,4 +94,9 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
         setChanged();
         notifyObservers(METHOD_REMOVE_ALL);
     }
+    
+    @Override
+    public int count() {
+		return listWorker.size();
+	}
 }

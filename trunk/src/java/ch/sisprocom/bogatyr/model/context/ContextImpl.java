@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.model.ModelAbstract;
  * Implementation of the context for applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100202)
+ * @version 0.9.1 (20100216)
  * @since 0.1.0
  */
 public class ContextImpl extends ModelAbstract implements Context {
@@ -100,15 +100,13 @@ public class ContextImpl extends ModelAbstract implements Context {
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
+//		if (null == value) {
+//			throw new RuntimeExceptionIsNull("value"); //$NON-NLS-1$
+//		}
 
+		contextData.put(key, value);
         setChanged();
-		if (null != value) {
-            contextData.put(key, value);
-            notifyObservers(METHOD_ADD_VALUE);
-		} else {
-			removeValue(key);
-            notifyObservers(METHOD_REMOVE_VALUE);
-		}
+        notifyObservers(METHOD_ADD_VALUE);
 	}
 
 	@Override

@@ -29,26 +29,42 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.model.unit;
-
-import java.math.BigDecimal;
+package ch.sisprocom.bogatyr.model.crypto;
 
 
 /**
- * This is an interface to define all methods of an unit.
+ * Hmac algoritms available in BouncyCastle
  * 
  * @author Stefan Laubenberger
  * @version 0.9.1 (20100216)
- * @since 0.9.0
+ * @since 0.9.1
  */
-public interface Unit<U extends Unit<?>> {
-	/**
-     * Converts a value to another unit.
-     * 
-     * @param toUnit resulting unit
-     * @param value in the given unit
-     * @return {@link BigDecimal} value in the resulting unit
-     * @since 0.9.0
-     */
-    BigDecimal convertTo(U toUnit, Number value);
-}
+public enum HmacAlgo implements Algorithm {
+	MD2("HmacMD2"), //$NON-NLS-1$
+	MD4("HmacMD4"), //$NON-NLS-1$
+	MD5("HmacMD5"), //$NON-NLS-1$
+	SHA1("HmacSHA1"), //$NON-NLS-1$
+	SHA224("HmacSHA224"), //$NON-NLS-1$
+	SHA256("HmacSHA256"), //$NON-NLS-1$
+	SHA384("HmacSHA384"), //$NON-NLS-1$
+	SHA512("HmacSHA512"), //$NON-NLS-1$
+	RIPEMD128("HmacRIPEMD128"), //$NON-NLS-1$
+	RIPEMD160("HmacRIPEMD160"), //$NON-NLS-1$
+	TIGER("HmacTiger"); //$NON-NLS-1$
+
+	private final String algorithm;
+	
+	HmacAlgo(final String algorithm) {
+		this.algorithm = algorithm;
+	}
+
+
+    /*
+      * Implemented methods
+      */
+	@Override
+    public String getAlgorithm() {
+		return algorithm;
+	}
+}	
+

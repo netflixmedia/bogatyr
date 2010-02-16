@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100216)
  * @since 0.2.0
  */
 public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
@@ -59,16 +59,16 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	private String password;
 	
 	
-	public ProviderSqlImpl() {
-        super();
-	}
+//	public ProviderSqlImpl() {
+//        super();
+//	}
 	
 	public ProviderSqlImpl(final String driver, final String url, final String user, final String password) {
         super();
         setDriver(driver);
         setUrl(url);
-        this.user = user;
-        this.password = password;
+        setUser(user);
+        setPassword(password);
 	}
 
     /**
@@ -145,6 +145,10 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 * @since 0.2.0
 	 */
 	public void setUser(final String user) {
+		if (null == user) {
+			throw new RuntimeExceptionIsNull("user"); //$NON-NLS-1$
+		}
+
 		this.user = user;
 	}
 
@@ -155,6 +159,10 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 * @since 0.2.0
 	 */
 	public void setPassword(final String password) {
+		if (null == password) {
+			throw new RuntimeExceptionIsNull("password"); //$NON-NLS-1$
+		}
+
 		this.password = password;
 	}
 

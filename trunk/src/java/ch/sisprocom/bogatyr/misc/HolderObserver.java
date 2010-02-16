@@ -37,13 +37,16 @@ import java.util.Observer;
 
 
 /**
- * Defines the methods for the observer holder (simply delegate the methods from {@link Observable}).
+ * Defines the methods for the observer holder (it also delegates the methods from {@link Observable}).
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.1 (20100216)
  * @since 0.9.0
  */
 public interface HolderObserver {
+	void setNotifyEnabled(boolean enabled);
+	boolean isNotifyEnabled();
+	
 	void addObserver(Observer o);
 	void deleteObserver(Observer o);
 	void notifyObservers();

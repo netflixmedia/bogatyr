@@ -51,7 +51,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100215
+ * @version 20100216
  */
 public class CryptoAsymmetricTest {
 	private static final int KEYSIZE = 512;
@@ -149,6 +149,7 @@ public class CryptoAsymmetricTest {
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			fail(ex.getMessage());
 		}
 		

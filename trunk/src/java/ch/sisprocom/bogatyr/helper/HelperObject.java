@@ -59,7 +59,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100216)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -184,6 +184,9 @@ public abstract class HelperObject {
 		if (null == clazz) {
 			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
+		if (null == methodName) {
+			throw new RuntimeExceptionIsNull("methodName"); //$NON-NLS-1$
+		}
 		
     	final Method[] methods = clazz.getMethods();
 
@@ -203,13 +206,14 @@ public abstract class HelperObject {
      * @since 0.7.0
      */
     public static String toString(final Object object) {
-    	if (null != object) {
-	    	final Collection<String> list = new ArrayList<String>();
-	    	toString(object, list);
-	
-	    	return object.getClass().getName() + list.toString();
-    	}
-    	return null;
+		if (null == object) {
+			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
+		}
+
+    	final Collection<String> list = new ArrayList<String>();
+    	toString(object, list);
+
+    	return object.getClass().getName() + list.toString();
     }
 
 	/**
@@ -220,7 +224,7 @@ public abstract class HelperObject {
      * @return true/false
      * @since 0.8.0
      */	
-	public static <T> boolean isEquals(final T objectA, final T objectB) { //$JUnit$
+	public static boolean isEquals(final Object objectA, final Object objectB) { //$JUnit$
 		return !((null == objectB && null != objectA) || (null != objectB && !objectB.equals(objectA)));
 	}
 	
@@ -233,29 +237,30 @@ public abstract class HelperObject {
      */	
 	@SuppressWarnings("unchecked")
 	public static <T extends Serializable> T clone(final T original) throws IOException, ClassNotFoundException {
-		if (null != original) {
-			final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            CloneOutput co = null;
-            ObjectInputStream ois = null;
-
-            try {
-                co = new CloneOutput(baos);
-			    co.writeObject(original);
-
-    			final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-                ois = new CloneInput(bais, co);
-
-                return (T) ois.readObject();
-            } finally {
-                if (null != co) {
-                    co.close();
-                }
-                if (null != ois) {
-                    ois.close();
-                }
-            }
+		if (null == original) {
+			throw new RuntimeExceptionIsNull("original"); //$NON-NLS-1$
 		}
-		return null;
+
+		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CloneOutput co = null;
+        ObjectInputStream ois = null;
+
+        try {
+            co = new CloneOutput(baos);
+		    co.writeObject(original);
+
+			final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ois = new CloneInput(bais, co);
+
+            return (T) ois.readObject();
+        } finally {
+            if (null != co) {
+                co.close();
+            }
+            if (null != ois) {
+                ois.close();
+            }
+        }
     }
 	
     

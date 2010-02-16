@@ -35,12 +35,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
 
 /**
  * This is a helper class for maps.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.9.0
  */
 public abstract class HelperMap {
@@ -65,16 +67,16 @@ public abstract class HelperMap {
      * @since 0.9.1
      */
     public static <K, V> Collection<K> getKeys(final Map<K, V> map) {
-		if (null != map) {
-	        
-			Collection<K> set = new ArrayList<K>(map.size());
-
-			for (final Map.Entry<K, V> pair : map.entrySet()) {
-				set.add(pair.getKey());
-			}
-	        return set;
+		if (null == map) {
+			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
 		}
-		return null;
+
+		final Collection<K> set = new ArrayList<K>(map.size());
+
+		for (final Map.Entry<K, V> pair : map.entrySet()) {
+			set.add(pair.getKey());
+		}
+        return set;
     }
    
     /**
@@ -86,16 +88,16 @@ public abstract class HelperMap {
      * @since 0.9.1
      */
     public static <K, V> Collection<V> getValues(final Map<K, V> map) {
-		if (null != map) {
-	        
-			Collection<V> set = new ArrayList<V>(map.size());
-
-			for (final Map.Entry<K, V> pair : map.entrySet()) {
-				set.add(pair.getValue());
-			}
-	        return set;
+		if (null == map) {
+			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
 		}
-		return null;
+
+		final Collection<V> set = new ArrayList<V>(map.size());
+
+		for (final Map.Entry<K, V> pair : map.entrySet()) {
+			set.add(pair.getValue());
+		}
+        return set;
     }
 
     /**
@@ -107,21 +109,20 @@ public abstract class HelperMap {
      * @since 0.7.0
      */
     public static String dump(final Map<?, ?> map) { //$JUnit$
-		if (null != map) {
-	        final StringBuilder sb = new StringBuilder();
-	
-	        int ii = 0;
-	        for (final Map.Entry<?, ?> pair : map.entrySet()) {
-	            if (0 < ii) {
-	                sb.append(HelperString.NEW_LINE);
-	            }
-	            sb.append(pair.getKey());
-	            sb.append('=');
-	            sb.append(pair.getValue());
-	        	ii++;
-	        }
-	        return sb.toString();
-			}
-		return null;
+		if (null == map) {
+			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
+		}
+        
+		final StringBuilder sb = new StringBuilder();
+
+        for (final Map.Entry<?, ?> pair : map.entrySet()) {
+            if (0 < sb.length()) {
+                sb.append(HelperString.NEW_LINE);
+            }
+            sb.append(pair.getKey());
+            sb.append('=');
+            sb.append(pair.getValue());
+        }
+        return sb.toString();
     }
 }

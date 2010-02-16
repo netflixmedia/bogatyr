@@ -61,11 +61,13 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
+import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.misc.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 import ch.sisprocom.bogatyr.model.crypto.CryptoSymmetricAlgo;
@@ -77,7 +79,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.1.0
  */
 public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmetric {
@@ -166,8 +168,8 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 
 	@Override
     public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException { //$JUnit$
-		if (null == input) {
-			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		if (!HelperArray.isValid(input)) {
+			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
@@ -177,14 +179,13 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
         }
         
         cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
-//        cipher.init(Cipher.ENCRYPT_MODE, key);
 		return cipher.doFinal(input);
 	}
 
 	@Override
     public byte[] decrypt(final byte[] input, final Key key) throws InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
-		if (null == input) {
-			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		if (!HelperArray.isValid(input)) {
+			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
@@ -194,7 +195,6 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
         }
 
         cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
-//        cipher.init(Cipher.DECRYPT_MODE, key);
 		return cipher.doFinal(input);
 	}
 
@@ -224,10 +224,9 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
         final byte[] buffer = new byte[bufferSize];
 
         cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
-//        cipher.init(Cipher.ENCRYPT_MODE, key);
         os = new CipherOutputStream(os, cipher);
 
-        int offset  ;
+        int offset;
         while (0 <= (offset = is.read(buffer))) {
         	os.write(buffer, 0, offset);
         }
@@ -262,10 +261,9 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 
         try {
         	cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
-//        	cipher.init(Cipher.DECRYPT_MODE, key);
         	cis = new CipherInputStream(is, cipher);
 	
-	        int offset  ;
+	        int offset;
 	        while (0 <= (offset = cis.read(buffer))) {
 	        	os.write(buffer, 0, offset);
 	        }
@@ -287,9 +285,6 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
-//		if (!input.exists()) {
-//			throw new RuntimeExceptionFileNotFound(input);
-//		}
 		if (null == output) {
             throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
         }
@@ -324,9 +319,6 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
-//		if (!input.exists()) {
-//			throw new RuntimeExceptionFileNotFound(input);
-//		}
         if (null == output) {
             throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
         }

@@ -54,6 +54,7 @@ import ch.sisprocom.bogatyr.helper.HelperArray;
 import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import ch.sisprocom.bogatyr.model.crypto.CryptoAsymmetricAlgo;
 import ch.sisprocom.bogatyr.model.crypto.SignatureAlgo;
@@ -64,7 +65,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.1.0
  */
 public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymmetric {
@@ -158,8 +159,18 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 	}
 
 	@Override
-	public byte[] generateSignature(SignatureAlgo algoritm, byte[] input, PrivateKey key) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
-        final Signature sig = Signature.getInstance(algoritm.getAlgorithm());
+	public byte[] generateSignature(final SignatureAlgo algoritm, final byte[] input, final PrivateKey key) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, NoSuchProviderException {
+		if (null == algoritm) {
+			throw new RuntimeExceptionIsNull("algoritm"); //$NON-NLS-1$
+		}
+		if (!HelperArray.isValid(input)) {
+			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+		}
+		if (null == key) {
+			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
+		}
+
+		final Signature sig = Signature.getInstance(algoritm.getAlgorithm(), PROVIDER);
         sig.initSign(key);
         sig.update(input);
         
@@ -167,8 +178,21 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 	}
 
 	@Override
-	public boolean isValidSignature(SignatureAlgo algoritm, byte[] signature, byte[] input, PublicKey key) throws InvalidKeyException, SignatureException, NoSuchAlgorithmException {
-        final Signature sig = Signature.getInstance(algoritm.getAlgorithm());
+	public boolean isValidSignature(final SignatureAlgo algoritm, final byte[] signature, final byte[] input, final PublicKey key) throws InvalidKeyException, SignatureException, NoSuchAlgorithmException, NoSuchProviderException {
+		if (null == algoritm) {
+			throw new RuntimeExceptionIsNull("algoritm"); //$NON-NLS-1$
+		}
+		if (!HelperArray.isValid(signature)) {
+			throw new RuntimeExceptionIsNullOrEmpty("signature"); //$NON-NLS-1$
+		}
+		if (!HelperArray.isValid(input)) {
+			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+		}
+		if (null == key) {
+			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
+		}
+
+		final Signature sig = Signature.getInstance(algoritm.getAlgorithm(), PROVIDER);
         sig.initVerify(key);
         sig.update(input);
 
@@ -177,7 +201,7 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
                 return true;
             }
         } catch (SignatureException se) {
-            return false;
+//            return false;
         }
         return false;
 	}
@@ -199,8 +223,8 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
     
     @Override
     public byte[] encrypt(final byte[] input, final PublicKey key, final int keySize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
-		if (null == input) {
-			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		if (!HelperArray.isValid(input)) {
+			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
@@ -216,7 +240,7 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
         }
    	
     	final int space = keySize/8 - 11;
-		byte[] result = null;
+		byte[] result = HelperArray.EMPTY_ARRAY_BYTE;
 		final byte[] temp = new byte[space];
 		
 		if (space < input.length) {
@@ -263,8 +287,8 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 
 	@Override
     public byte[] decrypt(final byte[] input, final PrivateKey key, final int keySize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
-		if (null == input) {
-			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		if (!HelperArray.isValid(input)) {
+			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
@@ -280,7 +304,7 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
         }
 
 		final int space = keySize/8;
-		byte[] result = null;
+		byte[] result = HelperArray.EMPTY_ARRAY_BYTE;
 		final byte[] temp = new byte[space];
 		
 		if (space < input.length) {

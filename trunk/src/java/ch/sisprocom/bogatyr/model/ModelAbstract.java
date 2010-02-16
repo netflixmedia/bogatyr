@@ -35,6 +35,7 @@ import java.util.Date;
 import java.util.Observable;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
 
@@ -44,13 +45,14 @@ import com.sun.xml.internal.txw2.annotation.XmlElement;
  * This is the skeleton for all models.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100216)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
 public abstract class ModelAbstract extends Observable implements Model {
 	private static final long serialVersionUID = 3491320587479082917L;
 
+	private boolean isNotifyEnabled = true;
 	private Date instantiationDate = new Date();
 
     protected ModelAbstract() {
@@ -69,6 +71,7 @@ public abstract class ModelAbstract extends Observable implements Model {
 				* result
 				+ ((null == instantiationDate) ? 0 : instantiationDate
 						.hashCode());
+		result = prime * result + (isNotifyEnabled ? 1231 : 1237);
 		return result;
 	}
 
@@ -86,14 +89,46 @@ public abstract class ModelAbstract extends Observable implements Model {
 				return false;
 		} else if (!instantiationDate.equals(other.instantiationDate))
 			return false;
+		if (isNotifyEnabled != other.isNotifyEnabled)
+			return false;
 		return true;
 	}
+
+	@Override
+    public String toString() {
+        return HelperObject.toString(this);
+    }
+
+	@Override
+	public void notifyObservers() {
+		if (isNotifyEnabled) {
+			super.notifyObservers();
+		}
+	}
 	
+	@Override
+	public void notifyObservers(final Object arg) {
+		if (isNotifyEnabled) {
+			super.notifyObservers(arg);
+		}
+	}
+
 	
     /*
      * Implemented methods
      */
-    @Override
+	@Override
+	public void setNotifyEnabled(final boolean enabled) {
+        isNotifyEnabled = enabled;
+	}
+	
+	@Override
+	@XmlTransient
+	public boolean isNotifyEnabled() {
+		return isNotifyEnabled;
+	}
+
+	@Override
     @XmlElement
 	public Date getInstantiationDate() {
 		return instantiationDate;
@@ -103,13 +138,4 @@ public abstract class ModelAbstract extends Observable implements Model {
 	public void setInstantiationDate(final Date instantiationDate) {
 		this.instantiationDate = instantiationDate;
 	}
-
-
-	/*
-     * Overridden methods
-     */
-    @Override
-    public String toString() {
-        return HelperObject.toString(this);
-    }
 }

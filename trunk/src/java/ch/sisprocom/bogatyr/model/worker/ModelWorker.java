@@ -31,8 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.worker;
 
-import java.util.List;
-
 import ch.sisprocom.bogatyr.model.Model;
 import ch.sisprocom.bogatyr.view.swing.worker.Worker;
 
@@ -41,7 +39,7 @@ import ch.sisprocom.bogatyr.view.swing.worker.Worker;
  * The interface for the worker model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.1 (20100216)
  * @since 0.9.0
  */
 public interface ModelWorker extends Model {
@@ -49,11 +47,13 @@ public interface ModelWorker extends Model {
     String METHOD_REMOVE     = ModelWorker.class.getName() + ".remove()"; //$NON-NLS-1$
     String METHOD_REMOVE_ALL = ModelWorker.class.getName() + ".removeAll()"; //$NON-NLS-1$
 
-    List<Worker> getWorkers();
+//    List<Worker> getWorkers();
     
 	void add(Worker worker);
 
 	void remove(Worker worker);
 
 	void removeAll();
+	
+	int count();
 }

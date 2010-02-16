@@ -38,6 +38,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 
 /**
@@ -45,7 +46,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -100,59 +101,77 @@ public abstract class HelperArray {
 	 * Concatenate 1-n arrays to one array.
 	 * 
 	 * @param arrays to concatenate
-	 * @return concatenated array
+	 * @return concatenated result array
 	 * @since 0.7.0
 	 */
-	public static <T> T[] concatenate(final T[] array1, final T[]... arrays) { //$JUnit$
-        if (null == array1) {
-            throw new RuntimeExceptionIsNull("array1"); //$NON-NLS-1$
-        }
+	public static <T> T[] concatenate(final T[]... arrays) { //$JUnit$
         if (!isValid(arrays)) {
-        	return array1;
+        	throw new RuntimeExceptionIsNullOrEmpty("arrays"); //$NON-NLS-1$
         }
+        
         final List<T> result = new ArrayList<T>();
         
-        result.addAll(Arrays.asList(array1));
-        
         for (final T[] array : arrays) {
-        	if (null != array) {
-        		result.addAll(Arrays.asList(array));
-        	}
+    		result.addAll(Arrays.asList(array));
         }
         
-//        final T[] array = (T[])Array.newInstance(arrays.getClass().getComponentType().getComponentType(), result.size());
-//        
-//        for (int ii = 0; ii < result.size(); ii++) {
-//        	array[ii] = result.get(ii);
-//        }
-//        
-//        return array;
-        return result.toArray(array1);
+        return result.toArray(arrays[0]);
     }
     
 	/**
-	 * Concatenate two byte-arrays to one byte-array.
+	 * Concatenate 1-n byte-arrays to one byte-array.
 	 * 
-	 * @param inA first array
-	 * @param inB second array
-	 * @return array a & b as one new byte-array
+	 * @param arrays to concatenate
+	 * @return concatenated result array
 	 * @since 0.7.0
 	 */
-    public static byte[] concatenate(final byte[] inA, final byte[] inB) { //$JUnit$
-    	byte[] a = inA;
-    	byte[] b = inB;
-    	
-    	if (null == a) {
-            a = EMPTY_ARRAY_BYTE;
+	public static byte[] concatenate(final byte[]... arrays) { //$JUnit$
+        if (!isValid(arrays)) {
+        	throw new RuntimeExceptionIsNullOrEmpty("arrays"); //$NON-NLS-1$
         }
 
-    	if (null == b) {
-            b = EMPTY_ARRAY_BYTE;
+        int totalSize = 0;
+        
+        for (final byte[] array : arrays) {
+        	totalSize += array.length;
         }
-    	
-    	final byte[] result = new byte[a.length + b.length];
-        System.arraycopy(a, 0, result, 0, a.length);
-        System.arraycopy(b, 0, result, a.length, b.length);
+        
+        final byte[] result = new byte[totalSize];
+        int offset = 0;
+        
+        for (final byte[] array : arrays) {
+        	System.arraycopy(array, 0, result, offset, array.length);
+        	offset += array.length;
+        }
+        
+        return result;
+    }
+    
+	/**
+	 * Concatenate 1-n char-arrays to one char-array.
+	 * 
+	 * @param arrays to concatenate
+	 * @return concatenated result array
+	 * @since 0.9.1
+	 */
+	public static char[] concatenate(final char[]... arrays) {
+        if (!isValid(arrays)) {
+        	throw new RuntimeExceptionIsNullOrEmpty("arrays"); //$NON-NLS-1$
+        }
+
+        int totalSize = 0;
+        
+        for (final char[] array : arrays) {
+        	totalSize += array.length;
+        }
+        
+        final char[] result = new char[totalSize];
+        int offset = 0;
+        
+        for (final char[] array : arrays) {
+        	System.arraycopy(array, 0, result, offset, array.length);
+        	offset += array.length;
+        }
         
         return result;
     }
@@ -165,33 +184,79 @@ public abstract class HelperArray {
 	 * @since 0.7.0
 	 */
 	public static <T> T[] removeDuplicates(final T[] array) { //$JUnit$
-		if (null != array) {
-			return HelperCollection.toArray(HelperCollection.removeDuplicates(Arrays.asList(array)));
+		if (null == array) {
+			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
 		}
-		return null;
+
+		return HelperCollection.toArray(HelperCollection.removeDuplicates(Arrays.asList(array)));
     }
 
-     /**
+    /**
      * Dump an array.
      * 
      * @param array to dump
      * @return dump string
      * @since 0.7.0
      */
-    public static <T> String dump(final T[] array) { //$JUnit$
-    	if (null != array) {
-    		final StringBuilder sb = new StringBuilder();
+    public static String dump(final Object[] array) { //$JUnit$
+		if (null == array) {
+			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
+		}
 
-	        int ii = 0;
-	        for (final T element : array) {
-	            if (0 < ii) {
-	                sb.append(HelperString.NEW_LINE);
-	            }
-	        	sb.append(element);
-	        	ii++;
-	        }
-	        return sb.toString();
-    	}
-    	return null;
+		final StringBuilder sb = new StringBuilder();
+
+        for (final Object element : array) {
+            if (0 < sb.length()) {
+                sb.append(HelperString.NEW_LINE);
+            }
+        	sb.append(element);
+        }
+        return sb.toString();
+    }
+    
+    /**
+     * Dump a byte-array.
+     * 
+     * @param array to dump
+     * @return dump string
+     * @since 0.9.1
+     */
+    public static String dump(final byte[] array) { //$JUnit$
+		if (null == array) {
+			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
+		}
+
+		final StringBuilder sb = new StringBuilder();
+
+        for (final byte element : array) {
+            if (0 < sb.length()) {
+                sb.append(HelperString.NEW_LINE);
+            }
+        	sb.append(element);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Dump a char-array.
+     * 
+     * @param array to dump
+     * @return dump string
+     * @since 0.9.1
+     */
+    public static String dump(final char[] array) { //$JUnit$
+		if (null == array) {
+			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
+		}
+
+		final StringBuilder sb = new StringBuilder();
+
+        for (final char element : array) {
+            if (0 < sb.length()) {
+                sb.append(HelperString.NEW_LINE);
+            }
+        	sb.append(element);
+        }
+        return sb.toString();
     }
 }

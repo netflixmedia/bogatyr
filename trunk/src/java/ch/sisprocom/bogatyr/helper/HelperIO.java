@@ -71,7 +71,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100216)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -130,9 +130,6 @@ public abstract class HelperIO {
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
-//		if (!source.exists()) {
-//			throw new RuntimeExceptionFileNotFound(source);
-//		}
 //		if (!source.isDirectory()) {
 //			throw new IllegalArgumentException("source is not a directory: " + source); //$NON-NLS-1$
 //		}
@@ -188,9 +185,6 @@ public abstract class HelperIO {
         if (null == source) {
             throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
         }
-//		if (!source.exists()) {
-//			throw new RuntimeExceptionFileNotFound(source);
-//		}
 //		if (!source.isFile()) {
 //            throw new IllegalArgumentException("source is not a file: " + source); //$NON-NLS-1$
 //        }
@@ -249,9 +243,6 @@ public abstract class HelperIO {
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
-//		if (!source.exists()) {
-//			throw new RuntimeExceptionFileNotFound(source);
-//		}
 		if (null == dest) {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
@@ -276,20 +267,18 @@ public abstract class HelperIO {
      * @since 0.1.0
      */	
 	public static void delete(final File... files) throws IOException {
-//		if (!HelperArray.isValid(files)) {
-//			throw new RuntimeExceptionArgumentIsNullOrEmpty("files"); //$NON-NLS-1$
-//		}
+		if (!HelperArray.isValid(files)) {
+			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
+		}
 
-		if (HelperArray.isValid(files)) {
-			for (final File target : files) {
-				if (target.isDirectory()) {
-					final File[] childFiles = target.listFiles();
-					for (final File child : childFiles) {
-						delete(child);
-					}
+		for (final File target : files) {
+			if (target.isDirectory()) {
+				final File[] childFiles = target.listFiles();
+				for (final File child : childFiles) {
+					delete(child);
 				}
-				target.delete();
 			}
+			target.delete();
 		}
 	}
 	  
@@ -306,9 +295,6 @@ public abstract class HelperIO {
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
-//		if (!source.exists()) {
-//			throw new RuntimeExceptionFileNotFound(source);
-//		}
 		if (null == dest) {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
@@ -337,9 +323,9 @@ public abstract class HelperIO {
 		if (!HelperString.isValid(encoding)) {
 			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
 		}
-//		if (null == line) {
-//			throw new RuntimeExceptionArgumentIsNull("line"); //$NON-NLS-1$
-//		}
+		if (null == line) {
+			throw new RuntimeExceptionIsNull("line"); //$NON-NLS-1$
+		}
 
         PrintWriter pw = null;
         try {
@@ -380,19 +366,17 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (null == data) {
-//			throw new RuntimeExceptionArgumentIsNull("data"); //$NON-NLS-1$
-//		}
+		if (null == data) {
+			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
+		}
 
-		if (HelperArray.isValid(data)) {
-			final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file, append));
-			
-			try {
-				bos.write(data);
-				bos.flush();
-			} finally {
-	            bos.close();
-			}
+		final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file, append));
+		
+		try {
+			bos.write(data);
+			bos.flush();
+		} finally {
+            bos.close();
 		}
 	}
 	
@@ -414,9 +398,9 @@ public abstract class HelperIO {
 		if (!HelperString.isValid(encoding)) {
 			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
 		}
-//		if (null == data) {
-//			throw new RuntimeExceptionArgumentIsNull("data"); //$NON-NLS-1$
-//		}
+		if (null == data) {
+			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
+		}
 
 		final Writer writer = new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(file)), encoding); 
 	
@@ -474,14 +458,12 @@ public abstract class HelperIO {
 		if (null == os) {
 			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
 		}
-//		if (null == data) {
-//			throw new RuntimeExceptionArgumentIsNull("data"); //$NON-NLS-1$
-//		}
+		if (null == data) {
+			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
+		}
 
-		if (HelperArray.isValid(data)) {
-    		os.write(data);
-    		os.flush();
-	    }
+		os.write(data);
+		os.flush();
 	}
 	
 	/**
@@ -551,9 +533,6 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.exists()) {
-//			throw new RuntimeExceptionFileNotFound(file);
-//		}
 //		if (!file.isFile()) {
 //			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 //		}
@@ -596,9 +575,6 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.exists()) {
-//			throw new RuntimeExceptionFileNotFound(file);
-//		}
 //		if (!file.isFile()) {
 //			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 //		}
@@ -616,13 +592,11 @@ public abstract class HelperIO {
 		final Scanner scanner = new Scanner(file, encoding);
 
 		try {
-			int ii = 0;
 	    	while (scanner.hasNextLine()){
-	            if (0 < ii) {
+	            if (0 < sb.length()) {
 	                sb.append(HelperString.NEW_LINE);
 	            }
 	            sb.append(scanner.nextLine());
-	            ii++;
             }
 	    	return sb.toString();
 	    } finally {
@@ -657,9 +631,6 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.exists()) {
-//			throw new RuntimeExceptionFileNotFound(file);
-//		}
 //		if (!file.isFile()) {
 //			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 //		}
@@ -710,9 +681,6 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.exists()) {
-//			throw new RuntimeExceptionFileNotFound(file);
-//		}
 //		if (!file.isFile()) {
 //			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 //		}
@@ -736,47 +704,45 @@ public abstract class HelperIO {
 		if (null == fileOutput) {
 			throw new RuntimeExceptionIsNull("fileOutput"); //$NON-NLS-1$
 		}
-//		if (!HelperArray.isValid(files)) {
-//			throw new RuntimeExceptionArgumentIsNullOrEmpty("list"); //$NON-NLS-1$
-//		}
-
-		if (HelperArray.isValid(files)) {
-			// Create output stream
-		    PrintWriter pw = null;
-	
-	        try {
-			    pw = new PrintWriter(new FileOutputStream(fileOutput));
-	
-	            BufferedReader br = null;
-	
-	            // Process all files that are not the destination file
-	            for (final File file : files) {
-	
-	            	if (file.isFile()) {
-		                try {
-		                    // Create input stream
-		                    br = new BufferedReader (new FileReader(file));
-		
-		                    // Read each line from the input file
-		                    String line = br.readLine();
-		
-		                    while (null != line) {
-		                        pw.println(line);
-		                        line = br.readLine();
-		                    }
-		                } finally {
-		                    if (null != br) {
-		                        br.close();
-		                    }
-		                }
-	            	}
-	            }
-		    } finally {
-		    	if (null != pw) {
-	                pw.close();
-	            }
-		    }
+		if (!HelperArray.isValid(files)) {
+			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
 		}
+
+		// Create output stream
+	    PrintWriter pw = null;
+
+        try {
+		    pw = new PrintWriter(new FileOutputStream(fileOutput));
+
+            BufferedReader br = null;
+
+            // Process all files that are not the destination file
+            for (final File file : files) {
+
+            	if (file.isFile()) {
+	                try {
+	                    // Create input stream
+	                    br = new BufferedReader (new FileReader(file));
+	
+	                    // Read each line from the input file
+	                    String line = br.readLine();
+	
+	                    while (null != line) {
+	                        pw.println(line);
+	                        line = br.readLine();
+	                    }
+	                } finally {
+	                    if (null != br) {
+	                        br.close();
+	                    }
+	                }
+            	}
+            }
+	    } finally {
+	    	if (null != pw) {
+                pw.close();
+            }
+	    }
 	}
 
 	/**
@@ -1053,9 +1019,13 @@ public abstract class HelperIO {
      * @since 0.9.0
      */
     public static String removeFileExtension(final String fileName) {
-    	if (null != fileName && fileName.contains(HelperString.PERIOD)) {
+        if (null == fileName) {
+            throw new RuntimeExceptionIsNull("fileName"); //$NON-NLS-1$
+        }
+
+    	if (fileName.contains(HelperString.PERIOD)) {
     		return fileName.substring(0, fileName.lastIndexOf(HelperString.PERIOD));
     	}
-    	return null;
+    	return fileName;
     }
 }
