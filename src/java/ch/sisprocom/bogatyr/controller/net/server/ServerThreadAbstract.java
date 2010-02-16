@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.7.0
  */
 public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implements ServerThread {
@@ -141,7 +141,7 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 	@Override
     public byte[] readStream() throws IOException {
 		final InputStream is = socket.getInputStream();
-		byte[] result = null;
+		byte[] result = HelperArray.EMPTY_ARRAY_BYTE;
 		byte input;
 
 		do {
@@ -198,16 +198,20 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 	
     @Override
     public synchronized void addListener(final ListenerServerThread listener) {
-    	if (null != listener) {
-    		listListener.add(listener);
-    	}
+        if (null == listener) {
+            throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
+        }
+
+        listListener.add(listener);
     }
 
     @Override
     public synchronized void deleteListener(final ListenerServerThread listener) {
-    	if (null != listener) {
-    		listListener.remove(listener);
-    	}
+        if (null == listener) {
+            throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
+        }
+
+        listListener.remove(listener);
     }
 
     @Override

@@ -44,7 +44,7 @@ import java.awt.event.ActionListener;
  * This is a group to add 1-n components (e.g. useful with JButtons).
  * 
  * @author Stefan Laubenberger
- * @version 0.8.0 (20091210)
+ * @version 0.9.1 (20100216)
  * @since 0.7.0
  */
 public class Group extends Panel {
@@ -56,7 +56,7 @@ public class Group extends Panel {
 		createLayout(data, insets, false);
 	}
 	
-	public Group(final Insets insets, final boolean isVertical, final JComponent... data) {
+	public Group(final Insets insets, final JComponent[] data, final boolean isVertical) {
 		super();
 		createLayout(data, insets, isVertical);
 	}

@@ -32,13 +32,13 @@
 package ch.sisprocom.bogatyr.helper;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 
@@ -47,7 +47,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.7.0
  */
 public abstract class HelperCollection {
@@ -77,8 +77,8 @@ public abstract class HelperCollection {
      * @since 0.9.0
      */
 	public static <E> List<E> getList(final E...elements) { //$JUnit$
-		if (null == elements) {
-			return new ArrayList<E>(0);
+		if (!HelperArray.isValid(elements)) {
+			throw new RuntimeExceptionIsNullOrEmpty("elements"); //$NON-NLS-1$
 		}
 
  		return Arrays.asList(elements);
@@ -93,11 +93,11 @@ public abstract class HelperCollection {
      * @since 0.9.0
      */
 	public static <E> Set<E> getSet(final E...elements) { //$JUnit$
-		if (null == elements) {
-			return new HashSet<E>(0);
+		if (!HelperArray.isValid(elements)) {
+			throw new RuntimeExceptionIsNullOrEmpty("elements"); //$NON-NLS-1$
 		}
 
-        final Set<E> set = new HashSet<E>(elements.length);
+		final Set<E> set = new HashSet<E>(elements.length);
 
         set.addAll(Arrays.asList(elements));
         
@@ -125,10 +125,11 @@ public abstract class HelperCollection {
 	 * @since 0.7.0
 	 */
     public static <E> Collection<E> removeDuplicates(final Collection<E> collection) { //$JUnit$
-		if (null != collection) {
-			return new HashSet<E>(collection);
+		if (null == collection) {
+			throw new RuntimeExceptionIsNull("collection"); //$NON-NLS-1$
 		}
-		return null;
+
+		return new HashSet<E>(collection);
     }
     
     /**
@@ -139,20 +140,19 @@ public abstract class HelperCollection {
      * @see Iterable
      * @since 0.7.0
      */
-    public static <E> String dump(final Iterable<E> iterable) { //$JUnit$
-    	if (null != iterable) {
-			final StringBuilder sb = new StringBuilder();
-	
-	        int ii = 0;
-	        for (final E element : iterable) {
-	            if (0 < ii) {
-	                sb.append(HelperString.NEW_LINE);
-	            }
-	        	sb.append(element);
-	        	ii++;
-	        }
-	        return sb.toString();
-    	}
-    	return null;
+    public static String dump(final Iterable<?> iterable) { //$JUnit$
+		if (null == iterable) {
+			throw new RuntimeExceptionIsNull("iterable"); //$NON-NLS-1$
+		}
+
+		final StringBuilder sb = new StringBuilder();
+
+        for (final Object element : iterable) {
+            if (0 < sb.length()) {
+                sb.append(HelperString.NEW_LINE);
+            }
+        	sb.append(element);
+        }
+        return sb.toString();
     }
 }

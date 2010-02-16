@@ -37,13 +37,14 @@ package ch.sisprocom.bogatyr.helper;
  * This is a helper class for keyboards.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100202)
+ * @version 0.9.1 (20100216)
  * @since 0.9.0
  */
 public abstract class HelperKeyboard {
 
 	public static boolean isNonPrintableKey(final int keyCode) {
-		return (8 == keyCode || // backspace
+		return (0 > keyCode || //keyCode couldn't be negative
+				8 == keyCode || // backspace
 			    (16 <= keyCode && 18 >= keyCode) || // shift, ctrl, alt
                 20 == keyCode || // Caps lock
                 27 == keyCode || // escape

@@ -36,12 +36,14 @@ package ch.sisprocom.bogatyr.model.crypto;
  * Asymmetric crypto algorithms available in BouncyCastle
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.9.1
  */
 public enum CryptoAsymmetricAlgo implements CryptoAlgo {
-	RSA("RSA", "RSA/NONE/PKCS1PADDING", 2048);  //$NON-NLS-1$//$NON-NLS-2$
-
+	RSA("RSA", "RSA/NONE/PKCS1PADDING", 2048),  //$NON-NLS-1$//$NON-NLS-2$
+	ELGAMAL("ElGamal", "ElGamal/NONE/PKCS1Padding", 1024);  //$NON-NLS-1$//$NON-NLS-2$
+//	ELGAMAL("ElGamal", "ElGamal/NONE/NoPadding", 1024);  //$NON-NLS-1$//$NON-NLS-2$
+	
 	private final String algorithm;
 	private final String xform;
 	private final int defaultKeysize;

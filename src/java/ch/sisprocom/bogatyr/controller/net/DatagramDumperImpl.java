@@ -39,6 +39,7 @@ import java.util.HashSet;
 
 import ch.sisprocom.bogatyr.helper.HelperNumber;
 import ch.sisprocom.bogatyr.misc.Event;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
@@ -47,7 +48,7 @@ import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  * This is a datagram dumper to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.8.0
  */
 public class DatagramDumperImpl extends ExtendedObjectAbstract implements DatagramDumper {
@@ -177,26 +178,27 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 				
 				firePacketReceived();
 			}
-//		} catch (SocketException ex) {
-//			//do nothing
 		} catch (IOException ex) {
             //do nothing
-//			ex.printStackTrace();
 		}
 	}
 
     @Override
     public synchronized void addListener(final ListenerDatagram listener) {
-    	if (null != listener) {
-    		listListener.add(listener);
-    	}
+        if (null == listener) {
+            throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
+        }
+
+        listListener.add(listener);
     }
 
     @Override
     public synchronized void deleteListener(final ListenerDatagram listener) {
-    	if (null != listener) {
-    		listListener.remove(listener);
-    	}
+        if (null == listener) {
+            throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
+        }
+
+        listListener.remove(listener);
     }
 
     @Override

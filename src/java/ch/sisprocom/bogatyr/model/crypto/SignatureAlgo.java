@@ -36,20 +36,21 @@ package ch.sisprocom.bogatyr.model.crypto;
  * Signature algoritms available in BouncyCastle
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.9.1
  */
 public enum SignatureAlgo implements Algorithm {
-	MD2WITHRSA ("MD2withRSA"), //$NON-NLS-1$
-	MD5WITHRSA ("MD5withRSA"), //$NON-NLS-1$
-	SHA1WITHRSA("SHA1withRSA"), //$NON-NLS-1$
-	RIPEMD128WITHRSA("RIPEMD128withRSA"), //$NON-NLS-1$
-	RIPEMD160WITHRSA("RIPEMD160withRSA"), //$NON-NLS-1$
-	RIPEMD256WITHRSA("RIPEMD256withRSA"), //$NON-NLS-1$
-	SHA224WITHRSA("SHA224withRSA"), //$NON-NLS-1$
-	SHA256WITHRSA("SHA256withRSA"), //$NON-NLS-1$
-	SHA384WITHRSA("SHA384withRSA"), //$NON-NLS-1$
-	SHA512WITHRSA("SHA512withRSA"); //$NON-NLS-1$
+	MD2_WITH_RSA ("MD2withRSA"), //$NON-NLS-1$
+	MD5_WITH_RSA ("MD5withRSA"), //$NON-NLS-1$
+	SHA1_WITH_RSA("SHA1withRSA"), //$NON-NLS-1$
+//	SHA1_WITH_DSA("SHA1withDSA"), //$NON-NLS-1$
+	SHA224_WITH_RSA("SHA224withRSA"), //$NON-NLS-1$
+	SHA256_WITH_RSA("SHA256withRSA"), //$NON-NLS-1$
+	SHA384_WITH_RSA("SHA384withRSA"), //$NON-NLS-1$
+	SHA512_WITH_RSA("SHA512withRSA"), //$NON-NLS-1$
+	RIPEMD128_WITH_RSA("RIPEMD128withRSA"), //$NON-NLS-1$
+	RIPEMD160_WITH_RSA("RIPEMD160withRSA"), //$NON-NLS-1$
+	RIPEMD256_WITH_RSA("RIPEMD256withRSA"); //$NON-NLS-1$
 
 	private final String algorithm;
 	

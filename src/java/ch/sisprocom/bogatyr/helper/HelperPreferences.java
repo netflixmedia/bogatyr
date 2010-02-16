@@ -42,18 +42,24 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.InvalidPreferencesFormatException;
 import java.util.prefs.Preferences;
 
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
 
 /**
  * This is a helper class for preferences.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091123)
+ * @version 0.9.1 (20100216)
  * @since 0.5.0
  */
 public abstract class HelperPreferences { //TODO complete and test it!
 	
 	public static void readFromFile(final File file) throws IOException, InvalidPreferencesFormatException {
-        final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
+
+		final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 
         try {
             Preferences.importPreferences(bis);
@@ -63,7 +69,14 @@ public abstract class HelperPreferences { //TODO complete and test it!
 	}
 	 
 	public static void write(final File file, final Preferences prefs) throws IOException, BackingStoreException {
-        final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
+		if (null == prefs) {
+			throw new RuntimeExceptionIsNull("prefs"); //$NON-NLS-1$
+		}
+
+		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {
             prefs.exportNode(fos);
@@ -73,7 +86,14 @@ public abstract class HelperPreferences { //TODO complete and test it!
 	}	
 	  
 	public static void writeUserNode(final File file, final Class<?> clazz) throws IOException, BackingStoreException {
-        final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
+		if (null == clazz) {
+			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
+		}
+
+		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {
             Preferences.userNodeForPackage(clazz).exportNode(fos);
@@ -83,7 +103,14 @@ public abstract class HelperPreferences { //TODO complete and test it!
 	}	
 	  
 	public static void writeSystemNode(final File file, final Class<?> clazz) throws IOException, BackingStoreException {
-        final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
+		if (null == clazz) {
+			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
+		}
+
+		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
 
         try {
             Preferences.systemNodeForPackage(clazz).exportNode(fos);

@@ -50,14 +50,14 @@ import ch.sisprocom.bogatyr.model.misc.PublisherImpl;
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.7.0
  */
 public abstract class Constants {
 	//Bogatyr specific
 	public static final String BOGATYR_NAME		 		  = "Bogatyr"; //$NON-NLS-1$
 	public static final BigDecimal BOGATYR_VERSION 		  = new BigDecimal("0.91"); //$NON-NLS-1$
-	public static final int BOGATYR_BUILD 				  = 234;
+	public static final int BOGATYR_BUILD 				  = 235;
 	public static final Manufacturer BOGATYR_MANUFACTURER = new ManufacturerImpl();
 	public static final Owner BOGATYR_OWNER 			  = new OwnerImpl();
 	public static final Publisher BOGATYR_PUBLISHER		  = new PublisherImpl();

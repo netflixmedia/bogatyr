@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -49,7 +49,7 @@ import ch.sisprocom.bogatyr.test.AllBogatyrTests;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20091103
+ * @version 20100216
  */
 public class HelperObjectTest {
 	@Test
@@ -150,7 +150,7 @@ public class HelperObjectTest {
 	@Test
 	public void testIsMethodAvailable() {
 		assertTrue(HelperObject.isMethodAvailable(String.class, "indexOf"));  //$NON-NLS-1$
-		assertFalse(HelperObject.isMethodAvailable(String.class, null));
+//		assertFalse(HelperObject.isMethodAvailable(String.class, null));
 		assertFalse(HelperObject.isMethodAvailable(String.class, "blabla"));  //$NON-NLS-1$
 		
 

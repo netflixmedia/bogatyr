@@ -174,45 +174,4 @@ public abstract class HelperTime {
     public static Date getDate(final long offSet) {
          return new Date(System.currentTimeMillis() + offSet);
     }
-    
-//    /**
-//     * Create a date with a given input {@link String} and a {@link DateFormat}.
-//     *
-//     * @param date as {@link String}
-//     * @param format {@link DateFormat} for the date
-//     * @return parsed date
-//     * @throws ParseException 
-//     * @see DateFormat
-//     * @since 0.9.0
-//     */
-//    public static Date getDate(final String date, final DateFormat format) throws ParseException {
-//    	return format.parse(date);
-//    }
-//
-//    /**
-//     * Create an formatted date with a given time in ms and a {@link DateFormat}.
-//     *
-//     * @param time in ms to format
-//     * @param format {@link DateFormat} for the date
-//     * @return formatted date
-//     * @see DateFormat
-//     * @since 0.9.0
-//     */
-//    public static String getFormattedDate(final long time, final DateFormat format) {
-//    	return format.format(new Date(time));
-//    }
-//    
-//    /**
-//     * Create an formatted date with a given {@link Date} and a {@link DateFormat}.
-//     *
-//     * @param date to format
-//     * @param format {@link DateFormat} for the date
-//     * @return formatted date
-//     * @see Date
-//     * @see DateFormat
-//     * @since 0.9.0
-//     */
-//    public static String getFormattedDate(final Date date, final DateFormat format) {
-//    	return format.format(date);
-//    }
 }

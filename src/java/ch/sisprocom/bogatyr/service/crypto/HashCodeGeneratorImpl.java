@@ -50,6 +50,7 @@ import ch.sisprocom.bogatyr.helper.HelperEnvironment;
 import ch.sisprocom.bogatyr.misc.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
@@ -60,7 +61,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.9.0
  */
 public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
@@ -82,11 +83,9 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 	 */
     @Override
 	public byte[] getHash(final byte[] input) {
-        if (null == input) {
-            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
-        }
-
-//    	final MessageDigest md = MessageDigest.getInstance(hashCode.getAlgorithm(), PROVIDER);
+		if (!HelperArray.isValid(input)) {
+			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+		}
 
 		md.reset();
 		md.update(input);
@@ -104,9 +103,6 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
-//		if (!input.exists()) {
-//			throw new RuntimeExceptionFileNotFound(input);
-//		}
 
         BufferedInputStream bis = null;
 
@@ -132,7 +128,6 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
             throw new RuntimeExceptionExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
         }
 
-//        final MessageDigest md = MessageDigest.getInstance(hashCode.getAlgorithm(), PROVIDER);
 		md.reset();
 		
 		final byte[] buffer = new byte[bufferSize];
@@ -153,9 +148,9 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 
 	@Override
 	public byte[] getFastHash(final byte[] input, final int parts, final int partSize) {
-        if (null == input) {
-            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
-        }
+		if (!HelperArray.isValid(input)) {
+			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+		}
         if (0 > parts) {
             throw new RuntimeExceptionMustBeGreater("parts", parts, 0); //$NON-NLS-1$
         }
@@ -192,9 +187,6 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
-//        if (!input.exists()) {
-//        	throw new RuntimeExceptionFileNotFound(input);
-//        }
         if (0 > parts) {
             throw new RuntimeExceptionMustBeGreater("parts", parts, 0); //$NON-NLS-1$
         }

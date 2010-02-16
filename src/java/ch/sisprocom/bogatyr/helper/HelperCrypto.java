@@ -40,6 +40,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
@@ -48,7 +49,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a helper class for cryptography (e.g. random keys).
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.7.0
  */
 public abstract class HelperCrypto {
@@ -107,7 +108,7 @@ public abstract class HelperCrypto {
      * Returns all installed security {@link Provider}.
      *
      * @return installed security {@link Provider}
-     * @see {@link Provider}
+     * @see Provider
      * @since 0.9.1
      */
     public static Collection<Provider> getProviders() {
@@ -119,7 +120,7 @@ public abstract class HelperCrypto {
      *
      * @param provider for the data
      * @return {@link Collection} containing all available ciphers
-     * @see {@link Provider}
+     * @see Provider
      * @since 0.9.1
      */
     public static Collection<String> getCiphers(final Provider provider) {
@@ -131,7 +132,7 @@ public abstract class HelperCrypto {
      *
      * @param provider for the data
      * @return {@link Collection} containing all available key agreements
-     * @see {@link Provider}
+     * @see Provider
      * @since 0.9.1
      */
     public static Collection<String> getKeyAgreements(final Provider provider) {
@@ -143,7 +144,7 @@ public abstract class HelperCrypto {
      *
      * @param provider for the data
      * @return {@link Collection} containing all available macs
-     * @see {@link Provider}
+     * @see Provider
      * @since 0.9.1
      */
     public static Collection<String> getMacs(final Provider provider) {
@@ -155,7 +156,7 @@ public abstract class HelperCrypto {
      *
      * @param provider for the data
      * @return {@link Collection} containing all available message digests
-     * @see {@link Provider}
+     * @see Provider
      * @since 0.9.1
      */
     public static Collection<String> getMessageDigests(final Provider provider) {
@@ -167,7 +168,7 @@ public abstract class HelperCrypto {
      *
      * @param provider for the data
      * @return {@link Collection} containing all available signatures
-     * @see {@link Provider}
+     * @see Provider
      * @since 0.9.1
      */
     public static Collection<String> getSignatures(final Provider provider) {
@@ -179,7 +180,7 @@ public abstract class HelperCrypto {
      *
      * @param provider for the data
      * @return {@link Collection} containing all available key pair generators
-     * @see {@link Provider}
+     * @see Provider
      * @since 0.9.1
      */
    public static Collection<String> getKeyPairGenerators(final Provider provider) {
@@ -191,7 +192,7 @@ public abstract class HelperCrypto {
     *
     * @param provider for the data
     * @return {@link Collection} containing all available key factories
-    * @see {@link Provider}
+    * @see Provider
     * @since 0.9.1
     */
     public static Collection<String> getKeyFactories(final Provider provider) {
@@ -203,7 +204,7 @@ public abstract class HelperCrypto {
      *
      * @param provider for the data
      * @return {@link Collection} containing all available key generators
-     * @see {@link Provider}
+     * @see Provider
      * @since 0.9.1
      */
     public static Collection<String> getKeyGenerators(final Provider provider) {
@@ -215,17 +216,19 @@ public abstract class HelperCrypto {
      * Private methods
      */
     private static Collection<String> getInformation(final Provider provider, final String id) {
-    	final Set<String> set = new HashSet<String>();
+		if (null == provider) {
+			throw new RuntimeExceptionIsNull("provider"); //$NON-NLS-1$
+		}
 
-    	if (null != provider) {
-            for (final Map.Entry<?, ?> pair : provider.entrySet()) {
-	        	final String entry = (String) pair.getKey();
-	        	
-	        	if (HelperString.startsWith(entry, id) && !HelperString.isNumeric(entry.substring(id.length(), id.length() + 1))) {
-	        		set.add(entry.substring(id.length()));
-	            }
-	        }
-    	}
+		final Set<String> set = new HashSet<String>();
+
+        for (final Map.Entry<?, ?> pair : provider.entrySet()) {
+        	final String entry = (String) pair.getKey();
+        	
+        	if (HelperString.startsWith(entry, id) && !HelperString.isNumeric(entry.substring(id.length(), id.length() + 1))) {
+        		set.add(entry.substring(id.length()));
+            }
+        }
     	return set;
     }
 }

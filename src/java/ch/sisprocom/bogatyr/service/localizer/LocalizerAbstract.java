@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.service.ServiceAbstract;
  * Abstract localizer implementation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100205)
+ * @version 0.9.1 (20100216)
  * @since 0.6.0
  */
 public abstract class LocalizerAbstract extends ServiceAbstract implements Localizer {
@@ -165,7 +165,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
     }
 
 	@Override
-    public void deleteListener(final ListenerLocale listener) {
+    public synchronized void deleteListener(final ListenerLocale listener) {
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}

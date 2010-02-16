@@ -48,7 +48,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for XML operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.1 (20100216)
  * @since 0.3.0
  */
 public abstract class HelperXml {
@@ -62,11 +62,11 @@ public abstract class HelperXml {
      * @since 0.3.0
      */
     public static String getValidXmlString(final String input) { //$JUnit$
-        if (!HelperString.isValid(input)) { // vacancy test
-            return HelperString.EMPTY_STRING;
+        if (null == input) {
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
        
-       	final StringBuilder sb = new StringBuilder(input.length()); // Used to hold the output.
+       	final StringBuilder sb = new StringBuilder(input.length());
 
         for (final char current : input.toCharArray()) {
 //            if (current != 0x96 && current != 0x9C) { // new
@@ -134,9 +134,6 @@ public abstract class HelperXml {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.exists()) {
-//			throw new RuntimeExceptionFileNotFound(file);
-//		}
 //		if (!file.isFile()) {
 //			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 //		}

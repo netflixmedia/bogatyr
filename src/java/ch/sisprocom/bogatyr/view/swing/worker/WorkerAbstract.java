@@ -44,7 +44,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This class represents a skeleton for the worker.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100209)
+ * @version 0.9.1 (20100216)
  * @since 0.9.0
  */
 public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker, HolderListener<ListenerWorker> {
@@ -77,7 +77,7 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 	 * Implemented methods
 	 */
 	@Override
-	public void addListener(final ListenerWorker listener) {
+	public synchronized void addListener(final ListenerWorker listener) {
     	if (null == listener) {
     		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
     	}
@@ -91,7 +91,7 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 	}
 	
 	@Override
-	public void deleteListener(final ListenerWorker listener) {
+	public synchronized void deleteListener(final ListenerWorker listener) {
     	if (null == listener) {
     		throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
     	}
@@ -100,7 +100,7 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
  	}
 	
 	@Override
-	public void deleteListeners() {
+	public synchronized void deleteListeners() {
         listListener = new HashSet<ListenerWorker>();
 	}
 

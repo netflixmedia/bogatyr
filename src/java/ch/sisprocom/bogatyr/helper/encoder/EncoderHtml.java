@@ -31,58 +31,61 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.helper.encoder;
 
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
 
 
 /**
  * Encodes and decodes data to HTML-format.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100214)
+ * @version 0.9.1 (20100216)
  * @since 0.9.1
  */
 public abstract class EncoderHtml {
 	public static String encode(final String input) {
-	    if (null != input) {
-			final StringBuffer sb = new StringBuffer(input.length());
-		    boolean lastWasBlankChar = false;
-	
-		    for (char c : input.toCharArray()) {
-		        if (c == ' ') {
-		            if (lastWasBlankChar) {
-		                lastWasBlankChar = false;
-		                sb.append("&nbsp;"); //$NON-NLS-1$
-	                } else {
-		                lastWasBlankChar = true;
-		                sb.append(' ');
-	                }
+        if (null == input) {
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+        }
+
+        final StringBuffer sb = new StringBuffer(input.length());
+	    boolean lastWasBlankChar = false;
+
+	    for (final char c : input.toCharArray()) {
+	        if (' ' == c) {
+	            if (lastWasBlankChar) {
+	                lastWasBlankChar = false;
+	                sb.append("&nbsp;"); //$NON-NLS-1$
+                } else {
+	                lastWasBlankChar = true;
+	                sb.append(' ');
+                }
+            } else {
+	            lastWasBlankChar = false;
+	            if ('"' == c) {
+	                sb.append("&quot;"); //$NON-NLS-1$
+	            } else if ('&' == c) {
+	                sb.append("&amp;"); //$NON-NLS-1$
+	            } else if ('<' == c) {
+	                sb.append("&lt;"); //$NON-NLS-1$
+	            } else if ('>' == c) {
+	                sb.append("&gt;"); //$NON-NLS-1$
+	            } else if ('\n' == c) {
+	                sb.append("&lt;br/&gt;"); //$NON-NLS-1$
 	            } else {
-		            lastWasBlankChar = false;
-		            if (c == '"') {
-		                sb.append("&quot;"); //$NON-NLS-1$
-		            } else if (c == '&') {
-		                sb.append("&amp;"); //$NON-NLS-1$
-		            } else if (c == '<') {
-		                sb.append("&lt;"); //$NON-NLS-1$
-		            } else if (c == '>') {
-		                sb.append("&gt;"); //$NON-NLS-1$
-		            } else if (c == '\n') {
-		                sb.append("&lt;br/&gt;"); //$NON-NLS-1$
-		            } else {
-		                int ci = 0xffff & c;
-		                if (ci < 160 ) {
-		                    // nothing special only 7 Bit
-		                    sb.append(c);
-		                } else {
-		                    // Not 7 Bit use the unicode system
-		                    sb.append("&#"); //$NON-NLS-1$
-		                    sb.append(new Integer(ci).toString());
-		                    sb.append(';');
-		                    }
-		                }
-		            }
-		        }
-		    return sb.toString();
-		}
-	    return null;
+	                final int ci = 0xffff & c;
+	                if (160 > ci) {
+	                    // nothing special only 7 Bit
+	                    sb.append(c);
+	                } else {
+	                    // Not 7 Bit use the unicode system
+	                    sb.append("&#"); //$NON-NLS-1$
+	                    sb.append(new Integer(ci).toString());
+	                    sb.append(';');
+	                    }
+	                }
+	            }
+	        }
+	    return sb.toString();
 	}
 }

@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -80,14 +80,16 @@ public abstract class HelperString {
      * @since 0.7.0
      */	
 	public static boolean isNumeric(final String input) { //$JUnit$
-		//TODO a bit lazy implemented... improve with regex if possible
-		if (isValid(input)) {
-			try{
-				new BigDecimal(input);
-				return true;
-			} catch (NumberFormatException ex) {
-				return false;
-			}
+    	if (null == input) {
+    		throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+    	}
+
+    	//TODO a bit lazy implemented... improve with regex if possible
+		try {
+			new BigDecimal(input);
+			return true;
+		} catch (NumberFormatException ex) {
+//				return false;
 		}
 		return false;
 	}
@@ -123,14 +125,11 @@ public abstract class HelperString {
      * @since 0.7.0
      */
     public static String reverse(final String input) { //$JUnit$
-//		if (null == input) {
-//			throw new RuntimeExceptionArgumentIsNull("input"); //$NON-NLS-1$
-//		}
+    	if (!isValid(input)) {
+    		throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+    	}
 
-		if (null != input) {
-			return new StringBuilder(input).reverse().toString();
-		}
-		return null;
+		return new StringBuilder(input).reverse().toString();
     }
 
     /**
@@ -142,7 +141,7 @@ public abstract class HelperString {
      */
     public static String getValidNumericString(final String text) { //$JUnit$
     	if (!isValid(text)) {
-    		return null;
+    		throw new RuntimeExceptionIsNullOrEmpty("text"); //$NON-NLS-1$
     	}
 
         boolean isNegative = false;
@@ -173,7 +172,7 @@ public abstract class HelperString {
     		return null;
     	}
     	
-    	return isNegative ? Constants.NEGATIVE_SIGN + sb : sb.toString();
+    	return isNegative ? Constants.NEGATIVE_SIGN + sb.toString() : sb.toString();
     }
     
     /**
@@ -185,15 +184,15 @@ public abstract class HelperString {
      * @return concatenated {@link String}
      * @since 0.7.0
      */
-    public static String concatenate(final String separator, final boolean isTrimmed, final String... strings) { //$JUnit$
+    public static String concatenate(final String[] strings, final String separator, final boolean isTrimmed) { //$JUnit$
         if (!HelperArray.isValid(strings)) {
-        	return null;
+        	throw new RuntimeExceptionIsNullOrEmpty("strings"); //$NON-NLS-1$
         }
 
         final StringBuilder sb = new StringBuilder();
         
         for (final String string : strings) {
-            if (isValid(string)) {
+            if (isValid(string)) { //TODO correct or should it be an exception
                 if (null != separator && 0 < sb.length()) {
                     sb.append(separator);
                 }
@@ -207,18 +206,6 @@ public abstract class HelperString {
         }
         return sb.toString();
     }
-//    
-//    /**
-//     * Concatenates strings with a separator (e.g. for CSV export).
-//     *
-//     * @param separator between the strings
-//     * @param strings to concatenate
-//     * @return concatenated {@link String}
-//     * @since 0.8.0
-//     */
-//    public static String concatenate(final String separator, final String... strings) {
-//    	return concatenate(separator, true, strings);
-//    }
     
     /**
      * Concatenates strings.
@@ -228,7 +215,7 @@ public abstract class HelperString {
      * @since 0.9.0
      */
     public static String concatenate(final String... strings) { //$JUnit$
-    	return concatenate(null, true, strings);
+    	return concatenate(strings, null, true);
     }
     
     /**
@@ -242,15 +229,15 @@ public abstract class HelperString {
      * @since 0.8.0
      */
 	public static String toString(final byte[] data, /*final int length, */final String encoding) throws UnsupportedEncodingException {
-		if (null != data) {
-			if (!isValid(encoding)) {
-				throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
-			}
-	
-	//		return new String(data, 0, length, encoding);
-			return new String(data, encoding);
+		if (null == data) {
+			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
-		return null;
+		if (!isValid(encoding)) {
+			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
+		}
+
+//		return new String(data, 0, length, encoding);
+		return new String(data, encoding);
 	}
 	
     /**
@@ -263,14 +250,14 @@ public abstract class HelperString {
      * @since 0.8.0
      */
 	public static byte[] toBytes(final String input, final String encoding) throws UnsupportedEncodingException {
-		if (null != input) {
-			if (!isValid(encoding)) {
-				throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
-			}
-	
-			return input.getBytes(encoding);
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
-		return null;
+		if (!isValid(encoding)) {
+			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
+		}
+
+		return input.getBytes(encoding);
 	}
 	
     /**
@@ -284,6 +271,9 @@ public abstract class HelperString {
 	public static boolean startsWith(final String string, final String prefix) { //$JUnit$
 		if (null == string) {
 			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
+		}
+		if (!isValid(prefix)) {
+			throw new RuntimeExceptionIsNullOrEmpty("prefix"); //$NON-NLS-1$
 		}
 
 		return string.matches("(?i)" + prefix + ".*");  //$NON-NLS-1$//$NON-NLS-2$
@@ -301,6 +291,9 @@ public abstract class HelperString {
 		if (null == string) {
 			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
 		}
+		if (!isValid(suffix)) {
+			throw new RuntimeExceptionIsNullOrEmpty("suffix"); //$NON-NLS-1$
+		}
 
 		return string.matches("(?i).*" + suffix); //$NON-NLS-1$
 	}
@@ -316,6 +309,9 @@ public abstract class HelperString {
 	public static boolean contains(final String string, final String part) { //$JUnit$
 		if (null == string) {
 			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
+		}
+		if (!isValid(part)) {
+			throw new RuntimeExceptionIsNullOrEmpty("part"); //$NON-NLS-1$
 		}
 
 		return string.matches("(?i).*" + part + ".*");  //$NON-NLS-1$//$NON-NLS-2$

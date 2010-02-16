@@ -51,7 +51,7 @@ import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100216)
  * @since 0.7.0
  */
 public abstract class ClientAbstract extends ExtendedObjectAbstract implements Client {
@@ -208,7 +208,7 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 
     @Override
     public byte[] readStream() throws IOException {
-    	byte[] result = null;
+    	byte[] result = HelperArray.EMPTY_ARRAY_BYTE;
 
         if (socket.isClosed()) {
             stop();
@@ -243,16 +243,20 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 
     @Override
     public synchronized void addListener(final ListenerClient listener) {
-    	if (null != listener) {
-    		listListener.add(listener);
-    	}
+        if (null == listener) {
+            throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
+        }
+
+		listListener.add(listener);
     }
 
     @Override
     public synchronized void deleteListener(final ListenerClient listener) {
-    	if (null != listener) {
-    		listListener.remove(listener);
-    	}
+        if (null == listener) {
+            throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
+        }
+
+        listListener.remove(listener);
     }
 
     @Override

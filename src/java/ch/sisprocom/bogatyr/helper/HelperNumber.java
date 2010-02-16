@@ -36,13 +36,14 @@ import java.math.BigInteger;
 
 import ch.sisprocom.bogatyr.misc.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 
 /**
  * This is a helper class for numbers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100214)
+ * @version 0.9.1 (20100216)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
@@ -104,9 +105,9 @@ public abstract class HelperNumber {
      * @since 0.7.0
      */
     public static BigDecimal multiply(final Number... values) {
-        if (null == values) {
-            throw new RuntimeExceptionIsNull("values"); //$NON-NLS-1$
-        }
+		if (!HelperArray.isValid(values)) {
+			throw new RuntimeExceptionIsNullOrEmpty("values"); //$NON-NLS-1$
+		}
 
         BigDecimal result = null;
 
@@ -125,10 +126,13 @@ public abstract class HelperNumber {
      * @since 0.7.0
      */
     public static BigDecimal multiply(final Number a, final Number b) {
-        if (null == a || null == b) {
-            return null;
-        }
-        
+		if (null == a) {
+			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
+		}
+		if (null == b ) {
+			throw new RuntimeExceptionIsNull("b"); //$NON-NLS-1$
+		}
+       
 		final BigDecimal numberA = new BigDecimal(a.toString());
 		final BigDecimal numberB = new BigDecimal(b.toString());
 
@@ -143,9 +147,9 @@ public abstract class HelperNumber {
      * @since 0.8.0
      */
     public static BigDecimal add(final Number... values) {
-        if (null == values) {
-            throw new RuntimeExceptionIsNull("values"); //$NON-NLS-1$
-        }
+		if (!HelperArray.isValid(values)) {
+			throw new RuntimeExceptionIsNullOrEmpty("values"); //$NON-NLS-1$
+		}
 
         BigDecimal result = null;
 
@@ -164,16 +168,13 @@ public abstract class HelperNumber {
      * @since 0.8.0
      */
     public static BigDecimal add(final Number a, final Number b) {
-        if (null == a) {
-            if (null == b) {
-            	return null;
-            }
-        	return new BigDecimal(b.toString());
-        }
-        if (null == b) {
-        	return new BigDecimal(a.toString());
-        }
-         
+		if (null == a) {
+			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
+		}
+		if (null == b ) {
+			throw new RuntimeExceptionIsNull("b"); //$NON-NLS-1$
+		}
+		
 		final BigDecimal numberA = new BigDecimal(a.toString());
 		final BigDecimal numberB = new BigDecimal(b.toString());
 

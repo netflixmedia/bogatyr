@@ -50,7 +50,7 @@ import ch.sisprocom.bogatyr.helper.HelperCollection;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100209
+ * @version 20100216
  */
 public class HelperCollectionTest {
 	@Test
@@ -100,21 +100,21 @@ public class HelperCollectionTest {
 	
 	@Test
 	public void testGetList() {
-		Collection<String> list = HelperCollection.getList(null);
+//		Collection<String> list = HelperCollection.getList(null);
+//
+//		assertEquals(0, list.size());
 
-		assertEquals(0, list.size());
-
-		list = HelperCollection.getList("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		final Collection<String> list = HelperCollection.getList("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 
 		assertEquals(3, list.size());
 	}
 	
 	@Test
 	public void testGetSet() {
-		Collection<String> list = HelperCollection.getSet(null);
-		assertEquals(0, list.size());
+//		Collection<String> list = HelperCollection.getSet(null);
+//		assertEquals(0, list.size());
 		
-		list = HelperCollection.getSet("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		final Collection<String> list = HelperCollection.getSet("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 
 		assertEquals(1, list.size());
 	}
