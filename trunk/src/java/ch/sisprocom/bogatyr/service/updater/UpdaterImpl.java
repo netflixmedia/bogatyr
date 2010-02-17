@@ -45,7 +45,7 @@ import ch.sisprocom.bogatyr.helper.HelperXml;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import ch.sisprocom.bogatyr.model.misc.Platform;
-import ch.sisprocom.bogatyr.model.updater.Document;
+import ch.sisprocom.bogatyr.model.updater.ModelUpdater;
 import ch.sisprocom.bogatyr.service.ServiceAbstract;
 
 
@@ -61,17 +61,17 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
     * Implemented methods
     */
     @Override
-	public Document getDocument(final File file) throws JAXBException {
-    	return HelperXml.deserialize(Document.class, file);
+	public ModelUpdater getDocument(final File file) throws JAXBException {
+    	return HelperXml.deserialize(ModelUpdater.class, file);
     }
 
 	@Override
-	public Document getDocument(final InputStream is) throws JAXBException {
-		return HelperXml.deserialize(Document.class, is);
+	public ModelUpdater getDocument(final InputStream is) throws JAXBException {
+		return HelperXml.deserialize(ModelUpdater.class, is);
 	}
 
 	@Override
-	public void update(final Document document, final Platform platform, final File dest) throws IOException {
+	public void update(final ModelUpdater document, final Platform platform, final File dest) throws IOException {
         if (null == document) {
             throw new RuntimeExceptionIsNull("document"); //$NON-NLS-1$
         }
@@ -105,7 +105,7 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 	}
 
 	@Override
-	public void update(final Document document, final File dest) throws IOException {
+	public void update(final ModelUpdater document, final File dest) throws IOException {
         if (null == document) {
             throw new RuntimeExceptionIsNull("document"); //$NON-NLS-1$
         }

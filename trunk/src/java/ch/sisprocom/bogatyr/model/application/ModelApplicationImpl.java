@@ -45,9 +45,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
 import ch.sisprocom.bogatyr.misc.xml.adapter.MapAdapterHashCode;
-import ch.sisprocom.bogatyr.model.ModelAbstract;
 import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
+import ch.sisprocom.bogatyr.model.misc.DocumentImpl;
 import ch.sisprocom.bogatyr.model.misc.Manufacturer;
+import ch.sisprocom.bogatyr.model.misc.Owner;
+import ch.sisprocom.bogatyr.model.misc.Publisher;
 import ch.sisprocom.bogatyr.model.worker.ModelWorker;
 import ch.sisprocom.bogatyr.model.worker.ModelWorkerImpl;
 import ch.sisprocom.bogatyr.service.localizer.Localizer;
@@ -58,24 +60,20 @@ import ch.sisprocom.bogatyr.service.property.Property;
  * The implementation of the application model.
  * 
  * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100217)
  * @since 0.9.0
  */
-@XmlRootElement(name = "application")
-@XmlType(propOrder={"name", "version", "build", "created", "manufacturer", "UUID", "debug", "hashs"})
-public class ModelApplicationImpl extends ModelAbstract implements ModelApplication {
+@XmlRootElement(name = "modelApplication")
+@XmlType(propOrder={"debug", "hashs"})
+public class ModelApplicationImpl extends DocumentImpl implements ModelApplication {
 	private static final long serialVersionUID = -2826684498598090349L;
 
-	private Map<HashCodeAlgo, String> mapHash = new HashMap<HashCodeAlgo, String>(3);
-	private String name;
-	private BigDecimal version;
-	private int build;
-	private Date created;
-	private Manufacturer manufacturer;
-	private UUID uuid;
 	private boolean isDebug;
+	private Map<HashCodeAlgo, String> mapHash = new HashMap<HashCodeAlgo, String>(3);
+
 	private transient Localizer localizer;
 	private transient Property property;
+
 	private final transient ModelWorker modelWorker = new ModelWorkerImpl();
 
 	
@@ -83,69 +81,52 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
         super();
     }
     
-	
+	public ModelApplicationImpl(final String name, final BigDecimal version, final int build,
+			final Date created, final Manufacturer manufacturer, final Owner owner,
+			final Publisher publisher, final UUID uuid, final boolean isDebug,
+			final Localizer localizer, final Property property, final Map<HashCodeAlgo, String> mapHash) {
+		super(name, version, build, created, manufacturer, owner, publisher, uuid);
+		this.isDebug = isDebug;
+		this.localizer = localizer;
+		this.property = property;
+		this.mapHash = mapHash;
+	}
+
+
 	/*
      * Overridden methods
      */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + build;
-		result = prime * result + ((null == created) ? 0 : created.hashCode());
+		int result = super.hashCode();
 		result = prime * result + (isDebug ? 1231 : 1237);
-		result = prime * result
-				+ ((null == manufacturer) ? 0 : manufacturer.hashCode());
 		result = prime * result + ((null == mapHash) ? 0 : mapHash.hashCode());
-		result = prime * result + ((null == name) ? 0 : name.hashCode());
-		result = prime * result + ((null == uuid) ? 0 : uuid.hashCode());
-		result = prime * result + ((null == version) ? 0 : version.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (null == obj)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 		final ModelApplicationImpl other = (ModelApplicationImpl) obj;
-		if (build != other.build)
-			return false;
-		if (null == created) {
-			if (null != other.created)
-				return false;
-		} else if (!created.equals(other.created))
-			return false;
-		if (isDebug != other.isDebug)
-			return false;
-		if (null == manufacturer) {
-			if (null != other.manufacturer)
-				return false;
-		} else if (!manufacturer.equals(other.manufacturer))
-			return false;
+        if (isDebug != other.isDebug) {
+            return false;
+        }
 		if (null == mapHash) {
-			if (null != other.mapHash)
-				return false;
-		} else if (!mapHash.equals(other.mapHash))
-			return false;
-		if (null == name) {
-			if (null != other.name)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (null == uuid) {
-			if (null != other.uuid)
-				return false;
-		} else if (!uuid.equals(other.uuid))
-			return false;
-		if (null == version) {
-			if (null != other.version)
-				return false;
-		} else if (!(0 == version.compareTo(other.version)))
-			return false;
+            if (null != other.mapHash) {
+                return false;
+            }
+		} else if (!mapHash.equals(other.mapHash)) {
+            return false;
+        }
 		return true;
 	}
 
@@ -153,17 +134,11 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	/*
      * Implemented methods
      */
-	@XmlElement
-	@Override
-	public int getBuild() {
-		return build;
-	}
-
 	@Override
 	public String getHash() {
 		return getHash(HashCodeAlgo.SHA256);
 	}
-	
+
 	@Override
 	public String getHash(final HashCodeAlgo hashCodeAlgo) {
 		return mapHash.get(hashCodeAlgo);
@@ -200,43 +175,13 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
-	@XmlElement
-	public Date getCreated() {
-		return created;
-	}
-
-	@Override
-	@XmlElement
-	public Manufacturer getManufacturer() {
-		return manufacturer;
-	}
-
-	@Override
-	@XmlElement
-	public UUID getUUID() {
-		return uuid;
-	}
-
-	@Override
 	public Localizer getLocalizer() {
 		return localizer;
 	}
 
 	@Override
-	@XmlElement
-	public String getName() {
-		return name;
-	}
-
-	@Override
 	public Property getProperty() {
 		return property;
-	}
-
-	@Override
-	@XmlElement
-	public BigDecimal getVersion() {
-		return version;
 	}
 
 	@Override
@@ -248,41 +193,6 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	@XmlElement
 	public Boolean isDebug() {
 		return isDebug;
-	}
-
-	@Override
-	public void setBuild(final int build) {
-        if (build != this.build) {
-            this.build = build;
-            setChanged();
-            notifyObservers(MEMBER_BUILD);
-        }
-	}
-	@Override
-	public void setCreated(final Date created) {
-        if (!HelperObject.isEquals(created, this.created)) {
-            this.created = created;
-            setChanged();
-            notifyObservers(MEMBER_CREATED);
-        }
-	}
-
-	@Override
-	public void setManufacturer(final Manufacturer manufacturer) {
-        if (!HelperObject.isEquals(manufacturer, this.manufacturer)) {
-            this.manufacturer = manufacturer;
-            setChanged();
-            notifyObservers(MEMBER_MANUFACTURER);
-        }
-	}
-
-	@Override
-	public void setUUID(final UUID uuid) {
-        if (!HelperObject.isEquals(uuid, this.uuid)) {
-            this.uuid = uuid;
-            setChanged();
-            notifyObservers(MEMBER_UUID);
-        }
 	}
 
 	@Override
@@ -304,15 +214,6 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
 	}
 
 	@Override
-	public void setName(final String name) {
-        if (!HelperObject.isEquals(name, this.name)) {
-            this.name = name;
-            setChanged();
-            notifyObservers(MEMBER_NAME);
-        }
-	}
-
-	@Override
 	public void setProperty(final Property property) {
         if (!HelperObject.isEquals(property, this.property)) {
             this.property = property;
@@ -321,15 +222,6 @@ public class ModelApplicationImpl extends ModelAbstract implements ModelApplicat
         }
 	}
 
-	@Override
-	public void setVersion(final BigDecimal version) {
-        if (!HelperObject.isEquals(version, this.version)) {
-            this.version = version;
-            setChanged();
-            notifyObservers(MEMBER_VERSION);
-        }
-	}
-	
 	
 	/*
 	 * Inner classes

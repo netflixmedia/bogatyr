@@ -46,7 +46,7 @@ import ch.sisprocom.bogatyr.model.ModelAbstract;
  * The implementation of the owner model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100202)
+ * @version 0.9.1 (20100217)
  * @since 0.9.0
  */
 @XmlRootElement(name = "owner")
@@ -86,28 +86,37 @@ public class OwnerImpl extends ModelAbstract implements Owner {
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (null == obj)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+        if (this == obj) {
+            return true;
+        }
+        if (null == obj) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 		final OwnerImpl other = (OwnerImpl) obj;
 		if (null == mail) {
-			if (null != other.mail)
-				return false;
-		} else if (!mail.equals(other.mail))
-			return false;
+            if (null != other.mail) {
+                return false;
+            }
+		} else if (!mail.equals(other.mail)) {
+            return false;
+        }
 		if (null == name) {
-			if (null != other.name)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
+            if (null != other.name) {
+                return false;
+            }
+		} else if (!name.equals(other.name)) {
+            return false;
+        }
 		if (null == url) {
-			if (null != other.url)
-				return false;
-		} else if (!url.equals(other.url))
-			return false;
+            if (null != other.url) {
+                return false;
+            }
+		} else if (!url.equals(other.url)) {
+            return false;
+        }
 		return true;
 	}
 

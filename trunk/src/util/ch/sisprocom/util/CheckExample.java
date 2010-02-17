@@ -90,7 +90,7 @@ public class CheckExample {
         	try {
         	    final java.io.FileFilter filter = new java.io.FileFilter() { 
         	    	public boolean accept(final File file) {
-        	    		return HelperString.endsWith(file.getName(), EXTENSION_JAVA) && !HelperString.contains(file.getName(), "svn");
+        	    		return HelperString.endsWith(file.getName(), EXTENSION_JAVA) && !HelperString.contains(file.getName(), "svn"); //$NON-NLS-1$
         	    	} 
         	    };
         	    

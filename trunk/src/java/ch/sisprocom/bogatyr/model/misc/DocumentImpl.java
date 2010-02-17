@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009-2010 by SiSprocom GmbH.
+ * Copyright (c) 2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,45 +29,33 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.model.updater;
+package ch.sisprocom.bogatyr.model.misc;
 
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
-import ch.sisprocom.bogatyr.misc.xml.adapter.MapAdapterHashCode;
-import ch.sisprocom.bogatyr.misc.xml.adapter.MapAdapterPlatform;
 import ch.sisprocom.bogatyr.model.ModelAbstract;
-import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
-import ch.sisprocom.bogatyr.model.misc.Manufacturer;
-import ch.sisprocom.bogatyr.model.misc.Owner;
-import ch.sisprocom.bogatyr.model.misc.Platform;
-import ch.sisprocom.bogatyr.model.misc.Publisher;
 
 
 /**
  * The implementation of the document model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
- * @since 0.9.0
+ * @version 0.9.1 (20100217)
+ * @since 0.9.1
  */
 @XmlRootElement(name = "document")
-@XmlType(propOrder={"name", "version", "build", "created", "manufacturer", "owner", "publisher", "UUID", "locations", "hashs"})
+@XmlType(propOrder={"name", "version", "build", "created", "manufacturer", "owner", "publisher", "UUID"})
 public class DocumentImpl extends ModelAbstract implements Document {
-	private static final long serialVersionUID = -2826684498598090349L;
+	private static final long serialVersionUID = 5505184629744108815L;
 
-	private Map<Platform, String> mapLocation = new HashMap<Platform, String>();
-	private Map<HashCodeAlgo, String> mapHash = new HashMap<HashCodeAlgo, String>();
 	private String name;
 	private BigDecimal version;
 	private int build;
@@ -81,21 +69,32 @@ public class DocumentImpl extends ModelAbstract implements Document {
         super();
     }
 
+	public DocumentImpl(final String name, final BigDecimal version, final int build,
+			final Date created, final Manufacturer manufacturer, final Owner owner,
+			final Publisher publisher, final UUID uuid) {
+		super();
+		this.name = name;
+		this.version = version;
+		this.build = build;
+		this.created = created;
+		this.manufacturer = manufacturer;
+		this.owner = owner;
+		this.publisher = publisher;
+		this.uuid = uuid;
+	}
+
 
 	/*
      * Overridden methods
      */
-    @Override
+	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + build;
 		result = prime * result + ((null == created) ? 0 : created.hashCode());
 		result = prime * result
 				+ ((null == manufacturer) ? 0 : manufacturer.hashCode());
-		result = prime * result + ((null == mapHash) ? 0 : mapHash.hashCode());
-		result = prime * result
-				+ ((null == mapLocation) ? 0 : mapLocation.hashCode());
 		result = prime * result + ((null == name) ? 0 : name.hashCode());
 		result = prime * result + ((null == owner) ? 0 : owner.hashCode());
 		result = prime * result
@@ -108,60 +107,68 @@ public class DocumentImpl extends ModelAbstract implements Document {
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (null == obj)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 		final DocumentImpl other = (DocumentImpl) obj;
-		if (build != other.build)
-			return false;
+        if (build != other.build) {
+            return false;
+        }
 		if (null == created) {
-			if (null != other.created)
-				return false;
-		} else if (!created.equals(other.created))
-			return false;
+            if (null != other.created) {
+                return false;
+            }
+		} else if (!created.equals(other.created)) {
+            return false;
+        }
 		if (null == manufacturer) {
-			if (null != other.manufacturer)
-				return false;
-		} else if (!manufacturer.equals(other.manufacturer))
-			return false;
-		if (null == mapHash) {
-			if (null != other.mapHash)
-				return false;
-		} else if (!mapHash.equals(other.mapHash))
-			return false;
-		if (null == mapLocation) {
-			if (null != other.mapLocation)
-				return false;
-		} else if (!mapLocation.equals(other.mapLocation))
-			return false;
+            if (null != other.manufacturer) {
+                return false;
+            }
+		} else if (!manufacturer.equals(other.manufacturer)) {
+            return false;
+        }
 		if (null == name) {
-			if (null != other.name)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
+            if (null != other.name) {
+                return false;
+            }
+		} else if (!name.equals(other.name)) {
+            return false;
+        }
 		if (null == owner) {
-			if (null != other.owner)
-				return false;
-		} else if (!owner.equals(other.owner))
-			return false;
+            if (null != other.owner) {
+                return false;
+            }
+		} else if (!owner.equals(other.owner)) {
+            return false;
+        }
 		if (null == publisher) {
-			if (null != other.publisher)
-				return false;
-		} else if (!publisher.equals(other.publisher))
-			return false;
+            if (null != other.publisher) {
+                return false;
+            }
+		} else if (!publisher.equals(other.publisher)) {
+            return false;
+        }
 		if (null == uuid) {
-			if (null != other.uuid)
-				return false;
-		} else if (!uuid.equals(other.uuid))
-			return false;
+            if (null != other.uuid) {
+                return false;
+            }
+		} else if (!uuid.equals(other.uuid)) {
+            return false;
+        }
 		if (null == version) {
-			if (null != other.version)
-				return false;
-		} else if (!(0 == version.compareTo(other.version)))
-			return false;
+            if (null != other.version) {
+                return false;
+            }
+		} else if (!version.equals(other.version)) {
+            return false;
+        }
 		return true;
 	}
 
@@ -173,58 +180,6 @@ public class DocumentImpl extends ModelAbstract implements Document {
     @XmlElement
 	public int getBuild() {
 		return build;
-	}
-
-	@Override
-	public String getLocation() {
-		return getLocation(Platform.ANY);
-	}
-
-    @Override
-	public String getLocation(final Platform platform) {
-		return mapLocation.get(platform);
-	}
-
-    @Override
-    @XmlElement
-    @XmlJavaTypeAdapter(MapAdapterPlatform.class)
-	public Map<Platform, String> getLocations() {
-		return mapLocation;
-	}
-    
-	@Override
-	public void setLocations(final Map<Platform, String> locations) {
-        if (!HelperObject.isEquals(locations, mapLocation)) {
-    		mapLocation = locations;
-            setChanged();
-            notifyObservers(MEMBER_LOCATIONS);
-        }
-	}
-
-	@Override
-	public String getHash() {
-		return getHash(HashCodeAlgo.SHA256);
-	}
-	
-    @Override
-	public String getHash(final HashCodeAlgo hashCodeAlgo) {
-		return mapHash.get(hashCodeAlgo);
-	}
-    
-    @Override
-    @XmlElement
-    @XmlJavaTypeAdapter(MapAdapterHashCode.class)
-	public Map<HashCodeAlgo, String> getHashs() {
-		return mapHash;
-	}
-
-	@Override
-	public void setHashs(final Map<HashCodeAlgo, String> hashs) {
-        if (!HelperObject.isEquals(hashs, mapHash)) {
-    		mapHash = hashs;
-            setChanged();
-            notifyObservers(MEMBER_HASHS);
-        }
 	}
 
 	@Override

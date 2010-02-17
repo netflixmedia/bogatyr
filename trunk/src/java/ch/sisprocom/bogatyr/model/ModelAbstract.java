@@ -45,7 +45,7 @@ import com.sun.xml.internal.txw2.annotation.XmlElement;
  * This is the skeleton for all models.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100217)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
@@ -77,20 +77,26 @@ public abstract class ModelAbstract extends Observable implements Model {
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (null == obj)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+        if (this == obj) {
+            return true;
+        }
+        if (null == obj) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 		final ModelAbstract other = (ModelAbstract) obj;
 		if (null == instantiationDate) {
-			if (null != other.instantiationDate)
-				return false;
-		} else if (!instantiationDate.equals(other.instantiationDate))
-			return false;
-		if (isNotifyEnabled != other.isNotifyEnabled)
-			return false;
+            if (null != other.instantiationDate) {
+                return false;
+            }
+		} else if (!instantiationDate.equals(other.instantiationDate)) {
+            return false;
+        }
+        if (isNotifyEnabled != other.isNotifyEnabled) {
+            return false;
+        }
 		return true;
 	}
 
