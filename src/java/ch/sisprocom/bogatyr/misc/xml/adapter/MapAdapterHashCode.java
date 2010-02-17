@@ -41,7 +41,7 @@ import ch.sisprocom.bogatyr.misc.xml.XmlMap;
 import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
 
 /**
- * Map adapter for the key {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo} and value {@link String}.
+ * Map adapter for the key {@link HashCodeAlgo} and value {@link String}.
  * 
  * @author Stefan Laubenberger
  * @version 0.9.1 (20100215)

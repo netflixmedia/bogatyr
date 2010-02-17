@@ -71,7 +71,7 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100217)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -114,7 +114,7 @@ public abstract class HelperIO {
      * @since 0.9.0
      */	
 	public static File getTemporaryFile() throws IOException { //$JUnit$
-	    return getTemporaryFile(Constants.BOGATYR_NAME, "tmp"); //$NON-NLS-1$
+	    return getTemporaryFile(Constants.BOGATYR.getName(), "tmp"); //$NON-NLS-1$
 	}
 	
 	/**

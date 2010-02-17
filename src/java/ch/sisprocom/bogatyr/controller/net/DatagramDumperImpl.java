@@ -159,8 +159,8 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 		if (null != thread) {
 			if (thread.isAlive()) {
 				thread.interrupt();
-			} else {
-				thread = null;
+//			} else {
+//				thread = null;
 			}
         }
     }

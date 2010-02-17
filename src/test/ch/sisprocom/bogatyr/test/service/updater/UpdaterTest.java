@@ -44,8 +44,8 @@ import org.junit.Test;
 import ch.sisprocom.bogatyr.helper.HelperCrypto;
 import ch.sisprocom.bogatyr.helper.HelperXml;
 import ch.sisprocom.bogatyr.model.misc.Platform;
-import ch.sisprocom.bogatyr.model.updater.Document;
-import ch.sisprocom.bogatyr.model.updater.DocumentImpl;
+import ch.sisprocom.bogatyr.model.updater.ModelUpdater;
+import ch.sisprocom.bogatyr.model.updater.ModelUpdaterImpl;
 
 
 /**
@@ -57,36 +57,35 @@ import ch.sisprocom.bogatyr.model.updater.DocumentImpl;
 public class UpdaterTest {
 	@Before
 	public void setUp() throws Exception {
-		final Document doc = new DocumentImpl();
+		final ModelUpdater doc = new ModelUpdaterImpl();
 		
 		final Map<Platform, String> locations = new HashMap<Platform, String>(3);
 //		locations.put(Platform.ANY, "http://code.google.com/p/bogatyr/downloads/list");
-		locations.put(Platform.WINDOWS, "www.ms.com");
-		locations.put(Platform.MAC_OSX, "www.apple.com");
-		locations.put(Platform.UNIX, "www.unix.com");
+		locations.put(Platform.WINDOWS, "www.ms.com"); //$NON-NLS-1$
+		locations.put(Platform.MAC_OSX, "www.apple.com"); //$NON-NLS-1$
+		locations.put(Platform.UNIX, "www.unix.com"); //$NON-NLS-1$
 		doc.setLocations(locations);
 
 		final Map<HashCodeAlgo, String> hashs = new HashMap<HashCodeAlgo, String>(3);
-		hashs.put(HashCodeAlgo.MD5, "MD5-Hashvalue");
-		hashs.put(HashCodeAlgo.SHA256, "SHA256-Hashvalue");
+		hashs.put(HashCodeAlgo.MD5, "MD5-Hashvalue"); //$NON-NLS-1$
+		hashs.put(HashCodeAlgo.SHA256, "SHA256-Hashvalue"); //$NON-NLS-1$
 		doc.setHashs(hashs);
 		
-		doc.setName(Constants.BOGATYR_NAME);
-		doc.setVersion(Constants.BOGATYR_VERSION);
-		doc.setBuild(Constants.BOGATYR_BUILD);
-		doc.setManufacturer(Constants.BOGATYR_MANUFACTURER);
-		doc.setOwner(Constants.BOGATYR_OWNER);
-		doc.setPublisher(Constants.BOGATYR_PUBLISHER);
+		doc.setName(Constants.BOGATYR.getName());
+		doc.setVersion(Constants.BOGATYR.getVersion());
+		doc.setBuild(Constants.BOGATYR.getBuild());
+		doc.setManufacturer(Constants.BOGATYR.getManufacturer());
+		doc.setOwner(Constants.BOGATYR.getOwner());
+		doc.setPublisher(Constants.BOGATYR.getPublisher());
 		doc.setCreated(new Date());
 		doc.setUUID(HelperCrypto.getUUID());
 		
 		System.out.println(doc);
 		
 		try {
-			HelperXml.serialize(doc, new File("/Users/Shared/Transfer/test.xml"));
+			HelperXml.serialize(doc, new File("/Users/Shared/Transfer/test.xml")); //$NON-NLS-1$
 	//		HelperXml.serialize(docs, new File("/Users/Shared/Transfer/test.xml"));
-			System.out.println("hi");
-			final Document doc2 = HelperXml.deserialize(DocumentImpl.class, new File("/Users/Shared/Transfer/test.xml"));
+			final ModelUpdater doc2 = HelperXml.deserialize(ModelUpdaterImpl.class, new File("/Users/Shared/Transfer/test.xml")); //$NON-NLS-1$
 	
 			System.out.println(doc2.getHashs());
 			

@@ -59,7 +59,7 @@ public class LauncherMailTest {
 		} catch (Exception ex) {fail(ex.getMessage());}
 
 		try {
-			LauncherMail.mail("Test", "This is a testäöäü:" + HelperString.NEW_LINE + "Yeah, new line is here!", "yourname@yourOtherMail.com", "anothername@anotherMail.com"); //$NON-NLS-1$ //$NON-NLS-2$
+			LauncherMail.mail("Test", "This is a testäöäü:" + HelperString.NEW_LINE + "Yeah, the new line is here!", "yourname@yourOtherMail.com", "anothername@anotherMail.com"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 }

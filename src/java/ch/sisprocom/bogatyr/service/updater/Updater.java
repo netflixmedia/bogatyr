@@ -36,7 +36,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import ch.sisprocom.bogatyr.model.misc.Platform;
-import ch.sisprocom.bogatyr.model.updater.Document;
+import ch.sisprocom.bogatyr.model.updater.ModelUpdater;
 import ch.sisprocom.bogatyr.service.Service;
 
 
@@ -50,12 +50,12 @@ import ch.sisprocom.bogatyr.service.Service;
  */
 public interface Updater extends Service {
 		
-	Document getDocument(File file) throws Exception;
+	ModelUpdater getDocument(File file) throws Exception;
 	
-	Document getDocument(InputStream is) throws Exception;
+	ModelUpdater getDocument(InputStream is) throws Exception;
 	
-	void update(Document document, File dest) throws IOException;
+	void update(ModelUpdater document, File dest) throws IOException;
 	
-	void update(Document document, Platform platform, File dest) throws IOException;
+	void update(ModelUpdater document, Platform platform, File dest) throws IOException;
 }   
 

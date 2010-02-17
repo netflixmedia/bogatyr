@@ -91,7 +91,7 @@ public class HelperCryptoTest {
     public void testGetUUID() {
 		final UUID a = HelperCrypto.getUUID();
 		final UUID b = HelperCrypto.getUUID();
-		
+
 		assertNotNull(a);
 		assertNotNull(b);
 		

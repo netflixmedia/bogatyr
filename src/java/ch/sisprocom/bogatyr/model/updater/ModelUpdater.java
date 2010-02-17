@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+ * Copyright (c) 2009-2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,39 +31,25 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.updater;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import ch.sisprocom.bogatyr.model.Model;
 import ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo;
-import ch.sisprocom.bogatyr.model.misc.Manufacturer;
-import ch.sisprocom.bogatyr.model.misc.Owner;
+import ch.sisprocom.bogatyr.model.misc.Document;
 import ch.sisprocom.bogatyr.model.misc.Platform;
-import ch.sisprocom.bogatyr.model.misc.Publisher;
 
 /**
- * The interface for the document model.
+ * The interface for the updater model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100217)
  * @since 0.9.0
  */
-@XmlJavaTypeAdapter(DocumentImpl.XmlAdapter.class)
-public interface Document extends Model {
-	String MEMBER_LOCATIONS    = Document.class.getName() + ".locations"; //$NON-NLS-1$
-	String MEMBER_HASHS        = Document.class.getName() + ".hashs"; //$NON-NLS-1$
-    String MEMBER_NAME     	   = Document.class.getName() + ".name"; //$NON-NLS-1$
-    String MEMBER_VERSION      = Document.class.getName() + ".version"; //$NON-NLS-1$
-    String MEMBER_BUILD        = Document.class.getName() + ".build"; //$NON-NLS-1$
-    String MEMBER_CREATED	   = Document.class.getName() + ".created"; //$NON-NLS-1$
-    String MEMBER_MANUFACTURER = Document.class.getName() + ".manufacturer"; //$NON-NLS-1$
-    String MEMBER_OWNER		   = Document.class.getName() + ".owner"; //$NON-NLS-1$
-    String MEMBER_PUBLISHER    = Document.class.getName() + ".publisher"; //$NON-NLS-1$
-    String MEMBER_UUID     	   = Document.class.getName() + ".UUID"; //$NON-NLS-1$
+@XmlJavaTypeAdapter(ModelUpdaterImpl.XmlAdapter.class)
+public interface ModelUpdater extends Document {
+	String MEMBER_LOCATIONS    = "locations"; //$NON-NLS-1$
+	String MEMBER_HASHS        = "hashs"; //$NON-NLS-1$
 
 
     /**
@@ -116,7 +102,7 @@ public interface Document extends Model {
     void setHashs(Map<HashCodeAlgo, String> hashs);
 
     /**
-     * Returns the hash for a given {@link ch.sisprocom.bogatyr.model.crypto.HashCodeAlgo}.
+     * Returns the hash for a given {@link HashCodeAlgo}.
      * 
      * @param hashCodeAlgo for the hash
      * @return hash 
@@ -131,28 +117,4 @@ public interface Document extends Model {
      * @since 0.9.0
      */	
 	String getHash();
-
-	String getName();
-	void setName(String name);
-    
-    BigDecimal getVersion();
-    void setVersion(BigDecimal version);
-
-    int getBuild();
-    void setBuild(int build);
-
-    Date getCreated();
-    void setCreated(Date created);
-    
-    Manufacturer getManufacturer();
-    void setManufacturer(Manufacturer manufacturer);
-    
-    Owner getOwner();
-    void setOwner(Owner owner);
-    
-    Publisher getPublisher();
-    void setPublisher(Publisher publisher);
-    
-    UUID getUUID();
-    void setUUID(UUID uuid);
 }

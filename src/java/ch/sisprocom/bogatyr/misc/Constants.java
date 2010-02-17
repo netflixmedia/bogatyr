@@ -36,13 +36,14 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.UUID;
 
 import ch.sisprocom.bogatyr.helper.HelperNumber;
-import ch.sisprocom.bogatyr.model.misc.Manufacturer;
+import ch.sisprocom.bogatyr.helper.HelperTime;
+import ch.sisprocom.bogatyr.model.misc.Document;
+import ch.sisprocom.bogatyr.model.misc.DocumentImpl;
 import ch.sisprocom.bogatyr.model.misc.ManufacturerImpl;
-import ch.sisprocom.bogatyr.model.misc.Owner;
 import ch.sisprocom.bogatyr.model.misc.OwnerImpl;
-import ch.sisprocom.bogatyr.model.misc.Publisher;
 import ch.sisprocom.bogatyr.model.misc.PublisherImpl;
 
 
@@ -50,17 +51,12 @@ import ch.sisprocom.bogatyr.model.misc.PublisherImpl;
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100217)
  * @since 0.7.0
  */
 public abstract class Constants {
 	//Bogatyr specific
-	public static final String BOGATYR_NAME		 		  = "Bogatyr"; //$NON-NLS-1$
-	public static final BigDecimal BOGATYR_VERSION 		  = new BigDecimal("0.91"); //$NON-NLS-1$
-	public static final int BOGATYR_BUILD 				  = 235;
-	public static final Manufacturer BOGATYR_MANUFACTURER = new ManufacturerImpl();
-	public static final Owner BOGATYR_OWNER 			  = new OwnerImpl();
-	public static final Publisher BOGATYR_PUBLISHER		  = new PublisherImpl();
+	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.91"), 236, HelperTime.getDate(17, 2, 2010), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
@@ -178,16 +174,10 @@ public abstract class Constants {
 	public static final BigDecimal FACTOR_TON_TO_KILOGRAM 	= new BigDecimal("907.1847"); //ton to kilogram //$NON-NLS-1$
 
 	static {
-		BOGATYR_MANUFACTURER.setName("SiSprocom GmbH"); //$NON-NLS-1$
-		BOGATYR_MANUFACTURER.setMail("laubenberger@gmail.com"); //$NON-NLS-1$
-		BOGATYR_OWNER.setName("SiSprocom GmbH"); //$NON-NLS-1$
-		BOGATYR_OWNER.setMail("info@sisprocom.ch"); //$NON-NLS-1$
-		BOGATYR_PUBLISHER.setName("SiSprocom GmbH"); //$NON-NLS-1$
-		BOGATYR_PUBLISHER.setMail("info@sisprocom.ch"); //$NON-NLS-1$
 		try {
-			BOGATYR_MANUFACTURER.setURL(new URL("http://www.sisprocom.ch/bogatyr")); //$NON-NLS-1$
-			BOGATYR_OWNER.setURL(new URL("http://www.sisprocom.ch")); //$NON-NLS-1$
-			BOGATYR_PUBLISHER.setURL(new URL("http://www.sisprocom.ch")); //$NON-NLS-1$
+			BOGATYR.setManufacturer(new ManufacturerImpl("SiSprocom GmbH", "laubenberger@gmail.com", new URL("http://www.sisprocom.ch/bogatyr"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			BOGATYR.setOwner(new OwnerImpl("SiSprocom GmbH", "info@sisprocom.ch", new URL("http://www.sisprocom.ch"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			BOGATYR.setPublisher(new PublisherImpl("SiSprocom GmbH", "info@sisprocom.ch", new URL("http://www.sisprocom.ch"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		} catch (MalformedURLException ex) {
 			// should never happen!
 			ex.printStackTrace();

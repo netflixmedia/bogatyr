@@ -41,10 +41,12 @@ import ch.sisprocom.bogatyr.misc.extendedObject.ExtendedObject;
  * Defines the methods for all models.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100217)
  * @since 0.9.0
  */
 public interface Model extends ExtendedObject, Serializable, HolderObserver {
+	String MEMBER_INSTANTIATION_DATE = "instantiationDate"; //$NON-NLS-1$
+	
 	/**
      * Sets the instantiation date of the model.
      * 
