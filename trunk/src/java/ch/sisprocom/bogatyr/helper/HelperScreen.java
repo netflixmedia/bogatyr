@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009-2010 by SiSprocom GmbH.
+ * Copyright (c) 2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -29,20 +29,42 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.model.misc;
+package ch.sisprocom.bogatyr.helper;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.image.ColorModel;
 
-import ch.sisprocom.bogatyr.model.Model;
+
 
 /**
- * The interface for the owner model.
+ * This is a helper class for screens.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100301)
- * @since 0.9.0
+ * @version 0.9.1 (20100228)
+ * @since 0.9.1
  */
-@XmlJavaTypeAdapter(OwnerImpl.XmlAdapter.class)
-public interface Owner extends Model, Address, Email, Website {
-	//atm nothing
+public abstract class HelperScreen {
+
+	public static Dimension getCurrentScreenSize() {
+		return Toolkit.getDefaultToolkit().getScreenSize();
+	}
+
+	public static ColorModel getCurrentColorModel() {
+		return Toolkit.getDefaultToolkit().getColorModel();
+	}
+
+//	public static ColorModel getCurrentNumberOfColors() {
+//		return Toolkit.getDefaultToolkit().getColorModel().getColorSpace();
+//	}
+
+	public static int getCurrentScreenResolution() {
+		return Toolkit.getDefaultToolkit().getScreenResolution();
+	}
+
+	public static boolean isValidScreenSize(final Dimension minSize) {
+		final Dimension resolution = getCurrentScreenSize();
+		
+		return resolution.width >= minSize.width && resolution.height >= minSize.height;
+	}
 }

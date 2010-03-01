@@ -31,8 +31,6 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.misc;
 
-import java.net.URL;
-
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ch.sisprocom.bogatyr.model.Model;
@@ -41,21 +39,10 @@ import ch.sisprocom.bogatyr.model.Model;
  * The interface for the publisher model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100217)
+ * @version 0.9.1 (20100301)
  * @since 0.9.0
  */
 @XmlJavaTypeAdapter(PublisherImpl.XmlAdapter.class)
-public interface Publisher extends Model {
-    String MEMBER_NAME 	  = "name"; //$NON-NLS-1$
-    String MEMBER_URL  	  = "url"; //$NON-NLS-1$
-    String MEMBER_MAIL 	  = "mail"; //$NON-NLS-1$
-
-    String getName();
-    void setName(String name);
-
-    URL getURL();
-    void setURL(URL url);
-
-    String getMail();
-    void setMail(String mail);
+public interface Publisher extends Model, Address, Email, Website {
+	//atm nothing
 }

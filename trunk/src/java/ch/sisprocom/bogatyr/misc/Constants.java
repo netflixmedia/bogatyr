@@ -51,12 +51,12 @@ import ch.sisprocom.bogatyr.model.misc.PublisherImpl;
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100217)
+ * @version 0.9.1 (20100301)
  * @since 0.7.0
  */
 public abstract class Constants {
 	//Bogatyr specific
-	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.91"), 236, HelperTime.getDate(17, 2, 2010), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.91"), 237, HelperTime.getDate(17, 2, 2010), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
@@ -175,9 +175,9 @@ public abstract class Constants {
 
 	static {
 		try {
-			BOGATYR.setManufacturer(new ManufacturerImpl("SiSprocom GmbH", "laubenberger@gmail.com", new URL("http://www.sisprocom.ch/bogatyr"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			BOGATYR.setOwner(new OwnerImpl("SiSprocom GmbH", "info@sisprocom.ch", new URL("http://www.sisprocom.ch"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			BOGATYR.setPublisher(new PublisherImpl("SiSprocom GmbH", "info@sisprocom.ch", new URL("http://www.sisprocom.ch"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			BOGATYR.setManufacturer(new ManufacturerImpl("SiSprocom GmbH", "Grubenstrasse 9", "8045", "Zürich", "Switzerland", "laubenberger@gmail.com", new URL("http://www.sisprocom.ch/bogatyr"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			BOGATYR.setOwner(new OwnerImpl("SiSprocom GmbH", "Grubenstrasse 9", "8045", "Zürich", "Switzerland", "info@sisprocom.ch", new URL("http://www.sisprocom.ch"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			BOGATYR.setPublisher(new PublisherImpl("SiSprocom GmbH", "Grubenstrasse 9", "8045", "Zürich", "Switzerland", "info@sisprocom.ch", new URL("http://www.sisprocom.ch"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		} catch (MalformedURLException ex) {
 			// should never happen!
 			ex.printStackTrace();

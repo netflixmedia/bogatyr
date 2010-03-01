@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009-2010 by SiSprocom GmbH.
+ * Copyright (c) 2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,18 +31,17 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.misc;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import ch.sisprocom.bogatyr.model.Model;
 
 /**
- * The interface for the owner model.
+ * The interface definition for an email.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100301)
- * @since 0.9.0
+ * @version 0.9.1 (20100228)
+ * @since 0.9.1
  */
-@XmlJavaTypeAdapter(OwnerImpl.XmlAdapter.class)
-public interface Owner extends Model, Address, Email, Website {
-	//atm nothing
+public interface Email {
+    String MEMBER_EMAIL = "email"; //$NON-NLS-1$
+
+    String getEmail();
+    void setEmail(String email);
 }

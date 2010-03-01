@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009-2010 by SiSprocom GmbH.
+ * Copyright (c) 2010 by SiSprocom GmbH.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,18 +31,31 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.model.misc;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ch.sisprocom.bogatyr.model.Model;
 
 /**
- * The interface for the owner model.
+ * The interface for the person model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100301)
- * @since 0.9.0
+ * @version 0.9.1 (20100228)
+ * @since 0.9.1
  */
-@XmlJavaTypeAdapter(OwnerImpl.XmlAdapter.class)
-public interface Owner extends Model, Address, Email, Website {
-	//atm nothing
+@XmlJavaTypeAdapter(PersonImpl.XmlAdapter.class)
+public interface Person extends Model, Address, Email, Website {
+    String MEMBER_FORENAME = "forename"; //$NON-NLS-1$
+    String MEMBER_BIRTHDAY = "birthday"; //$NON-NLS-1$
+    String MEMBER_GENDER = "gender"; //$NON-NLS-1$
+
+    String getForename();
+    void setForename(String forename);
+
+    Date getBirthday();
+    void setBirthday(Date birthday);
+    
+    Gender getGender();
+    void setGender(Gender gender);
 }
