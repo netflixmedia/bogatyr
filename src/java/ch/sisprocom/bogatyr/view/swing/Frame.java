@@ -31,18 +31,19 @@
  *******************************************************************************/
 package ch.sisprocom.bogatyr.view.swing;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.GraphicsConfiguration;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
 import java.awt.Image;
 
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 import ch.sisprocom.bogatyr.helper.HelperObject;
+import ch.sisprocom.bogatyr.helper.HelperString;
 import ch.sisprocom.bogatyr.helper.HelperSwing;
 import ch.sisprocom.bogatyr.misc.Displayable;
 import ch.sisprocom.bogatyr.misc.Fadeable;
@@ -52,7 +53,7 @@ import ch.sisprocom.bogatyr.misc.Fadeable;
  * This is an extended JFrame.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100228)
  * @since 0.2.0
  */
 public class Frame extends JFrame implements Fadeable, Displayable {
@@ -140,26 +141,20 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 	@Override
     public void setFading(final boolean isFading) {
 		this.isFading = isFading;
-		
-		final Container panelGlass = (Container) getGlassPane();
-		panelGlass.removeAll();
-		
-		panelGlass.setVisible(isFading);
-		
-		if (isFading) {
-	        panelGlass.setLayout(new GridBagLayout());
+
+		if (HelperString.contains(UIManager.getLookAndFeel().toString(), "swing.plaf") || HelperString.contains(UIManager.getLookAndFeel().toString(), "apple.laf")) { //do the fade-effect only with original lafs
+			final Container containerGlass = (Container) getGlassPane();
+			containerGlass.removeAll();	
+			containerGlass.setVisible(isFading);
 	
-	        final GridBagConstraints gbc = new GridBagConstraints();
-	        gbc.fill    = GridBagConstraints.BOTH;
-	        gbc.weighty = 1.0D;
-	        gbc.weightx = 1.0D;
+			if (isFading) {
+		        containerGlass.setLayout(new BorderLayout());
+		        containerGlass.add(new Panel(colorFader), BorderLayout.CENTER);
+			}
 	
-//	    if (isFading) {
-	        panelGlass.add(new Panel(colorFader), gbc);
+	        validate();
+	        repaint();
 		}
-		
-        validate();
-        repaint();
 	}
 	
 	@Override

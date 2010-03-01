@@ -32,12 +32,15 @@
 package ch.sisprocom.bogatyr.helper;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JSlider;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import ch.sisprocom.bogatyr.misc.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
@@ -48,7 +51,7 @@ import ch.sisprocom.bogatyr.model.misc.Platform;
  * This is a helper class for Swing.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100301)
  * @since 0.9.0
  */
 public abstract class HelperSwing {
@@ -178,5 +181,15 @@ public abstract class HelperSwing {
         
     	return new BigDecimal(slider.getValue()).multiply(internalTick, Constants.DEFAULT_MATHCONTEXT);
     }
-
+    
+    /**
+     * Returns a {@link Collection} containing all available system {@link LookAndFeelInfo}.
+     *
+     * @return {@link Collection} containing all look and feels
+     * @see LookAndFeelInfo
+     * @since 0.9.1
+     */
+    public static Collection<LookAndFeelInfo> getAvailableLookAndFeels() {
+		return Arrays.asList(UIManager.getInstalledLookAndFeels());
+	}
 }
