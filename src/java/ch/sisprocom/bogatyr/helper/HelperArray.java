@@ -37,6 +37,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.sisprocom.bogatyr.misc.Constants;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
@@ -50,6 +54,8 @@ import ch.sisprocom.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * @since 0.7.0
  */
 public abstract class HelperArray {
+	private static final Logger log = LoggerFactory.getLogger(HelperArray.class);
+
 	public static final Class<?>[] EMPTY_ARRAY_CLASS 		 = new Class[0];
 	public static final Object[] EMPTY_ARRAY_OBJECT 		 = new Object[0];
 	public static final String[] EMPTY_ARRAY_STRING 		 = new String[0];
@@ -72,7 +78,12 @@ public abstract class HelperArray {
      * @since 0.7.0
      */	
 	public static boolean isValid(final Object[] arg) { //$JUnit$
-        return !(null == arg || 0 == arg.length);
+		log.debug(HelperLog.methodStart(arg));
+		
+		final boolean result = !(null == arg || 0 == arg.length);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 	
 	/**
