@@ -1028,4 +1028,22 @@ public abstract class HelperIO {
     	}
     	return fileName;
     }
+    
+	/**
+     * Get the file extension from a given {@link String}.
+     * 
+     * @param fileName to get the extension
+     * @return {@link String} extension
+     * @since 0.9.1
+     */
+    public static String getFileExtension(final String fileName) {
+        if (null == fileName) {
+            throw new RuntimeExceptionIsNull("fileName"); //$NON-NLS-1$
+        }
+
+    	if (fileName.contains(HelperString.PERIOD)) {
+    		return fileName.substring(fileName.lastIndexOf(HelperString.PERIOD));
+    	}
+    	return fileName;
+    }
 }

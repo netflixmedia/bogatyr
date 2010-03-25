@@ -263,6 +263,21 @@ public abstract class HelperObject {
         }
     }
 	
+    /**
+     * Quotes a given {@link Object} for different purposes (e.g. logging).
+     * 
+     * @param object to quote
+     * @return quoted object string
+     * @since 0.9.1
+     */
+    public static String quote(final Object object) {
+		if (null == object) {
+			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
+		}
+
+		return HelperString.SINGLE_QUOTE + String.valueOf(object) + HelperString.SINGLE_QUOTE;
+    }
+
     
     /*
      * Private methods
