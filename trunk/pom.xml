@@ -1,0 +1,344 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ch.customcode.bogatyr</groupId>
+	<artifactId>Bogatyr</artifactId>
+	<packaging>jar</packaging>
+	<version>0.91</version>
+	<name>Bogatyr</name>
+	<description>Bogatyr Java library</description>
+	<url>http://code.google.com/p/bogatyr/</url>
+	<inceptionYear>2007</inceptionYear>
+
+	<organization>
+		<name>Custom Code</name>
+		<url>http://www.customcode.ch</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>1</id>
+			<name>Stefan Laubenberger</name>
+			<organization>Custom Code</organization>
+			<email>s.laubenberger@customcode.ch</email>
+			<timezone>1</timezone>
+			<!--<url>http://www.laubenberger.net</url>-->
+			<roles>
+				<role>architect</role>
+				<role>tester</role>
+				<role>developer</role>
+			</roles>
+			<properties>
+				<gtalk>laubenberger@gmail.com</gtalk>
+			</properties>
+		</developer>
+		<developer>
+			<id>2</id>
+			<name>Silvan Spross</name>
+			<organization>Custom Code</organization>
+			<email>s.spross@customcode.ch</email>
+			<timezone>1</timezone>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>3</id>
+			<name>Roman Wuersch</name>
+			<organization>Custom Code</organization>
+			<email>r.wuersch@customcode.ch</email>
+			<timezone>1</timezone>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<!--<contributors>-->
+	<!--<contributor>-->
+	<!--<name>Curdin Dalbert</name>-->
+	<!--<email>curdin.dalbert@gmail.com</email>-->
+	<!--<timezone>1</timezone>-->
+	<!--<url>http://noellemarie.com</url>-->
+	<!--<organization>ZKB</organization>-->
+	<!--<organizationUrl>http://www.zkb.ch</organizationUrl>-->
+	<!--<roles>-->
+	<!--<role>developer</role>-->
+	<!--</roles>-->
+	<!--<properties>-->
+	<!--<gtalk>some.name@gmail.com</gtalk>-->
+	<!--</properties>-->
+	<!--</contributor>-->
+	<!--</contributors>-->
+
+	<licenses>
+		<license>
+			<name>GNU General Public License, Version 2.0</name>
+			<url>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html</url>
+			<distribution>manual</distribution>
+		</license>
+	</licenses>
+
+	<properties>
+		<!-- default env when no profile is specified -->
+		<env>DEV</env>
+	</properties>
+
+	<!-- Source control -->
+	<scm>
+		<connection>scm:svn:https://bogatyr.googlecode.com/svn/trunk/</connection>
+		<developerConnection>scm:svn:https://bogatyr.googlecode.com/svn/trunk/</developerConnection>
+	</scm>
+
+	<!-- Continuum integration -->
+	<!--<ciManagement>-->
+	<!--<system>continuum</system>-->
+	<!--
+		<url>https://www.customcode.ch/continuum/groupSummary.action</url>
+	-->
+	<!--<notifiers>-->
+	<!--<notifier>-->
+	<!--<configuration>-->
+	<!--<type>mail</type>-->
+	<!--<sendOnError>true</sendOnError>-->
+	<!--<sendOnFailure>true</sendOnFailure>-->
+	<!--<sendOnSuccess>false</sendOnSuccess>-->
+	<!--<sendOnWarning>false</sendOnWarning>-->
+	<!--<address>s.laubenberger@customcode.ch</address>-->
+	<!--</configuration>-->
+	<!--</notifier>-->
+	<!--</notifiers>-->
+	<!--</ciManagement>-->
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk16</artifactId>
+			<version>1.45</version>
+		</dependency>
+		<dependency>
+			<groupId>org.xhtmlrenderer</groupId>
+			<artifactId>core-renderer</artifactId>
+			<version>R8pre2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.5.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.5.11</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>bogatyr</finalName>
+		<defaultGoal>compile</defaultGoal>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<!--<version>2.3</version>-->
+					<configuration>
+						<!-- specify UTF-8, ISO-8859-1 or any other file encoding -->
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+						<debug>false</debug>
+						<optimize>true</optimize>
+					</configuration>
+				</plugin>
+
+				<!--<plugin>-->
+				<!--<groupId>org.codehaus.mojo</groupId>-->
+				<!--<artifactId>exec-maven-plugin</artifactId>-->
+				<!--<executions>-->
+				<!--<execution>-->
+				<!--<goals>-->
+				<!--<goal>java</goal>-->
+				<!--</goals>-->
+				<!--</execution>-->
+				<!--</executions>-->
+				<!--<configuration>-->
+				<!--<mainClass>hello.HelloWorld</mainClass>-->
+				<!--</configuration>-->
+				<!--</plugin>-->
+
+				<!-- Run JUnit tests -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<configuration>
+						<testFailureIgnore>true</testFailureIgnore>
+					</configuration>
+				</plugin>
+
+				<!--
+					The delivery plugin is used to deploy the artifact to perforce.
+					Perforce is used by the configuration management and for deployment
+				-->
+				<!--<plugin>-->
+					<!--<groupId>ch.customcode.maven.plugin</groupId>-->
+					<!--<artifactId>delivery-plugin</artifactId>-->
+					<!--<configuration>-->
+						<!--<p4client>continuum.bogatyr.DEV_JAR</p4client>-->
+						<!--<p4work>/usr/tmp/P4_repository/JAR</p4work>-->
+					<!--</configuration>-->
+				<!--</plugin>-->
+			</plugins>
+		</pluginManagement>
+
+		<filters>
+			<filter>src/main/filters/filters-${env}.properties</filter>
+		</filters>
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>DEV</id>
+			<properties>
+				<env>DEV</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>QA</id>
+			<properties>
+				<env>QA</env>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>PROD</id>
+			<properties>
+				<env>PROD</env>
+			</properties>
+		</profile>
+	</profiles>
+
+	<reporting>
+		<plugins>
+
+			<!--
+				The Checkstyle Plugin generates a report regarding the code style
+			-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<configuration>
+					<!-- location of the current checkstyle definition  -->
+					<configLocation>/build/checkstyle.xml</configLocation>
+				</configuration>
+			</plugin>
+
+			<!-- Project Information -->
+			<plugin>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+			</plugin>
+
+			<!-- Code coverage for Junit tests -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.3</version>
+			</plugin>
+
+			<!-- Generating FindBugs Report -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+					<xmlOutput>true</xmlOutput>
+					<threshold>Low</threshold>
+					<effort>Max</effort>
+					<debug>true</debug>
+					<findbugsXmlOutput>true</findbugsXmlOutput>
+				</configuration>
+			</plugin>
+
+			<!-- PMD code analysis report -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<targetJdk>1.6</targetJdk>
+					<linkXref>true</linkXref>
+					<sourceEncoding>UTF-8</sourceEncoding>
+					<rulesets>
+						<ruleset>/rulesets/basic.xml</ruleset>
+						<ruleset>/rulesets/braces.xml</ruleset>
+						<ruleset>/rulesets/codesize.xml</ruleset>
+						<ruleset>/rulesets/clone.xml</ruleset>
+						<ruleset>/rulesets/design.xml</ruleset>
+						<ruleset>/rulesets/finalizers.xml</ruleset>
+						<ruleset>/rulesets/imports.xml</ruleset>
+						<ruleset>/rulesets/strings.xml</ruleset>
+						<ruleset>/rulesets/migrating_to_15.xml</ruleset>
+						<ruleset>/rulesets/optimizations.xml</ruleset>
+						<ruleset>/rulesets/sunsecure.xml</ruleset>
+						<ruleset>/rulesets/unusedcode.xml</ruleset>
+					</rulesets>
+				</configuration>
+			</plugin>
+
+			<!--
+				The Surefire Report Plugin renders the html report about the junit
+				test results
+			-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>surefire-report-maven-plugin</artifactId>
+				<version>2.5</version>
+			</plugin>
+
+
+			<!--
+				The NCSS Report Plugin counts the non commented source statement
+			-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>javancss-maven-plugin</artifactId>
+				<!--<version>2.0-beta-2</version>-->
+			</plugin>
+
+			<!-- plugin for creating a project website -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<!-- site:deploy may fail with 'unzip error' if not set here -->
+				<configuration>
+					<unzipCommand>/usr/bin/unzip -o &gt; err.txt</unzipCommand>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>
