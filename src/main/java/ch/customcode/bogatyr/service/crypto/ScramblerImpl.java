@@ -1,0 +1,235 @@
+/*
+ * Copyright (c) 2007-2010 by Custom Code GmbH.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the General Public License v2.0.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * See the GNU General Public License for more details:
+ * <http://www.gnu.org/licenses>
+ *
+ * This distribution is available at:
+ * <http://code.google.com/p/bogatyr/>
+ * <http://www.customcode.ch/bogatyr/>
+ *
+ * Contact information:
+ * Custom Code GmbH
+ * Grubenstrasse 9
+ * CH-8045 Zuerich
+ *
+ * <http://www.customcode.ch>
+ *
+ * <s.laubenberger@customcode.ch>
+ * <s.spross@customcode.ch>
+ */
+package ch.customcode.bogatyr.service.crypto;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import ch.customcode.bogatyr.misc.Constants;
+import ch.customcode.bogatyr.helper.HelperArray;
+import ch.customcode.bogatyr.helper.HelperEnvironment;
+import ch.customcode.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
+import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsEquals;
+import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+import ch.customcode.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+import ch.customcode.bogatyr.service.ServiceAbstract;
+
+
+/**
+ * This is a class for obfuscating data with CFB.
+ * 
+ * @author Stefan Laubenberger
+ * @version 0.9.1 (20100216)
+ * @since 0.3.0
+ */
+public class ScramblerImpl extends ServiceAbstract implements Scrambler {
+
+	
+	/*
+     * Private methods
+     */
+	/**
+	 * Obfuscate the data.
+	 * 
+	 * @param input data (byte-array) to obfuscate
+	 * @param pattern for obfuscating (region: -128 - 127)
+     * @return obfuscated data
+     * @since 0.3.0
+	 */
+	private static byte[] obfuscate(final byte[] input, final byte pattern) {
+		if (!HelperArray.isValid(input)) {
+			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+		}
+        if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
+        }
+
+		final byte[] result = new byte[input.length];
+		
+		result[0] = (byte)(input[0] ^ (int) pattern);
+		for (int ii = 1; ii < input.length; ii++) {
+			result[ii] = (byte)(input[ii] ^ (int) result[ii-1]);
+		}
+		return result;
+	}
+
+	/**
+	 * Unobfuscate the data.
+	 * 
+	 * @param input data (byte-array) to unobfuscate
+	 * @param pattern for unobfuscating (region: -128 - 127)
+     * @return unobfuscated data
+     * @since 0.3.0
+	 */
+	private static byte[] unobfuscate(final byte[] input, final byte pattern) {
+		if (!HelperArray.isValid(input)) {
+			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+		}
+        if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
+        }
+
+		final byte[] result = new byte[input.length];
+		
+		result[0] = (byte)(input[0] ^ (int) pattern);
+		for (int ii = 1; ii < input.length; ii++) {
+			result[ii] = (byte)(input[ii] ^ (int) input[ii-1]);
+		}
+		return result;
+	}
+
+	private static void obfuscate(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
+        if (null == input) {
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+        }
+		if (null == output) {
+            throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
+        }
+		if (input.equals(output)) {
+			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+        if (1 > bufferSize) {
+            throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
+        }
+        if (bufferSize > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
+        }
+		
+        final byte[] buffer = new byte[bufferSize];
+
+        InputStream is = null;
+        OutputStream os = null;
+
+        try {
+            is = new FileInputStream(input);
+            os = new FileOutputStream(output);
+            int offset;
+            byte lastByte = pattern;
+            while (0 < (offset = is.read(buffer))) {
+
+                final byte[] result = obfuscate(buffer, lastByte);
+            	
+            	os.write(result, 0, offset);
+
+            	lastByte = result[result.length - 1];
+            }
+            os.flush();
+        } finally {
+            if (null != is) {
+                is.close();
+            }
+            if (null != os) {
+                os.close();
+            }
+        }
+	}
+	
+
+	private static void unobfuscate(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
+        if (null == input) {
+            throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+        }
+		if (null == output) {
+            throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
+        }
+		if (input.equals(output)) {
+			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+        if (1 > bufferSize) {
+            throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
+        }
+        if (bufferSize > HelperEnvironment.getMemoryFree()) {
+            throw new RuntimeExceptionExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
+        }
+
+		final byte[] buffer = new byte[bufferSize];
+		
+		InputStream is = null;
+		OutputStream os =  null;
+
+		try {
+            is = new FileInputStream(input);
+            os = new FileOutputStream(output);
+            int offset;
+            byte lastByte = pattern;
+            while (0 < (offset = is.read(buffer))) {
+                
+            	os.write(unobfuscate(buffer, lastByte), 0, offset);
+            	
+            	lastByte = buffer[buffer.length - 1];
+            }
+            os.flush();
+        } finally {
+            if (null != is) {
+                is.close();
+            }
+            if (null != os) {
+                os.close();
+            }
+        }
+	}
+
+	
+	/*
+	 * Implemented methods
+	 */
+	@Override
+    public byte[] scramble(final byte[] input, final byte pattern) { //$JUnit$
+		return obfuscate(input, pattern);
+	}
+
+	@Override
+    public byte[] unscramble(final byte[] input, final byte pattern) { //$JUnit$
+		return unobfuscate(input, pattern);
+	}
+
+	@Override
+	public void scramble(final File input, final File output, final byte pattern) throws IOException {
+		obfuscate(input, output, pattern, Constants.DEFAULT_FILE_BUFFER_SIZE);
+	}
+
+	@Override
+	public void scramble(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
+		obfuscate(input, output, pattern, bufferSize);
+	}
+
+	@Override
+	public void unscramble(final File input, final File output, final byte pattern) throws IOException {
+		unobfuscate(input, output, pattern, Constants.DEFAULT_FILE_BUFFER_SIZE);
+	}
+	
+	@Override
+	public void unscramble(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
+		unobfuscate(input, output, pattern, bufferSize);
+	}
+}
