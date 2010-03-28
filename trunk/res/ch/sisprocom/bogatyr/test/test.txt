@@ -1,2 +1,0 @@
-Hello world!
-This is a Bogatyr test file for open, edit and print with the default system application.

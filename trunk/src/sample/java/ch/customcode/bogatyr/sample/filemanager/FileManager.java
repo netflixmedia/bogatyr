@@ -29,19 +29,19 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.sample.filemanager;
-
-import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.service.localizer.Localizer;
-import ch.sisprocom.bogatyr.service.localizer.LocalizerFile;
-import ch.sisprocom.bogatyr.service.property.Property;
-import ch.sisprocom.bogatyr.service.property.PropertyImpl;
+package ch.customcode.bogatyr.sample.filemanager;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+
+import ch.customcode.bogatyr.controller.ApplicationAbstract;
+import ch.customcode.bogatyr.helper.HelperIO;
+import ch.customcode.bogatyr.helper.HelperString;
+import ch.customcode.bogatyr.service.localizer.Localizer;
+import ch.customcode.bogatyr.service.localizer.LocalizerFile;
+import ch.customcode.bogatyr.service.property.Property;
+import ch.customcode.bogatyr.service.property.PropertyImpl;
 
 
 /**
@@ -52,7 +52,7 @@ import java.io.IOException;
  */
 public class FileManager extends ApplicationAbstract {
 	// Fixed parameter - e.g. this could be an argument
-	private static final String	ARG_PROPERTY_LOCATION = "cfg/ch/sisprocom/bogatyr/sample/filemanager/standard.properties"; //$NON-NLS-1$
+	private static final String	ARG_PROPERTY_LOCATION = "src/sample/configuration/ch/customcode/bogatyr/sample/filemanager/standard.properties"; //$NON-NLS-1$
 
 	// Properties
 	private static final String	PROPERTY_LOCALIZER_BASE = "FileManager.localizerbase"; //$NON-NLS-1$

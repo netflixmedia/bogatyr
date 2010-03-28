@@ -29,18 +29,18 @@
  * <s.spross@sisprocom.ch>
  * 
  *******************************************************************************/
-package ch.sisprocom.bogatyr.sample.helloworld;
-
-import ch.sisprocom.bogatyr.controller.ApplicationAbstract;
-import ch.sisprocom.bogatyr.service.localizer.LocalizerFile;
-import ch.sisprocom.bogatyr.service.localizer.Localizer;
-import ch.sisprocom.bogatyr.service.property.PropertyImpl;
-import ch.sisprocom.bogatyr.service.property.Property;
-import ch.sisprocom.bogatyr.helper.HelperString;
+package ch.customcode.bogatyr.sample.helloworld;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
+
+import ch.customcode.bogatyr.controller.ApplicationAbstract;
+import ch.customcode.bogatyr.helper.HelperString;
+import ch.customcode.bogatyr.service.localizer.Localizer;
+import ch.customcode.bogatyr.service.localizer.LocalizerFile;
+import ch.customcode.bogatyr.service.property.Property;
+import ch.customcode.bogatyr.service.property.PropertyImpl;
 
 
 /**
@@ -52,7 +52,7 @@ import java.util.Locale;
  */
 public class HelloWorld extends ApplicationAbstract { 
 	// Fixed parameter - e.g. this could be an argument
-	private static final String	ARG_PROPERTY_LOCATION = "cfg/ch/sisprocom/bogatyr/sample/helloworld/standard.properties"; //$NON-NLS-1$
+	private static final String	ARG_PROPERTY_LOCATION = "src/sample/configuration/ch/customcode/bogatyr/sample/helloworld/standard.properties"; //$NON-NLS-1$
 	
 	// Properties
 	private static final String	PROPERTY_LOCALIZER_BASE = "HelloWorld.localizerbase"; //$NON-NLS-1$
