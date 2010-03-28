@@ -29,7 +29,7 @@
  * <s.spross@sisprocom.ch>
  *
  *******************************************************************************/
-package ch.sisprocom.util;
+package ch.customcode.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,20 +40,20 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
-import ch.sisprocom.bogatyr.helper.HelperEnvironment;
-import ch.sisprocom.bogatyr.helper.HelperIO;
-import ch.sisprocom.bogatyr.helper.HelperString;
-import ch.sisprocom.bogatyr.helper.launcher.LauncherFile;
+import ch.customcode.bogatyr.helper.HelperEnvironment;
+import ch.customcode.bogatyr.helper.HelperIO;
+import ch.customcode.bogatyr.helper.HelperString;
+import ch.customcode.bogatyr.helper.launcher.LauncherFile;
 
 /**
- * This is a class to parse Java files and check if an example documentation is available.
- * To find such classes and methods, it must be marked with $Example$.
+ * This is a class to parse Java files and check if JUnit tests are available.
+ * To find such classes and methods, it must be marked with $JUnit$.
  *
  * @author Stefan Laubenberger
  * @version 20091210
  */
-public class CheckExample {
-	private static final String MARKER = "$Example$"; //$NON-NLS-1$
+public class CheckJUnit {
+	private static final String MARKER = "$JUnit$"; //$NON-NLS-1$
 	private static final String EXTENSION_CSV = ".csv"; //$NON-NLS-1$
 	private static final String EXTENSION_JAVA = ".java"; //$NON-NLS-1$
 	
@@ -61,7 +61,7 @@ public class CheckExample {
 	private static final String QUALIFIER_PROTECTED = "protected"; //$NON-NLS-1$
 	private static final String QUALIFIER_CLASS = "class"; //$NON-NLS-1$
 	private static final String QUALIFIER_INTERFACE = "interface"; //$NON-NLS-1$
-	
+
 	/**
 	 * @param args
 	 */
@@ -69,18 +69,18 @@ public class CheckExample {
 //		list(true);
 		list(false);
 	}
-	
+
 	/*
-	 * Lists all classes (and methods) with or without example documentation tests.
+	 * Lists all classes (and methods) with or without JUnit tests
 	 */
-	private static void list(final boolean isExampleAvailable) {
+	private static void list(final boolean isTested) {
 		final JFileChooser fc = new JFileChooser();
 		fc.addChoosableFileFilter(new FileFilterCsv());
 		
-		if (isExampleAvailable) {
-			fc.setSelectedFile(new File(HelperEnvironment.getUserHomeDirectory(), "ExampleAvailable" + EXTENSION_CSV)); //$NON-NLS-1$
+		if (isTested) {
+			fc.setSelectedFile(new File(HelperEnvironment.getUserHomeDirectory(), "JUnitTested" + EXTENSION_CSV)); //$NON-NLS-1$
 		} else {
-			fc.setSelectedFile(new File(HelperEnvironment.getUserHomeDirectory(), "ExampleNotAvailable" + EXTENSION_CSV)); //$NON-NLS-1$
+			fc.setSelectedFile(new File(HelperEnvironment.getUserHomeDirectory(), "JUnitUntested" + EXTENSION_CSV)); //$NON-NLS-1$
 		}
 		
         if (JFileChooser.APPROVE_OPTION == fc.showSaveDialog(null)) {
@@ -88,15 +88,15 @@ public class CheckExample {
         	output.delete();
         	
         	try {
-        	    final java.io.FileFilter filter = new java.io.FileFilter() { 
+           	    final java.io.FileFilter filter = new java.io.FileFilter() { 
         	    	public boolean accept(final File file) {
         	    		return HelperString.endsWith(file.getName(), EXTENSION_JAVA) && !HelperString.contains(file.getName(), "svn"); //$NON-NLS-1$
         	    	} 
         	    };
         	    
         	    final Collection<File>listJava = HelperIO.getFiles(HelperEnvironment.getUserDirectory(), filter);
-	
-				HelperIO.writeLine(output, HelperString.concatenate(HelperString.SEMICOLON, "Class", "Method/Variable")); //$NON-NLS-1$ //$NON-NLS-2$
+		
+				HelperIO.writeLine(output, HelperString.concatenate(HelperString.SEMICOLON, "Class", "Method/Variable"));  //$NON-NLS-1$//$NON-NLS-2$
 				
 				for (final File file : listJava) {
 					if (file.getAbsolutePath().contains("/java/")) { //ignore all sources except the java package //$NON-NLS-1$
@@ -105,7 +105,7 @@ public class CheckExample {
 				    	while (scanner.hasNextLine()) {
 				    		final String line = scanner.nextLine();
 				    		
-				    		if (isExampleAvailable) {
+				    		if (isTested) {
 					    		if (null != line && line.contains(MARKER)) {
 					    			HelperIO.writeLine(output, HelperString.concatenate(HelperString.SEMICOLON, file.getAbsolutePath(), line));
 					    		}
@@ -133,7 +133,7 @@ public class CheckExample {
         	}
         }
 	}
-	
+
 	
 	/*
 	 * Inner classes
