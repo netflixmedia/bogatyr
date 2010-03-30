@@ -55,8 +55,8 @@ import ch.customcode.bogatyr.service.property.Property;
 /**
  * The implementation of the application model.
  * 
- * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 0.9.1 (20100217)
+ * @author Stefan Laubenberger
+ * @version 0.9.1 (20100331)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelApplication")

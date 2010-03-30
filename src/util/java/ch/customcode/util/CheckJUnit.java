@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright (c) 2009 by SiSprocom GmbH.
+/*
+ * Copyright (c) 2007-2010 by Custom Code GmbH.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -9,26 +9,22 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * See the GNU General Public License for more details:
- * ----------------------------------------------------
  * <http://www.gnu.org/licenses>
  *
  * This distribution is available at:
- * ----------------------------------
  * <http://code.google.com/p/bogatyr/>
- * <http://www.sisprocom.ch/bogatyr/>
+ * <http://www.customcode.ch/bogatyr/>
  *
  * Contact information:
- * --------------------
- * SiSprocom GmbH
- * Grubenstrasse 9 
+ * Custom Code GmbH
+ * Grubenstrasse 9
  * CH-8045 Zuerich
  *
- * <http://www.sisprocom.ch>
+ * <http://www.customcode.ch>
  *
- * <s.laubenberger@sisprocom.ch>
- * <s.spross@sisprocom.ch>
- *
- *******************************************************************************/
+ * <s.laubenberger@customcode.ch>
+ * <s.spross@customcode.ch>
+ */
 package ch.customcode.util;
 
 import java.io.File;
@@ -50,7 +46,7 @@ import ch.customcode.bogatyr.helper.launcher.LauncherFile;
  * To find such classes and methods, it must be marked with $JUnit$.
  *
  * @author Stefan Laubenberger
- * @version 20091210
+ * @version 20100331
  */
 public class CheckJUnit {
 	private static final String MARKER = "$JUnit$"; //$NON-NLS-1$
@@ -99,7 +95,7 @@ public class CheckJUnit {
 				HelperIO.writeLine(output, HelperString.concatenate(HelperString.SEMICOLON, "Class", "Method/Variable"));  //$NON-NLS-1$//$NON-NLS-2$
 				
 				for (final File file : listJava) {
-					if (file.getAbsolutePath().contains("/java/")) { //ignore all sources except the java package //$NON-NLS-1$
+					if (file.getAbsolutePath().contains("/main/java/")) { //ignore all sources except the java package //$NON-NLS-1$
 						final Scanner scanner = new Scanner(file);
 						
 				    	while (scanner.hasNextLine()) {

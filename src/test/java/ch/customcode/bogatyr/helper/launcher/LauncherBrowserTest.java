@@ -40,13 +40,13 @@ import ch.customcode.bogatyr.helper.launcher.LauncherBrowser;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090610
+ * @version 20100331
  */
 public class LauncherBrowserTest {
 	@Test
 	public void testBrowse() {
 //		try {
-//			LauncherBrowser.browse(new URI("http://www.sisprocom.ch/bogatyr/")); //$NON-NLS-1$
+//			LauncherBrowser.browse(new URI("http://www.customcode.ch/bogatyr/")); //$NON-NLS-1$
 //		} catch (Exception ex) {fail(ex.getMessage());}
 //
 //		try {

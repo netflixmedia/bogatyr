@@ -41,7 +41,7 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher starts the system browser and displays an URI.
  *
  * @author Stefan Laubenberger
- * @version 0.8.0 (20090610)
+ * @version 0.9.1 (20100331)
  * @since 0.2.0
  */
 public abstract class LauncherBrowser {
@@ -49,7 +49,7 @@ public abstract class LauncherBrowser {
 	/**
 	 * Displays an {@link URI} in the default browser application.
 	 *
-	 * @param uri for the browser (e.g. "http://www.sisprocom.ch/")
+	 * @param uri for the browser (e.g. "http://www.customcode.ch/")
 	 * @throws IOException 
 	 * @see URI
 	 * @since 0.2.0
@@ -69,7 +69,7 @@ public abstract class LauncherBrowser {
 	/**
 	 * Displays an {@link String} in the default browser application.
 	 *
-	 * @param url for the browser (e.g. "www.sisprocom.ch")
+	 * @param url for the browser (e.g. "www.customcode.ch")
 	 * @throws IOException 
 	 * @throws URISyntaxException
 	 * @since 0.2.0

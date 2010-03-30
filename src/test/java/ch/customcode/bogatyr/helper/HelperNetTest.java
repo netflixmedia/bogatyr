@@ -46,7 +46,7 @@ import ch.customcode.bogatyr.helper.HelperNet;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090610
+ * @version 20100331
  */
 public class HelperNetTest {
 	@Test
@@ -187,7 +187,7 @@ public class HelperNetTest {
 	@Test
 	public void testReadUrl() {
 		try {
-			assertNotNull(HelperNet.readUrl(new URL("http://www.sisprocom.ch"))); //$NON-NLS-1$
+			assertNotNull(HelperNet.readUrl(new URL("http://www.customcode.ch"))); //$NON-NLS-1$
 		} catch (Exception ex) {fail(ex.getMessage());}
 		
 		try {
@@ -203,7 +203,7 @@ public class HelperNetTest {
 	@Test
 	public void testIsPingable() {
 		try {
-			assertTrue(HelperNet.isPingable("sisprocom.ch")); //$NON-NLS-1$
+			assertTrue(HelperNet.isPingable("customcode.ch")); //$NON-NLS-1$
 		} catch (Exception ex) {fail(ex.getMessage());}
 
 		try {
@@ -248,7 +248,7 @@ public class HelperNetTest {
 	@Test
 	public void testGetIp() {
 		try {
-			assertEquals("78.46.88.137", HelperNet.getIp("www.sisprocom.ch")); //$NON-NLS-1$ //$NON-NLS-2$
+			assertEquals("78.46.88.137", HelperNet.getIp("www.customcode.ch")); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (Exception ex) {fail(ex.getMessage());}
 		
 		try {

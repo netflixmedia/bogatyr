@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <document>
     <name>Bogatyr</name>
-    <version>0.9</version>
-    <build>214</build>
-    <created>2010-01-05T01:35:01.493+01:00</created>
+    <version>0.91</version>
+    <build>245</build>
+    <created>2010-03-31T00:53:01.493+01:00</created>
     <manufacturer>
-        <name>SiSprocom GmbH</name>
-        <URL>http://www.sisprocom.ch/bogatyr</URL>
+        <name>Custom Code GmbH</name>
+        <URL>http://www.customcode.ch/bogatyr</URL>
         <mail>laubenberger@gmail.com</mail>
     </manufacturer>
     <owner>
-        <name>SiSprocom GmbH</name>
-        <URL>http://www.sisprocom.ch</URL>
-        <mail>info@sisprocom.ch</mail>
+        <name>Custom Code GmbH</name>
+        <URL>http://www.customcode.ch</URL>
+        <mail>info@customcode.ch</mail>
     </owner>
     <publisher>
-        <name>SiSprocom GmbH</name>
-        <URL>http://www.sisprocom.ch</URL>
-        <mail>info@sisprocom.ch</mail>
+        <name>Custom Code GmbH</name>
+        <URL>http://www.customcode.ch</URL>
+        <mail>info@customcode.ch</mail>
     </publisher>
     <UUID>3e213421-4d8f-45bc-94b3-f5f6637be68a</UUID>
     <locations>
