@@ -70,8 +70,8 @@ import ch.customcode.bogatyr.view.swing.factory.FormatFactory;
 /**
  * Junit test suite
  * 
- * @author SiSprocom GmbH, Stefan Laubenberger
- * @version 20100203
+ * @author Stefan Laubenberger
+ * @version 20100331
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$

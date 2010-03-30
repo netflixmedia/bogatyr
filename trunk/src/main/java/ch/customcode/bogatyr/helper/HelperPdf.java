@@ -62,7 +62,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * <strong>Note:</strong> This class needs <a href="http://itextpdf.com/">iText</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100331)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -155,7 +155,7 @@ public abstract class HelperPdf {
      * metadata.put("Author", "Stefan Laubenberger");
      * metadata.put("Subject", "Example PDF meta data");
      * metadata.put("Keywords", "Example, PDF");
-     * metadata.put("Creator", "http://www.sisprocom.ch/");
+     * metadata.put("Creator", "http://www.customcode.ch/");
      * metadata.put("Producer", "Silvan Spross");
      * 
      * @param source {@link File}
