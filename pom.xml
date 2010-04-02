@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ch.customcode.bogatyr</groupId>
-	<artifactId>Bogatyr</artifactId>
+	<artifactId>bogatyr</artifactId>
 	<packaging>jar</packaging>
 	<version>0.91</version>
-	<name>Bogatyr</name>
+	<name>bogatyr</name>
 	<description>Bogatyr Java library</description>
 	<url>http://code.google.com/p/bogatyr/</url>
 	<inceptionYear>2007</inceptionYear>
@@ -37,16 +37,6 @@
 			<name>Silvan Spross</name>
 			<organization>Custom Code</organization>
 			<email>s.spross@customcode.ch</email>
-			<timezone>1</timezone>
-			<roles>
-				<role>developer</role>
-			</roles>
-		</developer>
-		<developer>
-			<id>rwuersch</id>
-			<name>Roman Wuersch</name>
-			<organization>Custom Code</organization>
-			<email>r.wuersch@customcode.ch</email>
 			<timezone>1</timezone>
 			<roles>
 				<role>developer</role>
@@ -88,14 +78,34 @@
 	<scm>
 		<connection>scm:svn:https://bogatyr.googlecode.com/svn/trunk/</connection>
 		<developerConnection>scm:svn:https://bogatyr.googlecode.com/svn/trunk/</developerConnection>
-        <url>http://code.google.com/p/bogatyr/source/browse/</url>
+		<url>http://code.google.com/p/bogatyr/source/browse/</url>
 	</scm>
+	
+	<repositories>
+		<repository>
+			<id>main</id>
+			<name>Maven main Repository</name>
+			<url>http://repo1.maven.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>customcode-net</id>
+			<name>Custom Code Repository</name>
+			<url>http://www.sisprocom.ch/maven2/</url>
+		</repository>
+	</repositories>
 
-    <!--<issueManagement>-->
-      <!--<system>JIRA</system>-->
-      <!--<url>http://jira.codehaus.org/BrowseProject.jspa?id=10450</url>-->
-    <!--</issueManagement>-->
-    
+	<distributionManagement>
+		<repository>
+			<id>customcode-ftp</id>
+			<url>ftp://ftp.sisprocom.ch//httpdocs/maven2</url>
+		</repository>
+	</distributionManagement>
+
+	<!--<issueManagement>-->
+	<!--<system>JIRA</system>-->
+	<!--<url>http://jira.codehaus.org/BrowseProject.jspa?id=10450</url>-->
+	<!--</issueManagement>-->
+
 	<!-- Continuum integration -->
 	<!--<ciManagement>-->
 	<!--<system>continuum</system>-->
@@ -116,16 +126,16 @@
 	<!--</notifiers>-->
 	<!--</ciManagement>-->
 
-    <!--<mailingLists>-->
-         <!--<mailingList>-->
-           <!--<name>HotelDatabase project mailing list</name>-->
-           <!--<subscribe>dev-subscribe@wakaleo.com</subscribe>-->
-           <!--<unsubscribe>dev-unsubscribe@wakaleo.com</unsubscribe>-->
-          <!--<post>dev@wakaleo.com</post>-->
-          <!--<archive>http://mail-archives.wakaleo.com/modmbox/dev/</archive>-->
-         <!--</mailingList>-->
-       <!--</mailingLists>-->
-    
+	<!--<mailingLists>-->
+	<!--<mailingList>-->
+	<!--<name>HotelDatabase project mailing list</name>-->
+	<!--<subscribe>dev-subscribe@wakaleo.com</subscribe>-->
+	<!--<unsubscribe>dev-unsubscribe@wakaleo.com</unsubscribe>-->
+	<!--<post>dev@wakaleo.com</post>-->
+	<!--<archive>http://mail-archives.wakaleo.com/modmbox/dev/</archive>-->
+	<!--</mailingList>-->
+	<!--</mailingLists>-->
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -215,12 +225,12 @@
 					Perforce is used by the configuration management and for deployment
 				-->
 				<!--<plugin>-->
-					<!--<groupId>ch.customcode.maven.plugin</groupId>-->
-					<!--<artifactId>delivery-plugin</artifactId>-->
-					<!--<configuration>-->
-						<!--<p4client>continuum.bogatyr.DEV_JAR</p4client>-->
-						<!--<p4work>/usr/tmp/P4_repository/JAR</p4work>-->
-					<!--</configuration>-->
+				<!--<groupId>ch.customcode.maven.plugin</groupId>-->
+				<!--<artifactId>delivery-plugin</artifactId>-->
+				<!--<configuration>-->
+				<!--<p4client>continuum.bogatyr.DEV_JAR</p4client>-->
+				<!--<p4work>/usr/tmp/P4_repository/JAR</p4work>-->
+				<!--</configuration>-->
 				<!--</plugin>-->
 			</plugins>
 		</pluginManagement>
@@ -228,12 +238,21 @@
 		<filters>
 			<filter>src/main/filters/filters-${env}.properties</filter>
 		</filters>
+		
 		<resources>
 			<resource>
 				<filtering>true</filtering>
 				<directory>src/main/resources</directory>
 			</resource>
 		</resources>
+		
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<!-- <version>1.0-alpha-6</version> -->
+			</extension>
+		</extensions>
 	</build>
 
 	<profiles>
@@ -269,7 +288,7 @@
 				<configuration>
 					<!-- location of the current checkstyle definition  -->
 					<configLocation>build/checkstyle.xml</configLocation>
-                    <headerLocation>build/classheader.txt</headerLocation>
+					<headerLocation>build/classheader.txt</headerLocation>
 				</configuration>
 			</plugin>
 
@@ -278,62 +297,65 @@
 				<artifactId>maven-project-info-reports-plugin</artifactId>
 			</plugin>
 
-            <plugin>
-                 <groupId>org.apache.maven.plugins</groupId>
-                 <artifactId>maven-changelog-plugin</artifactId>
-             </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changelog-plugin</artifactId>
+			</plugin>
 
-            <!-- PMD code analysis report -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <!--<version>2.4</version>-->
-                <configuration>
-                    <targetJdk>1.6</targetJdk>
-                    <linkXref>true</linkXref>
-                    <sourceEncoding>UTF-8</sourceEncoding>
-                    <rulesets>
-                        <ruleset>/rulesets/basic.xml</ruleset>
-                        <ruleset>/rulesets/braces.xml</ruleset>
-                        <ruleset>/rulesets/codesize.xml</ruleset>
-                        <ruleset>/rulesets/clone.xml</ruleset>
-                        <ruleset>/rulesets/design.xml</ruleset>
-                        <ruleset>/rulesets/finalizers.xml</ruleset>
-                        <ruleset>/rulesets/imports.xml</ruleset>
-                        <ruleset>/rulesets/strings.xml</ruleset>
-                        <ruleset>/rulesets/migrating_to_15.xml</ruleset>
-                        <ruleset>/rulesets/optimizations.xml</ruleset>
-                        <ruleset>/rulesets/sunsecure.xml</ruleset>
-                        <ruleset>/rulesets/unusedcode.xml</ruleset>
-                    </rulesets>
-                </configuration>
-            </plugin>
+			<!-- PMD code analysis report -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<!--<version>2.4</version>-->
+				<configuration>
+					<targetJdk>1.6</targetJdk>
+					<linkXref>true</linkXref>
+					<sourceEncoding>UTF-8</sourceEncoding>
+					<rulesets>
+						<ruleset>/rulesets/basic.xml</ruleset>
+						<ruleset>/rulesets/braces.xml</ruleset>
+						<ruleset>/rulesets/codesize.xml</ruleset>
+						<ruleset>/rulesets/clone.xml</ruleset>
+						<ruleset>/rulesets/design.xml</ruleset>
+						<ruleset>/rulesets/finalizers.xml</ruleset>
+						<ruleset>/rulesets/imports.xml</ruleset>
+						<ruleset>/rulesets/strings.xml</ruleset>
+						<ruleset>/rulesets/migrating_to_15.xml</ruleset>
+						<ruleset>/rulesets/optimizations.xml</ruleset>
+						<ruleset>/rulesets/sunsecure.xml</ruleset>
+						<ruleset>/rulesets/unusedcode.xml</ruleset>
+					</rulesets>
+				</configuration>
+			</plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+			</plugin>
 
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-changes-plugin</artifactId>-->
-                <!--<reportSets>-->
-                  <!--<reportSet>-->
-                    <!--<reports>-->
-                      <!--<report>jira-report</report>-->
-                    <!--</reports>-->
-                  <!--</reportSet>-->
-                <!--</reportSets>-->
-            <!--</plugin>-->
+			<!--<plugin>-->
+			<!--<groupId>org.apache.maven.plugins</groupId>-->
+			<!--<artifactId>maven-changes-plugin</artifactId>-->
+			<!--<reportSets>-->
+			<!--<reportSet>-->
+			<!--<reports>-->
+			<!--<report>jira-report</report>-->
+			<!--</reports>-->
+			<!--</reportSet>-->
+			<!--</reportSets>-->
+			<!--</plugin>-->
 
 			<!-- plugin for creating a project website -->
 			<!--<plugin>-->
-				<!--<groupId>org.apache.maven.plugins</groupId>-->
-				<!--<artifactId>maven-site-plugin</artifactId>-->
-				<!--&lt;!&ndash; site:deploy may fail with 'unzip error' if not set here &ndash;&gt;-->
-				<!--<configuration>-->
-					<!--<unzipCommand>/usr/bin/unzip -o &gt; err.txt</unzipCommand>-->
-				<!--</configuration>-->
+			<!--<groupId>org.apache.maven.plugins</groupId>-->
+			<!--<artifactId>maven-site-plugin</artifactId>-->
+			<!--
+				&lt;!&ndash; site:deploy may fail with 'unzip error' if not set here
+				&ndash;&gt;
+			-->
+			<!--<configuration>-->
+			<!--<unzipCommand>/usr/bin/unzip -o &gt; err.txt</unzipCommand>-->
+			<!--</configuration>-->
 			<!--</plugin>-->
 
 			<!-- Code coverage for Junit tests -->
@@ -357,7 +379,10 @@
 				</configuration>
 			</plugin>
 
-			<!-- Surefire Report Plugin renders the html report about the junit test results -->
+			<!--
+				Surefire Report Plugin renders the html report about the junit test
+				results
+			-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>surefire-report-maven-plugin</artifactId>
@@ -367,45 +392,45 @@
 
 			<!-- NCSS Report Plugin counts the non commented source statement -->
 			<!--<plugin>-->
-				<!--<groupId>org.codehaus.mojo</groupId>-->
-				<!--<artifactId>javancss-maven-plugin</artifactId>-->
-				<!--&lt;!&ndash;<version>2.0-beta-2</version>&ndash;&gt;-->
+			<!--<groupId>org.codehaus.mojo</groupId>-->
+			<!--<artifactId>javancss-maven-plugin</artifactId>-->
+			<!--&lt;!&ndash;<version>2.0-beta-2</version>&ndash;&gt;-->
 			<!--</plugin>-->
 
-            <!--<plugin>-->
-                <!--<groupId>org.codehaus.mojo</groupId>-->
-                <!--<artifactId>jdepend-maven-plugin</artifactId>-->
-            <!--</plugin>-->
+			<!--<plugin>-->
+			<!--<groupId>org.codehaus.mojo</groupId>-->
+			<!--<artifactId>jdepend-maven-plugin</artifactId>-->
+			<!--</plugin>-->
 
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jxr-maven-plugin</artifactId>
-            </plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jxr-maven-plugin</artifactId>
+			</plugin>
 
-            <plugin>
-			        <groupId>org.codehaus.mojo</groupId>
-			        <artifactId>taglist-maven-plugin</artifactId>
-			        <configuration>
-						<encoding>UTF-8</encoding>
-				      <tagListOptions>
-			            <tagClasses>
-			              <tagClass>
-			                <displayName>Todo Work</displayName>
-			                <tags>
-			                  <tag>
-			                    <matchString>todo</matchString>
-			                    <matchType>ignoreCase</matchType>
-			                  </tag>
-			                  <tag>
-			                    <matchString>FIXME</matchString>
-			                    <matchType>exact</matchType>
-			                  </tag>
-			                </tags>
-			              </tagClass>
-			            </tagClasses>
-			          </tagListOptions>
-			        </configuration>
-			      </plugin>
-			</plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>taglist-maven-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<tagListOptions>
+						<tagClasses>
+							<tagClass>
+								<displayName>Todo Work</displayName>
+								<tags>
+									<tag>
+										<matchString>todo</matchString>
+										<matchType>ignoreCase</matchType>
+									</tag>
+									<tag>
+										<matchString>FIXME</matchString>
+										<matchType>exact</matchType>
+									</tag>
+								</tags>
+							</tagClass>
+						</tagClasses>
+					</tagListOptions>
+				</configuration>
+			</plugin>
+		</plugins>
 	</reporting>
 </project>

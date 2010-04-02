@@ -67,7 +67,7 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100217)
+ * @version 0.9.1 (20100402)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -349,6 +349,19 @@ public abstract class HelperIO {
 	}
 
 	/**
+     * Writes a byte-array into a new {@link File}.
+     * 
+     * @param file for writing
+     * @param data byte-array to write
+     * @throws IOException
+     * @see File
+     * @since 0.9.1
+     */	
+	public static void writeFile(final File file, final byte[] data) throws IOException {
+		writeFile(file, data, false);
+	}
+
+	/**
      * Writes a byte-array into a {@link File}.
      * 
      * @param file for writing
@@ -376,6 +389,20 @@ public abstract class HelperIO {
 		}
 	}
 	
+	/**
+     * Writes a {@link String} into a new {@link File} with the chosen encoding.
+     * 
+     * @param file for writing
+     * @param data string to write
+     * @param encoding of the file
+     * @throws IOException
+     * @see File
+     * @since 0.9.1
+     */	
+	public static void writeFile(final File file, final String data, final String encoding) throws IOException {
+		writeFile(file, data, encoding, false);
+	}
+
 	/**
      * Writes a {@link String} into a {@link File} with the chosen encoding.
      * 
@@ -413,6 +440,19 @@ public abstract class HelperIO {
 	}
 	
 	/**
+     * Writes a {@link String} into a new {@link File} with the default encoding (UTF-8).
+     * 
+     * @param file for writing
+     * @param data string to write
+     * @throws IOException
+     * @see File
+     * @since 0.9.1
+     */	
+	public static void writeFile(final File file, final String data) throws IOException {
+		writeFile(file, data, Constants.ENCODING_DEFAULT, false);
+	}
+
+	/**
      * Writes a {@link String} into a {@link File} with the default encoding (UTF-8).
      * 
      * @param file for writing
@@ -426,6 +466,20 @@ public abstract class HelperIO {
 		writeFile(file, data, Constants.ENCODING_DEFAULT, append);
 	}
 	
+	/**
+     * Writes an {@link InputStream} into a new {@link File}.
+     * 
+     * @param file for writing
+     * @param is stream to write
+     * @throws IOException
+     * @see File
+     * @see InputStream
+     * @since 0.9.1
+     */	
+	public static void writeFile(final File file, final InputStream is) throws IOException {
+		writeFile(file, readStream(is), false);
+	}	
+
 	/**
      * Writes an {@link InputStream} into a {@link File}.
      * 

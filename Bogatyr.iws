@@ -21,38 +21,12 @@
   </component>
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="6099473d-4163-40d6-a2ae-9afd78c1b030" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/misc/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/misc/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/filemanager/FileManager.java" afterPath="$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/filemanager/FileManager.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sample/resources/ch/sisprocom" afterPath="$PROJECT_DIR$/src/sample/resources/ch/customcode" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/UML.zargo" afterPath="$PROJECT_DIR$/doc/UML.zargo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/application/ModelApplicationImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/application/ModelApplicationImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/service/printer/PrinterTest.java" afterPath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/service/printer/PrinterTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/configuration/ch/customcode/bogatyr/sample/helloworld/standard.properties" afterPath="$PROJECT_DIR$/src/sample/configuration/ch/customcode/bogatyr/sample/helloworld/standard.properties" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sample/resources/ch/sisprocom/bogatyr" afterPath="$PROJECT_DIR$/src/sample/resources/ch/customcode/bogatyr" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/update.xml" afterPath="$PROJECT_DIR$/doc/update.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CheckJUnit.launch" afterPath="$PROJECT_DIR$/CheckJUnit.launch" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/configuration/ch/customcode/bogatyr/sample/filemanager/standard.properties" afterPath="$PROJECT_DIR$/src/sample/configuration/ch/customcode/bogatyr/sample/filemanager/standard.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/launcher/LauncherBrowser.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/launcher/LauncherBrowser.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/resources/ch/sisprocom/bogatyr/sample/filemanager" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/helloworld/HelloWorld.java" afterPath="$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/helloworld/HelloWorld.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/resources/ch/sisprocom/bogatyr/sample/filemanager/filemanager.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/javadoc.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/resources/ch/sisprocom/bogatyr/sample/filemanager/filemanager_de.properties" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/AllBogatyrTests.java" afterPath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/AllBogatyrTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/MANIFEST.MF" afterPath="$PROJECT_DIR$/build/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CheckExample.launch" afterPath="$PROJECT_DIR$/CheckExample.launch" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/HelperNetTest.java" afterPath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/HelperNetTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/java/ch/customcode/util/CheckJUnit.java" afterPath="$PROJECT_DIR$/src/util/java/ch/customcode/util/CheckJUnit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/launcher/LauncherBrowserTest.java" afterPath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/launcher/LauncherBrowserTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/java/ch/customcode/util/CheckExample.java" afterPath="$PROJECT_DIR$/src/util/java/ch/customcode/util/CheckExample.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperPdf.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperPdf.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sample/resources/ch/sisprocom/bogatyr/sample" afterPath="$PROJECT_DIR$/src/sample/resources/ch/customcode/bogatyr/sample" />
     </list>
-    <ignored path="target/" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="Bogatyr.iws" />
+    <ignored path="target/" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +87,17 @@
   </component>
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="34" selection-start="263" selection-end="270" vertical-scroll-proportion="0.0591133">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -126,7 +110,6 @@
         <option value="$PROJECT_DIR$/src/java/ch/sisprocom/bogatyr/model/misc/Country.java" />
         <option value="$PROJECT_DIR$/.classpath" />
         <option value="$PROJECT_DIR$/build/classheader.txt" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/doc/update.xml" />
         <option value="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/AllBogatyrTests.java" />
         <option value="$PROJECT_DIR$/src/util/java/ch/customcode/util/CheckExample.java" />
@@ -139,6 +122,7 @@
         <option value="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/launcher/LauncherBrowserTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/application/ModelApplicationImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/service/printer/PrinterTest.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -786,8 +770,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Favorites" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1025,32 +1010,6 @@
               <option name="myItemId" value="ch" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bogatyr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bogatyr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sample" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="customcode" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -1172,7 +1131,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1652,105 +1610,77 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/HelperCollectionTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="773" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="24" selection-start="1338" selection-end="1338" vertical-scroll-proportion="-6.330049">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="773" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/doc/update.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="14" selection-start="134" selection-end="134" vertical-scroll-proportion="0.07881773">
-          <folding />
-        </state>
+        <state line="4" column="14" selection-start="134" selection-end="134" vertical-scroll-proportion="0.07881773" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/AllBogatyrTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="20" selection-start="2820" selection-end="2820" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="73" column="20" selection-start="2820" selection-end="2820" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/util/java/ch/customcode/util/CheckExample.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="20" selection-start="1448" selection-end="1448" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="48" column="20" selection-start="1448" selection-end="1448" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/util/java/ch/customcode/util/CheckJUnit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="20" selection-start="1434" selection-end="1434" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="48" column="20" selection-start="1434" selection-end="1434" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/misc/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/filemanager/FileManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="20" selection-start="1407" selection-end="1407" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="46" column="20" selection-start="1407" selection-end="1407" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/helloworld/HelloWorld.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="20" selection-start="1389" selection-end="1389" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="46" column="20" selection-start="1389" selection-end="1389" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/HelperNetTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="20" selection-start="1278" selection-end="1278" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="48" column="20" selection-start="1278" selection-end="1278" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperPdf.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="17" selection-start="1986" selection-end="1986" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="64" column="17" selection-start="1986" selection-end="1986" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/launcher/LauncherBrowser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="17" selection-start="1247" selection-end="1247" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="43" column="17" selection-start="1247" selection-end="1247" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/launcher/LauncherBrowserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="20" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="42" column="20" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/application/ModelApplicationImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="27" selection-start="1870" selection-end="1870" vertical-scroll-proportion="0.21674877">
-          <folding />
-        </state>
+        <state line="58" column="27" selection-start="1870" selection-end="1870" vertical-scroll-proportion="0.21674877" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/service/printer/PrinterTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="20" selection-start="1211" selection-end="1211" vertical-scroll-proportion="0.19704433">
+        <state line="47" column="20" selection-start="1211" selection-end="1211" vertical-scroll-proportion="0.19704433" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="34" selection-start="263" selection-end="270" vertical-scroll-proportion="0.0591133">
           <folding />
         </state>
       </provider>
