@@ -31,6 +31,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
@@ -38,10 +41,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for maps.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.9.0
  */
 public abstract class HelperMap {
+	private static final Logger log = LoggerFactory.getLogger(HelperMap.class);
+	
 	/**
      * Checks if a {@link Map} is valid.
      * 
@@ -51,7 +56,12 @@ public abstract class HelperMap {
      * @since 0.9.0
      */
 	public static boolean isValid(final Map<?, ?> arg) { //$JUnit$
-        return !(null == arg || arg.isEmpty());
+		log.debug(HelperLog.methodStart(arg));
+		
+		final boolean result = !(null == arg || arg.isEmpty());
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 	
     /**
@@ -63,16 +73,18 @@ public abstract class HelperMap {
      * @since 0.9.1
      */
     public static <K, V> Collection<K> getKeys(final Map<K, V> map) {
+    	log.debug(HelperLog.methodStart(map));
 		if (null == map) {
 			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
 		}
 
-		final Collection<K> set = new ArrayList<K>(map.size());
+		final Collection<K> result = new ArrayList<K>(map.size());
 
 		for (final Map.Entry<K, V> pair : map.entrySet()) {
-			set.add(pair.getKey());
+			result.add(pair.getKey());
 		}
-        return set;
+		log.debug(HelperLog.methodExit(result));
+        return result;
     }
    
     /**
@@ -84,16 +96,18 @@ public abstract class HelperMap {
      * @since 0.9.1
      */
     public static <K, V> Collection<V> getValues(final Map<K, V> map) {
+    	log.debug(HelperLog.methodStart(map));
 		if (null == map) {
 			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
 		}
 
-		final Collection<V> set = new ArrayList<V>(map.size());
+		final Collection<V> result = new ArrayList<V>(map.size());
 
 		for (final Map.Entry<K, V> pair : map.entrySet()) {
-			set.add(pair.getValue());
+			result.add(pair.getValue());
 		}
-        return set;
+		log.debug(HelperLog.methodExit(result));
+        return result;
     }
 
     /**
@@ -105,6 +119,7 @@ public abstract class HelperMap {
      * @since 0.7.0
      */
     public static String dump(final Map<?, ?> map) { //$JUnit$
+    	log.debug(HelperLog.methodStart(map));
 		if (null == map) {
 			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
 		}
@@ -119,6 +134,10 @@ public abstract class HelperMap {
             sb.append('=');
             sb.append(pair.getValue());
         }
-        return sb.toString();
+
+        final String result = sb.toString();
+        
+        log.debug(HelperLog.methodExit(result));
+        return result;
     }
 }

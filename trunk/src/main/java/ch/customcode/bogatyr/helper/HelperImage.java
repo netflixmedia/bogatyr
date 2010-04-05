@@ -43,6 +43,9 @@ import java.util.Locale;
 
 import javax.imageio.ImageIO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
@@ -50,10 +53,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100405)
  * @since 0.4.0
  */
 public abstract class HelperImage {
+	private static final Logger log = LoggerFactory.getLogger(HelperCollection.class);
+	
 	public static final String TYPE_JPG  = "jpg"; //$NON-NLS-1$
 	public static final String TYPE_PNG  = "png"; //$NON-NLS-1$
 	public static final String TYPE_GIF  = "gif"; //$NON-NLS-1$
@@ -70,11 +75,15 @@ public abstract class HelperImage {
      * @since 0.9.0
      */
     public static BufferedImage readImage(final File file) throws IOException {
+    	log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-
-		return ImageIO.read(file);
+		
+		final BufferedImage result = ImageIO.read(file);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
     
     /**
@@ -88,11 +97,15 @@ public abstract class HelperImage {
      * @since 0.9.0
      */
     public static BufferedImage readImage(final InputStream is) throws IOException {
-		if (null == is) {
+    	log.debug(HelperLog.methodStart(is));
+    	if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
 
-		return ImageIO.read(is);
+		final BufferedImage result = ImageIO.read(is);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }  
     
 	/**
@@ -107,6 +120,7 @@ public abstract class HelperImage {
      * @since 0.4.0
      */
     public static void writeImage(final File file, final String type, final RenderedImage image) throws IOException { //$JUnit$
+    	log.debug(HelperLog.methodStart(file, type, image));
     	if (null == file) {
     		throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
     	}
@@ -118,6 +132,7 @@ public abstract class HelperImage {
 		}
 		
 		ImageIO.write(image, type, file);
+		log.debug(HelperLog.methodExit());
     }
     
 	/**
@@ -132,7 +147,8 @@ public abstract class HelperImage {
      * @since 0.9.0
      */
     public static void writeImage(final OutputStream os, final String type, final RenderedImage image) throws IOException {
-		if (null == image) {
+    	log.debug(HelperLog.methodStart(os, type, image));
+    	if (null == image) {
 			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
 		}
 		if (null == type || !getAvailableImageWriteFormats().contains(type)) {
@@ -143,6 +159,7 @@ public abstract class HelperImage {
 		}
 		
 		ImageIO.write(image, type, os);
+		log.debug(HelperLog.methodExit());
     }
 
     
@@ -156,17 +173,19 @@ public abstract class HelperImage {
      * @since 0.4.0
      */
 	public static RenderedImage getImage(final Component component) {
+		log.debug(HelperLog.methodStart(component));
 		if (null == component) {
 			throw new RuntimeExceptionIsNull("component"); //$NON-NLS-1$
 		}
 
 		final Dimension size = component.getSize();
-		final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-		final Graphics2D g2 = image.createGraphics();
+		final BufferedImage result = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+		final Graphics2D g2 = result.createGraphics();
 		
 		component.paint(g2);
        
-		return image;
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	/**
@@ -180,6 +199,7 @@ public abstract class HelperImage {
      * @since 0.9.0
      */
 	public static Image getScaledImage(final BufferedImage image, final double scale) {
+		log.debug(HelperLog.methodStart(image, scale));
 		if (null == image) {
 			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
 		}
@@ -187,7 +207,10 @@ public abstract class HelperImage {
 		final double width = (double)image.getWidth() / scale;
 		final double height = (double)image.getHeight() / scale;
 		
-		return image.getScaledInstance(HelperMath.convertDoubleToInt(width), HelperMath.convertDoubleToInt(height), Image.SCALE_SMOOTH);
+		final Image result = image.getScaledInstance(HelperMath.convertDoubleToInt(width), HelperMath.convertDoubleToInt(height), Image.SCALE_SMOOTH);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	/**
@@ -202,11 +225,15 @@ public abstract class HelperImage {
      * @since 0.9.0
      */
 	public static Image getScaledImage(final Image image, final Dimension size) {
+		log.debug(HelperLog.methodStart(image, size));
 		if (null == image) {
 			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
 		}
-
-		return image.getScaledInstance(size.width, size.height, Image.SCALE_SMOOTH);
+		
+		final Image result = image.getScaledInstance(size.width, size.height, Image.SCALE_SMOOTH);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	/**
@@ -216,7 +243,12 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageReadFormats() { //$JUnit$
-	    return unique(ImageIO.getReaderFormatNames());
+		log.debug(HelperLog.methodStart());
+		
+		final Collection<String> result = unique(ImageIO.getReaderFormatNames());
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -226,7 +258,12 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageWriteFormats() { //$JUnit$
-	    return unique(ImageIO.getWriterFormatNames());
+		log.debug(HelperLog.methodStart());
+		
+		final Collection<String> result = unique(ImageIO.getWriterFormatNames());
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -236,7 +273,12 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageReadMIMETypes() { //$JUnit$
-	    return unique(ImageIO.getReaderMIMETypes());
+		log.debug(HelperLog.methodStart());
+		
+		final Collection<String> result = unique(ImageIO.getReaderMIMETypes());
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -246,7 +288,12 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageWriteMIMETypes() { //$JUnit$
-	    return unique(ImageIO.getWriterMIMETypes());
+		log.debug(HelperLog.methodStart());
+		
+		final Collection<String> result = unique(ImageIO.getWriterMIMETypes());
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	
@@ -261,12 +308,14 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
     private static Collection<String> unique(final String... strings) {
-        final Collection<String> set = new HashSet<String>(strings.length);
+    	log.trace(HelperLog.methodStart(strings));
+    	final Collection<String> result = new HashSet<String>(strings.length);
         
         for (final String str : strings) {
-            set.add(str.toLowerCase(Locale.getDefault()));
+            result.add(str.toLowerCase(Locale.getDefault()));
         }
 
-        return set;
+        log.trace(HelperLog.methodExit(result));
+        return result;
     }
 }

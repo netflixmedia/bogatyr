@@ -38,6 +38,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.misc.Constants;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
@@ -48,10 +51,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a helper class for compress operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100405)
  * @since 0.3.0
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
+	private static final Logger log = LoggerFactory.getLogger(HelperCompress.class);
+	
 	/**
      * Writes a ZIP {@link File} containing a list of {@link File}.
      * 
@@ -62,7 +67,9 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * @since 0.3.0
      */	
 	public static void writeZip(final File file, final File... files) throws IOException {
+		log.debug(HelperLog.methodStart(file, files));
 		writeZip(file, files, Constants.DEFAULT_FILE_BUFFER_SIZE);
+		log.debug(HelperLog.methodExit());
 	}
 	
 	/**
@@ -75,6 +82,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * @since 0.8.0
      */	
 	public static void writeZip(final File file, final File[] files, final int bufferSize) throws IOException {
+		log.debug(HelperLog.methodStart(file, files, bufferSize));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -99,6 +107,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 			    zos.close();
 			} 
 		}
+		log.debug(HelperLog.methodExit());
 	}
 	
 //	/**
@@ -137,7 +146,9 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * @since 0.3.0
      */	
 	public static void extractZip(final ZipFile file, final File destinationDirectory) throws IOException { 
+		log.debug(HelperLog.methodStart(file, destinationDirectory));
 		extractZip(file, destinationDirectory, Constants.DEFAULT_FILE_BUFFER_SIZE); 
+		log.debug(HelperLog.methodExit());
 	} 
 	
 	/**
@@ -151,6 +162,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
      * @since 0.8.0
      */	
 	public static void extractZip(final ZipFile file, final File destinationDirectory, final int bufferSize) throws IOException { 
+		log.debug(HelperLog.methodStart(file, destinationDirectory, bufferSize));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -167,6 +179,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
           final ZipEntry zipEntry = zipEntryEnum.nextElement();
           extractEntry(file, zipEntry, destinationDirectory, bufferSize); 
         }
+        log.debug(HelperLog.methodExit());
 	} 
 	
 //	/**
@@ -209,6 +222,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	 * Private methods
 	 */
 	private static void addEntry(final ZipOutputStream zos, final File file, final int bufferSize) throws IOException {
+		log.trace(HelperLog.methodStart(zos, file, bufferSize));
 		BufferedInputStream bis = null;
 		final byte[] buffer = new byte[bufferSize];
 
@@ -232,9 +246,11 @@ public abstract class HelperCompress { //TODO implement GZip for streams
                 bis.close();
             }
 		}
+		log.trace(HelperLog.methodExit());
 	}
 	
 	private static void extractEntry(final ZipFile zipFile, final ZipEntry entry, final File destDir, final int bufferSize) throws IOException { 
+		log.trace(HelperLog.methodStart(zipFile, entry, destDir, bufferSize));
 		final File file = new File(destDir, entry.getName());
  	 
 	    if (entry.isDirectory()) {
@@ -265,5 +281,6 @@ public abstract class HelperCompress { //TODO implement GZip for streams
                 }
 	    	} 
 	    }
+	    log.trace(HelperLog.methodExit());
 	} 
 }

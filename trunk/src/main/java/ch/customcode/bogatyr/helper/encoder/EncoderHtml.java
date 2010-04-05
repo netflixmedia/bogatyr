@@ -27,6 +27,11 @@
  */
 package ch.customcode.bogatyr.helper.encoder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperCollection;
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
@@ -35,11 +40,14 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Encodes and decodes data to HTML-format.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.9.1
  */
 public abstract class EncoderHtml {
+	private static final Logger log = LoggerFactory.getLogger(HelperCollection.class);
+	
 	public static String encode(final String input) {
+		log.debug(HelperLog.methodStart(input));
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
@@ -78,10 +86,13 @@ public abstract class EncoderHtml {
 	                    sb.append("&#"); //$NON-NLS-1$
 	                    sb.append(new Integer(ci).toString());
 	                    sb.append(';');
-	                    }
-	                }
-	            }
-	        }
-	    return sb.toString();
+                    }
+                }
+            }
+        }
+		final String result = sb.toString();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 }

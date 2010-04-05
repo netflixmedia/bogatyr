@@ -27,7 +27,11 @@
  */
 package ch.customcode.bogatyr.helper.encoder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.helper.HelperEnvironment;
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
@@ -36,10 +40,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Encodes and decodes data to Base64 format.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.1.0
  */
 public abstract class EncoderBase64 {
+	private static final Logger log = LoggerFactory.getLogger(EncoderBase64.class);
+	
     private static final String ERROR_ILLEGAL_CHARACTER = "Illegal character in Base64 encoded data"; //$NON-NLS-1$
 
 	private static final char[] map1 = new char[64];
@@ -84,6 +90,7 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static String encode(final String input) { //$JUnit$
+		log.debug(HelperLog.methodStart(input));
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
@@ -91,7 +98,10 @@ public abstract class EncoderBase64 {
             throw new RuntimeExceptionExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
         }
 
-		return new String(encode(input.getBytes()));
+		final String result = new String(encode(input.getBytes()));
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -103,14 +113,18 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static char[] encode(final byte[] input) { //$JUnit$
+		log.debug(HelperLog.methodStart(input));
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
 		if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
 			throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
 		}
-	
-		return encode(input, input.length);
+		
+		final char[] result = encode(input, input.length);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -121,14 +135,18 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static byte[] decode(final String input) { //$JUnit$
+		log.debug(HelperLog.methodStart(input));
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
         if (input.length() * 2 > HelperEnvironment.getMemoryFree()) {
         	throw new RuntimeExceptionExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
         }
-
-		return decode(input.toCharArray());
+        
+		final byte[] result = decode(input.toCharArray());
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -140,6 +158,7 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static byte[] decode(final char[] input) { //$JUnit$
+		log.debug(HelperLog.methodStart(input));
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
@@ -158,7 +177,7 @@ public abstract class EncoderBase64 {
 		}
 		
 		final int oLen = iLen * 3 / 4;
-		final byte[] out = new byte[oLen];
+		final byte[] result = new byte[oLen];
 
         int ip = 0;
         int op = 0;
@@ -187,18 +206,19 @@ public abstract class EncoderBase64 {
 			final int o0 = b0 << 2 | b1 >>> 4;
 			final int o1 = (b1 & 0xf) << 4 | b2 >>> 2;
 			final int o2 = (b2 & 3) << 6 | b3;
-			out[op] = (byte) o0;
+			result[op] = (byte) o0;
             op++;
             if (op < oLen) {
-                out[op] = (byte) o1;
+                result[op] = (byte) o1;
                 op++;
             }
 			if (op < oLen) {
-                out[op] = (byte) o2;
+                result[op] = (byte) o2;
                 op++;
             }
 		}
-		return out;
+        log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	
@@ -215,9 +235,11 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	private static char[] encode(final byte[] in, final int iLen) {
+		log.trace(HelperLog.methodStart(in, iLen));
+		
 		final int oDataLen = (iLen * 4 + 2) / 3; // output length without padding
 		final int oLen = (iLen + 2) / 3 * 4; // output length including padding
-		final char[] out = new char[oLen];
+		final char[] result = new char[oLen];
 		int ip = 0;
 		int op = 0;
 
@@ -232,15 +254,16 @@ public abstract class EncoderBase64 {
 			final int o1 = (i0 & 3) << 4 | i1 >>> 4;
 			final int o2 = (i1 & 0xf) << 2 | i2 >>> 6;
 			final int o3 = i2 & 0x3F;
-			out[op] = map1[o0];
+			result[op] = map1[o0];
             op++;
-            out[op] = map1[o1];
+            result[op] = map1[o1];
             op++;
-            out[op] = op < oDataLen ? map1[o2] : '=';
+            result[op] = op < oDataLen ? map1[o2] : '=';
 			op++;
-			out[op] = op < oDataLen ? map1[o3] : '=';
+			result[op] = op < oDataLen ? map1[o3] : '=';
 			op++;
 		}
-		return out;
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 }

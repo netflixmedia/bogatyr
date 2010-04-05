@@ -33,8 +33,12 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.helper.HelperEnvironment;
 import ch.customcode.bogatyr.helper.HelperIO;
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperString;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
@@ -43,10 +47,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher opens, edits and prints files with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.7.0
  */
 public abstract class LauncherFile {
+	private static final Logger log = LoggerFactory.getLogger(LauncherFile.class);
+	
 	private static final File PATH = HelperEnvironment.getOsTempDirectory();
 	static final String IDENTIFIER = LauncherFile.class.getSimpleName();
 	
@@ -68,6 +74,7 @@ public abstract class LauncherFile {
 	 * @since 0.7.0
 	 */
 	public static void open(final byte[] data, final String extension) throws IOException {
+		log.debug(HelperLog.methodStart(data, extension));
 		if (null == data) {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
@@ -76,6 +83,8 @@ public abstract class LauncherFile {
 		}	
 		
 		open(createTemporaryFile(data, extension));
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -87,6 +96,7 @@ public abstract class LauncherFile {
 	 * @since 0.7.0
 	 */
 	public static void open(final File file) throws IOException { //$JUnit$
+		log.debug(HelperLog.methodStart(file));
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
 				throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
@@ -96,6 +106,7 @@ public abstract class LauncherFile {
 		} else {
 			throw new RuntimeException("Default system viewer application not supported by your machine!"); //$NON-NLS-1$
 		}
+		log.debug(HelperLog.methodExit());
 	}
 	
 	/**
@@ -108,6 +119,7 @@ public abstract class LauncherFile {
 	 * @since 0.7.0
 	 */
 	public static void open(final InputStream is, final String extension) throws IOException { //$JUnit$
+		log.debug(HelperLog.methodStart(is, extension));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
@@ -116,6 +128,8 @@ public abstract class LauncherFile {
 		}
 		
 		open(HelperIO.readStream(is), extension);
+		
+		log.debug(HelperLog.methodExit());
 	}
 	
 	/**
@@ -127,6 +141,7 @@ public abstract class LauncherFile {
 	 * @since 0.7.0
 	 */
 	public static void edit(final byte[] data, final String extension) throws IOException {
+		log.debug(HelperLog.methodStart(data, extension));
 		if (null == data) {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
@@ -135,6 +150,8 @@ public abstract class LauncherFile {
 		}	
 		
 		edit(createTemporaryFile(data, extension));
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -146,6 +163,7 @@ public abstract class LauncherFile {
 	 * @since 0.7.0
 	 */
 	public static void edit(final File file) throws IOException { //$JUnit$
+		log.debug(HelperLog.methodStart(file));
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
 				throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
@@ -155,6 +173,7 @@ public abstract class LauncherFile {
 		} else {
 			throw new RuntimeException("Default system editor application not supported by your machine!"); //$NON-NLS-1$
 		}
+		log.debug(HelperLog.methodExit());
 	}
 	
 	/**
@@ -167,6 +186,7 @@ public abstract class LauncherFile {
 	 * @since 0.7.0
 	 */
 	public static void edit(final InputStream is, final String extension) throws IOException { //$JUnit$
+		log.debug(HelperLog.methodStart(is, extension));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
@@ -175,6 +195,8 @@ public abstract class LauncherFile {
 		}
 		
 		edit(HelperIO.readStream(is), extension);
+		
+		log.debug(HelperLog.methodExit());
 	}
 	
 	/**
@@ -186,6 +208,7 @@ public abstract class LauncherFile {
 	 * @since 0.7.0
 	 */
 	public static void print(final byte[] data, final String extension) throws IOException {
+		log.debug(HelperLog.methodStart(data, extension));
 		if (null == data) {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
@@ -194,6 +217,8 @@ public abstract class LauncherFile {
 		}	
 		
 		print(createTemporaryFile(data, extension));
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -205,6 +230,7 @@ public abstract class LauncherFile {
 	 * @since 0.7.0
 	 */
 	public static void print(final File file) throws IOException { //$JUnit$
+		log.debug(HelperLog.methodStart(file));
 		if (Desktop.isDesktopSupported()) {
 			if (null == file) {
 				throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
@@ -214,6 +240,7 @@ public abstract class LauncherFile {
 		} else {
 			throw new RuntimeException("Default system print application not supported by your machine!"); //$NON-NLS-1$
 		}
+		log.debug(HelperLog.methodExit());
 	}
 	
 	/**
@@ -226,6 +253,7 @@ public abstract class LauncherFile {
 	 * @since 0.7.0
 	 */
 	public static void print(final InputStream is, final String extension) throws IOException { //$JUnit$
+		log.debug(HelperLog.methodStart(is, extension));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
@@ -234,6 +262,8 @@ public abstract class LauncherFile {
 		}
 		
 		print(HelperIO.readStream(is), extension);
+		
+		log.debug(HelperLog.methodExit());
 	}
 	
 	/**
@@ -243,6 +273,7 @@ public abstract class LauncherFile {
 	 * @since 0.8.0
 	 */
 	public static void deleteTemporaryFiles() throws IOException {
+		log.debug(HelperLog.methodStart());
 	    final FileFilter filter = new FileFilter() { 
 	    	@Override
             public boolean accept(final File file) {
@@ -253,6 +284,7 @@ public abstract class LauncherFile {
 		for (final File file : HelperIO.getFiles(PATH, filter)) {
 			HelperIO.delete(file);
 		}
+		log.debug(HelperLog.methodExit());
 	}
 	
 	
@@ -260,10 +292,13 @@ public abstract class LauncherFile {
 	 * Private methods
 	 */
 	private static File createTemporaryFile(final byte[] data, final String extension) throws IOException {
-		final File file = extension.startsWith(HelperString.PERIOD) ? new File(PATH, IDENTIFIER + System.currentTimeMillis() + extension) : new File(PATH, IDENTIFIER + System.currentTimeMillis() + HelperString.PERIOD + extension);
-
-		HelperIO.writeFile(file, data, false);
+		log.trace(HelperLog.methodStart(data, extension));
 		
-		return file;
+		final File result = extension.startsWith(HelperString.PERIOD) ? new File(PATH, IDENTIFIER + System.currentTimeMillis() + extension) : new File(PATH, IDENTIFIER + System.currentTimeMillis() + HelperString.PERIOD + extension);
+
+		HelperIO.writeFile(result, data, false);
+		
+		log.trace(HelperLog.methodExit(result));
+		return result;
 	}
 }
