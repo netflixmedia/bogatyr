@@ -38,6 +38,9 @@ import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.misc.Constants;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.model.misc.Platform;
@@ -47,11 +50,12 @@ import ch.customcode.bogatyr.model.misc.Platform;
  * This is a helper class for Swing.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100301)
+ * @version 0.9.1 (20100405)
  * @since 0.9.0
  */
 public abstract class HelperSwing {
-
+	private static final Logger log = LoggerFactory.getLogger(HelperSwing.class);
+	
     /**
      * Sets the menu on MacOSX to the standard style.
      * This method should be used before creating a new frame and after setting the L&F.
@@ -59,6 +63,7 @@ public abstract class HelperSwing {
      * @since 0.9.0
      */
 	public static void setMacOSXMenu() {
+		log.debug(HelperLog.methodStart());
 		if (Platform.MAC_OSX == HelperEnvironment.getPlatform()) {
 			//display the menu in MacOS X style
 			try {
@@ -82,68 +87,78 @@ public abstract class HelperSwing {
 					UIManager.put(pair.getKey(), pair.getValue());
 		        }
 		    } catch(Exception ex) {
-		    	//do nothing
+		    	log.error("Could not set MacOS X menu bar", ex); //$NON-NLS-1$
 		    }
 		}
+		log.debug(HelperLog.methodExit());
 	}
 	
+//	/**
+//     * Calculates the minimum value for a {@link JSlider} with a given tick.
+//     * 
+//     * @param minValue minimum value
+//     * @param tick of the {@link JSlider}
+//     * @return calculated minimum value
+//     * @see JSlider
+//     * @since 0.9.0
+//     */	
+//    public static int calculateSliderMin(final Number minValue, final Number tick) {
+//    	log.debug(HelperLog.methodStart(minValue, tick));
+//    	if (null == minValue) {
+//            throw new RuntimeExceptionIsNull("minValue"); //$NON-NLS-1$
+//        }
+//        if (null == tick) {
+//            throw new RuntimeExceptionIsNull("tick"); //$NON-NLS-1$
+//        }
+//
+//		final BigDecimal internalValue = new BigDecimal(minValue.toString());
+//		final BigDecimal internalTick = new BigDecimal(tick.toString());
+//
+//		final int result = internalValue.divide(internalTick, Constants.DEFAULT_MATHCONTEXT).intValue();
+//		
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//    }
+//
+//	/**
+//     * Calculates the maximum value for a {@link JSlider} with a given tick.
+//     * 
+//     * @param maxValue maximum value
+//     * @param tick of the {@link JSlider}
+//     * @return calculated maximum value
+//     * @see JSlider
+//     * @since 0.9.0
+//     */	
+//    public static int calculateSliderMax(final Number maxValue, final Number tick) {
+//    	log.debug(HelperLog.methodStart(maxValue, tick));
+//    	if (null == maxValue) {
+//            throw new RuntimeExceptionIsNull("maxValue"); //$NON-NLS-1$
+//        }
+//        if (null == tick) {
+//            throw new RuntimeExceptionIsNull("tick"); //$NON-NLS-1$
+//        }
+//
+//		final BigDecimal internalValue = new BigDecimal(maxValue.toString());
+//		final BigDecimal internalTick = new BigDecimal(tick.toString());
+//
+//		final int result = internalValue.divide(internalTick, Constants.DEFAULT_MATHCONTEXT).intValue();
+//		
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//    }
+
 	/**
-     * Calculates the minimum value for a {@link JSlider} with a given tick.
+     * Calculates the value for a {@link JSlider} with a given tick.
      * 
-     * @param minValue minimum value
+     * @param value for the {@link JSlider}
      * @param tick of the {@link JSlider}
-     * @return calculated minimum value
+     * @return calculated value
      * @see JSlider
      * @since 0.9.0
      */	
-    public static int calculateSliderMin(final Number minValue, final Number tick) {
-        if (null == minValue) {
-            throw new RuntimeExceptionIsNull("minValue"); //$NON-NLS-1$
-        }
-        if (null == tick) {
-            throw new RuntimeExceptionIsNull("tick"); //$NON-NLS-1$
-        }
-
-		final BigDecimal internalValue = new BigDecimal(minValue.toString());
-		final BigDecimal internalTick = new BigDecimal(tick.toString());
-
-    	return internalValue.divide(internalTick, Constants.DEFAULT_MATHCONTEXT).intValue();
-    }
-
-	/**
-     * Calculates the maximum value for a {@link JSlider} with a given tick.
-     * 
-     * @param maxValue maximum value
-     * @param tick of the {@link JSlider}
-     * @return calculated maximum value
-     * @see JSlider
-     * @since 0.9.0
-     */	
-    public static int calculateSliderMax(final Number maxValue, final Number tick) {
-        if (null == maxValue) {
-            throw new RuntimeExceptionIsNull("maxValue"); //$NON-NLS-1$
-        }
-        if (null == tick) {
-            throw new RuntimeExceptionIsNull("tick"); //$NON-NLS-1$
-        }
-
-		final BigDecimal internalValue = new BigDecimal(maxValue.toString());
-		final BigDecimal internalTick = new BigDecimal(tick.toString());
-
-        return internalValue.divide(internalTick, Constants.DEFAULT_MATHCONTEXT).intValue();
-    }
-
-	/**
-     * Calculates the current value for a {@link JSlider} with a given tick.
-     * 
-     * @param value current value
-     * @param tick of the {@link JSlider}
-     * @return calculated current value
-     * @see JSlider
-     * @since 0.9.0
-     */	
-    public static int calculateSliderValue(final Number value, final Number tick) {
-        if (null == value) {
+    public static int calculateValueForSlider(final Number value, final Number tick) {
+    	log.debug(HelperLog.methodStart(value, tick));
+    	if (null == value) {
             throw new RuntimeExceptionIsNull("value"); //$NON-NLS-1$
         }
         if (null == tick) {
@@ -152,8 +167,11 @@ public abstract class HelperSwing {
 
 		final BigDecimal internalValue = new BigDecimal(value.toString());
 		final BigDecimal internalTick = new BigDecimal(tick.toString());
-
-        return internalValue.divide(internalTick, Constants.DEFAULT_MATHCONTEXT).intValue();
+		
+		final int result = internalValue.divide(internalTick, Constants.DEFAULT_MATHCONTEXT).intValue();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 
 	/**
@@ -166,7 +184,8 @@ public abstract class HelperSwing {
      * @since 0.9.0
      */	
     public static BigDecimal calculateValueFromSlider(final JSlider slider, final Number tick) {
-        if (null == slider) {
+    	log.debug(HelperLog.methodStart(slider, tick));
+    	if (null == slider) {
             throw new RuntimeExceptionIsNull("slider"); //$NON-NLS-1$
         }
         if (null == tick) {
@@ -175,7 +194,10 @@ public abstract class HelperSwing {
 
         final BigDecimal internalTick = new BigDecimal(tick.toString());
         
-    	return new BigDecimal(slider.getValue()).multiply(internalTick, Constants.DEFAULT_MATHCONTEXT);
+		final BigDecimal result = new BigDecimal(slider.getValue()).multiply(internalTick, Constants.DEFAULT_MATHCONTEXT);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
     
     /**
@@ -186,6 +208,11 @@ public abstract class HelperSwing {
      * @since 0.9.1
      */
     public static Collection<LookAndFeelInfo> getAvailableLookAndFeels() {
-		return Arrays.asList(UIManager.getInstalledLookAndFeels());
+		log.debug(HelperLog.methodStart());
+		
+		final Collection<LookAndFeelInfo> result = Arrays.asList(UIManager.getInstalledLookAndFeels());
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 }

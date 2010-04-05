@@ -52,7 +52,7 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a format factory.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.9.0
  */
 public abstract class FormatFactory {
@@ -244,7 +244,7 @@ public abstract class FormatFactory {
 	        }
 	        
 	        @Override
-			public Object stringToValue(final String s) throws ParseException {
+			public Object stringToValue(final String s) {
 	        	final String text = HelperString.getValidNumericString(s);
 	        	
 	        	if (null != text) {
@@ -344,7 +344,7 @@ public abstract class FormatFactory {
 		return new DefaultFormatter() {
 			private static final long serialVersionUID = 2665033244806980400L;
 
-			transient Matcher matcher;
+			final transient Matcher matcher;
 
 			{
 				setCommitsOnValidEdit(true);

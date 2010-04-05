@@ -34,12 +34,16 @@ import java.net.URL;
 
 import javax.xml.bind.JAXBException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.helper.HelperEnvironment;
 import ch.customcode.bogatyr.helper.HelperIO;
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperNet;
 import ch.customcode.bogatyr.helper.HelperXml;
-import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsEquals;
+import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.model.misc.Platform;
 import ch.customcode.bogatyr.model.updater.ModelUpdater;
 import ch.customcode.bogatyr.service.ServiceAbstract;
@@ -49,25 +53,38 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * This is the updater for documents.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091210)
+ * @version 0.9.1 (20100405)
  * @since 0.6.0
  */
 public class UpdaterImpl extends ServiceAbstract implements Updater {
+	private static final Logger log = LoggerFactory.getLogger(UpdaterImpl.class);
+	
     /*
     * Implemented methods
     */
     @Override
 	public ModelUpdater getDocument(final File file) throws JAXBException {
-    	return HelperXml.deserialize(ModelUpdater.class, file);
+		log.debug(HelperLog.methodStart(file));
+
+		final ModelUpdater result = HelperXml.deserialize(file, ModelUpdater.class);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 
 	@Override
 	public ModelUpdater getDocument(final InputStream is) throws JAXBException {
-		return HelperXml.deserialize(ModelUpdater.class, is);
+		log.debug(HelperLog.methodStart(is));
+		
+		final ModelUpdater result = HelperXml.deserialize(is, ModelUpdater.class);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
 	public void update(final ModelUpdater document, final Platform platform, final File dest) throws IOException {
+		log.debug(HelperLog.methodStart(document, platform, dest));
         if (null == document) {
             throw new RuntimeExceptionIsNull("document"); //$NON-NLS-1$
         }
@@ -98,14 +115,18 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
         } else {
         	HelperIO.writeFile(dest, HelperNet.readUrl(new URL(location)), false);
         }
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void update(final ModelUpdater document, final File dest) throws IOException {
+		log.debug(HelperLog.methodStart(document, dest));
         if (null == document) {
             throw new RuntimeExceptionIsNull("document"); //$NON-NLS-1$
         }
 
         update(document, null == document.getLocation(HelperEnvironment.getPlatform()) ? Platform.ANY : HelperEnvironment.getPlatform(), dest);
+
+        log.debug(HelperLog.methodExit());
 	}
 }

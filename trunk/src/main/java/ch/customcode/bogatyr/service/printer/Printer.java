@@ -37,6 +37,10 @@ import java.awt.print.PrinterJob;
 
 import javax.swing.RepaintManager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.service.ServiceAbstract;
 
@@ -45,10 +49,12 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * This is a printer class for print operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20091027)
+ * @version 0.9.1 (20100405)
  * @since 0.5.0
  */
 public class Printer extends ServiceAbstract implements Printable {
+	private static final Logger log = LoggerFactory.getLogger(Printer.class);
+	
 	private Component componentToBePrinted;
 	private boolean isScaled;
 
@@ -62,7 +68,8 @@ public class Printer extends ServiceAbstract implements Printable {
      * @since 0.5.0
      */
     public synchronized void print(final Component component, final boolean isScaled) throws PrinterException {
-		if (null == component) {
+    	log.debug(HelperLog.methodStart(component, isScaled));
+    	if (null == component) {
 			throw new RuntimeExceptionIsNull("component"); //$NON-NLS-1$
 		}
 
@@ -70,6 +77,8 @@ public class Printer extends ServiceAbstract implements Printable {
     	this.isScaled = isScaled;
     	
         print();
+        
+        log.debug(HelperLog.methodExit());
     }
 
 
@@ -77,11 +86,15 @@ public class Printer extends ServiceAbstract implements Printable {
 	 * Private methods
 	 */
 	private void print() throws PrinterException {
+		log.trace(HelperLog.methodStart());
+		
 		final PrinterJob printJob = PrinterJob.getPrinterJob();
 		printJob.setPrintable(this);
 		if (printJob.printDialog()) {
 			printJob.print();
 		}
+		
+		log.trace(HelperLog.methodExit());
 	}
 	
 	/**
@@ -92,8 +105,12 @@ public class Printer extends ServiceAbstract implements Printable {
      * @since 0.5.0
 	 */
 	private static void disableDoubleBuffering(final Component component) {
+		log.trace(HelperLog.methodStart(component));
+		
 		final RepaintManager currentManager = RepaintManager.currentManager(component);
 		currentManager.setDoubleBufferingEnabled(false);
+		
+		log.trace(HelperLog.methodExit());
 	}
 
 	/** Re-enables double buffering globally.
@@ -102,8 +119,12 @@ public class Printer extends ServiceAbstract implements Printable {
      * @since 0.5.0
      */
 	private static void enableDoubleBuffering(final Component component) {
+		log.trace(HelperLog.methodStart(component));
+		
 		final RepaintManager currentManager = RepaintManager.currentManager(component);
 		currentManager.setDoubleBufferingEnabled(true);
+		
+		log.trace(HelperLog.methodExit());
 	}
 
 
@@ -112,30 +133,32 @@ public class Printer extends ServiceAbstract implements Printable {
      */
     @Override
     public synchronized int print(final Graphics graphics, final PageFormat pageFormat, final int pageIndex) {
-		if (null == graphics) {
+    	log.debug(HelperLog.methodStart(graphics, pageFormat, pageIndex));
+    	if (null == graphics) {
 			throw new RuntimeExceptionIsNull("graphics"); //$NON-NLS-1$
 		}
 		if (null == pageFormat) {
 			throw new RuntimeExceptionIsNull("pageFormat"); //$NON-NLS-1$
 		}
 
+		int result = NO_SUCH_PAGE;
     	if (0 < pageIndex) {
-			return NO_SUCH_PAGE;
-		}
-//		componentToBePrinted.setSize((int)(componentToBePrinted.getWidth() * pageFormat.getWidth()/componentToBePrinted.getWidth()), (int)(componentToBePrinted.getHeight() * pageFormat.getHeight()/componentToBePrinted.getHeight()));
-
-		final Graphics2D g2d = (Graphics2D) graphics;
-		g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
-
-		if (isScaled) {
-			g2d.scale(pageFormat.getImageableWidth()/(componentToBePrinted.getWidth() + 1), pageFormat.getImageableHeight()/(componentToBePrinted.getHeight() + 1)); //divide by 0 save
-		}
-
-
-        disableDoubleBuffering(componentToBePrinted);
-		componentToBePrinted.paint(g2d);
-		enableDoubleBuffering(componentToBePrinted);
+			final Graphics2D g2d = (Graphics2D) graphics;
+			g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+	
+			if (isScaled) {
+				g2d.scale(pageFormat.getImageableWidth()/(componentToBePrinted.getWidth() + 1), pageFormat.getImageableHeight()/(componentToBePrinted.getHeight() + 1)); //divide by 0 save
+			}
+	
+	
+	        disableDoubleBuffering(componentToBePrinted);
+			componentToBePrinted.paint(g2d);
+			enableDoubleBuffering(componentToBePrinted);
+			
+			result = PAGE_EXISTS;
+    	}
 		
-		return PAGE_EXISTS;
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 }

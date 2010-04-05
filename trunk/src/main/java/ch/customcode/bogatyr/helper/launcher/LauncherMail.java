@@ -140,7 +140,7 @@ public abstract class LauncherMail {
 	private static String getValidText(final String input) {
 		log.trace(HelperLog.methodStart(input));
 		
-		final StringBuffer sb = new StringBuffer(input.length());
+		final StringBuilder sb = new StringBuilder(input.length());
 
 	    for (final char c : input.toCharArray()) {
 	    	final int ci = 0xffff & c;
@@ -149,7 +149,7 @@ public abstract class LauncherMail {
                 sb.append(c);
             } else {
                 // Not 7 Bit - replace thru ?
-                sb.append("?"); //$NON-NLS-1$
+                sb.append('?');
             }
         }
 	    final String result = sb.toString();

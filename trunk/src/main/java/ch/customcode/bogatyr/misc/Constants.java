@@ -34,6 +34,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.helper.HelperNumber;
 import ch.customcode.bogatyr.helper.HelperTime;
 import ch.customcode.bogatyr.model.misc.Document;
@@ -51,8 +54,10 @@ import ch.customcode.bogatyr.model.misc.PublisherImpl;
  * @since 0.7.0
  */
 public abstract class Constants {
+	private static final Logger log = LoggerFactory.getLogger(Constants.class);
+	
 	//Bogatyr specific
-	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.91"), 247, HelperTime.getDate(5, 4, 2010), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.91"), 248, HelperTime.getDate(2010, 4, 5, 19, 55, 0), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
@@ -171,12 +176,13 @@ public abstract class Constants {
 
 	static {
 		try {
-			BOGATYR.setManufacturer(new ManufacturerImpl("Custom Code GmbH", "Grubenstrasse 9", "8045", "Zürich", "Switzerland", "laubenberger@gmail.com", new URL("http://www.customcode.ch/bogatyr"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			BOGATYR.setOwner(new OwnerImpl("Custom Code GmbH", "Grubenstrasse 9", "8045", "Zürich", "Switzerland", "info@customcode.ch", new URL("http://www.customcode.ch"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			BOGATYR.setPublisher(new PublisherImpl("Custom Code GmbH", "Grubenstrasse 9", "8045", "Zürich", "Switzerland", "info@customcode.ch", new URL("http://www.customcode.ch"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			BOGATYR.setManufacturer(new ManufacturerImpl("Custom Code GmbH", "Grubenstrasse 9", "8045", "Zürich", "Switzerland", "laubenberger@gmail.com", new URL("http://www.customcode.ch/bogatyr"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			BOGATYR.setOwner(new OwnerImpl("Custom Code GmbH", "Grubenstrasse 9", "8045", "Zürich", "Switzerland", "info@customcode.ch", new URL("http://www.customcode.ch"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			BOGATYR.setPublisher(new PublisherImpl("Custom Code GmbH", "Grubenstrasse 9", "8045", "Zürich", "Switzerland", "info@customcode.ch", new URL("http://www.customcode.ch"))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		} catch (MalformedURLException ex) {
+			System.out.println(ex);
 			// should never happen!
-			ex.printStackTrace();
+			log.error("URL invalid", ex); //$NON-NLS-1$
 		}
 	}
 }

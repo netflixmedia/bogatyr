@@ -34,6 +34,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
@@ -43,10 +46,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
  * This is a helper class for time operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100405)
  * @since 0.7.0
  */
 public abstract class HelperTime {
+	private static final Logger log = LoggerFactory.getLogger(HelperTime.class);
+	
 	public static final int HOURS_PER_DAY = 24;
 	public static final int DAYS_PER_WEEK = 7;
 	public static final int DAYS_PER_YEAR = 365;
@@ -71,7 +76,12 @@ public abstract class HelperTime {
      * @since 0.7.0
      */
 	public static Date getAtomicTime() throws IOException { //$JUnit$
-		return getAtomicTime(DEFAULT_TIME_SERVER);
+		log.debug(HelperLog.methodStart());
+		
+		final Date result = getAtomicTime(DEFAULT_TIME_SERVER);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
     /**
@@ -84,6 +94,7 @@ public abstract class HelperTime {
      * @since 0.7.0
      */
 	public static Date getAtomicTime(final String host) throws IOException { //$JUnit$
+		log.debug(HelperLog.methodStart(host));
 		if (!HelperString.isValid(host)) {
 			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
@@ -101,7 +112,10 @@ public abstract class HelperTime {
 				time ^= (long) is.read() << ii * 8;
 			}
 
-			return new Date((time - SECONDS_BETWEEN_1900_AND_1970) * HelperNumber.NUMBER_1000.longValue());
+    		final Date result = new Date((time - SECONDS_BETWEEN_1900_AND_1970) * HelperNumber.NUMBER_1000.longValue());
+    		
+    		log.debug(HelperLog.methodExit(result));
+    		return result;
 		} finally {
 			if (null != is) {
 				is.close();
@@ -116,49 +130,124 @@ public abstract class HelperTime {
     /**
      * Create a {@link Date} with day, month and year as parameters.
      *
-     * @param day range between 1-31
+     * @param year
      * @param month range between 1-12
-     * @param year 
+     * @param date range between 1-31
      * @return created date
      * @see Date
      * @since 0.7.0
      */
-    public static Date getDate(final int day, final int month, final int year) {
-    	if (0 > day) {
-    		throw new RuntimeExceptionMustBeGreater("day", day, 0); //$NON-NLS-1$
-    	}
-    	if (31 < day) {
-    		throw new RuntimeExceptionMustBeSmaller("day", day, 31); //$NON-NLS-1$
-    	}
+    public static Date getDate(final int year, final int month, final int date) {
+    	log.debug(HelperLog.methodStart(year, month, date));
+        if (0 > year) {
+            throw new RuntimeExceptionMustBeGreater("year", year, 0); //$NON-NLS-1$
+        }
+        if (9999 < year) {
+            throw new RuntimeExceptionMustBeSmaller("year", year, 9999); //$NON-NLS-1$
+        }
     	if (0 > month) {
     		throw new RuntimeExceptionMustBeGreater("month", month, 0); //$NON-NLS-1$
     	}
     	if (12 < month) {
     		throw new RuntimeExceptionMustBeSmaller("month", month, 12); //$NON-NLS-1$
     	}
-    	if (0 > year) {
-    		throw new RuntimeExceptionMustBeGreater("year", year, 0); //$NON-NLS-1$
-    	}
-    	if (9999 < year) {
-    		throw new RuntimeExceptionMustBeSmaller("year", year, 9999); //$NON-NLS-1$
-    	}
-    	
+        if (0 > date) {
+            throw new RuntimeExceptionMustBeGreater("date", date, 0); //$NON-NLS-1$
+        }
+        if (31 < date) {
+            throw new RuntimeExceptionMustBeSmaller("date", date, 31); //$NON-NLS-1$
+        }
+
     	final Calendar cal = new GregorianCalendar();
 
-        cal.set(year, month - 1, day);
+        cal.set(year, month - 1, date);
 
 
-        if (cal.get(Calendar.DAY_OF_MONTH) != day) {
-            throw new IllegalArgumentException("day value invalid: " + day); //$NON-NLS-1$
+        if (cal.get(Calendar.DAY_OF_MONTH) != date) {
+            throw new IllegalArgumentException("date value invalid: " + date); //$NON-NLS-1$
         }
 
         if (cal.get(Calendar.MONTH) != month - 1) {
             throw new IllegalArgumentException("month value invalid: " + month); //$NON-NLS-1$
         }
 
-        return cal.getTime();
+		final Date result = cal.getTime();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
     
+    /**
+     * Create a {@link Date} with day, month and year as parameters.
+     *
+     * @param year range between 0-9999
+     * @param month range between 1-12
+     * @param date range between 1-31
+     * @param hour range between 0-23
+     * @param minute range between 0-59
+     * @param second range between 0-59
+     * @return created date
+     * @see Date
+     * @since 0.9.1
+     */
+    public static Date getDate(final int year, final int month, final int date, final int hour, final int minute, final int second) {
+    	log.debug(HelperLog.methodStart(year, month, date));
+        if (0 > year) {
+            throw new RuntimeExceptionMustBeGreater("year", year, 0); //$NON-NLS-1$
+        }
+        if (9999 < year) {
+            throw new RuntimeExceptionMustBeSmaller("year", year, 9999); //$NON-NLS-1$
+        }
+    	if (0 > month) {
+    		throw new RuntimeExceptionMustBeGreater("month", month, 0); //$NON-NLS-1$
+    	}
+    	if (12 < month) {
+    		throw new RuntimeExceptionMustBeSmaller("month", month, 12); //$NON-NLS-1$
+    	}
+        if (0 > date) {
+            throw new RuntimeExceptionMustBeGreater("date", date, 0); //$NON-NLS-1$
+        }
+        if (31 < date) {
+            throw new RuntimeExceptionMustBeSmaller("date", date, 31); //$NON-NLS-1$
+        }
+        if (0 > hour) {
+            throw new RuntimeExceptionMustBeGreater("hour", hour, 0); //$NON-NLS-1$
+        }
+        if (23 < hour) {
+            throw new RuntimeExceptionMustBeSmaller("hour", hour, 23); //$NON-NLS-1$
+        }
+        if (0 > minute) {
+            throw new RuntimeExceptionMustBeGreater("minute", minute, 0); //$NON-NLS-1$
+        }
+        if (59 < minute) {
+            throw new RuntimeExceptionMustBeSmaller("minute", minute, 59); //$NON-NLS-1$
+        }
+        if (0 > second) {
+            throw new RuntimeExceptionMustBeGreater("second", second, 0); //$NON-NLS-1$
+        }
+        if (59 < second) {
+            throw new RuntimeExceptionMustBeSmaller("second", second, 59); //$NON-NLS-1$
+        }
+
+    	final Calendar cal = new GregorianCalendar();
+
+        cal.set(year, month - 1, date, hour, minute, second);
+
+
+        if (cal.get(Calendar.DAY_OF_MONTH) != date) {
+            throw new IllegalArgumentException("date value invalid: " + date); //$NON-NLS-1$
+        }
+
+        if (cal.get(Calendar.MONTH) != month - 1) {
+            throw new IllegalArgumentException("month value invalid: " + month); //$NON-NLS-1$
+        }
+
+		final Date result = cal.getTime();
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
+    }
+
     /**
      * Create a {@link Date} with a given offset in ms from the current time.
      *
@@ -168,6 +257,11 @@ public abstract class HelperTime {
      * @since 0.7.0
      */
     public static Date getDate(final long offSet) {
-         return new Date(System.currentTimeMillis() + offSet);
+    	log.debug(HelperLog.methodStart(offSet));
+    	
+		final Date result = new Date(System.currentTimeMillis() + offSet);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 }

@@ -30,6 +30,10 @@ package ch.customcode.bogatyr.service.profiler;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.service.ServiceAbstract;
 
 
@@ -37,17 +41,19 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * The implementation of a profiler.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100212)
+ * @version 0.9.1 (20100405)
  * @since 0.9.0
  */
 public class ProfilerImpl<T> extends ServiceAbstract implements Profiler<T> {
-
+	private static final Logger log = LoggerFactory.getLogger(ProfilerImpl.class);
+	
 	private final Map<T, Long> profiles =  new ConcurrentHashMap<T, Long>();
 	private long meanTime;
 	private long elapsedTime;
 	
 	public ProfilerImpl() {
 		super();
+		log.trace(HelperLog.constructor());
 		
 		start();
 	}
@@ -58,30 +64,42 @@ public class ProfilerImpl<T> extends ServiceAbstract implements Profiler<T> {
 	 */
 	@Override
 	public long getElapsedTime() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(elapsedTime));
 		return elapsedTime;
 	}
 
 	@Override
 	public Map<T, Long> getProfiles() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(profiles));
 		return profiles;
 	}
 
 	@Override
 	public long profile(final T event) {
-
+		log.debug(HelperLog.methodStart(event));
+		
 		final long currentTime = System.nanoTime();
-		final long elapsed = currentTime - meanTime;
-		profiles.put(event, elapsed);
+		final long result = currentTime - meanTime;
+		profiles.put(event, result);
 
-		elapsedTime += elapsed;
+		elapsedTime += result;
 		meanTime = currentTime;
 		
-		return elapsed;
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
 	public void start() {
+		log.debug(HelperLog.methodStart());
+		
 		profiles.clear();
 		meanTime = System.nanoTime();
+
+		log.debug(HelperLog.methodExit());
 	}
 }

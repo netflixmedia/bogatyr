@@ -48,7 +48,7 @@ import ch.customcode.bogatyr.model.updater.ModelUpdaterImpl;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100215
+ * @version 20100405
  */
 public class UpdaterTest {
 	@Before
@@ -79,9 +79,9 @@ public class UpdaterTest {
 		System.out.println(doc);
 		
 		try {
-			HelperXml.serialize(doc, new File("/Users/Shared/Transfer/test.xml")); //$NON-NLS-1$
+			HelperXml.serialize(new File("/Users/Shared/Transfer/test.xml"), doc); //$NON-NLS-1$
 	//		HelperXml.serialize(docs, new File("/Users/Shared/Transfer/test.xml"));
-			final ModelUpdater doc2 = HelperXml.deserialize(ModelUpdaterImpl.class, new File("/Users/Shared/Transfer/test.xml")); //$NON-NLS-1$
+			final ModelUpdater doc2 = HelperXml.deserialize(new File("/Users/Shared/Transfer/test.xml"), ModelUpdaterImpl.class); //$NON-NLS-1$
 	
 			System.out.println(doc2.getHashs());
 			

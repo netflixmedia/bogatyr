@@ -44,7 +44,7 @@ import ch.customcode.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  * This is a skeleton for server threads.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.7.0
  */
 public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implements ServerThread {
@@ -148,10 +148,10 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 			  }
 			} while (-1 != input);
 
-			if (null == result) { //client lost
-				stop();
-			}
-			return result;
+		if (null == result) { //client lost
+			stop();
+		}
+		return result;
     }
 
     @Override

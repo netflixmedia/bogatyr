@@ -60,7 +60,7 @@ public abstract class LauncherFile {
 		try {
 			deleteTemporaryFiles();
 		} catch (IOException ex) {
-			throw new RuntimeException("temporary files couldn't be deleted: " + ex.getLocalizedMessage()); //$NON-NLS-1$
+			log.warn("Could not delete temporary files", ex); //$NON-NLS-1$
 		}
 	}
 	

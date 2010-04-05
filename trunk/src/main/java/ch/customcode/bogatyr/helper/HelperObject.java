@@ -46,6 +46,9 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
@@ -55,10 +58,11 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.7.0
  */
 public abstract class HelperObject {
+	private static final Logger log = LoggerFactory.getLogger(HelperObject.class);
 	
 	/**
      * Creates an instance of a class.
@@ -74,11 +78,16 @@ public abstract class HelperObject {
 	 * @since 0.7.0
      */
 	public static <T> T createInstance(final Class<T> clazz) throws SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
+		log.debug(HelperLog.methodStart(clazz));
+		
 		if (null == clazz) {
 			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
 		
-		return clazz.getConstructor(HelperArray.EMPTY_ARRAY_CLASS).newInstance();
+		final T result = clazz.getConstructor(HelperArray.EMPTY_ARRAY_CLASS).newInstance();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -97,6 +106,7 @@ public abstract class HelperObject {
 	 * @since 0.7.0
      */
 	public static <T> T createInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
+		log.debug(HelperLog.methodStart(clazz, paramClazzes, params));
 		if (null == clazz) {
 			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
@@ -107,7 +117,10 @@ public abstract class HelperObject {
 			throw new RuntimeExceptionIsNull("params"); //$NON-NLS-1$
 		}
 		
-		return clazz.getConstructor(paramClazzes).newInstance(params);
+		final T result = clazz.getConstructor(paramClazzes).newInstance(params);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	/**
@@ -120,6 +133,7 @@ public abstract class HelperObject {
 	 * @since 0.7.0
 	 */
 	public static byte[] serialize(final Serializable object) throws IOException { //$JUnit$
+		log.debug(HelperLog.methodStart(object));
 		if (null == object) {
 			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
 		}	
@@ -132,7 +146,10 @@ public abstract class HelperObject {
             oos.writeObject(object);
             oos.flush();
 
-            return baos.toByteArray();
+    		final byte[] result = baos.toByteArray();
+    		
+    		log.debug(HelperLog.methodExit(result));
+    		return result;
         } finally {
         	if (null != oos) {
         		oos.close();	
@@ -151,6 +168,7 @@ public abstract class HelperObject {
 	 * @since 0.7.0
 	 */
 	public static Object deserialize(final byte[] data) throws IOException, ClassNotFoundException { //$JUnit$
+		log.debug(HelperLog.methodStart(data));
 		if (!HelperArray.isValid(data)) {
 			throw new RuntimeExceptionIsNullOrEmpty("data"); //$NON-NLS-1$
 		}
@@ -159,7 +177,44 @@ public abstract class HelperObject {
 		
         try {
             ois = new ObjectInputStream(new ByteArrayInputStream(data));
-            return ois.readObject();
+    		final Object result = ois.readObject();
+    		
+    		log.debug(HelperLog.methodExit(result));
+    		return result;
+        } finally {
+        	if (null != ois) {
+        		ois.close();
+        	}
+        }
+	}
+
+	/**
+	 * Deserialize a given byte-array into an {@link Object} from the given {@link Class}.
+	 * 
+	 * @param clazz full qualified class name
+	 * @param data byte-array to convert into an {@link Object}
+	 * @return {@link Object} from given byte-array and {@link Class}
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @since 0.7.0
+	 */
+	public static <T> T deserialize(final Class<T> clazz, final byte[] data) throws IOException, ClassNotFoundException { //$JUnit$
+		log.debug(HelperLog.methodStart(clazz, data));
+		if (!HelperArray.isValid(data)) {
+			throw new RuntimeExceptionIsNullOrEmpty("data"); //$NON-NLS-1$
+		}
+		if (null == clazz) {
+			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
+		}
+		
+		ObjectInputStream ois = null;
+		
+        try {
+            ois = new ObjectInputStream(new ByteArrayInputStream(data));
+    		final T result = (T)ois.readObject();
+    		
+    		log.debug(HelperLog.methodExit(result));
+    		return result;
         } finally {
         	if (null != ois) {
         		ois.close();
@@ -177,6 +232,7 @@ public abstract class HelperObject {
      * @since 0.7.0
      */
     public static boolean isMethodAvailable(final Class<?> clazz, final String methodName) { //$JUnit$
+    	log.debug(HelperLog.methodStart(clazz, methodName));
 		if (null == clazz) {
 			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
@@ -185,13 +241,15 @@ public abstract class HelperObject {
 		}
 		
     	final Method[] methods = clazz.getMethods();
-
+    	boolean result = false;
+    	
         for (final Method method : methods) {
             if (method.getName().equals(methodName)) {
-                return true;
+            	result = true;
             }
         }
-        return false;
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 
     /**
@@ -202,6 +260,7 @@ public abstract class HelperObject {
      * @since 0.7.0
      */
     public static String toString(final Object object) {
+//    	log.debug(HelperLog.methodStart(object));
 		if (null == object) {
 			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
 		}
@@ -209,7 +268,10 @@ public abstract class HelperObject {
     	final Collection<String> list = new ArrayList<String>();
     	toString(object, list);
 
-    	return object.getClass().getName() + list.toString();
+    	final String result = object.getClass().getName() + list.toString();
+    	
+//		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 
 	/**
@@ -221,7 +283,12 @@ public abstract class HelperObject {
      * @since 0.8.0
      */	
 	public static boolean isEquals(final Object objectA, final Object objectB) { //$JUnit$
-		return !((null == objectB && null != objectA) || (null != objectB && !objectB.equals(objectA)));
+		log.debug(HelperLog.methodStart(objectA, objectB));
+		
+		final boolean result = !((null == objectB && null != objectA) || (null != objectB && !objectB.equals(objectA)));
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	/**
@@ -233,6 +300,7 @@ public abstract class HelperObject {
      */	
 	@SuppressWarnings("unchecked")
 	public static <T extends Serializable> T clone(final T original) throws IOException, ClassNotFoundException {
+		log.debug(HelperLog.methodStart(original));
 		if (null == original) {
 			throw new RuntimeExceptionIsNull("original"); //$NON-NLS-1$
 		}
@@ -248,7 +316,10 @@ public abstract class HelperObject {
 			final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             ois = new CloneInput(bais, co);
 
-            return (T) ois.readObject();
+    		final T result = (T)ois.readObject();
+    		
+    		log.debug(HelperLog.methodExit(result));
+    		return result;
         } finally {
             if (null != co) {
                 co.close();
@@ -267,11 +338,15 @@ public abstract class HelperObject {
      * @since 0.9.1
      */
     public static String quote(final Object object) {
+    	log.debug(HelperLog.methodStart(object));
 		if (null == object) {
 			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
 		}
 
-		return HelperString.SINGLE_QUOTE + String.valueOf(object) + HelperString.SINGLE_QUOTE;
+		final String result = HelperString.SINGLE_QUOTE + String.valueOf(object) + HelperString.SINGLE_QUOTE;
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 
     
@@ -279,6 +354,8 @@ public abstract class HelperObject {
      * Private methods
      */
     private static void toString(final Object object, final Collection<String> list) {
+//    	log.trace(HelperLog.methodStart(object, list));
+    	
     	final Field[] fields = object.getClass().getDeclaredFields();
     	AccessibleObject.setAccessible(fields, true);
 
@@ -314,6 +391,8 @@ public abstract class HelperObject {
 ////    	if (clazz.getSuperclass() != null) {    		
 //    		toString(object, clazz.getSuperclass(), list);
 //    	}
+    	
+//    	log.debug(HelperLog.methodExit());
     }
     
     

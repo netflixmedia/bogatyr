@@ -138,7 +138,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
         	result = false;
         } else {
 	        // check odd divisors from 3 to the square root of n
-	        for (long ii = 3L, end = (long)StrictMath.sqrt((double) n); ii <= end && result == true; ii += 2L) {
+	        for (long ii = 3L, end = (long)StrictMath.sqrt((double) n); ii <= end && true == result; ii += 2L) {
 	            if (0L == n % ii) {
 	            	result = false;
 	            }

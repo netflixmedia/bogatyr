@@ -36,7 +36,10 @@ import java.security.Security;
 import javax.crypto.Mac;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.model.crypto.HmacAlgo;
 import ch.customcode.bogatyr.service.ServiceAbstract;
@@ -47,10 +50,12 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.9.1
  */
 public class HmacGeneratorImpl extends ServiceAbstract implements HmacGenerator {
+	private static final Logger log = LoggerFactory.getLogger(HmacGeneratorImpl.class);
+	
 	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
 
 	private final Mac mac;
@@ -61,6 +66,8 @@ public class HmacGeneratorImpl extends ServiceAbstract implements HmacGenerator 
 	
 	public HmacGeneratorImpl(final HmacAlgo algorithm) throws NoSuchAlgorithmException, NoSuchProviderException {
         super();
+        log.trace(HelperLog.constructor(algorithm));
+        
         mac = Mac.getInstance(algorithm.getAlgorithm(), PROVIDER);
     }
 	
@@ -70,13 +77,20 @@ public class HmacGeneratorImpl extends ServiceAbstract implements HmacGenerator 
 	 */
     @Override
 	public byte[] getHmac(final byte[] input, final Key key) throws InvalidKeyException {
+    	log.debug(HelperLog.methodStart(input, key));
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
-
+        if (null == key) {
+            throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
+        }
+        
         mac.init(key);
         mac.update(input);
 
-        return mac.doFinal();
+		final byte[] result = mac.doFinal();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 }

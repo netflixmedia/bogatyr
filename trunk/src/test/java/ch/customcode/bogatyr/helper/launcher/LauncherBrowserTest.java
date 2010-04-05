@@ -27,20 +27,14 @@
  */
 package ch.customcode.bogatyr.helper.launcher;
 
-import static org.junit.Assert.fail;
-
-import java.net.URI;
-
 import org.junit.Test;
-
-import ch.customcode.bogatyr.helper.launcher.LauncherBrowser;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100331
+ * @version 20100405
  */
 public class LauncherBrowserTest {
 	@Test

@@ -30,6 +30,9 @@ package ch.customcode.bogatyr.helper;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.misc.Constants;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
@@ -41,10 +44,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.7.0
  */
 public abstract class HelperString {
+	private static final Logger log = LoggerFactory.getLogger(HelperString.class);
+	
 	public static final String NEW_LINE = System.getProperty("line.separator"); //$NON-NLS-1$
 
 	public static final String EMPTY_STRING = ""; //$NON-NLS-1$
@@ -65,7 +70,12 @@ public abstract class HelperString {
      * @since 0.7.0
      */	
 	public static boolean isValid(final CharSequence input) { //$JUnit$
-        return !(null == input || 0 == input.length());
+		log.debug(HelperLog.methodStart(input));
+		
+		final boolean result = !(null == input || 0 == input.length());
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 
 	/**
@@ -76,18 +86,23 @@ public abstract class HelperString {
      * @since 0.7.0
      */	
 	public static boolean isNumeric(final String input) { //$JUnit$
-    	if (null == input) {
+		log.debug(HelperLog.methodStart(input));
+		if (null == input) {
     		throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
     	}
 
-    	//TODO a bit lazy implemented... improve with regex if possible
+		boolean result = false;
+
+		//TODO a bit lazy implemented... improve with regex if possible
 		try {
 			new BigDecimal(input);
-			return true;
+			result = true;
 		} catch (NumberFormatException ex) {
-//				return false;
+			log.info("NumberFormat invalid", ex); //$NON-NLS-1$
 		}
-		return false;
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -99,7 +114,8 @@ public abstract class HelperString {
      * @since 0.7.0
      */
     public static CharSequence fill(final char fillChar, final int fillLength) { //$JUnit$
-		if (0 >= fillLength) {
+    	log.debug(HelperLog.methodStart(fillChar, fillLength));
+    	if (0 >= fillLength) {
 			throw new RuntimeExceptionMustBeGreater("fillLength", fillLength, 0); //$NON-NLS-1$
 		}
 
@@ -110,7 +126,10 @@ public abstract class HelperString {
             --length;
             chars[length] = fillChar;
         }
-    	return new String(chars);
+		final String result = new String(chars);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
     
     /**
@@ -121,11 +140,15 @@ public abstract class HelperString {
      * @since 0.7.0
      */
     public static String reverse(final String input) { //$JUnit$
+    	log.debug(HelperLog.methodStart(input));
     	if (!isValid(input)) {
     		throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
     	}
-
-		return new StringBuilder(input).reverse().toString();
+    	
+		final String result = new StringBuilder(input).reverse().toString();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 
     /**
@@ -136,6 +159,7 @@ public abstract class HelperString {
      * @since 0.7.0
      */
     public static String getValidNumericString(final String text) { //$JUnit$
+    	log.debug(HelperLog.methodStart(text));
     	if (!isValid(text)) {
     		throw new RuntimeExceptionIsNullOrEmpty("text"); //$NON-NLS-1$
     	}
@@ -145,14 +169,14 @@ public abstract class HelperString {
     		isNegative = true;
     	}
     	
-    	final String result = text.replaceAll("[^0-9.]+", EMPTY_STRING); //$NON-NLS-1$
+    	final String temp = text.replaceAll("[^0-9.]+", EMPTY_STRING); //$NON-NLS-1$
 
     	boolean isPeriod = false;
-    	final StringBuilder sb = new StringBuilder(result.length());
+    	final StringBuilder sb = new StringBuilder(temp.length());
    
     	// remove multiple periods
-    	for (int ii = 0; ii < result.length(); ii++) {
-    		final char character = result.charAt(ii);
+    	for (int ii = 0; ii < temp.length(); ii++) {
+    		final char character = temp.charAt(ii);
    
     		if ('.' == character) {
     			if (!isPeriod) {
@@ -164,11 +188,14 @@ public abstract class HelperString {
     		}
     	}
     	
-    	if (result.isEmpty() || isPeriod && 1 == sb.length()) {
+    	if (temp.isEmpty() || isPeriod && 1 == sb.length()) {
     		return null;
     	}
     	
-    	return isNegative ? Constants.NEGATIVE_SIGN + sb.toString() : sb.toString();
+		final String result = isNegative ? Constants.NEGATIVE_SIGN + sb.toString() : sb.toString();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
     
     /**
@@ -181,7 +208,8 @@ public abstract class HelperString {
      * @since 0.7.0
      */
     public static String concatenate(final String[] strings, final String separator, final boolean isTrimmed) { //$JUnit$
-        if (!HelperArray.isValid(strings)) {
+    	log.debug(HelperLog.methodStart(strings, separator, isTrimmed));
+    	if (!HelperArray.isValid(strings)) {
         	throw new RuntimeExceptionIsNullOrEmpty("strings"); //$NON-NLS-1$
         }
 
@@ -200,7 +228,10 @@ public abstract class HelperString {
                 }
             }
         }
-        return sb.toString();
+		final String result = sb.toString();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
     
     /**
@@ -211,7 +242,12 @@ public abstract class HelperString {
      * @since 0.9.0
      */
     public static String concatenate(final String... strings) { //$JUnit$
-    	return concatenate(strings, null, true);
+    	log.debug(HelperLog.methodStart(strings));
+		
+    	final String result = concatenate(strings, null, true);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
     
     /**
@@ -224,7 +260,8 @@ public abstract class HelperString {
      * @throws UnsupportedEncodingException 
      * @since 0.8.0
      */
-	public static String toString(final byte[] data, /*final int length, */final String encoding) throws UnsupportedEncodingException {
+	public static String toString(final byte[] data, final String encoding) throws UnsupportedEncodingException {
+		log.debug(HelperLog.methodStart(data, encoding));
 		if (null == data) {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
@@ -232,8 +269,10 @@ public abstract class HelperString {
 			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
 		}
 
-//		return new String(data, 0, length, encoding);
-		return new String(data, encoding);
+    	final String result = new String(data, encoding);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
     /**
@@ -246,14 +285,18 @@ public abstract class HelperString {
      * @since 0.8.0
      */
 	public static byte[] toBytes(final String input, final String encoding) throws UnsupportedEncodingException {
+		log.debug(HelperLog.methodStart(input, encoding));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 		if (!isValid(encoding)) {
 			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
 		}
-
-		return input.getBytes(encoding);
+		
+    	final byte[] result = input.getBytes(encoding);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
     /**
@@ -265,14 +308,18 @@ public abstract class HelperString {
      * @since 0.9.0
      */
 	public static boolean startsWith(final String string, final String prefix) { //$JUnit$
+		log.debug(HelperLog.methodStart(string, prefix));
 		if (null == string) {
 			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
 		}
 		if (!isValid(prefix)) {
 			throw new RuntimeExceptionIsNullOrEmpty("prefix"); //$NON-NLS-1$
 		}
-
-		return string.matches("(?i)" + prefix + ".*");  //$NON-NLS-1$//$NON-NLS-2$
+		
+    	final boolean result = string.matches("(?i)" + prefix + ".*");  //$NON-NLS-1$//$NON-NLS-2$
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
     
 	/**
@@ -284,14 +331,18 @@ public abstract class HelperString {
      * @since 0.9.0
      */
 	public static boolean endsWith(final String string, final String suffix) { //$JUnit$
+		log.debug(HelperLog.methodStart(string, suffix));
 		if (null == string) {
 			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
 		}
 		if (!isValid(suffix)) {
 			throw new RuntimeExceptionIsNullOrEmpty("suffix"); //$NON-NLS-1$
 		}
-
-		return string.matches("(?i).*" + suffix); //$NON-NLS-1$
+		
+    	final boolean result = string.matches("(?i).*" + suffix); //$NON-NLS-1$
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -303,13 +354,17 @@ public abstract class HelperString {
      * @since 0.9.0
      */
 	public static boolean contains(final String string, final String part) { //$JUnit$
+		log.debug(HelperLog.methodStart(string, part));
 		if (null == string) {
 			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
 		}
 		if (!isValid(part)) {
 			throw new RuntimeExceptionIsNullOrEmpty("part"); //$NON-NLS-1$
 		}
-
-		return string.matches("(?i).*" + part + ".*");  //$NON-NLS-1$//$NON-NLS-2$
+		
+    	final boolean result = string.matches("(?i).*" + part + ".*");  //$NON-NLS-1$//$NON-NLS-2$
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 }
