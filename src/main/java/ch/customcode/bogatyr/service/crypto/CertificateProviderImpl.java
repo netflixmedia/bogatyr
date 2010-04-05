@@ -57,8 +57,11 @@ import org.bouncycastle.asn1.x509.KeyPurposeId;
 import org.bouncycastle.asn1.x509.KeyUsage;
 import org.bouncycastle.asn1.x509.X509Extensions;
 import org.bouncycastle.x509.X509V3CertificateGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ch.customcode.bogatyr.helper.HelperIO;
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.service.ServiceAbstract;
 
@@ -68,10 +71,12 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.1 (20100405)
  * @since 0.3.0
  */
 public class CertificateProviderImpl extends ServiceAbstract implements CertificateProvider {
+	private static final Logger log = LoggerFactory.getLogger(CertificateProviderImpl.class);
+	
 	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
 	
 	/*
@@ -79,7 +84,8 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 	 */
     @Override
     public X509Certificate readCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException { //$JUnit$
-		if (null == file) {
+    	log.debug(HelperLog.methodStart(file));
+    	if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 
@@ -87,7 +93,11 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 
         try {
             bis = new BufferedInputStream(new FileInputStream(file));
-            return readCertificate(new BufferedInputStream(new FileInputStream(file)));
+          
+    		final X509Certificate result = readCertificate(new BufferedInputStream(new FileInputStream(file)));
+    		
+    		log.debug(HelperLog.methodExit(result));
+    		return result;
         } finally {
             if (null != bis) {
                 bis.close();
@@ -97,7 +107,8 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 
     @Override
     public X509Certificate readCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {
-		if (null == is) {
+    	log.debug(HelperLog.methodStart(is));
+    	if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
 		
@@ -106,7 +117,10 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
             final CertificateFactory cf = CertificateFactory.getInstance("X.509", PROVIDER); //$NON-NLS-1$
 
             // get the certificate
-            return (X509Certificate)cf.generateCertificate(is);
+    		final X509Certificate result = (X509Certificate)cf.generateCertificate(is);
+    		
+    		log.debug(HelperLog.methodExit(result));
+    		return result;
         } finally {
             is.close();
         }
@@ -114,7 +128,8 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
     
     @Override
     public void writeCertificate(final OutputStream os, final Certificate cert) throws CertificateEncodingException, IOException {
-		if (null == os) {
+    	log.debug(HelperLog.methodStart(os, cert));
+    	if (null == os) {
 			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
 		}
 		if (null == cert) {
@@ -122,11 +137,14 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 		}
 		
 		HelperIO.writeStream(os, cert.getEncoded());
+		
+		log.debug(HelperLog.methodExit());
     }
     
     @Override
     public void writeCertificate(final File file, final Certificate cert) throws CertificateEncodingException, IOException { //$JUnit$
-		if (null == file) {
+    	log.debug(HelperLog.methodStart(file, cert));
+    	if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 		if (null == cert) {

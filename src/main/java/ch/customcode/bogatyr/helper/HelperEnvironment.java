@@ -473,7 +473,7 @@ public abstract class HelperEnvironment {
 		} else {
 			return Platform.UNIX; //this is a bit dirty, because it could be another system than Unix, but its the best guess...
 		}
-		
+
         log.debug(HelperLog.methodExit(result));
         return result;
 	}

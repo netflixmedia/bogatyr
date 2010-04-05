@@ -51,9 +51,6 @@ import ch.customcode.bogatyr.helper.HelperTimeTest;
 import ch.customcode.bogatyr.helper.HelperXmlTest;
 import ch.customcode.bogatyr.helper.encoder.EncoderBase64Test;
 import ch.customcode.bogatyr.helper.encoder.EncoderHexTest;
-import ch.customcode.bogatyr.helper.launcher.LauncherBrowserTest;
-import ch.customcode.bogatyr.helper.launcher.LauncherFileTest;
-import ch.customcode.bogatyr.helper.launcher.LauncherMailTest;
 import ch.customcode.bogatyr.misc.Constants;
 import ch.customcode.bogatyr.model.context.ContextTest;
 import ch.customcode.bogatyr.model.unit.UnitAreaTest;
@@ -71,7 +68,7 @@ import ch.customcode.bogatyr.view.swing.factory.FormatFactory;
  * Junit test suite
  * 
  * @author Stefan Laubenberger
- * @version 20100331
+ * @version 20100405
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA    = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~¡¢£¤¥¦§¨©ª«¬­®¯°±²³µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ" + //$NON-NLS-1$
@@ -119,9 +116,9 @@ public class AllBogatyrTests implements Runnable {
 				ScramblerTest.class,
 				EncoderBase64Test.class,
 				EncoderHexTest.class,
-				LauncherBrowserTest.class,
-				LauncherFileTest.class,
-				LauncherMailTest.class,
+//				LauncherBrowserTest.class,
+//				LauncherFileTest.class,
+//				LauncherMailTest.class,
 //				PaginatorTest.class,
 //				PrinterTest.class,
 				UnitAreaTest.class,

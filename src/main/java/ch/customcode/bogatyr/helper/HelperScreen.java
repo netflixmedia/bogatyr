@@ -31,36 +31,87 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.image.ColorModel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 
 /**
  * This is a helper class for screens.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100228)
+ * @version 0.9.1 (20100405)
  * @since 0.9.1
  */
 public abstract class HelperScreen {
-
+	private static final Logger log = LoggerFactory.getLogger(HelperScreen.class);
+	
+    /**
+     * Returns the current screen size in pixels as a {@link Dimension}.
+     *
+     * @return current screen size as a {@link Dimension}
+     * @see Dimension
+     * @since 0.9.1
+     */
 	public static Dimension getCurrentScreenSize() {
-		return Toolkit.getDefaultToolkit().getScreenSize();
+		log.debug(HelperLog.methodStart());
+		
+		final Dimension result = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
+    /**
+     * Returns the current screen color model as a {@link ColorModel}.
+     *
+     * @return current screen color model as a {@link ColorModel}
+     * @see ColorModel
+     * @since 0.9.1
+     */
 	public static ColorModel getCurrentColorModel() {
-		return Toolkit.getDefaultToolkit().getColorModel();
+		log.debug(HelperLog.methodStart());
+		
+		final ColorModel result = Toolkit.getDefaultToolkit().getColorModel();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 //	public static ColorModel getCurrentNumberOfColors() {
 //		return Toolkit.getDefaultToolkit().getColorModel().getColorSpace();
 //	}
 
+    /**
+     * Returns the current screen resolution in DPI.
+     *
+     * @return current screen resolution in DPI
+     * @since 0.9.1
+     */
 	public static int getCurrentScreenResolution() {
-		return Toolkit.getDefaultToolkit().getScreenResolution();
+		log.debug(HelperLog.methodStart());
+		
+		final int result = Toolkit.getDefaultToolkit().getScreenResolution();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
+    /**
+     * Checks if the given screen size fits to the current screen size.
+     *
+     * @param minSize given screen size as a {@link Dimension}
+     * @return true/false
+     * @see Dimension
+     * @since 0.9.1
+     */
 	public static boolean isValidScreenSize(final Dimension minSize) {
-		final Dimension resolution = getCurrentScreenSize();
+		log.debug(HelperLog.methodStart());
 		
-		return resolution.width >= minSize.width && resolution.height >= minSize.height;
+		final Dimension resolution = getCurrentScreenSize();
+		final boolean result = resolution.width >= minSize.width && resolution.height >= minSize.height;
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 }

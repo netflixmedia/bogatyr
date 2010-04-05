@@ -33,6 +33,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperString;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
@@ -44,10 +48,12 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.2.0
  */
 public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
+	private static final Logger log = LoggerFactory.getLogger(ProviderSqlImpl.class);
+	
 	// Server
 	private String driver;
 	private String url;
@@ -61,6 +67,8 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	
 	public ProviderSqlImpl(final String driver, final String url, final String user, final String password) {
         super();
+        log.trace(HelperLog.constructor(driver, url, user, password));
+        
         setDriver(driver);
         setUrl(url);
         setUser(user);
@@ -74,6 +82,9 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 * @since 0.2.0
 	 */
 	public String getDriver() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(driver));
 		return driver;
 	}
 
@@ -84,6 +95,9 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 * @since 0.2.0
 	 */
 	public String getUrl() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(url));
 		return url;
 	}
 
@@ -94,6 +108,9 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 * @since 0.2.0
 	 */
 	public String getUser() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(user));
 		return user;
 	}
 
@@ -104,6 +121,9 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 * @since 0.2.0
 	 */
 	public String getPassword() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(password));
 		return password;
 	}
 
@@ -114,11 +134,14 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 * @since 0.2.0
 	 */
 	public void setDriver(final String driver) {
+		log.debug(HelperLog.methodStart(driver));
     	if (null == driver) {
     		throw new RuntimeExceptionIsNull("driver"); //$NON-NLS-1$
     	}
     	
 		this.driver = driver;
+
+		log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -128,10 +151,13 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 * @since 0.2.0
 	 */
 	public void setUrl(final String url) {
+		log.debug(HelperLog.methodStart(url));
     	if (null == url) {
     		throw new RuntimeExceptionIsNull("url"); //$NON-NLS-1$
     	}
 		this.url = url;
+
+		log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -141,11 +167,14 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 * @since 0.2.0
 	 */
 	public void setUser(final String user) {
+		log.debug(HelperLog.methodStart(user));
 		if (null == user) {
 			throw new RuntimeExceptionIsNull("user"); //$NON-NLS-1$
 		}
 
 		this.user = user;
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -155,11 +184,14 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 * @since 0.2.0
 	 */
 	public void setPassword(final String password) {
+		log.debug(HelperLog.methodStart(password));
 		if (null == password) {
 			throw new RuntimeExceptionIsNull("password"); //$NON-NLS-1$
 		}
 
 		this.password = password;
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	
@@ -168,12 +200,18 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 */	
     @Override
     public Connection connectToDb() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchMethodException, InvocationTargetException {
-        Class.forName(driver).getConstructor().newInstance();
-		return DriverManager.getConnection(url, user, password);
+		log.debug(HelperLog.methodStart());
+		
+		Class.forName(driver).getConstructor().newInstance();
+		final Connection result = DriverManager.getConnection(url, user, password);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
     
     @Override
     public int executeUpdate(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchMethodException, InvocationTargetException {
+		log.debug(HelperLog.methodStart(statement));
     	if (!HelperString.isValid(statement)) {
     		throw new RuntimeExceptionIsNullOrEmpty("statement"); //$NON-NLS-1$
     	}
@@ -185,7 +223,10 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	    	con = connectToDb();
 			stmt = con.createStatement();
 	
-			return stmt.executeUpdate(statement);
+			final int result = stmt.executeUpdate(statement);
+			
+			log.debug(HelperLog.methodExit(result));
+			return result;
 		} finally {
 			if (null != con) {
                 con.close();
@@ -198,6 +239,7 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	
     @Override
     public boolean execute(final String statement) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchMethodException, InvocationTargetException  {
+		log.debug(HelperLog.methodStart(statement));
     	if (!HelperString.isValid(statement)) {
     		throw new RuntimeExceptionIsNullOrEmpty("statement"); //$NON-NLS-1$
     	}
@@ -209,7 +251,10 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	    	con = connectToDb();
 			stmt = con.createStatement();
 	
-			return stmt.execute(statement);
+			final boolean result = stmt.execute(statement);
+			
+			log.debug(HelperLog.methodExit(result));
+			return result;
 		} finally {
 			if (null != con) {
                 con.close();

@@ -1,97 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<module relativePaths="true" type="JAVA_MODULE" version="4"> 
-  <component name="NewModuleRootManager" inherit-compiler-output="false"> 
-    <output url="file://$MODULE_DIR$/target/classes"/>  
-    <output-test url="file://$MODULE_DIR$/target/test-classes"/>  
-    <exclude-output/>  
-    <content url="file://$MODULE_DIR$"> 
-      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false"/>
-      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true"/>
-      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" isTestSource="true"/>
-      <excludeFolder url="file://$MODULE_DIR$/target"/>
-    </content>  
-    <orderEntry type="sourceFolder" forTests="false"/>  
-    <orderEntry type="inheritedJdk"/>  
-    <orderEntry type="library" name="BouncyCastle" level="project"/>  
-    <orderEntry type="library" name="iText" level="project"/>  
-    <orderEntry type="library" name="XHTMLRenderer" level="project"/>  
+<module relativePaths="true" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="library" name="BouncyCastle" level="project" />
+    <orderEntry type="library" name="iText" level="project" />
+    <orderEntry type="library" name="XHTMLRenderer" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///Users/slaubenberger/.m2/repository/junit/junit/4.8.1/junit-4.8.1.jar!/"/>
+          <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.8.1/junit-4.8.1.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///Users/slaubenberger/.m2/repository/org/slf4j/slf4j-simple/1.5.11/slf4j-simple-1.5.11.jar!/"/>
+          <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/1.5.11/slf4j-simple-1.5.11.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///Users/slaubenberger/.m2/repository/org/slf4j/slf4j-api/1.5.11/slf4j-api-1.5.11.jar!/"/>
+          <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.5.11/slf4j-api-1.5.11.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///Users/slaubenberger/.m2/repository/org/xhtmlrenderer/core-renderer/R8pre2/core-renderer-R8pre2.jar!/"/>
+          <root url="jar://$MAVEN_REPOSITORY$/org/xhtmlrenderer/core-renderer/R8pre2/core-renderer-R8pre2.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///Users/slaubenberger/.m2/repository/com/lowagie/itext/2.1.7/itext-2.1.7.jar!/"/>
+          <root url="jar://$MAVEN_REPOSITORY$/com/lowagie/itext/2.1.7/itext-2.1.7.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///Users/slaubenberger/.m2/repository/bouncycastle/bcmail-jdk14/138/bcmail-jdk14-138.jar!/"/>
+          <root url="jar://$MAVEN_REPOSITORY$/bouncycastle/bcmail-jdk14/138/bcmail-jdk14-138.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///Users/slaubenberger/.m2/repository/bouncycastle/bcprov-jdk14/138/bcprov-jdk14-138.jar!/"/>
+          <root url="jar://$MAVEN_REPOSITORY$/bouncycastle/bcprov-jdk14/138/bcprov-jdk14-138.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///Users/slaubenberger/.m2/repository/org/bouncycastle/bctsp-jdk14/1.38/bctsp-jdk14-1.38.jar!/"/>
+          <root url="jar://$MAVEN_REPOSITORY$/org/bouncycastle/bctsp-jdk14/1.38/bctsp-jdk14-1.38.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///Users/slaubenberger/.m2/repository/org/bouncycastle/bcprov-jdk14/1.38/bcprov-jdk14-1.38.jar!/"/>
+          <root url="jar://$MAVEN_REPOSITORY$/org/bouncycastle/bcprov-jdk14/1.38/bcprov-jdk14-1.38.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///Users/slaubenberger/.m2/repository/org/bouncycastle/bcmail-jdk14/1.38/bcmail-jdk14-1.38.jar!/"/>
+          <root url="jar://$MAVEN_REPOSITORY$/org/bouncycastle/bcmail-jdk14/1.38/bcmail-jdk14-1.38.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar:///Users/slaubenberger/.m2/repository/org/bouncycastle/bcprov-jdk16/1.45/bcprov-jdk16-1.45.jar!/"/>
+          <root url="jar://$MAVEN_REPOSITORY$/org/bouncycastle/bcprov-jdk16/1.45/bcprov-jdk16-1.45.jar!/" />
         </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
-  </component> 
+  </component>
 </module>
+

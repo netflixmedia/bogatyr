@@ -39,6 +39,8 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsEquals;
@@ -62,11 +64,12 @@ import com.lowagie.text.pdf.PdfWriter;
  * <strong>Note:</strong> This class needs <a href="http://itextpdf.com/">iText</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100331)
+ * @version 0.9.1 (20100405)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
-
+	private static final Logger log = LoggerFactory.getLogger(HelperPdf.class);
+	
     /**
      * Writes a PDF from a {@link Component} to a {@link File}.
      *
@@ -79,6 +82,7 @@ public abstract class HelperPdf {
      * @since 0.5.0
      */
     public static void writePdfFromComponent(final File file, final Component component) throws IOException, DocumentException { //$JUnit$
+    	log.debug(HelperLog.methodStart(file, component));
     	if (null == file) {
     		throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
     	}
@@ -105,6 +109,7 @@ public abstract class HelperPdf {
 			document.close();
             fos.close();
         }
+		log.debug(HelperLog.methodExit());
 	}
 
     /**
@@ -119,6 +124,7 @@ public abstract class HelperPdf {
      * @since 0.5.0
      */
 	public static void writePdfFromHTML(final File file, final File... files) throws IOException, DocumentException { //$JUnit$
+		log.debug(HelperLog.methodStart(file, files));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -140,12 +146,11 @@ public abstract class HelperPdf {
 		       renderer.layout();
 		       renderer.writeNextDocument();
 		   }
-	
 		   renderer.finishPDF();
-
 		} finally {
 		   fos.close();
 		}
+		log.debug(HelperLog.methodExit());
 	}
 	
     /**
@@ -167,6 +172,7 @@ public abstract class HelperPdf {
      */
 	@SuppressWarnings("unchecked")
 	public static void setMetaData(final File source, final File dest, final Map<String, String> metadata) throws IOException, DocumentException {
+		log.debug(HelperLog.methodStart(source, dest, metadata));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
@@ -199,6 +205,7 @@ public abstract class HelperPdf {
 				reader.close();	   
 			}
 		}
+		log.debug(HelperLog.methodExit());
 	} 
 	
 	/**
@@ -213,6 +220,7 @@ public abstract class HelperPdf {
      * @since 0.9.0
      */
 	public static void unlock(final File source, final File dest, final byte[] user, final byte[] password) throws IOException, DocumentException {
+		log.debug(HelperLog.methodStart(source, dest, user, password));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
@@ -243,5 +251,6 @@ public abstract class HelperPdf {
 				reader.close();	   
 			}
 		}
+		log.debug(HelperLog.methodExit());
 	} 
 }

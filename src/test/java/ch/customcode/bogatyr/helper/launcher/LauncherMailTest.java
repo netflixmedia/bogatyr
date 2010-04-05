@@ -27,21 +27,14 @@
  */
 package ch.customcode.bogatyr.helper.launcher;
 
-import static org.junit.Assert.fail;
-
-import java.net.URI;
-
 import org.junit.Test;
-
-import ch.customcode.bogatyr.helper.HelperString;
-import ch.customcode.bogatyr.helper.launcher.LauncherMail;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100215
+ * @version 20100405
  */
 public class LauncherMailTest {
 	@Test

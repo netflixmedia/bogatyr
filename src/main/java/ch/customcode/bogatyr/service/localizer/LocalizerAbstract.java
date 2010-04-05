@@ -36,6 +36,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperNumber;
 import ch.customcode.bogatyr.misc.Event;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
@@ -46,10 +50,12 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * Abstract localizer implementation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.6.0
  */
 public abstract class LocalizerAbstract extends ServiceAbstract implements Localizer {
+	private static final Logger log = LoggerFactory.getLogger(LocalizerAbstract.class);
+	
 	private Collection<ListenerLocale> listListener = new HashSet<ListenerLocale>();
 
 	private final Event<Localizer> event = new Event<Localizer>(this);
@@ -61,9 +67,13 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	 * Private methods
 	 */
 	private void fireLocaleChanged() {
+		log.trace(HelperLog.methodStart());
+		
 		for (final ListenerLocale listener : listListener) {
 			listener.localeChanged(event);
 		}	
+		
+		log.trace(HelperLog.methodExit());
 	}
 
 	
@@ -72,110 +82,183 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	 */
     @Override
     public Boolean getBoolean(final String key) {
-        return null == getValue(key) ? null : Boolean.valueOf(getValue(key));
+		log.debug(HelperLog.methodStart(key));
+		
+		final Boolean result = null == getValue(key) ? null : Boolean.valueOf(getValue(key));
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 
 	@Override
     public BigDecimal getBigDecimal(final String key) {
-		return HelperNumber.getBigDecimal(getValue(key));
+		log.debug(HelperLog.methodStart(key));
+		
+		final BigDecimal result = HelperNumber.getBigDecimal(getValue(key));
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
     public BigInteger getBigInteger(final String key) {
-		return HelperNumber.getBigInteger(getValue(key));
+		log.debug(HelperLog.methodStart(key));
+		
+		final BigInteger result = HelperNumber.getBigInteger(getValue(key));
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
     public Byte getByte(final String key) {
-		return HelperNumber.getByte(getValue(key));
+		log.debug(HelperLog.methodStart(key));
+		
+		final Byte result = HelperNumber.getByte(getValue(key));
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
     public Double getDouble(final String key) {
-		return HelperNumber.getDouble(getValue(key));
+		log.debug(HelperLog.methodStart(key));
+		
+		final Double result = HelperNumber.getDouble(getValue(key));
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
     public Float getFloat(final String key) {
-		return HelperNumber.getFloat(getValue(key));
+		log.debug(HelperLog.methodStart(key));
+		
+		final Float result = HelperNumber.getFloat(getValue(key));
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
     public Integer getInteger(final String key) {
-		return HelperNumber.getInteger(getValue(key));
+		log.debug(HelperLog.methodStart(key));
+		
+		final Integer result = HelperNumber.getInteger(getValue(key));
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
     public Long getLong(final String key) {
-		return HelperNumber.getLong(getValue(key));
+		log.debug(HelperLog.methodStart(key));
+		
+		final Long result = HelperNumber.getLong(getValue(key));
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
     public Short getShort(final String key) {
-		return HelperNumber.getShort(getValue(key));
+		log.debug(HelperLog.methodStart(key));
+		
+		final Short result = HelperNumber.getShort(getValue(key));
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
     public File getFile(final String key) {
-		final String file = getValue(key);
+		log.debug(HelperLog.methodStart(key));
 		
-		return null == file ? null : new File(file);
+		final String file = getValue(key);
+		final File result = null == file ? null : new File(file);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
     public URL getURL(final String key) {
+		log.debug(HelperLog.methodStart(key));
+		
+		
 		final String url = getValue(key);
+		URL result = null;
 		
 		if (null != url) {
 			try {
-				return new URL(url);
-			} catch (MalformedURLException e) {
-				// do nothing
+				result = new URL(url);
+			} catch (MalformedURLException ex) {
+				log.info("URL invalid", ex); //$NON-NLS-1$
 			}
 		}
-		return null;
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
     public Locale getLocale() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(locale));
 		return locale;
 	}
 	
     @Override
     public void setLocale(final Locale locale) {
+		log.debug(HelperLog.methodStart(locale));
 		if (null == locale) {
 			throw new RuntimeExceptionIsNull("locale"); //$NON-NLS-1$
 		}
 
     	this.locale = locale;
         fireLocaleChanged();
+
+        log.debug(HelperLog.methodExit());
     }
     
     @Override
     public synchronized void addListener(final ListenerLocale listener) {
+		log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listListener.add(listener);
+
+		log.debug(HelperLog.methodExit());
     }
 
 	@Override
     public synchronized void deleteListener(final ListenerLocale listener) {
+		log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
-    	listListener.remove(listener);
+		listListener.remove(listener);
+
+		log.debug(HelperLog.methodExit());
     }
 
     @Override
     public synchronized void deleteListeners() {
-        listListener = new HashSet<ListenerLocale>();
+		log.debug(HelperLog.methodStart());
+		
+		listListener = new HashSet<ListenerLocale>();
+
+		log.debug(HelperLog.methodExit());
     }
 
     @Override
     public int countListeners() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(listListener.size()));
     	return listListener.size();
     }
 }

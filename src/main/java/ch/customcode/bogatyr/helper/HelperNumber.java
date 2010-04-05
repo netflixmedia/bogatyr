@@ -30,6 +30,9 @@ package ch.customcode.bogatyr.helper;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.misc.Constants;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
@@ -39,10 +42,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a helper class for numbers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
+	private static final Logger log = LoggerFactory.getLogger(HelperNumber.class);
+	
 //    public static final BigDecimal NUMBER_0 	  = BigDecimal.ZERO;
 //    public static final BigDecimal NUMBER_1 	  = BigDecimal.ONE;
 //    public static final BigDecimal NUMBER_2 	  = new BigDecimal("2"); //$NON-NLS-1$
@@ -101,6 +106,8 @@ public abstract class HelperNumber {
      * @since 0.7.0
      */
     public static BigDecimal multiply(final Number... values) {
+    	log.debug(HelperLog.methodStart(values));
+    	
 		if (!HelperArray.isValid(values)) {
 			throw new RuntimeExceptionIsNullOrEmpty("values"); //$NON-NLS-1$
 		}
@@ -110,6 +117,7 @@ public abstract class HelperNumber {
         for (int ii = 0; ii < values.length; ii++) {
             result = new BigDecimal((0 == ii ? values[0] : multiply(result, values[ii])).toString());
         }
+        log.debug(HelperLog.methodExit(result));
         return result;
     }
 
@@ -122,6 +130,7 @@ public abstract class HelperNumber {
      * @since 0.7.0
      */
     public static BigDecimal multiply(final Number a, final Number b) {
+    	log.debug(HelperLog.methodStart(a, b));
 		if (null == a) {
 			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
 		}
@@ -131,8 +140,11 @@ public abstract class HelperNumber {
        
 		final BigDecimal numberA = new BigDecimal(a.toString());
 		final BigDecimal numberB = new BigDecimal(b.toString());
-
-        return numberA.multiply(numberB, Constants.DEFAULT_MATHCONTEXT);
+		
+		final BigDecimal result = numberA.multiply(numberB, Constants.DEFAULT_MATHCONTEXT);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 
     /**
@@ -143,6 +155,7 @@ public abstract class HelperNumber {
      * @since 0.8.0
      */
     public static BigDecimal add(final Number... values) {
+    	log.debug(HelperLog.methodStart(values));
 		if (!HelperArray.isValid(values)) {
 			throw new RuntimeExceptionIsNullOrEmpty("values"); //$NON-NLS-1$
 		}
@@ -152,6 +165,7 @@ public abstract class HelperNumber {
         for (int ii = 0; ii < values.length; ii++) {
             result = new BigDecimal((0 == ii ? values[0] : add(result, values[ii])).toString());
         }
+        log.debug(HelperLog.methodExit(result));
         return result;
     }
 
@@ -164,6 +178,7 @@ public abstract class HelperNumber {
      * @since 0.8.0
      */
     public static BigDecimal add(final Number a, final Number b) {
+    	log.debug(HelperLog.methodStart(a, b));
 		if (null == a) {
 			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
 		}
@@ -173,8 +188,11 @@ public abstract class HelperNumber {
 		
 		final BigDecimal numberA = new BigDecimal(a.toString());
 		final BigDecimal numberB = new BigDecimal(b.toString());
-
-        return numberA.add(numberB);
+		
+		final BigDecimal result = numberA.add(numberB);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
     
 	/**
@@ -184,9 +202,13 @@ public abstract class HelperNumber {
      * @return {@link Double} from the {@link String} 
      */	
 	public static Double getDouble(final String text) {
-		final String value = HelperString.getValidNumericString(text);
+		log.debug(HelperLog.methodStart(text));
 		
-		return null == value ? null : new BigDecimal(value).doubleValue();
+		final String value = HelperString.getValidNumericString(text);
+		final Double result = null == value ? null : new BigDecimal(value).doubleValue();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	/**
@@ -196,9 +218,13 @@ public abstract class HelperNumber {
      * @return {@link Integer} from the {@link String} 
      */	
 	public static Integer getInteger(final String text) {
-		final String value = HelperString.getValidNumericString(text);
+		log.debug(HelperLog.methodStart(text));
 		
-		return null == value ? null : new BigDecimal(value).intValue();
+		final String value = HelperString.getValidNumericString(text);
+		final Integer result = null == value ? null : new BigDecimal(value).intValue();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	/**
@@ -208,9 +234,13 @@ public abstract class HelperNumber {
      * @return {@link Float} from the {@link String}
      */	
 	public static Float getFloat(final String text) {
-		final String value = HelperString.getValidNumericString(text);
+		log.debug(HelperLog.methodStart(text));
 		
-		return null == value ? null : new BigDecimal(value).floatValue();
+		final String value = HelperString.getValidNumericString(text);
+		final Float result = null == value ? null : new BigDecimal(value).floatValue();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	/**
@@ -220,9 +250,13 @@ public abstract class HelperNumber {
      * @return {@link Byte} from the {@link String}
      */	
 	public static Byte getByte(final String text) {
-		final String value = HelperString.getValidNumericString(text);
+		log.debug(HelperLog.methodStart(text));
 		
-		return null == value ? null : new BigDecimal(value).byteValue();
+		final String value = HelperString.getValidNumericString(text);
+		final Byte result = null == value ? null : new BigDecimal(value).byteValue();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	/**
@@ -232,9 +266,13 @@ public abstract class HelperNumber {
      * @return {@link Long} from the {@link String}
      */	
 	public static Long getLong(final String text) {
-		final String value = HelperString.getValidNumericString(text);
+		log.debug(HelperLog.methodStart(text));
 		
-		return null == value ? null : new BigDecimal(value).longValue();
+		final String value = HelperString.getValidNumericString(text);
+		final Long result = null == value ? null : new BigDecimal(value).longValue();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	/**
@@ -244,9 +282,13 @@ public abstract class HelperNumber {
      * @return {@link Short} from the {@link String} 
      */	
 	public static Short getShort(final String text) {
-		final String value = HelperString.getValidNumericString(text);
+		log.debug(HelperLog.methodStart(text));
 		
-		return null == value ? null : new BigDecimal(value).shortValue();
+		final String value = HelperString.getValidNumericString(text);
+		final Short result = null == value ? null : new BigDecimal(value).shortValue();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	/**
@@ -256,9 +298,13 @@ public abstract class HelperNumber {
      * @return {@link BigInteger} from the {@link String} 
      */	
 	public static BigInteger getBigInteger(final String text) {
-		final String value = HelperString.getValidNumericString(text);
+		log.debug(HelperLog.methodStart(text));
 		
-		return null == value ? null : new BigInteger(value);
+		final String value = HelperString.getValidNumericString(text);
+		final BigInteger result = null == value ? null : new BigInteger(value);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	/**
@@ -268,9 +314,13 @@ public abstract class HelperNumber {
      * @return {@link BigDecimal} from the {@link String}
      */	
 	public static BigDecimal getBigDecimal(final String text) {
-		final String value = HelperString.getValidNumericString(text);
+		log.debug(HelperLog.methodStart(text));
 		
-		return null == value ? null : new BigDecimal(value);
+		final String value = HelperString.getValidNumericString(text);
+		final BigDecimal result = null == value ? null : new BigDecimal(value);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	/**
@@ -280,6 +330,11 @@ public abstract class HelperNumber {
      * @return {@link String} from the {@link Number}
      */	
 	public static String getString(final Number number) {
-		return null == number ? HelperString.EMPTY_STRING : number.toString();
+		log.debug(HelperLog.methodStart(number));
+		
+		final String result = null == number ? HelperString.EMPTY_STRING : number.toString();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 }

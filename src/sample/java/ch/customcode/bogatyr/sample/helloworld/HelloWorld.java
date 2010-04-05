@@ -31,6 +31,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
+import org.apache.log4j.PropertyConfigurator;
+
 import ch.customcode.bogatyr.controller.ApplicationAbstract;
 import ch.customcode.bogatyr.helper.HelperString;
 import ch.customcode.bogatyr.service.localizer.Localizer;
@@ -44,7 +46,7 @@ import ch.customcode.bogatyr.service.property.PropertyImpl;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20100331
+ * @version 20100405
  */
 public class HelloWorld extends ApplicationAbstract { 
 	// Fixed parameter - e.g. this could be an argument
@@ -63,15 +65,16 @@ public class HelloWorld extends ApplicationAbstract {
 	
 	
 	public static void main(final String[] args) {
-		new HelloWorld();
+		PropertyConfigurator.configure("src/sample/configuration/ch/customcode/bogatyr/sample/helloworld/standard.properties");
+		
+		final HelloWorld hw = new HelloWorld();
+		hw.run();
 	}
 	
 	public HelloWorld() {
 		super();
 
 		init();
-		
-		run();
 	}
 
 	/*

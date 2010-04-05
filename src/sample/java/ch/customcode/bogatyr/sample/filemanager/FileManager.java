@@ -31,6 +31,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 
+import org.apache.log4j.PropertyConfigurator;
+
 import ch.customcode.bogatyr.controller.ApplicationAbstract;
 import ch.customcode.bogatyr.helper.HelperIO;
 import ch.customcode.bogatyr.helper.HelperString;
@@ -44,7 +46,7 @@ import ch.customcode.bogatyr.service.property.PropertyImpl;
  * Simple file manager using the Bogatyr framework
  * 
  * @author Stefan Laubenberger
- * @version 20100331
+ * @version 20100405
  */
 public class FileManager extends ApplicationAbstract {
 	// Fixed parameter - e.g. this could be an argument
@@ -68,14 +70,16 @@ public class FileManager extends ApplicationAbstract {
 	
 	
 	public static void main(final String[] args) {
-		new FileManager();
+		PropertyConfigurator.configure("src/sample/configuration/ch/customcode/bogatyr/sample/filemanager/standard.properties");
+		
+		final FileManager fm = new FileManager();
+		fm.run();
 	}
 	
 	public FileManager() {
 		super();
 		
 		init();
-		run();
 	}
 	
 	

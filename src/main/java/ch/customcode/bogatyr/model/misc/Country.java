@@ -156,8 +156,8 @@ public enum Country {
 	}
 
 	public Language getLanguage() {
-		for (Language language : Language.values()) {
-			if (language.getCode() == locale.getLanguage()) {
+		for (final Language language : Language.values()) {
+			if (language.getCode().equals(locale.getLanguage())) {
 				return language;
 			}
 		}

@@ -36,6 +36,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
@@ -44,10 +47,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for XML operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.3.0
  */
 public abstract class HelperXml {
+	private static final Logger log = LoggerFactory.getLogger(HelperXml.class);
+	
 	/**
      * This method ensures that the output String has only valid XML unicode characters as specified by the XML 1.0 standard.
      * For reference, please see <a href="http://www.w3.org/TR/2000/REC-xml-20001006#NT-Char">the standard</a>. 
@@ -58,7 +63,8 @@ public abstract class HelperXml {
      * @since 0.3.0
      */
     public static String getValidXmlString(final String input) { //$JUnit$
-        if (null == input) {
+		log.debug(HelperLog.methodStart(input));
+		if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
        
@@ -72,91 +78,104 @@ public abstract class HelperXml {
                 }
             }
         }
-        return sb.toString();
+        final String result = sb.toString();
+        
+        log.debug(HelperLog.methodExit(result));
+        return result;
     }
     
 	/**
      * Serialize data to an XML and store it to a file {@link File}.
      *
-     * @param data (object) to serialize as XML
      * @param file to store the serialized data
+     * @param data (object) to serialize as XML
      * @see File
      * @since 0.9.0
      */
-    public static <T> void serialize(final T data, final File file) throws JAXBException {
-		if (null == data) {
-			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
-		}
+    public static <T> void serialize(final File file, final T data) throws JAXBException {
+    	log.debug(HelperLog.methodStart(file, data));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
+		if (null == data) {
+			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
+		}
 
 		getMarshaller(data.getClass()).marshal(data, file);
+		
+		log.debug(HelperLog.methodExit());
     }
 
 	/**
      * Serialize data to an XML and store it to an output stream {@link OutputStream}.
      *
-     * @param data (object) to serialize as XML
      * @param os {@link OutputStream} to store the serialized data
+     * @param data (object) to serialize as XML
      * @see OutputStream
      * @since 0.9.0
      */
-    public static <T> void serialize(final T data, final OutputStream os) throws JAXBException {
-		if (null == data) {
+    public static <T> void serialize(final OutputStream os, final T data) throws JAXBException {
+    	log.debug(HelperLog.methodStart(os, data));
+    	if (null == os) {
+    		throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
+    	}
+    	if (null == data) {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
-		}
-		if (null == os) {
-			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
 		}
 
 		getMarshaller(data.getClass()).marshal(data, os);
+		
+		log.debug(HelperLog.methodExit());
     }
 
 	/**
      * Deserialize data from a XML file {@link File}.
      *
-     * @param clazz for the serialized data
      * @param file containing the serialized data
+     * @param clazz for the serialized data
      * @return data as object
      * @see File
      * @since 0.9.0
      */
     @SuppressWarnings("unchecked")
-	public static <T> T deserialize(final Class<T> clazz, final File file) throws JAXBException {
-		if (null == clazz) {
-			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
-		}
+	public static <T> T deserialize(final File file, final Class<T> clazz) throws JAXBException {
+    	log.debug(HelperLog.methodStart(file, clazz));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.isFile()) {
-//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
-//		}
+		if (null == clazz) {
+			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
+		}
 
-		return (T)getUnmarshaller(clazz).unmarshal(file);
+		final T result = (T)getUnmarshaller(clazz).unmarshal(file);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 
 	/**
      * Deserialize data from an input stream {@link InputStream}.
      *
-     * @param clazz for the serialized data
      * @param is {@link InputStream} containing the serialized data
+     * @param clazz for the serialized data
      * @return data as object
      * @see InputStream
      * @since 0.9.0
      */
     @SuppressWarnings("unchecked")
-	public static <T> T deserialize(final Class<T> clazz, final InputStream is) throws JAXBException {
-		if (null == clazz) {
-			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
-		}
+	public static <T> T deserialize(final InputStream is, final Class<T> clazz) throws JAXBException {
+    	log.debug(HelperLog.methodStart(is, clazz));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
+		if (null == clazz) {
+			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
+		}
 
-		return (T)getUnmarshaller(clazz).unmarshal(is);
+		final T result = (T)getUnmarshaller(clazz).unmarshal(is);
 		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
     
     
@@ -164,17 +183,23 @@ public abstract class HelperXml {
      * Private methods
      */
     private static <T> Marshaller getMarshaller(final Class<T> clazz) throws JAXBException {
-		final JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
-		final Marshaller marshaller = jaxbContext.createMarshaller();
+    	log.trace(HelperLog.methodStart(clazz));
+    	final JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
+		final Marshaller result = jaxbContext.createMarshaller();
 //		marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		result.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		
-		return marshaller;
+		log.trace(HelperLog.methodExit(result));
+		return result;
     }
     
     private static <T> Unmarshaller getUnmarshaller(final Class<T> clazz) throws JAXBException {
-		final JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
+    	log.trace(HelperLog.methodStart(clazz));
+    	
+    	final JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
+		final Unmarshaller result = jaxbContext.createUnmarshaller();
 		
-		return jaxbContext.createUnmarshaller();
+		log.trace(HelperLog.methodExit(result));
+		return result;
     }
 }

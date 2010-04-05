@@ -52,7 +52,7 @@ public abstract class EncoderHtml {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
 
-        final StringBuffer sb = new StringBuffer(input.length());
+        final StringBuilder sb = new StringBuilder(input.length());
 	    boolean lastWasBlankChar = false;
 
 	    for (final char c : input.toCharArray()) {
@@ -84,7 +84,7 @@ public abstract class EncoderHtml {
 	                } else {
 	                    // Not 7 Bit use the unicode system
 	                    sb.append("&#"); //$NON-NLS-1$
-	                    sb.append(new Integer(ci).toString());
+	                    sb.append(Integer.toString(ci));
 	                    sb.append(';');
                     }
                 }

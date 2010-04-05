@@ -40,110 +40,22 @@ import ch.customcode.bogatyr.model.misc.Document;
  * @since 0.9.1
  */
 public abstract class HelperLog {
-	private static final String ID_APPLICATION_START = "+++";
-	private static final String ID_APPLICATION_EXIT = "---";
-	private static final String ID_METHOD_START = ">>>";
-	private static final String ID_METHOD_EXIT = "<<<";
-	private static final String ID_CONSTRUCTOR = "***";
-	private static final String NULL = " null";
-	private static final String EMPTY = " empty";
-	
-//	public static void trace(final Logger logger, String message) {
-//		if (logger.isTraceEnabled()) {
-//			logger.trace('<' + getCaller().getMethodName() + ">: " + message);
-//		}
-//	}	
-//
-//	public static void trace(final Logger logger, String message, Object... args) {
-//		if (logger.isTraceEnabled()) {
-//			logger.trace('<' + getCaller().getMethodName() + ">: " + message, args);
-//		}
-//	}	
-//
-//	public static void trace(final Logger logger, String message, Throwable t) {
-//		if (logger.isTraceEnabled()) {
-//			logger.trace('<' + getCaller().getMethodName() + ">: " + message, t);
-//		}
-//	}	
-//
-//	public static void debug(final Logger logger, String message) {
-//		if (logger.isDebugEnabled()) {
-//			logger.debug('<' + getCaller().getMethodName() + ">: " + message);
-//		}
-//	}	
-//
-//	public static void debug(final Logger logger, String message, Object... args) {
-//		if (logger.isDebugEnabled()) {
-//			logger.debug('<' + getCaller().getMethodName() + ">: " + message, args);
-//		}
-//	}
-//
-//	public static void debug(final Logger logger, String message, Throwable t) {
-//		if (logger.isDebugEnabled()) {
-//			logger.debug('<' + getCaller().getMethodName() + ">: " + message, t);
-//		}
-//	}	
-//
-//	public static void info(final Logger logger, String message) {
-//		if (logger.isInfoEnabled()) {
-//			logger.info('<' + getCaller().getMethodName() + ">: " + message);
-//		}
-//	}	
-//
-//	public static void info(final Logger logger, String message, Object... args) {
-//		if (logger.isInfoEnabled()) {
-//			logger.info('<' + getCaller().getMethodName() + ">: " + message, args);
-//		}
-//	}	
-//
-//	public static void info(final Logger logger, String message, Throwable t) {
-//		if (logger.isInfoEnabled()) {
-//			logger.info('<' + getCaller().getMethodName() + ">: " + message, t);
-//		}
-//	}	
-//	
-//	public static void warn(final Logger logger, String message) {
-//		if (logger.isWarnEnabled()) {
-//			logger.warn('<' + getCaller().getMethodName() + ">: " + message);
-//		}
-//	}	
-//
-//	public static void warn(final Logger logger, String message, Object... args) {
-//		if (logger.isWarnEnabled()) {
-//			logger.warn('<' + getCaller().getMethodName() + ">: " + message, args);
-//		}
-//	}	
-//
-//	public static void warn(final Logger logger, String message, Throwable t) {
-//		if (logger.isWarnEnabled()) {
-//			logger.warn('<' + getCaller().getMethodName() + ">: " + message, t);
-//		}
-//	}	
-//	
-//	public static void error(final Logger logger, String message) {
-//		if (logger.isErrorEnabled()) {
-//			logger.error('<' + getCaller().getMethodName() + ">: " + message);
-//		}
-//	}	
-//
-//	public static void error(final Logger logger, String message, Object... args) {
-//		if (logger.isErrorEnabled()) {
-//			logger.error('<' + getCaller().getMethodName() + ">: " + message, args);
-//		}
-//	}	
-//
-//	public static void error(final Logger logger, String message, Throwable t) {
-//		if (logger.isErrorEnabled()) {
-//			logger.error('<' + getCaller().getMethodName() + ">: " + message, t);
-//		}
-//	}	
+	private static final String ID_APPLICATION_START 	= "+++"; //$NON-NLS-1$
+	private static final String ID_APPLICATION_EXIT		= "---"; //$NON-NLS-1$
+	private static final String ID_METHOD_START 		= ">>>"; //$NON-NLS-1$
+	private static final String ID_METHOD_EXIT 			= "<<<"; //$NON-NLS-1$
+	private static final String ID_CONSTRUCTOR 			= "***"; //$NON-NLS-1$
+
+	private static final String NULL	= " null"; //$NON-NLS-1$
+	private static final String EMPTY	= " empty"; //$NON-NLS-1$
+
 	
 	public static String applicationStart(final Document document) {
 		if (null == document) {
 			throw new RuntimeExceptionIsNull("document"); //$NON-NLS-1$
 		}
 
-		return ID_APPLICATION_START + HelperString.SPACE + document.getName() + HelperString.SPACE + document.getVersion() + " (" + document.getBuild() + ") " + ID_APPLICATION_START;
+		return ID_APPLICATION_START + HelperString.SPACE + document.getName() + HelperString.SPACE + document.getVersion() + " (" + document.getBuild() + ") " + ID_APPLICATION_START; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	public static String applicationExit(final Document document, final int returnCode) {
@@ -151,7 +63,7 @@ public abstract class HelperLog {
 			throw new RuntimeExceptionIsNull("document"); //$NON-NLS-1$
 		}
 
-		return ID_APPLICATION_EXIT + HelperString.SPACE + document.getName() + ": " + returnCode + HelperString.SPACE + ID_APPLICATION_EXIT;
+		return ID_APPLICATION_EXIT + HelperString.SPACE + document.getName() + ": " + returnCode + HelperString.SPACE + ID_APPLICATION_EXIT; //$NON-NLS-1$
 	}
 
 	public static String methodStart() {
@@ -163,15 +75,15 @@ public abstract class HelperLog {
 		sb.append(ID_METHOD_START);
 		
 		if (null != args) {
-			if (args.length == 0) {
+			if (0 == args.length) {
 				sb.append(EMPTY);
 			} else {
 				for (final Object obj : args) {
 		            if (sb.length() > ID_METHOD_START.length()) {
 		                sb.append(HelperString.COMMA);
 		            }
-		            sb.append(HelperString.SPACE + String.valueOf(obj));
-		//            sb.append(HelperString.SPACE + HelperObject.toString(obj));
+                    sb.append(HelperString.SPACE);
+		            sb.append(String.valueOf(obj));
 				}
 			}
 		} else {
@@ -179,38 +91,6 @@ public abstract class HelperLog {
 		}
 		return sb.toString();
 	}
-
-//	public static String methodStart(final byte[]... args) {
-//		final StringBuilder sb = new StringBuilder();
-//		sb.append(ID_METHOD_START);
-//		
-//		if (null != args) {
-//			if (args.length == 0) {
-//				sb.append(EMPTY);
-//			} else {
-//				sb.append(HelperString.SPACE + args);
-//			}
-//		} else {
-//            sb.append(NULL);
-//		}
-//		return sb.toString();
-//	}
-//	
-//	public static String methodStart(final char[]... args) {
-//		final StringBuilder sb = new StringBuilder();
-//		sb.append(ID_METHOD_START);
-//		
-//		if (null != args) {
-//			if (args.length == 0) {
-//				sb.append(EMPTY);
-//			} else {
-//				sb.append(HelperString.SPACE + args);
-//			}
-//		} else {
-//            sb.append(NULL);
-//		}
-//		return sb.toString();
-//	}
 
 	public static String methodExit() {
 		return ID_METHOD_EXIT;
@@ -229,15 +109,15 @@ public abstract class HelperLog {
 		sb.append(ID_CONSTRUCTOR);
 		
 		if (null != args) {
-			if (args.length == 0) {
+			if (0 == args.length) {
 				sb.append(EMPTY);
 			} else {
 				for (final Object obj : args) {
 		            if (sb.length() > ID_METHOD_START.length()) {
 		                sb.append(HelperString.COMMA);
 		            }
-		            sb.append(HelperString.SPACE + String.valueOf(obj));
-		//            sb.append(HelperString.SPACE + HelperObject.toString(obj));
+                    sb.append(HelperString.SPACE);
+		            sb.append(String.valueOf(obj));
 				}
 			}
 		} else {
@@ -245,11 +125,4 @@ public abstract class HelperLog {
 		}
 		return sb.toString();
 	}
-	
-//	private static StackTraceElement getCaller() {
-//		final Throwable t = new Throwable();
-//		final StackTraceElement[] elements = t.getStackTrace();
-//		
-//		return elements[3];
-//	}
 }

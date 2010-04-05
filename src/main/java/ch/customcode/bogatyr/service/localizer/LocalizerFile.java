@@ -33,6 +33,10 @@ import java.util.ResourceBundle;
 
 import javax.swing.KeyStroke;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
@@ -40,10 +44,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Localizer implementation for file access.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.1 (20100405)
  * @since 0.1.0
  */
 public class LocalizerFile extends LocalizerAbstract {
+	private static final Logger log = LoggerFactory.getLogger(LocalizerFile.class);
+	
 	public static final String POSTFIX_ACCELERATOR = ".accelerator"; //$NON-NLS-1$
 	public static final String POSTFIX_MNEMONIC = ".mnemonic"; //$NON-NLS-1$
 	public static final String POSTFIX_TOOLTIP = ".tooltip"; //$NON-NLS-1$
@@ -54,7 +60,8 @@ public class LocalizerFile extends LocalizerAbstract {
 	
 	public LocalizerFile(final String localizerBase) {
         super();
-
+        log.trace(HelperLog.constructor(localizerBase));
+        
         if (null == localizerBase) {
 			throw new RuntimeExceptionIsNull("localizerBase"); //$NON-NLS-1$
 		}
@@ -71,6 +78,9 @@ public class LocalizerFile extends LocalizerAbstract {
 	 * @since 0.1.0
 	 */
 	public String getLocalizerBase() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(localizerBase));
 		return localizerBase;
 	}
 
@@ -81,12 +91,15 @@ public class LocalizerFile extends LocalizerAbstract {
 	 * @since 0.1.0
 	 */
     public void setLocalizerBase(final String localizerBase) {
-		if (null == localizerBase) {
+    	log.debug(HelperLog.methodStart(localizerBase));
+    	if (null == localizerBase) {
 			throw new RuntimeExceptionIsNull("localizerBase"); //$NON-NLS-1$
 		}
 		
 		this.localizerBase = localizerBase;
         bundle = ResourceBundle.getBundle(localizerBase, getLocale());
+        
+        log.debug(HelperLog.methodExit());
     }
 	
 	
@@ -103,6 +116,7 @@ public class LocalizerFile extends LocalizerAbstract {
 	 */
     @Override
 	public void setLocale(final Locale locale) {
+    	log.debug(HelperLog.methodStart(locale));
 		if (null == locale) {
 			throw new RuntimeExceptionIsNull("locale"); //$NON-NLS-1$
 		}
@@ -110,6 +124,8 @@ public class LocalizerFile extends LocalizerAbstract {
 		bundle = ResourceBundle.getBundle(localizerBase, locale);
 
         super.setLocale(locale);
+        
+        log.debug(HelperLog.methodExit());
     }
 
     
@@ -118,29 +134,48 @@ public class LocalizerFile extends LocalizerAbstract {
 	 */
 	@Override
     public String getValue(final String key) {
+		log.debug(HelperLog.methodStart(key));
+		
+		String result = null;
 		try {
-			return bundle.getString(key);
+			result = bundle.getString(key);
 		} catch (MissingResourceException ex) {
-			return null;
+			log.warn("Resource not found", ex); //$NON-NLS-1$
 		}
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	@Override
     public KeyStroke getAccelerator(final String key) {
+		log.debug(HelperLog.methodStart(key));
+
 		final String keystroke = bundle.getString(key + POSTFIX_ACCELERATOR);
+		final KeyStroke result = null == keystroke ? null : KeyStroke.getKeyStroke(keystroke);
 		
-		return null == keystroke ? null : KeyStroke.getKeyStroke(keystroke);
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	@Override
     public int getMnemonic(final String key) {
+		log.debug(HelperLog.methodStart(key));
+
 		final String mnemonic = bundle.getString(key + POSTFIX_MNEMONIC);
+		final int result = null == mnemonic ? 0 : (int) mnemonic.charAt(0);
 		
-		return null == mnemonic ? 0 : (int) mnemonic.charAt(0);
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
     public String getTooltip(final String key) {
-		return bundle.getString(key + POSTFIX_TOOLTIP);
+		log.debug(HelperLog.methodStart(key));
+		
+		final String result = bundle.getString(key + POSTFIX_TOOLTIP);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 }

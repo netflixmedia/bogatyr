@@ -27,18 +27,14 @@
  */
 package ch.customcode.bogatyr.helper.launcher;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Test;
-
-import ch.customcode.bogatyr.helper.launcher.LauncherFile;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20090610
+ * @version 20100405
  */
 public class LauncherFileTest {
 	@Test

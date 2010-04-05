@@ -36,43 +36,11 @@ import ch.customcode.bogatyr.helper.HelperObject;
  * This is an extended JMenuBar.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.1 (20100405)
  * @since 0.2.0
  */
 public class MenuBar extends JMenuBar {
 	private static final long serialVersionUID = -5107664209576098148L;
-	
-//	static {
-//		if (HelperEnvironment.isMacPlatform()) {
-//			//display the menu in MacOS X style
-//			try {
-//				LookAndFeel laf = UIManager.getLookAndFeel();
-//				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//				
-//				Map<Object, Object> map = new HashMap<Object, Object>();
-//				
-//				map.put("MenuBarUI", UIManager.get("MenuBarUI"));
-//				map.put("MenuUI", UIManager.get("MenuUI"));
-//				map.put("MenuItemUI", UIManager.get("MenuItemUI"));
-//				map.put("CheckBoxMenuItemUI", UIManager.get("CheckBoxMenuItemUI"));
-//				map.put("RadioButtonMenuItemUI", UIManager.get("RadioButtonMenuItemUI"));
-//				map.put("PopupMenuUI", UIManager.get("PopupMenuUI"));
-//				
-//				UIManager.setLookAndFeel(laf);
-//				
-//		        for (final Map.Entry<?, ?> pair : map.entrySet()) {
-//					UIManager.put(pair.getKey(), pair.getValue());
-//		        }
-//				
-//				
-////				System.setProperty("apple.laf.useScreenMenuBar", "true"); //$NON-NLS-1$ //$NON-NLS-2$
-////	            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Bogatyr");  //$NON-NLS-1$//$NON-NLS-2$
-////	            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//		    } catch(Exception ex) {
-//		    	//do nothing
-//		    }
-//		}
-//	}
 
 	/*
 	 * Superclass constructors

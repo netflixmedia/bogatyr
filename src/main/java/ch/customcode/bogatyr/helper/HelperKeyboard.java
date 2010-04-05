@@ -42,10 +42,17 @@ import org.slf4j.LoggerFactory;
 public abstract class HelperKeyboard {
 	private static final Logger log = LoggerFactory.getLogger(HelperKeyboard.class);
 
-	public static boolean isNonPrintableKey(final int keyCode) {
+	/**
+     * Checks if a key code is printable.
+     * 
+     * @param keyCode to check
+     * @return true/false
+     * @since 0.9.1
+     */	
+	public static boolean isKeyPrintable(final int keyCode) {
 		log.debug(HelperLog.methodStart(keyCode));
 		
-		final boolean result = (0 > keyCode || //keyCode couldn't be negative
+		final boolean result = !(0 > keyCode || //keyCode couldn't be negative
 								8 == keyCode || // backspace
 							    (16 <= keyCode && 18 >= keyCode) || // shift, ctrl, alt
 				                20 == keyCode || // Caps lock

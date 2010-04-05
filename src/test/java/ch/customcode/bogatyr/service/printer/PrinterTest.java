@@ -27,25 +27,14 @@
  */
 package ch.customcode.bogatyr.service.printer;
 
-import static org.junit.Assert.fail;
-
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-
 import org.junit.Test;
-
-import ch.customcode.bogatyr.helper.HelperString;
-import ch.customcode.bogatyr.service.printer.Printer;
-import ch.customcode.bogatyr.view.swing.Button;
 
 
 /**
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100331
+ * @version 20100405
  */
 public class PrinterTest {
 	@Test

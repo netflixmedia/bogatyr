@@ -34,9 +34,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.misc.Constants;
 import ch.customcode.bogatyr.helper.HelperArray;
 import ch.customcode.bogatyr.helper.HelperEnvironment;
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
@@ -49,11 +53,11 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * This is a class for obfuscating data with CFB.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.3.0
  */
 public class ScramblerImpl extends ServiceAbstract implements Scrambler {
-
+	private static final Logger log = LoggerFactory.getLogger(ScramblerImpl.class);
 	
 	/*
      * Private methods
@@ -67,6 +71,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
      * @since 0.3.0
 	 */
 	private static byte[] obfuscate(final byte[] input, final byte pattern) {
+		log.trace(HelperLog.methodStart(input, pattern));
 		if (!HelperArray.isValid(input)) {
 			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
@@ -80,6 +85,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 		for (int ii = 1; ii < input.length; ii++) {
 			result[ii] = (byte)(input[ii] ^ (int) result[ii-1]);
 		}
+		log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -92,6 +98,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
      * @since 0.3.0
 	 */
 	private static byte[] unobfuscate(final byte[] input, final byte pattern) {
+		log.trace(HelperLog.methodStart(input, pattern));
 		if (!HelperArray.isValid(input)) {
 			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
@@ -105,11 +112,13 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 		for (int ii = 1; ii < input.length; ii++) {
 			result[ii] = (byte)(input[ii] ^ (int) input[ii-1]);
 		}
+		log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 
 	private static void obfuscate(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
-        if (null == input) {
+		log.trace(HelperLog.methodStart(input, output, pattern, bufferSize));
+		if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
 		if (null == output) {
@@ -152,11 +161,13 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
                 os.close();
             }
         }
+        log.trace(HelperLog.methodExit());
 	}
 	
 
 	private static void unobfuscate(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
-        if (null == input) {
+		log.trace(HelperLog.methodStart(input, output, pattern, bufferSize));
+		if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
 		if (null == output) {
@@ -197,6 +208,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
                 os.close();
             }
         }
+        log.trace(HelperLog.methodExit());
 	}
 
 	
@@ -205,31 +217,57 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 	 */
 	@Override
     public byte[] scramble(final byte[] input, final byte pattern) { //$JUnit$
-		return obfuscate(input, pattern);
+		log.debug(HelperLog.methodStart(input, pattern));
+		
+		final byte[] result = obfuscate(input, pattern);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
     public byte[] unscramble(final byte[] input, final byte pattern) { //$JUnit$
-		return unobfuscate(input, pattern);
+		log.debug(HelperLog.methodStart(input, pattern));
+		
+		final byte[] result = unobfuscate(input, pattern);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
 	public void scramble(final File input, final File output, final byte pattern) throws IOException {
+		log.debug(HelperLog.methodStart(input, output, pattern));
+		
 		obfuscate(input, output, pattern, Constants.DEFAULT_FILE_BUFFER_SIZE);
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void scramble(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
+		log.debug(HelperLog.methodStart(input, output, pattern, bufferSize));
+		
 		obfuscate(input, output, pattern, bufferSize);
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void unscramble(final File input, final File output, final byte pattern) throws IOException {
+		log.debug(HelperLog.methodStart(input, output, pattern));
+		
 		unobfuscate(input, output, pattern, Constants.DEFAULT_FILE_BUFFER_SIZE);
+		
+		log.debug(HelperLog.methodExit());
 	}
 	
 	@Override
 	public void unscramble(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
+		log.debug(HelperLog.methodStart(input, output, pattern, bufferSize));
+		
 		unobfuscate(input, output, pattern, bufferSize);
+		
+		log.debug(HelperLog.methodExit());
 	}
 }

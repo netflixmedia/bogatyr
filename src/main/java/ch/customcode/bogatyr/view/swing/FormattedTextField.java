@@ -45,7 +45,7 @@ import ch.customcode.bogatyr.misc.Activatable;
  * This is an extended JFormattedTextField.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100202)
+ * @version 0.9.1 (20100405)
  * @since 0.9.0
  */
 public class FormattedTextField extends JFormattedTextField implements Activatable {
@@ -151,7 +151,7 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 					'.' != key &&
 					'-' != key &&
 					'+' != key &&
-					!HelperKeyboard.isNonPrintableKey(e.getKeyCode())) {
+					HelperKeyboard.isKeyPrintable(e.getKeyCode())) {
 					
 					e.consume();
 				}

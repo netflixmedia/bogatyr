@@ -158,7 +158,7 @@ public abstract class LauncherProcess {
 					}
 				}
 			} catch (IOException ex) {
-				throw new RuntimeException("Couldn't read the stream of the process: " + ex.getLocalizedMessage()); //$NON-NLS-1$
+				throw new RuntimeException("Could not read the stream of the process: " + ex.getLocalizedMessage()); //$NON-NLS-1$
 			}
 		}
 	}
