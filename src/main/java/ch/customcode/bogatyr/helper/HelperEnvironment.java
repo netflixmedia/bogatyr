@@ -32,6 +32,9 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.TimeZone;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.model.misc.Platform;
 
@@ -42,10 +45,12 @@ import ch.customcode.bogatyr.model.misc.Platform;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
+	private static final Logger log = LoggerFactory.getLogger(HelperEnvironment.class);
+	
 	/**
 	 * Returns the used VM memory in bytes.
      *
@@ -53,7 +58,12 @@ public abstract class HelperEnvironment {
      * @since 0.9.0
 	 */
 	public static long getMemoryUsed() {
-		return getMemoryTotal() - Runtime.getRuntime().freeMemory();
+		log.debug(HelperLog.methodStart());
+		
+		final long result = getMemoryTotal() - Runtime.getRuntime().freeMemory();
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 	
 	/**
@@ -63,7 +73,12 @@ public abstract class HelperEnvironment {
      * @since 0.9.0
 	 */
 	public static long getMemoryFree() {
-		return getMemoryMax() - getMemoryUsed();
+		log.debug(HelperLog.methodStart());
+		
+		final long result = getMemoryMax() - getMemoryUsed();
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 
 	/**
@@ -73,7 +88,12 @@ public abstract class HelperEnvironment {
      * @since 0.9.0
 	 */
 	public static long getMemoryTotal() {
-		return Runtime.getRuntime().totalMemory();
+		log.debug(HelperLog.methodStart());
+		
+		final long result = Runtime.getRuntime().totalMemory();
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 
 	/**
@@ -83,7 +103,12 @@ public abstract class HelperEnvironment {
      * @since 0.9.0
 	 */
 	public static long getMemoryMax() {
-		return Runtime.getRuntime().maxMemory();
+		log.debug(HelperLog.methodStart());
+		
+		final long result = Runtime.getRuntime().maxMemory();
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 	
 	/**
@@ -93,7 +118,12 @@ public abstract class HelperEnvironment {
      * @since 0.7.0
 	 */
 	public static String getJavaVersion() { //$JUnit$
-		return System.getProperties().getProperty("java.version"); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final String result = System.getProperties().getProperty("java.version"); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 
 	/**
@@ -103,7 +133,12 @@ public abstract class HelperEnvironment {
      * @since 0.7.0
 	 */
 	public static String getJavaVendor() { //$JUnit$
-		return System.getProperties().getProperty("java.vendor"); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final String result = System.getProperties().getProperty("java.vendor"); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 	
 	/**
@@ -113,7 +148,12 @@ public abstract class HelperEnvironment {
      * @since 0.9.0
 	 */
 	public static String getJavaVmName() { //$JUnit$
-		return System.getProperties().getProperty("java.vm.name"); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final String result = System.getProperties().getProperty("java.vm.name"); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}	
 	
 	/**
@@ -123,7 +163,12 @@ public abstract class HelperEnvironment {
      * @since 0.9.0
 	 */
 	public static String getJavaVmVersion() { //$JUnit$
-		return System.getProperties().getProperty("java.vm.version"); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final String result = System.getProperties().getProperty("java.vm.version"); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}	
 	
 	/**
@@ -133,7 +178,12 @@ public abstract class HelperEnvironment {
      * @since 0.7.0
 	 */
 	public static String getClassPath() { //$JUnit$
-		return System.getProperties().getProperty("java.class.path"); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final String result = System.getProperties().getProperty("java.class.path"); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 	
 	/**
@@ -143,7 +193,12 @@ public abstract class HelperEnvironment {
      * @since 0.7.0
 	 */
 	public static String getLibraryPath() { //$JUnit$
-		return System.getProperties().getProperty("java.library.path"); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final String result = System.getProperties().getProperty("java.library.path"); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 	
 	/**
@@ -157,6 +212,7 @@ public abstract class HelperEnvironment {
 	 * @since 0.8.0
 	 */
 	public static void addPathToLibraryPath(final File path) throws SecurityException, NoSuchFieldException, IllegalAccessException {
+		log.debug(HelperLog.methodStart(path));
 		if (null == path) {
 			throw new RuntimeExceptionIsNull("path"); //$NON-NLS-1$
 		}
@@ -180,6 +236,7 @@ public abstract class HelperEnvironment {
 		field.set(null,tmp);
 		
 		System.setProperty("java.library.path", System.getProperty("java.library.path") + HelperIO.PATH_SEPARATOR + location); //$NON-NLS-1$ //$NON-NLS-2$
+		log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -189,7 +246,12 @@ public abstract class HelperEnvironment {
      * @since 0.6.0
 	 */
 	public static int getAvailableProcessors() { //$JUnit$
-		return Runtime.getRuntime().availableProcessors();
+		log.debug(HelperLog.methodStart());
+		
+		final int result = Runtime.getRuntime().availableProcessors();
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 
 	/**
@@ -199,7 +261,12 @@ public abstract class HelperEnvironment {
      * @since 0.1.0
 	 */
 	public static String getOsArch() { //$JUnit$
-		return System.getProperties().getProperty("os.arch"); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final String result = System.getProperties().getProperty("os.arch"); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 
 	/**
@@ -209,7 +276,12 @@ public abstract class HelperEnvironment {
      * @since 0.1.0
 	 */
 	public static String getOsName() { //$JUnit$
-		return System.getProperties().getProperty("os.name"); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final String result = System.getProperties().getProperty("os.name"); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 
 	/**
@@ -219,7 +291,12 @@ public abstract class HelperEnvironment {
      * @since 0.1.0
 	 */
 	public static String getOsVersion() { //$JUnit$
-		return System.getProperties().getProperty("os.version"); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final String result = System.getProperties().getProperty("os.version"); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 
 	/**
@@ -230,7 +307,12 @@ public abstract class HelperEnvironment {
 	 * @since 0.1.0
 	 */
 	public static Map<Object, Object> getJavaProperties() { //$JUnit$
-		return System.getProperties();
+		log.debug(HelperLog.methodStart());
+		
+		final Map<Object, Object> result = System.getProperties();
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
     }
 	
 	/**
@@ -241,7 +323,12 @@ public abstract class HelperEnvironment {
 	 * @since 0.1.0
 	 */
 	public static Map<String, String> getOsEnvironmentVariables() { //$JUnit$
-		return System.getenv();
+		log.debug(HelperLog.methodStart());
+		
+		final Map<String, String> result = System.getenv();
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
     }
 
 	/**
@@ -252,7 +339,12 @@ public abstract class HelperEnvironment {
 	 * @since 0.6.0
 	 */
 	public static String getOsEnvironmentVariable(final String variable) { //$JUnit$
-		return System.getenv(variable);
+		log.debug(HelperLog.methodStart(variable));
+		
+		final String result = System.getenv(variable);
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
     }
 	
 	/**
@@ -263,7 +355,12 @@ public abstract class HelperEnvironment {
      * @since 0.5.0
 	 */
 	public static File getOsTempDirectory() { //$JUnit$
-		return new File(System.getProperty("java.io.tmpdir")); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final File result = new File(System.getProperty("java.io.tmpdir")); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 	
 	/**
@@ -274,7 +371,12 @@ public abstract class HelperEnvironment {
      * @since 0.5.0
 	 */
 	public static File getUserHomeDirectory() { //$JUnit$
-		return new File(System.getProperty("user.home")); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final File result = new File(System.getProperty("user.home")); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 	
 	/**
@@ -285,7 +387,12 @@ public abstract class HelperEnvironment {
 	 * @since 0.5.0
 	 */
 	public static File getUserDirectory() { //$JUnit$
-		return new File(System.getProperty("user.dir")); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final File result = new File(System.getProperty("user.dir")); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 
 	/**
@@ -295,7 +402,12 @@ public abstract class HelperEnvironment {
 	 * @since 0.7.0
 	 */
 	public static String getUserName() { //$JUnit$
-		return System.getProperty("user.name"); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final String result = System.getProperty("user.name"); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 
 	/**
@@ -305,7 +417,12 @@ public abstract class HelperEnvironment {
 	 * @since 0.7.0
 	 */
 	public static String getUserCountry() { //$JUnit$
-		return System.getProperty("user.country"); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final String result = System.getProperty("user.country"); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 	
 	/**
@@ -315,7 +432,12 @@ public abstract class HelperEnvironment {
 	 * @since 0.7.0
 	 */
 	public static String getUserLanguage() { //$JUnit$
-		return System.getProperty("user.language"); //$NON-NLS-1$
+		log.debug(HelperLog.methodStart());
+		
+		final String result = System.getProperty("user.language"); //$NON-NLS-1$
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 	
 	/**
@@ -326,8 +448,12 @@ public abstract class HelperEnvironment {
 	 * @since 0.7.0
 	 */
 	public static TimeZone getUserTimezone() { //$JUnit$
-		return TimeZone.getDefault();
+		log.debug(HelperLog.methodStart());
 		
+		final TimeZone result = TimeZone.getDefault();
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 
 	/**
@@ -337,13 +463,19 @@ public abstract class HelperEnvironment {
 	 * @since 0.9.0
 	 */
 	public static Platform getPlatform() {
+		log.debug(HelperLog.methodStart());
+		
+		final Platform result;
 		if (isMacPlatform()) {
-			return Platform.MAC_OSX;
+			result = Platform.MAC_OSX;
+		} else if (isWindowsPlatform()) {
+			result = Platform.WINDOWS;
+		} else {
+			return Platform.UNIX; //this is a bit dirty, because it could be another system than Unix, but its the best guess...
 		}
-		if (isWindowsPlatform()) {
-			return Platform.WINDOWS;
-		}
-		return Platform.UNIX; //this is a bit dirty, because it could be another system than Unix, but its the best guess...
+		
+        log.debug(HelperLog.methodExit(result));
+        return result;
 	}
 
 	
@@ -357,7 +489,12 @@ public abstract class HelperEnvironment {
 	 * @since 0.1.0
 	 */
 	private static boolean isWindowsPlatform() {
-		return HelperString.contains(getOsName(), "Windows"); //$NON-NLS-1$
+		log.trace(HelperLog.methodStart());
+		
+		final boolean result = HelperString.contains(getOsName(), "Windows"); //$NON-NLS-1$
+		
+		log.trace(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -367,6 +504,11 @@ public abstract class HelperEnvironment {
 	 * @since 0.1.0
 	 */
 	private static boolean isMacPlatform() {
-		return HelperString.contains(getOsName(), "Mac"); //$NON-NLS-1$
+		log.trace(HelperLog.methodStart());
+		
+		final boolean result = HelperString.contains(getOsName(), "Mac"); //$NON-NLS-1$
+		
+		log.trace(HelperLog.methodExit(result));
+		return result;
 	}
 }

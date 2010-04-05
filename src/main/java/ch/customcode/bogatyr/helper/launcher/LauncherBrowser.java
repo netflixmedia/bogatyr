@@ -32,6 +32,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperString;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
@@ -41,10 +45,11 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher starts the system browser and displays an URI.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100331)
+ * @version 0.9.1 (20100405)
  * @since 0.2.0
  */
 public abstract class LauncherBrowser {
+	private static final Logger log = LoggerFactory.getLogger(LauncherBrowser.class);
 	
 	/**
 	 * Displays an {@link URI} in the default browser application.
@@ -55,6 +60,8 @@ public abstract class LauncherBrowser {
 	 * @since 0.2.0
 	 */
 	public static void browse(final URI uri) throws IOException { //$JUnit$
+		log.debug(HelperLog.methodStart(uri));
+		
 		if (Desktop.isDesktopSupported()) {
 			if (null == uri) {
 				throw new RuntimeExceptionIsNull("uri"); //$NON-NLS-1$
@@ -64,6 +71,7 @@ public abstract class LauncherBrowser {
 		} else {
 			throw new RuntimeException("Browser not supported by your machine!"); //$NON-NLS-1$
 		}
+		log.debug(HelperLog.methodExit());
 	}	
 	
 	/**
@@ -75,6 +83,8 @@ public abstract class LauncherBrowser {
 	 * @since 0.2.0
 	 */
 	public static void browse(final String url) throws IOException, URISyntaxException { //$JUnit$
+		log.debug(HelperLog.methodStart(url));
+		
 		if (!HelperString.isValid(url)) {
 			throw new RuntimeExceptionIsNullOrEmpty("url"); //$NON-NLS-1$
 		}
@@ -87,5 +97,6 @@ public abstract class LauncherBrowser {
 			//best guess as protocol is http
 			browse(new URI("http://" + url)); //$NON-NLS-1$
 		}
+		log.debug(HelperLog.methodExit());
 	}	
 }

@@ -27,7 +27,11 @@
  */
 package ch.customcode.bogatyr.helper.encoder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.helper.HelperEnvironment;
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
@@ -36,11 +40,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Encodes and decodes data to Hex format.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.1.0
  */
 public abstract class EncoderHex {
-
+	private static final Logger log = LoggerFactory.getLogger(EncoderHex.class);
+	
 	/**
      * Encodes a byte-array to a hex {@link String}.
      * 
@@ -49,6 +54,7 @@ public abstract class EncoderHex {
      * @since 0.1.0
      */
     public static String encode(final byte[] input) { //$JUnit$
+    	log.debug(HelperLog.methodStart(input));
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
@@ -65,7 +71,11 @@ public abstract class EncoderHex {
 			}
 			hexString.append(hex);
 		}
-		return hexString.toString();
+
+		final String result = hexString.toString();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
     
     /**
@@ -76,6 +86,7 @@ public abstract class EncoderHex {
      * @since 0.1.0
      */
     public static byte[] decode(final String input) { //$JUnit$
+    	log.debug(HelperLog.methodStart(input));
         if (null == input) {
             throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
         }
@@ -83,11 +94,12 @@ public abstract class EncoderHex {
             throw new RuntimeExceptionExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
         }
 
-		final byte[] bts = new byte[input.length() / 2];
+		final byte[] result = new byte[input.length() / 2];
 
-    	for (int ii = 0; ii < bts.length; ii++) {
-    		bts[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), 16);
+    	for (int ii = 0; ii < result.length; ii++) {
+    		result[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), 16);
     	}
-    	return bts;
+    	log.debug(HelperLog.methodExit(result));
+    	return result;
     }
 }

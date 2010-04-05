@@ -21,7 +21,7 @@
 			<name>Stefan Laubenberger</name>
 			<organization>Custom Code</organization>
 			<email>s.laubenberger@customcode.ch</email>
-			<timezone>1</timezone>
+			<timezone>2</timezone>
 			<!--<url>http://www.laubenberger.net</url>-->
 			<roles>
 				<role>architect</role>
@@ -37,7 +37,7 @@
 			<name>Silvan Spross</name>
 			<organization>Custom Code</organization>
 			<email>s.spross@customcode.ch</email>
-			<timezone>1</timezone>
+			<timezone>2</timezone>
 			<roles>
 				<role>developer</role>
 			</roles>
@@ -48,7 +48,7 @@
 	<!--<contributor>-->
 	<!--<name>Curdin Dalbert</name>-->
 	<!--<email>curdin.dalbert@gmail.com</email>-->
-	<!--<timezone>1</timezone>-->
+	<!--<timezone>2</timezone>-->
 	<!--<url>http://noellemarie.com</url>-->
 	<!--<organization>ZKB</organization>-->
 	<!--<organizationUrl>http://www.zkb.ch</organizationUrl>-->

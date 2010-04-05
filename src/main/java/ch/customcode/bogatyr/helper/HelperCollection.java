@@ -34,6 +34,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
@@ -43,11 +46,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.7.0
  */
 public abstract class HelperCollection {
-
+	private static final Logger log = LoggerFactory.getLogger(HelperCollection.class);
+	
 	/**
      * Returns a array of the given {@link Collection}.
      * 
@@ -58,10 +62,15 @@ public abstract class HelperCollection {
      */
 	@SuppressWarnings("unchecked")
 	public static <E> E[] toArray(final Collection<E> collection) { //$JUnit$
+		log.debug(HelperLog.methodStart(collection));
 		if (!isValid(collection)) {
 			throw new RuntimeExceptionIsNullOrEmpty("collection"); //$NON-NLS-1$
 		}
-		return collection.toArray((E[]) Array.newInstance(collection.iterator().next().getClass(), collection.size()));
+
+		final E[] result = collection.toArray((E[]) Array.newInstance(collection.iterator().next().getClass(), collection.size()));
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 	
 	/**
@@ -73,11 +82,15 @@ public abstract class HelperCollection {
      * @since 0.9.0
      */
 	public static <E> List<E> getList(final E...elements) { //$JUnit$
+		log.debug(HelperLog.methodStart(elements));
 		if (!HelperArray.isValid(elements)) {
 			throw new RuntimeExceptionIsNullOrEmpty("elements"); //$NON-NLS-1$
 		}
 
- 		return Arrays.asList(elements);
+		final List<E> result = Arrays.asList(elements);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 
 	/**
@@ -89,15 +102,17 @@ public abstract class HelperCollection {
      * @since 0.9.0
      */
 	public static <E> Set<E> getSet(final E...elements) { //$JUnit$
+		log.debug(HelperLog.methodStart(elements));
 		if (!HelperArray.isValid(elements)) {
 			throw new RuntimeExceptionIsNullOrEmpty("elements"); //$NON-NLS-1$
 		}
 
-		final Set<E> set = new HashSet<E>(elements.length);
+		final Set<E> result = new HashSet<E>(elements.length);
 
-        set.addAll(Arrays.asList(elements));
-        
-		return set;
+        result.addAll(Arrays.asList(elements));
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 	
 	/**
@@ -109,7 +124,12 @@ public abstract class HelperCollection {
      * @since 0.7.0
      */
 	public static boolean isValid(final Collection<?> collection) { //$JUnit$
-        return !(null == collection || collection.isEmpty());
+		log.debug(HelperLog.methodStart(collection));
+		
+		final boolean result = !(null == collection || collection.isEmpty());
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
     
 	/**
@@ -121,11 +141,15 @@ public abstract class HelperCollection {
 	 * @since 0.7.0
 	 */
     public static <E> Collection<E> removeDuplicates(final Collection<E> collection) { //$JUnit$
-		if (null == collection) {
+    	log.debug(HelperLog.methodStart(collection));
+    	if (null == collection) {
 			throw new RuntimeExceptionIsNull("collection"); //$NON-NLS-1$
 		}
 
-		return new HashSet<E>(collection);
+		final Set<E> result = new HashSet<E>(collection);
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
     
     /**
@@ -137,7 +161,8 @@ public abstract class HelperCollection {
      * @since 0.7.0
      */
     public static String dump(final Iterable<?> iterable) { //$JUnit$
-		if (null == iterable) {
+    	log.debug(HelperLog.methodStart(iterable));
+    	if (null == iterable) {
 			throw new RuntimeExceptionIsNull("iterable"); //$NON-NLS-1$
 		}
 
@@ -149,6 +174,10 @@ public abstract class HelperCollection {
             }
         	sb.append(element);
         }
-        return sb.toString();
+        
+        final String result = sb.toString();
+        
+        log.debug(HelperLog.methodExit(result));
+        return result;
     }
 }

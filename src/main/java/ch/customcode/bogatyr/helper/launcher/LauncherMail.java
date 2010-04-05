@@ -32,7 +32,11 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.helper.HelperArray;
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperString;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
@@ -42,11 +46,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher starts the system mail application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.7.0
  */
 public abstract class LauncherMail {
-
+	private static final Logger log = LoggerFactory.getLogger(LauncherMail.class);
+	
 	/**
 	 * Opens the default mail application.
 	 *
@@ -54,11 +59,13 @@ public abstract class LauncherMail {
 	 * @since 0.7.0
 	 */
 	public static void mail() throws IOException { //$JUnit$
+		log.debug(HelperLog.methodStart());
 		if (Desktop.isDesktopSupported()) {
 			Desktop.getDesktop().mail();
 		} else {
 			throw new RuntimeException("Mail application not supported by your machine!"); //$NON-NLS-1$
 		}
+		log.debug(HelperLog.methodExit());
 	}
 	
 	/**
@@ -70,6 +77,7 @@ public abstract class LauncherMail {
 	 * @since 0.7.0
 	 */
 	public static void mail(final URI uri) throws IOException { //$JUnit$
+		log.debug(HelperLog.methodStart(uri));
 		if (Desktop.isDesktopSupported()) {
 			if (null == uri) {
 				throw new RuntimeExceptionIsNull("uri"); //$NON-NLS-1$
@@ -79,6 +87,7 @@ public abstract class LauncherMail {
 		} else {
 			throw new RuntimeException("Mail application not supported by your machine!"); //$NON-NLS-1$
 		}
+		log.debug(HelperLog.methodExit());
 	}
 	
 	/**
@@ -92,6 +101,7 @@ public abstract class LauncherMail {
 	 * @since 0.7.0
 	 */
 	public static void mail(final String subject, final String body, final String... emailAddresses) throws IOException, URISyntaxException { //$JUnit$
+		log.debug(HelperLog.methodStart(subject, body, emailAddresses));
 		if (null == subject) {
 			throw new RuntimeExceptionIsNull("subject"); //$NON-NLS-1$
 		}
@@ -119,6 +129,8 @@ public abstract class LauncherMail {
 		final String prefix = "mailto:"; //$NON-NLS-1$
 		
 		mail(new URI(prefix + addresses.replaceAll(" ", "%20")));   //$NON-NLS-1$//$NON-NLS-2$
+		
+		log.debug(HelperLog.methodExit());
 	}
 	
 	
@@ -126,6 +138,8 @@ public abstract class LauncherMail {
 	 * Private methods
 	 */
 	private static String getValidText(final String input) {
+		log.trace(HelperLog.methodStart(input));
+		
 		final StringBuffer sb = new StringBuffer(input.length());
 
 	    for (final char c : input.toCharArray()) {
@@ -138,6 +152,9 @@ public abstract class LauncherMail {
                 sb.append("?"); //$NON-NLS-1$
             }
         }
-	    return sb.toString();
+	    final String result = sb.toString();
+		
+		log.trace(HelperLog.methodExit(result));
+		return result;
 	}
 }

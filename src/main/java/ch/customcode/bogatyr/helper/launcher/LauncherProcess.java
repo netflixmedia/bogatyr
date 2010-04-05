@@ -31,8 +31,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import ch.customcode.bogatyr.misc.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.helper.HelperArray;
+import ch.customcode.bogatyr.helper.HelperLog;
+import ch.customcode.bogatyr.misc.Constants;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
@@ -41,10 +45,12 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher creates a new process and reads standard output and standard error.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.2.0
  */
 public abstract class LauncherProcess {
+	private static final Logger log = LoggerFactory.getLogger(LauncherProcess.class);
+	
 	/**
 	 * Creates a new process and reads the standard output and standard error.
 	 *
@@ -57,6 +63,7 @@ public abstract class LauncherProcess {
      * @since 0.2.0
 	 */
 	public static Process createProcess(final String[] commands, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
+		log.debug(HelperLog.methodStart(commands, outputStream, errorStream));
 		if (null == outputStream) {
 			throw new RuntimeExceptionIsNull("outputStream"); //$NON-NLS-1$
 		}
@@ -64,11 +71,12 @@ public abstract class LauncherProcess {
 			throw new RuntimeExceptionIsNull("errorStream"); //$NON-NLS-1$
 		}
 		
-		final Process process = createProcess(commands);
+		final Process result = createProcess(commands);
 
-		readStandardOutput(process, outputStream, errorStream);
+		readStandardOutput(result, outputStream, errorStream);
 		
-		return process;
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -80,13 +88,17 @@ public abstract class LauncherProcess {
      * @since 0.2.0
 	 */
 	public static Process createProcess(final String... commands) throws IOException {
+		log.debug(HelperLog.methodStart(commands));
 		if (!HelperArray.isValid(commands)) {
 			throw new RuntimeExceptionIsNullOrEmpty("commands"); //$NON-NLS-1$
 		}
 		
 		final ProcessBuilder pb = new ProcessBuilder(commands);
-		return pb.start();
 //		return Runtime.getRuntime().exec(command);
+		final Process result = pb.start();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	
@@ -105,15 +117,19 @@ public abstract class LauncherProcess {
 	 * @since 0.2.0
 	 */
 	private static void readStandardOutput(final Process process, final OutputStream outputStream, final OutputStream errorStream) {
+		log.trace(HelperLog.methodStart(process, outputStream, errorStream));
+		
 		new Thread(new StreamReader(process.getErrorStream(), errorStream)).start();
 		new Thread(new StreamReader(process.getInputStream(), outputStream)).start();
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	
 	/*
 	 * Inner classes
 	 */
-	static class StreamReader implements Runnable {
+	private static class StreamReader implements Runnable {
 		private final InputStream is;
 		private final OutputStream os;
 

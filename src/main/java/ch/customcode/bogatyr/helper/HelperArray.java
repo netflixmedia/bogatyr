@@ -45,7 +45,7 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -89,7 +89,12 @@ public abstract class HelperArray {
      * @since 0.7.0
      */	
 	public static boolean isValid(final byte[] arg) { //$JUnit$
-        return !(null == arg || 0 == arg.length);
+		log.debug(HelperLog.methodStart(arg));
+
+		final boolean result = !(null == arg || 0 == arg.length);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
 	
 	/**
@@ -100,7 +105,12 @@ public abstract class HelperArray {
      * @since 0.9.0
      */	
 	public static boolean isValid(final char[] arg) { //$JUnit$
-        return !(null == arg || 0 == arg.length);
+		log.debug(HelperLog.methodStart(arg));
+		
+		final boolean result = !(null == arg || 0 == arg.length);
+		
+		log.debug(HelperLog.methodExit(result));
+		return !(null == arg || 0 == arg.length);
     }
 
 	/**
@@ -111,17 +121,21 @@ public abstract class HelperArray {
 	 * @since 0.7.0
 	 */
 	public static <T> T[] concatenate(final T[]... arrays) { //$JUnit$
-        if (!isValid(arrays)) {
+		log.debug(HelperLog.methodStart(arrays));
+		if (!isValid(arrays)) {
         	throw new RuntimeExceptionIsNullOrEmpty("arrays"); //$NON-NLS-1$
         }
         
-        final List<T> result = new ArrayList<T>();
+        final List<T> resultList = new ArrayList<T>();
         
         for (final T[] array : arrays) {
-    		result.addAll(Arrays.asList(array));
+    		resultList.addAll(Arrays.asList(array));
         }
         
-        return result.toArray(arrays[0]);
+        final T[] result = resultList.toArray(arrays[0]);
+        
+        log.debug(HelperLog.methodExit(result));
+        return result;
     }
     
 	/**
@@ -132,7 +146,8 @@ public abstract class HelperArray {
 	 * @since 0.7.0
 	 */
 	public static byte[] concatenate(final byte[]... arrays) { //$JUnit$
-        if (!isValid(arrays)) {
+		log.debug(HelperLog.methodStart(arrays));
+		if (!isValid(arrays)) {
         	throw new RuntimeExceptionIsNullOrEmpty("arrays"); //$NON-NLS-1$
         }
 
@@ -150,6 +165,7 @@ public abstract class HelperArray {
         	offset += array.length;
         }
         
+        log.debug(HelperLog.methodExit(result));
         return result;
     }
     
@@ -161,7 +177,8 @@ public abstract class HelperArray {
 	 * @since 0.9.1
 	 */
 	public static char[] concatenate(final char[]... arrays) {
-        if (!isValid(arrays)) {
+		log.debug(HelperLog.methodStart(arrays));
+		if (!isValid(arrays)) {
         	throw new RuntimeExceptionIsNullOrEmpty("arrays"); //$NON-NLS-1$
         }
 
@@ -179,6 +196,7 @@ public abstract class HelperArray {
         	offset += array.length;
         }
         
+        log.debug(HelperLog.methodExit(result));
         return result;
     }
 	
@@ -190,11 +208,15 @@ public abstract class HelperArray {
 	 * @since 0.7.0
 	 */
 	public static <T> T[] removeDuplicates(final T[] array) { //$JUnit$
+		log.debug(HelperLog.methodStart(array));
 		if (null == array) {
 			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
 		}
 
-		return HelperCollection.toArray(HelperCollection.removeDuplicates(Arrays.asList(array)));
+        final T[] result = HelperCollection.toArray(HelperCollection.removeDuplicates(Arrays.asList(array)));
+        
+        log.debug(HelperLog.methodExit(result));
+        return result;
     }
 
     /**
@@ -205,7 +227,8 @@ public abstract class HelperArray {
      * @since 0.7.0
      */
     public static String dump(final Object[] array) { //$JUnit$
-		if (null == array) {
+    	log.debug(HelperLog.methodStart(array));
+    	if (null == array) {
 			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
 		}
 
@@ -217,7 +240,11 @@ public abstract class HelperArray {
             }
         	sb.append(element);
         }
-        return sb.toString();
+        
+        final String result = sb.toString();
+        
+        log.debug(HelperLog.methodExit(result));
+        return result;
     }
     
     /**
@@ -228,7 +255,8 @@ public abstract class HelperArray {
      * @since 0.9.1
      */
     public static String dump(final byte[] array) { //$JUnit$
-		if (null == array) {
+    	log.debug(HelperLog.methodStart(array));
+    	if (null == array) {
 			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
 		}
 
@@ -240,7 +268,11 @@ public abstract class HelperArray {
             }
         	sb.append(element);
         }
-        return sb.toString();
+        
+        final String result = sb.toString();
+        
+        log.debug(HelperLog.methodExit(result));
+        return result;
     }
 
     /**
@@ -251,7 +283,8 @@ public abstract class HelperArray {
      * @since 0.9.1
      */
     public static String dump(final char[] array) { //$JUnit$
-		if (null == array) {
+    	log.debug(HelperLog.methodStart(array));
+    	if (null == array) {
 			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
 		}
 
@@ -263,6 +296,10 @@ public abstract class HelperArray {
             }
         	sb.append(element);
         }
-        return sb.toString();
+        
+        final String result = sb.toString();
+        
+        log.debug(HelperLog.methodExit(result));
+        return result;
     }
 }

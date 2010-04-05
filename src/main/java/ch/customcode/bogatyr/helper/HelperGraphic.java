@@ -40,6 +40,9 @@ import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
@@ -47,10 +50,11 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100405)
  * @since 0.4.0
  */
 public abstract class HelperGraphic {
+	private static final Logger log = LoggerFactory.getLogger(HelperGraphic.class);
 	
 	/**
      * Enable anti-aliasing on a {@link Graphics2D} container.
@@ -60,12 +64,15 @@ public abstract class HelperGraphic {
      * @since 0.4.0
      */	
 	public static void enableAntialiasing(final Graphics2D graphics) {
+		log.debug(HelperLog.methodStart(graphics));
 		if (null == graphics) {
 			throw new RuntimeExceptionIsNull("graphics"); //$NON-NLS-1$
 		}
 
 		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		
+		log.debug(HelperLog.methodExit());
 	}
 
     /**
@@ -77,11 +84,15 @@ public abstract class HelperGraphic {
      * @since 0.4.0
      */
     public static Dimension getCenter(final Dimension size) { //$JUnit$
-		if (null == size) {
+    	log.debug(HelperLog.methodStart(size));
+    	if (null == size) {
 			throw new RuntimeExceptionIsNull("size"); //$NON-NLS-1$
 		}
-
-		return new Dimension(size.width / 2, size.height / 2);
+		
+    	final Dimension result = new Dimension(size.width / 2, size.height / 2);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
     /**
@@ -94,7 +105,8 @@ public abstract class HelperGraphic {
      * @since 0.9.0
      */
     public static double getScale(final Dimension2D input, final Dimension2D output) { //$JUnit$
-		if (null == input) {
+    	log.debug(HelperLog.methodStart(input, output));
+    	if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 		if (null == output) {
@@ -103,8 +115,11 @@ public abstract class HelperGraphic {
 		
 		final double scaleHeight =  input.getHeight() / output.getHeight();
 		final double scaleWidth =  input.getWidth() / output.getWidth();
-
-        return scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
+    	
+		final double result = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
     
     /**
@@ -117,7 +132,8 @@ public abstract class HelperGraphic {
      * @since 0.9.0
      */
     public static Dimension getScaledSize(final Dimension2D input, final Dimension2D output) { //$JUnit$
-		if (null == input) {
+    	log.debug(HelperLog.methodStart(input, output));
+    	if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 		if (null == output) {
@@ -128,7 +144,10 @@ public abstract class HelperGraphic {
 		final double scaleWidth = input.getWidth() / output.getWidth();
         final double scale = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
 		
-		return new Dimension(HelperMath.convertDoubleToInt(input.getWidth() / scale), HelperMath.convertDoubleToInt(input.getHeight() / scale));
+    	final Dimension result = new Dimension(HelperMath.convertDoubleToInt(input.getWidth() / scale), HelperMath.convertDoubleToInt(input.getHeight() / scale));
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}    
     
     /**
@@ -143,6 +162,7 @@ public abstract class HelperGraphic {
      * @since 0.4.0
      */
 	public static Dimension getTextSize(final String text, final Graphics graphics) {
+		log.debug(HelperLog.methodStart(text, graphics));
 		if (null == text) {
 			throw new RuntimeExceptionIsNull("text"); //$NON-NLS-1$
 		}
@@ -152,8 +172,11 @@ public abstract class HelperGraphic {
 		
 		final FontMetrics fm = graphics.getFontMetrics(graphics.getFont());
 		final Rectangle2D rect = fm.getStringBounds(text, graphics);
+    	
+		final Dimension result = new Dimension((int)rect.getWidth(), (int)rect.getHeight());
 		
-		return new Dimension((int)rect.getWidth(), (int)rect.getHeight()); 
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
 	
@@ -171,9 +194,13 @@ public abstract class HelperGraphic {
      * @since 0.4.0
      */
     public static Collection<Font> getAvailableFonts() { //$JUnit$
-		final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    	log.debug(HelperLog.methodStart());
+    	final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		
-		return Arrays.asList(ge.getAllFonts());
+    	final Collection<Font> result = Arrays.asList(ge.getAllFonts());
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
     
     /**
@@ -185,10 +212,14 @@ public abstract class HelperGraphic {
      * @since 0.4.0
      */
     public static String getColorHex(final Color color) { //$JUnit$
-		if (null == color) {
+    	log.debug(HelperLog.methodStart(color));
+    	if (null == color) {
 			throw new RuntimeExceptionIsNull("color"); //$NON-NLS-1$
 		}
+    	
+    	final String result = Integer.toHexString(color.getRGB() & 0x00ffffff); 
 		
-    	return Integer.toHexString(color.getRGB() & 0x00ffffff); 
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 }
