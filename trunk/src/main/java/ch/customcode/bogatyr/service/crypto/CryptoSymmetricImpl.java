@@ -62,6 +62,7 @@ import org.slf4j.LoggerFactory;
 import ch.customcode.bogatyr.helper.HelperArray;
 import ch.customcode.bogatyr.helper.HelperEnvironment;
 import ch.customcode.bogatyr.helper.HelperLog;
+import ch.customcode.bogatyr.helper.HelperObject;
 import ch.customcode.bogatyr.misc.Constants;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsEquals;
@@ -78,7 +79,7 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100408)
  * @since 0.1.0
  */
 public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmetric {
@@ -346,7 +347,7 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 		if (null == output) {
             throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
         }
-		if (input.equals(output)) {
+		if (HelperObject.isEquals(input, output)) {
 			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
@@ -386,7 +387,7 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
         if (null == output) {
             throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
         }
-		if (input.equals(output)) {
+		if (HelperObject.isEquals(input, output)) {
 			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 

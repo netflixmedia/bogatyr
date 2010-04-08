@@ -45,7 +45,7 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100408)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -220,6 +220,29 @@ public abstract class HelperArray {
     }
 
     /**
+	 * Checks if an array contains an given object.
+	 * 
+	 * @param array to check
+	 * @param object to search in the array
+	 * @return true/false
+	 * @since 0.9.1
+	 */
+	public static boolean contains(final Object[] array, final Object object) { //$JUnit$
+		log.debug(HelperLog.methodStart(array, object));
+        
+		boolean result = true;
+		
+		for (final Object objTemp : array) {
+            if (HelperObject.isEquals(object, objTemp)) {
+                result = false;
+            }
+        }
+        
+        log.debug(HelperLog.methodExit(result));
+        return result;
+    }
+
+	/**
      * Dump an array.
      * 
      * @param array to dump

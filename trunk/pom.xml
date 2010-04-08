@@ -80,19 +80,6 @@
 		<developerConnection>scm:svn:https://bogatyr.googlecode.com/svn/trunk/</developerConnection>
 		<url>http://code.google.com/p/bogatyr/source/browse/</url>
 	</scm>
-	
-	<repositories>
-		<repository>
-			<id>main</id>
-			<name>Maven main Repository</name>
-			<url>http://repo1.maven.org/maven2/</url>
-		</repository>
-		<repository>
-			<id>customcode-net</id>
-			<name>Custom Code Repository</name>
-			<url>http://www.sisprocom.ch/maven2/</url>
-		</repository>
-	</repositories>
 
 	<distributionManagement>
 		<repository>
@@ -174,6 +161,24 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.15</version>
 			<!--<scope>compile</scope>-->
+            <exclusions>
+              <exclusion>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+              </exclusion>
+              <exclusion>
+                <groupId>javax.jms</groupId>
+                <artifactId>jms</artifactId>
+              </exclusion>
+              <exclusion>
+                <groupId>com.sun.jdmk</groupId>
+                <artifactId>jmxtools</artifactId>
+              </exclusion>
+              <exclusion>
+                <groupId>com.sun.jmx</groupId>
+                <artifactId>jmxri</artifactId>
+              </exclusion>
+            </exclusions>
 		</dependency>
 	</dependencies>
 
@@ -356,10 +361,7 @@
 			<!--<plugin>-->
 			<!--<groupId>org.apache.maven.plugins</groupId>-->
 			<!--<artifactId>maven-site-plugin</artifactId>-->
-			<!--
-				&lt;!&ndash; site:deploy may fail with 'unzip error' if not set here
-				&ndash;&gt;
-			-->
+			<!-- site:deploy may fail with 'unzip error' if not set here -->
 			<!--<configuration>-->
 			<!--<unzipCommand>/usr/bin/unzip -o &gt; err.txt</unzipCommand>-->
 			<!--</configuration>-->

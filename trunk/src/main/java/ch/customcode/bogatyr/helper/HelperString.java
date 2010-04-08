@@ -187,13 +187,13 @@ public abstract class HelperString {
     	  		sb.append(character);
     		}
     	}
-    	
-    	if (temp.isEmpty() || isPeriod && 1 == sb.length()) {
-    		return null;
+
+        String result = null;
+
+    	if (!(temp.isEmpty() || isPeriod && 1 == sb.length())) {
+    		result = isNegative ? Constants.NEGATIVE_SIGN + sb.toString() : sb.toString();
     	}
     	
-		final String result = isNegative ? Constants.NEGATIVE_SIGN + sb.toString() : sb.toString();
-		
 		log.debug(HelperLog.methodExit(result));
 		return result;
     }

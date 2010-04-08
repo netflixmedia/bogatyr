@@ -50,14 +50,14 @@ import ch.customcode.bogatyr.model.misc.PublisherImpl;
  * Collected constants of very general utility.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100408)
  * @since 0.7.0
  */
 public abstract class Constants {
 	private static final Logger log = LoggerFactory.getLogger(Constants.class);
 	
 	//Bogatyr specific
-	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.91"), 248, HelperTime.getDate(2010, 4, 5, 19, 55, 0), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.91"), 249, HelperTime.getDate(2010, 4, 8, 2, 15, 0), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;

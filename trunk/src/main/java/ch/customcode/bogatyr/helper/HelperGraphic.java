@@ -35,7 +35,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
-import java.awt.geom.Dimension2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
 import java.util.Collection;
@@ -44,13 +43,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import ch.customcode.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 
 /**
  * This is a helper class for graphic operations
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100408)
  * @since 0.4.0
  */
 public abstract class HelperGraphic {
@@ -96,60 +96,134 @@ public abstract class HelperGraphic {
 	}
 
     /**
-     * Calculates the scale to fit an input {@link Dimension2D} to an output {@link Dimension2D}.
+     * Calculates the scale to fit an input {@link Dimension} to an output {@link Dimension}.
      *
-     * @param input {@link Dimension2D} for the calculation
-     * @param output {@link Dimension2D} for the calculation
-     * @return scale to fit the input {@link Dimension2D}
-     * @see Dimension2D
+     * @param input {@link Dimension} for the calculation
+     * @param output {@link Dimension} for the calculation
+     * @return scale to fit the input {@link Dimension}
+     * @see Dimension
      * @since 0.9.0
      */
-    public static double getScale(final Dimension2D input, final Dimension2D output) { //$JUnit$
+    public static double getScale(final Dimension input, final Dimension output) { //$JUnit$
     	log.debug(HelperLog.methodStart(input, output));
     	if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
+    	if (0 > input.width) {
+			throw new RuntimeExceptionMustBeGreater("input.width", input.width, 0); //$NON-NLS-1$
+		}
+    	if (0 > input.height) {
+			throw new RuntimeExceptionMustBeGreater("input.height", input.height, 0); //$NON-NLS-1$
+		}
 		if (null == output) {
 			throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
 		}
+    	if (0 > output.width) {
+			throw new RuntimeExceptionMustBeGreater("output.width", output.width, 0); //$NON-NLS-1$
+		}
+    	if (0 > output.height) {
+			throw new RuntimeExceptionMustBeGreater("output.height", output.height, 0); //$NON-NLS-1$
+		}
 		
-		final double scaleHeight =  input.getHeight() / output.getHeight();
-		final double scaleWidth =  input.getWidth() / output.getWidth();
+    	double scaleWidth = 0.0D;
+		double scaleHeight = 0.0D;
+
+    	if (0 == output.width) {
+    		if (0 != output.height) {
+    			scaleHeight = input.getHeight() / output.getHeight();
+    		}
+    	} else {
+    		scaleWidth = input.getWidth() / output.getWidth();
+    	}
+    	if (0 == output.height) {
+    		if (0 != output.width) {
+    			scaleWidth = input.getWidth() / output.getWidth();
+    		}
+    	} else {
+			scaleHeight = input.getHeight() / output.getHeight();
+    	}
     	
-		final double result = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
+		final double result = 0 == scaleWidth && 0 == scaleHeight ? 1.0D : scaleWidth > scaleHeight ? 1.0D / scaleWidth : 1.0D / scaleHeight;
 		
 		log.debug(HelperLog.methodExit(result));
 		return result;
 	}
     
     /**
-     * Calculates the scaled size to fit an input {@link Dimension2D} to an output {@link Dimension2D}.
+     * Calculates the scaled size to fit an input {@link Dimension} to an output {@link Dimension}.
      *
-     * @param input {@link Dimension2D} for the calculation
-     * @param output {@link Dimension2D} for the calculation
-     * @return scaled {@link Dimension2D} to fit the input {@link Dimension2D}
-     * @see Dimension2D
+     * @param input {@link Dimension} for the calculation
+     * @param output {@link Dimension} for the calculation
+     * @return scaled {@link Dimension} to fit the input {@link Dimension}
+     * @see Dimension
      * @since 0.9.0
      */
-    public static Dimension getScaledSize(final Dimension2D input, final Dimension2D output) { //$JUnit$
+    public static Dimension getScaledSize(final Dimension input, final Dimension output) { 
     	log.debug(HelperLog.methodStart(input, output));
     	if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
+    	if (0 > input.width) {
+			throw new RuntimeExceptionMustBeGreater("input.width", input.width, 0); //$NON-NLS-1$
+		}
+    	if (0 > input.height) {
+			throw new RuntimeExceptionMustBeGreater("input.height", input.height, 0); //$NON-NLS-1$
+		}
 		if (null == output) {
 			throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
 		}
+    	if (0 > output.width) {
+			throw new RuntimeExceptionMustBeGreater("output.width", output.width, 0); //$NON-NLS-1$
+		}
+    	if (0 > output.height) {
+			throw new RuntimeExceptionMustBeGreater("output.height", output.height, 0); //$NON-NLS-1$
+		}
 		
-		final double scaleHeight = input.getHeight() / output.getHeight();
-		final double scaleWidth = input.getWidth() / output.getWidth();
-        final double scale = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
-		
-    	final Dimension result = new Dimension(HelperMath.convertDoubleToInt(input.getWidth() / scale), HelperMath.convertDoubleToInt(input.getHeight() / scale));
+//		final double scaleHeight = input.getHeight() / output.getHeight();
+//		final double scaleWidth = input.getWidth() / output.getWidth();
+//        final double scale = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
+//
+//        final double scale = getScale(input, output);
+        
+    	final Dimension result = getScaledSize(input, getScale(input, output));
 		
 		log.debug(HelperLog.methodExit(result));
 		return result;
 	}    
     
+    /**
+     * Calculates the scaled size to for an input {@link Dimension} with a given scale.
+     *
+     * @param input {@link Dimension} for the calculation
+     * @param scale for the new {@link Dimension}
+     * @return scaled {@link Dimension} of the input {@link Dimension}
+     * @see Dimension
+     * @since 0.9.1
+     */
+    public static Dimension getScaledSize(final Dimension input, final double scale) { 
+    	log.debug(HelperLog.methodStart(input, scale));
+    	if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
+//    	if (input.width < 0) {
+//			throw new RuntimeExceptionMustBeGreater("input.width", input.width, 0); //$NON-NLS-1$
+//		}
+//    	if (input.height < 0) {
+//			throw new RuntimeExceptionMustBeGreater("input.height", input.height, 0); //$NON-NLS-1$
+//		}
+		
+//		final double scaleHeight = input.getHeight() * scale;
+//		final double scaleWidth = input.getWidth() * scale;
+//        final double scaleNew = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
+//		
+//    	final Dimension result = new Dimension(HelperMath.convertDoubleToInt(input.getWidth() * scaleNew), HelperMath.convertDoubleToInt(input.getHeight() * scaleNew));
+
+    	final Dimension result = new Dimension(HelperMath.convertDoubleToInt(input.getWidth() * scale), HelperMath.convertDoubleToInt(input.getHeight() * scale));
+    	
+		log.debug(HelperLog.methodExit(result));
+		return result;
+	}    
+
     /**
      * Calculates the size of a text in a {@link Graphics} container with its current {@link Font}.
      *
