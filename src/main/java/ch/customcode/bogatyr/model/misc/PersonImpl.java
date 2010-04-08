@@ -43,7 +43,7 @@ import ch.customcode.bogatyr.model.ModelAbstract;
  * The implementation of the person model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100301)
+ * @version 0.9.1 (20100408)
  * @since 0.9.1
  */
 @XmlRootElement(name = "person")
@@ -108,63 +108,86 @@ public class PersonImpl extends ModelAbstract implements Person {
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
 		final PersonImpl other = (PersonImpl) obj;
 		if (null == birthday) {
-			if (null != other.birthday)
-				return false;
-		} else if (!birthday.equals(other.birthday))
-			return false;
+            if (null != other.birthday) {
+                return false;
+            }
+		} else if (!birthday.equals(other.birthday)) {
+            return false;
+        }
 		if (null == city) {
-			if (null != other.city)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
+            if (null != other.city) {
+                return false;
+            }
+		} else if (!city.equals(other.city)) {
+            return false;
+        }
 		if (null == country) {
-			if (null != other.country)
-				return false;
-		} else if (!country.equals(other.country))
-			return false;
+            if (null != other.country) {
+                return false;
+            }
+		} else if (!country.equals(other.country)) {
+            return false;
+        }
 		if (null == email) {
-			if (null != other.email)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
+            if (null != other.email) {
+                return false;
+            }
+		} else if (!email.equals(other.email)) {
+            return false;
+        }
 		if (null == forename) {
-			if (null != other.forename)
-				return false;
-		} else if (!forename.equals(other.forename))
-			return false;
+            if (null != other.forename) {
+                return false;
+            }
+		} else if (!forename.equals(other.forename)) {
+            return false;
+        }
 		if (null == gender) {
-			if (null != other.gender)
-				return false;
-		} else if (!gender.equals(other.gender))
-			return false;
+            if (null != other.gender) {
+                return false;
+            }
+		} else if (!gender.equals(other.gender)) {
+            return false;
+        }
 		if (null == name) {
-			if (null != other.name)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
+            if (null != other.name) {
+                return false;
+            }
+		} else if (!name.equals(other.name)) {
+            return false;
+        }
 		if (null == street) {
-			if (null != other.street)
-				return false;
-		} else if (!street.equals(other.street))
-			return false;
+            if (null != other.street) {
+                return false;
+            }
+		} else if (!street.equals(other.street)) {
+            return false;
+        }
 		if (null == website) {
-			if (null != other.website)
-				return false;
-		} else if (!website.equals(other.website))
-			return false;
+            if (null != other.website) {
+                return false;
+            }
+		} else if (!website.equals(other.website)) {
+            return false;
+        }
 		if (null == zip) {
-			if (null != other.zip)
-				return false;
-		} else if (!zip.equals(other.zip))
-			return false;
+            if (null != other.zip) {
+                return false;
+            }
+		} else if (!zip.equals(other.zip)) {
+            return false;
+        }
 		return true;
 	}
 

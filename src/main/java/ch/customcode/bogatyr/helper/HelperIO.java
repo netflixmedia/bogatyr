@@ -70,7 +70,7 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100408)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -145,7 +145,7 @@ public abstract class HelperIO {
 		if (null == dest) {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
-		if (source.equals(dest)) {
+		if (HelperObject.isEquals(source, dest)) {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
@@ -204,7 +204,7 @@ public abstract class HelperIO {
         if (null == dest) {
             throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
         }
-		if (source.equals(dest)) {
+		if (HelperObject.isEquals(source, dest)) {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
         if (1 > bufferSize) {
@@ -261,7 +261,7 @@ public abstract class HelperIO {
 		if (null == dest) {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
-		if (source.equals(dest)) {
+		if (HelperObject.isEquals(source, dest)) {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
@@ -318,7 +318,7 @@ public abstract class HelperIO {
 		if (null == dest) {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
-		if (source.equals(dest)) {
+		if (HelperObject.isEquals(source, dest)) {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 

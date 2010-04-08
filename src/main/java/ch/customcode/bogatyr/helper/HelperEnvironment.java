@@ -45,7 +45,7 @@ import ch.customcode.bogatyr.model.misc.Platform;
  * It also provides informations about vm memory, temp/user directory and variables.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100408)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -223,19 +223,15 @@ public abstract class HelperEnvironment {
 		field.setAccessible(true);
 		final String[] paths = (String[])field.get(null);
 
-        for (final String path1 : paths) {
-            if (location.equals(path1)) {
-                return;
-            }
-        }
-		
-		final String[] tmp = new String[paths.length + 1];
-		
-		System.arraycopy(paths, 0, tmp, 0, paths.length);
-		tmp[paths.length] = location;
-		field.set(null,tmp);
-		
-		System.setProperty("java.library.path", System.getProperty("java.library.path") + HelperIO.PATH_SEPARATOR + location); //$NON-NLS-1$ //$NON-NLS-2$
+		if (!HelperArray.contains(paths, location)) {
+			final String[] tmp = new String[paths.length + 1];
+			
+			System.arraycopy(paths, 0, tmp, 0, paths.length);
+			tmp[paths.length] = location;
+			field.set(null,tmp);
+			
+			System.setProperty("java.library.path", System.getProperty("java.library.path") + HelperIO.PATH_SEPARATOR + location); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 		log.debug(HelperLog.methodExit());
 	}
 

@@ -41,6 +41,7 @@ import ch.customcode.bogatyr.helper.HelperEnvironment;
 import ch.customcode.bogatyr.helper.HelperIO;
 import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperNet;
+import ch.customcode.bogatyr.helper.HelperObject;
 import ch.customcode.bogatyr.helper.HelperXml;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
@@ -53,7 +54,7 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * This is the updater for documents.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100408)
  * @since 0.6.0
  */
 public class UpdaterImpl extends ServiceAbstract implements Updater {
@@ -108,7 +109,7 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
         final File source = new File(location);
 
         if (source.exists()) {
-    		if (source.equals(dest)) {
+    		if (HelperObject.isEquals(source, dest)) {
     			throw new RuntimeExceptionIsEquals("location", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
     		}
             HelperIO.copyFile(source, dest);

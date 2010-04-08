@@ -29,13 +29,15 @@ package ch.customcode.bogatyr.model.misc;
 
 import java.util.Locale;
 
+import ch.customcode.bogatyr.helper.HelperObject;
+
 
 /**
  * Possible countries.
  * <strong>Note:</strong> The language is always the main language of a country.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100302)
+ * @version 0.9.1 (20100408)
  * @since 0.9.1
  */
 public enum Country {
@@ -157,7 +159,7 @@ public enum Country {
 
 	public Language getLanguage() {
 		for (final Language language : Language.values()) {
-			if (language.getCode().equals(locale.getLanguage())) {
+			if (HelperObject.isEquals(language.getCode(), locale.getLanguage())) {
 				return language;
 			}
 		}

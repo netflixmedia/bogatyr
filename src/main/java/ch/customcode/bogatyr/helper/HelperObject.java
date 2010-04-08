@@ -58,7 +58,7 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100408)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -244,7 +244,7 @@ public abstract class HelperObject {
     	boolean result = false;
     	
         for (final Method method : methods) {
-            if (method.getName().equals(methodName)) {
+            if (isEquals(method.getName(), methodName)) {
             	result = true;
             }
         }
@@ -369,7 +369,7 @@ public abstract class HelperObject {
 //	               list.add(field.getName() + '=' + objectField);
 //	            }
     			
-       			if (field.getType().equals(object.getClass())) {
+       			if (isEquals(field.getType(), object.getClass())) {
        				list.add(field.getName() + '=' + object.getClass().getName());
 //       			} else if (objectField instanceof Collection<?> && ((Collection<?>)objectField).contains(object)) {
 //       				System.out.println("COLL");
@@ -430,7 +430,7 @@ public abstract class HelperObject {
 		    final Class<?> c = output.classQueue.poll();
 		    final String expected = osc.getName();
 		    final String found = (null == c) ? null : c.getName();
-		    if (!expected.equals(found)) {
+		    if (!isEquals(expected, found)) {
 		    	throw new InvalidClassException("Classes desynchronized - found: " + found + " when expecting: " + expected); //$NON-NLS-1$ //$NON-NLS-2$
 		    }
 		    return c;

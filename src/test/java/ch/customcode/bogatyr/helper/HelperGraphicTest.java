@@ -40,9 +40,26 @@ import java.awt.Dimension;
  * Junit test
  * 
  * @author Stefan Laubenberger
- * @version 20100209
+ * @version 20100408
  */
 public class HelperGraphicTest {
+	@Test
+	public void testGetScale() {
+//		System.out.println(HelperGraphic.getScale(new Dimension(100, 100), (new Dimension(0, 20))));
+//		System.out.println(HelperGraphic.getScaledSize(new Dimension(100, 100), (new Dimension(0, 40))));
+//		System.out.println(HelperGraphic.getScaledSize(new Dimension(100, 100), 0.4));
+		assertEquals(0.5D, HelperGraphic.getScale(new Dimension(100, 100), (new Dimension(50, 50))), 0.001D);
+		
+//		try {
+//			HelperGraphic.getCenter(null);
+//			fail("size is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+	}
+
 	@Test
 	public void testGetCenter() {
 		assertEquals(new Dimension(50, 50), HelperGraphic.getCenter(new Dimension(100, 100)));

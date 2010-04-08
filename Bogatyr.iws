@@ -21,67 +21,31 @@
   </component>
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="6099473d-4163-40d6-a2ae-9afd78c1b030" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperArray.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/updater/UpdaterImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/updater/UpdaterImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/misc/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/misc/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/filemanager/FileManager.java" afterPath="$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/filemanager/FileManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperKeyboard.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperKeyboard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/service/printer/PrinterTest.java" afterPath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/service/printer/PrinterTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/configuration/ch/customcode/bogatyr/sample/helloworld/standard.properties" afterPath="$PROJECT_DIR$/src/sample/configuration/ch/customcode/bogatyr/sample/helloworld/standard.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperScreen.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/timer/CountdownTimerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/timer/CountdownTimerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperNumber.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperNumber.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/ScramblerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/ScramblerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/configuration/ch/customcode/bogatyr/sample/filemanager/standard.properties" afterPath="$PROJECT_DIR$/src/sample/configuration/ch/customcode/bogatyr/sample/filemanager/standard.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/launcher/LauncherFile.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/launcher/LauncherFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/view/swing/FormattedTextField.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/view/swing/FormattedTextField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/launcher/LauncherProcess.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/launcher/LauncherProcess.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperTime.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperTime.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.project" afterPath="$PROJECT_DIR$/.project" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/view/swing/MenuBar.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/view/swing/MenuBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/provider/ProviderSqlImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/provider/ProviderSqlImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/helloworld/HelloWorld.java" afterPath="$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/helloworld/HelloWorld.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/localizer/LocalizerAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/localizer/LocalizerAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/launcher/LauncherMail.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/launcher/LauncherMail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/view/swing/factory/FormatFactory.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/view/swing/factory/FormatFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/localizer/LocalizerFile.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/localizer/LocalizerFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/encoder/EncoderHtml.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/encoder/EncoderHtml.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/CertificateProviderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/CertificateProviderImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/Country.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/Country.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperIO.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperIO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperImage.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperImage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperGraphic.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperGraphic.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperEnvironment.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperEnvironment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/launcher/LauncherMailTest.java" afterPath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/launcher/LauncherMailTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/PersonImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/PersonImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.ipr" afterPath="$PROJECT_DIR$/Bogatyr.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/ScramblerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/ScramblerImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperString.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperString.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperPdf.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperPdf.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperObject.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/CryptoSymmetricImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/CryptoSymmetricImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/timer/TimerAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/timer/TimerAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/timer/TimerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/timer/TimerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/paginator/PaginatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/paginator/PaginatorImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/KeyWrapperImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/KeyWrapperImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/HashCodeGeneratorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/HashCodeGeneratorImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/CryptoAsymmetricImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/CryptoAsymmetricImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/service/updater/UpdaterTest.java" afterPath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/service/updater/UpdaterTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/launcher/LauncherFileTest.java" afterPath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/launcher/LauncherFileTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperSwing.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperSwing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/printer/Printer.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/printer/Printer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/property/PropertyImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/property/PropertyImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/updater/UpdaterImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/updater/UpdaterImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperLog.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperLog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/Country.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/Country.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/AllBogatyrTests.java" afterPath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/AllBogatyrTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperSound.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperSound.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperMath.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperMath.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/profiler/ProfilerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/profiler/ProfilerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/HmacGeneratorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/HmacGeneratorImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/launcher/LauncherBrowserTest.java" afterPath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/launcher/LauncherBrowserTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FileManager.launch" afterPath="$PROJECT_DIR$/FileManager.launch" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/controller/net/server/ServerThreadAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/controller/net/server/ServerThreadAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperXml.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperXml.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/ManufacturerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/ManufacturerImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperObject.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperObject.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iml" afterPath="$PROJECT_DIR$/Bogatyr.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/HelperGraphicTest.java" afterPath="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/HelperGraphicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/OwnerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/OwnerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/CryptoSymmetricImpl.java" afterPath="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/CryptoSymmetricImpl.java" />
     </list>
-    <ignored path=".idea/workspace.xml" />
     <ignored path="Bogatyr.iws" />
     <ignored path="target/" />
+    <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,22 +116,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/timer/TimerImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/updater/UpdaterImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/service/updater/UpdaterTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperTime.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/Country.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/CryptoSymmetricImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperArray.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperEnvironment.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperString.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperLog.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/launcher/LauncherMail.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/encoder/EncoderHtml.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperGraphic.java" />
+        <option value="$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/HelperGraphicTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperImage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperIO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperPdf.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/ScramblerImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/updater/UpdaterImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperObject.java" />
-        <option value="$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/filemanager/FileManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/view/swing/factory/FormatFactory.java" />
-        <option value="$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/helloworld/HelloWorld.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/property/PropertyImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/misc/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperString.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/OwnerImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/PersonImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/ManufacturerImpl.java" />
       </list>
     </option>
   </component>
@@ -815,6 +779,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Favorites" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -1252,7 +1218,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="helper" />
+              <option name="myItemId" value="misc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1266,14 +1232,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="doc" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bogatyr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="helper" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1625,29 +1605,29 @@
     <frame x="0" y="22" width="1920" height="1054" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32976446" sideWeight="0.0" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32976446" sideWeight="0.0" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3222698" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.6057572" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39946738" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.6057572" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32655245" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275862" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18278995" sideWeight="0.68201286" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18278995" sideWeight="0.6627409" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.6057572" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39939487" sideWeight="0.6057572" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977018" sideWeight="0.6627409" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977018" sideWeight="0.6627409" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3875803" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3262317" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3222698" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31905782" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32867885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3875803" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsManagerConfiguration">
@@ -1746,108 +1726,114 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperObject.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperEnvironment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="262" column="30" selection-start="7901" selection-end="7901" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/misc/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="4" selection-start="1190" selection-end="1190" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/CryptoSymmetricImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="269" column="8" selection-start="9345" selection-end="9345" vertical-scroll-proportion="0.013468013">
+        <state line="47" column="27" selection-start="1521" selection-end="1521" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/AllBogatyrTests.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperGraphic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="20" selection-start="2620" selection-end="2628" vertical-scroll-proportion="0.0">
+        <state line="52" column="27" selection-start="1444" selection-end="1444" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/filemanager/FileManager.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/helper/HelperGraphicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="20" selection-start="1454" selection-end="1454" vertical-scroll-proportion="0.0">
+        <state line="42" column="20" selection-start="1048" selection-end="1048" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/view/swing/factory/FormatFactory.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="27" selection-start="1606" selection-end="1606" vertical-scroll-proportion="0.0">
+        <state line="57" column="27" selection-start="1600" selection-end="1600" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/view/swing/FormattedTextField.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperPdf.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="40" selection-start="3230" selection-end="3230" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/java/ch/customcode/bogatyr/sample/helloworld/HelloWorld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="20" selection-start="1436" selection-end="1436" vertical-scroll-proportion="0.0">
+        <state line="66" column="27" selection-start="2053" selection-end="2053" vertical-scroll-proportion="0.22335026">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/KeyWrapperImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/crypto/ScramblerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/profiler/ProfilerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/property/PropertyImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="17" selection-start="1511" selection-end="1511" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/controller/net/server/ServerThreadAbstract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/timer/TimerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="56" column="27" selection-start="1834" selection-end="1834" vertical-scroll-proportion="0.20304568">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/service/updater/UpdaterImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="56" column="27" selection-start="1714" selection-end="1714" vertical-scroll-proportion="0.20304568">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/ch/customcode/bogatyr/service/updater/UpdaterTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperIO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="27" selection-start="2162" selection-end="2162" vertical-scroll-proportion="0.22916667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperString.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="192" column="61" selection-start="5525" selection-end="5572" vertical-scroll-proportion="0.4856176">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/view/swing/factory/FormatFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="254" column="23" selection-start="8252" selection-end="8252" vertical-scroll-proportion="0.30287647">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/context/ContextImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="130" column="19" selection-start="3178" selection-end="3178" vertical-scroll-proportion="0.30287647">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/Country.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/misc/Constants.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/helper/HelperObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="137" selection-start="1814" selection-end="1814" vertical-scroll-proportion="0.35416666">
+        <state line="60" column="27" selection-start="1739" selection-end="1747" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/OwnerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="27" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.20135364">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/PersonImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="27" selection-start="1211" selection-end="1211" vertical-scroll-proportion="0.20135364">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/customcode/bogatyr/model/misc/ManufacturerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="27" selection-start="1194" selection-end="1194" vertical-scroll-proportion="0.22335026">
           <folding />
         </state>
       </provider>

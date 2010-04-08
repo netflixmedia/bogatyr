@@ -41,6 +41,7 @@ import ch.customcode.bogatyr.misc.Constants;
 import ch.customcode.bogatyr.helper.HelperArray;
 import ch.customcode.bogatyr.helper.HelperEnvironment;
 import ch.customcode.bogatyr.helper.HelperLog;
+import ch.customcode.bogatyr.helper.HelperObject;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
@@ -53,7 +54,7 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * This is a class for obfuscating data with CFB.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100408)
  * @since 0.3.0
  */
 public class ScramblerImpl extends ServiceAbstract implements Scrambler {
@@ -124,7 +125,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 		if (null == output) {
             throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
         }
-		if (input.equals(output)) {
+		if (HelperObject.isEquals(input, output)) {
 			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
         if (1 > bufferSize) {
@@ -173,7 +174,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 		if (null == output) {
             throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
         }
-		if (input.equals(output)) {
+		if (HelperObject.isEquals(input, output)) {
 			throw new RuntimeExceptionIsEquals("input", "output"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
         if (1 > bufferSize) {

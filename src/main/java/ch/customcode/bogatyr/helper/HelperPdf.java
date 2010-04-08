@@ -64,7 +64,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * <strong>Note:</strong> This class needs <a href="http://itextpdf.com/">iText</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100408)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -182,7 +182,7 @@ public abstract class HelperPdf {
 		if (!HelperMap.isValid(metadata)) {
 			throw new RuntimeExceptionIsNullOrEmpty("metadata"); //$NON-NLS-1$
 		}
-		if (source.equals(dest)) {
+		if (HelperObject.isEquals(source, dest)) {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
@@ -227,7 +227,7 @@ public abstract class HelperPdf {
 		if (null == dest) {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
-		if (source.equals(dest)) {
+		if (HelperObject.isEquals(source, dest)) {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
