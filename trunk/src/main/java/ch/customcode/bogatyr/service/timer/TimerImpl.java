@@ -39,7 +39,7 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100413)
  * @since 0.6.0
  */
 public class TimerImpl extends TimerAbstract implements Timer {
@@ -47,6 +47,15 @@ public class TimerImpl extends TimerAbstract implements Timer {
 	
 	long time;
 	
+	public TimerImpl() {
+        super();
+        log.trace(HelperLog.constructor());
+    }
+	
+	
+	/*
+	 * Implemented methods
+	 */
 	@Override
     public long getTime() {
 		log.debug(HelperLog.methodStart());
@@ -66,12 +75,8 @@ public class TimerImpl extends TimerAbstract implements Timer {
 
 		log.debug(HelperLog.methodExit());
 	}
-	
-	
-	/*
-	 * Implemented methods
-	 */
-    @Override
+
+	@Override
     public synchronized void start(final long interval) {
 		log.debug(HelperLog.methodStart(interval));
 		if (0 > interval) {

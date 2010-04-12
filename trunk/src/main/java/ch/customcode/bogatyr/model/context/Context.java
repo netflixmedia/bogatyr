@@ -27,11 +27,6 @@
  */
 package ch.customcode.bogatyr.model.context;
 
-import java.io.File;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.net.URL;
-import java.util.Date;
 import java.util.Map;
 
 import ch.customcode.bogatyr.model.Model;
@@ -41,7 +36,7 @@ import ch.customcode.bogatyr.model.Model;
  * Interface for the context in applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100202)
+ * @version 0.9.1 (20100413)
  * @since 0.6.0
  */
 public interface Context extends Model {
@@ -92,119 +87,12 @@ public interface Context extends Model {
 	Object getValue(Object key);
 	
 	/**
-     * Returns a {@link String} associated to the given key from the context.
+     * Returns an object associated to the given key and {@link Class} from the context.
      * 
      * @param key for the context
-     * @return {@link String} associated to the given key
-     * @since 0.6.0 
+     * @param clazz of the object
+     * @return object associated to the given key and {@link Class}
+     * @since 0.9.1 
      */	
-	String getString(Object key);
-	
-	/**
-     * Returns a {@link Boolean} value associated to the given key from the context.
-     * 
-     * @param key for the context
-     * @return {@link Boolean} associated to the given key
-     * @since 0.7.0 
-     */	
-	Boolean getBoolean(Object key);
-	
-	/**
-     * Returns a {@link Double} value associated to the given key from the context.
-     * 
-     * @param key for the context
-     * @return {@link Double} associated to the given key
-     * @since 0.7.0 
-     */	
-	Double getDouble(Object key);
-	
-	/**
-     * Returns an {@link Integer} value associated to the given key from the context.
-     * 
-     * @param key for the context
-     * @return {@link Integer} associated to the given key
-     * @since 0.7.0 
-     */	
-	Integer getInteger(Object key);
-	
-	/**
-     * Returns a {@link Float} value associated to the given key from the context.
-     * 
-     * @param key for the context
-     * @return {@link Float} associated to the given key
-     * @since 0.7.0 
-     */	
-	Float getFloat(Object key);
-	
-	/**
-     * Returns a {@link Byte} value associated to the given key from the context.
-     * 
-     * @param key for the context
-     * @return {@link Byte} associated to the given key
-     * @since 0.7.0 
-     */	
-	Byte getByte(Object key);
-	
-	/**
-     * Returns a {@link Long} value associated to the given key from the context.
-     * 
-     * @param key for the context
-     * @return {@link Long} associated to the given key
-     * @since 0.7.0 
-     */	
-	Long getLong(Object key);
-
-	/**
-     * Returns a {@link Short} value associated to the given key from the context.
-     * 
-     * @param key for the context
-     * @return {@link Short} associated to the given key
-     * @since 0.7.0 
-     */	
-	Short getShort(Object key);
-	
-	/**
-     * Returns a {@link BigInteger} value associated to the given key from the context.
-     * 
-     * @param key for the context
-     * @return {@link BigInteger} associated to the given key
-     * @since 0.7.0 
-     */	
-	BigInteger getBigInteger(Object key);
-	
-	/**
-     * Returns a {@link BigDecimal} value associated to the given key from the context.
-     * 
-     * @param key for the context
-     * @return {@link BigDecimal} associated to the given key
-     * @since 0.7.0 
-     */	
-	BigDecimal getBigDecimal(Object key);
-
-	/**
-     * Returns a {@link Date} associated to the given key from the context.
-     * 
-     * @param key for the context
-     * @return {@link Date} associated to the given key
-     * @since 0.7.0 
-     */	
-	Date getDate(Object key);
-	
-	/**
-     * Returns a {@link File} associated to the given key from the context.
-     * 
-     * @param key for the context
-     * @return {@link File} associated to the given key
-     * @since 0.9.0 
-     */	
-	File getFile(Object key);
-	
-	/**
-     * Returns a {@link URL} associated to the given key from the context.
-     * 
-     * @param key for the context
-     * @return {@link URL} associated to the given key
-     * @since 0.9.0 
-     */	
-	URL getURL(Object key);
+	<T> T getValue(Object key, Class<T> clazz);
 }

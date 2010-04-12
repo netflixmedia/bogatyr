@@ -54,11 +54,18 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * This is a class for obfuscating data with CFB.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100408)
+ * @version 0.9.1 (20100413)
  * @since 0.3.0
  */
 public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 	private static final Logger log = LoggerFactory.getLogger(ScramblerImpl.class);
+	
+	
+	public ScramblerImpl() {
+        super();
+        log.trace(HelperLog.constructor());
+    }
+	
 	
 	/*
      * Private methods

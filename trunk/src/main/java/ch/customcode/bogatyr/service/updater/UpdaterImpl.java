@@ -54,11 +54,18 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * This is the updater for documents.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100408)
+ * @version 0.9.1 (20100413)
  * @since 0.6.0
  */
 public class UpdaterImpl extends ServiceAbstract implements Updater {
 	private static final Logger log = LoggerFactory.getLogger(UpdaterImpl.class);
+	
+
+	public UpdaterImpl() {
+        super();
+        log.trace(HelperLog.constructor());
+    }
+
 	
     /*
     * Implemented methods

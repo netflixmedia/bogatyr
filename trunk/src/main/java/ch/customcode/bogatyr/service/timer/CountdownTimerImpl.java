@@ -40,13 +40,19 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a countdown timer which informs all added listeners about its state.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100413)
  * @since 0.6.0
  */
 public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer {
 	private static final Logger log = LoggerFactory.getLogger(CountdownTimerImpl.class);
 	
 	long runtime;
+
+	
+	public CountdownTimerImpl() {
+        super();
+        log.trace(HelperLog.constructor());
+    }
 
 	
 	/*

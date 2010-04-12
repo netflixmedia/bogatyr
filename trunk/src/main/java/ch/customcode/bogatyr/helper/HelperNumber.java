@@ -28,7 +28,6 @@
 package ch.customcode.bogatyr.helper;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +41,7 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a helper class for numbers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100413)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
@@ -195,117 +194,117 @@ public abstract class HelperNumber {
 		return result;
     }
     
-	/**
-     * Returns a {@link Double} value from a {@link String}.
-     * 
-     * @param text value to convert
-     * @return {@link Double} from the {@link String} 
-     */	
-	public static Double getDouble(final String text) {
-		log.debug(HelperLog.methodStart(text));
-		
-		final String value = HelperString.getValidNumericString(text);
-		final Double result = null == value ? null : new BigDecimal(value).doubleValue();
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-	
-	/**
-     * Returns a {@link Integer} value from a {@link String}.
-     * 
-     * @param text value to convert
-     * @return {@link Integer} from the {@link String} 
-     */	
-	public static Integer getInteger(final String text) {
-		log.debug(HelperLog.methodStart(text));
-		
-		final String value = HelperString.getValidNumericString(text);
-		final Integer result = null == value ? null : new BigDecimal(value).intValue();
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-	
-	/**
-     * Returns a {@link Float} value from a {@link String}.
-     * 
-     * @param text value to convert
-     * @return {@link Float} from the {@link String}
-     */	
-	public static Float getFloat(final String text) {
-		log.debug(HelperLog.methodStart(text));
-		
-		final String value = HelperString.getValidNumericString(text);
-		final Float result = null == value ? null : new BigDecimal(value).floatValue();
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-	
-	/**
-     * Returns a {@link Byte} value from a {@link String}.
-     * 
-     * @param text value to convert
-     * @return {@link Byte} from the {@link String}
-     */	
-	public static Byte getByte(final String text) {
-		log.debug(HelperLog.methodStart(text));
-		
-		final String value = HelperString.getValidNumericString(text);
-		final Byte result = null == value ? null : new BigDecimal(value).byteValue();
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-	
-	/**
-     * Returns a {@link Long} value from a {@link String}.
-     * 
-     * @param text value to convert
-     * @return {@link Long} from the {@link String}
-     */	
-	public static Long getLong(final String text) {
-		log.debug(HelperLog.methodStart(text));
-		
-		final String value = HelperString.getValidNumericString(text);
-		final Long result = null == value ? null : new BigDecimal(value).longValue();
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-	
-	/**
-     * Returns a {@link Short} value from a {@link String}.
-     * 
-     * @param text value to convert
-     * @return {@link Short} from the {@link String} 
-     */	
-	public static Short getShort(final String text) {
-		log.debug(HelperLog.methodStart(text));
-		
-		final String value = HelperString.getValidNumericString(text);
-		final Short result = null == value ? null : new BigDecimal(value).shortValue();
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-	
-	/**
-     * Returns a {@link BigInteger} value from a {@link String}.
-     * 
-     * @param text value to convert
-     * @return {@link BigInteger} from the {@link String} 
-     */	
-	public static BigInteger getBigInteger(final String text) {
-		log.debug(HelperLog.methodStart(text));
-		
-		final String value = HelperString.getValidNumericString(text);
-		final BigInteger result = null == value ? null : new BigInteger(value);
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
+//	/**
+//     * Returns a {@link Double} value from a {@link String}.
+//     * 
+//     * @param text value to convert
+//     * @return {@link Double} from the {@link String} 
+//     */	
+//	public static Double getDouble(final String text) {
+//		log.debug(HelperLog.methodStart(text));
+//		
+//		final String value = HelperString.getValidNumericString(text);
+//		final Double result = null == value ? null : new BigDecimal(value).doubleValue();
+//		
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
+//	
+//	/**
+//     * Returns a {@link Integer} value from a {@link String}.
+//     * 
+//     * @param text value to convert
+//     * @return {@link Integer} from the {@link String} 
+//     */	
+//	public static Integer getInteger(final String text) {
+//		log.debug(HelperLog.methodStart(text));
+//		
+//		final String value = HelperString.getValidNumericString(text);
+//		final Integer result = null == value ? null : new BigDecimal(value).intValue();
+//		
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
+//	
+//	/**
+//     * Returns a {@link Float} value from a {@link String}.
+//     * 
+//     * @param text value to convert
+//     * @return {@link Float} from the {@link String}
+//     */	
+//	public static Float getFloat(final String text) {
+//		log.debug(HelperLog.methodStart(text));
+//		
+//		final String value = HelperString.getValidNumericString(text);
+//		final Float result = null == value ? null : new BigDecimal(value).floatValue();
+//		
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
+//	
+//	/**
+//     * Returns a {@link Byte} value from a {@link String}.
+//     * 
+//     * @param text value to convert
+//     * @return {@link Byte} from the {@link String}
+//     */	
+//	public static Byte getByte(final String text) {
+//		log.debug(HelperLog.methodStart(text));
+//		
+//		final String value = HelperString.getValidNumericString(text);
+//		final Byte result = null == value ? null : new BigDecimal(value).byteValue();
+//		
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
+//	
+//	/**
+//     * Returns a {@link Long} value from a {@link String}.
+//     * 
+//     * @param text value to convert
+//     * @return {@link Long} from the {@link String}
+//     */	
+//	public static Long getLong(final String text) {
+//		log.debug(HelperLog.methodStart(text));
+//		
+//		final String value = HelperString.getValidNumericString(text);
+//		final Long result = null == value ? null : new BigDecimal(value).longValue();
+//		
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
+//	
+//	/**
+//     * Returns a {@link Short} value from a {@link String}.
+//     * 
+//     * @param text value to convert
+//     * @return {@link Short} from the {@link String} 
+//     */	
+//	public static Short getShort(final String text) {
+//		log.debug(HelperLog.methodStart(text));
+//		
+//		final String value = HelperString.getValidNumericString(text);
+//		final Short result = null == value ? null : new BigDecimal(value).shortValue();
+//		
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
+//	
+//	/**
+//     * Returns a {@link BigInteger} value from a {@link String}.
+//     * 
+//     * @param text value to convert
+//     * @return {@link BigInteger} from the {@link String} 
+//     */	
+//	public static BigInteger getBigInteger(final String text) {
+//		log.debug(HelperLog.methodStart(text));
+//		
+//		final String value = HelperString.getValidNumericString(text);
+//		final BigInteger result = null == value ? null : new BigInteger(value);
+//		
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
 	
 	/**
      * Returns a {@link BigDecimal} value from a {@link String}.
@@ -313,15 +312,36 @@ public abstract class HelperNumber {
      * @param text value to convert
      * @return {@link BigDecimal} from the {@link String}
      */	
-	public static BigDecimal getBigDecimal(final String text) {
+	public static BigDecimal getNumber(final String text) {
 		log.debug(HelperLog.methodStart(text));
 		
 		final String value = HelperString.getValidNumericString(text);
-		final BigDecimal result = null == value ? null : new BigDecimal(value);
 		
+		BigDecimal result = null;
+		
+		if (value != null) {
+			result = new BigDecimal(value);
+		}
+
 		log.debug(HelperLog.methodExit(result));
 		return result;
 	}
+
+//	/**
+//     * Returns a {@link BigDecimal} value from a {@link String}.
+//     * 
+//     * @param text value to convert
+//     * @return {@link BigDecimal} from the {@link String}
+//     */	
+//	public static BigDecimal getBigDecimal(final String text) {
+//		log.debug(HelperLog.methodStart(text));
+//		
+//		final String value = HelperString.getValidNumericString(text);
+//		final BigDecimal result = null == value ? null : new BigDecimal(value);
+//		
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
 	
 	/**
      * Returns a {@link String} value from a {@link Number}.

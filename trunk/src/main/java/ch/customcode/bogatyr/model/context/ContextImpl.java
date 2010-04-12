@@ -27,14 +27,13 @@
  */
 package ch.customcode.bogatyr.model.context;
 
-import java.io.File;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.net.URL;
-import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperObject;
 import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.model.ModelAbstract;
@@ -44,12 +43,14 @@ import ch.customcode.bogatyr.model.ModelAbstract;
  * Implementation of the context for applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100216)
+ * @version 0.9.1 (20100413)
  * @since 0.1.0
  */
 public class ContextImpl extends ModelAbstract implements Context {
 	private static final long serialVersionUID = 5570878557994873482L;
 
+	private static final Logger log = LoggerFactory.getLogger(ContextImpl.class);
+	
 	private static final Context INSTANCE = new ContextImpl();
 
 	private transient Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();
@@ -57,6 +58,7 @@ public class ContextImpl extends ModelAbstract implements Context {
 
     private ContextImpl() {
         super();
+        log.trace(HelperLog.constructor());
     }
 
     public static Context getInstance() {
@@ -78,21 +80,28 @@ public class ContextImpl extends ModelAbstract implements Context {
 	 */
     @Override
     public Map<Object, Object> getData() {
-        return contextData;
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(contextData));
+		return contextData;
     }
 
     @Override
     public void setData(final Map<Object, Object> data) {
+    	log.debug(HelperLog.methodStart(data));
+    	
         if (!HelperObject.isEquals(data, contextData)) {
             contextData = data;
             setChanged();
             notifyObservers(MEMBER_DATA);
         }
 
+        log.debug(HelperLog.methodExit());
     }
 
     @Override
     public void addValue(final Object key, final Object value) { //$JUnit$
+    	log.debug(HelperLog.methodStart(key, value));
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
@@ -103,120 +112,51 @@ public class ContextImpl extends ModelAbstract implements Context {
 		contextData.put(key, value);
         setChanged();
         notifyObservers(METHOD_ADD_VALUE);
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
     public void removeValue(final Object key) { //$JUnit$
+		log.debug(HelperLog.methodStart(key));
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
 		contextData.remove(key);
         setChanged();
         notifyObservers(METHOD_REMOVE_VALUE);
-}
+        
+        log.debug(HelperLog.methodExit());
+	}
 
 	@Override
     public Object getValue(final Object key) { //$JUnit$
+		log.debug(HelperLog.methodStart(key));
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
-		return contextData.get(key);
-	}
-
-	@Override
-    public String getString(final Object key) { //$JUnit$
-		final Object obj = getValue(key);
 		
-		if (null == obj) {
-			return null;
+		final Object result = contextData.get(key);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+    public <T> T getValue(final Object key, final Class<T> clazz) {
+		log.debug(HelperLog.methodStart(key, clazz));
+		final Object obj = getValue(key);
+
+		T result = null;
+		
+		if (null != obj) {
+			if (HelperObject.isEquals(obj.getClass(), clazz)) {
+				result = (T)obj;
+			}
 		}
-		if (obj instanceof String) {
-			return (String)obj;
-		}
-		return obj.toString();
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
     }
-
-	@Override
-    public Boolean getBoolean(final Object key) { //$JUnit$
-		final Object obj = getValue(key);
-
-		return null != obj && obj instanceof Boolean ? (Boolean)obj : null;
-    }
-	
-	@Override
-    public Double getDouble(final Object key) { //$JUnit$
-		final Object obj = getValue(key);
-
-		return null != obj && obj instanceof Double ? (Double)obj : null;
-	}
-	
-	@Override
-    public Integer getInteger(final Object key) { //$JUnit$
-		final Object obj = getValue(key);
-
-		return null != obj && obj instanceof Integer ? (Integer)obj : null;
-	}
-	
-	@Override
-    public Float getFloat(final Object key) { //$JUnit$
-		final Object obj = getValue(key);
-
-		return null != obj && obj instanceof Float ? (Float)obj : null;
-	}
-	
-	@Override
-    public Byte getByte(final Object key) { //$JUnit$
-		final Object obj = getValue(key);
-
-		return null != obj && obj instanceof Byte ? (Byte)obj : null;
-	}
-	
-	@Override
-    public Long getLong(final Object key) { //$JUnit$
-		final Object obj = getValue(key);
-
-		return null != obj && obj instanceof Long ? (Long)obj : null;
-	}
-
-	@Override
-    public Short getShort(final Object key) { //$JUnit$
-		final Object obj = getValue(key);
-
-		return null != obj && obj instanceof Short ? (Short)obj : null;
-	}
-	
-	@Override
-    public BigInteger getBigInteger(final Object key) { //$JUnit$
-		final Object obj = getValue(key);
-
-		return null != obj && obj instanceof BigInteger ? (BigInteger)obj : null;
-	}
-	
-	@Override
-    public BigDecimal getBigDecimal(final Object key) { //$JUnit$
-		final Object obj = getValue(key);
-
-		return null != obj && obj instanceof BigDecimal ? (BigDecimal)obj : null;
-	}
-
-	@Override
-    public Date getDate(final Object key) { //$JUnit$
-		final Object obj = getValue(key);
-
-		return null != obj && obj instanceof Date ? (Date)obj : null;
-	}
-
-	@Override
-    public File getFile(final Object key) {
-		final Object obj = getValue(key);
-
-		return null != obj && obj instanceof File ? (File)obj : null;
-	}
-	
-	@Override
-    public URL getURL(final Object key) {
-		final Object obj = getValue(key);
-
-		return null != obj && obj instanceof URL ? (URL)obj : null;
-	}
 }

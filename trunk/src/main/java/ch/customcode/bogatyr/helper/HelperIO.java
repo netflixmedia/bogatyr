@@ -70,7 +70,7 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100408)
+ * @version 0.9.1 (20100413)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -1201,13 +1201,13 @@ public abstract class HelperIO {
     }
 
 	/**
-     * Removes a file extension from a given {@link String}.
+     * Get the file without extension from a given {@link String}.
      * 
      * @param fileName to remove the extension
      * @return {@link String} without extension
      * @since 0.9.0
      */
-    public static String removeFileExtension(final String fileName) {
+    public static String getFileWithoutExtension(final String fileName) {
     	log.debug(HelperLog.methodStart(fileName));
     	if (null == fileName) {
             throw new RuntimeExceptionIsNull("fileName"); //$NON-NLS-1$
