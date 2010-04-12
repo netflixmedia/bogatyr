@@ -29,7 +29,6 @@ package ch.customcode.bogatyr.service.localizer;
 
 import java.io.File;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
@@ -50,7 +49,7 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * Abstract localizer implementation.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100413)
  * @since 0.6.0
  */
 public abstract class LocalizerAbstract extends ServiceAbstract implements Localizer {
@@ -91,80 +90,10 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
     }
 
 	@Override
-    public BigDecimal getBigDecimal(final String key) {
+    public BigDecimal getNumber(final String key) {
 		log.debug(HelperLog.methodStart(key));
 		
-		final BigDecimal result = HelperNumber.getBigDecimal(getValue(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public BigInteger getBigInteger(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final BigInteger result = HelperNumber.getBigInteger(getValue(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public Byte getByte(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final Byte result = HelperNumber.getByte(getValue(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public Double getDouble(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final Double result = HelperNumber.getDouble(getValue(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public Float getFloat(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final Float result = HelperNumber.getFloat(getValue(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public Integer getInteger(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final Integer result = HelperNumber.getInteger(getValue(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public Long getLong(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final Long result = HelperNumber.getLong(getValue(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public Short getShort(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final Short result = HelperNumber.getShort(getValue(key));
+		final BigDecimal result = HelperNumber.getNumber(getValue(key));
 		
 		log.debug(HelperLog.methodExit(result));
 		return result;

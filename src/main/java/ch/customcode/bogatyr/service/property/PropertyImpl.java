@@ -33,7 +33,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
@@ -51,7 +50,7 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * This is the properties class for file and stream access.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100413)
  * @since 0.1.0
  */
 public class PropertyImpl extends ServiceAbstract implements Property {
@@ -109,80 +108,10 @@ public class PropertyImpl extends ServiceAbstract implements Property {
     }
 
 	@Override
-    public BigDecimal getBigDecimal(final String key) {
+    public BigDecimal getNumber(final String key) {
 		log.debug(HelperLog.methodStart(key));
 		
-		final BigDecimal result = HelperNumber.getBigDecimal(properties.getProperty(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public BigInteger getBigInteger(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final BigInteger result = HelperNumber.getBigInteger(properties.getProperty(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public Byte getByte(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final Byte result = HelperNumber.getByte(properties.getProperty(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public Double getDouble(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final Double result = HelperNumber.getDouble(properties.getProperty(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public Float getFloat(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final Float result = HelperNumber.getFloat(properties.getProperty(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public Integer getInteger(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final Integer result = HelperNumber.getInteger(properties.getProperty(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public Long getLong(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final Long result = HelperNumber.getLong(properties.getProperty(key));
-		
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-    public Short getShort(final String key) {
-		log.debug(HelperLog.methodStart(key));
-		
-		final Short result = HelperNumber.getShort(properties.getProperty(key));
+		final BigDecimal result = HelperNumber.getNumber(properties.getProperty(key));
 		
 		log.debug(HelperLog.methodExit(result));
 		return result;

@@ -49,7 +49,7 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * This is a printer class for print operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100413)
  * @since 0.5.0
  */
 public class Printer extends ServiceAbstract implements Printable {
@@ -58,6 +58,12 @@ public class Printer extends ServiceAbstract implements Printable {
 	private Component componentToBePrinted;
 	private boolean isScaled;
 
+
+	public Printer() {
+        super();
+        log.trace(HelperLog.constructor());
+    }
+	
     /**
      * Print a component {@link Component}.
      *

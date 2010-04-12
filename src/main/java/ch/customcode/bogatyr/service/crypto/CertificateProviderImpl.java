@@ -71,13 +71,20 @@ import ch.customcode.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.1 (20100413)
  * @since 0.3.0
  */
 public class CertificateProviderImpl extends ServiceAbstract implements CertificateProvider {
 	private static final Logger log = LoggerFactory.getLogger(CertificateProviderImpl.class);
 	
 	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
+	
+	
+	public CertificateProviderImpl() {
+        super();
+        log.trace(HelperLog.constructor());
+    }
+
 	
 	/*
 	 * Implemented methods

@@ -29,7 +29,6 @@ package ch.customcode.bogatyr.service.localizer;
 
 import java.io.File;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.net.URL;
 import java.util.Locale;
 
@@ -43,7 +42,7 @@ import ch.customcode.bogatyr.service.Service;
  * Defines the methods for the implementation of the localizer for different languages (i18n standard).
  * 
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.1 (20100413)
  * @since 0.6.0
  */
 public interface Localizer extends Service, HolderListener<ListenerLocale> {
@@ -73,7 +72,16 @@ public interface Localizer extends Service, HolderListener<ListenerLocale> {
 	 * @since 0.6.0
 	 */
 	String getValue(String key);
-	
+
+	/**
+     * Returns the value of a key as {@link BigDecimal}.
+     * 
+     * @param key
+     * @return {@link BigDecimal} associated to the given key
+     * @since 0.9.1 
+     */	
+	BigDecimal getNumber(String key);
+
 	/**
      * Returns the value of a key as {@link Boolean}.
      * 
@@ -83,78 +91,6 @@ public interface Localizer extends Service, HolderListener<ListenerLocale> {
      */
     Boolean getBoolean(String key);
     
-	/**
-     * Returns the value of a key as {@link Double}.
-     * 
-     * @param key
-     * @return {@link Double} associated to the given key
-     * @since 0.9.0 
-     */
-	Double getDouble(String key);
-	
-	/**
-     * Returns the value of a key as {@link Integer}.
-     * 
-     * @param key
-     * @return {@link Integer} associated to the given key 
-     * @since 0.9.0
-     */
-	Integer getInteger(String key);
-	
-	/**
-     * Returns the value of a key as {@link Float}.
-     * 
-     * @param key
-     * @return {@link Float} associated to the given key
-     * @since 0.9.0 
-     */
-	Float getFloat(String key);
-	
-	/**
-     * Returns the value of a key as {@link Byte}.
-     * 
-     * @param key
-     * @return {@link Byte} associated to the given key
-     * @since 0.9.0 
-     */
-	Byte getByte(String key);
-	
-	/**
-     * Returns the value of a key as {@link Long}.
-     * 
-     * @param key
-     * @return {@link Long} associated to the given key
-     * @since 0.9.0 
-     */
-	Long getLong(String key);
-	
-	/**
-     * Returns the value of a key as {@link Short}.
-     * 
-     * @param key
-     * @return {@link Short} associated to the given key
-     * @since 0.9.0 
-     */	
-	Short getShort(String key);
-	
-	/**
-     * Returns the value of a key as {@link BigInteger}.
-     * 
-     * @param key
-     * @return {@link BigInteger} associated to the given key
-     * @since 0.9.0 
-     */	
-	BigInteger getBigInteger(String key);
-	
-	/**
-     * Returns the value of a key as {@link BigDecimal}.
-     * 
-     * @param key
-     * @return {@link BigDecimal} associated to the given key
-     * @since 0.9.0 
-     */	
-	BigDecimal getBigDecimal(String key);
-
 	/**
 	 * Returns the accelerator ({@link KeyStroke}) for a key.
 	 *

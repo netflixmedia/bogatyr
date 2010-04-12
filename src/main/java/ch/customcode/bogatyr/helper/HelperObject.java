@@ -58,7 +58,7 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100408)
+ * @version 0.9.1 (20100413)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -198,6 +198,7 @@ public abstract class HelperObject {
 	 * @throws ClassNotFoundException
 	 * @since 0.7.0
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> T deserialize(final Class<T> clazz, final byte[] data) throws IOException, ClassNotFoundException { //$JUnit$
 		log.debug(HelperLog.methodStart(clazz, data));
 		if (!HelperArray.isValid(data)) {
