@@ -30,11 +30,16 @@ package ch.customcode.bogatyr.model.misc;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperObject;
 import ch.customcode.bogatyr.model.ModelAbstract;
 
@@ -43,13 +48,15 @@ import ch.customcode.bogatyr.model.ModelAbstract;
  * The implementation of the person model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100408)
+ * @version 0.9.1 (20100414)
  * @since 0.9.1
  */
 @XmlRootElement(name = "person")
 @XmlType(propOrder={"name", "forename", "birthday", "gender", "street", "zip", "city", "country", "email", "website"})
 public class PersonImpl extends ModelAbstract implements Person {
 	private static final long serialVersionUID = -6819817877075750182L;
+	
+	private static final Logger log = LoggerFactory.getLogger(PersonImpl.class);
 	
 	private String name;
 	private String forename;
@@ -69,8 +76,9 @@ public class PersonImpl extends ModelAbstract implements Person {
 
 	public PersonImpl(final String name, final String forename, final Date birthday,
 			final Gender gender, final String street, final String zip, final String city,
-			final String country, final String email, final URL website) {
-		super();
+			final String country, final String email, final URL website, final Map<String, String> mapTag) {
+		super(mapTag);
+		log.trace(HelperLog.constructor(name, forename, birthday, gender, street, zip, city, country, email, website, mapTag));
 		this.name = name;
 		this.forename = forename;
 		this.birthday = birthday;
@@ -198,151 +206,221 @@ public class PersonImpl extends ModelAbstract implements Person {
 	@Override
     @XmlElement
 	public String getName() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(name));
 		return name;
 	}
 
 	@Override
 	@XmlElement
-	public String getEmail() {
-		return email;
-	}
-
-	@Override
-    @XmlElement
-	public URL getWebsite() {
-		return website;
-	}
-	
-	@Override
-	public void setName(final String name) {
-        if (!HelperObject.isEquals(name, this.name)) {
-            this.name = name;
-            setChanged();
-            notifyObservers(MEMBER_NAME);
-        }
-	}
-
-	@Override
-	public void setEmail(final String mail) {
-        if (!HelperObject.isEquals(mail, email)) {
-            email = mail;
-            setChanged();
-            notifyObservers(MEMBER_EMAIL);
-        }
-	}
-
-	@Override
-	public void setWebsite(final URL url) {
-        if (!HelperObject.isEquals(url, website)) {
-            website = url;
-            setChanged();
-            notifyObservers(MEMBER_WEBSITE);
-        }
-	}
-
-	@Override
-	@XmlElement
 	public String getCity() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(city));
 		return city;
 	}
 
 	@Override
 	@XmlElement
 	public String getCountry() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(country));
 		return country;
 	}
 
 	@Override
 	@XmlElement
 	public String getStreet() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(street));
 		return street;
 	}
 
 	@Override
 	@XmlElement
 	public String getZip() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(zip));
 		return zip;
 	}
-
+	
 	@Override
-	public void setCity(final String city) {
-        if (!HelperObject.isEquals(city, this.city)) {
-            this.city = city;
-            setChanged();
-            notifyObservers(MEMBER_CITY);
-        }
+	@XmlElement
+	public String getEmail() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(email));
+		return email;
 	}
 
 	@Override
-	public void setCountry(final String country) {
-        if (!HelperObject.isEquals(country, this.country)) {
-            this.country = country;
-            setChanged();
-            notifyObservers(MEMBER_COUNTRY);
-        }
-	}
-
-	@Override
-	public void setStreet(final String street) {
-        if (!HelperObject.isEquals(street, this.street)) {
-            this.street = street;
-            setChanged();
-            notifyObservers(MEMBER_STREET);
-        }
-	}
-
-	@Override
-	public void setZip(final String zip) {
-        if (!HelperObject.isEquals(zip, this.zip)) {
-            this.zip = zip;
-            setChanged();
-            notifyObservers(MEMBER_ZIP);
-        }
+    @XmlElement
+	public URL getWebsite() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(website));
+		return website;
 	}
 	
 	@Override
 	@XmlElement
 	public Date getBirthday() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(birthday));
 		return birthday;
 	}
 
 	@Override
 	@XmlElement
 	public String getForename() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(forename));
 		return forename;
 	}
 
 	@Override
 	@XmlElement
 	public Gender getGender() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(gender));
 		return gender;
+	}
+	
+	@Override
+	public void setName(final String name) {
+		log.debug(HelperLog.methodStart(name));
+		
+        if (!HelperObject.isEquals(name, this.name)) {
+            this.name = name;
+            setChanged();
+            notifyObservers(MEMBER_NAME);
+        }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
+	public void setCity(final String city) {
+		log.debug(HelperLog.methodStart(city));
+		
+        if (!HelperObject.isEquals(city, this.city)) {
+            this.city = city;
+            setChanged();
+            notifyObservers(MEMBER_CITY);
+        }
+        
+        log.debug(HelperLog.methodExit());
+	}
+	
+	@Override
+	public void setCountry(final String country) {
+		log.debug(HelperLog.methodStart(country));
+		
+        if (!HelperObject.isEquals(country, this.country)) {
+            this.country = country;
+            setChanged();
+            notifyObservers(MEMBER_COUNTRY);
+        }
+        
+        log.debug(HelperLog.methodExit());
+	}
+
+	@Override
+	public void setStreet(final String street) {
+		log.debug(HelperLog.methodStart(street));
+		
+        if (!HelperObject.isEquals(street, this.street)) {
+            this.street = street;
+            setChanged();
+            notifyObservers(MEMBER_STREET);
+        }
+        
+        log.debug(HelperLog.methodExit());
+	}
+
+	@Override
+	public void setZip(final String zip) {
+		log.debug(HelperLog.methodStart(zip));
+		
+        if (!HelperObject.isEquals(zip, this.zip)) {
+            this.zip = zip;
+            setChanged();
+            notifyObservers(MEMBER_ZIP);
+        }
+        
+        log.debug(HelperLog.methodExit());
+	}
+
+	@Override
+	public void setEmail(final String mail) {
+		log.debug(HelperLog.methodStart(mail));
+		
+        if (!HelperObject.isEquals(mail, email)) {
+            email = mail;
+            setChanged();
+            notifyObservers(MEMBER_EMAIL);
+        }
+        
+        log.debug(HelperLog.methodExit());
+	}
+
+	@Override
+	public void setWebsite(final URL url) {
+		log.debug(HelperLog.methodStart(url));
+		
+        if (!HelperObject.isEquals(url, website)) {
+            website = url;
+            setChanged();
+            notifyObservers(MEMBER_WEBSITE);
+        }
+        
+        log.debug(HelperLog.methodExit());
+	}
+	
+	@Override
 	public void setBirthday(final Date birthday) {
+		log.debug(HelperLog.methodStart(birthday));
+		
         if (!HelperObject.isEquals(birthday, this.birthday)) {
             this.birthday = birthday;
             setChanged();
             notifyObservers(MEMBER_BIRTHDAY);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setForename(final String forename) {
+		log.debug(HelperLog.methodStart(forename));
+		
         if (!HelperObject.isEquals(forename, this.forename)) {
             this.forename = forename;
             setChanged();
             notifyObservers(MEMBER_FORENAME);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setGender(final Gender gender) {
+		log.debug(HelperLog.methodStart(gender));
+		
         if (gender != this.gender) {
             this.gender = gender;
             setChanged();
             notifyObservers(MEMBER_GENDER);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 

@@ -29,11 +29,16 @@ package ch.customcode.bogatyr.model.misc;
 
 
 import java.net.URL;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperObject;
 import ch.customcode.bogatyr.model.ModelAbstract;
 
@@ -42,13 +47,15 @@ import ch.customcode.bogatyr.model.ModelAbstract;
  * The implementation of the publisher model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100301)
+ * @version 0.9.1 (20100414)
  * @since 0.9.0
  */
 @XmlRootElement(name = "publisher")
 @XmlType(propOrder={"name", "street", "zip", "city", "country", "email", "website"})
 public class PublisherImpl extends ModelAbstract implements Publisher {
 	private static final long serialVersionUID = 3542143128600081015L;
+	
+	private static final Logger log = LoggerFactory.getLogger(PublisherImpl.class);
 
 	private String name;
 	private String street;
@@ -61,11 +68,13 @@ public class PublisherImpl extends ModelAbstract implements Publisher {
 	
     public PublisherImpl() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public PublisherImpl(final String name, final String street, final String zip, final String city,
-			final String country, final String email, final URL website) {
-		super();
+			final String country, final String email, final URL website, final Map<String, String> mapTag) {
+		super(mapTag);
+		log.trace(HelperLog.constructor(name, street, zip, city, country, email, website, mapTag));
 		this.name = name;
 		this.street = street;
 		this.zip = zip;
@@ -164,106 +173,155 @@ public class PublisherImpl extends ModelAbstract implements Publisher {
 	@Override
     @XmlElement
 	public String getName() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(name));
 		return name;
 	}
 
 	@Override
 	@XmlElement
-	public String getEmail() {
-		return email;
-	}
-
-	@Override
-    @XmlElement
-	public URL getWebsite() {
-		return website;
-	}
-	
-	@Override
-	public void setName(final String name) {
-        if (!HelperObject.isEquals(name, this.name)) {
-            this.name = name;
-            setChanged();
-            notifyObservers(MEMBER_NAME);
-        }
-	}
-
-	@Override
-	public void setEmail(final String mail) {
-        if (!HelperObject.isEquals(mail, email)) {
-            email = mail;
-            setChanged();
-            notifyObservers(MEMBER_EMAIL);
-        }
-	}
-
-	@Override
-	public void setWebsite(final URL url) {
-        if (!HelperObject.isEquals(url, website)) {
-            website = url;
-            setChanged();
-            notifyObservers(MEMBER_WEBSITE);
-        }
-	}
-	
-	@Override
-	@XmlElement
 	public String getCity() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(city));
 		return city;
 	}
 
 	@Override
 	@XmlElement
 	public String getCountry() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(country));
 		return country;
 	}
 
 	@Override
 	@XmlElement
 	public String getStreet() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(street));
 		return street;
 	}
 
 	@Override
 	@XmlElement
 	public String getZip() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(zip));
 		return zip;
+	}
+	
+	@Override
+	@XmlElement
+	public String getEmail() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(email));
+		return email;
+	}
+
+	@Override
+    @XmlElement
+	public URL getWebsite() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(website));
+		return website;
+	}
+	
+	@Override
+	public void setName(final String name) {
+		log.debug(HelperLog.methodStart(name));
+		
+        if (!HelperObject.isEquals(name, this.name)) {
+            this.name = name;
+            setChanged();
+            notifyObservers(MEMBER_NAME);
+        }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setCity(final String city) {
+		log.debug(HelperLog.methodStart(city));
+		
         if (!HelperObject.isEquals(city, this.city)) {
             this.city = city;
             setChanged();
             notifyObservers(MEMBER_CITY);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
-
+	
 	@Override
 	public void setCountry(final String country) {
+		log.debug(HelperLog.methodStart(country));
+		
         if (!HelperObject.isEquals(country, this.country)) {
             this.country = country;
             setChanged();
             notifyObservers(MEMBER_COUNTRY);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setStreet(final String street) {
+		log.debug(HelperLog.methodStart(street));
+		
         if (!HelperObject.isEquals(street, this.street)) {
             this.street = street;
             setChanged();
             notifyObservers(MEMBER_STREET);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setZip(final String zip) {
+		log.debug(HelperLog.methodStart(zip));
+		
         if (!HelperObject.isEquals(zip, this.zip)) {
             this.zip = zip;
             setChanged();
             notifyObservers(MEMBER_ZIP);
         }
+        
+        log.debug(HelperLog.methodExit());
+	}
+
+	@Override
+	public void setEmail(final String mail) {
+		log.debug(HelperLog.methodStart(mail));
+		
+        if (!HelperObject.isEquals(mail, email)) {
+            email = mail;
+            setChanged();
+            notifyObservers(MEMBER_EMAIL);
+        }
+        
+        log.debug(HelperLog.methodExit());
+	}
+
+	@Override
+	public void setWebsite(final URL url) {
+		log.debug(HelperLog.methodStart(url));
+		
+        if (!HelperObject.isEquals(url, website)) {
+            website = url;
+            setChanged();
+            notifyObservers(MEMBER_WEBSITE);
+        }
+        
+        log.debug(HelperLog.methodExit());
 	}
 	
 	

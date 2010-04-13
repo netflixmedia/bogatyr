@@ -43,7 +43,7 @@ import ch.customcode.bogatyr.model.ModelAbstract;
  * Implementation of the context for applications.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100413)
+ * @version 0.9.1 (20100414)
  * @since 0.1.0
  */
 public class ContextImpl extends ModelAbstract implements Context {
@@ -53,7 +53,7 @@ public class ContextImpl extends ModelAbstract implements Context {
 	
 	private static final Context INSTANCE = new ContextImpl();
 
-	private transient Map<Object, Object> contextData = new ConcurrentHashMap<Object, Object>();
+	private transient Map<Object, Object> contextData;
 
 
     private ContextImpl() {
@@ -109,6 +109,9 @@ public class ContextImpl extends ModelAbstract implements Context {
 //			throw new RuntimeExceptionIsNull("value"); //$NON-NLS-1$
 //		}
 
+		if (null == contextData) {
+			contextData = new ConcurrentHashMap<Object, Object>();
+		}
 		contextData.put(key, value);
         setChanged();
         notifyObservers(METHOD_ADD_VALUE);
@@ -122,10 +125,13 @@ public class ContextImpl extends ModelAbstract implements Context {
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
-		contextData.remove(key);
-        setChanged();
-        notifyObservers(METHOD_REMOVE_VALUE);
-        
+		
+		if (null != contextData) {
+			contextData.remove(key);
+	        setChanged();
+	        notifyObservers(METHOD_REMOVE_VALUE);
+		}
+		
         log.debug(HelperLog.methodExit());
 	}
 
@@ -136,7 +142,10 @@ public class ContextImpl extends ModelAbstract implements Context {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
 		
-		final Object result = contextData.get(key);
+		Object result = null;
+		if (null != contextData) {
+			result = contextData.get(key);
+		}
 		
 		log.debug(HelperLog.methodExit(result));
 		return result;

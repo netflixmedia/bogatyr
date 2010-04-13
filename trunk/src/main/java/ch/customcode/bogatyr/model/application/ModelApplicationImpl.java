@@ -39,7 +39,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperObject;
+import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.xml.adapter.MapAdapterHashCode;
 import ch.customcode.bogatyr.model.crypto.HashCodeAlgo;
 import ch.customcode.bogatyr.model.misc.DocumentImpl;
@@ -56,7 +61,7 @@ import ch.customcode.bogatyr.service.property.Property;
  * The implementation of the application model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100331)
+ * @version 0.9.1 (20100414)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelApplication")
@@ -64,6 +69,8 @@ import ch.customcode.bogatyr.service.property.Property;
 public class ModelApplicationImpl extends DocumentImpl implements ModelApplication {
 	private static final long serialVersionUID = -2826684498598090349L;
 
+	private static final Logger log = LoggerFactory.getLogger(ModelApplicationImpl.class);
+	
 	private boolean isDebug;
 	private Map<HashCodeAlgo, String> mapHash = new HashMap<HashCodeAlgo, String>(3);
 
@@ -75,13 +82,17 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 	
     public ModelApplicationImpl() {
         super();
+        log.trace(HelperLog.constructor());
     }
     
 	public ModelApplicationImpl(final String name, final BigDecimal version, final int build,
 			final Date created, final Manufacturer manufacturer, final Owner owner,
 			final Publisher publisher, final UUID uuid, final boolean isDebug,
-			final Localizer localizer, final Property property, final Map<HashCodeAlgo, String> mapHash) {
-		super(name, version, build, created, manufacturer, owner, publisher, uuid);
+			final Localizer localizer, final Property property, final Map<HashCodeAlgo, String> mapHash, final Map<String, String> mapTag) {
+		super(name, version, build, created, manufacturer, owner, publisher, uuid, mapTag);
+		
+		log.trace(HelperLog.constructor(name, version, build, created, manufacturer, owner, publisher, uuid, isDebug, localizer, property, mapHash, mapTag));
+		
 		this.isDebug = isDebug;
 		this.localizer = localizer;
 		this.property = property;
@@ -132,90 +143,153 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
      */
 	@Override
 	public String getHash() {
-		return getHash(HashCodeAlgo.SHA256);
+		log.debug(HelperLog.methodStart());
+		
+		final String result = getHash(HashCodeAlgo.SHA256);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
 	public String getHash(final HashCodeAlgo hashCodeAlgo) {
-		return mapHash.get(hashCodeAlgo);
+		log.debug(HelperLog.methodStart(hashCodeAlgo));
+		
+		String result = null;
+		if (null != mapHash) {
+			result = mapHash.get(hashCodeAlgo);
+		}
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
 	@XmlElement
     @XmlJavaTypeAdapter(MapAdapterHashCode.class)
 	public Map<HashCodeAlgo, String> getHashs() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(mapHash));
 		return mapHash;
 	}
 
 	@Override
 	public void setHashs(final Map<HashCodeAlgo, String> hashs) {
-        if (!HelperObject.isEquals(hashs, mapHash)) {
+		log.debug(HelperLog.methodStart(hashs));
+		
+		if (!HelperObject.isEquals(hashs, mapHash)) {
     		mapHash = hashs;
             setChanged();
             notifyObservers(MEMBER_HASHS);
         }
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void addHash(final HashCodeAlgo hashCodeAlgo, final String hash) {
+    	log.debug(HelperLog.methodStart(hashCodeAlgo, hash));
+		if (null == hashCodeAlgo) {
+			throw new RuntimeExceptionIsNull("hashCodeAlgo"); //$NON-NLS-1$
+		}
+
+		if (null == mapHash) {
+			mapHash = new HashMap<HashCodeAlgo, String>();
+		}
 		mapHash.put(hashCodeAlgo, hash);
         setChanged();
         notifyObservers(METHOD_ADD_HASH);
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void removeHash(final HashCodeAlgo hashCodeAlgo) {
-		mapHash.remove(hashCodeAlgo);
-        setChanged();
-        notifyObservers(METHOD_REMOVE_HASH);
+		log.debug(HelperLog.methodStart(hashCodeAlgo));
+		if (null == hashCodeAlgo) {
+			throw new RuntimeExceptionIsNull("hashCodeAlgo"); //$NON-NLS-1$
+		}
+
+		if (null != mapHash) {
+			mapHash.remove(hashCodeAlgo);
+	        setChanged();
+	        notifyObservers(METHOD_REMOVE_HASH);
+		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public Localizer getLocalizer() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(localizer));
 		return localizer;
 	}
 
 	@Override
 	public Property getProperty() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(property));
 		return property;
 	}
 
 	@Override
 	public ModelWorker getModelWorker() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(modelWorker));
 		return modelWorker;
 	}
 
 	@Override
 	@XmlElement
 	public Boolean isDebug() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(isDebug));
 		return isDebug;
 	}
 
 	@Override
 	public void setDebug(final boolean isDebug) {
+		log.debug(HelperLog.methodStart(isDebug));
+		
         if (isDebug != this.isDebug) {
             this.isDebug = isDebug;
             setChanged();
             notifyObservers(MEMBER_DEBUG);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setLocalizer(final Localizer localizer) {
-        if (!HelperObject.isEquals(localizer, this.localizer)) {
+		log.debug(HelperLog.methodStart(localizer));
+		
+		if (!HelperObject.isEquals(localizer, this.localizer)) {
             this.localizer = localizer;
             setChanged();
             notifyObservers(MEMBER_LOCALIZER);
         }
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setProperty(final Property property) {
-        if (!HelperObject.isEquals(property, this.property)) {
+		log.debug(HelperLog.methodStart(property));
+		
+		if (!HelperObject.isEquals(property, this.property)) {
             this.property = property;
             setChanged();
             notifyObservers(MEMBER_PROPERTY);
         }
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	

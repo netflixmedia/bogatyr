@@ -30,12 +30,17 @@ package ch.customcode.bogatyr.model.misc;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperObject;
 import ch.customcode.bogatyr.model.ModelAbstract;
 
@@ -44,7 +49,7 @@ import ch.customcode.bogatyr.model.ModelAbstract;
  * The implementation of the document model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100217)
+ * @version 0.9.1 (20100414)
  * @since 0.9.1
  */
 @XmlRootElement(name = "document")
@@ -52,6 +57,8 @@ import ch.customcode.bogatyr.model.ModelAbstract;
 public class DocumentImpl extends ModelAbstract implements Document {
 	private static final long serialVersionUID = 5505184629744108815L;
 
+	private static final Logger log = LoggerFactory.getLogger(DocumentImpl.class);
+	
 	private String name;
 	private BigDecimal version;
 	private int build;
@@ -63,12 +70,15 @@ public class DocumentImpl extends ModelAbstract implements Document {
 
     public DocumentImpl() {
         super();
+        log.trace(HelperLog.constructor());
     }
 
 	public DocumentImpl(final String name, final BigDecimal version, final int build,
 			final Date created, final Manufacturer manufacturer, final Owner owner,
-			final Publisher publisher, final UUID uuid) {
-		super();
+			final Publisher publisher, final UUID uuid, final Map<String, String> mapTag) {
+		super(mapTag);
+		log.trace(HelperLog.constructor(name, version, build, created, manufacturer, owner, publisher, uuid, mapTag));
+		
 		this.name = name;
 		this.version = version;
 		this.build = build;
@@ -162,7 +172,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
             if (null != other.version) {
                 return false;
             }
-		} else if (!version.equals(other.version)) {
+		} else if (!(version.compareTo(other.version) == 0)) {
             return false;
         }
 		return true;
@@ -175,12 +185,18 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	@Override
     @XmlElement
 	public int getBuild() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(build));
 		return build;
 	}
 
 	@Override
     @XmlElement
 	public Date getCreated() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(created));
 		return created;
 	}
 
@@ -188,109 +204,159 @@ public class DocumentImpl extends ModelAbstract implements Document {
     @XmlElement
 //    @XmlAnyElement
 	public Manufacturer getManufacturer() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(manufacturer));
 		return manufacturer;
 	}
 
 	@Override
     @XmlElement
 	public Owner getOwner() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(owner));
 		return owner;
 	}
 
 	@Override
     @XmlElement
 	public Publisher getPublisher() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(publisher));
 		return publisher;
 	}
 
 	@Override
     @XmlElement
 	public UUID getUUID() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(uuid));
 		return uuid;
 	}
     
 	@Override
     @XmlElement
 	public String getName() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(name));
 		return name;
 	}
 
 	@Override
     @XmlElement
 	public BigDecimal getVersion() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(version));
 		return version;
 	}
 
 	@Override
 	public void setBuild(final int build) {
+		log.debug(HelperLog.methodStart(build));
+		
         if (build != this.build) {
             this.build = build;
             setChanged();
             notifyObservers(MEMBER_BUILD);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setCreated(final Date created) {
+		log.debug(HelperLog.methodStart(created));
+		
         if (!HelperObject.isEquals(created, this.created)) {
             this.created = created;
             setChanged();
             notifyObservers(MEMBER_CREATED);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setManufacturer(final Manufacturer manufacturer) {
+		log.debug(HelperLog.methodStart(manufacturer));
+		
         if (!HelperObject.isEquals(manufacturer, this.manufacturer)) {
             this.manufacturer = manufacturer;
             setChanged();
             notifyObservers(MEMBER_MANUFACTURER);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setOwner(final Owner owner) {
+		log.debug(HelperLog.methodStart(owner));
+		
         if (!HelperObject.isEquals(owner, this.owner)) {
             this.owner = owner;
             setChanged();
             notifyObservers(MEMBER_OWNER);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setPublisher(final Publisher publisher) {
+		log.debug(HelperLog.methodStart(publisher));
+		
         if (!HelperObject.isEquals(publisher, this.publisher)) {
             this.publisher = publisher;
             setChanged();
             notifyObservers(MEMBER_PUBLISHER);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setUUID(final UUID uuid) {
+		log.debug(HelperLog.methodStart(uuid));
+		
         if (!HelperObject.isEquals(uuid, this.uuid)) {
             this.uuid = uuid;
             setChanged();
             notifyObservers(MEMBER_UUID);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setName(final String name) {
+		log.debug(HelperLog.methodStart(name));
+		
         if (!HelperObject.isEquals(name, this.name)) {
             this.name = name;
             setChanged();
             notifyObservers(MEMBER_NAME);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setVersion(final BigDecimal version) {
+		log.debug(HelperLog.methodStart(version));
+		
         if (!HelperObject.isEquals(version, this.version)) {
             this.version = version;
             setChanged();
             notifyObservers(MEMBER_VERSION);
         }
+        
+        log.debug(HelperLog.methodExit());
 	}
 	
 	

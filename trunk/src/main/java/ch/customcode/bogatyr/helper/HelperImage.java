@@ -55,7 +55,7 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100408)
+ * @version 0.9.1 (20100414)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -407,7 +407,8 @@ public abstract class HelperImage {
 		class StatusObserver implements ImageObserver {
 			boolean imageLoaded = false;
 
-			public boolean imageUpdate(final Image img, final int infoflags,
+			@Override
+            public boolean imageUpdate(final Image img, final int infoflags,
 					final int x, final int y, final int width, final int height) {
 				if (ALLBITS == infoflags) {
 					synchronized (this) {

@@ -37,7 +37,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperObject;
+import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.xml.adapter.MapAdapterString;
 
 
@@ -45,20 +50,29 @@ import ch.customcode.bogatyr.misc.xml.adapter.MapAdapterString;
  * This is the skeleton for all models.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100413)
+ * @version 0.9.1 (20100414)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
 public abstract class ModelAbstract extends Observable implements Model {
 	private static final long serialVersionUID = 3491320587479082917L;
 
-	private Map<String, String> mapTag = new HashMap<String, String>();
+	private static final Logger log = LoggerFactory.getLogger(ModelAbstract.class);
+	
+	private Map<String, String> mapTag;
 	
 	private boolean isNotifyEnabled = true;
 	private Date instantiationDate = new Date();
 
     protected ModelAbstract() {
         super();
+        log.trace(HelperLog.constructor());
+    }
+
+    protected ModelAbstract(final Map<String, String> mapTag) {
+        super();
+        log.trace(HelperLog.constructor(mapTag));
+        this.mapTag = mapTag;
     }
 
     
@@ -71,32 +85,32 @@ public abstract class ModelAbstract extends Observable implements Model {
 		int result = 1;
 		result = prime
 				* result
-				+ ((instantiationDate == null) ? 0 : instantiationDate
+				+ ((null == instantiationDate) ? 0 : instantiationDate
 						.hashCode());
 		result = prime * result + (isNotifyEnabled ? 1231 : 1237);
-		result = prime * result + ((mapTag == null) ? 0 : mapTag.hashCode());
+		result = prime * result + ((null == mapTag) ? 0 : mapTag.hashCode());
 		return result;
 	}
 
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (null == obj)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ModelAbstract other = (ModelAbstract) obj;
-		if (instantiationDate == null) {
-			if (other.instantiationDate != null)
+		final ModelAbstract other = (ModelAbstract) obj;
+		if (null == instantiationDate) {
+			if (null != other.instantiationDate)
 				return false;
 		} else if (!instantiationDate.equals(other.instantiationDate))
 			return false;
 		if (isNotifyEnabled != other.isNotifyEnabled)
 			return false;
-		if (mapTag == null) {
-			if (other.mapTag != null)
+		if (null == mapTag) {
+			if (null != other.mapTag)
 				return false;
 		} else if (!mapTag.equals(other.mapTag))
 			return false;
@@ -127,54 +141,110 @@ public abstract class ModelAbstract extends Observable implements Model {
      * Implemented methods
      */
 	@Override
-	public void setNotifyEnabled(final boolean enabled) {
-        isNotifyEnabled = enabled;
-	}
-	
-	@Override
 	@XmlTransient
 	public boolean isNotifyEnabled() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(isNotifyEnabled));
 		return isNotifyEnabled;
 	}
 
 	@Override
     @XmlElement
 	public Date getInstantiationDate() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(instantiationDate));
 		return instantiationDate;
-	}
-
-    @Override
-	public void setInstantiationDate(final Date instantiationDate) {
-		this.instantiationDate = instantiationDate;
 	}
     
 	@Override
 	@XmlElement
     @XmlJavaTypeAdapter(MapAdapterString.class)
 	public Map<String, String> getTags() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(mapTag));
 		return mapTag;
+	}
+	
+	@Override
+	public String getTag(final String key) {
+		log.debug(HelperLog.methodStart(key));
+		if (null == key) {
+			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
+		}
+		
+		String result = null;
+		if (null != mapTag) {
+			result = mapTag.get(key);
+		}
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
+	@Override
+	public void setNotifyEnabled(final boolean enabled) {
+		log.debug(HelperLog.methodStart(enabled));
+		
+		isNotifyEnabled = enabled;
+		
+		log.debug(HelperLog.methodExit());
+	}
+	
+	@Override
+	public void setInstantiationDate(final Date instantiationDate) {
+		log.debug(HelperLog.methodStart(instantiationDate));
+		
+		this.instantiationDate = instantiationDate;
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setTags(final Map<String, String> tags) {
-        if (!HelperObject.isEquals(tags, mapTag)) {
+		log.debug(HelperLog.methodStart(tags));
+		
+		if (!HelperObject.isEquals(tags, mapTag)) {
         	mapTag = tags;
             setChanged();
             notifyObservers(MEMBER_TAGS);
         }
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void addTag(final String key, final String value) {
+    	log.debug(HelperLog.methodStart(key, value));
+		if (null == key) {
+			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
+		}
+
+		if (null == mapTag) {
+			mapTag = new HashMap<String, String>();
+		}
 		mapTag.put(key, value);
         setChanged();
         notifyObservers(METHOD_ADD_TAG);
+        
+        log.debug(HelperLog.methodExit());
 	}
-
+	
 	@Override
 	public void removeTag(final String key) {
-		mapTag.remove(key);
-        setChanged();
-        notifyObservers(METHOD_REMOVE_TAG);
+		log.debug(HelperLog.methodStart(key));
+		if (null == key) {
+			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
+		}
+		
+		if (null != mapTag) {
+			mapTag.remove(key);
+	        setChanged();
+	        notifyObservers(METHOD_REMOVE_TAG);
+		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 }
