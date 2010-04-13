@@ -41,7 +41,7 @@ import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a helper class for numbers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100413)
+ * @version 0.9.1 (20100414)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
@@ -319,7 +319,7 @@ public abstract class HelperNumber {
 		
 		BigDecimal result = null;
 		
-		if (value != null) {
+		if (null != value) {
 			result = new BigDecimal(value);
 		}
 

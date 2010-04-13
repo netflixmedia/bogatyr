@@ -41,7 +41,7 @@ import ch.customcode.bogatyr.service.property.Property;
  * The interface for the application model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100217)
+ * @version 0.9.1 (20100414)
  * @since 0.9.0
  */
 @XmlJavaTypeAdapter(ModelApplicationImpl.XmlAdapter.class)
@@ -87,8 +87,21 @@ public interface ModelApplication extends Document {
      */	
 	String getHash();
 	
+    /**
+     * Adds a {@link HashCodeAlgo} and hash.
+     * 
+     * @param hashCodeAlgo of the hash
+     * @param hash value
+     * @since 0.9.0
+     */	
 	void addHash(HashCodeAlgo hashCodeAlgo, String hash);
 
+    /**
+     * Removes a hash.
+     * 
+     * @param hashCodeAlgo of the hash
+     * @since 0.9.0
+     */	
 	void removeHash(HashCodeAlgo hashCodeAlgo);
 
     Boolean isDebug();

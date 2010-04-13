@@ -39,7 +39,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import ch.customcode.bogatyr.helper.HelperLog;
 import ch.customcode.bogatyr.helper.HelperObject;
+import ch.customcode.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import ch.customcode.bogatyr.misc.xml.adapter.MapAdapterHashCode;
 import ch.customcode.bogatyr.misc.xml.adapter.MapAdapterPlatform;
 import ch.customcode.bogatyr.model.crypto.HashCodeAlgo;
@@ -54,7 +59,7 @@ import ch.customcode.bogatyr.model.misc.Publisher;
  * The implementation of the updater model.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100217)
+ * @version 0.9.1 (20100414)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelDocument")
@@ -62,17 +67,21 @@ import ch.customcode.bogatyr.model.misc.Publisher;
 public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 	private static final long serialVersionUID = -2826684498598090349L;
 
+	private static final Logger log = LoggerFactory.getLogger(ModelUpdaterImpl.class);
+	
 	private Map<Platform, String> mapLocation = new HashMap<Platform, String>();
 	private Map<HashCodeAlgo, String> mapHash = new HashMap<HashCodeAlgo, String>();
 
     public ModelUpdaterImpl() {
         super();
+        log.trace(HelperLog.constructor());
     }
 
 	public ModelUpdaterImpl(final String name, final BigDecimal version, final int build,
 			final Date created, final Manufacturer manufacturer, final Owner owner,
-			final Publisher publisher, final UUID uuid, final Map<Platform, String> mapLocation, final Map<HashCodeAlgo, String> mapHash) {
-		super(name, version, build, created, manufacturer, owner, publisher, uuid);
+			final Publisher publisher, final UUID uuid, final Map<Platform, String> mapLocation, final Map<HashCodeAlgo, String> mapHash, final Map<String, String> mapTag) {
+		super(name, version, build, created, manufacturer, owner, publisher, uuid, mapTag);
+		log.trace(HelperLog.constructor(name, version, build, created, manufacturer, owner, publisher, uuid, mapLocation, mapHash, mapTag));
 		this.mapLocation = mapLocation;
 		this.mapHash = mapHash;
 	}
@@ -126,54 +135,100 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
      */
 	@Override
 	public String getLocation() {
-		return getLocation(Platform.ANY);
+		log.debug(HelperLog.methodStart());
+		
+		final String result = getLocation(Platform.ANY);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	@Override
 	public String getLocation(final Platform platform) {
-		return mapLocation.get(platform);
+		log.debug(HelperLog.methodStart(platform));
+		if (null == platform) {
+			throw new RuntimeExceptionIsNull("platform"); //$NON-NLS-1$
+		}
+		
+		String result = null;
+		if (null != mapLocation) {
+			result = mapLocation.get(platform);
+		}
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
     @Override
     @XmlElement
     @XmlJavaTypeAdapter(MapAdapterPlatform.class)
 	public Map<Platform, String> getLocations() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(mapLocation));
 		return mapLocation;
 	}
     
 	@Override
-	public void setLocations(final Map<Platform, String> locations) {
-        if (!HelperObject.isEquals(locations, mapLocation)) {
-    		mapLocation = locations;
-            setChanged();
-            notifyObservers(MEMBER_LOCATIONS);
-        }
-	}
-
-	@Override
 	public String getHash() {
-		return getHash(HashCodeAlgo.SHA256);
+		log.debug(HelperLog.methodStart());
+		
+		final String result = getHash(HashCodeAlgo.SHA256);
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 	
     @Override
 	public String getHash(final HashCodeAlgo hashCodeAlgo) {
-		return mapHash.get(hashCodeAlgo);
+		log.debug(HelperLog.methodStart(hashCodeAlgo));
+		if (null == hashCodeAlgo) {
+			throw new RuntimeExceptionIsNull("hashCodeAlgo"); //$NON-NLS-1$
+		}
+		
+		String result = null;
+		if (null != mapHash) {
+			result = mapHash.get(hashCodeAlgo);
+		}
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
     
     @Override
     @XmlElement
     @XmlJavaTypeAdapter(MapAdapterHashCode.class)
 	public Map<HashCodeAlgo, String> getHashs() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(mapHash));
 		return mapHash;
+	}
+	
+    @Override
+	public void setLocations(final Map<Platform, String> locations) {
+    	log.debug(HelperLog.methodStart(locations));
+    	
+    	if (!HelperObject.isEquals(locations, mapLocation)) {
+    		mapLocation = locations;
+            setChanged();
+            notifyObservers(MEMBER_LOCATIONS);
+        }
+    	
+    	log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setHashs(final Map<HashCodeAlgo, String> hashs) {
-        if (!HelperObject.isEquals(hashs, mapHash)) {
+		log.debug(HelperLog.methodStart(hashs));
+		
+		if (!HelperObject.isEquals(hashs, mapHash)) {
     		mapHash = hashs;
             setChanged();
             notifyObservers(MEMBER_HASHS);
         }
+		
+		log.debug(HelperLog.methodExit());
 	}
 	
 	
