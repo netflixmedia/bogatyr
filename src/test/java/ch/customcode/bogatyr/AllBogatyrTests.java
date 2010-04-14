@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2007-2010 by Custom Code GmbH.
+ * Copyright (c) 2007-2010 by Stefan Laubenberger.
  *
- * This program is free software: you can redistribute it and/or modify
+ * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
  *
- * This program is distributed in the hope that it will be useful,
+ * Bogatyr is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
@@ -13,23 +13,24 @@
  *
  * This distribution is available at:
  * <http://code.google.com/p/bogatyr/>
- * <http://www.customcode.ch/bogatyr/>
+ * <http://www.laubenberger.net/bogatyr/>
  *
  * Contact information:
- * Custom Code GmbH
- * Grubenstrasse 9
- * CH-8045 Zuerich
+ * Stefan Laubenberger
+ * Bullingerstrasse 53
+ * CH-8004 Zuerich
  *
- * <http://www.customcode.ch>
+ * <http://www.laubenberger.net>
  *
- * <s.laubenberger@customcode.ch>
- * <s.spross@customcode.ch>
+ * <bogatyr@laubenberger.net>
  */
+
 package ch.customcode.bogatyr;
 
 import java.text.DateFormat;
 import java.util.Date;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
@@ -81,6 +82,8 @@ public class AllBogatyrTests implements Runnable {
 
 	
     public static void main(final String[] args) {
+    	PropertyConfigurator.configure("src/test/configuration/log4j.properties");
+    	
     	final DateFormat df = FormatFactory.createDateFormat(FormatFactory.PATTERN_DATE_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND_MILLISECOND);
     	
     	System.out.println("+---------------------------+"); //$NON-NLS-1$
