@@ -13,7 +13,7 @@
  *
  * This distribution is available at:
  * <http://code.google.com/p/bogatyr/>
- * <http://www.laubenberger.net/bogatyr/>
+ * <http://dev.laubenberger.net/bogatyr/>
  *
  * Contact information:
  * Stefan Laubenberger
@@ -22,8 +22,9 @@
  *
  * <http://www.laubenberger.net>
  *
- * <bogatyr@laubenberger.net>
+ * <laubenberger@gmail.com>
  */
+
 package net.laubenberger.bogatyr.misc.exception;
 
 import net.laubenberger.bogatyr.helper.HelperEnvironment;
