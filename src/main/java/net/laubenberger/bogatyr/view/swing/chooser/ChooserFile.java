@@ -32,6 +32,10 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -45,32 +49,40 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class ChooserFile extends JFileChooser {
 	private static final long serialVersionUID = -4453036459563578035L;
 
+	private static final Logger log = LoggerFactory.getLogger(ChooserFile.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public ChooserFile() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public ChooserFile(final File currentDirectory, final FileSystemView fsv) {
 		super(currentDirectory, fsv);
+		log.trace(HelperLog.constructor(currentDirectory, fsv));
 	}
 
 	public ChooserFile(final File currentDirectory) {
 		super(currentDirectory);
+		log.trace(HelperLog.constructor(currentDirectory));
 	}
 
 	public ChooserFile(final FileSystemView fsv) {
 		super(fsv);
+		log.trace(HelperLog.constructor(fsv));
 	}
 
 	public ChooserFile(final String currentDirectoryPath, final FileSystemView fsv) {
 		super(currentDirectoryPath, fsv);
+		log.trace(HelperLog.constructor(currentDirectoryPath, fsv));
 	}
 
 	public ChooserFile(final String currentDirectoryPath) {
 		super(currentDirectoryPath);
+		log.trace(HelperLog.constructor(currentDirectoryPath));
 	}
 
 

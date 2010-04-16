@@ -27,11 +27,16 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
 import javax.swing.BoundedRangeModel;
 import javax.swing.JSlider;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.awt.Component;
 import java.awt.Font;
 import java.util.Collections;
@@ -48,6 +53,8 @@ import java.util.Dictionary;
 public class Slider extends JSlider implements Activatable {
 	private static final long serialVersionUID = 8676540667794440059L;
 
+	private static final Logger log = LoggerFactory.getLogger(Slider.class);
+	
 	private boolean isNotActive;
 
 	/*
@@ -56,26 +63,32 @@ public class Slider extends JSlider implements Activatable {
 
 	public Slider() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public Slider(final BoundedRangeModel model) {
 		super(model);
+		log.trace(HelperLog.constructor(model));
 	}
 
 	public Slider(final int orientation, final int min, final int max, final int value) {
 		super(orientation, min, max, value);
+		log.trace(HelperLog.constructor(orientation, min, max, value));
 	}
 
 	public Slider(final int min, final int max, final int value) {
 		super(min, max, value);
+		log.trace(HelperLog.constructor(min, max, value));
 	}
 
 	public Slider(final int min, final int max) {
 		super(min, max);
+		log.trace(HelperLog.constructor(min, max));
 	}
 
 	public Slider(final int orientation) {
 		super(orientation);
+		log.trace(HelperLog.constructor(orientation));
 	}
 
 	/*
@@ -84,15 +97,20 @@ public class Slider extends JSlider implements Activatable {
 
 	public Slider(final BoundedRangeModel model, final String toolTip) {
 		this(model);
+		log.trace(HelperLog.constructor(model, toolTip));
+		
 		setToolTipText(toolTip);
 	}
 
 	public Slider(final int minValue, final int maxValue, final int currentValue, final String toolTip) {
-		this(minValue, maxValue, currentValue, HORIZONTAL, toolTip);
+		this(HORIZONTAL, minValue, maxValue, currentValue, toolTip);
+		log.trace(HelperLog.constructor(minValue, maxValue, currentValue, toolTip));
 	}
 
-	public Slider(final int minValue, final int maxValue, final int currentValue, final int orientation, final String toolTip) {
+	public Slider(final int orientation, final int minValue, final int maxValue, final int currentValue, final String toolTip) {
 		this(orientation, minValue, maxValue, currentValue);
+		log.trace(HelperLog.constructor(orientation, minValue, maxValue, currentValue, toolTip));
+		
 		setToolTipText(toolTip);
 	}
 
@@ -134,11 +152,16 @@ public class Slider extends JSlider implements Activatable {
 
 	@Override
 	public boolean isActive() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
+		log.debug(HelperLog.methodStart(isActive));
+		
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -146,5 +169,7 @@ public class Slider extends JSlider implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 }

@@ -32,12 +32,13 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -138,7 +139,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 			result = false;
 		} else {
 			// check odd divisors from 3 to the square root of n
-			for (long ii = 3L, end = (long) StrictMath.sqrt((double) n); ii <= end && true == result; ii += 2L) {
+			for (long ii = 3L, end = (long) StrictMath.sqrt((double) n); ii <= end && result; ii += 2L) {
 				if (0L == n % ii) {
 					result = false;
 				}
@@ -181,7 +182,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @return list with the calculated prime numbers
 	 * @since 0.5.0
 	 */
-	public static Collection<Integer> calcPrimes(final int start, final int end) { //$JUnit$
+	public static Collection<Long> calcPrimes(final long start, final long end) { //$JUnit$
 		log.debug(HelperLog.methodStart(start, end));
 //        if (0 > start) {
 //            throw new IllegalArgumentException("start value must be positive: " + start); //$NON-NLS-1$
@@ -192,10 +193,13 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 		if (start > end) {
 			throw new IllegalArgumentException("end value (" + end + ") must be greater than the start value (" + start + ')'); //$NON-NLS-1$ //$NON-NLS-2$
 		}
+		if (Integer.MAX_VALUE < end - start + 1) {
+			throw new RuntimeExceptionMustBeSmaller("range (end - start + 1)", end - start + 1 , Integer.MAX_VALUE); //$NON-NLS-1$
+		}
 
-		final Collection<Integer> result = new ArrayList<Integer>(end - start + 1);
+		final Collection<Long> result = new ArrayList<Long>((int)(end - start + 1));
 
-		for (int ii = start; ii <= end; ii++) {
+		for (long ii = start; ii <= end; ii++) {
 			if (isPrime(ii)) {
 				result.add(ii);
 			}
@@ -530,7 +534,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 			throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
 		}
 
-		long result = 0;
+		long result = 0L;
 		for (long ii = 2L; ii <= n * 2L; ii += 2L) {
 			result += ii;
 		}

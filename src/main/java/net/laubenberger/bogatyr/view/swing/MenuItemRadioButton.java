@@ -33,6 +33,10 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JRadioButtonMenuItem;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -46,40 +50,50 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class MenuItemRadioButton extends JRadioButtonMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
 
+	private static final Logger log = LoggerFactory.getLogger(MenuItemRadioButton.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public MenuItemRadioButton() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public MenuItemRadioButton(final Action action) {
 		super(action);
+		log.trace(HelperLog.constructor(action));
 	}
 
 	public MenuItemRadioButton(final Icon icon, final boolean selected) {
 		super(icon, selected);
+		log.trace(HelperLog.constructor(icon, selected));
 	}
 
 	public MenuItemRadioButton(final Icon icon) {
 		super(icon);
+		log.trace(HelperLog.constructor(icon));
 	}
 
 	public MenuItemRadioButton(final String text, final boolean selected) {
 		super(text, selected);
+		log.trace(HelperLog.constructor(text, selected));
 	}
 
 	public MenuItemRadioButton(final String text, final Icon icon, final boolean selected) {
 		super(text, icon, selected);
+		log.trace(HelperLog.constructor(text, icon, selected));
 	}
 
 	public MenuItemRadioButton(final String text, final Icon icon) {
 		super(text, icon);
+		log.trace(HelperLog.constructor(text, icon));
 	}
 
 	public MenuItemRadioButton(final String text) {
 		super(text);
+		log.trace(HelperLog.constructor(text));
 	}
 
 	/*
@@ -88,22 +102,25 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 
 	public MenuItemRadioButton(final boolean isSelected) {
 		super();
+		log.trace(HelperLog.constructor(isSelected));
 
 		setSelected(isSelected);
 	}
 
 	public MenuItemRadioButton(final boolean isSelected, final Action action) {
 		this(action);
+		log.trace(HelperLog.constructor(isSelected, action));
 
 		setSelected(isSelected);
 	}
 
-	public MenuItemRadioButton(final String text, final Icon image, final int mnemonic, final String toolTip, final boolean isSelected) {
+	public MenuItemRadioButton(final String text, final Icon icon, final int mnemonic, final String toolTip, final boolean isSelected) {
 		this(text);
+		log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, isSelected));
 
 		// Add the optional icon
-		if (null != image) {
-			setIcon(image);
+		if (null != icon) {
+			setIcon(icon);
 		}
 
 		// Add the mnemonic key
@@ -118,8 +135,10 @@ public class MenuItemRadioButton extends JRadioButtonMenuItem {
 		setSelected(isSelected);
 	}
 
-	public MenuItemRadioButton(final String text, final Icon image, final int mnemonic, final String toolTip, final boolean isSelected, final ActionListener listener) {
-		this(text, image, mnemonic, toolTip, isSelected);
+	public MenuItemRadioButton(final String text, final Icon icon, final int mnemonic, final String toolTip, final boolean isSelected, final ActionListener listener) {
+		this(text, icon, mnemonic, toolTip, isSelected);
+		log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, isSelected, listener));
+		
 		addActionListener(listener);
 	}
 

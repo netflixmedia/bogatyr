@@ -173,7 +173,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 			if (null != other.version) {
 				return false;
 			}
-		} else if (!(version.compareTo(other.version) == 0)) {
+		} else if (!(0 == version.compareTo(other.version))) {
 			return false;
 		}
 		return true;

@@ -27,12 +27,17 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
 import javax.swing.JTree;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -47,6 +52,8 @@ import java.util.Vector;
 public class Tree extends JTree implements Activatable {
 	private static final long serialVersionUID = -4538444845018995986L;
 
+	private static final Logger log = LoggerFactory.getLogger(Tree.class);
+	
 	private boolean isNotActive;
 
 	/*
@@ -55,30 +62,37 @@ public class Tree extends JTree implements Activatable {
 
 	public Tree() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public Tree(final Hashtable<?, ?> value) {
 		super(value);
+		log.trace(HelperLog.constructor(value));
 	}
 
 	public Tree(final Object[] value) {
 		super(value);
+		log.trace(HelperLog.constructor(value));
 	}
 
 	public Tree(final TreeModel newModel) {
 		super(newModel);
+		log.trace(HelperLog.constructor(newModel));
 	}
 
 	public Tree(final TreeNode root, final boolean asksAllowsChildren) {
 		super(root, asksAllowsChildren);
+		log.trace(HelperLog.constructor(root, asksAllowsChildren));
 	}
 
 	public Tree(final TreeNode root) {
 		super(root);
+		log.trace(HelperLog.constructor(root));
 	}
 
 	public Tree(final Vector<?> value) {
 		super(value);
+		log.trace(HelperLog.constructor(value));
 	}
 
 
@@ -106,11 +120,16 @@ public class Tree extends JTree implements Activatable {
 
 	@Override
 	public boolean isActive() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
+		log.debug(HelperLog.methodStart(isActive));
+		
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -118,5 +137,7 @@ public class Tree extends JTree implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 }

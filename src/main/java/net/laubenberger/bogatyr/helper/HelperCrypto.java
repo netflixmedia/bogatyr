@@ -33,15 +33,14 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -285,7 +284,7 @@ public abstract class HelperCrypto {
 			throw new RuntimeExceptionIsNull("id"); //$NON-NLS-1$
 		}
 
-		final Set<String> result = new HashSet<String>();
+		final Collection<String> result = new HashSet<String>();
 
 		for (final Map.Entry<?, ?> pair : provider.entrySet()) {
 			final String entry = (String) pair.getKey();

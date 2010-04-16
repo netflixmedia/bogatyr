@@ -146,7 +146,7 @@ public abstract class HelperCollection {
 			throw new RuntimeExceptionIsNull("collection"); //$NON-NLS-1$
 		}
 
-		final Set<E> result = new HashSet<E>(collection);
+		final Collection<E> result = new HashSet<E>(collection);
 
 		log.debug(HelperLog.methodExit(result));
 		return result;

@@ -83,7 +83,7 @@ public class AllBogatyrTests implements Runnable {
 
 
 	public static void main(final String[] args) {
-		PropertyConfigurator.configure("src/test/configuration/log4j.properties");
+		PropertyConfigurator.configure("src/test/configuration/log4j.properties"); //$NON-NLS-1$
 
 		final DateFormat df = FormatFactory.createDateFormat(FormatFactory.PATTERN_DATE_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND_MILLISECOND);
 

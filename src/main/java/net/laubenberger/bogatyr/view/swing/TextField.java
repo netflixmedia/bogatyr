@@ -30,6 +30,10 @@ package net.laubenberger.bogatyr.view.swing;
 import javax.swing.JTextField;
 import javax.swing.text.Document;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
@@ -44,6 +48,8 @@ import net.laubenberger.bogatyr.misc.Activatable;
 public class TextField extends JTextField implements Activatable {
 	private static final long serialVersionUID = 866371447844640358L;
 
+	private static final Logger log = LoggerFactory.getLogger(TextField.class);
+	
 	private boolean isNotActive;
 
 	/*
@@ -52,22 +58,27 @@ public class TextField extends JTextField implements Activatable {
 
 	public TextField() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public TextField(final Document doc, final String text, final int columns) {
 		super(doc, text, columns);
+		log.trace(HelperLog.constructor(doc, text, columns));
 	}
 
 	public TextField(final int columns) {
 		super(columns);
+		log.trace(HelperLog.constructor(columns));
 	}
 
 	public TextField(final String text, final int columns) {
 		super(text, columns);
+		log.trace(HelperLog.constructor(text, columns));
 	}
 
 	public TextField(final String text) {
 		super(text);
+		log.trace(HelperLog.constructor(text));
 	}
 
 	/*
@@ -76,16 +87,22 @@ public class TextField extends JTextField implements Activatable {
 
 	public TextField(final String text, final String toolTip) {
 		this(text);
+		log.trace(HelperLog.constructor(text, toolTip));
+		
 		setToolTipText(toolTip);
 	}
 
 	public TextField(final String text, final String toolTip, final Document document, final int columns) {
 		this(document, text, columns);
+		log.trace(HelperLog.constructor(text, toolTip, document, columns));
+		
 		setToolTipText(toolTip);
 	}
 
 	public TextField(final String toolTip, final Document document, final int columns) {
 		this();
+		log.trace(HelperLog.constructor(toolTip, document, columns));
+		
 		setDocument(document);
 		setColumns(columns);
 		setToolTipText(toolTip);
@@ -120,11 +137,16 @@ public class TextField extends JTextField implements Activatable {
 
 	@Override
 	public boolean isActive() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
+		log.debug(HelperLog.methodStart(isActive));
+		
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -132,5 +154,7 @@ public class TextField extends JTextField implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 }

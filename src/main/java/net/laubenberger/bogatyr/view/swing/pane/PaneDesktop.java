@@ -27,10 +27,15 @@
 
 package net.laubenberger.bogatyr.view.swing.pane;
 
-import net.laubenberger.bogatyr.helper.HelperObject;
+import java.awt.Component;
 
 import javax.swing.JDesktopPane;
-import java.awt.Component;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
+import net.laubenberger.bogatyr.helper.HelperObject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -43,12 +48,15 @@ import java.awt.Component;
 public class PaneDesktop extends JDesktopPane {
 	private static final long serialVersionUID = -1000995349055355841L;
 
+	private static final Logger log = LoggerFactory.getLogger(PaneDesktop.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public PaneDesktop() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 
@@ -62,11 +70,11 @@ public class PaneDesktop extends JDesktopPane {
 	}
 
 	@Override
-	public void setEnabled(final boolean enabled) {
-		super.setEnabled(enabled);
+	public void setEnabled(final boolean isEnabled) {
+		super.setEnabled(isEnabled);
 
 		for (final Component component : getComponents()) {
-			component.setEnabled(enabled);
+			component.setEnabled(isEnabled);
 		}
 	}
 }

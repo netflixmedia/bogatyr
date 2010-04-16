@@ -49,7 +49,7 @@ public enum Volume implements Unit<Volume> {
 	GALLON_US(Constants.FACTOR_GALLON_US_TO_L), //$JUnit$
 	BARREL(Constants.FACTOR_BARREL_TO_L); //$JUnit$
 
-	private final BigDecimal factor;
+	final BigDecimal factor;
 
 	Volume(final BigDecimal factor) {
 		this.factor = factor;

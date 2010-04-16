@@ -51,7 +51,7 @@ public class MapAdapterPlatform extends XmlAdapter<XmlMap, Map<Platform, String>
 
 	@Override
 	public XmlMap marshal(final Map<Platform, String> map) throws Exception {
-		if (map != null) {
+		if (null != map) {
 			final XmlMap xmlMap = new XmlMap();
 		
 			for (final Map.Entry<Platform, String> entry : map.entrySet()) {
@@ -64,7 +64,7 @@ public class MapAdapterPlatform extends XmlAdapter<XmlMap, Map<Platform, String>
 
 	@Override
 	public Map<Platform, String> unmarshal(final XmlMap xmlMap) throws Exception {
-		if (xmlMap != null) {
+		if (null != xmlMap) {
 			final Map<Platform, String> map = new HashMap<Platform, String>(xmlMap.getEntries().size());
 			for (final XmlEntry entry : xmlMap.getEntries()) {
 				map.put(Platform.valueOf(entry.getKey()), entry.getValue());

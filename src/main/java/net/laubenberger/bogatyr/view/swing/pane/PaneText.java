@@ -32,6 +32,10 @@ import java.awt.Component;
 import javax.swing.JTextPane;
 import javax.swing.text.StyledDocument;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -45,16 +49,20 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class PaneText extends JTextPane {
 	private static final long serialVersionUID = -3996840505161218721L;
 
+	private static final Logger log = LoggerFactory.getLogger(PaneText.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public PaneText() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public PaneText(final StyledDocument doc) {
 		super(doc);
+		log.trace(HelperLog.constructor(doc));
 	}
 
 
@@ -68,11 +76,11 @@ public class PaneText extends JTextPane {
 	}
 
 	@Override
-	public void setEnabled(final boolean enabled) {
-		super.setEnabled(enabled);
+	public void setEnabled(final boolean isEnabled) {
+		super.setEnabled(isEnabled);
 
 		for (final Component component : getComponents()) {
-			component.setEnabled(enabled);
+			component.setEnabled(isEnabled);
 		}
 	}
 }

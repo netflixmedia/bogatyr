@@ -392,7 +392,7 @@ public abstract class HelperImage {
 		log.trace(HelperLog.methodStart(image));
 
 		class StatusObserver implements ImageObserver {
-			boolean imageLoaded = false;
+			boolean imageLoaded;
 
 			@Override
 			public boolean imageUpdate(final Image img, final int infoflags,
@@ -400,7 +400,7 @@ public abstract class HelperImage {
 				if (ALLBITS == infoflags) {
 					synchronized (this) {
 						imageLoaded = true;
-						notify();
+						notifyAll();
 					}
 					return true;
 				}

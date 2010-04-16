@@ -33,6 +33,10 @@ import java.net.URL;
 
 import javax.swing.JEditorPane;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -46,24 +50,30 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class PaneEditor extends JEditorPane {
 	private static final long serialVersionUID = -3298005917085461997L;
 
+	private static final Logger log = LoggerFactory.getLogger(PaneEditor.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public PaneEditor() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public PaneEditor(final String type, final String text) {
 		super(type, text);
+		log.trace(HelperLog.constructor(type, text));
 	}
 
 	public PaneEditor(final String url) throws IOException {
 		super(url);
+		log.trace(HelperLog.constructor(url));
 	}
 
 	public PaneEditor(final URL initialPage) throws IOException {
 		super(initialPage);
+		log.trace(HelperLog.constructor(initialPage));
 	}
 
 
@@ -77,11 +87,11 @@ public class PaneEditor extends JEditorPane {
 	}
 
 	@Override
-	public void setEnabled(final boolean enabled) {
-		super.setEnabled(enabled);
+	public void setEnabled(final boolean isEnabled) {
+		super.setEnabled(isEnabled);
 
 		for (final Component component : getComponents()) {
-			component.setEnabled(enabled);
+			component.setEnabled(isEnabled);
 		}
 	}
 }

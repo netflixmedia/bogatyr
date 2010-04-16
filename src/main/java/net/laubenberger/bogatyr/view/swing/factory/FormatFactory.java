@@ -42,6 +42,10 @@ import javax.swing.text.DefaultFormatter;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperNumber;
 import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
@@ -56,6 +60,8 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * @since 0.9.0
  */
 public abstract class FormatFactory {
+	private static final Logger log = LoggerFactory.getLogger(FormatFactory.class);
+	
 	public static final String PATTERN_DATE_DAY_MONTH_YEAR = "dd.MM.yyyy"; //$NON-NLS-1$
 	public static final String PATTERN_DATE_YEAR_MONTH_DAY = "yyyy.MM.dd"; //$NON-NLS-1$
 	public static final String PATTERN_DATE_YEAR_MONTH_DAY_HOUR_MINUTE = "yyyy.MM.dd HH:mm"; //$NON-NLS-1$
@@ -77,7 +83,12 @@ public abstract class FormatFactory {
 	 * @since 0.9.0
 	 */
 	public static NumberFormat createNumberFormat() {
-		return NumberFormat.getNumberInstance(Locale.getDefault());
+		log.debug(HelperLog.methodStart());
+
+		final NumberFormat result = NumberFormat.getNumberInstance(Locale.getDefault());
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -89,11 +100,15 @@ public abstract class FormatFactory {
 	 * @since 0.9.0
 	 */
 	public static NumberFormat createNumberFormat(final String pattern) {
+		log.debug(HelperLog.methodStart(pattern));
 		if (!HelperString.isValid(pattern)) {
 			throw new RuntimeExceptionIsNullOrEmpty("pattern"); //$NON-NLS-1$
 		}
 
-		return new DecimalFormat(pattern);
+		final NumberFormat result = new DecimalFormat(pattern);
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -104,7 +119,12 @@ public abstract class FormatFactory {
 	 * @since 0.9.0
 	 */
 	public static NumberFormat createPercentFormat() {
-		return NumberFormat.getPercentInstance(Locale.getDefault());
+		log.debug(HelperLog.methodStart());
+		
+		final NumberFormat result = NumberFormat.getPercentInstance(Locale.getDefault());
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -115,7 +135,12 @@ public abstract class FormatFactory {
 	 * @since 0.9.0
 	 */
 	public static NumberFormat createCurrencyFormat() {
-		return NumberFormat.getCurrencyInstance(Locale.getDefault());
+		log.debug(HelperLog.methodStart());
+		
+		final NumberFormat result = NumberFormat.getCurrencyInstance(Locale.getDefault());
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -127,11 +152,15 @@ public abstract class FormatFactory {
 	 * @since 0.9.0
 	 */
 	public static DateFormat createDateFormat(final String pattern) {
+		log.debug(HelperLog.methodStart(pattern));
 		if (!HelperString.isValid(pattern)) {
 			throw new RuntimeExceptionIsNullOrEmpty("pattern"); //$NON-NLS-1$
 		}
+		
+		final DateFormat result = new SimpleDateFormat(pattern, Locale.getDefault());
 
-		return new SimpleDateFormat(pattern, Locale.getDefault());
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -144,17 +173,21 @@ public abstract class FormatFactory {
 	 * @since 0.9.0
 	 */
 	public static NumberFormatter createNumberFormatterDisplay(final NumberFormat format) {
+		log.debug(HelperLog.methodStart(format));
 		if (null == format) {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
-		return new NumberFormatter(format) {
+		final NumberFormatter result = new NumberFormatter(format) {
 			private static final long serialVersionUID = -8279122736069976223L;
 
 			{
 				setCommitsOnValidEdit(true);
 			}
 		};
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -167,11 +200,12 @@ public abstract class FormatFactory {
 	 * @since 0.9.0
 	 */
 	public static NumberFormatter createNumberFormatterEdit(final NumberFormat format) {
+		log.debug(HelperLog.methodStart(format));
 		if (null == format) {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
-
-		return new NumberFormatter(format) {
+		
+		final NumberFormatter result = new NumberFormatter(format) {
 			private static final long serialVersionUID = 1315478587371973936L;
 
 			{
@@ -186,6 +220,9 @@ public abstract class FormatFactory {
 				return null == text ? null : super.stringToValue(text);
 			}
 		};
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -198,17 +235,21 @@ public abstract class FormatFactory {
 	 * @since 0.9.0
 	 */
 	public static NumberFormatter createPercentFormatterDisplay(final NumberFormat format) {
+		log.debug(HelperLog.methodStart(format));
 		if (null == format) {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
-
-		return new NumberFormatter(format) {
+		
+		final NumberFormatter result = new NumberFormatter(format) {
 			private static final long serialVersionUID = 1104014354379282093L;
 
 			{
 				setCommitsOnValidEdit(true);
 			}
 		};
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -221,11 +262,12 @@ public abstract class FormatFactory {
 	 * @since 0.9.0
 	 */
 	public static NumberFormatter createPercentFormatterEdit(final NumberFormat format) {
+		log.debug(HelperLog.methodStart(format));
 		if (null == format) {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
-		return new NumberFormatter(format) {
+		final NumberFormatter result = new NumberFormatter(format) {
 			private static final long serialVersionUID = 1315478587371973936L;
 
 			{
@@ -255,6 +297,9 @@ public abstract class FormatFactory {
 				return null;
 			}
 		};
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -267,17 +312,21 @@ public abstract class FormatFactory {
 	 * @since 0.9.0
 	 */
 	public static DateFormatter createDateFormatterDisplay(final DateFormat format) {
+		log.debug(HelperLog.methodStart(format));
 		if (null == format) {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
 
-		return new DateFormatter(format) {
+		final DateFormatter result = new DateFormatter(format) {
 			private static final long serialVersionUID = 8705680761187261160L;
 
 			{
 				setCommitsOnValidEdit(true);
 			}
 		};
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -290,17 +339,21 @@ public abstract class FormatFactory {
 	 * @since 0.9.0
 	 */
 	public static DateFormatter createDateFormatterEdit(final DateFormat format) {
+		log.debug(HelperLog.methodStart(format));
 		if (null == format) {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
-
-		return new DateFormatter(format) {
+		
+		final DateFormatter result = new DateFormatter(format) {
 			private static final long serialVersionUID = 8705680761187261160L;
 
 			{
 				setCommitsOnValidEdit(true);
 			}
 		};
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -313,11 +366,12 @@ public abstract class FormatFactory {
 	 * @since 0.9.0
 	 */
 	public static MaskFormatter createMaskFormatter(final String format) throws ParseException {
+		log.debug(HelperLog.methodStart(format));
 		if (null == format) {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
-
-		return new MaskFormatter(format) {
+		
+		final MaskFormatter result = new MaskFormatter(format) {
 			private static final long serialVersionUID = 5212947957420446007L;
 
 			{
@@ -325,6 +379,9 @@ public abstract class FormatFactory {
 				setPlaceholderCharacter('_');
 			}
 		};
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -337,11 +394,12 @@ public abstract class FormatFactory {
 	 * @since 0.9.0
 	 */
 	public static DefaultFormatter createRegexFormatter(final Pattern regex) {
+		log.debug(HelperLog.methodStart(regex));
 		if (null == regex) {
 			throw new RuntimeExceptionIsNull("regex"); //$NON-NLS-1$
 		}
-
-		return new DefaultFormatter() {
+		
+		final DefaultFormatter result = new DefaultFormatter() {
 			private static final long serialVersionUID = 2665033244806980400L;
 
 			final transient Matcher matcher;
@@ -367,5 +425,8 @@ public abstract class FormatFactory {
 				return super.stringToValue(string);
 			}
 		};
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 }

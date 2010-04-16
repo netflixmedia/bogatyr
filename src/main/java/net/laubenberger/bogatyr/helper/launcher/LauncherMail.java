@@ -149,8 +149,8 @@ public abstract class LauncherMail {
 				// nothing special only 7 Bit
 				sb.append(c);
 			} else {
-				// Not 7 Bit - replace thru ?
-				sb.append('?');
+				// Not 7 Bit - replace thru #
+				sb.append('#');
 			}
 		}
 		final String result = sb.toString();

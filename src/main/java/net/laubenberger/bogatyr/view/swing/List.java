@@ -27,11 +27,16 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
 import javax.swing.JList;
 import javax.swing.ListModel;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Vector;
 
 
@@ -45,6 +50,8 @@ import java.util.Vector;
 public class List extends JList implements Activatable {
 	private static final long serialVersionUID = 7354802735840177105L;
 
+	private static final Logger log = LoggerFactory.getLogger(List.class);
+	
 	private boolean isNotActive;
 
 	/*
@@ -53,18 +60,22 @@ public class List extends JList implements Activatable {
 
 	public List() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public List(final ListModel dataModel) {
 		super(dataModel);
+		log.trace(HelperLog.constructor(dataModel));
 	}
 
 	public List(final Object[] listData) {
 		super(listData);
+		log.trace(HelperLog.constructor(listData));
 	}
 
 	public List(final Vector<?> listData) {
 		super(listData);
+		log.trace(HelperLog.constructor(listData));
 	}
 
 	/*
@@ -73,11 +84,15 @@ public class List extends JList implements Activatable {
 
 	public List(final ListModel dataModel, final String toolTip) {
 		this(dataModel);
+		log.trace(HelperLog.constructor(dataModel, toolTip));
+		
 		setToolTipText(toolTip);
 	}
 
 	public List(final Object[] listData, final String toolTip) {
 		this(listData);
+		log.trace(HelperLog.constructor(listData, toolTip));
+		
 		setToolTipText(toolTip);
 	}
 
@@ -105,11 +120,16 @@ public class List extends JList implements Activatable {
 
 	@Override
 	public boolean isActive() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
+		log.debug(HelperLog.methodStart(isActive));
+		
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -117,5 +137,7 @@ public class List extends JList implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 }

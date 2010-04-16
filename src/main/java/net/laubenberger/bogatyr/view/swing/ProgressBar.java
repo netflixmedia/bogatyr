@@ -30,6 +30,10 @@ package net.laubenberger.bogatyr.view.swing;
 import javax.swing.BoundedRangeModel;
 import javax.swing.JProgressBar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -43,28 +47,35 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class ProgressBar extends JProgressBar {
 	private static final long serialVersionUID = -6439735629199643683L;
 
+	private static final Logger log = LoggerFactory.getLogger(ProgressBar.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public ProgressBar() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public ProgressBar(final BoundedRangeModel model) {
 		super(model);
+		log.trace(HelperLog.constructor(model));
 	}
 
 	public ProgressBar(final int orientation, final int min, final int max) {
 		super(orientation, min, max);
+		log.trace(HelperLog.constructor(orientation, min, max));
 	}
 
 	public ProgressBar(final int orientation) {
 		super(orientation);
+		log.trace(HelperLog.constructor(orientation));
 	}
 
 	public ProgressBar(final int start, final int end) {
 		super(start, end);
+		log.trace(HelperLog.constructor(start, end));
 	}
 
 
@@ -76,11 +87,4 @@ public class ProgressBar extends JProgressBar {
 	public String toString() {
 		return HelperObject.toString(this);
 	}
-
-//	@Override
-//	public void setToolTipText(final String text) {
-//		if (text != null) {
-//            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
-//        }
-//	}
 }

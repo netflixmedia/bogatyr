@@ -76,7 +76,7 @@ public enum Bit implements Unit<Bit> {
 	YOBIBYTE(BigDecimal.ONE.divide(Constants.FACTOR_BIT_TO_YOBIBYTE, Constants.DEFAULT_MATHCONTEXT));
 
 
-	private final BigDecimal factor;
+	final BigDecimal factor;
 
 	Bit(final BigDecimal factor) {
 		this.factor = factor;

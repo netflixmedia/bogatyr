@@ -27,9 +27,13 @@
 
 package net.laubenberger.bogatyr.view.swing.chart;
 
+import javax.swing.JComponent;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
-import javax.swing.JComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -41,6 +45,8 @@ import javax.swing.JComponent;
  * @since 0.5.0
  */
 public class ChartEntry {
+	private static final Logger log = LoggerFactory.getLogger(ChartEntry.class);
+	
 	private final JComponent component;
 	private final int x;
 	private final int y;
@@ -50,6 +56,8 @@ public class ChartEntry {
 
 	public ChartEntry(final JComponent component, final int x, final int y, final int sizeX, final int sizeY) {
 		super();
+		log.trace(HelperLog.constructor(component, x, y, sizeX, sizeY));
+		
 		this.component = component;
 		this.x = x;
 		this.y = y;
@@ -58,22 +66,37 @@ public class ChartEntry {
 	}
 
 	public JComponent getComponent() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(component));
 		return component;
 	}
 
 	public int getSizeX() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(sizeX));
 		return sizeX;
 	}
 
 	public int getSizeY() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(sizeY));
 		return sizeY;
 	}
 
 	public int getX() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(x));
 		return x;
 	}
 
 	public int getY() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(y));
 		return y;
 	}
 

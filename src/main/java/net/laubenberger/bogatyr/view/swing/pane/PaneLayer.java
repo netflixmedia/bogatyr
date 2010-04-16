@@ -27,9 +27,14 @@
 
 package net.laubenberger.bogatyr.view.swing.pane;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 import javax.swing.JLayeredPane;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.awt.Component;
 
 
@@ -43,12 +48,15 @@ import java.awt.Component;
 public class PaneLayer extends JLayeredPane {
 	private static final long serialVersionUID = -6557519717085237490L;
 
+	private static final Logger log = LoggerFactory.getLogger(PaneLayer.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public PaneLayer() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 
@@ -61,13 +69,12 @@ public class PaneLayer extends JLayeredPane {
 		return HelperObject.toString(this);
 	}
 
-
 	@Override
-	public void setEnabled(final boolean enabled) {
-		super.setEnabled(enabled);
+	public void setEnabled(final boolean isEnabled) {
+		super.setEnabled(isEnabled);
 
 		for (final Component component : getComponents()) {
-			component.setEnabled(enabled);
+			component.setEnabled(isEnabled);
 		}
 	}
 }

@@ -29,6 +29,12 @@ package net.laubenberger.bogatyr.view.swing;
 
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -46,33 +52,47 @@ import java.awt.event.ActionListener;
 public class Group extends Panel {
 	private static final long serialVersionUID = -3557759501854611930L;
 
+	private static final Logger log = LoggerFactory.getLogger(Frame.class);
+	
 
 	public Group(final Insets insets, final JComponent... data) {
 		super();
+		log.trace(HelperLog.constructor(insets, data));
+		
 		createLayout(data, insets, false);
 	}
 
 	public Group(final Insets insets, final JComponent[] data, final boolean isVertical) {
 		super();
+		log.trace(HelperLog.constructor(insets, data, isVertical));
+		
 		createLayout(data, insets, isVertical);
 	}
 
 	public void addActionListener(final ActionListener listener) {
+		log.debug(HelperLog.methodStart(listener));
+		
 		final Component[] components = getComponents();
 		for (final Component component : components) {
 			if (component instanceof AbstractButton) {
 				((AbstractButton) component).addActionListener(listener);
 			}
 		}
+
+		log.debug(HelperLog.methodExit());
 	}
 
 	public void removeActionListener(final ActionListener listener) {
+		log.debug(HelperLog.methodStart(listener));
+		
 		final Component[] components = getComponents();
 		for (final Component component : components) {
 			if (component instanceof AbstractButton) {
 				((AbstractButton) component).removeActionListener(listener);
 			}
 		}
+
+		log.debug(HelperLog.methodExit());
 	}
 
 
@@ -81,14 +101,20 @@ public class Group extends Panel {
 	 */
 
 	private void createLayout(final JComponent[] data, final Insets insets, final boolean isVertical) {
+		log.trace(HelperLog.methodStart());
+		
 		if (isVertical) {
 			createLayoutVertical(data, insets);
 		} else {
 			createLayoutHorizontal(data, insets);
 		}
+		
+		log.trace(HelperLog.methodExit());
 	}
 
 	private void createLayoutVertical(final JComponent[] data, final Insets insets) {
+		log.trace(HelperLog.methodStart());
+		
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
@@ -101,9 +127,13 @@ public class Group extends Panel {
 				add(button, gbc);
 			}
 		}
+		
+		log.trace(HelperLog.methodExit());
 	}
 
 	private void createLayoutHorizontal(final JComponent[] data, final Insets insets) {
+		log.trace(HelperLog.methodStart());
+		
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 0;
@@ -116,6 +146,8 @@ public class Group extends Panel {
 				add(button, gbc);
 			}
 		}
+		
+		log.trace(HelperLog.methodExit());
 	}
 
 

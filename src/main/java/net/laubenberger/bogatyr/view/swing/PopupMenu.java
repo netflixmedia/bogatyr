@@ -29,6 +29,10 @@ package net.laubenberger.bogatyr.view.swing;
 
 import javax.swing.JPopupMenu;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -42,16 +46,20 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class PopupMenu extends JPopupMenu {
 	private static final long serialVersionUID = -2117215021680174633L;
 
+	private static final Logger log = LoggerFactory.getLogger(PopupMenu.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public PopupMenu() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public PopupMenu(final String label) {
 		super(label);
+		log.trace(HelperLog.constructor(label));
 	}
 
 

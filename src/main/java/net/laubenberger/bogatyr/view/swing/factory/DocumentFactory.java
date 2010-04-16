@@ -34,8 +34,12 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -46,6 +50,8 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * @since 0.9.0
  */
 public abstract class DocumentFactory {
+	private static final Logger log = LoggerFactory.getLogger(DocumentFactory.class);
+	
 	private static final Pattern PATTERN = Pattern.compile("[-%'0-9.]+"); //$NON-NLS-1$
 
 	/**
@@ -57,11 +63,12 @@ public abstract class DocumentFactory {
 	 * @since 0.9.0
 	 */
 	public static PlainDocument createTextDocument(final int length) {
+		log.debug(HelperLog.methodStart(length));
 		if (0 >= length) {
 			throw new RuntimeExceptionMustBeGreater("length", length, 0); //$NON-NLS-1$
 		}
 
-		return new PlainDocument() {
+		final PlainDocument result = new PlainDocument() {
 			private static final long serialVersionUID = -5008928912535075396L;
 
 			@Override
@@ -71,6 +78,9 @@ public abstract class DocumentFactory {
 				}
 			}
 		};
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
 	/**
@@ -82,11 +92,12 @@ public abstract class DocumentFactory {
 	 * @since 0.9.0
 	 */
 	public static PlainDocument createNumberDocument(final int length) {
+		log.debug(HelperLog.methodStart(length));
 		if (0 >= length) {
 			throw new RuntimeExceptionMustBeGreater("length", length, 0); //$NON-NLS-1$
 		}
 
-		return new PlainDocument() {
+		final PlainDocument result = new PlainDocument() {
 			private static final long serialVersionUID = 3766889554419497713L;
 
 			@Override
@@ -96,16 +107,30 @@ public abstract class DocumentFactory {
 				}
 			}
 		};
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 
+	
+	/*
+	 * Private methods
+	 */
+	
 	static boolean isStringNumeric(final CharSequence arg) {
+		log.trace(HelperLog.methodStart(arg));
+		
+		boolean result = false;
+		
 		if (HelperString.isValid(arg)) {
 			final Matcher matcher = PATTERN.matcher(arg);
 
 			if (matcher.matches()) {
-				return true;
+				result = true;
 			}
 		}
-		return false;
+		
+		log.trace(HelperLog.methodExit(result));
+		return result;
 	}
 }

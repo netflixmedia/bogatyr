@@ -27,9 +27,13 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 import javax.swing.table.AbstractTableModel;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -42,15 +46,24 @@ import javax.swing.table.AbstractTableModel;
 public class TableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -472247252594891753L;
 
+	private static final Logger log = LoggerFactory.getLogger(TableModel.class);
+	
 	private final String[] columnNames;
 	private final transient Object[][] data;
 
 
 	public TableModel(final String[] columnNames, final Object[][] data) {
 		super();
+		log.trace(HelperLog.constructor(columnNames, data));
+		
 		this.columnNames = columnNames.clone();
 		this.data = data.clone();
 	}
+
+
+	/*
+	 * Overridden methods
+	 */
 
 	/**
 	 * Counts the number of columns.
@@ -87,11 +100,6 @@ public class TableModel extends AbstractTableModel {
 		return data[rowIndex][columnIndex];
 	}
 
-
-	/*
-	 * Overridden methods
-	 */
-
 	@Override
 	public String toString() {
 		return HelperObject.toString(this);
@@ -103,9 +111,9 @@ public class TableModel extends AbstractTableModel {
 	}
 
 	/*
-	* JTable uses this method to determine the default renderer/editor for each cell.  If we didn't implement this method,
-	* then the last column would contain text (true/false), rather than a check box
-	*/
+	 * JTable uses this method to determine the default renderer/editor for each cell.  If we didn't implement this method,
+	 * then the last column would contain text (true/false), rather than a check box
+	 */
 
 	@Override
 	public Class<?> getColumnClass(final int columnIndex) {
@@ -119,8 +127,8 @@ public class TableModel extends AbstractTableModel {
 	}
 
 	/*
-	* Don't need to implement this method unless your table's editable.
-	*/
+	 * Don't need to implement this method unless your table's editable.
+	 */
 
 	@Override
 	public boolean isCellEditable(final int rowIndex, final int columnIndex) {
@@ -129,8 +137,8 @@ public class TableModel extends AbstractTableModel {
 	}
 
 	/*
-	* Don't need to implement this method unless your table's data can change
-	*/
+	 * Don't need to implement this method unless your table's data can change
+	 */
 
 	@Override
 	public void setValueAt(final Object aValue, final int rowIndex, final int columnIndex) {

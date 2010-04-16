@@ -33,6 +33,10 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JMenuItem;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -46,44 +50,53 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class MenuItem extends JMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
 
+	private static final Logger log = LoggerFactory.getLogger(MenuItem.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public MenuItem() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public MenuItem(final Icon icon) {
 		super(icon);
+		log.trace(HelperLog.constructor(icon));
 	}
 
 	public MenuItem(final String text, final Icon icon) {
 		super(text, icon);
+		log.trace(HelperLog.constructor(text, icon));
 	}
 
 	public MenuItem(final String text, final int mnemonic) {
 		super(text, mnemonic);
+		log.trace(HelperLog.constructor(text, mnemonic));
 	}
 
 	public MenuItem(final String text) {
 		super(text);
+		log.trace(HelperLog.constructor(text));
 	}
 
 	public MenuItem(final Action action) {
 		super(action);
+		log.trace(HelperLog.constructor(action));
 	}
 
 	/*
 	 * Own constructors
 	 */
 
-	public MenuItem(final String text, final Icon image, final int mnemonic, final String toolTip) {
+	public MenuItem(final String text, final Icon icon, final int mnemonic, final String toolTip) {
 		this(text);
+		log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip));
 
 		// Add the optional icon
-		if (null != image) {
-			setIcon(image);
+		if (null != icon) {
+			setIcon(icon);
 		}
 
 		// Add the mnemonic key
@@ -97,8 +110,10 @@ public class MenuItem extends JMenuItem {
 		}
 	}
 
-	public MenuItem(final String text, final Icon image, final int mnemonic, final String toolTip, final ActionListener listener) {
-		this(text, image, mnemonic, toolTip);
+	public MenuItem(final String text, final Icon icon, final int mnemonic, final String toolTip, final ActionListener listener) {
+		this(text, icon, mnemonic, toolTip);
+		log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, listener));
+		
 		addActionListener(listener);
 	}
 

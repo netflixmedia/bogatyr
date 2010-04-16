@@ -28,17 +28,16 @@
 package net.laubenberger.bogatyr.service.paginator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import net.laubenberger.bogatyr.helper.HelperCollection;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.service.ServiceAbstract;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -88,7 +87,7 @@ public class PaginatorImpl extends ServiceAbstract implements Paginator {
 			throw new RuntimeExceptionIsNull("list"); //$NON-NLS-1$
 		}
 
-		this.list = Collections.unmodifiableList(list);
+		this.list = list;
 		log.debug(HelperLog.methodExit());
 	}
 

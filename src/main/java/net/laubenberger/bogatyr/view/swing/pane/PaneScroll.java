@@ -32,6 +32,10 @@ import java.awt.Component;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -45,10 +49,14 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class PaneScroll extends JScrollPane {
 	private static final long serialVersionUID = 544751396135811303L;
 
+	private static final Logger log = LoggerFactory.getLogger(PaneScroll.class);
+	
+	private static final int DEFAULT_INCREMENT = 16;
+
 	{
 		setWheelScrollingEnabled(true);
-		getVerticalScrollBar().setUnitIncrement(16);
-		getHorizontalScrollBar().setUnitIncrement(16);
+		getVerticalScrollBar().setUnitIncrement(DEFAULT_INCREMENT);
+		getHorizontalScrollBar().setUnitIncrement(DEFAULT_INCREMENT);
 	}
 
 	/*
@@ -57,18 +65,22 @@ public class PaneScroll extends JScrollPane {
 
 	public PaneScroll() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public PaneScroll(final Component component) {
 		super(component);
+		log.trace(HelperLog.constructor(component));
 	}
 
 	public PaneScroll(final Component view, final int vsbPolicy, final int hsbPolicy) {
 		super(view, vsbPolicy, hsbPolicy);
+		log.trace(HelperLog.constructor(view, vsbPolicy, hsbPolicy));
 	}
 
 	public PaneScroll(final int vsbPolicy, final int hsbPolicy) {
 		super(vsbPolicy, hsbPolicy);
+		log.trace(HelperLog.constructor(vsbPolicy, hsbPolicy));
 	}
 
 	/*
@@ -77,6 +89,8 @@ public class PaneScroll extends JScrollPane {
 
 	public PaneScroll(final Component component, final Border border) {
 		this(component);
+		log.trace(HelperLog.constructor(component, border));
+		
 		setBorder(border);
 	}
 
@@ -91,11 +105,11 @@ public class PaneScroll extends JScrollPane {
 	}
 
 	@Override
-	public void setEnabled(final boolean enabled) {
-		super.setEnabled(enabled);
+	public void setEnabled(final boolean isEnabled) {
+		super.setEnabled(isEnabled);
 
-		for (final Component component : getViewport().getComponents()) {
-			component.setEnabled(enabled);
+		for (final Component component : getComponents()) {
+			component.setEnabled(isEnabled);
 		}
 	}
 }

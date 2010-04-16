@@ -52,6 +52,13 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 public abstract class HelperTime {
 	private static final Logger log = LoggerFactory.getLogger(HelperTime.class);
 
+	public static final int MAX_SECOND_VALUE = 59;
+	public static final int MAX_MINUTE_VALUE = 59;
+	public static final int MAX_HOUR_VALUE = 23;
+	public static final int MAX_DAY_VALUE = 31;
+	public static final int MAX_MONTH_VALUE = 12;
+	public static final int MAX_YEAR_VALUE = 9999;
+
 	public static final int HOURS_PER_DAY = 24;
 	public static final int DAYS_PER_WEEK = 7;
 	public static final int DAYS_PER_YEAR = 365;
@@ -142,20 +149,20 @@ public abstract class HelperTime {
 		if (0 > year) {
 			throw new RuntimeExceptionMustBeGreater("year", year, 0); //$NON-NLS-1$
 		}
-		if (9999 < year) {
-			throw new RuntimeExceptionMustBeSmaller("year", year, 9999); //$NON-NLS-1$
+		if (MAX_YEAR_VALUE < year) {
+			throw new RuntimeExceptionMustBeSmaller("year", year, MAX_YEAR_VALUE); //$NON-NLS-1$
 		}
 		if (0 > month) {
 			throw new RuntimeExceptionMustBeGreater("month", month, 0); //$NON-NLS-1$
 		}
-		if (12 < month) {
-			throw new RuntimeExceptionMustBeSmaller("month", month, 12); //$NON-NLS-1$
+		if (MAX_MONTH_VALUE < month) {
+			throw new RuntimeExceptionMustBeSmaller("month", month, MAX_MONTH_VALUE); //$NON-NLS-1$
 		}
 		if (0 > date) {
 			throw new RuntimeExceptionMustBeGreater("date", date, 0); //$NON-NLS-1$
 		}
-		if (31 < date) {
-			throw new RuntimeExceptionMustBeSmaller("date", date, 31); //$NON-NLS-1$
+		if (MAX_DAY_VALUE < date) {
+			throw new RuntimeExceptionMustBeSmaller("date", date, MAX_DAY_VALUE); //$NON-NLS-1$
 		}
 
 		final Calendar cal = new GregorianCalendar();
@@ -195,38 +202,38 @@ public abstract class HelperTime {
 		if (0 > year) {
 			throw new RuntimeExceptionMustBeGreater("year", year, 0); //$NON-NLS-1$
 		}
-		if (9999 < year) {
-			throw new RuntimeExceptionMustBeSmaller("year", year, 9999); //$NON-NLS-1$
+		if (MAX_YEAR_VALUE < year) {
+			throw new RuntimeExceptionMustBeSmaller("year", year, MAX_YEAR_VALUE); //$NON-NLS-1$
 		}
 		if (0 > month) {
 			throw new RuntimeExceptionMustBeGreater("month", month, 0); //$NON-NLS-1$
 		}
-		if (12 < month) {
-			throw new RuntimeExceptionMustBeSmaller("month", month, 12); //$NON-NLS-1$
+		if (MAX_MONTH_VALUE < month) {
+			throw new RuntimeExceptionMustBeSmaller("month", month, MAX_MONTH_VALUE); //$NON-NLS-1$
 		}
 		if (0 > date) {
 			throw new RuntimeExceptionMustBeGreater("date", date, 0); //$NON-NLS-1$
 		}
-		if (31 < date) {
-			throw new RuntimeExceptionMustBeSmaller("date", date, 31); //$NON-NLS-1$
+		if (MAX_DAY_VALUE < date) {
+			throw new RuntimeExceptionMustBeSmaller("date", date, MAX_DAY_VALUE); //$NON-NLS-1$
 		}
 		if (0 > hour) {
 			throw new RuntimeExceptionMustBeGreater("hour", hour, 0); //$NON-NLS-1$
 		}
-		if (23 < hour) {
-			throw new RuntimeExceptionMustBeSmaller("hour", hour, 23); //$NON-NLS-1$
+		if (MAX_HOUR_VALUE < hour) {
+			throw new RuntimeExceptionMustBeSmaller("hour", hour, MAX_HOUR_VALUE); //$NON-NLS-1$
 		}
 		if (0 > minute) {
 			throw new RuntimeExceptionMustBeGreater("minute", minute, 0); //$NON-NLS-1$
 		}
-		if (59 < minute) {
-			throw new RuntimeExceptionMustBeSmaller("minute", minute, 59); //$NON-NLS-1$
+		if (MAX_MINUTE_VALUE < minute) {
+			throw new RuntimeExceptionMustBeSmaller("minute", minute, MAX_MINUTE_VALUE); //$NON-NLS-1$
 		}
 		if (0 > second) {
 			throw new RuntimeExceptionMustBeGreater("second", second, 0); //$NON-NLS-1$
 		}
-		if (59 < second) {
-			throw new RuntimeExceptionMustBeSmaller("second", second, 59); //$NON-NLS-1$
+		if (MAX_SECOND_VALUE < second) {
+			throw new RuntimeExceptionMustBeSmaller("second", second, MAX_SECOND_VALUE); //$NON-NLS-1$
 		}
 
 		final Calendar cal = new GregorianCalendar();

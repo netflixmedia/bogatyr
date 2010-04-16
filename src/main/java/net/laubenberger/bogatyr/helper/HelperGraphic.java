@@ -143,7 +143,7 @@ public abstract class HelperGraphic {
 			scaleHeight = input.getHeight() / output.getHeight();
 		}
 
-		final double result = 0 == scaleWidth && 0 == scaleHeight ? 1.0D : scaleWidth > scaleHeight ? 1.0D / scaleWidth : 1.0D / scaleHeight;
+		final double result = 0.0D == scaleWidth && 0.0D == scaleHeight ? 1.0D : scaleWidth > scaleHeight ? 1.0D / scaleWidth : 1.0D / scaleHeight;
 
 		log.debug(HelperLog.methodExit(result));
 		return result;

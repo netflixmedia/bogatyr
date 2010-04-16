@@ -27,11 +27,15 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
 import javax.swing.JTextArea;
 import javax.swing.text.Document;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -44,6 +48,8 @@ import javax.swing.text.Document;
 public class TextArea extends JTextArea implements Activatable {
 	private static final long serialVersionUID = 8509257459382968021L;
 
+	private static final Logger log = LoggerFactory.getLogger(TextArea.class);
+	
 	private boolean isNotActive;
 
 	{
@@ -57,22 +63,27 @@ public class TextArea extends JTextArea implements Activatable {
 
 	public TextArea() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public TextArea(final Document doc, final String text, final int rows, final int columns) {
 		super(doc, text, rows, columns);
+		log.trace(HelperLog.constructor(doc, text, rows, columns));
 	}
 
 	public TextArea(final int rows, final int columns) {
 		super(rows, columns);
+		log.trace(HelperLog.constructor(rows, columns));
 	}
 
 	public TextArea(final String text, final int rows, final int columns) {
 		super(text, rows, columns);
+		log.trace(HelperLog.constructor(text, rows, columns));
 	}
 
 	public TextArea(final Document doc) {
 		super(doc);
+		log.trace(HelperLog.constructor(doc));
 	}
 
 	/*
@@ -81,11 +92,15 @@ public class TextArea extends JTextArea implements Activatable {
 
 	public TextArea(final String toolTip) {
 		this();
+		log.trace(HelperLog.constructor(toolTip));
+		
 		setToolTipText(toolTip);
 	}
 
 	public TextArea(final String text, final String toolTip, final int rows, final int columns) {
 		this(text, rows, columns);
+		log.trace(HelperLog.constructor(text, toolTip, rows, columns));
+		
 		setToolTipText(toolTip);
 	}
 
@@ -119,11 +134,16 @@ public class TextArea extends JTextArea implements Activatable {
 
 	@Override
 	public boolean isActive() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
+		log.debug(HelperLog.methodStart(isActive));
+		
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -131,5 +151,7 @@ public class TextArea extends JTextArea implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 }

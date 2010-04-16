@@ -50,7 +50,7 @@ public enum Length implements Unit<Length> {
 	MILE(BigDecimal.ONE.divide(Constants.FACTOR_MILE_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	NAUTICAL_MILE(BigDecimal.ONE.divide(Constants.FACTOR_NAUTICAL_MILE_TO_M, Constants.DEFAULT_MATHCONTEXT)); //$JUnit$
 
-	private final BigDecimal factor;
+	final BigDecimal factor;
 
 	Length(final BigDecimal factor) {
 		this.factor = factor;

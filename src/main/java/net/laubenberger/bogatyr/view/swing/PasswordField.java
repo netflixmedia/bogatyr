@@ -27,13 +27,15 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
-import net.laubenberger.bogatyr.helper.HelperObject;
-import net.laubenberger.bogatyr.misc.Activatable;
-
 import javax.swing.JPasswordField;
 import javax.swing.text.Document;
 
-import java.util.Arrays;
+import net.laubenberger.bogatyr.helper.HelperLog;
+import net.laubenberger.bogatyr.helper.HelperObject;
+import net.laubenberger.bogatyr.misc.Activatable;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -46,6 +48,8 @@ import java.util.Arrays;
 public class PasswordField extends JPasswordField implements Activatable {
 	private static final long serialVersionUID = 4337982428755317915L;
 
+	private static final Logger log = LoggerFactory.getLogger(PasswordField.class);
+	
 	private boolean isNotActive;
 
 	/*
@@ -54,34 +58,44 @@ public class PasswordField extends JPasswordField implements Activatable {
 
 	public PasswordField() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public PasswordField(final Document doc, final String text, final int columns) {
 		super(doc, text, columns);
+		log.trace(HelperLog.constructor(doc, text, columns));
 	}
 
 	public PasswordField(final int columns) {
 		super(columns);
+		log.trace(HelperLog.constructor(columns));
 	}
 
 	public PasswordField(final String text, final int columns) {
 		super(text, columns);
+		log.trace(HelperLog.constructor(text, columns));
 	}
 
+	/*
+	 * Own constructors
+	 */
+	
 	public PasswordField(final String toolTip) {
 		super();
+		log.trace(HelperLog.constructor(toolTip));
+
 		setToolTipText(toolTip);
 	}
 
-	/**
-	 * Checks if the entered password is correct.
-	 *
-	 * @param correctPassword from the user (e.g. from the db).
-	 * @return true/false
-	 */
-	public boolean isPasswordCorrect(final char[] correctPassword) {
-		return getPassword().length == correctPassword.length && Arrays.equals(getPassword(), correctPassword);
-	}
+//	/**
+//	 * Checks if the entered password is correct.
+//	 *
+//	 * @param correctPassword from the user (e.g. from the db).
+//	 * @return true/false
+//	 */
+//	public boolean isPasswordCorrect(final char[] correctPassword) {
+//		return getPassword().length == correctPassword.length && Arrays.equals(getPassword(), correctPassword);
+//	}
 
 
 	/*
@@ -107,11 +121,16 @@ public class PasswordField extends JPasswordField implements Activatable {
 
 	@Override
 	public boolean isActive() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
+		log.debug(HelperLog.methodStart(isActive));
+		
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -119,5 +138,7 @@ public class PasswordField extends JPasswordField implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 }
