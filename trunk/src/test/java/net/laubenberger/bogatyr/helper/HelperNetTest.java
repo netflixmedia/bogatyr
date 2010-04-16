@@ -256,7 +256,7 @@ public class HelperNetTest {
 	@Test
 	public void testGetIp() {
 		try {
-			assertEquals("78.46.88.137", HelperNet.getIp("http://www.laubenberger.net")); //$NON-NLS-1$ //$NON-NLS-2$
+			assertEquals("78.46.88.137", HelperNet.getIp("orwell.ch")); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
