@@ -29,7 +29,6 @@ package net.laubenberger.bogatyr.model.updater;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -37,9 +36,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
@@ -52,6 +48,9 @@ import net.laubenberger.bogatyr.model.misc.Manufacturer;
 import net.laubenberger.bogatyr.model.misc.Owner;
 import net.laubenberger.bogatyr.model.misc.Platform;
 import net.laubenberger.bogatyr.model.misc.Publisher;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -68,8 +67,8 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 
 	private static final Logger log = LoggerFactory.getLogger(ModelUpdaterImpl.class);
 
-	private Map<Platform, String> mapLocation = new HashMap<Platform, String>();
-	private Map<HashCodeAlgo, String> mapHash = new HashMap<HashCodeAlgo, String>();
+	private Map<Platform, String> mapLocation;
+	private Map<HashCodeAlgo, String> mapHash;
 
 	public ModelUpdaterImpl() {
 		super();

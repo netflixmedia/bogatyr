@@ -71,7 +71,7 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 	private static final Logger log = LoggerFactory.getLogger(ModelApplicationImpl.class);
 
 	private boolean isDebug;
-	private Map<HashCodeAlgo, String> mapHash = new HashMap<HashCodeAlgo, String>(3);
+	private Map<HashCodeAlgo, String> mapHash;
 
 	private transient Localizer localizer;
 	private transient Property property;
