@@ -33,6 +33,10 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
@@ -47,6 +51,8 @@ import net.laubenberger.bogatyr.misc.Activatable;
 public class Button extends JButton implements Activatable {
 	private static final long serialVersionUID = -7231487009931166084L;
 
+	private static final Logger log = LoggerFactory.getLogger(Button.class);
+	
 	private boolean isNotActive;
 
 	/*
@@ -55,22 +61,27 @@ public class Button extends JButton implements Activatable {
 
 	public Button() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public Button(final Action action) {
 		super(action);
+		log.trace(HelperLog.constructor(action));
 	}
 
 	public Button(final Icon icon) {
 		super(icon);
+		log.trace(HelperLog.constructor(icon));
 	}
 
 	public Button(final String text, final Icon icon) {
 		super(text, icon);
+		log.trace(HelperLog.constructor(text, icon));
 	}
 
 	public Button(final String text) {
 		super(text);
+		log.trace(HelperLog.constructor(text));
 	}
 
 
@@ -80,16 +91,22 @@ public class Button extends JButton implements Activatable {
 
 	public Button(final String text, final String toolTip) {
 		this(text);
+		log.trace(HelperLog.constructor(text, toolTip));
+		
 		setToolTipText(toolTip);
 	}
 
 	public Button(final String text, final String toolTip, final ActionListener listener) {
 		this(text, toolTip);
+		log.trace(HelperLog.constructor(text, toolTip, listener));
+		
 		addActionListener(listener);
 	}
 
 	public Button(final String text, final Icon icon, final String toolTip, final ActionListener listener) {
 		this(text, icon);
+		log.trace(HelperLog.constructor(text, icon, toolTip, listener));
+		
 		setToolTipText(toolTip);
 		addActionListener(listener);
 	}
@@ -118,11 +135,16 @@ public class Button extends JButton implements Activatable {
 
 	@Override
 	public boolean isActive() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
+		log.debug(HelperLog.methodStart(isActive));
+		
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -130,5 +152,7 @@ public class Button extends JButton implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 }

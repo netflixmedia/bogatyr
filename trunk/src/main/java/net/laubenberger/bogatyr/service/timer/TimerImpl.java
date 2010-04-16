@@ -68,7 +68,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
 	@Override
 	public void setTime(final long time) {
 		log.debug(HelperLog.methodStart(time));
-		if (0 > time) {
+		if (0L > time) {
 			throw new RuntimeExceptionMustBeGreater("time", time, 0); //$NON-NLS-1$
 		}
 
@@ -80,7 +80,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
 	@Override
 	public synchronized void start(final long interval) {
 		log.debug(HelperLog.methodStart(interval));
-		if (0 > interval) {
+		if (0L > interval) {
 			throw new RuntimeExceptionMustBeGreater("interval", interval, 0); //$NON-NLS-1$
 		}
 
@@ -92,10 +92,10 @@ public class TimerImpl extends TimerAbstract implements Timer {
 	@Override
 	public synchronized void start(final long delay, final long interval) {
 		log.debug(HelperLog.methodStart(delay, interval));
-		if (0 > delay) {
+		if (0L > delay) {
 			throw new RuntimeExceptionMustBeGreater("delay", delay, 0); //$NON-NLS-1$
 		}
-		if (0 > interval) {
+		if (0L > interval) {
 			throw new RuntimeExceptionMustBeGreater("interval", interval, 0); //$NON-NLS-1$
 		}
 

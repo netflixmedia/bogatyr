@@ -126,7 +126,7 @@ public abstract class HelperString {
 			--length;
 			chars[length] = fillChar;
 		}
-		final String result = new String(chars);
+		final CharSequence result = new String(chars);
 
 		log.debug(HelperLog.methodExit(result));
 		return result;

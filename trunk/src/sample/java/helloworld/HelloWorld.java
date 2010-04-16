@@ -39,6 +39,8 @@ import net.laubenberger.bogatyr.service.localizer.Localizer;
 import net.laubenberger.bogatyr.service.localizer.LocalizerFile;
 import net.laubenberger.bogatyr.service.property.Property;
 import net.laubenberger.bogatyr.service.property.PropertyImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -49,6 +51,8 @@ import net.laubenberger.bogatyr.service.property.PropertyImpl;
  * @version 20100416
  */
 public class HelloWorld extends ApplicationAbstract {
+	private static final Logger log = LoggerFactory.getLogger(HelloWorld.class);
+
 	// Fixed parameter - e.g. this could be an argument
 	private static final String ARG_PROPERTY_LOCATION = "src/sample/configuration/helloworld/standard.properties"; //$NON-NLS-1$
 
@@ -65,7 +69,7 @@ public class HelloWorld extends ApplicationAbstract {
 
 
 	public static void main(final String[] args) {
-		PropertyConfigurator.configure("src/sample/configuration/log4j.properties");
+		PropertyConfigurator.configure("src/sample/configuration/log4j.properties"); //$NON-NLS-1$
 
 		final HelloWorld hw = new HelloWorld();
 		hw.run();
@@ -85,8 +89,7 @@ public class HelloWorld extends ApplicationAbstract {
 		try {
 			property = new PropertyImpl(new File(ARG_PROPERTY_LOCATION));
 		} catch (IOException ex) {
-			System.err.println("Couldn't process the property file!"); //$NON-NLS-1$
-			ex.printStackTrace();
+			log.error("Could not process the property file", ex); //$NON-NLS-1$
 			System.exit(1);
 		}
 

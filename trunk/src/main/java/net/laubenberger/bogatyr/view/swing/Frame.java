@@ -38,6 +38,10 @@ import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.helper.HelperSwing;
@@ -55,6 +59,8 @@ import net.laubenberger.bogatyr.misc.Fadeable;
 public class Frame extends JFrame implements Fadeable, Displayable {
 	private static final long serialVersionUID = 7476360387134225315L;
 
+	private static final Logger log = LoggerFactory.getLogger(Frame.class);
+	
 	private boolean isFading;
 
 	private Color colorFader = new Color(0, 0, 0, 100);
@@ -71,18 +77,22 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 
 	public Frame() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public Frame(final GraphicsConfiguration gc) {
 		super(gc);
+		log.trace(HelperLog.constructor(gc));
 	}
 
 	public Frame(final String title, final GraphicsConfiguration gc) {
 		super(title, gc);
+		log.trace(HelperLog.constructor(title, gc));
 	}
 
 	public Frame(final String title) throws HeadlessException {
 		super(title);
+		log.trace(HelperLog.constructor(title));
 	}
 
 	/*
@@ -91,6 +101,8 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 
 	public Frame(final String title, final Image icon) {
 		this();
+		log.trace(HelperLog.constructor(title, icon));
+		
 		setTitle(title);
 		setIconImage(icon);
 	}
@@ -130,19 +142,29 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 
 	@Override
 	public void createAndShowGUI() {
+		log.debug(HelperLog.methodStart());
+		
 		setVisible(true);
+
+		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void clearAndHide() {
+		log.debug(HelperLog.methodStart());
+		
 		dispose();
+
+		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setFading(final boolean isFading) {
+		log.debug(HelperLog.methodStart(isFading));
+		
 		this.isFading = isFading;
 
-		if (HelperString.contains(UIManager.getLookAndFeel().toString(), "swing.plaf") || HelperString.contains(UIManager.getLookAndFeel().toString(), "apple.laf")) { //do the fade-effect only with original lafs
+		if (HelperString.contains(UIManager.getLookAndFeel().toString(), "swing.plaf") || HelperString.contains(UIManager.getLookAndFeel().toString(), "apple.laf")) { //do the fade-effect only with original lafs //$NON-NLS-1$ //$NON-NLS-2$
 			final Container containerGlass = (Container) getGlassPane();
 			containerGlass.removeAll();
 			containerGlass.setVisible(isFading);
@@ -155,15 +177,24 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 			validate();
 			repaint();
 		}
+
+		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setFaderColor(final Color colorFader) {
+		log.debug(HelperLog.methodStart(colorFader));
+		
 		this.colorFader = colorFader;
+
+		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public boolean isFading() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(isFading));
 		return isFading;
 	}
 }

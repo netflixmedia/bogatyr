@@ -38,10 +38,14 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.view.swing.Label;
 import net.laubenberger.bogatyr.view.swing.LabelVertical;
 import net.laubenberger.bogatyr.view.swing.Panel;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -54,6 +58,8 @@ import net.laubenberger.bogatyr.view.swing.Panel;
  */
 public class Chart extends Panel {
 	private static final long serialVersionUID = -4618658256880807781L;
+
+	private static final Logger log = LoggerFactory.getLogger(Chart.class);
 
 	public enum X_Axis {
 		NORTH, SOUTH
@@ -81,11 +87,13 @@ public class Chart extends Panel {
 
 	public Chart(final int maxX, final int maxY, final String[] xAxes, final String[] yAxes) {
 		this(maxX, maxY, xAxes, yAxes, X_Axis.SOUTH, Y_Axis.WEST);
+		log.trace(HelperLog.constructor(maxX, maxY, xAxes, yAxes));
 	}
 
 	public Chart(final int maxX, final int maxY, final String[] xAxes, final String[] yAxes, final X_Axis positionXAxis, final Y_Axis positionYAxis) {
 		super();
-
+		log.trace(HelperLog.constructor(maxX, maxY, xAxes, yAxes, positionXAxis, positionYAxis));
+		
 		this.xAxes = xAxes.clone();
 		this.yAxes = yAxes.clone();
 		this.maxX = maxX;
@@ -107,6 +115,7 @@ public class Chart extends Panel {
 	 * @since 0.5.0
 	 */
 	public void addEntry(final ChartEntry entry) {
+		log.debug(HelperLog.methodStart(entry));
 		if (null == entry) {
 			throw new RuntimeExceptionIsNull("entry"); //$NON-NLS-1$
 		}
@@ -115,6 +124,8 @@ public class Chart extends Panel {
 		}
 		entries.add(entry);
 		createLayout();
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -124,6 +135,9 @@ public class Chart extends Panel {
 	 * @since 0.5.0
 	 */
 	public Color getColorGrid() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(colorGrid));
 		return colorGrid;
 	}
 
@@ -134,8 +148,12 @@ public class Chart extends Panel {
 	 * @since 0.5.0
 	 */
 	public void setColorGrid(final Color color) {
+		log.debug(HelperLog.methodStart(color));
+		
 		colorGrid = color;
 		createLayout();
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 
@@ -144,6 +162,8 @@ public class Chart extends Panel {
 	 */
 
 	private void createLayout() {
+		log.trace(HelperLog.methodStart());
+		
 		// First remove all
 		removeAll();
 
@@ -224,11 +244,14 @@ public class Chart extends Panel {
 				}
 			}
 		}
+		log.trace(HelperLog.methodExit());
 	}
 
 	private Component getXAxis() {
-		final JComponent panelXAxis = new Panel(colorBackground);
-		panelXAxis.setLayout(new GridLayout(0, xAxes.length));
+		log.trace(HelperLog.methodStart());
+
+		final JComponent result = new Panel(colorBackground);
+		result.setLayout(new GridLayout(0, xAxes.length));
 
 		// Paint x axis
 		for (final String text : xAxes) {
@@ -238,14 +261,18 @@ public class Chart extends Panel {
 			if (null != font) {
 				label.setFont(font);
 			}
-			panelXAxis.add(label);
+			result.add(label);
 		}
-		return panelXAxis;
+		
+		log.trace(HelperLog.methodExit(result));
+		return result;
 	}
 
 	private Component getYAxis() {
-		final JComponent panelYAxis = new Panel(colorBackground);
-		panelYAxis.setLayout(new GridLayout(yAxes.length, 0));
+		log.trace(HelperLog.methodStart());
+		
+		final JComponent result = new Panel(colorBackground);
+		result.setLayout(new GridLayout(yAxes.length, 0));
 
 		// Paint y axis
 		for (final String text : yAxes) {
@@ -255,9 +282,11 @@ public class Chart extends Panel {
 			if (null != font) {
 				label.setFont(font);
 			}
-			panelYAxis.add(label);
+			result.add(label);
 		}
-		return panelYAxis;
+		
+		log.trace(HelperLog.methodExit(result));
+		return result;
 	}
 
 

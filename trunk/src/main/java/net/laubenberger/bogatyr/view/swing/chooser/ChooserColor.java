@@ -32,7 +32,11 @@ import java.awt.Color;
 import javax.swing.JColorChooser;
 import javax.swing.colorchooser.ColorSelectionModel;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -45,20 +49,25 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class ChooserColor extends JColorChooser {
 	private static final long serialVersionUID = 2106701368372263061L;
 
+	private static final Logger log = LoggerFactory.getLogger(ChooserColor.class);
+
 	/*
 	 * Superclass constructors
 	 */
 
 	public ChooserColor() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public ChooserColor(final Color initialColor) {
 		super(initialColor);
+		log.trace(HelperLog.constructor(initialColor));
 	}
 
 	public ChooserColor(final ColorSelectionModel model) {
 		super(model);
+		log.trace(HelperLog.constructor(model));
 	}
 
 

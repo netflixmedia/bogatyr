@@ -40,6 +40,10 @@ import net.laubenberger.bogatyr.helper.HelperIO;
 import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.helper.launcher.LauncherFile;
 
+import org.apache.log4j.PropertyConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * This is a class to parse Java files and check if an example documentation is available.
  * To find such classes and methods, it must be marked with $Example$.
@@ -48,6 +52,8 @@ import net.laubenberger.bogatyr.helper.launcher.LauncherFile;
  * @version 20100416
  */
 public class CheckExample {
+	private static final Logger log = LoggerFactory.getLogger(CheckExample.class);
+
 	private static final String MARKER = "$Example$"; //$NON-NLS-1$
 	private static final String EXTENSION_CSV = ".csv"; //$NON-NLS-1$
 	private static final String EXTENSION_JAVA = ".java"; //$NON-NLS-1$
@@ -61,6 +67,8 @@ public class CheckExample {
 	 * @param args
 	 */
 	public static void main(final String[] args) {
+		PropertyConfigurator.configure("src/util/configuration/log4j.properties"); //$NON-NLS-1$
+
 //		list(true);
 		list(false);
 	}
@@ -85,6 +93,7 @@ public class CheckExample {
 
 			try {
 				final java.io.FileFilter filter = new java.io.FileFilter() {
+					@Override
 					public boolean accept(final File file) {
 						return HelperString.endsWith(file.getName(), EXTENSION_JAVA) && !HelperString.contains(file.getName(), "svn"); //$NON-NLS-1$
 					}
@@ -116,14 +125,14 @@ public class CheckExample {
 					}
 				}
 			} catch (IOException ex) {
-				ex.printStackTrace();
+				log.error("Could not process files", ex); //$NON-NLS-1$
 			}
 
 			if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Open file with the default application?", "Open file", JOptionPane.YES_NO_OPTION)) {  //$NON-NLS-1$//$NON-NLS-2$
 				try {
 					LauncherFile.open(output);
 				} catch (IOException ex) {
-					ex.printStackTrace();
+					log.error("Could not open output file", ex); //$NON-NLS-1$
 					System.exit(10);
 				}
 			}

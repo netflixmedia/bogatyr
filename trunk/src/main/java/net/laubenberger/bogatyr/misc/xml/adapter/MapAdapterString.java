@@ -50,7 +50,7 @@ public class MapAdapterString extends XmlAdapter<XmlMap, Map<String, String>> {
 
 	@Override
 	public XmlMap marshal(final Map<String, String> map) throws Exception {
-		if (map != null) {
+		if (null != map) {
 			final XmlMap xmlMap = new XmlMap();
 			
 				for (final Map.Entry<String, String> entry : map.entrySet()) {
@@ -63,7 +63,7 @@ public class MapAdapterString extends XmlAdapter<XmlMap, Map<String, String>> {
 
 	@Override
 	public Map<String, String> unmarshal(final XmlMap xmlMap) throws Exception {
-		if (xmlMap != null) {
+		if (null != xmlMap) {
 			final Map<String, String> map = new HashMap<String, String>(xmlMap.getEntries().size());
 			for (final XmlEntry entry : xmlMap.getEntries()) {
 				map.put(String.valueOf(entry.getKey()), entry.getValue());

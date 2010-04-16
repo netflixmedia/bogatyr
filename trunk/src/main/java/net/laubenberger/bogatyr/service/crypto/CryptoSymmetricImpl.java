@@ -272,8 +272,8 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 		cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
 		os = new CipherOutputStream(os, cipher);
 
-		int offset;
 		try {
+			int offset;
 			while (0 <= (offset = is.read(buffer))) {
 				os.write(buffer, 0, offset);
 			}

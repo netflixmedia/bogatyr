@@ -31,6 +31,10 @@ import java.awt.Component;
 
 import javax.swing.JTabbedPane;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -44,20 +48,25 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class PaneTab extends JTabbedPane {
 	private static final long serialVersionUID = -4529079733239863943L;
 
+	private static final Logger log = LoggerFactory.getLogger(PaneTab.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public PaneTab() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public PaneTab(final int tabPlacement, final int tabLayoutPolicy) {
 		super(tabPlacement, tabLayoutPolicy);
+		log.trace(HelperLog.constructor(tabPlacement, tabLayoutPolicy));
 	}
 
 	public PaneTab(final int tabPlacement) {
 		super(tabPlacement);
+		log.trace(HelperLog.constructor(tabPlacement));
 	}
 
 
@@ -71,11 +80,11 @@ public class PaneTab extends JTabbedPane {
 	}
 
 	@Override
-	public void setEnabled(final boolean enabled) {
-		super.setEnabled(enabled);
+	public void setEnabled(final boolean isEnabled) {
+		super.setEnabled(isEnabled);
 
 		for (final Component component : getComponents()) {
-			component.setEnabled(enabled);
+			component.setEnabled(isEnabled);
 		}
 	}
 }

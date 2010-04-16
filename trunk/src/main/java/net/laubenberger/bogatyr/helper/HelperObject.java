@@ -261,7 +261,6 @@ public abstract class HelperObject {
 	 * @since 0.7.0
 	 */
 	public static String toString(final Object object) {
-//    	log.debug(HelperLog.methodStart(object));
 		if (null == object) {
 			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
 		}
@@ -269,10 +268,7 @@ public abstract class HelperObject {
 		final Collection<String> list = new ArrayList<String>();
 		toString(object, list);
 
-		final String result = object.getClass().getName() + list.toString();
-
-//		log.debug(HelperLog.methodExit(result));
-		return result;
+		return object.getClass().getName() + list.toString();
 	}
 
 	/**
@@ -352,12 +348,10 @@ public abstract class HelperObject {
 
 
 	/*
-		  * Private methods
-		  */
+	 * Private methods
+	 */
 
 	private static void toString(final Object object, final Collection<String> list) {
-//    	log.trace(HelperLog.methodStart(object, list));
-
 		final Field[] fields = object.getClass().getDeclaredFields();
 		AccessibleObject.setAccessible(fields, true);
 
@@ -393,14 +387,12 @@ public abstract class HelperObject {
 ////    	if (clazz.getSuperclass() != null) {    		
 //    		toString(object, clazz.getSuperclass(), list);
 //    	}
-
-//    	log.debug(HelperLog.methodExit());
 	}
 
 
 	/*
-		  * Inner classes
-		  */
+	 * Inner classes
+	 */
 
 	private static class CloneOutput extends ObjectOutputStream {
 		final Queue<Class<?>> classQueue = new LinkedList<Class<?>>();

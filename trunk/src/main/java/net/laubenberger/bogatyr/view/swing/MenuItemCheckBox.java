@@ -33,6 +33,10 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JCheckBoxMenuItem;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -46,36 +50,45 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class MenuItemCheckBox extends JCheckBoxMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
 
+	private static final Logger log = LoggerFactory.getLogger(MenuItemCheckBox.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public MenuItemCheckBox() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public MenuItemCheckBox(final Action action) {
 		super(action);
+		log.trace(HelperLog.constructor(action));
 	}
 
 	public MenuItemCheckBox(final Icon icon) {
 		super(icon);
+		log.trace(HelperLog.constructor(icon));
 	}
 
 	public MenuItemCheckBox(final String text, final boolean selected) {
 		super(text, selected);
+		log.trace(HelperLog.constructor(text, selected));
 	}
 
 	public MenuItemCheckBox(final String text, final Icon icon, final boolean selected) {
 		super(text, icon, selected);
+		log.trace(HelperLog.constructor(text, icon, selected));
 	}
 
 	public MenuItemCheckBox(final String text, final Icon icon) {
 		super(text, icon);
+		log.trace(HelperLog.constructor(text, icon));
 	}
 
 	public MenuItemCheckBox(final String text) {
 		super(text);
+		log.trace(HelperLog.constructor(text));
 	}
 
 	/*
@@ -84,22 +97,25 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 
 	public MenuItemCheckBox(final boolean isSelected) {
 		super();
+		log.trace(HelperLog.constructor(isSelected));
 
 		setSelected(isSelected);
 	}
 
 	public MenuItemCheckBox(final boolean isSelected, final Action action) {
 		this(action);
+		log.trace(HelperLog.constructor(isSelected, action));
 
 		setSelected(isSelected);
 	}
 
-	public MenuItemCheckBox(final String text, final Icon image, final int mnemonic, final String toolTip, final boolean isSelected) {
+	public MenuItemCheckBox(final String text, final Icon icon, final int mnemonic, final String toolTip, final boolean isSelected) {
 		this(text);
+		log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, isSelected));
 
 		// Add the optional icon
-		if (null != image) {
-			setIcon(image);
+		if (null != icon) {
+			setIcon(icon);
 		}
 
 		// Add the mnemonic key
@@ -114,8 +130,10 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 		setSelected(isSelected);
 	}
 
-	public MenuItemCheckBox(final String text, final Icon image, final int mnemonic, final String toolTip, final boolean isSelected, final ActionListener listener) {
-		this(text, image, mnemonic, toolTip, isSelected);
+	public MenuItemCheckBox(final String text, final Icon icon, final int mnemonic, final String toolTip, final boolean isSelected, final ActionListener listener) {
+		this(text, icon, mnemonic, toolTip, isSelected);
+		log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, isSelected, listener));
+		
 		addActionListener(listener);
 	}
 

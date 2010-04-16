@@ -27,12 +27,16 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JToggleButton;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -45,6 +49,8 @@ import javax.swing.JToggleButton;
 public class ToggleButton extends JToggleButton implements Activatable {
 	private static final long serialVersionUID = 7669429243607853809L;
 
+	private static final Logger log = LoggerFactory.getLogger(ToggleButton.class);
+	
 	private boolean isNotActive;
 
 	/*
@@ -53,34 +59,42 @@ public class ToggleButton extends JToggleButton implements Activatable {
 
 	public ToggleButton() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public ToggleButton(final Action action) {
 		super(action);
+		log.trace(HelperLog.constructor(action));
 	}
 
 	public ToggleButton(final Icon icon, final boolean selected) {
 		super(icon, selected);
+		log.trace(HelperLog.constructor(icon, selected));
 	}
 
 	public ToggleButton(final Icon icon) {
 		super(icon);
+		log.trace(HelperLog.constructor(icon));
 	}
 
 	public ToggleButton(final String text, final boolean selected) {
 		super(text, selected);
+		log.trace(HelperLog.constructor(text, selected));
 	}
 
 	public ToggleButton(final String text, final Icon icon, final boolean selected) {
 		super(text, icon, selected);
+		log.trace(HelperLog.constructor(text, icon, selected));
 	}
 
 	public ToggleButton(final String text, final Icon icon) {
 		super(text, icon);
+		log.trace(HelperLog.constructor(text, icon));
 	}
 
 	public ToggleButton(final String text) {
 		super(text);
+		log.trace(HelperLog.constructor(text));
 	}
 
 
@@ -108,11 +122,16 @@ public class ToggleButton extends JToggleButton implements Activatable {
 
 	@Override
 	public boolean isActive() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
+		log.debug(HelperLog.methodStart(isActive));
+		
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -120,5 +139,7 @@ public class ToggleButton extends JToggleButton implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 }

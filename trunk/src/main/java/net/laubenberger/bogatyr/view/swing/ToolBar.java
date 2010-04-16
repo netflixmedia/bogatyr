@@ -27,10 +27,14 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
 import javax.swing.JToolBar;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -43,6 +47,8 @@ import javax.swing.JToolBar;
 public class ToolBar extends JToolBar implements Activatable {
 	private static final long serialVersionUID = 7538391089705088133L;
 
+	private static final Logger log = LoggerFactory.getLogger(ToolBar.class);
+	
 	private boolean isNotActive;
 
 	/*
@@ -51,18 +57,22 @@ public class ToolBar extends JToolBar implements Activatable {
 
 	public ToolBar() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public ToolBar(final int orientation) {
 		super(orientation);
+		log.trace(HelperLog.constructor(orientation));
 	}
 
 	public ToolBar(final String name, final int orientation) {
 		super(name, orientation);
+		log.trace(HelperLog.constructor(name, orientation));
 	}
 
 	public ToolBar(final String name) {
 		super(name);
+		log.trace(HelperLog.constructor(name));
 	}
 
 
@@ -89,11 +99,16 @@ public class ToolBar extends JToolBar implements Activatable {
 
 	@Override
 	public boolean isActive() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
+		log.debug(HelperLog.methodStart(isActive));
+		
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -101,5 +116,7 @@ public class ToolBar extends JToolBar implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 }

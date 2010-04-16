@@ -53,7 +53,7 @@ public enum Area implements Unit<Area> {
 	ACRE(Constants.FACTOR_ACRE_TO_M2), //$JUnit$
 	MILE2(BigDecimal.ONE.divide((Constants.FACTOR_M2_TO_AREA.multiply(Constants.FACTOR_AREA_TO_HECTARE, Constants.DEFAULT_MATHCONTEXT).multiply(Constants.FACTOR_HECTARE_TO_KM2, Constants.DEFAULT_MATHCONTEXT).multiply(Constants.FACTOR_MILE2_TO_KM2, Constants.DEFAULT_MATHCONTEXT)), Constants.DEFAULT_MATHCONTEXT)); //$JUnit$
 
-	private final BigDecimal factor;
+	final BigDecimal factor;
 
 	Area(final BigDecimal factor) {
 		this.factor = factor;

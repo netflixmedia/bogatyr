@@ -27,12 +27,16 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JCheckBox;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -45,6 +49,8 @@ import javax.swing.JCheckBox;
 public class CheckBox extends JCheckBox implements Activatable {
 	private static final long serialVersionUID = -6439735629199643683L;
 
+	private static final Logger log = LoggerFactory.getLogger(CheckBox.class);
+	
 	private boolean isNotActive;
 
 	/*
@@ -53,34 +59,42 @@ public class CheckBox extends JCheckBox implements Activatable {
 
 	public CheckBox() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public CheckBox(final Action action) {
 		super(action);
+		log.trace(HelperLog.constructor(action));
 	}
 
 	public CheckBox(final Icon icon, final boolean selected) {
 		super(icon, selected);
+		log.trace(HelperLog.constructor(icon, selected));
 	}
 
 	public CheckBox(final Icon icon) {
 		super(icon);
+		log.trace(HelperLog.constructor(icon));
 	}
 
 	public CheckBox(final String text, final boolean selected) {
 		super(text, selected);
+		log.trace(HelperLog.constructor(text, selected));
 	}
 
 	public CheckBox(final String text, final Icon icon, final boolean selected) {
 		super(text, icon, selected);
+		log.trace(HelperLog.constructor(text, icon, selected));
 	}
 
 	public CheckBox(final String text, final Icon icon) {
 		super(text, icon);
+		log.trace(HelperLog.constructor(text, icon));
 	}
 
 	public CheckBox(final String text) {
 		super(text);
+		log.trace(HelperLog.constructor(text));
 	}
 
 	/*
@@ -89,23 +103,29 @@ public class CheckBox extends JCheckBox implements Activatable {
 
 	public CheckBox(final boolean isSelected) {
 		super();
+		log.trace(HelperLog.constructor(isSelected));
 
 		setSelected(isSelected);
 	}
 
 	public CheckBox(final boolean isSelected, final Action action) {
 		this(action);
+		log.trace(HelperLog.constructor(isSelected, action));
 
 		setSelected(isSelected);
 	}
 
 	public CheckBox(final String text, final boolean isSelected, final String toolTip) {
 		this(text, isSelected);
+		log.trace(HelperLog.constructor(text, isSelected, toolTip));
+		
 		setToolTipText(toolTip);
 	}
 
 	public CheckBox(final boolean isSelected, final String toolTip) {
 		this();
+		log.trace(HelperLog.constructor(isSelected, toolTip));
+		
 		setSelected(isSelected);
 		setToolTipText(toolTip);
 	}
@@ -134,11 +154,16 @@ public class CheckBox extends JCheckBox implements Activatable {
 
 	@Override
 	public boolean isActive() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
+		log.debug(HelperLog.methodStart(isActive));
+		
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -146,5 +171,7 @@ public class CheckBox extends JCheckBox implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 }

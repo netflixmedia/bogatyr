@@ -27,11 +27,15 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -44,6 +48,8 @@ import javax.swing.SpinnerModel;
 public class Spinner extends JSpinner implements Activatable {
 	private static final long serialVersionUID = 1637909823592308393L;
 
+	private static final Logger log = LoggerFactory.getLogger(Spinner.class);
+	
 	private boolean isNotActive;
 
 	/*
@@ -52,10 +58,12 @@ public class Spinner extends JSpinner implements Activatable {
 
 	public Spinner() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public Spinner(final SpinnerModel model) {
 		super(model);
+		log.trace(HelperLog.constructor(model));
 	}
 
 	/*
@@ -64,6 +72,8 @@ public class Spinner extends JSpinner implements Activatable {
 
 	public Spinner(final SpinnerModel model, final String toolTip) {
 		this(model);
+		log.trace(HelperLog.constructor(model, toolTip));
+		
 		setToolTipText(toolTip);
 	}
 
@@ -92,11 +102,16 @@ public class Spinner extends JSpinner implements Activatable {
 
 	@Override
 	public boolean isActive() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
+		log.debug(HelperLog.methodStart(isActive));
+		
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -104,5 +119,7 @@ public class Spinner extends JSpinner implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 }

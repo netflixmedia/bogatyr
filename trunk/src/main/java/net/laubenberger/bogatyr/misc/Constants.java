@@ -57,7 +57,7 @@ public abstract class Constants {
 	private static final Logger log = LoggerFactory.getLogger(Constants.class);
 
 	//Bogatyr specific
-	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.91"), 257, HelperTime.getDate(2010, 4, 16, 11, 38, 0), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.91"), 258, HelperTime.getDate(2010, 4, 16, 20, 59, 0), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
@@ -180,7 +180,6 @@ public abstract class Constants {
 			BOGATYR.setOwner(new OwnerImpl("Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", "Switzerland", "info@laubenberger.net", new URL("http://www.laubenberger.net"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 			BOGATYR.setPublisher(new PublisherImpl("Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", "Switzerland", "info@laubenberger.net", new URL("http://www.laubenberger.net"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		} catch (MalformedURLException ex) {
-			System.out.println(ex);
 			// should never happen!
 			log.error("URL invalid", ex); //$NON-NLS-1$
 		}

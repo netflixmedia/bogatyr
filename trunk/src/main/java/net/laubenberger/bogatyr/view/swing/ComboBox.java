@@ -27,6 +27,7 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.misc.Activatable;
@@ -37,6 +38,10 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.PlainDocument;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -54,28 +59,36 @@ import java.util.Vector;
 public class ComboBox extends JComboBox implements Activatable {
 	private static final long serialVersionUID = -3870596701286078140L;
 
+	private static final Logger log = LoggerFactory.getLogger(ComboBox.class);
+	
 	private boolean isNotActive;
 
+	{
+		createLayout();
+	}
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public ComboBox() {
 		super();
-
-		createLayout();
+		log.trace(HelperLog.constructor());
 	}
 
 	public ComboBox(final ComboBoxModel model) {
 		super(model);
+		log.trace(HelperLog.constructor(model));
 	}
 
 	public ComboBox(final Object[] data) {
 		super(data);
+		log.trace(HelperLog.constructor(data));
 	}
 
 	public ComboBox(final Vector<?> data) {
 		super(data);
+		log.trace(HelperLog.constructor(data));
 	}
 
 	/*
@@ -84,39 +97,42 @@ public class ComboBox extends JComboBox implements Activatable {
 
 	public ComboBox(final ComboBoxModel model, final String toolTip) {
 		this(model);
-
+		log.trace(HelperLog.constructor(model, toolTip));
+		
 		setToolTipText(toolTip);
-		createLayout();
 	}
 
 	public ComboBox(final Object[] data, final String toolTip) {
 		this(data);
-
+		log.trace(HelperLog.constructor(data, toolTip));
+		
 		if (null != data) {
-//			setSelectedIndex(0);
 			setSelectedIndex(-1);
 		}
 
 		setToolTipText(toolTip);
-		createLayout();
 	}
 
 
 	/*
-		 * Private methods
-		 */
+	 * Private methods
+	 */
 
 	private void createLayout() {
+		log.trace(HelperLog.methodStart());
+		
 		setEditable(true);
 
 		// get the combo boxes editor component and change the editor's document
 		((JTextComponent) getEditor().getEditorComponent()).setDocument(new ComboBoxPopup(this));
+		
+		log.trace(HelperLog.methodExit());
 	}
 
 
 	/*
-		 * Overridden methods
-		 */
+	 * Overridden methods
+	 */
 
 	@Override
 	public String toString() {
@@ -132,16 +148,21 @@ public class ComboBox extends JComboBox implements Activatable {
 
 
 	/*
-		 * Implemented methods
-		 */
+	 * Implemented methods
+	 */
 
 	@Override
 	public boolean isActive() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
+		log.debug(HelperLog.methodStart(isActive));
+		
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -149,19 +170,14 @@ public class ComboBox extends JComboBox implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
+		
+		log.debug(HelperLog.methodExit());
 	}
-
-//	@Override
-//	public void setToolTipText(final String text) {
-//		if (text != null) {
-//            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
-//        }
-//	}	
 
 
 	/*
-		 * Inner classes
-		 */
+	 * Inner classes
+	 */
 
 	static class ComboBoxPopup extends PlainDocument {
 		private static final long serialVersionUID = -5374025097785761556L;
@@ -244,8 +260,8 @@ public class ComboBox extends JComboBox implements Activatable {
 
 
 		/*
-				 * Overridden methods
-				 */
+		 * Overridden methods
+		 */
 
 		@Override
 		public void remove(final int offs, final int len) throws BadLocationException {

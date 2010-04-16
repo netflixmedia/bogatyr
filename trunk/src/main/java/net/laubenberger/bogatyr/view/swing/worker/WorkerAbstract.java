@@ -32,9 +32,13 @@ import java.util.HashSet;
 
 import javax.swing.SwingWorker;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.Event;
 import net.laubenberger.bogatyr.misc.HolderListener;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class represents a skeleton for the worker.
@@ -46,10 +50,13 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker, HolderListener<ListenerWorker> {
 	private Collection<ListenerWorker> listListener = new HashSet<ListenerWorker>();
 
+	private static final Logger log = LoggerFactory.getLogger(WorkerAbstract.class);
+	
 	private final Event<Worker> event = new Event<Worker>(this);
 
 	protected WorkerAbstract() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 
@@ -58,15 +65,23 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 	 */
 
 	protected void fireWorkerStart() {
+		log.trace(HelperLog.methodStart());
+		
 		for (final ListenerWorker listener : listListener) {
 			listener.start(event);
 		}
+		
+		log.trace(HelperLog.methodExit());
 	}
 
 	protected void fireWorkerDone() {
+		log.trace(HelperLog.methodStart());
+		
 		for (final ListenerWorker listener : listListener) {
 			listener.done(event);
 		}
+		
+		log.trace(HelperLog.methodExit());
 	}
 
 
@@ -76,30 +91,43 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 
 	@Override
 	public synchronized void addListener(final ListenerWorker listener) {
+		log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listListener.add(listener);
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public int countListeners() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(listListener.size()));
 		return listListener.size();
 	}
 
 	@Override
 	public synchronized void deleteListener(final ListenerWorker listener) {
+		log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listListener.remove(listener);
+		
+		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void deleteListeners() {
+		log.debug(HelperLog.methodStart());
+		
 		listListener = new HashSet<ListenerWorker>();
+
+		log.debug(HelperLog.methodExit());
 	}
 
 //    protected WorkerAbstract(final HandlerWorker handlerWorker) {

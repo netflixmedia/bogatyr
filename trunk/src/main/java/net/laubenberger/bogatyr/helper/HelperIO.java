@@ -47,10 +47,7 @@ import java.io.StringReader;
 import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import javax.swing.filechooser.FileSystemView;
 
@@ -1167,7 +1164,7 @@ public abstract class HelperIO {
 	 * @see FileFilter
 	 * @since 0.9.0
 	 */
-	public static List<File> getFiles(final File path, final FileFilter filter) { //$JUnit$
+	public static Collection<File> getFiles(final File path, final FileFilter filter) { //$JUnit$
 		log.debug(HelperLog.methodStart(path, filter));
 
 		final List<File> result = getFiles(path, filter, -1);

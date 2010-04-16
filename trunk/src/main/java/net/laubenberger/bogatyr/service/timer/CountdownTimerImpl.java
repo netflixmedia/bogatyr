@@ -46,6 +46,8 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer {
 	private static final Logger log = LoggerFactory.getLogger(CountdownTimerImpl.class);
 
+	private static final long DEFAULT_DELAY = 1000L;
+
 	long runtime;
 
 
@@ -66,7 +68,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 			throw new RuntimeExceptionMustBeGreater("runtime", runtime, 0); //$NON-NLS-1$
 		}
 
-		start(0L, runtime, 1000L);
+		start(0L, runtime, DEFAULT_DELAY);
 
 		log.debug(HelperLog.methodExit());
 	}
@@ -74,13 +76,13 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 	@Override
 	public synchronized void start(final long delay, final long runtime, final long interval) {
 		log.debug(HelperLog.methodStart(delay, runtime, interval));
-		if (0 > delay) {
+		if (0L > delay) {
 			throw new RuntimeExceptionMustBeGreater("delay", delay, 0); //$NON-NLS-1$
 		}
-		if (0 > runtime) {
+		if (0L > runtime) {
 			throw new RuntimeExceptionMustBeGreater("runtime", runtime, 0); //$NON-NLS-1$
 		}
-		if (0 > interval) {
+		if (0L > interval) {
 			throw new RuntimeExceptionMustBeGreater("interval", interval, 0); //$NON-NLS-1$
 		}
 
@@ -117,7 +119,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 	@Override
 	public synchronized void setTime(final long runtime) {
 		log.debug(HelperLog.methodStart(runtime));
-		if (0 > runtime) {
+		if (0L > runtime) {
 			throw new RuntimeExceptionMustBeGreater("runtime", runtime, 0); //$NON-NLS-1$
 		}
 

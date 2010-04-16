@@ -51,7 +51,7 @@ public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCodeAlgo, Str
 
 	@Override
 	public XmlMap marshal(final Map<HashCodeAlgo, String> map) throws Exception {
-		if (map != null) {
+		if (null != map) {
 			final XmlMap xmlMap = new XmlMap();
 		
 			for (final Map.Entry<HashCodeAlgo, String> entry : map.entrySet()) {
@@ -64,7 +64,7 @@ public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCodeAlgo, Str
 
 	@Override
 	public Map<HashCodeAlgo, String> unmarshal(final XmlMap xmlMap) throws Exception {
-		if (xmlMap != null) {
+		if (null != xmlMap) {
 			final Map<HashCodeAlgo, String> map = new HashMap<HashCodeAlgo, String>(xmlMap.getEntries().size());
 			for (final XmlEntry entry : xmlMap.getEntries()) {
 				map.put(HashCodeAlgo.valueOf(entry.getKey()), entry.getValue());

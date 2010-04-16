@@ -32,6 +32,10 @@ import java.awt.Component;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -45,38 +49,47 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class PaneOption extends JOptionPane {
 	private static final long serialVersionUID = -4947729751470298861L;
 
+	private static final Logger log = LoggerFactory.getLogger(PaneOption.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public PaneOption() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public PaneOption(final Object message, final int messageType, final int optionType,
 							final Icon icon, final Object[] options, final Object initialValue) {
 		super(message, messageType, optionType, icon, options, initialValue);
+		log.trace(HelperLog.constructor(message, messageType, optionType, icon, options, initialValue));
 	}
 
 	public PaneOption(final Object message, final int messageType, final int optionType,
 							final Icon icon, final Object[] options) {
 		super(message, messageType, optionType, icon, options);
+		log.trace(HelperLog.constructor(message, messageType, optionType, icon, options));
 	}
 
 	public PaneOption(final Object message, final int messageType, final int optionType, final Icon icon) {
 		super(message, messageType, optionType, icon);
+		log.trace(HelperLog.constructor(message, messageType, optionType, icon));
 	}
 
 	public PaneOption(final Object message, final int messageType, final int optionType) {
 		super(message, messageType, optionType);
+		log.trace(HelperLog.constructor(message, messageType, optionType));
 	}
 
 	public PaneOption(final Object message, final int messageType) {
 		super(message, messageType);
+		log.trace(HelperLog.constructor(message, messageType));
 	}
 
 	public PaneOption(final Object message) {
 		super(message);
+		log.trace(HelperLog.constructor(message));
 	}
 
 
@@ -90,11 +103,11 @@ public class PaneOption extends JOptionPane {
 	}
 
 	@Override
-	public void setEnabled(final boolean enabled) {
-		super.setEnabled(enabled);
+	public void setEnabled(final boolean isEnabled) {
+		super.setEnabled(isEnabled);
 
 		for (final Component component : getComponents()) {
-			component.setEnabled(enabled);
+			component.setEnabled(isEnabled);
 		}
 	}
 }

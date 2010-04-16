@@ -35,8 +35,12 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -49,6 +53,8 @@ import net.laubenberger.bogatyr.misc.Activatable;
 public class Panel extends JPanel implements Activatable {
 	private static final long serialVersionUID = 3679443739459084931L;
 
+	private static final Logger log = LoggerFactory.getLogger(Panel.class);
+	
 	private boolean isNotActive;
 
 	private String title;
@@ -59,18 +65,22 @@ public class Panel extends JPanel implements Activatable {
 
 	public Panel() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public Panel(final boolean isDoubleBuffered) {
 		super(isDoubleBuffered);
+		log.trace(HelperLog.constructor(isDoubleBuffered));
 	}
 
 	public Panel(final LayoutManager layout, final boolean isDoubleBuffered) {
 		super(layout, isDoubleBuffered);
+		log.trace(HelperLog.constructor(layout, isDoubleBuffered));
 	}
 
 	public Panel(final LayoutManager layout) {
 		super(layout);
+		log.trace(HelperLog.constructor(layout));
 	}
 
 	/*
@@ -79,17 +89,23 @@ public class Panel extends JPanel implements Activatable {
 
 	public Panel(final String title) {
 		this();
+		log.trace(HelperLog.constructor(title));
+		
 		this.title = title;
 		setTitle(title);
 	}
 
 	public Panel(final Color color) {
 		this();
+		log.trace(HelperLog.constructor(color));
+		
 		setBackground(color);
 	}
 
 	public Panel(final Color color, final LayoutManager layout) {
 		this(layout);
+		log.trace(HelperLog.constructor(color, layout));
+		
 		setBackground(color);
 	}
 
@@ -145,10 +161,6 @@ public class Panel extends JPanel implements Activatable {
 				((JComponent) component).setToolTipText(text);
 			}
 		}
-
-//		if (text != null) {
-//            super.setToolTipText("<html>" + text + "</html>"); //$NON-NLS-1$ //$NON-NLS-2$
-//        }
 	}
 
 	@Override
@@ -163,11 +175,16 @@ public class Panel extends JPanel implements Activatable {
 
 	@Override
 	public boolean isActive() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
+		log.debug(HelperLog.methodStart(isActive));
+		
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -175,5 +192,7 @@ public class Panel extends JPanel implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
+		
+		log.debug(HelperLog.methodExit());
 	}
 }

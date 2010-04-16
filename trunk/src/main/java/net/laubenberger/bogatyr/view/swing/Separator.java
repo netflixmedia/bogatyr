@@ -31,6 +31,10 @@ import java.awt.Color;
 
 import javax.swing.JSeparator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -44,16 +48,20 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class Separator extends JSeparator {
 	private static final long serialVersionUID = 544751396135811303L;
 
+	private static final Logger log = LoggerFactory.getLogger(Separator.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public Separator() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public Separator(final int orientation) {
 		super(orientation);
+		log.trace(HelperLog.constructor(orientation));
 	}
 
 	/*
@@ -62,6 +70,7 @@ public class Separator extends JSeparator {
 
 	public Separator(final Color color) {
 		this();
+		log.trace(HelperLog.constructor(color));
 
 		setAlignmentY(TOP_ALIGNMENT);
 		setAlignmentX(LEFT_ALIGNMENT);
@@ -71,6 +80,7 @@ public class Separator extends JSeparator {
 
 	public Separator(final int orientation, final Color color) {
 		this(orientation);
+		log.trace(HelperLog.constructor(orientation, color));
 
 		setAlignmentY(TOP_ALIGNMENT);
 		setAlignmentX(LEFT_ALIGNMENT);

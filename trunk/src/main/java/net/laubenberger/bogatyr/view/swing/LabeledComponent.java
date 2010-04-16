@@ -37,8 +37,10 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
-import net.laubenberger.bogatyr.view.swing.Label;
-import net.laubenberger.bogatyr.view.swing.Panel;
+import net.laubenberger.bogatyr.helper.HelperLog;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -51,35 +53,44 @@ import net.laubenberger.bogatyr.view.swing.Panel;
 public class LabeledComponent<T extends JComponent> extends Panel {
 	private static final long serialVersionUID = 2215341067138215010L;
 
+	private static final Logger log = LoggerFactory.getLogger(LabeledComponent.class);
+	
 	private final JLabel label = new Label();
 	private final T component;
 
+	{
+		createLayout();
+	}
 
 	public LabeledComponent(final String labelText, final String toolTip, final T component) {
 		super();
-
+		log.trace(HelperLog.constructor(labelText, toolTip, component));
+		
 		this.component = component;
 		label.setText(labelText);
-
-		createLayout();
 		setToolTipText(toolTip);
 	}
 
 	public LabeledComponent(final String title, final String labelText, final String toolTip, final T component) {
 		super(title);
-
+		log.trace(HelperLog.constructor(title, labelText, toolTip, component));
+		
 		this.component = component;
 		label.setText(labelText);
-
-		createLayout();
 		setToolTipText(toolTip);
 	}
 
 	public JLabel getLabel() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(label));
 		return label;
 	}
 
 	public T getComponent() {
+		log.debug(HelperLog.methodStart());
+		
+		log.debug(HelperLog.methodExit(component));
 		return component;
 	}
 
@@ -89,6 +100,8 @@ public class LabeledComponent<T extends JComponent> extends Panel {
 	 */
 
 	private void createLayout() {
+		log.trace(HelperLog.methodStart());
+		
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(0, 0, 0, 5);
@@ -107,8 +120,9 @@ public class LabeledComponent<T extends JComponent> extends Panel {
 			gbc.gridx = 1;
 			gbc.insets = new Insets(0, 0, 0, 0);
 			add(component, gbc);
-
 		}
+		
+		log.trace(HelperLog.methodExit());
 	}
 
 

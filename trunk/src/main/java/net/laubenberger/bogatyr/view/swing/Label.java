@@ -30,6 +30,10 @@ package net.laubenberger.bogatyr.view.swing;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -43,32 +47,40 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class Label extends JLabel {
 	private static final long serialVersionUID = 2440681846691377894L;
 
+	private static final Logger log = LoggerFactory.getLogger(Label.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public Label() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public Label(final Icon icon, final int horizontalAlignment) {
 		super(icon, horizontalAlignment);
+		log.trace(HelperLog.constructor(icon, horizontalAlignment));
 	}
 
 	public Label(final String text, final Icon icon, final int horizontalAlignment) {
 		super(text, icon, horizontalAlignment);
+		log.trace(HelperLog.constructor(text, icon, horizontalAlignment));
 	}
 
 	public Label(final Icon icon) {
 		super(icon);
+		log.trace(HelperLog.constructor(icon));
 	}
 
 	public Label(final String text) {
 		super(text);
+		log.trace(HelperLog.constructor(text));
 	}
 
 	public Label(final String text, final int horizontalAlignment) {
 		super(text, horizontalAlignment);
+		log.trace(HelperLog.constructor(text, horizontalAlignment));
 	}
 
 

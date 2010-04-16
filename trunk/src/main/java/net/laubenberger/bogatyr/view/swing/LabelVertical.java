@@ -28,6 +28,12 @@
 package net.laubenberger.bogatyr.view.swing;
 
 import javax.swing.Icon;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -48,6 +54,8 @@ import java.awt.image.BufferedImage;
 public class LabelVertical extends Panel implements Icon {
 	private static final long serialVersionUID = -6664528555390753370L;
 
+	private static final Logger log = LoggerFactory.getLogger(LabelVertical.class);
+	
 	private static final double NINETY_DEGREES = 1.5707963267948966;
 
 	private Label label;
@@ -55,31 +63,42 @@ public class LabelVertical extends Panel implements Icon {
 
 	public LabelVertical() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public LabelVertical(final Icon icon, final int horizontalAlignment) {
 		this();
+		log.trace(HelperLog.constructor(icon, horizontalAlignment));
+		
 		label = new Label(icon, horizontalAlignment);
 	}
 
 	public LabelVertical(final String text, final Icon icon, final int horizontalAlignment) {
 		this();
+		log.trace(HelperLog.constructor(text, icon, horizontalAlignment));
+		
 		label = new Label(text, icon, horizontalAlignment);
 
 	}
 
 	public LabelVertical(final Icon icon) {
 		this();
+		log.trace(HelperLog.constructor(icon));
+		
 		label = new Label(icon);
 	}
 
 	public LabelVertical(final String text) {
 		this();
+		log.trace(HelperLog.constructor(text));
+		
 		label = new Label(text);
 	}
 
 	public LabelVertical(final String text, final int horizontalAlignment) {
 		this();
+		log.trace(HelperLog.constructor(text, horizontalAlignment));
+		
 		label = new Label(text, horizontalAlignment);
 	}
 
@@ -119,23 +138,25 @@ public class LabelVertical extends Panel implements Icon {
 	 */
 
 	private void paintVertical(final Object g, final int x, final int y, final int width, final int height) {
-		if (0 >= height || 0 >= width) {
-			return;
-		}
+		log.trace(HelperLog.methodStart(g, x, y, width, height));
+		
+		if (!(0 >= height || 0 >= width)) {
+	//		this.label.updateUI();
+	//		this.label.revalidate();
+	
+			final BufferedImage buffer = new BufferedImage(height, width, BufferedImage.TYPE_INT_ARGB_PRE); // switch of width and height
+			final Graphics2D g2 = buffer.createGraphics();
+			label.setSize(new Dimension(height, width)); // switch of width and height
+			label.paint(g2);
+	
+			final AffineTransform af = AffineTransform.getTranslateInstance((double) x, (double) (y + height));
+			final AffineTransform af2 = AffineTransform.getRotateInstance(-NINETY_DEGREES);
+			af.concatenate(af2);
+	
+			((Graphics2D) g).drawImage(buffer, af, this);
+		}		
 
-//		this.label.updateUI();
-//		this.label.revalidate();
-
-		final BufferedImage buffer = new BufferedImage(height, width, BufferedImage.TYPE_INT_ARGB_PRE); // switch of width and height
-		final Graphics2D g2 = buffer.createGraphics();
-		label.setSize(new Dimension(height, width)); // switch of width and height
-		label.paint(g2);
-
-		final AffineTransform af = AffineTransform.getTranslateInstance((double) x, (double) (y + height));
-		final AffineTransform af2 = AffineTransform.getRotateInstance(-NINETY_DEGREES);
-		af.concatenate(af2);
-
-		((Graphics2D) g).drawImage(buffer, af, this);
+		log.trace(HelperLog.methodExit());
 	}
 
 

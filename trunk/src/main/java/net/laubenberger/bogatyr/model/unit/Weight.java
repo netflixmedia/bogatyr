@@ -47,7 +47,7 @@ public enum Weight implements Unit<Weight> {
 	POUND(Constants.FACTOR_POUND_TO_KILOGRAM), //$JUnit$
 	TON(BigDecimal.ONE.divide(Constants.FACTOR_TON_TO_KILOGRAM, Constants.DEFAULT_MATHCONTEXT)); //$JUnit$
 
-	private final BigDecimal factor;
+	final BigDecimal factor;
 
 	Weight(final BigDecimal factor) {
 		this.factor = factor;

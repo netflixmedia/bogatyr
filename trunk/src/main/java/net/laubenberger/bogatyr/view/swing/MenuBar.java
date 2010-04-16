@@ -29,6 +29,10 @@ package net.laubenberger.bogatyr.view.swing;
 
 import javax.swing.JMenuBar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -42,12 +46,15 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class MenuBar extends JMenuBar {
 	private static final long serialVersionUID = -5107664209576098148L;
 
+	private static final Logger log = LoggerFactory.getLogger(MenuBar.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public MenuBar() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 

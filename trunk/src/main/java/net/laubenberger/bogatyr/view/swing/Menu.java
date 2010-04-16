@@ -30,6 +30,10 @@ package net.laubenberger.bogatyr.view.swing;
 import javax.swing.Action;
 import javax.swing.JMenu;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -43,26 +47,31 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class Menu extends JMenu {
 	private static final long serialVersionUID = -908869267540163157L;
 
+	private static final Logger log = LoggerFactory.getLogger(Menu.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public Menu() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public Menu(final String text, final boolean b) {
 		super(text, b);
+		log.trace(HelperLog.constructor(text, b));
 	}
 
 	public Menu(final String text) {
 		super(text);
+		log.trace(HelperLog.constructor(text));
 	}
 
 	public Menu(final Action action) {
 		super(action);
+		log.trace(HelperLog.constructor(action));
 	}
-
 
 	/*
 	 * Own constructors
@@ -70,7 +79,8 @@ public class Menu extends JMenu {
 
 	public Menu(final String text, final int mnemonic) {
 		this(text);
-
+		log.trace(HelperLog.constructor(text, mnemonic));
+		
 		// Add the mnemonic key
 		if (0 < mnemonic) {
 			setMnemonic(mnemonic);

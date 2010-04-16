@@ -31,6 +31,10 @@ import java.awt.Component;
 
 import javax.swing.JSplitPane;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
 
@@ -44,30 +48,37 @@ import net.laubenberger.bogatyr.helper.HelperObject;
 public class PaneSplit extends JSplitPane {
 	private static final long serialVersionUID = 2243720263917281740L;
 
+	private static final Logger log = LoggerFactory.getLogger(PaneSplit.class);
+	
 	/*
 	 * Superclass constructors
 	 */
 
 	public PaneSplit() {
 		super();
+		log.trace(HelperLog.constructor());
 	}
 
 	public PaneSplit(final int newOrientation, final boolean newContinuousLayout,
 						  final Component newLeftComponent, final Component newRightComponent) {
 		super(newOrientation, newContinuousLayout, newLeftComponent, newRightComponent);
+		log.trace(HelperLog.constructor(newOrientation, newContinuousLayout, newLeftComponent, newRightComponent));
 	}
 
 	public PaneSplit(final int newOrientation, final boolean newContinuousLayout) {
 		super(newOrientation, newContinuousLayout);
+		log.trace(HelperLog.constructor(newOrientation, newContinuousLayout));
 	}
 
 	public PaneSplit(final int newOrientation, final Component newLeftComponent,
 						  final Component newRightComponent) {
 		super(newOrientation, newLeftComponent, newRightComponent);
+		log.trace(HelperLog.constructor(newOrientation, newLeftComponent, newRightComponent));
 	}
 
 	public PaneSplit(final int newOrientation) {
 		super(newOrientation);
+		log.trace(HelperLog.constructor(newOrientation));
 	}
 
 
@@ -81,11 +92,11 @@ public class PaneSplit extends JSplitPane {
 	}
 
 	@Override
-	public void setEnabled(final boolean enabled) {
-		super.setEnabled(enabled);
+	public void setEnabled(final boolean isEnabled) {
+		super.setEnabled(isEnabled);
 
 		for (final Component component : getComponents()) {
-			component.setEnabled(enabled);
+			component.setEnabled(isEnabled);
 		}
 	}
 }
