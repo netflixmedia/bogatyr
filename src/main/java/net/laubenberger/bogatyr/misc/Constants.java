@@ -13,7 +13,7 @@
  *
  * This distribution is available at:
  * <http://code.google.com/p/bogatyr/>
- * <http://www.laubenberger.net/bogatyr/>
+ * <http://dev.laubenberger.net/bogatyr/>
  *
  * Contact information:
  * Stefan Laubenberger
@@ -22,8 +22,9 @@
  *
  * <http://www.laubenberger.net>
  *
- * <bogatyr@laubenberger.net>
+ * <laubenberger@gmail.com>
  */
+
 package net.laubenberger.bogatyr.misc;
 
 import java.math.BigDecimal;
@@ -56,7 +57,7 @@ public abstract class Constants {
 	private static final Logger log = LoggerFactory.getLogger(Constants.class);
 
 	//Bogatyr specific
-	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.91"), 256, HelperTime.getDate(2010, 4, 16, 2, 24, 0), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.91"), 257, HelperTime.getDate(2010, 4, 16, 11, 38, 0), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
