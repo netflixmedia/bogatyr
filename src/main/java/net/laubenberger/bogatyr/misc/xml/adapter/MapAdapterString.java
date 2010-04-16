@@ -49,19 +49,26 @@ public class MapAdapterString extends XmlAdapter<XmlMap, Map<String, String>> {
 
 	@Override
 	public XmlMap marshal(final Map<String, String> map) throws Exception {
-		final XmlMap xmlMap = new XmlMap();
-		for (final Map.Entry<String, String> entry : map.entrySet()) {
-			xmlMap.getEntries().add(new XmlEntry(entry.getValue(), entry.getValue()));
+		if (map != null) {
+			final XmlMap xmlMap = new XmlMap();
+			
+				for (final Map.Entry<String, String> entry : map.entrySet()) {
+					xmlMap.getEntries().add(new XmlEntry(entry.getValue(), entry.getValue()));
+				}
+			return xmlMap;
 		}
-		return xmlMap;
+		return null;
 	}
 
 	@Override
 	public Map<String, String> unmarshal(final XmlMap xmlMap) throws Exception {
-		final Map<String, String> map = new HashMap<String, String>(xmlMap.getEntries().size());
-		for (final XmlEntry entry : xmlMap.getEntries()) {
-			map.put(String.valueOf(entry.getKey()), entry.getValue());
+		if (xmlMap != null) {
+			final Map<String, String> map = new HashMap<String, String>(xmlMap.getEntries().size());
+			for (final XmlEntry entry : xmlMap.getEntries()) {
+				map.put(String.valueOf(entry.getKey()), entry.getValue());
+			}
+			return map;
 		}
-		return map;
+		return null;
 	}
 }

@@ -50,19 +50,26 @@ public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCodeAlgo, Str
 
 	@Override
 	public XmlMap marshal(final Map<HashCodeAlgo, String> map) throws Exception {
-		final XmlMap xmlMap = new XmlMap();
-		for (final Map.Entry<HashCodeAlgo, String> entry : map.entrySet()) {
-			xmlMap.getEntries().add(new XmlEntry(entry.getKey().name(), entry.getValue()));
+		if (map != null) {
+			final XmlMap xmlMap = new XmlMap();
+		
+			for (final Map.Entry<HashCodeAlgo, String> entry : map.entrySet()) {
+				xmlMap.getEntries().add(new XmlEntry(entry.getKey().name(), entry.getValue()));
+			}
+			return xmlMap;
 		}
-		return xmlMap;
+		return null;
 	}
 
 	@Override
 	public Map<HashCodeAlgo, String> unmarshal(final XmlMap xmlMap) throws Exception {
-		final Map<HashCodeAlgo, String> map = new HashMap<HashCodeAlgo, String>(xmlMap.getEntries().size());
-		for (final XmlEntry entry : xmlMap.getEntries()) {
-			map.put(HashCodeAlgo.valueOf(entry.getKey()), entry.getValue());
+		if (xmlMap != null) {
+			final Map<HashCodeAlgo, String> map = new HashMap<HashCodeAlgo, String>(xmlMap.getEntries().size());
+			for (final XmlEntry entry : xmlMap.getEntries()) {
+				map.put(HashCodeAlgo.valueOf(entry.getKey()), entry.getValue());
+			}
+			return map;
 		}
-		return map;
+		return null;
 	}
 }

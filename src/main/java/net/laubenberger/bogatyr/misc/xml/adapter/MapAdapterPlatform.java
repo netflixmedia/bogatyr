@@ -50,19 +50,26 @@ public class MapAdapterPlatform extends XmlAdapter<XmlMap, Map<Platform, String>
 
 	@Override
 	public XmlMap marshal(final Map<Platform, String> map) throws Exception {
-		final XmlMap xmlMap = new XmlMap();
-		for (final Map.Entry<Platform, String> entry : map.entrySet()) {
-			xmlMap.getEntries().add(new XmlEntry(entry.getKey().name(), entry.getValue()));
+		if (map != null) {
+			final XmlMap xmlMap = new XmlMap();
+		
+			for (final Map.Entry<Platform, String> entry : map.entrySet()) {
+				xmlMap.getEntries().add(new XmlEntry(entry.getKey().name(), entry.getValue()));
+			}
+			return xmlMap;
 		}
-		return xmlMap;
+		return null;
 	}
 
 	@Override
 	public Map<Platform, String> unmarshal(final XmlMap xmlMap) throws Exception {
-		final Map<Platform, String> map = new HashMap<Platform, String>(xmlMap.getEntries().size());
-		for (final XmlEntry entry : xmlMap.getEntries()) {
-			map.put(Platform.valueOf(entry.getKey()), entry.getValue());
+		if (xmlMap != null) {
+			final Map<Platform, String> map = new HashMap<Platform, String>(xmlMap.getEntries().size());
+			for (final XmlEntry entry : xmlMap.getEntries()) {
+				map.put(Platform.valueOf(entry.getKey()), entry.getValue());
+			}
+			return map;
 		}
-		return map;
+		return null;
 	}
 }

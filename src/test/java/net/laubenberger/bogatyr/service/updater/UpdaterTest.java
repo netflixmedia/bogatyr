@@ -27,21 +27,24 @@
 
 package net.laubenberger.bogatyr.service.updater;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.laubenberger.bogatyr.helper.HelperCrypto;
+import net.laubenberger.bogatyr.helper.HelperIO;
+import net.laubenberger.bogatyr.helper.HelperXml;
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
-import org.junit.Before;
-import org.junit.Test;
-
-import net.laubenberger.bogatyr.helper.HelperCrypto;
-import net.laubenberger.bogatyr.helper.HelperXml;
 import net.laubenberger.bogatyr.model.misc.Platform;
 import net.laubenberger.bogatyr.model.updater.ModelUpdater;
 import net.laubenberger.bogatyr.model.updater.ModelUpdaterImpl;
+
+import org.junit.Before;
+import org.junit.Test;
 
 
 /**
@@ -76,29 +79,29 @@ public class UpdaterTest {
 		doc.setCreated(new Date());
 		doc.setUUID(HelperCrypto.getUUID());
 
-		System.out.println(doc);
+//		System.out.println(doc);
 
 		try {
-			HelperXml.serialize(new File("/Users/Shared/Transfer/test.xml"), doc); //$NON-NLS-1$
-			//		HelperXml.serialize(docs, new File("/Users/Shared/Transfer/test.xml"));
-			final ModelUpdater doc2 = HelperXml.deserialize(new File("/Users/Shared/Transfer/test.xml"), ModelUpdaterImpl.class); //$NON-NLS-1$
+			final File file = HelperIO.getTemporaryFile();
+			
+			HelperXml.serialize(file, doc);
 
-			System.out.println(doc2.getHashs());
-
-			System.out.println(doc.equals(doc2));
+			final ModelUpdater doc2 = HelperXml.deserialize(file, ModelUpdaterImpl.class); 
+			
+			assertEquals(doc, doc2);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
-	public static void main(final String[] args) {
-		try {
-			new UpdaterTest().setUp();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public static void main(final String[] args) {
+//		try {
+//			new UpdaterTest().setUp();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 	@Test
 	public void testGetDocuments() {
