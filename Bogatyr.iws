@@ -21,94 +21,13 @@
   </component>
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="6099473d-4163-40d6-a2ae-9afd78c1b030" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/java/helloworld/HelloWorld.java" afterPath="$PROJECT_DIR$/src/sample/java/helloworld/HelloWorld.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Slider.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Slider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ToggleButton.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ToggleButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Panel.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Panel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Spinner.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Spinner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ProgressBar.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ProgressBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/factory/FormatFactory.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/factory/FormatFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Separator.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Separator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterPlatform.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterPlatform.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/TextField.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/TextField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuItem.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/SplashScreen.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/SplashScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/worker/WorkerAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/worker/WorkerAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Weight.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Weight.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/FormattedTextField.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/FormattedTextField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/launcher/LauncherProcess.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/launcher/LauncherProcess.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneText.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneText.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chart/Chart.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chart/Chart.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/LabeledComponent.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/LabeledComponent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/List.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/List.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/PasswordField.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/PasswordField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/PopupMenu.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/PopupMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperObject.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/launcher/LauncherMail.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/launcher/LauncherMail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ActionAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ActionAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Dialog.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Dialog.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/util/configuration/log4j.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Button.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Button.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterHashCode.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterHashCode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chart/ChartEntry.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chart/ChartEntry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperGraphic.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperGraphic.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneEditor.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneEditor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/java/CheckExample.java" afterPath="$PROJECT_DIR$/src/util/java/CheckExample.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneOption.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneOption.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/service/timer/CountdownTimerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/service/timer/CountdownTimerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Table.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Table.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuItemRadioButton.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuItemRadioButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneTab.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuItemCheckBox.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuItemCheckBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperCrypto.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperCrypto.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperImage.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/AllBogatyrTests.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/AllBogatyrTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperCollection.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperCollection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/DocumentImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/DocumentImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperTime.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperTime.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Time.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Time.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperIO.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperIO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Length.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Length.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterString.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterString.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Frame.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Frame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/LabelVertical.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/LabelVertical.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneScroll.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneScroll.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Menu.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Menu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperMath.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperMath.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/RadioButton.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/RadioButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneLayer.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ToolBar.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ToolBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Group.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Group.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/service/timer/TimerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/service/timer/TimerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/java/CheckJUnit.java" afterPath="$PROJECT_DIR$/src/util/java/CheckJUnit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ComboBox.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ComboBox.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/java/filemanager/FileManager.java" afterPath="$PROJECT_DIR$/src/sample/java/filemanager/FileManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/TextArea.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/TextArea.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chooser/ChooserFile.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chooser/ChooserFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneSplit.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneSplit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneDesktop.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneDesktop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Label.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Label.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/service/crypto/CryptoSymmetricImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/service/crypto/CryptoSymmetricImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/CheckBox.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/CheckBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.ipr" afterPath="$PROJECT_DIR$/Bogatyr.ipr" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/factory/DocumentFactory.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/factory/DocumentFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chooser/ChooserColor.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chooser/ChooserColor.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/labeledcomponent" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Bit.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Bit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperString.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperString.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/service/paginator/PaginatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/service/paginator/PaginatorImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/util/configuration" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuBar.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Area.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Area.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Tree.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Tree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/TableModel.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/TableModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Volume.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Volume.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperNetTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperNetTest.java" />
     </list>
     <ignored path=".idea/workspace.xml" />
-    <ignored path="target/" />
     <ignored path="Bogatyr.iws" />
+    <ignored path="target/" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,10 +89,10 @@
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ComboBox.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ComboBox.java">
+      <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="158" column="32" selection-start="3442" selection-end="3442" vertical-scroll-proportion="0.2893401">
+            <state line="261" column="0" selection-start="7549" selection-end="7549" vertical-scroll-proportion="0.7575221">
               <folding />
             </state>
           </provider>
@@ -189,7 +108,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Length.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Time.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Volume.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/unit/Weight.java" />
@@ -205,6 +123,7 @@
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/service/timer/TimerImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperImage.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ComboBox.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -852,7 +771,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Favorites" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1521,8 +1441,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1874,12 +1793,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="22" width="1920" height="1054" extended-state="0" />
-    <editor active="false" />
+    <frame x="0" y="22" width="1920" height="1054" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32976446" sideWeight="0.0" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3222698" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.6057572" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39946738" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1889,17 +1807,18 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18278995" sideWeight="0.6627409" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.6057572" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39939487" sideWeight="0.6057572" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977018" sideWeight="0.6627409" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977018" sideWeight="0.6627409" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3875803" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3262317" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3222698" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31905782" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32867885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3875803" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsManagerConfiguration">
@@ -1998,114 +1917,86 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/service/crypto/CryptoSymmetricImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/encoder/EncoderHtml.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="27" selection-start="1708" selection-end="1708" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="60" column="27" selection-start="1708" selection-end="1708" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Fadeable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/crypto/HashCodeAlgo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperMath.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperString.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="52" selection-start="2818" selection-end="2818" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="95" column="52" selection-start="2818" selection-end="2818" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/service/crypto/HmacGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/launcher/LauncherMail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="6" selection-start="1211" selection-end="1211" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="49" column="6" selection-start="1211" selection-end="1211" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/application/ModelApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneOption.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="6" selection-start="1186" selection-end="1186" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="48" column="6" selection-start="1186" selection-end="1186" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneDesktop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="6" selection-start="1164" selection-end="1164" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="46" column="6" selection-start="1164" selection-end="1164" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/service/paginator/Paginator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/RadioButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="6" selection-start="1287" selection-end="1287" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="50" column="6" selection-start="1287" selection-end="1287" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Spinner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="6" selection-start="1252" selection-end="1252" vertical-scroll-proportion="0.32029796">
-          <folding />
-        </state>
+        <state line="49" column="6" selection-start="1252" selection-end="1252" vertical-scroll-proportion="0.32029796" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ComboBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="158" column="32" selection-start="3442" selection-end="3442" vertical-scroll-proportion="0.2893401">
+        <state line="173" column="148" selection-start="3734" selection-end="3734" vertical-scroll-proportion="0.020304568">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="261" column="0" selection-start="7549" selection-end="7549" vertical-scroll-proportion="0.7575221">
           <folding />
         </state>
       </provider>
