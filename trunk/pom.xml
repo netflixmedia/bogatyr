@@ -28,7 +28,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>ch.customcode.bogatyr</groupId>
+	<groupId>net.laubenberger</groupId>
 	<artifactId>bogatyr</artifactId>
 	<packaging>jar</packaging>
 	<version>0.91</version>
@@ -37,19 +37,18 @@
 	<url>http://code.google.com/p/bogatyr/</url>
 	<inceptionYear>2007</inceptionYear>
 
-	<organization>
-		<name>Custom Code</name>
-		<url>http://www.customcode.ch</url>
-	</organization>
+	<!--<organization>-->
+		<!--<name>Custom Code</name>-->
+		<!--<url>http://www.customcode.ch</url>-->
+	<!--</organization>-->
 
 	<developers>
 		<developer>
 			<id>slaubenberger</id>
 			<name>Stefan Laubenberger</name>
-			<organization>Custom Code</organization>
-			<email>s.laubenberger@customcode.ch</email>
-			<timezone>2</timezone>
-			<!--<url>http://www.laubenberger.net</url>-->
+			<email>laubenberger@gmail.com</email>
+			<timezone>1</timezone>
+			<url>http://www.laubenberger.net</url>
 			<roles>
 				<role>architect</role>
 				<role>tester</role>
@@ -62,9 +61,20 @@
 		<developer>
 			<id>sspross</id>
 			<name>Silvan Spross</name>
-			<organization>Custom Code</organization>
-			<email>s.spross@customcode.ch</email>
-			<timezone>2</timezone>
+			<organization>SiSprocom GmbH</organization>
+			<email>s.spross@sisprocom.ch</email>
+			<timezone>1</timezone>
+			<url>http://www.sisprocom.ch</url>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>rwuersch</id>
+			<name>Roman Wuersch</name>
+			<organization>SiSprocom GmbH</organization>
+			<email>r.wuersch@sisprocom.ch</email>
+			<timezone>1</timezone>
 			<roles>
 				<role>developer</role>
 			</roles>
@@ -75,16 +85,12 @@
 	<!--<contributor>-->
 	<!--<name>Curdin Dalbert</name>-->
 	<!--<email>curdin.dalbert@gmail.com</email>-->
-	<!--<timezone>2</timezone>-->
-	<!--<url>http://noellemarie.com</url>-->
+	<!--<timezone>1</timezone>-->
 	<!--<organization>ZKB</organization>-->
 	<!--<organizationUrl>http://www.zkb.ch</organizationUrl>-->
 	<!--<roles>-->
 	<!--<role>developer</role>-->
 	<!--</roles>-->
-	<!--<properties>-->
-	<!--<gtalk>some.name@gmail.com</gtalk>-->
-	<!--</properties>-->
 	<!--</contributor>-->
 	<!--</contributors>-->
 
@@ -96,10 +102,10 @@
 		</license>
 	</licenses>
 
-	<properties>
-		<!-- default env when no profile is specified -->
-		<env>DEV</env>
-	</properties>
+	<!--<properties>-->
+		<!--&lt;!&ndash; default env when no profile is specified &ndash;&gt;-->
+		<!--<env>DEV</env>-->
+	<!--</properties>-->
 
 	<!-- Source control -->
 	<scm>
@@ -110,8 +116,8 @@
 
 	<distributionManagement>
 		<repository>
-			<id>customcode-ftp</id>
-			<url>ftp://ftp.sisprocom.ch//httpdocs/maven2</url>
+			<id>laubenberger-ftp</id>
+			<url>ftp://ftp.laubenberger.net/subdomains/repo/httpdocs/maven2</url>
 		</repository>
 	</distributionManagement>
 
@@ -124,7 +130,7 @@
 	<!--<ciManagement>-->
 	<!--<system>continuum</system>-->
 	<!--
-		<url>https://www.customcode.ch/continuum</url>
+		<url>https://www.laubenberger.net/continuum</url>
 	-->
 	<!--<notifiers>-->
 	<!--<notifier>-->
@@ -134,7 +140,7 @@
 	<!--<sendOnFailure>true</sendOnFailure>-->
 	<!--<sendOnSuccess>false</sendOnSuccess>-->
 	<!--<sendOnWarning>false</sendOnWarning>-->
-	<!--<address>s.laubenberger@customcode.ch</address>-->
+	<!--<address>laubenberger@gmail.com</address>-->
 	<!--</configuration>-->
 	<!--</notifier>-->
 	<!--</notifiers>-->
@@ -274,16 +280,16 @@
 			</plugins>
 		</pluginManagement>
 
-		<filters>
-			<filter>src/main/filters/filters-${env}.properties</filter>
-		</filters>
+		<!--<filters>-->
+			<!--<filter>src/main/filters/filters-${env}.properties</filter>-->
+		<!--</filters>-->
 		
-		<resources>
-			<resource>
-				<filtering>true</filtering>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
+		<!--<resources>-->
+			<!--<resource>-->
+				<!--<filtering>true</filtering>-->
+				<!--<directory>src/main/resources</directory>-->
+			<!--</resource>-->
+		<!--</resources>-->
 		
 		<extensions>
 			<extension>
@@ -294,28 +300,28 @@
 		</extensions>
 	</build>
 
-	<profiles>
-		<profile>
-			<id>DEV</id>
-			<properties>
-				<env>DEV</env>
-			</properties>
-		</profile>
+	<!--<profiles>-->
+		<!--<profile>-->
+			<!--<id>DEV</id>-->
+			<!--<properties>-->
+				<!--<env>DEV</env>-->
+			<!--</properties>-->
+		<!--</profile>-->
 
-		<profile>
-			<id>QA</id>
-			<properties>
-				<env>QA</env>
-			</properties>
-		</profile>
+		<!--<profile>-->
+			<!--<id>QA</id>-->
+			<!--<properties>-->
+				<!--<env>QA</env>-->
+			<!--</properties>-->
+		<!--</profile>-->
 
-		<profile>
-			<id>PROD</id>
-			<properties>
-				<env>PROD</env>
-			</properties>
-		</profile>
-	</profiles>
+		<!--<profile>-->
+			<!--<id>PROD</id>-->
+			<!--<properties>-->
+				<!--<env>PROD</env>-->
+			<!--</properties>-->
+		<!--</profile>-->
+	<!--</profiles>-->
 
 	<reporting>
 		<plugins>
@@ -326,8 +332,8 @@
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<configuration>
 					<!-- location of the current checkstyle definition  -->
-					<configLocation>build/checkstyle.xml</configLocation>
-					<headerLocation>build/classheader.txt</headerLocation>
+					<configLocation>/build/checkstyle.xml</configLocation>
+					<headerLocation>/build/classheader.txt</headerLocation>
 				</configuration>
 			</plugin>
 
