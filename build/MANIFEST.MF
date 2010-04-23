@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Implementation-Title: Bogatyr
-Implementation-Version: 0.91 (20100416)
+Implementation-Version: 0.92 (20100423)
 Bundle-Name: Bogatyr
 Bundle-Vendor: laubenberger.net
-Bundle-Version: 0.91
+Bundle-Version: 0.92

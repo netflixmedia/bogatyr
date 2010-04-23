@@ -50,7 +50,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a helper class for graphic operations
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100423)
  * @since 0.4.0
  */
 public abstract class HelperGraphic {
@@ -218,7 +218,7 @@ public abstract class HelperGraphic {
 //		
 //    	final Dimension result = new Dimension(HelperMath.convertDoubleToInt(input.getWidth() * scaleNew), HelperMath.convertDoubleToInt(input.getHeight() * scaleNew));
 
-		final Dimension result = new Dimension(HelperMath.convertDoubleToInt(input.getWidth() * scale), HelperMath.convertDoubleToInt(input.getHeight() * scale));
+		final Dimension result = new Dimension((int)(input.getWidth() * scale), (int)(input.getHeight() * scale));
 
 		log.debug(HelperLog.methodExit(result));
 		return result;

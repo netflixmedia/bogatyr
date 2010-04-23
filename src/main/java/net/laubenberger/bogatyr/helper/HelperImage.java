@@ -55,12 +55,12 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a helper class for image operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100423)
  * @since 0.4.0
  */
 public abstract class HelperImage {
 	private static final Logger log = LoggerFactory
-			.getLogger(HelperCollection.class);
+			.getLogger(HelperImage.class);
 
 	public static final String TYPE_JPG = "jpg"; //$NON-NLS-1$
 	public static final String TYPE_PNG = "png"; //$NON-NLS-1$
@@ -171,15 +171,15 @@ public abstract class HelperImage {
 	}
 
 	/**
-	 * Gets a {@link RenderedImage} from a {@link Component}.
+	 * Gets a {@link BufferedImage} from a {@link Component}.
 	 *
 	 * @param component for the image
-	 * @return {@link Component} as {@link RenderedImage}
-	 * @see RenderedImage
+	 * @return {@link Component} as {@link BufferedImage}
+	 * @see BufferedImage
 	 * @see Component
 	 * @since 0.4.0
 	 */
-	public static RenderedImage getImage(final Component component) {
+	public static BufferedImage getImage(final Component component) {
 		log.debug(HelperLog.methodStart(component));
 		if (null == component) {
 			throw new RuntimeExceptionIsNull("component"); //$NON-NLS-1$

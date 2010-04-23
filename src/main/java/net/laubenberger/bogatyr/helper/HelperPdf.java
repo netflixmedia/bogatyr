@@ -27,9 +27,6 @@
 
 package net.laubenberger.bogatyr.helper;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,23 +36,21 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.xhtmlrenderer.pdf.ITextRenderer;
-
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.xhtmlrenderer.pdf.ITextRenderer;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Image;
 import com.lowagie.text.Rectangle;
-import com.lowagie.text.pdf.DefaultFontMapper;
-import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfEncryptor;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
-import com.lowagie.text.pdf.PdfTemplate;
 import com.lowagie.text.pdf.PdfWriter;
 
 
@@ -64,54 +59,73 @@ import com.lowagie.text.pdf.PdfWriter;
  * <strong>Note:</strong> This class needs <a href="http://itextpdf.com/">iText</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100423)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
 	private static final Logger log = LoggerFactory.getLogger(HelperPdf.class);
 
-	/**
-	 * Writes a PDF from a {@link Component} to a {@link File}.
-	 *
-	 * @param file		output as PDF
-	 * @param component for the PDF
-	 * @throws DocumentException
-	 * @throws IOException
-	 * @see File
-	 * @see Component
-	 * @since 0.5.0
-	 */
-	public static void writePdfFromComponent(final File file, final Component component) throws IOException, DocumentException { //$JUnit$
-		log.debug(HelperLog.methodStart(file, component));
-		if (null == file) {
-			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
-		}
-		if (null == component) {
-			throw new RuntimeExceptionIsNull("component"); //$NON-NLS-1$
-		}
-
-		final Dimension size = component.getSize();
-		final Document document = new Document(new Rectangle((float) size.width, (float) size.height));
-		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
-
-		try {
-			final PdfWriter writer = PdfWriter.getInstance(document, fos);
-
-			document.open();
-			final PdfContentByte cb = writer.getDirectContent();
-			final PdfTemplate tp = cb.createTemplate((float) size.width, (float) size.height);
-
-			final Graphics2D g2d = tp.createGraphics((float) size.width, (float) size.height, new DefaultFontMapper());
-			component.paint(g2d);
-			g2d.dispose();
-			cb.addTemplate(tp, 0.0F, 0.0F);
-		} finally {
-			document.close();
-			fos.close();
-		}
-		log.debug(HelperLog.methodExit());
-	}
-
+//	/**
+//	 * Writes a PDF from multiple {@link Component} to a {@link File}.
+//	 *
+//	 * @param pageSize of the PDF
+//	 * @param scale images to fit the page size
+//	 * @param file		output as PDF
+//	 * @param components for the PDF
+//	 * @throws DocumentException
+//	 * @throws IOException
+//	 * @see File
+//	 * @see Component
+//	 * @since 0.5.0
+//	 */
+//	public static void writePdfFromComponent(Rectangle pageSize, boolean scale, final File file, final Component... components) throws IOException, DocumentException { //$JUnit$ //TODO enable multiple components
+//		log.debug(HelperLog.methodStart(pageSize, scale, file, components));
+//		if (null == pageSize) {
+//			throw new RuntimeExceptionIsNull("pageSize"); //$NON-NLS-1$
+//		}
+//		if (null == file) {
+//			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+//		}
+//		if (null == components) {
+//			throw new RuntimeExceptionIsNull("components"); //$NON-NLS-1$
+//		}
+//
+//		final Document document = new Document(pageSize);
+//		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
+//
+//		try {
+//			final PdfWriter writer = PdfWriter.getInstance(document, fos);
+//			document.open();
+//
+//			for (Component component : components) {
+//				final PdfContentByte cb = writer.getDirectContent();
+//				PdfTemplate tp;
+//				Graphics2D g2d;
+//
+//				if (scale) {
+//					Dimension dim = HelperGraphic.getScaledSize(component.getSize(), new Dimension((int)pageSize.getWidth(), (int)pageSize.getHeight()));
+//					
+//					System.out.println(dim);
+//					System.out.println(pageSize);
+//					tp = cb.createTemplate(pageSize.getWidth(), pageSize.getHeight());
+//					g2d = tp.createGraphics((float)dim.getWidth(), (float)dim.getHeight(), new DefaultFontMapper());
+//				} else {
+//					tp = cb.createTemplate(pageSize.getWidth(), pageSize.getHeight());
+//					g2d = tp.createGraphics(component.getWidth(), component.getHeight(), new DefaultFontMapper());
+//				}
+//	
+//				component.paint(g2d);
+//				g2d.dispose();
+//				cb.addTemplate(tp, 0.0F, 0.0F);
+//				document.newPage();
+//			}
+//		} finally {
+//			document.close();
+//			fos.close();
+//		}
+//		log.debug(HelperLog.methodExit());
+//	}
+ 
 	/**
 	 * Writes a PDF from multiple (X)HTML files to a {@link File}.
 	 * <strong>Note:</strong> This method needs <a href="https://xhtmlrenderer.dev.java.net/">XHTML</a> to work.
@@ -152,7 +166,106 @@ public abstract class HelperPdf {
 		}
 		log.debug(HelperLog.methodExit());
 	}
+	
+	/**
+	 * Writes a PDF from multiple image files to a {@link File}.
+	 *
+	 * @param pageSize of the PDF
+	 * @param scale images to fit the page size
+	 * @param file  output as PDF
+	 * @param files for the PDF
+	 * @throws DocumentException 
+	 * @throws IOException 
+	 * @see File
+	 * @see Rectangle
+	 * @since 0.9.2
+	 */
+	public static void writePdfFromImage(Rectangle pageSize, boolean scale, final File file, final File... files) throws DocumentException, IOException {
+		log.debug(HelperLog.methodStart(pageSize, scale, file, files));
+		if (null == pageSize) {
+			throw new RuntimeExceptionIsNull("pageSize"); //$NON-NLS-1$
+		}
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
+		if (!HelperArray.isValid(files)) {
+			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
+		}
 
+		final Document document = new Document(pageSize);
+		document.setMargins(0.0F, 0.0F, 0.0F, 0.0F);
+		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
+
+		try {
+			PdfWriter.getInstance(document, fos);
+			document.open();
+
+			for (final File tempFile : files) {
+				final Image image = Image.getInstance(tempFile.getAbsolutePath());
+				
+				if (scale) {
+					image.scaleToFit(pageSize.getWidth(), pageSize.getHeight());
+				}
+				document.add(image);
+				document.newPage();
+			}
+		} finally {
+			document.close();
+			fos.close();
+		}
+		log.debug(HelperLog.methodExit());
+	}
+	
+	/**
+	 * Writes a PDF from multiple {@link java.awt.Image} to a {@link File}.
+	 *
+	 * @param pageSize of the PDF
+	 * @param scale images to fit the page size
+	 * @param file  output as PDF
+	 * @param images for the PDF
+	 * @throws DocumentException 
+	 * @throws IOException 
+	 * @see File
+	 * @see java.awt.Image
+	 * @see Rectangle
+	 * @since 0.9.2
+	 */
+	public static void writePdfFromImage(Rectangle pageSize, boolean scale, final File file, final java.awt.Image... images) throws DocumentException, IOException {
+		log.debug(HelperLog.methodStart(pageSize, scale, file, images));
+		if (null == pageSize) {
+			throw new RuntimeExceptionIsNull("pageSize"); //$NON-NLS-1$
+		}		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
+		if (!HelperArray.isValid(images)) {
+			throw new RuntimeExceptionIsNullOrEmpty("images"); //$NON-NLS-1$
+		}
+		
+		final Document document = new Document(pageSize);
+		document.setMargins(0.0F, 0.0F, 0.0F, 0.0F);
+		
+		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
+
+		try {
+			PdfWriter.getInstance(document, fos);
+			document.open();
+	
+			for (final java.awt.Image tempImage : images) {
+				final Image image = Image.getInstance(tempImage, null);
+				
+				if (scale) {
+					image.scaleToFit(pageSize.getWidth(), pageSize.getHeight());
+				}
+				document.add(image);
+				document.newPage();
+			}
+		} finally {
+			document.close();
+			fos.close();
+		}
+		log.debug(HelperLog.methodExit());
+	}
+	
 	/**
 	 * Modifies the meta data of given PDF and stores it in a new {@link File}.
 	 * <strong>Meta data example:"</strong>
