@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100423)
  * @since 0.4.0
  */
 public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
@@ -208,22 +208,22 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 		return result;
 	}
 
-	/**
-	 * Convert a double to an int-value.
-	 * Rounds the double value with {@link Math#round(double)}.
-	 *
-	 * @param value double-value
-	 * @return int-value
-	 * @since 0.4.0
-	 */
-	public static int convertDoubleToInt(final double value) { //$JUnit$
-		log.debug(HelperLog.methodStart(value));
-
-		final int result = (int) StrictMath.round(value);
-
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
+//	/**
+//	 * Convert a double to an int-value.
+//	 * Rounds the double value with {@link Math#round(double)}.
+//	 *
+//	 * @param value double-value
+//	 * @return int-value
+//	 * @since 0.4.0
+//	 */
+//	public static int convertDoubleToInt(final double value) { //$JUnit$
+//		log.debug(HelperLog.methodStart(value));
+//
+//		final int result = (int) StrictMath.round(value);
+//
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
 
 	/**
 	 * Calculate the logarithm with a given base.

@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.helper.HelperMath;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20100423
  */
 public class HelperMathTest {
 //	@Test
@@ -198,15 +198,15 @@ public class HelperMathTest {
 		}
 	}
 
-	@Test
-	public void testConvertDoubleToInt() {
-		assertEquals(-2, HelperMath.convertDoubleToInt(-2.499D));
-		assertEquals(-2, HelperMath.convertDoubleToInt(-2.5D));
-		assertEquals(-3, HelperMath.convertDoubleToInt(-2.51D));
-		assertEquals(2, HelperMath.convertDoubleToInt(2.499D));
-		assertEquals(3, HelperMath.convertDoubleToInt(2.5D));
-		assertEquals(0, HelperMath.convertDoubleToInt(0.0D));
-	}
+//	@Test
+//	public void testConvertDoubleToInt() {
+//		assertEquals(-2, HelperMath.convertDoubleToInt(-2.499D));
+//		assertEquals(-2, HelperMath.convertDoubleToInt(-2.5D));
+//		assertEquals(-3, HelperMath.convertDoubleToInt(-2.51D));
+//		assertEquals(2, HelperMath.convertDoubleToInt(2.499D));
+//		assertEquals(3, HelperMath.convertDoubleToInt(2.5D));
+//		assertEquals(0, HelperMath.convertDoubleToInt(0.0D));
+//	}
 
 	@Test
 	public void testLog() {
