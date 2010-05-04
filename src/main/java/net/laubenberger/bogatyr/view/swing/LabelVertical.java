@@ -48,14 +48,14 @@ import java.awt.image.BufferedImage;
  * This is a vertical Label.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.2.0
  */
 public class LabelVertical extends Panel implements Icon {
 	private static final long serialVersionUID = -6664528555390753370L;
 
 	private static final Logger log = LoggerFactory.getLogger(LabelVertical.class);
-	
+
 	private static final double NINETY_DEGREES = 1.5707963267948966;
 
 	private Label label;
@@ -69,14 +69,14 @@ public class LabelVertical extends Panel implements Icon {
 	public LabelVertical(final Icon icon, final int horizontalAlignment) {
 		this();
 		log.trace(HelperLog.constructor(icon, horizontalAlignment));
-		
+
 		label = new Label(icon, horizontalAlignment);
 	}
 
 	public LabelVertical(final String text, final Icon icon, final int horizontalAlignment) {
 		this();
 		log.trace(HelperLog.constructor(text, icon, horizontalAlignment));
-		
+
 		label = new Label(text, icon, horizontalAlignment);
 
 	}
@@ -84,21 +84,21 @@ public class LabelVertical extends Panel implements Icon {
 	public LabelVertical(final Icon icon) {
 		this();
 		log.trace(HelperLog.constructor(icon));
-		
+
 		label = new Label(icon);
 	}
 
 	public LabelVertical(final String text) {
 		this();
 		log.trace(HelperLog.constructor(text));
-		
+
 		label = new Label(text);
 	}
 
 	public LabelVertical(final String text, final int horizontalAlignment) {
 		this();
 		log.trace(HelperLog.constructor(text, horizontalAlignment));
-		
+
 		label = new Label(text, horizontalAlignment);
 	}
 
@@ -139,22 +139,22 @@ public class LabelVertical extends Panel implements Icon {
 
 	private void paintVertical(final Object g, final int x, final int y, final int width, final int height) {
 		log.trace(HelperLog.methodStart(g, x, y, width, height));
-		
+
 		if (!(0 >= height || 0 >= width)) {
-	//		this.label.updateUI();
-	//		this.label.revalidate();
-	
+			//		this.label.updateUI();
+			//		this.label.revalidate();
+
 			final BufferedImage buffer = new BufferedImage(height, width, BufferedImage.TYPE_INT_ARGB_PRE); // switch of width and height
 			final Graphics2D g2 = buffer.createGraphics();
 			label.setSize(new Dimension(height, width)); // switch of width and height
 			label.paint(g2);
-	
+
 			final AffineTransform af = AffineTransform.getTranslateInstance((double) x, (double) (y + height));
 			final AffineTransform af2 = AffineTransform.getRotateInstance(-NINETY_DEGREES);
 			af.concatenate(af2);
-	
+
 			((Graphics2D) g).drawImage(buffer, af, this);
-		}		
+		}
 
 		log.trace(HelperLog.methodExit());
 	}

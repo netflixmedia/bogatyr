@@ -35,10 +35,10 @@ import net.laubenberger.bogatyr.model.Model;
  * The interface for the owner model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.9.0
  */
 @XmlJavaTypeAdapter(OwnerImpl.XmlAdapter.class)
-public interface Owner extends Model, Address, Email, Website {
+public interface Owner extends Model, Address, Phone, Fax, Email, Website {
 	//atm nothing
 }

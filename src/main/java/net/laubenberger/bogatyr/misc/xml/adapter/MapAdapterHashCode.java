@@ -40,7 +40,7 @@ import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
  * Map adapter for the key {@link HashCodeAlgo} and value {@link String}.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.9.0
  */
 public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCodeAlgo, String>> {
@@ -53,7 +53,7 @@ public class MapAdapterHashCode extends XmlAdapter<XmlMap, Map<HashCodeAlgo, Str
 	public XmlMap marshal(final Map<HashCodeAlgo, String> map) throws Exception {
 		if (null != map) {
 			final XmlMap xmlMap = new XmlMap();
-		
+
 			for (final Map.Entry<HashCodeAlgo, String> entry : map.entrySet()) {
 				xmlMap.getEntries().add(new XmlEntry(entry.getKey().name(), entry.getValue()));
 			}

@@ -47,14 +47,14 @@ import java.util.Dictionary;
  * This is an extended JSlider.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.2.0
  */
 public class Slider extends JSlider implements Activatable {
 	private static final long serialVersionUID = 8676540667794440059L;
 
 	private static final Logger log = LoggerFactory.getLogger(Slider.class);
-	
+
 	private boolean isNotActive;
 
 	/*
@@ -98,7 +98,7 @@ public class Slider extends JSlider implements Activatable {
 	public Slider(final BoundedRangeModel model, final String toolTip) {
 		this(model);
 		log.trace(HelperLog.constructor(model, toolTip));
-		
+
 		setToolTipText(toolTip);
 	}
 
@@ -110,7 +110,7 @@ public class Slider extends JSlider implements Activatable {
 	public Slider(final int orientation, final int minValue, final int maxValue, final int currentValue, final String toolTip) {
 		this(orientation, minValue, maxValue, currentValue);
 		log.trace(HelperLog.constructor(orientation, minValue, maxValue, currentValue, toolTip));
-		
+
 		setToolTipText(toolTip);
 	}
 
@@ -153,7 +153,7 @@ public class Slider extends JSlider implements Activatable {
 	@Override
 	public boolean isActive() {
 		log.debug(HelperLog.methodStart());
-		
+
 		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
@@ -161,7 +161,7 @@ public class Slider extends JSlider implements Activatable {
 	@Override
 	public void setActive(final boolean isActive) {
 		log.debug(HelperLog.methodStart(isActive));
-		
+
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -169,7 +169,7 @@ public class Slider extends JSlider implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
-		
+
 		log.debug(HelperLog.methodExit());
 	}
 }

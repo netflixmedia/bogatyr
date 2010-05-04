@@ -47,7 +47,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher opens, edits and prints files with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.7.0
  */
 public abstract class LauncherFile {
@@ -291,6 +291,7 @@ public abstract class LauncherFile {
 	/*
 	 * Private methods
 	 */
+
 	private static File createTemporaryFile(final byte[] data, final String extension) throws IOException {
 		log.trace(HelperLog.methodStart(data, extension));
 

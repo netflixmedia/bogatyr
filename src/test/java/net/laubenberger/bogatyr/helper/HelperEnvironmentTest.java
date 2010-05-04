@@ -41,7 +41,7 @@ import java.util.TimeZone;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20100504
  */
 public class HelperEnvironmentTest {
 //	@Test
@@ -145,6 +145,7 @@ public class HelperEnvironmentTest {
 
 	@Test
 	public void testGetUserHomeDirectory() {
+		System.out.println(HelperEnvironment.getUserHomeDirectory());
 		assertNotNull(HelperEnvironment.getUserHomeDirectory());
 		assertEquals(new File(System.getProperty("user.home")), HelperEnvironment.getUserHomeDirectory()); //$NON-NLS-1$
 	}
@@ -188,12 +189,12 @@ public class HelperEnvironmentTest {
 
 	@Test
 	public void testGetUserCountry() {
-		assertEquals(System.getProperty("user.country"), HelperEnvironment.getUserCountry()); //$NON-NLS-1$
+		assertEquals(System.getProperty("user.country"), HelperEnvironment.getUserCountry().getCode()); //$NON-NLS-1$
 	}
 
 	@Test
 	public void testGetUserLanguage() {
-		assertEquals(System.getProperty("user.language"), HelperEnvironment.getUserLanguage()); //$NON-NLS-1$
+		assertEquals(System.getProperty("user.language"), HelperEnvironment.getUserLanguage().getCode()); //$NON-NLS-1$
 	}
 
 	@Test

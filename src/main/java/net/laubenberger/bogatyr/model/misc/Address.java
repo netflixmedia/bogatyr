@@ -32,7 +32,7 @@ package net.laubenberger.bogatyr.model.misc;
  * The interface definition for an address.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.9.1
  */
 public interface Address {
@@ -58,7 +58,7 @@ public interface Address {
 
 	void setCity(String city);
 
-	String getCountry();
+	Country getCountry();
 
-	void setCountry(String country);
+	void setCountry(Country country);
 }

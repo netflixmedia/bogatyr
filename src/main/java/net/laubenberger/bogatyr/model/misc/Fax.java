@@ -25,45 +25,20 @@
  * <laubenberger@gmail.com>
  */
 
-package net.laubenberger.bogatyr.view.swing;
-
-import javax.swing.JMenuBar;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
+package net.laubenberger.bogatyr.model.misc;
 
 
 /**
- * This is an extended JMenuBar.
+ * The interface definition for a fax number.
  *
  * @author Stefan Laubenberger
  * @version 0.9.2 (20100504)
- * @since 0.2.0
+ * @since 0.9.2
  */
-public class MenuBar extends JMenuBar {
-	private static final long serialVersionUID = -5107664209576098148L;
+public interface Fax {
+	String MEMBER_FAX_NUMBER = "faxNumber"; //$NON-NLS-1$
 
-	private static final Logger log = LoggerFactory.getLogger(MenuBar.class);
+	String getFaxNumber();
 
-	/*
-		 * Superclass constructors
-		 */
-
-	public MenuBar() {
-		super();
-		log.trace(HelperLog.constructor());
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
+	void setFaxNumber(String email);
 }

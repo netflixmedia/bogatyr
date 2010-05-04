@@ -47,14 +47,14 @@ import org.slf4j.LoggerFactory;
  * This is a Label combined with a JComponent.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.6.0
  */
 public class LabeledComponent<T extends JComponent> extends Panel {
 	private static final long serialVersionUID = 2215341067138215010L;
 
 	private static final Logger log = LoggerFactory.getLogger(LabeledComponent.class);
-	
+
 	private final JLabel label = new Label();
 	private final T component;
 
@@ -65,7 +65,7 @@ public class LabeledComponent<T extends JComponent> extends Panel {
 	public LabeledComponent(final String labelText, final String toolTip, final T component) {
 		super();
 		log.trace(HelperLog.constructor(labelText, toolTip, component));
-		
+
 		this.component = component;
 		label.setText(labelText);
 		setToolTipText(toolTip);
@@ -74,7 +74,7 @@ public class LabeledComponent<T extends JComponent> extends Panel {
 	public LabeledComponent(final String title, final String labelText, final String toolTip, final T component) {
 		super(title);
 		log.trace(HelperLog.constructor(title, labelText, toolTip, component));
-		
+
 		this.component = component;
 		label.setText(labelText);
 		setToolTipText(toolTip);
@@ -82,14 +82,14 @@ public class LabeledComponent<T extends JComponent> extends Panel {
 
 	public JLabel getLabel() {
 		log.debug(HelperLog.methodStart());
-		
+
 		log.debug(HelperLog.methodExit(label));
 		return label;
 	}
 
 	public T getComponent() {
 		log.debug(HelperLog.methodStart());
-		
+
 		log.debug(HelperLog.methodExit(component));
 		return component;
 	}
@@ -101,7 +101,7 @@ public class LabeledComponent<T extends JComponent> extends Panel {
 
 	private void createLayout() {
 		log.trace(HelperLog.methodStart());
-		
+
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(0, 0, 0, 5);
@@ -121,7 +121,7 @@ public class LabeledComponent<T extends JComponent> extends Panel {
 			gbc.insets = new Insets(0, 0, 0, 0);
 			add(component, gbc);
 		}
-		
+
 		log.trace(HelperLog.methodExit());
 	}
 

@@ -35,7 +35,7 @@ import java.util.Locale;
  * <strong>Note:</strong> The language is always the main language of a country.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.9.1
  */
 public enum Language {
@@ -82,7 +82,8 @@ public enum Language {
 	SPANISH(new Locale("es")), //$NON-NLS-1$
 	GREEK(new Locale("el")), //$NON-NLS-1$
 	LATVIAN(new Locale("lv")), //$NON-NLS-1$
-	ROMANIAN(new Locale("ro")); //$NON-NLS-1$
+	ROMANIAN(new Locale("ro")), //$NON-NLS-1$
+	UNKNOWN(new Locale("unknown"));
 
 	private final Locale locale;
 

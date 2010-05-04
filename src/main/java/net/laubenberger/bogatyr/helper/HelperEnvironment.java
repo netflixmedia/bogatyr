@@ -32,11 +32,13 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.TimeZone;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import net.laubenberger.bogatyr.model.misc.Country;
+import net.laubenberger.bogatyr.model.misc.Language;
+import net.laubenberger.bogatyr.model.misc.Platform;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.model.misc.Platform;
 
 
 /**
@@ -45,7 +47,7 @@ import net.laubenberger.bogatyr.model.misc.Platform;
  * It also provides informations about vm memory, temp/user directory and variables.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -236,9 +238,9 @@ public abstract class HelperEnvironment {
 	}
 
 	/**
-	 * Returns all available processors for the VM.
+	 * Returns all available processors (cores) for the VM.
 	 *
-	 * @return available processors for the VM
+	 * @return available processors (cores) for the VM
 	 * @since 0.6.0
 	 */
 	public static int getAvailableProcessors() { //$JUnit$
@@ -412,26 +414,42 @@ public abstract class HelperEnvironment {
 	 * @return language of the current country
 	 * @since 0.7.0
 	 */
-	public static String getUserCountry() { //$JUnit$
+	public static Country getUserCountry() { //$JUnit$
 		log.debug(HelperLog.methodStart());
 
-		final String result = System.getProperty("user.country"); //$NON-NLS-1$
+		String countryString = System.getProperty("user.country"); //$NON-NLS-1$
+		Country result = Country.UNKNOWN;
+		
+		for (Country country : Country.values()) {  
+	     if (countryString.equals(country.getCode())) {
+	   	  result = country;
+	   	  break;
+	     }
+	   }  
 
 		log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	/**
-	 * Returns the language of the current user.
+	 * Returns the {@link Language} of the current user.
 	 *
 	 * @return language of the current user
 	 * @since 0.7.0
 	 */
-	public static String getUserLanguage() { //$JUnit$
+	public static Language getUserLanguage() { //$JUnit$
 		log.debug(HelperLog.methodStart());
 
-		final String result = System.getProperty("user.language"); //$NON-NLS-1$
-
+		String languageString = System.getProperty("user.language"); //$NON-NLS-1$
+		Language result = Language.UNKNOWN;
+		
+		for (Language language : Language.values()) {  
+	     if (languageString.equals(language.getCode())) {
+	   	  result = language;
+	   	  break;
+	     }
+	   }  
+		
 		log.debug(HelperLog.methodExit(result));
 		return result;
 	}

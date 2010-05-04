@@ -43,14 +43,14 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JScrollPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.3.0
  */
 public class PaneScroll extends JScrollPane {
 	private static final long serialVersionUID = 544751396135811303L;
 
 	private static final Logger log = LoggerFactory.getLogger(PaneScroll.class);
-	
+
 	private static final int DEFAULT_INCREMENT = 16;
 
 	{
@@ -90,7 +90,7 @@ public class PaneScroll extends JScrollPane {
 	public PaneScroll(final Component component, final Border border) {
 		this(component);
 		log.trace(HelperLog.constructor(component, border));
-		
+
 		setBorder(border);
 	}
 

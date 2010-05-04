@@ -41,17 +41,17 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JMenu.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.2.0
  */
 public class Menu extends JMenu {
 	private static final long serialVersionUID = -908869267540163157L;
 
 	private static final Logger log = LoggerFactory.getLogger(Menu.class);
-	
+
 	/*
-	 * Superclass constructors
-	 */
+		 * Superclass constructors
+		 */
 
 	public Menu() {
 		super();
@@ -80,7 +80,7 @@ public class Menu extends JMenu {
 	public Menu(final String text, final int mnemonic) {
 		this(text);
 		log.trace(HelperLog.constructor(text, mnemonic));
-		
+
 		// Add the mnemonic key
 		if (0 < mnemonic) {
 			setMnemonic(mnemonic);

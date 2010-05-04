@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
@@ -148,7 +148,7 @@ public abstract class ModelAbstract extends Observable implements Model {
 
 	/*
 	 * Implemented methods
-	Ê*/
+	 */
 
 	@Override
 	@XmlTransient

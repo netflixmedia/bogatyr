@@ -35,7 +35,7 @@ import java.io.IOException;
  * This is the skeleton for SSL secured clients.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.8.0
  */
 public abstract class ClientSSLAbstract extends ClientAbstract {
@@ -51,6 +51,7 @@ public abstract class ClientSSLAbstract extends ClientAbstract {
 	/*
 	 * Overridden methods
 	 */
+
 	@Override
 	public void start() throws IOException {
 		final SocketFactory sslFactory = SSLSocketFactory.getDefault();

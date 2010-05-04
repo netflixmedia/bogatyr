@@ -42,14 +42,14 @@ import org.slf4j.LoggerFactory;
  * This is an extended JPasswordField.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.1.0
  */
 public class PasswordField extends JPasswordField implements Activatable {
 	private static final long serialVersionUID = 4337982428755317915L;
 
 	private static final Logger log = LoggerFactory.getLogger(PasswordField.class);
-	
+
 	private boolean isNotActive;
 
 	/*
@@ -79,7 +79,7 @@ public class PasswordField extends JPasswordField implements Activatable {
 	/*
 	 * Own constructors
 	 */
-	
+
 	public PasswordField(final String toolTip) {
 		super();
 		log.trace(HelperLog.constructor(toolTip));
@@ -122,7 +122,7 @@ public class PasswordField extends JPasswordField implements Activatable {
 	@Override
 	public boolean isActive() {
 		log.debug(HelperLog.methodStart());
-		
+
 		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
@@ -130,7 +130,7 @@ public class PasswordField extends JPasswordField implements Activatable {
 	@Override
 	public void setActive(final boolean isActive) {
 		log.debug(HelperLog.methodStart(isActive));
-		
+
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -138,7 +138,7 @@ public class PasswordField extends JPasswordField implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
-		
+
 		log.debug(HelperLog.methodExit());
 	}
 }

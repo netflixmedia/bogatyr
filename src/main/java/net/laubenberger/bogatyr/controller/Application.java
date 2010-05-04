@@ -31,13 +31,21 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObject;
 
 
 /**
- * Defines the methods for all applications.
+ * Defines the methods for all Bogatyr based applications.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.9.0
  */
 public interface Application extends ExtendedObject, Runnable {
+	/**
+	 * Exit the application.
+	 * 
+	 * @param returnCode of the application
+	 * @since 0.9.2
+	 */	
+	void exit(int returnCode);
+	
 //	/**
 //     * Returns the model of the application.
 //     * 

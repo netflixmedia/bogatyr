@@ -44,14 +44,14 @@ import org.slf4j.LoggerFactory;
  * This class represents a skeleton for the worker.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.9.0
  */
 public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker, HolderListener<ListenerWorker> {
 	private Collection<ListenerWorker> listListener = new HashSet<ListenerWorker>();
 
 	private static final Logger log = LoggerFactory.getLogger(WorkerAbstract.class);
-	
+
 	private final Event<Worker> event = new Event<Worker>(this);
 
 	protected WorkerAbstract() {
@@ -66,21 +66,21 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 
 	protected void fireWorkerStart() {
 		log.trace(HelperLog.methodStart());
-		
+
 		for (final ListenerWorker listener : listListener) {
 			listener.start(event);
 		}
-		
+
 		log.trace(HelperLog.methodExit());
 	}
 
 	protected void fireWorkerDone() {
 		log.trace(HelperLog.methodStart());
-		
+
 		for (final ListenerWorker listener : listListener) {
 			listener.done(event);
 		}
-		
+
 		log.trace(HelperLog.methodExit());
 	}
 
@@ -97,14 +97,14 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 		}
 
 		listListener.add(listener);
-		
+
 		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public int countListeners() {
 		log.debug(HelperLog.methodStart());
-		
+
 		log.debug(HelperLog.methodExit(listListener.size()));
 		return listListener.size();
 	}
@@ -117,14 +117,14 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 		}
 
 		listListener.remove(listener);
-		
+
 		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void deleteListeners() {
 		log.debug(HelperLog.methodStart());
-		
+
 		listListener = new HashSet<ListenerWorker>();
 
 		log.debug(HelperLog.methodExit());

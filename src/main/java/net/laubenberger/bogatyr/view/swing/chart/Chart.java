@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.5.0
  */
 public class Chart extends Panel {
@@ -93,7 +93,7 @@ public class Chart extends Panel {
 	public Chart(final int maxX, final int maxY, final String[] xAxes, final String[] yAxes, final X_Axis positionXAxis, final Y_Axis positionYAxis) {
 		super();
 		log.trace(HelperLog.constructor(maxX, maxY, xAxes, yAxes, positionXAxis, positionYAxis));
-		
+
 		this.xAxes = xAxes.clone();
 		this.yAxes = yAxes.clone();
 		this.maxX = maxX;
@@ -124,7 +124,7 @@ public class Chart extends Panel {
 		}
 		entries.add(entry);
 		createLayout();
-		
+
 		log.debug(HelperLog.methodExit());
 	}
 
@@ -136,7 +136,7 @@ public class Chart extends Panel {
 	 */
 	public Color getColorGrid() {
 		log.debug(HelperLog.methodStart());
-		
+
 		log.debug(HelperLog.methodExit(colorGrid));
 		return colorGrid;
 	}
@@ -149,10 +149,10 @@ public class Chart extends Panel {
 	 */
 	public void setColorGrid(final Color color) {
 		log.debug(HelperLog.methodStart(color));
-		
+
 		colorGrid = color;
 		createLayout();
-		
+
 		log.debug(HelperLog.methodExit());
 	}
 
@@ -163,7 +163,7 @@ public class Chart extends Panel {
 
 	private void createLayout() {
 		log.trace(HelperLog.methodStart());
-		
+
 		// First remove all
 		removeAll();
 
@@ -263,14 +263,14 @@ public class Chart extends Panel {
 			}
 			result.add(label);
 		}
-		
+
 		log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 
 	private Component getYAxis() {
 		log.trace(HelperLog.methodStart());
-		
+
 		final JComponent result = new Panel(colorBackground);
 		result.setLayout(new GridLayout(yAxes.length, 0));
 
@@ -284,7 +284,7 @@ public class Chart extends Panel {
 			}
 			result.add(label);
 		}
-		
+
 		log.trace(HelperLog.methodExit(result));
 		return result;
 	}

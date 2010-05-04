@@ -44,17 +44,17 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JEditorPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.7.0
  */
 public class PaneEditor extends JEditorPane {
 	private static final long serialVersionUID = -3298005917085461997L;
 
 	private static final Logger log = LoggerFactory.getLogger(PaneEditor.class);
-	
+
 	/*
-	 * Superclass constructors
-	 */
+		 * Superclass constructors
+		 */
 
 	public PaneEditor() {
 		super();

@@ -47,11 +47,11 @@ import net.laubenberger.bogatyr.model.ModelAbstract;
  * The implementation of the publisher model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.9.0
  */
 @XmlRootElement(name = "publisher")
-@XmlType(propOrder = {"name", "street", "zip", "city", "country", "email", "website"})
+@XmlType(propOrder = {"name", "street", "zip", "city", "country", "phoneNumber", "faxNumber", "email", "website"})
 public class PublisherImpl extends ModelAbstract implements Publisher {
 	private static final long serialVersionUID = 3542143128600081015L;
 
@@ -61,7 +61,9 @@ public class PublisherImpl extends ModelAbstract implements Publisher {
 	private String street;
 	private String zip;
 	private String city;
-	private String country;
+	private Country country;
+	private String phoneNumber;
+	private String faxNumber;
 	private String email;
 	private URL website;
 
@@ -72,14 +74,16 @@ public class PublisherImpl extends ModelAbstract implements Publisher {
 	}
 
 	public PublisherImpl(final String name, final String street, final String zip, final String city,
-								final String country, final String email, final URL website, final Map<String, String> mapTag) {
+								final Country country, final String phoneNumber, final String faxNumber, final String email, final URL website, final Map<String, String> mapTag) {
 		super(mapTag);
-		log.trace(HelperLog.constructor(name, street, zip, city, country, email, website, mapTag));
+		log.trace(HelperLog.constructor(name, street, zip, city, country, phoneNumber, faxNumber, email, website, mapTag));
 		this.name = name;
 		this.street = street;
 		this.zip = zip;
 		this.city = city;
 		this.country = country;
+		this.phoneNumber = phoneNumber;
+		this.faxNumber = faxNumber;
 		this.email = email;
 		this.website = website;
 	}
@@ -93,77 +97,72 @@ public class PublisherImpl extends ModelAbstract implements Publisher {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((null == city) ? 0 : city.hashCode());
-		result = prime * result + ((null == country) ? 0 : country.hashCode());
-		result = prime * result + ((null == email) ? 0 : email.hashCode());
-		result = prime * result + ((null == name) ? 0 : name.hashCode());
-		result = prime * result + ((null == street) ? 0 : street.hashCode());
-		result = prime * result + ((null == website) ? 0 : website.hashCode());
-		result = prime * result + ((null == zip) ? 0 : zip.hashCode());
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((faxNumber == null) ? 0 : faxNumber.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		result = prime * result + ((website == null) ? 0 : website.hashCode());
+		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		}
-		if (!super.equals(obj)) {
+		if (!super.equals(obj))
 			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
-		final PublisherImpl other = (PublisherImpl) obj;
-		if (null == city) {
-			if (null != other.city) {
+		PublisherImpl other = (PublisherImpl) obj;
+		if (city == null) {
+			if (other.city != null)
 				return false;
-			}
-		} else if (!city.equals(other.city)) {
+		} else if (!city.equals(other.city))
 			return false;
-		}
-		if (null == country) {
-			if (null != other.country) {
+		if (country == null) {
+			if (other.country != null)
 				return false;
-			}
-		} else if (!country.equals(other.country)) {
+		} else if (!country.equals(other.country))
 			return false;
-		}
-		if (null == email) {
-			if (null != other.email) {
+		if (email == null) {
+			if (other.email != null)
 				return false;
-			}
-		} else if (!email.equals(other.email)) {
+		} else if (!email.equals(other.email))
 			return false;
-		}
-		if (null == name) {
-			if (null != other.name) {
+		if (faxNumber == null) {
+			if (other.faxNumber != null)
 				return false;
-			}
-		} else if (!name.equals(other.name)) {
+		} else if (!faxNumber.equals(other.faxNumber))
 			return false;
-		}
-		if (null == street) {
-			if (null != other.street) {
+		if (name == null) {
+			if (other.name != null)
 				return false;
-			}
-		} else if (!street.equals(other.street)) {
+		} else if (!name.equals(other.name))
 			return false;
-		}
-		if (null == website) {
-			if (null != other.website) {
+		if (phoneNumber == null) {
+			if (other.phoneNumber != null)
 				return false;
-			}
-		} else if (!website.equals(other.website)) {
+		} else if (!phoneNumber.equals(other.phoneNumber))
 			return false;
-		}
-		if (null == zip) {
-			if (null != other.zip) {
+		if (street == null) {
+			if (other.street != null)
 				return false;
-			}
-		} else if (!zip.equals(other.zip)) {
+		} else if (!street.equals(other.street))
 			return false;
-		}
+		if (website == null) {
+			if (other.website != null)
+				return false;
+		} else if (!website.equals(other.website))
+			return false;
+		if (zip == null) {
+			if (other.zip != null)
+				return false;
+		} else if (!zip.equals(other.zip))
+			return false;
 		return true;
 	}
 
@@ -192,7 +191,7 @@ public class PublisherImpl extends ModelAbstract implements Publisher {
 
 	@Override
 	@XmlElement
-	public String getCountry() {
+	public Country getCountry() {
 		log.debug(HelperLog.methodStart());
 
 		log.debug(HelperLog.methodExit(country));
@@ -217,6 +216,24 @@ public class PublisherImpl extends ModelAbstract implements Publisher {
 		return zip;
 	}
 
+	@Override
+	@XmlElement
+	public String getPhoneNumber() {
+		log.debug(HelperLog.methodStart());
+
+		log.debug(HelperLog.methodExit(phoneNumber));
+		return phoneNumber;
+	}
+	
+	@Override
+	@XmlElement
+	public String getFaxNumber() {
+		log.debug(HelperLog.methodStart());
+
+		log.debug(HelperLog.methodExit(faxNumber));
+		return faxNumber;
+	}
+	
 	@Override
 	@XmlElement
 	public String getEmail() {
@@ -262,7 +279,7 @@ public class PublisherImpl extends ModelAbstract implements Publisher {
 	}
 
 	@Override
-	public void setCountry(final String country) {
+	public void setCountry(final Country country) {
 		log.debug(HelperLog.methodStart(country));
 
 		if (!HelperObject.isEquals(country, this.country)) {
@@ -300,6 +317,32 @@ public class PublisherImpl extends ModelAbstract implements Publisher {
 		log.debug(HelperLog.methodExit());
 	}
 
+	@Override
+	public void setPhoneNumber(final String phoneNumber) {
+		log.debug(HelperLog.methodStart(phoneNumber));
+
+		if (!HelperObject.isEquals(this.phoneNumber, phoneNumber)) {
+			this.phoneNumber = phoneNumber;
+			setChanged();
+			notifyObservers(MEMBER_PHONE_NUMBER);
+		}
+
+		log.debug(HelperLog.methodExit());
+	}
+
+	@Override
+	public void setFaxNumber(final String faxNumber) {
+		log.debug(HelperLog.methodStart(faxNumber));
+
+		if (!HelperObject.isEquals(this.faxNumber, faxNumber)) {
+			this.faxNumber = faxNumber;
+			setChanged();
+			notifyObservers(MEMBER_FAX_NUMBER);
+		}
+
+		log.debug(HelperLog.methodExit());
+	}
+	
 	@Override
 	public void setEmail(final String mail) {
 		log.debug(HelperLog.methodStart(mail));

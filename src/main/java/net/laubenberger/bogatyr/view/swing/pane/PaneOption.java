@@ -43,17 +43,17 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JOptionPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.7.0
  */
 public class PaneOption extends JOptionPane {
 	private static final long serialVersionUID = -4947729751470298861L;
 
 	private static final Logger log = LoggerFactory.getLogger(PaneOption.class);
-	
+
 	/*
-	 * Superclass constructors
-	 */
+		 * Superclass constructors
+		 */
 
 	public PaneOption() {
 		super();

@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  * This is a datagram dumper to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.8.0
  */
 public class DatagramDumperImpl extends ExtendedObjectAbstract implements DatagramDumper {
@@ -86,6 +86,7 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 	/*
 	 * Private methods
 	 */
+
 	private void firePacketReceived() {
 		for (final ListenerDatagram listener : listListener) {
 			listener.packetReceived(event);
@@ -112,6 +113,7 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 	/*
 	 * Implemented methods
 	 */
+
 	@Override
 	public DatagramPacket getPacket() {
 		return packet;
