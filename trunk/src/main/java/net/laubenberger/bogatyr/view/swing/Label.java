@@ -41,17 +41,17 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JLabel.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.2.0
  */
 public class Label extends JLabel {
 	private static final long serialVersionUID = 2440681846691377894L;
 
 	private static final Logger log = LoggerFactory.getLogger(Label.class);
-	
+
 	/*
-	 * Superclass constructors
-	 */
+		 * Superclass constructors
+		 */
 
 	public Label() {
 		super();

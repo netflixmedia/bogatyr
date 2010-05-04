@@ -34,7 +34,7 @@ import net.laubenberger.bogatyr.model.application.ModelApplication;
  * The skeleton for the application controller.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.9.0
  */
 public abstract class ControllerApplicationAbstract extends ControllerAbstract implements ControllerApplication {
@@ -49,6 +49,7 @@ public abstract class ControllerApplicationAbstract extends ControllerAbstract i
 	/*
 	 * Implemented methods
 	 */
+
 	@Override
 	public ModelApplication getModel() {
 		return model;

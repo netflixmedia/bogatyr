@@ -39,6 +39,7 @@ import org.slf4j.LoggerFactory;
 
 import net.laubenberger.bogatyr.helper.HelperNumber;
 import net.laubenberger.bogatyr.helper.HelperTime;
+import net.laubenberger.bogatyr.model.misc.Country;
 import net.laubenberger.bogatyr.model.misc.Document;
 import net.laubenberger.bogatyr.model.misc.DocumentImpl;
 import net.laubenberger.bogatyr.model.misc.ManufacturerImpl;
@@ -50,14 +51,14 @@ import net.laubenberger.bogatyr.model.misc.PublisherImpl;
  * Collected constants of very general utility.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100423)
+ * @version 0.9.2 (20100504)
  * @since 0.7.0
  */
 public abstract class Constants {
 	private static final Logger log = LoggerFactory.getLogger(Constants.class);
 
 	//Bogatyr specific
-	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.92"), 260, HelperTime.getDate(2010, 4, 23, 17, 28, 0), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.92"), 260, HelperTime.getDate(2010, 5, 4, 17, 29, 0), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
@@ -176,9 +177,9 @@ public abstract class Constants {
 
 	static {
 		try {
-			BOGATYR.setManufacturer(new ManufacturerImpl("Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", "Switzerland", "laubenberger@gmail.com", new URL("http://www.laubenberger.net/projects/java/bogatyr"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
-			BOGATYR.setOwner(new OwnerImpl("Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", "Switzerland", "info@laubenberger.net", new URL("http://www.laubenberger.net"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
-			BOGATYR.setPublisher(new PublisherImpl("Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", "Switzerland", "info@laubenberger.net", new URL("http://www.laubenberger.net"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			BOGATYR.setManufacturer(new ManufacturerImpl("Stefan Laubenberger", "Bullingerstrasse 53", "8004", "ZÃ¼rich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net/projects/java/bogatyr"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			BOGATYR.setOwner(new OwnerImpl("Stefan Laubenberger", "Bullingerstrasse 53", "8004", "ZÃ¼rich", Country.SWITZERLAND, "+41 1 401 27 43", null, "info@laubenberger.net", new URL("http://www.laubenberger.net"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			BOGATYR.setPublisher(new PublisherImpl("Stefan Laubenberger", "Bullingerstrasse 53", "8004", "ZÃ¼rich", Country.SWITZERLAND, "+41 1 401 27 43", null, "info@laubenberger.net", new URL("http://www.laubenberger.net"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 		} catch (MalformedURLException ex) {
 			// should never happen!
 			log.error("URL invalid", ex); //$NON-NLS-1$

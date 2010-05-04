@@ -56,12 +56,12 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a format factory.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.9.0
  */
 public abstract class FormatFactory {
 	private static final Logger log = LoggerFactory.getLogger(FormatFactory.class);
-	
+
 	public static final String PATTERN_DATE_DAY_MONTH_YEAR = "dd.MM.yyyy"; //$NON-NLS-1$
 	public static final String PATTERN_DATE_YEAR_MONTH_DAY = "yyyy.MM.dd"; //$NON-NLS-1$
 	public static final String PATTERN_DATE_YEAR_MONTH_DAY_HOUR_MINUTE = "yyyy.MM.dd HH:mm"; //$NON-NLS-1$
@@ -120,7 +120,7 @@ public abstract class FormatFactory {
 	 */
 	public static NumberFormat createPercentFormat() {
 		log.debug(HelperLog.methodStart());
-		
+
 		final NumberFormat result = NumberFormat.getPercentInstance(Locale.getDefault());
 
 		log.debug(HelperLog.methodExit(result));
@@ -136,7 +136,7 @@ public abstract class FormatFactory {
 	 */
 	public static NumberFormat createCurrencyFormat() {
 		log.debug(HelperLog.methodStart());
-		
+
 		final NumberFormat result = NumberFormat.getCurrencyInstance(Locale.getDefault());
 
 		log.debug(HelperLog.methodExit(result));
@@ -156,7 +156,7 @@ public abstract class FormatFactory {
 		if (!HelperString.isValid(pattern)) {
 			throw new RuntimeExceptionIsNullOrEmpty("pattern"); //$NON-NLS-1$
 		}
-		
+
 		final DateFormat result = new SimpleDateFormat(pattern, Locale.getDefault());
 
 		log.debug(HelperLog.methodExit(result));
@@ -204,7 +204,7 @@ public abstract class FormatFactory {
 		if (null == format) {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
-		
+
 		final NumberFormatter result = new NumberFormatter(format) {
 			private static final long serialVersionUID = 1315478587371973936L;
 
@@ -239,7 +239,7 @@ public abstract class FormatFactory {
 		if (null == format) {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
-		
+
 		final NumberFormatter result = new NumberFormatter(format) {
 			private static final long serialVersionUID = 1104014354379282093L;
 
@@ -343,7 +343,7 @@ public abstract class FormatFactory {
 		if (null == format) {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
-		
+
 		final DateFormatter result = new DateFormatter(format) {
 			private static final long serialVersionUID = 8705680761187261160L;
 
@@ -370,7 +370,7 @@ public abstract class FormatFactory {
 		if (null == format) {
 			throw new RuntimeExceptionIsNull("format"); //$NON-NLS-1$
 		}
-		
+
 		final MaskFormatter result = new MaskFormatter(format) {
 			private static final long serialVersionUID = 5212947957420446007L;
 
@@ -398,7 +398,7 @@ public abstract class FormatFactory {
 		if (null == regex) {
 			throw new RuntimeExceptionIsNull("regex"); //$NON-NLS-1$
 		}
-		
+
 		final DefaultFormatter result = new DefaultFormatter() {
 			private static final long serialVersionUID = 2665033244806980400L;
 

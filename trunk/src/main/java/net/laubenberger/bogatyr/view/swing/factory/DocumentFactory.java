@@ -46,12 +46,12 @@ import org.slf4j.LoggerFactory;
  * This is a document factory.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.9.0
  */
 public abstract class DocumentFactory {
 	private static final Logger log = LoggerFactory.getLogger(DocumentFactory.class);
-	
+
 	private static final Pattern PATTERN = Pattern.compile("[-%'0-9.]+"); //$NON-NLS-1$
 
 	/**
@@ -78,7 +78,7 @@ public abstract class DocumentFactory {
 				}
 			}
 		};
-		
+
 		log.debug(HelperLog.methodExit(result));
 		return result;
 	}
@@ -107,21 +107,21 @@ public abstract class DocumentFactory {
 				}
 			}
 		};
-		
+
 		log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
-	
+
 	/*
-	 * Private methods
-	 */
-	
+		 * Private methods
+		 */
+
 	static boolean isStringNumeric(final CharSequence arg) {
 		log.trace(HelperLog.methodStart(arg));
-		
+
 		boolean result = false;
-		
+
 		if (HelperString.isValid(arg)) {
 			final Matcher matcher = PATTERN.matcher(arg);
 
@@ -129,7 +129,7 @@ public abstract class DocumentFactory {
 				result = true;
 			}
 		}
-		
+
 		log.trace(HelperLog.methodExit(result));
 		return result;
 	}

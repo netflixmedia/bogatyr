@@ -53,14 +53,14 @@ import net.laubenberger.bogatyr.misc.Fadeable;
  * This is an extended JFrame.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.2.0
  */
 public class Frame extends JFrame implements Fadeable, Displayable {
 	private static final long serialVersionUID = 7476360387134225315L;
 
 	private static final Logger log = LoggerFactory.getLogger(Frame.class);
-	
+
 	private boolean isFading;
 
 	private Color colorFader = new Color(0, 0, 0, 100);
@@ -102,7 +102,7 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 	public Frame(final String title, final Image icon) {
 		this();
 		log.trace(HelperLog.constructor(title, icon));
-		
+
 		setTitle(title);
 		setIconImage(icon);
 	}
@@ -143,7 +143,7 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 	@Override
 	public void createAndShowGUI() {
 		log.debug(HelperLog.methodStart());
-		
+
 		setVisible(true);
 
 		log.debug(HelperLog.methodExit());
@@ -152,7 +152,7 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 	@Override
 	public void clearAndHide() {
 		log.debug(HelperLog.methodStart());
-		
+
 		dispose();
 
 		log.debug(HelperLog.methodExit());
@@ -161,7 +161,7 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 	@Override
 	public void setFading(final boolean isFading) {
 		log.debug(HelperLog.methodStart(isFading));
-		
+
 		this.isFading = isFading;
 
 		if (HelperString.contains(UIManager.getLookAndFeel().toString(), "swing.plaf") || HelperString.contains(UIManager.getLookAndFeel().toString(), "apple.laf")) { //do the fade-effect only with original lafs //$NON-NLS-1$ //$NON-NLS-2$
@@ -184,7 +184,7 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 	@Override
 	public void setFaderColor(final Color colorFader) {
 		log.debug(HelperLog.methodStart(colorFader));
-		
+
 		this.colorFader = colorFader;
 
 		log.debug(HelperLog.methodExit());
@@ -193,7 +193,7 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 	@Override
 	public boolean isFading() {
 		log.debug(HelperLog.methodStart());
-		
+
 		log.debug(HelperLog.methodExit(isFading));
 		return isFading;
 	}

@@ -43,17 +43,17 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JFileChooser.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.7.0
  */
 public class ChooserFile extends JFileChooser {
 	private static final long serialVersionUID = -4453036459563578035L;
 
 	private static final Logger log = LoggerFactory.getLogger(ChooserFile.class);
-	
+
 	/*
-	 * Superclass constructors
-	 */
+		 * Superclass constructors
+		 */
 
 	public ChooserFile() {
 		super();

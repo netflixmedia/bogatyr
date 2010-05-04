@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100423)
+ * @version 0.9.2 (20100504)
  * @since 0.4.0
  */
 public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
@@ -194,10 +194,10 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 			throw new IllegalArgumentException("end value (" + end + ") must be greater than the start value (" + start + ')'); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if (Integer.MAX_VALUE < end - start + 1) {
-			throw new RuntimeExceptionMustBeSmaller("range (end - start + 1)", end - start + 1 , Integer.MAX_VALUE); //$NON-NLS-1$
+			throw new RuntimeExceptionMustBeSmaller("range (end - start + 1)", end - start + 1, Integer.MAX_VALUE); //$NON-NLS-1$
 		}
 
-		final Collection<Long> result = new ArrayList<Long>((int)(end - start + 1));
+		final Collection<Long> result = new ArrayList<Long>((int) (end - start + 1));
 
 		for (long ii = start; ii <= end; ii++) {
 			if (isPrime(ii)) {

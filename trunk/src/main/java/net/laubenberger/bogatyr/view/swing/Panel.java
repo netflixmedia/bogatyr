@@ -47,14 +47,14 @@ import org.slf4j.LoggerFactory;
  * This is an extended JPanel.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.1.0
  */
 public class Panel extends JPanel implements Activatable {
 	private static final long serialVersionUID = 3679443739459084931L;
 
 	private static final Logger log = LoggerFactory.getLogger(Panel.class);
-	
+
 	private boolean isNotActive;
 
 	private String title;
@@ -90,7 +90,7 @@ public class Panel extends JPanel implements Activatable {
 	public Panel(final String title) {
 		this();
 		log.trace(HelperLog.constructor(title));
-		
+
 		this.title = title;
 		setTitle(title);
 	}
@@ -98,14 +98,14 @@ public class Panel extends JPanel implements Activatable {
 	public Panel(final Color color) {
 		this();
 		log.trace(HelperLog.constructor(color));
-		
+
 		setBackground(color);
 	}
 
 	public Panel(final Color color, final LayoutManager layout) {
 		this(layout);
 		log.trace(HelperLog.constructor(color, layout));
-		
+
 		setBackground(color);
 	}
 
@@ -176,7 +176,7 @@ public class Panel extends JPanel implements Activatable {
 	@Override
 	public boolean isActive() {
 		log.debug(HelperLog.methodStart());
-		
+
 		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
@@ -184,7 +184,7 @@ public class Panel extends JPanel implements Activatable {
 	@Override
 	public void setActive(final boolean isActive) {
 		log.debug(HelperLog.methodStart(isActive));
-		
+
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -192,7 +192,7 @@ public class Panel extends JPanel implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
-		
+
 		log.debug(HelperLog.methodExit());
 	}
 }

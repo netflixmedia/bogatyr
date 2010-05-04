@@ -49,7 +49,7 @@ import com.lowagie.text.PageSize;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100423
+ * @version 20100504
  */
 public class HelperPdfTest {
 	@Test
@@ -67,7 +67,7 @@ public class HelperPdfTest {
 		component2.setForeground(Color.CYAN);
 		component2.setFont(new Font("Arial", Font.BOLD, 20)); //$NON-NLS-1$
 		component2.setSize(new Dimension(100, 100));
-		
+
 		try {
 			File output = HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf");
 //			File output = new File("bogatyr.pdf");
@@ -76,7 +76,7 @@ public class HelperPdfTest {
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
-		
+
 //		try {
 //			HelperPdf.writePdfFromImage(PageSize.A4, true, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"), null); //$NON-NLS-1$ //$NON-NLS-2$
 //			fail("components is null!"); //$NON-NLS-1$

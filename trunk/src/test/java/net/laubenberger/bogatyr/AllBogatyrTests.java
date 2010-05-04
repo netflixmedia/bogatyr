@@ -70,13 +70,13 @@ import org.junit.runner.Result;
  * Junit test suite
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20100504
  */
 public class AllBogatyrTests implements Runnable {
-	public static final String DATA = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~΅Ά£¤¥¦§¨©ª«¬­®―°±²³µ¶·ΈΉΊ»Ό½ΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡÒΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώÿ" + //$NON-NLS-1$
-			"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~΅Ά£¤¥¦§¨©ª«¬­®―°±²³µ¶·ΈΉΊ»Ό½ΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡÒΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώÿ" + //$NON-NLS-1$
-			"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~΅Ά£¤¥¦§¨©ª«¬­®―°±²³µ¶·ΈΉΊ»Ό½ΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡÒΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώÿ" + //$NON-NLS-1$
-			"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~΅Ά£¤¥¦§¨©ª«¬­®―°±²³µ¶·ΈΉΊ»Ό½ΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡÒΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώÿ"; //$NON-NLS-1$
+	public static final String DATA = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~Β°ΒΆΒ£Β§β€ΆΒ¶ΓΒ®Β©β„ΆΒ΄Β¨β‰ Γ†ΓβΒ±β‰¤β‰¥Βµβ‚β‘βΟ€β«ΒªΒΊΞ©Γ¦ΓΈΒΏΒ΅Β¬βΖ’β‰β†Β«Β»β€¦Β Γ€ΓƒΓ•Ε’Ε“β€“β€”β€β€β€β€™Γ·β—ΓΏΕΈβ„β‚¬β€Ήβ€Ίο¬ο¬‚β€΅Β·β€β€β€°Γ‚ΓΓΓ‹ΓΓΓΓΓΓ“Γ”ο£ΏΓ’ΓΓ›Γ™Δ±Λ†ΛΒ―ΛΛ™ΛΒΈΛΛ›Λ‡" + //$NON-NLS-1$
+			"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~Β°ΒΆΒ£Β§β€ΆΒ¶ΓΒ®Β©β„ΆΒ΄Β¨β‰ Γ†ΓβΒ±β‰¤β‰¥Βµβ‚β‘βΟ€β«ΒªΒΊΞ©Γ¦ΓΈΒΏΒ΅Β¬βΖ’β‰β†Β«Β»β€¦Β Γ€ΓƒΓ•Ε’Ε“β€“β€”β€β€β€β€™Γ·β—ΓΏΕΈβ„β‚¬β€Ήβ€Ίο¬ο¬‚β€΅Β·β€β€β€°Γ‚ΓΓΓ‹ΓΓΓΓΓΓ“Γ”ο£ΏΓ’ΓΓ›Γ™Δ±Λ†ΛΒ―ΛΛ™ΛΒΈΛΛ›Λ‡" + //$NON-NLS-1$
+			"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~Β°ΒΆΒ£Β§β€ΆΒ¶ΓΒ®Β©β„ΆΒ΄Β¨β‰ Γ†ΓβΒ±β‰¤β‰¥Βµβ‚β‘βΟ€β«ΒªΒΊΞ©Γ¦ΓΈΒΏΒ΅Β¬βΖ’β‰β†Β«Β»β€¦Β Γ€ΓƒΓ•Ε’Ε“β€“β€”β€β€β€β€™Γ·β—ΓΏΕΈβ„β‚¬β€Ήβ€Ίο¬ο¬‚β€΅Β·β€β€β€°Γ‚ΓΓΓ‹ΓΓΓΓΓΓ“Γ”ο£ΏΓ’ΓΓ›Γ™Δ±Λ†ΛΒ―ΛΛ™ΛΒΈΛΛ›Λ‡" + //$NON-NLS-1$
+			"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~Β°ΒΆΒ£Β§β€ΆΒ¶ΓΒ®Β©β„ΆΒ΄Β¨β‰ Γ†ΓβΒ±β‰¤β‰¥Βµβ‚β‘βΟ€β«ΒªΒΊΞ©Γ¦ΓΈΒΏΒ΅Β¬βΖ’β‰β†Β«Β»β€¦Β Γ€ΓƒΓ•Ε’Ε“β€“β€”β€β€β€β€™Γ·β—ΓΏΕΈβ„β‚¬β€Ήβ€Ίο¬ο¬‚β€΅Β·β€β€β€°Γ‚ΓΓΓ‹ΓΓΓΓΓΓ“Γ”ο£ΏΓ’ΓΓ›Γ™Δ±Λ†ΛΒ―ΛΛ™ΛΒΈΛΛ›Λ‡"; //$NON-NLS-1$
 
 	public static final int ITERATIONS = 1;
 	public static final int THREADS = 1;

@@ -49,14 +49,14 @@ import net.laubenberger.bogatyr.misc.Activatable;
  * This is an extended JFormattedTextField.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.9.0
  */
 public class FormattedTextField extends JFormattedTextField implements Activatable {
 	private static final long serialVersionUID = -507647543464629867L;
 
 	private static final Logger log = LoggerFactory.getLogger(FormattedTextField.class);
-	
+
 	private boolean isNotActive;
 
 	{
@@ -105,14 +105,14 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 	public FormattedTextField(final Object value, final String toolTip, final AbstractFormatterFactory formatterFactory, final boolean isNumeric) {
 		this(toolTip, formatterFactory, isNumeric);
 		log.trace(HelperLog.constructor(value, toolTip, formatterFactory, isNumeric));
-		
+
 		setValue(value);
 	}
 
 	public FormattedTextField(final String toolTip, final AbstractFormatterFactory formatterFactory, final boolean isNumeric) {
 		this(formatterFactory);
 		log.trace(HelperLog.constructor(toolTip, formatterFactory, isNumeric));
-		
+
 		setToolTipText(toolTip);
 
 		if (isNumeric) {
@@ -123,7 +123,7 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 	public FormattedTextField(final String toolTip, final Format format, final boolean isNumeric) {
 		this(format);
 		log.trace(HelperLog.constructor(toolTip, format, isNumeric));
-		
+
 		setToolTipText(toolTip);
 
 		if (isNumeric) {
@@ -134,7 +134,7 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 	public FormattedTextField(final String toolTip, final AbstractFormatter formatter, final boolean isNumeric) {
 		this(formatter);
 		log.trace(HelperLog.constructor(toolTip, formatter, isNumeric));
-		
+
 		setToolTipText(toolTip);
 
 		if (isNumeric) {
@@ -149,7 +149,7 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 
 	private void init() {
 		log.trace(HelperLog.methodStart());
-		
+
 		addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(final FocusEvent e) {
@@ -160,13 +160,13 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 				}
 			}
 		});
-		
+
 		log.trace(HelperLog.methodExit());
 	}
 
 	private void allowOnlyNumericInput() {
 		log.trace(HelperLog.methodStart());
-		
+
 		addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -183,7 +183,7 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 				}
 			}
 		});
-		
+
 		log.trace(HelperLog.methodExit());
 	}
 
@@ -212,7 +212,7 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 	@Override
 	public boolean isActive() {
 		log.debug(HelperLog.methodStart());
-		
+
 		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
@@ -220,7 +220,7 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 	@Override
 	public void setActive(final boolean isActive) {
 		log.debug(HelperLog.methodStart(isActive));
-		
+
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -228,7 +228,7 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
-		
+
 		log.debug(HelperLog.methodExit());
 	}
 }

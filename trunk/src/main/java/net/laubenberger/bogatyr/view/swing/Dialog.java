@@ -46,14 +46,14 @@ import java.awt.Window;
  * This is an extended JDialog.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.4.0
  */
 public class Dialog extends JDialog implements Displayable {
 	private static final long serialVersionUID = -3903296901431213544L;
 
 	private static final Logger log = LoggerFactory.getLogger(Dialog.class);
-	
+
 	{
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		HelperSwing.setMacOSXMenu();
@@ -164,19 +164,19 @@ public class Dialog extends JDialog implements Displayable {
 	@Override
 	public void createAndShowGUI() {
 		log.debug(HelperLog.methodStart());
-		
+
 		setLocationRelativeTo(getOwner());
 		setVisible(true);
-		
+
 		log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void clearAndHide() {
 		log.debug(HelperLog.methodStart());
-		
+
 		dispose();
-		
+
 		log.debug(HelperLog.methodExit());
 	}
 }

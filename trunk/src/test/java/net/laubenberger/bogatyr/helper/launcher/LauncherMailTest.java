@@ -34,7 +34,7 @@ import org.junit.Test;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20100504
  */
 public class LauncherMailTest {
 	@Test
@@ -48,7 +48,7 @@ public class LauncherMailTest {
 //		} catch (Exception ex) {fail(ex.getMessage());}
 //
 //		try {
-//			LauncherMail.mail("Test", "This is a testäöäü:" + HelperString.NEW_LINE + "Yeah, the new line is here!", "yourname@yourOtherMail.com", "anothername@anotherMail.com"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+//			LauncherMail.mail("Test", "This is a test Ã¤Ã¶Ã¼:" + HelperString.NEW_LINE + "Yeah, the new line is here!", "yourname@yourOtherMail.com", "anothername@anotherMail.com"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 //		} catch (Exception ex) {fail(ex.getMessage());}
 	}
 }

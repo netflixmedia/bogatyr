@@ -46,14 +46,14 @@ import java.util.TimerTask;
  * Display a splash-screen manual or for a desired time.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.1.0
  */
 public class SplashScreen extends Frame {
 	private static final long serialVersionUID = 8819965047277292543L;
 
 	private static final Logger log = LoggerFactory.getLogger(SplashScreen.class);
-	
+
 	private final ImageIcon splash;
 
 
@@ -74,7 +74,7 @@ public class SplashScreen extends Frame {
 	 */
 	public void display(final long displayTime) {
 		log.debug(HelperLog.methodStart(displayTime));
-		
+
 		createAndShowGUI();
 		final Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -94,7 +94,7 @@ public class SplashScreen extends Frame {
 	 */
 	public void display() {
 		log.debug(HelperLog.methodStart());
-		
+
 		createAndShowGUI();
 
 		log.debug(HelperLog.methodExit());
@@ -108,16 +108,16 @@ public class SplashScreen extends Frame {
 	@Override
 	public void hide() {
 		log.debug(HelperLog.methodStart());
-		
+
 		clearAndHide();
 
 		log.debug(HelperLog.methodExit());
 	}
 
-	
+
 	/*
-	 * Private methods
-	 */
+		 * Private methods
+		 */
 
 	private void createLayout() {
 		log.trace(HelperLog.methodStart());

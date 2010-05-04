@@ -42,17 +42,17 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JSplitPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.7.0
  */
 public class PaneSplit extends JSplitPane {
 	private static final long serialVersionUID = 2243720263917281740L;
 
 	private static final Logger log = LoggerFactory.getLogger(PaneSplit.class);
-	
+
 	/*
-	 * Superclass constructors
-	 */
+		 * Superclass constructors
+		 */
 
 	public PaneSplit() {
 		super();

@@ -27,16 +27,47 @@
 
 package net.laubenberger.bogatyr.controller;
 
+import java.lang.Thread.UncaughtExceptionHandler;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
- * This is the skeleton for all Bogatyr applications.
+ * This is the skeleton for all Bogatyr based applications.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.1.0
  */
 public abstract class ApplicationAbstract extends ExtendedObjectAbstract implements Application {
-	//atm nothing here
+	static final Logger log = LoggerFactory.getLogger(ApplicationAbstract.class);
+	
+	static {
+		Thread.setDefaultUncaughtExceptionHandler(new Handler());
+	}
+
+	{
+		log.info(HelperLog.applicationStart());
+	}
+	
+	public void exit(final int returnCode) {
+		if (0 == returnCode) {
+			log.info(HelperLog.applicationExit(returnCode));
+		} else {
+			log.warn(HelperLog.applicationExit(returnCode));
+		}
+		System.exit(returnCode);
+	}
+	
+	static final class Handler implements UncaughtExceptionHandler {
+		public void uncaughtException(Thread t, Throwable ex) {
+			log.error("uncaught exception occured", ex);
+//			log.warn(HelperLog.applicationExit(255));
+//			System.exit(255);
+		}
+	}
 }

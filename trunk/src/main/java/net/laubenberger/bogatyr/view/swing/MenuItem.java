@@ -44,17 +44,17 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JMenuItem.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.2.0
  */
 public class MenuItem extends JMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
 
 	private static final Logger log = LoggerFactory.getLogger(MenuItem.class);
-	
+
 	/*
-	 * Superclass constructors
-	 */
+		 * Superclass constructors
+		 */
 
 	public MenuItem() {
 		super();
@@ -113,7 +113,7 @@ public class MenuItem extends JMenuItem {
 	public MenuItem(final String text, final Icon icon, final int mnemonic, final String toolTip, final ActionListener listener) {
 		this(text, icon, mnemonic, toolTip);
 		log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, listener));
-		
+
 		addActionListener(listener);
 	}
 

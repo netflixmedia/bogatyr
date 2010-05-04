@@ -39,7 +39,7 @@ import javax.net.ssl.SSLServerSocketFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.8.0
  */
 public abstract class ServerSSLAbstract extends ServerAbstract {
@@ -59,6 +59,7 @@ public abstract class ServerSSLAbstract extends ServerAbstract {
 	/*
 	 * Overridden methods
 	 */
+
 	@Override
 	public void start() throws IOException {
 		setRunning(true);

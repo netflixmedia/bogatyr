@@ -51,7 +51,7 @@ import org.junit.Test;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20100504
  */
 public class UpdaterTest {
 	@Before
@@ -83,11 +83,11 @@ public class UpdaterTest {
 
 		try {
 			final File file = HelperIO.getTemporaryFile();
-			
+
 			HelperXml.serialize(file, doc);
 
-			final ModelUpdater doc2 = HelperXml.deserialize(file, ModelUpdaterImpl.class); 
-			
+			final ModelUpdater doc2 = HelperXml.deserialize(file, ModelUpdaterImpl.class);
+
 			assertEquals(doc, doc2);
 		} catch (Exception ex) {
 			ex.printStackTrace();

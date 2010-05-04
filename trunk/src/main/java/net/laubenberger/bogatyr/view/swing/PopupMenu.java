@@ -40,17 +40,17 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JPopupMenu.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.2.0
  */
 public class PopupMenu extends JPopupMenu {
 	private static final long serialVersionUID = -2117215021680174633L;
 
 	private static final Logger log = LoggerFactory.getLogger(PopupMenu.class);
-	
+
 	/*
-	 * Superclass constructors
-	 */
+		 * Superclass constructors
+		 */
 
 	public PopupMenu() {
 		super();

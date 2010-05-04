@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  * This is a skeleton for server threads.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.7.0
  */
 public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implements ServerThread {
@@ -94,6 +94,7 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 	/*
 	 * Private methods
 	 */
+
 	protected void fireStreamRead() {
 		for (final ListenerServerThread listener : listListener) {
 			listener.serverThreadStreamRead(event);
@@ -120,6 +121,7 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 	/*
 	 * Implemented methods
 	 */
+
 	@Override
 	public Socket getSocket() {
 		return socket;

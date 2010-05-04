@@ -53,23 +53,23 @@ import java.util.Vector;
  * This is an extended JComboBox.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.2.0
  */
 public class ComboBox extends JComboBox implements Activatable {
 	private static final long serialVersionUID = -3870596701286078140L;
 
 	private static final Logger log = LoggerFactory.getLogger(ComboBox.class);
-	
+
 	private boolean isNotActive;
 
 	{
 		createLayout();
 	}
-	
+
 	/*
-	 * Superclass constructors
-	 */
+		 * Superclass constructors
+		 */
 
 	public ComboBox() {
 		super();
@@ -98,14 +98,14 @@ public class ComboBox extends JComboBox implements Activatable {
 	public ComboBox(final ComboBoxModel model, final String toolTip) {
 		this(model);
 		log.trace(HelperLog.constructor(model, toolTip));
-		
+
 		setToolTipText(toolTip);
 	}
 
 	public ComboBox(final Object[] data, final String toolTip) {
 		this(data);
 		log.trace(HelperLog.constructor(data, toolTip));
-		
+
 		if (null != data) {
 			setSelectedIndex(-1);
 		}
@@ -120,12 +120,12 @@ public class ComboBox extends JComboBox implements Activatable {
 
 	private void createLayout() {
 		log.trace(HelperLog.methodStart());
-		
+
 		setEditable(true);
 
 		// get the combo boxes editor component and change the editor's document
 		((JTextComponent) getEditor().getEditorComponent()).setDocument(new ComboBoxPopup(this));
-		
+
 		log.trace(HelperLog.methodExit());
 	}
 
@@ -154,7 +154,7 @@ public class ComboBox extends JComboBox implements Activatable {
 	@Override
 	public boolean isActive() {
 		log.debug(HelperLog.methodStart());
-		
+
 		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
@@ -162,7 +162,7 @@ public class ComboBox extends JComboBox implements Activatable {
 	@Override
 	public void setActive(final boolean isActive) {
 		log.debug(HelperLog.methodStart(isActive));
-		
+
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -170,7 +170,7 @@ public class ComboBox extends JComboBox implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
-		
+
 		log.debug(HelperLog.methodExit());
 	}
 

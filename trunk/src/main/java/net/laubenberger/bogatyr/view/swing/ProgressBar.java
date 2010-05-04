@@ -41,17 +41,17 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JProgressBar.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.2.0
  */
 public class ProgressBar extends JProgressBar {
 	private static final long serialVersionUID = -6439735629199643683L;
 
 	private static final Logger log = LoggerFactory.getLogger(ProgressBar.class);
-	
+
 	/*
-	 * Superclass constructors
-	 */
+		 * Superclass constructors
+		 */
 
 	public ProgressBar() {
 		super();

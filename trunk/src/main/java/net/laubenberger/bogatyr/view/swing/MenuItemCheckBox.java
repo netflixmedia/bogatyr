@@ -44,17 +44,17 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JCheckBoxMenuItem.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.2.0
  */
 public class MenuItemCheckBox extends JCheckBoxMenuItem {
 	private static final long serialVersionUID = -5950690648354816752L;
 
 	private static final Logger log = LoggerFactory.getLogger(MenuItemCheckBox.class);
-	
+
 	/*
-	 * Superclass constructors
-	 */
+		 * Superclass constructors
+		 */
 
 	public MenuItemCheckBox() {
 		super();
@@ -133,7 +133,7 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 	public MenuItemCheckBox(final String text, final Icon icon, final int mnemonic, final String toolTip, final boolean isSelected, final ActionListener listener) {
 		this(text, icon, mnemonic, toolTip, isSelected);
 		log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, isSelected, listener));
-		
+
 		addActionListener(listener);
 	}
 

@@ -26,106 +26,108 @@
   ~ <laubenberger@gmail.com>
   -->
 
-<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+		"http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 <module name="Checker">
-    <property name="severity" value="warning"/>
-    <module name="TreeWalker">
-        <property name="tabWidth" value="4"/>
-        <module name="JavadocMethod"/>
-        <module name="JavadocType">
-            <property name="authorFormat" value="\S"/>
-        </module>
-        <module name="JavadocVariable"/>
-        <module name="JavadocStyle">
-            <property name="checkFirstSentence" value="false"/>
-        </module>
-        <module name="LocalFinalVariableName"/>
-        <module name="LocalVariableName"/>
-        <module name="MemberName"/>
-        <module name="MethodName"/>
-        <module name="PackageName"/>
-        <module name="ParameterName"/>
-        <module name="StaticVariableName"/>
-        <module name="TypeName"/>
-        <module name="AvoidStarImport"/>
-        <module name="IllegalImport"/>
-        <module name="RedundantImport"/>
-        <module name="UnusedImports"/>
-        <module name="FileLength"/>
-        <module name="LineLength">
-            <metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="120 characters (Sun: 80)"/>
-            <property name="max" value="120"/>
-        </module>
-        <module name="MethodLength"/>
-        <module name="ParameterNumber"/>
-        <module name="EmptyForIteratorPad"/>
-        <module name="MethodParamPad"/>
-        <module name="NoWhitespaceAfter">
-            <property name="tokens" value="BNOT,DEC,DOT,INC,LNOT,UNARY_MINUS,UNARY_PLUS"/>
-        </module>
-        <module name="NoWhitespaceBefore"/>
-        <module name="OperatorWrap"/>
-        <module name="ParenPad"/>
-        <module name="TypecastParenPad"/>
-        <module name="TabCharacter">
-            <property name="severity" value="info"/>
-        </module>
-        <module name="WhitespaceAfter"/>
-        <module name="ModifierOrder"/>
-        <module name="RedundantModifier"/>
-        <module name="AvoidNestedBlocks"/>
-        <module name="EmptyBlock"/>
-        <module name="LeftCurly"/>
-        <module name="NeedBraces"/>
-        <module name="RightCurly">
-           <property name="tokens" value="LITERAL_TRY, LITERAL_CATCH"/>
-        </module>
-        <module name="AvoidInlineConditionals">
-            <property name="severity" value="info"/>
-        </module>
-        <module name="DoubleCheckedLocking"/>
-        <module name="EmptyStatement"/>
-        <module name="EqualsHashCode"/>
-        <module name="HiddenField">
-            <property name="tokens" value="VARIABLE_DEF"/>
-        </module>
-        <module name="IllegalInstantiation"/>
-        <module name="InnerAssignment"/>
-        <module name="MissingSwitchDefault"/>
-        <module name="RedundantThrows">
-            <property name="logLoadErrors" value="true"/>
-            <property name="suppressLoadErrors" value="true"/>
-        </module>
-        <module name="SimplifyBooleanExpression"/>
-        <module name="SimplifyBooleanReturn"/>
-        <module name="FinalClass"/>
-        <module name="HideUtilityClassConstructor"/>
-        <module name="InterfaceIsType">
-            <property name="severity" value="ignore"/>
-        </module>
-        <module name="VisibilityModifier">
-        <property name="protectedAllowed " value="true"/>
-        </module>
-        <module name="ArrayTypeStyle"/>
-        <module name="GenericIllegalRegexp">
-            <property name="format" value="^\s*\*\s*@param\s+\S+\s+-"/>
-            <property name="message" value="Parameter description has extra dash."/>
-        </module>
-        
-        <module name="TodoComment">
-            <property name="format" value="TODO"/>
-            <property name="severity" value="info"/>
-        </module>
-        <module name="TodoComment">
-            <property name="format" value="FIXME"/>
-            <property name="severity" value="info"/>
-        </module>
-        
-        <module name="UpperEll"/>
-        <module name="WhitespaceAround">
-            <property name="tokens" value="COLON,NOT_EQUAL,DIV,DIV_ASSIGN,BXOR,QUESTION,BXOR_ASSIGN,MINUS,LCURLY,RCURLY,STAR,STAR_ASSIGN,TYPE_EXTENSION_AND,BAND,LAND,BAND_ASSIGN,MOD,MOD_ASSIGN,PLUS,PLUS_ASSIGN,LT,SL,SL_ASSIGN,LE,ASSIGN,MINUS_ASSIGN,EQUAL,GT,GE,SR,SR_ASSIGN,BSR,BSR_ASSIGN,BOR,BOR_ASSIGN,LOR,LITERAL_ASSERT,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,SLIST,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE"/>                        
-        </module>
-    </module>
-    <module name="NewlineAtEndOfFile"/>
-    <module name="Translation"/>
+	<property name="severity" value="warning"/>
+	<module name="TreeWalker">
+		<property name="tabWidth" value="4"/>
+		<module name="JavadocMethod"/>
+		<module name="JavadocType">
+			<property name="authorFormat" value="\S"/>
+		</module>
+		<module name="JavadocVariable"/>
+		<module name="JavadocStyle">
+			<property name="checkFirstSentence" value="false"/>
+		</module>
+		<module name="LocalFinalVariableName"/>
+		<module name="LocalVariableName"/>
+		<module name="MemberName"/>
+		<module name="MethodName"/>
+		<module name="PackageName"/>
+		<module name="ParameterName"/>
+		<module name="StaticVariableName"/>
+		<module name="TypeName"/>
+		<module name="AvoidStarImport"/>
+		<module name="IllegalImport"/>
+		<module name="RedundantImport"/>
+		<module name="UnusedImports"/>
+		<module name="FileLength"/>
+		<module name="LineLength">
+			<metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="120 characters (Sun: 80)"/>
+			<property name="max" value="120"/>
+		</module>
+		<module name="MethodLength"/>
+		<module name="ParameterNumber"/>
+		<module name="EmptyForIteratorPad"/>
+		<module name="MethodParamPad"/>
+		<module name="NoWhitespaceAfter">
+			<property name="tokens" value="BNOT,DEC,DOT,INC,LNOT,UNARY_MINUS,UNARY_PLUS"/>
+		</module>
+		<module name="NoWhitespaceBefore"/>
+		<module name="OperatorWrap"/>
+		<module name="ParenPad"/>
+		<module name="TypecastParenPad"/>
+		<module name="TabCharacter">
+			<property name="severity" value="info"/>
+		</module>
+		<module name="WhitespaceAfter"/>
+		<module name="ModifierOrder"/>
+		<module name="RedundantModifier"/>
+		<module name="AvoidNestedBlocks"/>
+		<module name="EmptyBlock"/>
+		<module name="LeftCurly"/>
+		<module name="NeedBraces"/>
+		<module name="RightCurly">
+			<property name="tokens" value="LITERAL_TRY, LITERAL_CATCH"/>
+		</module>
+		<module name="AvoidInlineConditionals">
+			<property name="severity" value="info"/>
+		</module>
+		<module name="DoubleCheckedLocking"/>
+		<module name="EmptyStatement"/>
+		<module name="EqualsHashCode"/>
+		<module name="HiddenField">
+			<property name="tokens" value="VARIABLE_DEF"/>
+		</module>
+		<module name="IllegalInstantiation"/>
+		<module name="InnerAssignment"/>
+		<module name="MissingSwitchDefault"/>
+		<module name="RedundantThrows">
+			<property name="logLoadErrors" value="true"/>
+			<property name="suppressLoadErrors" value="true"/>
+		</module>
+		<module name="SimplifyBooleanExpression"/>
+		<module name="SimplifyBooleanReturn"/>
+		<module name="FinalClass"/>
+		<module name="HideUtilityClassConstructor"/>
+		<module name="InterfaceIsType">
+			<property name="severity" value="ignore"/>
+		</module>
+		<module name="VisibilityModifier">
+			<property name="protectedAllowed " value="true"/>
+		</module>
+		<module name="ArrayTypeStyle"/>
+		<module name="GenericIllegalRegexp">
+			<property name="format" value="^\s*\*\s*@param\s+\S+\s+-"/>
+			<property name="message" value="Parameter description has extra dash."/>
+		</module>
+
+		<module name="TodoComment">
+			<property name="format" value="TODO"/>
+			<property name="severity" value="info"/>
+		</module>
+		<module name="TodoComment">
+			<property name="format" value="FIXME"/>
+			<property name="severity" value="info"/>
+		</module>
+
+		<module name="UpperEll"/>
+		<module name="WhitespaceAround">
+			<property name="tokens"
+						 value="COLON,NOT_EQUAL,DIV,DIV_ASSIGN,BXOR,QUESTION,BXOR_ASSIGN,MINUS,LCURLY,RCURLY,STAR,STAR_ASSIGN,TYPE_EXTENSION_AND,BAND,LAND,BAND_ASSIGN,MOD,MOD_ASSIGN,PLUS,PLUS_ASSIGN,LT,SL,SL_ASSIGN,LE,ASSIGN,MINUS_ASSIGN,EQUAL,GT,GE,SR,SR_ASSIGN,BSR,BSR_ASSIGN,BOR,BOR_ASSIGN,LOR,LITERAL_ASSERT,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,SLIST,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE"/>
+		</module>
+	</module>
+	<module name="NewlineAtEndOfFile"/>
+	<module name="Translation"/>
 </module>

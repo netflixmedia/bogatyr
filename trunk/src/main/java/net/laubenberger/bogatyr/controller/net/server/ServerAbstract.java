@@ -46,7 +46,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100504)
  * @since 0.7.0
  */
 public abstract class ServerAbstract extends ExtendedObjectAbstract implements Server, ListenerServerThread {
@@ -111,6 +111,7 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 	/*
 	 * Implemented methods
 	 */
+
 	@Override
 	public ServerSocket getServerSocket() {
 		return serverSocket;

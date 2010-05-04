@@ -45,14 +45,14 @@ import net.laubenberger.bogatyr.misc.Activatable;
  * This is an extended JButton.
  *
  * @author Stefan Laubenberger
- * @version 0.9.0 (20100201)
+ * @version 0.9.2 (20100504)
  * @since 0.2.0
  */
 public class Button extends JButton implements Activatable {
 	private static final long serialVersionUID = -7231487009931166084L;
 
 	private static final Logger log = LoggerFactory.getLogger(Button.class);
-	
+
 	private boolean isNotActive;
 
 	/*
@@ -92,21 +92,21 @@ public class Button extends JButton implements Activatable {
 	public Button(final String text, final String toolTip) {
 		this(text);
 		log.trace(HelperLog.constructor(text, toolTip));
-		
+
 		setToolTipText(toolTip);
 	}
 
 	public Button(final String text, final String toolTip, final ActionListener listener) {
 		this(text, toolTip);
 		log.trace(HelperLog.constructor(text, toolTip, listener));
-		
+
 		addActionListener(listener);
 	}
 
 	public Button(final String text, final Icon icon, final String toolTip, final ActionListener listener) {
 		this(text, icon);
 		log.trace(HelperLog.constructor(text, icon, toolTip, listener));
-		
+
 		setToolTipText(toolTip);
 		addActionListener(listener);
 	}
@@ -136,7 +136,7 @@ public class Button extends JButton implements Activatable {
 	@Override
 	public boolean isActive() {
 		log.debug(HelperLog.methodStart());
-		
+
 		log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
@@ -144,7 +144,7 @@ public class Button extends JButton implements Activatable {
 	@Override
 	public void setActive(final boolean isActive) {
 		log.debug(HelperLog.methodStart(isActive));
-		
+
 		if (isActive) {
 			isNotActive = !isActive;
 			setEnabled(isActive);
@@ -152,7 +152,7 @@ public class Button extends JButton implements Activatable {
 			setEnabled(isActive);
 			isNotActive = !isActive;
 		}
-		
+
 		log.debug(HelperLog.methodExit());
 	}
 }
