@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100506)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -106,14 +106,14 @@ public abstract class HelperString {
 	}
 
 	/**
-	 * Fill a {@link CharSequence} with a char.
+	 * Fill a {@link String} with a char.
 	 *
 	 * @param fillChar	char to fill the string
 	 * @param fillLength length of the filled string
-	 * @return filled {@link CharSequence}
+	 * @return filled {@link String}
 	 * @since 0.7.0
 	 */
-	public static CharSequence fill(final char fillChar, final int fillLength) { //$JUnit$
+	public static String fill(final char fillChar, final int fillLength) { //$JUnit$
 		log.debug(HelperLog.methodStart(fillChar, fillLength));
 		if (0 >= fillLength) {
 			throw new RuntimeExceptionMustBeGreater("fillLength", fillLength, 0); //$NON-NLS-1$
@@ -126,7 +126,7 @@ public abstract class HelperString {
 			--length;
 			chars[length] = fillChar;
 		}
-		final CharSequence result = new String(chars);
+		final String result = new String(chars);
 
 		log.debug(HelperLog.methodExit(result));
 		return result;

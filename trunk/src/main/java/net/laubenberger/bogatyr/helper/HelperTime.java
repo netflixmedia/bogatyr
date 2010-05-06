@@ -32,21 +32,22 @@ import java.io.InputStream;
 import java.net.Socket;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This is a helper class for time operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100506)
  * @since 0.7.0
  */
 public abstract class HelperTime {
@@ -135,17 +136,39 @@ public abstract class HelperTime {
 	}
 
 	/**
-	 * Create a {@link Date} with day, month and year as parameters.
+	 * Create a {@link Date} with day, month and year as parameters and the current user {@link TimeZone}.
 	 *
 	 * @param year
 	 * @param month range between 1-12
 	 * @param date  range between 1-31
-	 * @return created date
+	 * @return created {@link Date}
 	 * @see Date
+	 * @see TimeZone
 	 * @since 0.7.0
 	 */
 	public static Date getDate(final int year, final int month, final int date) {
 		log.debug(HelperLog.methodStart(year, month, date));
+		
+		final Date result = getDate(year, month, date, HelperEnvironment.getUserTimezone());
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;	
+	}
+	
+	/**
+	 * Create a {@link Date} with day, month, year and {@link TimeZone} as parameters.
+	 *
+	 * @param year
+	 * @param month range between 1-12
+	 * @param date  range between 1-31
+	 * @param timeZone for the {@link Date}
+	 * @return created {@link Date}
+	 * @see Date
+	 * @see TimeZone
+	 * @since 0.9.2
+	 */
+	public static Date getDate(final int year, final int month, final int date, final TimeZone timeZone) {
+		log.debug(HelperLog.methodStart(year, month, date, timeZone));
 		if (0 > year) {
 			throw new RuntimeExceptionMustBeGreater("year", year, 0); //$NON-NLS-1$
 		}
@@ -165,9 +188,9 @@ public abstract class HelperTime {
 			throw new RuntimeExceptionMustBeSmaller("date", date, MAX_DAY_VALUE); //$NON-NLS-1$
 		}
 
-		final Calendar cal = new GregorianCalendar();
-
-		cal.set(year, month - 1, date);
+		final Calendar cal = Calendar.getInstance(timeZone);
+		
+		cal.set(year, month - 1, date, 0, 0, 0);
 
 
 		if (cal.get(Calendar.DAY_OF_MONTH) != date) {
@@ -185,7 +208,7 @@ public abstract class HelperTime {
 	}
 
 	/**
-	 * Create a {@link Date} with day, month and year as parameters.
+	 * Create a {@link Date} with day, month and year as parameters and the current user {@link TimeZone}.
 	 *
 	 * @param year	range between 0-9999
 	 * @param month  range between 1-12
@@ -193,12 +216,37 @@ public abstract class HelperTime {
 	 * @param hour	range between 0-23
 	 * @param minute range between 0-59
 	 * @param second range between 0-59
-	 * @return created date
+	 * @return created {@link Date}
 	 * @see Date
+	 * @see TimeZone
 	 * @since 0.9.1
 	 */
 	public static Date getDate(final int year, final int month, final int date, final int hour, final int minute, final int second) {
-		log.debug(HelperLog.methodStart(year, month, date));
+		log.debug(HelperLog.methodStart(year, month, date, hour, minute, second));
+		
+		final Date result = getDate(year, month, date, hour, minute, second, HelperEnvironment.getUserTimezone());
+		
+		log.debug(HelperLog.methodExit(result));
+		return result;	
+	}
+	
+	/**
+	 * Create a {@link Date} with day, month, year and {@link TimeZone} as parameters.
+	 * 
+	 * @param year	range between 0-9999
+	 * @param month  range between 1-12
+	 * @param date	range between 1-31
+	 * @param hour	range between 0-23
+	 * @param minute range between 0-59
+	 * @param second range between 0-59
+	 * @param timeZone for the {@link Date}
+	 * @return created {@link Date}
+	 * @see Date
+	 * @see TimeZone
+	 * @since 0.9.2
+	 */
+	public static Date getDate(final int year, final int month, final int date, final int hour, final int minute, final int second, final TimeZone timeZone) {
+		log.debug(HelperLog.methodStart(year, month, date, hour, minute, second, timeZone));
 		if (0 > year) {
 			throw new RuntimeExceptionMustBeGreater("year", year, 0); //$NON-NLS-1$
 		}
@@ -235,8 +283,11 @@ public abstract class HelperTime {
 		if (MAX_SECOND_VALUE < second) {
 			throw new RuntimeExceptionMustBeSmaller("second", second, MAX_SECOND_VALUE); //$NON-NLS-1$
 		}
-
-		final Calendar cal = new GregorianCalendar();
+		if (null == timeZone) {
+			throw new RuntimeExceptionIsNull("timeZone"); //$NON-NLS-1$
+		}
+		
+		final Calendar cal = Calendar.getInstance(timeZone);
 
 		cal.set(year, month - 1, date, hour, minute, second);
 
@@ -254,21 +305,70 @@ public abstract class HelperTime {
 		log.debug(HelperLog.methodExit(result));
 		return result;
 	}
-
+	
 	/**
-	 * Create a {@link Date} with a given offset in ms from the current time.
+	 * Returns a {@link Date} containing only the date from a given {@link Date}. The values of hours, minutes, seconds and milliseconds is set to 0.
 	 *
-	 * @param offSet in ms from the current time
-	 * @return created date
+	 * @param date for the absolute date
+	 * @return created {@link Date}
 	 * @see Date
-	 * @since 0.7.0
+	 * @since 0.9.2
 	 */
-	public static Date getDate(final long offSet) {
-		log.debug(HelperLog.methodStart(offSet));
+	public static Date getDateAsAbsoluteDate(final Date date) {
+		log.debug(HelperLog.methodStart(date));
 
-		final Date result = new Date(System.currentTimeMillis() + offSet);
+		final Calendar cal = Calendar.getInstance();
+		
+		cal.setTime(date);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+
+		final Date result = cal.getTime();
 
 		log.debug(HelperLog.methodExit(result));
 		return result;
 	}
+	
+	/**
+	 * Returns a {@link Date} containing only the time from a given {@link Date}. The values of years is set to 0 and months/days set to 1.
+	 *
+	 * @param date for the absolute time
+	 * @return created {@link Date}
+	 * @see Date
+	 * @since 0.9.2
+	 */
+	public static Date getDateAsAbsoluteTime(final Date date) {
+		log.debug(HelperLog.methodStart(date));
+
+		final Calendar cal = Calendar.getInstance();
+		
+		cal.setTime(date);
+		cal.set(Calendar.YEAR, 0);
+		cal.set(Calendar.MONTH, 1);
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+
+		final Date result = cal.getTime();
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
+//	/**
+//	 * Create a {@link Date} with a given offset in ms from the current time.
+//	 *
+//	 * @param offSet in ms from the current time
+//	 * @return created date
+//	 * @see Date
+//	 * @since 0.7.0
+//	 */
+//	public static Date getDate(final long offSet) {
+//		log.debug(HelperLog.methodStart(offSet));
+//
+//		final Date result = new Date(System.currentTimeMillis() + offSet);
+//
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
 }

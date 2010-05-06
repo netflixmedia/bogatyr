@@ -31,13 +31,14 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 
+import net.laubenberger.bogatyr.model.application.ModelApplication;
 import net.laubenberger.bogatyr.model.unit.Bit;
 
 /**
  * This is a helper class for logging.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100506)
  * @since 0.9.1
  */
 public abstract class HelperLog {
@@ -46,145 +47,206 @@ public abstract class HelperLog {
 	private static final String ID_METHOD_START = ">>>"; //$NON-NLS-1$
 	private static final String ID_METHOD_EXIT = "<<<"; //$NON-NLS-1$
 	private static final String ID_CONSTRUCTOR = "***"; //$NON-NLS-1$
-
+	
+	private static final int LINE_LENGTH = 80;
+	private static final String FILLER = HelperString.fill('-', LINE_LENGTH);
+	
 	private static final String NULL = " null"; //$NON-NLS-1$
 	private static final String EMPTY = " empty"; //$NON-NLS-1$
 
-	public static String applicationStart() {
+	public static String applicationStart(final ModelApplication model) {
 		final StringBuilder sb = new StringBuilder();
 
 		sb.append(ID_APPLICATION_START);
 		sb.append(HelperString.NEW_LINE);
-
-		sb.append("Java version: ");
+		
+		// Application
+		sb.append(FILLER); 
+		sb.append(HelperString.NEW_LINE);
+		
+		sb.append("Name: "); //$NON-NLS-1$
+		sb.append(model.getName());
+		sb.append(HelperString.NEW_LINE);
+		
+		sb.append("Version: "); //$NON-NLS-1$
+		sb.append(model.getVersion());
+		sb.append(HelperString.NEW_LINE);
+		
+		sb.append("Build: "); //$NON-NLS-1$
+		sb.append(model.getBuild());
+		sb.append(HelperString.NEW_LINE);
+		
+		sb.append("Created: "); //$NON-NLS-1$
+		sb.append(model.getCreated());
+		sb.append(HelperString.NEW_LINE);
+		
+		sb.append("UUID: "); //$NON-NLS-1$
+		sb.append(model.getUUID());
+		sb.append(HelperString.NEW_LINE);
+		
+		sb.append("Manufacturer: "); //$NON-NLS-1$
+		sb.append(model.getManufacturer());
+		sb.append(HelperString.NEW_LINE);		
+		
+		sb.append("Owner: "); //$NON-NLS-1$
+		sb.append(model.getOwner());
+		sb.append(HelperString.NEW_LINE);	
+		
+		sb.append("Publisher: "); //$NON-NLS-1$
+		sb.append(model.getPublisher());
+		sb.append(HelperString.NEW_LINE);	
+		
+		sb.append("isDebug: "); //$NON-NLS-1$
+		sb.append(model.isDebug());
+		sb.append(HelperString.NEW_LINE);
+		
+		// Java
+		sb.append(FILLER); 
+		sb.append(HelperString.NEW_LINE);
+		
+		sb.append("Java version: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getJavaVersion());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("Java vendor: ");
+		sb.append("Java vendor: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getJavaVendor());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("Java VM name: ");
+		sb.append("Java VM name: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getJavaVmName());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("Java VM version: ");
+		sb.append("Java VM version: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getJavaVmVersion());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("Java properties: ");
+		sb.append("Java properties: "); //$NON-NLS-1$
 		sb.append(HelperMap.dump(HelperEnvironment.getJavaProperties()));
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("Class path: ");
+		sb.append("Class path: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getClassPath());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("Library path: ");
+		sb.append("Library path: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getLibraryPath());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("Platform: ");
+		// OS
+		sb.append(FILLER); 
+		sb.append(HelperString.NEW_LINE);
+
+		sb.append("Platform: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getPlatform());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("OS name: ");
+		sb.append("OS name: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getOsName());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("OS version: ");
+		sb.append("OS version: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getOsVersion());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("OS architecture: ");
+		sb.append("OS architecture: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getOsArch());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("OS temorary directory: ");
+		sb.append("OS temorary directory: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getOsTempDirectory());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("OS environment variables: ");
+		sb.append("OS environment variables: "); //$NON-NLS-1$
 		sb.append(HelperMap.dump(HelperEnvironment.getOsEnvironmentVariables()));
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("User name: ");
+		// User
+		sb.append(FILLER); 
+		sb.append(HelperString.NEW_LINE);
+
+		sb.append("User name: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getUserName());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("User home directory: ");
+		sb.append("User home directory: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getUserHomeDirectory());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("User directory: ");
+		sb.append("User directory: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getUserDirectory());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("User country: ");
+		sb.append("User country: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getUserCountry());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("User language: ");
+		sb.append("User language: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getUserLanguage());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("User timezone: ");
+		sb.append("User timezone: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getUserTimezone());
+		sb.append(HelperString.NEW_LINE);
+		
+		// System
+		sb.append(FILLER); 
+		sb.append(HelperString.NEW_LINE);
 
-		sb.append("Available processors (cores): ");
+		sb.append("Available processors (cores): "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getAvailableProcessors());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("Memory max: ");
+		sb.append("Maximum memory: "); //$NON-NLS-1$
 		sb.append(Bit.BYTE.convertTo(Bit.MEGABYTE, HelperEnvironment.getMemoryMax()).setScale(3, BigDecimal.ROUND_DOWN));
-		sb.append(" MB");
+		sb.append(" MB"); //$NON-NLS-1$
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("Memory total: ");
+		sb.append("Total memory: "); //$NON-NLS-1$
 		sb.append(Bit.BYTE.convertTo(Bit.MEGABYTE, HelperEnvironment.getMemoryTotal()).setScale(3, BigDecimal.ROUND_DOWN));
-		sb.append(" MB");
+		sb.append(" MB"); //$NON-NLS-1$
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("Memory used: ");
-		sb.append(Bit.BYTE.convertTo(Bit.MEGABYTE, HelperEnvironment.getMemoryUsed()).setScale(3, BigDecimal.ROUND_DOWN));
-		sb.append(" MB");
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("Memory free: ");
+		sb.append("Free memory: "); //$NON-NLS-1$
 		sb.append(Bit.BYTE.convertTo(Bit.MEGABYTE, HelperEnvironment.getMemoryFree()).setScale(3, BigDecimal.ROUND_DOWN));
-		sb.append(" MB");
+		sb.append(" MB"); //$NON-NLS-1$
+		sb.append(HelperString.NEW_LINE);
+		
+		sb.append("Used memory: "); //$NON-NLS-1$
+		sb.append(Bit.BYTE.convertTo(Bit.MEGABYTE, HelperEnvironment.getMemoryUsed()).setScale(3, BigDecimal.ROUND_DOWN));
+		sb.append(" MB"); //$NON-NLS-1$
 		sb.append(HelperString.NEW_LINE);
 
 		List<File> files = HelperIO.getAvailableDrives();
 
 		for (File root : files) {
-			sb.append("File system root: ");
+			sb.append("Drive: "); //$NON-NLS-1$
 			sb.append(root.getAbsolutePath());
 			sb.append(HelperString.NEW_LINE);
-			sb.append("Total space: ");
+			sb.append("Total space: "); //$NON-NLS-1$
 			sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceTotal(root)).setScale(3, BigDecimal.ROUND_DOWN));
-			sb.append(" GB");
+			sb.append(" GB"); //$NON-NLS-1$
 			sb.append(HelperString.NEW_LINE);
-			sb.append("Free space: ");
+			sb.append("Free space: "); //$NON-NLS-1$
 			sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceFree(root)).setScale(3, BigDecimal.ROUND_DOWN));
-			sb.append(" GB");
+			sb.append(" GB"); //$NON-NLS-1$
 			sb.append(HelperString.NEW_LINE);
-			sb.append("Usable space: ");
+			sb.append("Usable space: "); //$NON-NLS-1$
 			sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceUsable(root)).setScale(3, BigDecimal.ROUND_DOWN));
-			sb.append(" GB");
+			sb.append(" GB"); //$NON-NLS-1$
 			sb.append(HelperString.NEW_LINE);
-			sb.append("Used space: ");
+			sb.append("Used space: "); //$NON-NLS-1$
 			sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceUsed(root)).setScale(3, BigDecimal.ROUND_DOWN));
-			sb.append(" GB");
+			sb.append(" GB"); //$NON-NLS-1$
 			sb.append(HelperString.NEW_LINE);
 		}
+
+		sb.append(FILLER); 
 
 		return sb.toString();
 	}
 
 	public static String applicationExit(final int returnCode) {
-		return ID_APPLICATION_EXIT + HelperString.SPACE
-				+ "ended: " + returnCode + HelperString.SPACE + ID_APPLICATION_EXIT; //$NON-NLS-1$
+		return ID_APPLICATION_EXIT + HelperString.SPACE + returnCode + HelperString.SPACE + ID_APPLICATION_EXIT;
 	}
 
 	public static String methodStart() {

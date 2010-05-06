@@ -20,100 +20,7 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="6099473d-4163-40d6-a2ae-9afd78c1b030" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/ManufacturerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/ManufacturerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/application/ControllerApplicationAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/application/ControllerApplicationAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Slider.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Slider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ToggleButton.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ToggleButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Panel.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Panel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Spinner.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Spinner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ProgressBar.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ProgressBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/factory/FormatFactory.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/factory/FormatFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Separator.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Separator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterPlatform.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterPlatform.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/client/ClientSSLAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/client/ClientSSLAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/TextField.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/TextField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuItem.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/SplashScreen.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/SplashScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/worker/WorkerAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/worker/WorkerAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/FormattedTextField.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/FormattedTextField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/PersonImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/PersonImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneText.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneText.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Manufacturer.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Manufacturer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/PublisherImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/PublisherImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Phone.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chart/Chart.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chart/Chart.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/server/ServerSSLAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/server/ServerSSLAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/server/ServerAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/server/ServerAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/LabeledComponent.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/LabeledComponent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperEnvironment.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperEnvironment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/List.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/List.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/PasswordField.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/PasswordField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/PopupMenu.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/PopupMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperEnvironmentTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperEnvironmentTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ActionAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ActionAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Dialog.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Dialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Button.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Button.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/client/ClientAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/client/ClientAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterHashCode.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterHashCode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperGraphic.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperGraphic.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chart/ChartEntry.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chart/ChartEntry.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneEditor.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneEditor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneOption.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneOption.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Table.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Table.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuItemRadioButton.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuItemRadioButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneTab.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/DatagramDumperImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/DatagramDumperImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/checkstyle.xml" afterPath="$PROJECT_DIR$/build/checkstyle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuItemCheckBox.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuItemCheckBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/service/updater/UpdaterTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/service/updater/UpdaterTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/launcher/LauncherMailTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/launcher/LauncherMailTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/AllBogatyrTests.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/AllBogatyrTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Language.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Language.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Owner.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Owner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/LabelVertical.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/LabelVertical.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterString.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterString.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Frame.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Frame.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/JarLoader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Menu.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Menu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneScroll.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneScroll.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperMath.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperMath.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperLog.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperLog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/RadioButton.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/RadioButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneLayer.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneLayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ToolBar.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ToolBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Group.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Group.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Person.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Person.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/server/ServerThreadAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/server/ServerThreadAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ComboBox.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ComboBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperPdfTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperPdfTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/TextArea.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/TextArea.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperPdf.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperPdf.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneSplit.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneSplit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chooser/ChooserFile.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/chooser/ChooserFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneDesktop.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/pane/PaneDesktop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Label.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Label.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/CheckBox.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/CheckBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Address.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Address.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.ipr" afterPath="$PROJECT_DIR$/Bogatyr.ipr" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/resources/helloworld/helloworld_de.properties" afterPath="$PROJECT_DIR$/src/sample/resources/helloworld/helloworld_de.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/factory/DocumentFactory.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/factory/DocumentFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Fax.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/OwnerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/OwnerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/launcher/LauncherFile.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/launcher/LauncherFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/Application.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/ModelAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/ModelAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Country.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Country.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuBar.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/MenuBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Publisher.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Publisher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/ApplicationAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/ApplicationAbstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Tree.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/Tree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/TableModel.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/TableModel.java" />
-    </list>
+    <list default="true" readonly="true" id="6099473d-4163-40d6-a2ae-9afd78c1b030" name="Default" comment="" />
     <ignored path="target/" />
     <ignored path="$USER_HOME_GRAILS$/" />
     <ignored path=".idea/workspace.xml" />
@@ -1487,7 +1394,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1920" height="1054" extended-state="6" />
+    <frame x="1" y="22" width="1920" height="1054" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40899357" sideWeight="0.0" order="10" side_tool="false" content_ui="tabs" />
@@ -1497,6 +1404,7 @@
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.6057572" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32655245" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31905782" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32655245" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18278995" sideWeight="0.6627409" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.6057572" order="3" side_tool="false" content_ui="tabs" />
@@ -1509,7 +1417,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3222698" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31905782" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32867885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3875803" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />

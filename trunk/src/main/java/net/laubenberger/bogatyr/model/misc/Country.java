@@ -37,7 +37,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * <strong>Note:</strong> The language is always the main language of a country.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100506)
  * @since 0.9.1
  */
 public enum Country {
@@ -137,7 +137,7 @@ public enum Country {
 	SWEDEN(new Locale("sv", "SE")), //$NON-NLS-1$//$NON-NLS-2$
 	DENMARK(new Locale("da", "DK")), //$NON-NLS-1$//$NON-NLS-2$
 	HONDURAS(new Locale("es", "HN")), //$NON-NLS-1$//$NON-NLS-2$
-	UNKNOWN(new Locale("unknown", "UNKNOWN"));
+	UNKNOWN(new Locale("unknown", "UNKNOWN"));  //$NON-NLS-1$//$NON-NLS-2$
 
 	private final Locale locale;
 

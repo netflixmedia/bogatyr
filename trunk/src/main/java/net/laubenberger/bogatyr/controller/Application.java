@@ -28,13 +28,14 @@
 package net.laubenberger.bogatyr.controller;
 
 import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObject;
+import net.laubenberger.bogatyr.model.application.ModelApplication;
 
 
 /**
  * Defines the methods for all Bogatyr based applications.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100506)
  * @since 0.9.0
  */
 public interface Application extends ExtendedObject, Runnable {
@@ -46,13 +47,13 @@ public interface Application extends ExtendedObject, Runnable {
 	 */	
 	void exit(int returnCode);
 	
-//	/**
-//     * Returns the model of the application.
-//     * 
-//     * @return model of the application
-//     * @since 0.9.0
-//     */	
-//	ModelApplication getModel();
+	/**
+     * Returns the model of the application.
+     * 
+     * @return model of the application
+     * @since 0.9.0
+     */	
+	ModelApplication getModel();
 //	
 //	/**
 //     * Returns the view of the controller.
