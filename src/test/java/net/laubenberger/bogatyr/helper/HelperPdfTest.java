@@ -37,7 +37,6 @@ import java.io.File;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 
-import net.laubenberger.bogatyr.helper.launcher.LauncherFile;
 import net.laubenberger.bogatyr.view.swing.Button;
 
 import org.junit.Test;
@@ -49,7 +48,7 @@ import com.lowagie.text.PageSize;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100504
+ * @version 20100506
  */
 public class HelperPdfTest {
 	@Test

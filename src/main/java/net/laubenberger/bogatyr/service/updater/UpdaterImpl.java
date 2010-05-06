@@ -34,9 +34,6 @@ import java.net.URL;
 
 import javax.xml.bind.JAXBException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperIO;
 import net.laubenberger.bogatyr.helper.HelperLog;
@@ -47,14 +44,18 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.model.misc.Platform;
 import net.laubenberger.bogatyr.model.updater.ModelUpdater;
+import net.laubenberger.bogatyr.model.updater.ModelUpdaterImpl;
 import net.laubenberger.bogatyr.service.ServiceAbstract;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This is the updater for documents.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100506)
  * @since 0.6.0
  */
 public class UpdaterImpl extends ServiceAbstract implements Updater {
@@ -75,7 +76,7 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 	public ModelUpdater getDocument(final File file) throws JAXBException {
 		log.debug(HelperLog.methodStart(file));
 
-		final ModelUpdater result = HelperXml.deserialize(file, ModelUpdater.class);
+		final ModelUpdater result = HelperXml.deserialize(file, ModelUpdaterImpl.class);
 
 		log.debug(HelperLog.methodExit(result));
 		return result;
@@ -85,7 +86,7 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 	public ModelUpdater getDocument(final InputStream is) throws JAXBException {
 		log.debug(HelperLog.methodStart(is));
 
-		final ModelUpdater result = HelperXml.deserialize(is, ModelUpdater.class);
+		final ModelUpdater result = HelperXml.deserialize(is, ModelUpdaterImpl.class);
 
 		log.debug(HelperLog.methodExit(result));
 		return result;

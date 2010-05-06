@@ -68,7 +68,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100506)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -362,7 +362,7 @@ public abstract class HelperPdf {
 
 		final File[] files = new File[ppt.getSlides().length];
 		for (int ii = 0; ii < ppt.getSlides().length; ii++) {
-			files[ii] = HelperIO.getTemporaryFile(HelperPdf.class.getSimpleName() + "-slide", IMAGE_TYPE);
+			files[ii] = HelperIO.getTemporaryFile(HelperPdf.class.getSimpleName() + "-slide", IMAGE_TYPE); //$NON-NLS-1$
 		}
 
 		// export ppt as images

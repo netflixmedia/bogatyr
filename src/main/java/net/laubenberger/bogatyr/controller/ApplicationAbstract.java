@@ -31,6 +31,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
+import net.laubenberger.bogatyr.model.application.ModelApplication;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,20 +41,45 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all Bogatyr based applications.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100506)
  * @since 0.1.0
  */
 public abstract class ApplicationAbstract extends ExtendedObjectAbstract implements Application {
 	static final Logger log = LoggerFactory.getLogger(ApplicationAbstract.class);
 	
+	private final ModelApplication model;
+	
+	
 	static {
 		Thread.setDefaultUncaughtExceptionHandler(new Handler());
 	}
 
-	{
-		log.info(HelperLog.applicationStart());
+//	{
+//		log.info(HelperLog.applicationStart());
+//	}
+	
+	public ApplicationAbstract(final ModelApplication model) {
+		super();
+		
+		this.model = model;
 	}
 	
+
+	/*
+	 * Implemented methods
+	 */
+	
+	@Override
+	public ModelApplication getModel() {
+		return model;
+	}
+	
+	@Override
+	public void run() {
+		log.info(HelperLog.applicationStart(model));
+	}
+	
+	@Override
 	public void exit(final int returnCode) {
 		if (0 == returnCode) {
 			log.info(HelperLog.applicationExit(returnCode));
@@ -63,9 +89,14 @@ public abstract class ApplicationAbstract extends ExtendedObjectAbstract impleme
 		System.exit(returnCode);
 	}
 	
+	
+	/*
+	 * Inner classes
+	 */
+	
 	static final class Handler implements UncaughtExceptionHandler {
 		public void uncaughtException(Thread t, Throwable ex) {
-			log.error("uncaught exception occured", ex);
+			log.error("uncaught exception occured", ex); //$NON-NLS-1$
 //			log.warn(HelperLog.applicationExit(255));
 //			System.exit(255);
 		}
