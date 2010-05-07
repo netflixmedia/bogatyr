@@ -30,17 +30,25 @@ package filemanager;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
-
-import net.laubenberger.bogatyr.helper.HelperObject;
-import org.apache.log4j.PropertyConfigurator;
+import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import net.laubenberger.bogatyr.controller.ApplicationAbstract;
 import net.laubenberger.bogatyr.helper.HelperIO;
+import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.helper.HelperString;
-import net.laubenberger.bogatyr.service.localizer.Localizer;
+import net.laubenberger.bogatyr.helper.HelperTime;
+import net.laubenberger.bogatyr.model.application.ModelApplication;
+import net.laubenberger.bogatyr.model.application.ModelApplicationImpl;
+import net.laubenberger.bogatyr.model.misc.Country;
+import net.laubenberger.bogatyr.model.misc.ManufacturerImpl;
+import net.laubenberger.bogatyr.model.misc.OwnerImpl;
+import net.laubenberger.bogatyr.model.misc.PublisherImpl;
 import net.laubenberger.bogatyr.service.localizer.LocalizerFile;
-import net.laubenberger.bogatyr.service.property.Property;
 import net.laubenberger.bogatyr.service.property.PropertyImpl;
+
+import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +57,7 @@ import org.slf4j.LoggerFactory;
  * Simple file manager using the Bogatyr framework
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20100507
  */
 public class FileManager extends ApplicationAbstract {
 	private static final Logger log = LoggerFactory.getLogger(FileManager.class);
@@ -57,6 +65,8 @@ public class FileManager extends ApplicationAbstract {
 	// Fixed parameter - e.g. this could be an argument
 	private static final String ARG_PROPERTY_LOCATION = "src/sample/configuration/filemanager/standard.properties"; //$NON-NLS-1$
 
+	private static final ModelApplication MODEL;
+	
 	// Properties
 	private static final String PROPERTY_LOCALIZER_BASE = "FileManager.localizerbase"; //$NON-NLS-1$
 	private static final String PROPERTY_PATH = "FileManager.path"; //$NON-NLS-1$
@@ -68,21 +78,38 @@ public class FileManager extends ApplicationAbstract {
 	private static final String RES_DELETED = "FileManager.deleted"; //$NON-NLS-1$
 	private static final String RES_FOUND = "FileManager.found"; //$NON-NLS-1$
 
-	Property property;
-	private Localizer localizer;
-
 	private File path;
+
+	static {
+		PropertyConfigurator.configure("src/sample/configuration/log4j.properties"); //$NON-NLS-1$
+
+		MODEL = new ModelApplicationImpl(
+				"FileManager", new BigDecimal("0.92"), 20100507, HelperTime.getDate(2010, 5, 7, 21, 27, 0), null, null, null, null, false, null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+
+		try {
+			MODEL
+					.setManufacturer(new ManufacturerImpl(
+							"Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net/"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			MODEL
+					.setOwner(new OwnerImpl(
+							"Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net/"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			MODEL
+					.setPublisher(new PublisherImpl(
+							"Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net/"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+		} catch (MalformedURLException ex) {
+			// should never happen!
+			log.error("URL invalid", ex); //$NON-NLS-1$
+		}
+	}
 
 
 	public static void main(final String[] args) {
-		PropertyConfigurator.configure("src/sample/configuration/log4j.properties"); //$NON-NLS-1$
-
 		final FileManager fm = new FileManager();
 		fm.run();
 	}
 
 	public FileManager() {
-		super();
+		super(MODEL);
 
 		init();
 	}
@@ -94,31 +121,31 @@ public class FileManager extends ApplicationAbstract {
 
 	private void init() {
 		try {
-			property = new PropertyImpl(new File(ARG_PROPERTY_LOCATION));
+			MODEL.setProperty(new PropertyImpl(new File(ARG_PROPERTY_LOCATION)));
 		} catch (IOException ex) {
 			log.error("Could not process the property file", ex); //$NON-NLS-1$
-			System.exit(1);
+			exit(1);
 		}
 
-		final String value = property.getValue(PROPERTY_PATH);
+		final String value = MODEL.getProperty().getValue(PROPERTY_PATH);
 		if (HelperString.isValid(value)) {
 			path = new File(value);
 		} else {
 			log.error(HelperObject.quote(PROPERTY_PATH) + " not found"); //$NON-NLS-1$
-			System.exit(10);
+			exit(10);
 		}
 
-		localizer = new LocalizerFile(property.getValue(PROPERTY_LOCALIZER_BASE));
+		MODEL.setLocalizer(new LocalizerFile(MODEL.getProperty().getValue(PROPERTY_LOCALIZER_BASE)));
 	}
 
 	private void searchFiles() throws IOException {
 		int ii = 0;
-		final boolean isDelete = property.getBoolean(PROPERTY_DELETE);
+		final boolean isDelete = MODEL.getProperty().getBoolean(PROPERTY_DELETE);
 
 		final FileFilter filter = new FileFilter() {
 			@Override
 			public boolean accept(final File file) {
-				return HelperString.contains(file.getName(), property.getValue(PROPERTY_IDENTIFIER));
+				return HelperString.contains(file.getName(), MODEL.getProperty().getValue(PROPERTY_IDENTIFIER));
 			}
 		};
 
@@ -126,10 +153,10 @@ public class FileManager extends ApplicationAbstract {
 			if (isDelete) {
 				HelperIO.delete(file);
 			}
-			System.out.println(file);
+			log.debug(file.getAbsolutePath());
 			ii++;
 		}
-		System.out.println(localizer.getValue(RES_FILES) + HelperString.SPACE + (isDelete ? localizer.getValue(RES_DELETED) : localizer.getValue(RES_FOUND)) + ':' + ii);
+		log.debug(MODEL.getLocalizer().getValue(RES_FILES) + HelperString.SPACE + (isDelete ? MODEL.getLocalizer().getValue(RES_DELETED) : MODEL.getLocalizer().getValue(RES_FOUND)) + ':' + ii);
 	}
 
 
@@ -139,12 +166,14 @@ public class FileManager extends ApplicationAbstract {
 
 	@Override
 	public void run() {
+		super.run();
+		
 		try {
 			searchFiles();
 		} catch (IOException ex) {
 			log.error("Could not process the file search", ex); //$NON-NLS-1$
-			System.exit(20);
+			exit(20);
 		}
-		System.exit(0);
+		exit(0);
 	}
 }
