@@ -29,16 +29,24 @@ package helloworld;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Locale;
-
-import org.apache.log4j.PropertyConfigurator;
 
 import net.laubenberger.bogatyr.controller.ApplicationAbstract;
 import net.laubenberger.bogatyr.helper.HelperString;
-import net.laubenberger.bogatyr.service.localizer.Localizer;
+import net.laubenberger.bogatyr.helper.HelperTime;
+import net.laubenberger.bogatyr.model.application.ModelApplication;
+import net.laubenberger.bogatyr.model.application.ModelApplicationImpl;
+import net.laubenberger.bogatyr.model.misc.Country;
+import net.laubenberger.bogatyr.model.misc.ManufacturerImpl;
+import net.laubenberger.bogatyr.model.misc.OwnerImpl;
+import net.laubenberger.bogatyr.model.misc.PublisherImpl;
 import net.laubenberger.bogatyr.service.localizer.LocalizerFile;
-import net.laubenberger.bogatyr.service.property.Property;
 import net.laubenberger.bogatyr.service.property.PropertyImpl;
+
+import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +56,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20100416
+ * @version 20100507
  */
 public class HelloWorld extends ApplicationAbstract {
 	private static final Logger log = LoggerFactory.getLogger(HelloWorld.class);
@@ -56,6 +64,8 @@ public class HelloWorld extends ApplicationAbstract {
 	// Fixed parameter - e.g. this could be an argument
 	private static final String ARG_PROPERTY_LOCATION = "src/sample/configuration/helloworld/standard.properties"; //$NON-NLS-1$
 
+	private static final ModelApplication MODEL;
+	
 	// Properties
 	private static final String PROPERTY_LOCALIZER_BASE = "HelloWorld.localizerbase"; //$NON-NLS-1$
 	private static final String PROPERTY_USERNAME = "HelloWorld.username"; //$NON-NLS-1$
@@ -64,19 +74,35 @@ public class HelloWorld extends ApplicationAbstract {
 	private static final String RES_WELCOME = "HelloWorld.welcome"; //$NON-NLS-1$
 	private static final String RES_BYE = "HelloWorld.bye"; //$NON-NLS-1$
 
-	private Property property;
-	private Localizer localizer;
-
-
-	public static void main(final String[] args) {
+	static {
 		PropertyConfigurator.configure("src/sample/configuration/log4j.properties"); //$NON-NLS-1$
 
+		MODEL = new ModelApplicationImpl(
+				"HelloWorld", new BigDecimal("0.92"), 20100507, HelperTime.getDate(2010, 5, 7, 21, 33, 0), null, null, null, null, false, null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+
+		try {
+			MODEL
+					.setManufacturer(new ManufacturerImpl(
+							"Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net/"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			MODEL
+					.setOwner(new OwnerImpl(
+							"Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net/"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			MODEL
+					.setPublisher(new PublisherImpl(
+							"Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net/"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+		} catch (MalformedURLException ex) {
+			// should never happen!
+			log.error("URL invalid", ex); //$NON-NLS-1$
+		}
+	}
+
+	public static void main(final String[] args) {
 		final HelloWorld hw = new HelloWorld();
 		hw.run();
 	}
 
 	public HelloWorld() {
-		super();
+		super(MODEL);
 
 		init();
 	}
@@ -87,13 +113,13 @@ public class HelloWorld extends ApplicationAbstract {
 
 	private void init() {
 		try {
-			property = new PropertyImpl(new File(ARG_PROPERTY_LOCATION));
+			MODEL.setProperty(new PropertyImpl(new File(ARG_PROPERTY_LOCATION)));
 		} catch (IOException ex) {
 			log.error("Could not process the property file", ex); //$NON-NLS-1$
-			System.exit(1);
+			exit(1);
 		}
 
-		localizer = new LocalizerFile(property.getValue(PROPERTY_LOCALIZER_BASE));
+		MODEL.setLocalizer(new LocalizerFile(MODEL.getProperty().getValue(PROPERTY_LOCALIZER_BASE)));
 	}
 
 	/*
@@ -102,20 +128,22 @@ public class HelloWorld extends ApplicationAbstract {
 
 	@Override
 	public void run() {
-		final String username = property.getValue(PROPERTY_USERNAME);
+		super.run();
+		
+		final String username = MODEL.getProperty().getValue(PROPERTY_USERNAME);
 
-		localizer.setLocale(Locale.GERMAN);
-		System.out.println(localizer.getValue(RES_WELCOME) + HelperString.SPACE + username + '!');
+		MODEL.getLocalizer().setLocale(Locale.GERMAN);
+		System.out.println(MODEL.getLocalizer().getValue(RES_WELCOME) + HelperString.SPACE + username + '!');
 
-		localizer.setLocale(Locale.ROOT);
-		System.out.println(localizer.getValue(RES_WELCOME) + HelperString.SPACE + username + '!');
+		MODEL.getLocalizer().setLocale(Locale.ROOT);
+		System.out.println(MODEL.getLocalizer().getValue(RES_WELCOME) + HelperString.SPACE + username + '!');
 
-		localizer.setLocale(Locale.GERMAN);
-		System.out.println(localizer.getValue(RES_BYE));
+		MODEL.getLocalizer().setLocale(Locale.GERMAN);
+		System.out.println(MODEL.getLocalizer().getValue(RES_BYE));
 
-		localizer.setLocale(Locale.ROOT);
-		System.out.println(localizer.getValue(RES_BYE));
+		MODEL.getLocalizer().setLocale(Locale.ROOT);
+		System.out.println(MODEL.getLocalizer().getValue(RES_BYE));
 
-		System.exit(0);
+		exit(0);
 	}
 }
