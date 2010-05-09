@@ -27,18 +27,19 @@
 
 package net.laubenberger.bogatyr.model.misc;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import net.laubenberger.bogatyr.model.Model;
+import java.net.URL;
 
 /**
- * The interface for the manufacturer model.
+ * The interface definition for an url.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
- * @since 0.9.0
+ * @version 0.9.2 (20100509)
+ * @since 0.9.1
  */
-@XmlJavaTypeAdapter(ManufacturerImpl.XmlAdapter.class)
-public interface Manufacturer extends Model, Address, Phone, Fax, Email, Website {
-	//atm nothing
+public interface Url {
+	String MEMBER_WEBSITE = "url"; //$NON-NLS-1$
+
+	URL getUrl();
+
+	void setUrl(URL website);
 }

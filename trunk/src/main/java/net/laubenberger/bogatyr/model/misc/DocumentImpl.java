@@ -29,7 +29,9 @@ package net.laubenberger.bogatyr.model.misc;
 
 
 import java.math.BigDecimal;
+import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -49,11 +51,11 @@ import net.laubenberger.bogatyr.model.ModelAbstract;
  * The implementation of the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100509)
  * @since 0.9.1
  */
 @XmlRootElement(name = "document")
-@XmlType(propOrder = {"name", "version", "build", "created", "manufacturer", "owner", "publisher", "UUID"})
+@XmlType(propOrder = {"name", "version", "build", "created", "UUID", "url", "organizations", "persons"})
 public class DocumentImpl extends ModelAbstract implements Document {
 	private static final long serialVersionUID = 5505184629744108815L;
 
@@ -63,10 +65,10 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	private BigDecimal version;
 	private int build;
 	private Date created;
-	private Manufacturer manufacturer;
-	private Owner owner;
-	private Publisher publisher;
 	private UUID uuid;
+	private URL url;
+	private List<Organization> listOrganization;
+	private List<Person> listPerson;
 
 	public DocumentImpl() {
 		super();
@@ -74,111 +76,89 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	public DocumentImpl(final String name, final BigDecimal version, final int build,
-							  final Date created, final Manufacturer manufacturer, final Owner owner,
-							  final Publisher publisher, final UUID uuid, final Map<String, String> mapTag) {
+							  final Date created, final UUID uuid, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final Map<String, String> mapTag) {
 		super(mapTag);
-		log.trace(HelperLog.constructor(name, version, build, created, manufacturer, owner, publisher, uuid, mapTag));
+		log.trace(HelperLog.constructor(name, version, build, created, uuid, url, listOrganization, listPerson, mapTag));
 
 		this.name = name;
 		this.version = version;
 		this.build = build;
 		this.created = created;
-		this.manufacturer = manufacturer;
-		this.owner = owner;
-		this.publisher = publisher;
 		this.uuid = uuid;
+		this.url = url;
+		this.listOrganization = listOrganization;
+		this.listPerson = listPerson;
 	}
 
 
 	/*
 	 * Overridden methods
 	 */
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + build;
-		result = prime * result + ((null == created) ? 0 : created.hashCode());
-		result = prime * result
-				+ ((null == manufacturer) ? 0 : manufacturer.hashCode());
-		result = prime * result + ((null == name) ? 0 : name.hashCode());
-		result = prime * result + ((null == owner) ? 0 : owner.hashCode());
-		result = prime * result
-				+ ((null == publisher) ? 0 : publisher.hashCode());
-		result = prime * result + ((null == uuid) ? 0 : uuid.hashCode());
-		result = prime * result + ((null == version) ? 0 : version.hashCode());
+		result = prime * result + ((created == null) ? 0 : created.hashCode());
+		result = prime * result + ((listOrganization == null) ? 0 : listOrganization.hashCode());
+		result = prime * result + ((listPerson == null) ? 0 : listPerson.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
 
-
 	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		}
-		if (!super.equals(obj)) {
+		if (!super.equals(obj))
 			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
-		final DocumentImpl other = (DocumentImpl) obj;
-		if (build != other.build) {
+		DocumentImpl other = (DocumentImpl) obj;
+		if (build != other.build)
 			return false;
-		}
-		if (null == created) {
-			if (null != other.created) {
+		if (created == null) {
+			if (other.created != null)
 				return false;
-			}
-		} else if (!created.equals(other.created)) {
+		} else if (!created.equals(other.created))
 			return false;
-		}
-		if (null == manufacturer) {
-			if (null != other.manufacturer) {
+		if (listOrganization == null) {
+			if (other.listOrganization != null)
 				return false;
-			}
-		} else if (!manufacturer.equals(other.manufacturer)) {
+		} else if (!listOrganization.equals(other.listOrganization))
 			return false;
-		}
-		if (null == name) {
-			if (null != other.name) {
+		if (listPerson == null) {
+			if (other.listPerson != null)
 				return false;
-			}
-		} else if (!name.equals(other.name)) {
+		} else if (!listPerson.equals(other.listPerson))
 			return false;
-		}
-		if (null == owner) {
-			if (null != other.owner) {
+		if (name == null) {
+			if (other.name != null)
 				return false;
-			}
-		} else if (!owner.equals(other.owner)) {
+		} else if (!name.equals(other.name))
 			return false;
-		}
-		if (null == publisher) {
-			if (null != other.publisher) {
+		if (url == null) {
+			if (other.url != null)
 				return false;
-			}
-		} else if (!publisher.equals(other.publisher)) {
+		} else if (!url.equals(other.url))
 			return false;
-		}
-		if (null == uuid) {
-			if (null != other.uuid) {
+		if (uuid == null) {
+			if (other.uuid != null)
 				return false;
-			}
-		} else if (!uuid.equals(other.uuid)) {
+		} else if (!uuid.equals(other.uuid))
 			return false;
-		}
-		if (null == version) {
-			if (null != other.version) {
+		if (version == null) {
+			if (other.version != null)
 				return false;
-			}
-		} else if (!(0 == version.compareTo(other.version))) {
+		} else if (!version.equals(other.version))
 			return false;
-		}
 		return true;
 	}
-
+	
 
 	/*
 	 * Implemented methods
@@ -200,33 +180,6 @@ public class DocumentImpl extends ModelAbstract implements Document {
 
 		log.debug(HelperLog.methodExit(created));
 		return created;
-	}
-
-	@Override
-	@XmlElement
-	public Manufacturer getManufacturer() {
-		log.debug(HelperLog.methodStart());
-
-		log.debug(HelperLog.methodExit(manufacturer));
-		return manufacturer;
-	}
-
-	@Override
-	@XmlElement
-	public Owner getOwner() {
-		log.debug(HelperLog.methodStart());
-
-		log.debug(HelperLog.methodExit(owner));
-		return owner;
-	}
-
-	@Override
-	@XmlElement
-	public Publisher getPublisher() {
-		log.debug(HelperLog.methodStart());
-
-		log.debug(HelperLog.methodExit(publisher));
-		return publisher;
 	}
 
 	@Override
@@ -257,6 +210,15 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	@Override
+	@XmlElement
+	public URL getUrl() {
+		log.debug(HelperLog.methodStart());
+
+		log.debug(HelperLog.methodExit(url));
+		return url;
+	}
+	
+	@Override
 	public void setBuild(final int build) {
 		log.debug(HelperLog.methodStart(build));
 
@@ -277,45 +239,6 @@ public class DocumentImpl extends ModelAbstract implements Document {
 			this.created = created;
 			setChanged();
 			notifyObservers(MEMBER_CREATED);
-		}
-
-		log.debug(HelperLog.methodExit());
-	}
-
-	@Override
-	public void setManufacturer(final Manufacturer manufacturer) {
-		log.debug(HelperLog.methodStart(manufacturer));
-
-		if (!HelperObject.isEquals(manufacturer, this.manufacturer)) {
-			this.manufacturer = manufacturer;
-			setChanged();
-			notifyObservers(MEMBER_MANUFACTURER);
-		}
-
-		log.debug(HelperLog.methodExit());
-	}
-
-	@Override
-	public void setOwner(final Owner owner) {
-		log.debug(HelperLog.methodStart(owner));
-
-		if (!HelperObject.isEquals(owner, this.owner)) {
-			this.owner = owner;
-			setChanged();
-			notifyObservers(MEMBER_OWNER);
-		}
-
-		log.debug(HelperLog.methodExit());
-	}
-
-	@Override
-	public void setPublisher(final Publisher publisher) {
-		log.debug(HelperLog.methodStart(publisher));
-
-		if (!HelperObject.isEquals(publisher, this.publisher)) {
-			this.publisher = publisher;
-			setChanged();
-			notifyObservers(MEMBER_PUBLISHER);
 		}
 
 		log.debug(HelperLog.methodExit());
@@ -360,7 +283,64 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		log.debug(HelperLog.methodExit());
 	}
 
+	@Override
+	public void setUrl(final URL url) {
+		log.debug(HelperLog.methodStart(url));
 
+		if (!HelperObject.isEquals(this.url, url)) {
+			this.url = url;
+			setChanged();
+			notifyObservers(MEMBER_WEBSITE);
+		}
+
+		log.debug(HelperLog.methodExit());
+	}
+
+	@Override
+	@XmlElement
+	public List<Organization> getOrganizations() {
+		log.debug(HelperLog.methodStart());
+
+		log.debug(HelperLog.methodExit(listOrganization));
+		return listOrganization;
+	}
+
+	@Override
+	public void setOrganizations(final List<Organization> organizations) {
+		log.debug(HelperLog.methodStart(organizations));
+
+		if (!HelperObject.isEquals(organizations, listOrganization)) {
+			listOrganization = organizations;
+			setChanged();
+			notifyObservers(MEMBER_ORGANIZATIONS);
+		}
+
+		log.debug(HelperLog.methodExit());
+	}
+
+	@Override
+	@XmlElement
+	public List<Person> getPersons() {
+		log.debug(HelperLog.methodStart());
+
+		log.debug(HelperLog.methodExit(listPerson));
+		return listPerson;
+	}
+
+	@Override
+	public void setPersons(final List<Person> persons) {
+		log.debug(HelperLog.methodStart(persons));
+
+		if (!HelperObject.isEquals(persons, listPerson)) {
+			listPerson = persons;
+			setChanged();
+			notifyObservers(MEMBER_PERSONS);
+		}
+
+		log.debug(HelperLog.methodExit());
+	}
+	
+	
 	/*
 	 * Inner classes
 	 */

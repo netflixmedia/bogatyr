@@ -38,7 +38,7 @@ import net.laubenberger.bogatyr.model.unit.Bit;
  * This is a helper class for logging.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100506)
+ * @version 0.9.2 (20100509)
  * @since 0.9.1
  */
 public abstract class HelperLog {
@@ -84,21 +84,31 @@ public abstract class HelperLog {
 		sb.append(model.getUUID());
 		sb.append(HelperString.NEW_LINE);
 		
-		sb.append("Manufacturer: "); //$NON-NLS-1$
-		sb.append(model.getManufacturer());
-		sb.append(HelperString.NEW_LINE);		
+		sb.append("URL: "); //$NON-NLS-1$
+		sb.append(model.getUrl());
+		sb.append(HelperString.NEW_LINE);
 		
-		sb.append("Owner: "); //$NON-NLS-1$
-		sb.append(model.getOwner());
-		sb.append(HelperString.NEW_LINE);	
+		if (null != model.getOrganizations()) {
+			sb.append("Organizations: "); //$NON-NLS-1$
+			sb.append(HelperCollection.dump(model.getOrganizations()));
+			sb.append(HelperString.NEW_LINE);		
+		}
 		
-		sb.append("Publisher: "); //$NON-NLS-1$
-		sb.append(model.getPublisher());
-		sb.append(HelperString.NEW_LINE);	
+		if (null != model.getPersons()) {
+			sb.append("Persons: "); //$NON-NLS-1$
+			sb.append(HelperCollection.dump(model.getPersons()));
+			sb.append(HelperString.NEW_LINE);	
+		}
 		
 		sb.append("isDebug: "); //$NON-NLS-1$
 		sb.append(model.isDebug());
 		sb.append(HelperString.NEW_LINE);
+		
+		if (null != model.getTags()) {
+			sb.append("Tags: "); //$NON-NLS-1$
+			sb.append(HelperMap.dump(model.getTags()));
+			sb.append(HelperString.NEW_LINE);	
+		}
 		
 		// Java
 		sb.append(FILLER); 

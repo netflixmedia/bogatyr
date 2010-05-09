@@ -41,7 +41,7 @@ import net.laubenberger.bogatyr.service.property.Property;
  * The interface for the application model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100509)
  * @since 0.9.0
  */
 @XmlJavaTypeAdapter(ModelApplicationImpl.XmlAdapter.class)
@@ -51,8 +51,7 @@ public interface ModelApplication extends Document {
 	String MEMBER_PROPERTY = "property"; //$NON-NLS-1$
 	String MEMBER_LOCALIZER = "localizer"; //$NON-NLS-1$
 	String MEMBER_MODEL_WORKER = "modelWorker"; //$NON-NLS-1$
-	String METHOD_ADD_HASH = "addHash"; //$NON-NLS-1$
-	String METHOD_REMOVE_HASH = "removeHash"; //$NON-NLS-1$
+
 
 	/**
 	 * Returns all hashs.
@@ -69,40 +68,6 @@ public interface ModelApplication extends Document {
 	 * @since 0.9.0
 	 */
 	void setHashs(Map<HashCodeAlgo, String> hashs);
-
-	/**
-	 * Returns the hash for a given {@link HashCodeAlgo}.
-	 *
-	 * @param hashCodeAlgo for the hash
-	 * @return hash
-	 * @since 0.9.0
-	 */
-	String getHash(HashCodeAlgo hashCodeAlgo);
-
-	/**
-	 * Returns the default hash (generated with SHA256).
-	 *
-	 * @return default hash
-	 * @since 0.9.0
-	 */
-	String getHash();
-
-	/**
-	 * Adds a {@link HashCodeAlgo} and hash.
-	 *
-	 * @param hashCodeAlgo of the hash
-	 * @param hash			value
-	 * @since 0.9.0
-	 */
-	void addHash(HashCodeAlgo hashCodeAlgo, String hash);
-
-	/**
-	 * Removes a hash.
-	 *
-	 * @param hashCodeAlgo of the hash
-	 * @since 0.9.0
-	 */
-	void removeHash(HashCodeAlgo hashCodeAlgo);
 
 	Boolean isDebug();
 

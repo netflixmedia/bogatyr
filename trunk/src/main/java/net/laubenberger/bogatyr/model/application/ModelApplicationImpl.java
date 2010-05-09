@@ -29,8 +29,9 @@ package net.laubenberger.bogatyr.model.application;
 
 
 import java.math.BigDecimal;
+import java.net.URL;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -39,29 +40,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.xml.adapter.MapAdapterHashCode;
 import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
 import net.laubenberger.bogatyr.model.misc.DocumentImpl;
-import net.laubenberger.bogatyr.model.misc.Manufacturer;
-import net.laubenberger.bogatyr.model.misc.Owner;
-import net.laubenberger.bogatyr.model.misc.Publisher;
+import net.laubenberger.bogatyr.model.misc.Organization;
+import net.laubenberger.bogatyr.model.misc.Person;
 import net.laubenberger.bogatyr.model.worker.ModelWorker;
 import net.laubenberger.bogatyr.model.worker.ModelWorkerImpl;
 import net.laubenberger.bogatyr.service.localizer.Localizer;
 import net.laubenberger.bogatyr.service.property.Property;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * The implementation of the application model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100509)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelApplication")
@@ -86,12 +85,11 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 	}
 
 	public ModelApplicationImpl(final String name, final BigDecimal version, final int build,
-										 final Date created, final Manufacturer manufacturer, final Owner owner,
-										 final Publisher publisher, final UUID uuid, final boolean isDebug,
+										 final Date created, final UUID uuid, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final boolean isDebug,
 										 final Localizer localizer, final Property property, final Map<HashCodeAlgo, String> mapHash, final Map<String, String> mapTag) {
-		super(name, version, build, created, manufacturer, owner, publisher, uuid, mapTag);
+		super(name, version, build, created, uuid, url, listOrganization, listPerson, mapTag);
 
-		log.trace(HelperLog.constructor(name, version, build, created, manufacturer, owner, publisher, uuid, isDebug, localizer, property, mapHash, mapTag));
+		log.trace(HelperLog.constructor(name, version, build, created, uuid, url, listOrganization, listPerson, isDebug, localizer, property, mapHash, mapTag));
 
 		this.isDebug = isDebug;
 		this.localizer = localizer;
@@ -143,28 +141,28 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 	 * Implemented methods
 	 */
 
-	@Override
-	public String getHash() {
-		log.debug(HelperLog.methodStart());
-
-		final String result = getHash(HashCodeAlgo.SHA256);
-
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	@Override
-	public String getHash(final HashCodeAlgo hashCodeAlgo) {
-		log.debug(HelperLog.methodStart(hashCodeAlgo));
-
-		String result = null;
-		if (null != mapHash) {
-			result = mapHash.get(hashCodeAlgo);
-		}
-
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
+//	@Override
+//	public String getHash() {
+//		log.debug(HelperLog.methodStart());
+//
+//		final String result = getHash(HashCodeAlgo.SHA256);
+//
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
+//
+//	@Override
+//	public String getHash(final HashCodeAlgo hashCodeAlgo) {
+//		log.debug(HelperLog.methodStart(hashCodeAlgo));
+//
+//		String result = null;
+//		if (null != mapHash) {
+//			result = mapHash.get(hashCodeAlgo);
+//		}
+//
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
 
 	@Override
 	@XmlElement
@@ -189,38 +187,38 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 		log.debug(HelperLog.methodExit());
 	}
 
-	@Override
-	public void addHash(final HashCodeAlgo hashCodeAlgo, final String hash) {
-		log.debug(HelperLog.methodStart(hashCodeAlgo, hash));
-		if (null == hashCodeAlgo) {
-			throw new RuntimeExceptionIsNull("hashCodeAlgo"); //$NON-NLS-1$
-		}
-
-		if (null == mapHash) {
-			mapHash = new HashMap<HashCodeAlgo, String>();
-		}
-		mapHash.put(hashCodeAlgo, hash);
-		setChanged();
-		notifyObservers(METHOD_ADD_HASH);
-
-		log.debug(HelperLog.methodExit());
-	}
-
-	@Override
-	public void removeHash(final HashCodeAlgo hashCodeAlgo) {
-		log.debug(HelperLog.methodStart(hashCodeAlgo));
-		if (null == hashCodeAlgo) {
-			throw new RuntimeExceptionIsNull("hashCodeAlgo"); //$NON-NLS-1$
-		}
-
-		if (null != mapHash) {
-			mapHash.remove(hashCodeAlgo);
-			setChanged();
-			notifyObservers(METHOD_REMOVE_HASH);
-		}
-
-		log.debug(HelperLog.methodExit());
-	}
+//	@Override
+//	public void addHash(final HashCodeAlgo hashCodeAlgo, final String hash) {
+//		log.debug(HelperLog.methodStart(hashCodeAlgo, hash));
+//		if (null == hashCodeAlgo) {
+//			throw new RuntimeExceptionIsNull("hashCodeAlgo"); //$NON-NLS-1$
+//		}
+//
+//		if (null == mapHash) {
+//			mapHash = new HashMap<HashCodeAlgo, String>();
+//		}
+//		mapHash.put(hashCodeAlgo, hash);
+//		setChanged();
+//		notifyObservers(METHOD_ADD_HASH);
+//
+//		log.debug(HelperLog.methodExit());
+//	}
+//
+//	@Override
+//	public void removeHash(final HashCodeAlgo hashCodeAlgo) {
+//		log.debug(HelperLog.methodStart(hashCodeAlgo));
+//		if (null == hashCodeAlgo) {
+//			throw new RuntimeExceptionIsNull("hashCodeAlgo"); //$NON-NLS-1$
+//		}
+//
+//		if (null != mapHash) {
+//			mapHash.remove(hashCodeAlgo);
+//			setChanged();
+//			notifyObservers(METHOD_REMOVE_HASH);
+//		}
+//
+//		log.debug(HelperLog.methodExit());
+//	}
 
 	@Override
 	public Localizer getLocalizer() {

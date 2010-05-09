@@ -27,57 +27,53 @@
 
 package net.laubenberger.bogatyr.model.misc;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import net.laubenberger.bogatyr.model.Model;
 
 /**
- * The interface for the document model.
+ * The interface for the organization model.
  *
  * @author Stefan Laubenberger
  * @version 0.9.2 (20100509)
- * @since 0.9.1
+ * @since 0.9.2
  */
-@XmlJavaTypeAdapter(DocumentImpl.XmlAdapter.class)
-public interface Document extends Model, Url {
-	String MEMBER_NAME = "name"; //$NON-NLS-1$
-	String MEMBER_VERSION = "version"; //$NON-NLS-1$
-	String MEMBER_BUILD = "build"; //$NON-NLS-1$
-	String MEMBER_CREATED = "created"; //$NON-NLS-1$
-	String MEMBER_UUID = "UUID"; //$NON-NLS-1$
-	String MEMBER_ORGANIZATIONS = "organizations"; //$NON-NLS-1$
+@XmlJavaTypeAdapter(OrganizationImpl.XmlAdapter.class)
+public interface Organization extends Model, Address, Phone, Fax, Email, Url {
 	String MEMBER_PERSONS = "persons"; //$NON-NLS-1$
-	
-	String getName();
+	String MEMBER_ROLES = "roles"; //$NON-NLS-1$
 
-	void setName(String name);
-
-	BigDecimal getVersion();
-
-	void setVersion(BigDecimal version);
-
-	int getBuild();
-
-	void setBuild(int build);
-
-	Date getCreated();
-
-	void setCreated(Date created);
-
-	List<Organization> getOrganizations();
-
-	void setOrganizations(List<Organization> organizations);
-
+	/**
+	 * Returns all {@link Person} of the organization.
+	 *
+	 * @return {@link List} all related {@link Person} of the organization
+	 * @since 0.9.2
+	 */
 	List<Person> getPersons();
 
+	/**
+	 * Sets all {@link Person}.
+	 *
+	 * @param persons {@link List} containing all related {@link Person} of the organization
+	 * @since 0.9.2
+	 */
 	void setPersons(List<Person> persons);
 
-	UUID getUUID();
+	/**
+	 * Returns all {@link Role} of the organization.
+	 *
+	 * @return {@link List} all related {@link Role} of the organization
+	 * @since 0.9.2
+	 */
+	List<Role> getRoles();
 
-	void setUUID(UUID uuid);
+	/**
+	 * Sets all {@link Role}.
+	 *
+	 * @param roles {@link List} containing all related {@link Role} of the organization
+	 * @since 0.9.2
+	 */
+	void setRoles(List<Role> roles);
 }
