@@ -41,7 +41,7 @@ import net.laubenberger.bogatyr.service.property.Property;
  * The interface for the application model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100509)
+ * @version 0.9.2 (20100510)
  * @since 0.9.0
  */
 @XmlJavaTypeAdapter(ModelApplicationImpl.XmlAdapter.class)
@@ -51,6 +51,7 @@ public interface ModelApplication extends Document {
 	String MEMBER_PROPERTY = "property"; //$NON-NLS-1$
 	String MEMBER_LOCALIZER = "localizer"; //$NON-NLS-1$
 	String MEMBER_MODEL_WORKER = "modelWorker"; //$NON-NLS-1$
+	String METHOD_ADD_HASH = "addHash"; //$NON-NLS-1$
 
 
 	/**
@@ -68,6 +69,15 @@ public interface ModelApplication extends Document {
 	 * @since 0.9.0
 	 */
 	void setHashs(Map<HashCodeAlgo, String> hashs);
+
+   /**
+    * Adds a {@link HashCodeAlgo} and hash.
+    *
+    * @param hashCodeAlgo of the hash
+    * @param hash                  value
+    * @since 0.9.0
+    */
+   void addHash(HashCodeAlgo hashCodeAlgo, String hash);
 
 	Boolean isDebug();
 

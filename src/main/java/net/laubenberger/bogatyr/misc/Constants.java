@@ -32,8 +32,6 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import net.laubenberger.bogatyr.helper.HelperCollection;
@@ -43,7 +41,6 @@ import net.laubenberger.bogatyr.model.misc.Country;
 import net.laubenberger.bogatyr.model.misc.Document;
 import net.laubenberger.bogatyr.model.misc.DocumentImpl;
 import net.laubenberger.bogatyr.model.misc.Gender;
-import net.laubenberger.bogatyr.model.misc.Person;
 import net.laubenberger.bogatyr.model.misc.PersonImpl;
 import net.laubenberger.bogatyr.model.misc.Role;
 
@@ -55,14 +52,14 @@ import org.slf4j.LoggerFactory;
  * Collected constants of very general utility.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100509)
+ * @version 0.9.2 (20100510)
  * @since 0.7.0
  */
 public abstract class Constants {
 	private static final Logger log = LoggerFactory.getLogger(Constants.class);
 
 	//Bogatyr specific
-	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.92"), 265, HelperTime.getDate(2010, 5, 9, 18, 11, 0), UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.92"), 266, HelperTime.getDate(2010, 5, 10, 0, 28, 0), UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
@@ -183,9 +180,7 @@ public abstract class Constants {
 		try {
 			BOGATYR.setUrl(new URL("http://dev.laubenberger.net/bogatyr/")); //$NON-NLS-1$
 			
-			final List<Person> persons = new ArrayList<Person>();
-			persons.add(new PersonImpl("Laubenberger", "Stefan", HelperTime.getDate(1976, 12, 30), Gender.MALE, "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net"), null, HelperCollection.getList(Role.ADMINISTRATOR, Role.ARCHITECT, Role.DESIGNER, Role.DEVELOPER, Role.MANUFACTURER, Role.OWNER, Role.PROJECT_MANAGER, Role.PUBLISHER, Role.REVIEWER, Role.TESTER, Role.WRITER), null));   //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
-			BOGATYR.setPersons(persons);
+			BOGATYR.addPerson(new PersonImpl("Laubenberger", "Stefan", HelperTime.getDate(1976, 12, 30), Gender.MALE, "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net"), null, HelperCollection.getList(Role.ADMINISTRATOR, Role.ARCHITECT, Role.DESIGNER, Role.DEVELOPER, Role.MANUFACTURER, Role.OWNER, Role.PROJECT_MANAGER, Role.PUBLISHER, Role.REVIEWER, Role.TESTER, Role.WRITER), null));   //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
 		} catch (MalformedURLException ex) {
 			// should never happen!
 			log.error("URL invalid", ex); //$NON-NLS-1$

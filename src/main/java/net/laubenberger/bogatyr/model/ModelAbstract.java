@@ -28,6 +28,7 @@
 package net.laubenberger.bogatyr.model;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
@@ -38,6 +39,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.xml.adapter.MapAdapterString;
 
 import org.slf4j.Logger;
@@ -48,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100509)
+ * @version 0.9.2 (20100510)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
@@ -223,22 +225,22 @@ public abstract class ModelAbstract extends Observable implements Model {
 		log.debug(HelperLog.methodExit());
 	}
 
-//	@Override
-//	public void addTag(final String key, final String value) {
-//		log.debug(HelperLog.methodStart(key, value));
-//		if (null == key) {
-//			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
-//		}
-//
-//		if (null == mapTag) {
-//			mapTag = new HashMap<String, String>();
-//		}
-//		mapTag.put(key, value);
-//		setChanged();
-//		notifyObservers(METHOD_ADD_TAG);
-//
-//		log.debug(HelperLog.methodExit());
-//	}
+	@Override
+	public void addTag(final String key, final String value) {
+		log.debug(HelperLog.methodStart(key, value));
+		if (null == key) {
+			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
+		}
+
+		if (null == mapTag) {
+			mapTag = new HashMap<String, String>();
+		}
+		mapTag.put(key, value);
+		setChanged();
+		notifyObservers(METHOD_ADD_TAG);
+
+		log.debug(HelperLog.methodExit());
+	}
 //
 //	@Override
 //	public void removeTag(final String key) {

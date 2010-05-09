@@ -33,8 +33,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import net.laubenberger.bogatyr.controller.ApplicationAbstract;
 import net.laubenberger.bogatyr.helper.HelperCollection;
@@ -46,7 +44,6 @@ import net.laubenberger.bogatyr.model.application.ModelApplication;
 import net.laubenberger.bogatyr.model.application.ModelApplicationImpl;
 import net.laubenberger.bogatyr.model.misc.Country;
 import net.laubenberger.bogatyr.model.misc.Gender;
-import net.laubenberger.bogatyr.model.misc.Person;
 import net.laubenberger.bogatyr.model.misc.PersonImpl;
 import net.laubenberger.bogatyr.model.misc.Role;
 import net.laubenberger.bogatyr.service.localizer.LocalizerFile;
@@ -61,7 +58,7 @@ import org.slf4j.LoggerFactory;
  * Simple file manager using the Bogatyr framework
  *
  * @author Stefan Laubenberger
- * @version 20100509
+ * @version 20100510
  */
 public class FileManager extends ApplicationAbstract {
 	private static final Logger log = LoggerFactory.getLogger(FileManager.class);
@@ -88,14 +85,11 @@ public class FileManager extends ApplicationAbstract {
 		PropertyConfigurator.configure("src/sample/configuration/log4j.properties"); //$NON-NLS-1$
 
 		MODEL = new ModelApplicationImpl(
-				"FileManager", new BigDecimal("0.92"), 264, HelperTime.getDate(2010, 5, 9, 18, 8, 0), null, null, null, null, false, null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$
+				"FileManager", new BigDecimal("0.92"), 266, HelperTime.getDate(2010, 5, 10, 0, 28, 0), null, null, null, null, false, null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$
 
 		try {
 			MODEL.setUrl(new URL("http://dev.laubenberger.net/bogatyr/")); //$NON-NLS-1$
-			
-			final List<Person> persons = new ArrayList<Person>();
-			persons.add(new PersonImpl("Laubenberger", "Stefan", HelperTime.getDate(1976, 12, 30), Gender.MALE, "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net"), null, HelperCollection.getList(Role.ADMINISTRATOR, Role.ARCHITECT, Role.DESIGNER, Role.DEVELOPER, Role.MANUFACTURER, Role.OWNER, Role.PROJECT_MANAGER, Role.PUBLISHER, Role.REVIEWER, Role.TESTER, Role.WRITER), null));   //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
-			MODEL.setPersons(persons);
+			MODEL.addPerson(new PersonImpl("Laubenberger", "Stefan", HelperTime.getDate(1976, 12, 30), Gender.MALE, "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net"), null, HelperCollection.getList(Role.ADMINISTRATOR, Role.ARCHITECT, Role.DESIGNER, Role.DEVELOPER, Role.MANUFACTURER, Role.OWNER, Role.PROJECT_MANAGER, Role.PUBLISHER, Role.REVIEWER, Role.TESTER, Role.WRITER), null));   //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
 		} catch (MalformedURLException ex) {
 			// should never happen!
 			log.error("URL invalid", ex); //$NON-NLS-1$

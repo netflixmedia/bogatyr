@@ -30,6 +30,7 @@ package net.laubenberger.bogatyr.model.misc;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -39,19 +40,20 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.model.ModelAbstract;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * The implementation of the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100509)
+ * @version 0.9.2 (20100510)
  * @since 0.9.1
  */
 @XmlRootElement(name = "document")
@@ -339,6 +341,40 @@ public class DocumentImpl extends ModelAbstract implements Document {
 
 		log.debug(HelperLog.methodExit());
 	}
+	
+	@Override
+	public void addOrganization(Organization organization) {
+		log.debug(HelperLog.methodStart(organization));
+		if (null == organization) {
+			throw new RuntimeExceptionIsNull("organization"); //$NON-NLS-1$
+		}
+
+		if (null == listOrganization) {
+			listOrganization = new ArrayList<Organization>();
+		}
+		listOrganization.add(organization);
+		setChanged();
+		notifyObservers(METHOD_ADD_ORGANIZATION);
+
+		log.debug(HelperLog.methodExit());
+	}
+
+	@Override
+	public void addPerson(Person person) {
+		log.debug(HelperLog.methodStart(person));
+		if (null == person) {
+			throw new RuntimeExceptionIsNull("person"); //$NON-NLS-1$
+		}
+
+		if (null == listPerson) {
+			listPerson = new ArrayList<Person>();
+		}
+		listPerson.add(person);
+		setChanged();
+		notifyObservers(METHOD_ADD_PERSON);
+
+		log.debug(HelperLog.methodExit());
+	}	
 	
 	
 	/*

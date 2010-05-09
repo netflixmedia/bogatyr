@@ -29,6 +29,7 @@ package net.laubenberger.bogatyr.model.misc;
 
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.model.ModelAbstract;
 
 
@@ -49,7 +51,7 @@ import net.laubenberger.bogatyr.model.ModelAbstract;
  * The implementation of the person model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100509)
+ * @version 0.9.2 (20100510)
  * @since 0.9.1
  */
 @XmlRootElement(name = "person")
@@ -520,6 +522,40 @@ public class PersonImpl extends ModelAbstract implements Person {
 
 		log.debug(HelperLog.methodExit());
 	}	
+	
+	@Override
+	public void addOrganization(Organization organization) {
+		log.debug(HelperLog.methodStart(organization));
+		if (null == organization) {
+			throw new RuntimeExceptionIsNull("organization"); //$NON-NLS-1$
+		}
+
+		if (null == listOrganization) {
+			listOrganization = new ArrayList<Organization>();
+		}
+		listOrganization.add(organization);
+		setChanged();
+		notifyObservers(METHOD_ADD_ORGANIZATION);
+
+		log.debug(HelperLog.methodExit());
+	}
+
+	@Override
+	public void addRole(Role role) {
+		log.debug(HelperLog.methodStart(role));
+		if (null == role) {
+			throw new RuntimeExceptionIsNull("role"); //$NON-NLS-1$
+		}
+
+		if (null == listRole) {
+			listRole = new ArrayList<Role>();
+		}
+		listRole.add(role);
+		setChanged();
+		notifyObservers(METHOD_ADD_ROLE);
+
+		log.debug(HelperLog.methodExit());
+	}
 	
 	
 	/*

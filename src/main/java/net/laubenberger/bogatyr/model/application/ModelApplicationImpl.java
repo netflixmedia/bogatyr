@@ -31,6 +31,7 @@ package net.laubenberger.bogatyr.model.application;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -42,6 +43,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.xml.adapter.MapAdapterHashCode;
 import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
 import net.laubenberger.bogatyr.model.misc.DocumentImpl;
@@ -60,7 +62,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the application model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100509)
+ * @version 0.9.2 (20100510)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelApplication")
@@ -187,22 +189,22 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 		log.debug(HelperLog.methodExit());
 	}
 
-//	@Override
-//	public void addHash(final HashCodeAlgo hashCodeAlgo, final String hash) {
-//		log.debug(HelperLog.methodStart(hashCodeAlgo, hash));
-//		if (null == hashCodeAlgo) {
-//			throw new RuntimeExceptionIsNull("hashCodeAlgo"); //$NON-NLS-1$
-//		}
-//
-//		if (null == mapHash) {
-//			mapHash = new HashMap<HashCodeAlgo, String>();
-//		}
-//		mapHash.put(hashCodeAlgo, hash);
-//		setChanged();
-//		notifyObservers(METHOD_ADD_HASH);
-//
-//		log.debug(HelperLog.methodExit());
-//	}
+	@Override
+	public void addHash(final HashCodeAlgo hashCodeAlgo, final String hash) {
+		log.debug(HelperLog.methodStart(hashCodeAlgo, hash));
+		if (null == hashCodeAlgo) {
+			throw new RuntimeExceptionIsNull("hashCodeAlgo"); //$NON-NLS-1$
+		}
+
+		if (null == mapHash) {
+			mapHash = new HashMap<HashCodeAlgo, String>();
+		}
+		mapHash.put(hashCodeAlgo, hash);
+		setChanged();
+		notifyObservers(METHOD_ADD_HASH);
+
+		log.debug(HelperLog.methodExit());
+	}
 //
 //	@Override
 //	public void removeHash(final HashCodeAlgo hashCodeAlgo) {
