@@ -38,14 +38,14 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObject;
  * Defines the methods for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100509)
  * @since 0.9.0
  */
 public interface Model extends ExtendedObject, Serializable, HolderObserver {
 	String MEMBER_INSTANTIATION_DATE = "instantiationDate"; //$NON-NLS-1$
 	String MEMBER_TAGS = "tags"; //$NON-NLS-1$
-	String METHOD_ADD_TAG = "addTag"; //$NON-NLS-1$
-	String METHOD_REMOVE_TAG = "removeTag"; //$NON-NLS-1$
+//	String METHOD_ADD_TAG = "addTag"; //$NON-NLS-1$
+//	String METHOD_REMOVE_TAG = "removeTag"; //$NON-NLS-1$
 
 	/**
 	 * Sets the instantiation date of the model.
@@ -71,29 +71,29 @@ public interface Model extends ExtendedObject, Serializable, HolderObserver {
 	 */
 	void setTags(Map<String, String> tags);
 
-	/**
-	 * Returns the value of a tag for a given key.
-	 *
-	 * @param key for the tag
-	 * @return tag value
-	 * @since 0.9.1
-	 */
-	String getTag(String key);
-
-	/**
-	 * Adds a key and value for a tag.
-	 *
-	 * @param key	of the tag
-	 * @param value of the tag
-	 * @since 0.9.1
-	 */
-	void addTag(String key, String value);
-
-	/**
-	 * Removes a tag.
-	 *
-	 * @param key to remove the tag
-	 * @since 0.9.1
-	 */
-	void removeTag(String key);
+//	/**
+//	 * Returns the value of a tag for a given key.
+//	 *
+//	 * @param key for the tag
+//	 * @return tag value
+//	 * @since 0.9.1
+//	 */
+//	String getTag(String key);
+//
+//	/**
+//	 * Adds a key and value for a tag.
+//	 *
+//	 * @param key	of the tag
+//	 * @param value of the tag
+//	 * @since 0.9.1
+//	 */
+//	void addTag(String key, String value);
+//
+//	/**
+//	 * Removes a tag.
+//	 *
+//	 * @param key to remove the tag
+//	 * @since 0.9.1
+//	 */
+//	void removeTag(String key);
 }

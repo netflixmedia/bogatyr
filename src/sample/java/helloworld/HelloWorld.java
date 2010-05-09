@@ -32,17 +32,21 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import net.laubenberger.bogatyr.controller.ApplicationAbstract;
+import net.laubenberger.bogatyr.helper.HelperCollection;
 import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.helper.HelperTime;
 import net.laubenberger.bogatyr.model.application.ModelApplication;
 import net.laubenberger.bogatyr.model.application.ModelApplicationImpl;
 import net.laubenberger.bogatyr.model.misc.Country;
-import net.laubenberger.bogatyr.model.misc.ManufacturerImpl;
-import net.laubenberger.bogatyr.model.misc.OwnerImpl;
-import net.laubenberger.bogatyr.model.misc.PublisherImpl;
+import net.laubenberger.bogatyr.model.misc.Gender;
+import net.laubenberger.bogatyr.model.misc.Person;
+import net.laubenberger.bogatyr.model.misc.PersonImpl;
+import net.laubenberger.bogatyr.model.misc.Role;
 import net.laubenberger.bogatyr.service.localizer.LocalizerFile;
 import net.laubenberger.bogatyr.service.property.PropertyImpl;
 
@@ -56,7 +60,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20100507
+ * @version 20100509
  */
 public class HelloWorld extends ApplicationAbstract {
 	private static final Logger log = LoggerFactory.getLogger(HelloWorld.class);
@@ -78,18 +82,14 @@ public class HelloWorld extends ApplicationAbstract {
 		PropertyConfigurator.configure("src/sample/configuration/log4j.properties"); //$NON-NLS-1$
 
 		MODEL = new ModelApplicationImpl(
-				"HelloWorld", new BigDecimal("0.92"), 20100507, HelperTime.getDate(2010, 5, 7, 21, 33, 0), null, null, null, null, false, null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				"HelloWorld", new BigDecimal("0.92"), 264, HelperTime.getDate(2010, 5, 9, 18, 8, 0), null, null, null, null, false, null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$
 
 		try {
-			MODEL
-					.setManufacturer(new ManufacturerImpl(
-							"Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net/"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
-			MODEL
-					.setOwner(new OwnerImpl(
-							"Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net/"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
-			MODEL
-					.setPublisher(new PublisherImpl(
-							"Stefan Laubenberger", "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net/"), null)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+			MODEL.setUrl(new URL("http://dev.laubenberger.net/bogatyr/")); //$NON-NLS-1$
+			
+			final List<Person> persons = new ArrayList<Person>();
+			persons.add(new PersonImpl("Laubenberger", "Stefan", HelperTime.getDate(1976, 12, 30), Gender.MALE, "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net"), null, HelperCollection.getList(Role.ADMINISTRATOR, Role.ARCHITECT, Role.DESIGNER, Role.DEVELOPER, Role.MANUFACTURER, Role.OWNER, Role.PROJECT_MANAGER, Role.PUBLISHER, Role.REVIEWER, Role.TESTER, Role.WRITER), null));   //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
+			MODEL.setPersons(persons);
 		} catch (MalformedURLException ex) {
 			// should never happen!
 			log.error("URL invalid", ex); //$NON-NLS-1$

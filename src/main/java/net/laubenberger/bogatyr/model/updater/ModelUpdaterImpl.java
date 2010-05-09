@@ -29,7 +29,9 @@ package net.laubenberger.bogatyr.model.updater;
 
 
 import java.math.BigDecimal;
+import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -45,10 +47,9 @@ import net.laubenberger.bogatyr.misc.xml.adapter.MapAdapterHashCode;
 import net.laubenberger.bogatyr.misc.xml.adapter.MapAdapterPlatform;
 import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
 import net.laubenberger.bogatyr.model.misc.DocumentImpl;
-import net.laubenberger.bogatyr.model.misc.Manufacturer;
-import net.laubenberger.bogatyr.model.misc.Owner;
+import net.laubenberger.bogatyr.model.misc.Organization;
+import net.laubenberger.bogatyr.model.misc.Person;
 import net.laubenberger.bogatyr.model.misc.Platform;
-import net.laubenberger.bogatyr.model.misc.Publisher;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +59,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the updater model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100509)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelDocument")
@@ -77,10 +78,9 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 	}
 
 	public ModelUpdaterImpl(final String name, final BigDecimal version, final int build,
-									final Date created, final Manufacturer manufacturer, final Owner owner,
-									final Publisher publisher, final UUID uuid, final Map<Platform, String> mapLocation, final Map<HashCodeAlgo, String> mapHash, final Map<String, String> mapTag) {
-		super(name, version, build, created, manufacturer, owner, publisher, uuid, mapTag);
-		log.trace(HelperLog.constructor(name, version, build, created, manufacturer, owner, publisher, uuid, mapLocation, mapHash, mapTag));
+									final Date created, final UUID uuid, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final Map<Platform, String> mapLocation, final Map<HashCodeAlgo, String> mapHash, final Map<String, String> mapTag) {
+		super(name, version, build, created, uuid, url, listOrganization, listPerson, mapTag);
+		log.trace(HelperLog.constructor(name, version, build, created, uuid, url, listOrganization, listPerson, mapLocation, mapHash, mapTag));
 		this.mapLocation = mapLocation;
 		this.mapHash = mapHash;
 	}

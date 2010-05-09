@@ -36,13 +36,13 @@ import net.laubenberger.bogatyr.model.Model;
  * Interface for the context in applications.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100509)
  * @since 0.6.0
  */
 public interface Context extends Model {
-	String MEMBER_DATA = Context.class.getName() + ".data"; //$NON-NLS-1$
-	String METHOD_ADD_VALUE = Context.class.getName() + ".addValue()"; //$NON-NLS-1$
-	String METHOD_REMOVE_VALUE = Context.class.getName() + ".removeValue()"; //$NON-NLS-1$
+	String MEMBER_DATA = "data"; //$NON-NLS-1$
+	String METHOD_ADD_VALUE = "addValue"; //$NON-NLS-1$
+	String METHOD_REMOVE_VALUE = "removeValue"; //$NON-NLS-1$
 
 	/**
 	 * Returns the data of the context.

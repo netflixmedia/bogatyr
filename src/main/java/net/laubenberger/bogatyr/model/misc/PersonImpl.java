@@ -30,6 +30,7 @@ package net.laubenberger.bogatyr.model.misc;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -48,11 +49,11 @@ import net.laubenberger.bogatyr.model.ModelAbstract;
  * The implementation of the person model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100509)
  * @since 0.9.1
  */
 @XmlRootElement(name = "person")
-@XmlType(propOrder = {"name", "forename", "birthday", "gender", "street", "zip", "city", "country", "phoneNumber", "faxNumber", "email", "website"})
+@XmlType(propOrder = {"name", "forename", "birthday", "gender", "street", "zip", "city", "country", "phoneNumber", "faxNumber", "email", "url", "organizations", "roles"})
 public class PersonImpl extends ModelAbstract implements Person {
 	private static final long serialVersionUID = -6819817877075750182L;
 
@@ -69,7 +70,9 @@ public class PersonImpl extends ModelAbstract implements Person {
 	private String phoneNumber;
 	private String faxNumber;
 	private String email;
-	private URL website;
+	private URL url;
+	private List<Organization> listOrganization;
+	private List<Role> listRole;
 
 
 	public PersonImpl() {
@@ -78,7 +81,7 @@ public class PersonImpl extends ModelAbstract implements Person {
 
 	public PersonImpl(final String name, final String forename, final Date birthday,
 							final Gender gender, final String street, final String zip, final String city,
-							final Country country, final String phoneNumber, final String faxNumber, final String email, final URL website, final Map<String, String> mapTag) {
+							final Country country, final String phoneNumber, final String faxNumber, final String email, final URL website, final List<Organization> listOrganization, final List<Role> listRole, final Map<String, String> mapTag) {
 		super(mapTag);
 		log.trace(HelperLog.constructor(name, forename, birthday, gender, street, zip, city, country, phoneNumber, faxNumber, email, website, mapTag));
 		this.name = name;
@@ -92,7 +95,9 @@ public class PersonImpl extends ModelAbstract implements Person {
 		this.phoneNumber = phoneNumber;
 		this.faxNumber = faxNumber;
 		this.email = email;
-		this.website = website;
+		this.url = website;
+		this.listOrganization = listOrganization;
+		this.listRole = listRole;
 	}
 
 
@@ -111,10 +116,12 @@ public class PersonImpl extends ModelAbstract implements Person {
 		result = prime * result + ((faxNumber == null) ? 0 : faxNumber.hashCode());
 		result = prime * result + ((forename == null) ? 0 : forename.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + ((listOrganization == null) ? 0 : listOrganization.hashCode());
+		result = prime * result + ((listRole == null) ? 0 : listRole.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
-		result = prime * result + ((website == null) ? 0 : website.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
 		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
 		return result;
 	}
@@ -163,6 +170,16 @@ public class PersonImpl extends ModelAbstract implements Person {
 				return false;
 		} else if (!gender.equals(other.gender))
 			return false;
+		if (listOrganization == null) {
+			if (other.listOrganization != null)
+				return false;
+		} else if (!listOrganization.equals(other.listOrganization))
+			return false;
+		if (listRole == null) {
+			if (other.listRole != null)
+				return false;
+		} else if (!listRole.equals(other.listRole))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -178,10 +195,10 @@ public class PersonImpl extends ModelAbstract implements Person {
 				return false;
 		} else if (!street.equals(other.street))
 			return false;
-		if (website == null) {
-			if (other.website != null)
+		if (url == null) {
+			if (other.url != null)
 				return false;
-		} else if (!website.equals(other.website))
+		} else if (!url.equals(other.url))
 			return false;
 		if (zip == null) {
 			if (other.zip != null)
@@ -270,11 +287,11 @@ public class PersonImpl extends ModelAbstract implements Person {
 
 	@Override
 	@XmlElement
-	public URL getWebsite() {
+	public URL getUrl() {
 		log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(website));
-		return website;
+		log.debug(HelperLog.methodExit(url));
+		return url;
 	}
 
 	@Override
@@ -409,11 +426,11 @@ public class PersonImpl extends ModelAbstract implements Person {
 	}
 
 	@Override
-	public void setWebsite(final URL url) {
+	public void setUrl(final URL url) {
 		log.debug(HelperLog.methodStart(url));
 
-		if (!HelperObject.isEquals(url, website)) {
-			website = url;
+		if (!HelperObject.isEquals(this.url, url)) {
+			this.url = url;
 			setChanged();
 			notifyObservers(MEMBER_WEBSITE);
 		}
@@ -460,7 +477,51 @@ public class PersonImpl extends ModelAbstract implements Person {
 		log.debug(HelperLog.methodExit());
 	}
 
+	@Override
+	@XmlElement
+	public List<Organization> getOrganizations() {
+		log.debug(HelperLog.methodStart());
 
+		log.debug(HelperLog.methodExit(listOrganization));
+		return listOrganization;
+	}
+
+	@Override
+	public void setOrganizations(final List<Organization> organizations) {
+		log.debug(HelperLog.methodStart(organizations));
+
+		if (!HelperObject.isEquals(organizations, listOrganization)) {
+			listOrganization = organizations;
+			setChanged();
+			notifyObservers(MEMBER_ORGANIZATIONS);
+		}
+
+		log.debug(HelperLog.methodExit());
+	}
+
+	@Override
+	@XmlElement
+	public List<Role> getRoles() {
+		log.debug(HelperLog.methodStart());
+
+		log.debug(HelperLog.methodExit(listRole));
+		return listRole;
+	}
+
+	@Override
+	public void setRoles(final List<Role> roles) {
+		log.debug(HelperLog.methodStart(roles));
+
+		if (!HelperObject.isEquals(roles, listRole)) {
+			listRole = roles;
+			setChanged();
+			notifyObservers(MEMBER_ROLES);
+		}
+
+		log.debug(HelperLog.methodExit());
+	}	
+	
+	
 	/*
 	 * Inner classes
 	 */

@@ -51,7 +51,7 @@ import org.junit.Test;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100504
+ * @version 20100509
  */
 public class UpdaterTest {
 	@Before
@@ -73,9 +73,7 @@ public class UpdaterTest {
 		doc.setName(Constants.BOGATYR.getName());
 		doc.setVersion(Constants.BOGATYR.getVersion());
 		doc.setBuild(Constants.BOGATYR.getBuild());
-		doc.setManufacturer(Constants.BOGATYR.getManufacturer());
-		doc.setOwner(Constants.BOGATYR.getOwner());
-		doc.setPublisher(Constants.BOGATYR.getPublisher());
+		doc.setPersons(Constants.BOGATYR.getPersons());
 		doc.setCreated(new Date());
 		doc.setUUID(HelperCrypto.getUUID());
 

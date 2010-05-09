@@ -28,6 +28,7 @@
 package net.laubenberger.bogatyr.model.misc;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -37,15 +38,17 @@ import net.laubenberger.bogatyr.model.Model;
  * The interface for the person model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100509)
  * @since 0.9.1
  */
 @XmlJavaTypeAdapter(PersonImpl.XmlAdapter.class)
-public interface Person extends Model, Address, Phone, Fax, Email, Website {
+public interface Person extends Model, Address, Phone, Fax, Email, Url {
 	String MEMBER_FORENAME = "forename"; //$NON-NLS-1$
 	String MEMBER_BIRTHDAY = "birthday"; //$NON-NLS-1$
 	String MEMBER_GENDER = "gender"; //$NON-NLS-1$
-
+	String MEMBER_ORGANIZATIONS = "organizations"; //$NON-NLS-1$
+	String MEMBER_ROLES = "roles"; //$NON-NLS-1$
+	
 	String getForename();
 
 	void setForename(String forename);
@@ -57,4 +60,36 @@ public interface Person extends Model, Address, Phone, Fax, Email, Website {
 	Gender getGender();
 
 	void setGender(Gender gender);
+	
+	/**
+	 * Returns all {@link Organization} of the person.
+	 *
+	 * @return {@link List} all related {@link Organization} of the person
+	 * @since 0.9.2
+	 */
+	List<Organization> getOrganizations();
+
+	/**
+	 * Sets all {@link Organization}.
+	 *
+	 * @param organizations {@link List} containing all related {@link Organization} of the person
+	 * @since 0.9.2
+	 */
+	void setOrganizations(List<Organization> organizations);
+
+	/**
+	 * Returns all {@link Role} of the organization.
+	 *
+	 * @return {@link List} all related {@link Role} of the organization
+	 * @since 0.9.2
+	 */
+	List<Role> getRoles();
+
+	/**
+	 * Sets all {@link Role}.
+	 *
+	 * @param roles {@link List} containing all related {@link Role} of the organization
+	 * @since 0.9.2
+	 */
+	void setRoles(List<Role> roles);
 }

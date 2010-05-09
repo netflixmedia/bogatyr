@@ -29,33 +29,34 @@ package net.laubenberger.bogatyr.model.misc;
 
 
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.model.ModelAbstract;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
- * The implementation of the owner model.
+ * The implementation of the organization model.
  *
  * @author Stefan Laubenberger
  * @version 0.9.2 (20100504)
- * @since 0.9.0
+ * @since 0.9.2
  */
-@XmlRootElement(name = "owner")
-@XmlType(propOrder = {"name", "street", "zip", "city", "country", "phoneNumber", "faxNumber", "email", "website"})
-public class OwnerImpl extends ModelAbstract implements Owner {
-	private static final long serialVersionUID = 1559324818473508642L;
+@XmlRootElement(name = "organization")
+@XmlType(propOrder = {"name", "street", "zip", "city", "country", "phoneNumber", "faxNumber", "email", "url", "persons", "roles"})
+public class OrganizationImpl extends ModelAbstract implements Organization {
+	private static final long serialVersionUID = -6819817877075750182L;
 
-	private static final Logger log = LoggerFactory.getLogger(OwnerImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(OrganizationImpl.class);
 
 	private String name;
 	private String street;
@@ -65,18 +66,21 @@ public class OwnerImpl extends ModelAbstract implements Owner {
 	private String phoneNumber;
 	private String faxNumber;
 	private String email;
-	private URL website;
-
-
-	public OwnerImpl() {
+	private URL url;
+	private List<Person> listPerson;
+	private List<Role> listRole;
+	
+	
+	public OrganizationImpl() {
 		super();
 		log.trace(HelperLog.constructor());
 	}
 
-	public OwnerImpl(final String name, final String street, final String zip, final String city,
-						  final Country country, final String phoneNumber, final String faxNumber, final String email, final URL website, final Map<String, String> mapTag) {
+
+	public OrganizationImpl(final String name, final String street, final String zip,
+									final String city, final Country country, final String phoneNumber, final String faxNumber, final String email, final URL website, final List<Person> listPerson, final List<Role> listRole, final Map<String, String> mapTag) {
 		super(mapTag);
-		log.trace(HelperLog.constructor(name, street, zip, city, country, phoneNumber, faxNumber, email, website, mapTag));
+		log.trace(HelperLog.constructor(name, street, zip, city, country, phoneNumber, faxNumber, email, website, listPerson, listRole, mapTag));
 		this.name = name;
 		this.street = street;
 		this.zip = zip;
@@ -85,14 +89,16 @@ public class OwnerImpl extends ModelAbstract implements Owner {
 		this.phoneNumber = phoneNumber;
 		this.faxNumber = faxNumber;
 		this.email = email;
-		this.website = website;
+		this.url = website;
+		this.listPerson = listPerson;
+		this.listRole = listRole;
 	}
 
 
 	/*
 	 * Overridden methods
 	 */
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -101,10 +107,12 @@ public class OwnerImpl extends ModelAbstract implements Owner {
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((faxNumber == null) ? 0 : faxNumber.hashCode());
+		result = prime * result + ((listPerson == null) ? 0 : listPerson.hashCode());
+		result = prime * result + ((listRole == null) ? 0 : listRole.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
-		result = prime * result + ((website == null) ? 0 : website.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
 		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
 		return result;
 	}
@@ -117,7 +125,7 @@ public class OwnerImpl extends ModelAbstract implements Owner {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OwnerImpl other = (OwnerImpl) obj;
+		OrganizationImpl other = (OrganizationImpl) obj;
 		if (city == null) {
 			if (other.city != null)
 				return false;
@@ -138,6 +146,16 @@ public class OwnerImpl extends ModelAbstract implements Owner {
 				return false;
 		} else if (!faxNumber.equals(other.faxNumber))
 			return false;
+		if (listPerson == null) {
+			if (other.listPerson != null)
+				return false;
+		} else if (!listPerson.equals(other.listPerson))
+			return false;
+		if (listRole == null) {
+			if (other.listRole != null)
+				return false;
+		} else if (!listRole.equals(other.listRole))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -153,10 +171,10 @@ public class OwnerImpl extends ModelAbstract implements Owner {
 				return false;
 		} else if (!street.equals(other.street))
 			return false;
-		if (website == null) {
-			if (other.website != null)
+		if (url == null) {
+			if (other.url != null)
 				return false;
-		} else if (!website.equals(other.website))
+		} else if (!url.equals(other.url))
 			return false;
 		if (zip == null) {
 			if (other.zip != null)
@@ -245,11 +263,11 @@ public class OwnerImpl extends ModelAbstract implements Owner {
 
 	@Override
 	@XmlElement
-	public URL getWebsite() {
+	public URL getUrl() {
 		log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(website));
-		return website;
+		log.debug(HelperLog.methodExit(url));
+		return url;
 	}
 
 	@Override
@@ -357,11 +375,11 @@ public class OwnerImpl extends ModelAbstract implements Owner {
 	}
 
 	@Override
-	public void setWebsite(final URL url) {
+	public void setUrl(final URL url) {
 		log.debug(HelperLog.methodStart(url));
 
-		if (!HelperObject.isEquals(url, website)) {
-			website = url;
+		if (!HelperObject.isEquals(this.url, url)) {
+			this.url = url;
 			setChanged();
 			notifyObservers(MEMBER_WEBSITE);
 		}
@@ -369,20 +387,64 @@ public class OwnerImpl extends ModelAbstract implements Owner {
 		log.debug(HelperLog.methodExit());
 	}
 
+	@Override
+	@XmlElement
+	public List<Person> getPersons() {
+		log.debug(HelperLog.methodStart());
 
+		log.debug(HelperLog.methodExit(listPerson));
+		return listPerson;
+	}
+
+	@Override
+	public void setPersons(final List<Person> persons) {
+		log.debug(HelperLog.methodStart(persons));
+
+		if (!HelperObject.isEquals(persons, listPerson)) {
+			listPerson = persons;
+			setChanged();
+			notifyObservers(MEMBER_PERSONS);
+		}
+
+		log.debug(HelperLog.methodExit());
+	}
+
+	@Override
+	@XmlElement
+	public List<Role> getRoles() {
+		log.debug(HelperLog.methodStart());
+
+		log.debug(HelperLog.methodExit(listRole));
+		return listRole;
+	}
+
+	@Override
+	public void setRoles(final List<Role> roles) {
+		log.debug(HelperLog.methodStart(roles));
+
+		if (!HelperObject.isEquals(roles, listRole)) {
+			listRole = roles;
+			setChanged();
+			notifyObservers(MEMBER_ROLES);
+		}
+
+		log.debug(HelperLog.methodExit());
+	}	
+	
+	
 	/*
 	 * Inner classes
 	 */
 
-	public static class XmlAdapter extends javax.xml.bind.annotation.adapters.XmlAdapter<OwnerImpl, Owner> {
+	public static class XmlAdapter extends javax.xml.bind.annotation.adapters.XmlAdapter<OrganizationImpl, Organization> {
 
 		@Override
-		public OwnerImpl marshal(final Owner model) {
-			return (OwnerImpl) model;
+		public OrganizationImpl marshal(final Organization model) {
+			return (OrganizationImpl) model;
 		}
 
 		@Override
-		public Owner unmarshal(final OwnerImpl model) {
+		public Organization unmarshal(final OrganizationImpl model) {
 			return model;
 		}
 	}
