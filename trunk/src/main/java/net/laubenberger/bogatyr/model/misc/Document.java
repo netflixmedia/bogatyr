@@ -40,7 +40,7 @@ import net.laubenberger.bogatyr.model.Model;
  * The interface for the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100509)
+ * @version 0.9.2 (20100510)
  * @since 0.9.1
  */
 @XmlJavaTypeAdapter(DocumentImpl.XmlAdapter.class)
@@ -52,6 +52,8 @@ public interface Document extends Model, Url {
 	String MEMBER_UUID = "UUID"; //$NON-NLS-1$
 	String MEMBER_ORGANIZATIONS = "organizations"; //$NON-NLS-1$
 	String MEMBER_PERSONS = "persons"; //$NON-NLS-1$
+	String METHOD_ADD_ORGANIZATION = "addOrganization"; //$NON-NLS-1$
+	String METHOD_ADD_PERSON = "addPerson"; //$NON-NLS-1$
 	
 	String getName();
 
@@ -73,10 +75,14 @@ public interface Document extends Model, Url {
 
 	void setOrganizations(List<Organization> organizations);
 
+	void addOrganization(Organization organization);
+	
 	List<Person> getPersons();
 
 	void setPersons(List<Person> persons);
 
+	void addPerson(Person person);
+	
 	UUID getUUID();
 
 	void setUUID(UUID uuid);
