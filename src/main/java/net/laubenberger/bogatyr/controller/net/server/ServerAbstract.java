@@ -46,13 +46,13 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100512)
  * @since 0.7.0
  */
 public abstract class ServerAbstract extends ExtendedObjectAbstract implements Server, ListenerServerThread {
 	private Thread thread;
 
-	private final Collection<ServerThread> listThread = new HashSet<ServerThread>();
+	private final Collection<ServerThread> threads = new HashSet<ServerThread>();
 
 //    private final Map<UUID, ServerThread> mapThread = new ConcurrentHashMap<UUID, ServerThread>();
 
@@ -168,7 +168,7 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 
 	@Override
 	public Collection<ServerThread> getServerThreads() {
-		return Collections.unmodifiableCollection(listThread);
+		return Collections.unmodifiableCollection(threads);
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 			serverSocket.close();
 		}
 
-		for (final ServerThread thread : listThread) {
+		for (final ServerThread thread : threads) {
 			thread.stop();
 		}
 
@@ -217,7 +217,7 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 			throw new RuntimeExceptionIsNull("event"); //$NON-NLS-1$
 		}
 
-		listThread.add(event.getSource());
+		threads.add(event.getSource());
 	}
 
 	@Override
@@ -226,6 +226,6 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 			throw new RuntimeExceptionIsNull("event"); //$NON-NLS-1$
 		}
 
-		listThread.remove(event.getSource());
+		threads.remove(event.getSource());
 	}
 }

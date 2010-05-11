@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  * This is a datagram dumper to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100512)
  * @since 0.8.0
  */
 public class DatagramDumperImpl extends ExtendedObjectAbstract implements DatagramDumper {
@@ -52,7 +52,7 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 
 	private Thread thread;
 
-	private Collection<ListenerDatagram> listListener = new HashSet<ListenerDatagram>();
+	private Collection<ListenerDatagram> listeners = new HashSet<ListenerDatagram>();
 
 	private int port;
 	private DatagramSocket socket;
@@ -88,7 +88,7 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 	 */
 
 	private void firePacketReceived() {
-		for (final ListenerDatagram listener : listListener) {
+		for (final ListenerDatagram listener : listeners) {
 			listener.packetReceived(event);
 		}
 	}
@@ -96,7 +96,7 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 	private void fireStarted() {
 		isRunning = true;
 
-		for (final ListenerDatagram listener : listListener) {
+		for (final ListenerDatagram listener : listeners) {
 			listener.datagramStarted(event);
 		}
 	}
@@ -104,7 +104,7 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 	private void fireStopped() {
 		isRunning = false;
 
-		for (final ListenerDatagram listener : listListener) {
+		for (final ListenerDatagram listener : listeners) {
 			listener.datagramStopped(event);
 		}
 	}
@@ -187,7 +187,7 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
-		listListener.add(listener);
+		listeners.add(listener);
 	}
 
 	@Override
@@ -196,16 +196,16 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
-		listListener.remove(listener);
+		listeners.remove(listener);
 	}
 
 	@Override
 	public synchronized void deleteListeners() {
-		listListener = new HashSet<ListenerDatagram>();
+		listeners = new HashSet<ListenerDatagram>();
 	}
 
 	@Override
 	public int countListeners() {
-		return listListener.size();
+		return listeners.size();
 	}
 }

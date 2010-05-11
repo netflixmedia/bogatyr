@@ -38,23 +38,22 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import net.laubenberger.bogatyr.helper.encoder.EncoderBase64;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100512)
  * @since 0.5.0
  */
 public abstract class HelperNet {
@@ -313,16 +312,16 @@ public abstract class HelperNet {
 	}
 
 	/**
-	 * Returns all IP addresses of the current machine.
+	 * Returns a {@link List} of all IP addresses of the current machine.
 	 *
-	 * @return {@link Collection} with IP addresses of the current machine
+	 * @return {@link List} containing all IP addresses of the current machine
 	 * @throws UnknownHostException
 	 * @since 0.5.0
 	 */
-	public static Collection<String> getLocalIps() throws UnknownHostException { //$JUnit$
+	public static List<String> getLocalIps() throws UnknownHostException { //$JUnit$
 		log.debug(HelperLog.methodStart());
 
-		final Collection<String> result = new ArrayList<String>();
+		final List<String> result = new ArrayList<String>();
 		final String localHost = InetAddress.getLocalHost().getHostName();
 
 		for (final InetAddress address : InetAddress.getAllByName(localHost)) {
@@ -333,9 +332,9 @@ public abstract class HelperNet {
 	}
 
 	/**
-	 * Returns all network interfaces of the current machine.
+	 * Returns {@link List} of all {@link NetworkInterface} of the current machine.
 	 *
-	 * @return {@link List} with network interfaces of the current machine
+	 * @return {@link List} containing all {@link NetworkInterface} of the current machine
 	 * @throws SocketException
 	 * @see NetworkInterface
 	 * @since 0.5.0

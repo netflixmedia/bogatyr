@@ -38,7 +38,7 @@ import net.laubenberger.bogatyr.model.unit.Bit;
  * This is a helper class for logging.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100509)
+ * @version 0.9.2 (20100512)
  * @since 0.9.1
  */
 public abstract class HelperLog {
@@ -229,25 +229,27 @@ public abstract class HelperLog {
 		List<File> files = HelperIO.getAvailableDrives();
 
 		for (File root : files) {
-			sb.append("Drive: "); //$NON-NLS-1$
-			sb.append(root.getAbsolutePath());
-			sb.append(HelperString.NEW_LINE);
-			sb.append("Total space: "); //$NON-NLS-1$
-			sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceTotal(root)).setScale(3, BigDecimal.ROUND_DOWN));
-			sb.append(" GB"); //$NON-NLS-1$
-			sb.append(HelperString.NEW_LINE);
-			sb.append("Free space: "); //$NON-NLS-1$
-			sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceFree(root)).setScale(3, BigDecimal.ROUND_DOWN));
-			sb.append(" GB"); //$NON-NLS-1$
-			sb.append(HelperString.NEW_LINE);
-			sb.append("Usable space: "); //$NON-NLS-1$
-			sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceUsable(root)).setScale(3, BigDecimal.ROUND_DOWN));
-			sb.append(" GB"); //$NON-NLS-1$
-			sb.append(HelperString.NEW_LINE);
-			sb.append("Used space: "); //$NON-NLS-1$
-			sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceUsed(root)).setScale(3, BigDecimal.ROUND_DOWN));
-			sb.append(" GB"); //$NON-NLS-1$
-			sb.append(HelperString.NEW_LINE);
+//			if (HelperIO.isDrive(root)) {
+				sb.append("Drive: "); //$NON-NLS-1$
+				sb.append(root.getAbsolutePath());
+				sb.append(HelperString.NEW_LINE);
+				sb.append("Total space: "); //$NON-NLS-1$
+				sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceTotal(root)).setScale(3, BigDecimal.ROUND_DOWN));
+				sb.append(" GB"); //$NON-NLS-1$
+				sb.append(HelperString.NEW_LINE);
+				sb.append("Free space: "); //$NON-NLS-1$
+				sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceFree(root)).setScale(3, BigDecimal.ROUND_DOWN));
+				sb.append(" GB"); //$NON-NLS-1$
+				sb.append(HelperString.NEW_LINE);
+				sb.append("Usable space: "); //$NON-NLS-1$
+				sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceUsable(root)).setScale(3, BigDecimal.ROUND_DOWN));
+				sb.append(" GB"); //$NON-NLS-1$
+				sb.append(HelperString.NEW_LINE);
+				sb.append("Used space: "); //$NON-NLS-1$
+				sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceUsed(root)).setScale(3, BigDecimal.ROUND_DOWN));
+				sb.append(" GB"); //$NON-NLS-1$
+				sb.append(HelperString.NEW_LINE);
+//			}
 		}
 
 		sb.append(FILLER); 

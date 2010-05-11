@@ -37,20 +37,20 @@ import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
-import java.util.Collection;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
 
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This is a helper class for graphic operations
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100512)
  * @since 0.4.0
  */
 public abstract class HelperGraphic {
@@ -261,17 +261,17 @@ public abstract class HelperGraphic {
 //	}
 
 	/**
-	 * Returns a {@link Collection} containing all available system {@link Font}.
+	 * Returns a {@link List} containing all available system {@link Font}.
 	 *
-	 * @return {@link Collection} containing all fonts
+	 * @return {@link List} containing all fonts
 	 * @see Font
 	 * @since 0.4.0
 	 */
-	public static Collection<Font> getAvailableFonts() { //$JUnit$
+	public static List<Font> getAvailableFonts() { //$JUnit$
 		log.debug(HelperLog.methodStart());
 		final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
-		final Collection<Font> result = Arrays.asList(ge.getAllFonts());
+		final List<Font> result = Arrays.asList(ge.getAllFonts());
 
 		log.debug(HelperLog.methodExit(result));
 		return result;

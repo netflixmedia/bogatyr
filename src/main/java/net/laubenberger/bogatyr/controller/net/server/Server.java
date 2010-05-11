@@ -39,7 +39,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObject;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100512)
  * @since 0.7.0
  */
 public interface Server extends ExtendedObject, Runnable {
@@ -118,7 +118,7 @@ public interface Server extends ExtendedObject, Runnable {
 	boolean isRunning();
 
 	/**
-	 * Returns all server threads.
+	 * Returns a {@link Collection} of all server threads.
 	 *
 	 * @return {@link Collection} containing all {@link ServerThread}
 	 * @since 0.8.0

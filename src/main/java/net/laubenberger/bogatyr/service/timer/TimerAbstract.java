@@ -43,13 +43,13 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * This is a timer which informs all added listeners about its state.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100512)
  * @since 0.6.0
  */
 public abstract class TimerAbstract extends ServiceAbstract implements TimeMachine {
 	private static final Logger log = LoggerFactory.getLogger(TimerAbstract.class);
 
-	private Collection<ListenerTimer> listListener = new HashSet<ListenerTimer>();
+	private Collection<ListenerTimer> listeners = new HashSet<ListenerTimer>();
 
 	private final Event<TimeMachine> event = new Event<TimeMachine>(this);
 
@@ -103,7 +103,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 	protected void fireTimeChanged() {
 		log.trace(HelperLog.methodStart());
 
-		for (final ListenerTimer listener : listListener) {
+		for (final ListenerTimer listener : listeners) {
 			listener.timeChanged(event);
 		}
 
@@ -115,7 +115,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 
 		isRunning = true;
 
-		for (final ListenerTimer listener : listListener) {
+		for (final ListenerTimer listener : listeners) {
 			listener.timerStarted(event);
 		}
 
@@ -127,7 +127,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 
 		isRunning = false;
 
-		for (final ListenerTimer listener : listListener) {
+		for (final ListenerTimer listener : listeners) {
 			listener.timerStopped(event);
 		}
 
@@ -170,7 +170,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
-		listListener.add(listener);
+		listeners.add(listener);
 
 		log.debug(HelperLog.methodExit());
 	}
@@ -182,7 +182,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
-		listListener.remove(listener);
+		listeners.remove(listener);
 
 		log.debug(HelperLog.methodExit());
 	}
@@ -191,7 +191,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 	public synchronized void deleteListeners() {
 		log.debug(HelperLog.methodStart());
 
-		listListener = new HashSet<ListenerTimer>();
+		listeners = new HashSet<ListenerTimer>();
 
 		log.debug(HelperLog.methodExit());
 	}
@@ -200,7 +200,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 	public int countListeners() {
 		log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(listListener.size()));
-		return listListener.size();
+		log.debug(HelperLog.methodExit(listeners.size()));
+		return listeners.size();
 	}
 }

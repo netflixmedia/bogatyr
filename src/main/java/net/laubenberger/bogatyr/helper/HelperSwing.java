@@ -29,8 +29,8 @@ package net.laubenberger.bogatyr.helper;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JSlider;
@@ -38,19 +38,19 @@ import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.model.misc.Platform;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This is a helper class for Swing.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100512)
  * @since 0.9.0
  */
 public abstract class HelperSwing {
@@ -147,16 +147,16 @@ public abstract class HelperSwing {
 	}
 
 	/**
-	 * Returns a {@link Collection} containing all available system {@link LookAndFeelInfo}.
+	 * Returns a {@link List} containing all available system {@link LookAndFeelInfo}.
 	 *
-	 * @return {@link Collection} containing all look and feels
+	 * @return {@link List} containing all look and feels
 	 * @see LookAndFeelInfo
 	 * @since 0.9.1
 	 */
-	public static Collection<LookAndFeelInfo> getAvailableLookAndFeels() {
+	public static List<LookAndFeelInfo> getAvailableLookAndFeels() {
 		log.debug(HelperLog.methodStart());
 
-		final Collection<LookAndFeelInfo> result = Arrays.asList(UIManager.getInstalledLookAndFeels());
+		final List<LookAndFeelInfo> result = Arrays.asList(UIManager.getInstalledLookAndFeels());
 
 		log.debug(HelperLog.methodExit(result));
 		return result;
