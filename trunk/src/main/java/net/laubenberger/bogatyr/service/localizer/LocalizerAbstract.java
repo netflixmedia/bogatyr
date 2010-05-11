@@ -49,13 +49,13 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * Abstract localizer implementation.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100512)
  * @since 0.6.0
  */
 public abstract class LocalizerAbstract extends ServiceAbstract implements Localizer {
 	private static final Logger log = LoggerFactory.getLogger(LocalizerAbstract.class);
 
-	private Collection<ListenerLocale> listListener = new HashSet<ListenerLocale>();
+	private Collection<ListenerLocale> listeners = new HashSet<ListenerLocale>();
 
 	private final Event<Localizer> event = new Event<Localizer>(this);
 
@@ -69,7 +69,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	private void fireLocaleChanged() {
 		log.trace(HelperLog.methodStart());
 
-		for (final ListenerLocale listener : listListener) {
+		for (final ListenerLocale listener : listeners) {
 			listener.localeChanged(event);
 		}
 
@@ -159,7 +159,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
-		listListener.add(listener);
+		listeners.add(listener);
 
 		log.debug(HelperLog.methodExit());
 	}
@@ -171,7 +171,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
-		listListener.remove(listener);
+		listeners.remove(listener);
 
 		log.debug(HelperLog.methodExit());
 	}
@@ -180,7 +180,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	public synchronized void deleteListeners() {
 		log.debug(HelperLog.methodStart());
 
-		listListener = new HashSet<ListenerLocale>();
+		listeners = new HashSet<ListenerLocale>();
 
 		log.debug(HelperLog.methodExit());
 	}
@@ -189,7 +189,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	public int countListeners() {
 		log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(listListener.size()));
-		return listListener.size();
+		log.debug(HelperLog.methodExit(listeners.size()));
+		return listeners.size();
 	}
 }

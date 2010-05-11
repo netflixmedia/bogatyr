@@ -47,7 +47,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100512)
  * @since 0.7.0
  */
 public abstract class ClientAbstract extends ExtendedObjectAbstract implements Client {
@@ -55,7 +55,7 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 
 	private Thread thread;
 
-	private Collection<ListenerClient> listListener = new HashSet<ListenerClient>();
+	private Collection<ListenerClient> listeners = new HashSet<ListenerClient>();
 
 	private String host;
 	private int port;
@@ -106,7 +106,7 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 	 */
 
 	protected void fireStreamRead() {
-		for (final ListenerClient listener : listListener) {
+		for (final ListenerClient listener : listeners) {
 			listener.clientStreamRead(event);
 		}
 	}
@@ -114,7 +114,7 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 	protected void fireStarted() {
 		isRunning = true;
 
-		for (final ListenerClient listener : listListener) {
+		for (final ListenerClient listener : listeners) {
 			listener.clientStarted(event);
 		}
 	}
@@ -122,7 +122,7 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 	protected void fireStopped() {
 		isRunning = false;
 
-		for (final ListenerClient listener : listListener) {
+		for (final ListenerClient listener : listeners) {
 			listener.clientStopped(event);
 		}
 	}
@@ -245,7 +245,7 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
-		listListener.add(listener);
+		listeners.add(listener);
 	}
 
 	@Override
@@ -254,16 +254,16 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
-		listListener.remove(listener);
+		listeners.remove(listener);
 	}
 
 	@Override
 	public synchronized void deleteListeners() {
-		listListener = new HashSet<ListenerClient>();
+		listeners = new HashSet<ListenerClient>();
 	}
 
 	@Override
 	public int countListeners() {
-		return listListener.size();
+		return listeners.size();
 	}
 }

@@ -27,24 +27,27 @@
 
 package net.laubenberger.bogatyr.service.localizer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import javax.swing.KeyStroke;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import net.laubenberger.bogatyr.model.misc.Language;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * Localizer implementation for file access.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100512)
  * @since 0.1.0
  */
 public class LocalizerFile extends LocalizerAbstract {
@@ -55,22 +58,33 @@ public class LocalizerFile extends LocalizerAbstract {
 	public static final String POSTFIX_TOOLTIP = ".tooltip"; //$NON-NLS-1$
 
 	private String localizerBase;
+	final ClassLoader classLoader;
 	private ResourceBundle bundle;
 
 
 	public LocalizerFile(final String localizerBase) {
-		super();
+		this(localizerBase, ClassLoader.getSystemClassLoader());
 		log.trace(HelperLog.constructor(localizerBase));
+	}
+
+	public LocalizerFile(final String localizerBase, final ClassLoader classLoader) {
+		super();
+		log.trace(HelperLog.constructor(localizerBase, classLoader));
 
 		if (null == localizerBase) {
 			throw new RuntimeExceptionIsNull("localizerBase"); //$NON-NLS-1$
 		}
 
+		if (null == classLoader) {
+			throw new RuntimeExceptionIsNull("classLoader"); //$NON-NLS-1$
+		}
+
 		this.localizerBase = localizerBase;
+		this.classLoader = classLoader;
 
 		init();
 	}
-
+	
 	/**
 	 * Returns the localize base of the resource file.
 	 *
@@ -97,7 +111,7 @@ public class LocalizerFile extends LocalizerAbstract {
 		}
 
 		this.localizerBase = localizerBase;
-		bundle = ResourceBundle.getBundle(localizerBase, getLocale());
+		bundle = ResourceBundle.getBundle(localizerBase, getLocale(), classLoader);
 
 		log.debug(HelperLog.methodExit());
 	}
@@ -108,7 +122,7 @@ public class LocalizerFile extends LocalizerAbstract {
 	 */
 
 	private void init() {
-		bundle = ResourceBundle.getBundle(localizerBase, getLocale());
+		bundle = ResourceBundle.getBundle(localizerBase, getLocale(), classLoader);
 	}
 
 
@@ -123,7 +137,7 @@ public class LocalizerFile extends LocalizerAbstract {
 			throw new RuntimeExceptionIsNull("locale"); //$NON-NLS-1$
 		}
 
-		bundle = ResourceBundle.getBundle(localizerBase, locale);
+		bundle = ResourceBundle.getBundle(localizerBase, locale, classLoader);
 
 		super.setLocale(locale);
 
@@ -177,6 +191,24 @@ public class LocalizerFile extends LocalizerAbstract {
 		log.debug(HelperLog.methodStart(key));
 
 		final String result = bundle.getString(key + POSTFIX_TOOLTIP);
+
+		log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
+	@Override
+	public List<Language> getAvailableLanguages() {
+		log.debug(HelperLog.methodStart());
+		
+		final List<Language> result = new ArrayList<Language>();
+		
+		for (final Language language : Language.values()) {
+			ResourceBundle bundle = ResourceBundle.getBundle(localizerBase, language.getLocale());
+			
+			if (language.getLocale().equals(bundle.getLocale())) {
+				result.add(language);
+			}
+		}
 
 		log.debug(HelperLog.methodExit(result));
 		return result;

@@ -28,20 +28,20 @@
 package net.laubenberger.bogatyr.helper;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
 /**
  * This is a helper class for maps.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100512)
  * @since 0.9.0
  */
 public abstract class HelperMap {
@@ -65,20 +65,20 @@ public abstract class HelperMap {
 	}
 
 	/**
-	 * Get all keys from a {@link Map}.
+	 * Get a {@link List} of all keys from a {@link Map}.
 	 *
 	 * @param map to dump
-	 * @return keys from a {@link Map}
+	 * @return {@link List} containing all keys from a {@link Map}
 	 * @see Map
 	 * @since 0.9.1
 	 */
-	public static <K, V> Collection<K> getKeys(final Map<K, V> map) {
+	public static <K, V> List<K> getKeys(final Map<K, V> map) {
 		log.debug(HelperLog.methodStart(map));
 		if (null == map) {
 			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
 		}
 
-		final Collection<K> result = new ArrayList<K>(map.size());
+		final List<K> result = new ArrayList<K>(map.size());
 
 		for (final Map.Entry<K, V> pair : map.entrySet()) {
 			result.add(pair.getKey());
@@ -88,20 +88,20 @@ public abstract class HelperMap {
 	}
 
 	/**
-	 * Get all values from a {@link Map}.
+	 * Get  a {@link List} of all values from a {@link Map}.
 	 *
 	 * @param map to dump
-	 * @return values from a {@link Map}
+	 * @return {@link List} containing all values from a {@link Map}
 	 * @see Map
 	 * @since 0.9.1
 	 */
-	public static <K, V> Collection<V> getValues(final Map<K, V> map) {
+	public static <K, V> List<V> getValues(final Map<K, V> map) {
 		log.debug(HelperLog.methodStart(map));
 		if (null == map) {
 			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
 		}
 
-		final Collection<V> result = new ArrayList<V>(map.size());
+		final List<V> result = new ArrayList<V>(map.size());
 
 		for (final Map.Entry<K, V> pair : map.entrySet()) {
 			result.add(pair.getValue());

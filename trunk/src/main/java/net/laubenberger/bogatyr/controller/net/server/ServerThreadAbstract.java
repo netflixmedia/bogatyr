@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  * This is a skeleton for server threads.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100512)
  * @since 0.7.0
  */
 public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implements ServerThread {
@@ -52,7 +52,7 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 
 	private Thread thread;
 
-	private Collection<ListenerServerThread> listListener = new HashSet<ListenerServerThread>();
+	private Collection<ListenerServerThread> listeners = new HashSet<ListenerServerThread>();
 
 	private Socket socket;
 
@@ -96,7 +96,7 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 	 */
 
 	protected void fireStreamRead() {
-		for (final ListenerServerThread listener : listListener) {
+		for (final ListenerServerThread listener : listeners) {
 			listener.serverThreadStreamRead(event);
 		}
 	}
@@ -104,7 +104,7 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 	protected void fireStarted() {
 		isRunning = true;
 
-		for (final ListenerServerThread listener : listListener) {
+		for (final ListenerServerThread listener : listeners) {
 			listener.serverThreadStarted(event);
 		}
 	}
@@ -112,7 +112,7 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 	protected void fireStopped() {
 		isRunning = false;
 
-		for (final ListenerServerThread listener : listListener) {
+		for (final ListenerServerThread listener : listeners) {
 			listener.serverThreadStopped(event);
 		}
 	}
@@ -200,7 +200,7 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
-		listListener.add(listener);
+		listeners.add(listener);
 	}
 
 	@Override
@@ -209,16 +209,16 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
-		listListener.remove(listener);
+		listeners.remove(listener);
 	}
 
 	@Override
 	public synchronized void deleteListeners() {
-		listListener = new HashSet<ListenerServerThread>();
+		listeners = new HashSet<ListenerServerThread>();
 	}
 
 	@Override
 	public int countListeners() {
-		return listListener.size();
+		return listeners.size();
 	}
 }

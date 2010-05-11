@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100506)
+ * @version 0.9.2 (20100512)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -60,6 +60,12 @@ public abstract class HelperString {
 	public static final String PERIOD = "."; //$NON-NLS-1$
 	public static final String COMMA = ","; //$NON-NLS-1$
 	public static final String SEMICOLON = ";"; //$NON-NLS-1$
+	public static final String COPYRIGHT = "©"; //$NON-NLS-1$
+	public static final String AT = "@"; //$NON-NLS-1$
+	public static final String TILDE = "~"; //$NON-NLS-1$
+	public static final String PI = "µ"; //$NON-NLS-1$
+	public static final String POWER_OF_2 = "²"; //$NON-NLS-1$
+	public static final String POWER_OF_3 = "³"; //$NON-NLS-1$
 
 	/**
 	 * Checks if a {@link CharSequence} is valid.

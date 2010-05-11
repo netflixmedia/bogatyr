@@ -31,7 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,17 +52,17 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.AudioFileFormat.Type;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
 /**
  * This is a helper class for sound operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.2 (20100512)
  * @since 0.5.0
  */
 public abstract class HelperSound {
@@ -251,16 +251,16 @@ public abstract class HelperSound {
 	}
 
 	/**
-	 * Returns all available audio formats of the current machine (e.g. "aiff", "wave").
+	 * Returns a {@link List} of all available audio {@link Type} of the current machine (e.g. "aiff", "wave").
 	 *
-	 * @return {@link Collection} containing all available audio {@link Type} of the current machine
+	 * @return {@link List} containing all available audio {@link Type} of the current machine
 	 * @see Type
 	 * @since 0.5.0
 	 */
-	public static Collection<Type> getAvailableAudioFormats() { //$JUnit$
+	public static List<Type> getAvailableAudioFormats() { //$JUnit$
 		log.debug(HelperLog.methodStart());
 
-		final Collection<Type> result = Arrays.asList(AudioSystem.getAudioFileTypes());
+		final List<Type> result = Arrays.asList(AudioSystem.getAudioFileTypes());
 
 		log.debug(HelperLog.methodExit(result));
 		return result;

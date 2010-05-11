@@ -32,6 +32,7 @@ import java.security.Security;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -47,7 +48,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for cryptography (e.g. random keys).
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100512)
  * @since 0.7.0
  */
 public abstract class HelperCrypto {
@@ -119,16 +120,16 @@ public abstract class HelperCrypto {
 	}
 
 	/**
-	 * Returns all installed security {@link Provider}.
+	 * Returns a {@link List} of all installed security {@link Provider}.
 	 *
-	 * @return installed security {@link Provider}
+	 * @return {@link List} containing all installed security {@link Provider}
 	 * @see Provider
 	 * @since 0.9.1
 	 */
-	public static Collection<Provider> getProviders() {
+	public static List<Provider> getProviders() {
 		log.debug(HelperLog.methodStart());
 
-		final Collection<Provider> result = Arrays.asList(Security.getProviders());
+		final List<Provider> result = Arrays.asList(Security.getProviders());
 
 		log.debug(HelperLog.methodExit(result));
 		return result;

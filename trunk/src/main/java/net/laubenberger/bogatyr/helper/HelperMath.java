@@ -30,7 +30,7 @@ package net.laubenberger.bogatyr.helper;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100512)
  * @since 0.4.0
  */
 public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
@@ -175,14 +175,14 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	}
 
 	/**
-	 * Calculates a {@link Collection} containing all primes in a given range.
+	 * Calculates a {@link List} containing all primes in a given range.
 	 *
 	 * @param start number of the range
 	 * @param end	number of the range
-	 * @return list with the calculated prime numbers
+	 * @return {@link List} containing all calculated prime numbers
 	 * @since 0.5.0
 	 */
-	public static Collection<Long> calcPrimes(final long start, final long end) { //$JUnit$
+	public static List<Long> calcPrimes(final long start, final long end) { //$JUnit$
 		log.debug(HelperLog.methodStart(start, end));
 //        if (0 > start) {
 //            throw new IllegalArgumentException("start value must be positive: " + start); //$NON-NLS-1$
@@ -197,7 +197,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 			throw new RuntimeExceptionMustBeSmaller("range (end - start + 1)", end - start + 1, Integer.MAX_VALUE); //$NON-NLS-1$
 		}
 
-		final Collection<Long> result = new ArrayList<Long>((int) (end - start + 1));
+		final List<Long> result = new ArrayList<Long>((int) (end - start + 1));
 
 		for (long ii = start; ii <= end; ii++) {
 			if (isPrime(ii)) {

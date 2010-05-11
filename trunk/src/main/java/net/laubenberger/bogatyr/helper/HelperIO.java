@@ -67,7 +67,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100512)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -1164,7 +1164,7 @@ public abstract class HelperIO {
 	 * @see FileFilter
 	 * @since 0.9.0
 	 */
-	public static Collection<File> getFiles(final File path, final FileFilter filter) { //$JUnit$
+	public static List<File> getFiles(final File path, final FileFilter filter) { //$JUnit$
 		log.debug(HelperLog.methodStart(path, filter));
 
 		final List<File> result = getFiles(path, filter, -1);
