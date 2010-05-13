@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -322,8 +322,9 @@ public abstract class HelperString {
 			throw new RuntimeExceptionIsNullOrEmpty("prefix"); //$NON-NLS-1$
 		}
 
-		final boolean result = string.matches("(?i)" + prefix + ".*");  //$NON-NLS-1$//$NON-NLS-2$
-
+//		final boolean result = string.matches("(?i)" + prefix + ".*");  //$NON-NLS-1$//$NON-NLS-2$
+		final boolean result = string.toUpperCase().startsWith(prefix.toUpperCase());
+		
 		log.debug(HelperLog.methodExit(result));
 		return result;
 	}
@@ -345,7 +346,8 @@ public abstract class HelperString {
 			throw new RuntimeExceptionIsNullOrEmpty("suffix"); //$NON-NLS-1$
 		}
 
-		final boolean result = string.matches("(?i).*" + suffix); //$NON-NLS-1$
+//		final boolean result = string.matches("(?i).*" + suffix); //$NON-NLS-1$
+		final boolean result = string.toUpperCase().endsWith(suffix.toUpperCase());
 
 		log.debug(HelperLog.methodExit(result));
 		return result;
@@ -368,7 +370,8 @@ public abstract class HelperString {
 			throw new RuntimeExceptionIsNullOrEmpty("part"); //$NON-NLS-1$
 		}
 
-		final boolean result = string.matches("(?i).*" + part + ".*");  //$NON-NLS-1$//$NON-NLS-2$
+//		final boolean result = string.matches("(?i).*" + part + ".*");  //$NON-NLS-1$//$NON-NLS-2$
+		final boolean result = string.toUpperCase().contains(part.toUpperCase());
 
 		log.debug(HelperLog.methodExit(result));
 		return result;
