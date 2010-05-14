@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for screens.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100405)
+ * @version 0.9.2 (20100514)
  * @since 0.9.1
  */
 public abstract class HelperScreen {
@@ -53,11 +53,11 @@ public abstract class HelperScreen {
 	 * @since 0.9.1
 	 */
 	public static Dimension getCurrentScreenSize() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final Dimension result = Toolkit.getDefaultToolkit().getScreenSize();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -69,11 +69,11 @@ public abstract class HelperScreen {
 	 * @since 0.9.1
 	 */
 	public static ColorModel getCurrentColorModel() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final ColorModel result = Toolkit.getDefaultToolkit().getColorModel();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -88,11 +88,11 @@ public abstract class HelperScreen {
 	 * @since 0.9.1
 	 */
 	public static int getCurrentScreenResolution() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final int result = Toolkit.getDefaultToolkit().getScreenResolution();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -105,12 +105,12 @@ public abstract class HelperScreen {
 	 * @since 0.9.1
 	 */
 	public static boolean isValidScreenSize(final Dimension minSize) {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final Dimension resolution = getCurrentScreenSize();
 		final boolean result = resolution.width >= minSize.width && resolution.height >= minSize.height;
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

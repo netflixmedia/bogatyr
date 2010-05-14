@@ -46,7 +46,7 @@ import java.awt.event.ActionListener;
  * This is a group to add 1-n components (e.g. useful with JButtons).
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class Group extends Panel {
@@ -57,20 +57,20 @@ public class Group extends Panel {
 
 	public Group(final Insets insets, final JComponent... data) {
 		super();
-		log.trace(HelperLog.constructor(insets, data));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(insets, data));
 
 		createLayout(data, insets, false);
 	}
 
 	public Group(final Insets insets, final JComponent[] data, final boolean isVertical) {
 		super();
-		log.trace(HelperLog.constructor(insets, data, isVertical));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(insets, data, isVertical));
 
 		createLayout(data, insets, isVertical);
 	}
 
 	public void addActionListener(final ActionListener listener) {
-		log.debug(HelperLog.methodStart(listener));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 
 		final Component[] components = getComponents();
 		for (final Component component : components) {
@@ -79,11 +79,11 @@ public class Group extends Panel {
 			}
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	public void removeActionListener(final ActionListener listener) {
-		log.debug(HelperLog.methodStart(listener));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 
 		final Component[] components = getComponents();
 		for (final Component component : components) {
@@ -92,7 +92,7 @@ public class Group extends Panel {
 			}
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 
@@ -101,7 +101,7 @@ public class Group extends Panel {
 	 */
 
 	private void createLayout(final JComponent[] data, final Insets insets, final boolean isVertical) {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		if (isVertical) {
 			createLayoutVertical(data, insets);
@@ -109,11 +109,11 @@ public class Group extends Panel {
 			createLayoutHorizontal(data, insets);
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 	private void createLayoutVertical(final JComponent[] data, final Insets insets) {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -128,11 +128,11 @@ public class Group extends Panel {
 			}
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 	private void createLayoutHorizontal(final JComponent[] data, final Insets insets) {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -147,7 +147,7 @@ public class Group extends Panel {
 			}
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 

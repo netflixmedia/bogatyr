@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JDesktopPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class PaneDesktop extends JDesktopPane {
@@ -56,7 +56,7 @@ public class PaneDesktop extends JDesktopPane {
 
 	public PaneDesktop() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 

@@ -50,7 +50,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * This is the properties class for file and stream access.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.1.0
  */
 public class PropertyImpl extends ServiceAbstract implements Property {
@@ -61,7 +61,7 @@ public class PropertyImpl extends ServiceAbstract implements Property {
 
 	public PropertyImpl(final InputStream is) throws IOException {
 		super();
-		log.trace(HelperLog.constructor(is));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(is));
 
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
@@ -82,56 +82,56 @@ public class PropertyImpl extends ServiceAbstract implements Property {
 
 	@Override
 	public Properties getProperties() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(properties));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(properties));
 		return properties;
 	}
 
 	@Override
 	public String getValue(final String key) {
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 		final String result = properties.getProperty(key);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public Boolean getBoolean(final String key) {
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 		final Boolean result = null == properties.getProperty(key) ? null : Boolean.valueOf(properties.getProperty(key));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public BigDecimal getNumber(final String key) {
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 		final BigDecimal result = HelperNumber.getNumber(properties.getProperty(key));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public File getFile(final String key) {
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 		final String file = properties.getProperty(key);
 		final File result = null == file ? null : new File(file);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public URL getURL(final String key) {
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 		final String url = properties.getProperty(key);
 		URL result = null;
@@ -140,10 +140,10 @@ public class PropertyImpl extends ServiceAbstract implements Property {
 			try {
 				result = new URL(url);
 			} catch (MalformedURLException ex) {
-				log.info("URL invalid", ex); //$NON-NLS-1$
+				if (log.isInfoEnabled()) log.info("URL invalid", ex); //$NON-NLS-1$
 			}
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }   

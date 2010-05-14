@@ -71,7 +71,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.3.0
  */
 public class CertificateProviderImpl extends ServiceAbstract implements CertificateProvider {
@@ -82,7 +82,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 
 	public CertificateProviderImpl() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 
@@ -92,7 +92,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 
 	@Override
 	public X509Certificate readCertificate(final File file) throws CertificateException, NoSuchProviderException, IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -104,7 +104,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 
 			final X509Certificate result = readCertificate(new BufferedInputStream(new FileInputStream(file)));
 
-			log.debug(HelperLog.methodExit(result));
+			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
 		} finally {
 			if (null != bis) {
@@ -115,7 +115,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 
 	@Override
 	public X509Certificate readCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {
-		log.debug(HelperLog.methodStart(is));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
@@ -127,7 +127,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 			// get the certificate
 			final X509Certificate result = (X509Certificate) cf.generateCertificate(is);
 
-			log.debug(HelperLog.methodExit(result));
+			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
 		} finally {
 			is.close();
@@ -136,7 +136,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 
 	@Override
 	public void writeCertificate(final OutputStream os, final Certificate cert) throws CertificateEncodingException, IOException {
-		log.debug(HelperLog.methodStart(os, cert));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(os, cert));
 		if (null == os) {
 			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
 		}
@@ -146,12 +146,12 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 
 		HelperIO.writeStream(os, cert.getEncoded());
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void writeCertificate(final File file, final Certificate cert) throws CertificateEncodingException, IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(file, cert));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, cert));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}

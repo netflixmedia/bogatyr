@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JPasswordField.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.1.0
  */
 public class PasswordField extends JPasswordField implements Activatable {
@@ -58,22 +58,22 @@ public class PasswordField extends JPasswordField implements Activatable {
 
 	public PasswordField() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public PasswordField(final Document doc, final String text, final int columns) {
 		super(doc, text, columns);
-		log.trace(HelperLog.constructor(doc, text, columns));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(doc, text, columns));
 	}
 
 	public PasswordField(final int columns) {
 		super(columns);
-		log.trace(HelperLog.constructor(columns));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(columns));
 	}
 
 	public PasswordField(final String text, final int columns) {
 		super(text, columns);
-		log.trace(HelperLog.constructor(text, columns));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, columns));
 	}
 
 	/*
@@ -82,7 +82,7 @@ public class PasswordField extends JPasswordField implements Activatable {
 
 	public PasswordField(final String toolTip) {
 		super();
-		log.trace(HelperLog.constructor(toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(toolTip));
 
 		setToolTipText(toolTip);
 	}
@@ -121,15 +121,15 @@ public class PasswordField extends JPasswordField implements Activatable {
 
 	@Override
 	public boolean isActive() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(!isNotActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
-		log.debug(HelperLog.methodStart(isActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isActive));
 
 		if (isActive) {
 			isNotActive = !isActive;
@@ -139,6 +139,6 @@ public class PasswordField extends JPasswordField implements Activatable {
 			isNotActive = !isActive;
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

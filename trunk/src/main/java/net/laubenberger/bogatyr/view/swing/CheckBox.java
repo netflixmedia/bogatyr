@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JCheckBox.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.2.0
  */
 public class CheckBox extends JCheckBox implements Activatable {
@@ -59,42 +59,42 @@ public class CheckBox extends JCheckBox implements Activatable {
 
 	public CheckBox() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public CheckBox(final Action action) {
 		super(action);
-		log.trace(HelperLog.constructor(action));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(action));
 	}
 
 	public CheckBox(final Icon icon, final boolean selected) {
 		super(icon, selected);
-		log.trace(HelperLog.constructor(icon, selected));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(icon, selected));
 	}
 
 	public CheckBox(final Icon icon) {
 		super(icon);
-		log.trace(HelperLog.constructor(icon));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(icon));
 	}
 
 	public CheckBox(final String text, final boolean selected) {
 		super(text, selected);
-		log.trace(HelperLog.constructor(text, selected));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, selected));
 	}
 
 	public CheckBox(final String text, final Icon icon, final boolean selected) {
 		super(text, icon, selected);
-		log.trace(HelperLog.constructor(text, icon, selected));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon, selected));
 	}
 
 	public CheckBox(final String text, final Icon icon) {
 		super(text, icon);
-		log.trace(HelperLog.constructor(text, icon));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon));
 	}
 
 	public CheckBox(final String text) {
 		super(text);
-		log.trace(HelperLog.constructor(text));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text));
 	}
 
 	/*
@@ -103,28 +103,28 @@ public class CheckBox extends JCheckBox implements Activatable {
 
 	public CheckBox(final boolean isSelected) {
 		super();
-		log.trace(HelperLog.constructor(isSelected));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(isSelected));
 
 		setSelected(isSelected);
 	}
 
 	public CheckBox(final boolean isSelected, final Action action) {
 		this(action);
-		log.trace(HelperLog.constructor(isSelected, action));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(isSelected, action));
 
 		setSelected(isSelected);
 	}
 
 	public CheckBox(final String text, final boolean isSelected, final String toolTip) {
 		this(text, isSelected);
-		log.trace(HelperLog.constructor(text, isSelected, toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, isSelected, toolTip));
 
 		setToolTipText(toolTip);
 	}
 
 	public CheckBox(final boolean isSelected, final String toolTip) {
 		this();
-		log.trace(HelperLog.constructor(isSelected, toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(isSelected, toolTip));
 
 		setSelected(isSelected);
 		setToolTipText(toolTip);
@@ -154,15 +154,15 @@ public class CheckBox extends JCheckBox implements Activatable {
 
 	@Override
 	public boolean isActive() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(!isNotActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
-		log.debug(HelperLog.methodStart(isActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isActive));
 
 		if (isActive) {
 			isNotActive = !isActive;
@@ -172,6 +172,6 @@ public class CheckBox extends JCheckBox implements Activatable {
 			isNotActive = !isActive;
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

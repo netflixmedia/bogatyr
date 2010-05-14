@@ -46,7 +46,7 @@ import java.util.Vector;
  * This is an extended JTable.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class Table extends JTable implements Activatable {
@@ -62,37 +62,37 @@ public class Table extends JTable implements Activatable {
 
 	public Table() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public Table(final int numRows, final int numColumns) {
 		super(numRows, numColumns);
-		log.trace(HelperLog.constructor(numRows, numColumns));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(numRows, numColumns));
 	}
 
 	public Table(final Object[][] rowData, final Object[] columnNames) {
 		super(rowData, columnNames);
-		log.trace(HelperLog.constructor(rowData, columnNames));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(rowData, columnNames));
 	}
 
 	public Table(final TableModel dm, final TableColumnModel cm, final ListSelectionModel sm) {
 		super(dm, cm, sm);
-		log.trace(HelperLog.constructor(dm, cm, sm));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(dm, cm, sm));
 	}
 
 	public Table(final TableModel dm, final TableColumnModel cm) {
 		super(dm, cm);
-		log.trace(HelperLog.constructor(dm, cm));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(dm, cm));
 	}
 
 	public Table(final TableModel dm) {
 		super(dm);
-		log.trace(HelperLog.constructor(dm));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(dm));
 	}
 
 	public Table(final Vector<?> rowData, final Vector<?> columnNames) {
 		super(rowData, columnNames);
-		log.trace(HelperLog.constructor(rowData, columnNames));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(rowData, columnNames));
 	}
 
 
@@ -119,15 +119,15 @@ public class Table extends JTable implements Activatable {
 
 	@Override
 	public boolean isActive() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(!isNotActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
-		log.debug(HelperLog.methodStart(isActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isActive));
 
 		if (isActive) {
 			isNotActive = !isActive;
@@ -137,6 +137,6 @@ public class Table extends JTable implements Activatable {
 			isNotActive = !isActive;
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

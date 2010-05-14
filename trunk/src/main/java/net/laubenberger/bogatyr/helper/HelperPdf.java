@@ -68,7 +68,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100506)
+ * @version 0.9.2 (20100514)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -91,7 +91,7 @@ public abstract class HelperPdf {
 	 * @since 0.5.0
 	 */
 	public static void writePdfFromHTML(final File file, final File... files) throws IOException, DocumentException { // $JUnit$
-		log.debug(HelperLog.methodStart(file, files));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, files));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -117,7 +117,7 @@ public abstract class HelperPdf {
 		} finally {
 			fos.close();
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -139,7 +139,7 @@ public abstract class HelperPdf {
 	 */
 	public static void writePdfFromImage(Rectangle pageSize, boolean scale, final File file, final File... files)
 			throws DocumentException, IOException {
-		log.debug(HelperLog.methodStart(pageSize, scale, file, files));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, files));
 		if (null == pageSize) {
 			throw new RuntimeExceptionIsNull("pageSize"); //$NON-NLS-1$
 		}
@@ -171,7 +171,7 @@ public abstract class HelperPdf {
 			document.close();
 			fos.close();
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -194,7 +194,7 @@ public abstract class HelperPdf {
 	 */
 	public static void writePdfFromImage(Rectangle pageSize, boolean scale, final File file,
 			final java.awt.Image... images) throws DocumentException, IOException {
-		log.debug(HelperLog.methodStart(pageSize, scale, file, images));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, images));
 		if (null == pageSize) {
 			throw new RuntimeExceptionIsNull("pageSize"); //$NON-NLS-1$
 		}
@@ -227,7 +227,7 @@ public abstract class HelperPdf {
 			document.close();
 			fos.close();
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -251,7 +251,7 @@ public abstract class HelperPdf {
 	@SuppressWarnings("unchecked")
 	public static void setMetaData(final File source, final File dest, final Map<String, String> metadata)
 			throws IOException, DocumentException {
-		log.debug(HelperLog.methodStart(source, dest, metadata));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, metadata));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
@@ -284,7 +284,7 @@ public abstract class HelperPdf {
 				reader.close();
 			}
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -304,7 +304,7 @@ public abstract class HelperPdf {
 	 */
 	public static void unlock(final File source, final File dest, final byte[] user, final byte[] password)
 			throws IOException, DocumentException {
-		log.debug(HelperLog.methodStart(source, dest, user, password));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, user, password));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
@@ -333,7 +333,7 @@ public abstract class HelperPdf {
 				reader.close();
 			}
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -358,7 +358,7 @@ public abstract class HelperPdf {
 	 * @since 0.9.2
 	 */
 	public static void writePdfFromPpt(Rectangle pageSize, boolean scale, final File file, final SlideShow ppt) throws IOException, DocumentException {
-		log.debug(HelperLog.methodStart(pageSize, scale, file, ppt));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, ppt));
 
 		final File[] files = new File[ppt.getSlides().length];
 		for (int ii = 0; ii < ppt.getSlides().length; ii++) {
@@ -371,7 +371,7 @@ public abstract class HelperPdf {
 		// process exported images to pdf
 		writePdfFromImage(pageSize, scale, file, files);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -396,7 +396,7 @@ public abstract class HelperPdf {
 	 * @since 0.9.2
 	 */
 	public static void writePdfFromPpt(Rectangle pageSize, boolean scale, final File file, final File pptFile) throws IOException, DocumentException {
-		log.debug(HelperLog.methodStart(pageSize, scale, file, pptFile));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, pptFile));
 
 		InputStream is = null;
 		try {
@@ -408,7 +408,7 @@ public abstract class HelperPdf {
 			}
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	
@@ -417,7 +417,7 @@ public abstract class HelperPdf {
 	 */
 	
 	private static void exportAsImages(final SlideShow ppt, final File[] files) throws IOException {
-		log.trace(HelperLog.methodStart(ppt, files));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(ppt, files));
 
 		final Dimension size = ppt.getPageSize();
 		final Slide[] slides = ppt.getSlides();
@@ -437,7 +437,7 @@ public abstract class HelperPdf {
 			HelperImage.writeImage(files[ii], IMAGE_TYPE, image);
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 }

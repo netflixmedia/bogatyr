@@ -46,7 +46,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for XML operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.3.0
  */
 public abstract class HelperXml {
@@ -62,7 +62,7 @@ public abstract class HelperXml {
 	 * @since 0.3.0
 	 */
 	public static String getValidXmlString(final String input) { //$JUnit$
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -79,7 +79,7 @@ public abstract class HelperXml {
 		}
 		final String result = sb.toString();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -92,7 +92,7 @@ public abstract class HelperXml {
 	 * @since 0.9.0
 	 */
 	public static <T> void serialize(final File file, final T data) throws JAXBException {
-		log.debug(HelperLog.methodStart(file, data));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, data));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -102,7 +102,7 @@ public abstract class HelperXml {
 
 		getMarshaller(data.getClass()).marshal(data, file);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -114,7 +114,7 @@ public abstract class HelperXml {
 	 * @since 0.9.0
 	 */
 	public static <T> void serialize(final OutputStream os, final T data) throws JAXBException {
-		log.debug(HelperLog.methodStart(os, data));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(os, data));
 		if (null == os) {
 			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
 		}
@@ -124,7 +124,7 @@ public abstract class HelperXml {
 
 		getMarshaller(data.getClass()).marshal(data, os);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -138,7 +138,7 @@ public abstract class HelperXml {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T deserialize(final File file, final Class<T> clazz) throws JAXBException {
-		log.debug(HelperLog.methodStart(file, clazz));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, clazz));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -148,7 +148,7 @@ public abstract class HelperXml {
 
 		final T result = (T) getUnmarshaller(clazz).unmarshal(file);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -163,7 +163,7 @@ public abstract class HelperXml {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T deserialize(final InputStream is, final Class<T> clazz) throws JAXBException {
-		log.debug(HelperLog.methodStart(is, clazz));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is, clazz));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
@@ -173,7 +173,7 @@ public abstract class HelperXml {
 
 		final T result = (T) getUnmarshaller(clazz).unmarshal(is);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -183,23 +183,23 @@ public abstract class HelperXml {
 	 */
 
 	private static <T> Marshaller getMarshaller(final Class<T> clazz) throws JAXBException {
-		log.trace(HelperLog.methodStart(clazz));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(clazz));
 		final JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
 		final Marshaller result = jaxbContext.createMarshaller();
 //		marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
 		result.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-		log.trace(HelperLog.methodExit(result));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 
 	private static <T> Unmarshaller getUnmarshaller(final Class<T> clazz) throws JAXBException {
-		log.trace(HelperLog.methodStart(clazz));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(clazz));
 
 		final JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
 		final Unmarshaller result = jaxbContext.createUnmarshaller();
 
-		log.trace(HelperLog.methodExit(result));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 }

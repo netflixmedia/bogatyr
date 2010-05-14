@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
  * Localizer implementation for file access.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100514)
  * @since 0.1.0
  */
 public class LocalizerFile extends LocalizerAbstract {
@@ -64,12 +64,12 @@ public class LocalizerFile extends LocalizerAbstract {
 
 	public LocalizerFile(final String localizerBase) {
 		this(localizerBase, ClassLoader.getSystemClassLoader());
-		log.trace(HelperLog.constructor(localizerBase));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(localizerBase));
 	}
 
 	public LocalizerFile(final String localizerBase, final ClassLoader classLoader) {
 		super();
-		log.trace(HelperLog.constructor(localizerBase, classLoader));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(localizerBase, classLoader));
 
 		if (null == localizerBase) {
 			throw new RuntimeExceptionIsNull("localizerBase"); //$NON-NLS-1$
@@ -92,9 +92,9 @@ public class LocalizerFile extends LocalizerAbstract {
 	 * @since 0.1.0
 	 */
 	public String getLocalizerBase() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(localizerBase));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(localizerBase));
 		return localizerBase;
 	}
 
@@ -105,7 +105,7 @@ public class LocalizerFile extends LocalizerAbstract {
 	 * @since 0.1.0
 	 */
 	public void setLocalizerBase(final String localizerBase) {
-		log.debug(HelperLog.methodStart(localizerBase));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(localizerBase));
 		if (null == localizerBase) {
 			throw new RuntimeExceptionIsNull("localizerBase"); //$NON-NLS-1$
 		}
@@ -113,7 +113,7 @@ public class LocalizerFile extends LocalizerAbstract {
 		this.localizerBase = localizerBase;
 		bundle = ResourceBundle.getBundle(localizerBase, getLocale(), classLoader);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 
@@ -132,7 +132,7 @@ public class LocalizerFile extends LocalizerAbstract {
 
 	@Override
 	public void setLocale(final Locale locale) {
-		log.debug(HelperLog.methodStart(locale));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(locale));
 		if (null == locale) {
 			throw new RuntimeExceptionIsNull("locale"); //$NON-NLS-1$
 		}
@@ -141,7 +141,7 @@ public class LocalizerFile extends LocalizerAbstract {
 
 		super.setLocale(locale);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 
@@ -151,54 +151,54 @@ public class LocalizerFile extends LocalizerAbstract {
 
 	@Override
 	public String getValue(final String key) {
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 		String result = null;
 		try {
 			result = bundle.getString(key);
 		} catch (MissingResourceException ex) {
-			log.warn("Resource not found", ex); //$NON-NLS-1$
+			if (log.isWarnEnabled()) log.warn("Resource not found", ex); //$NON-NLS-1$
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public KeyStroke getAccelerator(final String key) {
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 		final String keystroke = bundle.getString(key + POSTFIX_ACCELERATOR);
 		final KeyStroke result = null == keystroke ? null : KeyStroke.getKeyStroke(keystroke);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public int getMnemonic(final String key) {
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 		final String mnemonic = bundle.getString(key + POSTFIX_MNEMONIC);
 		final int result = null == mnemonic ? 0 : (int) mnemonic.charAt(0);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public String getTooltip(final String key) {
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 		final String result = bundle.getString(key + POSTFIX_TOOLTIP);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 	
 	@Override
 	public List<Language> getAvailableLanguages() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
 		final List<Language> result = new ArrayList<Language>();
 		
@@ -210,7 +210,7 @@ public class LocalizerFile extends LocalizerAbstract {
 			}
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

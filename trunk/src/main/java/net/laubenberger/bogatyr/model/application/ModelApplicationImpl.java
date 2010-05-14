@@ -62,7 +62,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the application model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100510)
+ * @version 0.9.2 (20100514)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelApplication")
@@ -83,7 +83,7 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 
 	public ModelApplicationImpl() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public ModelApplicationImpl(final String name, final BigDecimal version, final int build,
@@ -91,7 +91,7 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 										 final Localizer localizer, final Property property, final Map<HashCodeAlgo, String> mapHash, final Map<String, String> mapTag) {
 		super(name, version, build, created, uuid, url, listOrganization, listPerson, mapTag);
 
-		log.trace(HelperLog.constructor(name, version, build, created, uuid, url, listOrganization, listPerson, isDebug, localizer, property, mapHash, mapTag));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, uuid, url, listOrganization, listPerson, isDebug, localizer, property, mapHash, mapTag));
 
 		this.isDebug = isDebug;
 		this.localizer = localizer;
@@ -145,24 +145,24 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 
 //	@Override
 //	public String getHash() {
-//		log.debug(HelperLog.methodStart());
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 //
 //		final String result = getHash(HashCodeAlgo.SHA256);
 //
-//		log.debug(HelperLog.methodExit(result));
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 //		return result;
 //	}
 //
 //	@Override
 //	public String getHash(final HashCodeAlgo hashCodeAlgo) {
-//		log.debug(HelperLog.methodStart(hashCodeAlgo));
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(hashCodeAlgo));
 //
 //		String result = null;
 //		if (null != mapHash) {
 //			result = mapHash.get(hashCodeAlgo);
 //		}
 //
-//		log.debug(HelperLog.methodExit(result));
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 //		return result;
 //	}
 
@@ -170,15 +170,15 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 	@XmlElement
 	@XmlJavaTypeAdapter(MapAdapterHashCode.class)
 	public Map<HashCodeAlgo, String> getHashs() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(mapHash));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(mapHash));
 		return mapHash;
 	}
 
 	@Override
 	public void setHashs(final Map<HashCodeAlgo, String> hashs) {
-		log.debug(HelperLog.methodStart(hashs));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(hashs));
 
 		if (!HelperObject.isEquals(hashs, mapHash)) {
 			mapHash = hashs;
@@ -186,12 +186,12 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 			notifyObservers(MEMBER_HASHS);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void addHash(final HashCodeAlgo hashCodeAlgo, final String hash) {
-		log.debug(HelperLog.methodStart(hashCodeAlgo, hash));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(hashCodeAlgo, hash));
 		if (null == hashCodeAlgo) {
 			throw new RuntimeExceptionIsNull("hashCodeAlgo"); //$NON-NLS-1$
 		}
@@ -203,12 +203,12 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 		setChanged();
 		notifyObservers(METHOD_ADD_HASH);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 //
 //	@Override
 //	public void removeHash(final HashCodeAlgo hashCodeAlgo) {
-//		log.debug(HelperLog.methodStart(hashCodeAlgo));
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(hashCodeAlgo));
 //		if (null == hashCodeAlgo) {
 //			throw new RuntimeExceptionIsNull("hashCodeAlgo"); //$NON-NLS-1$
 //		}
@@ -219,45 +219,45 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 //			notifyObservers(METHOD_REMOVE_HASH);
 //		}
 //
-//		log.debug(HelperLog.methodExit());
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 //	}
 
 	@Override
 	public Localizer getLocalizer() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(localizer));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(localizer));
 		return localizer;
 	}
 
 	@Override
 	public Property getProperty() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(property));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(property));
 		return property;
 	}
 
 	@Override
 	public ModelWorker getModelWorker() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(modelWorker));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(modelWorker));
 		return modelWorker;
 	}
 
 	@Override
 	@XmlElement
 	public Boolean isDebug() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(isDebug));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(isDebug));
 		return isDebug;
 	}
 
 	@Override
 	public void setDebug(final boolean isDebug) {
-		log.debug(HelperLog.methodStart(isDebug));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isDebug));
 
 		if (isDebug != this.isDebug) {
 			this.isDebug = isDebug;
@@ -265,12 +265,12 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 			notifyObservers(MEMBER_DEBUG);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setLocalizer(final Localizer localizer) {
-		log.debug(HelperLog.methodStart(localizer));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(localizer));
 
 		if (!HelperObject.isEquals(localizer, this.localizer)) {
 			this.localizer = localizer;
@@ -278,12 +278,12 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 			notifyObservers(MEMBER_LOCALIZER);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setProperty(final Property property) {
-		log.debug(HelperLog.methodStart(property));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(property));
 
 		if (!HelperObject.isEquals(property, this.property)) {
 			this.property = property;
@@ -291,7 +291,7 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 			notifyObservers(MEMBER_PROPERTY);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 

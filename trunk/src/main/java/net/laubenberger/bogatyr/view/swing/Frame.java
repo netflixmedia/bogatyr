@@ -53,7 +53,7 @@ import net.laubenberger.bogatyr.misc.Fadeable;
  * This is an extended JFrame.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.2.0
  */
 public class Frame extends JFrame implements Fadeable, Displayable {
@@ -77,22 +77,22 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 
 	public Frame() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public Frame(final GraphicsConfiguration gc) {
 		super(gc);
-		log.trace(HelperLog.constructor(gc));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(gc));
 	}
 
 	public Frame(final String title, final GraphicsConfiguration gc) {
 		super(title, gc);
-		log.trace(HelperLog.constructor(title, gc));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, gc));
 	}
 
 	public Frame(final String title) throws HeadlessException {
 		super(title);
-		log.trace(HelperLog.constructor(title));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title));
 	}
 
 	/*
@@ -101,7 +101,7 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 
 	public Frame(final String title, final Image icon) {
 		this();
-		log.trace(HelperLog.constructor(title, icon));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, icon));
 
 		setTitle(title);
 		setIconImage(icon);
@@ -142,25 +142,25 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 
 	@Override
 	public void createAndShowGUI() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		setVisible(true);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void clearAndHide() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		dispose();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setFading(final boolean isFading) {
-		log.debug(HelperLog.methodStart(isFading));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isFading));
 
 		this.isFading = isFading;
 
@@ -178,23 +178,23 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 			repaint();
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setFaderColor(final Color colorFader) {
-		log.debug(HelperLog.methodStart(colorFader));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(colorFader));
 
 		this.colorFader = colorFader;
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public boolean isFading() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(isFading));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(isFading));
 		return isFading;
 	}
 }

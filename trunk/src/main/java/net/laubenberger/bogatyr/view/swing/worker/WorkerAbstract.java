@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * This class represents a skeleton for the worker.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100514)
  * @since 0.9.0
  */
 public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker, HolderListener<ListenerWorker> {
@@ -56,7 +56,7 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 
 	protected WorkerAbstract() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 
@@ -65,23 +65,23 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 	 */
 
 	protected void fireWorkerStart() {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		for (final ListenerWorker listener : listeners) {
 			listener.start(event);
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 	protected void fireWorkerDone() {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		for (final ListenerWorker listener : listeners) {
 			listener.done(event);
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 
@@ -91,43 +91,43 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 
 	@Override
 	public synchronized void addListener(final ListenerWorker listener) {
-		log.debug(HelperLog.methodStart(listener));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listeners.add(listener);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public int countListeners() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(listeners.size()));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listeners.size()));
 		return listeners.size();
 	}
 
 	@Override
 	public synchronized void deleteListener(final ListenerWorker listener) {
-		log.debug(HelperLog.methodStart(listener));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listeners.remove(listener);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void deleteListeners() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		listeners = new HashSet<ListenerWorker>();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 //    protected WorkerAbstract(final HandlerWorker handlerWorker) {

@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100510)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
@@ -66,12 +66,12 @@ public abstract class ModelAbstract extends Observable implements Model {
 
 	protected ModelAbstract() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	protected ModelAbstract(final Map<String, String> mapTag) {
 		super();
-		log.trace(HelperLog.constructor(mapTag));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(mapTag));
 		this.mapTag = mapTag;
 	}
 
@@ -153,18 +153,18 @@ public abstract class ModelAbstract extends Observable implements Model {
 	@Override
 	@XmlTransient
 	public boolean isNotifyEnabled() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(isNotifyEnabled));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(isNotifyEnabled));
 		return isNotifyEnabled;
 	}
 
 	@Override
 	@XmlElement
 	public Date getInstantiationDate() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(instantiationDate));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(instantiationDate));
 		return instantiationDate;
 	}
 
@@ -172,15 +172,15 @@ public abstract class ModelAbstract extends Observable implements Model {
 	@XmlElement
 	@XmlJavaTypeAdapter(MapAdapterString.class)
 	public Map<String, String> getTags() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(mapTag));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(mapTag));
 		return mapTag;
 	}
 //
 //	@Override
 //	public String getTag(final String key) {
-//		log.debug(HelperLog.methodStart(key));
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 //		if (null == key) {
 //			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 //		}
@@ -190,31 +190,31 @@ public abstract class ModelAbstract extends Observable implements Model {
 //			result = mapTag.get(key);
 //		}
 //
-//		log.debug(HelperLog.methodExit(result));
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 //		return result;
 //	}
 
 	@Override
 	public void setNotifyEnabled(final boolean enabled) {
-		log.debug(HelperLog.methodStart(enabled));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(enabled));
 
 		isNotifyEnabled = enabled;
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setInstantiationDate(final Date instantiationDate) {
-		log.debug(HelperLog.methodStart(instantiationDate));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(instantiationDate));
 
 		this.instantiationDate = instantiationDate;
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setTags(final Map<String, String> tags) {
-		log.debug(HelperLog.methodStart(tags));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(tags));
 
 		if (!HelperObject.isEquals(tags, mapTag)) {
 			mapTag = tags;
@@ -222,12 +222,12 @@ public abstract class ModelAbstract extends Observable implements Model {
 			notifyObservers(MEMBER_TAGS);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void addTag(final String key, final String value) {
-		log.debug(HelperLog.methodStart(key, value));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key, value));
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
@@ -239,12 +239,12 @@ public abstract class ModelAbstract extends Observable implements Model {
 		setChanged();
 		notifyObservers(METHOD_ADD_TAG);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 //
 //	@Override
 //	public void removeTag(final String key) {
-//		log.debug(HelperLog.methodStart(key));
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 //		if (null == key) {
 //			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 //		}
@@ -255,6 +255,6 @@ public abstract class ModelAbstract extends Observable implements Model {
 //			notifyObservers(METHOD_REMOVE_TAG);
 //		}
 //
-//		log.debug(HelperLog.methodExit());
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 //	}
 }

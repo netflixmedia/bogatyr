@@ -58,7 +58,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -78,7 +78,7 @@ public abstract class HelperObject {
 	 * @since 0.7.0
 	 */
 	public static <T> T createInstance(final Class<T> clazz) throws SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
-		log.debug(HelperLog.methodStart(clazz));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clazz));
 
 		if (null == clazz) {
 			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
@@ -86,7 +86,7 @@ public abstract class HelperObject {
 
 		final T result = clazz.getConstructor(HelperArray.EMPTY_ARRAY_CLASS).newInstance();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -106,7 +106,7 @@ public abstract class HelperObject {
 	 * @since 0.7.0
 	 */
 	public static <T> T createInstance(final Class<T> clazz, final Class<?>[] paramClazzes, final Object[] params) throws SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
-		log.debug(HelperLog.methodStart(clazz, paramClazzes, params));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clazz, paramClazzes, params));
 		if (null == clazz) {
 			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
@@ -119,7 +119,7 @@ public abstract class HelperObject {
 
 		final T result = clazz.getConstructor(paramClazzes).newInstance(params);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -133,7 +133,7 @@ public abstract class HelperObject {
 	 * @since 0.7.0
 	 */
 	public static byte[] serialize(final Serializable object) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(object));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(object));
 		if (null == object) {
 			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
 		}
@@ -148,7 +148,7 @@ public abstract class HelperObject {
 
 			final byte[] result = baos.toByteArray();
 
-			log.debug(HelperLog.methodExit(result));
+			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
 		} finally {
 			if (null != oos) {
@@ -168,7 +168,7 @@ public abstract class HelperObject {
 	 * @since 0.7.0
 	 */
 	public static Object deserialize(final byte[] data) throws IOException, ClassNotFoundException { //$JUnit$
-		log.debug(HelperLog.methodStart(data));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(data));
 		if (!HelperArray.isValid(data)) {
 			throw new RuntimeExceptionIsNullOrEmpty("data"); //$NON-NLS-1$
 		}
@@ -179,7 +179,7 @@ public abstract class HelperObject {
 			ois = new ObjectInputStream(new ByteArrayInputStream(data));
 			final Object result = ois.readObject();
 
-			log.debug(HelperLog.methodExit(result));
+			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
 		} finally {
 			if (null != ois) {
@@ -200,7 +200,7 @@ public abstract class HelperObject {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T deserialize(final Class<T> clazz, final byte[] data) throws IOException, ClassNotFoundException { //$JUnit$
-		log.debug(HelperLog.methodStart(clazz, data));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clazz, data));
 		if (!HelperArray.isValid(data)) {
 			throw new RuntimeExceptionIsNullOrEmpty("data"); //$NON-NLS-1$
 		}
@@ -214,7 +214,7 @@ public abstract class HelperObject {
 			ois = new ObjectInputStream(new ByteArrayInputStream(data));
 			final T result = (T) ois.readObject();
 
-			log.debug(HelperLog.methodExit(result));
+			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
 		} finally {
 			if (null != ois) {
@@ -233,7 +233,7 @@ public abstract class HelperObject {
 	 * @since 0.7.0
 	 */
 	public static boolean isMethodAvailable(final Class<?> clazz, final String methodName) { //$JUnit$
-		log.debug(HelperLog.methodStart(clazz, methodName));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clazz, methodName));
 		if (null == clazz) {
 			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
@@ -249,7 +249,7 @@ public abstract class HelperObject {
 				result = true;
 			}
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -280,11 +280,11 @@ public abstract class HelperObject {
 	 * @since 0.8.0
 	 */
 	public static boolean isEquals(final Object objectA, final Object objectB) { //$JUnit$
-		log.debug(HelperLog.methodStart(objectA, objectB));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(objectA, objectB));
 
 		final boolean result = !((null == objectB && null != objectA) || (null != objectB && !objectB.equals(objectA)));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -297,7 +297,7 @@ public abstract class HelperObject {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends Serializable> T clone(final T original) throws IOException, ClassNotFoundException {
-		log.debug(HelperLog.methodStart(original));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(original));
 		if (null == original) {
 			throw new RuntimeExceptionIsNull("original"); //$NON-NLS-1$
 		}
@@ -315,7 +315,7 @@ public abstract class HelperObject {
 
 			final T result = (T) ois.readObject();
 
-			log.debug(HelperLog.methodExit(result));
+			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
 		} finally {
 			if (null != co) {
@@ -335,14 +335,14 @@ public abstract class HelperObject {
 	 * @since 0.9.1
 	 */
 	public static String quote(final Object object) {
-		log.debug(HelperLog.methodStart(object));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(object));
 		if (null == object) {
 			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
 		}
 
 		final String result = HelperString.SINGLE_QUOTE + String.valueOf(object) + HelperString.SINGLE_QUOTE;
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 

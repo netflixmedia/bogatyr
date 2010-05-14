@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100514)
  * @since 0.4.0
  */
 public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
@@ -61,7 +61,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.4.0
 	 */
 	public static BigDecimal gcd(final Number a, final Number b) { //$JUnit$
-		log.debug(HelperLog.methodStart(a, b));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(a, b));
 		if (null == a) {
 			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
 		}
@@ -85,7 +85,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 
 		final BigDecimal result = 0 == BigDecimal.ZERO.compareTo(numberB) ? numberA : gcd(numberB, numberA.remainder(numberB));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -98,7 +98,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.4.0
 	 */
 	public static BigDecimal lcm(final Number a, final Number b) { //$JUnit$
-		log.debug(HelperLog.methodStart(a, b));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(a, b));
 		if (null == a) {
 			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
 		}
@@ -118,7 +118,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 
 		final BigDecimal result = numberA.multiply(numberB, Constants.DEFAULT_MATHCONTEXT).divide(gcd(a, b), Constants.DEFAULT_MATHCONTEXT);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -130,7 +130,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.5.0
 	 */
 	public static boolean isPrime(final long n) { //$JUnit$
-		log.debug(HelperLog.methodStart(n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 
 		boolean result = true;
 		if (2L >= n) { // 2 is the smallest prime
@@ -145,7 +145,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 				}
 			}
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -157,7 +157,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.5.0
 	 */
 	public static long calcNearestPrime(final long n) { //$JUnit$
-		log.debug(HelperLog.methodStart(n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 
 		final long result;
 		if (2L >= n) { // 2 is the smallest prime
@@ -170,7 +170,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 			}
 			result = number;
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -183,7 +183,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.5.0
 	 */
 	public static List<Long> calcPrimes(final long start, final long end) { //$JUnit$
-		log.debug(HelperLog.methodStart(start, end));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(start, end));
 //        if (0 > start) {
 //            throw new IllegalArgumentException("start value must be positive: " + start); //$NON-NLS-1$
 //        }
@@ -204,7 +204,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 				result.add(ii);
 			}
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -217,11 +217,11 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 //	 * @since 0.4.0
 //	 */
 //	public static int convertDoubleToInt(final double value) { //$JUnit$
-//		log.debug(HelperLog.methodStart(value));
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(value));
 //
 //		final int result = (int) StrictMath.round(value);
 //
-//		log.debug(HelperLog.methodExit(result));
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 //		return result;
 //	}
 
@@ -234,7 +234,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.4.0
 	 */
 	public static double log(final double base, final double value) { //$JUnit$
-		log.debug(HelperLog.methodStart(base, value));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(base, value));
 		if (1.0D >= base) {
 			throw new RuntimeExceptionMustBeGreater("base", base, 1); //$NON-NLS-1$
 		}
@@ -244,7 +244,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 
 		final double result = StrictMath.log(value) / StrictMath.log(base);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -257,7 +257,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.4.0
 	 */
 	public static double round(final double value, final int decimalPlace) { //$JUnit$
-		log.debug(HelperLog.methodStart(value, decimalPlace));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(value, decimalPlace));
 
 		int dp = decimalPlace;
 		double powerOfTen = 1.0D;
@@ -269,7 +269,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 
 		final double result = (double) StrictMath.round(value * powerOfTen) / powerOfTen;
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -281,11 +281,11 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.4.0
 	 */
 	public static int getRandom(final int n) { //$JUnit$
-		log.debug(HelperLog.methodStart(n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 
 		final int result = (int) (StrictMath.random() * (double) n);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -300,7 +300,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.7.0
 	 */
 	public static double calcAmount(final double amount, final double interest, final int days) { //$JUnit$
-		log.debug(HelperLog.methodStart(amount, interest, days));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(amount, interest, days));
 
 		if (0 >= days) {
 			throw new RuntimeExceptionMustBeGreater("days", days, 0); //$NON-NLS-1$
@@ -308,7 +308,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 
 		final double result = amount * StrictMath.pow(StrictMath.E, (double) days / 360.0D * interest);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -320,7 +320,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.9.0
 	 */
 	public static BigInteger factorial(final long n) { //$JUnit$
-		log.debug(HelperLog.methodStart(n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 		if (0L > n) {
 			throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
 		}
@@ -330,7 +330,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 		for (long ii = n; 0L < ii; ii--) {
 			result = result.multiply(BigInteger.valueOf(ii));
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -342,7 +342,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.7.0
 	 */
 	public static long sum(final long n) { //$JUnit$
-		log.debug(HelperLog.methodStart(n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 
 		if (0L > n) {
 			throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
@@ -354,7 +354,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 
 		final long result = n * (n + 1L) / 2L;
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -366,7 +366,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.7.0
 	 */
 	public static long sumSquare(final long n) { //$JUnit$
-		log.debug(HelperLog.methodStart(n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 
 		if (0L > n) {
 			throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
@@ -378,7 +378,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 
 		final long result = n * (n + 1L) * (2L * n + 1L) / 6L;
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -390,7 +390,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.7.0
 	 */
 	public static long sumCubic(final long n) { //$JUnit$
-		log.debug(HelperLog.methodStart(n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 
 		if (0L > n) {
 			throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
@@ -402,7 +402,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 
 		final long result = (long) StrictMath.pow(sum(n), 2.0D);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -415,7 +415,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.7.0
 	 */
 	public static long sumRange(final long m, final long n) {
-		log.debug(HelperLog.methodStart(m, n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(m, n));
 		if (0L > m) {
 			throw new RuntimeExceptionMustBeGreater("m", m, 0); //$NON-NLS-1$
 		}
@@ -428,7 +428,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 
 		final long result = (m + n) * (n - m + 1L) / 2L;
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -440,14 +440,14 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.7.0
 	 */
 	public static long calcConnections(final long n) { //$JUnit$
-		log.debug(HelperLog.methodStart(n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 		if (0L >= n) {
 			throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
 		}
 
 		final long result = n * (n - 1L) / 2L;
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -459,7 +459,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.7.0
 	 */
 	public static double calcBirthdayProblem(final int n) { //$JUnit$
-		log.debug(HelperLog.methodStart(n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 		if (0 >= n) {
 			throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
 		}
@@ -472,7 +472,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 
 		final BigDecimal result = BigDecimal.ONE.subtract(term01.divide(term02.multiply(term03, Constants.DEFAULT_MATHCONTEXT), Constants.DEFAULT_MATHCONTEXT));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result.doubleValue();
 	}
 
@@ -485,7 +485,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.7.0
 	 */
 	public static BigInteger binomialCoefficient(final long n, final long k) { //$JUnit$
-		log.debug(HelperLog.methodStart(n, k));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n, k));
 		if (0L > n) {
 			throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
 		}
@@ -498,7 +498,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 
 		final BigInteger result = factorial(n).divide(((factorial(n - k).multiply(factorial(k)))));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -510,14 +510,14 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.7.0
 	 */
 	public static long sumOdd(final long n) { //$JUnit$
-		log.debug(HelperLog.methodStart(n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 		if (0L > n) {
 			throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
 		}
 
 		final long result = (long) StrictMath.pow(n, 2.0D);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -529,7 +529,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.7.0
 	 */
 	public static long sumEven(final long n) { //$JUnit$
-		log.debug(HelperLog.methodStart(n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 		if (0L > n) {
 			throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
 		}
@@ -539,7 +539,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 			result += ii;
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -551,11 +551,11 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.7.0
 	 */
 	public static boolean isOdd(final long n) { //$JUnit$
-		log.debug(HelperLog.methodStart(n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 
 		final boolean result = 0L != n % 2L;
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -567,11 +567,11 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @since 0.7.0
 	 */
 	public static boolean isEven(final long n) { //$JUnit$
-		log.debug(HelperLog.methodStart(n));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
 
 		final boolean result = !isOdd(n);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

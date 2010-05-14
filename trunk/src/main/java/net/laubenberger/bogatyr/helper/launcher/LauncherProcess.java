@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher creates a new process and reads standard output and standard error.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.2.0
  */
 public abstract class LauncherProcess {
@@ -63,7 +63,7 @@ public abstract class LauncherProcess {
 	 * @since 0.2.0
 	 */
 	public static Process createProcess(final String[] commands, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
-		log.debug(HelperLog.methodStart(commands, outputStream, errorStream));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(commands, outputStream, errorStream));
 		if (null == outputStream) {
 			throw new RuntimeExceptionIsNull("outputStream"); //$NON-NLS-1$
 		}
@@ -75,7 +75,7 @@ public abstract class LauncherProcess {
 
 		readStandardOutput(result, outputStream, errorStream);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -88,7 +88,7 @@ public abstract class LauncherProcess {
 	 * @since 0.2.0
 	 */
 	public static Process createProcess(final String... commands) throws IOException {
-		log.debug(HelperLog.methodStart(commands));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(commands));
 		if (!HelperArray.isValid(commands)) {
 			throw new RuntimeExceptionIsNullOrEmpty("commands"); //$NON-NLS-1$
 		}
@@ -97,7 +97,7 @@ public abstract class LauncherProcess {
 //		return Runtime.getRuntime().exec(command);
 		final Process result = pb.start();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -118,12 +118,12 @@ public abstract class LauncherProcess {
 	 * @since 0.2.0
 	 */
 	private static void readStandardOutput(final Process process, final OutputStream outputStream, final OutputStream errorStream) {
-		log.trace(HelperLog.methodStart(process, outputStream, errorStream));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(process, outputStream, errorStream));
 
 		new Thread(new StreamReader(process.getErrorStream(), errorStream)).start();
 		new Thread(new StreamReader(process.getInputStream(), outputStream)).start();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 

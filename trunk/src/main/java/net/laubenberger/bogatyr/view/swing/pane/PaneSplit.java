@@ -42,7 +42,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JSplitPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class PaneSplit extends JSplitPane {
@@ -56,29 +56,29 @@ public class PaneSplit extends JSplitPane {
 
 	public PaneSplit() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public PaneSplit(final int newOrientation, final boolean newContinuousLayout,
 						  final Component newLeftComponent, final Component newRightComponent) {
 		super(newOrientation, newContinuousLayout, newLeftComponent, newRightComponent);
-		log.trace(HelperLog.constructor(newOrientation, newContinuousLayout, newLeftComponent, newRightComponent));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(newOrientation, newContinuousLayout, newLeftComponent, newRightComponent));
 	}
 
 	public PaneSplit(final int newOrientation, final boolean newContinuousLayout) {
 		super(newOrientation, newContinuousLayout);
-		log.trace(HelperLog.constructor(newOrientation, newContinuousLayout));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(newOrientation, newContinuousLayout));
 	}
 
 	public PaneSplit(final int newOrientation, final Component newLeftComponent,
 						  final Component newRightComponent) {
 		super(newOrientation, newLeftComponent, newRightComponent);
-		log.trace(HelperLog.constructor(newOrientation, newLeftComponent, newRightComponent));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(newOrientation, newLeftComponent, newRightComponent));
 	}
 
 	public PaneSplit(final int newOrientation) {
 		super(newOrientation);
-		log.trace(HelperLog.constructor(newOrientation));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(newOrientation));
 	}
 
 

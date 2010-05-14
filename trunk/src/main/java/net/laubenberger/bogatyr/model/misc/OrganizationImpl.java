@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the organization model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100510)
+ * @version 0.9.2 (20100514)
  * @since 0.9.2
  */
 @XmlRootElement(name = "organization")
@@ -75,14 +75,14 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 	
 	public OrganizationImpl() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 
 	public OrganizationImpl(final String name, final String street, final String zip,
 									final String city, final Country country, final String phoneNumber, final String faxNumber, final String email, final URL website, final List<Person> listPerson, final List<Role> listRole, final Map<String, String> mapTag) {
 		super(mapTag);
-		log.trace(HelperLog.constructor(name, street, zip, city, country, phoneNumber, faxNumber, email, website, listPerson, listRole, mapTag));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, street, zip, city, country, phoneNumber, faxNumber, email, website, listPerson, listRole, mapTag));
 		this.name = name;
 		this.street = street;
 		this.zip = zip;
@@ -194,87 +194,87 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 	@Override
 	@XmlElement
 	public String getName() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(name));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(name));
 		return name;
 	}
 
 	@Override
 	@XmlElement
 	public String getCity() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(city));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(city));
 		return city;
 	}
 
 	@Override
 	@XmlElement
 	public Country getCountry() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(country));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(country));
 		return country;
 	}
 
 	@Override
 	@XmlElement
 	public String getStreet() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(street));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(street));
 		return street;
 	}
 
 	@Override
 	@XmlElement
 	public String getZip() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(zip));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(zip));
 		return zip;
 	}
 
 	@Override
 	@XmlElement
 	public String getPhoneNumber() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(phoneNumber));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(phoneNumber));
 		return phoneNumber;
 	}
 	
 	@Override
 	@XmlElement
 	public String getFaxNumber() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(faxNumber));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(faxNumber));
 		return faxNumber;
 	}
 	
 	@Override
 	@XmlElement
 	public String getEmail() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(email));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(email));
 		return email;
 	}
 
 	@Override
 	@XmlElement
 	public URL getUrl() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(url));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(url));
 		return url;
 	}
 
 	@Override
 	public void setName(final String name) {
-		log.debug(HelperLog.methodStart(name));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(name));
 
 		if (!HelperObject.isEquals(name, this.name)) {
 			this.name = name;
@@ -282,12 +282,12 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 			notifyObservers(MEMBER_NAME);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setCity(final String city) {
-		log.debug(HelperLog.methodStart(city));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(city));
 
 		if (!HelperObject.isEquals(city, this.city)) {
 			this.city = city;
@@ -295,12 +295,12 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 			notifyObservers(MEMBER_CITY);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setCountry(final Country country) {
-		log.debug(HelperLog.methodStart(country));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(country));
 
 		if (!HelperObject.isEquals(country, this.country)) {
 			this.country = country;
@@ -308,12 +308,12 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 			notifyObservers(MEMBER_COUNTRY);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setStreet(final String street) {
-		log.debug(HelperLog.methodStart(street));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(street));
 
 		if (!HelperObject.isEquals(street, this.street)) {
 			this.street = street;
@@ -321,12 +321,12 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 			notifyObservers(MEMBER_STREET);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setZip(final String zip) {
-		log.debug(HelperLog.methodStart(zip));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(zip));
 
 		if (!HelperObject.isEquals(zip, this.zip)) {
 			this.zip = zip;
@@ -334,12 +334,12 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 			notifyObservers(MEMBER_ZIP);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setPhoneNumber(final String phoneNumber) {
-		log.debug(HelperLog.methodStart(phoneNumber));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(phoneNumber));
 
 		if (!HelperObject.isEquals(this.phoneNumber, phoneNumber)) {
 			this.phoneNumber = phoneNumber;
@@ -347,12 +347,12 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 			notifyObservers(MEMBER_PHONE_NUMBER);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setFaxNumber(final String faxNumber) {
-		log.debug(HelperLog.methodStart(faxNumber));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(faxNumber));
 
 		if (!HelperObject.isEquals(this.faxNumber, faxNumber)) {
 			this.faxNumber = faxNumber;
@@ -360,12 +360,12 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 			notifyObservers(MEMBER_FAX_NUMBER);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 	
 	@Override
 	public void setEmail(final String mail) {
-		log.debug(HelperLog.methodStart(mail));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(mail));
 
 		if (!HelperObject.isEquals(mail, email)) {
 			email = mail;
@@ -373,12 +373,12 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 			notifyObservers(MEMBER_EMAIL);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setUrl(final URL url) {
-		log.debug(HelperLog.methodStart(url));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(url));
 
 		if (!HelperObject.isEquals(this.url, url)) {
 			this.url = url;
@@ -386,21 +386,21 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 			notifyObservers(MEMBER_WEBSITE);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	@XmlElement
 	public List<Person> getPersons() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(listPerson));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listPerson));
 		return listPerson;
 	}
 
 	@Override
 	public void setPersons(final List<Person> persons) {
-		log.debug(HelperLog.methodStart(persons));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(persons));
 
 		if (!HelperObject.isEquals(persons, listPerson)) {
 			listPerson = persons;
@@ -408,21 +408,21 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 			notifyObservers(MEMBER_PERSONS);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	@XmlElement
 	public List<Role> getRoles() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(listRole));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listRole));
 		return listRole;
 	}
 
 	@Override
 	public void setRoles(final List<Role> roles) {
-		log.debug(HelperLog.methodStart(roles));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(roles));
 
 		if (!HelperObject.isEquals(roles, listRole)) {
 			listRole = roles;
@@ -430,12 +430,12 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 			notifyObservers(MEMBER_ROLES);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}	
 	
 	@Override
 	public void addPerson(Person person) {
-		log.debug(HelperLog.methodStart(person));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(person));
 		if (null == person) {
 			throw new RuntimeExceptionIsNull("person"); //$NON-NLS-1$
 		}
@@ -447,12 +447,12 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 		setChanged();
 		notifyObservers(METHOD_ADD_PERSON);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 	
 	@Override
 	public void addRole(Role role) {
-		log.debug(HelperLog.methodStart(role));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(role));
 		if (null == role) {
 			throw new RuntimeExceptionIsNull("role"); //$NON-NLS-1$
 		}
@@ -464,7 +464,7 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 		setChanged();
 		notifyObservers(METHOD_ADD_ROLE);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 	
 	

@@ -60,7 +60,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.9.0
  */
 public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
@@ -78,7 +78,7 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 
 	public HashCodeGeneratorImpl(final HashCodeAlgo algorithm) throws NoSuchAlgorithmException, NoSuchProviderException {
 		super();
-		log.trace(HelperLog.constructor(algorithm));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(algorithm));
 
 		md = MessageDigest.getInstance(algorithm.getAlgorithm(), PROVIDER);
 	}
@@ -89,7 +89,7 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 
 	@Override
 	public byte[] getHash(final byte[] input) {
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (!HelperArray.isValid(input)) {
 			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
@@ -99,23 +99,23 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 
 		final byte[] result = md.digest();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public byte[] getHash(final File input) throws IOException {
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 
 		final byte[] result = getHash(input, Constants.DEFAULT_FILE_BUFFER_SIZE);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public byte[] getHash(final File input, final int bufferSize) throws IOException {
-		log.debug(HelperLog.methodStart(input, bufferSize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, bufferSize));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -127,7 +127,7 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 
 			final byte[] result = getHash(bis, bufferSize);
 
-			log.debug(HelperLog.methodExit(result));
+			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
 		} finally {
 			if (null != bis) {
@@ -138,7 +138,7 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 
 	@Override
 	public byte[] getHash(final InputStream is, final int bufferSize) throws IOException {
-		log.debug(HelperLog.methodStart(is, bufferSize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is, bufferSize));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
@@ -161,23 +161,23 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 
 		final byte[] result = md.digest();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public byte[] getHash(final InputStream is) throws IOException {
-		log.debug(HelperLog.methodStart(is));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is));
 
 		final byte[] result = getHash(is, Constants.DEFAULT_FILE_BUFFER_SIZE);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public byte[] getFastHash(final byte[] input, final int parts, final int partSize) {
-		log.debug(HelperLog.methodStart(input, parts, partSize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, parts, partSize));
 		if (!HelperArray.isValid(input)) {
 			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
@@ -205,23 +205,23 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 		}
 		final byte[] result = getHash(temp);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public byte[] getFastHash(final byte[] input) {
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 
 		final byte[] result = getFastHash(input, DEFAULT_PARTS, DEFAULT_PARTSIZE);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public byte[] getFastHash(final File input, final int parts, final int partSize) throws IOException {
-		log.debug(HelperLog.methodStart(input, parts, partSize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, parts, partSize));
 
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
@@ -261,17 +261,17 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 		}
 		final byte[] result = getHash(temp);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public byte[] getFastHash(final File input) throws IOException {
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 
 		final byte[] result = getFastHash(input, DEFAULT_PARTS, DEFAULT_PARTSIZE);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

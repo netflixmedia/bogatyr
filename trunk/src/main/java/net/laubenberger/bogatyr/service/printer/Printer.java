@@ -49,7 +49,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * This is a printer class for print operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.5.0
  */
 public class Printer extends ServiceAbstract implements Printable {
@@ -61,7 +61,7 @@ public class Printer extends ServiceAbstract implements Printable {
 
 	public Printer() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class Printer extends ServiceAbstract implements Printable {
 	 * @since 0.5.0
 	 */
 	public synchronized void print(final Component component, final boolean isScaled) throws PrinterException {
-		log.debug(HelperLog.methodStart(component, isScaled));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(component, isScaled));
 		if (null == component) {
 			throw new RuntimeExceptionIsNull("component"); //$NON-NLS-1$
 		}
@@ -84,7 +84,7 @@ public class Printer extends ServiceAbstract implements Printable {
 
 		print();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 
@@ -93,7 +93,7 @@ public class Printer extends ServiceAbstract implements Printable {
 	 */
 
 	private void print() throws PrinterException {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		final PrinterJob printJob = PrinterJob.getPrinterJob();
 		printJob.setPrintable(this);
@@ -101,7 +101,7 @@ public class Printer extends ServiceAbstract implements Printable {
 			printJob.print();
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 	/**
@@ -112,12 +112,12 @@ public class Printer extends ServiceAbstract implements Printable {
 	 * @since 0.5.0
 	 */
 	private static void disableDoubleBuffering(final Component component) {
-		log.trace(HelperLog.methodStart(component));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(component));
 
 		final RepaintManager currentManager = RepaintManager.currentManager(component);
 		currentManager.setDoubleBufferingEnabled(false);
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 	/**
@@ -127,12 +127,12 @@ public class Printer extends ServiceAbstract implements Printable {
 	 * @since 0.5.0
 	 */
 	private static void enableDoubleBuffering(final Component component) {
-		log.trace(HelperLog.methodStart(component));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(component));
 
 		final RepaintManager currentManager = RepaintManager.currentManager(component);
 		currentManager.setDoubleBufferingEnabled(true);
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 
@@ -142,7 +142,7 @@ public class Printer extends ServiceAbstract implements Printable {
 
 	@Override
 	public synchronized int print(final Graphics graphics, final PageFormat pageFormat, final int pageIndex) {
-		log.debug(HelperLog.methodStart(graphics, pageFormat, pageIndex));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(graphics, pageFormat, pageIndex));
 		if (null == graphics) {
 			throw new RuntimeExceptionIsNull("graphics"); //$NON-NLS-1$
 		}
@@ -167,7 +167,7 @@ public class Printer extends ServiceAbstract implements Printable {
 			result = PAGE_EXISTS;
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

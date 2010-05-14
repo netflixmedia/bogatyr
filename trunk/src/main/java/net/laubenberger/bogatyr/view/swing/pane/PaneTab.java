@@ -42,7 +42,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JTabbedPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class PaneTab extends JTabbedPane {
@@ -56,17 +56,17 @@ public class PaneTab extends JTabbedPane {
 
 	public PaneTab() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public PaneTab(final int tabPlacement, final int tabLayoutPolicy) {
 		super(tabPlacement, tabLayoutPolicy);
-		log.trace(HelperLog.constructor(tabPlacement, tabLayoutPolicy));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(tabPlacement, tabLayoutPolicy));
 	}
 
 	public PaneTab(final int tabPlacement) {
 		super(tabPlacement);
-		log.trace(HelperLog.constructor(tabPlacement));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(tabPlacement));
 	}
 
 

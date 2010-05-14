@@ -43,7 +43,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JFileChooser.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class ChooserFile extends JFileChooser {
@@ -57,32 +57,32 @@ public class ChooserFile extends JFileChooser {
 
 	public ChooserFile() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public ChooserFile(final File currentDirectory, final FileSystemView fsv) {
 		super(currentDirectory, fsv);
-		log.trace(HelperLog.constructor(currentDirectory, fsv));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(currentDirectory, fsv));
 	}
 
 	public ChooserFile(final File currentDirectory) {
 		super(currentDirectory);
-		log.trace(HelperLog.constructor(currentDirectory));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(currentDirectory));
 	}
 
 	public ChooserFile(final FileSystemView fsv) {
 		super(fsv);
-		log.trace(HelperLog.constructor(fsv));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(fsv));
 	}
 
 	public ChooserFile(final String currentDirectoryPath, final FileSystemView fsv) {
 		super(currentDirectoryPath, fsv);
-		log.trace(HelperLog.constructor(currentDirectoryPath, fsv));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(currentDirectoryPath, fsv));
 	}
 
 	public ChooserFile(final String currentDirectoryPath) {
 		super(currentDirectoryPath);
-		log.trace(HelperLog.constructor(currentDirectoryPath));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(currentDirectoryPath));
 	}
 
 

@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -73,11 +73,11 @@ public abstract class HelperArray {
 	 * @since 0.7.0
 	 */
 	public static boolean isValid(final Object[] arg) { //$JUnit$
-		log.debug(HelperLog.methodStart(arg));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arg));
 
 		final boolean result = !(null == arg || 0 == arg.length);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -89,11 +89,11 @@ public abstract class HelperArray {
 	 * @since 0.7.0
 	 */
 	public static boolean isValid(final byte[] arg) { //$JUnit$
-		log.debug(HelperLog.methodStart(arg));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arg));
 
 		final boolean result = !(null == arg || 0 == arg.length);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -105,11 +105,11 @@ public abstract class HelperArray {
 	 * @since 0.9.0
 	 */
 	public static boolean isValid(final char[] arg) { //$JUnit$
-		log.debug(HelperLog.methodStart(arg));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arg));
 
 		final boolean result = !(null == arg || 0 == arg.length);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return !(null == arg || 0 == arg.length);
 	}
 
@@ -121,7 +121,7 @@ public abstract class HelperArray {
 	 * @since 0.7.0
 	 */
 	public static <T> T[] concatenate(final T[]... arrays) { //$JUnit$
-		log.debug(HelperLog.methodStart(arrays));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arrays));
 		if (!isValid(arrays)) {
 			throw new RuntimeExceptionIsNullOrEmpty("arrays"); //$NON-NLS-1$
 		}
@@ -134,7 +134,7 @@ public abstract class HelperArray {
 
 		final T[] result = resultList.toArray(arrays[0]);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -146,7 +146,7 @@ public abstract class HelperArray {
 	 * @since 0.7.0
 	 */
 	public static byte[] concatenate(final byte[]... arrays) { //$JUnit$
-		log.debug(HelperLog.methodStart(arrays));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arrays));
 		if (!isValid(arrays)) {
 			throw new RuntimeExceptionIsNullOrEmpty("arrays"); //$NON-NLS-1$
 		}
@@ -165,7 +165,7 @@ public abstract class HelperArray {
 			offset += array.length;
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -177,7 +177,7 @@ public abstract class HelperArray {
 	 * @since 0.9.1
 	 */
 	public static char[] concatenate(final char[]... arrays) {
-		log.debug(HelperLog.methodStart(arrays));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arrays));
 		if (!isValid(arrays)) {
 			throw new RuntimeExceptionIsNullOrEmpty("arrays"); //$NON-NLS-1$
 		}
@@ -196,7 +196,7 @@ public abstract class HelperArray {
 			offset += array.length;
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -208,14 +208,14 @@ public abstract class HelperArray {
 	 * @since 0.7.0
 	 */
 	public static <T> T[] removeDuplicates(final T[] array) { //$JUnit$
-		log.debug(HelperLog.methodStart(array));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(array));
 		if (null == array) {
 			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
 		}
 
 		final T[] result = HelperCollection.toArray(HelperCollection.removeDuplicates(Arrays.asList(array)));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -228,7 +228,7 @@ public abstract class HelperArray {
 	 * @since 0.9.1
 	 */
 	public static boolean contains(final Object[] array, final Object object) { //$JUnit$
-		log.debug(HelperLog.methodStart(array, object));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(array, object));
 
 		boolean result = true;
 
@@ -238,7 +238,7 @@ public abstract class HelperArray {
 			}
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -250,7 +250,7 @@ public abstract class HelperArray {
 	 * @since 0.7.0
 	 */
 	public static String dump(final Object[] array) { //$JUnit$
-		log.debug(HelperLog.methodStart(array));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(array));
 		if (null == array) {
 			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
 		}
@@ -266,7 +266,7 @@ public abstract class HelperArray {
 
 		final String result = sb.toString();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -278,7 +278,7 @@ public abstract class HelperArray {
 	 * @since 0.9.1
 	 */
 	public static String dump(final byte[] array) { //$JUnit$
-		log.debug(HelperLog.methodStart(array));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(array));
 		if (null == array) {
 			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
 		}
@@ -294,7 +294,7 @@ public abstract class HelperArray {
 
 		final String result = sb.toString();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -306,7 +306,7 @@ public abstract class HelperArray {
 	 * @since 0.9.1
 	 */
 	public static String dump(final char[] array) { //$JUnit$
-		log.debug(HelperLog.methodStart(array));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(array));
 		if (null == array) {
 			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
 		}
@@ -322,7 +322,7 @@ public abstract class HelperArray {
 
 		final String result = sb.toString();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

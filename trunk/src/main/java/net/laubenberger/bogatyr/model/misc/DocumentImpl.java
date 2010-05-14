@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100510)
+ * @version 0.9.2 (20100514)
  * @since 0.9.1
  */
 @XmlRootElement(name = "document")
@@ -74,13 +74,13 @@ public class DocumentImpl extends ModelAbstract implements Document {
 
 	public DocumentImpl() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public DocumentImpl(final String name, final BigDecimal version, final int build,
 							  final Date created, final UUID uuid, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final Map<String, String> mapTag) {
 		super(mapTag);
-		log.trace(HelperLog.constructor(name, version, build, created, uuid, url, listOrganization, listPerson, mapTag));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, uuid, url, listOrganization, listPerson, mapTag));
 
 		this.name = name;
 		this.version = version;
@@ -169,60 +169,60 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	@Override
 	@XmlElement
 	public int getBuild() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(build));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(build));
 		return build;
 	}
 
 	@Override
 	@XmlElement
 	public Date getCreated() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(created));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(created));
 		return created;
 	}
 
 	@Override
 	@XmlElement
 	public UUID getUUID() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(uuid));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(uuid));
 		return uuid;
 	}
 
 	@Override
 	@XmlElement
 	public String getName() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(name));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(name));
 		return name;
 	}
 
 	@Override
 	@XmlElement
 	public BigDecimal getVersion() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(version));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(version));
 		return version;
 	}
 
 	@Override
 	@XmlElement
 	public URL getUrl() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(url));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(url));
 		return url;
 	}
 	
 	@Override
 	public void setBuild(final int build) {
-		log.debug(HelperLog.methodStart(build));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(build));
 
 		if (build != this.build) {
 			this.build = build;
@@ -230,12 +230,12 @@ public class DocumentImpl extends ModelAbstract implements Document {
 			notifyObservers(MEMBER_BUILD);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setCreated(final Date created) {
-		log.debug(HelperLog.methodStart(created));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(created));
 
 		if (!HelperObject.isEquals(created, this.created)) {
 			this.created = created;
@@ -243,12 +243,12 @@ public class DocumentImpl extends ModelAbstract implements Document {
 			notifyObservers(MEMBER_CREATED);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setUUID(final UUID uuid) {
-		log.debug(HelperLog.methodStart(uuid));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(uuid));
 
 		if (!HelperObject.isEquals(uuid, this.uuid)) {
 			this.uuid = uuid;
@@ -256,12 +256,12 @@ public class DocumentImpl extends ModelAbstract implements Document {
 			notifyObservers(MEMBER_UUID);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setName(final String name) {
-		log.debug(HelperLog.methodStart(name));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(name));
 
 		if (!HelperObject.isEquals(name, this.name)) {
 			this.name = name;
@@ -269,12 +269,12 @@ public class DocumentImpl extends ModelAbstract implements Document {
 			notifyObservers(MEMBER_NAME);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setVersion(final BigDecimal version) {
-		log.debug(HelperLog.methodStart(version));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(version));
 
 		if (!HelperObject.isEquals(version, this.version)) {
 			this.version = version;
@@ -282,12 +282,12 @@ public class DocumentImpl extends ModelAbstract implements Document {
 			notifyObservers(MEMBER_VERSION);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setUrl(final URL url) {
-		log.debug(HelperLog.methodStart(url));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(url));
 
 		if (!HelperObject.isEquals(this.url, url)) {
 			this.url = url;
@@ -295,21 +295,21 @@ public class DocumentImpl extends ModelAbstract implements Document {
 			notifyObservers(MEMBER_WEBSITE);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	@XmlElement
 	public List<Organization> getOrganizations() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(listOrganization));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listOrganization));
 		return listOrganization;
 	}
 
 	@Override
 	public void setOrganizations(final List<Organization> organizations) {
-		log.debug(HelperLog.methodStart(organizations));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(organizations));
 
 		if (!HelperObject.isEquals(organizations, listOrganization)) {
 			listOrganization = organizations;
@@ -317,21 +317,21 @@ public class DocumentImpl extends ModelAbstract implements Document {
 			notifyObservers(MEMBER_ORGANIZATIONS);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	@XmlElement
 	public List<Person> getPersons() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(listPerson));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listPerson));
 		return listPerson;
 	}
 
 	@Override
 	public void setPersons(final List<Person> persons) {
-		log.debug(HelperLog.methodStart(persons));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(persons));
 
 		if (!HelperObject.isEquals(persons, listPerson)) {
 			listPerson = persons;
@@ -339,12 +339,12 @@ public class DocumentImpl extends ModelAbstract implements Document {
 			notifyObservers(MEMBER_PERSONS);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 	
 	@Override
 	public void addOrganization(Organization organization) {
-		log.debug(HelperLog.methodStart(organization));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(organization));
 		if (null == organization) {
 			throw new RuntimeExceptionIsNull("organization"); //$NON-NLS-1$
 		}
@@ -356,12 +356,12 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		setChanged();
 		notifyObservers(METHOD_ADD_ORGANIZATION);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void addPerson(Person person) {
-		log.debug(HelperLog.methodStart(person));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(person));
 		if (null == person) {
 			throw new RuntimeExceptionIsNull("person"); //$NON-NLS-1$
 		}
@@ -373,7 +373,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		setChanged();
 		notifyObservers(METHOD_ADD_PERSON);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}	
 	
 	

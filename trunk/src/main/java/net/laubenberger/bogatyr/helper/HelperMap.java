@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for maps.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100514)
  * @since 0.9.0
  */
 public abstract class HelperMap {
@@ -56,11 +56,11 @@ public abstract class HelperMap {
 	 * @since 0.9.0
 	 */
 	public static boolean isValid(final Map<?, ?> arg) { //$JUnit$
-		log.debug(HelperLog.methodStart(arg));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arg));
 
 		final boolean result = !(null == arg || arg.isEmpty());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -73,7 +73,7 @@ public abstract class HelperMap {
 	 * @since 0.9.1
 	 */
 	public static <K, V> List<K> getKeys(final Map<K, V> map) {
-		log.debug(HelperLog.methodStart(map));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(map));
 		if (null == map) {
 			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
 		}
@@ -83,7 +83,7 @@ public abstract class HelperMap {
 		for (final Map.Entry<K, V> pair : map.entrySet()) {
 			result.add(pair.getKey());
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -96,7 +96,7 @@ public abstract class HelperMap {
 	 * @since 0.9.1
 	 */
 	public static <K, V> List<V> getValues(final Map<K, V> map) {
-		log.debug(HelperLog.methodStart(map));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(map));
 		if (null == map) {
 			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
 		}
@@ -106,7 +106,7 @@ public abstract class HelperMap {
 		for (final Map.Entry<K, V> pair : map.entrySet()) {
 			result.add(pair.getValue());
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -119,7 +119,7 @@ public abstract class HelperMap {
 	 * @since 0.7.0
 	 */
 	public static String dump(final Map<?, ?> map) { //$JUnit$
-		log.debug(HelperLog.methodStart(map));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(map));
 		if (null == map) {
 			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
 		}
@@ -137,7 +137,7 @@ public abstract class HelperMap {
 
 		final String result = sb.toString();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

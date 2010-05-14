@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
  * This is the updater for documents.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100506)
+ * @version 0.9.2 (20100514)
  * @since 0.6.0
  */
 public class UpdaterImpl extends ServiceAbstract implements Updater {
@@ -64,7 +64,7 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 
 	public UpdaterImpl() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 
@@ -74,27 +74,27 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 
 	@Override
 	public ModelUpdater getDocument(final File file) throws JAXBException {
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 
 		final ModelUpdater result = HelperXml.deserialize(file, ModelUpdaterImpl.class);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public ModelUpdater getDocument(final InputStream is) throws JAXBException {
-		log.debug(HelperLog.methodStart(is));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is));
 
 		final ModelUpdater result = HelperXml.deserialize(is, ModelUpdaterImpl.class);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public void update(final ModelUpdater document, final Platform platform, final File dest) throws IOException {
-		log.debug(HelperLog.methodStart(document, platform, dest));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(document, platform, dest));
 		if (null == document) {
 			throw new RuntimeExceptionIsNull("document"); //$NON-NLS-1$
 		}
@@ -125,18 +125,18 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 		} else {
 			HelperIO.writeFile(dest, HelperNet.readUrl(new URL(location)), false);
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void update(final ModelUpdater document, final File dest) throws IOException {
-		log.debug(HelperLog.methodStart(document, dest));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(document, dest));
 		if (null == document) {
 			throw new RuntimeExceptionIsNull("document"); //$NON-NLS-1$
 		}
 
 		update(document, null == document.getLocation(HelperEnvironment.getPlatform()) ? Platform.ANY : HelperEnvironment.getPlatform(), dest);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

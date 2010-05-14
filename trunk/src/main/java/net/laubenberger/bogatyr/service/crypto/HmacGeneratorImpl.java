@@ -50,7 +50,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.9.1
  */
 public class HmacGeneratorImpl extends ServiceAbstract implements HmacGenerator {
@@ -66,7 +66,7 @@ public class HmacGeneratorImpl extends ServiceAbstract implements HmacGenerator 
 
 	public HmacGeneratorImpl(final HmacAlgo algorithm) throws NoSuchAlgorithmException, NoSuchProviderException {
 		super();
-		log.trace(HelperLog.constructor(algorithm));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(algorithm));
 
 		mac = Mac.getInstance(algorithm.getAlgorithm(), PROVIDER);
 	}
@@ -78,7 +78,7 @@ public class HmacGeneratorImpl extends ServiceAbstract implements HmacGenerator 
 
 	@Override
 	public byte[] getHmac(final byte[] input, final Key key) throws InvalidKeyException {
-		log.debug(HelperLog.methodStart(input, key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, key));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -91,7 +91,7 @@ public class HmacGeneratorImpl extends ServiceAbstract implements HmacGenerator 
 
 		final byte[] result = mac.doFinal();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

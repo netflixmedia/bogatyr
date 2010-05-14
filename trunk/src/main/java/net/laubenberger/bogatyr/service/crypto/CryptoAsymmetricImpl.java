@@ -64,7 +64,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.1.0
  */
 public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymmetric {
@@ -83,7 +83,7 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 
 	public CryptoAsymmetricImpl(final CryptoAsymmetricAlgo algorithm) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
 		super();
-		log.trace(HelperLog.constructor(algorithm));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(algorithm));
 
 		this.algorithm = algorithm;
 		cipher = Cipher.getInstance(algorithm.getXform(), PROVIDER);
@@ -109,12 +109,12 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 	 * @since 0.1.0
 	 */
 	private byte[] encryptInternal(final byte[] input, final Key key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-		log.trace(HelperLog.methodStart(input, key));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(input, key));
 
 		cipher.init(Cipher.ENCRYPT_MODE, key);
 		final byte[] result = cipher.doFinal(input);
 
-		log.trace(HelperLog.methodExit(result));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -130,12 +130,12 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 	 * @since 0.1.0
 	 */
 	private byte[] decryptInternal(final byte[] input, final Key key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-		log.trace(HelperLog.methodStart(input, key));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(input, key));
 
 		cipher.init(Cipher.DECRYPT_MODE, key);
 		final byte[] result = cipher.doFinal(input);
 
-		log.trace(HelperLog.methodExit(result));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -154,17 +154,17 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 	 */
 	@Override
 	public KeyPair generateKeyPair() { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final KeyPair result = generateKeyPair(algorithm.getDefaultKeysize());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public KeyPair generateKeyPair(final int keySize) { //$JUnit$
-		log.debug(HelperLog.methodStart(keySize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(keySize));
 		if (0 >= keySize) {
 			throw new RuntimeExceptionMustBeGreater("keySize", keySize, 0); //$NON-NLS-1$
 		}
@@ -177,13 +177,13 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 
 		final KeyPair result = kpg.generateKeyPair();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public byte[] generateSignature(final SignatureAlgo algoritm, final byte[] input, final PrivateKey key) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, NoSuchProviderException {
-		log.debug(HelperLog.methodStart(algoritm, input, key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(algoritm, input, key));
 		if (null == algoritm) {
 			throw new RuntimeExceptionIsNull("algoritm"); //$NON-NLS-1$
 		}
@@ -200,13 +200,13 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 
 		final byte[] result = sig.sign();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public boolean isValidSignature(final SignatureAlgo algoritm, final byte[] signature, final byte[] input, final PublicKey key) throws InvalidKeyException, SignatureException, NoSuchAlgorithmException, NoSuchProviderException {
-		log.debug(HelperLog.methodStart(algoritm, signature, input, key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(algoritm, signature, input, key));
 		if (null == algoritm) {
 			throw new RuntimeExceptionIsNull("algoritm"); //$NON-NLS-1$
 		}
@@ -230,10 +230,10 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 				result = true;
 			}
 		} catch (SignatureException ex) {
-			log.info("Signature invalid", ex); //$NON-NLS-1$
+			if (log.isInfoEnabled()) log.info("Signature invalid", ex); //$NON-NLS-1$
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -250,17 +250,17 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 	 */
 	@Override
 	public byte[] encrypt(final byte[] input, final PublicKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
-		log.debug(HelperLog.methodStart(input, key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, key));
 
 		final byte[] result = encrypt(input, key, algorithm.getDefaultKeysize());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public byte[] encrypt(final byte[] input, final PublicKey key, final int keySize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
-		log.debug(HelperLog.methodStart(input, key, keySize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, key, keySize));
 		if (!HelperArray.isValid(input)) {
 			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
@@ -306,7 +306,7 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 		} else {
 			result = encryptInternal(input, key);
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -323,17 +323,17 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 	 */
 	@Override
 	public byte[] decrypt(final byte[] input, final PrivateKey key) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
-		log.debug(HelperLog.methodStart(input, key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, key));
 
 		final byte[] result = decrypt(input, key, algorithm.getDefaultKeysize());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public byte[] decrypt(final byte[] input, final PrivateKey key, final int keySize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
-		log.debug(HelperLog.methodStart(input, key, keySize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, key, keySize));
 		if (!HelperArray.isValid(input)) {
 			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
@@ -370,7 +370,7 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 		} else {
 			result = decryptInternal(input, key);
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

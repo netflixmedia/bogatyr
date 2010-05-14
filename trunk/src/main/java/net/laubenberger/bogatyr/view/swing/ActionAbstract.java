@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended AbstractAction.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public abstract class ActionAbstract extends AbstractAction {
@@ -60,17 +60,17 @@ public abstract class ActionAbstract extends AbstractAction {
 
 	protected ActionAbstract() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	protected ActionAbstract(final String name, final Icon icon) {
 		super(name, icon);
-		log.trace(HelperLog.constructor(name, icon));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, icon));
 	}
 
 	protected ActionAbstract(final String name) {
 		super(name);
-		log.trace(HelperLog.constructor(name));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name));
 	}
 
 	/*
@@ -79,14 +79,14 @@ public abstract class ActionAbstract extends AbstractAction {
 
 	protected ActionAbstract(final String name, final String toolTip) {
 		super(name);
-		log.trace(HelperLog.constructor(name, toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, toolTip));
 
 		putValue(SHORT_DESCRIPTION, toolTip);
 	}
 
 	protected ActionAbstract(final String name, final String toolTip, final int mnemonic) {
 		super(name);
-		log.trace(HelperLog.constructor(name, toolTip, mnemonic));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, toolTip, mnemonic));
 
 		putValue(SHORT_DESCRIPTION, toolTip);
 		putValue(MNEMONIC_KEY, mnemonic);
@@ -94,14 +94,14 @@ public abstract class ActionAbstract extends AbstractAction {
 
 	protected ActionAbstract(final String name, final String toolTip, final Icon icon) {
 		super(name, icon);
-		log.trace(HelperLog.constructor(name, toolTip, icon));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, toolTip, icon));
 
 		putValue(SHORT_DESCRIPTION, toolTip);
 	}
 
 	protected ActionAbstract(final String name, final String toolTip, final Icon icon, final int mnemonic) {
 		super(name, icon);
-		log.trace(HelperLog.constructor(name, toolTip, icon, mnemonic));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, toolTip, icon, mnemonic));
 
 		putValue(SHORT_DESCRIPTION, toolTip);
 		putValue(MNEMONIC_KEY, mnemonic);
@@ -109,14 +109,14 @@ public abstract class ActionAbstract extends AbstractAction {
 
 	protected ActionAbstract(final String name, final String toolTip, final int mnemonic, final KeyStroke accelerator) {
 		this(name, toolTip, mnemonic);
-		log.trace(HelperLog.constructor(name, toolTip, mnemonic, accelerator));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, toolTip, mnemonic, accelerator));
 
 		putValue(ACCELERATOR_KEY, accelerator);
 	}
 
 	protected ActionAbstract(final String name, final String toolTip, final Icon icon, final int mnemonic, final KeyStroke accelerator) {
 		this(name, toolTip, icon, mnemonic);
-		log.trace(HelperLog.constructor(name, toolTip, icon, mnemonic, accelerator));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, toolTip, icon, mnemonic, accelerator));
 
 		putValue(ACCELERATOR_KEY, accelerator);
 	}

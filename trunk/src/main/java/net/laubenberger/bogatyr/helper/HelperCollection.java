@@ -46,7 +46,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public abstract class HelperCollection {
@@ -62,14 +62,14 @@ public abstract class HelperCollection {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <E> E[] toArray(final Collection<E> collection) { //$JUnit$
-		log.debug(HelperLog.methodStart(collection));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(collection));
 		if (!isValid(collection)) {
 			throw new RuntimeExceptionIsNullOrEmpty("collection"); //$NON-NLS-1$
 		}
 
 		final E[] result = collection.toArray((E[]) Array.newInstance(collection.iterator().next().getClass(), collection.size()));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -82,14 +82,14 @@ public abstract class HelperCollection {
 	 * @since 0.9.0
 	 */
 	public static <E> List<E> getList(final E... elements) { //$JUnit$
-		log.debug(HelperLog.methodStart(elements));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(elements));
 		if (!HelperArray.isValid(elements)) {
 			throw new RuntimeExceptionIsNullOrEmpty("elements"); //$NON-NLS-1$
 		}
 
 		final List<E> result = Arrays.asList(elements);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -102,7 +102,7 @@ public abstract class HelperCollection {
 	 * @since 0.9.0
 	 */
 	public static <E> Set<E> getSet(final E... elements) { //$JUnit$
-		log.debug(HelperLog.methodStart(elements));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(elements));
 		if (!HelperArray.isValid(elements)) {
 			throw new RuntimeExceptionIsNullOrEmpty("elements"); //$NON-NLS-1$
 		}
@@ -111,7 +111,7 @@ public abstract class HelperCollection {
 
 		result.addAll(Arrays.asList(elements));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -124,11 +124,11 @@ public abstract class HelperCollection {
 	 * @since 0.7.0
 	 */
 	public static boolean isValid(final Collection<?> collection) { //$JUnit$
-		log.debug(HelperLog.methodStart(collection));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(collection));
 
 		final boolean result = !(null == collection || collection.isEmpty());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -141,14 +141,14 @@ public abstract class HelperCollection {
 	 * @since 0.7.0
 	 */
 	public static <E> Collection<E> removeDuplicates(final Collection<E> collection) { //$JUnit$
-		log.debug(HelperLog.methodStart(collection));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(collection));
 		if (null == collection) {
 			throw new RuntimeExceptionIsNull("collection"); //$NON-NLS-1$
 		}
 
 		final Collection<E> result = new HashSet<E>(collection);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -161,7 +161,7 @@ public abstract class HelperCollection {
 	 * @since 0.7.0
 	 */
 	public static String dump(final Iterable<?> iterable) { //$JUnit$
-		log.debug(HelperLog.methodStart(iterable));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(iterable));
 		if (null == iterable) {
 			throw new RuntimeExceptionIsNull("iterable"); //$NON-NLS-1$
 		}
@@ -177,7 +177,7 @@ public abstract class HelperCollection {
 
 		final String result = sb.toString();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

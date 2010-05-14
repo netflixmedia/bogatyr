@@ -43,7 +43,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * This is a timer which informs all added listeners about its state.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100514)
  * @since 0.6.0
  */
 public abstract class TimerAbstract extends ServiceAbstract implements TimeMachine {
@@ -71,9 +71,9 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 	 * @since 0.6.0
 	 */
 	public Timer getTimer() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(timer));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(timer));
 		return timer;
 	}
 
@@ -85,14 +85,14 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 	 * @since 0.6.0
 	 */
 	public void setTimer(final Timer timer) {
-		log.debug(HelperLog.methodStart(timer));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(timer));
 		if (null == timer) {
 			throw new RuntimeExceptionIsNull("timer"); //$NON-NLS-1$
 		}
 
 		this.timer = timer;
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 
@@ -101,17 +101,17 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 		 */
 
 	protected void fireTimeChanged() {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		for (final ListenerTimer listener : listeners) {
 			listener.timeChanged(event);
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 	protected void fireTimerStarted() {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		isRunning = true;
 
@@ -119,11 +119,11 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 			listener.timerStarted(event);
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 	protected void fireTimerStopped() {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		isRunning = false;
 
@@ -131,15 +131,15 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 			listener.timerStopped(event);
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 	protected void setInterval(final long interval) {
-		log.trace(HelperLog.methodStart(interval));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(interval));
 
 		this.interval = interval;
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 
@@ -149,58 +149,58 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 
 	@Override
 	public boolean isRunning() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(isRunning));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(isRunning));
 		return isRunning;
 	}
 
 	@Override
 	public long getInterval() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(interval));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(interval));
 		return interval;
 	}
 
 	@Override
 	public synchronized void addListener(final ListenerTimer listener) {
-		log.debug(HelperLog.methodStart(listener));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listeners.add(listener);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void deleteListener(final ListenerTimer listener) {
-		log.debug(HelperLog.methodStart(listener));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listeners.remove(listener);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void deleteListeners() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		listeners = new HashSet<ListenerTimer>();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public int countListeners() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(listeners.size()));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listeners.size()));
 		return listeners.size();
 	}
 }

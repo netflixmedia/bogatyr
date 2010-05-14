@@ -52,7 +52,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.3.0
  */
 public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
@@ -64,7 +64,7 @@ public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
 
 	public KeyWrapperImpl(final CryptoAlgo wrapperAlgorithm) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
 		super();
-		log.trace(HelperLog.constructor(wrapperAlgorithm));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(wrapperAlgorithm));
 
 		cipher = Cipher.getInstance(wrapperAlgorithm.getXform(), PROVIDER);
 	}
@@ -76,7 +76,7 @@ public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
 
 	@Override
 	public byte[] wrap(final Key wrapperKey, final Key key) throws InvalidKeyException, IllegalBlockSizeException {
-		log.debug(HelperLog.methodStart(wrapperKey, key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(wrapperKey, key));
 		if (null == wrapperKey) {
 			throw new RuntimeExceptionIsNull("wrapperKey"); //$NON-NLS-1$
 		}
@@ -88,13 +88,13 @@ public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
 
 		final byte[] result = cipher.wrap(key);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public Key unwrap(final Key wrapperKey, final byte[] wrappedKey, final String keyAlgorithm, final int keyType) throws InvalidKeyException, NoSuchAlgorithmException {
-		log.debug(HelperLog.methodStart(wrapperKey, wrappedKey, keyAlgorithm, keyType));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(wrapperKey, wrappedKey, keyAlgorithm, keyType));
 		if (null == wrapperKey) {
 			throw new RuntimeExceptionIsNull("wrapperKey"); //$NON-NLS-1$
 		}
@@ -112,7 +112,7 @@ public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
 
 		final Key result = cipher.unwrap(wrappedKey, keyAlgorithm, keyType);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

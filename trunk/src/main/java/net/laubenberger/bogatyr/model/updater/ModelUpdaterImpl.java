@@ -59,7 +59,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the updater model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100509)
+ * @version 0.9.2 (20100514)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelDocument")
@@ -74,13 +74,13 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 
 	public ModelUpdaterImpl() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public ModelUpdaterImpl(final String name, final BigDecimal version, final int build,
 									final Date created, final UUID uuid, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final Map<Platform, String> mapLocation, final Map<HashCodeAlgo, String> mapHash, final Map<String, String> mapTag) {
 		super(name, version, build, created, uuid, url, listOrganization, listPerson, mapTag);
-		log.trace(HelperLog.constructor(name, version, build, created, uuid, url, listOrganization, listPerson, mapLocation, mapHash, mapTag));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, uuid, url, listOrganization, listPerson, mapLocation, mapHash, mapTag));
 		this.mapLocation = mapLocation;
 		this.mapHash = mapHash;
 	}
@@ -136,17 +136,17 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 
 	@Override
 	public String getLocation() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final String result = getLocation(Platform.ANY);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public String getLocation(final Platform platform) {
-		log.debug(HelperLog.methodStart(platform));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(platform));
 		if (null == platform) {
 			throw new RuntimeExceptionIsNull("platform"); //$NON-NLS-1$
 		}
@@ -156,7 +156,7 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 			result = mapLocation.get(platform);
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -164,25 +164,25 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 	@XmlElement
 	@XmlJavaTypeAdapter(MapAdapterPlatform.class)
 	public Map<Platform, String> getLocations() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(mapLocation));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(mapLocation));
 		return mapLocation;
 	}
 
 	@Override
 	public String getHash() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final String result = getHash(HashCodeAlgo.SHA256);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public String getHash(final HashCodeAlgo hashCodeAlgo) {
-		log.debug(HelperLog.methodStart(hashCodeAlgo));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(hashCodeAlgo));
 		if (null == hashCodeAlgo) {
 			throw new RuntimeExceptionIsNull("hashCodeAlgo"); //$NON-NLS-1$
 		}
@@ -192,7 +192,7 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 			result = mapHash.get(hashCodeAlgo);
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -200,15 +200,15 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 	@XmlElement
 	@XmlJavaTypeAdapter(MapAdapterHashCode.class)
 	public Map<HashCodeAlgo, String> getHashs() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(mapHash));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(mapHash));
 		return mapHash;
 	}
 
 	@Override
 	public void setLocations(final Map<Platform, String> locations) {
-		log.debug(HelperLog.methodStart(locations));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(locations));
 
 		if (!HelperObject.isEquals(locations, mapLocation)) {
 			mapLocation = locations;
@@ -216,12 +216,12 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 			notifyObservers(MEMBER_LOCATIONS);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setHashs(final Map<HashCodeAlgo, String> hashs) {
-		log.debug(HelperLog.methodStart(hashs));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(hashs));
 
 		if (!HelperObject.isEquals(hashs, mapHash)) {
 			mapHash = hashs;
@@ -229,7 +229,7 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 			notifyObservers(MEMBER_HASHS);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 

@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100514)
  * @since 0.5.0
  */
 public abstract class HelperNet {
@@ -80,7 +80,7 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static void enableProxyHttp(final String host, final int port, final String username, final String password) { //$JUnit$
-		log.debug(HelperLog.methodStart(host, port, username, password));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host, port, username, password));
 		if (!HelperString.isValid(host)) {
 			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
@@ -97,7 +97,7 @@ public abstract class HelperNet {
 
 		authenticate(username, password);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -106,13 +106,13 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static void disableProxyHttp() { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 //        System.clearProperty(PROPERTY_HTTP_USE_PROXY);
 		System.clearProperty(PROPERTY_HTTP_PROXY_HOST);
 		System.clearProperty(PROPERTY_HTTP_PROXY_PORT);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -125,7 +125,7 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static void enableProxyHttps(final String host, final int port, final String username, final String password) { //$JUnit$
-		log.debug(HelperLog.methodStart(host, port, username, password));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host, port, username, password));
 		if (!HelperString.isValid(host)) {
 			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
@@ -142,7 +142,7 @@ public abstract class HelperNet {
 
 		authenticate(username, password);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -151,13 +151,13 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static void disableProxyHttps() { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 //		System.clearProperty(PROPERTY_HTTPS_USE_PROXY);
 		System.clearProperty(PROPERTY_HTTPS_PROXY_HOST);
 		System.clearProperty(PROPERTY_HTTPS_PROXY_PORT);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -170,7 +170,7 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static void enableProxyFtp(final String host, final int port, final String username, final String password) { //$JUnit$
-		log.debug(HelperLog.methodStart(host, port, username, password));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host, port, username, password));
 
 		if (!HelperString.isValid(host)) {
 			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
@@ -188,7 +188,7 @@ public abstract class HelperNet {
 
 		authenticate(username, password);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -197,13 +197,13 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static void disableProxyFtp() { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 //        System.clearProperty(PROPERTY_FTP_USE_PROXY);
 		System.clearProperty(PROPERTY_FTP_PROXY_HOST);
 		System.clearProperty(PROPERTY_FTP_PROXY_PORT);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -215,7 +215,7 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static boolean isPingable(final String host) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(host));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host));
 		if (!HelperString.isValid(host)) {
 			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
@@ -227,7 +227,7 @@ public abstract class HelperNet {
 		// reached then the method returns false.
 		final boolean result = address.isReachable(TIMEOUT);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -240,7 +240,7 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static String getHostname(final String ip) throws UnknownHostException { //$JUnit$
-		log.debug(HelperLog.methodStart(ip));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(ip));
 		if (!HelperString.isValid(ip)) {
 			throw new RuntimeExceptionIsNullOrEmpty("ip"); //$NON-NLS-1$
 		}
@@ -249,7 +249,7 @@ public abstract class HelperNet {
 
 		final String result = address.getHostName();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -261,13 +261,13 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static String getLocalHostname() throws UnknownHostException { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final InetAddress address = InetAddress.getLocalHost();
 
 		final String result = address.getHostName();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -280,7 +280,7 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static String getIp(final String host) throws UnknownHostException { //$JUnit$
-		log.debug(HelperLog.methodStart(host));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host));
 		if (!HelperString.isValid(host)) {
 			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
@@ -289,7 +289,7 @@ public abstract class HelperNet {
 
 		final String result = address.getHostAddress();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -301,13 +301,13 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static String getLocalIp() throws UnknownHostException { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final InetAddress address = InetAddress.getLocalHost();
 
 		final String result = address.getHostAddress();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -319,7 +319,7 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static List<String> getLocalIps() throws UnknownHostException { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final List<String> result = new ArrayList<String>();
 		final String localHost = InetAddress.getLocalHost().getHostName();
@@ -327,7 +327,7 @@ public abstract class HelperNet {
 		for (final InetAddress address : InetAddress.getAllByName(localHost)) {
 			result.add(address.getHostAddress());
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -340,11 +340,11 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static List<NetworkInterface> getNetworkInterfaces() throws SocketException { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final List<NetworkInterface> result = Collections.list(NetworkInterface.getNetworkInterfaces());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -358,7 +358,7 @@ public abstract class HelperNet {
 	 * @since 0.7.0
 	 */
 	public static String getMacAddress(final NetworkInterface ni) throws SocketException { //$JUnit$
-		log.debug(HelperLog.methodStart(ni));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(ni));
 		if (null == ni) {
 			throw new RuntimeExceptionIsNull("ni"); //$NON-NLS-1$
 		}
@@ -375,7 +375,7 @@ public abstract class HelperNet {
 
 		final String result = sb.toString();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -390,7 +390,7 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static InputStream readUrl(final URL url) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(url));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(url));
 		if (null == url) {
 			throw new RuntimeExceptionIsNull("url"); //$NON-NLS-1$
 		}
@@ -401,7 +401,7 @@ public abstract class HelperNet {
 
 		final InputStream result = con.getInputStream();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -418,7 +418,7 @@ public abstract class HelperNet {
 	 * @since 0.5.0
 	 */
 	public static InputStream readUrl(final URL url, final String username, final String password) throws IOException {
-		log.debug(HelperLog.methodStart(url, username, password));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(url, username, password));
 		if (null == url) {
 			throw new RuntimeExceptionIsNull("url"); //$NON-NLS-1$
 		}
@@ -436,7 +436,7 @@ public abstract class HelperNet {
 
 		final InputStream result = con.getInputStream();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -446,11 +446,11 @@ public abstract class HelperNet {
 	 */
 
 	private static void authenticate(final String username, final String password) {
-		log.trace(HelperLog.methodStart(username, password));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(username, password));
 
 		Authenticator.setDefault(new WebAuthenticator(username, password));
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 

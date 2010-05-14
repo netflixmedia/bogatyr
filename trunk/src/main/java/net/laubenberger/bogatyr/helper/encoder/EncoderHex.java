@@ -40,7 +40,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Encodes and decodes data to Hex format.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.1.0
  */
 public abstract class EncoderHex {
@@ -54,7 +54,7 @@ public abstract class EncoderHex {
 	 * @since 0.1.0
 	 */
 	public static String encode(final byte[] input) { //$JUnit$
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -74,7 +74,7 @@ public abstract class EncoderHex {
 
 		final String result = hexString.toString();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -86,7 +86,7 @@ public abstract class EncoderHex {
 	 * @since 0.1.0
 	 */
 	public static byte[] decode(final String input) { //$JUnit$
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -99,7 +99,7 @@ public abstract class EncoderHex {
 		for (int ii = 0; ii < result.length; ii++) {
 			result[ii] = (byte) Integer.parseInt(input.substring(2 * ii, 2 * ii + 2), 16);
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

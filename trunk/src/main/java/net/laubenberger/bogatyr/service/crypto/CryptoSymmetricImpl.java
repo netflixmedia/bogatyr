@@ -79,7 +79,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.1.0
  */
 public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmetric {
@@ -99,7 +99,7 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 
 	public CryptoSymmetricImpl(final CryptoSymmetricAlgo algorithm) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
 		super();
-		log.trace(HelperLog.constructor(algorithm));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(algorithm));
 
 		this.algorithm = algorithm;
 		cipher = Cipher.getInstance(algorithm.getXform(), PROVIDER);
@@ -112,7 +112,7 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 	 */
 
 	private AlgorithmParameterSpec prepareIv() {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		final byte[] ivBytes = new byte[algorithm.getIvSize()];
 
@@ -121,7 +121,7 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 		}
 		final AlgorithmParameterSpec result = new IvParameterSpec(ivBytes);
 
-		log.trace(HelperLog.methodExit(result));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -140,17 +140,17 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 	 */
 	@Override
 	public SecretKey generateKey() { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final SecretKey result = generateKey(algorithm.getDefaultKeysize());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public SecretKey generateKey(final int keySize) { //$JUnit$
-		log.debug(HelperLog.methodStart(keySize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(keySize));
 		if (0 >= keySize) {
 			throw new RuntimeExceptionMustBeGreater("keySize", keySize, 0); //$NON-NLS-1$
 		}
@@ -163,23 +163,23 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 
 		final SecretKey result = kg.generateKey();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public SecretKey generateKey(final byte[] password) {
-		log.debug(HelperLog.methodStart(password));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(password));
 
 		final SecretKey result = generateKey(password, algorithm.getDefaultKeysize());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public SecretKey generateKey(final byte[] password, final int keySize) {
-		log.debug(HelperLog.methodStart(password, keySize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(password, keySize));
 		if (!HelperArray.isValid(password)) {
 			throw new RuntimeExceptionIsNullOrEmpty("password"); //$NON-NLS-1$
 		}
@@ -195,13 +195,13 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 
 		final SecretKey result = new SecretKeySpec(Arrays.copyOfRange(hcg.getHash(password), 0, keySize / 8), algorithm.getAlgorithm());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException { //$JUnit$
-		log.debug(HelperLog.methodStart(input, key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, key));
 		if (!HelperArray.isValid(input)) {
 			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
@@ -215,13 +215,13 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 		cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
 		final byte[] result = cipher.doFinal(input);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public byte[] decrypt(final byte[] input, final Key key) throws InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
-		log.debug(HelperLog.methodStart(input, key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, key));
 		if (!HelperArray.isValid(input)) {
 			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
@@ -235,22 +235,22 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 		cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
 		final byte[] result = cipher.doFinal(input);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public void encrypt(final InputStream is, final OutputStream os, final Key key) throws InvalidKeyException, InvalidAlgorithmParameterException, IOException {
-		log.debug(HelperLog.methodStart(is, os, key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is, os, key));
 
 		encrypt(is, os, key, Constants.DEFAULT_FILE_BUFFER_SIZE);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void encrypt(final InputStream is, OutputStream os, final Key key, final int bufferSize) throws InvalidKeyException, InvalidAlgorithmParameterException, IOException {
-		log.debug(HelperLog.methodStart(is, os, key, bufferSize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is, os, key, bufferSize));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
@@ -280,21 +280,21 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 		} finally {
 			os.close();
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void decrypt(final InputStream is, final OutputStream os, final Key key) throws InvalidKeyException, InvalidAlgorithmParameterException, IOException {
-		log.debug(HelperLog.methodStart(is, os, key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is, os, key));
 
 		decrypt(is, os, key, Constants.DEFAULT_FILE_BUFFER_SIZE);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void decrypt(final InputStream is, final OutputStream os, final Key key, final int bufferSize) throws InvalidKeyException, InvalidAlgorithmParameterException, IOException {
-		log.debug(HelperLog.methodStart(is, os, key, bufferSize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is, os, key, bufferSize));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
@@ -328,21 +328,21 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 				cis.close();
 			}
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void encrypt(final File input, final File output, final Key key) throws InvalidKeyException, InvalidAlgorithmParameterException, IOException {
-		log.debug(HelperLog.methodStart(input, output, key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, output, key));
 
 		encrypt(input, output, key, Constants.DEFAULT_FILE_BUFFER_SIZE);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void encrypt(final File input, final File output, final Key key, final int bufferSize) throws InvalidKeyException, InvalidAlgorithmParameterException, IOException {
-		log.debug(HelperLog.methodStart(input, output, key, bufferSize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, output, key, bufferSize));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -368,21 +368,21 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 				bis.close();
 			}
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void decrypt(final File input, final File output, final Key key) throws InvalidKeyException, InvalidAlgorithmParameterException, IOException {
-		log.debug(HelperLog.methodStart(input, output, key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, output, key));
 
 		decrypt(input, output, key, Constants.DEFAULT_FILE_BUFFER_SIZE);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void decrypt(final File input, final File output, final Key key, final int bufferSize) throws InvalidKeyException, InvalidAlgorithmParameterException, IOException {
-		log.debug(HelperLog.methodStart(input, output, key, bufferSize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, output, key, bufferSize));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -408,6 +408,6 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 				bis.close();
 			}
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

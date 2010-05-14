@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
  * This is a Label combined with a JComponent.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.6.0
  */
 public class LabeledComponent<T extends JComponent> extends Panel {
@@ -64,7 +64,7 @@ public class LabeledComponent<T extends JComponent> extends Panel {
 
 	public LabeledComponent(final String labelText, final String toolTip, final T component) {
 		super();
-		log.trace(HelperLog.constructor(labelText, toolTip, component));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(labelText, toolTip, component));
 
 		this.component = component;
 		label.setText(labelText);
@@ -73,7 +73,7 @@ public class LabeledComponent<T extends JComponent> extends Panel {
 
 	public LabeledComponent(final String title, final String labelText, final String toolTip, final T component) {
 		super(title);
-		log.trace(HelperLog.constructor(title, labelText, toolTip, component));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, labelText, toolTip, component));
 
 		this.component = component;
 		label.setText(labelText);
@@ -81,16 +81,16 @@ public class LabeledComponent<T extends JComponent> extends Panel {
 	}
 
 	public JLabel getLabel() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(label));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(label));
 		return label;
 	}
 
 	public T getComponent() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(component));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(component));
 		return component;
 	}
 
@@ -100,7 +100,7 @@ public class LabeledComponent<T extends JComponent> extends Panel {
 	 */
 
 	private void createLayout() {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -122,7 +122,7 @@ public class LabeledComponent<T extends JComponent> extends Panel {
 			add(component, gbc);
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 

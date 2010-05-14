@@ -55,7 +55,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a helper class for image operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100423)
+ * @version 0.9.2 (20100514)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -78,14 +78,14 @@ public abstract class HelperImage {
 	 * @since 0.9.0
 	 */
 	public static BufferedImage readImage(final File file) throws IOException {
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 
 		final BufferedImage result = ImageIO.read(file);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -101,14 +101,14 @@ public abstract class HelperImage {
 	 */
 	public static BufferedImage readImage(final InputStream is)
 			throws IOException {
-		log.debug(HelperLog.methodStart(is));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
 
 		final BufferedImage result = ImageIO.read(is);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -125,7 +125,7 @@ public abstract class HelperImage {
 	 */
 	public static void writeImage(final File file, final String type,
 											final RenderedImage image) throws IOException { // $JUnit$
-		log.debug(HelperLog.methodStart(file, type, image));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, type, image));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -138,7 +138,7 @@ public abstract class HelperImage {
 		}
 
 		ImageIO.write(image, type, file);
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -154,7 +154,7 @@ public abstract class HelperImage {
 	 */
 	public static void writeImage(final OutputStream os, final String type,
 											final RenderedImage image) throws IOException {
-		log.debug(HelperLog.methodStart(os, type, image));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(os, type, image));
 		if (null == image) {
 			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
 		}
@@ -167,7 +167,7 @@ public abstract class HelperImage {
 		}
 
 		ImageIO.write(image, type, os);
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -180,7 +180,7 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	public static BufferedImage getImage(final Component component) {
-		log.debug(HelperLog.methodStart(component));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(component));
 		if (null == component) {
 			throw new RuntimeExceptionIsNull("component"); //$NON-NLS-1$
 		}
@@ -192,7 +192,7 @@ public abstract class HelperImage {
 
 		component.paint(g2);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -208,7 +208,7 @@ public abstract class HelperImage {
 	 */
 	public static Image getScaledImage(final BufferedImage image,
 												  final double scale) {
-		log.debug(HelperLog.methodStart(image, scale));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(image, scale));
 		if (null == image) {
 			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
 		}
@@ -224,7 +224,7 @@ public abstract class HelperImage {
 //				.convertDoubleToInt(width), HelperMath
 //				.convertDoubleToInt(height), Image.SCALE_SMOOTH);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -241,7 +241,7 @@ public abstract class HelperImage {
 	 * @since 0.9.0
 	 */
 	public static Image getScaledImage(final BufferedImage image, final Dimension size) {
-		log.debug(HelperLog.methodStart(image, size));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(image, size));
 		if (null == image) {
 			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
 		}
@@ -261,7 +261,7 @@ public abstract class HelperImage {
 			result = image.getScaledInstance(size.width, size.height, Image.SCALE_SMOOTH);
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -273,11 +273,11 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageReadFormats() { // $JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final Collection<String> result = unique(ImageIO.getReaderFormatNames());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -289,11 +289,11 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageWriteFormats() { // $JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final Collection<String> result = unique(ImageIO.getWriterFormatNames());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -306,11 +306,11 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageReadMIMETypes() { // $JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final Collection<String> result = unique(ImageIO.getReaderMIMETypes());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -323,11 +323,11 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	public static Collection<String> getAvailableImageWriteMIMETypes() { // $JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final Collection<String> result = unique(ImageIO.getWriterMIMETypes());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -341,7 +341,7 @@ public abstract class HelperImage {
 	 * @since 0.9.1
 	 */
 	public static BufferedImage getBufferedImage(final Image image) {
-		log.debug(HelperLog.methodStart(image));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(image));
 
 		final BufferedImage result;
 		if (image instanceof BufferedImage) {
@@ -359,7 +359,7 @@ public abstract class HelperImage {
 			g2.dispose();
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -377,19 +377,19 @@ public abstract class HelperImage {
 	 * @since 0.4.0
 	 */
 	private static Collection<String> unique(final String... strings) {
-		log.trace(HelperLog.methodStart(strings));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(strings));
 		final Collection<String> result = new HashSet<String>(strings.length);
 
 		for (final String str : strings) {
 			result.add(str.toLowerCase(Locale.getDefault()));
 		}
 
-		log.trace(HelperLog.methodExit(result));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 
 	private static void loadImage(final Image image) {
-		log.trace(HelperLog.methodStart(image));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(image));
 
 		class StatusObserver implements ImageObserver {
 			boolean imageLoaded;
@@ -422,6 +422,6 @@ public abstract class HelperImage {
 			}
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 }

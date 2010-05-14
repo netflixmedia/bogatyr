@@ -95,17 +95,17 @@ public class TrayIcon extends java.awt.TrayIcon {
 
 	public TrayIcon(final Image image, final String tooltip, final PopupMenu popup) {
 		super(image, tooltip, popup);
-		log.trace(HelperLog.constructor(image, tooltip, popup));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(image, tooltip, popup));
 	}
 
 	public TrayIcon(final Image image, final String tooltip) {
 		super(image, tooltip);
-		log.trace(HelperLog.constructor(image, tooltip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(image, tooltip));
 	}
 
 	public TrayIcon(final Image image) {
 		super(image);
-		log.trace(HelperLog.constructor(image));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(image));
 	}
 	
 	/*
@@ -114,7 +114,7 @@ public class TrayIcon extends java.awt.TrayIcon {
 	
 	public TrayIcon(final Image image, final String tooltip, final JPopupMenu popup) {
 		super(image, tooltip);
-		log.trace(HelperLog.constructor(image, tooltip, popup));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(image, tooltip, popup));
 		
 		setJPopupMenu(popup);
 	}

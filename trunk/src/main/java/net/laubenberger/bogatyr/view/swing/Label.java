@@ -41,7 +41,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JLabel.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.2.0
  */
 public class Label extends JLabel {
@@ -55,32 +55,32 @@ public class Label extends JLabel {
 
 	public Label() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public Label(final Icon icon, final int horizontalAlignment) {
 		super(icon, horizontalAlignment);
-		log.trace(HelperLog.constructor(icon, horizontalAlignment));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(icon, horizontalAlignment));
 	}
 
 	public Label(final String text, final Icon icon, final int horizontalAlignment) {
 		super(text, icon, horizontalAlignment);
-		log.trace(HelperLog.constructor(text, icon, horizontalAlignment));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon, horizontalAlignment));
 	}
 
 	public Label(final Icon icon) {
 		super(icon);
-		log.trace(HelperLog.constructor(icon));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(icon));
 	}
 
 	public Label(final String text) {
 		super(text);
-		log.trace(HelperLog.constructor(text));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text));
 	}
 
 	public Label(final String text, final int horizontalAlignment) {
 		super(text, horizontalAlignment);
-		log.trace(HelperLog.constructor(text, horizontalAlignment));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, horizontalAlignment));
 	}
 
 

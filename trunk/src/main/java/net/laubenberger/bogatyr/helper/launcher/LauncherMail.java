@@ -46,7 +46,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher starts the system mail application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public abstract class LauncherMail {
@@ -59,13 +59,13 @@ public abstract class LauncherMail {
 	 * @since 0.7.0
 	 */
 	public static void mail() throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		if (Desktop.isDesktopSupported()) {
 			Desktop.getDesktop().mail();
 		} else {
 			throw new RuntimeException("Mail application not supported by your machine!"); //$NON-NLS-1$
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -77,7 +77,7 @@ public abstract class LauncherMail {
 	 * @since 0.7.0
 	 */
 	public static void mail(final URI uri) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(uri));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(uri));
 		if (Desktop.isDesktopSupported()) {
 			if (null == uri) {
 				throw new RuntimeExceptionIsNull("uri"); //$NON-NLS-1$
@@ -87,7 +87,7 @@ public abstract class LauncherMail {
 		} else {
 			throw new RuntimeException("Mail application not supported by your machine!"); //$NON-NLS-1$
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -101,7 +101,7 @@ public abstract class LauncherMail {
 	 * @since 0.7.0
 	 */
 	public static void mail(final String subject, final String body, final String... emailAddresses) throws IOException, URISyntaxException { //$JUnit$
-		log.debug(HelperLog.methodStart(subject, body, emailAddresses));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(subject, body, emailAddresses));
 		if (null == subject) {
 			throw new RuntimeExceptionIsNull("subject"); //$NON-NLS-1$
 		}
@@ -130,7 +130,7 @@ public abstract class LauncherMail {
 
 		mail(new URI(prefix + addresses.replaceAll(" ", "%20")));	//$NON-NLS-1$//$NON-NLS-2$
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 
@@ -139,7 +139,7 @@ public abstract class LauncherMail {
 	 */
 
 	private static String getValidText(final String input) {
-		log.trace(HelperLog.methodStart(input));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(input));
 
 		final StringBuilder sb = new StringBuilder(input.length());
 
@@ -155,7 +155,7 @@ public abstract class LauncherMail {
 		}
 		final String result = sb.toString();
 
-		log.trace(HelperLog.methodExit(result));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 }

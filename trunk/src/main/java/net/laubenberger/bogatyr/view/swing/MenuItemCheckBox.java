@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JCheckBoxMenuItem.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.2.0
  */
 public class MenuItemCheckBox extends JCheckBoxMenuItem {
@@ -58,37 +58,37 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 
 	public MenuItemCheckBox() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public MenuItemCheckBox(final Action action) {
 		super(action);
-		log.trace(HelperLog.constructor(action));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(action));
 	}
 
 	public MenuItemCheckBox(final Icon icon) {
 		super(icon);
-		log.trace(HelperLog.constructor(icon));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(icon));
 	}
 
 	public MenuItemCheckBox(final String text, final boolean selected) {
 		super(text, selected);
-		log.trace(HelperLog.constructor(text, selected));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, selected));
 	}
 
 	public MenuItemCheckBox(final String text, final Icon icon, final boolean selected) {
 		super(text, icon, selected);
-		log.trace(HelperLog.constructor(text, icon, selected));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon, selected));
 	}
 
 	public MenuItemCheckBox(final String text, final Icon icon) {
 		super(text, icon);
-		log.trace(HelperLog.constructor(text, icon));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon));
 	}
 
 	public MenuItemCheckBox(final String text) {
 		super(text);
-		log.trace(HelperLog.constructor(text));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text));
 	}
 
 	/*
@@ -97,21 +97,21 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 
 	public MenuItemCheckBox(final boolean isSelected) {
 		super();
-		log.trace(HelperLog.constructor(isSelected));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(isSelected));
 
 		setSelected(isSelected);
 	}
 
 	public MenuItemCheckBox(final boolean isSelected, final Action action) {
 		this(action);
-		log.trace(HelperLog.constructor(isSelected, action));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(isSelected, action));
 
 		setSelected(isSelected);
 	}
 
 	public MenuItemCheckBox(final String text, final Icon icon, final int mnemonic, final String toolTip, final boolean isSelected) {
 		this(text);
-		log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, isSelected));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, isSelected));
 
 		// Add the optional icon
 		if (null != icon) {
@@ -132,7 +132,7 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 
 	public MenuItemCheckBox(final String text, final Icon icon, final int mnemonic, final String toolTip, final boolean isSelected, final ActionListener listener) {
 		this(text, icon, mnemonic, toolTip, isSelected);
-		log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, isSelected, listener));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, isSelected, listener));
 
 		addActionListener(listener);
 	}

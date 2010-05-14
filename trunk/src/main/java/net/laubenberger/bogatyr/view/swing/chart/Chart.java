@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.5.0
  */
 public class Chart extends Panel {
@@ -87,12 +87,12 @@ public class Chart extends Panel {
 
 	public Chart(final int maxX, final int maxY, final String[] xAxes, final String[] yAxes) {
 		this(maxX, maxY, xAxes, yAxes, X_Axis.SOUTH, Y_Axis.WEST);
-		log.trace(HelperLog.constructor(maxX, maxY, xAxes, yAxes));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(maxX, maxY, xAxes, yAxes));
 	}
 
 	public Chart(final int maxX, final int maxY, final String[] xAxes, final String[] yAxes, final X_Axis positionXAxis, final Y_Axis positionYAxis) {
 		super();
-		log.trace(HelperLog.constructor(maxX, maxY, xAxes, yAxes, positionXAxis, positionYAxis));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(maxX, maxY, xAxes, yAxes, positionXAxis, positionYAxis));
 
 		this.xAxes = xAxes.clone();
 		this.yAxes = yAxes.clone();
@@ -115,7 +115,7 @@ public class Chart extends Panel {
 	 * @since 0.5.0
 	 */
 	public void addEntry(final ChartEntry entry) {
-		log.debug(HelperLog.methodStart(entry));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(entry));
 		if (null == entry) {
 			throw new RuntimeExceptionIsNull("entry"); //$NON-NLS-1$
 		}
@@ -125,7 +125,7 @@ public class Chart extends Panel {
 		entries.add(entry);
 		createLayout();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -135,9 +135,9 @@ public class Chart extends Panel {
 	 * @since 0.5.0
 	 */
 	public Color getColorGrid() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(colorGrid));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(colorGrid));
 		return colorGrid;
 	}
 
@@ -148,12 +148,12 @@ public class Chart extends Panel {
 	 * @since 0.5.0
 	 */
 	public void setColorGrid(final Color color) {
-		log.debug(HelperLog.methodStart(color));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(color));
 
 		colorGrid = color;
 		createLayout();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 
@@ -162,7 +162,7 @@ public class Chart extends Panel {
 	 */
 
 	private void createLayout() {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		// First remove all
 		removeAll();
@@ -244,11 +244,11 @@ public class Chart extends Panel {
 				}
 			}
 		}
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 	private Component getXAxis() {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		final JComponent result = new Panel(colorBackground);
 		result.setLayout(new GridLayout(0, xAxes.length));
@@ -264,12 +264,12 @@ public class Chart extends Panel {
 			result.add(label);
 		}
 
-		log.trace(HelperLog.methodExit(result));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 
 	private Component getYAxis() {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		final JComponent result = new Panel(colorBackground);
 		result.setLayout(new GridLayout(yAxes.length, 0));
@@ -285,7 +285,7 @@ public class Chart extends Panel {
 			result.add(label);
 		}
 
-		log.trace(HelperLog.methodExit(result));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 
