@@ -43,7 +43,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JTextPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class PaneText extends JTextPane {
@@ -57,12 +57,12 @@ public class PaneText extends JTextPane {
 
 	public PaneText() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public PaneText(final StyledDocument doc) {
 		super(doc);
-		log.trace(HelperLog.constructor(doc));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(doc));
 	}
 
 

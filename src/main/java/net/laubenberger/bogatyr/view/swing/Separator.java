@@ -42,7 +42,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JSeparator.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.2.0
  */
 public class Separator extends JSeparator {
@@ -56,12 +56,12 @@ public class Separator extends JSeparator {
 
 	public Separator() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public Separator(final int orientation) {
 		super(orientation);
-		log.trace(HelperLog.constructor(orientation));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(orientation));
 	}
 
 	/*
@@ -70,7 +70,7 @@ public class Separator extends JSeparator {
 
 	public Separator(final Color color) {
 		this();
-		log.trace(HelperLog.constructor(color));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(color));
 
 		setAlignmentY(TOP_ALIGNMENT);
 		setAlignmentX(LEFT_ALIGNMENT);
@@ -80,7 +80,7 @@ public class Separator extends JSeparator {
 
 	public Separator(final int orientation, final Color color) {
 		this(orientation);
-		log.trace(HelperLog.constructor(orientation, color));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(orientation, color));
 
 		setAlignmentY(TOP_ALIGNMENT);
 		setAlignmentX(LEFT_ALIGNMENT);

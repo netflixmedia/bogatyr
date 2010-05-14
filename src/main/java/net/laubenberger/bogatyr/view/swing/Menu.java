@@ -41,7 +41,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JMenu.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.2.0
  */
 public class Menu extends JMenu {
@@ -55,22 +55,22 @@ public class Menu extends JMenu {
 
 	public Menu() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public Menu(final String text, final boolean b) {
 		super(text, b);
-		log.trace(HelperLog.constructor(text, b));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, b));
 	}
 
 	public Menu(final String text) {
 		super(text);
-		log.trace(HelperLog.constructor(text));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text));
 	}
 
 	public Menu(final Action action) {
 		super(action);
-		log.trace(HelperLog.constructor(action));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(action));
 	}
 
 	/*
@@ -79,7 +79,7 @@ public class Menu extends JMenu {
 
 	public Menu(final String text, final int mnemonic) {
 		this(text);
-		log.trace(HelperLog.constructor(text, mnemonic));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, mnemonic));
 
 		// Add the mnemonic key
 		if (0 < mnemonic) {

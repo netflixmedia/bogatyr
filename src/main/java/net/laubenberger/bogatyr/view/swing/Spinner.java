@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JSpinner.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class Spinner extends JSpinner implements Activatable {
@@ -58,12 +58,12 @@ public class Spinner extends JSpinner implements Activatable {
 
 	public Spinner() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public Spinner(final SpinnerModel model) {
 		super(model);
-		log.trace(HelperLog.constructor(model));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(model));
 	}
 
 	/*
@@ -72,7 +72,7 @@ public class Spinner extends JSpinner implements Activatable {
 
 	public Spinner(final SpinnerModel model, final String toolTip) {
 		this(model);
-		log.trace(HelperLog.constructor(model, toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(model, toolTip));
 
 		setToolTipText(toolTip);
 	}
@@ -102,15 +102,15 @@ public class Spinner extends JSpinner implements Activatable {
 
 	@Override
 	public boolean isActive() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(!isNotActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
-		log.debug(HelperLog.methodStart(isActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isActive));
 
 		if (isActive) {
 			isNotActive = !isActive;
@@ -120,6 +120,6 @@ public class Spinner extends JSpinner implements Activatable {
 			isNotActive = !isActive;
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

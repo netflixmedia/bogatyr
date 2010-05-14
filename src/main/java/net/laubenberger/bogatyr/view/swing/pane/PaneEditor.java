@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JEditorPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class PaneEditor extends JEditorPane {
@@ -58,22 +58,22 @@ public class PaneEditor extends JEditorPane {
 
 	public PaneEditor() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public PaneEditor(final String type, final String text) {
 		super(type, text);
-		log.trace(HelperLog.constructor(type, text));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(type, text));
 	}
 
 	public PaneEditor(final String url) throws IOException {
 		super(url);
-		log.trace(HelperLog.constructor(url));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(url));
 	}
 
 	public PaneEditor(final URL initialPage) throws IOException {
 		super(initialPage);
-		log.trace(HelperLog.constructor(initialPage));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(initialPage));
 	}
 
 

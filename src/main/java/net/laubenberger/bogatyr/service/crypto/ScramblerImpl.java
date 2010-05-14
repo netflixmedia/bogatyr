@@ -54,7 +54,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * This is a class for obfuscating data with CFB.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.3.0
  */
 public class ScramblerImpl extends ServiceAbstract implements Scrambler {
@@ -63,7 +63,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 
 	public ScramblerImpl() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 
@@ -80,7 +80,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 	 * @since 0.3.0
 	 */
 	private static byte[] obfuscate(final byte[] input, final byte pattern) {
-		log.trace(HelperLog.methodStart(input, pattern));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(input, pattern));
 		if (!HelperArray.isValid(input)) {
 			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
@@ -94,7 +94,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 		for (int ii = 1; ii < input.length; ii++) {
 			result[ii] = (byte) (input[ii] ^ (int) result[ii - 1]);
 		}
-		log.trace(HelperLog.methodExit(result));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -107,7 +107,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 	 * @since 0.3.0
 	 */
 	private static byte[] unobfuscate(final byte[] input, final byte pattern) {
-		log.trace(HelperLog.methodStart(input, pattern));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(input, pattern));
 		if (!HelperArray.isValid(input)) {
 			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
 		}
@@ -121,12 +121,12 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 		for (int ii = 1; ii < input.length; ii++) {
 			result[ii] = (byte) (input[ii] ^ (int) input[ii - 1]);
 		}
-		log.trace(HelperLog.methodExit(result));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 
 	private static void obfuscate(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
-		log.trace(HelperLog.methodStart(input, output, pattern, bufferSize));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(input, output, pattern, bufferSize));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -170,12 +170,12 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 				os.close();
 			}
 		}
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 
 	private static void unobfuscate(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
-		log.trace(HelperLog.methodStart(input, output, pattern, bufferSize));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(input, output, pattern, bufferSize));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -217,7 +217,7 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 				os.close();
 			}
 		}
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 
@@ -227,57 +227,57 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 
 	@Override
 	public byte[] scramble(final byte[] input, final byte pattern) { //$JUnit$
-		log.debug(HelperLog.methodStart(input, pattern));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, pattern));
 
 		final byte[] result = obfuscate(input, pattern);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public byte[] unscramble(final byte[] input, final byte pattern) { //$JUnit$
-		log.debug(HelperLog.methodStart(input, pattern));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, pattern));
 
 		final byte[] result = unobfuscate(input, pattern);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public void scramble(final File input, final File output, final byte pattern) throws IOException {
-		log.debug(HelperLog.methodStart(input, output, pattern));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, output, pattern));
 
 		obfuscate(input, output, pattern, Constants.DEFAULT_FILE_BUFFER_SIZE);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void scramble(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
-		log.debug(HelperLog.methodStart(input, output, pattern, bufferSize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, output, pattern, bufferSize));
 
 		obfuscate(input, output, pattern, bufferSize);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void unscramble(final File input, final File output, final byte pattern) throws IOException {
-		log.debug(HelperLog.methodStart(input, output, pattern));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, output, pattern));
 
 		unobfuscate(input, output, pattern, Constants.DEFAULT_FILE_BUFFER_SIZE);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void unscramble(final File input, final File output, final byte pattern, final int bufferSize) throws IOException {
-		log.debug(HelperLog.methodStart(input, output, pattern, bufferSize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, output, pattern, bufferSize));
 
 		unobfuscate(input, output, pattern, bufferSize);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

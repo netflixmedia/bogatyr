@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.5.0
  */
 public class ChartEntry {
@@ -56,7 +56,7 @@ public class ChartEntry {
 
 	public ChartEntry(final JComponent component, final int x, final int y, final int sizeX, final int sizeY) {
 		super();
-		log.trace(HelperLog.constructor(component, x, y, sizeX, sizeY));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(component, x, y, sizeX, sizeY));
 
 		this.component = component;
 		this.x = x;
@@ -66,37 +66,37 @@ public class ChartEntry {
 	}
 
 	public JComponent getComponent() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(component));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(component));
 		return component;
 	}
 
 	public int getSizeX() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(sizeX));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(sizeX));
 		return sizeX;
 	}
 
 	public int getSizeY() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(sizeY));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(sizeY));
 		return sizeY;
 	}
 
 	public int getX() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(x));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(x));
 		return x;
 	}
 
 	public int getY() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(y));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(y));
 		return y;
 	}
 

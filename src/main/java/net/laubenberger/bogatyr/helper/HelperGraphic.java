@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for graphic operations
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100514)
  * @since 0.4.0
  */
 public abstract class HelperGraphic {
@@ -64,7 +64,7 @@ public abstract class HelperGraphic {
 	 * @since 0.4.0
 	 */
 	public static void enableAntialiasing(final Graphics2D graphics) {
-		log.debug(HelperLog.methodStart(graphics));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(graphics));
 		if (null == graphics) {
 			throw new RuntimeExceptionIsNull("graphics"); //$NON-NLS-1$
 		}
@@ -72,7 +72,7 @@ public abstract class HelperGraphic {
 		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -84,14 +84,14 @@ public abstract class HelperGraphic {
 	 * @since 0.4.0
 	 */
 	public static Dimension getCenter(final Dimension size) { //$JUnit$
-		log.debug(HelperLog.methodStart(size));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(size));
 		if (null == size) {
 			throw new RuntimeExceptionIsNull("size"); //$NON-NLS-1$
 		}
 
 		final Dimension result = new Dimension(size.width / 2, size.height / 2);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -105,7 +105,7 @@ public abstract class HelperGraphic {
 	 * @since 0.9.0
 	 */
 	public static double getScale(final Dimension input, final Dimension output) { //$JUnit$
-		log.debug(HelperLog.methodStart(input, output));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, output));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -145,7 +145,7 @@ public abstract class HelperGraphic {
 
 		final double result = 0.0D == scaleWidth && 0.0D == scaleHeight ? 1.0D : scaleWidth > scaleHeight ? 1.0D / scaleWidth : 1.0D / scaleHeight;
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -159,7 +159,7 @@ public abstract class HelperGraphic {
 	 * @since 0.9.0
 	 */
 	public static Dimension getScaledSize(final Dimension input, final Dimension output) {
-		log.debug(HelperLog.methodStart(input, output));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, output));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -187,7 +187,7 @@ public abstract class HelperGraphic {
 
 		final Dimension result = getScaledSize(input, getScale(input, output));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -201,7 +201,7 @@ public abstract class HelperGraphic {
 	 * @since 0.9.1
 	 */
 	public static Dimension getScaledSize(final Dimension input, final double scale) {
-		log.debug(HelperLog.methodStart(input, scale));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, scale));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -220,7 +220,7 @@ public abstract class HelperGraphic {
 
 		final Dimension result = new Dimension((int) (input.getWidth() * scale), (int) (input.getHeight() * scale));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -236,7 +236,7 @@ public abstract class HelperGraphic {
 	 * @since 0.4.0
 	 */
 	public static Dimension getTextSize(final String text, final Graphics graphics) {
-		log.debug(HelperLog.methodStart(text, graphics));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(text, graphics));
 		if (null == text) {
 			throw new RuntimeExceptionIsNull("text"); //$NON-NLS-1$
 		}
@@ -249,7 +249,7 @@ public abstract class HelperGraphic {
 
 		final Dimension result = new Dimension((int) rect.getWidth(), (int) rect.getHeight());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -268,12 +268,12 @@ public abstract class HelperGraphic {
 	 * @since 0.4.0
 	 */
 	public static List<Font> getAvailableFonts() { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
 		final List<Font> result = Arrays.asList(ge.getAllFonts());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -286,14 +286,14 @@ public abstract class HelperGraphic {
 	 * @since 0.4.0
 	 */
 	public static String getColorHex(final Color color) { //$JUnit$
-		log.debug(HelperLog.methodStart(color));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(color));
 		if (null == color) {
 			throw new RuntimeExceptionIsNull("color"); //$NON-NLS-1$
 		}
 
 		final String result = Integer.toHexString(color.getRGB() & 0x00ffffff);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

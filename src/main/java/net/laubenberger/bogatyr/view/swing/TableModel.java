@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended AbstractTableModel.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.2.0
  */
 public class TableModel extends AbstractTableModel {
@@ -54,7 +54,7 @@ public class TableModel extends AbstractTableModel {
 
 	public TableModel(final String[] columnNames, final Object[][] data) {
 		super();
-		log.trace(HelperLog.constructor(columnNames, data));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(columnNames, data));
 
 		this.columnNames = columnNames.clone();
 		this.data = data.clone();

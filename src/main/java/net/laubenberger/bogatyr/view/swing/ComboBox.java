@@ -53,7 +53,7 @@ import java.util.Vector;
  * This is an extended JComboBox.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.2.0
  */
 public class ComboBox extends JComboBox implements Activatable {
@@ -73,22 +73,22 @@ public class ComboBox extends JComboBox implements Activatable {
 
 	public ComboBox() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public ComboBox(final ComboBoxModel model) {
 		super(model);
-		log.trace(HelperLog.constructor(model));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(model));
 	}
 
 	public ComboBox(final Object[] data) {
 		super(data);
-		log.trace(HelperLog.constructor(data));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(data));
 	}
 
 	public ComboBox(final Vector<?> data) {
 		super(data);
-		log.trace(HelperLog.constructor(data));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(data));
 	}
 
 	/*
@@ -97,14 +97,14 @@ public class ComboBox extends JComboBox implements Activatable {
 
 	public ComboBox(final ComboBoxModel model, final String toolTip) {
 		this(model);
-		log.trace(HelperLog.constructor(model, toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(model, toolTip));
 
 		setToolTipText(toolTip);
 	}
 
 	public ComboBox(final Object[] data, final String toolTip) {
 		this(data);
-		log.trace(HelperLog.constructor(data, toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(data, toolTip));
 
 		if (null != data) {
 			setSelectedIndex(-1);
@@ -119,14 +119,14 @@ public class ComboBox extends JComboBox implements Activatable {
 	 */
 
 	private void createLayout() {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		setEditable(true);
 
 		// get the combo boxes editor component and change the editor's document
 		((JTextComponent) getEditor().getEditorComponent()).setDocument(new ComboBoxPopup(this));
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 
@@ -153,15 +153,15 @@ public class ComboBox extends JComboBox implements Activatable {
 
 	@Override
 	public boolean isActive() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(!isNotActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
-		log.debug(HelperLog.methodStart(isActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isActive));
 
 		if (isActive) {
 			isNotActive = !isActive;
@@ -171,7 +171,7 @@ public class ComboBox extends JComboBox implements Activatable {
 			isNotActive = !isActive;
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 

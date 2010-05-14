@@ -46,7 +46,7 @@ import java.util.TimerTask;
  * Display a splash-screen manual or for a desired time.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.1.0
  */
 public class SplashScreen extends Frame {
@@ -59,7 +59,7 @@ public class SplashScreen extends Frame {
 
 	public SplashScreen(final String title, final Image icon, final ImageIcon splash) {
 		super(title, icon);
-		log.trace(HelperLog.constructor(title, icon, splash));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, icon, splash));
 
 		this.splash = splash;
 
@@ -73,7 +73,7 @@ public class SplashScreen extends Frame {
 	 * @since 0.1.0
 	 */
 	public void display(final long displayTime) {
-		log.debug(HelperLog.methodStart(displayTime));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(displayTime));
 
 		createAndShowGUI();
 		final Timer timer = new Timer();
@@ -84,7 +84,7 @@ public class SplashScreen extends Frame {
 			}
 		}, displayTime);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -93,11 +93,11 @@ public class SplashScreen extends Frame {
 	 * @since 0.1.0
 	 */
 	public void display() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		createAndShowGUI();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -107,11 +107,11 @@ public class SplashScreen extends Frame {
 	 */
 	@Override
 	public void hide() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		clearAndHide();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 
@@ -120,7 +120,7 @@ public class SplashScreen extends Frame {
 		 */
 
 	private void createLayout() {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		if (null != splash && MediaTracker.COMPLETE == splash.getImageLoadStatus()) {
 
@@ -137,6 +137,6 @@ public class SplashScreen extends Frame {
 			setCursor(new Cursor(Cursor.WAIT_CURSOR));
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 }

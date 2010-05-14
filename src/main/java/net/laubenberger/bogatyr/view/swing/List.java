@@ -44,7 +44,7 @@ import java.util.Vector;
  * This is an extended JList.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class List extends JList implements Activatable {
@@ -60,22 +60,22 @@ public class List extends JList implements Activatable {
 
 	public List() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public List(final ListModel dataModel) {
 		super(dataModel);
-		log.trace(HelperLog.constructor(dataModel));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(dataModel));
 	}
 
 	public List(final Object[] listData) {
 		super(listData);
-		log.trace(HelperLog.constructor(listData));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(listData));
 	}
 
 	public List(final Vector<?> listData) {
 		super(listData);
-		log.trace(HelperLog.constructor(listData));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(listData));
 	}
 
 	/*
@@ -84,14 +84,14 @@ public class List extends JList implements Activatable {
 
 	public List(final ListModel dataModel, final String toolTip) {
 		this(dataModel);
-		log.trace(HelperLog.constructor(dataModel, toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(dataModel, toolTip));
 
 		setToolTipText(toolTip);
 	}
 
 	public List(final Object[] listData, final String toolTip) {
 		this(listData);
-		log.trace(HelperLog.constructor(listData, toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(listData, toolTip));
 
 		setToolTipText(toolTip);
 	}
@@ -120,15 +120,15 @@ public class List extends JList implements Activatable {
 
 	@Override
 	public boolean isActive() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(!isNotActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
-		log.debug(HelperLog.methodStart(isActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isActive));
 
 		if (isActive) {
 			isNotActive = !isActive;
@@ -138,6 +138,6 @@ public class List extends JList implements Activatable {
 			isNotActive = !isActive;
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

@@ -62,7 +62,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for sound operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100514)
  * @since 0.5.0
  */
 public abstract class HelperSound {
@@ -81,14 +81,14 @@ public abstract class HelperSound {
 	 * @since 0.5.0
 	 */
 	public static Clip getClip(final File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 
 		final Clip result = getClip(AudioSystem.getAudioInputStream(file));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -105,14 +105,14 @@ public abstract class HelperSound {
 	 * @since 0.5.0
 	 */
 	public static Clip getClip(final InputStream is) throws UnsupportedAudioFileException, LineUnavailableException, IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(is));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
 
 		final Clip result = getClip(AudioSystem.getAudioInputStream(is));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -128,14 +128,14 @@ public abstract class HelperSound {
 	 * @since 0.5.0
 	 */
 	public static Sequence getSequence(final File file) throws InvalidMidiDataException, IOException {
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 
 		final Sequence result = MidiSystem.getSequence(file);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -151,14 +151,14 @@ public abstract class HelperSound {
 	 * @since 0.5.0
 	 */
 	public static Sequence getSequence(final InputStream is) throws InvalidMidiDataException, IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(is));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
 
 		final Sequence result = MidiSystem.getSequence(is);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -174,7 +174,7 @@ public abstract class HelperSound {
 	 * @since 0.5.0
 	 */
 	public static Sequencer getSequencer(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException { //$JUnit$
-		log.debug(HelperLog.methodStart(sequence));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(sequence));
 		if (null == sequence) {
 			throw new RuntimeExceptionIsNull("sequence"); //$NON-NLS-1$
 		}
@@ -195,7 +195,7 @@ public abstract class HelperSound {
 		// Read the sequence from the file and tell the sequencer about it
 		result.setSequence(sequence);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -207,7 +207,7 @@ public abstract class HelperSound {
 	 * @since 0.5.0
 	 */
 	public static void play(final Clip clip) { //$JUnit$
-		log.debug(HelperLog.methodStart(clip));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clip));
 		if (null == clip) {
 			throw new RuntimeExceptionIsNull("clip"); //$NON-NLS-1$
 		}
@@ -220,7 +220,7 @@ public abstract class HelperSound {
 				clip.stop();
 			}
 		}, clip.getMicrosecondLength() / HelperNumber.NUMBER_1000.longValue());
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -233,7 +233,7 @@ public abstract class HelperSound {
 	 * @since 0.5.0
 	 */
 	public static void play(final Sequence sequence) throws MidiUnavailableException, InvalidMidiDataException { //$JUnit$
-		log.debug(HelperLog.methodStart(sequence));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(sequence));
 		if (null == sequence) {
 			throw new RuntimeExceptionIsNull("sequence"); //$NON-NLS-1$
 		}
@@ -247,7 +247,7 @@ public abstract class HelperSound {
 				sequencer.stop();
 			}
 		}, sequence.getTickLength());
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -258,11 +258,11 @@ public abstract class HelperSound {
 	 * @since 0.5.0
 	 */
 	public static List<Type> getAvailableAudioFormats() { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final List<Type> result = Arrays.asList(AudioSystem.getAudioFileTypes());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -272,14 +272,14 @@ public abstract class HelperSound {
 	 */
 
 	private static Clip getClip(final AudioInputStream ais) throws LineUnavailableException, IOException {
-		log.trace(HelperLog.methodStart(ais));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(ais));
 
 		try {
 			final Line.Info info = new DataLine.Info(Clip.class, ais.getFormat());
 			final Clip result = (Clip) AudioSystem.getLine(info);
 			result.open(ais);
 
-			log.trace(HelperLog.methodExit(result));
+			if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 			return result;
 		}
 		finally {

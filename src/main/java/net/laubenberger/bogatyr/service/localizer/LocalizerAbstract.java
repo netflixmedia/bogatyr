@@ -49,7 +49,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * Abstract localizer implementation.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100514)
  * @since 0.6.0
  */
 public abstract class LocalizerAbstract extends ServiceAbstract implements Localizer {
@@ -67,13 +67,13 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	 */
 
 	private void fireLocaleChanged() {
-		log.trace(HelperLog.methodStart());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		for (final ListenerLocale listener : listeners) {
 			listener.localeChanged(event);
 		}
 
-		log.trace(HelperLog.methodExit());
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 
@@ -83,38 +83,38 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 
 	@Override
 	public Boolean getBoolean(final String key) {
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 		final Boolean result = null == getValue(key) ? null : Boolean.valueOf(getValue(key));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public BigDecimal getNumber(final String key) {
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 		final BigDecimal result = HelperNumber.getNumber(getValue(key));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public File getFile(final String key) {
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 		final String file = getValue(key);
 		final File result = null == file ? null : new File(file);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public URL getURL(final String key) {
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 
 		final String url = getValue(key);
@@ -124,24 +124,24 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 			try {
 				result = new URL(url);
 			} catch (MalformedURLException ex) {
-				log.info("URL invalid", ex); //$NON-NLS-1$
+				if (log.isInfoEnabled()) log.info("URL invalid", ex); //$NON-NLS-1$
 			}
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public Locale getLocale() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(locale));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(locale));
 		return locale;
 	}
 
 	@Override
 	public void setLocale(final Locale locale) {
-		log.debug(HelperLog.methodStart(locale));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(locale));
 		if (null == locale) {
 			throw new RuntimeExceptionIsNull("locale"); //$NON-NLS-1$
 		}
@@ -149,47 +149,47 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 		this.locale = locale;
 		fireLocaleChanged();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void addListener(final ListenerLocale listener) {
-		log.debug(HelperLog.methodStart(listener));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listeners.add(listener);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void deleteListener(final ListenerLocale listener) {
-		log.debug(HelperLog.methodStart(listener));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listeners.remove(listener);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void deleteListeners() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		listeners = new HashSet<ListenerLocale>();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public int countListeners() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(listeners.size()));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listeners.size()));
 		return listeners.size();
 	}
 }

@@ -46,7 +46,7 @@ import java.util.Vector;
  * This is an extended JTree.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class Tree extends JTree implements Activatable {
@@ -62,37 +62,37 @@ public class Tree extends JTree implements Activatable {
 
 	public Tree() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public Tree(final Hashtable<?, ?> value) {
 		super(value);
-		log.trace(HelperLog.constructor(value));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(value));
 	}
 
 	public Tree(final Object[] value) {
 		super(value);
-		log.trace(HelperLog.constructor(value));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(value));
 	}
 
 	public Tree(final TreeModel newModel) {
 		super(newModel);
-		log.trace(HelperLog.constructor(newModel));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(newModel));
 	}
 
 	public Tree(final TreeNode root, final boolean asksAllowsChildren) {
 		super(root, asksAllowsChildren);
-		log.trace(HelperLog.constructor(root, asksAllowsChildren));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(root, asksAllowsChildren));
 	}
 
 	public Tree(final TreeNode root) {
 		super(root);
-		log.trace(HelperLog.constructor(root));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(root));
 	}
 
 	public Tree(final Vector<?> value) {
 		super(value);
-		log.trace(HelperLog.constructor(value));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(value));
 	}
 
 
@@ -120,15 +120,15 @@ public class Tree extends JTree implements Activatable {
 
 	@Override
 	public boolean isActive() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(!isNotActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
-		log.debug(HelperLog.methodStart(isActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isActive));
 
 		if (isActive) {
 			isNotActive = !isActive;
@@ -138,6 +138,6 @@ public class Tree extends JTree implements Activatable {
 			isNotActive = !isActive;
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

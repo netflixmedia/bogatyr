@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for cryptography (e.g. random keys).
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public abstract class HelperCrypto {
@@ -66,7 +66,7 @@ public abstract class HelperCrypto {
 	 * @since 0.7.0
 	 */
 	public static String getRandomKey(final int digits, final char... seed) { //$JUnit$
-		log.debug(HelperLog.methodStart(digits, seed));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(digits, seed));
 		if (0 >= digits) {
 			throw new RuntimeExceptionMustBeGreater("digits", digits, 0); //$NON-NLS-1$
 		}
@@ -82,7 +82,7 @@ public abstract class HelperCrypto {
 
 		final String result = sb.toString();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -95,11 +95,11 @@ public abstract class HelperCrypto {
 	 * @since 0.7.0
 	 */
 	public static String getRandomKey(final int digits) { //$JUnit$
-		log.debug(HelperLog.methodStart(digits));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(digits));
 
 		final String result = getRandomKey(digits, DEFAULT_RANDOMKEY_SEED);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -111,11 +111,11 @@ public abstract class HelperCrypto {
 	 * @since 0.7.0
 	 */
 	public static UUID getUUID() { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final UUID result = UUID.randomUUID();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -127,11 +127,11 @@ public abstract class HelperCrypto {
 	 * @since 0.9.1
 	 */
 	public static List<Provider> getProviders() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final List<Provider> result = Arrays.asList(Security.getProviders());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -144,11 +144,11 @@ public abstract class HelperCrypto {
 	 * @since 0.9.1
 	 */
 	public static Collection<String> getCiphers(final Provider provider) {
-		log.debug(HelperLog.methodStart(provider));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(provider));
 
 		final Collection<String> result = getInformation(provider, "Cipher."); //$NON-NLS-1$
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -161,11 +161,11 @@ public abstract class HelperCrypto {
 	 * @since 0.9.1
 	 */
 	public static Collection<String> getKeyAgreements(final Provider provider) {
-		log.debug(HelperLog.methodStart(provider));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(provider));
 
 		final Collection<String> result = getInformation(provider, "KeyAgreement."); //$NON-NLS-1$
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -178,11 +178,11 @@ public abstract class HelperCrypto {
 	 * @since 0.9.1
 	 */
 	public static Collection<String> getMacs(final Provider provider) {
-		log.debug(HelperLog.methodStart(provider));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(provider));
 
 		final Collection<String> result = getInformation(provider, "Mac."); //$NON-NLS-1$
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -195,11 +195,11 @@ public abstract class HelperCrypto {
 	 * @since 0.9.1
 	 */
 	public static Collection<String> getMessageDigests(final Provider provider) {
-		log.debug(HelperLog.methodStart(provider));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(provider));
 
 		final Collection<String> result = getInformation(provider, "MessageDigest."); //$NON-NLS-1$
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -212,11 +212,11 @@ public abstract class HelperCrypto {
 	 * @since 0.9.1
 	 */
 	public static Collection<String> getSignatures(final Provider provider) {
-		log.debug(HelperLog.methodStart(provider));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(provider));
 
 		final Collection<String> result = getInformation(provider, "Signature."); //$NON-NLS-1$
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -229,11 +229,11 @@ public abstract class HelperCrypto {
 	 * @since 0.9.1
 	 */
 	public static Collection<String> getKeyPairGenerators(final Provider provider) {
-		log.debug(HelperLog.methodStart(provider));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(provider));
 
 		final Collection<String> result = getInformation(provider, "KeyPairGenerator."); //$NON-NLS-1$
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -246,11 +246,11 @@ public abstract class HelperCrypto {
 	 * @since 0.9.1
 	 */
 	public static Collection<String> getKeyFactories(final Provider provider) {
-		log.debug(HelperLog.methodStart(provider));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(provider));
 
 		final Collection<String> result = getInformation(provider, "KeyFactory."); //$NON-NLS-1$
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -263,11 +263,11 @@ public abstract class HelperCrypto {
 	 * @since 0.9.1
 	 */
 	public static Collection<String> getKeyGenerators(final Provider provider) {
-		log.debug(HelperLog.methodStart(provider));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(provider));
 
 		final Collection<String> result = getInformation(provider, "KeyGenerator."); //$NON-NLS-1$
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -277,7 +277,7 @@ public abstract class HelperCrypto {
 	 */
 
 	private static Collection<String> getInformation(final Provider provider, final String id) {
-		log.trace(HelperLog.methodStart(provider, id));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(provider, id));
 		if (null == provider) {
 			throw new RuntimeExceptionIsNull("provider"); //$NON-NLS-1$
 		}
@@ -294,7 +294,7 @@ public abstract class HelperCrypto {
 				result.add(entry.substring(id.length()));
 			}
 		}
-		log.trace(HelperLog.methodExit(result));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 }

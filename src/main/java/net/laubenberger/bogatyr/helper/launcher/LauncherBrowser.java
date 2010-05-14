@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher starts the system browser and displays an URI.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.2.0
  */
 public abstract class LauncherBrowser {
@@ -60,7 +60,7 @@ public abstract class LauncherBrowser {
 	 * @since 0.2.0
 	 */
 	public static void browse(final URI uri) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(uri));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(uri));
 
 		if (Desktop.isDesktopSupported()) {
 			if (null == uri) {
@@ -71,7 +71,7 @@ public abstract class LauncherBrowser {
 		} else {
 			throw new RuntimeException("Browser not supported by your machine!"); //$NON-NLS-1$
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -83,7 +83,7 @@ public abstract class LauncherBrowser {
 	 * @since 0.2.0
 	 */
 	public static void browse(final String url) throws IOException, URISyntaxException { //$JUnit$
-		log.debug(HelperLog.methodStart(url));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(url));
 
 		if (!HelperString.isValid(url)) {
 			throw new RuntimeExceptionIsNullOrEmpty("url"); //$NON-NLS-1$
@@ -97,6 +97,6 @@ public abstract class LauncherBrowser {
 			//best guess as protocol is http
 			browse(new URI("http://" + url)); //$NON-NLS-1$
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

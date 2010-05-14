@@ -46,7 +46,7 @@ import java.awt.Window;
  * This is an extended JDialog.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.4.0
  */
 public class Dialog extends JDialog implements Displayable {
@@ -65,85 +65,85 @@ public class Dialog extends JDialog implements Displayable {
 
 	public Dialog() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public Dialog(final java.awt.Dialog owner, final boolean modal) {
 		super(owner, modal);
-		log.trace(HelperLog.constructor(owner, modal));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner, modal));
 	}
 
 	public Dialog(final java.awt.Dialog owner, final String title, final boolean modal,
 					  final GraphicsConfiguration gc) {
 		super(owner, title, modal, gc);
-		log.trace(HelperLog.constructor(owner, title, modal, gc));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner, title, modal, gc));
 	}
 
 	public Dialog(final java.awt.Dialog owner, final String title, final boolean modal) {
 		super(owner, title, modal);
-		log.trace(HelperLog.constructor(owner, title, modal));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner, title, modal));
 	}
 
 	public Dialog(final java.awt.Dialog owner, final String title) {
 		super(owner, title);
-		log.trace(HelperLog.constructor(owner, title));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner, title));
 	}
 
 	public Dialog(final java.awt.Dialog owner) {
 		super(owner);
-		log.trace(HelperLog.constructor(owner));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner));
 	}
 
 	public Dialog(final Frame owner, final boolean modal) {
 		super(owner, modal);
-		log.trace(HelperLog.constructor(owner, modal));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner, modal));
 	}
 
 	public Dialog(final Frame owner, final String title, final boolean modal,
 					  final GraphicsConfiguration gc) {
 		super(owner, title, modal, gc);
-		log.trace(HelperLog.constructor(owner, title, modal, gc));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner, title, modal, gc));
 	}
 
 	public Dialog(final Frame owner, final String title, final boolean modal) {
 		super(owner, title, modal);
-		log.trace(HelperLog.constructor(owner, title, modal));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner, title, modal));
 	}
 
 	public Dialog(final Frame owner, final String title) {
 		super(owner, title);
-		log.trace(HelperLog.constructor(owner, title));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner, title));
 	}
 
 	public Dialog(final Frame owner) {
 		super(owner);
-		log.trace(HelperLog.constructor(owner));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner));
 	}
 
 	public Dialog(final Window arg0, final ModalityType arg1) {
 		super(arg0, arg1);
-		log.trace(HelperLog.constructor(arg0, arg1));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(arg0, arg1));
 	}
 
 	public Dialog(final Window arg0, final String arg1, final ModalityType arg2,
 					  final GraphicsConfiguration arg3) {
 		super(arg0, arg1, arg2, arg3);
-		log.trace(HelperLog.constructor(arg0, arg1, arg2, arg3));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(arg0, arg1, arg2, arg3));
 	}
 
 	public Dialog(final Window arg0, final String arg1, final ModalityType arg2) {
 		super(arg0, arg1, arg2);
-		log.trace(HelperLog.constructor(arg0, arg1, arg2));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(arg0, arg1, arg2));
 	}
 
 	public Dialog(final Window arg0, final String arg1) {
 		super(arg0, arg1);
-		log.trace(HelperLog.constructor(arg0, arg1));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(arg0, arg1));
 	}
 
 	public Dialog(final Window arg0) {
 		super(arg0);
-		log.trace(HelperLog.constructor(arg0));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(arg0));
 	}
 
 
@@ -163,20 +163,20 @@ public class Dialog extends JDialog implements Displayable {
 
 	@Override
 	public void createAndShowGUI() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		setLocationRelativeTo(getOwner());
 		setVisible(true);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void clearAndHide() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		dispose();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

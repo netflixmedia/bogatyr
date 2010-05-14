@@ -67,7 +67,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100514)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -87,7 +87,7 @@ public abstract class HelperIO {
 	 * @since 0.5.0
 	 */
 	public static File getTemporaryFile(final String name, final String extension) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(name, extension));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(name, extension));
 		if (!HelperString.isValid(name)) {
 			throw new RuntimeExceptionIsNullOrEmpty("name"); //$NON-NLS-1$
 		}
@@ -101,7 +101,7 @@ public abstract class HelperIO {
 		// Delete temp file when program exits
 		result.deleteOnExit();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -114,11 +114,11 @@ public abstract class HelperIO {
 	 * @since 0.9.0
 	 */
 	public static File getTemporaryFile() throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final File result = getTemporaryFile(Constants.BOGATYR.getName(), "tmp"); //$NON-NLS-1$
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -132,7 +132,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static void copyDirectory(final File source, final File dest) throws IOException {
-		log.debug(HelperLog.methodStart(source, dest));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
@@ -162,7 +162,7 @@ public abstract class HelperIO {
 				copyFile(sourceChild, destChild);
 			}
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -175,9 +175,9 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static void copyFile(final File source, final File dest) throws IOException {
-		log.debug(HelperLog.methodStart(source, dest));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest));
 		copyFile(source, dest, Constants.DEFAULT_FILE_BUFFER_SIZE);
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -191,7 +191,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static void copyFile(final File source, final File dest, final int bufferSize) throws IOException {
-		log.debug(HelperLog.methodStart(source, dest, bufferSize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, bufferSize));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
@@ -238,7 +238,7 @@ public abstract class HelperIO {
 				os.close();
 			}
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -251,7 +251,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static void move(final File source, final File dest) throws IOException {
-		log.debug(HelperLog.methodStart(source, dest));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
@@ -269,7 +269,7 @@ public abstract class HelperIO {
 		}
 		delete(source);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -281,7 +281,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static void delete(final File... files) throws IOException {
-		log.debug(HelperLog.methodStart(files));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(files));
 		if (!HelperArray.isValid(files)) {
 			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
 		}
@@ -295,7 +295,7 @@ public abstract class HelperIO {
 			}
 			target.delete();
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -308,7 +308,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static boolean rename(final File source, final File dest) {
-		log.debug(HelperLog.methodStart(source, dest));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
@@ -321,7 +321,7 @@ public abstract class HelperIO {
 
 		final boolean result = source.renameTo(dest);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -337,7 +337,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static void writeLine(final File file, final String encoding, final String line) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(file, encoding, line));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, encoding, line));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -358,7 +358,7 @@ public abstract class HelperIO {
 				pw.close();
 			}
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -371,9 +371,9 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static void writeLine(final File file, final String line) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(file, line));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, line));
 		writeLine(file, Constants.ENCODING_DEFAULT, line);
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -386,9 +386,9 @@ public abstract class HelperIO {
 	 * @since 0.9.1
 	 */
 	public static void writeFile(final File file, final byte[] data) throws IOException {
-		log.debug(HelperLog.methodStart(file, data));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, data));
 		writeFile(file, data, false);
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -402,7 +402,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static void writeFile(final File file, final byte[] data, final boolean append) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(file, data, append));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, data, append));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -418,7 +418,7 @@ public abstract class HelperIO {
 		} finally {
 			bos.close();
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -432,9 +432,9 @@ public abstract class HelperIO {
 	 * @since 0.9.1
 	 */
 	public static void writeFile(final File file, final String data, final String encoding) throws IOException {
-		log.debug(HelperLog.methodStart(file, data));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, data));
 		writeFile(file, data, encoding, false);
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -449,7 +449,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static void writeFile(final File file, final String data, final String encoding, final boolean append) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(file, data, append));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, data, append));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -472,7 +472,7 @@ public abstract class HelperIO {
 		} finally {
 			writer.close();
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -485,9 +485,9 @@ public abstract class HelperIO {
 	 * @since 0.9.1
 	 */
 	public static void writeFile(final File file, final String data) throws IOException {
-		log.debug(HelperLog.methodStart(file, data));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, data));
 		writeFile(file, data, Constants.ENCODING_DEFAULT, false);
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -501,9 +501,9 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static void writeFile(final File file, final String data, final boolean append) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(file, data, append));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, data, append));
 		writeFile(file, data, Constants.ENCODING_DEFAULT, append);
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -517,9 +517,9 @@ public abstract class HelperIO {
 	 * @since 0.9.1
 	 */
 	public static void writeFile(final File file, final InputStream is) throws IOException {
-		log.debug(HelperLog.methodStart(file, is));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, is));
 		writeFile(file, readStream(is), false);
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -534,9 +534,9 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static void writeFile(final File file, final InputStream is, final boolean append) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(file, is, append));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, is, append));
 		writeFile(file, readStream(is), append);
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -549,7 +549,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static void writeStream(final OutputStream os, final byte[] data) throws IOException {
-		log.debug(HelperLog.methodStart(os, data));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(os, data));
 		if (null == os) {
 			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
 		}
@@ -559,7 +559,7 @@ public abstract class HelperIO {
 
 		os.write(data);
 		os.flush();
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -572,11 +572,11 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static byte[] readStream(final InputStream is) throws IOException {
-		log.debug(HelperLog.methodStart(is));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is));
 
 		final byte[] result = readStream(is, Constants.DEFAULT_FILE_BUFFER_SIZE);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -591,7 +591,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static byte[] readStream(final InputStream is, final int bufferSize) throws IOException {
-		log.debug(HelperLog.methodStart(is, bufferSize));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is, bufferSize));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
@@ -619,7 +619,7 @@ public abstract class HelperIO {
 		} finally {
 			baos.close();
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -633,7 +633,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static byte[] readFile(final File file) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -662,7 +662,7 @@ public abstract class HelperIO {
 				bis.close();
 			}
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -677,7 +677,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static String readFileAsString(final File file, final String encoding) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(file, encoding));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, encoding));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -706,7 +706,7 @@ public abstract class HelperIO {
 			}
 			final String result = sb.toString();
 
-			log.debug(HelperLog.methodExit(result));
+			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
 		} finally {
 			scanner.close();
@@ -723,11 +723,11 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static String readFileAsString(final File file) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 
 		final String result = readFileAsString(file, Constants.ENCODING_DEFAULT);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -742,7 +742,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static List<String> readFileAsList(final File file, final String encoding) throws IOException {
-		log.debug(HelperLog.methodStart(file, encoding));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, encoding));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -766,7 +766,7 @@ public abstract class HelperIO {
 		} finally {
 			scanner.close();
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -780,11 +780,11 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static List<String> readFileAsList(final File file) throws IOException {
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 
 		final List<String> result = readFileAsList(file, Constants.ENCODING_DEFAULT);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -799,7 +799,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static void readFileAsStream(final File file, final OutputStream os) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(file, os));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, os));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -811,7 +811,7 @@ public abstract class HelperIO {
 		}
 
 		writeStream(os, readFile(file));
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -824,7 +824,7 @@ public abstract class HelperIO {
 	 * @since 0.2.0
 	 */
 	public static void concatenateFiles(final File fileOutput, final File... files) throws IOException {
-		log.debug(HelperLog.methodStart(fileOutput, files));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(fileOutput, files));
 		if (null == fileOutput) {
 			throw new RuntimeExceptionIsNull("fileOutput"); //$NON-NLS-1$
 		}
@@ -867,7 +867,7 @@ public abstract class HelperIO {
 				pw.close();
 			}
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -881,14 +881,14 @@ public abstract class HelperIO {
 	 * @since 0.7.0
 	 */
 	public static URL getURL(final File file) throws MalformedURLException {
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 
 		final URL result = file.toURI().toURL();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -899,7 +899,7 @@ public abstract class HelperIO {
 	 * @since 0.7.0
 	 */
 	public static List<String> getDriveNames() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		final List<String> result = new ArrayList<String>(getAvailableDrives().size());
 		final FileSystemView view = FileSystemView.getFileSystemView();
 
@@ -907,7 +907,7 @@ public abstract class HelperIO {
 			result.add(view.getSystemDisplayName(file));
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -919,11 +919,11 @@ public abstract class HelperIO {
 	 * @since 0.7.0
 	 */
 	public static List<File> getAvailableDrives() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final List<File> result = Arrays.asList(File.listRoots());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -945,14 +945,14 @@ public abstract class HelperIO {
 	 * @since 0.7.0
 	 */
 	public static long getSpaceTotal(final File file) {
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 
 		final long result = file.getTotalSpace();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -965,14 +965,14 @@ public abstract class HelperIO {
 	 * @since 0.7.0
 	 */
 	public static long getSpaceFree(final File file) {
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 
 		final long result = file.getFreeSpace();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -985,14 +985,14 @@ public abstract class HelperIO {
 	 * @since 0.7.0
 	 */
 	public static long getSpaceUsable(final File file) {
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 
 		final long result = file.getUsableSpace();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -1005,11 +1005,11 @@ public abstract class HelperIO {
 	 * @since 0.7.0
 	 */
 	public static long getSpaceUsed(final File file) {
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 
 		final long result = getSpaceTotal(file) - getSpaceFree(file);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -1022,14 +1022,14 @@ public abstract class HelperIO {
 	 * @since 0.7.0
 	 */
 	public static boolean isDrive(final File file) {
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 
 		final boolean result = FileSystemView.getFileSystemView().isDrive(file);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -1042,14 +1042,14 @@ public abstract class HelperIO {
 	 * @since 0.7.0
 	 */
 	public static boolean isRemovableDrive(final File file) {
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 
 		final boolean result = FileSystemView.getFileSystemView().isFloppyDrive(file);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -1062,14 +1062,14 @@ public abstract class HelperIO {
 	 * @since 0.7.0
 	 */
 	public static boolean isNetworkDrive(final File file) {
-		log.debug(HelperLog.methodStart(file));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
 
 		final boolean result = FileSystemView.getFileSystemView().isComputerNode(file);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -1083,14 +1083,14 @@ public abstract class HelperIO {
 	 * @since 0.7.0
 	 */
 	public static InputStream convertOutputToInputStream(final ByteArrayOutputStream baos) {
-		log.debug(HelperLog.methodStart(baos));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(baos));
 		if (null == baos) {
 			throw new RuntimeExceptionIsNull("baos"); //$NON-NLS-1$
 		}
 
 		final InputStream result = new ByteArrayInputStream(baos.toByteArray());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -1104,14 +1104,14 @@ public abstract class HelperIO {
 	 * @since 0.7.0
 	 */
 	public static Reader convertWriterToReader(final Writer writer) {
-		log.debug(HelperLog.methodStart(writer));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(writer));
 		if (null == writer) {
 			throw new RuntimeExceptionIsNull("writer"); //$NON-NLS-1$
 		}
 
 		final Reader result = new StringReader(writer.toString());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -1127,7 +1127,7 @@ public abstract class HelperIO {
 	 * @since 0.1.0
 	 */
 	public static List<File> getFiles(final File path, final FileFilter filter, final int recurseDepth) { //$JUnit$
-		log.debug(HelperLog.methodStart(path, filter, recurseDepth));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(path, filter, recurseDepth));
 		if (null == path) {
 			throw new RuntimeExceptionIsNull("path"); //$NON-NLS-1$
 		}
@@ -1150,7 +1150,7 @@ public abstract class HelperIO {
 				}
 			}
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -1165,11 +1165,11 @@ public abstract class HelperIO {
 	 * @since 0.9.0
 	 */
 	public static List<File> getFiles(final File path, final FileFilter filter) { //$JUnit$
-		log.debug(HelperLog.methodStart(path, filter));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(path, filter));
 
 		final List<File> result = getFiles(path, filter, -1);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -1182,7 +1182,7 @@ public abstract class HelperIO {
 	 * @since 0.9.0
 	 */
 	public static List<File> getFiles(final File path) { //$JUnit$
-		log.debug(HelperLog.methodStart(path));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(path));
 
 		final FileFilter filter = new FileFilter() {
 			@Override
@@ -1193,7 +1193,7 @@ public abstract class HelperIO {
 
 		final List<File> result = getFiles(path, filter, -1);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -1205,7 +1205,7 @@ public abstract class HelperIO {
 	 * @since 0.9.0
 	 */
 	public static String getFileWithoutExtension(final String fileName) {
-		log.debug(HelperLog.methodStart(fileName));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(fileName));
 		if (null == fileName) {
 			throw new RuntimeExceptionIsNull("fileName"); //$NON-NLS-1$
 		}
@@ -1218,7 +1218,7 @@ public abstract class HelperIO {
 			result = fileName;
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -1230,7 +1230,7 @@ public abstract class HelperIO {
 	 * @since 0.9.1
 	 */
 	public static String getFileExtension(final String fileName) {
-		log.debug(HelperLog.methodStart(fileName));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(fileName));
 		if (null == fileName) {
 			throw new RuntimeExceptionIsNull("fileName"); //$NON-NLS-1$
 		}
@@ -1243,7 +1243,7 @@ public abstract class HelperIO {
 			result = fileName;
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

@@ -59,7 +59,7 @@ public abstract class Constants {
 	private static final Logger log = LoggerFactory.getLogger(Constants.class);
 
 	//Bogatyr specific
-	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.92"), 268, HelperTime.getDate(2010, 5, 14, 1, 15, 0), UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.92"), 269, HelperTime.getDate(2010, 5, 14, 18, 23, 0), UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;

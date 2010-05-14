@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  * This is a document factory.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.9.0
  */
 public abstract class DocumentFactory {
@@ -63,7 +63,7 @@ public abstract class DocumentFactory {
 	 * @since 0.9.0
 	 */
 	public static PlainDocument createTextDocument(final int length) {
-		log.debug(HelperLog.methodStart(length));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(length));
 		if (0 >= length) {
 			throw new RuntimeExceptionMustBeGreater("length", length, 0); //$NON-NLS-1$
 		}
@@ -79,7 +79,7 @@ public abstract class DocumentFactory {
 			}
 		};
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -92,7 +92,7 @@ public abstract class DocumentFactory {
 	 * @since 0.9.0
 	 */
 	public static PlainDocument createNumberDocument(final int length) {
-		log.debug(HelperLog.methodStart(length));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(length));
 		if (0 >= length) {
 			throw new RuntimeExceptionMustBeGreater("length", length, 0); //$NON-NLS-1$
 		}
@@ -108,7 +108,7 @@ public abstract class DocumentFactory {
 			}
 		};
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -118,7 +118,7 @@ public abstract class DocumentFactory {
 		 */
 
 	static boolean isStringNumeric(final CharSequence arg) {
-		log.trace(HelperLog.methodStart(arg));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(arg));
 
 		boolean result = false;
 
@@ -130,7 +130,7 @@ public abstract class DocumentFactory {
 			}
 		}
 
-		log.trace(HelperLog.methodExit(result));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
 		return result;
 	}
 }

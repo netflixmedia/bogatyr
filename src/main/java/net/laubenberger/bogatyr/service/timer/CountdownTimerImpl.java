@@ -40,7 +40,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a countdown timer which informs all added listeners about its state.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.6.0
  */
 public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer {
@@ -53,7 +53,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 
 	public CountdownTimerImpl() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 
@@ -63,19 +63,19 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 
 	@Override
 	public synchronized void start(final long runtime) {
-		log.debug(HelperLog.methodStart(runtime));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(runtime));
 		if (0L > runtime) {
 			throw new RuntimeExceptionMustBeGreater("runtime", runtime, 0); //$NON-NLS-1$
 		}
 
 		start(0L, runtime, DEFAULT_DELAY);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void start(final long delay, final long runtime, final long interval) {
-		log.debug(HelperLog.methodStart(delay, runtime, interval));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(delay, runtime, interval));
 		if (0L > delay) {
 			throw new RuntimeExceptionMustBeGreater("delay", delay, 0); //$NON-NLS-1$
 		}
@@ -95,37 +95,37 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 		getTimer().schedule(new TaskCountdown(), delay, interval);
 		fireTimerStarted();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void stop() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		getTimer().cancel();
 		fireTimerStopped();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public long getTime() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(runtime));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(runtime));
 		return runtime;
 	}
 
 	@Override
 	public synchronized void setTime(final long runtime) {
-		log.debug(HelperLog.methodStart(runtime));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(runtime));
 		if (0L > runtime) {
 			throw new RuntimeExceptionMustBeGreater("runtime", runtime, 0); //$NON-NLS-1$
 		}
 
 		this.runtime = runtime;
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 

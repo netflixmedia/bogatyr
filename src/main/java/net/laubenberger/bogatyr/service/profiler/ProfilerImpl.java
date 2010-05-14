@@ -41,7 +41,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * The implementation of a profiler.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.9.0
  */
 public class ProfilerImpl<T> extends ServiceAbstract implements Profiler<T> {
@@ -53,7 +53,7 @@ public class ProfilerImpl<T> extends ServiceAbstract implements Profiler<T> {
 
 	public ProfilerImpl() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 
 		start();
 	}
@@ -65,23 +65,23 @@ public class ProfilerImpl<T> extends ServiceAbstract implements Profiler<T> {
 
 	@Override
 	public long getElapsedTime() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(elapsedTime));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(elapsedTime));
 		return elapsedTime;
 	}
 
 	@Override
 	public Map<T, Long> getProfiles() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(profiles));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(profiles));
 		return profiles;
 	}
 
 	@Override
 	public long profile(final T event) {
-		log.debug(HelperLog.methodStart(event));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(event));
 
 		final long currentTime = System.nanoTime();
 		final long result = currentTime - meanTime;
@@ -90,17 +90,17 @@ public class ProfilerImpl<T> extends ServiceAbstract implements Profiler<T> {
 		elapsedTime += result;
 		meanTime = currentTime;
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public void start() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		profiles.clear();
 		meanTime = System.nanoTime();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

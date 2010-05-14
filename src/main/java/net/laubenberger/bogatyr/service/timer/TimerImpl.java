@@ -39,7 +39,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a timer which informs all added listeners about its state.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.6.0
  */
 public class TimerImpl extends TimerAbstract implements Timer {
@@ -49,7 +49,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
 
 	public TimerImpl() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 
@@ -59,39 +59,39 @@ public class TimerImpl extends TimerAbstract implements Timer {
 
 	@Override
 	public long getTime() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(time));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(time));
 		return time;
 	}
 
 	@Override
 	public void setTime(final long time) {
-		log.debug(HelperLog.methodStart(time));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(time));
 		if (0L > time) {
 			throw new RuntimeExceptionMustBeGreater("time", time, 0); //$NON-NLS-1$
 		}
 
 		this.time = time;
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void start(final long interval) {
-		log.debug(HelperLog.methodStart(interval));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(interval));
 		if (0L > interval) {
 			throw new RuntimeExceptionMustBeGreater("interval", interval, 0); //$NON-NLS-1$
 		}
 
 		start(0L, interval);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void start(final long delay, final long interval) {
-		log.debug(HelperLog.methodStart(delay, interval));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(delay, interval));
 		if (0L > delay) {
 			throw new RuntimeExceptionMustBeGreater("delay", delay, 0); //$NON-NLS-1$
 		}
@@ -106,17 +106,17 @@ public class TimerImpl extends TimerAbstract implements Timer {
 		getTimer().schedule(new Task(), delay, interval);
 		fireTimerStarted();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void stop() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		getTimer().cancel();
 		fireTimerStopped();
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 

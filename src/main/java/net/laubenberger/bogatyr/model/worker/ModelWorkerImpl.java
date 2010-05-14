@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.view.swing.worker.Worker;
  * The implementation of the worker model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.9.0
  */
 public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
@@ -58,7 +58,7 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 
 	public ModelWorkerImpl() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	/*
@@ -67,7 +67,7 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 
 	@Override
 	public synchronized void add(final Worker worker) {
-		log.debug(HelperLog.methodStart(worker));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(worker));
 		if (null == worker) {
 			throw new RuntimeExceptionIsNull("worker"); //$NON-NLS-1$
 		}
@@ -76,12 +76,12 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 		setChanged();
 		notifyObservers(METHOD_ADD);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void remove(final Worker worker) {
-		log.debug(HelperLog.methodStart(worker));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(worker));
 		if (null == worker) {
 			throw new RuntimeExceptionIsNull("worker"); //$NON-NLS-1$
 		}
@@ -91,12 +91,12 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 		setChanged();
 		notifyObservers(METHOD_REMOVE);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public synchronized void removeAll() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		for (final Worker worker : listWorker) {
 			worker.cancel(true);
@@ -106,14 +106,14 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 		setChanged();
 		notifyObservers(METHOD_REMOVE_ALL);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public int count() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(listWorker.size()));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listWorker.size()));
 		return listWorker.size();
 	}
 }

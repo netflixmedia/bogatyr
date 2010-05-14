@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * The implementation for a paginator.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.5.0
  */
 public class PaginatorImpl extends ServiceAbstract implements Paginator {
@@ -56,12 +56,12 @@ public class PaginatorImpl extends ServiceAbstract implements Paginator {
 
 	public PaginatorImpl() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public PaginatorImpl(final List<?> list, final int numberPerPage) {
 		super();
-		log.trace(HelperLog.constructor(list, numberPerPage));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(list, numberPerPage));
 
 		setList(list);
 		setNumberPerPage(numberPerPage);
@@ -74,45 +74,45 @@ public class PaginatorImpl extends ServiceAbstract implements Paginator {
 
 	@Override
 	public List<?> getList() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(list));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(list));
 		return list;
 	}
 
 	@Override
 	public void setList(final List<?> list) {
-		log.debug(HelperLog.methodStart(list));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(list));
 		if (null == list) {
 			throw new RuntimeExceptionIsNull("list"); //$NON-NLS-1$
 		}
 
 		this.list = list;
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public int getNumberPerPage() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(numberPerPage));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(numberPerPage));
 		return numberPerPage;
 	}
 
 	@Override
 	public void setNumberPerPage(final int numberPerPage) {
-		log.debug(HelperLog.methodStart(numberPerPage));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(numberPerPage));
 		if (0 > numberPerPage) {
 			throw new RuntimeExceptionMustBeGreater("numberPerPage", numberPerPage, 0); //$NON-NLS-1$
 		}
 
 		this.numberPerPage = numberPerPage;
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public int getNumberOfPages() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		if (!HelperCollection.isValid(list) || 0 == numberPerPage) {
 			return 0;
 		} else if (list.size() < numberPerPage) {
@@ -124,13 +124,13 @@ public class PaginatorImpl extends ServiceAbstract implements Paginator {
 		if (result * numberPerPage < list.size()) {
 			result++;
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
 	public List<?> getPage(final int requestedPage) {
-		log.debug(HelperLog.methodStart(requestedPage));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(requestedPage));
 		if (0 > requestedPage) {
 			throw new RuntimeExceptionMustBeGreater("requestedPage", requestedPage, 0); //$NON-NLS-1$
 		}
@@ -156,7 +156,7 @@ public class PaginatorImpl extends ServiceAbstract implements Paginator {
 //                }
 			}
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

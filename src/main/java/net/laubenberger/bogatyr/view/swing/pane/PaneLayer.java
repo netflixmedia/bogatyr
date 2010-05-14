@@ -42,7 +42,7 @@ import java.awt.Component;
  * This is an extended JLayeredPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class PaneLayer extends JLayeredPane {
@@ -56,7 +56,7 @@ public class PaneLayer extends JLayeredPane {
 
 	public PaneLayer() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 

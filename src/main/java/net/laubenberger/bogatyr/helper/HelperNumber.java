@@ -41,7 +41,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a helper class for numbers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
@@ -105,7 +105,7 @@ public abstract class HelperNumber {
 	 * @since 0.7.0
 	 */
 	public static BigDecimal multiply(final Number... values) {
-		log.debug(HelperLog.methodStart(values));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(values));
 
 		if (!HelperArray.isValid(values)) {
 			throw new RuntimeExceptionIsNullOrEmpty("values"); //$NON-NLS-1$
@@ -116,7 +116,7 @@ public abstract class HelperNumber {
 		for (int ii = 0; ii < values.length; ii++) {
 			result = new BigDecimal((0 == ii ? values[0] : multiply(result, values[ii])).toString());
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -129,7 +129,7 @@ public abstract class HelperNumber {
 	 * @since 0.7.0
 	 */
 	public static BigDecimal multiply(final Number a, final Number b) {
-		log.debug(HelperLog.methodStart(a, b));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(a, b));
 		if (null == a) {
 			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
 		}
@@ -142,7 +142,7 @@ public abstract class HelperNumber {
 
 		final BigDecimal result = numberA.multiply(numberB, Constants.DEFAULT_MATHCONTEXT);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -154,7 +154,7 @@ public abstract class HelperNumber {
 	 * @since 0.8.0
 	 */
 	public static BigDecimal add(final Number... values) {
-		log.debug(HelperLog.methodStart(values));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(values));
 		if (!HelperArray.isValid(values)) {
 			throw new RuntimeExceptionIsNullOrEmpty("values"); //$NON-NLS-1$
 		}
@@ -164,7 +164,7 @@ public abstract class HelperNumber {
 		for (int ii = 0; ii < values.length; ii++) {
 			result = new BigDecimal((0 == ii ? values[0] : add(result, values[ii])).toString());
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -177,7 +177,7 @@ public abstract class HelperNumber {
 	 * @since 0.8.0
 	 */
 	public static BigDecimal add(final Number a, final Number b) {
-		log.debug(HelperLog.methodStart(a, b));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(a, b));
 		if (null == a) {
 			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
 		}
@@ -190,7 +190,7 @@ public abstract class HelperNumber {
 
 		final BigDecimal result = numberA.add(numberB);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -201,7 +201,7 @@ public abstract class HelperNumber {
 	 * @return {@link BigDecimal} from the {@link String}
 	 */
 	public static BigDecimal getNumber(final String text) {
-		log.debug(HelperLog.methodStart(text));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(text));
 
 		final String value = HelperString.getValidNumericString(text);
 
@@ -211,7 +211,7 @@ public abstract class HelperNumber {
 			result = new BigDecimal(value);
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -222,11 +222,11 @@ public abstract class HelperNumber {
 	 * @return {@link String} from the {@link Number}
 	 */
 	public static String getString(final Number number) {
-		log.debug(HelperLog.methodStart(number));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(number));
 
 		final String result = null == number ? HelperString.EMPTY_STRING : number.toString();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

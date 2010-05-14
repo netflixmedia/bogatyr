@@ -43,7 +43,7 @@ import net.laubenberger.bogatyr.model.ModelAbstract;
  * Implementation of the context for applications.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.1.0
  */
 public class ContextImpl extends ModelAbstract implements Context {
@@ -58,7 +58,7 @@ public class ContextImpl extends ModelAbstract implements Context {
 
 	private ContextImpl() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public static Context getInstance() {
@@ -82,15 +82,15 @@ public class ContextImpl extends ModelAbstract implements Context {
 
 	@Override
 	public Map<Object, Object> getData() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(contextData));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(contextData));
 		return contextData;
 	}
 
 	@Override
 	public void setData(final Map<Object, Object> data) {
-		log.debug(HelperLog.methodStart(data));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(data));
 
 		if (!HelperObject.isEquals(data, contextData)) {
 			contextData = data;
@@ -98,12 +98,12 @@ public class ContextImpl extends ModelAbstract implements Context {
 			notifyObservers(MEMBER_DATA);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void addValue(final Object key, final Object value) { //$JUnit$
-		log.debug(HelperLog.methodStart(key, value));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key, value));
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
@@ -118,12 +118,12 @@ public class ContextImpl extends ModelAbstract implements Context {
 		setChanged();
 		notifyObservers(METHOD_ADD_VALUE);
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void removeValue(final Object key) { //$JUnit$
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
@@ -134,12 +134,12 @@ public class ContextImpl extends ModelAbstract implements Context {
 			notifyObservers(METHOD_REMOVE_VALUE);
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public Object getValue(final Object key) { //$JUnit$
-		log.debug(HelperLog.methodStart(key));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
@@ -149,14 +149,14 @@ public class ContextImpl extends ModelAbstract implements Context {
 			result = contextData.get(key);
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getValue(final Object key, final Class<T> clazz) {
-		log.debug(HelperLog.methodStart(key, clazz));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key, clazz));
 		final Object obj = getValue(key);
 
 		T result = null;
@@ -167,7 +167,7 @@ public class ContextImpl extends ModelAbstract implements Context {
 			}
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

@@ -92,7 +92,7 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static String encode(final String input) { //$JUnit$
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -102,7 +102,7 @@ public abstract class EncoderBase64 {
 
 		final String result = new String(encode(input.getBytes()));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -115,7 +115,7 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static char[] encode(final byte[] input) { //$JUnit$
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -125,7 +125,7 @@ public abstract class EncoderBase64 {
 
 		final char[] result = encode(input, input.length);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -137,7 +137,7 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static byte[] decode(final String input) { //$JUnit$
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -147,7 +147,7 @@ public abstract class EncoderBase64 {
 
 		final byte[] result = decode(input.toCharArray());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -160,7 +160,7 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	public static byte[] decode(final char[] input) { //$JUnit$
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -219,7 +219,7 @@ public abstract class EncoderBase64 {
 				op++;
 			}
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -238,7 +238,7 @@ public abstract class EncoderBase64 {
 	 * @since 0.1.0
 	 */
 	private static char[] encode(final byte[] in, final int iLen) {
-		log.trace(HelperLog.methodStart(in, iLen));
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(in, iLen));
 
 		final int oDataLen = (iLen * 4 + 2) / 3; // output length without padding
 		final int oLen = (iLen + 2) / 3 * 4; // output length including padding
@@ -266,7 +266,7 @@ public abstract class EncoderBase64 {
 			result[op] = op < oDataLen ? map1[o3] : '=';
 			op++;
 		}
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

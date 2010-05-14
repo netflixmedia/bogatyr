@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for keyboards.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100514)
  * @since 0.9.0
  */
 public abstract class HelperKeyboard {
@@ -49,7 +49,7 @@ public abstract class HelperKeyboard {
 	 * @since 0.9.1
 	 */
 	public static boolean isKeyPrintable(final int keyCode) {
-		log.debug(HelperLog.methodStart(keyCode));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(keyCode));
 
 		final boolean result = !(0 > keyCode || //keyCode couldn't be negative
 				8 == keyCode || // backspace
@@ -67,7 +67,7 @@ public abstract class HelperKeyboard {
 				524 == keyCode || // Windows cmd
 				525 == keyCode); // Windows context menu
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

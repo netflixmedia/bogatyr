@@ -47,7 +47,7 @@ import java.util.Dictionary;
  * This is an extended JSlider.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.2.0
  */
 public class Slider extends JSlider implements Activatable {
@@ -63,32 +63,32 @@ public class Slider extends JSlider implements Activatable {
 
 	public Slider() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public Slider(final BoundedRangeModel model) {
 		super(model);
-		log.trace(HelperLog.constructor(model));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(model));
 	}
 
 	public Slider(final int orientation, final int min, final int max, final int value) {
 		super(orientation, min, max, value);
-		log.trace(HelperLog.constructor(orientation, min, max, value));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(orientation, min, max, value));
 	}
 
 	public Slider(final int min, final int max, final int value) {
 		super(min, max, value);
-		log.trace(HelperLog.constructor(min, max, value));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(min, max, value));
 	}
 
 	public Slider(final int min, final int max) {
 		super(min, max);
-		log.trace(HelperLog.constructor(min, max));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(min, max));
 	}
 
 	public Slider(final int orientation) {
 		super(orientation);
-		log.trace(HelperLog.constructor(orientation));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(orientation));
 	}
 
 	/*
@@ -97,19 +97,19 @@ public class Slider extends JSlider implements Activatable {
 
 	public Slider(final BoundedRangeModel model, final String toolTip) {
 		this(model);
-		log.trace(HelperLog.constructor(model, toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(model, toolTip));
 
 		setToolTipText(toolTip);
 	}
 
 	public Slider(final int minValue, final int maxValue, final int currentValue, final String toolTip) {
 		this(HORIZONTAL, minValue, maxValue, currentValue, toolTip);
-		log.trace(HelperLog.constructor(minValue, maxValue, currentValue, toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(minValue, maxValue, currentValue, toolTip));
 	}
 
 	public Slider(final int orientation, final int minValue, final int maxValue, final int currentValue, final String toolTip) {
 		this(orientation, minValue, maxValue, currentValue);
-		log.trace(HelperLog.constructor(orientation, minValue, maxValue, currentValue, toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(orientation, minValue, maxValue, currentValue, toolTip));
 
 		setToolTipText(toolTip);
 	}
@@ -152,15 +152,15 @@ public class Slider extends JSlider implements Activatable {
 
 	@Override
 	public boolean isActive() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(!isNotActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
-		log.debug(HelperLog.methodStart(isActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isActive));
 
 		if (isActive) {
 			isNotActive = !isActive;
@@ -170,6 +170,6 @@ public class Slider extends JSlider implements Activatable {
 			isNotActive = !isActive;
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

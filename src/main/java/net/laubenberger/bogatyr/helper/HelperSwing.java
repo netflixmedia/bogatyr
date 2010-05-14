@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for Swing.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100514)
  * @since 0.9.0
  */
 public abstract class HelperSwing {
@@ -63,7 +63,7 @@ public abstract class HelperSwing {
 	 * @since 0.9.0
 	 */
 	public static void setMacOSXMenu() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		if (Platform.MAC_OSX == HelperEnvironment.getPlatform()) {
 			//display the menu in MacOS X style
 			try {
@@ -87,10 +87,10 @@ public abstract class HelperSwing {
 					UIManager.put(pair.getKey(), pair.getValue());
 				}
 			} catch (Exception ex) {
-				log.error("Could not set MacOS X menu bar", ex); //$NON-NLS-1$
+				if (log.isErrorEnabled()) log.error("Could not set MacOS X menu bar", ex); //$NON-NLS-1$
 			}
 		}
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	/**
@@ -103,7 +103,7 @@ public abstract class HelperSwing {
 	 * @since 0.9.0
 	 */
 	public static int calculateValueForSlider(final Number value, final Number tick) {
-		log.debug(HelperLog.methodStart(value, tick));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(value, tick));
 		if (null == value) {
 			throw new RuntimeExceptionIsNull("value"); //$NON-NLS-1$
 		}
@@ -116,7 +116,7 @@ public abstract class HelperSwing {
 
 		final int result = internalValue.divide(internalTick, Constants.DEFAULT_MATHCONTEXT).intValue();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -130,7 +130,7 @@ public abstract class HelperSwing {
 	 * @since 0.9.0
 	 */
 	public static BigDecimal calculateValueFromSlider(final JSlider slider, final Number tick) {
-		log.debug(HelperLog.methodStart(slider, tick));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(slider, tick));
 		if (null == slider) {
 			throw new RuntimeExceptionIsNull("slider"); //$NON-NLS-1$
 		}
@@ -142,7 +142,7 @@ public abstract class HelperSwing {
 
 		final BigDecimal result = new BigDecimal(slider.getValue()).multiply(internalTick, Constants.DEFAULT_MATHCONTEXT);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -154,11 +154,11 @@ public abstract class HelperSwing {
 	 * @since 0.9.1
 	 */
 	public static List<LookAndFeelInfo> getAvailableLookAndFeels() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final List<LookAndFeelInfo> result = Arrays.asList(UIManager.getInstalledLookAndFeels());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all Bogatyr based applications.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100506)
+ * @version 0.9.2 (20100514)
  * @since 0.1.0
  */
 public abstract class ApplicationAbstract extends ExtendedObjectAbstract implements Application {
@@ -55,7 +55,7 @@ public abstract class ApplicationAbstract extends ExtendedObjectAbstract impleme
 	}
 
 //	{
-//		log.info(HelperLog.applicationStart());
+//		if (log.isInfoEnabled()) log.info(HelperLog.applicationStart());
 //	}
 	
 	public ApplicationAbstract(final ModelApplication model) {
@@ -76,15 +76,15 @@ public abstract class ApplicationAbstract extends ExtendedObjectAbstract impleme
 	
 	@Override
 	public void run() {
-		log.info(HelperLog.applicationStart(model));
+		if (log.isInfoEnabled()) log.info(HelperLog.applicationStart(model));
 	}
 	
 	@Override
 	public void exit(final int returnCode) {
 		if (0 == returnCode) {
-			log.info(HelperLog.applicationExit(returnCode));
+			if (log.isInfoEnabled()) log.info(HelperLog.applicationExit(returnCode));
 		} else {
-			log.warn(HelperLog.applicationExit(returnCode));
+			if (log.isWarnEnabled()) log.warn(HelperLog.applicationExit(returnCode));
 		}
 		System.exit(returnCode);
 	}
@@ -96,8 +96,8 @@ public abstract class ApplicationAbstract extends ExtendedObjectAbstract impleme
 	
 	static final class Handler implements UncaughtExceptionHandler {
 		public void uncaughtException(Thread t, Throwable ex) {
-			log.error("uncaught exception occured", ex); //$NON-NLS-1$
-//			log.warn(HelperLog.applicationExit(255));
+			if (log.isErrorEnabled()) log.error("uncaught exception occurred", ex); //$NON-NLS-1$
+//			if (log.isWarnEnabled()) log.warn(HelperLog.applicationExit(255));
 //			System.exit(255);
 		}
 	}

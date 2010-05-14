@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JMenuItem.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.2.0
  */
 public class MenuItem extends JMenuItem {
@@ -58,32 +58,32 @@ public class MenuItem extends JMenuItem {
 
 	public MenuItem() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public MenuItem(final Icon icon) {
 		super(icon);
-		log.trace(HelperLog.constructor(icon));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(icon));
 	}
 
 	public MenuItem(final String text, final Icon icon) {
 		super(text, icon);
-		log.trace(HelperLog.constructor(text, icon));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon));
 	}
 
 	public MenuItem(final String text, final int mnemonic) {
 		super(text, mnemonic);
-		log.trace(HelperLog.constructor(text, mnemonic));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, mnemonic));
 	}
 
 	public MenuItem(final String text) {
 		super(text);
-		log.trace(HelperLog.constructor(text));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text));
 	}
 
 	public MenuItem(final Action action) {
 		super(action);
-		log.trace(HelperLog.constructor(action));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(action));
 	}
 
 	/*
@@ -92,7 +92,7 @@ public class MenuItem extends JMenuItem {
 
 	public MenuItem(final String text, final Icon icon, final int mnemonic, final String toolTip) {
 		this(text);
-		log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip));
 
 		// Add the optional icon
 		if (null != icon) {
@@ -112,7 +112,7 @@ public class MenuItem extends JMenuItem {
 
 	public MenuItem(final String text, final Icon icon, final int mnemonic, final String toolTip, final ActionListener listener) {
 		this(text, icon, mnemonic, toolTip);
-		log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, listener));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, listener));
 
 		addActionListener(listener);
 	}

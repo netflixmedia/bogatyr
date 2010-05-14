@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JPanel.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.1.0
  */
 public class Panel extends JPanel implements Activatable {
@@ -65,22 +65,22 @@ public class Panel extends JPanel implements Activatable {
 
 	public Panel() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public Panel(final boolean isDoubleBuffered) {
 		super(isDoubleBuffered);
-		log.trace(HelperLog.constructor(isDoubleBuffered));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(isDoubleBuffered));
 	}
 
 	public Panel(final LayoutManager layout, final boolean isDoubleBuffered) {
 		super(layout, isDoubleBuffered);
-		log.trace(HelperLog.constructor(layout, isDoubleBuffered));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(layout, isDoubleBuffered));
 	}
 
 	public Panel(final LayoutManager layout) {
 		super(layout);
-		log.trace(HelperLog.constructor(layout));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(layout));
 	}
 
 	/*
@@ -89,7 +89,7 @@ public class Panel extends JPanel implements Activatable {
 
 	public Panel(final String title) {
 		this();
-		log.trace(HelperLog.constructor(title));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title));
 
 		this.title = title;
 		setTitle(title);
@@ -97,14 +97,14 @@ public class Panel extends JPanel implements Activatable {
 
 	public Panel(final Color color) {
 		this();
-		log.trace(HelperLog.constructor(color));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(color));
 
 		setBackground(color);
 	}
 
 	public Panel(final Color color, final LayoutManager layout) {
 		this(layout);
-		log.trace(HelperLog.constructor(color, layout));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(color, layout));
 
 		setBackground(color);
 	}
@@ -175,15 +175,15 @@ public class Panel extends JPanel implements Activatable {
 
 	@Override
 	public boolean isActive() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(!isNotActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
-		log.debug(HelperLog.methodStart(isActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isActive));
 
 		if (isActive) {
 			isNotActive = !isActive;
@@ -193,6 +193,6 @@ public class Panel extends JPanel implements Activatable {
 			isNotActive = !isActive;
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JTextArea.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.1.0
  */
 public class TextArea extends JTextArea implements Activatable {
@@ -63,27 +63,27 @@ public class TextArea extends JTextArea implements Activatable {
 
 	public TextArea() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public TextArea(final Document doc, final String text, final int rows, final int columns) {
 		super(doc, text, rows, columns);
-		log.trace(HelperLog.constructor(doc, text, rows, columns));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(doc, text, rows, columns));
 	}
 
 	public TextArea(final int rows, final int columns) {
 		super(rows, columns);
-		log.trace(HelperLog.constructor(rows, columns));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(rows, columns));
 	}
 
 	public TextArea(final String text, final int rows, final int columns) {
 		super(text, rows, columns);
-		log.trace(HelperLog.constructor(text, rows, columns));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, rows, columns));
 	}
 
 	public TextArea(final Document doc) {
 		super(doc);
-		log.trace(HelperLog.constructor(doc));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(doc));
 	}
 
 	/*
@@ -92,14 +92,14 @@ public class TextArea extends JTextArea implements Activatable {
 
 	public TextArea(final String toolTip) {
 		this();
-		log.trace(HelperLog.constructor(toolTip));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(toolTip));
 
 		setToolTipText(toolTip);
 	}
 
 	public TextArea(final String text, final String toolTip, final int rows, final int columns) {
 		this(text, rows, columns);
-		log.trace(HelperLog.constructor(text, toolTip, rows, columns));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, toolTip, rows, columns));
 
 		setToolTipText(toolTip);
 	}
@@ -134,15 +134,15 @@ public class TextArea extends JTextArea implements Activatable {
 
 	@Override
 	public boolean isActive() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(!isNotActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
-		log.debug(HelperLog.methodStart(isActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isActive));
 
 		if (isActive) {
 			isNotActive = !isActive;
@@ -152,6 +152,6 @@ public class TextArea extends JTextArea implements Activatable {
 			isNotActive = !isActive;
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

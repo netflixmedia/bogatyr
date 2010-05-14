@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for time operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100506)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public abstract class HelperTime {
@@ -84,11 +84,11 @@ public abstract class HelperTime {
 	 * @since 0.7.0
 	 */
 	public static Date getAtomicTime() throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final Date result = getAtomicTime(DEFAULT_TIME_SERVER);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -102,7 +102,7 @@ public abstract class HelperTime {
 	 * @since 0.7.0
 	 */
 	public static Date getAtomicTime(final String host) throws IOException { //$JUnit$
-		log.debug(HelperLog.methodStart(host));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host));
 		if (!HelperString.isValid(host)) {
 			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
@@ -122,7 +122,7 @@ public abstract class HelperTime {
 
 			final Date result = new Date((time - SECONDS_BETWEEN_1900_AND_1970) * HelperNumber.NUMBER_1000.longValue());
 
-			log.debug(HelperLog.methodExit(result));
+			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
 		} finally {
 			if (null != is) {
@@ -147,11 +147,11 @@ public abstract class HelperTime {
 	 * @since 0.7.0
 	 */
 	public static Date getDate(final int year, final int month, final int date) {
-		log.debug(HelperLog.methodStart(year, month, date));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(year, month, date));
 		
 		final Date result = getDate(year, month, date, HelperEnvironment.getUserTimezone());
 		
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;	
 	}
 	
@@ -168,7 +168,7 @@ public abstract class HelperTime {
 	 * @since 0.9.2
 	 */
 	public static Date getDate(final int year, final int month, final int date, final TimeZone timeZone) {
-		log.debug(HelperLog.methodStart(year, month, date, timeZone));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(year, month, date, timeZone));
 		if (0 > year) {
 			throw new RuntimeExceptionMustBeGreater("year", year, 0); //$NON-NLS-1$
 		}
@@ -203,7 +203,7 @@ public abstract class HelperTime {
 
 		final Date result = cal.getTime();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -222,11 +222,11 @@ public abstract class HelperTime {
 	 * @since 0.9.1
 	 */
 	public static Date getDate(final int year, final int month, final int date, final int hour, final int minute, final int second) {
-		log.debug(HelperLog.methodStart(year, month, date, hour, minute, second));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(year, month, date, hour, minute, second));
 		
 		final Date result = getDate(year, month, date, hour, minute, second, HelperEnvironment.getUserTimezone());
 		
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;	
 	}
 	
@@ -246,7 +246,7 @@ public abstract class HelperTime {
 	 * @since 0.9.2
 	 */
 	public static Date getDate(final int year, final int month, final int date, final int hour, final int minute, final int second, final TimeZone timeZone) {
-		log.debug(HelperLog.methodStart(year, month, date, hour, minute, second, timeZone));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(year, month, date, hour, minute, second, timeZone));
 		if (0 > year) {
 			throw new RuntimeExceptionMustBeGreater("year", year, 0); //$NON-NLS-1$
 		}
@@ -302,7 +302,7 @@ public abstract class HelperTime {
 
 		final Date result = cal.getTime();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 	
@@ -315,7 +315,7 @@ public abstract class HelperTime {
 	 * @since 0.9.2
 	 */
 	public static Date getDateAsAbsoluteDate(final Date date) {
-		log.debug(HelperLog.methodStart(date));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(date));
 
 		final Calendar cal = Calendar.getInstance();
 		
@@ -327,7 +327,7 @@ public abstract class HelperTime {
 
 		final Date result = cal.getTime();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 	
@@ -340,7 +340,7 @@ public abstract class HelperTime {
 	 * @since 0.9.2
 	 */
 	public static Date getDateAsAbsoluteTime(final Date date) {
-		log.debug(HelperLog.methodStart(date));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(date));
 
 		final Calendar cal = Calendar.getInstance();
 		
@@ -351,7 +351,7 @@ public abstract class HelperTime {
 
 		final Date result = cal.getTime();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 	
@@ -364,11 +364,11 @@ public abstract class HelperTime {
 //	 * @since 0.7.0
 //	 */
 //	public static Date getDate(final long offSet) {
-//		log.debug(HelperLog.methodStart(offSet));
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(offSet));
 //
 //		final Date result = new Date(System.currentTimeMillis() + offSet);
 //
-//		log.debug(HelperLog.methodExit(result));
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 //		return result;
 //	}
 }

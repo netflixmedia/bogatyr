@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JToolBar.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class ToolBar extends JToolBar implements Activatable {
@@ -57,22 +57,22 @@ public class ToolBar extends JToolBar implements Activatable {
 
 	public ToolBar() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public ToolBar(final int orientation) {
 		super(orientation);
-		log.trace(HelperLog.constructor(orientation));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(orientation));
 	}
 
 	public ToolBar(final String name, final int orientation) {
 		super(name, orientation);
-		log.trace(HelperLog.constructor(name, orientation));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, orientation));
 	}
 
 	public ToolBar(final String name) {
 		super(name);
-		log.trace(HelperLog.constructor(name));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name));
 	}
 
 
@@ -99,15 +99,15 @@ public class ToolBar extends JToolBar implements Activatable {
 
 	@Override
 	public boolean isActive() {
-		log.debug(HelperLog.methodStart());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		log.debug(HelperLog.methodExit(!isNotActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(!isNotActive));
 		return !isNotActive;
 	}
 
 	@Override
 	public void setActive(final boolean isActive) {
-		log.debug(HelperLog.methodStart(isActive));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isActive));
 
 		if (isActive) {
 			isNotActive = !isActive;
@@ -117,6 +117,6 @@ public class ToolBar extends JToolBar implements Activatable {
 			isNotActive = !isActive;
 		}
 
-		log.debug(HelperLog.methodExit());
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

@@ -43,7 +43,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JScrollPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.3.0
  */
 public class PaneScroll extends JScrollPane {
@@ -65,22 +65,22 @@ public class PaneScroll extends JScrollPane {
 
 	public PaneScroll() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public PaneScroll(final Component component) {
 		super(component);
-		log.trace(HelperLog.constructor(component));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(component));
 	}
 
 	public PaneScroll(final Component view, final int vsbPolicy, final int hsbPolicy) {
 		super(view, vsbPolicy, hsbPolicy);
-		log.trace(HelperLog.constructor(view, vsbPolicy, hsbPolicy));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(view, vsbPolicy, hsbPolicy));
 	}
 
 	public PaneScroll(final int vsbPolicy, final int hsbPolicy) {
 		super(vsbPolicy, hsbPolicy);
-		log.trace(HelperLog.constructor(vsbPolicy, hsbPolicy));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(vsbPolicy, hsbPolicy));
 	}
 
 	/*
@@ -89,7 +89,7 @@ public class PaneScroll extends JScrollPane {
 
 	public PaneScroll(final Component component, final Border border) {
 		this(component);
-		log.trace(HelperLog.constructor(component, border));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(component, border));
 
 		setBorder(border);
 	}

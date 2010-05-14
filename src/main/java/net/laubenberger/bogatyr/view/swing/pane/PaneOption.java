@@ -43,7 +43,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JOptionPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100514)
  * @since 0.7.0
  */
 public class PaneOption extends JOptionPane {
@@ -57,39 +57,39 @@ public class PaneOption extends JOptionPane {
 
 	public PaneOption() {
 		super();
-		log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public PaneOption(final Object message, final int messageType, final int optionType,
 							final Icon icon, final Object[] options, final Object initialValue) {
 		super(message, messageType, optionType, icon, options, initialValue);
-		log.trace(HelperLog.constructor(message, messageType, optionType, icon, options, initialValue));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(message, messageType, optionType, icon, options, initialValue));
 	}
 
 	public PaneOption(final Object message, final int messageType, final int optionType,
 							final Icon icon, final Object[] options) {
 		super(message, messageType, optionType, icon, options);
-		log.trace(HelperLog.constructor(message, messageType, optionType, icon, options));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(message, messageType, optionType, icon, options));
 	}
 
 	public PaneOption(final Object message, final int messageType, final int optionType, final Icon icon) {
 		super(message, messageType, optionType, icon);
-		log.trace(HelperLog.constructor(message, messageType, optionType, icon));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(message, messageType, optionType, icon));
 	}
 
 	public PaneOption(final Object message, final int messageType, final int optionType) {
 		super(message, messageType, optionType);
-		log.trace(HelperLog.constructor(message, messageType, optionType));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(message, messageType, optionType));
 	}
 
 	public PaneOption(final Object message, final int messageType) {
 		super(message, messageType);
-		log.trace(HelperLog.constructor(message, messageType));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(message, messageType));
 	}
 
 	public PaneOption(final Object message) {
 		super(message);
-		log.trace(HelperLog.constructor(message));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(message));
 	}
 
 
