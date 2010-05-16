@@ -43,7 +43,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JTextPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100516)
  * @since 0.7.0
  */
 public class PaneText extends JTextPane {
@@ -52,8 +52,8 @@ public class PaneText extends JTextPane {
 	private static final Logger log = LoggerFactory.getLogger(PaneText.class);
 
 	/*
-		 * Superclass constructors
-		 */
+	 * Superclass constructors
+	 */
 
 	public PaneText() {
 		super();

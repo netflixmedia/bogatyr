@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JRadioButton.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100516)
  * @since 0.2.0
  */
 public class RadioButton extends JRadioButton implements Activatable {
@@ -102,7 +102,7 @@ public class RadioButton extends JRadioButton implements Activatable {
 	 */
 
 	public RadioButton(final boolean isSelected) {
-		super();
+		this();
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(isSelected));
 
 		setSelected(isSelected);

@@ -35,9 +35,11 @@ import java.util.ResourceBundle;
 
 import javax.swing.KeyStroke;
 
+import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.model.misc.Language;
+import net.laubenberger.bogatyr.model.misc.Platform;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,12 +49,14 @@ import org.slf4j.LoggerFactory;
  * Localizer implementation for file access.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100516)
  * @since 0.1.0
  */
 public class LocalizerFile extends LocalizerAbstract {
 	private static final Logger log = LoggerFactory.getLogger(LocalizerFile.class);
 
+	private static final Platform PLATFORM = HelperEnvironment.getPlatform();
+	
 	public static final String POSTFIX_ACCELERATOR = ".accelerator"; //$NON-NLS-1$
 	public static final String POSTFIX_MNEMONIC = ".mnemonic"; //$NON-NLS-1$
 	public static final String POSTFIX_TOOLTIP = ".tooltip"; //$NON-NLS-1$
@@ -168,9 +172,14 @@ public class LocalizerFile extends LocalizerAbstract {
 	public KeyStroke getAccelerator(final String key) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
-		final String keystroke = bundle.getString(key + POSTFIX_ACCELERATOR);
-		final KeyStroke result = null == keystroke ? null : KeyStroke.getKeyStroke(keystroke);
+		String keystroke = getValue(key + POSTFIX_ACCELERATOR);
+		KeyStroke result = null == keystroke ? null : KeyStroke.getKeyStroke(keystroke);
 
+		if (null == result) {
+			keystroke = getValue(key + POSTFIX_ACCELERATOR + '.' + PLATFORM.getCode());
+			result = null == keystroke ? null : KeyStroke.getKeyStroke(keystroke);
+		}
+		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
@@ -179,7 +188,7 @@ public class LocalizerFile extends LocalizerAbstract {
 	public int getMnemonic(final String key) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
-		final String mnemonic = bundle.getString(key + POSTFIX_MNEMONIC);
+		final String mnemonic = getValue(key + POSTFIX_MNEMONIC);
 		final int result = null == mnemonic ? 0 : (int) mnemonic.charAt(0);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
@@ -190,7 +199,7 @@ public class LocalizerFile extends LocalizerAbstract {
 	public String getTooltip(final String key) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
-		final String result = bundle.getString(key + POSTFIX_TOOLTIP);
+		final String result = getValue(key + POSTFIX_TOOLTIP);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

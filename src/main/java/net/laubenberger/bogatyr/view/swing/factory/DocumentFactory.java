@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  * This is a document factory.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100516)
  * @since 0.9.0
  */
 public abstract class DocumentFactory {
@@ -114,8 +114,8 @@ public abstract class DocumentFactory {
 
 
 	/*
-		 * Private methods
-		 */
+	 * Private methods
+	 */
 
 	static boolean isStringNumeric(final CharSequence arg) {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(arg));

@@ -27,25 +27,23 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
-import java.awt.event.ActionListener;
-
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This is an extended JButton.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100516)
  * @since 0.2.0
  */
 public class Button extends JButton implements Activatable {
@@ -96,19 +94,18 @@ public class Button extends JButton implements Activatable {
 		setToolTipText(toolTip);
 	}
 
-	public Button(final String text, final String toolTip, final ActionListener listener) {
-		this(text, toolTip);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, toolTip, listener));
+//	public Button(final String text, final String toolTip, final ActionListener listener) {
+//		this(text, toolTip);
+//		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, toolTip, listener));
+//
+//		addActionListener(listener);
+//	}
 
-		addActionListener(listener);
-	}
-
-	public Button(final String text, final Icon icon, final String toolTip, final ActionListener listener) {
+	public Button(final String text, final Icon icon, final String toolTip) {
 		this(text, icon);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon, toolTip, listener));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon, toolTip));
 
 		setToolTipText(toolTip);
-		addActionListener(listener);
 	}
 
 

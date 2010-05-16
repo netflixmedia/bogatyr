@@ -39,7 +39,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JDialog;
 import javax.swing.JPopupMenu;
-import javax.swing.JWindow;
 import javax.swing.RootPaneContainer;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
@@ -56,7 +55,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended TrayIcon with JPopupMenu support.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100516)
  * @since 0.9.2
  */
 public class TrayIcon extends java.awt.TrayIcon {
@@ -113,7 +112,7 @@ public class TrayIcon extends java.awt.TrayIcon {
 	 */
 	
 	public TrayIcon(final Image image, final String tooltip, final JPopupMenu popup) {
-		super(image, tooltip);
+		this(image, tooltip);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(image, tooltip, popup));
 		
 		setJPopupMenu(popup);
@@ -170,13 +169,8 @@ public class TrayIcon extends java.awt.TrayIcon {
 	void showJPopupMenu(final MouseEvent e) {
 		if (null != popup) {
 			if (null == window) {
-
-				if (Platform.UNIX == PLATFORM) {
-					window = new JWindow((Frame) null);
-				} else {
-					window = new JDialog((Frame) null);
-					((JDialog) window).setUndecorated(true);
-				}
+				window = new JDialog((Frame) null);
+				((JDialog) window).setUndecorated(true);
 				window.setAlwaysOnTop(true);
 				final Dimension size = popup.getPreferredSize();
 
