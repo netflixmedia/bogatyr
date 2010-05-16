@@ -52,14 +52,14 @@ import org.slf4j.LoggerFactory;
  * Collected constants of very general utility.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100516)
  * @since 0.7.0
  */
 public abstract class Constants {
 	private static final Logger log = LoggerFactory.getLogger(Constants.class);
 
 	//Bogatyr specific
-	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.92"), 269, HelperTime.getDate(2010, 5, 14, 18, 23, 0), UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.92"), 270, HelperTime.getDate(2010, 5, 16, 12, 30, 0), UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
@@ -67,11 +67,11 @@ public abstract class Constants {
 	public static final int DEFAULT_FILE_BUFFER_SIZE = HelperNumber.NUMBER_32768.intValue(); //32kB
 	public static final BigDecimal DEFAULT_DPI = new BigDecimal("72"); //$NON-NLS-1$
 
-	//algebraic signs
-	public static final int POSITIVE = 1;
-	public static final int NEGATIVE = -1;
-	public static final String PLUS_SIGN = "+"; //$NON-NLS-1$
-	public static final String NEGATIVE_SIGN = "-"; //$NON-NLS-1$
+//	//algebraic signs
+//	public static final int POSITIVE = 1;
+//	public static final int NEGATIVE = -1;
+//	public static final String PLUS_SIGN = "+"; //$NON-NLS-1$
+//	public static final String NEGATIVE_SIGN = "-"; //$NON-NLS-1$
 
 	//constants
 	public static final BigDecimal SPEED_OF_LIGHT = new BigDecimal("299792458"); //speed of light in m/s //$NON-NLS-1$

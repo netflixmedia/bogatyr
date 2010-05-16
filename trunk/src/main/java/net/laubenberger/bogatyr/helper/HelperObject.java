@@ -58,7 +58,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100516)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -69,22 +69,20 @@ public abstract class HelperObject {
 	 *
 	 * @param clazz full qualified class name
 	 * @return instantiated object
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
-	 * @throws NoSuchMethodException
-	 * @throws SecurityException
-	 * @throws InvocationTargetException
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 * @see Class
 	 * @since 0.7.0
 	 */
-	public static <T> T createInstance(final Class<T> clazz) throws SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException { //$JUnit$
+	public static <T> T createInstance(final Class<T> clazz) throws InstantiationException, IllegalAccessException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clazz));
 
 		if (null == clazz) {
 			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
 
-		final T result = clazz.getConstructor(HelperArray.EMPTY_ARRAY_CLASS).newInstance();
+//		final T result = clazz.getConstructor(HelperArray.EMPTY_ARRAY_CLASS).newInstance();
+		final T result = clazz.newInstance();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

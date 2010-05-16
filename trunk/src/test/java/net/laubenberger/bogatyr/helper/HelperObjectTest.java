@@ -49,7 +49,7 @@ public class HelperObjectTest {
 	public void testCreateInstance() {
 		try {
 			assertEquals(HelperString.EMPTY_STRING, HelperObject.createInstance(String.class));
-			assertEquals(AllBogatyrTests.DATA, HelperObject.createInstance(String.class, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA}));
+			assertEquals(AllBogatyrTests.DATA, HelperObject.createInstance(String.class, HelperArray.getArray(String.class), HelperArray.getArray(AllBogatyrTests.DATA)));
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}

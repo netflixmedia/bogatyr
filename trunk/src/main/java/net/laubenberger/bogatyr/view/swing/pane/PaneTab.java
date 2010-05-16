@@ -42,7 +42,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JTabbedPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100516)
  * @since 0.7.0
  */
 public class PaneTab extends JTabbedPane {
@@ -51,8 +51,8 @@ public class PaneTab extends JTabbedPane {
 	private static final Logger log = LoggerFactory.getLogger(PaneTab.class);
 
 	/*
-		 * Superclass constructors
-		 */
+	 * Superclass constructors
+	 */
 
 	public PaneTab() {
 		super();

@@ -27,24 +27,23 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
-import java.awt.event.ActionListener;
-
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JCheckBoxMenuItem;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.swing.KeyStroke;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This is an extended JCheckBoxMenuItem.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100516)
  * @since 0.2.0
  */
 public class MenuItemCheckBox extends JCheckBoxMenuItem {
@@ -109,32 +108,34 @@ public class MenuItemCheckBox extends JCheckBoxMenuItem {
 		setSelected(isSelected);
 	}
 
-	public MenuItemCheckBox(final String text, final Icon icon, final int mnemonic, final String toolTip, final boolean isSelected) {
-		this(text);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, isSelected));
+	public MenuItemCheckBox(final String text, final boolean isSelected, final Icon icon, final String toolTip) {
+		this(text, isSelected, icon, toolTip, 0, null);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, isSelected, icon, toolTip));
+	}
+
+	public MenuItemCheckBox(final String text, final boolean isSelected, final Icon icon, final String toolTip, final int mnemonic, final KeyStroke accelerator) {
+		this(isSelected);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, isSelected, icon, toolTip, mnemonic, accelerator));
 
 		// Add the optional icon
 		if (null != icon) {
 			setIcon(icon);
 		}
-
-		// Add the mnemonic key
-		if (0 < mnemonic) {
-			setMnemonic(mnemonic);
-		}
-
+		
 		// Add the optional tool tip text
 		if (null != toolTip) {
 			setToolTipText(toolTip);
 		}
-		setSelected(isSelected);
-	}
 
-	public MenuItemCheckBox(final String text, final Icon icon, final int mnemonic, final String toolTip, final boolean isSelected, final ActionListener listener) {
-		this(text, icon, mnemonic, toolTip, isSelected);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon, mnemonic, toolTip, isSelected, listener));
+		// Add the optional mnemonic key
+		if (0 < mnemonic) {
+			setMnemonic(mnemonic);
+		}
 
-		addActionListener(listener);
+		// Add the optional accelerator
+		if (null != accelerator) {
+			setAccelerator(accelerator);
+		}
 	}
 
 

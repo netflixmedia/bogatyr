@@ -28,6 +28,7 @@
 package net.laubenberger.bogatyr.view.swing;
 
 import javax.swing.Action;
+import javax.swing.Icon;
 import javax.swing.JMenu;
 
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JMenu.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100516)
  * @since 0.2.0
  */
 public class Menu extends JMenu {
@@ -77,10 +78,20 @@ public class Menu extends JMenu {
 	 * Own constructors
 	 */
 
-	public Menu(final String text, final int mnemonic) {
+	public Menu(final String text, final Icon icon, final String toolTip, final int mnemonic) {
 		this(text);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, mnemonic));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon, toolTip, mnemonic));
 
+		// Add the optional icon
+		if (null != icon) {
+			setIcon(icon);
+		}
+		
+		// Add the optional tool tip text
+		if (null != toolTip) {
+			setToolTipText(toolTip);
+		}
+		
 		// Add the mnemonic key
 		if (0 < mnemonic) {
 			setMnemonic(mnemonic);

@@ -30,13 +30,12 @@ package net.laubenberger.bogatyr.helper;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -44,7 +43,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100516)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -60,7 +59,17 @@ public abstract class HelperString {
 	public static final String PERIOD = "."; //$NON-NLS-1$
 	public static final String COMMA = ","; //$NON-NLS-1$
 	public static final String SEMICOLON = ";"; //$NON-NLS-1$
+	public static final String COLON = ":"; //$NON-NLS-1$
+	public static final String AMPERSAND = "&"; //$NON-NLS-1$
 	public static final String COPYRIGHT = "©"; //$NON-NLS-1$
+	public static final String REGISTERED = "®"; //$NON-NLS-1$
+	public static final String TRADEMARK = "™"; //$NON-NLS-1$
+	public static final String NUMBER = "№"; //$NON-NLS-1$
+	public static final String PLUS_SIGN = "+"; //$NON-NLS-1$
+	public static final String NEGATIVE_SIGN = "-"; //$NON-NLS-1$
+	public static final String PERCENT = "%"; //$NON-NLS-1$
+	public static final String PERMILLE = "‰"; //$NON-NLS-1$
+	public static final String PERMYRIAD = "‱"; //$NON-NLS-1$
 	public static final String AT = "@"; //$NON-NLS-1$
 	public static final String TILDE = "~"; //$NON-NLS-1$
 	public static final String PI = "µ"; //$NON-NLS-1$
@@ -171,7 +180,7 @@ public abstract class HelperString {
 		}
 
 		boolean isNegative = false;
-		if (text.startsWith(Constants.NEGATIVE_SIGN)) {
+		if (text.startsWith(NEGATIVE_SIGN)) {
 			isNegative = true;
 		}
 
@@ -197,7 +206,7 @@ public abstract class HelperString {
 		String result = null;
 
 		if (!(temp.isEmpty() || isPeriod && 1 == sb.length())) {
-			result = isNegative ? Constants.NEGATIVE_SIGN + sb.toString() : sb.toString();
+			result = isNegative ? NEGATIVE_SIGN + sb.toString() : sb.toString();
 		}
 
 		log.debug(HelperLog.methodExit(result));

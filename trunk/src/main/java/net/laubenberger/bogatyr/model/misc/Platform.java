@@ -32,24 +32,30 @@ package net.laubenberger.bogatyr.model.misc;
  * Possible platforms
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100416)
  * @since 0.9.0
  */
 public enum Platform {
-	ANY("Any platform"), //$NON-NLS-1$
-	MAC_OSX("Apple Mac OSX"), //$NON-NLS-1$
-	WINDOWS("Microsoft Windows"), //$NON-NLS-1$
-	UNIX("UNIX/Linux"); //$NON-NLS-1$
+	ANY("Any platform", "any"), //$NON-NLS-1$ //$NON-NLS-2$
+	MAC_OSX("Apple Mac OSX", "mac"), //$NON-NLS-1$ //$NON-NLS-2$
+	WINDOWS("Microsoft Windows", "win"), //$NON-NLS-1$ //$NON-NLS-2$
+	UNIX("UNIX/Linux", "unix"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	private final String name;
+	private final String code;
 
-	Platform(final String name) {
+	Platform(final String name, final String code) {
 		this.name = name;
+		this.code = code;
 	}
 
 
 	public String getName() {
 		return name;
+	}
+
+	public String getCode() {
+		return code;
 	}
 }	
 

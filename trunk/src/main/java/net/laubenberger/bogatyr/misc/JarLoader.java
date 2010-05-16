@@ -27,25 +27,73 @@
 
 package net.laubenberger.bogatyr.misc;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLClassLoader;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
+import net.laubenberger.bogatyr.helper.HelperObject;
 
 
 /**
  * Loads JAR files during runtime.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100516)
  * @since 0.9.2
  */
 public class JarLoader extends URLClassLoader {
+	private static final Logger log = LoggerFactory.getLogger(JarLoader.class);
+	
 	
 	public JarLoader(URL... urls){
 		super(urls);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(urls));
 	}
 
-	public Object createInstance(final String clazz) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		Class<?> jarClass = super.loadClass(clazz, true);
-		return jarClass.newInstance();
+	/**
+	 * Creates an instance of a class.
+	 *
+	 * @param clazz full qualified class name
+	 * @return instantiated object
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws ClassNotFoundException
+	 * @since 0.9.2
+	 */
+	public Object createInstance(final String clazz) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clazz));
+
+		final Object result = HelperObject.createInstance(super.loadClass(clazz, true));
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+
+	/**
+	 * Creates an instance of a class with parameters.
+	 *
+	 * @param clazz		  full qualified class name
+	 * @param paramClazzes classes for the constructor
+	 * @param params		 parameters for the constructor
+	 * @return instantiated object
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InvocationTargetException
+	 * @see Class
+	 * @since 0.9.2
+	 */
+	public Object createInstance(final String clazz, final Class<?>[] paramClazzes, final Object[] params) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SecurityException, InvocationTargetException, NoSuchMethodException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clazz, paramClazzes, params));
+
+		final Object result = HelperObject.createInstance(super.loadClass(clazz, true), paramClazzes, params);
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
 	}
 }
