@@ -30,6 +30,8 @@ package net.laubenberger.bogatyr.model.context;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +45,7 @@ import net.laubenberger.bogatyr.model.ModelAbstract;
  * Implementation of the context for applications.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100519)
  * @since 0.1.0
  */
 public class ContextImpl extends ModelAbstract implements Context {
@@ -81,6 +83,7 @@ public class ContextImpl extends ModelAbstract implements Context {
 	 */
 
 	@Override
+	@XmlTransient
 	public Map<Object, Object> getData() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 

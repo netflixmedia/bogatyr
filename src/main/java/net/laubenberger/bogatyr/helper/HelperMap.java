@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for maps.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100519)
  * @since 0.9.0
  */
 public abstract class HelperMap {
@@ -120,22 +120,22 @@ public abstract class HelperMap {
 	 */
 	public static String dump(final Map<?, ?> map) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(map));
-		if (null == map) {
-			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
-		}
 
-		final StringBuilder sb = new StringBuilder();
-
-		for (final Map.Entry<?, ?> pair : map.entrySet()) {
-			if (0 < sb.length()) {
-				sb.append(HelperString.NEW_LINE);
+		String result = null;
+		if (null != map) {
+			final StringBuilder sb = new StringBuilder();
+	
+			for (final Map.Entry<?, ?> pair : map.entrySet()) {
+				if (0 < sb.length()) {
+					sb.append(HelperString.NEW_LINE);
+				}
+				sb.append(pair.getKey());
+				sb.append('=');
+				sb.append(pair.getValue());
 			}
-			sb.append(pair.getKey());
-			sb.append('=');
-			sb.append(pair.getValue());
+	
+			result = sb.toString();
 		}
-
-		final String result = sb.toString();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

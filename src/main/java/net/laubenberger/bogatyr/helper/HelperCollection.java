@@ -46,7 +46,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100519)
  * @since 0.7.0
  */
 public abstract class HelperCollection {
@@ -162,20 +162,20 @@ public abstract class HelperCollection {
 	 */
 	public static String dump(final Iterable<?> iterable) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(iterable));
-		if (null == iterable) {
-			throw new RuntimeExceptionIsNull("iterable"); //$NON-NLS-1$
-		}
 
-		final StringBuilder sb = new StringBuilder();
-
-		for (final Object element : iterable) {
-			if (0 < sb.length()) {
-				sb.append(HelperString.NEW_LINE);
+		String result = null;
+		if (null != iterable) {
+			final StringBuilder sb = new StringBuilder();
+	
+			for (final Object element : iterable) {
+				if (0 < sb.length()) {
+					sb.append(HelperString.NEW_LINE);
+				}
+				sb.append(element);
 			}
-			sb.append(element);
+	
+			result = sb.toString();
 		}
-
-		final String result = sb.toString();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

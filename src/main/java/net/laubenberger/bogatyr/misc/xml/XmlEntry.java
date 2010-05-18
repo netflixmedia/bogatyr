@@ -39,13 +39,15 @@ import javax.xml.bind.annotation.XmlType;
  *
  * @author Stefan Laubenberger
  * @author Roman Wuersch
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100519)
  * @since 0.9.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"key", "value"})
+@XmlType(propOrder = {"id", "key", "value"})
 @XmlRootElement(name = "entry")
 public class XmlEntry {
+	@XmlElement(name = "id")
+	private String id;
 	@XmlElement(name = "key", required = true)
 	private final String key;
 	@XmlElement(name = "value", required = true)
@@ -63,6 +65,17 @@ public class XmlEntry {
 		this.value = value;
 	}
 
+	public XmlEntry(final String id, final String key, final String value) {
+		super();
+		this.id = id;
+		this.key = key;
+		this.value = value;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
 	public String getKey() {
 		return key;
 	}

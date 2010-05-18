@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100519)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -227,14 +227,14 @@ public abstract class HelperArray {
 	 * @return true/false
 	 * @since 0.9.1
 	 */
-	public static boolean contains(final Object[] array, final Object object) { //$JUnit$
+	public static <T> boolean contains(final T[] array, final T object) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(array, object));
 
-		boolean result = true;
+		boolean result = false;
 
-		for (final Object objTemp : array) {
+		for (final T objTemp : array) {
 			if (HelperObject.isEquals(object, objTemp)) {
-				result = false;
+				result = true;
 			}
 		}
 
@@ -307,20 +307,20 @@ public abstract class HelperArray {
 	 */
 	public static String dump(final char[] array) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(array));
-		if (null == array) {
-			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
-		}
 
-		final StringBuilder sb = new StringBuilder();
-
-		for (final char element : array) {
-			if (0 < sb.length()) {
-				sb.append(HelperString.NEW_LINE);
+		String result = null;
+		if (null != array) {
+			final StringBuilder sb = new StringBuilder();
+	
+			for (final char element : array) {
+				if (0 < sb.length()) {
+					sb.append(HelperString.NEW_LINE);
+				}
+				sb.append(element);
 			}
-			sb.append(element);
+	
+			result = sb.toString();
 		}
-
-		final String result = sb.toString();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

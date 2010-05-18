@@ -47,7 +47,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100519)
  * @since 0.7.0
  */
 public abstract class ClientAbstract extends ExtendedObjectAbstract implements Client {
@@ -257,13 +257,13 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 		listeners.remove(listener);
 	}
 
-	@Override
-	public synchronized void deleteListeners() {
-		listeners = new HashSet<ListenerClient>();
-	}
-
-	@Override
-	public int countListeners() {
-		return listeners.size();
-	}
+//	@Override
+//	public synchronized void deleteListeners() {
+//		listeners = new HashSet<ListenerClient>();
+//	}
+//
+//	@Override
+//	public int countListeners() {
+//		return listeners.size();
+//	}
 }

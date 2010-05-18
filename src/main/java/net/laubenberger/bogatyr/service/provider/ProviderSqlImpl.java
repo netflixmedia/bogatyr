@@ -48,7 +48,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100519)
  * @since 0.2.0
  */
 public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
@@ -196,7 +196,7 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 	 */
 
 	@Override
-	public Connection connectToDb() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchMethodException, InvocationTargetException {
+	public Connection getConnection() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, NoSuchMethodException, InvocationTargetException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		Class.forName(driver).getConstructor().newInstance();
@@ -217,7 +217,7 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 		Connection con = null;
 
 		try {
-			con = connectToDb();
+			con = getConnection();
 			stmt = con.createStatement();
 
 			final int result = stmt.executeUpdate(statement);
@@ -245,7 +245,7 @@ public class ProviderSqlImpl extends ServiceAbstract implements ProviderSql {
 		Connection con = null;
 
 		try {
-			con = connectToDb();
+			con = getConnection();
 			stmt = con.createStatement();
 
 			final boolean result = stmt.execute(statement);

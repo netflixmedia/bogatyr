@@ -49,7 +49,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * Abstract localizer implementation.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100519)
  * @since 0.6.0
  */
 public abstract class LocalizerAbstract extends ServiceAbstract implements Localizer {
@@ -85,7 +85,8 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	public Boolean getBoolean(final String key) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
-		final Boolean result = null == getValue(key) ? null : Boolean.valueOf(getValue(key));
+		final String value = getValue(key);
+		final Boolean result = null == value ? null : Boolean.parseBoolean(value);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -105,8 +106,8 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	public File getFile(final String key) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
-		final String file = getValue(key);
-		final File result = null == file ? null : new File(file);
+		final String value = getValue(key);
+		final File result = null == value ? null : new File(value);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -117,12 +118,12 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
 
-		final String url = getValue(key);
+		final String value = getValue(key);
 		URL result = null;
 
-		if (null != url) {
+		if (null != value) {
 			try {
-				result = new URL(url);
+				result = new URL(value);
 			} catch (MalformedURLException ex) {
 				if (log.isInfoEnabled()) log.info("URL invalid", ex); //$NON-NLS-1$
 			}
@@ -176,20 +177,20 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
-	@Override
-	public synchronized void deleteListeners() {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-
-		listeners = new HashSet<ListenerLocale>();
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
-
-	@Override
-	public int countListeners() {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listeners.size()));
-		return listeners.size();
-	}
+//	@Override
+//	public synchronized void deleteListeners() {
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+//
+//		listeners = new HashSet<ListenerLocale>();
+//
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+//	}
+//
+//	@Override
+//	public int countListeners() {
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+//
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listeners.size()));
+//		return listeners.size();
+//	}
 }

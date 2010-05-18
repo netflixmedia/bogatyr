@@ -58,7 +58,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100519)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -277,7 +277,7 @@ public abstract class HelperObject {
 	 * @return true/false
 	 * @since 0.8.0
 	 */
-	public static boolean isEquals(final Object objectA, final Object objectB) { //$JUnit$
+	public static <T> boolean isEquals(final T objectA, final T objectB) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(objectA, objectB));
 
 		final boolean result = !((null == objectB && null != objectA) || (null != objectB && !objectB.equals(objectA)));

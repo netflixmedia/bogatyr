@@ -37,21 +37,22 @@ import net.laubenberger.bogatyr.service.Service;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100519)
  * @since 0.6.0
  */
 public interface ProviderSql extends Service {
 	/**
-	 * Connects to a database
+	 * Retuns a {@link Connection} to a database.
 	 *
-	 * @return Connection
+	 * @return {@link Connection} to a database
 	 * @throws Exception
+	 * @see Connection
 	 * @since 0.6.0
 	 */
-	Connection connectToDb() throws Exception;
+	Connection getConnection() throws Exception;
 
 	/**
-	 * Executes an update
+	 * Executes an SQL update statement.
 	 *
 	 * @param statement string in SQL
 	 * @return SQL return code
@@ -61,7 +62,7 @@ public interface ProviderSql extends Service {
 	int executeUpdate(String statement) throws Exception;
 
 	/**
-	 * Executes a SQL command
+	 * Executes a SQL statement.
 	 *
 	 * @param statement string in SQL
 	 * @return true/false
