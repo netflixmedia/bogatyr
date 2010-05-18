@@ -32,7 +32,7 @@ package net.laubenberger.bogatyr.misc;
  * Defines the methods for the listener holder (observable).
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100519)
  * @since 0.9.0
  */
 public interface HolderListener<L extends Listener> {
@@ -54,17 +54,17 @@ public interface HolderListener<L extends Listener> {
 	void deleteListener(L listener);
 //	<T extends Listener> void deleteListener(T listener);
 
-	/**
-	 * Removes and deletes all registered listeners.
-	 *
-	 * @since 0.9.0
-	 */
-	void deleteListeners();
-
-	/**
-	 * Counts all registered listeners.
-	 *
-	 * @since 0.9.0
-	 */
-	int countListeners();
+//	/**
+//	 * Removes and deletes all registered listeners.
+//	 *
+//	 * @since 0.9.0
+//	 */
+//	void deleteListeners();
+//
+//	/**
+//	 * Counts all registered listeners.
+//	 *
+//	 * @since 0.9.0
+//	 */
+//	int countListeners();
 }   

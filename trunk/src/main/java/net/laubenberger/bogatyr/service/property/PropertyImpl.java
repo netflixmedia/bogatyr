@@ -50,7 +50,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * This is the properties class for file and stream access.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100519)
  * @since 0.1.0
  */
 public class PropertyImpl extends ServiceAbstract implements Property {
@@ -102,7 +102,8 @@ public class PropertyImpl extends ServiceAbstract implements Property {
 	public Boolean getBoolean(final String key) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
-		final Boolean result = null == properties.getProperty(key) ? null : Boolean.valueOf(properties.getProperty(key));
+		final String value = properties.getProperty(key);
+		final Boolean result = null == value ? null : Boolean.parseBoolean(value);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -122,8 +123,8 @@ public class PropertyImpl extends ServiceAbstract implements Property {
 	public File getFile(final String key) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
-		final String file = properties.getProperty(key);
-		final File result = null == file ? null : new File(file);
+		final String value = properties.getProperty(key);
+		final File result = null == value ? null : new File(value);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -133,12 +134,12 @@ public class PropertyImpl extends ServiceAbstract implements Property {
 	public URL getURL(final String key) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
-		final String url = properties.getProperty(key);
+		final String value = properties.getProperty(key);
 		URL result = null;
 
-		if (null != url) {
+		if (null != value) {
 			try {
-				result = new URL(url);
+				result = new URL(value);
 			} catch (MalformedURLException ex) {
 				if (log.isInfoEnabled()) log.info("URL invalid", ex); //$NON-NLS-1$
 			}

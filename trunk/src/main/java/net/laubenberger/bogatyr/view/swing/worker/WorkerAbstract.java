@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * This class represents a skeleton for the worker.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100519)
  * @since 0.9.0
  */
 public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker, HolderListener<ListenerWorker> {
@@ -101,13 +101,13 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
-	@Override
-	public int countListeners() {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listeners.size()));
-		return listeners.size();
-	}
+//	@Override
+//	public int countListeners() {
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+//
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listeners.size()));
+//		return listeners.size();
+//	}
 
 	@Override
 	public synchronized void deleteListener(final ListenerWorker listener) {
@@ -121,14 +121,14 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
-	@Override
-	public synchronized void deleteListeners() {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-
-		listeners = new HashSet<ListenerWorker>();
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
+//	@Override
+//	public synchronized void deleteListeners() {
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+//
+//		listeners = new HashSet<ListenerWorker>();
+//
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+//	}
 
 //    protected WorkerAbstract(final HandlerWorker handlerWorker) {
 //        super();

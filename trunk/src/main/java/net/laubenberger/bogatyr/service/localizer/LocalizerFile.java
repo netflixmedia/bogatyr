@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
  * Localizer implementation for file access.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100519)
  * @since 0.1.0
  */
 public class LocalizerFile extends LocalizerAbstract {
@@ -172,10 +172,12 @@ public class LocalizerFile extends LocalizerAbstract {
 	public KeyStroke getAccelerator(final String key) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key));
 
-		String keystroke = getValue(key + POSTFIX_ACCELERATOR);
-		KeyStroke result = null == keystroke ? null : KeyStroke.getKeyStroke(keystroke);
-
-		if (null == result) {
+		String keystroke;
+		KeyStroke result;
+		try {
+			keystroke = bundle.getString(key + POSTFIX_ACCELERATOR);
+			result = null == keystroke ? null : KeyStroke.getKeyStroke(keystroke);
+		} catch (MissingResourceException ex) {
 			keystroke = getValue(key + POSTFIX_ACCELERATOR + '.' + PLATFORM.getCode());
 			result = null == keystroke ? null : KeyStroke.getKeyStroke(keystroke);
 		}

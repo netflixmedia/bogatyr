@@ -36,25 +36,28 @@ import net.laubenberger.bogatyr.misc.xml.XmlEntry;
 import net.laubenberger.bogatyr.misc.xml.XmlMap;
 
 /**
- * Map adapter for the key {@link String} and value {@link String}.
+ * Map adapter for the key {@link String} and value {@link Map} (multi map).
  *
  * @author Stefan Laubenberger
  * @version 0.9.2 (20100519)
- * @since 0.9.1
+ * @since 0.9.2
  */
-public class MapAdapterString extends XmlAdapter<XmlMap, Map<String, String>> {
+public class MapAdapterMap extends XmlAdapter<XmlMap, Map<String, Map<String, String>>> {
 
 	/*
 	 * Overridden methods
 	 */
 
 	@Override
-	public XmlMap marshal(final Map<String, String> map) throws Exception {
+	public XmlMap marshal(final Map<String, Map<String, String>> map) throws Exception {
 		if (null != map) {
 			final XmlMap xmlMap = new XmlMap();
 
-			for (final Map.Entry<String, String> entry : map.entrySet()) {
-				xmlMap.getEntries().add(new XmlEntry(entry.getKey(), entry.getValue()));
+			for (final Map.Entry<String, Map<String, String>> entry : map.entrySet()) {
+				for (final Map.Entry<String, String> item : entry.getValue().entrySet()) {
+					xmlMap.getEntries().add(new XmlEntry(entry.getKey().toString(), item.getKey(), item.getValue()));
+				}
+				
 			}
 			return xmlMap;
 		}
@@ -62,11 +65,18 @@ public class MapAdapterString extends XmlAdapter<XmlMap, Map<String, String>> {
 	}
 
 	@Override
-	public Map<String, String> unmarshal(final XmlMap xmlMap) throws Exception {
+	public Map<String, Map<String, String>> unmarshal(final XmlMap xmlMap) throws Exception {
 		if (null != xmlMap) {
-			final Map<String, String> map = new HashMap<String, String>(xmlMap.getEntries().size());
+			final Map<String, Map<String, String>> map = new HashMap<String, Map<String, String>>();
+			
 			for (final XmlEntry entry : xmlMap.getEntries()) {
-				map.put(String.valueOf(entry.getKey()), entry.getValue());
+				Map<String, String> items = map.get(entry.getId());
+				
+				if (items == null) {
+					items = new HashMap<String, String>();
+				}
+				items.put(entry.getKey(), entry.getValue());
+				map.put(entry.getId(), items);
 			}
 			return map;
 		}

@@ -38,6 +38,7 @@ import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -62,7 +63,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the application model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100519)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelApplication")
@@ -223,6 +224,7 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 //	}
 
 	@Override
+	@XmlTransient
 	public Localizer getLocalizer() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
@@ -231,6 +233,7 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 	}
 
 	@Override
+	@XmlTransient
 	public Property getProperty() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
@@ -239,6 +242,7 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 	}
 
 	@Override
+	@XmlTransient
 	public ModelWorker getModelWorker() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
