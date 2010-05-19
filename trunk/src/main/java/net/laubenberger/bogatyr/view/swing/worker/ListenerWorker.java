@@ -34,12 +34,24 @@ import net.laubenberger.bogatyr.misc.Listener;
  * This listener informs the listeners about the current work state.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100520)
  * @since 0.9.0
  */
 public interface ListenerWorker extends Listener {
 
+	/**
+	 * Informs the listener that a worker had been started.
+	 *
+	 * @param event for the listener
+	 * @since 0.9.0
+	 */
 	void start(Event<Worker> event);
 
+	/**
+	 * Informs the listener that a worker had been stopped.
+	 *
+	 * @param event for the listener
+	 * @since 0.9.0
+	 */
 	void done(Event<Worker> event);
 }

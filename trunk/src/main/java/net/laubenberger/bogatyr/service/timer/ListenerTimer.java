@@ -34,13 +34,14 @@ import net.laubenberger.bogatyr.misc.Listener;
  * ListenerTimer
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100520)
  * @since 0.6.0
  */
 public interface ListenerTimer extends Listener {
 	/**
 	 * Sends the actual time of the timer/countdown to the listener.
 	 *
+	 * @param event for the listener
 	 * @since 0.6.0
 	 */
 	void timeChanged(Event<TimeMachine> event);
@@ -48,6 +49,7 @@ public interface ListenerTimer extends Listener {
 	/**
 	 * Informs the listener that the timer/countdown has started.
 	 *
+	 * @param event for the listener
 	 * @since 0.6.0
 	 */
 	void timerStarted(Event<TimeMachine> event);
@@ -55,6 +57,7 @@ public interface ListenerTimer extends Listener {
 	/**
 	 * Informs the listener that the timer/countdown has stopped.
 	 *
+	 * @param event for the listener
 	 * @since 0.6.0
 	 */
 	void timerStopped(Event<TimeMachine> event);
