@@ -34,13 +34,14 @@ import net.laubenberger.bogatyr.misc.Listener;
  * ListenerLocale
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100520)
  * @since 0.6.0
  */
 public interface ListenerLocale extends Listener {
 	/**
 	 * Informs the listener that the locale has changed.
 	 *
+	 * @param event for the listener
 	 * @since 0.6.0
 	 */
 	void localeChanged(Event<Localizer> event);
