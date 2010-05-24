@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended TrayIcon with JPopupMenu support.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100519)
+ * @version 0.9.2 (20100525)
  * @since 0.9.2
  */
 public class TrayIcon extends java.awt.TrayIcon {
@@ -141,6 +141,8 @@ public class TrayIcon extends java.awt.TrayIcon {
 	 */
 	
 	private void init() {
+		setImageAutoSize(true);
+
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(final MouseEvent e) {

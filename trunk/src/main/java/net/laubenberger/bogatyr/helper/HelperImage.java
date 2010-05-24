@@ -31,6 +31,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.RenderedImage;
@@ -45,17 +46,17 @@ import java.util.Locale;
 
 import javax.imageio.ImageIO;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is a helper class for image operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100525)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -67,6 +68,77 @@ public abstract class HelperImage {
 	public static final String TYPE_GIF = "gif"; //$NON-NLS-1$
 	public static final String TYPE_BMP = "bmp"; //$NON-NLS-1$
 
+//	   1. public static BufferedImage rotate(BufferedImage img, int angle) {
+//   2.         int w = img.getWidth();
+//   3.         int h = img.getHeight();
+//   4.         BufferedImage dimg = dimg = new BufferedImage(w, h, img.getType());
+//   5.         Graphics2D g = dimg.createGraphics();
+//   6.         g.rotate(Math.toRadians(angle), w/2, h/2);
+//   7.         g.drawImage(img, null, 0, 0);
+//   8.         return dimg;
+//   9.     }
+//
+//	   1. public static BufferedImage verticalflip(BufferedImage img) {
+//   2.         int w = img.getWidth();
+//   3.         int h = img.getHeight();
+//   4.         BufferedImage dimg = dimg = new BufferedImage(w, h, img.getColorModel().getTransparency());
+//   5.         Graphics2D g = dimg.createGraphics();
+//   6.         g.drawImage(img, 0, 0, w, h, 0, h, w, 0, null);
+//   7.         g.dispose();
+//   8.         return dimg;
+//   9.     }
+//
+//	   1. public static BufferedImage horizontalflip(BufferedImage img) {
+//   2.         int w = img.getWidth();
+//   3.         int h = img.getHeight();
+//   4.         BufferedImage dimg = new BufferedImage(w, h, img.getType());
+//   5.         Graphics2D g = dimg.createGraphics();
+//   6.         g.drawImage(img, 0, 0, w, h, w, 0, 0, h, null);
+//   7.         g.dispose();
+//   8.         return dimg;
+//   9.     }
+//
+//
+//
+//	   1. public static BufferedImage makeColorTransparent(String ref, Color color) {
+//   2.         BufferedImage image = loadImage(ref);
+//   3.         BufferedImage dimg = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+//
+//   1.     Graphics2D g = dimg.createGraphics();
+//   2.     g.setComposite(AlphaComposite.Src);
+//   3.     g.drawImage(image, null, 0, 0);
+//   4.     g.dispose();
+//   5.     for(int i = 0; i < dimg.getHeight(); i++) {
+//   6.         for(int j = 0; j < dimg.getWidth(); j++) {
+//   7.             if(dimg.getRGB(j, i) == color.getRGB()) {
+//   8.             dimg.setRGB(j, i, 0x8F1C1C);
+//   9.             }
+//  10.         }
+//  11.     }
+//  12.     return dimg;
+//  13. }
+//
+//
+//
+//	   1. public static BufferedImage loadTranslucentImage(String url, float transperancy) {
+//   2.         // Load the image
+//   3.         BufferedImage loaded = loadImage(url);
+//   4.         // Create the image using the
+//   5.         BufferedImage aimg = new BufferedImage(loaded.getWidth(), loaded.getHeight(), BufferedImage.TRANSLUCENT);
+//   6.         // Get the images graphics
+//   7.         Graphics2D g = aimg.createGraphics();
+//   8.         // Set the Graphics composite to Alpha
+//   9.         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, transperancy));
+//  10.         // Draw the LOADED img into the prepared reciver image
+//  11.         g.drawImage(loaded, null, 0, 0);
+//  12.         // let go of all system resources in this Graphics
+//  13.         g.dispose();
+//  14.         // Return the image
+//  15.         return aimg;
+//  16.     }
+
+
+	
 	/**
 	 * Reads an image from a {@link File} to a {@link BufferedImage}.
 	 *
@@ -188,9 +260,9 @@ public abstract class HelperImage {
 		final Dimension size = component.getSize();
 		final BufferedImage result = new BufferedImage(size.width, size.height,
 				BufferedImage.TYPE_INT_RGB);
-		final Graphics2D g2 = result.createGraphics();
+		final Graphics2D g2d = result.createGraphics();
 
-		component.paint(g2);
+		component.paint(g2d);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -201,12 +273,11 @@ public abstract class HelperImage {
 	 *
 	 * @param image to scale
 	 * @param scale for the new image
-	 * @return scaled {@link Image}
+	 * @return scaled {@link BufferedImage}
 	 * @see BufferedImage
-	 * @see Image
 	 * @since 0.9.0
 	 */
-	public static Image getScaledImage(final BufferedImage image,
+	public static BufferedImage getScaledImage(final BufferedImage image,
 												  final double scale) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(image, scale));
 		if (null == image) {
@@ -214,8 +285,11 @@ public abstract class HelperImage {
 		}
 
 		final Dimension size = HelperGraphic.getScaledSize(new Dimension(image.getWidth(), image.getHeight()), scale);
-		final Image result = image.getScaledInstance(size.width, size.height,
-				Image.SCALE_SMOOTH);
+		final BufferedImage result = getScaledImage(image, size);
+		
+		
+		//		final Image result = image.getScaledInstance(size.width, size.height,
+//				Image.SCALE_SMOOTH);
 
 //		final double width = (double) image.getWidth() * scale;
 //		final double height = (double) image.getHeight() * scale;
@@ -234,13 +308,12 @@ public abstract class HelperImage {
 	 *
 	 * @param image to scale
 	 * @param size  of the new image
-	 * @return scaled {@link Image}
+	 * @return scaled {@link BufferedImage}
 	 * @see BufferedImage
 	 * @see Dimension
-	 * @see Image
 	 * @since 0.9.0
 	 */
-	public static Image getScaledImage(final BufferedImage image, final Dimension size) {
+	public static BufferedImage getScaledImage(final BufferedImage image, final Dimension size) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(image, size));
 		if (null == image) {
 			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
@@ -252,15 +325,39 @@ public abstract class HelperImage {
 			throw new RuntimeExceptionMustBeGreater("size.height", size.height, 0); //$NON-NLS-1$
 		}
 
-		final Image result;
-
-		if (0 == size.width || 0 == size.height) {
-			final Dimension sizeNew = HelperGraphic.getScaledSize(new Dimension(image.getWidth(), image.getHeight()), size);
-			result = image.getScaledInstance(sizeNew.width, sizeNew.height, Image.SCALE_SMOOTH);
+		BufferedImage result; 
+		if (size.equals(new Dimension(image.getWidth(), image.getHeight()))) {
+			result = image;
 		} else {
-			result = image.getScaledInstance(size.width, size.height, Image.SCALE_SMOOTH);
-		}
-
+	      if (0 == size.width || 0 == size.height) {
+	      	final Dimension sizeNew = HelperGraphic.getScaledSize(new Dimension(image.getWidth(), image.getHeight()), size);
+	      	
+	      	result = new BufferedImage(sizeNew.width, sizeNew.height, image.getType());  
+	      	
+	      	final Graphics2D g2d = result.createGraphics();  
+	      	g2d.setRenderingHints(getHQRenderingHints());
+	      	g2d.drawImage(image, 0, 0, sizeNew.width, sizeNew.height, 0, 0, image.getWidth(), image.getHeight(), null);  
+	      	g2d.dispose();  		         
+	      } else {
+	      	result = new BufferedImage(size.width, size.height, image.getType());  
+	      	
+	      	final Graphics2D g2d = result.createGraphics();
+	      	g2d.setRenderingHints(getHQRenderingHints());
+	      	g2d.drawImage(image, 0, 0, size.width, size.height, 0, 0, image.getWidth(), image.getHeight(), null);  
+	      	g2d.dispose();  
+	      	
+	      }
+		} 
+		
+//		final Image result;
+//
+//		if (0 == size.width || 0 == size.height) {
+//			final Dimension sizeNew = HelperGraphic.getScaledSize(new Dimension(image.getWidth(), image.getHeight()), size);
+//			result = image.getScaledInstance(sizeNew.width, sizeNew.height, Image.SCALE_SMOOTH);
+//		} else {
+//			result = image.getScaledInstance(size.width, size.height, Image.SCALE_SMOOTH);
+//		}
+//
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
@@ -332,15 +429,16 @@ public abstract class HelperImage {
 	}
 
 	/**
-	 * Gets a {@link BufferedImage} from a given {@link Image}.
+	 * Returns a {@link BufferedImage} from a given {@link Image}.
 	 *
 	 * @param image to convert
+	 * @param type BufferedImage.TYPE_xxx (e.g. BufferedImage.TYPE_INT_RGB, BufferedImage.TYPE_INT_ARGB)
 	 * @return {@link BufferedImage} from the given {@link Image}
 	 * @see BufferedImage
 	 * @see Image
 	 * @since 0.9.1
 	 */
-	public static BufferedImage getBufferedImage(final Image image) {
+	public static BufferedImage getBufferedImage(final Image image, int type) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(image));
 
 		final BufferedImage result;
@@ -352,7 +450,7 @@ public abstract class HelperImage {
 			loadImage(image);
 
 			result = new BufferedImage(image.getWidth(null),
-					image.getHeight(null), BufferedImage.TYPE_INT_RGB);
+					image.getHeight(null), type);
 
 			final Graphics2D g2 = result.createGraphics();
 			g2.drawImage(image, null, null);
@@ -362,7 +460,22 @@ public abstract class HelperImage {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
-
+	
+	/**
+	 * Returns a set of high quality {@link RenderingHints}.
+	 *
+	 * @return set of high quality {@link RenderingHints}
+	 * @see RenderingHints
+	 * @since 0.9.2
+	 */
+	public static RenderingHints getHQRenderingHints() {
+	    RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+	    hints.put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+	    hints.put(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+	    hints.put(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+	    hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+	    return hints;
+	}
 
 	/*
 	 * Private methods

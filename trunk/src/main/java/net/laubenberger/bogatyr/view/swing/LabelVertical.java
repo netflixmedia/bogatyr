@@ -48,7 +48,7 @@ import java.awt.image.BufferedImage;
  * This is a vertical Label.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100525)
  * @since 0.2.0
  */
 public class LabelVertical extends Panel implements Icon {
@@ -137,7 +137,7 @@ public class LabelVertical extends Panel implements Icon {
 	 * Private methods
 	 */
 
-	private void paintVertical(final Object g, final int x, final int y, final int width, final int height) {
+	private void paintVertical(final Graphics g, final int x, final int y, final int width, final int height) {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(g, x, y, width, height));
 
 		if (!(0 >= height || 0 >= width)) {
@@ -145,9 +145,9 @@ public class LabelVertical extends Panel implements Icon {
 			//		this.label.revalidate();
 
 			final BufferedImage buffer = new BufferedImage(height, width, BufferedImage.TYPE_INT_ARGB_PRE); // switch of width and height
-			final Graphics2D g2 = buffer.createGraphics();
+			final Graphics2D g2d = buffer.createGraphics();
 			label.setSize(new Dimension(height, width)); // switch of width and height
-			label.paint(g2);
+			label.paint(g2d);
 
 			final AffineTransform af = AffineTransform.getTranslateInstance((double) x, (double) (y + height));
 			final AffineTransform af2 = AffineTransform.getRotateInstance(-NINETY_DEGREES);

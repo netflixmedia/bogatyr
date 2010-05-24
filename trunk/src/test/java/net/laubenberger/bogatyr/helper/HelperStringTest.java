@@ -43,7 +43,7 @@ import net.laubenberger.bogatyr.helper.HelperString;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20100525
  */
 public class HelperStringTest {
 	@Test
@@ -99,14 +99,14 @@ public class HelperStringTest {
 //        assertNull(HelperString.getValidNumericString(null));
 //        assertNull(HelperString.getValidNumericString(HelperString.EMPTY_STRING)); 
 
-		assertEquals("123.0", HelperString.getValidNumericString("123.0")); //$NON-NLS-1$ //$NON-NLS-2$
-		assertEquals("123.23", HelperString.getValidNumericString("123.23abc")); //$NON-NLS-1$ //$NON-NLS-2$
-		assertEquals("-123.23", HelperString.getValidNumericString("--123.23abc")); //$NON-NLS-1$ //$NON-NLS-2$
-		assertEquals("123.23", HelperString.getValidNumericString("123.2-3abc")); //$NON-NLS-1$ //$NON-NLS-2$
-		assertEquals("123.23", HelperString.getValidNumericString("123..23")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("123.0", HelperString.getNumericString("123.0")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("123.23", HelperString.getNumericString("123.23abc")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("-123.23", HelperString.getNumericString("--123.23abc")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("123.23", HelperString.getNumericString("123.2-3abc")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("123.23", HelperString.getNumericString("123..23")); //$NON-NLS-1$ //$NON-NLS-2$
 
-		assertNull(HelperString.getValidNumericString(".")); //$NON-NLS-1$
-		assertNull(HelperString.getValidNumericString("-")); //$NON-NLS-1$
+		assertNull(HelperString.getNumericString(".")); //$NON-NLS-1$
+		assertNull(HelperString.getNumericString("-")); //$NON-NLS-1$
 	}
 
 	@Test

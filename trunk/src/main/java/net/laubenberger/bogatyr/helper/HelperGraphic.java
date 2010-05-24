@@ -32,9 +32,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
-import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
 import java.util.List;
@@ -50,30 +48,30 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for graphic operations
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100525)
  * @since 0.4.0
  */
 public abstract class HelperGraphic {
 	private static final Logger log = LoggerFactory.getLogger(HelperGraphic.class);
 
-	/**
-	 * Enable anti-aliasing on a {@link Graphics2D} container.
-	 *
-	 * @param graphics {@link Graphics2D} container
-	 * @see Graphics2D
-	 * @since 0.4.0
-	 */
-	public static void enableAntialiasing(final Graphics2D graphics) {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(graphics));
-		if (null == graphics) {
-			throw new RuntimeExceptionIsNull("graphics"); //$NON-NLS-1$
-		}
-
-		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
+//	/**
+//	 * Enable anti-aliasing on a {@link Graphics2D} container.
+//	 *
+//	 * @param graphics {@link Graphics2D} container
+//	 * @see Graphics2D
+//	 * @since 0.4.0
+//	 */
+//	public static void enableAntialiasing(final Graphics2D graphics) {
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(graphics));
+//		if (null == graphics) {
+//			throw new RuntimeExceptionIsNull("graphics"); //$NON-NLS-1$
+//		}
+//
+//		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+//
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+//	}
 
 	/**
 	 * Calculates the center of given a {@link Dimension}.

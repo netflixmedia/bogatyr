@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100525)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -173,40 +173,38 @@ public abstract class HelperString {
 	 * @return numeric {@link String}
 	 * @since 0.7.0
 	 */
-	public static String getValidNumericString(final String text) { //$JUnit$
+	public static String getNumericString(final String text) { //$JUnit$
 		log.debug(HelperLog.methodStart(text));
-		if (!isValid(text)) {
-			throw new RuntimeExceptionIsNullOrEmpty("text"); //$NON-NLS-1$
-		}
-
-		boolean isNegative = false;
-		if (text.startsWith(NEGATIVE_SIGN)) {
-			isNegative = true;
-		}
-
-		final String temp = text.replaceAll("[^0-9.]+", EMPTY_STRING); //$NON-NLS-1$
-
-		boolean isPeriod = false;
-		final StringBuilder sb = new StringBuilder(temp.length());
-
-		// remove multiple periods
-		for (int ii = 0; ii < temp.length(); ii++) {
-			final char character = temp.charAt(ii);
-
-			if ('.' == character) {
-				if (!isPeriod) {
-					sb.append(PERIOD);
-					isPeriod = true;
-				}
-			} else {
-				sb.append(character);
-			}
-		}
-
+		
 		String result = null;
-
-		if (!(temp.isEmpty() || isPeriod && 1 == sb.length())) {
-			result = isNegative ? NEGATIVE_SIGN + sb.toString() : sb.toString();
+		if (isValid(text)) {
+			boolean isNegative = false;
+			if (text.startsWith(NEGATIVE_SIGN)) {
+				isNegative = true;
+			}
+	
+			final String temp = text.replaceAll("[^0-9.]+", EMPTY_STRING); //$NON-NLS-1$
+	
+			boolean isPeriod = false;
+			final StringBuilder sb = new StringBuilder(temp.length());
+	
+			// remove multiple periods
+			for (int ii = 0; ii < temp.length(); ii++) {
+				final char character = temp.charAt(ii);
+	
+				if ('.' == character) {
+					if (!isPeriod) {
+						sb.append(PERIOD);
+						isPeriod = true;
+					}
+				} else {
+					sb.append(character);
+				}
+			}
+	
+			if (!(temp.isEmpty() || isPeriod && 1 == sb.length())) {
+				result = isNegative ? NEGATIVE_SIGN + sb.toString() : sb.toString();
+			}
 		}
 
 		log.debug(HelperLog.methodExit(result));
