@@ -68,7 +68,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100525)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -425,14 +425,14 @@ public abstract class HelperPdf {
 		for (int ii = 0; ii < slides.length; ii++) {
 
 			final BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-			final Graphics2D graphics = image.createGraphics();
+			final Graphics2D g2d = image.createGraphics();
 
 			// clear the drawing area
-			graphics.setPaint(Color.WHITE);
-			graphics.fill(new Rectangle2D.Float(0, 0, size.width, size.height));
+			g2d.setPaint(Color.WHITE);
+			g2d.fill(new Rectangle2D.Float(0, 0, size.width, size.height));
 
 			// render
-			slides[ii].draw(graphics);
+			slides[ii].draw(g2d);
 
 			HelperImage.writeImage(files[ii], IMAGE_TYPE, image);
 		}

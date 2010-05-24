@@ -38,22 +38,21 @@ import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.helper.HelperString;
-import net.laubenberger.bogatyr.helper.HelperSwing;
 import net.laubenberger.bogatyr.misc.Displayable;
 import net.laubenberger.bogatyr.misc.Fadeable;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This is an extended JFrame.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100525)
  * @since 0.2.0
  */
 public class Frame extends JFrame implements Fadeable, Displayable {
@@ -68,7 +67,7 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 	{
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
-		HelperSwing.setMacOSXMenu();
+//		HelperSwing.setMacOSXMenu();
 	}
 
 	/*

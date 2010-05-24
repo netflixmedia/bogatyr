@@ -56,7 +56,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a format factory.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100525)
  * @since 0.9.0
  */
 public abstract class FormatFactory {
@@ -215,7 +215,7 @@ public abstract class FormatFactory {
 
 			@Override
 			public Object stringToValue(final String string) throws ParseException {
-				final String text = HelperString.getValidNumericString(string);
+				final String text = HelperString.getNumericString(string);
 
 				return null == text ? null : super.stringToValue(text);
 			}
@@ -287,10 +287,10 @@ public abstract class FormatFactory {
 
 			@Override
 			public Object stringToValue(final String s) {
-				final String text = HelperString.getValidNumericString(s);
+				final String text = HelperString.getNumericString(s);
 
 				if (null != text) {
-					final Number number = new BigDecimal(HelperString.getValidNumericString(s));
+					final Number number = new BigDecimal(HelperString.getNumericString(s));
 
 					return number.doubleValue() / HelperNumber.NUMBER_100.doubleValue();
 				}

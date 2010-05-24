@@ -41,7 +41,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a helper class for numbers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100525)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
@@ -203,7 +203,7 @@ public abstract class HelperNumber {
 	public static BigDecimal getNumber(final String text) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(text));
 
-		final String value = HelperString.getValidNumericString(text);
+		final String value = HelperString.getNumericString(text);
 
 		BigDecimal result = null;
 

@@ -27,26 +27,25 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
-import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
-import net.laubenberger.bogatyr.helper.HelperSwing;
-import net.laubenberger.bogatyr.misc.Displayable;
-
-import javax.swing.JDialog;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
 import java.awt.Window;
+
+import javax.swing.JDialog;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
+import net.laubenberger.bogatyr.helper.HelperObject;
+import net.laubenberger.bogatyr.misc.Displayable;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This is an extended JDialog.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100525)
  * @since 0.4.0
  */
 public class Dialog extends JDialog implements Displayable {
@@ -56,7 +55,7 @@ public class Dialog extends JDialog implements Displayable {
 
 	{
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		HelperSwing.setMacOSXMenu();
+//		HelperSwing.setMacOSXMenu();
 	}
 
 	/*
