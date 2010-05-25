@@ -68,7 +68,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100525)
+ * @version 0.9.2 (20100526)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -137,7 +137,7 @@ public abstract class HelperPdf {
 	 * @see Rectangle
 	 * @since 0.9.2
 	 */
-	public static void writePdfFromImage(Rectangle pageSize, boolean scale, final File file, final File... files)
+	public static void writePdfFromImage(final Rectangle pageSize, final boolean scale, final File file, final File... files)
 			throws DocumentException, IOException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, files));
 		if (null == pageSize) {
@@ -192,7 +192,7 @@ public abstract class HelperPdf {
 	 * @see Rectangle
 	 * @since 0.9.2
 	 */
-	public static void writePdfFromImage(Rectangle pageSize, boolean scale, final File file,
+	public static void writePdfFromImage(final Rectangle pageSize, final boolean scale, final File file,
 			final java.awt.Image... images) throws DocumentException, IOException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, images));
 		if (null == pageSize) {
@@ -357,7 +357,7 @@ public abstract class HelperPdf {
 	 * @see Rectangle
 	 * @since 0.9.2
 	 */
-	public static void writePdfFromPpt(Rectangle pageSize, boolean scale, final File file, final SlideShow ppt) throws IOException, DocumentException {
+	public static void writePdfFromPpt(final Rectangle pageSize, final boolean scale, final File file, final SlideShow ppt) throws IOException, DocumentException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, ppt));
 
 		final File[] files = new File[ppt.getSlides().length];
@@ -395,7 +395,7 @@ public abstract class HelperPdf {
 	 * @see Rectangle
 	 * @since 0.9.2
 	 */
-	public static void writePdfFromPpt(Rectangle pageSize, boolean scale, final File file, final File pptFile) throws IOException, DocumentException {
+	public static void writePdfFromPpt(final Rectangle pageSize, final boolean scale, final File file, final File pptFile) throws IOException, DocumentException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, pptFile));
 
 		InputStream is = null;

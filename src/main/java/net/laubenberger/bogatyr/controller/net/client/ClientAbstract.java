@@ -47,7 +47,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100525)
+ * @version 0.9.2 (20100526)
  * @since 0.7.0
  */
 public abstract class ClientAbstract extends ExtendedObjectAbstract implements Client {
@@ -55,7 +55,7 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 
 	private Thread thread;
 
-	private Collection<ListenerClient> listeners = new HashSet<ListenerClient>();
+	private final Collection<ListenerClient> listeners = new HashSet<ListenerClient>();
 
 	private String host;
 	private int port;

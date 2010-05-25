@@ -42,14 +42,14 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * Loads JAR files during runtime.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100526)
  * @since 0.9.2
  */
 public class JarLoader extends URLClassLoader {
 	private static final Logger log = LoggerFactory.getLogger(JarLoader.class);
 	
 	
-	public JarLoader(URL... urls){
+	public JarLoader(final URL... urls){
 		super(urls);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(urls));
 	}
@@ -67,7 +67,7 @@ public class JarLoader extends URLClassLoader {
 	public Object createInstance(final String clazz) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clazz));
 
-		final Object result = HelperObject.createInstance(super.loadClass(clazz, true));
+		final Object result = HelperObject.createInstance(loadClass(clazz, true));
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -91,7 +91,7 @@ public class JarLoader extends URLClassLoader {
 	public Object createInstance(final String clazz, final Class<?>[] paramClazzes, final Object[] params) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SecurityException, InvocationTargetException, NoSuchMethodException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clazz, paramClazzes, params));
 
-		final Object result = HelperObject.createInstance(super.loadClass(clazz, true), paramClazzes, params);
+		final Object result = HelperObject.createInstance(loadClass(clazz, true), paramClazzes, params);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

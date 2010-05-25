@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
  * It also provides informations about vm memory, temp/user directory and variables.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100526)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -417,11 +417,11 @@ public abstract class HelperEnvironment {
 	public static Country getUserCountry() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		String countryString = System.getProperty("user.country"); //$NON-NLS-1$
+		final String countryString = System.getProperty("user.country"); //$NON-NLS-1$
 		Country result = Country.UNKNOWN;
 		
-		for (Country country : Country.values()) {  
-	     if (countryString.equals(country.getCode())) {
+		for (final Country country : Country.values()) {
+	     if (HelperObject.isEquals(countryString, country.getCode())) {
 	   	  result = country;
 	   	  break;
 	     }
@@ -440,11 +440,11 @@ public abstract class HelperEnvironment {
 	public static Language getUserLanguage() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		String languageString = System.getProperty("user.language"); //$NON-NLS-1$
+		final String languageString = System.getProperty("user.language"); //$NON-NLS-1$
 		Language result = Language.UNKNOWN;
 		
-		for (Language language : Language.values()) {  
-	     if (languageString.equals(language.getCode())) {
+		for (final Language language : Language.values()) {
+	     if (HelperObject.isEquals(languageString, language.getCode())) {
 	   	  result = language;
 	   	  break;
 	     }

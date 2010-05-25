@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.view.swing.worker.Worker;
  * The implementation of the worker model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100525)
+ * @version 0.9.2 (20100526)
  * @since 0.9.0
  */
 public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
@@ -53,7 +53,7 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 
 	private static final Logger log = LoggerFactory.getLogger(ModelApplicationImpl.class);
 
-	private transient List<Worker> listWorker = new ArrayList<Worker>();
+	private transient List<Worker> workers = new ArrayList<Worker>();
 
 
 	public ModelWorkerImpl() {
@@ -66,13 +66,18 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 	 */
 
 	@Override
+	public List<Worker> getWorkers() {
+		return workers;
+	}
+
+	@Override
 	public void add(final Worker worker) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(worker));
 		if (null == worker) {
 			throw new RuntimeExceptionIsNull("worker"); //$NON-NLS-1$
 		}
 
-		listWorker.add(worker);
+		workers.add(worker);
 		setChanged();
 		notifyObservers(METHOD_ADD);
 
@@ -87,7 +92,7 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 		}
 
 		worker.cancel(true);
-		listWorker.remove(worker);
+		workers.remove(worker);
 		setChanged();
 		notifyObservers(METHOD_REMOVE);
 
@@ -98,11 +103,11 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 	public void removeAll() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		for (final Worker worker : listWorker) {
+		for (final Worker worker : workers) {
 			worker.cancel(true);
 		}
 
-		listWorker = new ArrayList<Worker>();
+		workers = new ArrayList<Worker>();
 		setChanged();
 		notifyObservers(METHOD_REMOVE_ALL);
 
@@ -113,7 +118,7 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 	public int count() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listWorker.size()));
-		return listWorker.size();
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(workers.size()));
+		return workers.size();
 	}
 }

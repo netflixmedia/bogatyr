@@ -37,6 +37,7 @@ import javax.swing.KeyStroke;
 
 import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperLog;
+import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.model.misc.Language;
 import net.laubenberger.bogatyr.model.misc.Platform;
@@ -49,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * Localizer implementation for file access.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100519)
+ * @version 0.9.2 (20100526)
  * @since 0.1.0
  */
 public class LocalizerFile extends LocalizerAbstract {
@@ -214,9 +215,9 @@ public class LocalizerFile extends LocalizerAbstract {
 		final List<Language> result = new ArrayList<Language>();
 		
 		for (final Language language : Language.values()) {
-			ResourceBundle bundle = ResourceBundle.getBundle(localizerBase, language.getLocale());
+			final ResourceBundle bundle = ResourceBundle.getBundle(localizerBase, language.getLocale());
 			
-			if (language.getLocale().equals(bundle.getLocale())) {
+			if (HelperObject.isEquals(language.getLocale(), bundle.getLocale())) {
 				result.add(language);
 			}
 		}

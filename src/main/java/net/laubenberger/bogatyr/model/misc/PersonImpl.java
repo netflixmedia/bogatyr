@@ -51,7 +51,7 @@ import net.laubenberger.bogatyr.model.ModelAbstract;
  * The implementation of the person model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100526)
  * @since 0.9.1
  */
 @XmlRootElement(name = "person")
@@ -83,9 +83,9 @@ public class PersonImpl extends ModelAbstract implements Person {
 
 	public PersonImpl(final String name, final String forename, final Date birthday,
 							final Gender gender, final String street, final String zip, final String city,
-							final Country country, final String phoneNumber, final String faxNumber, final String email, final URL website, final List<Organization> listOrganization, final List<Role> listRole, final Map<String, String> mapTag) {
+							final Country country, final String phoneNumber, final String faxNumber, final String email, final URL url, final List<Organization> listOrganization, final List<Role> listRole, final Map<String, String> mapTag) {
 		super(mapTag);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, forename, birthday, gender, street, zip, city, country, phoneNumber, faxNumber, email, website, mapTag));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, forename, birthday, gender, street, zip, city, country, phoneNumber, faxNumber, email, url, mapTag));
 		this.name = name;
 		this.forename = forename;
 		this.birthday = birthday;
@@ -97,7 +97,7 @@ public class PersonImpl extends ModelAbstract implements Person {
 		this.phoneNumber = phoneNumber;
 		this.faxNumber = faxNumber;
 		this.email = email;
-		this.url = website;
+		this.url = url;
 		this.listOrganization = listOrganization;
 		this.listRole = listRole;
 	}
@@ -111,99 +111,99 @@ public class PersonImpl extends ModelAbstract implements Person {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((faxNumber == null) ? 0 : faxNumber.hashCode());
-		result = prime * result + ((forename == null) ? 0 : forename.hashCode());
-		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-		result = prime * result + ((listOrganization == null) ? 0 : listOrganization.hashCode());
-		result = prime * result + ((listRole == null) ? 0 : listRole.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result + ((street == null) ? 0 : street.hashCode());
-		result = prime * result + ((url == null) ? 0 : url.hashCode());
-		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
+		result = prime * result + ((null == birthday) ? 0 : birthday.hashCode());
+		result = prime * result + ((null == city) ? 0 : city.hashCode());
+		result = prime * result + ((null == country) ? 0 : country.hashCode());
+		result = prime * result + ((null == email) ? 0 : email.hashCode());
+		result = prime * result + ((null == faxNumber) ? 0 : faxNumber.hashCode());
+		result = prime * result + ((null == forename) ? 0 : forename.hashCode());
+		result = prime * result + ((null == gender) ? 0 : gender.hashCode());
+		result = prime * result + ((null == listOrganization) ? 0 : listOrganization.hashCode());
+		result = prime * result + ((null == listRole) ? 0 : listRole.hashCode());
+		result = prime * result + ((null == name) ? 0 : name.hashCode());
+		result = prime * result + ((null == phoneNumber) ? 0 : phoneNumber.hashCode());
+		result = prime * result + ((null == street) ? 0 : street.hashCode());
+		result = prime * result + ((null == url) ? 0 : url.hashCode());
+		result = prime * result + ((null == zip) ? 0 : zip.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
 		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PersonImpl other = (PersonImpl) obj;
-		if (birthday == null) {
-			if (other.birthday != null)
+		final PersonImpl other = (PersonImpl) obj;
+		if (null == birthday) {
+			if (null != other.birthday)
 				return false;
 		} else if (!birthday.equals(other.birthday))
 			return false;
-		if (city == null) {
-			if (other.city != null)
+		if (null == city) {
+			if (null != other.city)
 				return false;
 		} else if (!city.equals(other.city))
 			return false;
-		if (country == null) {
-			if (other.country != null)
+		if (null == country) {
+			if (null != other.country)
 				return false;
 		} else if (!country.equals(other.country))
 			return false;
-		if (email == null) {
-			if (other.email != null)
+		if (null == email) {
+			if (null != other.email)
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (faxNumber == null) {
-			if (other.faxNumber != null)
+		if (null == faxNumber) {
+			if (null != other.faxNumber)
 				return false;
 		} else if (!faxNumber.equals(other.faxNumber))
 			return false;
-		if (forename == null) {
-			if (other.forename != null)
+		if (null == forename) {
+			if (null != other.forename)
 				return false;
 		} else if (!forename.equals(other.forename))
 			return false;
-		if (gender == null) {
-			if (other.gender != null)
+		if (null == gender) {
+			if (null != other.gender)
 				return false;
 		} else if (!gender.equals(other.gender))
 			return false;
-		if (listOrganization == null) {
-			if (other.listOrganization != null)
+		if (null == listOrganization) {
+			if (null != other.listOrganization)
 				return false;
 		} else if (!listOrganization.equals(other.listOrganization))
 			return false;
-		if (listRole == null) {
-			if (other.listRole != null)
+		if (null == listRole) {
+			if (null != other.listRole)
 				return false;
 		} else if (!listRole.equals(other.listRole))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (null == name) {
+			if (null != other.name)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (phoneNumber == null) {
-			if (other.phoneNumber != null)
+		if (null == phoneNumber) {
+			if (null != other.phoneNumber)
 				return false;
 		} else if (!phoneNumber.equals(other.phoneNumber))
 			return false;
-		if (street == null) {
-			if (other.street != null)
+		if (null == street) {
+			if (null != other.street)
 				return false;
 		} else if (!street.equals(other.street))
 			return false;
-		if (url == null) {
-			if (other.url != null)
+		if (null == url) {
+			if (null != other.url)
 				return false;
 		} else if (!url.equals(other.url))
 			return false;
-		if (zip == null) {
-			if (other.zip != null)
+		if (null == zip) {
+			if (null != other.zip)
 				return false;
 		} else if (!zip.equals(other.zip))
 			return false;
@@ -524,7 +524,7 @@ public class PersonImpl extends ModelAbstract implements Person {
 	}	
 	
 	@Override
-	public void addOrganization(Organization organization) {
+	public void addOrganization(final Organization organization) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(organization));
 		if (null == organization) {
 			throw new RuntimeExceptionIsNull("organization"); //$NON-NLS-1$
@@ -541,7 +541,7 @@ public class PersonImpl extends ModelAbstract implements Person {
 	}
 
 	@Override
-	public void addRole(Role role) {
+	public void addRole(final Role role) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(role));
 		if (null == role) {
 			throw new RuntimeExceptionIsNull("role"); //$NON-NLS-1$

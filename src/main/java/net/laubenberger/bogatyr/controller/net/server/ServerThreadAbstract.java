@@ -52,7 +52,7 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 
 	private Thread thread;
 
-	private Collection<ListenerServerThread> listeners = new HashSet<ListenerServerThread>();
+	private final Collection<ListenerServerThread> listeners = new HashSet<ListenerServerThread>();
 
 	private Socket socket;
 

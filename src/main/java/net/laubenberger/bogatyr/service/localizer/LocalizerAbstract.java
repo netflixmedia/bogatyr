@@ -49,13 +49,13 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * Abstract localizer implementation.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100525)
+ * @version 0.9.2 (20100526)
  * @since 0.6.0
  */
 public abstract class LocalizerAbstract extends ServiceAbstract implements Localizer {
 	private static final Logger log = LoggerFactory.getLogger(LocalizerAbstract.class);
 
-	private Collection<ListenerLocale> listeners = new HashSet<ListenerLocale>();
+	private final Collection<ListenerLocale> listeners = new HashSet<ListenerLocale>();
 
 	private final Event<Localizer> event = new Event<Localizer>(this);
 

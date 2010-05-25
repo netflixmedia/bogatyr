@@ -43,13 +43,13 @@ import org.slf4j.LoggerFactory;
  * This class represents a skeleton for the worker.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100525)
+ * @version 0.9.2 (20100526)
  * @since 0.9.0
  */
 public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker {
 	private static final Logger log = LoggerFactory.getLogger(WorkerAbstract.class);
 
-	private Collection<ListenerWorker> listeners = new HashSet<ListenerWorker>();
+	private final Collection<ListenerWorker> listeners = new HashSet<ListenerWorker>();
 
 	private final Event<Worker> event = new Event<Worker>(this);
 

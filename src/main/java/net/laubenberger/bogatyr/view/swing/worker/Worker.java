@@ -39,14 +39,17 @@ import net.laubenberger.bogatyr.misc.HolderListener;
  * Type definition for workers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100525)
+ * @version 0.9.2 (20100526)
  * @since 0.9.0
  */
 public interface Worker extends HolderListener<ListenerWorker> {
-	//marker interface, only used as type definition for workers
+	
+//	void setName(String name);
+//	
+//	void setDescription(String desc);
 
+	
 	//methods from SwingWorker
-
 	boolean cancel(boolean mayInterruptIfRunning);
 
 	int getProgress();
