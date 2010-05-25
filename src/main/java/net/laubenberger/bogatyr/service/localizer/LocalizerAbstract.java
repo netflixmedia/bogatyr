@@ -49,7 +49,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * Abstract localizer implementation.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100519)
+ * @version 0.9.2 (20100525)
  * @since 0.6.0
  */
 public abstract class LocalizerAbstract extends ServiceAbstract implements Localizer {
@@ -154,7 +154,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	}
 
 	@Override
-	public synchronized void addListener(final ListenerLocale listener) {
+	public void addListener(final ListenerLocale listener) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
@@ -166,7 +166,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	}
 
 	@Override
-	public synchronized void deleteListener(final ListenerLocale listener) {
+	public void deleteListener(final ListenerLocale listener) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
@@ -176,21 +176,4 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
-
-//	@Override
-//	public synchronized void deleteListeners() {
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-//
-//		listeners = new HashSet<ListenerLocale>();
-//
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-//	}
-//
-//	@Override
-//	public int countListeners() {
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-//
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listeners.size()));
-//		return listeners.size();
-//	}
 }

@@ -43,7 +43,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * This is a timer which informs all added listeners about its state.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100519)
+ * @version 0.9.2 (20100525)
  * @since 0.6.0
  */
 public abstract class TimerAbstract extends ServiceAbstract implements TimeMachine {
@@ -164,7 +164,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 	}
 
 	@Override
-	public synchronized void addListener(final ListenerTimer listener) {
+	public void addListener(final ListenerTimer listener) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
@@ -176,7 +176,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 	}
 
 	@Override
-	public synchronized void deleteListener(final ListenerTimer listener) {
+	public void deleteListener(final ListenerTimer listener) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
@@ -186,21 +186,4 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
-
-//	@Override
-//	public synchronized void deleteListeners() {
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-//
-//		listeners = new HashSet<ListenerTimer>();
-//
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-//	}
-//
-//	@Override
-//	public int countListeners() {
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-//
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listeners.size()));
-//		return listeners.size();
-//	}
 }

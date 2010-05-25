@@ -39,7 +39,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a timer which informs all added listeners about its state.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100525)
  * @since 0.6.0
  */
 public class TimerImpl extends TimerAbstract implements Timer {
@@ -78,7 +78,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
 	}
 
 	@Override
-	public synchronized void start(final long interval) {
+	public void start(final long interval) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(interval));
 		if (0L > interval) {
 			throw new RuntimeExceptionMustBeGreater("interval", interval, 0); //$NON-NLS-1$
@@ -90,7 +90,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
 	}
 
 	@Override
-	public synchronized void start(final long delay, final long interval) {
+	public void start(final long delay, final long interval) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(delay, interval));
 		if (0L > delay) {
 			throw new RuntimeExceptionMustBeGreater("delay", delay, 0); //$NON-NLS-1$
@@ -110,7 +110,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
 	}
 
 	@Override
-	public synchronized void stop() {
+	public void stop() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		getTimer().cancel();

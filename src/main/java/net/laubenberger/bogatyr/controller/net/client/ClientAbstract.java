@@ -47,7 +47,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100519)
+ * @version 0.9.2 (20100525)
  * @since 0.7.0
  */
 public abstract class ClientAbstract extends ExtendedObjectAbstract implements Client {
@@ -240,7 +240,7 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 	}
 
 	@Override
-	public synchronized void addListener(final ListenerClient listener) {
+	public void addListener(final ListenerClient listener) {
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
@@ -249,21 +249,11 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 	}
 
 	@Override
-	public synchronized void deleteListener(final ListenerClient listener) {
+	public void deleteListener(final ListenerClient listener) {
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listeners.remove(listener);
 	}
-
-//	@Override
-//	public synchronized void deleteListeners() {
-//		listeners = new HashSet<ListenerClient>();
-//	}
-//
-//	@Override
-//	public int countListeners() {
-//		return listeners.size();
-//	}
 }

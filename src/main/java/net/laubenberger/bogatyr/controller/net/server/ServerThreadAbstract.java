@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  * This is a skeleton for server threads.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100519)
+ * @version 0.9.2 (20100525)
  * @since 0.7.0
  */
 public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implements ServerThread {
@@ -195,7 +195,7 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 	}
 
 	@Override
-	public synchronized void addListener(final ListenerServerThread listener) {
+	public void addListener(final ListenerServerThread listener) {
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
@@ -204,21 +204,11 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 	}
 
 	@Override
-	public synchronized void deleteListener(final ListenerServerThread listener) {
+	public void deleteListener(final ListenerServerThread listener) {
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listeners.remove(listener);
 	}
-
-//	@Override
-//	public synchronized void deleteListeners() {
-//		listeners = new HashSet<ListenerServerThread>();
-//	}
-//
-//	@Override
-//	public int countListeners() {
-//		return listeners.size();
-//	}
 }

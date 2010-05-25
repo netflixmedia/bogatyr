@@ -32,15 +32,17 @@ import java.beans.PropertyChangeSupport;
 
 import javax.swing.SwingWorker.StateValue;
 
+import net.laubenberger.bogatyr.misc.HolderListener;
+
 
 /**
  * Type definition for workers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100525)
  * @since 0.9.0
  */
-public interface Worker {
+public interface Worker extends HolderListener<ListenerWorker> {
 	//marker interface, only used as type definition for workers
 
 	//methods from SwingWorker
