@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100526)
  * @since 0.9.1
  */
 @XmlRootElement(name = "document")
@@ -102,59 +102,59 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + build;
-		result = prime * result + ((created == null) ? 0 : created.hashCode());
-		result = prime * result + ((listOrganization == null) ? 0 : listOrganization.hashCode());
-		result = prime * result + ((listPerson == null) ? 0 : listPerson.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((url == null) ? 0 : url.hashCode());
-		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
-		result = prime * result + ((version == null) ? 0 : version.hashCode());
+		result = prime * result + ((null == created) ? 0 : created.hashCode());
+		result = prime * result + ((null == listOrganization) ? 0 : listOrganization.hashCode());
+		result = prime * result + ((null == listPerson) ? 0 : listPerson.hashCode());
+		result = prime * result + ((null == name) ? 0 : name.hashCode());
+		result = prime * result + ((null == url) ? 0 : url.hashCode());
+		result = prime * result + ((null == uuid) ? 0 : uuid.hashCode());
+		result = prime * result + ((null == version) ? 0 : version.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj)
 			return true;
 		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DocumentImpl other = (DocumentImpl) obj;
+		final DocumentImpl other = (DocumentImpl) obj;
 		if (build != other.build)
 			return false;
-		if (created == null) {
-			if (other.created != null)
+		if (null == created) {
+			if (null != other.created)
 				return false;
 		} else if (!created.equals(other.created))
 			return false;
-		if (listOrganization == null) {
-			if (other.listOrganization != null)
+		if (null == listOrganization) {
+			if (null != other.listOrganization)
 				return false;
 		} else if (!listOrganization.equals(other.listOrganization))
 			return false;
-		if (listPerson == null) {
-			if (other.listPerson != null)
+		if (null == listPerson) {
+			if (null != other.listPerson)
 				return false;
 		} else if (!listPerson.equals(other.listPerson))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (null == name) {
+			if (null != other.name)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (url == null) {
-			if (other.url != null)
+		if (null == url) {
+			if (null != other.url)
 				return false;
 		} else if (!url.equals(other.url))
 			return false;
-		if (uuid == null) {
-			if (other.uuid != null)
+		if (null == uuid) {
+			if (null != other.uuid)
 				return false;
 		} else if (!uuid.equals(other.uuid))
 			return false;
-		if (version == null) {
-			if (other.version != null)
+		if (null == version) {
+			if (null != other.version)
 				return false;
 		} else if (!version.equals(other.version))
 			return false;
@@ -343,7 +343,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 	
 	@Override
-	public void addOrganization(Organization organization) {
+	public void addOrganization(final Organization organization) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(organization));
 		if (null == organization) {
 			throw new RuntimeExceptionIsNull("organization"); //$NON-NLS-1$
@@ -360,7 +360,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	@Override
-	public void addPerson(Person person) {
+	public void addPerson(final Person person) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(person));
 		if (null == person) {
 			throw new RuntimeExceptionIsNull("person"); //$NON-NLS-1$

@@ -27,6 +27,8 @@
 
 package net.laubenberger.bogatyr.model.worker;
 
+import java.util.List;
+
 import net.laubenberger.bogatyr.model.Model;
 import net.laubenberger.bogatyr.view.swing.worker.Worker;
 
@@ -35,15 +37,16 @@ import net.laubenberger.bogatyr.view.swing.worker.Worker;
  * The interface for the worker model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100526)
  * @since 0.9.0
  */
 public interface ModelWorker extends Model {
+	String MEMBER_WORKERS = "workers"; //$NON-NLS-1$
 	String METHOD_ADD = "add"; //$NON-NLS-1$
 	String METHOD_REMOVE = "remove"; //$NON-NLS-1$
 	String METHOD_REMOVE_ALL = "removeAll"; //$NON-NLS-1$
 
-//    List<Worker> getWorkers();
+	List<Worker> getWorkers();
 
 	void add(Worker worker);
 

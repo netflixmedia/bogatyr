@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100519)
+ * @version 0.9.2 (20100526)
  * @since 0.7.0
  */
 public abstract class HelperArray {
@@ -335,7 +335,7 @@ public abstract class HelperArray {
 	 */
 	public static <E> E[] getArray(final E... elements) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(elements));
-		if (!HelperArray.isValid(elements)) {
+		if (!isValid(elements)) {
 			throw new RuntimeExceptionIsNullOrEmpty("elements"); //$NON-NLS-1$
 		}
 

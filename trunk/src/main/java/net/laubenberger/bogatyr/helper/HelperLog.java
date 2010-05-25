@@ -38,7 +38,7 @@ import net.laubenberger.bogatyr.model.unit.Bit;
  * This is a helper class for logging.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100526)
  * @since 0.9.1
  */
 public abstract class HelperLog {
@@ -226,9 +226,9 @@ public abstract class HelperLog {
 		sb.append(" MB"); //$NON-NLS-1$
 		sb.append(HelperString.NEW_LINE);
 
-		List<File> files = HelperIO.getAvailableDrives();
+		final List<File> files = HelperIO.getAvailableDrives();
 
-		for (File root : files) {
+		for (final File root : files) {
 //			if (HelperIO.isDrive(root)) {
 				sb.append("Drive: "); //$NON-NLS-1$
 				sb.append(root.getAbsolutePath());

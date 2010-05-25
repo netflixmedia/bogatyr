@@ -43,13 +43,13 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * This is a timer which informs all added listeners about its state.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100525)
+ * @version 0.9.2 (20100526)
  * @since 0.6.0
  */
 public abstract class TimerAbstract extends ServiceAbstract implements TimeMachine {
 	private static final Logger log = LoggerFactory.getLogger(TimerAbstract.class);
 
-	private Collection<ListenerTimer> listeners = new HashSet<ListenerTimer>();
+	private final Collection<ListenerTimer> listeners = new HashSet<ListenerTimer>();
 
 	private final Event<TimeMachine> event = new Event<TimeMachine>(this);
 
