@@ -40,7 +40,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a countdown timer which informs all added listeners about its state.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100525)
  * @since 0.6.0
  */
 public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer {
@@ -62,7 +62,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 	 */
 
 	@Override
-	public synchronized void start(final long runtime) {
+	public void start(final long runtime) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(runtime));
 		if (0L > runtime) {
 			throw new RuntimeExceptionMustBeGreater("runtime", runtime, 0); //$NON-NLS-1$
@@ -74,7 +74,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 	}
 
 	@Override
-	public synchronized void start(final long delay, final long runtime, final long interval) {
+	public void start(final long delay, final long runtime, final long interval) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(delay, runtime, interval));
 		if (0L > delay) {
 			throw new RuntimeExceptionMustBeGreater("delay", delay, 0); //$NON-NLS-1$
@@ -99,7 +99,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 	}
 
 	@Override
-	public synchronized void stop() {
+	public void stop() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		getTimer().cancel();
@@ -117,7 +117,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 	}
 
 	@Override
-	public synchronized void setTime(final long runtime) {
+	public void setTime(final long runtime) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(runtime));
 		if (0L > runtime) {
 			throw new RuntimeExceptionMustBeGreater("runtime", runtime, 0); //$NON-NLS-1$

@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.view.swing.worker.Worker;
  * The implementation of the worker model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100525)
  * @since 0.9.0
  */
 public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
@@ -66,7 +66,7 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 	 */
 
 	@Override
-	public synchronized void add(final Worker worker) {
+	public void add(final Worker worker) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(worker));
 		if (null == worker) {
 			throw new RuntimeExceptionIsNull("worker"); //$NON-NLS-1$
@@ -80,7 +80,7 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 	}
 
 	@Override
-	public synchronized void remove(final Worker worker) {
+	public void remove(final Worker worker) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(worker));
 		if (null == worker) {
 			throw new RuntimeExceptionIsNull("worker"); //$NON-NLS-1$
@@ -95,7 +95,7 @@ public class ModelWorkerImpl extends ModelAbstract implements ModelWorker {
 	}
 
 	@Override
-	public synchronized void removeAll() {
+	public void removeAll() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		for (final Worker worker : listWorker) {

@@ -34,7 +34,6 @@ import javax.swing.SwingWorker;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.Event;
-import net.laubenberger.bogatyr.misc.HolderListener;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 import org.slf4j.Logger;
@@ -44,10 +43,10 @@ import org.slf4j.LoggerFactory;
  * This class represents a skeleton for the worker.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100519)
+ * @version 0.9.2 (20100525)
  * @since 0.9.0
  */
-public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker, HolderListener<ListenerWorker> {
+public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker {
 	private static final Logger log = LoggerFactory.getLogger(WorkerAbstract.class);
 
 	private Collection<ListenerWorker> listeners = new HashSet<ListenerWorker>();
@@ -90,7 +89,7 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 	 */
 
 	@Override
-	public synchronized void addListener(final ListenerWorker listener) {
+	public void addListener(final ListenerWorker listener) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
@@ -110,7 +109,7 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 //	}
 
 	@Override
-	public synchronized void deleteListener(final ListenerWorker listener) {
+	public void deleteListener(final ListenerWorker listener) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
