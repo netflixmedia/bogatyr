@@ -52,14 +52,14 @@ import org.slf4j.LoggerFactory;
  * Collected constants of very general utility.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.2 (20100527)
  * @since 0.7.0
  */
 public abstract class Constants {
 	private static final Logger log = LoggerFactory.getLogger(Constants.class);
 
 	//Bogatyr specific
-	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.92"), 275, HelperTime.getDate(2010, 5, 26, 1, 38, 0), UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.92"), 276, HelperTime.getDate(2010, 5, 27, 2, 1, 0), UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
