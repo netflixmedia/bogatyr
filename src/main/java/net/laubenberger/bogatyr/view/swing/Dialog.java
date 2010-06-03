@@ -32,6 +32,7 @@ import java.awt.GraphicsConfiguration;
 import java.awt.Window;
 
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
@@ -45,7 +46,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JDialog.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100525)
+ * @version 0.9.2 (20100603)
  * @since 0.4.0
  */
 public class Dialog extends JDialog implements Displayable {
@@ -53,9 +54,13 @@ public class Dialog extends JDialog implements Displayable {
 
 	private static final Logger log = LoggerFactory.getLogger(Dialog.class);
 
+//	static {
+//		JDialog.setDefaultLookAndFeelDecorated(true);
+//	}
+
 	{
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//		HelperSwing.setMacOSXMenu();
+		setLocationRelativeTo(getOwner());
 	}
 
 	/*

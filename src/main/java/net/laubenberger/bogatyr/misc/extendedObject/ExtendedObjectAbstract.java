@@ -35,21 +35,11 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is the skeleton for all extended objects.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100603)
  * @since 0.9.0
  */
 public abstract class ExtendedObjectAbstract implements ExtendedObject {
 	private final Date instantiationDate = new Date();
-
-
-	/*
-	 * Implemented methods
-	 */
-
-	@Override
-	public Date getInstantiationDate() {
-		return instantiationDate;
-	}
 
 
 	/*
@@ -59,5 +49,35 @@ public abstract class ExtendedObjectAbstract implements ExtendedObject {
 	@Override
 	public String toString() {
 		return HelperObject.toString(this);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((instantiationDate == null) ? 0 : instantiationDate.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		ExtendedObjectAbstract other = (ExtendedObjectAbstract) obj;
+		if (instantiationDate == null) {
+			if (other.instantiationDate != null) return false;
+		} else if (!instantiationDate.equals(other.instantiationDate)) return false;
+		return true;
+	}
+
+	
+	/*
+	 * Implemented methods
+	 */
+
+	@Override
+	public Date getInstantiationDate() {
+		return instantiationDate;
 	}
 }

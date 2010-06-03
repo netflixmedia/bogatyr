@@ -31,11 +31,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
-import java.awt.HeadlessException;
-import java.awt.Image;
 
-import javax.swing.JFrame;
+import javax.swing.JWindow;
 import javax.swing.UIManager;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
@@ -49,75 +48,55 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * This is an extended JFrame.
+ * This is an extended JWindow.
  *
  * @author Stefan Laubenberger
  * @version 0.9.2 (20100603)
- * @since 0.2.0
+ * @since 0.9.2
  */
-public class Frame extends JFrame implements Fadeable, Displayable {
+public class Window extends JWindow implements Fadeable, Displayable {
 	private static final long serialVersionUID = 7476360387134225315L;
 
-	private static final Logger log = LoggerFactory.getLogger(Frame.class);
+	private static final Logger log = LoggerFactory.getLogger(Window.class);
 
 	private boolean isFading;
 
 	private Color colorFader = new Color(0, 0, 0, 100);
 
-//	static {
-//		JFrame.setDefaultLookAndFeelDecorated(true);
-//	}
-
 	{
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setLocationRelativeTo(null);
+		setLocationRelativeTo(getOwner());
 	}
 
 	/*
 	 * Superclass constructors
 	 */
-
-	public Frame() {
+	
+	public Window() {
 		super();
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
-	public Frame(final GraphicsConfiguration gc) {
+	public Window(Frame owner) {
+		super(owner);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner));
+	}
+
+	public Window(GraphicsConfiguration gc) {
 		super(gc);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(gc));
 	}
 
-	public Frame(final String title, final GraphicsConfiguration gc) {
-		super(title, gc);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, gc));
+	public Window(Window owner, GraphicsConfiguration gc) {
+		super(owner, gc);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner, gc));
 	}
 
-	public Frame(final String title) throws HeadlessException {
-		super(title);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title));
+	public Window(Window owner) {
+		super(owner);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner));
 	}
 
-	/*
-	 * Own constructors
-	 */
-
-	public Frame(final String title, final Image icon) {
-		this();
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, icon));
-
-		setTitle(title);
-		setIconImage(icon);
-	}
-
-//	/**
-//     * Refresh the frame (validate() and repaint() in one method)
-//     */	
-//	public void refresh() {
-//		validate();
-//		repaint();
-//	}
-
-
+	
 	/*
 	 * Overridden methods
 	 */

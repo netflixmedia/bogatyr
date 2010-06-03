@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended TrayIcon with JPopupMenu support.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100525)
+ * @version 0.9.2 (20100603)
  * @since 0.9.2
  */
 public class TrayIcon extends java.awt.TrayIcon {
@@ -63,6 +63,7 @@ public class TrayIcon extends java.awt.TrayIcon {
 	
 	static final Platform PLATFORM = HelperEnvironment.getPlatform();
 	private static final int MAC_MENUBAR_OFFSET = 21;
+//	private static final int MAC_MENUBAR_OFFSET = 0;
 	
 	int counterMouseClicks = 1;
 	private Window window;
