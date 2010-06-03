@@ -38,7 +38,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObject;
  * Defines the methods for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100510)
+ * @version 0.9.2 (20100603)
  * @since 0.9.0
  */
 public interface Model extends ExtendedObject, Serializable, HolderObserver {
@@ -71,15 +71,15 @@ public interface Model extends ExtendedObject, Serializable, HolderObserver {
 	 */
 	void setTags(Map<String, String> tags);
 
-//	/**
-//	 * Returns the value of a tag for a given key.
-//	 *
-//	 * @param key for the tag
-//	 * @return tag value
-//	 * @since 0.9.1
-//	 */
-//	String getTag(String key);
-//
+	/**
+	 * Returns the value of a tag for a given key.
+	 *
+	 * @param key for the tag
+	 * @return tag value
+	 * @since 0.9.1
+	 */
+	String getTag(String key);
+
 	/**
 	 * Adds a key and value for a tag.
 	 *

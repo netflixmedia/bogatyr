@@ -39,10 +39,10 @@ import net.laubenberger.bogatyr.misc.HolderListener;
  * Type definition for workers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.2 (20100603)
  * @since 0.9.0
  */
-public interface Worker extends HolderListener<ListenerWorker> {
+public interface Worker extends Runnable, HolderListener<ListenerWorker> {
 	
 //	void setName(String name);
 //	

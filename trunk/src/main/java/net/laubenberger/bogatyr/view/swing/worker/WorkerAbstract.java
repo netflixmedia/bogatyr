@@ -33,6 +33,7 @@ import java.util.HashSet;
 import javax.swing.SwingWorker;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
+import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Event;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
@@ -43,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * This class represents a skeleton for the worker.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.2 (20100603)
  * @since 0.9.0
  */
 public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker {
@@ -58,7 +59,12 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
-
+   @Override
+   protected void done() {
+      fireWorkerDone(); 
+   }
+   
+   
 	/*
 	 * Private methods
 	 */
@@ -83,11 +89,44 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
+	
+	/*
+	 * Overridden methods
+	 */
+	
+	@Override
+	public String toString() {
+		return HelperObject.toString(this);
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((event == null) ? 0 : event.hashCode());
+		result = prime * result + ((listeners == null) ? 0 : listeners.hashCode());
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		WorkerAbstract other = (WorkerAbstract) obj;
+		if (event == null) {
+			if (other.event != null) return false;
+		} else if (!event.equals(other.event)) return false;
+		if (listeners == null) {
+			if (other.listeners != null) return false;
+		} else if (!listeners.equals(other.listeners)) return false;
+		return true;
+	}
+
+	
 	/*
 	 * Implemented methods
 	 */
-
 	@Override
 	public void addListener(final ListenerWorker listener) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
@@ -100,14 +139,6 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
-//	@Override
-//	public int countListeners() {
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-//
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listeners.size()));
-//		return listeners.size();
-//	}
-
 	@Override
 	public void deleteListener(final ListenerWorker listener) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
@@ -119,46 +150,4 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
-
-//	@Override
-//	public synchronized void deleteListeners() {
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-//
-//		listeners = new HashSet<ListenerWorker>();
-//
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-//	}
-
-//    protected WorkerAbstract(final HandlerWorker handlerWorker) {
-//        super();
-//
-//        this.handlerWorker = handlerWorker;
-//    }
-//
-//    public HandlerWorker getHandlerWorker() {
-//        return handlerWorker;
-//    }
-//
-//    public void setHandlerWorker(final HandlerWorker handlerWorker) {
-//        this.handlerWorker = handlerWorker;
-//    }
-//
-//    public void start() {
-//        if (null != handlerWorker) {
-//            handlerWorker.fireWorkerStart();
-//        }
-//        
-//        execute();
-//    }
-//
-//    
-//    /*
-//     * Overridden methods
-//     */
-//    @Override
-//    protected void done() {
-//    	if (null != handlerWorker) {
-//            handlerWorker.fireWorkerDone();
-//        }
-//    }
 }
