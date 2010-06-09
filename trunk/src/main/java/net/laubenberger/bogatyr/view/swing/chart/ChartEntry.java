@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.5.0
  */
 public class ChartEntry {
@@ -98,15 +98,5 @@ public class ChartEntry {
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(y));
 		return y;
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }

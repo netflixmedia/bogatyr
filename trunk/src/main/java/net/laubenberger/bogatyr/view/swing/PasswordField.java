@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JPasswordField.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.1.0
  */
 public class PasswordField extends JPasswordField implements Activatable {
@@ -101,11 +101,6 @@ public class PasswordField extends JPasswordField implements Activatable {
 	/*
 	 * Overridden methods
 	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
 
 	@Override
 	public void setEnabled(final boolean isEnabled) {

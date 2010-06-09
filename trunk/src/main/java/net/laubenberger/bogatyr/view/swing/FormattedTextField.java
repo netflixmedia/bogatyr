@@ -49,7 +49,7 @@ import net.laubenberger.bogatyr.misc.Activatable;
  * This is an extended JFormattedTextField.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.9.0
  */
 public class FormattedTextField extends JFormattedTextField implements Activatable {
@@ -191,11 +191,6 @@ public class FormattedTextField extends JFormattedTextField implements Activatab
 	/*
 	 * Overridden methods
 	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
 
 	@Override
 	public void setEnabled(final boolean isEnabled) {

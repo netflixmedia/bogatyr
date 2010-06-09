@@ -41,7 +41,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JLabel.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.2.0
  */
 public class Label extends JLabel {
@@ -81,15 +81,5 @@ public class Label extends JLabel {
 	public Label(final String text, final int horizontalAlignment) {
 		super(text, horizontalAlignment);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, horizontalAlignment));
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }

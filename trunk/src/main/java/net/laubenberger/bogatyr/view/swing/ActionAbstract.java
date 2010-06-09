@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended AbstractAction.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100610)
  * @since 0.7.0
  */
 public abstract class ActionAbstract extends AbstractAction {
@@ -121,15 +121,5 @@ public abstract class ActionAbstract extends AbstractAction {
 		putValue(SHORT_DESCRIPTION, toolTip);
 		putValue(MNEMONIC_KEY, mnemonic);
 		putValue(ACCELERATOR_KEY, accelerator);
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }

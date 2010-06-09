@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JDialog.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100603)
+ * @version 0.9.2 (20100610)
  * @since 0.4.0
  */
 public class Dialog extends JDialog implements Displayable {
@@ -150,17 +150,7 @@ public class Dialog extends JDialog implements Displayable {
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(arg0));
 	}
 
-
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
-
-
+	
 	/*
 	 * Implemented methods
 	 */

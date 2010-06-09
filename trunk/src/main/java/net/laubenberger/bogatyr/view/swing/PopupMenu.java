@@ -40,7 +40,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JPopupMenu.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100610)
  * @since 0.2.0
  */
 public class PopupMenu extends JPopupMenu {
@@ -60,15 +60,5 @@ public class PopupMenu extends JPopupMenu {
 	public PopupMenu(final String label) {
 		super(label);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(label));
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }

@@ -42,7 +42,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JSeparator.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.2.0
  */
 public class Separator extends JSeparator {
@@ -86,15 +86,5 @@ public class Separator extends JSeparator {
 		setAlignmentX(LEFT_ALIGNMENT);
 		setBackground(color);
 		setForeground(color);
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }

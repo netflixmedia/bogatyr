@@ -41,7 +41,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JProgressBar.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100610)
  * @since 0.2.0
  */
 public class ProgressBar extends JProgressBar {
@@ -76,15 +76,5 @@ public class ProgressBar extends JProgressBar {
 	public ProgressBar(final int start, final int end) {
 		super(start, end);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(start, end));
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }

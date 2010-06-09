@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JColorChooser.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.7.0
  */
 public class ChooserColor extends JColorChooser {
@@ -68,15 +68,5 @@ public class ChooserColor extends JColorChooser {
 	public ChooserColor(final ColorSelectionModel model) {
 		super(model);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(model));
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }

@@ -43,7 +43,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JFileChooser.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100610)
  * @since 0.7.0
  */
 public class ChooserFile extends JFileChooser {
@@ -83,15 +83,5 @@ public class ChooserFile extends JFileChooser {
 	public ChooserFile(final String currentDirectoryPath) {
 		super(currentDirectoryPath);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(currentDirectoryPath));
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }

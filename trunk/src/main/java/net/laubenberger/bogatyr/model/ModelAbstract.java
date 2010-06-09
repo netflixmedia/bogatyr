@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100603)
+ * @version 0.9.2 (20100610)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
@@ -93,7 +93,6 @@ public abstract class ModelAbstract extends Observable implements Model {
 		return result;
 	}
 
-
 	@Override
 	public boolean equals(final Object obj) {
 		if (this == obj) {
@@ -128,9 +127,10 @@ public abstract class ModelAbstract extends Observable implements Model {
 
 	@Override
 	public String toString() {
-		return HelperObject.toString(this);
+		return getClass().getName() + "[instantiationDate=" + instantiationDate + ", isNotifyEnabled=" + isNotifyEnabled
+				+ ", mapTag=" + mapTag + "]";
 	}
-
+	
 	@Override
 	public void notifyObservers() {
 		if (isNotifyEnabled) {

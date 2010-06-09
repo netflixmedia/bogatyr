@@ -42,7 +42,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JMenu.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100610)
  * @since 0.2.0
  */
 public class Menu extends JMenu {
@@ -96,15 +96,5 @@ public class Menu extends JMenu {
 		if (0 < mnemonic) {
 			setMnemonic(mnemonic);
 		}
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }

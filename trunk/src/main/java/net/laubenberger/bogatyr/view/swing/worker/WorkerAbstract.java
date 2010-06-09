@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * This class represents a skeleton for the worker.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100603)
+ * @version 0.9.2 (20100610)
  * @since 0.9.0
  */
 public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker {
@@ -93,10 +93,10 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 	/*
 	 * Overridden methods
 	 */
-	
+
 	@Override
 	public String toString() {
-		return HelperObject.toString(this);
+		return getClass().getName() + "[event=" + event + ", listeners=" + listeners + "]";
 	}
 	
 //	@Override
