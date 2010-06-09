@@ -99,31 +99,26 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 		return HelperObject.toString(this);
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((event == null) ? 0 : event.hashCode());
-		result = prime * result + ((listeners == null) ? 0 : listeners.hashCode());
-		return result;
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((event == null) ? 0 : event.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj) return true;
+//		if (obj == null) return false;
+//		if (getClass() != obj.getClass()) return false;
+//		WorkerAbstract other = (WorkerAbstract) obj;
+//		if (event == null) {
+//			if (other.event != null) return false;
+//		} else if (!event.equals(other.event)) return false;
+//		return true;
+//	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) return true;
-		if (obj == null) return false;
-		if (getClass() != obj.getClass()) return false;
-		WorkerAbstract other = (WorkerAbstract) obj;
-		if (event == null) {
-			if (other.event != null) return false;
-		} else if (!event.equals(other.event)) return false;
-		if (listeners == null) {
-			if (other.listeners != null) return false;
-		} else if (!listeners.equals(other.listeners)) return false;
-		return true;
-	}
-
-	
 	/*
 	 * Implemented methods
 	 */

@@ -74,8 +74,8 @@ public class HelperSoundTest {
 	}
 
 	@Test
-	public void testGetAvailableAudioFormats() {
-		assertNotNull(HelperSound.getAvailableAudioFormats());
+	public void testGetAvailableClipFormats() {
+		assertNotNull(HelperSound.getAvailableClipFormats());
 	}
 
 }

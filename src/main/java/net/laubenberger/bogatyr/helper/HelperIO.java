@@ -67,7 +67,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100609)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -460,7 +460,7 @@ public abstract class HelperIO {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
 
-		final Writer writer = new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(file)), encoding);
+		final Writer writer = new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(file, append)), encoding);
 
 		try {
 			if (append) {
