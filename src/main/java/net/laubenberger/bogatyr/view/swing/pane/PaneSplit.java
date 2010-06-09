@@ -42,7 +42,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JSplitPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100610)
  * @since 0.7.0
  */
 public class PaneSplit extends JSplitPane {
@@ -85,11 +85,6 @@ public class PaneSplit extends JSplitPane {
 	/*
 	 * Overridden methods
 	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
 
 	@Override
 	public void setEnabled(final boolean isEnabled) {

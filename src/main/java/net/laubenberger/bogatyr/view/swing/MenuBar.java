@@ -40,7 +40,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JMenuBar.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.2.0
  */
 public class MenuBar extends JMenuBar {
@@ -55,15 +55,5 @@ public class MenuBar extends JMenuBar {
 	public MenuBar() {
 		super();
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }

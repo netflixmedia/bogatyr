@@ -42,7 +42,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JTabbedPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100610)
  * @since 0.7.0
  */
 public class PaneTab extends JTabbedPane {
@@ -73,11 +73,6 @@ public class PaneTab extends JTabbedPane {
 	/*
 	 * Overridden methods
 	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
 
 	@Override
 	public void setEnabled(final boolean isEnabled) {

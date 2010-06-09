@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JCheckBox.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.2.0
  */
 public class CheckBox extends JCheckBox implements Activatable {
@@ -134,11 +134,6 @@ public class CheckBox extends JCheckBox implements Activatable {
 	/*
 	 * Overridden methods
 	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
 
 	@Override
 	public void setEnabled(final boolean isEnabled) {

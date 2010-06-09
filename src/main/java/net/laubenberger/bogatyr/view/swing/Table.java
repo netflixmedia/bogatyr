@@ -46,7 +46,7 @@ import java.util.Vector;
  * This is an extended JTable.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.7.0
  */
 public class Table extends JTable implements Activatable {
@@ -99,11 +99,6 @@ public class Table extends JTable implements Activatable {
 	/*
 	 * Overridden methods
 	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
 
 	@Override
 	public void setEnabled(final boolean isEnabled) {

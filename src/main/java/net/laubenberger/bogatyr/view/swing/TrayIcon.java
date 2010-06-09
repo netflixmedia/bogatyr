@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended TrayIcon with JPopupMenu support.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100603)
+ * @version 0.9.2 (20100610)
  * @since 0.9.2
  */
 public class TrayIcon extends java.awt.TrayIcon {
@@ -205,15 +205,5 @@ public class TrayIcon extends java.awt.TrayIcon {
 			window.dispose();
 			window = null;
 		}
-	}
-	
-	
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }

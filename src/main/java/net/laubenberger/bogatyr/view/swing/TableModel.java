@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended AbstractTableModel.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.2.0
  */
 public class TableModel extends AbstractTableModel {
@@ -98,11 +98,6 @@ public class TableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(final int rowIndex, final int columnIndex) {
 		return data[rowIndex][columnIndex];
-	}
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 
 	@Override

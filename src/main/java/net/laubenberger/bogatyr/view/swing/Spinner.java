@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JSpinner.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.7.0
  */
 public class Spinner extends JSpinner implements Activatable {
@@ -81,12 +81,6 @@ public class Spinner extends JSpinner implements Activatable {
 	/*
 	 * Overridden methods
 	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
-
 
 	@Override
 	public void setEnabled(final boolean isEnabled) {

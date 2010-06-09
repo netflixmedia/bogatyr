@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JFrame.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100603)
+ * @version 0.9.2 (20100610)
  * @since 0.2.0
  */
 public class Frame extends JFrame implements Fadeable, Displayable {
@@ -121,11 +121,6 @@ public class Frame extends JFrame implements Fadeable, Displayable {
 	/*
 	 * Overridden methods
 	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
 
 	@Override
 	public void setEnabled(final boolean isEnabled) {

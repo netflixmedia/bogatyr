@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JDesktopPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100610)
  * @since 0.7.0
  */
 public class PaneDesktop extends JDesktopPane {
@@ -63,11 +63,6 @@ public class PaneDesktop extends JDesktopPane {
 	/*
 	 * Overridden methods
 	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
 
 	@Override
 	public void setEnabled(final boolean isEnabled) {

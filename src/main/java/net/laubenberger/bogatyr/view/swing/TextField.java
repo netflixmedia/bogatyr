@@ -42,7 +42,7 @@ import net.laubenberger.bogatyr.misc.Activatable;
  * This is an extended JTextField.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.1.0
  */
 public class TextField extends JTextField implements Activatable {
@@ -112,16 +112,6 @@ public class TextField extends JTextField implements Activatable {
 	/*
 	 * Overridden methods
 	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
-
-//	@Override
-//	protected Document createDefaultModel() {
-//    	return DocumentFactory.createNumberDocument(getColumns());
-//    }
 
 	@Override
 	public void setEnabled(final boolean isEnabled) {

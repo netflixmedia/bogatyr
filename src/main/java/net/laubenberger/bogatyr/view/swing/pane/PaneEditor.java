@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is an extended JEditorPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100610)
  * @since 0.7.0
  */
 public class PaneEditor extends JEditorPane {
@@ -80,11 +80,6 @@ public class PaneEditor extends JEditorPane {
 	/*
 	 * Overridden methods
 	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
 
 	@Override
 	public void setEnabled(final boolean isEnabled) {

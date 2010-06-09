@@ -58,7 +58,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100519)
+ * @version 0.9.2 (20100610)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -251,23 +251,25 @@ public abstract class HelperObject {
 		return result;
 	}
 
-	/**
-	 * Generic toString() method for {@link Object} and different purposes.
-	 *
-	 * @param object to dump
-	 * @return dumped object string
-	 * @since 0.7.0
-	 */
-	public static String toString(final Object object) {
-		if (null == object) {
-			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
-		}
 
-		final Collection<String> list = new ArrayList<String>();
-		toString(object, list);
-
-		return object.getClass().getName() + list.toString();
-	}
+	//TODO replace by dump
+//	/**
+//	 * Generic toString() method for {@link Object} and different purposes.
+//	 *
+//	 * @param object to dump
+//	 * @return dumped object string
+//	 * @since 0.7.0
+//	 */
+//	public static String toString(final Object object) {
+//		if (null == object) {
+//			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
+//		}
+//
+//		final Collection<String> list = new ArrayList<String>();
+//		toString(object, list);
+//
+//		return object.getClass().getName() + list.toString();
+//	}
 
 	/**
 	 * Compare if two objects are equals.
@@ -349,43 +351,43 @@ public abstract class HelperObject {
 	 * Private methods
 	 */
 
-	private static void toString(final Object object, final Collection<String> list) {
-		final Field[] fields = object.getClass().getDeclaredFields();
-		AccessibleObject.setAccessible(fields, true);
-
-		for (final Field field : fields) {
-			try {
-//    			if (objectField == object ||
-//            		(objectField instanceof Collection<?> && ((Collection<?>)objectField).contains(object)) || 
-//            		(objectField instanceof Map<?, ?> && (((Map<?, ?>)objectField).containsKey(object) || ((Map<?, ?>)objectField).containsValue(object)))) {
-//            		list.add(field.getName() + '=' + object.getClass().getName());
-//              	} else {
-//	               list.add(field.getName() + '=' + objectField);
-//	            }
-
-				if (isEquals(field.getType(), object.getClass())) {
-					list.add(field.getName() + '=' + object.getClass().getName());
-//       			} else if (objectField instanceof Collection<?> && ((Collection<?>)objectField).contains(object)) {
-//       				System.out.println("COLL");
-//            		list.add(field.getName() + '=' + object.getClass().getName());
-//       			} else if (objectField instanceof Map<?, ?> && (((Map<?, ?>)objectField).containsKey(object) | ((Map<?, ?>)objectField).containsValue(object))) {
-////       			} else if (objectField instanceof Map<?, ?>) {
-//       				System.out.println("MAP");
-//               		list.add(field.getName() + '=' + object.getClass().getName());
-				} else {
-					list.add(field.getName() + '=' + field.get(object));
-				}
-
-			} catch (Exception ex) {
-				// do nothing
-			}
-		}
-
-//    	if (clazz.getSuperclass().getSuperclass() != null) {
-////    	if (clazz.getSuperclass() != null) {    		
-//    		toString(object, clazz.getSuperclass(), list);
-//    	}
-	}
+//	private static void toString(final Object object, final Collection<String> list) {
+//		final Field[] fields = object.getClass().getDeclaredFields();
+//		AccessibleObject.setAccessible(fields, true);
+//
+//		for (final Field field : fields) {
+//			try {
+////    			if (objectField == object ||
+////            		(objectField instanceof Collection<?> && ((Collection<?>)objectField).contains(object)) ||
+////            		(objectField instanceof Map<?, ?> && (((Map<?, ?>)objectField).containsKey(object) || ((Map<?, ?>)objectField).containsValue(object)))) {
+////            		list.add(field.getName() + '=' + object.getClass().getName());
+////              	} else {
+////	               list.add(field.getName() + '=' + objectField);
+////	            }
+//
+//				if (isEquals(field.getType(), object.getClass())) {
+//					list.add(field.getName() + '=' + object.getClass().getName());
+////       			} else if (objectField instanceof Collection<?> && ((Collection<?>)objectField).contains(object)) {
+////       				System.out.println("COLL");
+////            		list.add(field.getName() + '=' + object.getClass().getName());
+////       			} else if (objectField instanceof Map<?, ?> && (((Map<?, ?>)objectField).containsKey(object) | ((Map<?, ?>)objectField).containsValue(object))) {
+//////       			} else if (objectField instanceof Map<?, ?>) {
+////       				System.out.println("MAP");
+////               		list.add(field.getName() + '=' + object.getClass().getName());
+//				} else {
+//					list.add(field.getName() + '=' + field.get(object));
+//				}
+//
+//			} catch (Exception ex) {
+//				// do nothing
+//			}
+//		}
+//
+////    	if (clazz.getSuperclass().getSuperclass() != null) {
+//////    	if (clazz.getSuperclass() != null) {
+////    		toString(object, clazz.getSuperclass(), list);
+////    	}
+//	}
 
 
 	/*

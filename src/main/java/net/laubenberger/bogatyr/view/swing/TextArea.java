@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JTextArea.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.1.0
  */
 public class TextArea extends JTextArea implements Activatable {
@@ -108,11 +108,6 @@ public class TextArea extends JTextArea implements Activatable {
 	/*
 	 * Overridden methods
 	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
-	}
 
 	@Override
 	public void append(final String str) {

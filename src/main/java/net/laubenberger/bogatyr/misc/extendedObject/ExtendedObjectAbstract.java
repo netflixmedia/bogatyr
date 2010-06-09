@@ -35,7 +35,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * This is the skeleton for all extended objects.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100603)
+ * @version 0.9.2 (20100610)
  * @since 0.9.0
  */
 public abstract class ExtendedObjectAbstract implements ExtendedObject {
@@ -45,12 +45,12 @@ public abstract class ExtendedObjectAbstract implements ExtendedObject {
 	/*
 	 * Overridden methods
 	 */
-
+	
 	@Override
 	public String toString() {
-		return HelperObject.toString(this);
+		return getClass().getName() + "[instantiationDate=" + instantiationDate + "]";
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -58,7 +58,7 @@ public abstract class ExtendedObjectAbstract implements ExtendedObject {
 		result = prime * result + ((instantiationDate == null) ? 0 : instantiationDate.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) return true;

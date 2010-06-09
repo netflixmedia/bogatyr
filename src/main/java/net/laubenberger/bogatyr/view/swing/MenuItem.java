@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JMenuItem.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100516)
+ * @version 0.9.2 (20100610)
  * @since 0.2.0
  */
 public class MenuItem extends JMenuItem {
@@ -116,15 +116,5 @@ public class MenuItem extends JMenuItem {
 		if (null != accelerator) {
 			setAccelerator(accelerator);
 		}
-	}
-
-
-	/*
-	 * Overridden methods
-	 */
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 }

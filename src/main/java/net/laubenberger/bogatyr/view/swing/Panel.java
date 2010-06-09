@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JPanel.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100610)
  * @since 0.1.0
  */
 public class Panel extends JPanel implements Activatable {
@@ -161,11 +161,6 @@ public class Panel extends JPanel implements Activatable {
 				((JComponent) component).setToolTipText(text);
 			}
 		}
-	}
-
-	@Override
-	public String toString() {
-		return HelperObject.toString(this);
 	}
 
 
