@@ -69,7 +69,7 @@ public abstract class HelperSound {
 	private static final Logger log = LoggerFactory.getLogger(HelperSound.class);
 
 	/**
-	 * Returns an audio {@link Clip} from a {@link File} (e.g. "wav").
+	 * Returns an audio {@link Clip} from a {@link File} (allowed types are wav, au, aifc, snd and aiff).
 	 *
 	 * @param file for audio clip
 	 * @return Audio {@link Clip}
@@ -251,13 +251,13 @@ public abstract class HelperSound {
 	}
 
 	/**
-	 * Returns a {@link List} of all available audio {@link Type} of the current machine (e.g. "aiff", "wave").
+	 * Returns a {@link List} of all available clip formats {@link Type} of the current machine (e.g. "aiff", "wave").
 	 *
-	 * @return {@link List} containing all available audio {@link Type} of the current machine
+	 * @return {@link List} containing all available clip formats {@link Type} of the current machine
 	 * @see Type
 	 * @since 0.5.0
 	 */
-	public static List<Type> getAvailableAudioFormats() { //$JUnit$
+	public static List<Type> getAvailableClipFormats() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final List<Type> result = Arrays.asList(AudioSystem.getAudioFileTypes());
@@ -266,7 +266,23 @@ public abstract class HelperSound {
 		return result;
 	}
 
-
+//	/**
+//	 * Returns a {@link List} of all available sequence formats {@link Type} of the current machine (e.g. "mid").
+//	 *
+//	 * @return {@link List} containing all available sequence formats {@link Type} of the current machine
+//	 * @see Type
+//	 * @since 0.9.2
+//	 */
+//	public static List<Type> getAvailableSequenceFormats() { //$JUnit$
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+//
+//		final List<Type> result = Arrays.asList(MidiSystem.get);
+//
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
+	
+	
 	/*
 	 * Private methods
 	 */
