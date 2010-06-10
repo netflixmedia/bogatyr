@@ -33,7 +33,6 @@ import java.util.HashSet;
 import javax.swing.SwingWorker;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Event;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
@@ -44,7 +43,7 @@ import org.slf4j.LoggerFactory;
  * This class represents a skeleton for the worker.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.9.0
  */
 public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker {
@@ -96,7 +95,7 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 
 	@Override
 	public String toString() {
-		return getClass().getName() + "[event=" + event + ", listeners=" + listeners + "]";
+		return getClass().getName() + "[event=" + event + ", listeners=" + listeners + ']'; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 //	@Override

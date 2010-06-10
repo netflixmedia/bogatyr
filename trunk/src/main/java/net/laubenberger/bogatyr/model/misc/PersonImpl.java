@@ -51,7 +51,7 @@ import net.laubenberger.bogatyr.model.ModelAbstract;
  * The implementation of the person model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.2 (20100611)
  * @since 0.9.1
  */
 @XmlRootElement(name = "person")
@@ -150,7 +150,7 @@ public class PersonImpl extends ModelAbstract implements Person {
 		if (null == country) {
 			if (null != other.country)
 				return false;
-		} else if (!country.equals(other.country))
+		} else if (country != other.country)
 			return false;
 		if (null == email) {
 			if (null != other.email)
@@ -170,7 +170,7 @@ public class PersonImpl extends ModelAbstract implements Person {
 		if (null == gender) {
 			if (null != other.gender)
 				return false;
-		} else if (!gender.equals(other.gender))
+		} else if (gender != other.gender)
 			return false;
 		if (null == listOrganization) {
 			if (null != other.listOrganization)

@@ -28,20 +28,28 @@
 package net.laubenberger.bogatyr.controller.application;
 
 import net.laubenberger.bogatyr.controller.ControllerAbstract;
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.model.application.ModelApplication;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The skeleton for the application controller.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100611)
  * @since 0.9.0
  */
 public abstract class ControllerApplicationAbstract extends ControllerAbstract implements ControllerApplication {
-	final ModelApplication model;
+	private static final Logger log = LoggerFactory.getLogger(ControllerApplicationAbstract.class);
+	
+	private final ModelApplication model;
 
 	protected ControllerApplicationAbstract(final ModelApplication model) {
 		super();
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(model));
+		
 		this.model = model;
 	}
 
@@ -52,6 +60,9 @@ public abstract class ControllerApplicationAbstract extends ControllerAbstract i
 
 	@Override
 	public ModelApplication getModel() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(model));
 		return model;
 	}
 }

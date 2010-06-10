@@ -38,7 +38,6 @@ import javax.swing.JWindow;
 import javax.swing.UIManager;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.misc.Displayable;
 import net.laubenberger.bogatyr.misc.Fadeable;
@@ -51,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JWindow.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.9.2
  */
 public class Window extends JWindow implements Fadeable, Displayable {
@@ -76,22 +75,22 @@ public class Window extends JWindow implements Fadeable, Displayable {
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
-	public Window(Frame owner) {
+	public Window(final Frame owner) {
 		super(owner);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner));
 	}
 
-	public Window(GraphicsConfiguration gc) {
+	public Window(final GraphicsConfiguration gc) {
 		super(gc);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(gc));
 	}
 
-	public Window(Window owner, GraphicsConfiguration gc) {
+	public Window(final Window owner, final GraphicsConfiguration gc) {
 		super(owner, gc);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner, gc));
 	}
 
-	public Window(Window owner) {
+	public Window(final Window owner) {
 		super(owner);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(owner));
 	}

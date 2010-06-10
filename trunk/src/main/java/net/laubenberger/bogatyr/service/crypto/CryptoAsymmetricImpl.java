@@ -64,7 +64,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100611)
  * @since 0.1.0
  */
 public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymmetric {
@@ -101,9 +101,6 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 	 * @param key	for the encryption
 	 * @return encrypted byte-array
 	 * @throws InvalidKeyException
-	 * @throws InvalidKeyException
-	 * @throws BadPaddingException
-	 * @throws IllegalBlockSizeException
 	 * @throws BadPaddingException
 	 * @throws IllegalBlockSizeException
 	 * @since 0.1.0

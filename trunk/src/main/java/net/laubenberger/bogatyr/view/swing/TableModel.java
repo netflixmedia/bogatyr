@@ -28,8 +28,6 @@
 package net.laubenberger.bogatyr.view.swing;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
-
 import javax.swing.table.AbstractTableModel;
 
 import org.slf4j.Logger;
@@ -40,7 +38,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended AbstractTableModel.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.2.0
  */
 public class TableModel extends AbstractTableModel {

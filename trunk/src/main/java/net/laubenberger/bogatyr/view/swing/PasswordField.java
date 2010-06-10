@@ -31,7 +31,6 @@ import javax.swing.JPasswordField;
 import javax.swing.text.Document;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
 import org.slf4j.Logger;
@@ -42,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JPasswordField.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.1.0
  */
 public class PasswordField extends JPasswordField implements Activatable {

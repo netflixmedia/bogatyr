@@ -57,7 +57,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20100514
+ * @version 20100611
  */
 public class HelloWorld extends ApplicationAbstract {
 	private static final Logger log = LoggerFactory.getLogger(HelloWorld.class);
@@ -79,7 +79,7 @@ public class HelloWorld extends ApplicationAbstract {
 		PropertyConfigurator.configure("src/sample/configuration/log4j.properties"); //$NON-NLS-1$
 
 		MODEL = new ModelApplicationImpl(
-				"HelloWorld", new BigDecimal("0.92"), 266, HelperTime.getDate(2010, 5, 10, 0, 28, 0), null, null, null, null, false, null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$
+				"HelloWorld", new BigDecimal("0.92"), 266, HelperTime.getDate(2010, 5, 10, 0, 28, 0), null, null, null, null, null, false, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$
 
 		try {
 			MODEL.setUrl(new URL("http://dev.laubenberger.net/bogatyr/")); //$NON-NLS-1$

@@ -47,12 +47,12 @@ import java.io.StringReader;
 import java.io.Writer;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.filechooser.FileSystemView;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
@@ -61,13 +61,16 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * This is a helper class for I/O.
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100609)
+ * @version 0.9.2 (20100611)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -1212,11 +1215,7 @@ public abstract class HelperIO {
 
 		final String result;
 
-		if (fileName.contains(HelperString.PERIOD)) {
-			result = fileName.substring(0, fileName.lastIndexOf(HelperString.PERIOD));
-		} else {
-			result = fileName;
-		}
+		result = fileName.contains(HelperString.PERIOD) ? fileName.substring(0, fileName.lastIndexOf(HelperString.PERIOD)) : fileName;
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -1237,11 +1236,7 @@ public abstract class HelperIO {
 
 		final String result;
 
-		if (fileName.contains(HelperString.PERIOD)) {
-			result = fileName.substring(fileName.lastIndexOf(HelperString.PERIOD));
-		} else {
-			result = fileName;
-		}
+		result = fileName.contains(HelperString.PERIOD) ? fileName.substring(fileName.lastIndexOf(HelperString.PERIOD)) : fileName;
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

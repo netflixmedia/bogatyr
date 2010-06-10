@@ -27,13 +27,12 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
-import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
-import net.laubenberger.bogatyr.misc.Activatable;
-
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JCheckBox;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
+import net.laubenberger.bogatyr.misc.Activatable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JCheckBox.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.2.0
  */
 public class CheckBox extends JCheckBox implements Activatable {

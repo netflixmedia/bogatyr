@@ -29,6 +29,7 @@ package net.laubenberger.bogatyr.helper;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.util.Locale;
 
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
@@ -43,7 +44,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100525)
+ * @version 0.9.2 (20100611)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -330,7 +331,7 @@ public abstract class HelperString {
 		}
 
 //		final boolean result = string.matches("(?i)" + prefix + ".*");  //$NON-NLS-1$//$NON-NLS-2$
-		final boolean result = string.toUpperCase().startsWith(prefix.toUpperCase());
+		final boolean result = string.toUpperCase(Locale.getDefault()).startsWith(prefix.toUpperCase(Locale.getDefault()));
 		
 		log.debug(HelperLog.methodExit(result));
 		return result;
@@ -354,7 +355,7 @@ public abstract class HelperString {
 		}
 
 //		final boolean result = string.matches("(?i).*" + suffix); //$NON-NLS-1$
-		final boolean result = string.toUpperCase().endsWith(suffix.toUpperCase());
+		final boolean result = string.toUpperCase(Locale.getDefault()).endsWith(suffix.toUpperCase(Locale.getDefault()));
 
 		log.debug(HelperLog.methodExit(result));
 		return result;
@@ -378,7 +379,7 @@ public abstract class HelperString {
 		}
 
 //		final boolean result = string.matches("(?i).*" + part + ".*");  //$NON-NLS-1$//$NON-NLS-2$
-		final boolean result = string.toUpperCase().contains(part.toUpperCase());
+		final boolean result = string.toUpperCase(Locale.getDefault()).contains(part.toUpperCase(Locale.getDefault()));
 
 		log.debug(HelperLog.methodExit(result));
 		return result;

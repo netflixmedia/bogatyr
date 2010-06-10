@@ -44,12 +44,12 @@ import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.xml.adapter.MapAdapterHashCode;
-import net.laubenberger.bogatyr.misc.xml.adapter.MapAdapterPlatform;
 import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
 import net.laubenberger.bogatyr.model.misc.DocumentImpl;
 import net.laubenberger.bogatyr.model.misc.Organization;
 import net.laubenberger.bogatyr.model.misc.Person;
 import net.laubenberger.bogatyr.model.misc.Platform;
+import net.laubenberger.bogatyr.service.updater.MapAdapterPlatformURL;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +59,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the updater model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100611)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelDocument")
@@ -69,7 +69,7 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 
 	private static final Logger log = LoggerFactory.getLogger(ModelUpdaterImpl.class);
 
-	private Map<Platform, String> mapLocation;
+	private Map<Platform, URL> mapLocation;
 	private Map<HashCodeAlgo, String> mapHash;
 
 	public ModelUpdaterImpl() {
@@ -78,7 +78,7 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 	}
 
 	public ModelUpdaterImpl(final String name, final BigDecimal version, final int build,
-									final Date created, final UUID uuid, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final Map<Platform, String> mapLocation, final Map<HashCodeAlgo, String> mapHash, final Map<String, String> mapTag) {
+									final Date created, final UUID uuid, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final Map<Platform, URL> mapLocation, final Map<HashCodeAlgo, String> mapHash, final Map<String, String> mapTag) {
 		super(name, version, build, created, uuid, url, listOrganization, listPerson, mapTag);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, uuid, url, listOrganization, listPerson, mapLocation, mapHash, mapTag));
 		this.mapLocation = mapLocation;
@@ -135,23 +135,23 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 	 */
 
 	@Override
-	public String getLocation() {
+	public URL getLocation() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		final String result = getLocation(Platform.ANY);
+		final URL result = getLocation(Platform.ANY);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
 	@Override
-	public String getLocation(final Platform platform) {
+	public URL getLocation(final Platform platform) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(platform));
 		if (null == platform) {
 			throw new RuntimeExceptionIsNull("platform"); //$NON-NLS-1$
 		}
 
-		String result = null;
+		URL result = null;
 		if (null != mapLocation) {
 			result = mapLocation.get(platform);
 		}
@@ -162,8 +162,8 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 
 	@Override
 	@XmlElement
-	@XmlJavaTypeAdapter(MapAdapterPlatform.class)
-	public Map<Platform, String> getLocations() {
+	@XmlJavaTypeAdapter(MapAdapterPlatformURL.class)
+	public Map<Platform, URL> getLocations() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(mapLocation));
@@ -207,7 +207,7 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 	}
 
 	@Override
-	public void setLocations(final Map<Platform, String> locations) {
+	public void setLocations(final Map<Platform, URL> locations) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(locations));
 
 		if (!HelperObject.isEquals(locations, mapLocation)) {

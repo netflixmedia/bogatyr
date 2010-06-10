@@ -29,18 +29,17 @@ package net.laubenberger.bogatyr.view.swing;
 
 import javax.swing.JMenuBar;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JMenuBar.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.2.0
  */
 public class MenuBar extends JMenuBar {

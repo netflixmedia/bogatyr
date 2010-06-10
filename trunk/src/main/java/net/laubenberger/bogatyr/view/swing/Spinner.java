@@ -28,7 +28,6 @@
 package net.laubenberger.bogatyr.view.swing;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
 import javax.swing.JSpinner;
@@ -42,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JSpinner.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.7.0
  */
 public class Spinner extends JSpinner implements Activatable {

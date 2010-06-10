@@ -32,15 +32,15 @@ package net.laubenberger.bogatyr.model.misc;
  * The interface definition for an address.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100611)
  * @since 0.9.1
  */
 public interface Address {
-	String MEMBER_NAME = "name"; //$NON-NLS-1$
-	String MEMBER_STREET = "street"; //$NON-NLS-1$
-	String MEMBER_ZIP = "zip"; //$NON-NLS-1$
-	String MEMBER_CITY = "city"; //$NON-NLS-1$
-	String MEMBER_COUNTRY = "country"; //$NON-NLS-1$
+	String MEMBER_NAME		= "name"; //$NON-NLS-1$
+	String MEMBER_STREET 	= "street"; //$NON-NLS-1$
+	String MEMBER_ZIP 		= "zip"; //$NON-NLS-1$
+	String MEMBER_CITY 		= "city"; //$NON-NLS-1$
+	String MEMBER_COUNTRY 	= "country"; //$NON-NLS-1$
 
 	String getName();
 

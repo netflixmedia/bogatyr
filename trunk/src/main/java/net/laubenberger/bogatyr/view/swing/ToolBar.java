@@ -28,7 +28,6 @@
 package net.laubenberger.bogatyr.view.swing;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
 import javax.swing.JToolBar;

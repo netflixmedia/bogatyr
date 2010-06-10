@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the organization model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.2 (20100611)
  * @since 0.9.2
  */
 @XmlRootElement(name = "organization")
@@ -136,7 +136,7 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 		if (null == country) {
 			if (null != other.country)
 				return false;
-		} else if (!country.equals(other.country))
+		} else if (country != other.country)
 			return false;
 		if (null == email) {
 			if (null != other.email)

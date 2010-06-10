@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
  * This is the updater for documents.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100611)
  * @since 0.6.0
  */
 public class UpdaterImpl extends ServiceAbstract implements Updater {
@@ -105,7 +105,7 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
 
-		String location = document.getLocation(platform);
+		URL location = document.getLocation(platform);
 
 		if (null == location && Platform.ANY != platform) {
 			location = document.getLocation(Platform.ANY);
@@ -115,7 +115,7 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 			throw new IllegalArgumentException("no valid location found!"); //$NON-NLS-1$
 		}
 
-		final File source = new File(location);
+		final File source = new File(location.getFile());
 
 		if (source.exists()) {
 			if (HelperObject.isEquals(source, dest)) {
@@ -123,7 +123,7 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 			}
 			HelperIO.copyFile(source, dest);
 		} else {
-			HelperIO.writeFile(dest, HelperNet.readUrl(new URL(location)), false);
+			HelperIO.writeFile(dest, HelperNet.readUrl(location), false);
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}

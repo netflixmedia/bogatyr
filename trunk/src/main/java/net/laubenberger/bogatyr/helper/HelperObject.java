@@ -37,12 +37,8 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectStreamClass;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.lang.reflect.AccessibleObject;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -58,7 +54,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -293,6 +289,7 @@ public abstract class HelperObject {
 	 *
 	 * @param original to clone
 	 * @return cloned object
+	 * @throws ClassNotFoundException
 	 * @since 0.9.0
 	 */
 	@SuppressWarnings("unchecked")

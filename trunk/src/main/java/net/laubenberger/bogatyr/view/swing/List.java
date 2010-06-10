@@ -27,24 +27,23 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
-import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
-import net.laubenberger.bogatyr.misc.Activatable;
+import java.util.Vector;
 
 import javax.swing.JList;
 import javax.swing.ListModel;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
+import net.laubenberger.bogatyr.misc.Activatable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Vector;
 
 
 /**
  * This is an extended JList.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.7.0
  */
 public class List extends JList implements Activatable {

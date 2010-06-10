@@ -27,6 +27,7 @@
 
 package net.laubenberger.bogatyr.model.updater;
 
+import java.net.URL;
 import java.util.Map;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -39,7 +40,7 @@ import net.laubenberger.bogatyr.model.misc.Platform;
  * The interface for the updater model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100611)
  * @since 0.9.0
  */
 @XmlJavaTypeAdapter(ModelUpdaterImpl.XmlAdapter.class)
@@ -51,40 +52,47 @@ public interface ModelUpdater extends Document {
 	/**
 	 * Returns all locations.
 	 *
-	 * @return {@link Map} containing all locations
+	 * @return {@link Map} containing all update locations
+	 * @see URL
+	 * @see Platform
 	 * @since 0.9.0
 	 */
-	Map<Platform, String> getLocations();
+	Map<Platform, URL> getLocations();
 
 	/**
-	 * Sets all locations.
+	 * Sets all update {@link URL} locations.
 	 *
-	 * @param locations {@link Map} containing all locations
+	 * @param locations {@link Map} containing all update {@link URL} locations
+	 * @see URL
 	 * @since 0.9.0
 	 */
-	void setLocations(Map<Platform, String> locations);
+	void setLocations(Map<Platform, URL> locations);
 
 	/**
-	 * Returns the location for a given {@link Platform}.
+	 * Returns the {@link URL} location for a given {@link Platform}.
 	 *
 	 * @param platform for the location
 	 * @return location
+	 * @see URL
+	 * @see Platform
 	 * @since 0.9.0
 	 */
-	String getLocation(Platform platform);
+	URL getLocation(Platform platform);
 
 	/**
-	 * Returns the default location (ANY platform).
+	 * Returns the default update {@link URL} location (ANY platform).
 	 *
-	 * @return default location
+	 * @return default update location
+	 * @see URL
 	 * @since 0.9.0
 	 */
-	String getLocation();
+	URL getLocation();
 
 	/**
 	 * Returns all hashs.
 	 *
 	 * @return {@link Map} containing all hashs
+	 * @see HashCodeAlgo
 	 * @since 0.9.0
 	 */
 	Map<HashCodeAlgo, String> getHashs();
@@ -93,6 +101,7 @@ public interface ModelUpdater extends Document {
 	 * Sets all hashs.
 	 *
 	 * @param hashs {@link Map} containing all hashs
+	 * @see HashCodeAlgo
 	 * @since 0.9.0
 	 */
 	void setHashs(Map<HashCodeAlgo, String> hashs);
@@ -102,6 +111,7 @@ public interface ModelUpdater extends Document {
 	 *
 	 * @param hashCodeAlgo for the hash
 	 * @return hash
+	 * @see HashCodeAlgo
 	 * @since 0.9.0
 	 */
 	String getHash(HashCodeAlgo hashCodeAlgo);

@@ -29,22 +29,32 @@ package net.laubenberger.bogatyr.controller.net.client;
 
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.SocketFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 
 /**
  * This is the skeleton for SSL secured clients.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100611)
  * @since 0.8.0
  */
 public abstract class ClientSSLAbstract extends ClientAbstract {
+	private static final Logger log = LoggerFactory.getLogger(ClientSSLAbstract.class);
+	
 	protected ClientSSLAbstract() {
 		super();
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	protected ClientSSLAbstract(final String host, final int port) {
 		super(host, port);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(host, port));
 	}
 
 
@@ -54,6 +64,8 @@ public abstract class ClientSSLAbstract extends ClientAbstract {
 
 	@Override
 	public void start() throws IOException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
 		final SocketFactory sslFactory = SSLSocketFactory.getDefault();
 
 		setSocket(sslFactory.createSocket(getHost(), getPort()));
@@ -62,5 +74,7 @@ public abstract class ClientSSLAbstract extends ClientAbstract {
 		getThread().start();
 
 		fireStarted();
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

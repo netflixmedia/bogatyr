@@ -33,6 +33,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperNumber;
 import net.laubenberger.bogatyr.misc.Event;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
@@ -46,10 +50,12 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100512)
+ * @version 0.9.2 (20100611)
  * @since 0.7.0
  */
 public abstract class ServerAbstract extends ExtendedObjectAbstract implements Server, ListenerServerThread {
+	private static final Logger log = LoggerFactory.getLogger(ServerAbstract.class);
+	
 	private Thread thread;
 
 	private final Collection<ServerThread> threads = new HashSet<ServerThread>();
@@ -64,10 +70,12 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 
 	protected ServerAbstract() {
 		super();
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	protected ServerAbstract(final int port, final int timeout) {
 		super();
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(port, timeout));
 
 		setPort(port);
 		setTimeout(timeout);
@@ -75,6 +83,7 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 
 	protected ServerAbstract(final int port) {
 		this(port, 0);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(port));
 	}
 
 	/**
@@ -85,6 +94,9 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 	 * @since 0.7.0
 	 */
 	public Thread getThread() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(thread));
 		return thread;
 	}
 
@@ -96,15 +108,23 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 	 * @since 0.8.0
 	 */
 	protected void setThread(final Thread thread) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(thread));
+		
 		if (null == thread) {
 			throw new RuntimeExceptionIsNull("thread"); //$NON-NLS-1$
 		}
 
 		this.thread = thread;
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	protected void setRunning(final boolean isRunning) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(isRunning));
+		
 		this.isRunning = isRunning;
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 
@@ -114,21 +134,32 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 
 	@Override
 	public ServerSocket getServerSocket() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(serverSocket));
 		return serverSocket;
 	}
 
 	@Override
 	public int getPort() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(port));
 		return port;
 	}
 
 	@Override
 	public int getTimeout() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(timeout));
 		return timeout;
 	}
 
 	@Override
 	public void setPort(final int port) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(port));
+		
 		if (0 >= port) {
 			throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
 		}
@@ -137,24 +168,34 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 		}
 
 		this.port = port;
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setServerSocket(final ServerSocket serverSocket) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(serverSocket));
+		
 		if (null == serverSocket) {
 			throw new RuntimeExceptionIsNull("serverSocket"); //$NON-NLS-1$
 		}
 
 		this.serverSocket = serverSocket;
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void setTimeout(final int timeout) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(timeout));
+		
 		if (0 > timeout) {
 			throw new RuntimeExceptionMustBeGreater("timeout", timeout, 0); //$NON-NLS-1$
 		}
 
 		this.timeout = timeout;
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 //    public void addServerThread(final UUID uuid, final ServerThread serverThread) {
@@ -168,11 +209,16 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 
 	@Override
 	public Collection<ServerThread> getServerThreads() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(threads));
 		return Collections.unmodifiableCollection(threads);
 	}
 
 	@Override
 	public void start() throws IOException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
 		serverSocket = new ServerSocket(port);
 
 		if (0 < timeout) {
@@ -183,10 +229,14 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 		thread.start();
 
 		isRunning = true;
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void stop() throws IOException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
 		isRunning = false;
 
 		if (null != serverSocket && !serverSocket.isClosed()) {
@@ -204,28 +254,41 @@ public abstract class ServerAbstract extends ExtendedObjectAbstract implements S
 //				thread = null;
 			}
 		}
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public boolean isRunning() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(isRunning));
 		return isRunning;
 	}
 
 	@Override
 	public void serverThreadStarted(final Event<ServerThread> event) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(event));
+		
 		if (null == event) {
 			throw new RuntimeExceptionIsNull("event"); //$NON-NLS-1$
 		}
 
 		threads.add(event.getSource());
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void serverThreadStopped(final Event<ServerThread> event) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(event));
+		
 		if (null == event) {
 			throw new RuntimeExceptionIsNull("event"); //$NON-NLS-1$
 		}
 
 		threads.remove(event.getSource());
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

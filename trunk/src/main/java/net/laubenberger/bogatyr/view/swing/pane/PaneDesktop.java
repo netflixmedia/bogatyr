@@ -32,8 +32,6 @@ import java.awt.Component;
 import javax.swing.JDesktopPane;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +40,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JDesktopPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.7.0
  */
 public class PaneDesktop extends JDesktopPane {

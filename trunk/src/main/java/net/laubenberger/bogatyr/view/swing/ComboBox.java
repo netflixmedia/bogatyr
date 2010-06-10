@@ -27,10 +27,11 @@
 
 package net.laubenberger.bogatyr.view.swing;
 
-import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
-import net.laubenberger.bogatyr.helper.HelperString;
-import net.laubenberger.bogatyr.misc.Activatable;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Vector;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.JComboBox;
@@ -39,21 +40,19 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.PlainDocument;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
+import net.laubenberger.bogatyr.helper.HelperString;
+import net.laubenberger.bogatyr.misc.Activatable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.Vector;
 
 
 /**
  * This is an extended JComboBox.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.2.0
  */
 public class ComboBox extends JComboBox implements Activatable {

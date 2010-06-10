@@ -30,6 +30,7 @@ package net.laubenberger.bogatyr.service.updater;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,18 +52,18 @@ import org.junit.Test;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100509
+ * @version 20100611
  */
 public class UpdaterTest {
 	@Before
 	public void setUp() throws Exception {
 		final ModelUpdater doc = new ModelUpdaterImpl();
 
-		final Map<Platform, String> locations = new HashMap<Platform, String>(3);
+		final Map<Platform, URL> locations = new HashMap<Platform, URL>(3);
 //		locations.put(Platform.ANY, "http://code.google.com/p/bogatyr/downloads/list");
-		locations.put(Platform.WINDOWS, "www.ms.com"); //$NON-NLS-1$
-		locations.put(Platform.MAC_OSX, "www.apple.com"); //$NON-NLS-1$
-		locations.put(Platform.UNIX, "www.unix.com"); //$NON-NLS-1$
+		locations.put(Platform.WINDOWS, new URL("http://www.ms.com")); //$NON-NLS-1$
+		locations.put(Platform.MAC_OSX, new URL("http://www.apple.com")); //$NON-NLS-1$
+		locations.put(Platform.UNIX, new URL("http://www.unix.com")); //$NON-NLS-1$
 		doc.setLocations(locations);
 
 		final Map<HashCodeAlgo, String> hashs = new HashMap<HashCodeAlgo, String>(3);

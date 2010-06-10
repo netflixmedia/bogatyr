@@ -48,7 +48,7 @@ import com.lowagie.text.PageSize;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100506
+ * @version 20100611
  */
 public class HelperPdfTest {
 	@Test
@@ -68,7 +68,7 @@ public class HelperPdfTest {
 		component2.setSize(new Dimension(100, 100));
 
 		try {
-			File output = HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf");
+			File output = HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"); //$NON-NLS-1$ //$NON-NLS-2$
 //			File output = new File("bogatyr.pdf");
 			HelperPdf.writePdfFromImage(PageSize.A4, false, output, HelperImage.getImage(component), HelperImage.getImage(component2));
 //			LauncherFile.open(output);

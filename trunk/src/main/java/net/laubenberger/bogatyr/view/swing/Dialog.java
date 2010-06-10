@@ -32,10 +32,8 @@ import java.awt.GraphicsConfiguration;
 import java.awt.Window;
 
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Displayable;
 
 import org.slf4j.Logger;
@@ -46,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JDialog.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.4.0
  */
 public class Dialog extends JDialog implements Displayable {

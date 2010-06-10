@@ -37,14 +37,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
 
 
 /**
  * This is an extended JEditorPane.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.7.0
  */
 public class PaneEditor extends JEditorPane {
