@@ -38,13 +38,13 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObject;
  * Defines the methods for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100603)
+ * @version 0.9.2 (20100611)
  * @since 0.9.0
  */
 public interface Model extends ExtendedObject, Serializable, HolderObserver {
 	String MEMBER_INSTANTIATION_DATE = "instantiationDate"; //$NON-NLS-1$
-	String MEMBER_TAGS = "tags"; //$NON-NLS-1$
-	String METHOD_ADD_TAG = "addTag"; //$NON-NLS-1$
+	String MEMBER_TAGS 					= "tags"; //$NON-NLS-1$
+	String METHOD_ADD_TAG 				= "addTag"; //$NON-NLS-1$
 //	String METHOD_REMOVE_TAG = "removeTag"; //$NON-NLS-1$
 
 	/**

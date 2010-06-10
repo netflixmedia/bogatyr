@@ -33,6 +33,7 @@ import java.net.DatagramSocket;
 import java.util.Collection;
 import java.util.HashSet;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperNumber;
 import net.laubenberger.bogatyr.misc.Event;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
@@ -40,14 +41,19 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * This is a datagram dumper to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.2 (20100611)
  * @since 0.8.0
  */
 public class DatagramDumperImpl extends ExtendedObjectAbstract implements DatagramDumper {
+	private static final Logger log = LoggerFactory.getLogger(DatagramDumperImpl.class);
+	
 	private final Event<DatagramDumper> event = new Event<DatagramDumper>(this);
 
 	private Thread thread;
@@ -64,10 +70,12 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 
 	public DatagramDumperImpl() {
 		super();
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	public DatagramDumperImpl(final int port) {
 		super();
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(port));
 
 		setPort(port);
 	}
@@ -79,6 +87,8 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 	 * @since 0.8.0
 	 */
 	public Thread getThread() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
 		return thread;
 	}
 
@@ -88,44 +98,81 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 	 */
 
 	private void firePacketReceived() {
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
+		
 		for (final ListenerDatagram listener : listeners) {
 			listener.packetReceived(event);
 		}
+		
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 	private void fireStarted() {
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
+		
 		isRunning = true;
 
 		for (final ListenerDatagram listener : listeners) {
 			listener.datagramStarted(event);
 		}
+		
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 	private void fireStopped() {
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
+		
 		isRunning = false;
 
 		for (final ListenerDatagram listener : listeners) {
 			listener.datagramStopped(event);
 		}
+		
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
 
 	/*
 	 * Implemented methods
 	 */
+	
+	@Override
+	public void run() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		try {
+			while (!thread.isInterrupted()) {
+				socket.receive(packet);
+				
+				firePacketReceived();
+			}
+		} catch (IOException ex) {
+			if (log.isErrorEnabled()) log.error("Could not receive datagrams", ex); //$NON-NLS-1$
+		}
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
 
 	@Override
 	public DatagramPacket getPacket() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(packet));
 		return packet;
 	}
 
 	@Override
 	public int getPort() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(port));
 		return port;
 	}
 
 	@Override
 	public void setPort(final int port) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(port));
+		
 		if (0 >= port) {
 			throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
 		}
@@ -134,20 +181,28 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 		}
 
 		this.port = port;
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void start() throws IOException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
 		socket = new DatagramSocket(port);
 
 		thread = new Thread(this);
 		thread.start();
 
 		fireStarted();
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void stop() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
 		fireStopped();
 
 		if (null != socket && !socket.isClosed()) {
@@ -161,41 +216,41 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 //				thread = null;
 			}
 		}
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public boolean isRunning() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(isRunning));
 		return isRunning;
 	}
 
 	@Override
-	public void run() {
-		try {
-			while (!thread.isInterrupted()) {
-				socket.receive(packet);
-
-				firePacketReceived();
-			}
-		} catch (IOException ex) {
-			//do nothing
-		}
-	}
-
-	@Override
 	public void addListener(final ListenerDatagram listener) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
+		
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listeners.add(listener);
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
 	@Override
 	public void deleteListener(final ListenerDatagram listener) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
+		
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
 		}
 
 		listeners.remove(listener);
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

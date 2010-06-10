@@ -58,7 +58,7 @@ import org.slf4j.LoggerFactory;
  * Simple file manager using the Bogatyr framework
  *
  * @author Stefan Laubenberger
- * @version 20100514
+ * @version 20100611
  */
 public class FileManager extends ApplicationAbstract {
 	private static final Logger log = LoggerFactory.getLogger(FileManager.class);
@@ -85,7 +85,7 @@ public class FileManager extends ApplicationAbstract {
 		PropertyConfigurator.configure("src/sample/configuration/log4j.properties"); //$NON-NLS-1$
 
 		MODEL = new ModelApplicationImpl(
-				"FileManager", new BigDecimal("0.92"), 266, HelperTime.getDate(2010, 5, 10, 0, 28, 0), null, null, null, null, false, null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$
+				"FileManager", new BigDecimal("0.92"), 266, HelperTime.getDate(2010, 5, 10, 0, 28, 0), null, null, null, null, null, false, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$
 
 		try {
 			MODEL.setUrl(new URL("http://dev.laubenberger.net/bogatyr/")); //$NON-NLS-1$

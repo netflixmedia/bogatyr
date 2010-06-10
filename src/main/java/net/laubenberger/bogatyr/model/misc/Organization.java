@@ -37,15 +37,15 @@ import net.laubenberger.bogatyr.model.Model;
  * The interface for the organization model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100510)
+ * @version 0.9.2 (20100611)
  * @since 0.9.2
  */
 @XmlJavaTypeAdapter(OrganizationImpl.XmlAdapter.class)
 public interface Organization extends Model, Address, Phone, Fax, Email, Url {
-	String MEMBER_PERSONS = "persons"; //$NON-NLS-1$
-	String MEMBER_ROLES = "roles"; //$NON-NLS-1$
-	String METHOD_ADD_PERSON = "addPerson"; //$NON-NLS-1$
-	String METHOD_ADD_ROLE = "addRole"; //$NON-NLS-1$
+	String MEMBER_PERSONS 		= "persons"; //$NON-NLS-1$
+	String MEMBER_ROLES 			= "roles"; //$NON-NLS-1$
+	String METHOD_ADD_PERSON 	= "addPerson"; //$NON-NLS-1$
+	String METHOD_ADD_ROLE 		= "addRole"; //$NON-NLS-1$
 
 	/**
 	 * Returns all {@link Person} of the organization.

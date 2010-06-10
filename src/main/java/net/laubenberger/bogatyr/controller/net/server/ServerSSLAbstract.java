@@ -33,26 +33,36 @@ import java.net.ServerSocket;
 import javax.net.ServerSocketFactory;
 import javax.net.ssl.SSLServerSocketFactory;
 
+import net.laubenberger.bogatyr.helper.HelperLog;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * This is the skeleton for SSL secured servers.
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100504)
+ * @version 0.9.2 (20100611)
  * @since 0.8.0
  */
 public abstract class ServerSSLAbstract extends ServerAbstract {
+	private static final Logger log = LoggerFactory.getLogger(ServerSSLAbstract.class);
+	
 	protected ServerSSLAbstract() {
 		super();
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
 	protected ServerSSLAbstract(final int port, final int timeout) {
 		super(port, timeout);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(port, timeout));
 	}
 
 	protected ServerSSLAbstract(final int port) {
 		super(port);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(port));
 	}
 
 
@@ -62,6 +72,8 @@ public abstract class ServerSSLAbstract extends ServerAbstract {
 
 	@Override
 	public void start() throws IOException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
 		setRunning(true);
 
 		final ServerSocketFactory sslFactory = SSLServerSocketFactory.getDefault();
@@ -75,5 +87,7 @@ public abstract class ServerSSLAbstract extends ServerAbstract {
 
 		setThread(new Thread(this));
 		getThread().start();
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 }

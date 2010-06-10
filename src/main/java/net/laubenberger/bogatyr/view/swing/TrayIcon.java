@@ -45,7 +45,6 @@ import javax.swing.event.PopupMenuListener;
 
 import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.model.misc.Platform;
 
 import org.slf4j.Logger;
@@ -55,7 +54,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended TrayIcon with JPopupMenu support.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.9.2
  */
 public class TrayIcon extends java.awt.TrayIcon {
@@ -203,7 +202,7 @@ public class TrayIcon extends java.awt.TrayIcon {
 	void hideJPopupMenu() {
 		if (null != window) {
 			window.dispose();
-			window = null;
+			//window = null;
 		}
 	}
 }

@@ -28,7 +28,6 @@
 package net.laubenberger.bogatyr.view.swing;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
 import javax.swing.JTable;
@@ -46,7 +45,7 @@ import java.util.Vector;
  * This is an extended JTable.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.7.0
  */
 public class Table extends JTable implements Activatable {

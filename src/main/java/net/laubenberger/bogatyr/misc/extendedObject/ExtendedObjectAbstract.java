@@ -29,13 +29,11 @@ package net.laubenberger.bogatyr.misc.extendedObject;
 
 import java.util.Date;
 
-import net.laubenberger.bogatyr.helper.HelperObject;
-
 /**
  * This is the skeleton for all extended objects.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.9.0
  */
 public abstract class ExtendedObjectAbstract implements ExtendedObject {
@@ -48,25 +46,25 @@ public abstract class ExtendedObjectAbstract implements ExtendedObject {
 	
 	@Override
 	public String toString() {
-		return getClass().getName() + "[instantiationDate=" + instantiationDate + "]";
+		return getClass().getName() + "[instantiationDate=" + instantiationDate + ']'; //$NON-NLS-1$
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((instantiationDate == null) ? 0 : instantiationDate.hashCode());
+		result = prime * result + ((null == instantiationDate) ? 0 : instantiationDate.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj) return true;
-		if (obj == null) return false;
+		if (null == obj) return false;
 		if (getClass() != obj.getClass()) return false;
-		ExtendedObjectAbstract other = (ExtendedObjectAbstract) obj;
-		if (instantiationDate == null) {
-			if (other.instantiationDate != null) return false;
+		final ExtendedObjectAbstract other = (ExtendedObjectAbstract) obj;
+		if (null == instantiationDate) {
+			if (null != other.instantiationDate) return false;
 		} else if (!instantiationDate.equals(other.instantiationDate)) return false;
 		return true;
 	}

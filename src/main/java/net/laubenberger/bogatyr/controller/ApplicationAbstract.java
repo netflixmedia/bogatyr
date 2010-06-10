@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all Bogatyr based applications.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.2 (20100611)
  * @since 0.1.0
  */
 public abstract class ApplicationAbstract extends ExtendedObjectAbstract implements Application {
@@ -94,7 +94,8 @@ public abstract class ApplicationAbstract extends ExtendedObjectAbstract impleme
 	 * Inner classes
 	 */
 	
-	static final class Handler implements UncaughtExceptionHandler {
+	static class Handler implements UncaughtExceptionHandler {
+		@Override
 		public void uncaughtException(final Thread t, final Throwable ex) {
 			if (log.isErrorEnabled()) log.error("Uncaught exception occurred", ex); //$NON-NLS-1$
 //			if (log.isWarnEnabled()) log.warn(HelperLog.applicationExit(255));

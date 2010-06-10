@@ -51,7 +51,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a helper class for compress operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100611)
  * @since 0.3.0
  */
 public abstract class HelperCompress { //TODO implement GZip for streams
@@ -77,6 +77,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	 *
 	 * @param file  for writing
 	 * @param files for the ZIP file
+	 * @param bufferSize in bytes
 	 * @throws IOException
 	 * @see File
 	 * @since 0.8.0

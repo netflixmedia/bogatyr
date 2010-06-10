@@ -46,7 +46,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for XML operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100611)
  * @since 0.3.0
  */
 public abstract class HelperXml {
@@ -89,6 +89,7 @@ public abstract class HelperXml {
 	 * @param file to store the serialized data
 	 * @param data (object) to serialize as XML
 	 * @see File
+	 * @throws javax.xml.bind.JAXBException
 	 * @since 0.9.0
 	 */
 	public static <T> void serialize(final File file, final T data) throws JAXBException {
@@ -111,6 +112,7 @@ public abstract class HelperXml {
 	 * @param os	{@link OutputStream} to store the serialized data
 	 * @param data (object) to serialize as XML
 	 * @see OutputStream
+	 * @throws JAXBException
 	 * @since 0.9.0
 	 */
 	public static <T> void serialize(final OutputStream os, final T data) throws JAXBException {
@@ -134,6 +136,7 @@ public abstract class HelperXml {
 	 * @param clazz for the serialized data
 	 * @return data as object
 	 * @see File
+	 * @throws JAXBException
 	 * @since 0.9.0
 	 */
 	@SuppressWarnings("unchecked")
@@ -159,6 +162,7 @@ public abstract class HelperXml {
 	 * @param clazz for the serialized data
 	 * @return data as object
 	 * @see InputStream
+	 * @throws JAXBException
 	 * @since 0.9.0
 	 */
 	@SuppressWarnings("unchecked")

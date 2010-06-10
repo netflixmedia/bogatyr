@@ -28,7 +28,6 @@
 package net.laubenberger.bogatyr.view.swing;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Activatable;
 
 import javax.swing.BoundedRangeModel;
@@ -47,7 +46,7 @@ import java.util.Dictionary;
  * This is an extended JSlider.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.2.0
  */
 public class Slider extends JSlider implements Activatable {

@@ -38,18 +38,18 @@ import net.laubenberger.bogatyr.model.Model;
  * The interface for the person model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100510)
+ * @version 0.9.2 (20100611)
  * @since 0.9.1
  */
 @XmlJavaTypeAdapter(PersonImpl.XmlAdapter.class)
 public interface Person extends Model, Address, Phone, Fax, Email, Url {
-	String MEMBER_FORENAME = "forename"; //$NON-NLS-1$
-	String MEMBER_BIRTHDAY = "birthday"; //$NON-NLS-1$
-	String MEMBER_GENDER = "gender"; //$NON-NLS-1$
-	String MEMBER_ORGANIZATIONS = "organizations"; //$NON-NLS-1$
-	String MEMBER_ROLES = "roles"; //$NON-NLS-1$
-	String METHOD_ADD_ORGANIZATION = "addOrganization"; //$NON-NLS-1$
-	String METHOD_ADD_ROLE = "addRole"; //$NON-NLS-1$
+	String MEMBER_FORENAME 				= "forename"; //$NON-NLS-1$
+	String MEMBER_BIRTHDAY 				= "birthday"; //$NON-NLS-1$
+	String MEMBER_GENDER 				= "gender"; //$NON-NLS-1$
+	String MEMBER_ORGANIZATIONS 		= "organizations"; //$NON-NLS-1$
+	String MEMBER_ROLES 					= "roles"; //$NON-NLS-1$
+	String METHOD_ADD_ORGANIZATION 	= "addOrganization"; //$NON-NLS-1$
+	String METHOD_ADD_ROLE 				= "addRole"; //$NON-NLS-1$
 
 	String getForename();
 

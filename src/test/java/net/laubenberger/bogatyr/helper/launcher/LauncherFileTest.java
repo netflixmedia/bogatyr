@@ -29,13 +29,11 @@ package net.laubenberger.bogatyr.helper.launcher;
 
 import org.junit.Test;
 
-import static org.junit.Assert.fail;
-
 /**
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20100611
  */
 public class LauncherFileTest {
 	@Test

@@ -32,10 +32,11 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JInternalFrame;
+import javax.swing.UIManager;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.misc.Displayable;
 import net.laubenberger.bogatyr.misc.Fadeable;
@@ -48,7 +49,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JInternalFrame.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.9.2
  */
 public class InternalFrame extends JInternalFrame implements Fadeable, Displayable {
@@ -73,27 +74,27 @@ public class InternalFrame extends JInternalFrame implements Fadeable, Displayab
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 	
-	public InternalFrame(String title, boolean resizable, boolean closable, boolean maximizable, boolean iconifiable) {
+	public InternalFrame(final String title, final boolean resizable, final boolean closable, final boolean maximizable, final boolean iconifiable) {
 		super(title, resizable, closable, maximizable, iconifiable);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, resizable, closable, maximizable, iconifiable));
 	}
 
-	public InternalFrame(String title, boolean resizable, boolean closable, boolean maximizable) {
+	public InternalFrame(final String title, final boolean resizable, final boolean closable, final boolean maximizable) {
 		super(title, resizable, closable, maximizable);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, resizable, closable, maximizable));
 	}
 
-	public InternalFrame(String title, boolean resizable, boolean closable) {
+	public InternalFrame(final String title, final boolean resizable, final boolean closable) {
 		super(title, resizable, closable);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, resizable, closable));
 	}
 
-	public InternalFrame(String title, boolean resizable) {
+	public InternalFrame(final String title, final boolean resizable) {
 		super(title, resizable);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, resizable));
 	}
 
-	public InternalFrame(String title) {
+	public InternalFrame(final String title) {
 		super(title);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title));
 	}
@@ -102,35 +103,35 @@ public class InternalFrame extends JInternalFrame implements Fadeable, Displayab
 	 * Own constructors
 	 */
 
-	public InternalFrame(String title, final Icon icon, boolean resizable, boolean closable, boolean maximizable, boolean iconifiable) {
+	public InternalFrame(final String title, final Icon icon, final boolean resizable, final boolean closable, final boolean maximizable, final boolean iconifiable) {
 		this(title, resizable, closable, maximizable, iconifiable);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, icon, resizable, closable, maximizable, iconifiable));
 
 		setFrameIcon(icon);
 	}
 
-	public InternalFrame(String title, final Icon icon, boolean resizable, boolean closable, boolean maximizable) {
+	public InternalFrame(final String title, final Icon icon, final boolean resizable, final boolean closable, final boolean maximizable) {
 		this(title, resizable, closable, maximizable);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, icon, resizable, closable, maximizable));
 
 		setFrameIcon(icon);
 	}
 
-	public InternalFrame(String title, final Icon icon, boolean resizable, boolean closable) {
+	public InternalFrame(final String title, final Icon icon, final boolean resizable, final boolean closable) {
 		this(title, resizable, closable);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, icon, resizable, closable));
 
 		setFrameIcon(icon);
 	}
 
-	public InternalFrame(String title, final Icon icon, boolean resizable) {
+	public InternalFrame(final String title, final Icon icon, final boolean resizable) {
 		this(title, resizable);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, icon, resizable));
 
 		setFrameIcon(icon);
 	}
 
-	public InternalFrame(String title, final Icon icon) {
+	public InternalFrame(final String title, final Icon icon) {
 		this(title);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(title, icon));
 

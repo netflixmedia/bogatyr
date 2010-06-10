@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.model.ModelAbstract;
  * Implementation of the context for applications.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100610)
+ * @version 0.9.2 (20100611)
  * @since 0.1.0
  */
 public class ContextImpl extends ModelAbstract implements Context {
@@ -73,7 +73,7 @@ public class ContextImpl extends ModelAbstract implements Context {
 	 */
 	@Override
 	public String toString() {
-		return getClass().getName() + "[contextData=" + contextData + "]";
+		return getClass().getName() + "[contextData=" + contextData + ']'; //$NON-NLS-1$
 	}
 
 	/*
