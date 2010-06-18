@@ -39,12 +39,19 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Encodes and decodes data to HTML-format.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100618)
  * @since 0.9.1
  */
 public abstract class EncoderHtml {
 	private static final Logger log = LoggerFactory.getLogger(HelperCollection.class);
 
+	/**
+	 * Encodes an input {@link String} to a HTML {@link String}.
+	 *
+	 * @param input {@link String} to encode to a HTML {@link String}
+	 * @return encoded HTML {@link String}
+	 * @since 0.9.1
+	 */
 	public static String encode(final String input) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {

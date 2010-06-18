@@ -29,22 +29,40 @@ package net.laubenberger.bogatyr.controller.application;
 
 import net.laubenberger.bogatyr.controller.Controller;
 import net.laubenberger.bogatyr.model.application.ModelApplication;
+import net.laubenberger.bogatyr.view.View;
 
 
 /**
  * The interface for the application controller.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100618)
  * @since 0.9.0
  */
-public interface ControllerApplication extends Controller {
-
-	void run();
-
+public interface ControllerApplication<M extends ModelApplication, V extends View> extends Controller, Runnable {
+	/**
+	 * Exit the application.
+	 * 
+	 * @param returnCode of the application
+	 * @since 0.9.0
+	 */	
 	void exit(final int returnCode);
 
-	ModelApplication getModel();
-
+	/**
+    * Returns the model of the application.
+    * 
+    * @return model of the application
+    * @since 0.9.0
+    */	
+	M getModel();
+	
+	/**
+    * Returns the view of the application.
+    * 
+    * @return View of the application
+    * @since 0.9.0
+    */	
+	V getView();
+	
 	//TODO add public actions (e.g. save)
 }

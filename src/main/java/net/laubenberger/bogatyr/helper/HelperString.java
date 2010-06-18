@@ -30,6 +30,8 @@ package net.laubenberger.bogatyr.helper;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
@@ -44,7 +46,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100611)
+ * @version 0.9.2 (20100618)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -77,6 +79,8 @@ public abstract class HelperString {
 	public static final String POWER_OF_2 = "²"; //$NON-NLS-1$
 	public static final String POWER_OF_3 = "³"; //$NON-NLS-1$
 
+	private static final Pattern PATTERN = Pattern.compile("[^0-9.]+"); //$NON-NLS-1$
+	
 	/**
 	 * Checks if a {@link CharSequence} is valid.
 	 *
@@ -184,8 +188,9 @@ public abstract class HelperString {
 				isNegative = true;
 			}
 	
-			final String temp = text.replaceAll("[^0-9.]+", EMPTY_STRING); //$NON-NLS-1$
-	
+			final Matcher matcher = PATTERN.matcher(text);
+			final String temp = matcher.replaceAll(EMPTY_STRING);
+			
 			boolean isPeriod = false;
 			final StringBuilder sb = new StringBuilder(temp.length());
 	

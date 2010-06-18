@@ -42,7 +42,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * Loads JAR files during runtime.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.2 (20100618)
  * @since 0.9.2
  */
 public class JarLoader extends URLClassLoader {
@@ -62,9 +62,11 @@ public class JarLoader extends URLClassLoader {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 * @throws ClassNotFoundException
+	 * @throws InvocationTargetException 
+	 * @throws NoSuchMethodException 
 	 * @since 0.9.2
 	 */
-	public Object createInstance(final String clazz) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	public Object createInstance(final String clazz) throws InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clazz));
 
 		final Object result = HelperObject.createInstance(loadClass(clazz, true));

@@ -48,13 +48,13 @@ import org.slf4j.LoggerFactory;
  * This is an extended JFormattedTextField.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.2 (20100618)
  * @since 0.9.0
  */
 public class FormattedTextField extends JFormattedTextField implements Activatable {
 	private static final long serialVersionUID = -507647543464629867L;
 
-	private static final Logger log = LoggerFactory.getLogger(FormattedTextField.class);
+	static final Logger log = LoggerFactory.getLogger(FormattedTextField.class);
 
 	private boolean isNotActive;
 

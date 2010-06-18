@@ -34,7 +34,7 @@ import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import net.laubenberger.bogatyr.controller.ApplicationAbstract;
+import net.laubenberger.bogatyr.controller.application.ControllerApplicationAbstract;
 import net.laubenberger.bogatyr.helper.HelperCollection;
 import net.laubenberger.bogatyr.helper.HelperIO;
 import net.laubenberger.bogatyr.helper.HelperObject;
@@ -48,6 +48,7 @@ import net.laubenberger.bogatyr.model.misc.PersonImpl;
 import net.laubenberger.bogatyr.model.misc.Role;
 import net.laubenberger.bogatyr.service.localizer.LocalizerFile;
 import net.laubenberger.bogatyr.service.property.PropertyImpl;
+import net.laubenberger.bogatyr.view.View;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
@@ -58,9 +59,9 @@ import org.slf4j.LoggerFactory;
  * Simple file manager using the Bogatyr framework
  *
  * @author Stefan Laubenberger
- * @version 20100611
+ * @version 20100618
  */
-public class FileManager extends ApplicationAbstract {
+public class FileManager extends ControllerApplicationAbstract<ModelApplication, View> {
 	private static final Logger log = LoggerFactory.getLogger(FileManager.class);
 
 	// Fixed parameter - e.g. this could be an argument
@@ -169,5 +170,11 @@ public class FileManager extends ApplicationAbstract {
 			exit(20);
 		}
 		exit(0);
+	}
+
+	@Override
+	public View getView() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
