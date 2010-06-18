@@ -34,24 +34,9 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObject;
  * Defines the methods for all controllers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.2 (20100618)
  * @since 0.9.0
  */
 public interface Controller extends ExtendedObject {
-//	
-//	/**
-//     * Returns the model of the controller.
-//     * 
-//     * @return model of the controller
-//     * @since 0.9.0
-//     */	
-//	<T extends Model> T getModel();
-//	
-//	/**
-//     * Returns the view of the controller.
-//     * 
-//     * @return View of the controller
-//     * @since 0.9.0
-//     */	
-//	<T extends View> T getView();
+	//only a marker interface
 }

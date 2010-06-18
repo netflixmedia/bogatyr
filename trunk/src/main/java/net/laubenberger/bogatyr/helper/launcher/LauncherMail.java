@@ -31,6 +31,8 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,12 +48,14 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher starts the system mail application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.2 (20100618)
  * @since 0.7.0
  */
 public abstract class LauncherMail {
 	private static final Logger log = LoggerFactory.getLogger(LauncherMail.class);
 
+	private static final Pattern PATTERN = Pattern.compile(" "); //$NON-NLS-1$
+	
 	/**
 	 * Opens the default mail application.
 	 *
@@ -128,7 +132,10 @@ public abstract class LauncherMail {
 
 		final String prefix = "mailto:"; //$NON-NLS-1$
 
-		mail(new URI(prefix + addresses.replaceAll(" ", "%20")));	//$NON-NLS-1$//$NON-NLS-2$
+		final Matcher matcher = PATTERN.matcher(addresses);
+		final String temp = matcher.replaceAll("%20"); //$NON-NLS-1$
+
+		mail(new URI(prefix + temp));
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}

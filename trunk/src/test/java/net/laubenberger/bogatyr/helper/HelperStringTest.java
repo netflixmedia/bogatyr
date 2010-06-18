@@ -43,7 +43,7 @@ import net.laubenberger.bogatyr.helper.HelperString;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100525
+ * @version 20100618
  */
 public class HelperStringTest {
 	@Test
@@ -95,7 +95,7 @@ public class HelperStringTest {
 	}
 
 	@Test
-	public void testGetValidNumericString() {
+	public void testGetNumericString() {
 //        assertNull(HelperString.getValidNumericString(null));
 //        assertNull(HelperString.getValidNumericString(HelperString.EMPTY_STRING)); 
 

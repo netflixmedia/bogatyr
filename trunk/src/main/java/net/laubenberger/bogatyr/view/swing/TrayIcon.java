@@ -51,10 +51,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is an extended TrayIcon with JPopupMenu support.
+ * This is an extended {@link java.awt.TrayIcon} with {@link JPopupMenu} support.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.2 (20100618)
  * @since 0.9.2
  */
 public class TrayIcon extends java.awt.TrayIcon {
@@ -118,10 +118,24 @@ public class TrayIcon extends java.awt.TrayIcon {
 		setJPopupMenu(popup);
 	}
 
+	/**
+	 * Returns the {@link JPopupMenu}.
+	 *
+	 * @return used {@link JPopupMenu}
+	 * @see JPopupMenu
+	 * @since 0.9.2
+	 */
 	public JPopupMenu getJPopupMenu() {
 		return popup;
 	}
 
+	/**
+	 * Sets the {@link JPopupMenu}.
+	 *
+	 * @param popup to be used
+	 * @see JPopupMenu
+	 * @since 0.9.2
+	 */
 	public void setJPopupMenu(final JPopupMenu popup) {
 		if (null != this.popup) {
 			this.popup.removePopupMenuListener(popupListener);
@@ -202,7 +216,7 @@ public class TrayIcon extends java.awt.TrayIcon {
 	void hideJPopupMenu() {
 		if (null != window) {
 			window.dispose();
-			//window = null;
+			window = null;
 		}
 	}
 }
