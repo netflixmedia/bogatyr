@@ -58,7 +58,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20100618
+ * @version 20100714
  */
 public class HelloWorld extends ControllerApplicationAbstract<ModelApplication, View> {
 	private static final Logger log = LoggerFactory.getLogger(HelloWorld.class);
@@ -97,7 +97,7 @@ public class HelloWorld extends ControllerApplicationAbstract<ModelApplication, 
 	}
 
 	public HelloWorld() {
-		super(MODEL);
+		super(MODEL, null);
 
 		init();
 	}

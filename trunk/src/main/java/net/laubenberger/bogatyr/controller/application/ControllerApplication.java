@@ -36,7 +36,7 @@ import net.laubenberger.bogatyr.view.View;
  * The interface for the application controller.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100618)
+ * @version 0.9.3 (20100714)
  * @since 0.9.0
  */
 public interface ControllerApplication<M extends ModelApplication, V extends View> extends Controller, Runnable {
@@ -63,6 +63,23 @@ public interface ControllerApplication<M extends ModelApplication, V extends Vie
     * @since 0.9.0
     */	
 	V getView();
+	
+	/**
+    * Sets the model of the application.
+    * 
+    * @param model for the application
+    * @since 0.9.3
+    */	
+	void setModel(M model);
+	
+	/**
+    * Sets the view of the application.
+    * 
+    * @param view for the application
+    * @since 0.9.3
+    */	
+	void setView(V view);
+	
 	
 	//TODO add public actions (e.g. save)
 }

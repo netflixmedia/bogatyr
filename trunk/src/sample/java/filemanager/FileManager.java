@@ -59,7 +59,7 @@ import org.slf4j.LoggerFactory;
  * Simple file manager using the Bogatyr framework
  *
  * @author Stefan Laubenberger
- * @version 20100618
+ * @version 20100714
  */
 public class FileManager extends ControllerApplicationAbstract<ModelApplication, View> {
 	private static final Logger log = LoggerFactory.getLogger(FileManager.class);
@@ -104,7 +104,7 @@ public class FileManager extends ControllerApplicationAbstract<ModelApplication,
 	}
 
 	public FileManager() {
-		super(MODEL);
+		super(MODEL, null);
 
 		init();
 	}

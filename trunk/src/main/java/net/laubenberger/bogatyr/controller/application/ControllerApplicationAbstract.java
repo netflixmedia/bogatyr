@@ -41,37 +41,36 @@ import org.slf4j.LoggerFactory;
  * The skeleton for the application controller.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100618)
+ * @version 0.9.3 (20100714)
  * @since 0.9.0
  */
 public abstract class ControllerApplicationAbstract<M extends ModelApplication, V extends View> extends ControllerAbstract implements ControllerApplication<M, V> {
 	static final Logger log = LoggerFactory.getLogger(ControllerApplicationAbstract.class);
 	
-	private final M model;
+	private M model;
+	private V view;
 
 	static {
 		Thread.setDefaultUncaughtExceptionHandler(new Handler());
 	}
 	
-	protected ControllerApplicationAbstract(final M model) {
+	protected ControllerApplicationAbstract() {
 		super();
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(model));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
+	}
+	
+	protected ControllerApplicationAbstract(final M model, final V view) {
+		super();
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(model, view));
 		
 		this.model = model;
+		this.view = view;
 	}
 
 
 	/*
 	 * Implemented methods
 	 */
-
-	@Override
-	public M getModel() {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(model));
-		return model;
-	}
 	
 	@Override
 	public void run() {
@@ -88,6 +87,39 @@ public abstract class ControllerApplicationAbstract<M extends ModelApplication, 
 		System.exit(returnCode);
 	}
 
+	@Override
+	public M getModel() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(model));
+		return model;
+	}
+	
+	@Override
+	public V getView() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(view));
+		return view;
+	}
+
+	@Override
+	public void setModel(M model) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(model));
+		
+		this.model = model;
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
+	
+	@Override
+	public void setView(V view) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(view));
+		
+		this.view = view;
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
 	
 	/*
 	 * Inner classes
