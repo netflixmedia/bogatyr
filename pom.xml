@@ -31,7 +31,7 @@
 	<groupId>net.laubenberger</groupId>
 	<artifactId>bogatyr</artifactId>
 	<packaging>jar</packaging>
-	<version>0.92</version>
+	<version>0.93</version>
 	<name>bogatyr</name>
 	<description>Bogatyr Java library</description>
 	<url>http://dev.laubenberger.net/bogatyr/</url>
