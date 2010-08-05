@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JDialog.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.3 (20100805)
  * @since 0.4.0
  */
 public class Dialog extends JDialog implements Displayable {
@@ -157,7 +157,6 @@ public class Dialog extends JDialog implements Displayable {
 	public void createAndShowGUI() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		setLocationRelativeTo(getOwner());
 		setVisible(true);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
