@@ -48,7 +48,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher starts the system mail application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100618)
+ * @version 0.9.3 (20100805)
  * @since 0.7.0
  */
 public abstract class LauncherMail {
@@ -139,7 +139,39 @@ public abstract class LauncherMail {
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
+	/**
+	 * Opens an email with a given addresses with the default mail application.
+	 *
+	 * @param emailAddresses for the mail (e.g. "yourname@yourmail.com")
+	 * @throws IOException
+	 * @throws URISyntaxException
+	 * @since 0.9.3
+	 */
+	public static void mail(final String... emailAddresses) throws IOException, URISyntaxException { //$JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(emailAddresses));
+		if (!HelperArray.isValid(emailAddresses)) {
+			throw new RuntimeExceptionIsNullOrEmpty("emailAddresses"); //$NON-NLS-1$
+		}
 
+		final StringBuilder sb = new StringBuilder();
+		for (final String address : emailAddresses) {
+			if (0 < sb.length()) {
+				sb.append(HelperString.COMMA);
+			}
+			sb.append(address);
+		}
+
+		final String addresses = sb.toString();
+
+		final String prefix = "mailto:"; //$NON-NLS-1$
+
+		final Matcher matcher = PATTERN.matcher(addresses);
+		final String temp = matcher.replaceAll("%20"); //$NON-NLS-1$
+
+		mail(new URI(prefix + temp));
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
 
 	/*
 	 * Private methods

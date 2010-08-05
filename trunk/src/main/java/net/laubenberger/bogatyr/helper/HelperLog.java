@@ -38,7 +38,7 @@ import net.laubenberger.bogatyr.model.unit.Bit;
  * This is a helper class for logging.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.3 (20100805)
  * @since 0.9.1
  */
 public abstract class HelperLog {
@@ -162,7 +162,7 @@ public abstract class HelperLog {
 		sb.append(HelperEnvironment.getOsArch());
 		sb.append(HelperString.NEW_LINE);
 
-		sb.append("OS temorary directory: "); //$NON-NLS-1$
+		sb.append("OS temporary directory: "); //$NON-NLS-1$
 		sb.append(HelperEnvironment.getOsTempDirectory());
 		sb.append(HelperString.NEW_LINE);
 
