@@ -59,7 +59,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.3 (20100806)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -224,16 +224,6 @@ public abstract class HelperImage {
 		final Dimension size = HelperGraphic.getScaledSize(new Dimension(image.getWidth(), image.getHeight()), scale);
 		final BufferedImage result = getScaledImage(image, size);
 
-		// final Image result = image.getScaledInstance(size.width, size.height,
-		// Image.SCALE_SMOOTH);
-
-		// final double width = (double) image.getWidth() * scale;
-		// final double height = (double) image.getHeight() * scale;
-
-		// final Image result = image.getScaledInstance(HelperMath
-		// .convertDoubleToInt(width), HelperMath
-		// .convertDoubleToInt(height), Image.SCALE_SMOOTH);
-
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
@@ -275,32 +265,28 @@ public abstract class HelperImage {
 				result = new BufferedImage(sizeNew.width, sizeNew.height, image.getType());
 
 				final Graphics2D g2d = result.createGraphics();
-				g2d.setRenderingHints(getHQRenderingHints());
+				if (size.width > image.getWidth() || size.height > image.getHeight()) {
+					g2d.setRenderingHints(getHQRenderingHintsForUpscale());
+				} else {
+					g2d.setRenderingHints(getHQRenderingHintsForDownscale());
+				}
 				g2d.drawImage(image, 0, 0, sizeNew.width, sizeNew.height, 0, 0, image.getWidth(), image.getHeight(), null);
 				g2d.dispose();
 			} else {
 				result = new BufferedImage(size.width, size.height, image.getType());
 
 				final Graphics2D g2d = result.createGraphics();
-				g2d.setRenderingHints(getHQRenderingHints());
+				if (size.width > image.getWidth() || size.height > image.getHeight()) {
+					g2d.setRenderingHints(getHQRenderingHintsForUpscale());
+				} else {
+					g2d.setRenderingHints(getHQRenderingHintsForDownscale());
+				}
 				g2d.drawImage(image, 0, 0, size.width, size.height, 0, 0, image.getWidth(), image.getHeight(), null);
 				g2d.dispose();
 
 			}
 		}
 
-		// final Image result;
-		//
-		// if (0 == size.width || 0 == size.height) {
-		// final Dimension sizeNew = HelperGraphic.getScaledSize(new
-		// Dimension(image.getWidth(), image.getHeight()), size);
-		// result = image.getScaledInstance(sizeNew.width, sizeNew.height,
-		// Image.SCALE_SMOOTH);
-		// } else {
-		// result = image.getScaledInstance(size.width, size.height,
-		// Image.SCALE_SMOOTH);
-		// }
-		//
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
@@ -409,10 +395,11 @@ public abstract class HelperImage {
 		return result;
 	}
 
+
 	/**
-	 * Returns a set of high quality {@link RenderingHints}.
+	 * Returns a set of high quality {@link RenderingHints} for basic transformations.
 	 * 
-	 * @return set of high quality {@link RenderingHints}
+	 * @return set of high quality {@link RenderingHints} for basic transformations.
 	 * @see RenderingHints
 	 * @since 0.9.2
 	 */
@@ -424,6 +411,40 @@ public abstract class HelperImage {
 		hints.put(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
 		hints.put(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
 		hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		hints.put(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(hints));
+		return hints;
+	}
+	
+	/**
+	 * Returns a set of high quality {@link RenderingHints} for upscale transformations.
+	 * 
+	 * @return set of high quality {@link RenderingHints} for upscale transformations.
+	 * @see RenderingHints
+	 * @since 0.9.3
+	 */
+	public static RenderingHints getHQRenderingHintsForUpscale() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		final RenderingHints hints = getHQRenderingHints();
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(hints));
+		return hints;
+	}
+	
+	/**
+	 * Returns a set of high quality {@link RenderingHints} for downscale transformations.
+	 * 
+	 * @return set of high quality {@link RenderingHints} for downscale transformations.
+	 * @see RenderingHints
+	 * @since 0.9.3
+	 */
+	public static RenderingHints getHQRenderingHintsForDownscale() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		final RenderingHints hints = getHQRenderingHints();
+		hints.put(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(hints));
 		return hints;
@@ -480,7 +501,7 @@ public abstract class HelperImage {
 		final BufferedImage result = new BufferedImage(w, h, image.getColorModel().getTransparency());
 		
 		final Graphics2D g2d = result.createGraphics();
-//		g2d.setRenderingHints(getHQRenderingHints());
+		g2d.setRenderingHints(getHQRenderingHints());
 		g2d.drawImage(image, 0, 0, w, h, 0, h, w, 0, null);
 		g2d.dispose();
 		
@@ -509,7 +530,7 @@ public abstract class HelperImage {
 		final BufferedImage result = new BufferedImage(w, h, image.getType());
 		
 		final Graphics2D g2d = result.createGraphics();
-//		g2d.setRenderingHints(getHQRenderingHints());
+		g2d.setRenderingHints(getHQRenderingHints());
 		g2d.drawImage(image, 0, 0, w, h, w, 0, 0, h, null);
 		g2d.dispose();
 		
@@ -540,7 +561,7 @@ public abstract class HelperImage {
 		final BufferedImage result = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
 
 		final Graphics2D g2d = result.createGraphics();
-//		g2d.setRenderingHints(getHQRenderingHints());
+		g2d.setRenderingHints(getHQRenderingHints());
 		g2d.setComposite(AlphaComposite.Src);
 		g2d.drawImage(image, null, 0, 0);
 		g2d.dispose();
