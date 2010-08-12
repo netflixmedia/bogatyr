@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
  * To find such classes and methods, it must be marked with $Example$.
  *
  * @author Stefan Laubenberger
- * @version 20100514
+ * @version 20100813
  */
 public class CheckExample {
 	private static final Logger log = LoggerFactory.getLogger(CheckExample.class);
@@ -125,14 +125,14 @@ public class CheckExample {
 					}
 				}
 			} catch (IOException ex) {
-				if (log.isErrorEnabled()) log.error("Could not process files", ex); //$NON-NLS-1$
+				log.error("Could not process files", ex); //$NON-NLS-1$
 			}
 
 			if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Open file with the default application?", "Open file", JOptionPane.YES_NO_OPTION)) {  //$NON-NLS-1$//$NON-NLS-2$
 				try {
 					LauncherFile.open(output);
 				} catch (IOException ex) {
-					if (log.isErrorEnabled()) log.error("Could not open output file", ex); //$NON-NLS-1$
+					log.error("Could not open output file", ex); //$NON-NLS-1$
 					System.exit(10);
 				}
 			}

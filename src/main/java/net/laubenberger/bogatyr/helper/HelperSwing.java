@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for Swing.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.3 (20100813)
  * @since 0.9.0
  */
 public abstract class HelperSwing {
@@ -87,7 +87,7 @@ public abstract class HelperSwing {
 					UIManager.put(pair.getKey(), pair.getValue());
 				}
 			} catch (Exception ex) {
-				if (log.isErrorEnabled()) log.error("Could not set MacOS X menu bar", ex); //$NON-NLS-1$
+				log.error("Could not set MacOS X menu bar", ex); //$NON-NLS-1$
 			}
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
