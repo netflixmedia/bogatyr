@@ -38,7 +38,7 @@ import net.laubenberger.bogatyr.misc.xml.XmlMap;
  * Map adapter for {@link Dimension}.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100714)
+ * @version 0.9.3 (20100813)
  * @since 0.9.3
  */
 public class AdapterDimension extends XmlAdapter<XmlMap, Dimension> {
@@ -52,8 +52,8 @@ public class AdapterDimension extends XmlAdapter<XmlMap, Dimension> {
 		if (null != dim) {
 			final XmlMap xmlMap = new XmlMap();
 
-			xmlMap.getEntries().add(new XmlEntry("x", String.valueOf(dim.width)));
-			xmlMap.getEntries().add(new XmlEntry("y", String.valueOf(dim.height)));
+			xmlMap.getEntries().add(new XmlEntry("x", String.valueOf(dim.width))); //$NON-NLS-1$
+			xmlMap.getEntries().add(new XmlEntry("y", String.valueOf(dim.height))); //$NON-NLS-1$
 
 			return xmlMap;
 		}

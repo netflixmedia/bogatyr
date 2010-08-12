@@ -21,12 +21,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="6099473d-4163-40d6-a2ae-9afd78c1b030" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/application/ControllerApplicationAbstract.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/application/ControllerApplicationAbstract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/java/helloworld/HelloWorld.java" afterPath="$PROJECT_DIR$/src/sample/java/helloworld/HelloWorld.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/AdapterDimension.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/AdapterDimension.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/DatagramDumperImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/DatagramDumperImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/java/filemanager/FileManager.java" afterPath="$PROJECT_DIR$/src/sample/java/filemanager/FileManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperImage.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperImage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperSwing.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperSwing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/java/CheckExample.java" afterPath="$PROJECT_DIR$/src/util/java/CheckExample.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/java/CheckJUnit.java" afterPath="$PROJECT_DIR$/src/util/java/CheckJUnit.java" />
     </list>
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="target/" />
     <ignored path="$USER_HOME_GRAILS$/" />
     <ignored path="Bogatyr.iws" />
-    <ignored path="target/" />
-    <ignored path=".idea/workspace.xml" />
     <ignored path="$USER_HOME_GRIFFON$/" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +98,80 @@
   </component>
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="Constants.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="54" column="27" selection-start="1612" selection-end="1612" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ControllerApplicationAbstract.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/application/ControllerApplicationAbstract.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="43" column="27" selection-start="1252" selection-end="1252" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatagramDumperImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/DatagramDumperImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="17" selection-start="1588" selection-end="1588" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/java/filemanager/FileManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="61" column="20" selection-start="2017" selection-end="2017" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HelloWorld.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/sample/java/helloworld/HelloWorld.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="60" column="20" selection-start="1943" selection-end="1943" vertical-scroll-proportion="0.17603911">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdapterDimension.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/AdapterDimension.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="40" column="27" selection-start="1078" selection-end="1086" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CheckExample.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/util/java/CheckExample.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="51" column="20" selection-start="1509" selection-end="1509" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CheckJUnit.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/util/java/CheckJUnit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="51" column="20" selection-start="1495" selection-end="1495" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -102,22 +185,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/application/ControllerApplicationAbstract.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/encoder/EncoderHtml.java" />
-        <option value="$PROJECT_DIR$/src/sample/java/filemanager/FileManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/FormattedTextField.java" />
-        <option value="$PROJECT_DIR$/src/sample/java/helloworld/HelloWorld.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperObject.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperString.java" />
         <option value="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperStringTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/JarLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterMap.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/ModelAbstract.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/TrayIcon.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/AdapterDimension.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperLog.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/launcher/LauncherMail.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/AdapterDimension.java" />
+        <option value="$PROJECT_DIR$/src/util/java/CheckExample.java" />
+        <option value="$PROJECT_DIR$/src/util/java/CheckJUnit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/application/ControllerApplicationAbstract.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/DatagramDumperImpl.java" />
+        <option value="$PROJECT_DIR$/src/sample/java/filemanager/FileManager.java" />
+        <option value="$PROJECT_DIR$/src/sample/java/helloworld/HelloWorld.java" />
       </list>
     </option>
   </component>
@@ -1236,22 +1319,22 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="Favorites" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="257" />
-    <property name="project.structure.last.edited" value="Modules" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="231" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="29" />
-    <property name="project.structure.proportion" value="0.15" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="246" />
-    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
+    <property name="options.splitter.main.proportions" value="0.3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="RunManagerConfig.showSettingsBeforeRunnig" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="209" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5" value="5" />
@@ -1267,22 +1350,22 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="242" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="820" />
     <property name="GoToClass.includeLibraries" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="820" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="RESOURCE_BUNDLE_SPLITTER_PROPORTION" value="0.5" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
     <property name="options.lastSelected" value="File.Encoding" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="dynamic.classpath" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -1598,17 +1681,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="2560" height="1414" extended-state="6" />
-    <editor active="false" />
+    <frame x="0" y="22" width="2560" height="1414" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32843894" sideWeight="0.0" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32843894" sideWeight="0.0" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.6057572" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39946738" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.6057572" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32612056" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31839257" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32655245" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13522181" sideWeight="0.6059957" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.6057572" order="3" side_tool="false" content_ui="tabs" />
@@ -1621,6 +1703,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3222698" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31839257" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32867885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38650963" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1639,7 +1722,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="-new method for LauncherMail&#10;-new method for ActionAbstract&#10;-Typo in HelperLog" />
+    <option name="LAST_COMMIT_MESSAGE" value="-new HQ rendering hints for upscale/downscale" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1652,7 +1735,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="-Tagging mechanism improved&#10;-Logging added for package &quot;model&quot;" />
     <MESSAGE value="-Namespace changed (sorry for doing that!)&#10;-Reformatting of the whole code&#10;-Remove of dead code" />
     <MESSAGE value="-Copyright changes" />
     <MESSAGE value="-Final commit for build 0.91" />
@@ -1677,6 +1759,7 @@
     <MESSAGE value="-AdapterDimension added&#10;" />
     <MESSAGE value="-Dialog improved&#10;" />
     <MESSAGE value="-new method for LauncherMail&#10;-new method for ActionAbstract&#10;-Typo in HelperLog" />
+    <MESSAGE value="-new HQ rendering hints for upscale/downscale" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1724,41 +1807,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/sample/java/helloworld/HelloWorld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="20" selection-start="1943" selection-end="1943" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="27" selection-start="1596" selection-end="1596" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperString.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="27" selection-start="1369" selection-end="1369" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperStringTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="20" selection-start="1199" selection-end="1199" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/JarLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="27" selection-start="1156" selection-end="1156" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="27" selection-start="1146" selection-end="1146" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/ModelAbstract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="27" selection-start="1499" selection-end="1499" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/HolderListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="17" selection-start="953" selection-end="953" vertical-scroll-proportion="0.2440678" />
@@ -1779,16 +1827,6 @@
         <state line="16" column="24" selection-start="603" selection-end="603" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/AdapterDimension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="13" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.5119617" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="136" selection-start="1900" selection-end="1900" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/ActionAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -1802,6 +1840,67 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/launcher/LauncherMail.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="50" column="17" selection-start="1445" selection-end="1445" vertical-scroll-proportion="0.15846339" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/AdapterDimension.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="27" selection-start="1078" selection-end="1086" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/java/CheckExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="20" selection-start="1509" selection-end="1509" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/java/CheckJUnit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="20" selection-start="1495" selection-end="1495" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="27" selection-start="1612" selection-end="1612" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/application/ControllerApplicationAbstract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="27" selection-start="1252" selection-end="1252" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/controller/net/DatagramDumperImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="17" selection-start="1588" selection-end="1588" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/java/filemanager/FileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="20" selection-start="2017" selection-end="2017" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/java/helloworld/HelloWorld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="20" selection-start="1943" selection-end="1943" vertical-scroll-proportion="0.17603911">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>

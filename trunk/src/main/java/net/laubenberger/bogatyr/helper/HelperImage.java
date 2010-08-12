@@ -59,7 +59,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100806)
+ * @version 0.9.3 (20100813)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -658,7 +658,7 @@ public abstract class HelperImage {
 					try {
 						imageStatus.wait();
 					} catch (InterruptedException ex) {
-						if (log.isErrorEnabled()) log.error("Could not process image", ex); //$NON-NLS-1$
+						log.error("Could not process image", ex); //$NON-NLS-1$
 					}
 				}
 			}

@@ -58,7 +58,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 20100714
+ * @version 20100813
  */
 public class HelloWorld extends ControllerApplicationAbstract<ModelApplication, View> {
 	private static final Logger log = LoggerFactory.getLogger(HelloWorld.class);
@@ -87,7 +87,7 @@ public class HelloWorld extends ControllerApplicationAbstract<ModelApplication, 
 			MODEL.addPerson(new PersonImpl("Laubenberger", "Stefan", HelperTime.getDate(1976, 12, 30), Gender.MALE, "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net"), null, HelperCollection.getList(Role.ADMINISTRATOR, Role.ARCHITECT, Role.DESIGNER, Role.DEVELOPER, Role.MANUFACTURER, Role.OWNER, Role.PROJECT_MANAGER, Role.PUBLISHER, Role.REVIEWER, Role.TESTER, Role.WRITER), null));   //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
 		} catch (MalformedURLException ex) {
 			// should never happen!
-			if (log.isErrorEnabled()) log.error("URL invalid", ex); //$NON-NLS-1$
+			log.error("URL invalid", ex); //$NON-NLS-1$
 		}
 	}
 
@@ -110,7 +110,7 @@ public class HelloWorld extends ControllerApplicationAbstract<ModelApplication, 
 		try {
 			MODEL.setProperty(new PropertyImpl(new File(ARG_PROPERTY_LOCATION)));
 		} catch (IOException ex) {
-			if (log.isErrorEnabled()) log.error("Could not process the property file", ex); //$NON-NLS-1$
+			log.error("Could not process the property file", ex); //$NON-NLS-1$
 			exit(1);
 		}
 

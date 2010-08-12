@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * The skeleton for the application controller.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100714)
+ * @version 0.9.3 (20100813)
  * @since 0.9.0
  */
 public abstract class ControllerApplicationAbstract<M extends ModelApplication, V extends View> extends ControllerAbstract implements ControllerApplication<M, V> {
@@ -128,7 +128,7 @@ public abstract class ControllerApplicationAbstract<M extends ModelApplication, 
 	static class Handler implements UncaughtExceptionHandler {
 		@Override
 		public void uncaughtException(final Thread t, final Throwable ex) {
-			if (log.isErrorEnabled()) log.error("Uncaught exception occurred", ex); //$NON-NLS-1$
+			log.error("Uncaught exception occurred", ex); //$NON-NLS-1$
 		}
 	}
 }

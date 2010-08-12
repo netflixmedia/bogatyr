@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
  * This is a datagram dumper to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.3 (20100813)
  * @since 0.8.0
  */
 public class DatagramDumperImpl extends ExtendedObjectAbstract implements DatagramDumper {
@@ -147,7 +147,7 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 				firePacketReceived();
 			}
 		} catch (IOException ex) {
-			if (log.isErrorEnabled()) log.error("Could not receive datagrams", ex); //$NON-NLS-1$
+			log.error("Could not receive datagrams", ex); //$NON-NLS-1$
 		}
 		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
