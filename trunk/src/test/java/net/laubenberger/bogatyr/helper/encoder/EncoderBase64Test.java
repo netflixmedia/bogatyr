@@ -29,6 +29,8 @@ package net.laubenberger.bogatyr.helper.encoder;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.UnsupportedEncodingException;
+
 import net.laubenberger.bogatyr.AllBogatyrTests;
 
 import org.junit.Test;
@@ -38,12 +40,18 @@ import org.junit.Test;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20100816
  */
 public class EncoderBase64Test {
 	@Test
 	public void testEncodeAndDecode() {
-		final String encoded = EncoderBase64.encode(AllBogatyrTests.DATA);
+		String encoded = null;
+		try {
+			encoded = EncoderBase64.encode(AllBogatyrTests.DATA);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		final byte[] decoded = EncoderBase64.decode(encoded);
 
 		assertEquals(AllBogatyrTests.DATA, new String(decoded));

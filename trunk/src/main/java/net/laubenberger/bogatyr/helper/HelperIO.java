@@ -70,7 +70,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100611)
+ * @version 0.9.3 (20100816)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -82,9 +82,9 @@ public abstract class HelperIO {
 	/**
 	 * Returns a temporary {@link File} which will be deleted on program exit.
 	 *
-	 * @param name		of the file
-	 * @param extension of the file (e.g. ".java")
-	 * @return temporary file
+	 * @param name		of the {@link File}
+	 * @param extension of the {@link File} (e.g. ".java")
+	 * @return temporary {@link File}
 	 * @throws IOException
 	 * @see File
 	 * @since 0.5.0
@@ -111,7 +111,7 @@ public abstract class HelperIO {
 	/**
 	 * Returns a temporary {@link File} which will be deleted on program exit.
 	 *
-	 * @return temporary file
+	 * @return temporary {@link File}
 	 * @throws IOException
 	 * @see File
 	 * @since 0.9.0
@@ -333,7 +333,7 @@ public abstract class HelperIO {
 	 * Writes a text line in a {@link File} with the chosen encoding.
 	 *
 	 * @param file	  for writing
-	 * @param encoding of the file
+	 * @param encoding of the {@link File}
 	 * @param line	  containing the text to write
 	 * @throws IOException
 	 * @see File
@@ -399,7 +399,7 @@ public abstract class HelperIO {
 	 *
 	 * @param file	for writing
 	 * @param data	byte-array to write
-	 * @param append to file?
+	 * @param append to {@link File}?
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
@@ -428,8 +428,8 @@ public abstract class HelperIO {
 	 * Writes a {@link String} into a new {@link File} with the chosen encoding.
 	 *
 	 * @param file	  for writing
-	 * @param data	  string to write
-	 * @param encoding of the file
+	 * @param data	  {@link String} to write
+	 * @param encoding of the {@link File}
 	 * @throws IOException
 	 * @see File
 	 * @since 0.9.1
@@ -444,9 +444,9 @@ public abstract class HelperIO {
 	 * Writes a {@link String} into a {@link File} with the chosen encoding.
 	 *
 	 * @param file	  for writing
-	 * @param data	  string to write
-	 * @param encoding of the file
-	 * @param append	to file?
+	 * @param data	  {@link String} to write
+	 * @param encoding of the {@link File}
+	 * @param append	to {@link File}?
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
@@ -482,7 +482,7 @@ public abstract class HelperIO {
 	 * Writes a {@link String} into a new {@link File} with the default encoding (UTF-8).
 	 *
 	 * @param file for writing
-	 * @param data string to write
+	 * @param data {@link String} to write
 	 * @throws IOException
 	 * @see File
 	 * @since 0.9.1
@@ -497,8 +497,8 @@ public abstract class HelperIO {
 	 * Writes a {@link String} into a {@link File} with the default encoding (UTF-8).
 	 *
 	 * @param file	for writing
-	 * @param data	string to write
-	 * @param append to file?
+	 * @param data	{@link String} to write
+	 * @param append to {@link File}?
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
@@ -513,7 +513,7 @@ public abstract class HelperIO {
 	 * Writes an {@link InputStream} into a new {@link File}.
 	 *
 	 * @param file for writing
-	 * @param is	stream to write
+	 * @param is	{@link InputStream} to write
 	 * @throws IOException
 	 * @see File
 	 * @see InputStream
@@ -529,8 +529,8 @@ public abstract class HelperIO {
 	 * Writes an {@link InputStream} into a {@link File}.
 	 *
 	 * @param file	for writing
-	 * @param is	  stream to write
-	 * @param append to file?
+	 * @param is	  {@link InputStream} to write
+	 * @param append to {@link File}?
 	 * @throws IOException
 	 * @see File
 	 * @see InputStream
@@ -545,8 +545,8 @@ public abstract class HelperIO {
 	/**
 	 * Writes a byte array to an {@link OutputStream}.
 	 *
-	 * @param os	output stream for writing
-	 * @param data byte-array for the stream
+	 * @param os	{@link OutputStream} for writing
+	 * @param data byte-array for the {@link OutputStream}
 	 * @throws IOException
 	 * @see OutputStream
 	 * @since 0.1.0
@@ -568,8 +568,8 @@ public abstract class HelperIO {
 	/**
 	 * Reads an {@link InputStream} in a byte-array.
 	 *
-	 * @param is input stream for reading
-	 * @return byte-array containing the stream content
+	 * @param is {@link InputStream} for reading
+	 * @return byte-array containing the {@link InputStream} content
 	 * @throws IOException
 	 * @see InputStream
 	 * @since 0.1.0
@@ -586,9 +586,9 @@ public abstract class HelperIO {
 	/**
 	 * Reads an {@link InputStream} in a byte-array.
 	 *
-	 * @param is			input stream for reading
+	 * @param is			{@link InputStream} for reading
 	 * @param bufferSize in bytes
-	 * @return byte-array containing the stream content
+	 * @return byte-array containing the {@link InputStream} content
 	 * @throws IOException
 	 * @see InputStream
 	 * @since 0.1.0
@@ -630,7 +630,7 @@ public abstract class HelperIO {
 	 * Reads a {@link File} in a byte-array.
 	 *
 	 * @param file for reading
-	 * @return byte-array containing the file content
+	 * @return byte-array containing the {@link File} content
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
@@ -673,8 +673,8 @@ public abstract class HelperIO {
 	 * Reads a {@link File} in a {@link String} with the chosen encoding.
 	 *
 	 * @param file	  for reading
-	 * @param encoding of the file
-	 * @return String containing the file content
+	 * @param encoding of the {@link File}
+	 * @return {@link String} containing the file content
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
@@ -720,7 +720,7 @@ public abstract class HelperIO {
 	 * Reads a {@link File} in a {@link String} with the default encoding (UTF-8).
 	 *
 	 * @param file for reading
-	 * @return String containing the file content
+	 * @return {@link String} containing the {@link File} content
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
@@ -738,8 +738,8 @@ public abstract class HelperIO {
 	 * Reads a {@link File} in a {@link List} with the chosen encoding.
 	 *
 	 * @param file	  for reading
-	 * @param encoding of the file
-	 * @return {@link List} containing the file content
+	 * @param encoding of the {@link File}
+	 * @return {@link List} containing the {@link File} content
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
@@ -777,7 +777,7 @@ public abstract class HelperIO {
 	 * Reads a {@link File} in a {@link List} with the default encoding (UTF-8).
 	 *
 	 * @param file for reading
-	 * @return {@link List} containing the file content
+	 * @return {@link List} containing the {@link File} content
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
@@ -795,7 +795,7 @@ public abstract class HelperIO {
 	 * Reads a {@link File} into an {@link OutputStream}.
 	 *
 	 * @param file for reading
-	 * @param os	{@link OutputStream} for the file content
+	 * @param os	{@link OutputStream} for the {@link File} content
 	 * @throws IOException
 	 * @see File
 	 * @see OutputStream
@@ -820,7 +820,7 @@ public abstract class HelperIO {
 	/**
 	 * Concatenates many files to one output {@link File}.
 	 *
-	 * @param fileOutput Output file
+	 * @param fileOutput Output {@link File}
 	 * @param files		to concatenate
 	 * @throws IOException
 	 * @see File
@@ -1161,7 +1161,7 @@ public abstract class HelperIO {
 	 * Searchs in a path (directory) for files and directories via {@link FileFilter} and returns a {@link List} containing all {@link File}.
 	 *
 	 * @param path	for searching
-	 * @param filter for the match criterias. No filter (== null) will return all files.
+	 * @param filter for the match criterias. No filter (== null) will return all {@link File}
 	 * @return {@link List} containing the matched files
 	 * @see File
 	 * @see FileFilter
@@ -1180,7 +1180,7 @@ public abstract class HelperIO {
 	 * Searchs in a path (directory) for all files and directories and returns a {@link List} containing all {@link File}.
 	 *
 	 * @param path for searching
-	 * @return {@link List} containing the found files
+	 * @return {@link List} containing the found {@link File}
 	 * @see File
 	 * @since 0.9.0
 	 */

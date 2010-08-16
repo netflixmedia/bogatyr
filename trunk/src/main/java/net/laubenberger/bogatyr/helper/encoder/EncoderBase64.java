@@ -27,20 +27,25 @@
 
 package net.laubenberger.bogatyr.helper.encoder;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.UnsupportedEncodingException;
 
 import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperLog;
+import net.laubenberger.bogatyr.helper.HelperString;
+import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * Encodes and decodes data to Base64 format.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.3 (20100816)
  * @since 0.1.0
  */
 public abstract class EncoderBase64 {
@@ -84,23 +89,47 @@ public abstract class EncoderBase64 {
 	}
 
 	/**
-	 * Encodes a {@link String} into Base64 format.
+	 * Encodes a {@link String} with the default encoding (UTF-8) into Base64 format.
 	 * No blanks or line breaks are inserted.
 	 *
-	 * @param input String to be encoded
-	 * @return String with the Base64 encoded data
+	 * @param input {@link String} to be encoded
+	 * @return {@link String} with the Base64 encoded data
+	 * @param encoding of the given {@link String}
+	 * @throws UnsupportedEncodingException 
 	 * @since 0.1.0
 	 */
-	public static String encode(final String input) { //$JUnit$
+	public static String encode(final String input) throws UnsupportedEncodingException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
+
+		final String result = encode(input, Constants.ENCODING_DEFAULT);
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
+	/**
+	 * Encodes a {@link String} with the chosen encoding into Base64 format.
+	 * No blanks or line breaks are inserted.
+	 *
+	 * @param input {@link String} to be encoded
+	 * @param encoding of the {@link String}
+	 * @return {@link String} with the Base64 encoded data
+	 * @throws UnsupportedEncodingException 
+	 * @since 0.9.3
+	 */
+	public static String encode(final String input, final String encoding) throws UnsupportedEncodingException { //$JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, encoding));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 		if (input.length() * 2 > HelperEnvironment.getMemoryFree()) {
 			throw new RuntimeExceptionExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
 		}
+		if (!HelperString.isValid(encoding)) {
+			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
+		}
 
-		final String result = new String(encode(input.getBytes()));
+		final String result = new String(encode(input.getBytes(encoding)));
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
