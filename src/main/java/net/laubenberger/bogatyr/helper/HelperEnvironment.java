@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
  * It also provides informations about vm memory, temp/user directory and variables.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.3 (20100816)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -418,7 +418,7 @@ public abstract class HelperEnvironment {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final String countryString = System.getProperty("user.country"); //$NON-NLS-1$
-		Country result = Country.UNKNOWN;
+		Country result = null;
 		
 		for (final Country country : Country.values()) {
 	     if (HelperObject.isEquals(countryString, country.getCode())) {
@@ -441,7 +441,7 @@ public abstract class HelperEnvironment {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final String languageString = System.getProperty("user.language"); //$NON-NLS-1$
-		Language result = Language.UNKNOWN;
+		Language result = null;
 		
 		for (final Language language : Language.values()) {
 	     if (HelperObject.isEquals(languageString, language.getCode())) {

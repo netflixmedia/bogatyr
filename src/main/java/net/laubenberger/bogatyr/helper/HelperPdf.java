@@ -61,6 +61,7 @@ import com.lowagie.text.pdf.PdfEncryptor;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfStamper;
 import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.text.pdf.parser.PdfTextExtractor;
 
 /**
  * This is a helper class for PDF (Portable Document Format) operations.
@@ -68,7 +69,7 @@ import com.lowagie.text.pdf.PdfWriter;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.3 (20100816)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -410,7 +411,35 @@ public abstract class HelperPdf {
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
+	
+	/**
+	 * Returns the text of a given PDF as {@link String}.
+	 * 
+	 * @param file
+	 *           input as PDF
+	 * @returns text of the given PDF
+	 * @throws IOException 
+	 * @see File
+	 * @since 0.9.3
+	 */
+	public static String getText(File file) throws IOException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 
+		final PdfReader pdfReader = new PdfReader(file.getAbsolutePath());
+		final PdfTextExtractor pdfExtractor = new PdfTextExtractor(pdfReader);
+		
+		final StringBuilder sb = new StringBuilder();
+		
+		for (int page = 1; page <= pdfReader.getNumberOfPages(); page++) { 
+			sb.append(pdfExtractor.getTextFromPage(page));
+			sb.append(HelperString.NEW_LINE);
+		}
+		final String result = sb.toString();
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
 	
 	/*
 	 * Private methods
