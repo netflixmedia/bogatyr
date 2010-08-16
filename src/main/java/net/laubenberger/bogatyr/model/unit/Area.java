@@ -29,6 +29,8 @@ package net.laubenberger.bogatyr.model.unit;
 
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
@@ -37,9 +39,10 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Area units
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.3 (20100817)
  * @since 0.7.0
  */
+@XmlRootElement(name = "area")
 public enum Area implements Unit<Area> {
 	MM2(Constants.FACTOR_MM2_TO_CM2.multiply(Constants.FACTOR_CM2_TO_M2, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	CM2(Constants.FACTOR_CM2_TO_M2), //$JUnit$

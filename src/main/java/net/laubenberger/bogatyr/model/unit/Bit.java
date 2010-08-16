@@ -29,6 +29,8 @@ package net.laubenberger.bogatyr.model.unit;
 
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
@@ -36,9 +38,10 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Bit units
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.3 (20100817)
  * @since 0.9.0
  */
+@XmlRootElement(name = "bit")
 public enum Bit implements Unit<Bit> {
 	BIT(BigDecimal.ONE),
 	BYTE(BigDecimal.ONE.divide(Constants.FACTOR_BIT_TO_BYTE, Constants.DEFAULT_MATHCONTEXT)),

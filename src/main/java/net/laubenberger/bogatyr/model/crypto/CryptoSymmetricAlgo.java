@@ -27,14 +27,17 @@
 
 package net.laubenberger.bogatyr.model.crypto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  * Symmetric crypto algorithms available in BouncyCastle
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100215)
+ * @version 0.9.3 (20100817)
  * @since 0.9.1
  */
+@XmlRootElement(name = "cryptoSymmetricAlgo")
 public enum CryptoSymmetricAlgo implements CryptoAlgo {
 	AES("AES", "AES/CBC/PKCS5Padding", 192, 16), //$NON-NLS-1$ //$NON-NLS-2$
 	DES("DES", "DES/CBC/PKCS5Padding", 64, 8), //$NON-NLS-1$ //$NON-NLS-2$

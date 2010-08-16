@@ -27,14 +27,17 @@
 
 package net.laubenberger.bogatyr.model.misc;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  * Possible roles in a software development project
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100509)
+ * @version 0.9.3 (20100817)
  * @since 0.9.2
  */
+@XmlRootElement(name = "role")
 public enum Role {
 	DEVELOPER("Developer"), //$NON-NLS-1$
 	TESTER("Tester"), //$NON-NLS-1$

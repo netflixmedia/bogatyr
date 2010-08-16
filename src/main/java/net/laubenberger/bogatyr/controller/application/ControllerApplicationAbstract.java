@@ -30,7 +30,10 @@ package net.laubenberger.bogatyr.controller.application;
 import java.lang.Thread.UncaughtExceptionHandler;
 
 import net.laubenberger.bogatyr.controller.ControllerAbstract;
+import net.laubenberger.bogatyr.helper.HelperCollection;
 import net.laubenberger.bogatyr.helper.HelperLog;
+import net.laubenberger.bogatyr.helper.HelperMap;
+import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.model.application.ModelApplication;
 import net.laubenberger.bogatyr.view.View;
 
@@ -41,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * The skeleton for the application controller.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100813)
+ * @version 0.9.3 (20100817)
  * @since 0.9.0
  */
 public abstract class ControllerApplicationAbstract<M extends ModelApplication, V extends View> extends ControllerAbstract implements ControllerApplication<M, V> {
@@ -74,7 +77,7 @@ public abstract class ControllerApplicationAbstract<M extends ModelApplication, 
 	
 	@Override
 	public void run() {
-		if (log.isInfoEnabled()) log.info(HelperLog.applicationStart(model));
+		if (log.isInfoEnabled()) log.info(HelperLog.applicationStart(this));
 	}
 	
 	@Override
@@ -120,7 +123,71 @@ public abstract class ControllerApplicationAbstract<M extends ModelApplication, 
 		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
-	
+
+	@Override
+	public String getReport() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		final StringBuilder sb = new StringBuilder();
+		
+      sb.append("Name: "); //$NON-NLS-1$
+      sb.append(model.getName());
+      sb.append(HelperString.NEW_LINE);
+      
+      sb.append("Version: "); //$NON-NLS-1$
+      sb.append(model.getVersion());
+      sb.append(HelperString.NEW_LINE);
+      
+      sb.append("Build: "); //$NON-NLS-1$
+      sb.append(model.getBuild());
+      sb.append(HelperString.NEW_LINE);
+      
+      sb.append("Created: "); //$NON-NLS-1$
+      sb.append(model.getCreated());
+      sb.append(HelperString.NEW_LINE);
+      
+      sb.append("UUID: "); //$NON-NLS-1$
+      sb.append(model.getUUID());
+      sb.append(HelperString.NEW_LINE);
+      
+      sb.append("URL: "); //$NON-NLS-1$
+      sb.append(model.getUrl());
+      sb.append(HelperString.NEW_LINE);
+      
+      sb.append("UpdateLocation: "); //$NON-NLS-1$
+      sb.append(model.getUpdateLocation());
+      sb.append(HelperString.NEW_LINE);
+      
+      sb.append("isDebug: "); //$NON-NLS-1$
+      sb.append(model.isDebug());
+      sb.append(HelperString.NEW_LINE);
+      
+      if (null != model.getOrganizations()) {
+        sb.append("Organizations: "); //$NON-NLS-1$
+        sb.append(HelperCollection.dump(model.getOrganizations()));
+        sb.append(HelperString.NEW_LINE);               
+      }
+      
+      if (null != model.getPersons()) {
+        sb.append("Persons: "); //$NON-NLS-1$
+        sb.append(HelperCollection.dump(model.getPersons()));
+        sb.append(HelperString.NEW_LINE);       
+      }
+      
+      
+      if (null != model.getTags()) {
+			sb.append("Tags: "); //$NON-NLS-1$
+			sb.append(HelperMap.dump(model.getTags()));
+			sb.append(HelperString.NEW_LINE);
+      }
+
+		
+		final String result = sb.toString();
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+
 	/*
 	 * Inner classes
 	 */

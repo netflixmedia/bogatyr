@@ -29,6 +29,8 @@ package net.laubenberger.bogatyr.model.unit;
 
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
@@ -36,9 +38,10 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Volume units
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.3 (20100817)
  * @since 0.7.0
  */
+@XmlRootElement(name = "volume")
 public enum Volume implements Unit<Volume> {
 	MM3(Constants.FACTOR_MM3_TO_CM3.multiply(Constants.FACTOR_CM3_TO_L, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	CM3(Constants.FACTOR_CM3_TO_L), //$JUnit$

@@ -27,14 +27,17 @@
 
 package net.laubenberger.bogatyr.model.crypto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  * Hmac algoritms available in BouncyCastle
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.3 (20100817)
  * @since 0.9.1
  */
+@XmlRootElement(name = "hmacAlgo")
 public enum HmacAlgo implements Algorithm {
 	MD2("HmacMD2"), //$NON-NLS-1$
 	MD4("HmacMD4"), //$NON-NLS-1$

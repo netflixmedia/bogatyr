@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended AbstractAction.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100805)
+ * @version 0.9.3 (20100817)
  * @since 0.7.0
  */
 public abstract class ActionAbstract extends AbstractAction {
@@ -98,21 +98,14 @@ public abstract class ActionAbstract extends AbstractAction {
 		putValue(SHORT_DESCRIPTION, toolTip);
 	}
 
-//	protected ActionAbstract(final String name, final String toolTip, final Icon icon, final int mnemonic) {
-//		super(name, icon);
-//		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, toolTip, icon, mnemonic));
-//
-//		putValue(SHORT_DESCRIPTION, toolTip);
-//		putValue(MNEMONIC_KEY, mnemonic);
-//	}
-//
-//	protected ActionAbstract(final String name, final String toolTip, final int mnemonic, final KeyStroke accelerator) {
-//		this(name, toolTip, mnemonic);
-//		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, toolTip, mnemonic, accelerator));
-//
-//		putValue(ACCELERATOR_KEY, accelerator);
-//	}
+	protected ActionAbstract(final String name, final Icon icon, final String toolTip, final int mnemonic) {
+		this(name, icon);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, toolTip, icon, mnemonic));
 
+		putValue(SHORT_DESCRIPTION, toolTip);
+		putValue(MNEMONIC_KEY, mnemonic);
+	}
+	
 	protected ActionAbstract(final String name, final Icon icon, final String toolTip, final int mnemonic, final KeyStroke accelerator) {
 		this(name, icon);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, toolTip, icon, mnemonic, accelerator));

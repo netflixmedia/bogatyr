@@ -30,15 +30,18 @@ package net.laubenberger.bogatyr.model.misc;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import net.laubenberger.bogatyr.helper.HelperString;
 
 /**
  * Possible months.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.3 (20100817)
  * @since 0.9.1
  */
+@XmlRootElement(name = "month")
 public enum Month {
 	JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER;
 

@@ -27,14 +27,17 @@
 
 package net.laubenberger.bogatyr.model.misc;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  * Possible platforms
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100416)
+ * @version 0.9.3 (20100817)
  * @since 0.9.0
  */
+@XmlRootElement(name = "platform")
 public enum Platform {
 	ANY("Any platform", "any"), //$NON-NLS-1$ //$NON-NLS-2$
 	MAC_OSX("Apple Mac OSX", "mac"), //$NON-NLS-1$ //$NON-NLS-2$
