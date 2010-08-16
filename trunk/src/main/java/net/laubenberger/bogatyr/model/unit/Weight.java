@@ -29,6 +29,8 @@ package net.laubenberger.bogatyr.model.unit;
 
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
@@ -36,9 +38,10 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Weight units
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.3 (20100817)
  * @since 0.7.0
  */
+@XmlRootElement(name = "weight")
 public enum Weight implements Unit<Weight> {
 	MILLIGRAM(Constants.FACTOR_MILLIGRAM_TO_GRAM.multiply(Constants.FACTOR_GRAM_TO_KILOGRAM, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	GRAM(Constants.FACTOR_GRAM_TO_KILOGRAM), //$JUnit$

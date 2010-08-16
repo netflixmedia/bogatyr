@@ -27,14 +27,17 @@
 
 package net.laubenberger.bogatyr.model.crypto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  * Signature algoritms available in BouncyCastle
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.3 (20100817)
  * @since 0.9.1
  */
+@XmlRootElement(name = "signatureAlgo")
 public enum SignatureAlgo implements Algorithm {
 	MD2_WITH_RSA("MD2withRSA"), //$NON-NLS-1$
 	MD5_WITH_RSA("MD5withRSA"), //$NON-NLS-1$

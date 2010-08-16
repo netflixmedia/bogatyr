@@ -31,6 +31,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Locale;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import net.laubenberger.bogatyr.helper.HelperImage;
 import net.laubenberger.bogatyr.helper.HelperObject;
 
@@ -43,6 +45,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * @version 0.9.3 (20100816)
  * @since 0.9.1
  */
+@XmlRootElement(name = "country")
 public enum Country {
 	ALBANIA(new Locale("sq", "AL")), //$NON-NLS-1$//$NON-NLS-2$
 	ALGERIA(new Locale("ar", "DZ")), //$NON-NLS-1$//$NON-NLS-2$

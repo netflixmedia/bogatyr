@@ -29,6 +29,8 @@ package net.laubenberger.bogatyr.model.unit;
 
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
@@ -36,9 +38,10 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Length units
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.3 (20100817)
  * @since 0.7.0
  */
+@XmlRootElement(name = "length")
 public enum Length implements Unit<Length> {
 	MM(Constants.FACTOR_MM_TO_CM.multiply(Constants.FACTOR_CM_TO_M, Constants.DEFAULT_MATHCONTEXT)), //$JUnit$
 	CM(Constants.FACTOR_CM_TO_M), //$JUnit$

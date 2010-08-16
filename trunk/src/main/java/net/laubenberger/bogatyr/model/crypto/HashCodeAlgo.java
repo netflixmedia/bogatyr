@@ -27,14 +27,17 @@
 
 package net.laubenberger.bogatyr.model.crypto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  * Hash codes algoritms available in BouncyCastle
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.3 (20100817)
  * @since 0.9.0
  */
+@XmlRootElement(name = "hashCodeAlgo")
 public enum HashCodeAlgo implements Algorithm {
 	MD2("MD2"), //$NON-NLS-1$
 	MD4("MD4"), //$NON-NLS-1$

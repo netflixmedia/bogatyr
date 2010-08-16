@@ -59,10 +59,10 @@ import org.slf4j.LoggerFactory;
  * The implementation of the updater model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.3 (20100817)
  * @since 0.9.0
  */
-@XmlRootElement(name = "modelDocument")
+@XmlRootElement(name = "modelUpdater")
 @XmlType(propOrder = {"locations", "hashs"})
 public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 	private static final long serialVersionUID = -2826684498598090349L;

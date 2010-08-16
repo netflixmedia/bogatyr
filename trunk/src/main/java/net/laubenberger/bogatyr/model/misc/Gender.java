@@ -27,14 +27,17 @@
 
 package net.laubenberger.bogatyr.model.misc;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  * Possible genders
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.3 (20100817)
  * @since 0.9.1
  */
+@XmlRootElement(name = "gender")
 public enum Gender {
 	MALE("male"), //$NON-NLS-1$
 	FEMALE("female"); //$NON-NLS-1$
