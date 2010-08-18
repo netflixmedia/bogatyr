@@ -33,7 +33,7 @@ import net.laubenberger.bogatyr.controller.application.ControllerApplication;
  * This is a helper class for logging.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100817)
+ * @version 0.9.3 (20100819)
  * @since 0.9.1
  */
 public abstract class HelperLog {
@@ -55,7 +55,7 @@ public abstract class HelperLog {
 		sb.append(HelperString.NEW_LINE);
 		
 		// Application
-		final String application = "--- Application: ";
+		final String application = "--- Application: "; //$NON-NLS-1$
 		sb.append(application);
 		sb.append(HelperString.fill('-', LINE_LENGTH - application.length())); 
 		sb.append(HelperString.NEW_LINE);
@@ -63,7 +63,7 @@ public abstract class HelperLog {
 		sb.append(HelperString.NEW_LINE);
 		
 		// Java
-		final String java = "--- Java: ";
+		final String java = "--- Java: "; //$NON-NLS-1$
 		sb.append(java);
 		sb.append(HelperString.fill('-', LINE_LENGTH - java.length())); 
 		sb.append(HelperString.NEW_LINE);
@@ -71,7 +71,7 @@ public abstract class HelperLog {
 		sb.append(HelperString.NEW_LINE);
 
 		// OS
-		final String os = "--- Operating system: ";
+		final String os = "--- Operating system: "; //$NON-NLS-1$
 		sb.append(os);
 		sb.append(HelperString.fill('-', LINE_LENGTH - os.length())); 
 		sb.append(HelperString.NEW_LINE);
@@ -79,7 +79,7 @@ public abstract class HelperLog {
 		sb.append(HelperString.NEW_LINE);
 
 		// User
-		final String user = "--- User: ";
+		final String user = "--- User: "; //$NON-NLS-1$
 		sb.append(user);
 		sb.append(HelperString.fill('-', LINE_LENGTH - user.length())); 
 		sb.append(HelperString.NEW_LINE);
@@ -87,7 +87,7 @@ public abstract class HelperLog {
 		sb.append(HelperString.NEW_LINE);
 		
 		// System
-		final String system = "--- System: ";
+		final String system = "--- System: "; //$NON-NLS-1$
 		sb.append(system);
 		sb.append(HelperString.fill('-', LINE_LENGTH - system.length())); 
 		sb.append(HelperString.NEW_LINE);

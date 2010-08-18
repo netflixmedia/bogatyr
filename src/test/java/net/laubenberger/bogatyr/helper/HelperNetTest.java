@@ -35,18 +35,15 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
-import java.net.UnknownHostException;
 
 import org.junit.Test;
-
-import net.laubenberger.bogatyr.helper.HelperNet;
 
 
 /**
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20100819
  */
 public class HelperNetTest {
 	@Test

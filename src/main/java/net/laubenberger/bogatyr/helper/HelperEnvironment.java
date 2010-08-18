@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * It also provides informations about vm memory, temp/user directory and variables.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100817)
+ * @version 0.9.3 (20100819)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -633,7 +633,11 @@ public abstract class HelperEnvironment {
 		sb.append("Available processors (cores): "); //$NON-NLS-1$
 		sb.append(getAvailableProcessors());
 		sb.append(HelperString.NEW_LINE);
-
+		
+		sb.append("Current screen size: "); //$NON-NLS-1$
+		sb.append(HelperScreen.getCurrentScreenSize());
+		sb.append(HelperString.NEW_LINE);
+		
 		sb.append("Maximum memory: "); //$NON-NLS-1$
 		sb.append(Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryMax()).setScale(3, BigDecimal.ROUND_DOWN));
 		sb.append(" MB"); //$NON-NLS-1$
