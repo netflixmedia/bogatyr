@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * The skeleton for the application controller.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100817)
+ * @version 0.9.3 (20100818)
  * @since 0.9.0
  */
 public abstract class ControllerApplicationAbstract<M extends ModelApplication, V extends View> extends ControllerAbstract implements ControllerApplication<M, V> {
@@ -150,6 +150,10 @@ public abstract class ControllerApplicationAbstract<M extends ModelApplication, 
       sb.append(model.getUUID());
       sb.append(HelperString.NEW_LINE);
       
+      sb.append("Instantiated: "); //$NON-NLS-1$
+      sb.append(model.getInstantiated());
+      sb.append(HelperString.NEW_LINE);
+      
       sb.append("URL: "); //$NON-NLS-1$
       sb.append(model.getUrl());
       sb.append(HelperString.NEW_LINE);
@@ -158,7 +162,7 @@ public abstract class ControllerApplicationAbstract<M extends ModelApplication, 
       sb.append(model.getUpdateLocation());
       sb.append(HelperString.NEW_LINE);
       
-      sb.append("isDebug: "); //$NON-NLS-1$
+      sb.append("Debug: "); //$NON-NLS-1$
       sb.append(model.isDebug());
       sb.append(HelperString.NEW_LINE);
       

@@ -216,14 +216,14 @@ public class HelperNetTest {
 			fail(ex.getMessage());
 		}
 
-		try {
-			HelperNet.isPingable("987.654.321.000"); //$NON-NLS-1$
-			fail("host is invalid!"); //$NON-NLS-1$
-		} catch (UnknownHostException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+//		try {
+//			HelperNet.isPingable("987.654.321.000"); //$NON-NLS-1$
+//			fail("host is invalid!"); //$NON-NLS-1$
+//		} catch (UnknownHostException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
 
 		try {
 			HelperNet.isPingable(null);

@@ -34,7 +34,7 @@ import java.util.Date;
  * Definition for an extended object.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.3 (20100818)
  * @since 0.9.0
  */
 public interface ExtendedObject {
@@ -44,5 +44,5 @@ public interface ExtendedObject {
 	 * @return instantiation date of the object
 	 * @since 0.9.0
 	 */
-	Date getInstantiationDate();
+	Date getInstantiated();
 }   

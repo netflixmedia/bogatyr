@@ -28,9 +28,6 @@
 package net.laubenberger.bogatyr.controller.application;
 
 import net.laubenberger.bogatyr.controller.Controller;
-import net.laubenberger.bogatyr.helper.HelperEnvironment;
-import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.model.application.ModelApplication;
 import net.laubenberger.bogatyr.view.View;
 
@@ -39,7 +36,7 @@ import net.laubenberger.bogatyr.view.View;
  * The interface for the application controller.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100817)
+ * @version 0.9.3 (20100818)
  * @since 0.9.0
  */
 public interface ControllerApplication<M extends ModelApplication, V extends View> extends Controller, Runnable {
@@ -84,7 +81,7 @@ public interface ControllerApplication<M extends ModelApplication, V extends Vie
 	void setView(V view);
 	
 	/**
-	 * Returns a report about the curren application.
+	 * Returns a report about the current application.
 	 *
 	 * @return report about the current application
 	 * @since 0.9.3
