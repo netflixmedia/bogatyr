@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100618)
+ * @version 0.9.3 (20100818)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
@@ -62,7 +62,7 @@ public abstract class ModelAbstract extends Observable implements Model {
 	private Map<String, String> mapTag;
 
 	private boolean isNotifyEnabled = true;
-	private Date instantiationDate = new Date();
+	private Date instantiated = new Date();
 
 	protected ModelAbstract() {
 		super();
@@ -86,7 +86,7 @@ public abstract class ModelAbstract extends Observable implements Model {
 		int result = 1;
 		result = prime
 				* result
-				+ ((null == instantiationDate) ? 0 : instantiationDate
+				+ ((null == instantiated) ? 0 : instantiated
 				.hashCode());
 		result = prime * result + (isNotifyEnabled ? 1231 : 1237);
 		result = prime * result + ((null == mapTag) ? 0 : mapTag.hashCode());
@@ -105,11 +105,11 @@ public abstract class ModelAbstract extends Observable implements Model {
 			return false;
 		}
 		final ModelAbstract other = (ModelAbstract) obj;
-		if (null == instantiationDate) {
-			if (null != other.instantiationDate) {
+		if (null == instantiated) {
+			if (null != other.instantiated) {
 				return false;
 			}
-		} else if (!instantiationDate.equals(other.instantiationDate)) {
+		} else if (!instantiated.equals(other.instantiated)) {
 			return false;
 		}
 		if (isNotifyEnabled != other.isNotifyEnabled) {
@@ -127,7 +127,7 @@ public abstract class ModelAbstract extends Observable implements Model {
 
 	@Override
 	public String toString() {
-		return getClass().getName() + "[instantiationDate=" + instantiationDate + ", isNotifyEnabled=" + isNotifyEnabled //$NON-NLS-1$ //$NON-NLS-2$
+		return getClass().getName() + "[instantiated=" + instantiated + ", isNotifyEnabled=" + isNotifyEnabled //$NON-NLS-1$ //$NON-NLS-2$
 				+ ", mapTag=" + mapTag + ']'; //$NON-NLS-1$
 	}
 	
@@ -161,11 +161,11 @@ public abstract class ModelAbstract extends Observable implements Model {
 
 	@Override
 	@XmlElement
-	public Date getInstantiationDate() {
+	public Date getInstantiated() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(instantiationDate));
-		return instantiationDate;
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(instantiated));
+		return instantiated;
 	}
 
 	@Override
@@ -204,10 +204,10 @@ public abstract class ModelAbstract extends Observable implements Model {
 	}
 
 	@Override
-	public void setInstantiationDate(final Date instantiationDate) {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(instantiationDate));
+	public void setInstantiated(final Date instantiated) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(instantiated));
 
-		this.instantiationDate = instantiationDate;
+		this.instantiated = instantiated;
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}

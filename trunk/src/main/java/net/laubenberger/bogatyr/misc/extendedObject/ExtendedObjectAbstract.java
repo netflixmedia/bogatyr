@@ -33,7 +33,7 @@ import java.util.Date;
  * This is the skeleton for all extended objects.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.3 (20100818)
  * @since 0.9.0
  */
 public abstract class ExtendedObjectAbstract implements ExtendedObject {
@@ -75,7 +75,7 @@ public abstract class ExtendedObjectAbstract implements ExtendedObject {
 	 */
 
 	@Override
-	public Date getInstantiationDate() {
+	public Date getInstantiated() {
 		return instantiationDate;
 	}
 }

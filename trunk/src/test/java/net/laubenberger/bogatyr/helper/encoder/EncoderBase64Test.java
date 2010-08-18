@@ -32,6 +32,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.UnsupportedEncodingException;
 
 import net.laubenberger.bogatyr.AllBogatyrTests;
+import net.laubenberger.bogatyr.misc.Constants;
 
 import org.junit.Test;
 
@@ -54,7 +55,12 @@ public class EncoderBase64Test {
 		}
 		final byte[] decoded = EncoderBase64.decode(encoded);
 
-		assertEquals(AllBogatyrTests.DATA, new String(decoded));
+		try {
+			assertEquals(AllBogatyrTests.DATA, new String(decoded, Constants.ENCODING_UTF8));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 //		try {
 //			EncoderBase64.encode(""); //$NON-NLS-1$
