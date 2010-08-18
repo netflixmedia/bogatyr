@@ -41,7 +41,7 @@ import net.laubenberger.bogatyr.helper.HelperImage;
  * <strong>Note:</strong> The language is always the main language of a country.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100816)
+ * @version 0.9.3 (20100819)
  * @since 0.9.1
  */
 @XmlRootElement(name = "language")
@@ -117,7 +117,7 @@ public enum Language {
 	public BufferedImage getIcon() {
 		if (null == icon) {
 			try {
-				icon = HelperImage.readImage(Language.class.getClassLoader().getResourceAsStream("net/laubenberger/bogatyr/icon/language/" + getCode() + ".png"));
+				icon = HelperImage.readImage(Language.class.getClassLoader().getResourceAsStream("net/laubenberger/bogatyr/icon/language/" + getCode() + ".png")); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (IOException e) {
 				// Should never happen!
 //				e.printStackTrace();
