@@ -35,13 +35,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import net.laubenberger.bogatyr.helper.HelperImage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * Possible languages.
  * <strong>Note:</strong> The language is always the main language of a country.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100819)
+ * @version 0.9.3 (20100908)
  * @since 0.9.1
  */
 @XmlRootElement(name = "language")
@@ -91,6 +94,8 @@ public enum Language {
 	UKRAINIAN(new Locale("uk")), //$NON-NLS-1$
 	VIETNAMESE(new Locale("vi")); //$NON-NLS-1$
 
+	private static final Logger log = LoggerFactory.getLogger(Language.class);
+	
 	private final Locale locale;
 	private BufferedImage icon;
 	
@@ -118,9 +123,9 @@ public enum Language {
 		if (null == icon) {
 			try {
 				icon = HelperImage.readImage(Language.class.getClassLoader().getResourceAsStream("net/laubenberger/bogatyr/icon/language/" + getCode() + ".png")); //$NON-NLS-1$ //$NON-NLS-2$
-			} catch (IOException e) {
+			} catch (IOException ex) {
 				// Should never happen!
-//				e.printStackTrace();
+				log.error("Could not load icon", ex); //$NON-NLS-1$
 			}
 		}
 		

@@ -46,7 +46,7 @@ import java.awt.event.ActionListener;
  * This is a group to add 1-n components (e.g. useful with JButtons).
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.3 (20100908)
  * @since 0.7.0
  */
 public class Group extends Panel {
@@ -122,9 +122,9 @@ public class Group extends Panel {
 		gbc.insets = insets;
 
 		if (null != data) {
-			for (final JComponent button : data) {
+			for (final JComponent component : data) {
 				gbc.gridy++;
-				add(button, gbc);
+				add(component, gbc);
 			}
 		}
 
@@ -141,9 +141,9 @@ public class Group extends Panel {
 		gbc.insets = insets;
 
 		if (null != data) {
-			for (final JComponent button : data) {
+			for (final JComponent component : data) {
 				gbc.gridx++;
-				add(button, gbc);
+				add(component, gbc);
 			}
 		}
 
