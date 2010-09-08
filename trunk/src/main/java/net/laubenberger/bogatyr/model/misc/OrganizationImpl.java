@@ -50,11 +50,11 @@ import org.slf4j.LoggerFactory;
  * The implementation of the organization model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.3 (20100909)
  * @since 0.9.2
  */
 @XmlRootElement(name = "organization")
-@XmlType(propOrder = {"name", "street", "zip", "city", "country", "phoneNumber", "faxNumber", "email", "url", "persons", "roles"})
+@XmlType(propOrder = {Address.MEMBER_NAME, Address.MEMBER_STREET, Address.MEMBER_ZIP, Address.MEMBER_CITY, Address.MEMBER_COUNTRY, Phone.MEMBER_PHONE_NUMBER, Fax.MEMBER_FAX_NUMBER, Email.MEMBER_EMAIL, Url.MEMBER_URL, Organization.MEMBER_PERSONS, Organization.MEMBER_ROLES})
 public class OrganizationImpl extends ModelAbstract implements Organization {
 	private static final long serialVersionUID = -6819817877075750182L;
 
@@ -383,7 +383,7 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 		if (!HelperObject.isEquals(this.url, url)) {
 			this.url = url;
 			setChanged();
-			notifyObservers(MEMBER_WEBSITE);
+			notifyObservers(MEMBER_URL);
 		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());

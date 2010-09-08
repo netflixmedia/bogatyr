@@ -53,11 +53,11 @@ import org.slf4j.LoggerFactory;
  * The implementation of the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.3 (20100909)
  * @since 0.9.1
  */
 @XmlRootElement(name = "document")
-@XmlType(propOrder = {"name", "version", "build", "created", "UUID", "url", "organizations", "persons"})
+@XmlType(propOrder = {Document.MEMBER_NAME, Document.MEMBER_VERSION, Document.MEMBER_BUILD, Document.MEMBER_CREATED, Document.MEMBER_UUID, Url.MEMBER_URL, Document.MEMBER_ORGANIZATIONS, Document.MEMBER_PERSONS})
 public class DocumentImpl extends ModelAbstract implements Document {
 	private static final long serialVersionUID = 5505184629744108815L;
 
@@ -292,7 +292,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		if (!HelperObject.isEquals(this.url, url)) {
 			this.url = url;
 			setChanged();
-			notifyObservers(MEMBER_WEBSITE);
+			notifyObservers(MEMBER_URL);
 		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());

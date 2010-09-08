@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * The skeleton for the application controller.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100818)
+ * @version 0.9.3 (20100909)
  * @since 0.9.0
  */
 public abstract class ControllerApplicationAbstract<M extends ModelApplication, V extends View> extends ControllerAbstract implements ControllerApplication<M, V> {
@@ -107,7 +107,7 @@ public abstract class ControllerApplicationAbstract<M extends ModelApplication, 
 	}
 
 	@Override
-	public void setModel(M model) {
+	public void setModel(final M model) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(model));
 		
 		this.model = model;
@@ -116,7 +116,7 @@ public abstract class ControllerApplicationAbstract<M extends ModelApplication, 
 	}
 	
 	@Override
-	public void setView(V view) {
+	public void setView(final V view) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(view));
 		
 		this.view = view;

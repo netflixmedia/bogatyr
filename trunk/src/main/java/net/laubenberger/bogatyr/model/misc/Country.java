@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * <strong>Note:</strong> The language is always the main language of a country.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100908)
+ * @version 0.9.3 (20100909)
  * @since 0.9.1
  */
 @XmlRootElement(name = "country")
@@ -150,7 +150,7 @@ public enum Country {
 	private static final Logger log = LoggerFactory.getLogger(Country.class);
 
 	private final Locale locale;
-	private BufferedImage icon;
+	private transient BufferedImage icon;
 	
 	Country(final Locale locale) {
 		this.locale = locale;

@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * <strong>Note:</strong> The language is always the main language of a country.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100908)
+ * @version 0.9.3 (20100909)
  * @since 0.9.1
  */
 @XmlRootElement(name = "language")
@@ -97,7 +97,7 @@ public enum Language {
 	private static final Logger log = LoggerFactory.getLogger(Language.class);
 	
 	private final Locale locale;
-	private BufferedImage icon;
+	private transient BufferedImage icon;
 	
 	Language(final Locale locale) {
 		this.locale = locale;
