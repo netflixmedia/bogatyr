@@ -51,11 +51,11 @@ import net.laubenberger.bogatyr.model.ModelAbstract;
  * The implementation of the person model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.3 (20100909)
  * @since 0.9.1
  */
 @XmlRootElement(name = "person")
-@XmlType(propOrder = {"name", "forename", "birthday", "gender", "street", "zip", "city", "country", "phoneNumber", "faxNumber", "email", "url", "organizations", "roles"})
+@XmlType(propOrder = {Address.MEMBER_NAME, Person.MEMBER_FORENAME, Person.MEMBER_BIRTHDAY, Person.MEMBER_GENDER, Address.MEMBER_STREET, Address.MEMBER_ZIP, Address.MEMBER_CITY, Address.MEMBER_COUNTRY, Phone.MEMBER_PHONE_NUMBER, Fax.MEMBER_FAX_NUMBER, Email.MEMBER_EMAIL, Url.MEMBER_URL, Person.MEMBER_ORGANIZATIONS, Person.MEMBER_ROLES})
 public class PersonImpl extends ModelAbstract implements Person {
 	private static final long serialVersionUID = -6819817877075750182L;
 
@@ -434,7 +434,7 @@ public class PersonImpl extends ModelAbstract implements Person {
 		if (!HelperObject.isEquals(this.url, url)) {
 			this.url = url;
 			setChanged();
-			notifyObservers(MEMBER_WEBSITE);
+			notifyObservers(MEMBER_URL);
 		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());

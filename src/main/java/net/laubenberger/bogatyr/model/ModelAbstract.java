@@ -35,6 +35,7 @@ import java.util.Observable;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
@@ -50,10 +51,11 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100818)
+ * @version 0.9.3 (20100909)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
+@XmlType(propOrder = {Model.MEMBER_INSTANTIATED, Model.MEMBER_TAGS})
 public abstract class ModelAbstract extends Observable implements Model {
 	private static final long serialVersionUID = 3491320587479082917L;
 
@@ -207,7 +209,11 @@ public abstract class ModelAbstract extends Observable implements Model {
 	public void setInstantiated(final Date instantiated) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(instantiated));
 
-		this.instantiated = instantiated;
+		if (!HelperObject.isEquals(this.instantiated, instantiated)) {
+			this.instantiated = instantiated;
+			setChanged();
+			notifyObservers(MEMBER_INSTANTIATED);
+		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}

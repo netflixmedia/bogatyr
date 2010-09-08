@@ -33,11 +33,11 @@ import java.net.URL;
  * The interface definition for an url.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100509)
+ * @version 0.9.3 (20100909)
  * @since 0.9.1
  */
 public interface Url {
-	String MEMBER_WEBSITE = "url"; //$NON-NLS-1$
+	String MEMBER_URL = "url"; //$NON-NLS-1$
 
 	URL getUrl();
 
