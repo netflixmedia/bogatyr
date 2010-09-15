@@ -45,11 +45,11 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * <strong>Note:</strong> The language is always the main language of a country.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100909)
+ * @version 0.9.3 (20100915)
  * @since 0.9.1
  */
 @XmlRootElement(name = "country")
-public enum Country {
+public enum Country { //TODO complete the list with all countries
 	ALBANIA(new Locale("sq", "AL")), //$NON-NLS-1$//$NON-NLS-2$
 	ALGERIA(new Locale("ar", "DZ")), //$NON-NLS-1$//$NON-NLS-2$
 	ARGENTINA(new Locale("es", "AR")), //$NON-NLS-1$//$NON-NLS-2$
@@ -122,7 +122,6 @@ public enum Country {
 	ROMANIA(new Locale("ro", "RO")), //$NON-NLS-1$//$NON-NLS-2$
 	RUSSIA(new Locale("ru", "RU")), //$NON-NLS-1$//$NON-NLS-2$
 	SAUDI_ARABIA(new Locale("ar", "SA")), //$NON-NLS-1$//$NON-NLS-2$
-	SERBIA_AND_MONTENEGRO(new Locale("sr", "CS")), //$NON-NLS-1$//$NON-NLS-2$
 	SERBIA(new Locale("sr", "RS")), //$NON-NLS-1$//$NON-NLS-2$
 	SINGAPORE(new Locale("en", "SG")), //$NON-NLS-1$//$NON-NLS-2$
 	SLOVAKIA(new Locale("sk", "SK")), //$NON-NLS-1$//$NON-NLS-2$
