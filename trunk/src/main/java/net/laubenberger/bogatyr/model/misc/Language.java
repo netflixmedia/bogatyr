@@ -44,11 +44,11 @@ import org.slf4j.LoggerFactory;
  * <strong>Note:</strong> The language is always the main language of a country.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100909)
+ * @version 0.9.3 (20100915)
  * @since 0.9.1
  */
 @XmlRootElement(name = "language")
-public enum Language {
+public enum Language { //TODO complete the list with all languages
 	ALBANIAN(new Locale("sq")), //$NON-NLS-1$
 	ARABIC(new Locale("ar")), //$NON-NLS-1$
 	BELARUSIAN(new Locale("be")), //$NON-NLS-1$
