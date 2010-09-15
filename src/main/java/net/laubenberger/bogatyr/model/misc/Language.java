@@ -111,7 +111,7 @@ public enum Language { //TODO complete the list with all languages
 		return this.locale.getDisplayLanguage(locale);
 	}
 
-	public String getCode() { //ISO 639
+	public String getCode() { //ISO 639-1
 		return locale.getLanguage();
 	}
 

@@ -20,314 +20,12 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="6099473d-4163-40d6-a2ae-9afd78c1b030" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tv.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tv.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/km.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/km.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bo.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kn.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mu.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tw.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tw.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/li.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/li.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/nz.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/nz.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/uk.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/uk.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/wales.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gp.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gp.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/vi.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/vi.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/er.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/er.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ly.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ly.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/fam.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bi.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bi.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/my.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/my.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mm.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bv.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bv.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/england.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ge.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ge.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/dk.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/dk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bd.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bd.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kp.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kp.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mx.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mx.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gu.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bf.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bf.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tm.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gi.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gi.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/it.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/it.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/fk.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/fk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sz.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sz.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/me.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/me.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ci.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ci.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mw.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mw.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/tr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/tr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tz.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tz.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/wf.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/wf.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gs.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gs.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/uz.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/uz.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cu.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/in.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/in.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cc.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ki.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ki.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tc.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mz.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mz.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ua.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ua.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cv.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cv.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/nc.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/nc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/az.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/az.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/da.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/da.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/nl.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/nl.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ck.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ck.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/br.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/br.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/al.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/al.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sv.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sv.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cx.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cx.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cf.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cf.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/sq.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/sq.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kz.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kz.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/hn.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/hn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gt.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gt.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/catalonia.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ni.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ni.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/hk.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/hk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/uy.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/uy.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/hu.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/hu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lc.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ie.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ie.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ae.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ae.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/si.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/si.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/be.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/be.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/um.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/um.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/hu.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/hu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cz.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cz.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/an.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/an.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/na.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/na.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gq.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gq.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cg.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sy.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sy.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/fi.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/fi.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ma.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ma.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ws.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ws.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/by.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/by.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/lt.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/lt.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ca.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/no.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/no.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/iw.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/iw.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pf.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pf.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gd.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gd.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mq.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mq.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/cn.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/st.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/st.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sb.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sb.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cl.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cl.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/im.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/id.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/id.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bm.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ga.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ga.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/se.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/se.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ne.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ne.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/no.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/no.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/jp.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/jp.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/pt.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/pt.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ke.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ke.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/re.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/re.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/th.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/th.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/es.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/es.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ai.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ai.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/mk.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/mk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sm.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ye.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ye.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/vg.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/vg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sn.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/nf.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/nf.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kg.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kg.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/europeanunion.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ht.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ht.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/mt.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/mt.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/aw.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/aw.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/fm.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/fm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/sk.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/sk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/in.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/in.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sk.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ky.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ky.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lv.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lv.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sc.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/np.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/np.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mt.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mt.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gn.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/dj.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/dj.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kh.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kh.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/vn.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/vn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bg.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pn.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/jo.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/jo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/fr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/fr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/so.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/so.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mc.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ug.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ug.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ja.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ja.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/eg.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/eg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gb.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gb.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mk.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/cs.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/cs.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bn.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ag.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ag.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/as.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/as.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pk.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pm.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/de.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/de.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/vi.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/vi.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ch.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ch.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/rs.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/rs.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gh.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gh.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/za.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/za.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pg.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tl.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tl.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pt.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pt.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gl.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gl.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lb.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lb.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tt.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tt.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/is.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/is.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/jm.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/jm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/vc.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/vc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bl.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ga.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ga.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bw.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bw.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/zh.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/dz.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/dz.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lt.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lt.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ad.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ad.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ec.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ec.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sa.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sa.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ls.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ls.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pa.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pa.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bh.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bh.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mv.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mv.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sh.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sh.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cn.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/fo.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/fo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gy.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mf.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bt.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bt.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/io.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/io.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/us.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/us.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/sl.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/sl.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/sv.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/sv.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/at.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/at.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Language.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Language.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ms.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ms.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lu.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/iq.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/iq.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/am.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/am.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cy.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cy.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/hi.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/hi.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mg.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bs.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bs.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/yt.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/yt.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/pl.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/pl.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tn.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sj.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sj.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mp.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mp.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ao.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ao.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/be.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/be.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/om.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/om.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/fj.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/fj.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/il.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/il.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lk.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/lk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cm.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/nu.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/nu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ph.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ph.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bj.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bj.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/th.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/th.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gf.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gf.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/aq.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/fr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/fr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/vu.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/vu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/rw.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/rw.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cs.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sl.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sl.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/va.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/va.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/it.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/it.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pl.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pl.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/zm.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/zm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/lv.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/lv.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/dm.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/dm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tj.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tj.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/af.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/af.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bz.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bz.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/hm.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/hm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ve.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ve.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ps.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ps.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/fi.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/fi.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sg.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tf.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tf.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/je.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ms.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ms.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/et.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/et.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/is.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/is.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/nl.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/nl.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mh.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mh.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/to.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/to.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/sr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/sr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tk.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tk.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/nr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/nr.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/scotland.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ca.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ca.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ro.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ro.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pw.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pw.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/py.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/py.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kw.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/kw.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mo.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ba.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ba.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/do.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/do.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/zw.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/zw.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/bg.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/bg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ar.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ar.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cd.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/cd.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ml.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ml.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ru.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ru.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/en.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/en.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ru.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ru.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ro.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ro.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pe.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/pe.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/hr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/hr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ar.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ar.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/co.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/co.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/de.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/de.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ee.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ee.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/la.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/la.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gm.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gm.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/md.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/md.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ng.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ng.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ir.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ir.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/au.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/au.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mn.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/mn.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/et.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/et.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/el.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/el.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tg.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/tg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/qa.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/qa.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/td.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/td.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bb.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/bb.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sd.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/sd.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/eh.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/eh.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gw.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/gw.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/hr.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/hr.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/es.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/es.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Country.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Country.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ax.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/country/ax.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ko.png" afterPath="$PROJECT_DIR$/src/main/resources/net/laubenberger/bogatyr/icon/language/ko.png" />
-    </list>
+    <list default="true" readonly="true" id="6099473d-4163-40d6-a2ae-9afd78c1b030" name="Default" comment="" />
     <ignored path="Bogatyr.iws" />
-    <ignored path=".idea/workspace.xml" />
-    <ignored path="$USER_HOME_GRAILS$/" />
     <ignored path="target/" />
     <ignored path="$USER_HOME_GRIFFON$/" />
+    <ignored path="$USER_HOME_GRAILS$/" />
+    <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1065,8 +763,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1823,21 +1521,21 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="626" />
-    <property name="project.structure.last.edited" value="Modules" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="601" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="29" />
-    <property name="project.structure.proportion" value="0.15" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="615" />
-    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
+    <property name="options.splitter.main.proportions" value="0.3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="RunManagerConfig.showSettingsBeforeRunnig" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="497" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5" value="5" />
@@ -1853,22 +1551,22 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="612" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="820" />
     <property name="GoToClass.includeLibraries" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="820" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="RESOURCE_BUNDLE_SPLITTER_PROPORTION" value="0.5" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
     <property name="options.lastSelected" value="File.Encoding" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="dynamic.classpath" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -2185,15 +1883,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="2560" height="1414" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32998455" sideWeight="0.0" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32998455" sideWeight="0.0" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.6057572" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39946738" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.6057572" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32612056" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31839257" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32655245" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13522181" sideWeight="0.6059957" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.6057572" order="3" side_tool="false" content_ui="tabs" />
@@ -2206,7 +1905,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32225657" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31839257" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32867885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38639876" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -2225,7 +1923,7 @@
     <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="-Prepare of 0.93 release&#10;-Code clean-up" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Language&amp;Country icons improved" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -2238,7 +1936,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="-Samples fixed" />
     <MESSAGE value="-Manufacturer, Publisher and Owner removed&#10;-Replaced by Organization and Role&#10;-Person and Organization added to Document" />
     <MESSAGE value="-Little bug in Constants fixed" />
     <MESSAGE value="-Models improved" />
@@ -2263,6 +1960,7 @@
     <MESSAGE value="-Prepare of 0.93 release" />
     <MESSAGE value="-Logging for Country&amp;Language added" />
     <MESSAGE value="-Prepare of 0.93 release&#10;-Code clean-up" />
+    <MESSAGE value="-Language&amp;Country icons improved" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -2387,9 +2085,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/model/misc/Country.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="27" selection-start="1268" selection-end="1268" vertical-scroll-proportion="0.014440433">
-          <folding />
-        </state>
+        <state line="47" column="27" selection-start="1268" selection-end="1268" vertical-scroll-proportion="0.014440433" />
       </provider>
     </entry>
   </component>
