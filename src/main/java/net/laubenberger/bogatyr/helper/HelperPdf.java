@@ -69,7 +69,7 @@ import com.lowagie.text.pdf.parser.PdfTextExtractor;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100909)
+ * @version 0.9.3 (20101001)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -417,7 +417,7 @@ public abstract class HelperPdf {
 	 * 
 	 * @param file
 	 *           input as PDF
-	 * @returns text of the given PDF
+	 * @return text of the given PDF
 	 * @throws IOException 
 	 * @see File
 	 * @since 0.9.3
