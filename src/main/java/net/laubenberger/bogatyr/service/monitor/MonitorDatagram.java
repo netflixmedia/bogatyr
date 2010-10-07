@@ -25,47 +25,22 @@
  * <laubenberger@gmail.com>
  */
 
-package net.laubenberger.bogatyr.controller.net;
+package net.laubenberger.bogatyr.service.monitor;
 
-import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.Socket;
 
 import net.laubenberger.bogatyr.misc.HolderListener;
-import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObject;
 
 
 /**
- * Defines the methods for the implementation of the datagram dumper.
+ * Defines the methods for the implementation of the datagram monitor.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
- * @since 0.8.0
+ * @version 0.9.4 (20101007)
+ * @since 0.9.4
  */
-public interface DatagramDumper extends ExtendedObject, Runnable, HolderListener<ListenerDatagram> {
-	/**
-	 * Start the datagram controller on the given port.
-	 *
-	 * @throws IOException
-	 * @since 0.8.0
-	 */
-	void start() throws IOException;
-
-	/**
-	 * Stop the datagram controller.
-	 *
-	 * @since 0.8.0
-	 */
-	void stop();
-
-	/**
-	 * Returns the state of the datagram controller.
-	 *
-	 * @return true/false
-	 * @since 0.8.0
-	 */
-	boolean isRunning();
-
+public interface MonitorDatagram extends Monitor, Runnable, HolderListener<ListenerDatagram> {
 	/**
 	 * Returns the port of the {@link Socket}.
 	 *

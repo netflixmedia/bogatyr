@@ -31,13 +31,29 @@ import net.laubenberger.bogatyr.misc.Event;
 import net.laubenberger.bogatyr.misc.Listener;
 
 /**
- * ListenerLocale
+ * ListenerFileChanged
  *
  * @author Stefan Laubenberger
  * @version 0.9.4 (20101007)
  * @since 0.9.4
  */
 public interface ListenerFileChanged extends Listener {
+	/**
+	 * Informs the listener that the monitor has started.
+	 *
+	 * @param event for the listener
+	 * @since 0.9.4
+	 */
+	void monitorStarted(Event<MonitorFile> event);
+
+	/**
+	 * Informs the listener that the monitor has stopped.
+	 *
+	 * @param event for the listener
+	 * @since 0.9.4
+	 */
+	void monitorStopped(Event<MonitorFile> event);
+	
 	/**
 	 * Informs the listener that the file has changed.
 	 *

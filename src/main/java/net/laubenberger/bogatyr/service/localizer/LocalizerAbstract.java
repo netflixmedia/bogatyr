@@ -66,7 +66,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 	 * Private methods
 	 */
 
-	private void fireLocaleChanged() {
+	protected void fireLocaleChanged() {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		for (final ListenerLocale listener : listeners) {

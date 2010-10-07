@@ -106,7 +106,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
 		setTimer(new java.util.Timer());
 		setInterval(interval);
 		getTimer().schedule(new Task(), delay, interval);
-		fireTimerStarted();
+		fireStarted();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
@@ -118,7 +118,7 @@ public class TimerImpl extends TimerAbstract implements Timer {
 		if (isRunning()) {
 			getTimer().cancel();
 		}
-		fireTimerStopped();
+		fireStopped();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
