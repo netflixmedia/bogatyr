@@ -109,7 +109,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
-	protected void fireTimerStarted() {
+	protected void fireStarted() {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		isRunning = true;
@@ -121,7 +121,7 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
-	protected void fireTimerStopped() {
+	protected void fireStopped() {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
 		isRunning = false;

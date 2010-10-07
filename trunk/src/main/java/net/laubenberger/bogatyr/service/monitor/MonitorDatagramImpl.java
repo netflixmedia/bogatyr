@@ -25,11 +25,12 @@
  * <laubenberger@gmail.com>
  */
 
-package net.laubenberger.bogatyr.controller.net;
+package net.laubenberger.bogatyr.service.monitor;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.SocketException;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -39,22 +40,22 @@ import net.laubenberger.bogatyr.misc.Event;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
-import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
+import net.laubenberger.bogatyr.service.ServiceAbstract;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is a datagram dumper to analyse network packets (UDP) on a given port.
+ * Monitor implementation to analyse network packets (UDP) on a given port.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100813)
- * @since 0.8.0
+ * @version 0.9.4 (20101007)
+ * @since 0.9.4
  */
-public class DatagramDumperImpl extends ExtendedObjectAbstract implements DatagramDumper {
-	private static final Logger log = LoggerFactory.getLogger(DatagramDumperImpl.class);
+public class MonitorDatagramImpl extends ServiceAbstract implements MonitorDatagram {
+	private static final Logger log = LoggerFactory.getLogger(MonitorDatagramImpl.class);
 	
-	private final Event<DatagramDumper> event = new Event<DatagramDumper>(this);
+	private final Event<MonitorDatagram> event = new Event<MonitorDatagram>(this);
 
 	private Thread thread;
 
@@ -68,12 +69,12 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 	private boolean isRunning;
 
 
-	public DatagramDumperImpl() {
+	public MonitorDatagramImpl() {
 		super();
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
-	public DatagramDumperImpl(final int port) {
+	public MonitorDatagramImpl(final int port) {
 		super();
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(port));
 
@@ -97,7 +98,7 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 	 * Private methods
 	 */
 
-	private void firePacketReceived() {
+	protected void firePacketReceived() {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 		
 		for (final ListenerDatagram listener : listeners) {
@@ -107,25 +108,25 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
-	private void fireStarted() {
+	protected void fireStarted() {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 		
 		isRunning = true;
 
 		for (final ListenerDatagram listener : listeners) {
-			listener.datagramStarted(event);
+			listener.monitorStarted(event);
 		}
 		
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
-	private void fireStopped() {
+	protected void fireStopped() {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 		
 		isRunning = false;
 
 		for (final ListenerDatagram listener : listeners) {
-			listener.datagramStopped(event);
+			listener.monitorStopped(event);
 		}
 		
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
@@ -186,10 +187,14 @@ public class DatagramDumperImpl extends ExtendedObjectAbstract implements Datagr
 	}
 
 	@Override
-	public void start() throws IOException {
+	public void start() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
-		socket = new DatagramSocket(port);
+		try {
+			socket = new DatagramSocket(port);
+		} catch (SocketException e) {
+			throw new RuntimeException(e); //TODO improve this!
+		}
 
 		thread = new Thread(this);
 		thread.start();

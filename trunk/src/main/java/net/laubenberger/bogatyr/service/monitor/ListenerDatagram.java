@@ -25,7 +25,7 @@
  * <laubenberger@gmail.com>
  */
 
-package net.laubenberger.bogatyr.controller.net;
+package net.laubenberger.bogatyr.service.monitor;
 
 import java.net.DatagramPacket;
 
@@ -36,32 +36,32 @@ import net.laubenberger.bogatyr.misc.Listener;
  * ListenerDatagram
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
- * @since 0.8.0
+ * @version 0.9.4 (20100416)
+ * @since 0.9.4
  */
 public interface ListenerDatagram extends Listener {
+	/**
+	 * Informs the listener that the monitor has started.
+	 *
+	 * @param event for the listener
+	 * @since 0.9.4
+	 */
+	void monitorStarted(Event<MonitorDatagram> event);
+
+	/**
+	 * Informs the listener that the monitor has stopped.
+	 *
+	 * @param event for the listener
+	 * @since 0.9.4
+	 */
+	void monitorStopped(Event<MonitorDatagram> event);
+	
 	/**
 	 * Informs the listener that a {@link DatagramPacket} was received.
 	 *
 	 * @param event for the listener
 	 * @see DatagramPacket
-	 * @since 0.8.0
+	 * @since 0.9.4
 	 */
-	void packetReceived(Event<DatagramDumper> event);
-
-	/**
-	 * Informs the listener that the datagram controller has started.
-	 *
-	 * @param event for the listener
-	 * @since 0.8.0
-	 */
-	void datagramStarted(Event<DatagramDumper> event);
-
-	/**
-	 * Informs the listener that the datagram controller has stopped.
-	 *
-	 * @param event for the listener
-	 * @since 0.8.0
-	 */
-	void datagramStopped(Event<DatagramDumper> event);
+	void packetReceived(Event<MonitorDatagram> event);
 }

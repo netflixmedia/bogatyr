@@ -28,177 +28,31 @@
 package net.laubenberger.bogatyr.service.monitor;
 
 import java.io.File;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.misc.Event;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
-import net.laubenberger.bogatyr.service.ServiceAbstract;
-import net.laubenberger.bogatyr.service.crypto.HashCodeGenerator;
-import net.laubenberger.bogatyr.service.crypto.HashCodeGeneratorImpl;
+import net.laubenberger.bogatyr.misc.HolderListener;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- * Monitor implementation for files.
- * 
+ * Defines the methods for the implementation of a file monitor.
+ *
  * @author Stefan Laubenberger
  * @version 0.9.4 (20101007)
  * @since 0.9.4
  */
-public class MonitorFile extends ServiceAbstract implements Monitor {
-	private static final Logger log = LoggerFactory.getLogger(MonitorFile.class);
-
-	private final Collection<ListenerFileChanged> listeners = new HashSet<ListenerFileChanged>();
-
-	private final Event<MonitorFile> event = new Event<MonitorFile>(this);
-
-	final File file;
-	private Timer timer = new Timer();
-
-	final HashCodeGenerator hcg;
-	
-	private boolean isRunning = false;
-	
-	
-	public MonitorFile(final File file) throws NoSuchAlgorithmException, NoSuchProviderException {
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(file));
-		
-		if (null == file) {
-			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
-		}
-
-		this.file = file;
-		hcg = new HashCodeGeneratorImpl(HashCodeAlgo.SHA256);
-	}
-
-	public File getFile() {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(file));
-		return file;
-	}
-
-	
-	/*
-	 * Private methods
+public interface MonitorFile extends Monitor, HolderListener<ListenerFileChanged> {
+	/**
+	 * Starts immediately the monitor with a given interval.
+	 *
+	 * @param interval of the monitor
+	 * @since 0.9.4
 	 */
-
-	protected void fireFileChanged() {
-		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
-
-		for (final ListenerFileChanged listener : listeners) {
-			listener.fileChanged(event);
-		}
-
-		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
-	}
-
-	protected void fireFileNotFound() {
-		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
-
-		for (final ListenerFileChanged listener : listeners) {
-			listener.fileNotFound(event);
-		}
-
-		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
-	}	
+	void start(long interval);
 	
-	
-	/*
-	 * Implemented methods
+	/**
+	 * Returns the file from the monitor.
+	 *
+	 * @return {@link File}
+	 * @since 0.9.4
 	 */
-	
-	@Override
-	public void start(long interval) {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(interval));
-
-		stop();
-		
-		timer = new Timer();
-
-		final FileMonitorTask task = new FileMonitorTask();
-		timer.schedule(task, 0, interval);
-
-		isRunning = true;
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
-
-	@Override
-	public void stop() {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-
-		if (isRunning) {
-			timer.cancel();
-		}
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
-
-	@Override
-	public void addListener(ListenerFileChanged listener) {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
-		if (null == listener) {
-			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
-		}
-
-		listeners.add(listener);
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
-
-	@Override
-	public void deleteListener(ListenerFileChanged listener) {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
-		if (null == listener) {
-			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
-		}
-
-		listeners.remove(listener);
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
-
-	
-	/*
-	 * Inner classes
-	 */
-	
-	private class FileMonitorTask extends TimerTask {
-		byte[] hash;
-		
-		public FileMonitorTask() {
-			try {
-				hash = hcg.getFastHash(file);
-			} catch (IOException e) {
-//				e.printStackTrace();
-//				fireFileNotFound();
-			}
-		}
-
-		@Override
-		public void run() {
-			try {
-				byte[] hash = hcg.getFastHash(file);
-				
-				if (!Arrays.equals(this.hash, hash)) {
-					this.hash = hash;
-					fireFileChanged();
-				}
-			} catch (IOException e) {
-//				e.printStackTrace();
-				fireFileNotFound();
-			}
-		}
-	}
+	File getFile();
 }

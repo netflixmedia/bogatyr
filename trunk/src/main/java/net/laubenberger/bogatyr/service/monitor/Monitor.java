@@ -27,7 +27,6 @@
 
 package net.laubenberger.bogatyr.service.monitor;
 
-import net.laubenberger.bogatyr.misc.HolderListener;
 import net.laubenberger.bogatyr.service.Service;
 
 
@@ -38,14 +37,13 @@ import net.laubenberger.bogatyr.service.Service;
  * @version 0.9.4 (20101007)
  * @since 0.9.4
  */
-public interface Monitor extends Service, HolderListener<ListenerFileChanged> {
+public interface Monitor extends Service {
 	/**
-	 * Starts immediately the monitor with a given interval.
+	 * Starts immediately the monitor.
 	 *
-	 * @param interval of the monitor
 	 * @since 0.9.4
 	 */
-	void start(long interval);
+	void start();
 	
 	/**
 	 * Stops immediately the monitor.
@@ -53,4 +51,12 @@ public interface Monitor extends Service, HolderListener<ListenerFileChanged> {
 	 * @since 0.9.4
 	 */
 	void stop();
+	
+	/**
+	 * Returns the state of the monitor.
+	 *
+	 * @return true/false
+	 * @since 0.9.4
+	 */
+	boolean isRunning();
 }

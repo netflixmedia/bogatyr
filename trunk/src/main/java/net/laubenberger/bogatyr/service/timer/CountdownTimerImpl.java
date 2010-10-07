@@ -95,7 +95,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 		setInterval(interval);
 
 		getTimer().schedule(new TaskCountdown(), delay, interval);
-		fireTimerStarted();
+		fireStarted();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
@@ -107,7 +107,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 		if (isRunning()) {
 			getTimer().cancel();
 		}
-		fireTimerStopped();
+		fireStopped();
 		
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
@@ -146,7 +146,7 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 				fireTimeChanged();
 			} else {
 				getTimer().cancel();
-				fireTimerStopped();
+				fireStopped();
 			}
 		}
 	}
