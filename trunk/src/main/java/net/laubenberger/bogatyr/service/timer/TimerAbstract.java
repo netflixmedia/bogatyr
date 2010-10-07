@@ -41,9 +41,9 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
 
 /**
  * This is a timer which informs all added listeners about its state.
- *
+ * 
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.4 (20101007)
  * @since 0.6.0
  */
 public abstract class TimerAbstract extends ServiceAbstract implements TimeMachine {
@@ -58,14 +58,13 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 
 	private boolean isRunning;
 
-
-//	protected TimerAbstract() {
-//        super();
-//    }
+	// protected TimerAbstract() {
+	// super();
+	// }
 
 	/**
 	 * Returns the current {@link Timer}.
-	 *
+	 * 
 	 * @return current timer
 	 * @see Timer
 	 * @since 0.6.0
@@ -79,8 +78,9 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 
 	/**
 	 * Sets the current {@link Timer}.
-	 *
-	 * @param timer for the implementation
+	 * 
+	 * @param timer
+	 *           for the implementation
 	 * @see Timer
 	 * @since 0.6.0
 	 */
@@ -95,10 +95,9 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
-
 	/*
-		 * Private methods
-		 */
+	 * Private methods
+	 */
 
 	protected void fireTimeChanged() {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
@@ -142,10 +141,9 @@ public abstract class TimerAbstract extends ServiceAbstract implements TimeMachi
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 
-
 	/*
-		  * Implemented methods
-		  */
+	 * Implemented methods
+	 */
 
 	@Override
 	public boolean isRunning() {
