@@ -51,9 +51,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Monitor implementation for files.
+ * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101007)
+ * @version 0.9.4 (20101102)
  * @since 0.9.4
  */
 public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {

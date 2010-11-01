@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  * This class represents a skeleton for the worker.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.4 (20101102)
  * @since 0.9.0
  */
 public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements Worker {
@@ -95,7 +95,7 @@ public abstract class WorkerAbstract<T, V> extends SwingWorker<T, V> implements 
 
 	@Override
 	public String toString() {
-		return getClass().getName() + "[event=" + event + ", listeners=" + listeners + ']'; //$NON-NLS-1$ //$NON-NLS-2$
+		return getClass().getName() + "[listeners=" + listeners + ']'; //$NON-NLS-1$
 	}
 	
 //	@Override

@@ -35,10 +35,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -64,13 +66,12 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
  * This is a helper class for I/O.
- *
+ * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.3 (20100816)
+ * @version 0.9.4 (20101102)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -81,15 +82,17 @@ public abstract class HelperIO {
 
 	/**
 	 * Returns a temporary {@link File} which will be deleted on program exit.
-	 *
-	 * @param name		of the {@link File}
-	 * @param extension of the {@link File} (e.g. ".java")
+	 * 
+	 * @param name
+	 *           of the {@link File}
+	 * @param extension
+	 *           of the {@link File} (e.g. ".java")
 	 * @return temporary {@link File}
 	 * @throws IOException
 	 * @see File
 	 * @since 0.5.0
 	 */
-	public static File getTemporaryFile(final String name, final String extension) throws IOException { //$JUnit$
+	public static File getTemporaryFile(final String name, final String extension) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(name, extension));
 		if (!HelperString.isValid(name)) {
 			throw new RuntimeExceptionIsNullOrEmpty("name"); //$NON-NLS-1$
@@ -99,7 +102,8 @@ public abstract class HelperIO {
 		}
 
 		// Create temp file
-		final File result = extension.startsWith(HelperString.PERIOD) ? File.createTempFile(name, extension) : File.createTempFile(name, HelperString.PERIOD + extension);
+		final File result = extension.startsWith(HelperString.PERIOD) ? File.createTempFile(name, extension) : File
+				.createTempFile(name, HelperString.PERIOD + extension);
 
 		// Delete temp file when program exits
 		result.deleteOnExit();
@@ -110,13 +114,13 @@ public abstract class HelperIO {
 
 	/**
 	 * Returns a temporary {@link File} which will be deleted on program exit.
-	 *
+	 * 
 	 * @return temporary {@link File}
 	 * @throws IOException
 	 * @see File
 	 * @since 0.9.0
 	 */
-	public static File getTemporaryFile() throws IOException { //$JUnit$
+	public static File getTemporaryFile() throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final File result = getTemporaryFile(Constants.BOGATYR.getName(), "tmp"); //$NON-NLS-1$
@@ -127,9 +131,11 @@ public abstract class HelperIO {
 
 	/**
 	 * Copy a directory.
-	 *
-	 * @param source directory to copy
-	 * @param dest	directory destination
+	 * 
+	 * @param source
+	 *           directory to copy
+	 * @param dest
+	 *           directory destination
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
@@ -139,9 +145,9 @@ public abstract class HelperIO {
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
-//		if (!source.isDirectory()) {
-//			throw new IllegalArgumentException("source is not a directory: " + source); //$NON-NLS-1$
-//		}
+		// if (!source.isDirectory()) {
+		//			throw new IllegalArgumentException("source is not a directory: " + source); //$NON-NLS-1$
+		// }
 		if (null == dest) {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
@@ -170,9 +176,11 @@ public abstract class HelperIO {
 
 	/**
 	 * Copy a {@link File}.
-	 *
-	 * @param source {@link File} to copy
-	 * @param dest	{@link File} destination
+	 * 
+	 * @param source
+	 *           {@link File} to copy
+	 * @param dest
+	 *           {@link File} destination
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
@@ -185,10 +193,13 @@ public abstract class HelperIO {
 
 	/**
 	 * Copy a {@link File}.
-	 *
-	 * @param source	  {@link File} to copy
-	 * @param dest		 {@link File} destination
-	 * @param bufferSize in bytes
+	 * 
+	 * @param source
+	 *           {@link File} to copy
+	 * @param dest
+	 *           {@link File} destination
+	 * @param bufferSize
+	 *           in bytes
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
@@ -198,9 +209,9 @@ public abstract class HelperIO {
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
-//		if (!source.isFile()) {
-//            throw new IllegalArgumentException("source is not a file: " + source); //$NON-NLS-1$
-//        }
+		// if (!source.isFile()) {
+		//            throw new IllegalArgumentException("source is not a file: " + source); //$NON-NLS-1$
+		// }
 		if (null == dest) {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
@@ -246,9 +257,11 @@ public abstract class HelperIO {
 
 	/**
 	 * Move a file or directory.
-	 *
-	 * @param source file/directory to move
-	 * @param dest	file/directory
+	 * 
+	 * @param source
+	 *           file/directory to move
+	 * @param dest
+	 *           file/directory
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
@@ -277,8 +290,9 @@ public abstract class HelperIO {
 
 	/**
 	 * Delete files or directories.
-	 *
-	 * @param files to delete (files/directories)
+	 * 
+	 * @param files
+	 *           to delete (files/directories)
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
@@ -303,9 +317,11 @@ public abstract class HelperIO {
 
 	/**
 	 * Rename a file or directory.
-	 *
-	 * @param source file/directory to rename
-	 * @param dest	file/directory
+	 * 
+	 * @param source
+	 *           file/directory to rename
+	 * @param dest
+	 *           file/directory
 	 * @return true/false
 	 * @see File
 	 * @since 0.1.0
@@ -328,18 +344,20 @@ public abstract class HelperIO {
 		return result;
 	}
 
-
 	/**
 	 * Writes a text line in a {@link File} with the chosen encoding.
-	 *
-	 * @param file	  for writing
-	 * @param encoding of the {@link File}
-	 * @param line	  containing the text to write
+	 * 
+	 * @param file
+	 *           for writing
+	 * @param encoding
+	 *           of the {@link File}
+	 * @param line
+	 *           containing the text to write
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
 	 */
-	public static void writeLine(final File file, final String encoding, final String line) throws IOException { //$JUnit$
+	public static void writeLine(final File file, final String encoding, final String line) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, encoding, line));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
@@ -366,14 +384,16 @@ public abstract class HelperIO {
 
 	/**
 	 * Writes a text line in a {@link File} with the default encoding (UTF-8).
-	 *
-	 * @param file for writing
-	 * @param line containing the text to write
+	 * 
+	 * @param file
+	 *           for writing
+	 * @param line
+	 *           containing the text to write
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
 	 */
-	public static void writeLine(final File file, final String line) throws IOException { //$JUnit$
+	public static void writeLine(final File file, final String line) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, line));
 		writeLine(file, Constants.ENCODING_DEFAULT, line);
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
@@ -381,9 +401,11 @@ public abstract class HelperIO {
 
 	/**
 	 * Writes a byte-array into a new {@link File}.
-	 *
-	 * @param file for writing
-	 * @param data byte-array to write
+	 * 
+	 * @param file
+	 *           for writing
+	 * @param data
+	 *           byte-array to write
 	 * @throws IOException
 	 * @see File
 	 * @since 0.9.1
@@ -396,15 +418,18 @@ public abstract class HelperIO {
 
 	/**
 	 * Writes a byte-array into a {@link File}.
-	 *
-	 * @param file	for writing
-	 * @param data	byte-array to write
-	 * @param append to {@link File}?
+	 * 
+	 * @param file
+	 *           for writing
+	 * @param data
+	 *           byte-array to write
+	 * @param append
+	 *           to {@link File}?
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
 	 */
-	public static void writeFile(final File file, final byte[] data, final boolean append) throws IOException { //$JUnit$
+	public static void writeFile(final File file, final byte[] data, final boolean append) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, data, append));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
@@ -426,10 +451,13 @@ public abstract class HelperIO {
 
 	/**
 	 * Writes a {@link String} into a new {@link File} with the chosen encoding.
-	 *
-	 * @param file	  for writing
-	 * @param data	  {@link String} to write
-	 * @param encoding of the {@link File}
+	 * 
+	 * @param file
+	 *           for writing
+	 * @param data
+	 *           {@link String} to write
+	 * @param encoding
+	 *           of the {@link File}
 	 * @throws IOException
 	 * @see File
 	 * @since 0.9.1
@@ -442,16 +470,21 @@ public abstract class HelperIO {
 
 	/**
 	 * Writes a {@link String} into a {@link File} with the chosen encoding.
-	 *
-	 * @param file	  for writing
-	 * @param data	  {@link String} to write
-	 * @param encoding of the {@link File}
-	 * @param append	to {@link File}?
+	 * 
+	 * @param file
+	 *           for writing
+	 * @param data
+	 *           {@link String} to write
+	 * @param encoding
+	 *           of the {@link File}
+	 * @param append
+	 *           to {@link File}?
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
 	 */
-	public static void writeFile(final File file, final String data, final String encoding, final boolean append) throws IOException { //$JUnit$
+	public static void writeFile(final File file, final String data, final String encoding, final boolean append)
+			throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, data, append));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
@@ -463,7 +496,8 @@ public abstract class HelperIO {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
 
-		final Writer writer = new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(file, append)), encoding);
+		final Writer writer = new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(file, append)),
+				encoding);
 
 		try {
 			if (append) {
@@ -479,10 +513,13 @@ public abstract class HelperIO {
 	}
 
 	/**
-	 * Writes a {@link String} into a new {@link File} with the default encoding (UTF-8).
-	 *
-	 * @param file for writing
-	 * @param data {@link String} to write
+	 * Writes a {@link String} into a new {@link File} with the default encoding
+	 * (UTF-8).
+	 * 
+	 * @param file
+	 *           for writing
+	 * @param data
+	 *           {@link String} to write
 	 * @throws IOException
 	 * @see File
 	 * @since 0.9.1
@@ -494,16 +531,20 @@ public abstract class HelperIO {
 	}
 
 	/**
-	 * Writes a {@link String} into a {@link File} with the default encoding (UTF-8).
-	 *
-	 * @param file	for writing
-	 * @param data	{@link String} to write
-	 * @param append to {@link File}?
+	 * Writes a {@link String} into a {@link File} with the default encoding
+	 * (UTF-8).
+	 * 
+	 * @param file
+	 *           for writing
+	 * @param data
+	 *           {@link String} to write
+	 * @param append
+	 *           to {@link File}?
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
 	 */
-	public static void writeFile(final File file, final String data, final boolean append) throws IOException { //$JUnit$
+	public static void writeFile(final File file, final String data, final boolean append) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, data, append));
 		writeFile(file, data, Constants.ENCODING_DEFAULT, append);
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
@@ -511,9 +552,11 @@ public abstract class HelperIO {
 
 	/**
 	 * Writes an {@link InputStream} into a new {@link File}.
-	 *
-	 * @param file for writing
-	 * @param is	{@link InputStream} to write
+	 * 
+	 * @param file
+	 *           for writing
+	 * @param is
+	 *           {@link InputStream} to write
 	 * @throws IOException
 	 * @see File
 	 * @see InputStream
@@ -527,16 +570,19 @@ public abstract class HelperIO {
 
 	/**
 	 * Writes an {@link InputStream} into a {@link File}.
-	 *
-	 * @param file	for writing
-	 * @param is	  {@link InputStream} to write
-	 * @param append to {@link File}?
+	 * 
+	 * @param file
+	 *           for writing
+	 * @param is
+	 *           {@link InputStream} to write
+	 * @param append
+	 *           to {@link File}?
 	 * @throws IOException
 	 * @see File
 	 * @see InputStream
 	 * @since 0.1.0
 	 */
-	public static void writeFile(final File file, final InputStream is, final boolean append) throws IOException { //$JUnit$
+	public static void writeFile(final File file, final InputStream is, final boolean append) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, is, append));
 		writeFile(file, readStream(is), append);
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
@@ -544,9 +590,11 @@ public abstract class HelperIO {
 
 	/**
 	 * Writes a byte array to an {@link OutputStream}.
-	 *
-	 * @param os	{@link OutputStream} for writing
-	 * @param data byte-array for the {@link OutputStream}
+	 * 
+	 * @param os
+	 *           {@link OutputStream} for writing
+	 * @param data
+	 *           byte-array for the {@link OutputStream}
 	 * @throws IOException
 	 * @see OutputStream
 	 * @since 0.1.0
@@ -567,8 +615,9 @@ public abstract class HelperIO {
 
 	/**
 	 * Reads an {@link InputStream} in a byte-array.
-	 *
-	 * @param is {@link InputStream} for reading
+	 * 
+	 * @param is
+	 *           {@link InputStream} for reading
 	 * @return byte-array containing the {@link InputStream} content
 	 * @throws IOException
 	 * @see InputStream
@@ -585,9 +634,11 @@ public abstract class HelperIO {
 
 	/**
 	 * Reads an {@link InputStream} in a byte-array.
-	 *
-	 * @param is			{@link InputStream} for reading
-	 * @param bufferSize in bytes
+	 * 
+	 * @param is
+	 *           {@link InputStream} for reading
+	 * @param bufferSize
+	 *           in bytes
 	 * @return byte-array containing the {@link InputStream} content
 	 * @throws IOException
 	 * @see InputStream
@@ -628,26 +679,28 @@ public abstract class HelperIO {
 
 	/**
 	 * Reads a {@link File} in a byte-array.
-	 *
-	 * @param file for reading
+	 * 
+	 * @param file
+	 *           for reading
 	 * @return byte-array containing the {@link File} content
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
 	 */
-	public static byte[] readFile(final File file) throws IOException { //$JUnit$
+	public static byte[] readFile(final File file) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.isFile()) {
-//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
-//		}
+		// if (!file.isFile()) {
+		//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		// }
 
 		final long length = file.length();
 
 		if (Integer.MAX_VALUE < length) {
-			throw new IllegalArgumentException("length of file (" + length + ") is to large to process (" + Integer.MAX_VALUE + ')'); //$NON-NLS-1$ //$NON-NLS-2$
+			throw new IllegalArgumentException(
+					"length of file (" + length + ") is to large to process (" + Integer.MAX_VALUE + ')'); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if (length > HelperEnvironment.getMemoryFree()) {
 			throw new RuntimeExceptionExceedsVmMemory("file", file.length()); //$NON-NLS-1$
@@ -671,22 +724,24 @@ public abstract class HelperIO {
 
 	/**
 	 * Reads a {@link File} in a {@link String} with the chosen encoding.
-	 *
-	 * @param file	  for reading
-	 * @param encoding of the {@link File}
+	 * 
+	 * @param file
+	 *           for reading
+	 * @param encoding
+	 *           of the {@link File}
 	 * @return {@link String} containing the file content
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
 	 */
-	public static String readFileAsString(final File file, final String encoding) throws IOException { //$JUnit$
+	public static String readFileAsString(final File file, final String encoding) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, encoding));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.isFile()) {
-//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
-//		}
+		// if (!file.isFile()) {
+		//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		// }
 		if (!HelperString.isValid(encoding)) {
 			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
 		}
@@ -698,34 +753,45 @@ public abstract class HelperIO {
 		}
 
 		final StringBuilder sb = new StringBuilder();
-		final Scanner scanner = new Scanner(file, encoding);
+		BufferedReader br = null;
 
 		try {
-			while (scanner.hasNextLine()) {
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding));
+
+			String line = null;
+
+			while ((line = br.readLine()) != null) {
 				if (0 < sb.length()) {
 					sb.append(HelperString.NEW_LINE);
 				}
-				sb.append(scanner.nextLine());
+				sb.append(line);
 			}
+
 			final String result = sb.toString();
 
 			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 			return result;
 		} finally {
-			scanner.close();
+			try {
+				if (br != null) br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 
 	/**
-	 * Reads a {@link File} in a {@link String} with the default encoding (UTF-8).
-	 *
-	 * @param file for reading
+	 * Reads a {@link File} in a {@link String} with the default encoding
+	 * (UTF-8).
+	 * 
+	 * @param file
+	 *           for reading
 	 * @return {@link String} containing the {@link File} content
 	 * @throws IOException
 	 * @see File
 	 * @since 0.1.0
 	 */
-	public static String readFileAsString(final File file) throws IOException { //$JUnit$
+	public static String readFileAsString(final File file) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 
 		final String result = readFileAsString(file, Constants.ENCODING_DEFAULT);
@@ -736,9 +802,11 @@ public abstract class HelperIO {
 
 	/**
 	 * Reads a {@link File} in a {@link List} with the chosen encoding.
-	 *
-	 * @param file	  for reading
-	 * @param encoding of the {@link File}
+	 * 
+	 * @param file
+	 *           for reading
+	 * @param encoding
+	 *           of the {@link File}
 	 * @return {@link List} containing the {@link File} content
 	 * @throws IOException
 	 * @see File
@@ -749,9 +817,9 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.isFile()) {
-//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
-//		}
+		// if (!file.isFile()) {
+		//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		// }
 		if (!HelperString.isValid(encoding)) {
 			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
 		}
@@ -759,24 +827,34 @@ public abstract class HelperIO {
 			throw new RuntimeExceptionExceedsVmMemory("file", file.length()); //$NON-NLS-1$
 		}
 
-		final Scanner scanner = new Scanner(file, encoding);
 		final List<String> result = new ArrayList<String>();
+		BufferedReader br = null;
 
 		try {
-			while (scanner.hasNextLine()) {
-				result.add(scanner.nextLine());
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding));
+
+			String line = null;
+
+			while ((line = br.readLine()) != null) {
+				result.add(line);
 			}
+
+			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+			return result;
 		} finally {
-			scanner.close();
+			try {
+				if (br != null) br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
 	}
 
 	/**
 	 * Reads a {@link File} in a {@link List} with the default encoding (UTF-8).
-	 *
-	 * @param file for reading
+	 * 
+	 * @param file
+	 *           for reading
 	 * @return {@link List} containing the {@link File} content
 	 * @throws IOException
 	 * @see File
@@ -793,22 +871,24 @@ public abstract class HelperIO {
 
 	/**
 	 * Reads a {@link File} into an {@link OutputStream}.
-	 *
-	 * @param file for reading
-	 * @param os	{@link OutputStream} for the {@link File} content
+	 * 
+	 * @param file
+	 *           for reading
+	 * @param os
+	 *           {@link OutputStream} for the {@link File} content
 	 * @throws IOException
 	 * @see File
 	 * @see OutputStream
 	 * @since 0.1.0
 	 */
-	public static void readFileAsStream(final File file, final OutputStream os) throws IOException { //$JUnit$
+	public static void readFileAsStream(final File file, final OutputStream os) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, os));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
-//		if (!file.isFile()) {
-//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
-//		}
+		// if (!file.isFile()) {
+		//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
+		// }
 		if (null == os) {
 			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
 		}
@@ -819,9 +899,11 @@ public abstract class HelperIO {
 
 	/**
 	 * Concatenates many files to one output {@link File}.
-	 *
-	 * @param fileOutput Output {@link File}
-	 * @param files		to concatenate
+	 * 
+	 * @param fileOutput
+	 *           Output {@link File}
+	 * @param files
+	 *           to concatenate
 	 * @throws IOException
 	 * @see File
 	 * @since 0.2.0
@@ -875,8 +957,9 @@ public abstract class HelperIO {
 
 	/**
 	 * Returns the {@link URL} representation of a given {@link File}.
-	 *
-	 * @param file to get the URL
+	 * 
+	 * @param file
+	 *           to get the URL
 	 * @return {@link URL} representation of a given {@link File}
 	 * @throws MalformedURLException
 	 * @see File
@@ -897,7 +980,7 @@ public abstract class HelperIO {
 
 	/**
 	 * Returns a {@link List} containing all drive names of the current system.
-	 *
+	 * 
 	 * @return {@link List} containing all drive names of the current system
 	 * @since 0.7.0
 	 */
@@ -915,8 +998,9 @@ public abstract class HelperIO {
 	}
 
 	/**
-	 * Returns a {@link List} containing all available drives of the current system.
-	 *
+	 * Returns a {@link List} containing all available drives of the current
+	 * system.
+	 * 
 	 * @return {@link List} containing all drive names of the current system
 	 * @see File
 	 * @since 0.7.0
@@ -930,19 +1014,20 @@ public abstract class HelperIO {
 		return result;
 	}
 
-//	/**
-//	 * Returns all drive names of the current system.
-//	 * 
-//	 * @return list containing all drive names of the current system 
-//	 */
-//	public static Collection<String> getAvailable() {
-//		return Charset.availableCharsets();
-//	}
+	// /**
+	// * Returns all drive names of the current system.
+	// *
+	// * @return list containing all drive names of the current system
+	// */
+	// public static Collection<String> getAvailable() {
+	// return Charset.availableCharsets();
+	// }
 
 	/**
 	 * Returns the total space of a given {@link File} location in bytes.
-	 *
-	 * @param file location
+	 * 
+	 * @param file
+	 *           location
 	 * @return total space in bytes
 	 * @see File
 	 * @since 0.7.0
@@ -961,8 +1046,9 @@ public abstract class HelperIO {
 
 	/**
 	 * Returns the free space of a given {@link File} location in bytes.
-	 *
-	 * @param file location
+	 * 
+	 * @param file
+	 *           location
 	 * @return free space in bytes
 	 * @see File
 	 * @since 0.7.0
@@ -981,8 +1067,9 @@ public abstract class HelperIO {
 
 	/**
 	 * Returns the usable space of a given {@link File} location in bytes.
-	 *
-	 * @param file location
+	 * 
+	 * @param file
+	 *           location
 	 * @return usable space in bytes
 	 * @see File
 	 * @since 0.7.0
@@ -1001,8 +1088,9 @@ public abstract class HelperIO {
 
 	/**
 	 * Returns the used space of a given {@link File} location in bytes.
-	 *
-	 * @param file location
+	 * 
+	 * @param file
+	 *           location
 	 * @return used space in bytes
 	 * @see File
 	 * @since 0.7.0
@@ -1018,8 +1106,9 @@ public abstract class HelperIO {
 
 	/**
 	 * Checks a given {@link File} if it is a drive.
-	 *
-	 * @param file location
+	 * 
+	 * @param file
+	 *           location
 	 * @return true/false
 	 * @see File
 	 * @since 0.7.0
@@ -1038,8 +1127,9 @@ public abstract class HelperIO {
 
 	/**
 	 * Checks a given {@link File} if it is a removable drive.
-	 *
-	 * @param file location
+	 * 
+	 * @param file
+	 *           location
 	 * @return true/false
 	 * @see File
 	 * @since 0.7.0
@@ -1058,8 +1148,9 @@ public abstract class HelperIO {
 
 	/**
 	 * Checks a given {@link File} if it is a network drive.
-	 *
-	 * @param file location
+	 * 
+	 * @param file
+	 *           location
 	 * @return true/false
 	 * @see File
 	 * @since 0.7.0
@@ -1078,8 +1169,9 @@ public abstract class HelperIO {
 
 	/**
 	 * Converts a given {@link ByteArrayOutputStream} to an {@link InputStream}.
-	 *
-	 * @param baos byte-array output stream
+	 * 
+	 * @param baos
+	 *           byte-array output stream
 	 * @return {@link InputStream}
 	 * @see ByteArrayOutputStream
 	 * @see InputStream
@@ -1099,8 +1191,9 @@ public abstract class HelperIO {
 
 	/**
 	 * Converts a given {@link Writer} to a {@link Reader}.
-	 *
-	 * @param writer to convert
+	 * 
+	 * @param writer
+	 *           to convert
 	 * @return {@link Reader} containing the data of the {@link Writer}
 	 * @see Writer
 	 * @see Reader
@@ -1119,17 +1212,24 @@ public abstract class HelperIO {
 	}
 
 	/**
-	 * Searchs in a path (directory) for files and directories via {@link FileFilter} and returns a {@link List} containing all {@link File}.
-	 *
-	 * @param path			for searching
-	 * @param filter		 for the match criterias. No filter (== null) will return all files.
-	 * @param recurseDepth defines how many folder levels the recursion would pass. >= -1 always recurse, 0 only the current folder and any other value will continue recursion until 0 is hit.
+	 * Searchs in a path (directory) for files and directories via
+	 * {@link FileFilter} and returns a {@link List} containing all {@link File}.
+	 * 
+	 * @param path
+	 *           for searching
+	 * @param filter
+	 *           for the match criterias. No filter (== null) will return all
+	 *           files.
+	 * @param recurseDepth
+	 *           defines how many folder levels the recursion would pass. >= -1
+	 *           always recurse, 0 only the current folder and any other value
+	 *           will continue recursion until 0 is hit.
 	 * @return {@link List} containing the matched files
 	 * @see File
 	 * @see FileFilter
 	 * @since 0.1.0
 	 */
-	public static List<File> getFiles(final File path, final FileFilter filter, final int recurseDepth) { //$JUnit$
+	public static List<File> getFiles(final File path, final FileFilter filter, final int recurseDepth) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(path, filter, recurseDepth));
 		if (null == path) {
 			throw new RuntimeExceptionIsNull("path"); //$NON-NLS-1$
@@ -1158,16 +1258,20 @@ public abstract class HelperIO {
 	}
 
 	/**
-	 * Searchs in a path (directory) for files and directories via {@link FileFilter} and returns a {@link List} containing all {@link File}.
-	 *
-	 * @param path	for searching
-	 * @param filter for the match criterias. No filter (== null) will return all {@link File}
+	 * Searchs in a path (directory) for files and directories via
+	 * {@link FileFilter} and returns a {@link List} containing all {@link File}.
+	 * 
+	 * @param path
+	 *           for searching
+	 * @param filter
+	 *           for the match criterias. No filter (== null) will return all
+	 *           {@link File}
 	 * @return {@link List} containing the matched files
 	 * @see File
 	 * @see FileFilter
 	 * @since 0.9.0
 	 */
-	public static List<File> getFiles(final File path, final FileFilter filter) { //$JUnit$
+	public static List<File> getFiles(final File path, final FileFilter filter) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(path, filter));
 
 		final List<File> result = getFiles(path, filter, -1);
@@ -1177,14 +1281,16 @@ public abstract class HelperIO {
 	}
 
 	/**
-	 * Searchs in a path (directory) for all files and directories and returns a {@link List} containing all {@link File}.
-	 *
-	 * @param path for searching
+	 * Searchs in a path (directory) for all files and directories and returns a
+	 * {@link List} containing all {@link File}.
+	 * 
+	 * @param path
+	 *           for searching
 	 * @return {@link List} containing the found {@link File}
 	 * @see File
 	 * @since 0.9.0
 	 */
-	public static List<File> getFiles(final File path) { //$JUnit$
+	public static List<File> getFiles(final File path) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(path));
 
 		final FileFilter filter = new FileFilter() {
@@ -1202,8 +1308,9 @@ public abstract class HelperIO {
 
 	/**
 	 * Get the file without extension from a given {@link String}.
-	 *
-	 * @param fileName to remove the extension
+	 * 
+	 * @param fileName
+	 *           to remove the extension
 	 * @return {@link String} without extension
 	 * @since 0.9.0
 	 */
@@ -1215,7 +1322,8 @@ public abstract class HelperIO {
 
 		final String result;
 
-		result = fileName.contains(HelperString.PERIOD) ? fileName.substring(0, fileName.lastIndexOf(HelperString.PERIOD)) : fileName;
+		result = fileName.contains(HelperString.PERIOD) ? fileName
+				.substring(0, fileName.lastIndexOf(HelperString.PERIOD)) : fileName;
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -1223,8 +1331,9 @@ public abstract class HelperIO {
 
 	/**
 	 * Get the file extension from a given {@link String}.
-	 *
-	 * @param fileName to get the extension
+	 * 
+	 * @param fileName
+	 *           to get the extension
 	 * @return {@link String} extension
 	 * @since 0.9.1
 	 */
@@ -1236,7 +1345,8 @@ public abstract class HelperIO {
 
 		final String result;
 
-		result = fileName.contains(HelperString.PERIOD) ? fileName.substring(fileName.lastIndexOf(HelperString.PERIOD)) : fileName;
+		result = fileName.contains(HelperString.PERIOD) ? fileName.substring(fileName.lastIndexOf(HelperString.PERIOD))
+				: fileName;
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
