@@ -60,7 +60,7 @@ import org.slf4j.LoggerFactory;
 public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 	private static final Logger log = LoggerFactory.getLogger(MonitorFileImpl.class);
 
-	private static final long DEFAULT_INTERVAL = 2000L;
+	private long interval = 5000L;
 
 	private final Collection<ListenerFileChanged> listeners = new HashSet<ListenerFileChanged>();
 
@@ -137,13 +137,17 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 	/*
 	 * Implemented methods
 	 */
-	
 	@Override
-	public void start(long interval) {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(interval));
+	public void start(long delay, long interval) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(delay, interval));
+		if (0L > delay) {
+			throw new RuntimeExceptionMustBeGreater("delay", delay, 0); //$NON-NLS-1$
+		}
 		if (0L > interval) {
 			throw new RuntimeExceptionMustBeGreater("interval", interval, 0); //$NON-NLS-1$
 		}
+		
+		this.interval = interval;
 		
 		if (isRunning()) {
 			timer.cancel();
@@ -152,18 +156,27 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 		timer = new Timer();
 
 		final FileMonitorTask task = new FileMonitorTask();
-		timer.schedule(task, 0, interval);
+		timer.schedule(task, delay, interval);
 
 		fireStarted();
 		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
+	
+	@Override
+	public void start(long interval) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(interval));
+		
+		start(0L, interval);
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());	
 	}
 
 	@Override
 	public void start() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
-		start(DEFAULT_INTERVAL);
+		start(interval);
 		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());	
 	}
@@ -196,6 +209,14 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 		return file;
 	}
 
+	@Override
+	public long getInterval() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(interval));
+		return interval;
+	}
+	
 	@Override
 	public void addListener(ListenerFileChanged listener) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));

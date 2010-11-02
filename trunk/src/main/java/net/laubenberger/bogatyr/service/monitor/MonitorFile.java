@@ -36,7 +36,7 @@ import net.laubenberger.bogatyr.misc.HolderListener;
  * Defines the methods for the implementation of a file monitor.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101007)
+ * @version 0.9.4 (20101102)
  * @since 0.9.4
  */
 public interface MonitorFile extends Monitor, HolderListener<ListenerFileChanged> {
@@ -47,6 +47,23 @@ public interface MonitorFile extends Monitor, HolderListener<ListenerFileChanged
 	 * @since 0.9.4
 	 */
 	void start(long interval);
+
+	/**
+	 * Starts the monitor with a given delay and interval.
+	 *
+	 * @param delay	 until the monitor starts
+	 * @param interval of the monitor
+	 * @since 0.9.4
+	 */
+	void start(long delay, long interval);
+	
+	/**
+	 * Returns the current interval in ms of the monitor.
+	 *
+	 * @return current time of the timer
+	 * @since 0.9.4
+	 */
+	long getInterval();
 	
 	/**
 	 * Returns the file from the monitor.
