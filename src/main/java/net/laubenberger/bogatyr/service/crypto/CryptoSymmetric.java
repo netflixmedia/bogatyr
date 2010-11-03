@@ -40,7 +40,7 @@ import net.laubenberger.bogatyr.service.Service;
  * This is an interface for symmetric cryptology.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.4 (20101103)
  * @since 0.6.0
  */
 public interface CryptoSymmetric extends Service { //$Example$
@@ -83,7 +83,7 @@ public interface CryptoSymmetric extends Service { //$Example$
 	 * @see SecretKey
 	 * @since 0.9.1
 	 */
-	SecretKey generateKey(byte[] password);
+	SecretKey generateKey(byte... password);
 
 	/**
 	 * Encrypt the data (byte-array) with a given {@link Key} and the implementations algorithm.

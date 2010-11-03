@@ -69,7 +69,7 @@ import com.lowagie.text.pdf.parser.PdfTextExtractor;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.3 (20101001)
+ * @version 0.9.4 (20101103)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -445,7 +445,7 @@ public abstract class HelperPdf {
 	 * Private methods
 	 */
 	
-	private static void exportAsImages(final SlideShow ppt, final File[] files) throws IOException {
+	private static void exportAsImages(final SlideShow ppt, final File... files) throws IOException {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(ppt, files));
 
 		final Dimension size = ppt.getPageSize();

@@ -40,7 +40,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Encodes and decodes data to Hex format.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101103)
  * @since 0.1.0
  */
 public abstract class EncoderHex {
@@ -53,7 +53,7 @@ public abstract class EncoderHex {
 	 * @return hex representation of a byte array
 	 * @since 0.1.0
 	 */
-	public static String encode(final byte[] input) { //$JUnit$
+	public static String encode(final byte... input) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$

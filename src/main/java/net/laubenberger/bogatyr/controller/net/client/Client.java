@@ -39,7 +39,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObject;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.1 (20100416)
+ * @version 0.9.4 (20101103)
  * @since 0.7.0
  */
 public interface Client extends ExtendedObject, Runnable, HolderListener<ListenerClient> {
@@ -140,5 +140,5 @@ public interface Client extends ExtendedObject, Runnable, HolderListener<Listene
 	 * @throws IOException
 	 * @since 0.7.0
 	 */
-	void writeStream(byte[] data) throws IOException;
+	void writeStream(byte... data) throws IOException;
 }   

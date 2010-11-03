@@ -38,7 +38,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObject;
  * Defines the methods for the implementation of the server thread.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.4 (20101103)
  * @since 0.7.0
  */
 public interface ServerThread extends ExtendedObject, Runnable, HolderListener<ListenerServerThread> {
@@ -84,7 +84,7 @@ public interface ServerThread extends ExtendedObject, Runnable, HolderListener<L
 	 * @throws IOException
 	 * @since 0.7.0
 	 */
-	void writeStream(byte[] data) throws IOException;
+	void writeStream(byte... data) throws IOException;
 
 	/**
 	 * Stops the thread. And closes the open socket.

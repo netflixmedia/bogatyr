@@ -27,25 +27,63 @@
 
 package net.laubenberger.bogatyr.helper.launcher;
 
+import static org.junit.Assert.fail;
+
+import java.net.URI;
+
+import net.laubenberger.bogatyr.helper.HelperString;
+
 import org.junit.Test;
 
-
 /**
- * Junit test
- *
+ * JUnit test for {@link LauncherBrowser}
+ * 
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20101103
  */
 public class LauncherBrowserTest {
 	@Test
-	public void testBrowse() {
-//		try {
-//			LauncherBrowser.browse(new URI("http://www.laubenberger.net")); //$NON-NLS-1$
-//		} catch (Exception ex) {fail(ex.getMessage());}
-//
-//		try {
-//			LauncherBrowser.browse("code.google.com/p/bogatyr/"); //$NON-NLS-1$
-//		} catch (Exception ex) {fail(ex.getMessage());}
+	public void testPassBrowse() {
+		try {
+			LauncherBrowser.browse(new URI("http://www.laubenberger.net")); //$NON-NLS-1$
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 
+		try {
+			LauncherBrowser.browse("code.google.com/p/bogatyr/"); //$NON-NLS-1$
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testFailBrowse() {
+		try {
+			LauncherBrowser.browse((URI)null);
+			fail("uri is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+	try {
+			LauncherBrowser.browse((String)null);
+			fail("url is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			LauncherBrowser.browse(HelperString.EMPTY_STRING);
+			fail("url is empty"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }

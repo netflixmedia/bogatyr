@@ -54,7 +54,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100618)
+ * @version 0.9.4 (20101103)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -161,7 +161,7 @@ public abstract class HelperObject {
 	 * @throws ClassNotFoundException
 	 * @since 0.7.0
 	 */
-	public static Object deserialize(final byte[] data) throws IOException, ClassNotFoundException { //$JUnit$
+	public static Object deserialize(final byte... data) throws IOException, ClassNotFoundException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(data));
 		if (!HelperArray.isValid(data)) {
 			throw new RuntimeExceptionIsNullOrEmpty("data"); //$NON-NLS-1$
@@ -193,7 +193,7 @@ public abstract class HelperObject {
 	 * @since 0.7.0
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T deserialize(final Class<T> clazz, final byte[] data) throws IOException, ClassNotFoundException { //$JUnit$
+	public static <T> T deserialize(final Class<T> clazz, final byte... data) throws IOException, ClassNotFoundException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clazz, data));
 		if (!HelperArray.isValid(data)) {
 			throw new RuntimeExceptionIsNullOrEmpty("data"); //$NON-NLS-1$

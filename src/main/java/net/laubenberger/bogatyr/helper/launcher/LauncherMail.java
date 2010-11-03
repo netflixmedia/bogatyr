@@ -29,26 +29,29 @@ package net.laubenberger.bogatyr.helper.launcher;
 
 import java.awt.Desktop;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperArray;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperString;
+import net.laubenberger.bogatyr.helper.encoder.EncoderHex;
+import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This launcher starts the system mail application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100805)
+ * @version 0.9.4 (20101103)
  * @since 0.7.0
  */
 public abstract class LauncherMail {
@@ -106,12 +109,12 @@ public abstract class LauncherMail {
 	 */
 	public static void mail(final String subject, final String body, final String... emailAddresses) throws IOException, URISyntaxException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(subject, body, emailAddresses));
-		if (null == subject) {
-			throw new RuntimeExceptionIsNull("subject"); //$NON-NLS-1$
+		if (!HelperString.isValid(subject)) {
+			throw new RuntimeExceptionIsNullOrEmpty("subject"); //$NON-NLS-1$
 		}
-		if (null == body) {
-			throw new RuntimeExceptionIsNull("body"); //$NON-NLS-1$
-		}
+//		if (null == body) {
+//			throw new RuntimeExceptionIsNull("body"); //$NON-NLS-1$
+//		}
 		if (!HelperArray.isValid(emailAddresses)) {
 			throw new RuntimeExceptionIsNullOrEmpty("emailAddresses"); //$NON-NLS-1$
 		}
@@ -125,9 +128,13 @@ public abstract class LauncherMail {
 		}
 		sb.append("?subject="); //$NON-NLS-1$
 		sb.append(getValidText(subject));
-		sb.append("&body="); //$NON-NLS-1$
-		sb.append(getValidText(body).replace(HelperString.NEW_LINE, "%0A")); //$NON-NLS-1$
-
+		
+		if (null != body) {
+			sb.append("&body="); //$NON-NLS-1$
+			sb.append(getValidText(body).replace(HelperString.NEW_LINE, "%0D%0A")); //$NON-NLS-1$
+//			sb.append(EncoderHtml.encode(body.replace(HelperString.NEW_LINE, "%0D%0A"))); //$NON-NLS-1$
+		}
+		
 		final String addresses = sb.toString();
 
 		final String prefix = "mailto:"; //$NON-NLS-1$
@@ -139,39 +146,39 @@ public abstract class LauncherMail {
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
-	/**
-	 * Opens an email with a given addresses with the default mail application.
-	 *
-	 * @param emailAddresses for the mail (e.g. "yourname@yourmail.com")
-	 * @throws IOException
-	 * @throws URISyntaxException
-	 * @since 0.9.3
-	 */
-	public static void mail(final String... emailAddresses) throws IOException, URISyntaxException { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(emailAddresses));
-		if (!HelperArray.isValid(emailAddresses)) {
-			throw new RuntimeExceptionIsNullOrEmpty("emailAddresses"); //$NON-NLS-1$
-		}
-
-		final StringBuilder sb = new StringBuilder();
-		for (final String address : emailAddresses) {
-			if (0 < sb.length()) {
-				sb.append(HelperString.COMMA);
-			}
-			sb.append(address);
-		}
-
-		final String addresses = sb.toString();
-
-		final String prefix = "mailto:"; //$NON-NLS-1$
-
-		final Matcher matcher = PATTERN.matcher(addresses);
-		final String temp = matcher.replaceAll("%20"); //$NON-NLS-1$
-
-		mail(new URI(prefix + temp));
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
+//	/**
+//	 * Opens an email with a given addresses with the default mail application.
+//	 *
+//	 * @param emailAddresses for the mail (e.g. "yourname@yourmail.com")
+//	 * @throws IOException
+//	 * @throws URISyntaxException
+//	 * @since 0.9.3
+//	 */
+//	public static void mail(final String... emailAddresses) throws IOException, URISyntaxException {
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(emailAddresses));
+//		if (!HelperArray.isValid(emailAddresses)) {
+//			throw new RuntimeExceptionIsNullOrEmpty("emailAddresses"); //$NON-NLS-1$
+//		}
+//
+//		final StringBuilder sb = new StringBuilder();
+//		for (final String address : emailAddresses) {
+//			if (0 < sb.length()) {
+//				sb.append(HelperString.COMMA);
+//			}
+//			sb.append(address);
+//		}
+//
+//		final String addresses = sb.toString();
+//
+//		final String prefix = "mailto:"; //$NON-NLS-1$
+//
+//		final Matcher matcher = PATTERN.matcher(addresses);
+//		final String temp = matcher.replaceAll("%20"); //$NON-NLS-1$
+//
+//		mail(new URI(prefix + temp));
+//
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+//	}
 
 	/*
 	 * Private methods
@@ -185,11 +192,21 @@ public abstract class LauncherMail {
 		for (final char c : input.toCharArray()) {
 			final int ci = 0xffff & c;
 			if (160 > ci) {
-				// nothing special only 7 Bit
+				// 7 Bit
 				sb.append(c);
 			} else {
-				// Not 7 Bit - replace thru #
-				sb.append('#');
+				// not 7 Bit - replace with url encoding 
+				try {
+					final String hex = EncoderHex.encode(String.valueOf(c).getBytes(Constants.ENCODING_UTF8));	
+					
+					sb.append('%');
+					sb.append(hex.substring(0, 2));
+					sb.append('%');
+					sb.append(hex.substring(2, 4));
+				} catch (UnsupportedEncodingException ex) {
+					// should never happen!
+					log.error("Encoding invalid", ex); //$NON-NLS-1$
+				}
 			}
 		}
 		final String result = sb.toString();
