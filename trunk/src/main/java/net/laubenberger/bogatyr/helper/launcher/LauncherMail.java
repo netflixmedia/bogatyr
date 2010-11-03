@@ -29,16 +29,13 @@ package net.laubenberger.bogatyr.helper.launcher;
 
 import java.awt.Desktop;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.net.URLEncoder;
 
 import net.laubenberger.bogatyr.helper.HelperArray;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperString;
-import net.laubenberger.bogatyr.helper.encoder.EncoderHex;
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
@@ -57,7 +54,7 @@ import org.slf4j.LoggerFactory;
 public abstract class LauncherMail {
 	private static final Logger log = LoggerFactory.getLogger(LauncherMail.class);
 
-	private static final Pattern PATTERN = Pattern.compile(" "); //$NON-NLS-1$
+	private static final String HEX_SPACE = "%20"; //$NON-NLS-1$
 	
 	/**
 	 * Opens the default mail application.
@@ -124,94 +121,22 @@ public abstract class LauncherMail {
 			if (0 < sb.length()) {
 				sb.append(HelperString.COMMA);
 			}
-			sb.append(address);
+			sb.append(URLEncoder.encode(address, Constants.ENCODING_UTF8).replace(HelperString.PLUS_SIGN, HEX_SPACE));
 		}
 		sb.append("?subject="); //$NON-NLS-1$
-		sb.append(getValidText(subject));
+		sb.append(URLEncoder.encode(subject, Constants.ENCODING_UTF8).replace(HelperString.PLUS_SIGN, HEX_SPACE));
 		
 		if (null != body) {
 			sb.append("&body="); //$NON-NLS-1$
-			sb.append(getValidText(body).replace(HelperString.NEW_LINE, "%0D%0A")); //$NON-NLS-1$
-//			sb.append(EncoderHtml.encode(body.replace(HelperString.NEW_LINE, "%0D%0A"))); //$NON-NLS-1$
+			sb.append(URLEncoder.encode(body, Constants.ENCODING_UTF8).replace(HelperString.PLUS_SIGN, HEX_SPACE));
 		}
 		
 		final String addresses = sb.toString();
 
 		final String prefix = "mailto:"; //$NON-NLS-1$
 
-		final Matcher matcher = PATTERN.matcher(addresses);
-		final String temp = matcher.replaceAll("%20"); //$NON-NLS-1$
-
-		mail(new URI(prefix + temp));
+		mail(new URI(prefix + addresses));
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
-//	/**
-//	 * Opens an email with a given addresses with the default mail application.
-//	 *
-//	 * @param emailAddresses for the mail (e.g. "yourname@yourmail.com")
-//	 * @throws IOException
-//	 * @throws URISyntaxException
-//	 * @since 0.9.3
-//	 */
-//	public static void mail(final String... emailAddresses) throws IOException, URISyntaxException {
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(emailAddresses));
-//		if (!HelperArray.isValid(emailAddresses)) {
-//			throw new RuntimeExceptionIsNullOrEmpty("emailAddresses"); //$NON-NLS-1$
-//		}
-//
-//		final StringBuilder sb = new StringBuilder();
-//		for (final String address : emailAddresses) {
-//			if (0 < sb.length()) {
-//				sb.append(HelperString.COMMA);
-//			}
-//			sb.append(address);
-//		}
-//
-//		final String addresses = sb.toString();
-//
-//		final String prefix = "mailto:"; //$NON-NLS-1$
-//
-//		final Matcher matcher = PATTERN.matcher(addresses);
-//		final String temp = matcher.replaceAll("%20"); //$NON-NLS-1$
-//
-//		mail(new URI(prefix + temp));
-//
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-//	}
-
-	/*
-	 * Private methods
-	 */
-
-	private static String getValidText(final String input) {
-		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(input));
-
-		final StringBuilder sb = new StringBuilder(input.length());
-
-		for (final char c : input.toCharArray()) {
-			final int ci = 0xffff & c;
-			if (160 > ci) {
-				// 7 Bit
-				sb.append(c);
-			} else {
-				// not 7 Bit - replace with url encoding 
-				try {
-					final String hex = EncoderHex.encode(String.valueOf(c).getBytes(Constants.ENCODING_UTF8));	
-					
-					sb.append('%');
-					sb.append(hex.substring(0, 2));
-					sb.append('%');
-					sb.append(hex.substring(2, 4));
-				} catch (UnsupportedEncodingException ex) {
-					// should never happen!
-					log.error("Encoding invalid", ex); //$NON-NLS-1$
-				}
-			}
-		}
-		final String result = sb.toString();
-
-		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit(result));
-		return result;
 	}
 }

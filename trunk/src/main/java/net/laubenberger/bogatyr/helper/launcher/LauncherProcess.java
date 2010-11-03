@@ -45,14 +45,14 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher creates a new process and reads standard output and standard error.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101103)
  * @since 0.2.0
  */
 public abstract class LauncherProcess {
 	private static final Logger log = LoggerFactory.getLogger(LauncherProcess.class);
 
 	/**
-	 * Creates a new process and reads the standard output and standard error.
+	 * Creates and starts a new process and reads the standard output and standard error.
 	 *
 	 * @param outputStream for the standard output of the process
 	 * @param errorStream  for the standard error output of the process
@@ -62,7 +62,7 @@ public abstract class LauncherProcess {
 	 * @see OutputStream
 	 * @since 0.2.0
 	 */
-	public static Process createProcess(final String[] commands, final OutputStream outputStream, final OutputStream errorStream) throws IOException {
+	public static Process createAndStartProcess(final String[] commands, final OutputStream outputStream, final OutputStream errorStream) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(commands, outputStream, errorStream));
 		if (null == outputStream) {
 			throw new RuntimeExceptionIsNull("outputStream"); //$NON-NLS-1$
@@ -70,8 +70,11 @@ public abstract class LauncherProcess {
 		if (null == errorStream) {
 			throw new RuntimeExceptionIsNull("errorStream"); //$NON-NLS-1$
 		}
-
-		final Process result = createProcess(commands);
+		if (!HelperArray.isValid(commands)) {
+			throw new RuntimeExceptionIsNullOrEmpty("commands"); //$NON-NLS-1$
+		}
+		
+		final Process result = createAndStartProcess(commands);
 
 		readStandardOutput(result, outputStream, errorStream);
 
@@ -80,21 +83,20 @@ public abstract class LauncherProcess {
 	}
 
 	/**
-	 * Creates a new process without reading the standard output and standard error ("fire and forget").
+	 * Creates and starts a new process without reading the standard output and standard error ("fire and forget").
 	 *
 	 * @param commands arguments to start the process
 	 * @return created process
 	 * @throws IOException
 	 * @since 0.2.0
 	 */
-	public static Process createProcess(final String... commands) throws IOException {
+	public static Process createAndStartProcess(final String... commands) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(commands));
 		if (!HelperArray.isValid(commands)) {
 			throw new RuntimeExceptionIsNullOrEmpty("commands"); //$NON-NLS-1$
 		}
 
 		final ProcessBuilder pb = new ProcessBuilder(commands);
-//		return Runtime.getRuntime().exec(command);
 		final Process result = pb.start();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
@@ -146,7 +148,6 @@ public abstract class LauncherProcess {
 			super();
 			is = source;
 			os = target;
-//			start();
 		}
 
 		@Override

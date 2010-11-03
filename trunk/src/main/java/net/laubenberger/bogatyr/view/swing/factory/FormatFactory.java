@@ -56,7 +56,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a format factory.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100525)
+ * @version 0.9.4 (20101103)
  * @since 0.9.0
  */
 public abstract class FormatFactory {
@@ -407,7 +407,7 @@ public abstract class FormatFactory {
 			{
 				setCommitsOnValidEdit(true);
 				setOverwriteMode(false);
-				matcher = regex.matcher(""); //$NON-NLS-1$
+				matcher = regex.matcher(HelperString.EMPTY_STRING);
 			}
 
 
