@@ -38,23 +38,23 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This is a helper class for compress operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.4 (20101103)
  * @since 0.3.0
  */
-public abstract class HelperCompress { //TODO implement GZip for streams
+public abstract class HelperCompress {
 	private static final Logger log = LoggerFactory.getLogger(HelperCompress.class);
 
 	/**
@@ -66,9 +66,17 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	 * @see File
 	 * @since 0.3.0
 	 */
-	public static void writeZip(final File file, final File... files) throws IOException {
+	public static void writeZip(final File file, final File... files) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, files));
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
+		if (!HelperArray.isValid(files)) {
+			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
+		}
+		
 		writeZip(file, files, Constants.DEFAULT_FILE_BUFFER_SIZE);
+		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
@@ -82,7 +90,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	 * @see File
 	 * @since 0.8.0
 	 */
-	public static void writeZip(final File file, final File[] files, final int bufferSize) throws IOException {
+	public static void writeZip(final File file, final File[] files, final int bufferSize) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, files, bufferSize));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
@@ -111,32 +119,6 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
-//	/**
-//     * Writes a compressed stream.
-//     * 
-//     * @param os OutputStream to compress
-//     * @return Compressed OutputStream
-//     * @throws java.io.IOException
-//     */	
-//	public static OutputStream writeStream(final OutputStream os) throws IOException {
-////		ZipOutputStream zos = null;
-////		
-////		try {
-////			// create a ZipOutputStream to zip the data to
-////			zos = new ZipOutputStream(new FileOutputStream(file));
-////
-////			for (File entry : listOfFiles) {
-////			addEntry(zos, entry);
-////			}
-////		} finally {
-////			if (zos != null) {
-////				//close the stream 
-////			    zos.close();
-////			} 
-////		}
-//		return null;
-//	}
-
 	/**
 	 * Extracts a ZIP {@link File} to a destination directory.
 	 *
@@ -146,9 +128,17 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	 * @see File
 	 * @since 0.3.0
 	 */
-	public static void extractZip(final ZipFile file, final File destinationDirectory) throws IOException {
+	public static void extractZip(final File file, final File destinationDirectory) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, destinationDirectory));
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
+		if (null == destinationDirectory) {
+			throw new RuntimeExceptionIsNull("destinationDirectory"); //$NON-NLS-1$
+		}
+		
 		extractZip(file, destinationDirectory, Constants.DEFAULT_FILE_BUFFER_SIZE);
+		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
@@ -158,11 +148,11 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	 * @param file					  to extract
 	 * @param destinationDirectory for the ZIP file
 	 * @param bufferSize			  in bytes
-	 * @throws IOException
+	 * @throws IOException 
 	 * @see File
 	 * @since 0.8.0
 	 */
-	public static void extractZip(final ZipFile file, final File destinationDirectory, final int bufferSize) throws IOException {
+	public static void extractZip(final File file, final File destinationDirectory, final int bufferSize) throws IOException  { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, destinationDirectory, bufferSize));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
@@ -174,50 +164,21 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 			throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
 		}
 
-		final Enumeration<? extends ZipEntry> zipEntryEnum = file.entries();
+		final ZipFile zf = new ZipFile(file);
+		
+		final Enumeration<? extends ZipEntry> zipEntryEnum = zf.entries();
 
-		while (zipEntryEnum.hasMoreElements()) {
-			final ZipEntry zipEntry = zipEntryEnum.nextElement();
-			extractEntry(file, zipEntry, destinationDirectory, bufferSize);
+		try {
+			while (zipEntryEnum.hasMoreElements()) {
+				final ZipEntry zipEntry = zipEntryEnum.nextElement();
+					extractEntry(zf, zipEntry, destinationDirectory, bufferSize);
+			}
+		} finally {
+			zf.close();
 		}
+		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
-
-//	/**
-//     * Read a compressed stream and returns it uncompressed.
-//     * 
-//     * @param is InputStream to uncompress
-//     * @return Uncompressed InutStream
-//     * @throws java.io.IOException
-//     */	
-//	public static InputStream readStream(final InputStream is) throws IOException { 
-////        Enumeration<? extends ZipEntry> zipEntryEnum = file.entries(); 
-//// 
-////        while (zipEntryEnum.hasMoreElements()) { 
-////          ZipEntry zipEntry = zipEntryEnum.nextElement(); 
-////          extractEntry(file, zipEntry, destinationDirectory); 
-////        }
-//		return null;
-//	} 
-
-//	public class LevelGZIPOutputStream extends GZIPOutputStream
-//	{
-//	/**
-//	 * Creates a new output stream with a default buffer size and
-//	 * sets the current compression level to the specified value.
-//	 *
-//	 * @param out the output stream.
-//	 * @param level the new compression level (0-9).
-//	 * @exception IOException If an I/O error has occurred.
-//	 * @exception IllegalArgumentException if the compression level is invalid.
-//	 */
-//	public LevelGZIPOutputStream( OutputStream out, int compressionLevel )
-//	    throws IOException
-//	{
-//	  super( out );
-//	  def.setLevel( compressionLevel );
-//	}
-//	}
 
 
 	/*
@@ -230,19 +191,21 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 		final byte[] buffer = new byte[bufferSize];
 
 		try {
-			bis = new BufferedInputStream(new FileInputStream(file));
-
 			// create a new zip entry
-			final ZipEntry entry = new ZipEntry(file.getPath());
-
+			final ZipEntry entry = new ZipEntry(file.getPath() + (file.isDirectory() ? "/" : HelperString.EMPTY_STRING)); //$NON-NLS-1$
+			
 			// place the zip entry in the ZipOutputStream object
 			zos.putNextEntry(entry);
 
-			int offset;
+			if(!file.isDirectory()) {
+				bis = new BufferedInputStream(new FileInputStream(file));
 
-			// now write the content of the file to the ZipOutputStream
-			while (-1 != (offset = bis.read(buffer))) {
-				zos.write(buffer, 0, offset);
+				int offset;
+	
+				// now write the content of the file to the ZipOutputStream
+				while (-1 != (offset = bis.read(buffer))) {
+					zos.write(buffer, 0, offset);
+				}
 			}
 		} finally {
 			if (null != bis) {
@@ -255,7 +218,7 @@ public abstract class HelperCompress { //TODO implement GZip for streams
 	private static void extractEntry(final ZipFile zipFile, final ZipEntry entry, final File destDir, final int bufferSize) throws IOException {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(zipFile, entry, destDir, bufferSize));
 		final File file = new File(destDir, entry.getName());
-
+		
 		if (entry.isDirectory()) {
 			file.mkdirs();
 		} else {

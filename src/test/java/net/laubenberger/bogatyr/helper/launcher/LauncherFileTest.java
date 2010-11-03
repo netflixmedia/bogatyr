@@ -32,6 +32,7 @@ import static org.junit.Assert.fail;
 import java.io.InputStream;
 
 import net.laubenberger.bogatyr.AllBogatyrTests;
+import net.laubenberger.bogatyr.HelperResource;
 import net.laubenberger.bogatyr.helper.HelperString;
 
 import org.junit.Test;
@@ -44,7 +45,7 @@ import org.junit.Test;
  */
 public class LauncherFileTest {
 	private static final String EXTENSION = ".txt"; //$NON-NLS-1$
-	private final InputStream is = getClass().getResourceAsStream("/net/laubenberger/bogatyr/test.txt"); //$NON-NLS-1$
+	private final InputStream is = getClass().getResourceAsStream(HelperResource.RES_FILE_TXT);
 	
 //	@BeforeClass
 //	public static void init() {

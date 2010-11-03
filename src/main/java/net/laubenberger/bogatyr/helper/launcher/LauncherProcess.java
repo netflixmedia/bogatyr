@@ -64,14 +64,14 @@ public abstract class LauncherProcess {
 	 */
 	public static Process createAndStartProcess(final String[] commands, final OutputStream outputStream, final OutputStream errorStream) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(commands, outputStream, errorStream));
+		if (!HelperArray.isValid(commands)) {
+			throw new RuntimeExceptionIsNullOrEmpty("commands"); //$NON-NLS-1$
+		}
 		if (null == outputStream) {
 			throw new RuntimeExceptionIsNull("outputStream"); //$NON-NLS-1$
 		}
 		if (null == errorStream) {
 			throw new RuntimeExceptionIsNull("errorStream"); //$NON-NLS-1$
-		}
-		if (!HelperArray.isValid(commands)) {
-			throw new RuntimeExceptionIsNullOrEmpty("commands"); //$NON-NLS-1$
 		}
 		
 		final Process result = createAndStartProcess(commands);

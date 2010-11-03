@@ -33,36 +33,15 @@ import java.util.Date;
 import net.laubenberger.bogatyr.helper.HelperArrayTest;
 import net.laubenberger.bogatyr.helper.HelperCollection;
 import net.laubenberger.bogatyr.helper.HelperCollectionTest;
-import net.laubenberger.bogatyr.helper.HelperCryptoTest;
-import net.laubenberger.bogatyr.helper.HelperEnvironmentTest;
-import net.laubenberger.bogatyr.helper.HelperGraphicTest;
-import net.laubenberger.bogatyr.helper.HelperIOTest;
-import net.laubenberger.bogatyr.helper.HelperImageTest;
-import net.laubenberger.bogatyr.helper.HelperMapTest;
-import net.laubenberger.bogatyr.helper.HelperMathTest;
-import net.laubenberger.bogatyr.helper.HelperNetTest;
-import net.laubenberger.bogatyr.helper.HelperObjectTest;
-import net.laubenberger.bogatyr.helper.HelperPdfTest;
-import net.laubenberger.bogatyr.helper.HelperSoundTest;
-import net.laubenberger.bogatyr.helper.HelperStringTest;
-import net.laubenberger.bogatyr.helper.HelperTimeTest;
-import net.laubenberger.bogatyr.helper.HelperXmlTest;
+import net.laubenberger.bogatyr.helper.HelperCompressTest;
 import net.laubenberger.bogatyr.helper.encoder.EncoderBase64Test;
 import net.laubenberger.bogatyr.helper.encoder.EncoderHexTest;
 import net.laubenberger.bogatyr.helper.encoder.EncoderHtmlTest;
 import net.laubenberger.bogatyr.helper.launcher.LauncherBrowserTest;
 import net.laubenberger.bogatyr.helper.launcher.LauncherFileTest;
 import net.laubenberger.bogatyr.helper.launcher.LauncherMailTest;
+import net.laubenberger.bogatyr.helper.launcher.LauncherProcessTest;
 import net.laubenberger.bogatyr.misc.Constants;
-import net.laubenberger.bogatyr.model.context.ContextTest;
-import net.laubenberger.bogatyr.model.unit.UnitAreaTest;
-import net.laubenberger.bogatyr.model.unit.UnitLengthTest;
-import net.laubenberger.bogatyr.model.unit.UnitVolumeTest;
-import net.laubenberger.bogatyr.model.unit.UnitWeightTest;
-import net.laubenberger.bogatyr.service.crypto.CertificateProviderTest;
-import net.laubenberger.bogatyr.service.crypto.CryptoAsymmetricTest;
-import net.laubenberger.bogatyr.service.crypto.CryptoSymmetricTest;
-import net.laubenberger.bogatyr.service.crypto.ScramblerTest;
 import net.laubenberger.bogatyr.view.swing.factory.FormatFactory;
 
 import org.apache.log4j.PropertyConfigurator;
@@ -71,7 +50,7 @@ import org.junit.runner.Result;
 
 
 /**
- * Junit test suite
+ * JUnit test suite
  *
  * @author Stefan Laubenberger
  * @version 20101103
@@ -123,33 +102,35 @@ public class AllBogatyrTests implements Runnable {
 				LauncherBrowserTest.class,
 				LauncherFileTest.class,
 				LauncherMailTest.class,
-				ContextTest.class,
-				CertificateProviderTest.class,
-				CryptoAsymmetricTest.class,
-				CryptoSymmetricTest.class,
-				ScramblerTest.class,
-//				PaginatorTest.class,
-//				PrinterTest.class,
-				UnitAreaTest.class,
-				UnitLengthTest.class,
-				UnitVolumeTest.class,
-				UnitWeightTest.class,
+				LauncherProcessTest.class,
 				HelperArrayTest.class,
 				HelperCollectionTest.class,
-				HelperCryptoTest.class,
-				HelperEnvironmentTest.class,
-				HelperGraphicTest.class,
-				HelperImageTest.class,
-				HelperIOTest.class,
-				HelperMapTest.class,
-				HelperMathTest.class,
-				HelperNetTest.class,
-				HelperObjectTest.class,
-				HelperPdfTest.class,
-				HelperSoundTest.class,
-				HelperStringTest.class,
-				HelperTimeTest.class,
-				HelperXmlTest.class
+				HelperCompressTest.class
+//				HelperCryptoTest.class,
+//				HelperEnvironmentTest.class,
+//				HelperGraphicTest.class,
+//				HelperImageTest.class,
+//				HelperIOTest.class,
+//				HelperMapTest.class,
+//				HelperMathTest.class,
+//				HelperNetTest.class,
+//				HelperObjectTest.class,
+//				HelperPdfTest.class,
+//				HelperSoundTest.class,
+//				HelperStringTest.class,
+//				HelperTimeTest.class,
+//				HelperXmlTest.class,
+//				ContextTest.class,
+//				CertificateProviderTest.class,
+//				CryptoAsymmetricTest.class,
+//				CryptoSymmetricTest.class,
+//				ScramblerTest.class,
+////				PaginatorTest.class,
+////				PrinterTest.class,
+//				UnitAreaTest.class,
+//				UnitLengthTest.class,
+//				UnitVolumeTest.class,
+//				UnitWeightTest.class
 		);
 
 		System.out.println("** Test run completed **"); //$NON-NLS-1$

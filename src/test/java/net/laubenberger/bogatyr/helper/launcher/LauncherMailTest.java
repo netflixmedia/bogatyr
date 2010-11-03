@@ -100,7 +100,7 @@ public class LauncherMailTest {
 		try {
 			LauncherMail
 					.mail(
-							HelperString.EMPTY_STRING, "This is a test:" + HelperString.NEW_LINE + AllBogatyrTests.DATA  + HelperString.NEW_LINE + "Yeah, all lines are here! :-)", "yourname@oäöü.com", "anothername@anotherMail.com"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+							HelperString.EMPTY_STRING, "This is a test:" + HelperString.NEW_LINE + AllBogatyrTests.DATA  + HelperString.NEW_LINE + "Yeah, all lines are here! :-)", "yourname@oäöü.com", "anothername@anotherMail.com"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			fail("subject is empty"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			// nothing to do

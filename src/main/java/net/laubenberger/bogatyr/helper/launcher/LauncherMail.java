@@ -82,15 +82,16 @@ public abstract class LauncherMail {
 	 */
 	public static void mail(final URI uri) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(uri));
-		if (Desktop.isDesktopSupported()) {
-			if (null == uri) {
-				throw new RuntimeExceptionIsNull("uri"); //$NON-NLS-1$
-			}
+		if (null == uri) {
+			throw new RuntimeExceptionIsNull("uri"); //$NON-NLS-1$
+		}
 
+		if (Desktop.isDesktopSupported()) {
 			Desktop.getDesktop().mail(uri);
 		} else {
 			throw new RuntimeException("Mail application not supported by your machine!"); //$NON-NLS-1$
 		}
+		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 

@@ -45,10 +45,10 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100526)
+ * @version 0.9.4 (20101103)
  * @since 0.7.0
  */
-public abstract class HelperArray {
+public abstract class HelperArray { //TODO implement all methods for all primitive types
 	private static final Logger log = LoggerFactory.getLogger(HelperArray.class);
 
 	public static final Class<?>[] EMPTY_ARRAY_CLASS = new Class[0];
@@ -176,7 +176,7 @@ public abstract class HelperArray {
 	 * @return concatenated result array
 	 * @since 0.9.1
 	 */
-	public static char[] concatenate(final char[]... arrays) {
+	public static char[] concatenate(final char[]... arrays) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arrays));
 		if (!isValid(arrays)) {
 			throw new RuntimeExceptionIsNullOrEmpty("arrays"); //$NON-NLS-1$
@@ -229,14 +229,11 @@ public abstract class HelperArray {
 	 */
 	public static <T> boolean contains(final T[] array, final T object) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(array, object));
-
-		boolean result = false;
-
-		for (final T objTemp : array) {
-			if (HelperObject.isEquals(object, objTemp)) {
-				result = true;
-			}
+		if (null == array) {
+			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
 		}
+		
+		boolean result = Arrays.asList(array).contains(object);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -307,20 +304,20 @@ public abstract class HelperArray {
 	 */
 	public static String dump(final char[] array) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(array));
-
-		String result = null;
-		if (null != array) {
-			final StringBuilder sb = new StringBuilder();
-	
-			for (final char element : array) {
-				if (0 < sb.length()) {
-					sb.append(HelperString.NEW_LINE);
-				}
-				sb.append(element);
-			}
-	
-			result = sb.toString();
+		if (null == array) {
+			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
 		}
+		
+		final StringBuilder sb = new StringBuilder();
+
+		for (final char element : array) {
+			if (0 < sb.length()) {
+				sb.append(HelperString.NEW_LINE);
+			}
+			sb.append(element);
+		}
+
+		String result = sb.toString();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -335,9 +332,37 @@ public abstract class HelperArray {
 	 */
 	public static <E> E[] getArray(final E... elements) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(elements));
-		if (!isValid(elements)) {
-			throw new RuntimeExceptionIsNullOrEmpty("elements"); //$NON-NLS-1$
-		}
+//		if (!isValid(elements)) {
+//			throw new RuntimeExceptionIsNullOrEmpty("elements"); //$NON-NLS-1$
+//		}
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(elements));
+		return elements;
+	}
+	
+	/**
+	 * Returns an byte-array with the given elements.
+	 *
+	 * @param elements for the array
+	 * @return array with the given elements
+	 * @since 0.9.4
+	 */
+	public static byte[] getArray(final byte... elements) { //$JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(elements));
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(elements));
+		return elements;
+	}
+	
+	/**
+	 * Returns an char-array with the given elements.
+	 *
+	 * @param elements for the array
+	 * @return array with the given elements
+	 * @since 0.9.4
+	 */
+	public static char[] getArray(final char... elements) { //$JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(elements));
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(elements));
 		return elements;
