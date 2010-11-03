@@ -36,10 +36,10 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
 /**
- * Encodes and decodes data to HTML-format.
+ * Encodes data to clean HTML-format.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100618)
+ * @version 0.9.4 (20101103)
  * @since 0.9.1
  */
 public abstract class EncoderHtml {
@@ -52,7 +52,7 @@ public abstract class EncoderHtml {
 	 * @return encoded HTML {@link String}
 	 * @since 0.9.1
 	 */
-	public static String encode(final String input) {
+	public static String encode(final String input) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
@@ -85,10 +85,10 @@ public abstract class EncoderHtml {
 				} else {
 					final int ci = 0xffff & c;
 					if (160 > ci) {
-						// nothing special only 7 Bit
+						// 7 Bit
 						sb.append(c);
 					} else {
-						// Not 7 Bit use the unicode system
+						// not 7 Bit - replace with the unicode system
 						sb.append("&#"); //$NON-NLS-1$
 						sb.append(Integer.toString(ci));
 						sb.append(';');

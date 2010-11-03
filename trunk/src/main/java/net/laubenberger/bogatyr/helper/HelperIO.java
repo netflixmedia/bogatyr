@@ -69,7 +69,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101102)
+ * @version 0.9.4 (20101103)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -408,7 +408,7 @@ public abstract class HelperIO {
 	 * @see File
 	 * @since 0.9.1
 	 */
-	public static void writeFile(final File file, final byte[] data) throws IOException {
+	public static void writeFile(final File file, final byte... data) throws IOException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, data));
 		writeFile(file, data, false);
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
@@ -597,7 +597,7 @@ public abstract class HelperIO {
 	 * @see OutputStream
 	 * @since 0.1.0
 	 */
-	public static void writeStream(final OutputStream os, final byte[] data) throws IOException {
+	public static void writeStream(final OutputStream os, final byte... data) throws IOException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(os, data));
 		if (null == os) {
 			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$

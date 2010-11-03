@@ -48,7 +48,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObjectAbstract;
  * This is a skeleton for server threads.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.4 (20101103)
  * @since 0.7.0
  */
 public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implements ServerThread {
@@ -195,7 +195,7 @@ public abstract class ServerThreadAbstract extends ExtendedObjectAbstract implem
 	}
 
 	@Override
-	public void writeStream(final byte[] data) throws IOException {
+	public void writeStream(final byte... data) throws IOException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(data));
 		
 		HelperIO.writeStream(socket.getOutputStream(), HelperArray.concatenate(data, new byte[]{(byte) -1}));

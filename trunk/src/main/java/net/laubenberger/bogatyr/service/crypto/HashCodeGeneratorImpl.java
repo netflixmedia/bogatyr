@@ -60,7 +60,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101103)
  * @since 0.9.0
  */
 public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
@@ -88,7 +88,7 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 	 */
 
 	@Override
-	public byte[] getHash(final byte[] input) {
+	public byte[] getHash(final byte... input) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (!HelperArray.isValid(input)) {
 			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
@@ -210,7 +210,7 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 	}
 
 	@Override
-	public byte[] getFastHash(final byte[] input) {
+	public byte[] getFastHash(final byte... input) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 
 		final byte[] result = getFastHash(input, DEFAULT_PARTS, DEFAULT_PARTSIZE);

@@ -47,7 +47,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher opens, edits and prints files with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101103)
  * @since 0.7.0
  */
 public abstract class LauncherFile {
@@ -73,7 +73,7 @@ public abstract class LauncherFile {
 	 * @throws IOException
 	 * @since 0.7.0
 	 */
-	public static void open(final byte[] data, final String extension) throws IOException {
+	public static void open(final byte[] data, final String extension) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(data, extension));
 		if (null == data) {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
@@ -140,7 +140,7 @@ public abstract class LauncherFile {
 	 * @throws IOException
 	 * @since 0.7.0
 	 */
-	public static void edit(final byte[] data, final String extension) throws IOException {
+	public static void edit(final byte[] data, final String extension) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(data, extension));
 		if (null == data) {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
@@ -207,7 +207,7 @@ public abstract class LauncherFile {
 	 * @throws IOException
 	 * @since 0.7.0
 	 */
-	public static void print(final byte[] data, final String extension) throws IOException {
+	public static void print(final byte[] data, final String extension) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(data, extension));
 		if (null == data) {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$

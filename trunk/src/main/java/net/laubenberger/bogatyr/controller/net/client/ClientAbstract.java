@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100611)
+ * @version 0.9.4 (20101103)
  * @since 0.7.0
  */
 public abstract class ClientAbstract extends ExtendedObjectAbstract implements Client {
@@ -290,7 +290,7 @@ public abstract class ClientAbstract extends ExtendedObjectAbstract implements C
 	}
 
 	@Override
-	public void writeStream(final byte[] data) throws IOException {
+	public void writeStream(final byte... data) throws IOException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(data));
 		
 		HelperIO.writeStream(socket.getOutputStream(), HelperArray.concatenate(data, new byte[]{(byte) -1}));

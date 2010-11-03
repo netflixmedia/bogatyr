@@ -79,7 +79,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101103)
  * @since 0.1.0
  */
 public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmetric {
@@ -168,7 +168,7 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 	}
 
 	@Override
-	public SecretKey generateKey(final byte[] password) {
+	public SecretKey generateKey(final byte... password) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(password));
 
 		final SecretKey result = generateKey(password, algorithm.getDefaultKeysize());

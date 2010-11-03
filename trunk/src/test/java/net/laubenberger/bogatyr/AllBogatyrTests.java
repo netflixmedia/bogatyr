@@ -49,6 +49,10 @@ import net.laubenberger.bogatyr.helper.HelperTimeTest;
 import net.laubenberger.bogatyr.helper.HelperXmlTest;
 import net.laubenberger.bogatyr.helper.encoder.EncoderBase64Test;
 import net.laubenberger.bogatyr.helper.encoder.EncoderHexTest;
+import net.laubenberger.bogatyr.helper.encoder.EncoderHtmlTest;
+import net.laubenberger.bogatyr.helper.launcher.LauncherBrowserTest;
+import net.laubenberger.bogatyr.helper.launcher.LauncherFileTest;
+import net.laubenberger.bogatyr.helper.launcher.LauncherMailTest;
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.model.context.ContextTest;
 import net.laubenberger.bogatyr.model.unit.UnitAreaTest;
@@ -70,13 +74,13 @@ import org.junit.runner.Result;
  * Junit test suite
  *
  * @author Stefan Laubenberger
- * @version 20100504
+ * @version 20101103
  */
 public class AllBogatyrTests implements Runnable {
-	public static final String DATA = "!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ" + //$NON-NLS-1$
-			"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ" + //$NON-NLS-1$
-			"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ" + //$NON-NLS-1$
-			"!#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ"; //$NON-NLS-1$
+	public static final String DATA = "!$'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ" + //$NON-NLS-1$
+			"!$'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ" + //$NON-NLS-1$
+			"!$'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ" + //$NON-NLS-1$
+			"!$'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ"; //$NON-NLS-1$
 
 	public static final int ITERATIONS = 1;
 	public static final int THREADS = 1;
@@ -113,16 +117,17 @@ public class AllBogatyrTests implements Runnable {
 	@Override
 	public void run() {
 		final Result result = JUnitCore.runClasses(
+				EncoderBase64Test.class,
+				EncoderHexTest.class,
+				EncoderHtmlTest.class,
+				LauncherBrowserTest.class,
+				LauncherFileTest.class,
+				LauncherMailTest.class,
 				ContextTest.class,
 				CertificateProviderTest.class,
 				CryptoAsymmetricTest.class,
 				CryptoSymmetricTest.class,
 				ScramblerTest.class,
-				EncoderBase64Test.class,
-				EncoderHexTest.class,
-//				LauncherBrowserTest.class,
-//				LauncherFileTest.class,
-//				LauncherMailTest.class,
 //				PaginatorTest.class,
 //				PrinterTest.class,
 				UnitAreaTest.class,

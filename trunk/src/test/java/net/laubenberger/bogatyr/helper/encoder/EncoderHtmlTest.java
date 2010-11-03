@@ -27,55 +27,24 @@
 
 package net.laubenberger.bogatyr.helper.encoder;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import java.util.Arrays;
-
-import net.laubenberger.bogatyr.AllBogatyrTests;
-import net.laubenberger.bogatyr.helper.HelperArray;
 
 import org.junit.Test;
 
 
 /**
- * JUnit test for {@link EncoderHex}
+ * JUnit test for {@link EncoderHtml}
  *
  * @author Stefan Laubenberger
  * @version 20101103
  */
-public class EncoderHexTest {
-	@Test
-	public void testPassEncodeAndDecode() {
-		// Test with empty byte-array data
-		String encoded = EncoderHex.encode(HelperArray.EMPTY_ARRAY_BYTE);
-		byte[] decoded = EncoderHex.decode(encoded);
-		
-		assertTrue(Arrays.equals(HelperArray.EMPTY_ARRAY_BYTE, decoded));
-
-		// Test with real byte-array data
-		encoded = EncoderHex.encode(AllBogatyrTests.DATA.getBytes());
-		decoded = EncoderHex.decode(encoded);
-
-		assertTrue(Arrays.equals(AllBogatyrTests.DATA.getBytes(), decoded));
-	}
+public class EncoderHtmlTest {
+	//TODO implement test for encode, but how?
 	
 	@Test
 	public void testFailEncode() {
 		try {
-			EncoderHex.encode(null);
-			fail("input is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	public void testFailDecode() {
-		try {
-			EncoderHex.decode(null);
+			EncoderHtml.encode(null);
 			fail("input is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

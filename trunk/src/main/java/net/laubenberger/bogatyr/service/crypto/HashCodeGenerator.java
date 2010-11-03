@@ -38,7 +38,7 @@ import net.laubenberger.bogatyr.service.Service;
  * This is an interface for hash code generation.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.4 (20101103)
  * @since 0.8.0
  */
 public interface HashCodeGenerator extends Service {
@@ -50,7 +50,7 @@ public interface HashCodeGenerator extends Service {
 	 * @return generated hash code
 	 * @since 0.8.0
 	 */
-	byte[] getHash(byte[] input);
+	byte[] getHash(byte... input);
 
 	/**
 	 * Generates a hash code for an {@link InputStream}.
@@ -123,7 +123,7 @@ public interface HashCodeGenerator extends Service {
 	 * @return generated hash code
 	 * @since 0.9.0
 	 */
-	byte[] getFastHash(byte[] input);
+	byte[] getFastHash(byte... input);
 
 	/**
 	 * Generates a fast hash code for an input {@link File}.
