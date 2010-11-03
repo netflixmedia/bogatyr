@@ -99,7 +99,10 @@ public abstract class EncoderBase64 {
 	 */
 	public static String encode(final String input) throws UnsupportedEncodingException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
-
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
+		
 		final String result = encode(input, Constants.ENCODING_DEFAULT);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));

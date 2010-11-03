@@ -70,7 +70,7 @@ public class LauncherProcessTest {
 
 		if (HelperEnvironment.getPlatform() == Platform.WINDOWS) {
 			try {
-				LauncherProcess.createAndStartProcess(new String[] { "dir" }, osOutput, osError);
+				LauncherProcess.createAndStartProcess(new String[] { "dir" }, osOutput, osError); //$NON-NLS-1$
 			} catch (IOException ex) {
 				fail(ex.getMessage());
 			}
@@ -80,7 +80,7 @@ public class LauncherProcessTest {
 			assertTrue(fileOutput.length() > 0);
 
 			try {
-				LauncherProcess.createAndStartProcess(new String[] { "dir", "-ä" }, osOutput, osError);
+				LauncherProcess.createAndStartProcess(new String[] { "dir", "-ä" }, osOutput, osError); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (IOException ex) {
 				fail(ex.getMessage());
 			}
@@ -90,7 +90,7 @@ public class LauncherProcessTest {
 			assertTrue(fileError.length() > 0);
 		} else {
 			try {
-				LauncherProcess.createAndStartProcess(new String[] { "ls", "-l" }, osOutput, osError);
+				LauncherProcess.createAndStartProcess(new String[] { "ls", "-l" }, osOutput, osError); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (IOException ex) {
 				fail(ex.getMessage());
 			}
@@ -100,7 +100,7 @@ public class LauncherProcessTest {
 			assertTrue(fileOutput.length() > 0);
 
 			try {
-				LauncherProcess.createAndStartProcess(new String[] { "ls", "-ä" }, osOutput, osError);
+				LauncherProcess.createAndStartProcess(new String[] { "ls", "-ä" }, osOutput, osError); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (IOException ex) {
 				fail(ex.getMessage());
 			}
@@ -150,7 +150,7 @@ public class LauncherProcessTest {
 		}
 		
 		try {
-			LauncherProcess.createAndStartProcess(new String[]{"ls"}, null, osError);
+			LauncherProcess.createAndStartProcess(new String[]{"ls"}, null, osError); //$NON-NLS-1$
 			fail("outputStream is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			// nothing to do
@@ -159,7 +159,7 @@ public class LauncherProcessTest {
 		}
 		
 		try {
-			LauncherProcess.createAndStartProcess(new String[]{"ls"}, osOutput, null);
+			LauncherProcess.createAndStartProcess(new String[]{"ls"}, osOutput, null); //$NON-NLS-1$
 			fail("errorStream is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			// nothing to do

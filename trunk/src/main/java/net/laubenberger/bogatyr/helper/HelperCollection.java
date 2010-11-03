@@ -40,34 +40,53 @@ import org.slf4j.LoggerFactory;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
-
 /**
  * This is a helper class for collections.
- *
+ * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100519)
+ * @version 0.9.4 (20101103)
  * @since 0.7.0
  */
 public abstract class HelperCollection {
 	private static final Logger log = LoggerFactory.getLogger(HelperCollection.class);
 
 	/**
+	 * Checks if a {@link Collection} is valid.
+	 * 
+	 * @param collection
+	 *           to check
+	 * @return true/false
+	 * @see Collection
+	 * @since 0.7.0
+	 */
+	public static boolean isValid(final Collection<?> collection) { // $JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(collection));
+
+		final boolean result = !(null == collection || collection.isEmpty());
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+
+	/**
 	 * Returns a array of the given {@link Collection}.
-	 *
-	 * @param collection for the array
+	 * 
+	 * @param collection
+	 *           for the array
 	 * @return array with the collection content
 	 * @see Collection
 	 * @since 0.9.0
 	 */
 	@SuppressWarnings("unchecked")
-	public static <E> E[] toArray(final Collection<E> collection) { //$JUnit$
+	public static <E> E[] toArray(final Collection<E> collection) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(collection));
 		if (!isValid(collection)) {
 			throw new RuntimeExceptionIsNullOrEmpty("collection"); //$NON-NLS-1$
 		}
 
-		final E[] result = collection.toArray((E[]) Array.newInstance(collection.iterator().next().getClass(), collection.size()));
+		final E[] result = collection.toArray((E[]) Array.newInstance(collection.iterator().next().getClass(), collection
+				.size()));
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -75,16 +94,17 @@ public abstract class HelperCollection {
 
 	/**
 	 * Returns a {@link List} with the given elements.
-	 *
-	 * @param elements for the {@link List}
+	 * 
+	 * @param elements
+	 *           for the {@link List}
 	 * @return {@link List} with the given elements
 	 * @see List
 	 * @since 0.9.0
 	 */
-	public static <E> List<E> getList(final E... elements) { //$JUnit$
+	public static <E> List<E> getList(final E... elements) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(elements));
-		if (!HelperArray.isValid(elements)) {
-			throw new RuntimeExceptionIsNullOrEmpty("elements"); //$NON-NLS-1$
+		if (null == elements) {
+			throw new RuntimeExceptionIsNull("elements"); //$NON-NLS-1$
 		}
 
 		final List<E> result = Arrays.asList(elements);
@@ -95,16 +115,17 @@ public abstract class HelperCollection {
 
 	/**
 	 * Returns a {@link Set} with the given elements.
-	 *
-	 * @param elements for the {@link Set}
+	 * 
+	 * @param elements
+	 *           for the {@link Set}
 	 * @return {@link Set} with the given elements
 	 * @see Set
 	 * @since 0.9.0
 	 */
-	public static <E> Set<E> getSet(final E... elements) { //$JUnit$
+	public static <E> Set<E> getSet(final E... elements) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(elements));
-		if (!HelperArray.isValid(elements)) {
-			throw new RuntimeExceptionIsNullOrEmpty("elements"); //$NON-NLS-1$
+		if (null == elements) {
+			throw new RuntimeExceptionIsNull("elements"); //$NON-NLS-1$
 		}
 
 		final Set<E> result = new HashSet<E>(elements.length);
@@ -116,31 +137,15 @@ public abstract class HelperCollection {
 	}
 
 	/**
-	 * Checks if a {@link Collection} is valid.
-	 *
-	 * @param collection to check
-	 * @return true/false
-	 * @see Collection
-	 * @since 0.7.0
-	 */
-	public static boolean isValid(final Collection<?> collection) { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(collection));
-
-		final boolean result = !(null == collection || collection.isEmpty());
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	/**
 	 * Removes duplicate objects from {@link Collection}.
-	 *
-	 * @param collection containing duplicate objects
+	 * 
+	 * @param collection
+	 *           containing duplicate objects
 	 * @return {@link Collection} without duplicates
 	 * @see Collection
 	 * @since 0.7.0
 	 */
-	public static <E> Collection<E> removeDuplicates(final Collection<E> collection) { //$JUnit$
+	public static <E> Collection<E> removeDuplicates(final Collection<E> collection) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(collection));
 		if (null == collection) {
 			throw new RuntimeExceptionIsNull("collection"); //$NON-NLS-1$
@@ -154,28 +159,29 @@ public abstract class HelperCollection {
 
 	/**
 	 * Dump an {@link Iterable}.
-	 *
-	 * @param iterable to dump
+	 * 
+	 * @param iterable
+	 *           to dump
 	 * @return dump string
 	 * @see Iterable
 	 * @since 0.7.0
 	 */
-	public static String dump(final Iterable<?> iterable) { //$JUnit$
+	public static String dump(final Iterable<?> iterable) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(iterable));
-
-		String result = null;
-		if (null != iterable) {
-			final StringBuilder sb = new StringBuilder();
-	
-			for (final Object element : iterable) {
-				if (0 < sb.length()) {
-					sb.append(HelperString.NEW_LINE);
-				}
-				sb.append(element);
-			}
-	
-			result = sb.toString();
+		if (null == iterable) {
+			throw new RuntimeExceptionIsNull("iterable"); //$NON-NLS-1$
 		}
+
+		final StringBuilder sb = new StringBuilder();
+
+		for (final Object element : iterable) {
+			if (0 < sb.length()) {
+				sb.append(HelperString.NEW_LINE);
+			}
+			sb.append(element);
+		}
+
+		final String result = sb.toString();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

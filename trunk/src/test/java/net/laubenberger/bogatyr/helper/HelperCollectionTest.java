@@ -43,10 +43,10 @@ import net.laubenberger.bogatyr.helper.HelperCollection;
 
 
 /**
- * Junit test
+ * JUnit test for {@link HelperCollection}
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20101103
  */
 public class HelperCollectionTest {
 	@Test
@@ -56,26 +56,89 @@ public class HelperCollectionTest {
 		assertFalse(HelperCollection.isValid(list));
 		list.add("Hi"); //$NON-NLS-1$
 		assertTrue(HelperCollection.isValid(list));
+
+		assertFalse(HelperCollection.isValid(null));
 	}
 
+	@Test
+	public void testToArray() {
+		final String[] array = HelperCollection.toArray(HelperCollection.getList("A", "B", "C")); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+
+		assertTrue(Arrays.equals(new String[]{"A", "B", "C"}, array)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+
+		try {
+			HelperCollection.toArray(null);
+			fail("collection is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperCollection.toArray(new ArrayList<String>());
+			fail("collection is empty"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetList() {
+		final Collection<String> list = HelperCollection.getList("A", "B", "C"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+
+		assertEquals(3, list.size());
+		
+		assertEquals(0, HelperCollection.getList(HelperArray.EMPTY_ARRAY_STRING).size());
+		
+		try {
+			HelperCollection.getList(null);
+			fail("elements is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+
+	@Test
+	public void testGetSet() {
+		final Collection<String> list = HelperCollection.getSet("A", "A", "A", "B", "B", "C"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+
+		assertEquals(3, list.size());
+		
+		assertEquals(0, HelperCollection.getSet(HelperArray.EMPTY_ARRAY_STRING).size());
+		
+		try {
+			HelperCollection.getSet(null);
+			fail("elements is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
 	@Test
 	public void testRemoveDuplicates() {
 		Collection<String> list = new ArrayList<String>();
 
 		assertEquals(0, HelperCollection.removeDuplicates(list).size());
 
-		list = HelperCollection.getList("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		list = HelperCollection.getList("A", "A", "A", "B", "B", "C"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
 
-		assertEquals(1, HelperCollection.removeDuplicates(list).size());
+		assertEquals(3, HelperCollection.removeDuplicates(list).size());
 
-//		try {
-//			HelperCollection.removeDuplicates(null);
-//			fail("collection is null!"); //$NON-NLS-1$
-//		} catch (IllegalArgumentException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
+		try {
+			HelperCollection.removeDuplicates(null);
+			fail("collection is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
@@ -84,47 +147,9 @@ public class HelperCollectionTest {
 
 		assertNotNull(HelperCollection.dump(list));
 
-//		try {
-//			HelperCollection.dump(null);
-//			fail("iterable is null!"); //$NON-NLS-1$
-//		} catch (IllegalArgumentException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
-	}
-
-	@Test
-	public void testGetList() {
-//		Collection<String> list = HelperCollection.getList(null);
-//
-//		assertEquals(0, list.size());
-
-		final Collection<String> list = HelperCollection.getList("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
-
-		assertEquals(3, list.size());
-	}
-
-	@Test
-	public void testGetSet() {
-//		Collection<String> list = HelperCollection.getSet(null);
-//		assertEquals(0, list.size());
-
-		final Collection<String> list = HelperCollection.getSet("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
-
-		assertEquals(1, list.size());
-	}
-
-
-	@Test
-	public void testToArray() {
-		final String[] array = HelperCollection.toArray(HelperCollection.getList("A", "A", "A")); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
-
-		assertTrue(Arrays.equals(new String[]{"A", "A", "A"}, array)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-
 		try {
-			HelperCollection.toArray(null);
-			fail("collection is null!"); //$NON-NLS-1$
+			HelperCollection.dump(null);
+			fail("iterable is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {

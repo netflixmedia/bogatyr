@@ -97,15 +97,16 @@ public abstract class LauncherFile {
 	 */
 	public static void open(final File file) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
-		if (Desktop.isDesktopSupported()) {
-			if (null == file) {
-				throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
-			}
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
 
+		if (Desktop.isDesktopSupported()) {
 			Desktop.getDesktop().open(file);
 		} else {
 			throw new RuntimeException("Default system viewer application not supported by your machine!"); //$NON-NLS-1$
 		}
+	
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
@@ -164,11 +165,11 @@ public abstract class LauncherFile {
 	 */
 	public static void edit(final File file) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
-		if (Desktop.isDesktopSupported()) {
-			if (null == file) {
-				throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
-			}
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
 
+		if (Desktop.isDesktopSupported()) {
 			Desktop.getDesktop().edit(file);
 		} else {
 			throw new RuntimeException("Default system editor application not supported by your machine!"); //$NON-NLS-1$
@@ -231,11 +232,11 @@ public abstract class LauncherFile {
 	 */
 	public static void print(final File file) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
-		if (Desktop.isDesktopSupported()) {
-			if (null == file) {
-				throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
-			}
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
 
+		if (Desktop.isDesktopSupported()) {
 			Desktop.getDesktop().print(file);
 		} else {
 			throw new RuntimeException("Default system print application not supported by your machine!"); //$NON-NLS-1$
