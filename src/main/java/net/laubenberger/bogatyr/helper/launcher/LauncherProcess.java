@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher creates a new process and reads standard output and standard error.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101105)
  * @since 0.2.0
  */
 public abstract class LauncherProcess {
@@ -64,9 +64,9 @@ public abstract class LauncherProcess {
 	 */
 	public static Process createAndStartProcess(final String[] commands, final OutputStream outputStream, final OutputStream errorStream) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(commands, outputStream, errorStream));
-		if (!HelperArray.isValid(commands)) {
-			throw new RuntimeExceptionIsNullOrEmpty("commands"); //$NON-NLS-1$
-		}
+//		if (!HelperArray.isValid(commands)) {
+//			throw new RuntimeExceptionIsNullOrEmpty("commands"); //$NON-NLS-1$
+//		}
 		if (null == outputStream) {
 			throw new RuntimeExceptionIsNull("outputStream"); //$NON-NLS-1$
 		}

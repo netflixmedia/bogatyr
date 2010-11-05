@@ -34,22 +34,22 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Signature algoritms available in BouncyCastle
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100817)
+ * @version 0.9.4 (20101105)
  * @since 0.9.1
  */
 @XmlRootElement(name = "signatureAlgo")
 public enum SignatureAlgo implements Algorithm {
-	MD2_WITH_RSA("MD2withRSA"), //$NON-NLS-1$
-	MD5_WITH_RSA("MD5withRSA"), //$NON-NLS-1$
-	SHA1_WITH_RSA("SHA1withRSA"), //$NON-NLS-1$
+	MD2_WITH_RSA("MD2WithRSAEncryption"), //$NON-NLS-1$
+	MD5_WITH_RSA("MD5WithRSAEncryption"), //$NON-NLS-1$
+	SHA1_WITH_RSA("SHA1WithRSAEncryption"), //$NON-NLS-1$
 //	SHA1_WITH_DSA("SHA1withDSA"), //$NON-NLS-1$
-	SHA224_WITH_RSA("SHA224withRSA"), //$NON-NLS-1$
-	SHA256_WITH_RSA("SHA256withRSA"), //$NON-NLS-1$
-	SHA384_WITH_RSA("SHA384withRSA"), //$NON-NLS-1$
-	SHA512_WITH_RSA("SHA512withRSA"), //$NON-NLS-1$
-	RIPEMD128_WITH_RSA("RIPEMD128withRSA"), //$NON-NLS-1$
-	RIPEMD160_WITH_RSA("RIPEMD160withRSA"), //$NON-NLS-1$
-	RIPEMD256_WITH_RSA("RIPEMD256withRSA"); //$NON-NLS-1$
+	SHA224_WITH_RSA("SHA224WithRSAEncryption"), //$NON-NLS-1$
+	SHA256_WITH_RSA("SHA256WithRSAEncryption"), //$NON-NLS-1$
+	SHA384_WITH_RSA("SHA384WithRSAEncryption"), //$NON-NLS-1$
+	SHA512_WITH_RSA("SHA512WithRSAEncryption"), //$NON-NLS-1$
+	RIPEMD128_WITH_RSA("RIPEMD128WithRSAEncryption"), //$NON-NLS-1$
+	RIPEMD160_WITH_RSA("RIPEMD160WithRSAEncryption"), //$NON-NLS-1$
+	RIPEMD256_WITH_RSA("RIPEMD256WithRSAEncryption"); //$NON-NLS-1$
 
 	private final String algorithm;
 

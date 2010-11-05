@@ -30,16 +30,14 @@ package net.laubenberger.bogatyr.service.crypto;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
+import java.security.Provider;
 
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperArray;
+import net.laubenberger.bogatyr.helper.HelperCrypto;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
@@ -47,28 +45,39 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.model.crypto.CryptoAlgo;
 import net.laubenberger.bogatyr.service.ServiceAbstract;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * This is a class for wrapping and unwrapping a crypto key.
- * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101105)
  * @since 0.3.0
  */
 public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
 	private static final Logger log = LoggerFactory.getLogger(KeyWrapperImpl.class);
 
-	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
-
 	private final Cipher cipher;
 
-	public KeyWrapperImpl(final CryptoAlgo wrapperAlgorithm) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
+	public KeyWrapperImpl(final Provider provider, final CryptoAlgo algorithm) throws NoSuchAlgorithmException, NoSuchPaddingException {
 		super();
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(wrapperAlgorithm));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(provider, algorithm));
 
-		cipher = Cipher.getInstance(wrapperAlgorithm.getXform(), PROVIDER);
+		if (null == provider) {
+			throw new RuntimeExceptionIsNull("provider"); //$NON-NLS-1$
+		}
+		if (null == algorithm) {
+			throw new RuntimeExceptionIsNull("algorithm"); //$NON-NLS-1$
+		}
+		
+		cipher = Cipher.getInstance(algorithm.getXform(), provider);
 	}
-
+	
+	public KeyWrapperImpl(final CryptoAlgo algorithm) throws NoSuchAlgorithmException, NoSuchPaddingException {
+		this(HelperCrypto.DEFAULT_PROVIDER, algorithm);
+	}
+	
 
 	/*
 	 * Implemented methods

@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for compress operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101105)
  * @since 0.3.0
  */
 public abstract class HelperCompress {
@@ -68,12 +68,6 @@ public abstract class HelperCompress {
 	 */
 	public static void writeZip(final File file, final File... files) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, files));
-		if (null == file) {
-			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
-		}
-		if (!HelperArray.isValid(files)) {
-			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
-		}
 		
 		writeZip(file, files, Constants.DEFAULT_FILE_BUFFER_SIZE);
 		
@@ -130,12 +124,6 @@ public abstract class HelperCompress {
 	 */
 	public static void extractZip(final File file, final File destinationDirectory) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, destinationDirectory));
-		if (null == file) {
-			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
-		}
-		if (null == destinationDirectory) {
-			throw new RuntimeExceptionIsNull("destinationDirectory"); //$NON-NLS-1$
-		}
 		
 		extractZip(file, destinationDirectory, Constants.DEFAULT_FILE_BUFFER_SIZE);
 		

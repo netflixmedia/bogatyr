@@ -30,7 +30,6 @@ package net.laubenberger.bogatyr.service.monitor;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -54,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101102)
+ * @version 0.9.4 (20101105)
  * @since 0.9.4
  */
 public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
@@ -74,7 +73,7 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 	private boolean isRunning = false;
 	
 	
-	public MonitorFileImpl(final File file) throws NoSuchAlgorithmException, NoSuchProviderException {
+	public MonitorFileImpl(final File file) throws NoSuchAlgorithmException {
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(file));
 		
 		if (null == file) {

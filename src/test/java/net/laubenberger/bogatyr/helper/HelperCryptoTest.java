@@ -27,31 +27,38 @@
 
 package net.laubenberger.bogatyr.helper;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.UUID;
 
-import org.junit.Test;
+import net.laubenberger.bogatyr.model.crypto.CryptoAsymmetricAlgo;
+import net.laubenberger.bogatyr.model.crypto.CryptoSymmetricAlgo;
+import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
+import net.laubenberger.bogatyr.model.crypto.HmacAlgo;
+import net.laubenberger.bogatyr.model.crypto.SignatureAlgo;
 
-import net.laubenberger.bogatyr.helper.HelperCrypto;
+import org.junit.Test;
 
 
 /**
- * Junit test
+ * JUnit test for {@link HelperCrypto}
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20101105
  */
 public class HelperCryptoTest {
 
 	@Test
 	public void testGetRandomKey() {
-		assertNotNull(HelperCrypto.getRandomKey(16, '1', '2', '3'));
+		assertTrue(HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6').length() == 16);
+		assertFalse(HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6').equals(HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6')));
 
 		try {
-			HelperCrypto.getRandomKey(Integer.MIN_VALUE, '1', '2', '3');
+			HelperCrypto.getRandomKey(0, '1', '2', '3');
 			fail("digits must be greater than 0"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -67,14 +74,24 @@ public class HelperCryptoTest {
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
+	
+		try {
+			HelperCrypto.getRandomKey(16, HelperArray.EMPTY_ARRAY_CHAR);
+			fail("data is empty"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
 	public void testGetRandomKeyDefault() {
-		assertNotNull(HelperCrypto.getRandomKey(16));
+		assertTrue(HelperCrypto.getRandomKey(16).length() == 16);
+		assertFalse(HelperCrypto.getRandomKey(16).equals(HelperCrypto.getRandomKey(16)));
 
 		try {
-			HelperCrypto.getRandomKey(Integer.MIN_VALUE);
+			HelperCrypto.getRandomKey(0);
 			fail("digits must be greater than 0"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -92,5 +109,191 @@ public class HelperCryptoTest {
 		assertNotNull(b);
 
 		assertNotSame(a, b);
+	}
+	
+	@Test
+	public void testGetProviders() {
+		assertTrue(HelperCrypto.getProviders().size() > 0);
+		assertTrue(HelperCrypto.getProviders().contains(HelperCrypto.DEFAULT_PROVIDER));
+	}
+	
+	@Test
+	public void testGetCiphers() {
+		assertTrue(HelperCrypto.getCiphers(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+		
+		for (CryptoSymmetricAlgo algo : CryptoSymmetricAlgo.values()) {
+			assertTrue(HelperCrypto.getCiphers(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
+		}
+		for (CryptoAsymmetricAlgo algo : CryptoAsymmetricAlgo.values()) {
+			assertTrue(HelperCrypto.getCiphers(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
+		}		
+		
+		assertFalse(HelperCrypto.getCiphers(HelperCrypto.DEFAULT_PROVIDER).contains(HashCodeAlgo.SHA256.getAlgorithm()));
+		assertFalse(HelperCrypto.getCiphers(HelperCrypto.DEFAULT_PROVIDER).contains(HmacAlgo.SHA256.getAlgorithm()));
+		assertFalse(HelperCrypto.getCiphers(HelperCrypto.DEFAULT_PROVIDER).contains(SignatureAlgo.SHA256_WITH_RSA.getAlgorithm()));
+		
+		try {
+			HelperCrypto.getCiphers(null);
+			fail("provider is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+
+	@Test
+	public void testGetKeyAgreements() {
+		assertTrue(HelperCrypto.getKeyAgreements(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+		assertTrue(HelperCrypto.getKeyAgreements(HelperCrypto.DEFAULT_PROVIDER).contains("DH")); //$NON-NLS-1$
+		
+		try {
+			HelperCrypto.getKeyAgreements(null);
+			fail("provider is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetMacs() {
+		assertTrue(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+		
+		for (HmacAlgo algo : HmacAlgo.values()) {
+			assertTrue(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
+		}
+		
+		assertFalse(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoSymmetricAlgo.AES.getAlgorithm()));
+		assertFalse(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoAsymmetricAlgo.ELGAMAL.getAlgorithm()));
+		assertFalse(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).contains(HashCodeAlgo.SHA256.getAlgorithm()));
+		assertFalse(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).contains(SignatureAlgo.SHA256_WITH_RSA.getAlgorithm()));
+		
+		try {
+			HelperCrypto.getMacs(null);
+			fail("provider is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+
+	@Test
+	public void testGetMessageDigests() {
+		assertTrue(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+		
+		for (HashCodeAlgo algo : HashCodeAlgo.values()) {
+			assertTrue(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
+		}
+		
+		assertFalse(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoSymmetricAlgo.AES.getAlgorithm()));
+		assertFalse(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoAsymmetricAlgo.ELGAMAL.getAlgorithm()));
+		assertFalse(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).contains(HmacAlgo.SHA256.getAlgorithm()));
+		assertFalse(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).contains(SignatureAlgo.SHA256_WITH_RSA.getAlgorithm()));
+		
+		try {
+			HelperCrypto.getMessageDigests(null);
+			fail("provider is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+
+	@Test
+	public void testGetSignatures() {
+		assertTrue(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+		
+		for (SignatureAlgo algo : SignatureAlgo.values()) {
+			assertTrue(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
+		}
+		
+		assertFalse(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoSymmetricAlgo.AES.getAlgorithm()));
+		assertFalse(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoAsymmetricAlgo.ELGAMAL.getAlgorithm()));
+		assertFalse(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).contains(HashCodeAlgo.SHA256.getAlgorithm()));
+		assertFalse(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).contains(HmacAlgo.SHA256.getAlgorithm()));
+		
+		try {
+			HelperCrypto.getSignatures(null);
+			fail("provider is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+
+	@Test
+	public void testGetKeyPairGenerators() {
+		assertTrue(HelperCrypto.getKeyPairGenerators(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+		
+		for (CryptoAsymmetricAlgo algo : CryptoAsymmetricAlgo.values()) {
+			assertTrue(HelperCrypto.getKeyPairGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
+		}		
+
+		assertFalse(HelperCrypto.getKeyPairGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoSymmetricAlgo.AES.getAlgorithm()));
+		assertFalse(HelperCrypto.getKeyPairGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(HashCodeAlgo.SHA256.getAlgorithm()));
+		assertFalse(HelperCrypto.getKeyPairGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(HmacAlgo.SHA256.getAlgorithm()));
+		assertFalse(HelperCrypto.getKeyPairGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(SignatureAlgo.SHA256_WITH_RSA.getAlgorithm()));
+		
+		try {
+			HelperCrypto.getKeyPairGenerators(null);
+			fail("provider is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetKeyFactories() {
+		assertTrue(HelperCrypto.getKeyFactories(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+		
+		for (CryptoAsymmetricAlgo algo : CryptoAsymmetricAlgo.values()) {
+			assertTrue(HelperCrypto.getKeyFactories(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
+		}		
+		
+		assertFalse(HelperCrypto.getKeyFactories(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoSymmetricAlgo.AES.getAlgorithm()));
+		assertFalse(HelperCrypto.getKeyFactories(HelperCrypto.DEFAULT_PROVIDER).contains(HashCodeAlgo.SHA256.getAlgorithm()));
+		assertFalse(HelperCrypto.getKeyFactories(HelperCrypto.DEFAULT_PROVIDER).contains(HmacAlgo.SHA256.getAlgorithm()));
+		assertFalse(HelperCrypto.getKeyFactories(HelperCrypto.DEFAULT_PROVIDER).contains(SignatureAlgo.SHA256_WITH_RSA.getAlgorithm()));
+		
+		try {
+			HelperCrypto.getKeyFactories(null);
+			fail("provider is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetKeyGenerators() {
+		assertTrue(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+		
+		for (CryptoSymmetricAlgo algo : CryptoSymmetricAlgo.values()) {
+			assertTrue(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
+		}		
+		for (HmacAlgo algo : HmacAlgo.values()) {
+			assertTrue(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
+		}	
+		
+		assertFalse(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoAsymmetricAlgo.ELGAMAL.getAlgorithm()));
+		assertFalse(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(HashCodeAlgo.SHA256.getAlgorithm()));
+		assertFalse(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(SignatureAlgo.SHA256_WITH_RSA.getAlgorithm()));
+		
+		try {
+			HelperCrypto.getKeyGenerators(null);
+			fail("provider is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }

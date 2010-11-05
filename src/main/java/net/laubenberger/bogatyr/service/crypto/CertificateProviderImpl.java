@@ -39,6 +39,7 @@ import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.security.Provider;
 import java.security.SignatureException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
@@ -60,6 +61,7 @@ import org.bouncycastle.x509.X509V3CertificateGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.laubenberger.bogatyr.helper.HelperCrypto;
 import net.laubenberger.bogatyr.helper.HelperIO;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
@@ -68,21 +70,30 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
 
 /**
  * This class generates, reads and writes X.509 certificates.
- * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101105)
  * @since 0.3.0
  */
 public class CertificateProviderImpl extends ServiceAbstract implements CertificateProvider {
 	private static final Logger log = LoggerFactory.getLogger(CertificateProviderImpl.class);
 
-	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
+	private final Provider provider;
 
-
-	public CertificateProviderImpl() {
+	
+	public CertificateProviderImpl(final Provider provider) {
 		super();
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(provider));
+		
+		if (null == provider) {
+			throw new RuntimeExceptionIsNull("provider"); //$NON-NLS-1$
+		}
+		
+		this.provider = provider;
+	}
+	
+	public CertificateProviderImpl() {
+		this(HelperCrypto.DEFAULT_PROVIDER);
 	}
 
 
@@ -122,7 +133,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 
 		try {
 			// Generate the certificate factory
-			final CertificateFactory cf = CertificateFactory.getInstance("X.509", PROVIDER); //$NON-NLS-1$
+			final CertificateFactory cf = CertificateFactory.getInstance("X.509", provider); //$NON-NLS-1$
 
 			// get the certificate
 			final X509Certificate result = (X509Certificate) cf.generateCertificate(is);
@@ -199,6 +210,6 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 		certGen.addExtension(X509Extensions.ExtendedKeyUsage, true, new ExtendedKeyUsage(KeyPurposeId.id_kp_serverAuth));
 		certGen.addExtension(X509Extensions.SubjectAlternativeName, false, new GeneralNames(new GeneralName(GeneralName.rfc822Name, generalName)));
 
-		return certGen.generate(pair.getPrivate(), PROVIDER);
+		return certGen.generate(pair.getPrivate(), provider.getName());
 	}
 }

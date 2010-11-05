@@ -30,47 +30,50 @@ package net.laubenberger.bogatyr.service.crypto;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.Security;
+import java.security.Provider;
 
 import javax.crypto.Mac;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import net.laubenberger.bogatyr.helper.HelperCrypto;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.model.crypto.HmacAlgo;
 import net.laubenberger.bogatyr.service.ServiceAbstract;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * This is an implementation for hmac generation.
- * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101105)
  * @since 0.9.1
  */
 public class HmacGeneratorImpl extends ServiceAbstract implements HmacGenerator {
 	private static final Logger log = LoggerFactory.getLogger(HmacGeneratorImpl.class);
 
-	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
-
 	private final Mac mac;
 
-	static {
-		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
-	}
-
-	public HmacGeneratorImpl(final HmacAlgo algorithm) throws NoSuchAlgorithmException, NoSuchProviderException {
+	public HmacGeneratorImpl(final Provider provider, final HmacAlgo algorithm) throws NoSuchAlgorithmException {
 		super();
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(algorithm));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(provider, algorithm));
 
-		mac = Mac.getInstance(algorithm.getAlgorithm(), PROVIDER);
+		if (null == provider) {
+			throw new RuntimeExceptionIsNull("provider"); //$NON-NLS-1$
+		}
+		if (null == algorithm) {
+			throw new RuntimeExceptionIsNull("algorithm"); //$NON-NLS-1$
+		}
+		
+		mac = Mac.getInstance(algorithm.getAlgorithm(), provider);
 	}
-
+	
+	public HmacGeneratorImpl(final HmacAlgo algorithm) throws NoSuchAlgorithmException {
+		this(HelperCrypto.DEFAULT_PROVIDER, algorithm);
+	}
+	
 
 	/*
 	 * Implemented methods

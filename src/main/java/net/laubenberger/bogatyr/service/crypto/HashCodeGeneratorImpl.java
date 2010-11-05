@@ -35,15 +35,11 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.Security;
+import java.security.Provider;
 import java.util.Arrays;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperArray;
+import net.laubenberger.bogatyr.helper.HelperCrypto;
 import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.Constants;
@@ -54,35 +50,44 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
 import net.laubenberger.bogatyr.service.ServiceAbstract;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * This is an implementation for hash code generation.
- * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101105)
  * @since 0.9.0
  */
 public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
 	private static final Logger log = LoggerFactory.getLogger(HashCodeGeneratorImpl.class);
 
-	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
 	private static final int DEFAULT_PARTS = 16;
 	private static final int DEFAULT_PARTSIZE = 2048;
 
 	private final MessageDigest md;
 
-	static {
-		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
-	}
-
-	public HashCodeGeneratorImpl(final HashCodeAlgo algorithm) throws NoSuchAlgorithmException, NoSuchProviderException {
+	public HashCodeGeneratorImpl(final Provider provider, final HashCodeAlgo algorithm) throws NoSuchAlgorithmException {
 		super();
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(algorithm));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(provider, algorithm));
 
-		md = MessageDigest.getInstance(algorithm.getAlgorithm(), PROVIDER);
+		if (null == provider) {
+			throw new RuntimeExceptionIsNull("provider"); //$NON-NLS-1$
+		}
+		if (null == algorithm) {
+			throw new RuntimeExceptionIsNull("algorithm"); //$NON-NLS-1$
+		}
+		
+		md = MessageDigest.getInstance(algorithm.getAlgorithm(), provider);
+	}
+	
+	public HashCodeGeneratorImpl(final HashCodeAlgo algorithm) throws NoSuchAlgorithmException {
+		this(HelperCrypto.DEFAULT_PROVIDER, algorithm);
 	}
 
+	
 	/*
 	 * Implemented methods
 	 */

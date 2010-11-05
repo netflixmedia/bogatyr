@@ -47,7 +47,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher opens, edits and prints files with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101105)
  * @since 0.7.0
  */
 public abstract class LauncherFile {
@@ -124,9 +124,9 @@ public abstract class LauncherFile {
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
-		if (!HelperString.isValid(extension)) {
-			throw new RuntimeExceptionIsNullOrEmpty("extension"); //$NON-NLS-1$
-		}
+//		if (!HelperString.isValid(extension)) {
+//			throw new RuntimeExceptionIsNullOrEmpty("extension"); //$NON-NLS-1$
+//		}
 
 		open(HelperIO.readStream(is), extension);
 
@@ -191,9 +191,9 @@ public abstract class LauncherFile {
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
-		if (!HelperString.isValid(extension)) {
-			throw new RuntimeExceptionIsNullOrEmpty("extension"); //$NON-NLS-1$
-		}
+//		if (!HelperString.isValid(extension)) {
+//			throw new RuntimeExceptionIsNullOrEmpty("extension"); //$NON-NLS-1$
+//		}
 
 		edit(HelperIO.readStream(is), extension);
 
@@ -258,9 +258,9 @@ public abstract class LauncherFile {
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
 		}
-		if (!HelperString.isValid(extension)) {
-			throw new RuntimeExceptionIsNullOrEmpty("extension"); //$NON-NLS-1$
-		}
+//		if (!HelperString.isValid(extension)) {
+//			throw new RuntimeExceptionIsNullOrEmpty("extension"); //$NON-NLS-1$
+//		}
 
 		print(HelperIO.readStream(is), extension);
 
