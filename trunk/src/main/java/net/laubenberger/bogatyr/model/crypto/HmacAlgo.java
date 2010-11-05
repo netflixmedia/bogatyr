@@ -34,22 +34,26 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Hmac algoritms available in BouncyCastle
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100817)
+ * @version 0.9.4 (20101105)
  * @since 0.9.1
  */
 @XmlRootElement(name = "hmacAlgo")
 public enum HmacAlgo implements Algorithm {
-	MD2("HmacMD2"), //$NON-NLS-1$
-	MD4("HmacMD4"), //$NON-NLS-1$
-	MD5("HmacMD5"), //$NON-NLS-1$
-	SHA1("HmacSHA1"), //$NON-NLS-1$
-	SHA224("HmacSHA224"), //$NON-NLS-1$
-	SHA256("HmacSHA256"), //$NON-NLS-1$
-	SHA384("HmacSHA384"), //$NON-NLS-1$
-	SHA512("HmacSHA512"), //$NON-NLS-1$
-	RIPEMD128("HmacRIPEMD128"), //$NON-NLS-1$
-	RIPEMD160("HmacRIPEMD160"), //$NON-NLS-1$
-	TIGER("HmacTiger"); //$NON-NLS-1$
+//	DES("DESMAC"), //$NON-NLS-1$
+//	DESEDE("DESEDEMAC"), //$NON-NLS-1$
+	MD2("HMACMD2"), //$NON-NLS-1$
+	MD4("HMACMD4"), //$NON-NLS-1$
+	MD5("HMACMD5"), //$NON-NLS-1$
+	SHA1("HMACSHA1"), //$NON-NLS-1$
+	SHA224("HMACSHA224"), //$NON-NLS-1$
+	SHA256("HMACSHA256"), //$NON-NLS-1$
+	SHA384("HMACSHA384"), //$NON-NLS-1$
+	SHA512("HMACSHA512"), //$NON-NLS-1$
+//	RC2("RC2MAC"), //$NON-NLS-1$
+//	RC5("RC5MAC"), //$NON-NLS-1$
+	RIPEMD128("HMACRIPEMD128"), //$NON-NLS-1$
+	RIPEMD160("HMACRIPEMD160"), //$NON-NLS-1$
+	TIGER("HMACTIGER"); //$NON-NLS-1$
 
 	private final String algorithm;
 

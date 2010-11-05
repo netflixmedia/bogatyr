@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Hash codes algoritms available in BouncyCastle
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100817)
+ * @version 0.9.4 (20101105)
  * @since 0.9.0
  */
 @XmlRootElement(name = "hashCodeAlgo")
@@ -42,11 +42,11 @@ public enum HashCodeAlgo implements Algorithm {
 	MD2("MD2"), //$NON-NLS-1$
 	MD4("MD4"), //$NON-NLS-1$
 	MD5("MD5"), //$NON-NLS-1$
-	SHA1("SHA1"), //$NON-NLS-1$
-	SHA224("SHA224"), //$NON-NLS-1$
-	SHA256("SHA256"), //$NON-NLS-1$
-	SHA384("SHA384"), //$NON-NLS-1$
-	SHA512("SHA512"), //$NON-NLS-1$
+	SHA1("SHA-1"), //$NON-NLS-1$
+	SHA224("SHA-224"), //$NON-NLS-1$
+	SHA256("SHA-256"), //$NON-NLS-1$
+	SHA384("SHA-384"), //$NON-NLS-1$
+	SHA512("SHA-512"), //$NON-NLS-1$
 	RIPEMD128("RIPEMD128"), //$NON-NLS-1$
 	RIPEMD160("RIPEMD160"), //$NON-NLS-1$
 	RIPEMD256("RIPEMD256"), //$NON-NLS-1$

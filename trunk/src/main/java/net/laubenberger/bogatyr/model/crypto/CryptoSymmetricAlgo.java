@@ -34,27 +34,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Symmetric crypto algorithms available in BouncyCastle
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100817)
+ * @version 0.9.4 (20101105)
  * @since 0.9.1
  */
 @XmlRootElement(name = "cryptoSymmetricAlgo")
 public enum CryptoSymmetricAlgo implements CryptoAlgo {
 	AES("AES", "AES/CBC/PKCS5Padding", 192, 16), //$NON-NLS-1$ //$NON-NLS-2$
 	DES("DES", "DES/CBC/PKCS5Padding", 64, 8), //$NON-NLS-1$ //$NON-NLS-2$
-	DESEDE("DESede", "DESede/CBC/PKCS5Padding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
-	BLOWFISH("Blowfish", "Blowfish/CBC/PKCS5Padding", 448, 8), //$NON-NLS-1$ //$NON-NLS-2$
-	CAMELLIA("Camellia", "Camellia/CBC/PKCS5Padding", 256, 16), //$NON-NLS-1$ //$NON-NLS-2$
+	DESEDE("DESEDE", "DESEDE/CBC/PKCS5Padding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
+	BLOWFISH("BLOWFISH", "BLOWFISH/CBC/PKCS5Padding", 448, 8), //$NON-NLS-1$ //$NON-NLS-2$
+	CAMELLIA("CAMELLIA", "CAMELLIA/CBC/PKCS5Padding", 256, 16), //$NON-NLS-1$ //$NON-NLS-2$
 	CAST5("CAST5", "CAST5/CBC/PKCS5Padding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
 	CAST6("CAST6", "CAST6/CBC/PKCS5Padding", 256, 16), //$NON-NLS-1$ //$NON-NLS-2$
-	NOEKEON("Noekeon", "Noekeon/CBC/PKCS5Padding", 128, 16), //$NON-NLS-1$ //$NON-NLS-2$
+	NOEKEON("NOEKEON", "NOEKEON/CBC/PKCS5Padding", 128, 16), //$NON-NLS-1$ //$NON-NLS-2$
 	RC2("RC2", "RC2/CBC/PKCS5Padding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
 	RC5("RC5", "RC5/CBC/PKCS5Padding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
-	RC6("RC6", "Blowfish/CBC/PKCS5Padding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
-	RIJNDAEL("Rijndael", "Rijndael/CBC/PKCS5Padding", 192, 16), //$NON-NLS-1$ //$NON-NLS-2$
+	RC6("RC6", "RC6/CBC/PKCS5Padding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
+	RIJNDAEL("RIJNDAEL", "RIJNDAEL/CBC/PKCS5Padding", 192, 16), //$NON-NLS-1$ //$NON-NLS-2$
 	SEED("SEED", "SEED/CBC/PKCS5Padding", 128, 16), //$NON-NLS-1$ //$NON-NLS-2$
-	SERPENT("Serpent", "Serpent/CBC/PKCS5Padding", 256, 16), //$NON-NLS-1$ //$NON-NLS-2$
-	SKIPJACK("Skipjack", "Skipjack/CBC/PKCS5Padding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
-	TWOFISH("Twofish", "Twofish/CBC/PKCS5Padding", 256, 16), //$NON-NLS-1$ //$NON-NLS-2$
+	SERPENT("SERPENT", "SERPENT/CBC/PKCS5Padding", 256, 16), //$NON-NLS-1$ //$NON-NLS-2$
+	SKIPJACK("SKIPJACK", "SKIPJACK/CBC/PKCS5Padding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
+	TWOFISH("TWOFISH", "TWOFISH/CBC/PKCS5Padding", 256, 16), //$NON-NLS-1$ //$NON-NLS-2$
 	TEA("TEA", "TEA/CBC/PKCS5Padding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
 	XTEA("XTEA", "XTEA/CBC/PKCS5Padding", 128, 8); //$NON-NLS-1$ //$NON-NLS-2$
 

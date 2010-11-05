@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * It also provides informations about vm memory, temp/user directory and variables.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100819)
+ * @version 0.9.4 (20101105)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -62,7 +62,7 @@ public abstract class HelperEnvironment {
 	 * @return used VM memory
 	 * @since 0.9.0
 	 */
-	public static long getMemoryUsed() {
+	public static long getMemoryUsed() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final long result = getMemoryTotal() - Runtime.getRuntime().freeMemory();
@@ -77,7 +77,7 @@ public abstract class HelperEnvironment {
 	 * @return free VM memory
 	 * @since 0.9.0
 	 */
-	public static long getMemoryFree() {
+	public static long getMemoryFree() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final long result = getMemoryMax() - getMemoryUsed();
@@ -92,7 +92,7 @@ public abstract class HelperEnvironment {
 	 * @return current total VM memory
 	 * @since 0.9.0
 	 */
-	public static long getMemoryTotal() {
+	public static long getMemoryTotal() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final long result = Runtime.getRuntime().totalMemory();
@@ -107,7 +107,7 @@ public abstract class HelperEnvironment {
 	 * @return max VM memory
 	 * @since 0.9.0
 	 */
-	public static long getMemoryMax() {
+	public static long getMemoryMax() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final long result = Runtime.getRuntime().maxMemory();
@@ -176,6 +176,22 @@ public abstract class HelperEnvironment {
 		return result;
 	}
 
+	/**
+	 * Returns a {@link Map} containing containing all Java system properties.
+	 *
+	 * @return {@link Map} of all Java system properties
+	 * @see Map
+	 * @since 0.1.0
+	 */
+	public static Map<Object, Object> getJavaProperties() { //$JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+
+		final Map<Object, Object> result = System.getProperties();
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
 	/**
 	 * Returns the current class path.
 	 *
@@ -301,22 +317,6 @@ public abstract class HelperEnvironment {
 	}
 
 	/**
-	 * Returns a {@link Map} containing containing all Java system properties.
-	 *
-	 * @return {@link Map} of all Java system properties
-	 * @see Map
-	 * @since 0.1.0
-	 */
-	public static Map<Object, Object> getJavaProperties() { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-
-		final Map<Object, Object> result = System.getProperties();
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	/**
 	 * Returns a {@link Map} containing all system environment variables.
 	 *
 	 * @return {@link Map} of system environment variables
@@ -341,7 +341,10 @@ public abstract class HelperEnvironment {
 	 */
 	public static String getOsEnvironmentVariable(final String variable) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(variable));
-
+		if (null == variable) {
+			throw new RuntimeExceptionIsNull("variable"); //$NON-NLS-1$
+		}
+		
 		final String result = System.getenv(variable);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
@@ -479,7 +482,7 @@ public abstract class HelperEnvironment {
 	 * @return {@link Platform}
 	 * @since 0.9.0
 	 */
-	public static Platform getPlatform() {
+	public static Platform getPlatform() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final Platform result;
@@ -501,7 +504,7 @@ public abstract class HelperEnvironment {
 	 * @return report about the current Java environment
 	 * @since 0.9.3
 	 */
-	public static String getReportJava() {
+	public static String getReportJava() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
 		final StringBuilder sb = new StringBuilder();
@@ -545,7 +548,7 @@ public abstract class HelperEnvironment {
 	 * @return report about the current operating system
 	 * @since 0.9.3
 	 */
-	public static String getReportOS() {
+	public static String getReportOS() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
 		final StringBuilder sb = new StringBuilder();
@@ -585,7 +588,7 @@ public abstract class HelperEnvironment {
 	 * @return report about the current user
 	 * @since 0.9.3
 	 */
-	public static String getReportUser() {
+	public static String getReportUser() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
 		final StringBuilder sb = new StringBuilder();
@@ -625,7 +628,7 @@ public abstract class HelperEnvironment {
 	 * @return report about the current system environment
 	 * @since 0.9.3
 	 */
-	public static String getReportSystem() {
+	public static String getReportSystem() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
 		final StringBuilder sb = new StringBuilder();

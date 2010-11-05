@@ -34,14 +34,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Asymmetric crypto algorithms available in BouncyCastle
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100817)
+ * @version 0.9.4 (20101105)
  * @since 0.9.1
  */
 @XmlRootElement(name = "cryptoAsymmetricAlgo")
 public enum CryptoAsymmetricAlgo implements CryptoAlgo {
 	RSA("RSA", "RSA/NONE/PKCS1PADDING", 2048),  //$NON-NLS-1$//$NON-NLS-2$
-	ELGAMAL("ElGamal", "ElGamal/NONE/PKCS1Padding", 1024);  //$NON-NLS-1$//$NON-NLS-2$
-//	ELGAMAL("ElGamal", "ElGamal/NONE/NoPadding", 1024);  //$NON-NLS-1$//$NON-NLS-2$
+	ELGAMAL("ELGAMAL", "ELGAMAL/NONE/PKCS1Padding", 1024);  //$NON-NLS-1$//$NON-NLS-2$
 
 	private final String algorithm;
 	private final String xform;

@@ -39,8 +39,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.Security;
+import java.security.Provider;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.Arrays;
 
@@ -55,11 +54,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperArray;
+import net.laubenberger.bogatyr.helper.HelperCrypto;
 import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
@@ -74,18 +70,18 @@ import net.laubenberger.bogatyr.model.crypto.CryptoSymmetricAlgo;
 import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
 import net.laubenberger.bogatyr.service.ServiceAbstract;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * This is a class for symmetric cryptology via AES.
- * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
- *
+  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101105)
  * @since 0.1.0
  */
 public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmetric {
 	private static final Logger log = LoggerFactory.getLogger(CryptoSymmetricImpl.class);
-
-	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
 
 	private final CryptoSymmetricAlgo algorithm;
 
@@ -93,20 +89,29 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 	private final KeyGenerator kg;
 	private final HashCodeGenerator hcg;
 
-	static {
-		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
-	}
-
-	public CryptoSymmetricImpl(final CryptoSymmetricAlgo algorithm) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
+	public CryptoSymmetricImpl(final Provider provider, final CryptoSymmetricAlgo algorithm) throws NoSuchAlgorithmException, NoSuchPaddingException {
 		super();
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(algorithm));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(provider, algorithm));
+
+		if (null == provider) {
+			throw new RuntimeExceptionIsNull("provider"); //$NON-NLS-1$
+		}
+		if (null == algorithm) {
+			throw new RuntimeExceptionIsNull("algorithm"); //$NON-NLS-1$
+		}
 
 		this.algorithm = algorithm;
-		cipher = Cipher.getInstance(algorithm.getXform(), PROVIDER);
-		kg = KeyGenerator.getInstance(algorithm.getAlgorithm(), PROVIDER);
+		
+		cipher = Cipher.getInstance(algorithm.getXform(), provider);
+		kg = KeyGenerator.getInstance(algorithm.getAlgorithm(), provider);
 		hcg = new HashCodeGeneratorImpl(HashCodeAlgo.SHA512);
 	}
-
+	
+	public CryptoSymmetricImpl(final CryptoSymmetricAlgo algorithm) throws NoSuchAlgorithmException, NoSuchPaddingException {
+		this(HelperCrypto.DEFAULT_PROVIDER, algorithm);
+	}
+	
+	
 	/*
 	 * Private methods
 	 */

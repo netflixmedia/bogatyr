@@ -34,8 +34,8 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
+import java.security.Provider;
 import java.security.PublicKey;
-import java.security.Security;
 import java.security.Signature;
 import java.security.SignatureException;
 
@@ -44,11 +44,8 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperArray;
+import net.laubenberger.bogatyr.helper.HelperCrypto;
 import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
@@ -59,35 +56,45 @@ import net.laubenberger.bogatyr.model.crypto.CryptoAsymmetricAlgo;
 import net.laubenberger.bogatyr.model.crypto.SignatureAlgo;
 import net.laubenberger.bogatyr.service.ServiceAbstract;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * This is a class for asymmetric cryptology via RSA.
- * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.4 (20101105)
  * @since 0.1.0
  */
 public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymmetric {
 	private static final Logger log = LoggerFactory.getLogger(CryptoAsymmetricImpl.class);
 
-	private static final String PROVIDER = "BC"; //BouncyCastle //$NON-NLS-1$
-
+	private final Provider provider;
 	private final CryptoAsymmetricAlgo algorithm;
 
 	private final Cipher cipher;
 	private final KeyPairGenerator kpg;
 
-	static {
-		Security.addProvider(new BouncyCastleProvider()); //Needed because JavaSE doesn't include providers
-	}
-
-	public CryptoAsymmetricImpl(final CryptoAsymmetricAlgo algorithm) throws NoSuchAlgorithmException, NoSuchProviderException, NoSuchPaddingException {
+	public CryptoAsymmetricImpl(final Provider provider, final CryptoAsymmetricAlgo algorithm) throws NoSuchAlgorithmException, NoSuchPaddingException {
 		super();
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(algorithm));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(provider, algorithm));
 
+		if (null == provider) {
+			throw new RuntimeExceptionIsNull("provider"); //$NON-NLS-1$
+		}
+		if (null == algorithm) {
+			throw new RuntimeExceptionIsNull("algorithm"); //$NON-NLS-1$
+		}
+		
+		this.provider = provider;
 		this.algorithm = algorithm;
-		cipher = Cipher.getInstance(algorithm.getXform(), PROVIDER);
-		kpg = KeyPairGenerator.getInstance(algorithm.getAlgorithm(), PROVIDER);
+		
+		cipher = Cipher.getInstance(algorithm.getXform(), provider);
+		kpg = KeyPairGenerator.getInstance(algorithm.getAlgorithm(), provider);
+	}
+	
+	public CryptoAsymmetricImpl(final CryptoAsymmetricAlgo algorithm) throws NoSuchAlgorithmException, NoSuchPaddingException {
+		this(HelperCrypto.DEFAULT_PROVIDER, algorithm);
 	}
 
 	/*
@@ -191,7 +198,7 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
 
-		final Signature sig = Signature.getInstance(algoritm.getAlgorithm(), PROVIDER);
+		final Signature sig = Signature.getInstance(algoritm.getAlgorithm(), provider);
 		sig.initSign(key);
 		sig.update(input);
 
@@ -217,7 +224,7 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
 
-		final Signature sig = Signature.getInstance(algoritm.getAlgorithm(), PROVIDER);
+		final Signature sig = Signature.getInstance(algoritm.getAlgorithm(), provider);
 		sig.initVerify(key);
 		sig.update(input);
 
