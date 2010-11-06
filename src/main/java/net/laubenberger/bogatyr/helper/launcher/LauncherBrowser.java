@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * This launcher starts the system browser and displays an URI.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101106)
  * @since 0.2.0
  */
 public abstract class LauncherBrowser {
@@ -67,7 +67,7 @@ public abstract class LauncherBrowser {
 		if (Desktop.isDesktopSupported()) {
 			Desktop.getDesktop().browse(uri);
 		} else {
-			throw new RuntimeException("Browser not supported by your machine!"); //$NON-NLS-1$
+			throw new RuntimeException("Browser not supported by your machine"); //$NON-NLS-1$
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}

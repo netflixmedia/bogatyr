@@ -48,30 +48,11 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for graphic operations
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100525)
+ * @version 0.9.4 (20101106)
  * @since 0.4.0
  */
 public abstract class HelperGraphic {
 	private static final Logger log = LoggerFactory.getLogger(HelperGraphic.class);
-
-//	/**
-//	 * Enable anti-aliasing on a {@link Graphics2D} container.
-//	 *
-//	 * @param graphics {@link Graphics2D} container
-//	 * @see Graphics2D
-//	 * @since 0.4.0
-//	 */
-//	public static void enableAntialiasing(final Graphics2D graphics) {
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(graphics));
-//		if (null == graphics) {
-//			throw new RuntimeExceptionIsNull("graphics"); //$NON-NLS-1$
-//		}
-//
-//		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//		graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-//
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-//	}
 
 	/**
 	 * Calculates the center of given a {@link Dimension}.
@@ -156,32 +137,8 @@ public abstract class HelperGraphic {
 	 * @see Dimension
 	 * @since 0.9.0
 	 */
-	public static Dimension getScaledSize(final Dimension input, final Dimension output) {
+	public static Dimension getScaledSize(final Dimension input, final Dimension output) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, output));
-		if (null == input) {
-			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
-		}
-		if (0 > input.width) {
-			throw new RuntimeExceptionMustBeGreater("input.width", input.width, 0); //$NON-NLS-1$
-		}
-		if (0 > input.height) {
-			throw new RuntimeExceptionMustBeGreater("input.height", input.height, 0); //$NON-NLS-1$
-		}
-		if (null == output) {
-			throw new RuntimeExceptionIsNull("output"); //$NON-NLS-1$
-		}
-		if (0 > output.width) {
-			throw new RuntimeExceptionMustBeGreater("output.width", output.width, 0); //$NON-NLS-1$
-		}
-		if (0 > output.height) {
-			throw new RuntimeExceptionMustBeGreater("output.height", output.height, 0); //$NON-NLS-1$
-		}
-
-//		final double scaleHeight = input.getHeight() / output.getHeight();
-//		final double scaleWidth = input.getWidth() / output.getWidth();
-//        final double scale = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
-//
-//        final double scale = getScale(input, output);
 
 		final Dimension result = getScaledSize(input, getScale(input, output));
 
@@ -198,23 +155,11 @@ public abstract class HelperGraphic {
 	 * @see Dimension
 	 * @since 0.9.1
 	 */
-	public static Dimension getScaledSize(final Dimension input, final double scale) {
+	public static Dimension getScaledSize(final Dimension input, final double scale) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, scale));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
-//    	if (input.width < 0) {
-//			throw new RuntimeExceptionMustBeGreater("input.width", input.width, 0); //$NON-NLS-1$
-//		}
-//    	if (input.height < 0) {
-//			throw new RuntimeExceptionMustBeGreater("input.height", input.height, 0); //$NON-NLS-1$
-//		}
-
-//		final double scaleHeight = input.getHeight() * scale;
-//		final double scaleWidth = input.getWidth() * scale;
-//        final double scaleNew = scaleWidth > scaleHeight ? scaleWidth : scaleHeight;
-//		
-//    	final Dimension result = new Dimension(HelperMath.convertDoubleToInt(input.getWidth() * scaleNew), HelperMath.convertDoubleToInt(input.getHeight() * scaleNew));
 
 		final Dimension result = new Dimension((int) (input.getWidth() * scale), (int) (input.getHeight() * scale));
 
@@ -233,7 +178,7 @@ public abstract class HelperGraphic {
 	 * @see Font
 	 * @since 0.4.0
 	 */
-	public static Dimension getTextSize(final String text, final Graphics graphics) {
+	public static Dimension getTextSize(final String text, final Graphics graphics) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(text, graphics));
 		if (null == text) {
 			throw new RuntimeExceptionIsNull("text"); //$NON-NLS-1$
@@ -251,12 +196,6 @@ public abstract class HelperGraphic {
 		return result;
 	}
 
-
-//	public static List<String> getFonts() {
-//	    // Get all available font family names from GraphicsEnvironment
-//	    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//	    return Arrays.asList(ge.getAvailableFontFamilyNames());
-//	}
 
 	/**
 	 * Returns a {@link List} containing all available system {@link Font}.

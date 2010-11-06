@@ -36,6 +36,8 @@ import net.laubenberger.bogatyr.helper.HelperCollectionTest;
 import net.laubenberger.bogatyr.helper.HelperCompressTest;
 import net.laubenberger.bogatyr.helper.HelperCryptoTest;
 import net.laubenberger.bogatyr.helper.HelperEnvironmentTest;
+import net.laubenberger.bogatyr.helper.HelperGraphicTest;
+import net.laubenberger.bogatyr.helper.HelperImageTest;
 import net.laubenberger.bogatyr.helper.encoder.EncoderBase64Test;
 import net.laubenberger.bogatyr.helper.encoder.EncoderHexTest;
 import net.laubenberger.bogatyr.helper.encoder.EncoderHtmlTest;
@@ -55,7 +57,7 @@ import org.junit.runner.Result;
  * JUnit test suite
  *
  * @author Stefan Laubenberger
- * @version 20101103
+ * @version 20101106
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA = "!$'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ" + //$NON-NLS-1$
@@ -109,9 +111,9 @@ public class AllBogatyrTests implements Runnable {
 				HelperCollectionTest.class,
 				HelperCompressTest.class,
 				HelperCryptoTest.class,
-				HelperEnvironmentTest.class
-//				HelperGraphicTest.class,
-//				HelperImageTest.class,
+				HelperEnvironmentTest.class,
+				HelperGraphicTest.class,
+				HelperImageTest.class
 //				HelperIOTest.class,
 //				HelperMapTest.class,
 //				HelperMathTest.class,
