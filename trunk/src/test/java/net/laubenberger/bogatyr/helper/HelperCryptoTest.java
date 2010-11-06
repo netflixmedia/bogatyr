@@ -31,6 +31,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.UUID;
@@ -48,14 +49,14 @@ import org.junit.Test;
  * JUnit test for {@link HelperCrypto}
  *
  * @author Stefan Laubenberger
- * @version 20101105
+ * @version 20101106
  */
 public class HelperCryptoTest {
 
 	@Test
 	public void testGetRandomKey() {
-		assertTrue(HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6').length() == 16);
-		assertFalse(HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6').equals(HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6')));
+		assertEquals(16, HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6').length());
+		assertNotSame(HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6'), HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6'));
 
 		try {
 			HelperCrypto.getRandomKey(0, '1', '2', '3');
@@ -87,8 +88,8 @@ public class HelperCryptoTest {
 
 	@Test
 	public void testGetRandomKeyDefault() {
-		assertTrue(HelperCrypto.getRandomKey(16).length() == 16);
-		assertFalse(HelperCrypto.getRandomKey(16).equals(HelperCrypto.getRandomKey(16)));
+		assertEquals(16, HelperCrypto.getRandomKey(16).length());
+		assertNotSame(HelperCrypto.getRandomKey(16), HelperCrypto.getRandomKey(16));
 
 		try {
 			HelperCrypto.getRandomKey(0);

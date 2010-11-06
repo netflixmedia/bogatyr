@@ -27,7 +27,7 @@
 
 package net.laubenberger.bogatyr.helper;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -41,7 +41,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperCompress}
  * 
  * @author Stefan Laubenberger
- * @version 20101103
+ * @version 20101106
  */
 public class HelperCompressTest {
 
@@ -90,12 +90,11 @@ public class HelperCompressTest {
 			fail(ex.getMessage());
 		}
 
-		assertTrue(new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileMid
-				.getName()).length() == fileMid.length());
-		assertTrue(new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileText
-				.getName()).length() == fileText.length());
-		assertTrue(new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileWav
-				.getName()).length() == fileWav.length());
+		assertEquals(fileMid.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileMid.getName()).length());
+		assertEquals(fileText.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileText
+				.getName()).length());
+		assertEquals(fileWav.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileWav
+				.getName()).length());
 
 		try {
 			HelperCompress.extractZip(null, fileZipExtractDir);

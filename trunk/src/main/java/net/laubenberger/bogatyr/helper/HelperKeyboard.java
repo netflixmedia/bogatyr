@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for keyboards.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101106)
  * @since 0.9.0
  */
 public abstract class HelperKeyboard {
@@ -48,7 +48,7 @@ public abstract class HelperKeyboard {
 	 * @return true/false
 	 * @since 0.9.1
 	 */
-	public static boolean isKeyPrintable(final int keyCode) {
+	public static boolean isKeyPrintable(final int keyCode) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(keyCode));
 
 		final boolean result = !(0 > keyCode || //keyCode couldn't be negative

@@ -37,7 +37,10 @@ import net.laubenberger.bogatyr.helper.HelperCompressTest;
 import net.laubenberger.bogatyr.helper.HelperCryptoTest;
 import net.laubenberger.bogatyr.helper.HelperEnvironmentTest;
 import net.laubenberger.bogatyr.helper.HelperGraphicTest;
+import net.laubenberger.bogatyr.helper.HelperIOTest;
 import net.laubenberger.bogatyr.helper.HelperImageTest;
+import net.laubenberger.bogatyr.helper.HelperKeyboard;
+import net.laubenberger.bogatyr.helper.HelperKeyboardTest;
 import net.laubenberger.bogatyr.helper.encoder.EncoderBase64Test;
 import net.laubenberger.bogatyr.helper.encoder.EncoderHexTest;
 import net.laubenberger.bogatyr.helper.encoder.EncoderHtmlTest;
@@ -113,8 +116,9 @@ public class AllBogatyrTests implements Runnable {
 				HelperCryptoTest.class,
 				HelperEnvironmentTest.class,
 				HelperGraphicTest.class,
-				HelperImageTest.class
-//				HelperIOTest.class,
+				HelperImageTest.class,
+				HelperIOTest.class, //TODO not completed!
+				HelperKeyboardTest.class
 //				HelperMapTest.class,
 //				HelperMathTest.class,
 //				HelperNetTest.class,

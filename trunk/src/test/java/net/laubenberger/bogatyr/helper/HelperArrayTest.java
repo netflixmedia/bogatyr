@@ -30,7 +30,6 @@ package net.laubenberger.bogatyr.helper;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -130,7 +129,7 @@ public class HelperArrayTest {
 	public void testDumpObjects() {
 		final String[] array = {"A", "B", "C"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
-		assertNotNull(HelperArray.dump(array));
+		assertTrue(HelperArray.dump(array).length() > 0);
 
 		try {
 			HelperArray.dump((String[])null);
@@ -146,7 +145,7 @@ public class HelperArrayTest {
 	public void testDumpBytes() {
 		byte[] array = {1, 2, 3};
 
-		assertNotNull(HelperArray.dump(array));
+		assertTrue(HelperArray.dump(array).length() > 0);
 
 		try {
 			HelperArray.dump((byte[])null);
@@ -162,7 +161,7 @@ public class HelperArrayTest {
 	public void testDumpChars() {
 		final char[] array = {'A', 'B', 'C'};
 		
-		assertNotNull(HelperArray.dump(array));
+		assertTrue(HelperArray.dump(array).length() > 0);
 
 		try {
 			HelperArray.dump((char[])null);

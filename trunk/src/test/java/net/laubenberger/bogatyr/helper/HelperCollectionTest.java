@@ -27,19 +27,16 @@
 
 package net.laubenberger.bogatyr.helper;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.Test;
-
-import net.laubenberger.bogatyr.helper.HelperCollection;
 
 
 /**
@@ -64,7 +61,7 @@ public class HelperCollectionTest {
 	public void testToArray() {
 		final String[] array = HelperCollection.toArray(HelperCollection.getList("A", "B", "C")); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 
-		assertTrue(Arrays.equals(new String[]{"A", "B", "C"}, array)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		assertArrayEquals(new String[]{"A", "B", "C"}, array); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		try {
 			HelperCollection.toArray(null);
@@ -145,7 +142,7 @@ public class HelperCollectionTest {
 	public void testDump() {
 		final Collection<String> list = HelperCollection.getList("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 
-		assertNotNull(HelperCollection.dump(list));
+		assertTrue(HelperCollection.dump(list).length() > 0);
 
 		try {
 			HelperCollection.dump(null);

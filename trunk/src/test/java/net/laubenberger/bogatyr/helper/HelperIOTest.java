@@ -28,6 +28,7 @@
 package net.laubenberger.bogatyr.helper;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
@@ -41,23 +42,35 @@ import org.junit.Test;
 
 
 /**
- * Junit test
+ * JUnit test for {@link HelperIO}
  *
  * @author Stefan Laubenberger
- * @version 20100209
+ * @version 20101106
  */
-public class HelperIOTest {
+public class HelperIOTest { //TODO complete tests for all methods
 	@Test
 	public void testgetTemporaryFile() {
 		try {
-			assertNotNull(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".tmp"));  //$NON-NLS-1$//$NON-NLS-2$
+			assertNotNull(HelperIO.getTemporaryFile(getClass().getSimpleName(), "tmp"));  //$NON-NLS-1$
 		} catch (IOException ex) {
 			fail(ex.getLocalizedMessage());
 		}
 
 		try {
-			HelperIO.getTemporaryFile(null, ".tmp"); //$NON-NLS-1$
-			fail("name is null!"); //$NON-NLS-1$
+			assertNotNull(HelperIO.getTemporaryFile("tmp"));  //$NON-NLS-1$
+		} catch (IOException ex) {
+			fail(ex.getLocalizedMessage());
+		}
+		
+		try {
+			assertNotNull(HelperIO.getTemporaryFile());
+		} catch (IOException ex) {
+			fail(ex.getLocalizedMessage());
+		}
+
+		try {
+			HelperIO.getTemporaryFile(null, "tmp"); //$NON-NLS-1$
+			fail("name is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -65,8 +78,45 @@ public class HelperIOTest {
 		}
 
 		try {
-			HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), null); //$NON-NLS-1$
-			fail("extension is null!"); //$NON-NLS-1$
+			HelperIO.getTemporaryFile(HelperString.EMPTY_STRING, "tmp"); //$NON-NLS-1$
+			fail("name is empty"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperIO.getTemporaryFile(getClass().getSimpleName(), null);
+			fail("extension is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperIO.getTemporaryFile(getClass().getSimpleName(), HelperString.EMPTY_STRING);
+			fail("extension is empty"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		
+		try {
+			HelperIO.getTemporaryFile(null);
+			fail("extension is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperIO.getTemporaryFile(HelperString.EMPTY_STRING);
+			fail("extension is empty"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -76,7 +126,7 @@ public class HelperIOTest {
 
 	@Test
 	public void testGetFiles() {
-		assertNotNull(HelperIO.getFiles(HelperEnvironment.getOsTempDirectory(), null, -1));
+		assertTrue(HelperIO.getFiles(HelperEnvironment.getOsTempDirectory(), null, -1).size() > 0);
 
 		try {
 			HelperIO.getFiles(null, null, -1);
@@ -91,7 +141,7 @@ public class HelperIOTest {
 	@Test
 	public void testWriteLine() {
 		try {
-			final File file = HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".txt");  //$NON-NLS-1$//$NON-NLS-2$
+			final File file = HelperIO.getTemporaryFile(getClass().getSimpleName(), "txt");  //$NON-NLS-1$
 			HelperIO.writeLine(file, AllBogatyrTests.DATA);
 			assertEquals(AllBogatyrTests.DATA, HelperIO.readFileAsString(file));
 		} catch (IOException ex) {
@@ -117,7 +167,7 @@ public class HelperIOTest {
 //		}
 
 		try {
-			HelperIO.writeLine(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".txt"), null, AllBogatyrTests.DATA);  //$NON-NLS-1$//$NON-NLS-2$
+			HelperIO.writeLine(HelperIO.getTemporaryFile(getClass().getSimpleName(), "txt"), null, AllBogatyrTests.DATA);  //$NON-NLS-1$
 			fail("encoding is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -129,7 +179,7 @@ public class HelperIOTest {
 	@Test
 	public void testWriteReadFileAsByteArray() {
 		try {
-			final File file = HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".ba");  //$NON-NLS-1$//$NON-NLS-2$
+			final File file = HelperIO.getTemporaryFile(getClass().getSimpleName(), ".ba");  //$NON-NLS-1$
 			HelperIO.writeFile(file, AllBogatyrTests.DATA.getBytes(), false);
 			assertEquals(AllBogatyrTests.DATA, new String(HelperIO.readFile(file)));
 		} catch (IOException ex) {
@@ -149,7 +199,7 @@ public class HelperIOTest {
 	@Test
 	public void testWriteReadFileAsString() {
 		try {
-			final File file = HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".string");  //$NON-NLS-1$//$NON-NLS-2$
+			final File file = HelperIO.getTemporaryFile(getClass().getSimpleName(), ".string");  //$NON-NLS-1$
 			HelperIO.writeFile(file, AllBogatyrTests.DATA, false);
 			assertEquals(AllBogatyrTests.DATA, HelperIO.readFileAsString(file));
 		} catch (IOException ex) {
@@ -166,7 +216,7 @@ public class HelperIOTest {
 		}
 
 		try {
-			HelperIO.readFileAsString(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".string"), null); //$NON-NLS-1$ //$NON-NLS-2$
+			HelperIO.readFileAsString(HelperIO.getTemporaryFile(getClass().getSimpleName(), ".string"), null); //$NON-NLS-1$
 			fail("encoding is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -180,8 +230,8 @@ public class HelperIOTest {
 	public void testWriteReadFileAsStream() {
 		try {
 			final ByteArrayOutputStream os = new ByteArrayOutputStream();
-			final File file = HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".stream");  //$NON-NLS-1$//$NON-NLS-2$
-			final File fileResult = HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".stream");  //$NON-NLS-1$//$NON-NLS-2$
+			final File file = HelperIO.getTemporaryFile(getClass().getSimpleName(), ".stream");  //$NON-NLS-1$
+			final File fileResult = HelperIO.getTemporaryFile(getClass().getSimpleName(), ".stream");  //$NON-NLS-1$
 			HelperIO.writeFile(file, AllBogatyrTests.DATA, false);
 			HelperIO.readFileAsStream(file, os);
 			HelperIO.writeFile(fileResult, HelperIO.convertOutputToInputStream(os), false);
@@ -200,7 +250,7 @@ public class HelperIOTest {
 		}
 
 		try {
-			HelperIO.readFileAsStream(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".stream"), null);  //$NON-NLS-1$//$NON-NLS-2$
+			HelperIO.readFileAsStream(HelperIO.getTemporaryFile(getClass().getSimpleName(), ".stream"), null);  //$NON-NLS-1$
 			fail("os is null!"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

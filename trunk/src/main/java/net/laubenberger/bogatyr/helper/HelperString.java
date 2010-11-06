@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.2 (20100618)
+ * @version 0.9.4 (20101106)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -118,7 +118,8 @@ public abstract class HelperString {
 			new BigDecimal(input);
 			result = true;
 		} catch (NumberFormatException ex) {
-			log.info("NumberFormat invalid", ex); //$NON-NLS-1$
+			//do nothing
+//			if (log.isInfoEnabled()) log.info("NumberFormat invalid", ex); //$NON-NLS-1$
 		}
 
 		log.debug(HelperLog.methodExit(result));

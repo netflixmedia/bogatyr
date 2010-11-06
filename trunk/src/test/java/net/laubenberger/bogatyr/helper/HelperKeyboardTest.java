@@ -25,43 +25,30 @@
  * <laubenberger@gmail.com>
  */
 
-package net.laubenberger.bogatyr.helper.encoder;
+package net.laubenberger.bogatyr.helper;
 
-import static org.junit.Assert.fail;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import net.laubenberger.bogatyr.AllBogatyrTests;
-import net.laubenberger.bogatyr.helper.HelperString;
 
 import org.junit.Test;
 
 
 /**
- * JUnit test for {@link EncoderHtml}
+ * JUnit test for {@link HelperKeyboard}
  *
  * @author Stefan Laubenberger
  * @version 20101106
  */
-public class EncoderHtmlTest {
-	//TODO improve test for encode, but how?
-	
+public class HelperKeyboardTest {
 	@Test
-	public void testPassEncode() {
-		assertEquals(HelperString.EMPTY_STRING, EncoderHtml.encode(HelperString.EMPTY_STRING));
-		assertTrue(EncoderHtml.encode(AllBogatyrTests.DATA).length() > AllBogatyrTests.DATA.length());
-	}
+	public void testIsKeyPrintable() {
+		assertTrue(HelperKeyboard.isKeyPrintable(65)); //A
 
-	@Test
-	public void testFailEncode() {
-		try {
-			EncoderHtml.encode(null);
-			fail("input is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+		assertFalse(HelperKeyboard.isKeyPrintable(-10));
+		assertFalse(HelperKeyboard.isKeyPrintable(8));
+		assertFalse(HelperKeyboard.isKeyPrintable(33));
+		assertFalse(HelperKeyboard.isKeyPrintable(112));
+		assertFalse(HelperKeyboard.isKeyPrintable(127));
 	}
 }
 
