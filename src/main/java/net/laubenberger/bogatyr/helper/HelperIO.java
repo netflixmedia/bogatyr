@@ -69,7 +69,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101106)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -79,7 +79,7 @@ public abstract class HelperIO {
 	public static final String PATH_SEPARATOR = System.getProperty("path.separator"); //$NON-NLS-1$
 
 	/**
-	 * Returns a temporary {@link File} which will be deleted on program exit.
+	 * Returns a temporary {@link File} with a given name and extension.
 	 * 
 	 * @param name
 	 *           of the {@link File}
@@ -111,6 +111,25 @@ public abstract class HelperIO {
 	}
 
 	/**
+	 * Returns a temporary {@link File} with a given extension.
+	 * 
+	 * @param extension
+	 *           of the {@link File} (e.g. ".java")
+	 * @return temporary {@link File}
+	 * @throws IOException
+	 * @see File
+	 * @since 0.9.4
+	 */
+	public static File getTemporaryFile(final String extension) throws IOException { // $JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(extension));
+
+		final File result = getTemporaryFile(Constants.BOGATYR.getName(), extension);
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+
+	/**
 	 * Returns a temporary {@link File} which will be deleted on program exit.
 	 * 
 	 * @return temporary {@link File}
@@ -126,7 +145,7 @@ public abstract class HelperIO {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
-
+	
 	/**
 	 * Copy a directory.
 	 * 

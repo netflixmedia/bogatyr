@@ -63,7 +63,7 @@ import org.slf4j.LoggerFactory;
  * This is a class for asymmetric cryptology via RSA.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101105)
+ * @version 0.9.4 (20101106)
  * @since 0.1.0
  */
 public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymmetric {
@@ -234,7 +234,8 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 				result = true;
 			}
 		} catch (SignatureException ex) {
-			if (log.isInfoEnabled()) log.info("Signature invalid", ex); //$NON-NLS-1$
+			//do nothing
+//			if (log.isInfoEnabled()) log.info("Signature invalid", ex); //$NON-NLS-1$
 		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));

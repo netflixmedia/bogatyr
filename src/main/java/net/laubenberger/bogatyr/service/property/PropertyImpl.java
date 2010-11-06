@@ -50,7 +50,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * This is the properties class for file and stream access.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100519)
+ * @version 0.9.4 (20101106)
  * @since 0.1.0
  */
 public class PropertyImpl extends ServiceAbstract implements Property {
@@ -141,7 +141,8 @@ public class PropertyImpl extends ServiceAbstract implements Property {
 			try {
 				result = new URL(value);
 			} catch (MalformedURLException ex) {
-				if (log.isInfoEnabled()) log.info("URL invalid", ex); //$NON-NLS-1$
+				//do nothing
+//				if (log.isInfoEnabled()) log.info("URL invalid", ex); //$NON-NLS-1$
 			}
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));

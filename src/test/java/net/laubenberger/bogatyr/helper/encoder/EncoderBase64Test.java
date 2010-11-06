@@ -27,12 +27,11 @@
 
 package net.laubenberger.bogatyr.helper.encoder;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 
 import net.laubenberger.bogatyr.AllBogatyrTests;
 import net.laubenberger.bogatyr.helper.HelperArray;
@@ -46,7 +45,7 @@ import org.junit.Test;
  *  JUnit test for {@link EncoderBase64}
  *
  * @author Stefan Laubenberger
- * @version 20101103
+ * @version 20101106
  */
 public class EncoderBase64Test {
 	@Test
@@ -90,13 +89,13 @@ public class EncoderBase64Test {
 		encoded = EncoderBase64.encode(HelperArray.EMPTY_ARRAY_BYTE);
 		byte[] decoded = EncoderBase64.decode(encoded);
 		
-		assertTrue(Arrays.equals(HelperArray.EMPTY_ARRAY_BYTE, decoded));
+		assertArrayEquals(HelperArray.EMPTY_ARRAY_BYTE, decoded);
 		
 		// Test with real byte-array data
 		encoded = EncoderBase64.encode(AllBogatyrTests.DATA.getBytes());
 		decoded = EncoderBase64.decode(encoded);
 
-		assertTrue(Arrays.equals(AllBogatyrTests.DATA.getBytes(), decoded));
+		assertArrayEquals(AllBogatyrTests.DATA.getBytes(), decoded);
 	}
 	
 	@Test

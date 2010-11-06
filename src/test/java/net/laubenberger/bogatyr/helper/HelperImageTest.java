@@ -235,35 +235,35 @@ public class HelperImageTest {
 	public void testGetHQRenderingHints() {
 		final RenderingHints rh = HelperImage.getHQRenderingHints();
 		
-		assertTrue(rh.get(RenderingHints.KEY_ANTIALIASING).equals(RenderingHints.VALUE_ANTIALIAS_ON));
-		assertTrue(rh.get(RenderingHints.KEY_TEXT_ANTIALIASING).equals(RenderingHints.VALUE_TEXT_ANTIALIAS_ON));
-		assertTrue(rh.get(RenderingHints.KEY_INTERPOLATION).equals(RenderingHints.VALUE_INTERPOLATION_BICUBIC));
-		assertTrue(rh.get(RenderingHints.KEY_ALPHA_INTERPOLATION).equals(RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY));
-		assertTrue(rh.get(RenderingHints.KEY_RENDERING).equals(RenderingHints.VALUE_RENDER_QUALITY));
-		assertTrue(rh.get(RenderingHints.KEY_COLOR_RENDERING).equals(RenderingHints.VALUE_COLOR_RENDER_QUALITY));
+		assertEquals(RenderingHints.VALUE_ANTIALIAS_ON, rh.get(RenderingHints.KEY_ANTIALIASING));
+		assertEquals(RenderingHints.VALUE_TEXT_ANTIALIAS_ON, rh.get(RenderingHints.KEY_TEXT_ANTIALIASING));
+		assertEquals(RenderingHints.VALUE_INTERPOLATION_BICUBIC, rh.get(RenderingHints.KEY_INTERPOLATION));
+		assertEquals(RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY, rh.get(RenderingHints.KEY_ALPHA_INTERPOLATION));
+		assertEquals(RenderingHints.VALUE_RENDER_QUALITY, rh.get(RenderingHints.KEY_RENDERING));
+		assertEquals(RenderingHints.VALUE_COLOR_RENDER_QUALITY, rh.get(RenderingHints.KEY_COLOR_RENDERING));
 	}
 
 	@Test
 	public void testGetHQRenderingHintsForUpscale() {
 		final RenderingHints rh = HelperImage.getHQRenderingHintsForUpscale();
 		
-		assertTrue(rh.get(RenderingHints.KEY_ANTIALIASING).equals(RenderingHints.VALUE_ANTIALIAS_ON));
-		assertTrue(rh.get(RenderingHints.KEY_TEXT_ANTIALIASING).equals(RenderingHints.VALUE_TEXT_ANTIALIAS_ON));
-		assertTrue(rh.get(RenderingHints.KEY_INTERPOLATION).equals(RenderingHints.VALUE_INTERPOLATION_BICUBIC));
-		assertTrue(rh.get(RenderingHints.KEY_ALPHA_INTERPOLATION).equals(RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY));
-		assertTrue(rh.get(RenderingHints.KEY_RENDERING).equals(RenderingHints.VALUE_RENDER_QUALITY));
-		assertTrue(rh.get(RenderingHints.KEY_COLOR_RENDERING).equals(RenderingHints.VALUE_COLOR_RENDER_QUALITY));
+		assertEquals(RenderingHints.VALUE_ANTIALIAS_ON, rh.get(RenderingHints.KEY_ANTIALIASING));
+		assertEquals(RenderingHints.VALUE_TEXT_ANTIALIAS_ON, rh.get(RenderingHints.KEY_TEXT_ANTIALIASING));
+		assertEquals(RenderingHints.VALUE_INTERPOLATION_BICUBIC, rh.get(RenderingHints.KEY_INTERPOLATION));
+		assertEquals(RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY, rh.get(RenderingHints.KEY_ALPHA_INTERPOLATION));
+		assertEquals(RenderingHints.VALUE_RENDER_QUALITY, rh.get(RenderingHints.KEY_RENDERING));
+		assertEquals(RenderingHints.VALUE_COLOR_RENDER_QUALITY, rh.get(RenderingHints.KEY_COLOR_RENDERING));
 	}
 	
 	@Test
 	public void testGetHQRenderingHintsForDownscale() {
 		final RenderingHints rh = HelperImage.getHQRenderingHintsForDownscale();
 		
-		assertTrue(rh.get(RenderingHints.KEY_ANTIALIASING).equals(RenderingHints.VALUE_ANTIALIAS_ON));
-		assertTrue(rh.get(RenderingHints.KEY_TEXT_ANTIALIASING).equals(RenderingHints.VALUE_TEXT_ANTIALIAS_ON));
-		assertTrue(rh.get(RenderingHints.KEY_INTERPOLATION).equals(RenderingHints.VALUE_INTERPOLATION_BILINEAR));
-		assertTrue(rh.get(RenderingHints.KEY_ALPHA_INTERPOLATION).equals(RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY));
-		assertTrue(rh.get(RenderingHints.KEY_RENDERING).equals(RenderingHints.VALUE_RENDER_QUALITY));
-		assertTrue(rh.get(RenderingHints.KEY_COLOR_RENDERING).equals(RenderingHints.VALUE_COLOR_RENDER_QUALITY));
+		assertEquals(RenderingHints.VALUE_ANTIALIAS_ON, rh.get(RenderingHints.KEY_ANTIALIASING));
+		assertEquals(RenderingHints.VALUE_TEXT_ANTIALIAS_ON, rh.get(RenderingHints.KEY_TEXT_ANTIALIASING));
+		assertEquals(RenderingHints.VALUE_INTERPOLATION_BILINEAR, rh.get(RenderingHints.KEY_INTERPOLATION));
+		assertEquals(RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY, rh.get(RenderingHints.KEY_ALPHA_INTERPOLATION));
+		assertEquals(RenderingHints.VALUE_RENDER_QUALITY, rh.get(RenderingHints.KEY_RENDERING));
+		assertEquals(RenderingHints.VALUE_COLOR_RENDER_QUALITY, rh.get(RenderingHints.KEY_COLOR_RENDERING));
 	}
 }

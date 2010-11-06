@@ -43,7 +43,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperEnvironment}
  *
  * @author Stefan Laubenberger
- * @version 20101105
+ * @version 20101106
  */
 public class HelperEnvironmentTest {
 	@Test
@@ -100,7 +100,6 @@ public class HelperEnvironmentTest {
 	
 	@Test
 	public void testGetJavaProperties() {
-		assertNotNull(HelperEnvironment.getJavaProperties());
 		assertTrue(HelperEnvironment.getJavaProperties().size() > 0);
 		assertEquals(System.getProperties(), HelperEnvironment.getJavaProperties());
 	}
@@ -143,7 +142,6 @@ public class HelperEnvironmentTest {
 
 	@Test
 	public void testGetOsEnvironmentVariables() {
-		assertNotNull(HelperEnvironment.getOsEnvironmentVariables());
 		assertTrue(HelperEnvironment.getOsEnvironmentVariables().size() > 0);
 		assertEquals(System.getenv(), HelperEnvironment.getOsEnvironmentVariables());
 	}

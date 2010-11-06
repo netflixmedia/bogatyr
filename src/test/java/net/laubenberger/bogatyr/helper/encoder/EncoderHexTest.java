@@ -27,11 +27,8 @@
 
 package net.laubenberger.bogatyr.helper.encoder;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.fail;
-
-import java.util.Arrays;
-
 import net.laubenberger.bogatyr.AllBogatyrTests;
 import net.laubenberger.bogatyr.helper.HelperArray;
 
@@ -42,7 +39,7 @@ import org.junit.Test;
  * JUnit test for {@link EncoderHex}
  *
  * @author Stefan Laubenberger
- * @version 20101103
+ * @version 20101106
  */
 public class EncoderHexTest {
 	@Test
@@ -51,13 +48,13 @@ public class EncoderHexTest {
 		String encoded = EncoderHex.encode(HelperArray.EMPTY_ARRAY_BYTE);
 		byte[] decoded = EncoderHex.decode(encoded);
 		
-		assertTrue(Arrays.equals(HelperArray.EMPTY_ARRAY_BYTE, decoded));
+		assertArrayEquals(HelperArray.EMPTY_ARRAY_BYTE, decoded);
 
 		// Test with real byte-array data
 		encoded = EncoderHex.encode(AllBogatyrTests.DATA.getBytes());
 		decoded = EncoderHex.decode(encoded);
 
-		assertTrue(Arrays.equals(AllBogatyrTests.DATA.getBytes(), decoded));
+		assertArrayEquals(AllBogatyrTests.DATA.getBytes(), decoded);
 	}
 	
 	@Test
