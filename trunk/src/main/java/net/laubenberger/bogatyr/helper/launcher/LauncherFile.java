@@ -47,7 +47,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This launcher opens, edits and prints files with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101105)
+ * @version 0.9.4 (20101106)
  * @since 0.7.0
  */
 public abstract class LauncherFile {
@@ -104,7 +104,7 @@ public abstract class LauncherFile {
 		if (Desktop.isDesktopSupported()) {
 			Desktop.getDesktop().open(file);
 		} else {
-			throw new RuntimeException("Default system viewer application not supported by your machine!"); //$NON-NLS-1$
+			throw new RuntimeException("Default system viewer application not supported by your machine"); //$NON-NLS-1$
 		}
 	
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
@@ -172,7 +172,7 @@ public abstract class LauncherFile {
 		if (Desktop.isDesktopSupported()) {
 			Desktop.getDesktop().edit(file);
 		} else {
-			throw new RuntimeException("Default system editor application not supported by your machine!"); //$NON-NLS-1$
+			throw new RuntimeException("Default system editor application not supported by your machine"); //$NON-NLS-1$
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
@@ -239,7 +239,7 @@ public abstract class LauncherFile {
 		if (Desktop.isDesktopSupported()) {
 			Desktop.getDesktop().print(file);
 		} else {
-			throw new RuntimeException("Default system print application not supported by your machine!"); //$NON-NLS-1$
+			throw new RuntimeException("Default system print application not supported by your machine"); //$NON-NLS-1$
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}

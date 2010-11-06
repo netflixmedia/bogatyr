@@ -59,7 +59,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100813)
+ * @version 0.9.4 (20101106)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -82,7 +82,7 @@ public abstract class HelperImage {
 	 * @see BufferedImage
 	 * @since 0.9.0
 	 */
-	public static BufferedImage readImage(final File file) throws IOException {
+	public static BufferedImage readImage(final File file) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
@@ -105,7 +105,7 @@ public abstract class HelperImage {
 	 * @see BufferedImage
 	 * @since 0.9.0
 	 */
-	public static BufferedImage readImage(final InputStream is) throws IOException {
+	public static BufferedImage readImage(final InputStream is) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
@@ -161,8 +161,7 @@ public abstract class HelperImage {
 	 * @see RenderedImage
 	 * @since 0.9.0
 	 */
-	public static void writeImage(final OutputStream os, final String type, final RenderedImage image)
-			throws IOException {
+	public static void writeImage(final OutputStream os, final String type, final RenderedImage image) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(os, type, image));
 		if (null == image) {
 			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
@@ -188,7 +187,7 @@ public abstract class HelperImage {
 	 * @see Component
 	 * @since 0.4.0
 	 */
-	public static BufferedImage getImage(final Component component) {
+	public static BufferedImage getImage(final Component component) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(component));
 		if (null == component) {
 			throw new RuntimeExceptionIsNull("component"); //$NON-NLS-1$
@@ -215,7 +214,7 @@ public abstract class HelperImage {
 	 * @see BufferedImage
 	 * @since 0.9.0
 	 */
-	public static BufferedImage getScaledImage(final BufferedImage image, final double scale) {
+	public static BufferedImage getScaledImage(final BufferedImage image, final double scale) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(image, scale));
 		if (null == image) {
 			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
@@ -242,10 +241,13 @@ public abstract class HelperImage {
 	 * @see Dimension
 	 * @since 0.9.0
 	 */
-	public static BufferedImage getScaledImage(final BufferedImage image, final Dimension size) {
+	public static BufferedImage getScaledImage(final BufferedImage image, final Dimension size) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(image, size));
 		if (null == image) {
 			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
+		}
+		if (null == size) {
+			throw new RuntimeExceptionIsNull("size"); //$NON-NLS-1$
 		}
 		if (0 > size.width) {
 			throw new RuntimeExceptionMustBeGreater("size.width", size.width, 0); //$NON-NLS-1$
@@ -358,6 +360,60 @@ public abstract class HelperImage {
 	}
 
 	/**
+	 * Returns a set of high quality {@link RenderingHints} for basic transformations.
+	 * 
+	 * @return set of high quality {@link RenderingHints} for basic transformations.
+	 * @see RenderingHints
+	 * @since 0.9.2
+	 */
+	public static RenderingHints getHQRenderingHints() { // $JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		final RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		hints.put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		hints.put(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+		hints.put(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+		hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		hints.put(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(hints));
+		return hints;
+	}
+	
+	/**
+	 * Returns a set of high quality {@link RenderingHints} for upscale transformations.
+	 * 
+	 * @return set of high quality {@link RenderingHints} for upscale transformations.
+	 * @see RenderingHints
+	 * @since 0.9.3
+	 */
+	public static RenderingHints getHQRenderingHintsForUpscale() { // $JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		final RenderingHints hints = getHQRenderingHints();
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(hints));
+		return hints;
+	}
+	
+	/**
+	 * Returns a set of high quality {@link RenderingHints} for downscale transformations.
+	 * 
+	 * @return set of high quality {@link RenderingHints} for downscale transformations.
+	 * @see RenderingHints
+	 * @since 0.9.3
+	 */
+	public static RenderingHints getHQRenderingHintsForDownscale() { // $JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+		
+		final RenderingHints hints = getHQRenderingHints();
+		hints.put(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(hints));
+		return hints;
+	}
+
+	/**
 	 * Returns a {@link BufferedImage} from a given {@link Image}.
 	 * 
 	 * @param image
@@ -393,61 +449,6 @@ public abstract class HelperImage {
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
-	}
-
-
-	/**
-	 * Returns a set of high quality {@link RenderingHints} for basic transformations.
-	 * 
-	 * @return set of high quality {@link RenderingHints} for basic transformations.
-	 * @see RenderingHints
-	 * @since 0.9.2
-	 */
-	public static RenderingHints getHQRenderingHints() {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-		
-		final RenderingHints hints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		hints.put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		hints.put(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-		hints.put(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-		hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		hints.put(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(hints));
-		return hints;
-	}
-	
-	/**
-	 * Returns a set of high quality {@link RenderingHints} for upscale transformations.
-	 * 
-	 * @return set of high quality {@link RenderingHints} for upscale transformations.
-	 * @see RenderingHints
-	 * @since 0.9.3
-	 */
-	public static RenderingHints getHQRenderingHintsForUpscale() {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-		
-		final RenderingHints hints = getHQRenderingHints();
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(hints));
-		return hints;
-	}
-	
-	/**
-	 * Returns a set of high quality {@link RenderingHints} for downscale transformations.
-	 * 
-	 * @return set of high quality {@link RenderingHints} for downscale transformations.
-	 * @see RenderingHints
-	 * @since 0.9.3
-	 */
-	public static RenderingHints getHQRenderingHintsForDownscale() {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-		
-		final RenderingHints hints = getHQRenderingHints();
-		hints.put(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(hints));
-		return hints;
 	}
 	
 	/**

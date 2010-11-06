@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
  * This launcher starts the system mail application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101106)
  * @since 0.7.0
  */
 public abstract class LauncherMail {
@@ -67,7 +67,7 @@ public abstract class LauncherMail {
 		if (Desktop.isDesktopSupported()) {
 			Desktop.getDesktop().mail();
 		} else {
-			throw new RuntimeException("Mail application not supported by your machine!"); //$NON-NLS-1$
+			throw new RuntimeException("Mail application not supported by your machine"); //$NON-NLS-1$
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
@@ -89,7 +89,7 @@ public abstract class LauncherMail {
 		if (Desktop.isDesktopSupported()) {
 			Desktop.getDesktop().mail(uri);
 		} else {
-			throw new RuntimeException("Mail application not supported by your machine!"); //$NON-NLS-1$
+			throw new RuntimeException("Mail application not supported by your machine"); //$NON-NLS-1$
 		}
 		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());

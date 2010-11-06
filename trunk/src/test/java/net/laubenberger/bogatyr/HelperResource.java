@@ -30,11 +30,12 @@ package net.laubenberger.bogatyr;
  * Helper class for different available resources.
  * 
  * @author Stefan Laubenberger
- * @version 20101103
+ * @version 20101106
  */
 public interface HelperResource {
 
 	String RES_FILE_MID = "/net/laubenberger/bogatyr/test.mid"; //$NON-NLS-1$
+	String RES_FILE_PNG = "/net/laubenberger/bogatyr/test.png"; //$NON-NLS-1$
 	String RES_FILE_TXT = "/net/laubenberger/bogatyr/test.txt"; //$NON-NLS-1$
 	String RES_FILE_WAV = "/net/laubenberger/bogatyr/test.wav"; //$NON-NLS-1$
 }

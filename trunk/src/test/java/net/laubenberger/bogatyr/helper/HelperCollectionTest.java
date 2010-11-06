@@ -46,7 +46,7 @@ import net.laubenberger.bogatyr.helper.HelperCollection;
  * JUnit test for {@link HelperCollection}
  *
  * @author Stefan Laubenberger
- * @version 20101103
+ * @version 20101106
  */
 public class HelperCollectionTest {
 	@Test
@@ -149,7 +149,7 @@ public class HelperCollectionTest {
 
 		try {
 			HelperCollection.dump(null);
-			fail("iterable is null!"); //$NON-NLS-1$
+			fail("iterable is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {

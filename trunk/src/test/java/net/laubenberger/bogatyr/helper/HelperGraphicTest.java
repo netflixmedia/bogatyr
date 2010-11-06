@@ -27,75 +27,252 @@
 
 package net.laubenberger.bogatyr.helper;
 
-import net.laubenberger.bogatyr.helper.HelperGraphic;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import static org.junit.Assert.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
+import net.laubenberger.bogatyr.misc.Constants;
+import net.laubenberger.bogatyr.view.swing.Panel;
 
 import org.junit.Test;
 
-import java.awt.Color;
-import java.awt.Dimension;
-
 
 /**
- * Junit test
+ * JUnit test for {@link HelperGraphic}
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20101106
  */
 public class HelperGraphicTest {
-	@Test
-	public void testGetScale() {
-//		System.out.println(HelperGraphic.getScale(new Dimension(100, 100), (new Dimension(0, 20))));
-//		System.out.println(HelperGraphic.getScaledSize(new Dimension(100, 100), (new Dimension(0, 40))));
-//		System.out.println(HelperGraphic.getScaledSize(new Dimension(100, 100), 0.4));
-		assertEquals(0.5D, HelperGraphic.getScale(new Dimension(100, 100), (new Dimension(50, 50))), 0.001D);
-
-//		try {
-//			HelperGraphic.getCenter(null);
-//			fail("size is null!"); //$NON-NLS-1$
-//		} catch (IllegalArgumentException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
-	}
-
 	@Test
 	public void testGetCenter() {
 		assertEquals(new Dimension(50, 50), HelperGraphic.getCenter(new Dimension(100, 100)));
 		assertEquals(new Dimension(-50, -50), HelperGraphic.getCenter(new Dimension(-100, -100)));
-
-//		try {
-//			HelperGraphic.getCenter(null);
-//			fail("size is null!"); //$NON-NLS-1$
-//		} catch (IllegalArgumentException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
+		assertEquals(new Dimension(0, 0), HelperGraphic.getCenter(new Dimension(0, 0)));
+		assertEquals(new Dimension(50, 0), HelperGraphic.getCenter(new Dimension(100, 0)));
+		assertEquals(new Dimension(0, 50), HelperGraphic.getCenter(new Dimension(0, 100)));
+		
+		try {
+			HelperGraphic.getCenter(null);
+			fail("size is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
-
+	
 	@Test
-	public void testGetFonts() {
-		assertNotNull(HelperGraphic.getAvailableFonts());
-//		System.out.println(HelperGeneral.dumpList(HelperGraphic.getFonts()));
-	}
+	public void testGetScale() {
+		// standard cases
+		assertEquals(0.5D, HelperGraphic.getScale(new Dimension(100, 100), (new Dimension(50, 50))), 0.001D);
+		assertEquals(0.5D, HelperGraphic.getScale(new Dimension(100, 100), (new Dimension(50, 75))), 0.001D);
+		assertEquals(0.25D, HelperGraphic.getScale(new Dimension(100, 100), (new Dimension(50, 25))), 0.001D);
+		assertEquals(0.5D, HelperGraphic.getScale(new Dimension(100, 100), (new Dimension(75, 50))), 0.001D);
+		assertEquals(0.25D, HelperGraphic.getScale(new Dimension(100, 100), (new Dimension(25, 50))), 0.001D);
 
-	@Test
-	public void testGetColorHex() {
-		assertNotNull(HelperGraphic.getColorHex(Color.RED));
+		// special cases with 0 (= flexible)
+		assertEquals(0.5D, HelperGraphic.getScale(new Dimension(100, 100), (new Dimension(0, 50))), 0.001D);
+		assertEquals(0.5D, HelperGraphic.getScale(new Dimension(100, 100), (new Dimension(50, 0))), 0.001D);
+		assertEquals(1.0D, HelperGraphic.getScale(new Dimension(100, 100), (new Dimension(0, 0))), 0.001D);
 
 		try {
-			HelperGraphic.getColorHex(null);
-			fail("color is null!"); //$NON-NLS-1$
+			HelperGraphic.getScale(null, new Dimension(50, 50));
+			fail("input is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 
-//		System.out.println(HelperGraphic.getColorHex(Color.RED));
+		try {
+			HelperGraphic.getScale(new Dimension(100, 100), null);
+			fail("output is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperGraphic.getScale(new Dimension(-100, 100), new Dimension(50, 50));
+			fail("input.width is negative"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	
+		try {
+			HelperGraphic.getScale(new Dimension(100, -100), new Dimension(50, 50));
+			fail("input.height is negative"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	
+		try {
+			HelperGraphic.getScale(new Dimension(100, 100), new Dimension(-50, 50));
+			fail("output.width is negative"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	
+		try {
+			HelperGraphic.getScale(new Dimension(100, 100), new Dimension(50, -50));
+			fail("output.height is negative"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetScaledSizeWithDimension() {
+		// standard cases
+		assertEquals(new Dimension(50, 50), HelperGraphic.getScaledSize(new Dimension(100, 100), (new Dimension(50, 50))));
+		assertEquals(new Dimension(50, 50), HelperGraphic.getScaledSize(new Dimension(100, 100), (new Dimension(70, 50))));
+		assertEquals(new Dimension(50, 50), HelperGraphic.getScaledSize(new Dimension(100, 100), (new Dimension(50, 70))));
+
+		// special cases with 0 (= flexible)
+		assertEquals(new Dimension(50, 50), HelperGraphic.getScaledSize(new Dimension(100, 100), (new Dimension(0, 50))));
+		assertEquals(new Dimension(50, 50), HelperGraphic.getScaledSize(new Dimension(100, 100), (new Dimension(50, 0))));
+		assertEquals(new Dimension(100, 100), HelperGraphic.getScaledSize(new Dimension(100, 100), (new Dimension(0, 0))));
+
+		try {
+			HelperGraphic.getScaledSize(null, new Dimension(50, 50));
+			fail("input is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperGraphic.getScaledSize(new Dimension(100, 100), null);
+			fail("output is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperGraphic.getScale(new Dimension(-100, 100), new Dimension(50, 50));
+			fail("input.width is negative"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	
+		try {
+			HelperGraphic.getScale(new Dimension(100, -100), new Dimension(50, 50));
+			fail("input.height is negative"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	
+		try {
+			HelperGraphic.getScale(new Dimension(100, 100), new Dimension(-50, 50));
+			fail("output.width is negative"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	
+		try {
+			HelperGraphic.getScale(new Dimension(100, 100), new Dimension(50, -50));
+			fail("output.height is negative"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetScaledSizeWithScale() {
+		assertEquals(new Dimension(50, 50), HelperGraphic.getScaledSize(new Dimension(100, 100), 0.5D));
+		assertEquals(new Dimension(-50, -50), HelperGraphic.getScaledSize(new Dimension(100, 100), -0.5D));
+		assertEquals(new Dimension(50, -50), HelperGraphic.getScaledSize(new Dimension(-100, 100), -0.5D));
+		assertEquals(new Dimension(-50, 50), HelperGraphic.getScaledSize(new Dimension(100, -100), -0.5D));
+		assertEquals(new Dimension(0, 0), HelperGraphic.getScaledSize(new Dimension(100, -100), 0.0D));
+
+		try {
+			HelperGraphic.getScaledSize(null, 0.5D);
+			fail("input is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetTextSize() {
+		final Component component = new Panel();
+		component.setSize(new Dimension(100, 30));
+
+		final BufferedImage result = new BufferedImage(component.getSize().width, component.getSize().height, BufferedImage.TYPE_INT_RGB);
+		final Graphics2D g2d = result.createGraphics();
+
+		component.paint(g2d);
+
+		assertEquals(new Dimension(47, 15), HelperGraphic.getTextSize(Constants.BOGATYR.getName(), g2d));
+		assertEquals(new Dimension(0, 15), HelperGraphic.getTextSize(HelperString.EMPTY_STRING, g2d));
+	
+		try {
+			HelperGraphic.getTextSize(null, g2d);
+			fail("text is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperGraphic.getTextSize(Constants.BOGATYR.getName(), null);
+			fail("graphics is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+	}
+	
+	@Test
+	public void testGetAvailableFonts() {
+		assertTrue(HelperGraphic.getAvailableFonts().size() > 0);
+	}
+
+	@Test
+	public void testGetColorHex() {
+		assertEquals("ff0000", HelperGraphic.getColorHex(Color.RED));
+		assertEquals("ffff00", HelperGraphic.getColorHex(Color.YELLOW));
+
+		try {
+			HelperGraphic.getColorHex(null);
+			fail("color is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }
 

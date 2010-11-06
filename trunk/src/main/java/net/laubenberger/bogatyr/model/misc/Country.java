@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * <strong>Note:</strong> The language is always the main language of a country.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100915)
+ * @version 0.9.4 (20101106)
  * @since 0.9.1
  */
 @XmlRootElement(name = "country")
@@ -186,7 +186,7 @@ public enum Country { //TODO complete the list with all countries
 			try {
 				icon = HelperImage.readImage(Language.class.getClassLoader().getResourceAsStream("net/laubenberger/bogatyr/icon/country/" + getCode().toLowerCase() + ".png")); //$NON-NLS-1$ //$NON-NLS-2$
 			} catch (IOException ex) {
-				// Should never happen!
+				// should never happen!
 				log.error("Could not load icon", ex); //$NON-NLS-1$
 			}
 		}

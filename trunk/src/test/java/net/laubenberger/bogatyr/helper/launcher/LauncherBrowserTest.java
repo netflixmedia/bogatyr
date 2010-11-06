@@ -32,6 +32,7 @@ import static org.junit.Assert.fail;
 import java.net.URI;
 
 import net.laubenberger.bogatyr.helper.HelperString;
+import net.laubenberger.bogatyr.misc.Constants;
 
 import org.junit.Test;
 
@@ -39,13 +40,13 @@ import org.junit.Test;
  * JUnit test for {@link LauncherBrowser}
  * 
  * @author Stefan Laubenberger
- * @version 20101103
+ * @version 20101106
  */
 public class LauncherBrowserTest {
 	@Test
 	public void testPassBrowse() {
 		try {
-			LauncherBrowser.browse(new URI("http://www.laubenberger.net")); //$NON-NLS-1$
+			LauncherBrowser.browse(Constants.BOGATYR.getUrl().toURI());
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}

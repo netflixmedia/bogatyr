@@ -31,13 +31,13 @@ package net.laubenberger.bogatyr.misc.exception;
  * This runtime exception is thrown if an argument is null.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.4 (20101106)
  * @since 0.9.0
  */
 public class RuntimeExceptionIsNull extends IllegalArgumentException {
 	private static final long serialVersionUID = 8539788707176531770L;
 
 	public RuntimeExceptionIsNull(final String argument) {
-		super(argument + " is null!"); //$NON-NLS-1$
+		super(argument + " is null"); //$NON-NLS-1$
 	}
 }

@@ -41,7 +41,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperArray}
  *
  * @author Stefan Laubenberger
- * @version 20101103
+ * @version 20101106
  */
 public class HelperArrayTest {
 
@@ -99,7 +99,7 @@ public class HelperArrayTest {
 
 		try {
 			HelperArray.removeDuplicates(null);
-			fail("array is null!"); //$NON-NLS-1$
+			fail("array is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -118,7 +118,7 @@ public class HelperArrayTest {
 
 		try {
 			HelperArray.contains(null, "A"); //$NON-NLS-1$
-			fail("array is null!"); //$NON-NLS-1$
+			fail("array is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -134,7 +134,7 @@ public class HelperArrayTest {
 
 		try {
 			HelperArray.dump((String[])null);
-			fail("array is null!"); //$NON-NLS-1$
+			fail("array is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -150,7 +150,7 @@ public class HelperArrayTest {
 
 		try {
 			HelperArray.dump((byte[])null);
-			fail("array is null!"); //$NON-NLS-1$
+			fail("array is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -166,7 +166,7 @@ public class HelperArrayTest {
 
 		try {
 			HelperArray.dump((char[])null);
-			fail("array is null!"); //$NON-NLS-1$
+			fail("array is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {

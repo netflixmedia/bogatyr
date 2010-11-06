@@ -43,7 +43,7 @@ import org.junit.Test;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100819
+ * @version 20101106
  */
 public class HelperNetTest {
 	@Test
@@ -269,7 +269,7 @@ public class HelperNetTest {
 	}
 
 	@Test
-	public void testGetLocalHostname() { //TODO improve... but how?
+	public void testGetLocalHostname() {
 		try {
 			assertNotNull(HelperNet.getLocalHostname());
 		} catch (Exception ex) {
@@ -278,7 +278,7 @@ public class HelperNetTest {
 	}
 
 	@Test
-	public void testGetLocalIp() { //TODO improve... but how?
+	public void testGetLocalIp() {
 		try {
 			assertNotNull(HelperNet.getLocalIp());
 		} catch (Exception ex) {
@@ -287,7 +287,7 @@ public class HelperNetTest {
 	}
 
 	@Test
-	public void testGetLocalIps() { //TODO improve... but how?
+	public void testGetLocalIps() { 
 		try {
 			assertNotNull(HelperNet.getLocalIps());
 		} catch (Exception ex) {
@@ -296,7 +296,7 @@ public class HelperNetTest {
 	}
 
 	@Test
-	public void testGetNetworkInterfaces() { //TODO improve... but how?
+	public void testGetNetworkInterfaces() { 
 		try {
 			assertNotNull(HelperNet.getNetworkInterfaces());
 		} catch (Exception ex) {
