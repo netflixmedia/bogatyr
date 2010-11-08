@@ -49,7 +49,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperCrypto}
  *
  * @author Stefan Laubenberger
- * @version 20101106
+ * @version 20101108
  */
 public class HelperCryptoTest {
 
@@ -114,13 +114,15 @@ public class HelperCryptoTest {
 	
 	@Test
 	public void testGetProviders() {
-		assertTrue(HelperCrypto.getProviders().size() > 0);
+//		System.err.println(HelperCrypto.getProviders().size());
+		assertTrue(HelperCrypto.getProviders().size() >= 11);
 		assertTrue(HelperCrypto.getProviders().contains(HelperCrypto.DEFAULT_PROVIDER));
 	}
 	
 	@Test
 	public void testGetCiphers() {
-		assertTrue(HelperCrypto.getCiphers(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+//		System.err.println(HelperCrypto.getCiphers(HelperCrypto.DEFAULT_PROVIDER).size());
+		assertTrue(HelperCrypto.getCiphers(HelperCrypto.DEFAULT_PROVIDER).size() >= 75);
 		
 		for (CryptoSymmetricAlgo algo : CryptoSymmetricAlgo.values()) {
 			assertTrue(HelperCrypto.getCiphers(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
@@ -145,7 +147,8 @@ public class HelperCryptoTest {
 
 	@Test
 	public void testGetKeyAgreements() {
-		assertTrue(HelperCrypto.getKeyAgreements(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+//		System.err.println(HelperCrypto.getKeyAgreements(HelperCrypto.DEFAULT_PROVIDER).size());
+		assertTrue(HelperCrypto.getKeyAgreements(HelperCrypto.DEFAULT_PROVIDER).size() >= 4);
 		assertTrue(HelperCrypto.getKeyAgreements(HelperCrypto.DEFAULT_PROVIDER).contains("DH")); //$NON-NLS-1$
 		
 		try {
@@ -160,7 +163,8 @@ public class HelperCryptoTest {
 	
 	@Test
 	public void testGetMacs() {
-		assertTrue(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+//		System.err.println(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).size());
+		assertTrue(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).size() >= 33);
 		
 		for (HmacAlgo algo : HmacAlgo.values()) {
 			assertTrue(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
@@ -183,7 +187,8 @@ public class HelperCryptoTest {
 
 	@Test
 	public void testGetMessageDigests() {
-		assertTrue(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+//		System.err.println(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).size());
+		assertTrue(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).size() >=15);
 		
 		for (HashCodeAlgo algo : HashCodeAlgo.values()) {
 			assertTrue(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
@@ -206,7 +211,8 @@ public class HelperCryptoTest {
 
 	@Test
 	public void testGetSignatures() {
-		assertTrue(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+//		System.err.println(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).size());
+		assertTrue(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).size() >= 45);
 		
 		for (SignatureAlgo algo : SignatureAlgo.values()) {
 			assertTrue(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
@@ -229,7 +235,8 @@ public class HelperCryptoTest {
 
 	@Test
 	public void testGetKeyPairGenerators() {
-		assertTrue(HelperCrypto.getKeyPairGenerators(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+//		System.err.println(HelperCrypto.getKeyPairGenerators(HelperCrypto.DEFAULT_PROVIDER).size());
+		assertTrue(HelperCrypto.getKeyPairGenerators(HelperCrypto.DEFAULT_PROVIDER).size() >= 12);
 		
 		for (CryptoAsymmetricAlgo algo : CryptoAsymmetricAlgo.values()) {
 			assertTrue(HelperCrypto.getKeyPairGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
@@ -252,7 +259,8 @@ public class HelperCryptoTest {
 	
 	@Test
 	public void testGetKeyFactories() {
-		assertTrue(HelperCrypto.getKeyFactories(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+//		System.err.println(HelperCrypto.getKeyFactories(HelperCrypto.DEFAULT_PROVIDER).size());
+		assertTrue(HelperCrypto.getKeyFactories(HelperCrypto.DEFAULT_PROVIDER).size() >= 13);
 		
 		for (CryptoAsymmetricAlgo algo : CryptoAsymmetricAlgo.values()) {
 			assertTrue(HelperCrypto.getKeyFactories(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
@@ -275,7 +283,8 @@ public class HelperCryptoTest {
 	
 	@Test
 	public void testGetKeyGenerators() {
-		assertTrue(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).size() > 0);
+//		System.err.println(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).size());
+		assertTrue(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).size() >= 41);
 		
 		for (CryptoSymmetricAlgo algo : CryptoSymmetricAlgo.values()) {
 			assertTrue(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));

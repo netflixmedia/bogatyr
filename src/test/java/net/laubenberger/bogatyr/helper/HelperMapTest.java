@@ -29,7 +29,10 @@ package net.laubenberger.bogatyr.helper;
 
 import net.laubenberger.bogatyr.helper.HelperMap;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -38,10 +41,10 @@ import java.util.Map;
 
 
 /**
- * Junit test
+ * JUnit test for {@link HelperMap}
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20101108
  */
 public class HelperMapTest {
 	@Test
@@ -51,8 +54,54 @@ public class HelperMapTest {
 		assertFalse(HelperMap.isValid(map));
 		map.put("Hi", "Stefan"); //$NON-NLS-1$ //$NON-NLS-2$
 		assertTrue(HelperMap.isValid(map));
+		
+		assertFalse(HelperMap.isValid(null));
 	}
 
+	@Test
+	public void testGetKeys() {
+		final Map<String, String> map = new HashMap<String, String>();
+
+		assertEquals(0, HelperMap.getKeys(map).size());
+		
+		map.put("1", "Silvan"); //$NON-NLS-1$ //$NON-NLS-2$
+		map.put("2", "Roman"); //$NON-NLS-1$ //$NON-NLS-2$
+		map.put("3", "Stefan"); //$NON-NLS-1$ //$NON-NLS-2$
+
+		assertEquals(5, HelperCollection.dump(HelperMap.getKeys(map)).length());
+		
+		try {
+			HelperMap.getKeys(null);
+			fail("map is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+
+	@Test
+	public void testGetValues() {
+		final Map<String, String> map = new HashMap<String, String>();
+
+		assertEquals(0, HelperMap.getValues(map).size());
+		
+		map.put("1", "Silvan"); //$NON-NLS-1$ //$NON-NLS-2$
+		map.put("2", "Roman"); //$NON-NLS-1$ //$NON-NLS-2$
+		map.put("3", "Stefan"); //$NON-NLS-1$ //$NON-NLS-2$
+
+		assertEquals(19, HelperCollection.dump(HelperMap.getValues(map)).length());
+		
+		try {
+			HelperMap.getValues(null);
+			fail("map is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
 	@Test
 	public void testDump() {
 		final Map<String, String> map = new HashMap<String, String>();
@@ -61,15 +110,15 @@ public class HelperMapTest {
 		map.put("2", "Roman"); //$NON-NLS-1$ //$NON-NLS-2$
 		map.put("3", "Stefan"); //$NON-NLS-1$ //$NON-NLS-2$
 
-		assertNotNull(HelperMap.dump(map));
+		assertEquals(25, HelperMap.dump(map).length());
 
-//		try {
-//			HelperMap.dump(null);
-//			fail("map is null!"); //$NON-NLS-1$
-//		} catch (IllegalArgumentException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
+		try {
+			HelperMap.dump(null);
+			fail("map is null!"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }

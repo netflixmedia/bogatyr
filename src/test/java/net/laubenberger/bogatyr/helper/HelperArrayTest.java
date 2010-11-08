@@ -40,7 +40,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperArray}
  *
  * @author Stefan Laubenberger
- * @version 20101106
+ * @version 20101108
  */
 public class HelperArrayTest {
 
@@ -129,7 +129,8 @@ public class HelperArrayTest {
 	public void testDumpObjects() {
 		final String[] array = {"A", "B", "C"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
-		assertTrue(HelperArray.dump(array).length() > 0);
+//		System.err.println(HelperArray.dump(array).length());
+		assertEquals(5, HelperArray.dump(array).length());
 
 		try {
 			HelperArray.dump((String[])null);
@@ -145,7 +146,8 @@ public class HelperArrayTest {
 	public void testDumpBytes() {
 		byte[] array = {1, 2, 3};
 
-		assertTrue(HelperArray.dump(array).length() > 0);
+//		System.err.println(HelperArray.dump(array).length());
+		assertEquals(5, HelperArray.dump(array).length());
 
 		try {
 			HelperArray.dump((byte[])null);
@@ -161,7 +163,8 @@ public class HelperArrayTest {
 	public void testDumpChars() {
 		final char[] array = {'A', 'B', 'C'};
 		
-		assertTrue(HelperArray.dump(array).length() > 0);
+//		System.err.println(HelperArray.dump(array).length());
+		assertEquals(5, HelperArray.dump(array).length());
 
 		try {
 			HelperArray.dump((char[])null);

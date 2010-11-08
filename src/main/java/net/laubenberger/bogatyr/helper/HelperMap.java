@@ -36,12 +36,11 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
  * This is a helper class for maps.
- *
+ * 
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100519)
+ * @version 0.9.4 (20101108)
  * @since 0.9.0
  */
 public abstract class HelperMap {
@@ -49,13 +48,14 @@ public abstract class HelperMap {
 
 	/**
 	 * Checks if a {@link Map} is valid.
-	 *
-	 * @param arg to check
+	 * 
+	 * @param arg
+	 *           to check
 	 * @return true/false
 	 * @see Map
 	 * @since 0.9.0
 	 */
-	public static boolean isValid(final Map<?, ?> arg) { //$JUnit$
+	public static boolean isValid(final Map<?, ?> arg) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arg));
 
 		final boolean result = !(null == arg || arg.isEmpty());
@@ -66,8 +66,9 @@ public abstract class HelperMap {
 
 	/**
 	 * Get a {@link List} of all keys from a {@link Map}.
-	 *
-	 * @param map to dump
+	 * 
+	 * @param map
+	 *           to dump
 	 * @return {@link List} containing all keys from a {@link Map}
 	 * @see Map
 	 * @since 0.9.1
@@ -88,9 +89,10 @@ public abstract class HelperMap {
 	}
 
 	/**
-	 * Get  a {@link List} of all values from a {@link Map}.
-	 *
-	 * @param map to dump
+	 * Get a {@link List} of all values from a {@link Map}.
+	 * 
+	 * @param map
+	 *           to dump
 	 * @return {@link List} containing all values from a {@link Map}
 	 * @see Map
 	 * @since 0.9.1
@@ -112,30 +114,31 @@ public abstract class HelperMap {
 
 	/**
 	 * Dump a {@link Map}.
-	 *
-	 * @param map to dump
+	 * 
+	 * @param map
+	 *           to dump
 	 * @return dump string
 	 * @see Map
 	 * @since 0.7.0
 	 */
-	public static String dump(final Map<?, ?> map) { //$JUnit$
+	public static String dump(final Map<?, ?> map) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(map));
-
-		String result = null;
-		if (null != map) {
-			final StringBuilder sb = new StringBuilder();
-	
-			for (final Map.Entry<?, ?> pair : map.entrySet()) {
-				if (0 < sb.length()) {
-					sb.append(HelperString.NEW_LINE);
-				}
-				sb.append(pair.getKey());
-				sb.append('=');
-				sb.append(pair.getValue());
-			}
-	
-			result = sb.toString();
+		if (null == map) {
+			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
 		}
+
+		final StringBuilder sb = new StringBuilder();
+
+		for (final Map.Entry<?, ?> pair : map.entrySet()) {
+			if (0 < sb.length()) {
+				sb.append(HelperString.NEW_LINE);
+			}
+			sb.append(pair.getKey());
+			sb.append('=');
+			sb.append(pair.getValue());
+		}
+
+		String result = sb.toString();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

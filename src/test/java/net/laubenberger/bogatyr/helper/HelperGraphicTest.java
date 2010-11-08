@@ -47,7 +47,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperGraphic}
  *
  * @author Stefan Laubenberger
- * @version 20101106
+ * @version 20101108
  */
 public class HelperGraphicTest {
 	@Test
@@ -257,13 +257,14 @@ public class HelperGraphicTest {
 	
 	@Test
 	public void testGetAvailableFonts() {
-		assertTrue(HelperGraphic.getAvailableFonts().size() > 0);
+//		System.err.println(HelperGraphic.getAvailableFonts().size());
+		assertTrue(HelperGraphic.getAvailableFonts().size() > 50);
 	}
 
 	@Test
 	public void testGetColorHex() {
-		assertEquals("ff0000", HelperGraphic.getColorHex(Color.RED));
-		assertEquals("ffff00", HelperGraphic.getColorHex(Color.YELLOW));
+		assertEquals("ff0000", HelperGraphic.getColorHex(Color.RED)); //$NON-NLS-1$
+		assertEquals("ffff00", HelperGraphic.getColorHex(Color.YELLOW)); //$NON-NLS-1$
 
 		try {
 			HelperGraphic.getColorHex(null);
