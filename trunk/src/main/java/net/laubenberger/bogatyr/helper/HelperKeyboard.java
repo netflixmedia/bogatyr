@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for keyboards.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101106)
+ * @version 0.9.4 (20101108)
  * @since 0.9.0
  */
 public abstract class HelperKeyboard {
@@ -53,16 +53,18 @@ public abstract class HelperKeyboard {
 
 		final boolean result = !(0 > keyCode || //keyCode couldn't be negative
 				8 == keyCode || // backspace
-				(16 <= keyCode && 18 >= keyCode) || // shift, ctrl, alt
+				16 == keyCode || // shift
+				17 == keyCode || // ctrl
+				18 == keyCode || // alt
 				20 == keyCode || // Caps lock
 				27 == keyCode || // escape
 				(33 <= keyCode && 40 >= keyCode) || // PgUp, PgDown, Home, End, Arrows
 				(112 <= keyCode && 123 >= keyCode) || // F1-F12
-				127 == keyCode || // Delete
+				127 == keyCode || // delete
 				144 == keyCode || // Num lock
 				145 == keyCode || // Scroll lock
-				154 == keyCode || // Print
-				155 == keyCode || // Insert
+				154 == keyCode || // print
+				155 == keyCode || // insert
 				157 == keyCode || // Mac cmd
 				524 == keyCode || // Windows cmd
 				525 == keyCode); // Windows context menu

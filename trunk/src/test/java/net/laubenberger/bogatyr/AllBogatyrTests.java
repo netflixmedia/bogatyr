@@ -39,8 +39,9 @@ import net.laubenberger.bogatyr.helper.HelperEnvironmentTest;
 import net.laubenberger.bogatyr.helper.HelperGraphicTest;
 import net.laubenberger.bogatyr.helper.HelperIOTest;
 import net.laubenberger.bogatyr.helper.HelperImageTest;
-import net.laubenberger.bogatyr.helper.HelperKeyboard;
 import net.laubenberger.bogatyr.helper.HelperKeyboardTest;
+import net.laubenberger.bogatyr.helper.HelperLogTest;
+import net.laubenberger.bogatyr.helper.HelperMapTest;
 import net.laubenberger.bogatyr.helper.encoder.EncoderBase64Test;
 import net.laubenberger.bogatyr.helper.encoder.EncoderHexTest;
 import net.laubenberger.bogatyr.helper.encoder.EncoderHtmlTest;
@@ -60,7 +61,7 @@ import org.junit.runner.Result;
  * JUnit test suite
  *
  * @author Stefan Laubenberger
- * @version 20101106
+ * @version 20101108
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA = "!$'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ" + //$NON-NLS-1$
@@ -118,8 +119,9 @@ public class AllBogatyrTests implements Runnable {
 				HelperGraphicTest.class,
 				HelperImageTest.class,
 				HelperIOTest.class, //TODO not completed!
-				HelperKeyboardTest.class
-//				HelperMapTest.class,
+				HelperKeyboardTest.class,
+				HelperLogTest.class,
+				HelperMapTest.class
 //				HelperMathTest.class,
 //				HelperNetTest.class,
 //				HelperObjectTest.class,

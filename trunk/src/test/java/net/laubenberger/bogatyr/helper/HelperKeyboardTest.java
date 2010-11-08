@@ -37,18 +37,32 @@ import org.junit.Test;
  * JUnit test for {@link HelperKeyboard}
  *
  * @author Stefan Laubenberger
- * @version 20101106
+ * @version 20101108
  */
 public class HelperKeyboardTest {
 	@Test
 	public void testIsKeyPrintable() {
 		assertTrue(HelperKeyboard.isKeyPrintable(65)); //A
 
-		assertFalse(HelperKeyboard.isKeyPrintable(-10));
-		assertFalse(HelperKeyboard.isKeyPrintable(8));
-		assertFalse(HelperKeyboard.isKeyPrintable(33));
-		assertFalse(HelperKeyboard.isKeyPrintable(112));
-		assertFalse(HelperKeyboard.isKeyPrintable(127));
+		assertFalse(HelperKeyboard.isKeyPrintable(-1)); //keyCode couldn't be negative
+		assertFalse(HelperKeyboard.isKeyPrintable(8)); // backspace
+		assertFalse(HelperKeyboard.isKeyPrintable(16)); // shift
+		assertFalse(HelperKeyboard.isKeyPrintable(17)); // ctrl
+		assertFalse(HelperKeyboard.isKeyPrintable(18)); // alt
+		assertFalse(HelperKeyboard.isKeyPrintable(20)); // Caps lock
+		assertFalse(HelperKeyboard.isKeyPrintable(27)); // escape
+		assertFalse(HelperKeyboard.isKeyPrintable(33)); //PgUp
+		assertFalse(HelperKeyboard.isKeyPrintable(40)); //Arrow
+		assertFalse(HelperKeyboard.isKeyPrintable(112)); //F1
+		assertFalse(HelperKeyboard.isKeyPrintable(123)); //F12
+		assertFalse(HelperKeyboard.isKeyPrintable(127)); // delete
+		assertFalse(HelperKeyboard.isKeyPrintable(144)); // Num lock
+		assertFalse(HelperKeyboard.isKeyPrintable(145)); // Scroll lock
+		assertFalse(HelperKeyboard.isKeyPrintable(154)); // print
+		assertFalse(HelperKeyboard.isKeyPrintable(155)); // insert
+		assertFalse(HelperKeyboard.isKeyPrintable(157)); // Mac cmd
+		assertFalse(HelperKeyboard.isKeyPrintable(524)); // Windows cmd
+		assertFalse(HelperKeyboard.isKeyPrintable(525)); // Windows context menu
 	}
 }
 

@@ -36,6 +36,8 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.util.TimeZone;
 
+import net.laubenberger.bogatyr.model.unit.Bit;
+
 import org.junit.Test;
 
 
@@ -43,33 +45,33 @@ import org.junit.Test;
  * JUnit test for {@link HelperEnvironment}
  *
  * @author Stefan Laubenberger
- * @version 20101106
+ * @version 20101108
  */
 public class HelperEnvironmentTest {
 	@Test
 	public void testGetMemoryUsed() {
-		assertTrue(HelperEnvironment.getMemoryUsed() > 0);
+		assertTrue(HelperEnvironment.getMemoryUsed() > Bit.MEGABYTE.convertTo(Bit.BYTE, 1).longValue());
 		assertEquals(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(), HelperEnvironment.getMemoryUsed());
 		assertTrue(HelperEnvironment.getMemoryMax() > HelperEnvironment.getMemoryUsed());
 	}
 	
 	@Test
 	public void testGetMemoryFree() {
-		assertTrue(HelperEnvironment.getMemoryFree() > 0);
+		assertTrue(HelperEnvironment.getMemoryFree() > Bit.MEGABYTE.convertTo(Bit.BYTE, 1).longValue());
 		assertEquals(Runtime.getRuntime().maxMemory() - (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()), HelperEnvironment.getMemoryFree());
 		assertTrue(HelperEnvironment.getMemoryMax() > HelperEnvironment.getMemoryFree());
 	}
 	
 	@Test
 	public void testGetMemoryTotal() {
-		assertTrue(HelperEnvironment.getMemoryTotal() > 0);
+		assertTrue(HelperEnvironment.getMemoryTotal() > Bit.MEGABYTE.convertTo(Bit.BYTE, 2).longValue());
 		assertEquals(Runtime.getRuntime().totalMemory(), HelperEnvironment.getMemoryTotal());
 		assertTrue(HelperEnvironment.getMemoryMax() > HelperEnvironment.getMemoryTotal());
 	}
 	
 	@Test
 	public void testGetMemoryMax() {
-		assertTrue(HelperEnvironment.getMemoryMax() > 0);
+		assertTrue(HelperEnvironment.getMemoryMax() > Bit.MEGABYTE.convertTo(Bit.BYTE, 4).longValue());
 		assertEquals(Runtime.getRuntime().maxMemory(), HelperEnvironment.getMemoryMax());
 		assertTrue(HelperEnvironment.getMemoryMax() > HelperEnvironment.getMemoryTotal());
 	}
@@ -100,7 +102,8 @@ public class HelperEnvironmentTest {
 	
 	@Test
 	public void testGetJavaProperties() {
-		assertTrue(HelperEnvironment.getJavaProperties().size() > 0);
+//		System.err.println(HelperEnvironment.getJavaProperties().size());
+		assertTrue(HelperEnvironment.getJavaProperties().size() > 50);
 		assertEquals(System.getProperties(), HelperEnvironment.getJavaProperties());
 	}
 	
@@ -142,7 +145,8 @@ public class HelperEnvironmentTest {
 
 	@Test
 	public void testGetOsEnvironmentVariables() {
-		assertTrue(HelperEnvironment.getOsEnvironmentVariables().size() > 0);
+//		System.err.println(HelperEnvironment.getOsEnvironmentVariables().size());
+		assertTrue(HelperEnvironment.getOsEnvironmentVariables().size() > 5);
 		assertEquals(System.getenv(), HelperEnvironment.getOsEnvironmentVariables());
 	}
 
@@ -214,22 +218,26 @@ public class HelperEnvironmentTest {
 	
 	@Test
 	public void testGetReportJava() {
-		assertTrue(HelperEnvironment.getReportJava().length() > 0);
+//		System.err.println(HelperEnvironment.getReportJava().length());
+		assertTrue(HelperEnvironment.getReportJava().length() > 4000);
 	}
 	
 	@Test
 	public void testGetReportOS() {
-		assertTrue(HelperEnvironment.getReportOS().length() > 0);
+//		System.err.println(HelperEnvironment.getReportOS().length());
+		assertTrue(HelperEnvironment.getReportOS().length() > 500);
 	}
 	
 	@Test
 	public void testGetReportUser() {
-		assertTrue(HelperEnvironment.getReportUser().length() > 0);
+//		System.err.println(HelperEnvironment.getReportUser().length());
+		assertTrue(HelperEnvironment.getReportUser().length() > 300);
 	}	
 	
 	@Test
 	public void testGetReportSystem() {
-		assertTrue(HelperEnvironment.getReportSystem().length() > 0);
+//		System.err.println(HelperEnvironment.getReportSystem().length());
+		assertTrue(HelperEnvironment.getReportSystem().length() > 200);
 	}
 }
 

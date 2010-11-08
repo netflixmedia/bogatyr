@@ -27,10 +27,8 @@
 
 package net.laubenberger.bogatyr.helper.encoder;
 
-import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
+import static org.junit.Assert.fail;
 import net.laubenberger.bogatyr.AllBogatyrTests;
 import net.laubenberger.bogatyr.helper.HelperString;
 
@@ -41,7 +39,7 @@ import org.junit.Test;
  * JUnit test for {@link EncoderHtml}
  *
  * @author Stefan Laubenberger
- * @version 20101106
+ * @version 20101108
  */
 public class EncoderHtmlTest {
 	//TODO improve test for encode, but how?
@@ -49,7 +47,8 @@ public class EncoderHtmlTest {
 	@Test
 	public void testPassEncode() {
 		assertEquals(HelperString.EMPTY_STRING, EncoderHtml.encode(HelperString.EMPTY_STRING));
-		assertTrue(EncoderHtml.encode(AllBogatyrTests.DATA).length() > AllBogatyrTests.DATA.length());
+//		System.err.println(EncoderHtml.encode(AllBogatyrTests.DATA).length());
+		assertEquals(2692, EncoderHtml.encode(AllBogatyrTests.DATA).length());
 	}
 
 	@Test

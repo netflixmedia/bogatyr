@@ -43,7 +43,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperCollection}
  *
  * @author Stefan Laubenberger
- * @version 20101106
+ * @version 20101108
  */
 public class HelperCollectionTest {
 	@Test
@@ -140,9 +140,9 @@ public class HelperCollectionTest {
 
 	@Test
 	public void testDump() {
-		final Collection<String> list = HelperCollection.getList("A", "A", "A"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		final Collection<String> list = HelperCollection.getList("A", "B", "C"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 
-		assertTrue(HelperCollection.dump(list).length() > 0);
+		assertEquals(5, HelperCollection.dump(list).length());
 
 		try {
 			HelperCollection.dump(null);
