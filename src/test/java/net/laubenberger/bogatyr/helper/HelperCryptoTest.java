@@ -27,21 +27,19 @@
 
 package net.laubenberger.bogatyr.helper;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
-
 import net.laubenberger.bogatyr.model.crypto.CryptoAsymmetricAlgo;
 import net.laubenberger.bogatyr.model.crypto.CryptoSymmetricAlgo;
 import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
 import net.laubenberger.bogatyr.model.crypto.HmacAlgo;
 import net.laubenberger.bogatyr.model.crypto.SignatureAlgo;
-
 import org.junit.Test;
 
 
@@ -49,14 +47,23 @@ import org.junit.Test;
  * JUnit test for {@link HelperCrypto}
  *
  * @author Stefan Laubenberger
- * @version 20101108
+ * @version 20101109
  */
 public class HelperCryptoTest {
 
+    private static int ITERATION = 10000;
+    
 	@Test
 	public void testGetRandomKey() {
 		assertEquals(16, HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6').length());
-		assertNotSame(HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6'), HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6'));
+		
+		final Set<String> set = new HashSet<String>(ITERATION);
+		
+		for (int ii = 0; ii < ITERATION; ii++) {
+		    final String key = HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6');
+		    assertFalse(set.contains(key));
+		    set.add(key);
+		}
 
 		try {
 			HelperCrypto.getRandomKey(0, '1', '2', '3');
@@ -89,7 +96,14 @@ public class HelperCryptoTest {
 	@Test
 	public void testGetRandomKeyDefault() {
 		assertEquals(16, HelperCrypto.getRandomKey(16).length());
-		assertNotSame(HelperCrypto.getRandomKey(16), HelperCrypto.getRandomKey(16));
+
+		final Set<String> set = new HashSet<String>(ITERATION);
+	        
+        for (int ii = 0; ii < ITERATION; ii++) {
+            final String key = HelperCrypto.getRandomKey(8);
+            assertFalse(set.contains(key));
+            set.add(key);
+        }
 
 		try {
 			HelperCrypto.getRandomKey(0);
@@ -103,13 +117,15 @@ public class HelperCryptoTest {
 
 	@Test
 	public void testGetUUID() {
-		final UUID a = HelperCrypto.getUUID();
-		final UUID b = HelperCrypto.getUUID();
-
-		assertNotNull(a);
-		assertNotNull(b);
-
-		assertNotSame(a, b);
+	    assertNotNull(HelperCrypto.getUUID());
+	    
+       final Set<UUID> set = new HashSet<UUID>(ITERATION);
+        
+        for (int ii = 0; ii < ITERATION; ii++) {
+            final UUID key = HelperCrypto.getUUID();
+            assertFalse(set.contains(key));
+            set.add(key);
+        }
 	}
 	
 	@Test

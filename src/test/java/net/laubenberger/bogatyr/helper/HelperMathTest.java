@@ -41,41 +41,12 @@ import net.laubenberger.bogatyr.helper.HelperMath;
 
 
 /**
- * Junit test
+ * JUnit test for {@link HelperMath}
  *
  * @author Stefan Laubenberger
- * @version 20100423
+ * @version 20101109
  */
 public class HelperMathTest {
-//	@Test
-//	public void testGcd() {
-//		assertEquals(2.0D, HelperMath.gcd(2.0D, 4.0D), 0.00001D);
-//		assertEquals(2.0D, HelperMath.gcd(2.0D, 2.0D), 0.00001D);
-//		assertEquals(2.0D, HelperMath.gcd(4.0D, 2.0D), 0.00001D);
-//		assertEquals(2.0D, HelperMath.gcd(2.0D, 2.0D), 0.00001D);
-//		assertEquals(2.5D, HelperMath.gcd(2.5D, 5.0D), 0.00001D);
-//		assertEquals(0.0D, HelperMath.gcd(0.0D, 0.0D), 0.00001D);
-//		assertEquals(Double.MAX_VALUE, HelperMath.gcd(Double.MAX_VALUE, Double.MAX_VALUE), 0.00001D);
-//		
-//		try {
-//			HelperMath.gcd(-2.0D, 4.0D);
-//			fail("a is negative!"); //$NON-NLS-1$
-//		} catch (IllegalArgumentException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
-//
-//		try {
-//			HelperMath.gcd(2.0D, -4.0D);
-//			fail("b is negative!"); //$NON-NLS-1$
-//		} catch (IllegalArgumentException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
-//	}
-
 	@Test
 	public void testGcd() {
 		assertTrue(0 == new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("2"), new BigDecimal("4"))));	//$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
@@ -84,18 +55,36 @@ public class HelperMathTest {
 		assertTrue(0 == new BigDecimal("2.5").compareTo(HelperMath.gcd(new BigDecimal("2.5"), new BigDecimal("5"))));  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 		assertTrue(0 == BigDecimal.ZERO.compareTo(HelperMath.gcd(BigDecimal.ZERO, BigDecimal.ZERO)));
 
-		try {
+        try {
+            HelperMath.gcd(null, BigDecimal.ZERO); //$NON-NLS-1$
+            fail("a is null"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            //nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+        
+        try {
 			HelperMath.gcd(new BigDecimal("-2"), BigDecimal.ZERO); //$NON-NLS-1$
-			fail("a is negative!"); //$NON-NLS-1$
+			fail("a is negative"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 
+        try {
+            HelperMath.gcd(BigDecimal.ZERO, null); //$NON-NLS-1$
+            fail("b is null"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            //nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+        
 		try {
 			HelperMath.gcd(BigDecimal.ZERO, new BigDecimal("-2")); //$NON-NLS-1$
-			fail("b is negative!"); //$NON-NLS-1$
+			fail("b is negative"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -103,49 +92,41 @@ public class HelperMathTest {
 		}
 	}
 
-//	@Test
-//	public void testLcm() {
-//		assertEquals(10.0D, HelperMath.lcm(2.0D, 5.0D), 0.00001D);
-//		assertEquals(10.0D, HelperMath.lcm(5.0D, 2.0D), 0.00001D);
-//		assertEquals(Double.NaN, HelperMath.lcm(0.0D, 0.0D), 0.00001D);
-//		assertEquals(Double.POSITIVE_INFINITY, HelperMath.lcm(Double.MAX_VALUE, Double.MAX_VALUE), 0.00001D);
-//	
-//		try {
-//			HelperMath.lcm(-2.0D, 4.0D);
-//			fail("a is negative!"); //$NON-NLS-1$
-//		} catch (IllegalArgumentException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
-//
-//		try {
-//			HelperMath.lcm(2.0D, -4.0D);
-//			fail("b is negative!"); //$NON-NLS-1$
-//		} catch (IllegalArgumentException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
-//	}
-
 	@Test
 	public void testLcm() {
 		assertTrue(0 == BigDecimal.TEN.compareTo(HelperMath.lcm(new BigDecimal("2"), new BigDecimal("5"))));  //$NON-NLS-1$//$NON-NLS-2$
 		assertTrue(0 == BigDecimal.TEN.compareTo(HelperMath.lcm(new BigDecimal("5"), new BigDecimal("2")))); //$NON-NLS-1$ //$NON-NLS-2$
 
+        try {
+            HelperMath.lcm(null, BigDecimal.ZERO); //$NON-NLS-1$
+            fail("a is null"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            //nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+        
 		try {
 			HelperMath.lcm(new BigDecimal("-2"), BigDecimal.ZERO); //$NON-NLS-1$
-			fail("a is negative!"); //$NON-NLS-1$
+			fail("a is negative"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 
+        try {
+            HelperMath.lcm(BigDecimal.ZERO, null); //$NON-NLS-1$
+            fail("b is null"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            //nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+        
 		try {
 			HelperMath.lcm(BigDecimal.ZERO, new BigDecimal("-2")); //$NON-NLS-1$
-			fail("b is negative!"); //$NON-NLS-1$
+			fail("b is negative"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -181,7 +162,7 @@ public class HelperMathTest {
 
 		try {
 			HelperMath.calcPrimes(50, -10);
-			fail("end value (-10) must be positive!"); //$NON-NLS-1$
+			fail("end value (-10) must be positive"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -190,7 +171,7 @@ public class HelperMathTest {
 
 		try {
 			HelperMath.calcPrimes(50, 10);
-			fail("end value (10) must be greater than the start value (50)!"); //$NON-NLS-1$
+			fail("end value (10) must be greater than the start value (50)"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -217,7 +198,7 @@ public class HelperMathTest {
 
 		try {
 			HelperMath.log(1.0, 100.0);
-			fail("base must be greater than 1!"); //$NON-NLS-1$
+			fail("base must be greater than 1"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -226,7 +207,7 @@ public class HelperMathTest {
 
 		try {
 			HelperMath.log(10.0, -100.0);
-			fail("value (-100) must be positive!"); //$NON-NLS-1$
+			fail("value (-100) must be positive"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -251,6 +232,8 @@ public class HelperMathTest {
 
 	@Test
 	public void testRandom() {
+	    assertEquals(0, HelperMath.getRandom(0));
+	    
 		//positive numbers
 		int range = Integer.MAX_VALUE;
 		for (int ii = 0; 1000 > ii; ii++) {
@@ -277,7 +260,7 @@ public class HelperMathTest {
 
 		try {
 			HelperMath.calcAmount(10000.0D, 0.04D, -50);
-			fail("days (-50) must be positive!"); //$NON-NLS-1$
+			fail("days (-50) must be positive"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -287,11 +270,12 @@ public class HelperMathTest {
 
 	@Test
 	public void testFactorial() {
-		assertEquals(BigInteger.valueOf(24), HelperMath.factorial(4));
+		assertEquals(BigInteger.valueOf(24), HelperMath.factorial(4L));
+		assertEquals(BigInteger.ONE, HelperMath.factorial(0L));
 
 		try {
-			HelperMath.factorial(-1);
-			fail("n (-1) must be positive!"); //$NON-NLS-1$
+			HelperMath.factorial(-1L);
+			fail("n (-1) must be positive"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -301,11 +285,12 @@ public class HelperMathTest {
 
 	@Test
 	public void testSum() {
-		assertEquals(10, HelperMath.sum(4));
+		assertEquals(10L, HelperMath.sum(4L));
+		assertEquals(1L, HelperMath.sum(0L));
 
 		try {
-			HelperMath.sum(-1);
-			fail("n (-1) must be positive!"); //$NON-NLS-1$
+			HelperMath.sum(-1L);
+			fail("n (-1) must be positive"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -315,11 +300,12 @@ public class HelperMathTest {
 
 	@Test
 	public void testSumSquare() {
-		assertEquals(30, HelperMath.sumSquare(4));
+		assertEquals(30L, HelperMath.sumSquare(4L));
+		assertEquals(1L, HelperMath.sumSquare(0L));
 
 		try {
-			HelperMath.sumSquare(-1);
-			fail("n (-1) must be positive!"); //$NON-NLS-1$
+			HelperMath.sumSquare(-1L);
+			fail("n (-1) must be positive"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -329,11 +315,12 @@ public class HelperMathTest {
 
 	@Test
 	public void testSumCubic() {
-		assertEquals(100, HelperMath.sumCubic(4));
+		assertEquals(100L, HelperMath.sumCubic(4L));
+		assertEquals(1L, HelperMath.sumCubic(0L));
 
 		try {
-			HelperMath.sumCubic(-1);
-			fail("n (-1) must be positive!"); //$NON-NLS-1$
+			HelperMath.sumCubic(-1L);
+			fail("n (-1) must be positive"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -341,13 +328,37 @@ public class HelperMathTest {
 		}
 	}
 
+    @Test
+    public void testSumRange() {
+        assertEquals(55L, HelperMath.sumRange(0L, 10L));
+        assertEquals(0L, HelperMath.sumRange(0L, 0L));
+
+        try {
+            HelperMath.sumRange(-1L, 0L);
+            fail("m (-1) must be positive"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            //nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+        try {
+            HelperMath.sumRange(0L, -1L);
+            fail("n (-1) must be positive"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            //nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
+    
 	@Test
 	public void testSumOdd() {
-		assertEquals(9, HelperMath.sumOdd(3));
+		assertEquals(9L, HelperMath.sumOdd(3L));
+		assertEquals(0L, HelperMath.sumOdd(0L));
 
 		try {
-			HelperMath.sumOdd(-1);
-			fail("n (-1) must be positive!"); //$NON-NLS-1$
+			HelperMath.sumOdd(-1L);
+			fail("n (-1) must be positive"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -357,11 +368,12 @@ public class HelperMathTest {
 
 	@Test
 	public void testSumEven() {
-		assertEquals(12, HelperMath.sumEven(3));
+		assertEquals(12L, HelperMath.sumEven(3L));
+		assertEquals(0L, HelperMath.sumEven(0L));
 
 		try {
-			HelperMath.sumEven(-1);
-			fail("n (-1) must be positive!"); //$NON-NLS-1$
+			HelperMath.sumEven(-1L);
+			fail("n (-1) must be positive"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -371,23 +383,32 @@ public class HelperMathTest {
 
 	@Test
 	public void testIsOdd() {
-		assertFalse(HelperMath.isOdd(4));
-		assertTrue(HelperMath.isOdd(3));
+		assertFalse(HelperMath.isOdd(4L));
+		assertTrue(HelperMath.isOdd(3L));
 	}
 
 	@Test
 	public void testIsEven() {
-		assertTrue(HelperMath.isEven(4));
-		assertFalse(HelperMath.isEven(3));
+		assertTrue(HelperMath.isEven(4L));
+		assertFalse(HelperMath.isEven(3L));
 	}
 
 	@Test
 	public void testCalcConnections() {
-		assertEquals(6, HelperMath.calcConnections(4));
-
+		assertEquals(6L, HelperMath.calcConnections(4L));
+        
 		try {
-			HelperMath.calcConnections(-1);
-			fail("n (-1) must be positive!"); //$NON-NLS-1$
+            HelperMath.calcConnections(0L);
+            fail("n (0) must be greater than 0"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            //nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+        
+		try {
+			HelperMath.calcConnections(-1L);
+			fail("n (-1) must be positive"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -395,13 +416,46 @@ public class HelperMathTest {
 		}
 	}
 
-	@Test
+    @Test
+    public void testCalcBirthdayProblem() {
+        assertEquals(0.50729D, HelperMath.calcBirthdayProblem(23), 0.00001D);
+        
+        try {
+            HelperMath.calcBirthdayProblem(0);
+            fail("n (0) must be greater than 0"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            //nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+        
+        try {
+            HelperMath.calcBirthdayProblem(-1);
+            fail("n (-1) must be positive"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            //nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
+    
+    @Test
 	public void tesBinomialCoefficient() {
-		assertEquals(BigInteger.valueOf(35), HelperMath.binomialCoefficient(7, 3));
+		assertEquals(BigInteger.valueOf(35), HelperMath.binomialCoefficient(7L, 3L));
+		assertEquals(BigInteger.ONE, HelperMath.binomialCoefficient(0L, 0L));
+        
+        try {
+			HelperMath.binomialCoefficient(-1L, 4L);
+			fail("n (-1) must be positive"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 
-		try {
-			HelperMath.binomialCoefficient(-1, 4);
-			fail("n (-1) must be positive!"); //$NON-NLS-1$
+        try {
+			HelperMath.binomialCoefficient(3L, -1L);
+			fail("k (-1) must be positive"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -409,31 +463,8 @@ public class HelperMathTest {
 		}
 
 		try {
-			HelperMath.binomialCoefficient(3, -1);
-			fail("k (-1) must be positive!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-
-		try {
-			HelperMath.binomialCoefficient(3, 4);
-			fail("n (3) must be greater than k (4)!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-	}
-
-	@Test
-	public void testCalcBirthdayProblem() {
-		assertEquals(0.50729D, HelperMath.calcBirthdayProblem(23), 0.00001D);
-
-		try {
-			HelperMath.calcConnections(-1);
-			fail("n (-1) must be positive!"); //$NON-NLS-1$
+			HelperMath.binomialCoefficient(3L, 4L);
+			fail("n (3) must be greater than k (4)"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
