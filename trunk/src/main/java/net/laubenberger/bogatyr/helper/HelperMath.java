@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Silvan Spross
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101109)
  * @since 0.4.0
  */
 public abstract class HelperMath { //TODO replace primitive types by BigDecimal/BigInteger
@@ -414,7 +414,7 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 	 * @return sum between the range m - n
 	 * @since 0.7.0
 	 */
-	public static long sumRange(final long m, final long n) {
+	public static long sumRange(final long m, final long n) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(m, n));
 		if (0L > m) {
 			throw new RuntimeExceptionMustBeGreater("m", m, 0); //$NON-NLS-1$
@@ -431,6 +431,79 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
+
+    /**
+     * Calculates the sum of odd numbers between 0 - n.
+     *
+     * @param n distance for the range (e.g. 3 means 1+3+5=9)
+     * @return sum of odd numbers between 0 - n
+     * @since 0.7.0
+     */
+    public static long sumOdd(final long n) { //$JUnit$
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
+        if (0L > n) {
+            throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
+        }
+
+        final long result = (long) StrictMath.pow(n, 2.0D);
+
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+        return result;
+    }
+
+    /**
+     * Calculates the sum of even numbers between 0 - n.
+     *
+     * @param n distance for the range (e.g. 3 means 2+4+6=12)
+     * @return sum of even numbers between 0 - n
+     * @since 0.7.0
+     */
+    public static long sumEven(final long n) { //$JUnit$
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
+        if (0L > n) {
+            throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
+        }
+
+        long result = 0L;
+        for (long ii = 2L; ii <= n * 2L; ii += 2L) {
+            result += ii;
+        }
+
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+        return result;
+    }
+
+    /**
+     * Checks if the given number is odd.
+     *
+     * @param n number to check
+     * @return true/false
+     * @since 0.7.0
+     */
+    public static boolean isOdd(final long n) { //$JUnit$
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
+
+        final boolean result = 0L != n % 2L;
+
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+        return result;
+    }
+
+    /**
+     * Checks if the given number is even.
+     *
+     * @param n number to check
+     * @return true/false
+     * @since 0.7.0
+     */
+    public static boolean isEven(final long n) { //$JUnit$
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
+
+        final boolean result = !isOdd(n);
+
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+        return result;
+    }
 
 	/**
 	 * Calculates the number of connections from n.
@@ -497,79 +570,6 @@ public abstract class HelperMath { //TODO replace primitive types by BigDecimal/
 		}
 
 		final BigInteger result = factorial(n).divide(((factorial(n - k).multiply(factorial(k)))));
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	/**
-	 * Calculates the sum of odd numbers between 0 - n.
-	 *
-	 * @param n end number for the range
-	 * @return sum of odd numbers between 0 - n
-	 * @since 0.7.0
-	 */
-	public static long sumOdd(final long n) { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
-		if (0L > n) {
-			throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
-		}
-
-		final long result = (long) StrictMath.pow(n, 2.0D);
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	/**
-	 * Calculates the sum of even numbers between 0 - n.
-	 *
-	 * @param n number
-	 * @return sum of even numbers between 0 - n
-	 * @since 0.7.0
-	 */
-	public static long sumEven(final long n) { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
-		if (0L > n) {
-			throw new RuntimeExceptionMustBeGreater("n", n, 0); //$NON-NLS-1$
-		}
-
-		long result = 0L;
-		for (long ii = 2L; ii <= n * 2L; ii += 2L) {
-			result += ii;
-		}
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	/**
-	 * Checks if the given number is odd.
-	 *
-	 * @param n number to check
-	 * @return true/false
-	 * @since 0.7.0
-	 */
-	public static boolean isOdd(final long n) { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
-
-		final boolean result = 0L != n % 2L;
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	/**
-	 * Checks if the given number is even.
-	 *
-	 * @param n number to check
-	 * @return true/false
-	 * @since 0.7.0
-	 */
-	public static boolean isEven(final long n) { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(n));
-
-		final boolean result = !isOdd(n);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
