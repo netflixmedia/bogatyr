@@ -44,7 +44,7 @@ import net.laubenberger.bogatyr.helper.HelperMath;
  * JUnit test for {@link HelperMath}
  *
  * @author Stefan Laubenberger
- * @version 20101109
+ * @version 20101110
  */
 public class HelperMathTest {
 	@Test
@@ -56,7 +56,7 @@ public class HelperMathTest {
 		assertTrue(0 == BigDecimal.ZERO.compareTo(HelperMath.gcd(BigDecimal.ZERO, BigDecimal.ZERO)));
 
         try {
-            HelperMath.gcd(null, BigDecimal.ZERO); //$NON-NLS-1$
+            HelperMath.gcd(null, BigDecimal.ZERO);
             fail("a is null"); //$NON-NLS-1$
         } catch (IllegalArgumentException ex) {
             //nothing to do
@@ -74,7 +74,7 @@ public class HelperMathTest {
 		}
 
         try {
-            HelperMath.gcd(BigDecimal.ZERO, null); //$NON-NLS-1$
+            HelperMath.gcd(BigDecimal.ZERO, null);
             fail("b is null"); //$NON-NLS-1$
         } catch (IllegalArgumentException ex) {
             //nothing to do
@@ -98,7 +98,7 @@ public class HelperMathTest {
 		assertTrue(0 == BigDecimal.TEN.compareTo(HelperMath.lcm(new BigDecimal("5"), new BigDecimal("2")))); //$NON-NLS-1$ //$NON-NLS-2$
 
         try {
-            HelperMath.lcm(null, BigDecimal.ZERO); //$NON-NLS-1$
+            HelperMath.lcm(null, BigDecimal.ZERO);
             fail("a is null"); //$NON-NLS-1$
         } catch (IllegalArgumentException ex) {
             //nothing to do
@@ -116,7 +116,7 @@ public class HelperMathTest {
 		}
 
         try {
-            HelperMath.lcm(BigDecimal.ZERO, null); //$NON-NLS-1$
+            HelperMath.lcm(BigDecimal.ZERO, null);
             fail("b is null"); //$NON-NLS-1$
         } catch (IllegalArgumentException ex) {
             //nothing to do
@@ -197,7 +197,7 @@ public class HelperMathTest {
 		assertEquals(4.19180654857877D, HelperMath.log(3.0, 100.0), 0.00001D);
 
 		try {
-			HelperMath.log(1.0, 100.0);
+			HelperMath.log(1.0D, 100.0D);
 			fail("base must be greater than 1"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -206,7 +206,7 @@ public class HelperMathTest {
 		}
 
 		try {
-			HelperMath.log(10.0, -100.0);
+			HelperMath.log(10.0D, -100.0D);
 			fail("value (-100) must be positive"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

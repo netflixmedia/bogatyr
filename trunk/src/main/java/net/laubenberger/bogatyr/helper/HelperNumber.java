@@ -41,59 +41,34 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  * This is a helper class for numbers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100525)
+ * @version 0.9.4 (20101110)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
 	private static final Logger log = LoggerFactory.getLogger(HelperNumber.class);
 
-//    public static final BigDecimal NUMBER_0 	  = BigDecimal.ZERO;
-//    public static final BigDecimal NUMBER_1 	  = BigDecimal.ONE;
-//    public static final BigDecimal NUMBER_2 	  = new BigDecimal("2"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_3 	  = new BigDecimal("3"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_4 	  = new BigDecimal("4"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_5 	  = new BigDecimal("5"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_6 	  = new BigDecimal("6"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_7 	  = new BigDecimal("7"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_8 = new BigDecimal("8"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_9 	  = new BigDecimal("9"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_10 = BigDecimal.TEN;
 	public static final BigDecimal NUMBER_100 = new BigDecimal("100"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_1000 = new BigDecimal("1000"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_10000 = new BigDecimal("10000"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_100000 = new BigDecimal("100000"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_1000000 = new BigDecimal("1000000"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_15 	  = new BigDecimal("15"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_16 = new BigDecimal("16"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_31 	  = new BigDecimal("31"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_32 = new BigDecimal("32"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_63 	  = new BigDecimal("63"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_64 = new BigDecimal("64"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_127 	  = new BigDecimal("127"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_128 = new BigDecimal("128"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_255 	  = new BigDecimal("255"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_256 = new BigDecimal("256"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_511 	  = new BigDecimal("511"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_512 = new BigDecimal("512"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_1023 	  = new BigDecimal("1023"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_1024 = new BigDecimal("1024"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_2047 	  = new BigDecimal("2047"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_2048 = new BigDecimal("2048"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_4095 	  = new BigDecimal("4095"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_4096 = new BigDecimal("4096"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_8191 	  = new BigDecimal("8191"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_8192 = new BigDecimal("8192"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_16383   = new BigDecimal("16383"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_16384 = new BigDecimal("16384"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_32767   = new BigDecimal("32767"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_32768 = new BigDecimal("32768"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_65535   = new BigDecimal("65535"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_65536 = new BigDecimal("65536"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_131071   = new BigDecimal("131071"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_131072 = new BigDecimal("131072"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_262143   = new BigDecimal("262143"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_262144 = new BigDecimal("262144"); //$NON-NLS-1$
-//    public static final BigDecimal NUMBER_16777215 = new BigDecimal("16777215"); //$NON-NLS-1$
 	public static final BigDecimal NUMBER_16777216 = new BigDecimal("16777216"); //$NON-NLS-1$
 
 
@@ -104,9 +79,8 @@ public abstract class HelperNumber {
 	 * @return calculated value
 	 * @since 0.7.0
 	 */
-	public static BigDecimal multiply(final Number... values) {
+	public static BigDecimal multiply(final Number... values) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(values));
-
 		if (!HelperArray.isValid(values)) {
 			throw new RuntimeExceptionIsNullOrEmpty("values"); //$NON-NLS-1$
 		}
@@ -128,7 +102,7 @@ public abstract class HelperNumber {
 	 * @return calculated value
 	 * @since 0.7.0
 	 */
-	public static BigDecimal multiply(final Number a, final Number b) {
+	public static BigDecimal multiply(final Number a, final Number b) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(a, b));
 		if (null == a) {
 			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
@@ -153,7 +127,7 @@ public abstract class HelperNumber {
 	 * @return calculated value
 	 * @since 0.8.0
 	 */
-	public static BigDecimal add(final Number... values) {
+	public static BigDecimal add(final Number... values) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(values));
 		if (!HelperArray.isValid(values)) {
 			throw new RuntimeExceptionIsNullOrEmpty("values"); //$NON-NLS-1$
@@ -176,7 +150,7 @@ public abstract class HelperNumber {
 	 * @return calculated value
 	 * @since 0.8.0
 	 */
-	public static BigDecimal add(final Number a, final Number b) {
+	public static BigDecimal add(final Number a, final Number b) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(a, b));
 		if (null == a) {
 			throw new RuntimeExceptionIsNull("a"); //$NON-NLS-1$
@@ -200,7 +174,7 @@ public abstract class HelperNumber {
 	 * @param text value to convert
 	 * @return {@link BigDecimal} from the {@link String}
 	 */
-	public static BigDecimal getNumber(final String text) {
+	public static BigDecimal getNumber(final String text) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(text));
 
 		final String value = HelperString.getNumericString(text);
@@ -221,10 +195,10 @@ public abstract class HelperNumber {
 	 * @param number value to convert
 	 * @return {@link String} from the {@link Number}
 	 */
-	public static String getString(final Number number) {
+	public static String getString(final Number number) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(number));
 
-		final String result = null == number ? HelperString.EMPTY_STRING : number.toString();
+		final String result = null == number ? null : number.toString();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

@@ -69,7 +69,7 @@ import com.lowagie.text.pdf.parser.PdfTextExtractor;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101110)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -109,8 +109,11 @@ public abstract class HelperPdf {
 			renderer.layout();
 			renderer.createPDF(fos, false);
 
-			for (int ii = 1; ii < files.length; ii++) {
-				renderer.setDocument(files[ii]);
+			for (final File inputFile : files) {
+				if (null == inputFile) {
+					throw new RuntimeExceptionIsNull("inputFile"); //$NON-NLS-1$
+				}
+				renderer.setDocument(inputFile);
 				renderer.layout();
 				renderer.writeNextDocument();
 			}
@@ -138,7 +141,7 @@ public abstract class HelperPdf {
 	 * @see Rectangle
 	 * @since 0.9.2
 	 */
-	public static void writePdfFromImage(final Rectangle pageSize, final boolean scale, final File file, final File... files)
+	public static void writePdfFromImages(final Rectangle pageSize, final boolean scale, final File file, final File... files)
 			throws DocumentException, IOException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, files));
 		if (null == pageSize) {
@@ -159,8 +162,11 @@ public abstract class HelperPdf {
 			PdfWriter.getInstance(document, fos);
 			document.open();
 
-			for (final File tempFile : files) {
-				final Image image = Image.getInstance(tempFile.getAbsolutePath());
+			for (final File inputFile : files) {
+				if (null == inputFile) {
+					throw new RuntimeExceptionIsNull("inputFile"); //$NON-NLS-1$
+				}				
+				final Image image = Image.getInstance(inputFile.getAbsolutePath());
 
 				if (scale) {
 					image.scaleToFit(pageSize.getWidth(), pageSize.getHeight());
@@ -193,7 +199,7 @@ public abstract class HelperPdf {
 	 * @see Rectangle
 	 * @since 0.9.2
 	 */
-	public static void writePdfFromImage(final Rectangle pageSize, final boolean scale, final File file,
+	public static void writePdfFromImages(final Rectangle pageSize, final boolean scale, final File file,
 			final java.awt.Image... images) throws DocumentException, IOException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, images));
 		if (null == pageSize) {
@@ -216,6 +222,9 @@ public abstract class HelperPdf {
 			document.open();
 
 			for (final java.awt.Image tempImage : images) {
+				if (null == tempImage) {
+					throw new RuntimeExceptionIsNull("tempImage"); //$NON-NLS-1$
+				}
 				final Image image = Image.getInstance(tempImage, null);
 
 				if (scale) {
@@ -370,7 +379,7 @@ public abstract class HelperPdf {
 		exportAsImages(ppt, files);
 
 		// process exported images to pdf
-		writePdfFromImage(pageSize, scale, file, files);
+		writePdfFromImages(pageSize, scale, file, files);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}

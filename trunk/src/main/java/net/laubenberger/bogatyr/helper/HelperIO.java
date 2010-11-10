@@ -69,7 +69,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101106)
+ * @version 0.9.4 (20101110)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -321,6 +321,9 @@ public abstract class HelperIO {
 		}
 
 		for (final File target : files) {
+			if (null == target) {
+				throw new RuntimeExceptionIsNull("target"); //$NON-NLS-1$
+			}
 			if (target.isDirectory()) {
 				final File[] childFiles = target.listFiles();
 				for (final File child : childFiles) {
@@ -944,7 +947,9 @@ public abstract class HelperIO {
 
 			// Process all files that are not the destination file
 			for (final File file : files) {
-
+				if (null == file) {
+					throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+				}
 				if (file.isFile()) {
 					try {
 						// Create input stream
