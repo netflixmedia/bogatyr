@@ -42,14 +42,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+
 import org.apache.poi.hslf.model.Slide;
 import org.apache.poi.hslf.usermodel.SlideShow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xhtmlrenderer.pdf.ITextRenderer;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
@@ -74,52 +76,53 @@ public abstract class HelperPdf {
 
 	private static final String IMAGE_TYPE = HelperImage.TYPE_PNG;
 
-	/**
-	 * Writes a PDF from multiple (X)HTML files to a {@link File}.
-	 * <strong>Note:</strong> This method needs <a
-	 * href="https://xhtmlrenderer.dev.java.net/">XHTML</a> to work.
-	 * 
-	 * @param file
-	 *           output as PDF
-	 * @param files
-	 *           in (X)HTML format for the PDF
-	 * @throws DocumentException
-	 * @throws IOException
-	 * @see File
-	 * @since 0.5.0
-	 */
-	public static void writePdfFromHTML(final File file, final File... files) throws IOException, DocumentException { // $JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, files));
-		if (null == file) {
-			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
-		}
-		if (!HelperArray.isValid(files)) {
-			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
-		}
-
-		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
-
-		try {
-			final ITextRenderer renderer = new ITextRenderer();
-
-			renderer.setDocument(files[0]);
-			renderer.layout();
-			renderer.createPDF(fos, false);
-
-			for (final File inputFile : files) {
-				if (null == inputFile) {
-					throw new RuntimeExceptionIsNull("inputFile"); //$NON-NLS-1$
-				}
-				renderer.setDocument(inputFile);
-				renderer.layout();
-				renderer.writeNextDocument();
-			}
-			renderer.finishPDF();
-		} finally {
-			fos.close();
-		}
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
+	//does not work with 
+//	/**
+//	 * Writes a PDF from multiple (X)HTML files to a {@link File}.
+//	 * <strong>Note:</strong> This method needs <a
+//	 * href="https://xhtmlrenderer.dev.java.net/">XHTML</a> to work.
+//	 * 
+//	 * @param file
+//	 *           output as PDF
+//	 * @param files
+//	 *           in (X)HTML format for the PDF
+//	 * @throws DocumentException
+//	 * @throws IOException
+//	 * @see File
+//	 * @since 0.5.0
+//	 */
+//	public static void writePdfFromHTML(final File file, final File... files) throws IOException, DocumentException { // $JUnit$
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, files));
+//		if (null == file) {
+//			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+//		}
+//		if (!HelperArray.isValid(files)) {
+//			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
+//		}
+//
+//		final FilterOutputStream fos = new BufferedOutputStream(new FileOutputStream(file));
+//
+//		try {
+//			final ITextRenderer renderer = new ITextRenderer();
+//
+//			renderer.setDocument(files[0]);
+//			renderer.layout();
+//			renderer.createPDF(fos, false);
+//
+//			for (final File inputFile : files) {
+//				if (null == inputFile) {
+//					throw new RuntimeExceptionIsNull("inputFile"); //$NON-NLS-1$
+//				}
+//				renderer.setDocument(inputFile);
+//				renderer.layout();
+//				renderer.writeNextDocument();
+//			}
+//			renderer.finishPDF();
+//		} finally {
+//			fos.close();
+//		}
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+//	}
 
 	/**
 	 * Writes a PDF from multiple image files to a {@link File}.
@@ -138,8 +141,8 @@ public abstract class HelperPdf {
 	 * @see Rectangle
 	 * @since 0.9.2
 	 */
-	public static void writePdfFromImages(final Rectangle pageSize, final boolean scale, final File file, final File... files)
-			throws DocumentException, IOException {
+	public static void writePdfFromImages(final Rectangle pageSize, final boolean scale, final File file,
+			final File... files) throws DocumentException, IOException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, files));
 		if (null == pageSize) {
 			throw new RuntimeExceptionIsNull("pageSize"); //$NON-NLS-1$
@@ -162,7 +165,7 @@ public abstract class HelperPdf {
 			for (final File inputFile : files) {
 				if (null == inputFile) {
 					throw new RuntimeExceptionIsNull("inputFile"); //$NON-NLS-1$
-				}				
+				}
 				final Image image = Image.getInstance(inputFile.getAbsolutePath());
 
 				if (scale) {
@@ -236,7 +239,111 @@ public abstract class HelperPdf {
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
+	/**
+	 * Writes a PDF from a {@link SlideShow} to a {@link File}.
+	 * 
+	 * <strong>Note:</strong> This method needs <a
+	 * href="http://poi.apache.org/">Apache POI</a> to work.
+	 * 
+	 * @param pageSize
+	 *           of the PDF
+	 * @param scale
+	 *           should PPT fit the page size
+	 * @param file
+	 *           output as PDF
+	 * @param ppt
+	 *           for the PDF
+	 * @throws IOException
+	 * @throws DocumentException
+	 * @see File
+	 * @see SlideShow
+	 * @see Rectangle
+	 * @since 0.9.2
+	 */
+	public static void writePdfFromPpt(final Rectangle pageSize, final boolean scale, final File file,
+			final SlideShow ppt) throws IOException, DocumentException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, ppt));
 
+		final File[] files = new File[ppt.getSlides().length];
+		for (int ii = 0; ii < ppt.getSlides().length; ii++) {
+			files[ii] = HelperIO.getTemporaryFile(HelperPdf.class.getSimpleName() + "-slide", IMAGE_TYPE); //$NON-NLS-1$
+		}
+
+		// export ppt as images
+		exportAsImages(ppt, files);
+
+		// process exported images to pdf
+		writePdfFromImages(pageSize, scale, file, files);
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
+
+	/**
+	 * Writes a PDF from a {@link SlideShow} file to a {@link File}.
+	 * 
+	 * <strong>Note:</strong> This method needs <a
+	 * href="http://poi.apache.org/">Apache POI</a> to work.
+	 * 
+	 * @param pageSize
+	 *           of the PDF
+	 * @param scale
+	 *           should PPT fit the page size
+	 * @param file
+	 *           output as PDF
+	 * @param pptFile
+	 *           for the PDF
+	 * @throws IOException
+	 * @throws DocumentException
+	 * @see File
+	 * @see SlideShow
+	 * @see Rectangle
+	 * @since 0.9.2
+	 */
+	public static void writePdfFromPpt(final Rectangle pageSize, final boolean scale, final File file, final File pptFile)
+			throws IOException, DocumentException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, pptFile));
+
+		InputStream is = null;
+		try {
+			is = new FileInputStream(pptFile);
+			writePdfFromPpt(pageSize, scale, file, new SlideShow(is));
+		} finally {
+			if (null != is) {
+				is.close();
+			}
+		}
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
+
+	/**
+	 * Returns the text of a given PDF as {@link String}.
+	 * 
+	 * @param file
+	 *           input as PDF
+	 * @return text of the given PDF
+	 * @throws IOException
+	 * @see File
+	 * @since 0.9.3
+	 */
+	public static String getText(final File file) throws IOException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
+
+		final PdfReader pdfReader = new PdfReader(file.getAbsolutePath());
+		final PdfTextExtractor pdfExtractor = new PdfTextExtractor(pdfReader);
+
+		final StringBuilder sb = new StringBuilder();
+
+		for (int page = 1; page <= pdfReader.getNumberOfPages(); page++) {
+			sb.append(pdfExtractor.getTextFromPage(page));
+			sb.append(HelperString.NEW_LINE);
+		}
+		final String result = sb.toString();
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
 	/**
 	 * Modifies the meta data of given PDF and stores it in a new {@link File}.
 	 * <strong>Meta data example:"</strong> metadata.put("Title", "Example");
@@ -293,72 +400,98 @@ public abstract class HelperPdf {
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
-    
-    /**
-     * Adds a read lock and all restrictions to a PDF.
-     * 
-     * @param source
-     *           {@link File}
-     * @param dest
-     *           {@link File} for the locked PDF
-     * @param user
-     *           of the dest {@link File}
-     * @param password
-     *           of the dest {@link File}
-     * @throws DocumentException
-     * @throws IOException
-     * @since 0.9.4
-     */
-    public static void lock(final File source, final File dest, final byte[] user, final byte[] password)
-            throws IOException, DocumentException {
-        if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, user, password));
-        if (null == source) {
-            throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
-        }
-        if (null == dest) {
-            throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
-        }
-        if (HelperObject.isEquals(source, dest)) {
-            throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
-        }
-
-        PdfReader reader = null;
-        OutputStream os = null;
-
-        try {
-            reader = new PdfReader(source.getAbsolutePath());
-            os = new FileOutputStream(dest);
-
-            PdfEncryptor.encrypt(reader, os, user, password, PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY
-                    | PdfWriter.ALLOW_DEGRADED_PRINTING | PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_MODIFY_ANNOTATIONS
-                    | PdfWriter.ALLOW_MODIFY_CONTENTS | PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, true);
-        } finally {
-            if (null != os) {
-                os.close();
-            }
-            if (null != reader) {
-                reader.close();
-            }
-        }
-        if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-    }
-    
+	
 	/**
-	 * Removes the read lock and restrictions from a PDF.
+	 * Encrypt a PDF with a given user and password.
 	 * 
 	 * @param source
 	 *           {@link File}
 	 * @param dest
-	 *           {@link File} for the unlocked PDF
+	 *           {@link File} for the encrypted PDF
 	 * @param user
-	 *           of the source {@link File}
+	 *           of the dest {@link File}
+	 * @param password
+	 *           of the dest {@link File}
+	 * @throws DocumentException
+	 * @throws IOException
+	 * @since 0.9.4
+	 */
+	public static void encrypt(final File source, final File dest, final byte[] user, final byte[] password)
+			throws IOException, DocumentException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, user, password));
+		if (null == source) {
+			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
+		}
+		if (null == dest) {
+			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
+		}
+		if (HelperObject.isEquals(source, dest)) {
+			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		if (!HelperArray.isValid(user)) {
+			throw new RuntimeExceptionIsNullOrEmpty("user"); //$NON-NLS-1$
+		}
+		if (!HelperArray.isValid(password)) {
+			throw new RuntimeExceptionIsNullOrEmpty("password"); //$NON-NLS-1$
+		}
+		
+		PdfReader reader = null;
+		OutputStream os = null;
+
+		try {
+			reader = new PdfReader(source.getAbsolutePath());
+			os = new FileOutputStream(dest);
+
+			PdfEncryptor.encrypt(reader, os, user, password, PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY | PdfWriter.ALLOW_DEGRADED_PRINTING
+					| PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_MODIFY_ANNOTATIONS | PdfWriter.ALLOW_MODIFY_CONTENTS
+					| PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, true);
+		} finally {
+			if (null != os) {
+				os.close();
+			}
+			if (null != reader) {
+				reader.close();
+			}
+		}
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
+
+	/**
+	 * Decrypt a PDF with a given password.
+	 * 
+	 * @param source
+	 *           {@link File}
+	 * @param dest
+	 *           {@link File} for the decrypted PDF
 	 * @param password
 	 *           of the source {@link File}
 	 * @throws DocumentException
 	 * @throws IOException
-	 * @since 0.9.0
+	 * @since 0.9.4
 	 */
-	public static void unlock(final File source, final File dest, final byte[] password)
+	public static void decrypt(final File source, final File dest, final byte[] password) throws IOException,
+			DocumentException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, password));
+
+		unlock(source, dest, password);
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
+	
+	/**
+	 * Adds a all restrictions to a PDF with a given password.
+	 * 
+	 * @param source
+	 *           {@link File}
+	 * @param dest
+	 *           {@link File} for the locked PDF
+	 * @param password
+	 *           of the dest {@link File}
+	 * @throws DocumentException
+	 * @throws IOException
+	 * @since 0.9.4
+	 */
+	public static void lock(final File source, final File dest, final byte[] password)
 			throws IOException, DocumentException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, password));
 		if (null == source) {
@@ -370,24 +503,18 @@ public abstract class HelperPdf {
 		if (HelperObject.isEquals(source, dest)) {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-
+		if (!HelperArray.isValid(password)) {
+			throw new RuntimeExceptionIsNullOrEmpty("password"); //$NON-NLS-1$
+		}
+		
 		PdfReader reader = null;
 		OutputStream os = null;
 
 		try {
-			reader = new PdfReader(source.getAbsolutePath(), password);
+			reader = new PdfReader(source.getAbsolutePath());
 			os = new FileOutputStream(dest);
 
-//			PdfEncryptor.encrypt(reader, os, user, password, PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY
-//					| PdfWriter.ALLOW_DEGRADED_PRINTING | PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_MODIFY_ANNOTATIONS
-//					| PdfWriter.ALLOW_MODIFY_CONTENTS | PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, false);
-            PdfEncryptor.encrypt(reader, os, null, null, PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY
-                    | PdfWriter.ALLOW_DEGRADED_PRINTING | PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_MODIFY_ANNOTATIONS
-                    | PdfWriter.ALLOW_MODIFY_CONTENTS | PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, true);
-            
-//            PdfWriter writer = PdfWriter.;
-            
-            
+			PdfEncryptor.encrypt(reader, os, null, password, 0, true);
 		} finally {
 			if (null != os) {
 				os.close();
@@ -398,115 +525,63 @@ public abstract class HelperPdf {
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
-    
-	/**
-	 * Writes a PDF from a {@link SlideShow} to a {@link File}.
-	 * 
- 	 * <strong>Note:</strong> This method needs <a
-	 * href="http://poi.apache.org/">Apache POI</a> to work.
-	 *
-	 * @param pageSize
-	 *           of the PDF
-	 * @param scale
-	 *           should PPT fit the page size
-	 * @param file
-	 *           output as PDF
-	 * @param ppt
-	 *           for the PDF
-	 * @throws IOException 
-	 * @throws DocumentException 
-	 * @see File
-	 * @see SlideShow
-	 * @see Rectangle
-	 * @since 0.9.2
-	 */
-	public static void writePdfFromPpt(final Rectangle pageSize, final boolean scale, final File file, final SlideShow ppt) throws IOException, DocumentException {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, ppt));
 
-		final File[] files = new File[ppt.getSlides().length];
-		for (int ii = 0; ii < ppt.getSlides().length; ii++) {
-			files[ii] = HelperIO.getTemporaryFile(HelperPdf.class.getSimpleName() + "-slide", IMAGE_TYPE); //$NON-NLS-1$
+	/**
+	 * Removes all restrictions from a PDF with a given password.
+	 * 
+	 * @param source
+	 *           {@link File}
+	 * @param dest
+	 *           {@link File} for the unlocked PDF
+	 * @param password
+	 *           of the source {@link File}
+	 * @throws DocumentException
+	 * @throws IOException
+	 * @since 0.9.0
+	 */
+	public static void unlock(final File source, final File dest, final byte[] password) throws IOException,
+			DocumentException {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, password));
+		if (null == source) {
+			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
+		if (null == dest) {
+			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
+		}
+		if (HelperObject.isEquals(source, dest)) {
+			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		if (!HelperArray.isValid(password)) {
+			throw new RuntimeExceptionIsNullOrEmpty("password"); //$NON-NLS-1$
+		}
+		
+		PdfReader reader = null;
+		OutputStream os = null;
 
-		// export ppt as images
-		exportAsImages(ppt, files);
-
-		// process exported images to pdf
-		writePdfFromImages(pageSize, scale, file, files);
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
-
-	/**
-	 * Writes a PDF from a {@link SlideShow} file to a {@link File}.
-	 * 
- 	 * <strong>Note:</strong> This method needs <a
-	 * href="http://poi.apache.org/">Apache POI</a> to work.
-	 *
-	 * @param pageSize
-	 *           of the PDF
-	 * @param scale
-	 *           should PPT fit the page size
-	 * @param file
-	 *           output as PDF
-	 * @param pptFile
-	 *           for the PDF
-	 * @throws IOException 
-	 * @throws DocumentException 
-	 * @see File
-	 * @see SlideShow
-	 * @see Rectangle
-	 * @since 0.9.2
-	 */
-	public static void writePdfFromPpt(final Rectangle pageSize, final boolean scale, final File file, final File pptFile) throws IOException, DocumentException {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, pptFile));
-
-		InputStream is = null;
 		try {
-			is = new FileInputStream(pptFile);
-			writePdfFromPpt(pageSize, scale, file, new SlideShow(is));
+			reader = new PdfReader(source.getAbsolutePath(), password);
+			os = new FileOutputStream(dest);
+
+			PdfEncryptor.encrypt(reader, os, null, null, PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY
+					| PdfWriter.ALLOW_DEGRADED_PRINTING | PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_MODIFY_ANNOTATIONS
+					| PdfWriter.ALLOW_MODIFY_CONTENTS | PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, true);
+
 		} finally {
-			if (null != is) {
-				is.close();
+			if (null != os) {
+				os.close();
+			}
+			if (null != reader) {
+				reader.close();
 			}
 		}
-
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
-	
-	/**
-	 * Returns the text of a given PDF as {@link String}.
-	 * 
-	 * @param file
-	 *           input as PDF
-	 * @return text of the given PDF
-	 * @throws IOException 
-	 * @see File
-	 * @since 0.9.3
-	 */
-	public static String getText(final File file) throws IOException {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 
-		final PdfReader pdfReader = new PdfReader(file.getAbsolutePath());
-		final PdfTextExtractor pdfExtractor = new PdfTextExtractor(pdfReader);
-		
-		final StringBuilder sb = new StringBuilder();
-		
-		for (int page = 1; page <= pdfReader.getNumberOfPages(); page++) { 
-			sb.append(pdfExtractor.getTextFromPage(page));
-			sb.append(HelperString.NEW_LINE);
-		}
-		final String result = sb.toString();
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-	
 	
 	/*
 	 * Private methods
 	 */
-	
+
 	private static void exportAsImages(final SlideShow ppt, final File... files) throws IOException {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(ppt, files));
 
