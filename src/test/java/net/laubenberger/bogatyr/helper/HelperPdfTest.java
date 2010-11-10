@@ -33,14 +33,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 
+import net.laubenberger.bogatyr.HelperResource;
 import net.laubenberger.bogatyr.view.swing.Button;
 
 import org.junit.Test;
 
+import com.lowagie.text.DocumentException;
 import com.lowagie.text.PageSize;
 
 
@@ -51,40 +54,69 @@ import com.lowagie.text.PageSize;
  * @version 20101110
  */
 public class HelperPdfTest {
-	@Test
-	public void testCreatePdf() {
-		final JComponent component = new Button("Hello world", HelperString.EMPTY_STRING); //$NON-NLS-1$ 
-		component.setBackground(Color.GREEN);
-		component.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-		component.setForeground(Color.RED);
-		component.setFont(new Font("Arial", Font.PLAIN, 16)); //$NON-NLS-1$
-		component.setSize(new Dimension(100, 100));
-
-		final JComponent component2 = new Button("Hello again", HelperString.EMPTY_STRING); //$NON-NLS-1$ 
-		component2.setBackground(Color.GREEN);
-		component2.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-		component2.setForeground(Color.CYAN);
-		component2.setFont(new Font("Arial", Font.BOLD, 20)); //$NON-NLS-1$
-		component2.setSize(new Dimension(100, 100));
-
-		try {
-			File output = HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"); //$NON-NLS-1$ //$NON-NLS-2$
-//			File output = new File("bogatyr.pdf");
-			HelperPdf.writePdfFromImages(PageSize.A4, false, output, HelperImage.getImage(component), HelperImage.getImage(component2));
-			
-			
-			HelperPdf.lock(new File("test.pdf"), new File("test_lock.pdf"), "lala".getBytes(), "hi".getBytes());
-			
-//			HelperPdf.lock(output, new File("test_lock.pdf"), "me".getBytes(), "hi".getBytes());
-			
-			HelperPdf.unlock( new File("test_lock.pdf"), new File("test_unlock.pdf"), "hi".getBytes());
-			
-			System.err.println("bye");
-//			LauncherFile.open(output);
-		} catch (Exception ex) {
-		    ex.printStackTrace();
-			fail(ex.getMessage());
-		}
+//	@Test
+//	public void testWritePdfFromHTML() { //TODO improve
+//		try {
+//			File file = HelperIO.getTemporaryFile("test", "html");
+//			HelperIO.writeFile(file, getClass().getResourceAsStream(HelperResource.RES_FILE_HTML));
+//			HelperPdf.writePdfFromHTML(new File("html.pdf"), file);
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+////			fail(ex.getMessage());
+//		}
+//		System.err.println("muh");
+//		try {
+//			HelperPdf.writePdfFromHTML(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"), null); //$NON-NLS-1$ //$NON-NLS-2$
+//			fail("input is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+//
+//		try {
+//			HelperPdf.writePdfFromHTML(null, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".html")); //$NON-NLS-1$ //$NON-NLS-2$
+//			fail("file is null!"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			//nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+//	}
+	
+//	@Test
+//	public void testCreatePdf() {
+//		final JComponent component = new Button("Hello world", HelperString.EMPTY_STRING); //$NON-NLS-1$ 
+//		component.setBackground(Color.GREEN);
+//		component.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+//		component.setForeground(Color.RED);
+//		component.setFont(new Font("Arial", Font.PLAIN, 16)); //$NON-NLS-1$
+//		component.setSize(new Dimension(100, 100));
+//
+//		final JComponent component2 = new Button("Hello again", HelperString.EMPTY_STRING); //$NON-NLS-1$ 
+//		component2.setBackground(Color.GREEN);
+//		component2.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+//		component2.setForeground(Color.CYAN);
+//		component2.setFont(new Font("Arial", Font.BOLD, 20)); //$NON-NLS-1$
+//		component2.setSize(new Dimension(100, 100));
+//
+//		try {
+//			File output = HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"); //$NON-NLS-1$ //$NON-NLS-2$
+////			File output = new File("bogatyr.pdf");
+//			HelperPdf.writePdfFromImages(PageSize.A4, false, output, HelperImage.getImage(component), HelperImage.getImage(component2));
+//			
+//			
+//			HelperPdf.lock(new File("test.pdf"), new File("test_lock.pdf"), "hi".getBytes());
+//			HelperPdf.unlock( new File("test_lock.pdf"), new File("test_unlock.pdf"), "hi".getBytes());
+//
+//			HelperPdf.encrypt(new File("test.pdf"), new File("test_encrypt.pdf"), "me".getBytes(), "hi".getBytes());
+//			HelperPdf.decrypt( new File("test_encrypt.pdf"), new File("test_decrypt.pdf"), "hi".getBytes());
+//
+////			LauncherFile.open(output);
+//		} catch (Exception ex) {
+//		    ex.printStackTrace();
+//			fail(ex.getMessage());
+//		}
 
 //		try {
 //			HelperPdf.writePdfFromImage(PageSize.A4, true, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"), null); //$NON-NLS-1$ //$NON-NLS-2$
@@ -112,28 +144,9 @@ public class HelperPdfTest {
 //		} catch (Exception ex) {
 //			fail(ex.getMessage());
 //		}
-	}
+//	}
 
-	@Test
-	public void testWritePdfFromHTML() { //TODO improve
-		try {
-			HelperPdf.writePdfFromHTML(HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"), null); //$NON-NLS-1$ //$NON-NLS-2$
-			fail("input is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
 
-		try {
-			HelperPdf.writePdfFromHTML(null, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".html")); //$NON-NLS-1$ //$NON-NLS-2$
-			fail("file is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-	}
 }
 
 

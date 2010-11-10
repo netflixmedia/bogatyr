@@ -21,31 +21,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="6099473d-4163-40d6-a2ae-9afd78c1b030" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperNumber.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperNumber.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperArray.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperObjectTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperObjectTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/HelperResource.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/HelperResource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperPdfTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperPdfTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperArrayTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperArrayTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperNet.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperNet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperPdf.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperPdf.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/AllBogatyrTests.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/AllBogatyrTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/launcher/LauncherMailTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/launcher/LauncherMailTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperNumberTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperObject.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/launcher/LauncherMail.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/launcher/LauncherMail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperMathTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperMathTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperIO.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperIO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperNetTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperNetTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/LabelVertical.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/LabelVertical.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperString.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperString.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperCompressTest.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperCompressTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperCompress.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperCompress.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/net/laubenberger/bogatyr/test.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" afterPath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iml" afterPath="$PROJECT_DIR$/Bogatyr.iml" />
     </list>
+    <ignored path="$USER_HOME_GRIFFON$/" />
+    <ignored path="$USER_HOME_GRAILS$/" />
     <ignored path="target/" />
     <ignored path="Bogatyr.iws" />
-    <ignored path="$USER_HOME_GRAILS$/" />
-    <ignored path="$USER_HOME_GRIFFON$/" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -121,7 +112,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperArrayTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperCompress.java" />
         <option value="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperCompressTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperIO.java" />
@@ -137,6 +127,7 @@
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/launcher/LauncherMail.java" />
         <option value="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/launcher/LauncherMailTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperNumberTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" />
       </list>
     </option>
   </component>
@@ -784,7 +775,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Favorites" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1106,22 +1098,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="net" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laubenberger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bogatyr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="icon" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1577,22 +1553,21 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="626" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="601" />
     <property name="project.structure.last.edited" value="Modules" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="601" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="29" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="615" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="615" />
     <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
-    <property name="RunManagerConfig.showSettingsBeforeRunnig" value="false" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
+    <property name="RunManagerConfig.showSettingsBeforeRunnig" value="false" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="497" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5" value="5" />
@@ -1608,22 +1583,22 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="612" />
-    <property name="GoToClass.includeLibraries" value="false" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="820" />
+    <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="RESOURCE_BUNDLE_SPLITTER_PROPORTION" value="0.5" />
-    <property name="options.lastSelected" value="File.Encoding" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
+    <property name="options.lastSelected" value="File.Encoding" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
-    <property name="project.structure.side.proportion" value="0.2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
-    <property name="options.searchVisible" value="true" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -2065,18 +2040,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperArrayTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="20" selection-start="1130" selection-end="1130" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperCompress.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="27" selection-start="1557" selection-end="1557" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="53" column="27" selection-start="1557" selection-end="1557" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperCompressTest.java">
@@ -2091,84 +2057,67 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperMathTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="20" selection-start="1190" selection-end="1190" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="46" column="20" selection-start="1190" selection-end="1190" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperNet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="17" selection-start="1716" selection-end="1716" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="57" column="17" selection-start="1716" selection-end="1716" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperNumber.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="17" selection-start="1170" selection-end="1170" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="43" column="17" selection-start="1170" selection-end="1170" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="27" selection-start="1596" selection-end="1596" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="56" column="27" selection-start="1596" selection-end="1596" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperPdf.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="27" selection-start="2235" selection-end="2235" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="71" column="27" selection-start="2235" selection-end="2235" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperPdfTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="20" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="50" column="20" selection-start="1171" selection-end="1171" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperString.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="27" selection-start="1369" selection-end="1369" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="48" column="27" selection-start="1369" selection-end="1369" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/view/swing/LabelVertical.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="17" selection-start="1242" selection-end="1242" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="50" column="17" selection-start="1242" selection-end="1242" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/launcher/LauncherMailTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="20" selection-start="1135" selection-end="1135" vertical-scroll-proportion="0.14705883">
-          <folding />
-        </state>
+        <state line="43" column="20" selection-start="1135" selection-end="1135" vertical-scroll-proportion="0.14705883" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/launcher/LauncherMail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="27" selection-start="1467" selection-end="1467" vertical-scroll-proportion="0.15884477">
-          <folding />
-        </state>
+        <state line="50" column="27" selection-start="1467" selection-end="1467" vertical-scroll-proportion="0.15884477" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperNetTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="13" selection-start="1233" selection-end="1233" vertical-scroll-proportion="-0.93862814">
-          <folding />
-        </state>
+        <state line="46" column="13" selection-start="1233" selection-end="1233" vertical-scroll-proportion="-0.93862814" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/HelperNumberTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="13" selection-start="1042" selection-end="1042" vertical-scroll-proportion="0.18772563">
+        <state line="43" column="13" selection-start="1042" selection-end="1042" vertical-scroll-proportion="0.18772563" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="138" selection-start="1902" selection-end="1902" vertical-scroll-proportion="0.2647059">
           <folding />
         </state>
       </provider>

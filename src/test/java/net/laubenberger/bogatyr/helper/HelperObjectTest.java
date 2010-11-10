@@ -197,7 +197,7 @@ public class HelperObjectTest
         }
 
         try {
-            HelperObject.isMethodAvailable(String.class, null); //$NON-NLS-1$
+            HelperObject.isMethodAvailable(String.class, null);
             fail("methodName is null"); //$NON-NLS-1$
         } catch (IllegalArgumentException ex) {
             // nothing to do
@@ -220,7 +220,7 @@ public class HelperObjectTest
         assertEquals("'A'", HelperObject.quote("A")); //$NON-NLS-1$//$NON-NLS-2$
 
         try {
-            HelperObject.quote(null); //$NON-NLS-1$
+            HelperObject.quote(null);
             fail("object is null"); //$NON-NLS-1$
         } catch (IllegalArgumentException ex) {
             // nothing to do

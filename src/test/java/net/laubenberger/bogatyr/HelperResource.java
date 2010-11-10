@@ -34,6 +34,7 @@ package net.laubenberger.bogatyr;
  */
 public interface HelperResource {
 
+	String RES_FILE_HTML = "/net/laubenberger/bogatyr/test.html"; //$NON-NLS-1$
 	String RES_FILE_MID = "/net/laubenberger/bogatyr/test.mid"; //$NON-NLS-1$
 	String RES_FILE_PNG = "/net/laubenberger/bogatyr/test.png"; //$NON-NLS-1$
 	String RES_FILE_TXT = "/net/laubenberger/bogatyr/test.txt"; //$NON-NLS-1$
