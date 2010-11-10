@@ -42,17 +42,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
-
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
-
 import org.apache.poi.hslf.model.Slide;
 import org.apache.poi.hslf.usermodel.SlideShow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xhtmlrenderer.pdf.ITextRenderer;
-
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.Image;
@@ -296,9 +293,58 @@ public abstract class HelperPdf {
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
+    
+    /**
+     * Adds a read lock and all restrictions to a PDF.
+     * 
+     * @param source
+     *           {@link File}
+     * @param dest
+     *           {@link File} for the locked PDF
+     * @param user
+     *           of the dest {@link File}
+     * @param password
+     *           of the dest {@link File}
+     * @throws DocumentException
+     * @throws IOException
+     * @since 0.9.4
+     */
+    public static void lock(final File source, final File dest, final byte[] user, final byte[] password)
+            throws IOException, DocumentException {
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, user, password));
+        if (null == source) {
+            throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
+        }
+        if (null == dest) {
+            throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
+        }
+        if (HelperObject.isEquals(source, dest)) {
+            throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 
+        PdfReader reader = null;
+        OutputStream os = null;
+
+        try {
+            reader = new PdfReader(source.getAbsolutePath());
+            os = new FileOutputStream(dest);
+
+            PdfEncryptor.encrypt(reader, os, user, password, PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY
+                    | PdfWriter.ALLOW_DEGRADED_PRINTING | PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_MODIFY_ANNOTATIONS
+                    | PdfWriter.ALLOW_MODIFY_CONTENTS | PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, true);
+        } finally {
+            if (null != os) {
+                os.close();
+            }
+            if (null != reader) {
+                reader.close();
+            }
+        }
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+    }
+    
 	/**
-	 * Removes all locks and restrictions from a PDF.
+	 * Removes the read lock and restrictions from a PDF.
 	 * 
 	 * @param source
 	 *           {@link File}
@@ -312,9 +358,9 @@ public abstract class HelperPdf {
 	 * @throws IOException
 	 * @since 0.9.0
 	 */
-	public static void unlock(final File source, final File dest, final byte[] user, final byte[] password)
+	public static void unlock(final File source, final File dest, final byte[] password)
 			throws IOException, DocumentException {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, user, password));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, password));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
@@ -329,12 +375,19 @@ public abstract class HelperPdf {
 		OutputStream os = null;
 
 		try {
-			reader = new PdfReader(source.getAbsolutePath());
+			reader = new PdfReader(source.getAbsolutePath(), password);
 			os = new FileOutputStream(dest);
 
-			PdfEncryptor.encrypt(reader, os, user, password, PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY
-					| PdfWriter.ALLOW_DEGRADED_PRINTING | PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_MODIFY_ANNOTATIONS
-					| PdfWriter.ALLOW_MODIFY_CONTENTS | PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, false);
+//			PdfEncryptor.encrypt(reader, os, user, password, PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY
+//					| PdfWriter.ALLOW_DEGRADED_PRINTING | PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_MODIFY_ANNOTATIONS
+//					| PdfWriter.ALLOW_MODIFY_CONTENTS | PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, false);
+            PdfEncryptor.encrypt(reader, os, null, null, PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY
+                    | PdfWriter.ALLOW_DEGRADED_PRINTING | PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_MODIFY_ANNOTATIONS
+                    | PdfWriter.ALLOW_MODIFY_CONTENTS | PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, true);
+            
+//            PdfWriter writer = PdfWriter.;
+            
+            
 		} finally {
 			if (null != os) {
 				os.close();
@@ -345,7 +398,7 @@ public abstract class HelperPdf {
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
-
+    
 	/**
 	 * Writes a PDF from a {@link SlideShow} to a {@link File}.
 	 * 

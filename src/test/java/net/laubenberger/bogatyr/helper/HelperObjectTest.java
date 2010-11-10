@@ -29,137 +29,203 @@ package net.laubenberger.bogatyr.helper;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
 import net.laubenberger.bogatyr.AllBogatyrTests;
-
 import org.junit.Test;
 
-
 /**
- * Junit test
- *
+ * JUnit test for {@link HelperObject}
+ * 
  * @author Stefan Laubenberger
  * @version 20100416
  */
-public class HelperObjectTest {
-	@Test
-	public void testCreateInstance() {
-		try {
-			assertEquals(HelperString.EMPTY_STRING, HelperObject.createInstance(String.class));
-			assertEquals(AllBogatyrTests.DATA, HelperObject.createInstance(String.class, HelperArray.getArray(String.class), HelperArray.getArray(AllBogatyrTests.DATA)));
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+public class HelperObjectTest
+{
+    @Test
+    public void testCreateInstance() {
+        try {
+            assertEquals(HelperString.EMPTY_STRING, HelperObject.createInstance(String.class));
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
 
-		try {
-			HelperObject.createInstance(null);
-			fail("class is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+        try {
+            assertEquals(
+                    AllBogatyrTests.DATA,
+                    HelperObject.createInstance(String.class, HelperArray.getArray(String.class),
+                            HelperArray.getArray(AllBogatyrTests.DATA)));
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
 
-		try {
-			HelperObject.createInstance(null, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA});
-			fail("class is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+        try {
+            HelperObject.createInstance(null);
+            fail("class is null"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            // nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
 
-		try {
-			HelperObject.createInstance(String.class, HelperArray.EMPTY_ARRAY_CLASS, new Object[]{AllBogatyrTests.DATA});
-			fail("paramClazzes is empty!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+        try {
+            HelperObject.createInstance(null, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA});
+            fail("class is null"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            // nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
 
-		try {
-			HelperObject.createInstance(String.class, new Class[]{String.class}, HelperArray.EMPTY_ARRAY_OBJECT);
-			fail("params is empty!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-	}
+        try {
+            HelperObject.createInstance(String.class, HelperArray.EMPTY_ARRAY_CLASS, new Object[]{AllBogatyrTests.DATA});
+            fail("paramClazzes is empty"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            // nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
 
-	@Test
-	public void testSerialize() {
-		try {
-			assertNotNull(HelperObject.serialize(AllBogatyrTests.DATA));
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+        try {
+            HelperObject.createInstance(String.class, new Class[]{String.class}, HelperArray.EMPTY_ARRAY_OBJECT);
+            fail("params is empty"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            // nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
 
-		try {
-			HelperObject.serialize(null);
-			fail("Object is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-	}
+    @Test
+    public void testSerialize() {
+        try {
+            // System.err.println(HelperObject.serialize(AllBogatyrTests.DATA).length);
+            assertEquals(1183, HelperObject.serialize(AllBogatyrTests.DATA).length);
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
 
-	@Test
-	public void testDeserialize() {
-		try {
-			assertEquals(AllBogatyrTests.DATA, HelperObject.deserialize(HelperObject.serialize(AllBogatyrTests.DATA)));
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+        try {
+            HelperObject.serialize(null);
+            fail("object is null"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            // nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
 
-		try {
-			HelperObject.deserialize(null);
-			fail("byte[] is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+    @Test
+    public void testDeserialize() {
+        try {
+            assertEquals(AllBogatyrTests.DATA, HelperObject.deserialize(HelperObject.serialize(AllBogatyrTests.DATA)));
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
 
-		try {
-			HelperObject.deserialize(HelperArray.EMPTY_ARRAY_BYTE);
-			fail("byte[] is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-	}
+        try {
+            assertEquals(AllBogatyrTests.DATA,
+                    HelperObject.deserialize(String.class, HelperObject.serialize(AllBogatyrTests.DATA)));
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
 
-	@Test
-	public void testIsEquals() {
-		assertTrue(HelperObject.isEquals("A", "A"));  //$NON-NLS-1$//$NON-NLS-2$
-		assertTrue(HelperObject.isEquals(null, null));
-		assertFalse(HelperObject.isEquals("A", "B")); //$NON-NLS-1$ //$NON-NLS-2$
-		assertFalse(HelperObject.isEquals("A", null)); //$NON-NLS-1$
-		assertFalse(HelperObject.isEquals(null, "B")); //$NON-NLS-1$
-	}
+        try {
+            HelperObject.deserialize(null, AllBogatyrTests.DATA.getBytes());
+            fail("clazz is null"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            // nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
 
+        try {
+            HelperObject.deserialize(null);
+            fail("data is null"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            // nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
 
-	@Test
-	public void testIsMethodAvailable() {
-		assertTrue(HelperObject.isMethodAvailable(String.class, "indexOf"));  //$NON-NLS-1$
-//		assertFalse(HelperObject.isMethodAvailable(String.class, null));
-		assertFalse(HelperObject.isMethodAvailable(String.class, "blabla"));  //$NON-NLS-1$
+        try {
+            HelperObject.deserialize(HelperArray.EMPTY_ARRAY_BYTE);
+            fail("data is empty"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            // nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
 
+    @Test
+    public void testClone() {
+        try {
+            assertEquals(AllBogatyrTests.DATA, HelperObject.clone(AllBogatyrTests.DATA));
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
 
-		try {
-			assertTrue(HelperObject.isMethodAvailable(null, "indexOf"));  //$NON-NLS-1$
-			fail("clazz is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-	}
+        try {
+            assertFalse(AllBogatyrTests.DATA == HelperObject.clone(AllBogatyrTests.DATA));
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+
+        try {
+            HelperObject.deserialize(null);
+            fail("original is null"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            // nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testIsMethodAvailable() {
+        assertTrue(HelperObject.isMethodAvailable(String.class, "indexOf")); //$NON-NLS-1$
+        assertFalse(HelperObject.isMethodAvailable(String.class, "blabla")); //$NON-NLS-1$
+
+        try {
+            HelperObject.isMethodAvailable(null, "indexOf"); //$NON-NLS-1$
+            fail("clazz is null"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            // nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+
+        try {
+            HelperObject.isMethodAvailable(String.class, null); //$NON-NLS-1$
+            fail("methodName is null"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            // nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testIsEquals() {
+        assertTrue(HelperObject.isEquals("A", "A")); //$NON-NLS-1$//$NON-NLS-2$
+        assertTrue(HelperObject.isEquals(null, null));
+        assertFalse(HelperObject.isEquals("A", "B")); //$NON-NLS-1$ //$NON-NLS-2$
+        assertFalse(HelperObject.isEquals("A", null)); //$NON-NLS-1$
+        assertFalse(HelperObject.isEquals(null, "B")); //$NON-NLS-1$
+    }
+
+    @Test
+    public void testQuote() {
+        assertEquals("'A'", HelperObject.quote("A")); //$NON-NLS-1$//$NON-NLS-2$
+
+        try {
+            HelperObject.quote(null); //$NON-NLS-1$
+            fail("object is null"); //$NON-NLS-1$
+        } catch (IllegalArgumentException ex) {
+            // nothing to do
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+    }
 }
