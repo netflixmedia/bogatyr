@@ -71,8 +71,18 @@ public class HelperPdfTest {
 			File output = HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"); //$NON-NLS-1$ //$NON-NLS-2$
 //			File output = new File("bogatyr.pdf");
 			HelperPdf.writePdfFromImages(PageSize.A4, false, output, HelperImage.getImage(component), HelperImage.getImage(component2));
+			
+			
+			HelperPdf.lock(new File("test.pdf"), new File("test_lock.pdf"), "lala".getBytes(), "hi".getBytes());
+			
+//			HelperPdf.lock(output, new File("test_lock.pdf"), "me".getBytes(), "hi".getBytes());
+			
+			HelperPdf.unlock( new File("test_lock.pdf"), new File("test_unlock.pdf"), "hi".getBytes());
+			
+			System.err.println("bye");
 //			LauncherFile.open(output);
 		} catch (Exception ex) {
+		    ex.printStackTrace();
 			fail(ex.getMessage());
 		}
 

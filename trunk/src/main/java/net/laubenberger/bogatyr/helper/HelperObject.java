@@ -77,7 +77,6 @@ public abstract class HelperObject {
 			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
 
-//		final T result = clazz.getConstructor(HelperArray.EMPTY_ARRAY_CLASS).newInstance();
 		final T result = clazz.getConstructor().newInstance();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
@@ -104,10 +103,10 @@ public abstract class HelperObject {
 		if (null == clazz) {
 			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
-		if (null == paramClazzes) { //TODO should not also empty be tested?
-			throw new RuntimeExceptionIsNull("paramClazzes"); //$NON-NLS-1$
+		if (!HelperArray.isValid(paramClazzes)) {
+			throw new RuntimeExceptionIsNullOrEmpty("paramClazzes"); //$NON-NLS-1$
 		}
-		if (null == params) { //TODO should not also empty be tested?
+		if (!HelperArray.isValid(params)) {
 			throw new RuntimeExceptionIsNull("params"); //$NON-NLS-1$
 		}
 
@@ -195,28 +194,56 @@ public abstract class HelperObject {
 	@SuppressWarnings("unchecked")
 	public static <T> T deserialize(final Class<T> clazz, final byte... data) throws IOException, ClassNotFoundException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(clazz, data));
-		if (!HelperArray.isValid(data)) {
-			throw new RuntimeExceptionIsNullOrEmpty("data"); //$NON-NLS-1$
-		}
 		if (null == clazz) {
 			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
 
-		ObjectInputStream ois = null;
+		final T result = (T) deserialize(data);
 
-		try {
-			ois = new ObjectInputStream(new ByteArrayInputStream(data));
-			final T result = (T) ois.readObject();
-
-			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-			return result;
-		} finally {
-			if (null != ois) {
-				ois.close();
-			}
-		}
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
 	}
+	
+    /**
+     * Clones an object via serialize (deep clone).
+     *
+     * @param original to clone
+     * @return cloned object
+     * @throws ClassNotFoundException
+     * @since 0.9.0
+     */
+    @SuppressWarnings("unchecked")
+    public static <T extends Serializable> T clone(final T original) throws IOException, ClassNotFoundException { //$JUnit$
+        if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(original));
+        if (null == original) {
+            throw new RuntimeExceptionIsNull("original"); //$NON-NLS-1$
+        }
 
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CloneOutput co = null;
+        ObjectInputStream ois = null;
+
+        try {
+            co = new CloneOutput(baos);
+            co.writeObject(original);
+
+            final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ois = new CloneInput(bais, co);
+
+            final T result = (T) ois.readObject();
+
+            if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+            return result;
+        } finally {
+            if (null != co) {
+                co.close();
+            }
+            if (null != ois) {
+                ois.close();
+            }
+        }
+    }
+    
 	/**
 	 * Checks if a {@link Class} implements the given method name.
 	 *
@@ -285,53 +312,13 @@ public abstract class HelperObject {
 	}
 
 	/**
-	 * Clones an object via serialize (deep clone).
-	 *
-	 * @param original to clone
-	 * @return cloned object
-	 * @throws ClassNotFoundException
-	 * @since 0.9.0
-	 */
-	@SuppressWarnings("unchecked")
-	public static <T extends Serializable> T clone(final T original) throws IOException, ClassNotFoundException {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(original));
-		if (null == original) {
-			throw new RuntimeExceptionIsNull("original"); //$NON-NLS-1$
-		}
-
-		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		CloneOutput co = null;
-		ObjectInputStream ois = null;
-
-		try {
-			co = new CloneOutput(baos);
-			co.writeObject(original);
-
-			final ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-			ois = new CloneInput(bais, co);
-
-			final T result = (T) ois.readObject();
-
-			if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-			return result;
-		} finally {
-			if (null != co) {
-				co.close();
-			}
-			if (null != ois) {
-				ois.close();
-			}
-		}
-	}
-
-	/**
 	 * Quotes a given {@link Object} for different purposes (e.g. logging).
 	 *
 	 * @param object to quote
 	 * @return quoted object string
 	 * @since 0.9.1
 	 */
-	public static String quote(final Object object) {
+	public static String quote(final Object object) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(object));
 		if (null == object) {
 			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
