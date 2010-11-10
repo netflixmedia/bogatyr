@@ -41,7 +41,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperCompress}
  * 
  * @author Stefan Laubenberger
- * @version 20101106
+ * @version 20101110
  */
 public class HelperCompressTest {
 
@@ -95,15 +95,6 @@ public class HelperCompressTest {
 				.getName()).length());
 		assertEquals(fileWav.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileWav
 				.getName()).length());
-
-		try {
-			HelperCompress.extractZip(null, fileZipExtractDir);
-			fail("collection is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			// nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
 	}
 
 	@Test
@@ -130,6 +121,15 @@ public class HelperCompressTest {
 		try {
 			HelperCompress.writeZip(fileZip, new File[0]);
 			fail("files is empty"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperCompress.writeZip(fileZip, fileMid, null, fileWav);
+			fail("entry is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			// nothing to do
 		} catch (Exception ex) {

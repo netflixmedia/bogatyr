@@ -33,21 +33,20 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import java.net.URL;
+import net.laubenberger.bogatyr.misc.Constants;
 
 import org.junit.Test;
 
 
 /**
- * Junit test
+ * JUnit test for {@link HelperNet}
  *
  * @author Stefan Laubenberger
- * @version 20101106
+ * @version 20101110
  */
 public class HelperNetTest {
 	@Test
-	public void testEnableDisableProxyHttp() {
+	public void testEnableAndDisableProxyHttp() {
 		final String host = "192.168.1.1"; //$NON-NLS-1$
 		final int port = 8080;
 		final String user = "Bogatyr"; //$NON-NLS-1$
@@ -65,7 +64,7 @@ public class HelperNetTest {
 
 		try {
 			HelperNet.enableProxyHttp(null, port, user, pw);
-			fail("host is null!"); //$NON-NLS-1$
+			fail("host is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -73,8 +72,26 @@ public class HelperNetTest {
 		}
 
 		try {
+			HelperNet.enableProxyHttp(null, 0, user, pw);
+			fail("port must be greater than 0"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperNet.enableProxyHttp(host, HelperNumber.NUMBER_65536.intValue(), user, pw);
+			fail("port must be smaller than 65536"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
 			HelperNet.enableProxyHttp(host, port, null, pw);
-			fail("username is null!"); //$NON-NLS-1$
+			fail("username is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -83,7 +100,7 @@ public class HelperNetTest {
 
 		try {
 			HelperNet.enableProxyHttp(host, port, user, null);
-			fail("password is null!"); //$NON-NLS-1$
+			fail("password is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -92,7 +109,7 @@ public class HelperNetTest {
 	}
 
 	@Test
-	public void testEnableDisableProxyHttps() {
+	public void testEnableAndDisableProxyHttps() {
 		final String host = "192.168.1.1"; //$NON-NLS-1$
 		final int port = 8080;
 		final String user = "Bogatyr"; //$NON-NLS-1$
@@ -110,16 +127,34 @@ public class HelperNetTest {
 
 		try {
 			HelperNet.enableProxyHttps(null, port, user, pw);
-			fail("host is null!"); //$NON-NLS-1$
+			fail("host is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
-
+		
+		try {
+			HelperNet.enableProxyHttps(null, 0, user, pw);
+			fail("port must be greater than 0"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperNet.enableProxyHttps(host, HelperNumber.NUMBER_65536.intValue(), user, pw);
+			fail("port must be smaller than 65536"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
 		try {
 			HelperNet.enableProxyHttps(host, port, null, pw);
-			fail("username is null!"); //$NON-NLS-1$
+			fail("username is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -128,7 +163,7 @@ public class HelperNetTest {
 
 		try {
 			HelperNet.enableProxyHttps(host, port, user, null);
-			fail("password is null!"); //$NON-NLS-1$
+			fail("password is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -155,16 +190,34 @@ public class HelperNetTest {
 
 		try {
 			HelperNet.enableProxyFtp(null, port, user, pw);
-			fail("host is null!"); //$NON-NLS-1$
+			fail("host is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
-
+		
+		try {
+			HelperNet.enableProxyFtp(null, 0, user, pw);
+			fail("port must be greater than 0"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperNet.enableProxyFtp(host, HelperNumber.NUMBER_65536.intValue(), user, pw);
+			fail("port must be smaller than 65536"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
 		try {
 			HelperNet.enableProxyFtp(host, port, null, pw);
-			fail("username is null!"); //$NON-NLS-1$
+			fail("username is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -173,25 +226,7 @@ public class HelperNetTest {
 
 		try {
 			HelperNet.enableProxyFtp(host, port, user, null);
-			fail("password is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-	}
-
-	@Test
-	public void testReadUrl() {
-		try {
-			assertNotNull(HelperNet.readUrl(new URL("http://www.laubenberger.net"))); //$NON-NLS-1$
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-
-		try {
-			HelperNet.readUrl(null);
-			fail("url is null!"); //$NON-NLS-1$
+			fail("password is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -202,29 +237,29 @@ public class HelperNetTest {
 	@Test
 	public void testIsPingable() {
 		try {
-			assertTrue(HelperNet.isPingable("laubenberger.net")); //$NON-NLS-1$
+			assertTrue(HelperNet.isPingable("orwell.ch")); //$NON-NLS-1$
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 
 		try {
-			assertFalse(HelperNet.isPingable("192.168.1.12")); //$NON-NLS-1$
+			assertFalse(HelperNet.isPingable("192.168.255.255")); //$NON-NLS-1$
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
-
-//		try {
-//			HelperNet.isPingable("987.654.321.000"); //$NON-NLS-1$
-//			fail("host is invalid!"); //$NON-NLS-1$
-//		} catch (UnknownHostException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
 
 		try {
 			HelperNet.isPingable(null);
-			fail("host is null!"); //$NON-NLS-1$
+			fail("host is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperNet.isPingable(HelperString.EMPTY_STRING);
+			fail("host is empty"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -232,27 +267,11 @@ public class HelperNetTest {
 		}
 	}
 
-	@Test
-	public void testGetHostname() {
-		try {
-			assertEquals("orwell.ch", HelperNet.getHostname("78.46.88.137")); //$NON-NLS-1$ //$NON-NLS-2$
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-
-		try {
-			HelperNet.getHostname(null);
-			fail("ip is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-	}
 
 	@Test
 	public void testGetIp() {
 		try {
+//			System.err.println(HelperNet.getIp("www.laubenberger.net"));
 			assertEquals("78.46.88.137", HelperNet.getIp("orwell.ch")); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -260,7 +279,44 @@ public class HelperNetTest {
 
 		try {
 			HelperNet.getIp(null);
-			fail("host is null!"); //$NON-NLS-1$
+			fail("host is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperNet.getIp(HelperString.EMPTY_STRING);
+			fail("host is empty"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetHostname() {
+		try {
+//			System.err.println(HelperNet.getHostname("78.46.88.137"));
+			assertEquals("orwell.ch", HelperNet.getHostname("78.46.88.137")); //$NON-NLS-1$ //$NON-NLS-2$
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperNet.getHostname(null);
+			fail("ip is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperNet.getHostname(HelperString.EMPTY_STRING);
+			fail("ip is empty"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {
@@ -271,6 +327,7 @@ public class HelperNetTest {
 	@Test
 	public void testGetLocalHostname() {
 		try {
+//			System.err.println(HelperNet.getLocalHostname());
 			assertNotNull(HelperNet.getLocalHostname());
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -280,6 +337,7 @@ public class HelperNetTest {
 	@Test
 	public void testGetLocalIp() {
 		try {
+//			System.err.println(HelperNet.getLocalIp());
 			assertNotNull(HelperNet.getLocalIp());
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -289,7 +347,7 @@ public class HelperNetTest {
 	@Test
 	public void testGetLocalIps() { 
 		try {
-			assertNotNull(HelperNet.getLocalIps());
+			assertTrue(HelperNet.getLocalIps().size() > 0);
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
@@ -298,12 +356,11 @@ public class HelperNetTest {
 	@Test
 	public void testGetNetworkInterfaces() { 
 		try {
-			assertNotNull(HelperNet.getNetworkInterfaces());
+			assertTrue(HelperNet.getNetworkInterfaces().size() > 0);
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 	}
-
 
 	@Test
 	public void testGetMacAddress() {
@@ -315,7 +372,26 @@ public class HelperNetTest {
 
 		try {
 			HelperNet.getMacAddress(null);
-			fail("ni is null!"); //$NON-NLS-1$
+			fail("ni is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testReadUrl() {
+		try {
+//			System.err.println(HelperIO.readStream(HelperNet.readUrl(Constants.BOGATYR.getUrl())).length);
+			assertTrue(HelperIO.readStream(HelperNet.readUrl(Constants.BOGATYR.getUrl())).length > 2000);
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperNet.readUrl(null);
+			fail("url is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {

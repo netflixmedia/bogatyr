@@ -44,6 +44,8 @@ import java.util.List;
 import net.laubenberger.bogatyr.helper.encoder.EncoderBase64;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +55,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101110)
  * @since 0.5.0
  */
 public abstract class HelperNet {
@@ -83,6 +85,12 @@ public abstract class HelperNet {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host, port, username, password));
 		if (!HelperString.isValid(host)) {
 			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
+		}
+		if (0 >= port) {
+			throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
+		}
+		if (HelperNumber.NUMBER_65536.intValue() <= port) {
+			throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(username)) {
 			throw new RuntimeExceptionIsNullOrEmpty("username"); //$NON-NLS-1$
@@ -129,6 +137,12 @@ public abstract class HelperNet {
 		if (!HelperString.isValid(host)) {
 			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
 		}
+		if (0 >= port) {
+			throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
+		}
+		if (HelperNumber.NUMBER_65536.intValue() <= port) {
+			throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(username)) {
 			throw new RuntimeExceptionIsNullOrEmpty("username"); //$NON-NLS-1$
 		}
@@ -174,6 +188,12 @@ public abstract class HelperNet {
 
 		if (!HelperString.isValid(host)) {
 			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
+		}
+		if (0 >= port) {
+			throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
+		}
+		if (HelperNumber.NUMBER_65536.intValue() <= port) {
+			throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(username)) {
 			throw new RuntimeExceptionIsNullOrEmpty("username"); //$NON-NLS-1$
@@ -232,6 +252,28 @@ public abstract class HelperNet {
 	}
 
 	/**
+	 * Returns the IP for an host name.
+	 *
+	 * @param host for IP
+	 * @return IP of the host name
+	 * @throws UnknownHostException
+	 * @since 0.5.0
+	 */
+	public static String getIp(final String host) throws UnknownHostException { //$JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host));
+		if (!HelperString.isValid(host)) {
+			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
+		}
+
+		final InetAddress address = InetAddress.getByName(host);
+
+		final String result = address.getHostAddress();
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
+	/**
 	 * Returns the host name of an IP address.
 	 *
 	 * @param ip for host name
@@ -266,28 +308,6 @@ public abstract class HelperNet {
 		final InetAddress address = InetAddress.getLocalHost();
 
 		final String result = address.getHostName();
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	/**
-	 * Returns the IP for an host name.
-	 *
-	 * @param host for IP
-	 * @return IP of the host name
-	 * @throws UnknownHostException
-	 * @since 0.5.0
-	 */
-	public static String getIp(final String host) throws UnknownHostException { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host));
-		if (!HelperString.isValid(host)) {
-			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
-		}
-
-		final InetAddress address = InetAddress.getByName(host);
-
-		final String result = address.getHostAddress();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

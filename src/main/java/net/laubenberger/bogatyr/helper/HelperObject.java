@@ -54,7 +54,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101110)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -104,10 +104,10 @@ public abstract class HelperObject {
 		if (null == clazz) {
 			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
-		if (null == paramClazzes) {
+		if (null == paramClazzes) { //TODO should not also empty be tested?
 			throw new RuntimeExceptionIsNull("paramClazzes"); //$NON-NLS-1$
 		}
-		if (null == params) {
+		if (null == params) { //TODO should not also empty be tested?
 			throw new RuntimeExceptionIsNull("params"); //$NON-NLS-1$
 		}
 

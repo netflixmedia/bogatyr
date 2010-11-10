@@ -40,7 +40,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperArray}
  *
  * @author Stefan Laubenberger
- * @version 20101108
+ * @version 20101110
  */
 public class HelperArrayTest {
 
@@ -66,6 +66,15 @@ public class HelperArrayTest {
 		final String[] array = HelperArray.concatenate(a, b, c);
 
 		assertArrayEquals(new String[]{"A", "B", "C", "D", "E", "F"}, array); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+	
+		try {
+			HelperArray.concatenate(a, b, null);
+			fail("array is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
@@ -77,6 +86,15 @@ public class HelperArrayTest {
 		final byte[] array = HelperArray.concatenate(a, b, c);
 
 		assertArrayEquals(new byte[]{1, 2, 3, 4, 5, 6}, array);
+		
+		try {
+			HelperArray.concatenate(a, b, null);
+			fail("array is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
@@ -88,6 +106,15 @@ public class HelperArrayTest {
 		final char[] array = HelperArray.concatenate(a, b, c);
 
 		assertArrayEquals(new char[]{'A', 'B', 'C', 'D', 'E', 'F'}, array);
+		
+		try {
+			HelperArray.concatenate(a, b, null);
+			fail("array is null"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 	@Test

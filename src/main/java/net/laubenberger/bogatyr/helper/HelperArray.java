@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101110)
  * @since 0.7.0
  */
 public abstract class HelperArray { //TODO implement all methods for all primitive types
@@ -129,6 +129,9 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 		final List<T> resultList = new ArrayList<T>();
 
 		for (final T[] array : arrays) {
+			if (null == array) {
+				throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
+			}
 			resultList.addAll(Arrays.asList(array));
 		}
 
@@ -154,6 +157,9 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 		int totalSize = 0;
 
 		for (final byte[] array : arrays) {
+			if (null == array) {
+				throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
+			}
 			totalSize += array.length;
 		}
 
@@ -185,6 +191,9 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 		int totalSize = 0;
 
 		for (final char[] array : arrays) {
+			if (null == array) {
+				throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
+			}
 			totalSize += array.length;
 		}
 

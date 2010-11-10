@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101106)
+ * @version 0.9.4 (20101110)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -236,16 +236,18 @@ public abstract class HelperString {
 		final StringBuilder sb = new StringBuilder();
 
 		for (final String string : strings) {
-			if (isValid(string)) { //TODO correct or should it be an exception
-				if (null != separator && 0 < sb.length()) {
-					sb.append(separator);
-				}
+			if (null == string) {
+				throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
+			}
 
-				if (isTrimmed) {
-					sb.append(string.trim());
-				} else {
-					sb.append(string);
-				}
+			if (null != separator && 0 < sb.length()) {
+				sb.append(separator);
+			}
+
+			if (isTrimmed) {
+				sb.append(string.trim());
+			} else {
+				sb.append(string);
 			}
 		}
 		final String result = sb.toString();

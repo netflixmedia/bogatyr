@@ -41,7 +41,7 @@ import org.junit.Test;
  * JUnit test for {@link LauncherMail}
  * 
  * @author Stefan Laubenberger
- * @version 20101103
+ * @version 20101110
  */
 public class LauncherMailTest {
 	@Test
@@ -124,6 +124,17 @@ public class LauncherMailTest {
 					.mail(
 							"Hello again!", null, HelperArray.EMPTY_ARRAY_STRING); //$NON-NLS-1$
 			fail("emailAddresses is empty"); //$NON-NLS-1$
+		} catch (IllegalArgumentException ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			LauncherMail
+					.mail(
+							"Hello again!", null, "yourname@oäöü.com", null, "anothername@anotherMail.com"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			fail("address is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			// nothing to do
 		} catch (Exception ex) {

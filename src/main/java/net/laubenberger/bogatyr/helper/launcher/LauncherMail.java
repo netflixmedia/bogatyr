@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
  * This launcher starts the system mail application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101106)
+ * @version 0.9.4 (20101110)
  * @since 0.7.0
  */
 public abstract class LauncherMail {
@@ -119,9 +119,13 @@ public abstract class LauncherMail {
 
 		final StringBuilder sb = new StringBuilder();
 		for (final String address : emailAddresses) {
+			if (null == address) {
+				throw new RuntimeExceptionIsNull("address"); //$NON-NLS-1$
+			}
 			if (0 < sb.length()) {
 				sb.append(HelperString.COMMA);
 			}
+
 			sb.append(URLEncoder.encode(address, Constants.ENCODING_UTF8).replace(HelperString.PLUS_SIGN, HEX_SPACE));
 		}
 		sb.append("?subject="); //$NON-NLS-1$
