@@ -42,21 +42,21 @@ import javax.swing.text.DefaultFormatter;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperNumber;
 import net.laubenberger.bogatyr.helper.HelperString;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This is a format factory.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101119)
  * @since 0.9.0
  */
 public abstract class FormatFactory {
@@ -101,10 +101,13 @@ public abstract class FormatFactory {
 	 */
 	public static NumberFormat createNumberFormat(final String pattern) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pattern));
-		if (!HelperString.isValid(pattern)) {
-			throw new RuntimeExceptionIsNullOrEmpty("pattern"); //$NON-NLS-1$
+		if (null == pattern) {
+			throw new RuntimeExceptionIsNull("pattern"); //$NON-NLS-1$
 		}
-
+		if (!HelperString.isValid(pattern)) {
+			throw new RuntimeExceptionIsEmpty("pattern"); //$NON-NLS-1$
+		}
+		
 		final NumberFormat result = new DecimalFormat(pattern);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
@@ -153,8 +156,11 @@ public abstract class FormatFactory {
 	 */
 	public static DateFormat createDateFormat(final String pattern) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pattern));
+		if (null == pattern) {
+			throw new RuntimeExceptionIsNull("pattern"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(pattern)) {
-			throw new RuntimeExceptionIsNullOrEmpty("pattern"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("pattern"); //$NON-NLS-1$
 		}
 
 		final DateFormat result = new SimpleDateFormat(pattern, Locale.getDefault());

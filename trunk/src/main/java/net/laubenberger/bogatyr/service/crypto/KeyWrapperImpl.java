@@ -40,8 +40,8 @@ import net.laubenberger.bogatyr.helper.HelperArray;
 import net.laubenberger.bogatyr.helper.HelperCrypto;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperString;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.model.crypto.CryptoAlgo;
 import net.laubenberger.bogatyr.service.ServiceAbstract;
 
@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
  * This is a class for wrapping and unwrapping a crypto key.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101105)
+ * @version 0.9.4 (20101119)
  * @since 0.3.0
  */
 public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
@@ -107,11 +107,17 @@ public class KeyWrapperImpl extends ServiceAbstract implements KeyWrapper {
 		if (null == wrapperKey) {
 			throw new RuntimeExceptionIsNull("wrapperKey"); //$NON-NLS-1$
 		}
+		if (null == wrappedKey) {
+			throw new RuntimeExceptionIsNull("wrappedKey"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(wrappedKey)) {
-			throw new RuntimeExceptionIsNullOrEmpty("wrappedKey"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("wrappedKey"); //$NON-NLS-1$
+		}
+		if (null == keyAlgorithm) {
+			throw new RuntimeExceptionIsNull("keyAlgorithm"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(keyAlgorithm)) {
-			throw new RuntimeExceptionIsNullOrEmpty("keyAlgorithm"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("keyAlgorithm"); //$NON-NLS-1$
 		}
 		if (0 >= keyType) {
 			throw new IllegalArgumentException("keyType is invalid: " + keyType); //$NON-NLS-1$

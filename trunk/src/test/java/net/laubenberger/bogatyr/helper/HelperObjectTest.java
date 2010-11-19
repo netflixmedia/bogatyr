@@ -32,13 +32,16 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.laubenberger.bogatyr.AllBogatyrTests;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
 import org.junit.Test;
 
 /**
  * JUnit test for {@link HelperObject}
  * 
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20101119
  */
 public class HelperObjectTest
 {
@@ -62,7 +65,7 @@ public class HelperObjectTest
         try {
             HelperObject.createInstance(null);
             fail("class is null"); //$NON-NLS-1$
-        } catch (IllegalArgumentException ex) {
+        } catch (RuntimeExceptionIsNull ex) {
             // nothing to do
         } catch (Exception ex) {
             fail(ex.getMessage());
@@ -71,7 +74,7 @@ public class HelperObjectTest
         try {
             HelperObject.createInstance(null, new Class[]{String.class}, new Object[]{AllBogatyrTests.DATA});
             fail("class is null"); //$NON-NLS-1$
-        } catch (IllegalArgumentException ex) {
+        } catch (RuntimeExceptionIsNull ex) {
             // nothing to do
         } catch (Exception ex) {
             fail(ex.getMessage());
@@ -80,7 +83,7 @@ public class HelperObjectTest
         try {
             HelperObject.createInstance(String.class, HelperArray.EMPTY_ARRAY_CLASS, new Object[]{AllBogatyrTests.DATA});
             fail("paramClazzes is empty"); //$NON-NLS-1$
-        } catch (IllegalArgumentException ex) {
+        } catch (RuntimeExceptionIsEmpty ex) {
             // nothing to do
         } catch (Exception ex) {
             fail(ex.getMessage());
@@ -89,7 +92,7 @@ public class HelperObjectTest
         try {
             HelperObject.createInstance(String.class, new Class[]{String.class}, HelperArray.EMPTY_ARRAY_OBJECT);
             fail("params is empty"); //$NON-NLS-1$
-        } catch (IllegalArgumentException ex) {
+        } catch (RuntimeExceptionIsEmpty ex) {
             // nothing to do
         } catch (Exception ex) {
             fail(ex.getMessage());
@@ -108,7 +111,7 @@ public class HelperObjectTest
         try {
             HelperObject.serialize(null);
             fail("object is null"); //$NON-NLS-1$
-        } catch (IllegalArgumentException ex) {
+        } catch (RuntimeExceptionIsNull ex) {
             // nothing to do
         } catch (Exception ex) {
             fail(ex.getMessage());
@@ -133,7 +136,7 @@ public class HelperObjectTest
         try {
             HelperObject.deserialize(null, AllBogatyrTests.DATA.getBytes());
             fail("clazz is null"); //$NON-NLS-1$
-        } catch (IllegalArgumentException ex) {
+        } catch (RuntimeExceptionIsNull ex) {
             // nothing to do
         } catch (Exception ex) {
             fail(ex.getMessage());
@@ -142,7 +145,7 @@ public class HelperObjectTest
         try {
             HelperObject.deserialize(null);
             fail("data is null"); //$NON-NLS-1$
-        } catch (IllegalArgumentException ex) {
+        } catch (RuntimeExceptionIsNull ex) {
             // nothing to do
         } catch (Exception ex) {
             fail(ex.getMessage());
@@ -151,7 +154,7 @@ public class HelperObjectTest
         try {
             HelperObject.deserialize(HelperArray.EMPTY_ARRAY_BYTE);
             fail("data is empty"); //$NON-NLS-1$
-        } catch (IllegalArgumentException ex) {
+        } catch (RuntimeExceptionIsEmpty ex) {
             // nothing to do
         } catch (Exception ex) {
             fail(ex.getMessage());
@@ -175,7 +178,7 @@ public class HelperObjectTest
         try {
             HelperObject.deserialize(null);
             fail("original is null"); //$NON-NLS-1$
-        } catch (IllegalArgumentException ex) {
+        } catch (RuntimeExceptionIsNull ex) {
             // nothing to do
         } catch (Exception ex) {
             fail(ex.getMessage());
@@ -190,7 +193,7 @@ public class HelperObjectTest
         try {
             HelperObject.isMethodAvailable(null, "indexOf"); //$NON-NLS-1$
             fail("clazz is null"); //$NON-NLS-1$
-        } catch (IllegalArgumentException ex) {
+        } catch (RuntimeExceptionIsNull ex) {
             // nothing to do
         } catch (Exception ex) {
             fail(ex.getMessage());
@@ -199,7 +202,7 @@ public class HelperObjectTest
         try {
             HelperObject.isMethodAvailable(String.class, null);
             fail("methodName is null"); //$NON-NLS-1$
-        } catch (IllegalArgumentException ex) {
+        } catch (RuntimeExceptionIsNull ex) {
             // nothing to do
         } catch (Exception ex) {
             fail(ex.getMessage());
@@ -222,7 +225,7 @@ public class HelperObjectTest
         try {
             HelperObject.quote(null);
             fail("object is null"); //$NON-NLS-1$
-        } catch (IllegalArgumentException ex) {
+        } catch (RuntimeExceptionIsNull ex) {
             // nothing to do
         } catch (Exception ex) {
             fail(ex.getMessage());

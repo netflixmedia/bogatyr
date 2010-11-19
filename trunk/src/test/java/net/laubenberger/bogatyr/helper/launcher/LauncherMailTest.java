@@ -34,6 +34,8 @@ import java.net.URI;
 import net.laubenberger.bogatyr.AllBogatyrTests;
 import net.laubenberger.bogatyr.helper.HelperArray;
 import net.laubenberger.bogatyr.helper.HelperString;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 import org.junit.Test;
 
@@ -41,7 +43,7 @@ import org.junit.Test;
  * JUnit test for {@link LauncherMail}
  * 
  * @author Stefan Laubenberger
- * @version 20101110
+ * @version 20101119
  */
 public class LauncherMailTest {
 	@Test
@@ -80,7 +82,7 @@ public class LauncherMailTest {
 		try {
 			LauncherMail.mail(null);
 			fail("uri is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -91,7 +93,7 @@ public class LauncherMailTest {
 					.mail(
 							null, "This is a test:" + HelperString.NEW_LINE + AllBogatyrTests.DATA  + HelperString.NEW_LINE + "Yeah, all lines are here! :-)", "yourname@oäöü.com", "anothername@anotherMail.com"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			fail("subject is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -102,7 +104,7 @@ public class LauncherMailTest {
 					.mail(
 							HelperString.EMPTY_STRING, "This is a test:" + HelperString.NEW_LINE + AllBogatyrTests.DATA  + HelperString.NEW_LINE + "Yeah, all lines are here! :-)", "yourname@oäöü.com", "anothername@anotherMail.com"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			fail("subject is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -113,7 +115,7 @@ public class LauncherMailTest {
 					.mail(
 							"Hi there!", null, null); //$NON-NLS-1$
 			fail("emailAddresses is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -124,7 +126,7 @@ public class LauncherMailTest {
 					.mail(
 							"Hello again!", null, HelperArray.EMPTY_ARRAY_STRING); //$NON-NLS-1$
 			fail("emailAddresses is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -135,7 +137,7 @@ public class LauncherMailTest {
 					.mail(
 							"Hello again!", null, "yourname@oäöü.com", null, "anothername@anotherMail.com"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			fail("address is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

@@ -34,8 +34,8 @@ import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * Encodes and decodes data to Base64 format.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101119)
  * @since 0.1.0
  */
 public abstract class EncoderBase64 {
@@ -127,8 +127,11 @@ public abstract class EncoderBase64 {
 		if (input.length() * 2 > HelperEnvironment.getMemoryFree()) {
 			throw new RuntimeExceptionExceedsVmMemory("input", input.length() * 2); //$NON-NLS-1$
 		}
+		if (null == encoding) {
+			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(encoding)) {
-			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("encoding"); //$NON-NLS-1$
 		}
 
 		final String result = new String(encode(input.getBytes(encoding)));

@@ -38,6 +38,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import net.laubenberger.bogatyr.misc.Constants;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.view.swing.Panel;
 
 import org.junit.Test;
@@ -47,7 +49,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperGraphic}
  *
  * @author Stefan Laubenberger
- * @version 20101108
+ * @version 20101119
  */
 public class HelperGraphicTest {
 	@Test
@@ -61,7 +63,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getCenter(null);
 			fail("size is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -85,7 +87,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getScale(null, new Dimension(50, 50));
 			fail("input is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -94,7 +96,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getScale(new Dimension(100, 100), null);
 			fail("output is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -103,7 +105,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getScale(new Dimension(-100, 100), new Dimension(50, 50));
 			fail("input.width is negative"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -112,7 +114,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getScale(new Dimension(100, -100), new Dimension(50, 50));
 			fail("input.height is negative"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -121,7 +123,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getScale(new Dimension(100, 100), new Dimension(-50, 50));
 			fail("output.width is negative"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -130,7 +132,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getScale(new Dimension(100, 100), new Dimension(50, -50));
 			fail("output.height is negative"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -152,7 +154,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getScaledSize(null, new Dimension(50, 50));
 			fail("input is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -161,7 +163,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getScaledSize(new Dimension(100, 100), null);
 			fail("output is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -170,7 +172,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getScale(new Dimension(-100, 100), new Dimension(50, 50));
 			fail("input.width is negative"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -179,7 +181,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getScale(new Dimension(100, -100), new Dimension(50, 50));
 			fail("input.height is negative"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -188,7 +190,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getScale(new Dimension(100, 100), new Dimension(-50, 50));
 			fail("output.width is negative"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -197,7 +199,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getScale(new Dimension(100, 100), new Dimension(50, -50));
 			fail("output.height is negative"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -215,7 +217,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getScaledSize(null, 0.5D);
 			fail("input is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -238,7 +240,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getTextSize(null, g2d);
 			fail("text is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -247,7 +249,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getTextSize(Constants.BOGATYR.getName(), null);
 			fail("graphics is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -269,7 +271,7 @@ public class HelperGraphicTest {
 		try {
 			HelperGraphic.getColorHex(null);
 			fail("color is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

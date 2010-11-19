@@ -33,17 +33,17 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 import org.junit.Test;
-
-import net.laubenberger.bogatyr.helper.HelperString;
 
 
 /**
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100618
+ * @version 20101119
  */
 public class HelperStringTest {
 	@Test
@@ -73,7 +73,7 @@ public class HelperStringTest {
 		try {
 			assertNotNull(HelperString.fill('1', 0));
 			fail("fillLength must be greater than 0"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -123,8 +123,8 @@ public class HelperStringTest {
 
 		try {
 			HelperString.startsWith(null, "blabla"); //$NON-NLS-1$
-			fail("string is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+			fail("string is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -138,8 +138,8 @@ public class HelperStringTest {
 
 		try {
 			HelperString.endsWith(null, "blabla"); //$NON-NLS-1$
-			fail("string is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+			fail("string is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -153,8 +153,8 @@ public class HelperStringTest {
 
 		try {
 			HelperString.contains(null, "blabla"); //$NON-NLS-1$
-			fail("string is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+			fail("string is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

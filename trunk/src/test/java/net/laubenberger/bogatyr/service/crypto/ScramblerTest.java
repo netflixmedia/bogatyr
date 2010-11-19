@@ -30,9 +30,10 @@ package net.laubenberger.bogatyr.service.crypto;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.fail;
-
 import net.laubenberger.bogatyr.AllBogatyrTests;
 import net.laubenberger.bogatyr.helper.HelperArray;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 import org.junit.Test;
 
@@ -41,7 +42,7 @@ import org.junit.Test;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20101119
  */
 public class ScramblerTest {
 	@Test
@@ -53,8 +54,8 @@ public class ScramblerTest {
 
 		try {
 			scrambler.scramble(null, (byte) 23);
-			fail("byte[] is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+			fail("byte[] is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -62,8 +63,8 @@ public class ScramblerTest {
 
 		try {
 			scrambler.scramble(HelperArray.EMPTY_ARRAY_BYTE, (byte) 23);
-			fail("byte[] is empty!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+			fail("byte[] is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -71,8 +72,8 @@ public class ScramblerTest {
 
 		try {
 			scrambler.unscramble(null, (byte) 23);
-			fail("byte[] is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+			fail("byte[] is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -80,8 +81,8 @@ public class ScramblerTest {
 
 		try {
 			scrambler.unscramble(HelperArray.EMPTY_ARRAY_BYTE, (byte) 23);
-			fail("byte[] is empty!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+			fail("byte[] is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

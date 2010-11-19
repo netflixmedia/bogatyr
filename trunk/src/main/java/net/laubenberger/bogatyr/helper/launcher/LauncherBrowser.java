@@ -31,10 +31,11 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperString;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * This launcher starts the system browser and displays an URI.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101106)
+ * @version 0.9.4 (20101119)
  * @since 0.2.0
  */
 public abstract class LauncherBrowser {
@@ -82,8 +83,11 @@ public abstract class LauncherBrowser {
 	 */
 	public static void browse(final String url) throws IOException, URISyntaxException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(url));
+		if (null == url) {
+			throw new RuntimeExceptionIsNull("url"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(url)) {
-			throw new RuntimeExceptionIsNullOrEmpty("url"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("url"); //$NON-NLS-1$
 		}
 
 		final String prefix = "://"; //$NON-NLS-1$

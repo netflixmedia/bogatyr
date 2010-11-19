@@ -61,9 +61,9 @@ import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 import net.laubenberger.bogatyr.model.crypto.CryptoSymmetricAlgo;
@@ -77,7 +77,7 @@ import org.slf4j.LoggerFactory;
  * This is a class for symmetric cryptology via AES.
   *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101105)
+ * @version 0.9.4 (20101119)
  * @since 0.1.0
  */
 public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmetric {
@@ -185,8 +185,11 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 	@Override
 	public SecretKey generateKey(final byte[] password, final int keySize) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(password, keySize));
+		if (null == password) {
+			throw new RuntimeExceptionIsNull("password"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(password)) {
-			throw new RuntimeExceptionIsNullOrEmpty("password"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("password"); //$NON-NLS-1$
 		}
 		if (0 >= keySize) {
 			throw new RuntimeExceptionMustBeGreater("keySize", keySize, 0); //$NON-NLS-1$
@@ -207,8 +210,11 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 	@Override
 	public byte[] encrypt(final byte[] input, final Key key) throws IllegalBlockSizeException, BadPaddingException, InvalidKeyException, InvalidAlgorithmParameterException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, key));
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(input)) {
-			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
@@ -227,8 +233,11 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 	@Override
 	public byte[] decrypt(final byte[] input, final Key key) throws InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, key));
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(input)) {
-			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$

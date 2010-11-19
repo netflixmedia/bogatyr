@@ -33,8 +33,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 import org.slf4j.Logger;
@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101110)
+ * @version 0.9.4 (20101119)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -162,10 +162,13 @@ public abstract class HelperString {
 	 */
 	public static String reverse(final String input) { //$JUnit$
 		log.debug(HelperLog.methodStart(input));
-		if (!isValid(input)) {
-			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
-
+		if (!isValid(input)) {
+			throw new RuntimeExceptionIsEmpty("input"); //$NON-NLS-1$
+		}
+		
 		final String result = new StringBuilder(input).reverse().toString();
 
 		log.debug(HelperLog.methodExit(result));
@@ -229,8 +232,11 @@ public abstract class HelperString {
 	 */
 	public static String concatenate(final String[] strings, final String separator, final boolean isTrimmed) { //$JUnit$
 		log.debug(HelperLog.methodStart(strings, separator, isTrimmed));
+		if (null == strings) {
+			throw new RuntimeExceptionIsNull("strings"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(strings)) {
-			throw new RuntimeExceptionIsNullOrEmpty("strings"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("strings"); //$NON-NLS-1$
 		}
 
 		final StringBuilder sb = new StringBuilder();
@@ -287,8 +293,11 @@ public abstract class HelperString {
 		if (null == data) {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
+		if (null == encoding) {
+			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
+		}
 		if (!isValid(encoding)) {
-			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("encoding"); //$NON-NLS-1$
 		}
 
 		final String result = new String(data, encoding);
@@ -311,9 +320,13 @@ public abstract class HelperString {
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
-		if (!isValid(encoding)) {
-			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
+		if (null == encoding) {
+			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
 		}
+		if (!isValid(encoding)) {
+			throw new RuntimeExceptionIsEmpty("encoding"); //$NON-NLS-1$
+		}
+
 
 		final byte[] result = input.getBytes(encoding);
 
@@ -334,8 +347,11 @@ public abstract class HelperString {
 		if (null == string) {
 			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
 		}
+		if (null == prefix) {
+			throw new RuntimeExceptionIsNull("prefix"); //$NON-NLS-1$
+		}
 		if (!isValid(prefix)) {
-			throw new RuntimeExceptionIsNullOrEmpty("prefix"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("prefix"); //$NON-NLS-1$
 		}
 
 //		final boolean result = string.matches("(?i)" + prefix + ".*");  //$NON-NLS-1$//$NON-NLS-2$
@@ -358,8 +374,11 @@ public abstract class HelperString {
 		if (null == string) {
 			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
 		}
+		if (null == suffix) {
+			throw new RuntimeExceptionIsNull("suffix"); //$NON-NLS-1$
+		}
 		if (!isValid(suffix)) {
-			throw new RuntimeExceptionIsNullOrEmpty("suffix"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("suffix"); //$NON-NLS-1$
 		}
 
 //		final boolean result = string.matches("(?i).*" + suffix); //$NON-NLS-1$
@@ -382,8 +401,11 @@ public abstract class HelperString {
 		if (null == string) {
 			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
 		}
+		if (null == part) {
+			throw new RuntimeExceptionIsNull("part"); //$NON-NLS-1$
+		}
 		if (!isValid(part)) {
-			throw new RuntimeExceptionIsNullOrEmpty("part"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("part"); //$NON-NLS-1$
 		}
 
 //		final boolean result = string.matches("(?i).*" + part + ".*");  //$NON-NLS-1$//$NON-NLS-2$

@@ -49,6 +49,7 @@ import java.util.Locale;
 
 import javax.imageio.ImageIO;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsInvalid;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
@@ -59,7 +60,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101106)
+ * @version 0.9.4 (20101119)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -139,8 +140,11 @@ public abstract class HelperImage {
 		if (null == image) {
 			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
 		}
-		if (null == type || !getAvailableImageWriteFormats().contains(type)) {
-			throw new IllegalArgumentException("type is null or invalid: " + type); //$NON-NLS-1$
+		if (null == type) {
+			throw new RuntimeExceptionIsNull("type"); //$NON-NLS-1$
+		}
+		if (!getAvailableImageWriteFormats().contains(type)) {
+			throw new RuntimeExceptionIsInvalid("type", type); //$NON-NLS-1$
 		}
 
 		ImageIO.write(image, type, file);
@@ -166,8 +170,11 @@ public abstract class HelperImage {
 		if (null == image) {
 			throw new RuntimeExceptionIsNull("image"); //$NON-NLS-1$
 		}
-		if (null == type || !getAvailableImageWriteFormats().contains(type)) {
-			throw new IllegalArgumentException("type is null or invalid: " + type); //$NON-NLS-1$
+		if (null == type) {
+			throw new RuntimeExceptionIsNull("type"); //$NON-NLS-1$
+		}
+		if (!getAvailableImageWriteFormats().contains(type)) {
+			throw new RuntimeExceptionIsInvalid("type", type); //$NON-NLS-1$
 		}
 		if (null == os) {
 			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$

@@ -35,21 +35,20 @@ import javax.sound.sampled.Clip;
 
 import org.junit.Test;
 
-import net.laubenberger.bogatyr.HelperResource;
-import net.laubenberger.bogatyr.helper.HelperSound;
+import net.laubenberger.bogatyr.misc.resource.ResourceSound;
 
 
 /**
  * JUnit test for {@link HelperSound}
  *
  * @author Stefan Laubenberger
- * @version 20101103
+ * @version 20101119
  */
 public class HelperSoundTest {
 	@Test
 	public void testGetAndPlayClip() {
 		try {
-			final Clip clip = HelperSound.getClip(getClass().getResourceAsStream(HelperResource.RES_FILE_WAV));
+			final Clip clip = HelperSound.getClip(ResourceSound.WAV.getResourceAsStream());
 
 			assertNotNull(clip);
 
@@ -63,7 +62,7 @@ public class HelperSoundTest {
 	@Test
 	public void testGetAndPlaySequence() {
 		try {
-			final Sequence sequence = HelperSound.getSequence(getClass().getResourceAsStream(HelperResource.RES_FILE_MID));
+			final Sequence sequence = HelperSound.getSequence(ResourceSound.MID.getResourceAsStream());
 
 			assertNotNull(sequence);
 

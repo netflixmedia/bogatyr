@@ -29,19 +29,19 @@ package net.laubenberger.bogatyr.helper;
 
 import java.math.BigDecimal;
 
+import net.laubenberger.bogatyr.misc.Constants;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.laubenberger.bogatyr.misc.Constants;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 
 /**
  * This is a helper class for numbers.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101110)
+ * @version 0.9.4 (20101119)
  * @since 0.7.0
  */
 public abstract class HelperNumber {
@@ -81,10 +81,13 @@ public abstract class HelperNumber {
 	 */
 	public static BigDecimal multiply(final Number... values) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(values));
-		if (!HelperArray.isValid(values)) {
-			throw new RuntimeExceptionIsNullOrEmpty("values"); //$NON-NLS-1$
+		if (null == values) {
+			throw new RuntimeExceptionIsNull("values"); //$NON-NLS-1$
 		}
-
+		if (!HelperArray.isValid(values)) {
+			throw new RuntimeExceptionIsEmpty("values"); //$NON-NLS-1$
+		}
+		
 		BigDecimal result = null;
 
 		for (int ii = 0; ii < values.length; ii++) {
@@ -129,8 +132,11 @@ public abstract class HelperNumber {
 	 */
 	public static BigDecimal add(final Number... values) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(values));
+		if (null == values) {
+			throw new RuntimeExceptionIsNull("values"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(values)) {
-			throw new RuntimeExceptionIsNullOrEmpty("values"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("values"); //$NON-NLS-1$
 		}
 
 		BigDecimal result = null;

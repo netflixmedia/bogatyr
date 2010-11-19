@@ -42,11 +42,11 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 
 /**
@@ -54,7 +54,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101110)
+ * @version 0.9.4 (20101119)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -103,11 +103,17 @@ public abstract class HelperObject {
 		if (null == clazz) {
 			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
 		}
+		if (null == paramClazzes) {
+			throw new RuntimeExceptionIsNull("paramClazzes"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(paramClazzes)) {
-			throw new RuntimeExceptionIsNullOrEmpty("paramClazzes"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("paramClazzes"); //$NON-NLS-1$
+		}
+		if (null == params) {
+			throw new RuntimeExceptionIsNull("params"); //$NON-NLS-1$
 		}
 		if (!HelperArray.isValid(params)) {
-			throw new RuntimeExceptionIsNull("params"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("params"); //$NON-NLS-1$
 		}
 
 		final T result = clazz.getConstructor(paramClazzes).newInstance(params);
@@ -162,8 +168,11 @@ public abstract class HelperObject {
 	 */
 	public static Object deserialize(final byte... data) throws IOException, ClassNotFoundException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(data));
+		if (null == data) {
+			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(data)) {
-			throw new RuntimeExceptionIsNullOrEmpty("data"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("data"); //$NON-NLS-1$
 		}
 
 		ObjectInputStream ois = null;

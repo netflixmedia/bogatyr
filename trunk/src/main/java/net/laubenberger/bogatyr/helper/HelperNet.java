@@ -42,8 +42,8 @@ import java.util.Collections;
 import java.util.List;
 
 import net.laubenberger.bogatyr.helper.encoder.EncoderBase64;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 
@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for network operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101110)
+ * @version 0.9.4 (20101119)
  * @since 0.5.0
  */
 public abstract class HelperNet {
@@ -83,8 +83,11 @@ public abstract class HelperNet {
 	 */
 	public static void enableProxyHttp(final String host, final int port, final String username, final String password) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host, port, username, password));
+		if (null == host) {
+			throw new RuntimeExceptionIsNull("host"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(host)) {
-			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("host"); //$NON-NLS-1$
 		}
 		if (0 >= port) {
 			throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
@@ -92,8 +95,11 @@ public abstract class HelperNet {
 		if (HelperNumber.NUMBER_65536.intValue() <= port) {
 			throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
 		}
+		if (null == username) {
+			throw new RuntimeExceptionIsNull("username"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(username)) {
-			throw new RuntimeExceptionIsNullOrEmpty("username"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("username"); //$NON-NLS-1$
 		}
 		if (null == password) {
 			throw new RuntimeExceptionIsNull("password"); //$NON-NLS-1$
@@ -134,8 +140,11 @@ public abstract class HelperNet {
 	 */
 	public static void enableProxyHttps(final String host, final int port, final String username, final String password) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host, port, username, password));
+		if (null == host) {
+			throw new RuntimeExceptionIsNull("host"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(host)) {
-			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("host"); //$NON-NLS-1$
 		}
 		if (0 >= port) {
 			throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
@@ -143,8 +152,11 @@ public abstract class HelperNet {
 		if (HelperNumber.NUMBER_65536.intValue() <= port) {
 			throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
 		}
+		if (null == username) {
+			throw new RuntimeExceptionIsNull("username"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(username)) {
-			throw new RuntimeExceptionIsNullOrEmpty("username"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("username"); //$NON-NLS-1$
 		}
 		if (null == password) {
 			throw new RuntimeExceptionIsNull("password"); //$NON-NLS-1$
@@ -185,9 +197,11 @@ public abstract class HelperNet {
 	 */
 	public static void enableProxyFtp(final String host, final int port, final String username, final String password) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host, port, username, password));
-
+		if (null == host) {
+			throw new RuntimeExceptionIsNull("host"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(host)) {
-			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("host"); //$NON-NLS-1$
 		}
 		if (0 >= port) {
 			throw new RuntimeExceptionMustBeGreater("port", port, 0); //$NON-NLS-1$
@@ -195,8 +209,11 @@ public abstract class HelperNet {
 		if (HelperNumber.NUMBER_65536.intValue() <= port) {
 			throw new RuntimeExceptionMustBeSmaller("port", port, 65535); //$NON-NLS-1$
 		}
+		if (null == username) {
+			throw new RuntimeExceptionIsNull("username"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(username)) {
-			throw new RuntimeExceptionIsNullOrEmpty("username"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("username"); //$NON-NLS-1$
 		}
 		if (null == password) {
 			throw new RuntimeExceptionIsNull("password"); //$NON-NLS-1$
@@ -236,8 +253,11 @@ public abstract class HelperNet {
 	 */
 	public static boolean isPingable(final String host) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host));
+		if (null == host) {
+			throw new RuntimeExceptionIsNull("host"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(host)) {
-			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("host"); //$NON-NLS-1$
 		}
 
 		final InetAddress address = InetAddress.getByName(host);
@@ -261,8 +281,11 @@ public abstract class HelperNet {
 	 */
 	public static String getIp(final String host) throws UnknownHostException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host));
+		if (null == host) {
+			throw new RuntimeExceptionIsNull("host"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(host)) {
-			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("host"); //$NON-NLS-1$
 		}
 
 		final InetAddress address = InetAddress.getByName(host);
@@ -283,10 +306,13 @@ public abstract class HelperNet {
 	 */
 	public static String getHostname(final String ip) throws UnknownHostException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(ip));
-		if (!HelperString.isValid(ip)) {
-			throw new RuntimeExceptionIsNullOrEmpty("ip"); //$NON-NLS-1$
+		if (null == ip) {
+			throw new RuntimeExceptionIsNull("ip"); //$NON-NLS-1$
 		}
-
+		if (!HelperString.isValid(ip)) {
+			throw new RuntimeExceptionIsEmpty("ip"); //$NON-NLS-1$
+		}
+		
 		final InetAddress address = InetAddress.getByName(ip);
 
 		final String result = address.getHostName();
@@ -442,8 +468,11 @@ public abstract class HelperNet {
 		if (null == url) {
 			throw new RuntimeExceptionIsNull("url"); //$NON-NLS-1$
 		}
+		if (null == username) {
+			throw new RuntimeExceptionIsNull("username"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(username)) {
-			throw new RuntimeExceptionIsNullOrEmpty("username"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("username"); //$NON-NLS-1$
 		}
 		if (null == password) {
 			throw new RuntimeExceptionIsNull("password"); //$NON-NLS-1$

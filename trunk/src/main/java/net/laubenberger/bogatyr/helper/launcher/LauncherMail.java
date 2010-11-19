@@ -37,8 +37,8 @@ import net.laubenberger.bogatyr.helper.HelperArray;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.misc.Constants;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
  * This launcher starts the system mail application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101110)
+ * @version 0.9.4 (20101119)
  * @since 0.7.0
  */
 public abstract class LauncherMail {
@@ -107,14 +107,20 @@ public abstract class LauncherMail {
 	 */
 	public static void mail(final String subject, final String body, final String... emailAddresses) throws IOException, URISyntaxException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(subject, body, emailAddresses));
+		if (null == subject) {
+			throw new RuntimeExceptionIsNull("subject"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(subject)) {
-			throw new RuntimeExceptionIsNullOrEmpty("subject"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("subject"); //$NON-NLS-1$
 		}
 //		if (null == body) {
 //			throw new RuntimeExceptionIsNull("body"); //$NON-NLS-1$
 //		}
+		if (null == emailAddresses) {
+			throw new RuntimeExceptionIsNull("emailAddresses"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(emailAddresses)) {
-			throw new RuntimeExceptionIsNullOrEmpty("emailAddresses"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("emailAddresses"); //$NON-NLS-1$
 		}
 
 		final StringBuilder sb = new StringBuilder();

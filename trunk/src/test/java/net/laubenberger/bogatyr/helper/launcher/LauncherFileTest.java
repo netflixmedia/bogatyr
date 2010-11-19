@@ -28,12 +28,11 @@
 package net.laubenberger.bogatyr.helper.launcher;
 
 import static org.junit.Assert.fail;
-
-import java.io.InputStream;
-
 import net.laubenberger.bogatyr.AllBogatyrTests;
-import net.laubenberger.bogatyr.HelperResource;
 import net.laubenberger.bogatyr.helper.HelperString;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import net.laubenberger.bogatyr.misc.resource.ResourceMisc;
 
 import org.junit.Test;
 
@@ -41,12 +40,9 @@ import org.junit.Test;
  * JUnit test for {@link LauncherFile}
  * 
  * @author Stefan Laubenberger
- * @version 20101103
+ * @version 20101119
  */
 public class LauncherFileTest {
-	private static final String EXTENSION = ".txt"; //$NON-NLS-1$
-	private final InputStream is = getClass().getResourceAsStream(HelperResource.RES_FILE_TXT);
-	
 //	@BeforeClass
 //	public static void init() {
 //		try {
@@ -59,7 +55,7 @@ public class LauncherFileTest {
 	@Test
 	public void testPassOpen() {
 		try {
-			LauncherFile.open(is, EXTENSION);
+			LauncherFile.open(ResourceMisc.TXT.getResourceAsFile());
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
@@ -68,7 +64,7 @@ public class LauncherFileTest {
 	@Test
 	public void testPassEdit() {
 		try {
-			LauncherFile.edit(is, EXTENSION);
+			LauncherFile.edit(ResourceMisc.TXT.getResourceAsFile());
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
@@ -77,7 +73,7 @@ public class LauncherFileTest {
 	@Test
 	public void testPassPrint() {
 		try {
-			LauncherFile.print(is, EXTENSION);
+			LauncherFile.print(ResourceMisc.TXT.getResourceAsFile());
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
@@ -85,29 +81,28 @@ public class LauncherFileTest {
 	
 	@Test
 	public void testFailOpen() {
-		// InputStream
 		try {
 			LauncherFile.open(null);
 			fail("file is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 		
 		try {
-			LauncherFile.open(is, null);
+			LauncherFile.open(ResourceMisc.TXT.getResourceAsStream(), null);
 			fail("extension is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 		
 		try {
-			LauncherFile.open(is, HelperString.EMPTY_STRING);
+			LauncherFile.open(ResourceMisc.TXT.getResourceAsStream(), HelperString.EMPTY_STRING);
 			fail("extension is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -117,7 +112,7 @@ public class LauncherFileTest {
 		try {
 			LauncherFile.open(AllBogatyrTests.DATA.getBytes(), null);
 			fail("extension is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -126,7 +121,7 @@ public class LauncherFileTest {
 		try {
 			LauncherFile.open(AllBogatyrTests.DATA.getBytes(), HelperString.EMPTY_STRING);
 			fail("extension is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -135,29 +130,28 @@ public class LauncherFileTest {
 
 	@Test
 	public void testFailEdit() {
-		// InputStream
 		try {
 			LauncherFile.edit(null);
 			fail("file is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 		
 		try {
-			LauncherFile.edit(is, null);
+			LauncherFile.edit(ResourceMisc.TXT.getResourceAsStream(), null);
 			fail("extension is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 		
 		try {
-			LauncherFile.edit(is, HelperString.EMPTY_STRING);
+			LauncherFile.edit(ResourceMisc.TXT.getResourceAsStream(), HelperString.EMPTY_STRING);
 			fail("extension is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -167,7 +161,7 @@ public class LauncherFileTest {
 		try {
 			LauncherFile.edit(AllBogatyrTests.DATA.getBytes(), null);
 			fail("extension is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -176,7 +170,7 @@ public class LauncherFileTest {
 		try {
 			LauncherFile.edit(AllBogatyrTests.DATA.getBytes(), HelperString.EMPTY_STRING);
 			fail("extension is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -185,29 +179,28 @@ public class LauncherFileTest {
 
 	@Test
 	public void testFailPrint() {
-		// InputStream
 		try {
 			LauncherFile.print(null);
 			fail("file is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 		
 		try {
-			LauncherFile.print(is, null);
+			LauncherFile.print(ResourceMisc.TXT.getResourceAsStream(), null);
 			fail("extension is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 		
 		try {
-			LauncherFile.print(is, HelperString.EMPTY_STRING);
+			LauncherFile.print(ResourceMisc.TXT.getResourceAsStream(), HelperString.EMPTY_STRING);
 			fail("extension is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -217,7 +210,7 @@ public class LauncherFileTest {
 		try {
 			LauncherFile.print(AllBogatyrTests.DATA.getBytes(), null);
 			fail("extension is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -226,7 +219,7 @@ public class LauncherFileTest {
 		try {
 			LauncherFile.print(AllBogatyrTests.DATA.getBytes(), HelperString.EMPTY_STRING);
 			fail("extension is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

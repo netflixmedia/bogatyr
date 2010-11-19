@@ -30,6 +30,7 @@ package net.laubenberger.bogatyr.helper;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 import org.junit.Test;
 
@@ -38,7 +39,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperLog}
  *
  * @author Stefan Laubenberger
- * @version 20101108
+ * @version 20101119
  */
 public class HelperLogTest {
 	@Test
@@ -49,7 +50,7 @@ public class HelperLogTest {
 		try {
 			HelperLog.applicationStart(null);
 			fail("controller is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

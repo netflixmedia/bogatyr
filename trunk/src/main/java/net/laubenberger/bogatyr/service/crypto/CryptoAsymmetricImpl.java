@@ -49,8 +49,8 @@ import net.laubenberger.bogatyr.helper.HelperCrypto;
 import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.model.crypto.CryptoAsymmetricAlgo;
 import net.laubenberger.bogatyr.model.crypto.SignatureAlgo;
@@ -63,7 +63,7 @@ import org.slf4j.LoggerFactory;
  * This is a class for asymmetric cryptology via RSA.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101106)
+ * @version 0.9.4 (20101119)
  * @since 0.1.0
  */
 public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymmetric {
@@ -191,8 +191,11 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 		if (null == algoritm) {
 			throw new RuntimeExceptionIsNull("algoritm"); //$NON-NLS-1$
 		}
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(input)) {
-			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
@@ -214,11 +217,17 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 		if (null == algoritm) {
 			throw new RuntimeExceptionIsNull("algoritm"); //$NON-NLS-1$
 		}
+		if (null == signature) {
+			throw new RuntimeExceptionIsNull("signature"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(signature)) {
-			throw new RuntimeExceptionIsNullOrEmpty("signature"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("signature"); //$NON-NLS-1$
+		}
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 		if (!HelperArray.isValid(input)) {
-			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
@@ -266,8 +275,11 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 	@Override
 	public byte[] encrypt(final byte[] input, final PublicKey key, final int keySize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, key, keySize));
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(input)) {
-			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
@@ -339,8 +351,11 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 	@Override
 	public byte[] decrypt(final byte[] input, final PrivateKey key, final int keySize) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, key, keySize));
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(input)) {
-			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("input"); //$NON-NLS-1$
 		}
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$

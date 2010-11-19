@@ -28,8 +28,8 @@
 package net.laubenberger.bogatyr.helper;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
@@ -37,6 +37,8 @@ import java.io.File;
 import java.io.IOException;
 
 import net.laubenberger.bogatyr.AllBogatyrTests;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 import org.junit.Test;
 
@@ -45,7 +47,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperIO}
  *
  * @author Stefan Laubenberger
- * @version 20101106
+ * @version 20101119
  */
 public class HelperIOTest { //TODO complete tests for all methods
 	@Test
@@ -71,7 +73,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.getTemporaryFile(null, "tmp"); //$NON-NLS-1$
 			fail("name is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -80,7 +82,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.getTemporaryFile(HelperString.EMPTY_STRING, "tmp"); //$NON-NLS-1$
 			fail("name is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -89,7 +91,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.getTemporaryFile(getClass().getSimpleName(), null);
 			fail("extension is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -98,7 +100,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.getTemporaryFile(getClass().getSimpleName(), HelperString.EMPTY_STRING);
 			fail("extension is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -108,7 +110,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.getTemporaryFile(null);
 			fail("extension is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -117,7 +119,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.getTemporaryFile(HelperString.EMPTY_STRING);
 			fail("extension is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -131,7 +133,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.getFiles(null, null, -1);
 			fail("path is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -151,7 +153,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.writeLine(null, AllBogatyrTests.DATA);
 			fail("file is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -169,7 +171,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.writeLine(HelperIO.getTemporaryFile(getClass().getSimpleName(), "txt"), null, AllBogatyrTests.DATA);  //$NON-NLS-1$
 			fail("encoding is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -189,7 +191,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.readFile(null);
 			fail("file is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -209,7 +211,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.readFileAsString(null);
 			fail("file is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -218,7 +220,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.readFileAsString(HelperIO.getTemporaryFile(getClass().getSimpleName(), ".string"), null); //$NON-NLS-1$
 			fail("encoding is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -243,7 +245,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.readFileAsStream(null, new ByteArrayOutputStream());
 			fail("file is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -252,7 +254,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 		try {
 			HelperIO.readFileAsStream(HelperIO.getTemporaryFile(getClass().getSimpleName(), ".stream"), null);  //$NON-NLS-1$
 			fail("os is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

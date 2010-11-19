@@ -32,14 +32,20 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.model.crypto.CryptoAsymmetricAlgo;
 import net.laubenberger.bogatyr.model.crypto.CryptoSymmetricAlgo;
 import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
 import net.laubenberger.bogatyr.model.crypto.HmacAlgo;
 import net.laubenberger.bogatyr.model.crypto.SignatureAlgo;
+
 import org.junit.Test;
 
 
@@ -68,7 +74,7 @@ public class HelperCryptoTest {
 		try {
 			HelperCrypto.getRandomKey(0, '1', '2', '3');
 			fail("digits must be greater than 0"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -77,7 +83,7 @@ public class HelperCryptoTest {
 		try {
 			HelperCrypto.getRandomKey(16, null);
 			fail("data is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -86,7 +92,7 @@ public class HelperCryptoTest {
 		try {
 			HelperCrypto.getRandomKey(16, HelperArray.EMPTY_ARRAY_CHAR);
 			fail("data is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -108,7 +114,7 @@ public class HelperCryptoTest {
 		try {
 			HelperCrypto.getRandomKey(0);
 			fail("digits must be greater than 0"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -154,7 +160,7 @@ public class HelperCryptoTest {
 		try {
 			HelperCrypto.getCiphers(null);
 			fail("provider is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -170,7 +176,7 @@ public class HelperCryptoTest {
 		try {
 			HelperCrypto.getKeyAgreements(null);
 			fail("provider is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -194,7 +200,7 @@ public class HelperCryptoTest {
 		try {
 			HelperCrypto.getMacs(null);
 			fail("provider is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -218,7 +224,7 @@ public class HelperCryptoTest {
 		try {
 			HelperCrypto.getMessageDigests(null);
 			fail("provider is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -242,7 +248,7 @@ public class HelperCryptoTest {
 		try {
 			HelperCrypto.getSignatures(null);
 			fail("provider is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -266,7 +272,7 @@ public class HelperCryptoTest {
 		try {
 			HelperCrypto.getKeyPairGenerators(null);
 			fail("provider is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -290,7 +296,7 @@ public class HelperCryptoTest {
 		try {
 			HelperCrypto.getKeyFactories(null);
 			fail("provider is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -316,7 +322,7 @@ public class HelperCryptoTest {
 		try {
 			HelperCrypto.getKeyGenerators(null);
 			fail("provider is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

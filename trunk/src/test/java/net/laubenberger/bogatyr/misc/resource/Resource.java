@@ -25,19 +25,23 @@
  * <laubenberger@gmail.com>
  */
 
-package net.laubenberger.bogatyr.misc.exception;
+package net.laubenberger.bogatyr.misc.resource;
+
+import java.io.File;
+import java.io.InputStream;
+
 
 /**
- * This runtime exception is thrown if an argument is null or empty.
+ * This is an interface to define all methods of a resource.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101106)
- * @since 0.9.0
+ * @version 20101119
  */
-public class RuntimeExceptionIsNullOrEmpty extends IllegalArgumentException {
-	private static final long serialVersionUID = 6974645627720904297L;
+public interface Resource {
+	
+	String getResource();
 
-	public RuntimeExceptionIsNullOrEmpty(final String argument) {
-		super(argument + " is null or empty"); //$NON-NLS-1$
-	}
+	InputStream getResourceAsStream();
+	
+	File getResourceAsFile();
 }

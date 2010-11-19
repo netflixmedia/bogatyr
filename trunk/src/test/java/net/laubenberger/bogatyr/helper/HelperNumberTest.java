@@ -32,6 +32,9 @@ import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
 import org.junit.Test;
 
 
@@ -39,7 +42,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperNumber}
  *
  * @author Stefan Laubenberger
- * @version 20101110
+ * @version 20101119
  */
 public class HelperNumberTest {
 	@Test
@@ -49,7 +52,7 @@ public class HelperNumberTest {
 		try {
 			HelperNumber.multiply(1, 2, null, 4, 5);
 			fail("value is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -58,7 +61,7 @@ public class HelperNumberTest {
 		try {
 			HelperNumber.multiply(null);
 			fail("values is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -67,7 +70,7 @@ public class HelperNumberTest {
 		try {
 			HelperNumber.multiply(HelperArray.EMPTY_ARRAY_BIG_DECIMAL);
 			fail("values is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -81,7 +84,7 @@ public class HelperNumberTest {
 		try {
 			HelperNumber.add(1, 2, null, 4, 5);
 			fail("value is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -90,7 +93,7 @@ public class HelperNumberTest {
 		try {
 			HelperNumber.add(null);
 			fail("values is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -99,7 +102,7 @@ public class HelperNumberTest {
 		try {
 			HelperNumber.add(HelperArray.EMPTY_ARRAY_BIG_DECIMAL);
 			fail("values is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

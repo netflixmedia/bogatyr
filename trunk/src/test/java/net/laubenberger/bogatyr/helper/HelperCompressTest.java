@@ -32,8 +32,16 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import net.laubenberger.bogatyr.HelperResource;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import net.laubenberger.bogatyr.misc.resource.Resource;
+import net.laubenberger.bogatyr.misc.resource.ResourceImage;
+import net.laubenberger.bogatyr.misc.resource.ResourceMisc;
+import net.laubenberger.bogatyr.misc.resource.ResourceOffice;
+import net.laubenberger.bogatyr.misc.resource.ResourceSound;
 
 import org.junit.Test;
 
@@ -41,31 +49,37 @@ import org.junit.Test;
  * JUnit test for {@link HelperCompress}
  * 
  * @author Stefan Laubenberger
- * @version 20101110
+ * @version 20101119
  */
 public class HelperCompressTest {
 
 	private File fileZip;
-	private File fileMid;
-	private File fileText;
-	private File fileWav;
+//	private File fileMid;
+//	private File fileText;
+//	private File fileWav;
+	
+	private final List<File> files = new ArrayList<File>();
 	private File fileZipExtractDir;
 
 	{
 		try {
 			fileZip = HelperIO.getTemporaryFile("test", "zip"); //$NON-NLS-1$ //$NON-NLS-2$
-
-			fileMid = HelperIO.getTemporaryFile("test", "mid"); //$NON-NLS-1$ //$NON-NLS-2$
-			HelperIO.writeFile(fileMid, getClass().getResourceAsStream(HelperResource.RES_FILE_MID));
-
-			fileText = HelperIO.getTemporaryFile("test", "txt"); //$NON-NLS-1$ //$NON-NLS-2$
-			HelperIO.writeFile(fileText, getClass().getResourceAsStream(HelperResource.RES_FILE_TXT));
-
-			fileWav = HelperIO.getTemporaryFile("test", "wav"); //$NON-NLS-1$ //$NON-NLS-2$
-			HelperIO.writeFile(fileWav, getClass().getResourceAsStream(HelperResource.RES_FILE_WAV));
-
+			
+			for (Resource resource : ResourceImage.values()) {
+				files.add(resource.getResourceAsFile());
+			}
+			for (Resource resource : ResourceMisc.values()) {
+				files.add(resource.getResourceAsFile());
+			}
+			for (Resource resource : ResourceOffice.values()) {
+				files.add(resource.getResourceAsFile());
+			}
+			for (Resource resource : ResourceSound.values()) {
+				files.add(resource.getResourceAsFile());
+			}
+			
 			fileZipExtractDir = new File(HelperEnvironment.getOsTempDirectory(), "HelperCompressTest_extract"); //$NON-NLS-1$
-			if (!fileZipExtractDir.exists()) {
+			if (fileZipExtractDir.exists()) {
 				HelperIO.delete(fileZipExtractDir);
 			}
 			fileZipExtractDir.mkdir();
@@ -79,7 +93,7 @@ public class HelperCompressTest {
 	public void testPassWriteAndExtractZip() {
 
 		try {
-			HelperCompress.writeZip(fileZip, fileMid, fileText, fileWav);
+			HelperCompress.writeZip(fileZip, HelperCollection.toArray(files));
 		} catch (IOException ex) {
 			fail(ex.getMessage());
 		}
@@ -90,20 +104,23 @@ public class HelperCompressTest {
 			fail(ex.getMessage());
 		}
 
-		assertEquals(fileMid.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileMid.getName()).length());
-		assertEquals(fileText.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileText
-				.getName()).length());
-		assertEquals(fileWav.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileWav
-				.getName()).length());
+		for (File file : files) {
+			assertEquals(file.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), file.getName()).length());
+		}
+//		assertEquals(fileMid.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileMid.getName()).length());
+//		assertEquals(fileText.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileText
+//				.getName()).length());
+//		assertEquals(fileWav.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileWav
+//				.getName()).length());
 	}
 
 	@Test
 	public void testFailWriteZip() {
 
 		try {
-			HelperCompress.writeZip(null, fileMid, fileText, fileWav);
+			HelperCompress.writeZip(null, HelperCollection.toArray(files));
 			fail("file is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -112,7 +129,7 @@ public class HelperCompressTest {
 		try {
 			HelperCompress.writeZip(fileZip, null);
 			fail("files is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -121,20 +138,29 @@ public class HelperCompressTest {
 		try {
 			HelperCompress.writeZip(fileZip, new File[0]);
 			fail("files is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 		
-		try {
-			HelperCompress.writeZip(fileZip, fileMid, null, fileWav);
-			fail("entry is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			// nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
+//		try {
+//			HelperCompress.writeZip(fileZip, HelperIO.getTemporaryFile(), null);
+//			fail("entry is null"); //$NON-NLS-1$
+//		} catch (RuntimeExceptionIsNull ex) {
+//			// nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
+		
+//		try {
+//			HelperCompress.writeZip(fileZip, new File("file1"), new File("file2"));
+//			fail("entry does not exist"); //$NON-NLS-1$
+//		} catch (IllegalArgumentException ex) {
+//			// nothing to do
+//		} catch (Exception ex) {
+//			fail(ex.getMessage());
+//		}
 	}
 
 	@Test
@@ -143,7 +169,7 @@ public class HelperCompressTest {
 		try {
 			HelperCompress.extractZip(null, fileZipExtractDir);
 			fail("file is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -152,7 +178,7 @@ public class HelperCompressTest {
 		try {
 			HelperCompress.extractZip(fileZip, null);
 			fail("destinationDirectory is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

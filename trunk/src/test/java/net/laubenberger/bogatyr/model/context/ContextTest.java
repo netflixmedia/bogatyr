@@ -30,6 +30,7 @@ package net.laubenberger.bogatyr.model.context;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 import org.junit.Test;
 
@@ -38,7 +39,7 @@ import org.junit.Test;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20101119
  */
 public class ContextTest {
 	private static final String UNKNOWN_KEY = "lalala"; //$NON-NLS-1$
@@ -68,8 +69,8 @@ public class ContextTest {
 		//null key
 		try {
 			ContextImpl.getInstance().addValue(null, value);
-			fail("key is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+			fail("key is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -86,7 +87,7 @@ public class ContextTest {
 		//null key
 		try {
 			ContextImpl.getInstance().removeValue(null);
-			fail("key is null!"); //$NON-NLS-1$
+			fail("key is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
 		} catch (Exception ex) {

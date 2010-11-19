@@ -27,8 +27,8 @@
 
 package net.laubenberger.bogatyr.helper;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.awt.Color;
@@ -42,7 +42,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import net.laubenberger.bogatyr.HelperResource;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsInvalid;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
+import net.laubenberger.bogatyr.misc.resource.ResourceImage;
 import net.laubenberger.bogatyr.view.swing.Button;
 
 import org.junit.Test;
@@ -51,13 +54,22 @@ import org.junit.Test;
  * JUnit test for {@link HelperImage}
  * 
  * @author Stefan Laubenberger
- * @version 20101108
+ * @version 20101119
  */
 public class HelperImageTest {
 	@Test
 	public void testReadImage() {
 		try {
-			assertEquals(32, HelperImage.readImage(getClass().getResourceAsStream(HelperResource.RES_FILE_PNG)).getWidth());
+			for (ResourceImage res : ResourceImage.values()) {
+				assertEquals(32, HelperImage.readImage(res.getResourceAsFile()).getWidth());
+			}
+		} catch (IOException ex) {
+			fail(ex.getMessage());
+		}
+		try {
+			for (ResourceImage res : ResourceImage.values()) {
+				assertEquals(32, HelperImage.readImage(res.getResourceAsStream()).getWidth());
+			}
 		} catch (IOException ex) {
 			fail(ex.getMessage());
 		}
@@ -65,7 +77,7 @@ public class HelperImageTest {
 		try {
 			HelperImage.readImage((File) null);
 			fail("file is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -74,7 +86,7 @@ public class HelperImageTest {
 		try {
 			HelperImage.readImage((InputStream) null);
 			fail("is is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -98,6 +110,20 @@ public class HelperImageTest {
 		final BufferedImage image = HelperImage.getImage(component);
 		
 		try {
+			HelperImage.writeImage(file, HelperImage.TYPE_BMP, image);
+			assertEquals(100, HelperImage.readImage(file).getWidth());
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperImage.writeImage(file, HelperImage.TYPE_GIF, image);
+			assertEquals(100, HelperImage.readImage(file).getWidth());
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
 			HelperImage.writeImage(file, HelperImage.TYPE_JPG, image);
 			assertEquals(100, HelperImage.readImage(file).getWidth());
 		} catch (Exception ex) {
@@ -105,36 +131,43 @@ public class HelperImageTest {
 		}
 
 		try {
-			HelperImage	.writeImage((File)null, HelperImage.TYPE_JPG, image);
+			HelperImage.writeImage(file, HelperImage.TYPE_PNG, image);
+			assertEquals(100, HelperImage.readImage(file).getWidth());
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperImage.writeImage((File)null, HelperImage.TYPE_JPG, image);
 			fail("file is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 		
 		try {
-			HelperImage	.writeImage((OutputStream)null, HelperImage.TYPE_JPG, image);
+			HelperImage.writeImage((OutputStream)null, HelperImage.TYPE_JPG, image);
 			fail("os is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 		
 		try {
-			HelperImage	.writeImage(file, null, image);
+			HelperImage.writeImage(file, null, image);
 			fail("type is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
 		
 		try {
-			HelperImage	.writeImage(file, HelperString.EMPTY_STRING, image);
+			HelperImage.writeImage(file, HelperString.EMPTY_STRING, image);
 			fail("type is invalid"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsInvalid ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -143,7 +176,7 @@ public class HelperImageTest {
 		try {
 			HelperImage	.writeImage(file, HelperString.EMPTY_STRING, null);
 			fail("image is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -154,7 +187,7 @@ public class HelperImageTest {
 	public void testGetScaledImage() {
 		BufferedImage image = null;
 		try {
-			image = HelperImage.readImage(getClass().getResourceAsStream(HelperResource.RES_FILE_PNG));
+			image = HelperImage.readImage(ResourceImage.PNG.getResourceAsStream());
 		} catch (IOException ex) {
 			fail(ex.getMessage());
 		}
@@ -169,7 +202,7 @@ public class HelperImageTest {
 		try {
 			HelperImage.getScaledImage(null, 2.0D);
 			fail("image is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -178,7 +211,7 @@ public class HelperImageTest {
 		try {
 			HelperImage.getScaledImage(null, new Dimension(40, 30));
 			fail("image is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -187,7 +220,7 @@ public class HelperImageTest {
 		try {
 			HelperImage.getScaledImage(image, -2.0D);
 			fail("scale is negative"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -196,7 +229,7 @@ public class HelperImageTest {
 		try {
 			HelperImage.getScaledImage(image, null);
 			fail("size is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
