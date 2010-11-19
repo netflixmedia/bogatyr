@@ -39,8 +39,8 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 import net.laubenberger.bogatyr.misc.Constants;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 import org.slf4j.Logger;
@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for compress operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101110)
+ * @version 0.9.4 (20101119)
  * @since 0.3.0
  */
 public abstract class HelperCompress {
@@ -89,13 +89,25 @@ public abstract class HelperCompress {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
+		if (null == files) {
+			throw new RuntimeExceptionIsNull("files"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(files)) {
-			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("files"); //$NON-NLS-1$
 		}
 		if (1 > bufferSize) {
 			throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
 		}
-
+//		//check all list entries
+//		for (final File entry : files) {
+//			if (null == entry) {
+//				throw new RuntimeExceptionIsNull("entry"); //$NON-NLS-1$
+//			}
+//			if (!entry.exists()) {
+//				throw new RuntimeExceptionFileNotExist("entry", entry); //$NON-NLS-1$
+//			}
+//		}
+		
 		ZipOutputStream zos = null;
 
 		try {
@@ -103,9 +115,6 @@ public abstract class HelperCompress {
 			zos = new ZipOutputStream(new FileOutputStream(file));
 
 			for (final File entry : files) {
-				if (null == entry) {
-					throw new RuntimeExceptionIsNull("entry"); //$NON-NLS-1$
-				}
 				addEntry(zos, entry, bufferSize);
 			}
 		} finally {

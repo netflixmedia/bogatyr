@@ -33,11 +33,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 
 /**
@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101110)
+ * @version 0.9.4 (20101119)
  * @since 0.7.0
  */
 public abstract class HelperArray { //TODO implement all methods for all primitive types
@@ -122,8 +122,11 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	 */
 	public static <T> T[] concatenate(final T[]... arrays) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arrays));
+		if (null == arrays) {
+			throw new RuntimeExceptionIsNull("arrays"); //$NON-NLS-1$
+		}
 		if (!isValid(arrays)) {
-			throw new RuntimeExceptionIsNullOrEmpty("arrays"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("arrays"); //$NON-NLS-1$
 		}
 
 		final List<T> resultList = new ArrayList<T>();
@@ -150,8 +153,11 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	 */
 	public static byte[] concatenate(final byte[]... arrays) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arrays));
+		if (null == arrays) {
+			throw new RuntimeExceptionIsNull("arrays"); //$NON-NLS-1$
+		}
 		if (!isValid(arrays)) {
-			throw new RuntimeExceptionIsNullOrEmpty("arrays"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("arrays"); //$NON-NLS-1$
 		}
 
 		int totalSize = 0;
@@ -184,8 +190,11 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 	 */
 	public static char[] concatenate(final char[]... arrays) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(arrays));
+		if (null == arrays) {
+			throw new RuntimeExceptionIsNull("arrays"); //$NON-NLS-1$
+		}
 		if (!isValid(arrays)) {
-			throw new RuntimeExceptionIsNullOrEmpty("arrays"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("arrays"); //$NON-NLS-1$
 		}
 
 		int totalSize = 0;

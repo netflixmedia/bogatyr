@@ -28,17 +28,16 @@
 package net.laubenberger.bogatyr.helper;
 
 import static org.junit.Assert.fail;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 import org.junit.Test;
-
-import net.laubenberger.bogatyr.helper.HelperTime;
 
 
 /**
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20101119
  */
 public class HelperTimeTest {
 	@Test
@@ -54,7 +53,7 @@ public class HelperTimeTest {
 		try {
 			HelperTime.getAtomicTime(null);
 			fail("host is null!"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

@@ -33,21 +33,21 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperIO;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperString;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This launcher opens, edits and prints files with the default system application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101106)
+ * @version 0.9.4 (20101119)
  * @since 0.7.0
  */
 public abstract class LauncherFile {
@@ -78,10 +78,13 @@ public abstract class LauncherFile {
 		if (null == data) {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
-		if (!HelperString.isValid(extension)) {
-			throw new RuntimeExceptionIsNullOrEmpty("extension"); //$NON-NLS-1$
+		if (null == extension) {
+			throw new RuntimeExceptionIsNull("extension"); //$NON-NLS-1$
 		}
-
+		if (!HelperString.isValid(extension)) {
+			throw new RuntimeExceptionIsEmpty("extension"); //$NON-NLS-1$
+		}
+		
 		open(createTemporaryFile(data, extension));
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
@@ -146,10 +149,13 @@ public abstract class LauncherFile {
 		if (null == data) {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
-		if (!HelperString.isValid(extension)) {
-			throw new RuntimeExceptionIsNullOrEmpty("extension"); //$NON-NLS-1$
+		if (null == extension) {
+			throw new RuntimeExceptionIsNull("extension"); //$NON-NLS-1$
 		}
-
+		if (!HelperString.isValid(extension)) {
+			throw new RuntimeExceptionIsEmpty("extension"); //$NON-NLS-1$
+		}
+		
 		edit(createTemporaryFile(data, extension));
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
@@ -213,8 +219,11 @@ public abstract class LauncherFile {
 		if (null == data) {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
 		}
+		if (null == extension) {
+			throw new RuntimeExceptionIsNull("extension"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(extension)) {
-			throw new RuntimeExceptionIsNullOrEmpty("extension"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("extension"); //$NON-NLS-1$
 		}
 
 		print(createTemporaryFile(data, extension));

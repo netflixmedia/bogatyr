@@ -36,6 +36,7 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.util.TimeZone;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.model.unit.Bit;
 
 import org.junit.Test;
@@ -45,7 +46,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperEnvironment}
  *
  * @author Stefan Laubenberger
- * @version 20101108
+ * @version 20101119
  */
 public class HelperEnvironmentTest {
 	@Test
@@ -161,7 +162,7 @@ public class HelperEnvironmentTest {
 		try {
 			HelperEnvironment.getOsEnvironmentVariable(null);
 			fail("variable is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

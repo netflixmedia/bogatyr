@@ -33,6 +33,8 @@ import java.net.URI;
 
 import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.misc.Constants;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 import org.junit.Test;
 
@@ -40,7 +42,7 @@ import org.junit.Test;
  * JUnit test for {@link LauncherBrowser}
  * 
  * @author Stefan Laubenberger
- * @version 20101106
+ * @version 20101119
  */
 public class LauncherBrowserTest {
 	@Test
@@ -63,7 +65,7 @@ public class LauncherBrowserTest {
 		try {
 			LauncherBrowser.browse((URI)null);
 			fail("uri is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -72,7 +74,7 @@ public class LauncherBrowserTest {
 	try {
 			LauncherBrowser.browse((String)null);
 			fail("url is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -81,7 +83,7 @@ public class LauncherBrowserTest {
 		try {
 			LauncherBrowser.browse(HelperString.EMPTY_STRING);
 			fail("url is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

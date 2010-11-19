@@ -27,8 +27,8 @@
 
 package net.laubenberger.bogatyr.helper.launcher;
 
-import static org.junit.Assert.fail;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,6 +38,8 @@ import java.io.OutputStream;
 import net.laubenberger.bogatyr.helper.HelperArray;
 import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperIO;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.model.misc.Platform;
 
 import org.junit.Test;
@@ -46,7 +48,7 @@ import org.junit.Test;
  * JUnit test for {@link LauncherProcess}
  * 
  * @author Stefan Laubenberger
- * @version 20101105
+ * @version 20101119
  */
 public class LauncherProcessTest {
 	private File fileOutput;
@@ -116,7 +118,7 @@ public class LauncherProcessTest {
 		try {
 			LauncherProcess.createAndStartProcess(null);
 			fail("commands is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -125,7 +127,7 @@ public class LauncherProcessTest {
 		try {
 			LauncherProcess.createAndStartProcess(HelperArray.EMPTY_ARRAY_STRING);
 			fail("commands is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -134,7 +136,7 @@ public class LauncherProcessTest {
 		try {
 			LauncherProcess.createAndStartProcess(null, osOutput, osError);
 			fail("commands is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -143,7 +145,7 @@ public class LauncherProcessTest {
 		try {
 			LauncherProcess.createAndStartProcess(HelperArray.EMPTY_ARRAY_STRING, osOutput, osError);
 			fail("commands is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -152,7 +154,7 @@ public class LauncherProcessTest {
 		try {
 			LauncherProcess.createAndStartProcess(new String[]{"ls"}, null, osError); //$NON-NLS-1$
 			fail("outputStream is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -161,7 +163,7 @@ public class LauncherProcessTest {
 		try {
 			LauncherProcess.createAndStartProcess(new String[]{"ls"}, osOutput, null); //$NON-NLS-1$
 			fail("errorStream is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

@@ -43,9 +43,9 @@ import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.service.ServiceAbstract;
 
@@ -54,7 +54,7 @@ import net.laubenberger.bogatyr.service.ServiceAbstract;
  * This is a class for obfuscating data with CFB.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101119)
  * @since 0.3.0
  */
 public class ScramblerImpl extends ServiceAbstract implements Scrambler {
@@ -81,8 +81,11 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 	 */
 	private static byte[] obfuscate(final byte[] input, final byte pattern) {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(input, pattern));
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(input)) {
-			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("input"); //$NON-NLS-1$
 		}
 		if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
 			throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
@@ -108,8 +111,11 @@ public class ScramblerImpl extends ServiceAbstract implements Scrambler {
 	 */
 	private static byte[] unobfuscate(final byte[] input, final byte pattern) {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(input, pattern));
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(input)) {
-			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("input"); //$NON-NLS-1$
 		}
 		if (input.length * 2 > HelperEnvironment.getMemoryFree()) {
 			throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$

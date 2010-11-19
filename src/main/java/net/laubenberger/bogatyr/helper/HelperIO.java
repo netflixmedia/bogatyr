@@ -56,9 +56,9 @@ import javax.swing.filechooser.FileSystemView;
 
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 import org.slf4j.Logger;
@@ -69,7 +69,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101110)
+ * @version 0.9.4 (20101119)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -92,11 +92,17 @@ public abstract class HelperIO {
 	 */
 	public static File getTemporaryFile(final String name, final String extension) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(name, extension));
+		if (null == name) {
+			throw new RuntimeExceptionIsNull("name"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(name)) {
-			throw new RuntimeExceptionIsNullOrEmpty("name"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("name"); //$NON-NLS-1$
+		}
+		if (null == extension) {
+			throw new RuntimeExceptionIsNull("extension"); //$NON-NLS-1$
 		}
 		if (!HelperString.isValid(extension)) {
-			throw new RuntimeExceptionIsNullOrEmpty("extension"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("extension"); //$NON-NLS-1$
 		}
 
 		// Create temp file
@@ -316,10 +322,13 @@ public abstract class HelperIO {
 	 */
 	public static void delete(final File... files) throws IOException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(files));
-		if (!HelperArray.isValid(files)) {
-			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
+		if (null == files) {
+			throw new RuntimeExceptionIsNull("files"); //$NON-NLS-1$
 		}
-
+		if (!HelperArray.isValid(files)) {
+			throw new RuntimeExceptionIsEmpty("files"); //$NON-NLS-1$
+		}
+		
 		for (final File target : files) {
 			if (null == target) {
 				throw new RuntimeExceptionIsNull("target"); //$NON-NLS-1$
@@ -382,8 +391,11 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
+		if (null == encoding) {
+			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(encoding)) {
-			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("encoding"); //$NON-NLS-1$
 		}
 		if (null == line) {
 			throw new RuntimeExceptionIsNull("line"); //$NON-NLS-1$
@@ -509,8 +521,11 @@ public abstract class HelperIO {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
+		if (null == encoding) {
+			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(encoding)) {
-			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("encoding"); //$NON-NLS-1$
 		}
 		if (null == data) {
 			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
@@ -762,8 +777,11 @@ public abstract class HelperIO {
 		// if (!file.isFile()) {
 		//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		// }
+		if (null == encoding) {
+			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(encoding)) {
-			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("encoding"); //$NON-NLS-1$
 		}
 
 		final long length = file.length();
@@ -840,8 +858,11 @@ public abstract class HelperIO {
 		// if (!file.isFile()) {
 		//			throw new IllegalArgumentException("file is not a file: " + file); //$NON-NLS-1$
 		// }
+		if (null == encoding) {
+			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(encoding)) {
-			throw new RuntimeExceptionIsNullOrEmpty("encoding"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("encoding"); //$NON-NLS-1$
 		}
 		if (file.length() > HelperEnvironment.getMemoryFree()) {
 			throw new RuntimeExceptionExceedsVmMemory("file", file.length()); //$NON-NLS-1$
@@ -933,8 +954,11 @@ public abstract class HelperIO {
 		if (null == fileOutput) {
 			throw new RuntimeExceptionIsNull("fileOutput"); //$NON-NLS-1$
 		}
+		if (null == files) {
+			throw new RuntimeExceptionIsNull("files"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(files)) {
-			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("files"); //$NON-NLS-1$
 		}
 
 		// Create output stream

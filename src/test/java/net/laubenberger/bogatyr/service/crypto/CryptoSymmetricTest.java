@@ -35,6 +35,9 @@ import javax.crypto.SecretKey;
 
 import net.laubenberger.bogatyr.AllBogatyrTests;
 import net.laubenberger.bogatyr.helper.HelperArray;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.model.crypto.CryptoSymmetricAlgo;
 
 import org.junit.Before;
@@ -45,7 +48,7 @@ import org.junit.Test;
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20101119
  */
 public class CryptoSymmetricTest {
 //	private static final int KEYSIZE = 256;
@@ -64,9 +67,21 @@ public class CryptoSymmetricTest {
 	@Test
 	public void testGenerateKey() {
 		try {
+			assertNotNull(cryptoSymm.generateKey());
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			assertNotNull(cryptoSymm.generateKey());
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
 			cryptoSymm.generateKey(0);
 			fail("keysize is 0"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -75,20 +90,8 @@ public class CryptoSymmetricTest {
 		try {
 			cryptoSymm.generateKey(Integer.MIN_VALUE);
 			fail("keysize is -1024"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-
-		try {
-			assertNotNull(cryptoSymm.generateKey());
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-
-		try {
-			assertNotNull(cryptoSymm.generateKey());
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
@@ -97,9 +100,21 @@ public class CryptoSymmetricTest {
 	@Test
 	public void testEncrypt() {
 		try {
+			assertNotNull(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKey));
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			assertNotNull(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKeyDefault));
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
 			cryptoSymm.encrypt(null, null);
 			fail("input is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -108,7 +123,7 @@ public class CryptoSymmetricTest {
 		try {
 			cryptoSymm.encrypt(HelperArray.EMPTY_ARRAY_BYTE, null);
 			fail("input is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -117,56 +132,15 @@ public class CryptoSymmetricTest {
 		try {
 			cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), null);
 			fail("key is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-
-		try {
-			assertNotNull(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKey));
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			fail(ex.getMessage());
-		}
-
-		try {
-			assertNotNull(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKeyDefault));
-		} catch (Exception ex) {
-			ex.printStackTrace();
 			fail(ex.getMessage());
 		}
 	}
 
 	@Test
 	public void testDecrypt() {
-		try {
-			cryptoSymm.decrypt(null, null);
-			fail("input is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-
-		try {
-			cryptoSymm.decrypt(HelperArray.EMPTY_ARRAY_BYTE, null);
-			fail("input is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-
-		try {
-			cryptoSymm.decrypt(AllBogatyrTests.DATA.getBytes(), null);
-			fail("key is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
-			//nothing to do
-		} catch (Exception ex) {
-			fail(ex.getMessage());
-		}
-
 		try {
 			assertEquals(AllBogatyrTests.DATA, new String(cryptoSymm.decrypt(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKey), secretKey)));
 		} catch (Exception ex) {
@@ -175,6 +149,33 @@ public class CryptoSymmetricTest {
 
 		try {
 			assertEquals(AllBogatyrTests.DATA, new String(cryptoSymm.decrypt(cryptoSymm.encrypt(AllBogatyrTests.DATA.getBytes(), secretKeyDefault), secretKeyDefault)));
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			cryptoSymm.decrypt(null, null);
+			fail("input is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			cryptoSymm.decrypt(HelperArray.EMPTY_ARRAY_BYTE, null);
+			fail("input is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			cryptoSymm.decrypt(AllBogatyrTests.DATA.getBytes(), null);
+			fail("key is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}

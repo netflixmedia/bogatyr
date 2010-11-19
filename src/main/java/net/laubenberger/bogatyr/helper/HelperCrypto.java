@@ -36,8 +36,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101105)
+ * @version 0.9.4 (20101119)
  * @since 0.7.0
  */
 public abstract class HelperCrypto {
@@ -77,10 +77,13 @@ public abstract class HelperCrypto {
 		if (0 >= digits) {
 			throw new RuntimeExceptionMustBeGreater("digits", digits, 0); //$NON-NLS-1$
 		}
-		if (!HelperArray.isValid(seed)) {
-			throw new RuntimeExceptionIsNullOrEmpty("seed"); //$NON-NLS-1$
+		if (null == seed) {
+			throw new RuntimeExceptionIsNull("seed"); //$NON-NLS-1$
 		}
-
+		if (!HelperArray.isValid(seed)) {
+			throw new RuntimeExceptionIsEmpty("seed"); //$NON-NLS-1$
+		}
+		
 		final StringBuilder sb = new StringBuilder(digits);
 
 		for (int ii = 0; ii < digits; ii++) {

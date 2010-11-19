@@ -43,9 +43,9 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEquals;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 import org.apache.poi.hslf.model.Slide;
 import org.apache.poi.hslf.usermodel.SlideShow;
@@ -68,7 +68,7 @@ import com.lowagie.text.pdf.parser.PdfTextExtractor;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101110)
+ * @version 0.9.4 (20101119)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -150,8 +150,11 @@ public abstract class HelperPdf {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
+		if (null == files) {
+			throw new RuntimeExceptionIsNull("files"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(files)) {
-			throw new RuntimeExceptionIsNullOrEmpty("files"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("files"); //$NON-NLS-1$
 		}
 
 		final Document document = new Document(pageSize);
@@ -208,8 +211,11 @@ public abstract class HelperPdf {
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
+		if (null == images) {
+			throw new RuntimeExceptionIsNull("images"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(images)) {
-			throw new RuntimeExceptionIsNullOrEmpty("images"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("images"); //$NON-NLS-1$
 		}
 
 		final Document document = new Document(pageSize);
@@ -372,8 +378,11 @@ public abstract class HelperPdf {
 		if (null == dest) {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
+		if (null == metadata) {
+			throw new RuntimeExceptionIsNull("metadata"); //$NON-NLS-1$
+		}
 		if (!HelperMap.isValid(metadata)) {
-			throw new RuntimeExceptionIsNullOrEmpty("metadata"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("metadata"); //$NON-NLS-1$
 		}
 		if (HelperObject.isEquals(source, dest)) {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -428,11 +437,17 @@ public abstract class HelperPdf {
 		if (HelperObject.isEquals(source, dest)) {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
+		if (null == user) {
+			throw new RuntimeExceptionIsNull("user"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(user)) {
-			throw new RuntimeExceptionIsNullOrEmpty("user"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("user"); //$NON-NLS-1$
+		}
+		if (null == password) {
+			throw new RuntimeExceptionIsNull("password"); //$NON-NLS-1$
 		}
 		if (!HelperArray.isValid(password)) {
-			throw new RuntimeExceptionIsNullOrEmpty("password"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("password"); //$NON-NLS-1$
 		}
 		
 		PdfReader reader = null;
@@ -503,8 +518,11 @@ public abstract class HelperPdf {
 		if (HelperObject.isEquals(source, dest)) {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
+		if (null == password) {
+			throw new RuntimeExceptionIsNull("password"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(password)) {
-			throw new RuntimeExceptionIsNullOrEmpty("password"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("password"); //$NON-NLS-1$
 		}
 		
 		PdfReader reader = null;
@@ -551,8 +569,11 @@ public abstract class HelperPdf {
 		if (HelperObject.isEquals(source, dest)) {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
+		if (null == password) {
+			throw new RuntimeExceptionIsNull("password"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(password)) {
-			throw new RuntimeExceptionIsNullOrEmpty("password"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("password"); //$NON-NLS-1$
 		}
 		
 		PdfReader reader = null;

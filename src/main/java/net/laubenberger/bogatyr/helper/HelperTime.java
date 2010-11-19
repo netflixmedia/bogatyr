@@ -34,8 +34,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
 
@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for time operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101119)
  * @since 0.7.0
  */
 public abstract class HelperTime {
@@ -103,8 +103,11 @@ public abstract class HelperTime {
 	 */
 	public static Date getAtomicTime(final String host) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(host));
+		if (null == host) {
+			throw new RuntimeExceptionIsNull("host"); //$NON-NLS-1$
+		}
 		if (!HelperString.isValid(host)) {
-			throw new RuntimeExceptionIsNullOrEmpty("host"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("host"); //$NON-NLS-1$
 		}
 
 		Socket socket = null;

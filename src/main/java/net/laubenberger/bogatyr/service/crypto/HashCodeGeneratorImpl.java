@@ -44,8 +44,8 @@ import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionExceedsVmMemory;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
 import net.laubenberger.bogatyr.service.ServiceAbstract;
@@ -58,7 +58,7 @@ import org.slf4j.LoggerFactory;
  * This is an implementation for hash code generation.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101105)
+ * @version 0.9.4 (20101119)
  * @since 0.9.0
  */
 public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
@@ -95,8 +95,11 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 	@Override
 	public byte[] getHash(final byte... input) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(input)) {
-			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("input"); //$NON-NLS-1$
 		}
 
 		md.reset();
@@ -183,8 +186,11 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 	@Override
 	public byte[] getFastHash(final byte[] input, final int parts, final int partSize) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, parts, partSize));
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(input)) {
-			throw new RuntimeExceptionIsNullOrEmpty("input"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("input"); //$NON-NLS-1$
 		}
 		if (0 > parts) {
 			throw new RuntimeExceptionMustBeGreater("parts", parts, 0); //$NON-NLS-1$

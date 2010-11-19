@@ -31,21 +31,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperArray;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.misc.Constants;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This launcher creates a new process and reads standard output and standard error.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101105)
+ * @version 0.9.4 (20101119)
  * @since 0.2.0
  */
 public abstract class LauncherProcess {
@@ -92,8 +92,11 @@ public abstract class LauncherProcess {
 	 */
 	public static Process createAndStartProcess(final String... commands) throws IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(commands));
+		if (null == commands) {
+			throw new RuntimeExceptionIsNull("commands"); //$NON-NLS-1$
+		}
 		if (!HelperArray.isValid(commands)) {
-			throw new RuntimeExceptionIsNullOrEmpty("commands"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("commands"); //$NON-NLS-1$
 		}
 
 		final ProcessBuilder pb = new ProcessBuilder(commands);

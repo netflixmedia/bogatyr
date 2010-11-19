@@ -36,6 +36,9 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
 import org.junit.Test;
 
 
@@ -43,7 +46,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperCollection}
  *
  * @author Stefan Laubenberger
- * @version 20101108
+ * @version 20101119
  */
 public class HelperCollectionTest {
 	@Test
@@ -66,7 +69,7 @@ public class HelperCollectionTest {
 		try {
 			HelperCollection.toArray(null);
 			fail("collection is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -75,7 +78,7 @@ public class HelperCollectionTest {
 		try {
 			HelperCollection.toArray(new ArrayList<String>());
 			fail("collection is empty"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -93,7 +96,7 @@ public class HelperCollectionTest {
 		try {
 			HelperCollection.getList(null);
 			fail("elements is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -111,7 +114,7 @@ public class HelperCollectionTest {
 		try {
 			HelperCollection.getSet(null);
 			fail("elements is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -131,7 +134,7 @@ public class HelperCollectionTest {
 		try {
 			HelperCollection.removeDuplicates(null);
 			fail("collection is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -147,7 +150,7 @@ public class HelperCollectionTest {
 		try {
 			HelperCollection.dump(null);
 			fail("iterable is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

@@ -32,6 +32,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 import org.junit.Test;
 
@@ -40,7 +41,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperArray}
  *
  * @author Stefan Laubenberger
- * @version 20101110
+ * @version 20101119
  */
 public class HelperArrayTest {
 
@@ -70,7 +71,7 @@ public class HelperArrayTest {
 		try {
 			HelperArray.concatenate(a, b, null);
 			fail("array is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -90,7 +91,7 @@ public class HelperArrayTest {
 		try {
 			HelperArray.concatenate(a, b, null);
 			fail("array is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -110,7 +111,7 @@ public class HelperArrayTest {
 		try {
 			HelperArray.concatenate(a, b, null);
 			fail("array is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -126,7 +127,7 @@ public class HelperArrayTest {
 		try {
 			HelperArray.removeDuplicates(null);
 			fail("array is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -145,7 +146,7 @@ public class HelperArrayTest {
 		try {
 			HelperArray.contains(null, "A"); //$NON-NLS-1$
 			fail("array is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -162,7 +163,7 @@ public class HelperArrayTest {
 		try {
 			HelperArray.dump((String[])null);
 			fail("array is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -179,7 +180,7 @@ public class HelperArrayTest {
 		try {
 			HelperArray.dump((byte[])null);
 			fail("array is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -196,7 +197,7 @@ public class HelperArrayTest {
 		try {
 			HelperArray.dump((char[])null);
 			fail("array is null"); //$NON-NLS-1$
-		} catch (IllegalArgumentException ex) {
+		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

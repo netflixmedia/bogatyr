@@ -27,35 +27,26 @@
 
 package net.laubenberger.bogatyr.helper;
 
-import static org.junit.Assert.fail;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.io.File;
-import java.io.IOException;
-
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-
-import net.laubenberger.bogatyr.HelperResource;
-import net.laubenberger.bogatyr.view.swing.Button;
-
+import org.junit.Ignore;
 import org.junit.Test;
-
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.PageSize;
 
 
 /**
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20101110
+ * @version 20101119
  */
 public class HelperPdfTest {
+	
+	@Ignore
+	@Test
+	public void testWritePdfFromImages() {
+		//atm nothing
+	}
+	
 //	@Test
-//	public void testWritePdfFromHTML() { //TODO improve
+//	public void testWritePdfFromHTML() {
 //		try {
 //			File file = HelperIO.getTemporaryFile("test", "html");
 //			HelperIO.writeFile(file, getClass().getResourceAsStream(HelperResource.RES_FILE_HTML));
@@ -145,8 +136,4 @@ public class HelperPdfTest {
 //			fail(ex.getMessage());
 //		}
 //	}
-
-
 }
-
-

@@ -28,16 +28,16 @@
 package net.laubenberger.bogatyr.misc.exception;
 
 /**
- * This runtime exception is thrown if an argument is equals to an output argument.
+ * This runtime exception is thrown if an input argument is empty.
  *
  * @author Stefan Laubenberger
  * @version 0.9.4 (20101119)
- * @since 0.9.0
+ * @since 0.9.4
  */
-public class RuntimeExceptionIsEquals extends IllegalArgumentException {
-	private static final long serialVersionUID = -3055488683655986508L;
+public class RuntimeExceptionIsEmpty extends IllegalArgumentException {
+	private static final long serialVersionUID = -4313345499948593908L;
 
-	public RuntimeExceptionIsEquals(final String input, final String output) {
-		super(input + " is equals to " + output); //$NON-NLS-1$
+	public RuntimeExceptionIsEmpty(final String argument) {
+		super(argument + " is empty"); //$NON-NLS-1$
 	}
 }

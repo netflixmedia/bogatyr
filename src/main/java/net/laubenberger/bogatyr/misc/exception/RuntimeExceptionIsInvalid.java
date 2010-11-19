@@ -28,16 +28,16 @@
 package net.laubenberger.bogatyr.misc.exception;
 
 /**
- * This runtime exception is thrown if an argument is equals to an output argument.
+ * This runtime exception is thrown if an argument is invalid.
  *
  * @author Stefan Laubenberger
  * @version 0.9.4 (20101119)
- * @since 0.9.0
+ * @since 0.9.4
  */
-public class RuntimeExceptionIsEquals extends IllegalArgumentException {
-	private static final long serialVersionUID = -3055488683655986508L;
+public class RuntimeExceptionIsInvalid extends IllegalArgumentException {
+	private static final long serialVersionUID = 151028636266409941L;
 
-	public RuntimeExceptionIsEquals(final String input, final String output) {
-		super(input + " is equals to " + output); //$NON-NLS-1$
+	public RuntimeExceptionIsInvalid(final String argument, final Object object) {
+		super(argument + " (" + object + ") is invalid"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 }

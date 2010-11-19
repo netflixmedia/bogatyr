@@ -34,18 +34,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNullOrEmpty;
 
 /**
  * This is a helper class for collections.
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101103)
+ * @version 0.9.4 (20101119)
  * @since 0.7.0
  */
 public abstract class HelperCollection {
@@ -81,8 +81,11 @@ public abstract class HelperCollection {
 	@SuppressWarnings("unchecked")
 	public static <E> E[] toArray(final Collection<E> collection) { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(collection));
+		if (null == collection) {
+			throw new RuntimeExceptionIsNull("collection"); //$NON-NLS-1$
+		}		
 		if (!isValid(collection)) {
-			throw new RuntimeExceptionIsNullOrEmpty("collection"); //$NON-NLS-1$
+			throw new RuntimeExceptionIsEmpty("collection"); //$NON-NLS-1$
 		}
 
 		final E[] result = collection.toArray((E[]) Array.newInstance(collection.iterator().next().getClass(), collection
