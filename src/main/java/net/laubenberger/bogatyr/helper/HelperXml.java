@@ -27,9 +27,13 @@
 
 package net.laubenberger.bogatyr.helper;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -39,6 +43,7 @@ import javax.xml.bind.Unmarshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 
@@ -46,7 +51,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for XML operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100909)
+ * @version 0.9.4 (20101126)
  * @since 0.3.0
  */
 public abstract class HelperXml {
@@ -54,8 +59,7 @@ public abstract class HelperXml {
 
 	/**
 	 * This method ensures that the output String has only valid XML unicode characters as specified by the XML 1.0 standard.
-	 * For reference, please see <a href="http://www.w3.org/TR/2000/REC-xml-20001006#NT-Char">the standard</a>.
-	 * This method will return an empty {@link String} if the input is null or empty.
+	 * For reference, please see the <a href="http://www.w3.org/TR/2000/REC-xml-20001006#NT-Char">standard</a>.
 	 *
 	 * @param input {@link String} to remove non-valid characters
 	 * @return stripped {@link String}
@@ -69,11 +73,22 @@ public abstract class HelperXml {
 
 		final StringBuilder sb = new StringBuilder(input.length());
 
-		for (final char current : input.toCharArray()) {
-//            if (current != 0x96 && current != 0x9C) { // new
-			if ((char) 0x26 != current) { // new
-				if ((char) 0x9 == current || (char) 0xA == current || (char) 0xD == current || (char) 0x20 <= current && (char) 0xD7FF >= current || (char) 0xE000 <= current && (char) 0xFFFD >= current || (char) 0x10000 <= current && (char) 0x10FFFF >= current) {
-					sb.append(current);
+		for (final int current : input.toCharArray()) {
+			if (127 != current && // delete
+					144 != current && // Num lock
+					145 != current && // Scroll lock
+					154 != current && // print
+					155 != current && // insert
+					157 != current && // Mac cmd
+					524 != current && // Windows cmd
+					525 != current) { // Windows context menu)
+				if (9 == current || 
+						10 == current || 
+						13 == current || 
+						(41 <= current && 111 >= current) || 
+						(124 <= current && 55295 >= current) || 
+						(57344 <= current && 65533 >= current)) {
+					sb.append((char)current);
 				}
 			}
 		}
@@ -84,7 +99,7 @@ public abstract class HelperXml {
 	}
 
 	/**
-	 * Serialize data to an XML and store it to a file {@link File}.
+	 * Serialize data to XML and store it into a {@link File}.
 	 *
 	 * @param file to store the serialized data
 	 * @param data (object) to serialize as XML
@@ -92,7 +107,7 @@ public abstract class HelperXml {
 	 * @throws JAXBException
 	 * @since 0.9.0
 	 */
-	public static <T> void serialize(final File file, final T data) throws JAXBException {
+	public static <T> void serialize(final File file, final T data) throws JAXBException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, data));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
@@ -107,7 +122,7 @@ public abstract class HelperXml {
 	}
 
 	/**
-	 * Serialize data to an XML and store it to an output stream {@link OutputStream}.
+	 * Serialize data to XML and store it to an {@link OutputStream}.
 	 *
 	 * @param os	{@link OutputStream} to store the serialized data
 	 * @param data (object) to serialize as XML
@@ -115,7 +130,7 @@ public abstract class HelperXml {
 	 * @throws JAXBException
 	 * @since 0.9.0
 	 */
-	public static <T> void serialize(final OutputStream os, final T data) throws JAXBException {
+	public static <T> void serialize(final OutputStream os, final T data) throws JAXBException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(os, data));
 		if (null == os) {
 			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
@@ -130,7 +145,31 @@ public abstract class HelperXml {
 	}
 
 	/**
-	 * Deserialize data from a XML file {@link File}.
+	 * Serialize data to XML and return it as {@link String}.
+	 *
+	 * @param data (object) to serialize as XML
+	 * @see String
+	 * @throws JAXBException
+	 * @throws IOException 
+	 * @throws UnsupportedEncodingException 
+	 * @since 0.9.4
+	 */
+	public static <T> String serialize(final T data) throws JAXBException, UnsupportedEncodingException, IOException { //$JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(data));
+
+		String result = null;
+		final ByteArrayOutputStream os = new ByteArrayOutputStream();
+		
+		serialize(os, data);
+
+		result = new String(HelperIO.readStream(HelperIO.convertOutputToInputStream(os)), Constants.ENCODING_DEFAULT);
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
+	/**
+	 * Deserialize data from a XML {@link File}.
 	 *
 	 * @param file  containing the serialized data
 	 * @param clazz for the serialized data
@@ -140,7 +179,7 @@ public abstract class HelperXml {
 	 * @since 0.9.0
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T deserialize(final File file, final Class<T> clazz) throws JAXBException {
+	public static <T> T deserialize(final File file, final Class<T> clazz) throws JAXBException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file, clazz));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
@@ -156,7 +195,7 @@ public abstract class HelperXml {
 	}
 
 	/**
-	 * Deserialize data from an input stream {@link InputStream}.
+	 * Deserialize data from A XML {@link InputStream}.
 	 *
 	 * @param is	 {@link InputStream} containing the serialized data
 	 * @param clazz for the serialized data
@@ -166,7 +205,7 @@ public abstract class HelperXml {
 	 * @since 0.9.0
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T> T deserialize(final InputStream is, final Class<T> clazz) throws JAXBException {
+	public static <T> T deserialize(final InputStream is, final Class<T> clazz) throws JAXBException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is, clazz));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
@@ -182,6 +221,33 @@ public abstract class HelperXml {
 	}
 
 
+	/**
+	 * Deserialize data from a XML {@link String}.
+	 *
+	 * @param input {@link String} containing the serialized data
+	 * @param clazz for the serialized data
+	 * @return data as object
+	 * @see String
+	 * @throws JAXBException
+	 * @throws UnsupportedEncodingException 
+	 * @since 0.9.4
+	 */
+	public static <T> T deserialize(final String input, final Class<T> clazz) throws JAXBException, UnsupportedEncodingException { //$JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, clazz));
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
+		
+		T result = null;
+		final InputStream is = new ByteArrayInputStream(input.getBytes(Constants.ENCODING_DEFAULT));
+
+		result = deserialize(is, clazz);
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
+	
 	/*
 	 * Private methods
 	 */

@@ -49,14 +49,11 @@ import org.junit.Test;
  * JUnit test for {@link HelperCompress}
  * 
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101126
  */
 public class HelperCompressTest {
 
 	private File fileZip;
-//	private File fileMid;
-//	private File fileText;
-//	private File fileWav;
 	
 	private final List<File> files = new ArrayList<File>();
 	private File fileZipExtractDir;
@@ -107,11 +104,6 @@ public class HelperCompressTest {
 		for (File file : files) {
 			assertEquals(file.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), file.getName()).length());
 		}
-//		assertEquals(fileMid.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileMid.getName()).length());
-//		assertEquals(fileText.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileText
-//				.getName()).length());
-//		assertEquals(fileWav.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), fileWav
-//				.getName()).length());
 	}
 
 	@Test
