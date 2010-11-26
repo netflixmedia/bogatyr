@@ -69,7 +69,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101119)
+ * @version 0.9.4 (20101126)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -151,9 +151,9 @@ public abstract class HelperIO {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
-	
+
 	/**
-	 * Copy a directory.
+	 * Copy a file or directory.
 	 * 
 	 * @param source
 	 *           directory to copy
@@ -163,14 +163,11 @@ public abstract class HelperIO {
 	 * @see File
 	 * @since 0.1.0
 	 */
-	public static void copyDirectory(final File source, final File dest) throws IOException {
+	public static void copy(final File source, final File dest) throws IOException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
 		}
-		// if (!source.isDirectory()) {
-		//			throw new IllegalArgumentException("source is not a directory: " + source); //$NON-NLS-1$
-		// }
 		if (null == dest) {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
@@ -178,103 +175,12 @@ public abstract class HelperIO {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		if (!dest.exists()) {
-			dest.mkdir();
+		if (!source.isDirectory()) {
+			copyDirectory(source, dest);
+		} else {
+			copyFile(source, dest);
 		}
 
-		final File[] children = source.listFiles();
-
-		for (final File sourceChild : children) {
-			final String name = sourceChild.getName();
-			final File destChild = new File(dest, name);
-
-			if (sourceChild.isDirectory()) {
-				copyDirectory(sourceChild, destChild);
-			} else {
-				copyFile(sourceChild, destChild);
-			}
-		}
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
-
-	/**
-	 * Copy a {@link File}.
-	 * 
-	 * @param source
-	 *           {@link File} to copy
-	 * @param dest
-	 *           {@link File} destination
-	 * @throws IOException
-	 * @see File
-	 * @since 0.1.0
-	 */
-	public static void copyFile(final File source, final File dest) throws IOException {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest));
-		copyFile(source, dest, Constants.DEFAULT_FILE_BUFFER_SIZE);
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
-
-	/**
-	 * Copy a {@link File}.
-	 * 
-	 * @param source
-	 *           {@link File} to copy
-	 * @param dest
-	 *           {@link File} destination
-	 * @param bufferSize
-	 *           in bytes
-	 * @throws IOException
-	 * @see File
-	 * @since 0.1.0
-	 */
-	public static void copyFile(final File source, final File dest, final int bufferSize) throws IOException {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, bufferSize));
-		if (null == source) {
-			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
-		}
-		// if (!source.isFile()) {
-		//            throw new IllegalArgumentException("source is not a file: " + source); //$NON-NLS-1$
-		// }
-		if (null == dest) {
-			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
-		}
-		if (HelperObject.isEquals(source, dest)) {
-			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-		if (1 > bufferSize) {
-			throw new RuntimeExceptionMustBeGreater("bufferSize", bufferSize, 1); //$NON-NLS-1$
-		}
-		if (bufferSize > HelperEnvironment.getMemoryFree()) {
-			throw new RuntimeExceptionExceedsVmMemory("bufferSize", bufferSize); //$NON-NLS-1$
-		}
-
-		final byte[] buffer = new byte[bufferSize];
-
-		if (!dest.exists()) {
-			dest.mkdirs();
-			dest.delete();
-			dest.createNewFile();
-		}
-
-		InputStream is = null;
-		OutputStream os = null;
-
-		try {
-			is = new FileInputStream(source);
-			os = new FileOutputStream(dest);
-			int len;
-			while (0 < (len = is.read(buffer))) {
-				os.write(buffer, 0, len);
-			}
-			os.flush();
-		} finally {
-			if (null != is) {
-				is.close();
-			}
-			if (null != os) {
-				os.close();
-			}
-		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
@@ -1396,5 +1302,89 @@ public abstract class HelperIO {
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
+	}
+	
+	
+	/*
+	 * Private methods
+	 */
+	
+	/**
+	 * Copy a directory.
+	 * 
+	 * @param source
+	 *           directory to copy
+	 * @param dest
+	 *           directory destination
+	 * @throws IOException
+	 * @see File
+	 * @since 0.1.0
+	 */
+	private static void copyDirectory(final File source, final File dest) throws IOException {
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(source, dest));
+
+		if (!dest.exists()) {
+			dest.mkdir();
+		}
+
+		final File[] children = source.listFiles();
+
+		for (final File sourceChild : children) {
+			final String name = sourceChild.getName();
+			final File destChild = new File(dest, name);
+
+			if (sourceChild.isDirectory()) {
+				copyDirectory(sourceChild, destChild);
+			} else {
+				copyFile(sourceChild, destChild);
+			}
+		}
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
+	}
+	
+	/**
+	 * Copy a {@link File}.
+	 * 
+	 * @param source
+	 *           {@link File} to copy
+	 * @param dest
+	 *           {@link File} destination
+	 * @param bufferSize
+	 *           in bytes
+	 * @throws IOException
+	 * @see File
+	 * @since 0.1.0
+	 */
+	private static void copyFile(final File source, final File dest) throws IOException {
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(source, dest));
+
+		final byte[] buffer = new byte[Constants.DEFAULT_FILE_BUFFER_SIZE];
+
+		if (!dest.exists()) {
+			dest.mkdirs();
+			dest.delete();
+			dest.createNewFile();
+		}
+
+		InputStream is = null;
+		OutputStream os = null;
+
+		try {
+			is = new FileInputStream(source);
+			os = new FileOutputStream(dest);
+			int len;
+			while (0 < (len = is.read(buffer))) {
+				os.write(buffer, 0, len);
+			}
+			os.flush();
+		} finally {
+			if (null != is) {
+				is.close();
+			}
+			if (null != os) {
+				os.close();
+			}
+		}
+		if (log.isTraceEnabled()) log.trace(HelperLog.methodExit());
 	}
 }

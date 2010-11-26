@@ -29,6 +29,7 @@ package net.laubenberger.bogatyr;
 
 import java.text.DateFormat;
 import java.util.Date;
+
 import net.laubenberger.bogatyr.helper.HelperArrayTest;
 import net.laubenberger.bogatyr.helper.HelperCollection;
 import net.laubenberger.bogatyr.helper.HelperCollectionTest;
@@ -45,6 +46,8 @@ import net.laubenberger.bogatyr.helper.HelperMathTest;
 import net.laubenberger.bogatyr.helper.HelperNetTest;
 import net.laubenberger.bogatyr.helper.HelperNumberTest;
 import net.laubenberger.bogatyr.helper.HelperObjectTest;
+import net.laubenberger.bogatyr.helper.HelperTimeTest;
+import net.laubenberger.bogatyr.helper.HelperXmlTest;
 import net.laubenberger.bogatyr.helper.encoder.EncoderBase64Test;
 import net.laubenberger.bogatyr.helper.encoder.EncoderHexTest;
 import net.laubenberger.bogatyr.helper.encoder.EncoderHtmlTest;
@@ -54,6 +57,7 @@ import net.laubenberger.bogatyr.helper.launcher.LauncherMailTest;
 import net.laubenberger.bogatyr.helper.launcher.LauncherProcessTest;
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.view.swing.factory.FormatFactory;
+
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -63,7 +67,7 @@ import org.junit.runner.Result;
  * JUnit test suite
  *
  * @author Stefan Laubenberger
- * @version 20101110
+ * @version 20101126
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA = "!$'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ" + //$NON-NLS-1$
@@ -127,12 +131,12 @@ public class AllBogatyrTests implements Runnable {
 				HelperMathTest.class,
 				HelperNetTest.class,
 				HelperNumberTest.class,
-				HelperObjectTest.class
+				HelperObjectTest.class,
 //				HelperPdfTest.class,
 //				HelperSoundTest.class,
 //				HelperStringTest.class,
-//				HelperTimeTest.class,
-//				HelperXmlTest.class,
+				HelperTimeTest.class,
+				HelperXmlTest.class
 //				ContextTest.class,
 //				CertificateProviderTest.class,
 //				CryptoAsymmetricTest.class,

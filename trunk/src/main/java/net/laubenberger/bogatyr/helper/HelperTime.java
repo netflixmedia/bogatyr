@@ -30,14 +30,17 @@ package net.laubenberger.bogatyr.helper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsInvalid;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeSmaller;
+import net.laubenberger.bogatyr.view.swing.factory.FormatFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for time operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101119)
+ * @version 0.9.4 (20101126)
  * @since 0.7.0
  */
 public abstract class HelperTime {
@@ -58,7 +61,8 @@ public abstract class HelperTime {
 	public static final int MAX_HOUR_VALUE = 23;
 	public static final int MAX_DAY_VALUE = 31;
 	public static final int MAX_MONTH_VALUE = 12;
-	public static final int MAX_YEAR_VALUE = 9999;
+	public static final int MIN_YEAR_VALUE = -290000000;
+	public static final int MAX_YEAR_VALUE = 290000000;
 
 	public static final int HOURS_PER_DAY = 24;
 	public static final int DAYS_PER_WEEK = 7;
@@ -74,10 +78,13 @@ public abstract class HelperTime {
 	public static final int TIME_SERVER_PORT = 37;
 	public static final String DEFAULT_TIME_SERVER = "ptbtime1.ptb.de"; //$NON-NLS-1$
 
+	private static final int TIMEOUT = 5000;
 
+	
 	/**
 	 * Returns the current atomic time of the default time server.
-	 *
+	 * Uses the time protocol specified in Internet time standard RFC-868.
+	 * 
 	 * @return atomic time of the default time server
 	 * @throws IOException
 	 * @see Date
@@ -94,7 +101,8 @@ public abstract class HelperTime {
 
 	/**
 	 * Returns the current atomic time of the given time server.
-	 *
+	 * Uses the time protocol specified in Internet time standard RFC-868.
+	 * 
 	 * @param host of the time server
 	 * @return atomic time of the given time server
 	 * @throws IOException
@@ -115,6 +123,7 @@ public abstract class HelperTime {
 
 		try {
 			socket = new Socket(host, TIME_SERVER_PORT);
+			socket.setSoTimeout(TIMEOUT);
 			is = socket.getInputStream();
 
 			long time = 0L;
@@ -139,134 +148,84 @@ public abstract class HelperTime {
 	}
 
 	/**
-	 * Create a {@link Date} with day, month and year as parameters and the current user {@link TimeZone}.
+	 * Create a {@link Date} with year, month and day as parameters.
 	 *
-	 * @param year
+	 * @param year range between -290000000 - 290000000
 	 * @param month range between 1-12
-	 * @param date  range between 1-31
+	 * @param day  range between 1-31
 	 * @return created {@link Date}
 	 * @see Date
-	 * @see TimeZone
 	 * @since 0.7.0
 	 */
-	public static Date getDate(final int year, final int month, final int date) {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(year, month, date));
-		
-		final Date result = getDate(year, month, date, HelperEnvironment.getUserTimezone());
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;	
-	}
-	
-	/**
-	 * Create a {@link Date} with day, month, year and {@link TimeZone} as parameters.
-	 *
-	 * @param year
-	 * @param month range between 1-12
-	 * @param date  range between 1-31
-	 * @param timeZone for the {@link Date}
-	 * @return created {@link Date}
-	 * @see Date
-	 * @see TimeZone
-	 * @since 0.9.2
-	 */
-	public static Date getDate(final int year, final int month, final int date, final TimeZone timeZone) {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(year, month, date, timeZone));
-		if (0 > year) {
-			throw new RuntimeExceptionMustBeGreater("year", year, 0); //$NON-NLS-1$
+	public static Date getDate(final int year, final int month, final int day) { //$JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(year, month, day));
+		if (MIN_YEAR_VALUE > year) {
+			throw new RuntimeExceptionMustBeGreater("year", year, MIN_YEAR_VALUE); //$NON-NLS-1$
 		}
 		if (MAX_YEAR_VALUE < year) {
 			throw new RuntimeExceptionMustBeSmaller("year", year, MAX_YEAR_VALUE); //$NON-NLS-1$
 		}
-		if (0 > month) {
+		if (1 > month) {
 			throw new RuntimeExceptionMustBeGreater("month", month, 0); //$NON-NLS-1$
 		}
 		if (MAX_MONTH_VALUE < month) {
 			throw new RuntimeExceptionMustBeSmaller("month", month, MAX_MONTH_VALUE); //$NON-NLS-1$
 		}
-		if (0 > date) {
-			throw new RuntimeExceptionMustBeGreater("date", date, 0); //$NON-NLS-1$
+		if (1 > day) {
+			throw new RuntimeExceptionMustBeGreater("day", day, 0); //$NON-NLS-1$
 		}
-		if (MAX_DAY_VALUE < date) {
-			throw new RuntimeExceptionMustBeSmaller("date", date, MAX_DAY_VALUE); //$NON-NLS-1$
+		if (MAX_DAY_VALUE < day) {
+			throw new RuntimeExceptionMustBeSmaller("day", day, MAX_DAY_VALUE); //$NON-NLS-1$
 		}
 
-		final Calendar cal = Calendar.getInstance(timeZone);
+		final Calendar calendar = Calendar.getInstance();
 		
-		cal.set(year, month - 1, date, 0, 0, 0);
-
-
-		if (cal.get(Calendar.DAY_OF_MONTH) != date) {
-			throw new IllegalArgumentException("date value invalid: " + date); //$NON-NLS-1$
+		calendar.set(year, month - 1, day, 0, 0, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		
+		//has day changed?
+		if (calendar.get(Calendar.DAY_OF_MONTH) != day) {
+			throw new RuntimeExceptionIsInvalid("day", day); //$NON-NLS-1$
 		}
-
-		if (cal.get(Calendar.MONTH) != month - 1) {
-			throw new IllegalArgumentException("month value invalid: " + month); //$NON-NLS-1$
-		}
-
-		final Date result = cal.getTime();
+		
+		final Date result = calendar.getTime();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
+		return result;	
 	}
 
 	/**
-	 * Create a {@link Date} with day, month and year as parameters and the current user {@link TimeZone}.
+	 * Create a {@link Date} with year, month, day, minutes and seconds as parameters.
 	 *
-	 * @param year	range between 0-9999
+	 * @param year	range between -290000000 - 290000000
 	 * @param month  range between 1-12
-	 * @param date	range between 1-31
-	 * @param hour	range between 0-23
+	 * @param day	range between 1-31
+	 * @param hour	range between 0-23 (24-hour notation)
 	 * @param minute range between 0-59
 	 * @param second range between 0-59
 	 * @return created {@link Date}
 	 * @see Date
-	 * @see TimeZone
 	 * @since 0.9.1
 	 */
-	public static Date getDate(final int year, final int month, final int date, final int hour, final int minute, final int second) {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(year, month, date, hour, minute, second));
-		
-		final Date result = getDate(year, month, date, hour, minute, second, HelperEnvironment.getUserTimezone());
-		
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;	
-	}
-	
-	/**
-	 * Create a {@link Date} with day, month, year and {@link TimeZone} as parameters.
-	 * 
-	 * @param year	range between 0-9999
-	 * @param month  range between 1-12
-	 * @param date	range between 1-31
-	 * @param hour	range between 0-23
-	 * @param minute range between 0-59
-	 * @param second range between 0-59
-	 * @param timeZone for the {@link Date}
-	 * @return created {@link Date}
-	 * @see Date
-	 * @see TimeZone
-	 * @since 0.9.2
-	 */
-	public static Date getDate(final int year, final int month, final int date, final int hour, final int minute, final int second, final TimeZone timeZone) {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(year, month, date, hour, minute, second, timeZone));
-		if (0 > year) {
-			throw new RuntimeExceptionMustBeGreater("year", year, 0); //$NON-NLS-1$
+	public static Date getDate(final int year, final int month, final int day, final int hour, final int minute, final int second) { //$JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(year, month, day, hour, minute, second));
+		if (MIN_YEAR_VALUE > year) {
+			throw new RuntimeExceptionMustBeGreater("year", year, MIN_YEAR_VALUE); //$NON-NLS-1$
 		}
 		if (MAX_YEAR_VALUE < year) {
 			throw new RuntimeExceptionMustBeSmaller("year", year, MAX_YEAR_VALUE); //$NON-NLS-1$
 		}
-		if (0 > month) {
+		if (1 > month) {
 			throw new RuntimeExceptionMustBeGreater("month", month, 0); //$NON-NLS-1$
 		}
 		if (MAX_MONTH_VALUE < month) {
 			throw new RuntimeExceptionMustBeSmaller("month", month, MAX_MONTH_VALUE); //$NON-NLS-1$
 		}
-		if (0 > date) {
-			throw new RuntimeExceptionMustBeGreater("date", date, 0); //$NON-NLS-1$
+		if (1 > day) {
+			throw new RuntimeExceptionMustBeGreater("day", day, 0); //$NON-NLS-1$
 		}
-		if (MAX_DAY_VALUE < date) {
-			throw new RuntimeExceptionMustBeSmaller("date", date, MAX_DAY_VALUE); //$NON-NLS-1$
+		if (MAX_DAY_VALUE < day) {
+			throw new RuntimeExceptionMustBeSmaller("day", day, MAX_DAY_VALUE); //$NON-NLS-1$
 		}
 		if (0 > hour) {
 			throw new RuntimeExceptionMustBeGreater("hour", hour, 0); //$NON-NLS-1$
@@ -286,92 +245,103 @@ public abstract class HelperTime {
 		if (MAX_SECOND_VALUE < second) {
 			throw new RuntimeExceptionMustBeSmaller("second", second, MAX_SECOND_VALUE); //$NON-NLS-1$
 		}
-		if (null == timeZone) {
-			throw new RuntimeExceptionIsNull("timeZone"); //$NON-NLS-1$
-		}
 		
-		final Calendar cal = Calendar.getInstance(timeZone);
+		final Calendar calendar = Calendar.getInstance();
 
-		cal.set(year, month - 1, date, hour, minute, second);
-
-
-		if (cal.get(Calendar.DAY_OF_MONTH) != date) {
-			throw new IllegalArgumentException("date value invalid: " + date); //$NON-NLS-1$
+		calendar.set(year, month - 1, day, hour, minute, second);
+		calendar.set(Calendar.MILLISECOND, 0);
+		
+		//has day changed?
+		if (calendar.get(Calendar.DAY_OF_MONTH) != day) {
+			throw new RuntimeExceptionIsInvalid("day", day); //$NON-NLS-1$
 		}
 
-		if (cal.get(Calendar.MONTH) != month - 1) {
-			throw new IllegalArgumentException("month value invalid: " + month); //$NON-NLS-1$
-		}
-
-		final Date result = cal.getTime();
+		final Date result = calendar.getTime();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
+		return result;	
 	}
 	
 	/**
-	 * Returns a {@link Date} containing only the date from a given {@link Date}. The values of hours, minutes, seconds and milliseconds is set to 0.
+	 * Returns a {@link Date} containing only the date from a given {@link Date}. The values of hours, minutes, seconds and milliseconds are set to 0.
 	 *
 	 * @param date for the absolute date
 	 * @return created {@link Date}
 	 * @see Date
 	 * @since 0.9.2
 	 */
-	public static Date getDateAsAbsoluteDate(final Date date) {
+	public static Date getDateAsAbsoluteDate(final Date date) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(date));
-
-		final Calendar cal = Calendar.getInstance();
+		if (null == date) {
+			throw new RuntimeExceptionIsNull("date"); //$NON-NLS-1$
+		}
 		
-		cal.setTime(date);
-		cal.set(Calendar.HOUR_OF_DAY, 0);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND, 0);
+		final Calendar calendar = Calendar.getInstance();
+		
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
 
-		final Date result = cal.getTime();
+		final Date result = calendar.getTime();
 
+//		final DateFormat df = FormatFactory.createDateFormat(FormatFactory.PATTERN_DATE_DAY_MONTH_YEAR);
+//
+//		Date result = null;
+//		try {
+//			result = df.parse(df.format(date));
+//		} catch (ParseException ex) {
+//			// should never happen!
+//			log.error("Could not parse date", ex);
+//		}
+		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 	
 	/**
-	 * Returns a {@link Date} containing only the time from a given {@link Date}. The values of years is set to 0 and months/days set to 1.
+	 * Returns a {@link Date} containing only the time from a given {@link Date}. The values of years are set to 0 and months/days set to 1.
 	 *
 	 * @param date for the absolute time
 	 * @return created {@link Date}
 	 * @see Date
 	 * @since 0.9.2
 	 */
-	public static Date getDateAsAbsoluteTime(final Date date) {
+	public static Date getDateAsAbsoluteTime(final Date date) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(date));
-
-		final Calendar cal = Calendar.getInstance();
+		if (null == date) {
+			throw new RuntimeExceptionIsNull("date"); //$NON-NLS-1$
+		}
 		
-		cal.setTime(date);
-		cal.set(Calendar.YEAR, 0);
-		cal.set(Calendar.MONTH, 1);
-		cal.set(Calendar.DAY_OF_MONTH, 1);
+//		final Calendar calendar = Calendar.getInstance();
+//		
+//		calendar.setTime(date);
+//
+//		// Gregorian or Julian calendar?
+//		if (calendar.get(Calendar.YEAR) > 1582) {
+//			calendar.set(Calendar.YEAR, 1970);
+//		} else {
+//			calendar.set(Calendar.YEAR, 1);
+//		}
+//
+//		calendar.set(Calendar.MONTH, 0);
+//		calendar.set(Calendar.DAY_OF_MONTH, 1);
+//		calendar.set(Calendar.MILLISECOND, 0);
+//		
+//		final Date result = calendar.getTime();
 
-		final Date result = cal.getTime();
+		final DateFormat df = FormatFactory.createDateFormat(FormatFactory.PATTERN_DATE_HOUR_MINUTE_SECOND_MILLISECOND);
+
+		Date result = null;
+		try {
+			result = df.parse(df.format(date));
+		} catch (ParseException ex) {
+			// should never happen!
+			log.error("Could not parse date", ex);
+		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
-	
-//	/**
-//	 * Create a {@link Date} with a given offset in ms from the current time.
-//	 *
-//	 * @param offSet in ms from the current time
-//	 * @return created date
-//	 * @see Date
-//	 * @since 0.7.0
-//	 */
-//	public static Date getDate(final long offSet) {
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(offSet));
-//
-//		final Date result = new Date(System.currentTimeMillis() + offSet);
-//
-//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-//		return result;
-//	}
 }

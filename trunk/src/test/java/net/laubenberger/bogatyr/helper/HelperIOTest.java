@@ -47,25 +47,25 @@ import org.junit.Test;
  * JUnit test for {@link HelperIO}
  *
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101126
  */
 public class HelperIOTest { //TODO complete tests for all methods
 	@Test
 	public void testgetTemporaryFile() {
 		try {
-			assertNotNull(HelperIO.getTemporaryFile(getClass().getSimpleName(), "tmp"));  //$NON-NLS-1$
+			assertTrue(HelperIO.getTemporaryFile(getClass().getSimpleName(), "tmp").exists());  //$NON-NLS-1$
 		} catch (IOException ex) {
 			fail(ex.getLocalizedMessage());
 		}
 
 		try {
-			assertNotNull(HelperIO.getTemporaryFile("tmp"));  //$NON-NLS-1$
+			assertTrue(HelperIO.getTemporaryFile("tmp").exists());  //$NON-NLS-1$
 		} catch (IOException ex) {
 			fail(ex.getLocalizedMessage());
 		}
 		
 		try {
-			assertNotNull(HelperIO.getTemporaryFile());
+			assertTrue(HelperIO.getTemporaryFile().exists());
 		} catch (IOException ex) {
 			fail(ex.getLocalizedMessage());
 		}
@@ -105,7 +105,6 @@ public class HelperIOTest { //TODO complete tests for all methods
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
-		
 		
 		try {
 			HelperIO.getTemporaryFile(null);

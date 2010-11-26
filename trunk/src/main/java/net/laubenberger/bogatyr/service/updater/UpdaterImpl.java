@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
  * This is the updater for documents.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101106)
+ * @version 0.9.4 (20101126)
  * @since 0.6.0
  */
 public class UpdaterImpl extends ServiceAbstract implements Updater {
@@ -121,7 +121,7 @@ public class UpdaterImpl extends ServiceAbstract implements Updater {
 			if (HelperObject.isEquals(source, dest)) {
 				throw new RuntimeExceptionIsEquals("location", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
-			HelperIO.copyFile(source, dest);
+			HelperIO.copy(source, dest);
 		} else {
 			HelperIO.writeFile(dest, HelperNet.readUrl(location), false);
 		}

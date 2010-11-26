@@ -27,26 +27,195 @@
 
 package net.laubenberger.bogatyr.helper;
 
-import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import javax.xml.bind.JAXBException;
+
+import net.laubenberger.bogatyr.misc.Constants;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import net.laubenberger.bogatyr.model.misc.DocumentImpl;
 
 import org.junit.Test;
 
-import net.laubenberger.bogatyr.helper.HelperXml;
-
 
 /**
- * Junit test
+ * JUnit test for {@link HelperXml}
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20101126
  */
 public class HelperXmlTest {
-	private static final String INVALID_XML = new String(new byte[]{(byte) 0x26});
+	private static final String INVALID_XML = new String(new char[]{(char) 127, (char) 144, (char) 145, (char) 154, (char) 155, (char) 157, (char) 524, (char) 525, (char) 9, (char) 10, (char) 11, (char) 13, (char) 40, (char) 41, (char) 111, (char) 112, (char) 123, (char) 124, (char) 55295, (char) 55296, (char) 57343, (char) 57344, (char) 65533, (char) 65534});
+	private static final String VALID_XML = new String(new char[]{(char) 9, (char) 10, (char) 13, (char) 41, (char) 111, (char) 124, (char) 55295, (char) 57344, (char) 65533});
 
 	@Test
 	public void testGetValidXmlString() {
-//		assertEquals(HelperString.EMPTY_STRING, HelperXml.getValidXmlString(null)); 
-		assertNotSame(INVALID_XML, HelperXml.getValidXmlString(INVALID_XML));
+		assertEquals(VALID_XML, HelperXml.getValidXmlString(INVALID_XML));
+		assertEquals(HelperString.EMPTY_STRING, HelperXml.getValidXmlString(HelperString.EMPTY_STRING));
+		
+		try {
+			HelperXml.getValidXmlString(null);
+			fail("input is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+
+	@Test
+	public void testSerialize() {
+		File file = null;
+		
+		try {
+			file = HelperIO.getTemporaryFile();
+		} catch (IOException ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperXml.serialize(file, Constants.BOGATYR);
+			assertEquals(Constants.BOGATYR, HelperXml.deserialize(file, DocumentImpl.class));
+		} catch (JAXBException ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			assertEquals(Constants.BOGATYR, HelperXml.deserialize(HelperXml.serialize(Constants.BOGATYR), DocumentImpl.class));
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}		
+		
+		try {
+			HelperXml.serialize((File)null, Constants.BOGATYR);
+			fail("file is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	
+		try {
+			HelperXml.serialize(file, null);
+			fail("data is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperXml.serialize((OutputStream)null, Constants.BOGATYR);
+			fail("os is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	
+		try {
+			HelperXml.serialize(new ByteArrayOutputStream(), null);
+			fail("data is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperXml.serialize(null);
+			fail("data is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+
+	@Test
+	public void testDeserialize() {
+		File file = null;
+		
+		try {
+			file = HelperIO.getTemporaryFile();
+		} catch (IOException ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperXml.serialize(file, Constants.BOGATYR);
+			assertEquals(Constants.BOGATYR, HelperXml.deserialize(file, DocumentImpl.class));
+		} catch (JAXBException ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			assertEquals(Constants.BOGATYR, HelperXml.deserialize(HelperXml.serialize(Constants.BOGATYR), DocumentImpl.class));
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}		
+		
+		try {
+			HelperXml.deserialize((File)null, DocumentImpl.class);
+			fail("file is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	
+		try {
+			HelperXml.deserialize(file, null);
+			fail("clazz is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperXml.deserialize((InputStream)null, DocumentImpl.class);
+			fail("os is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	
+		try {
+			HelperXml.deserialize(new ByteArrayInputStream(HelperString.EMPTY_STRING.getBytes()), null);
+			fail("clazz is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperXml.deserialize((String)null, DocumentImpl.class);
+			fail("input is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperXml.deserialize(HelperString.EMPTY_STRING, null);
+			fail("clazz is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 }
 
