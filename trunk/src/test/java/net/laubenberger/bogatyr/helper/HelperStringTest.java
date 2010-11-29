@@ -29,10 +29,10 @@ package net.laubenberger.bogatyr.helper;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
 
@@ -40,10 +40,10 @@ import org.junit.Test;
 
 
 /**
- * Junit test
+ *JUnit test for {@link HelperString}
  *
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101129
  */
 public class HelperStringTest {
 	@Test
@@ -55,7 +55,6 @@ public class HelperStringTest {
 
 	@Test
 	public void testIsNumeric() {
-//		assertFalse(HelperString.isNumeric(null));
 		assertFalse(HelperString.isNumeric(HelperString.EMPTY_STRING));
 		assertTrue(HelperString.isNumeric("123.0")); //$NON-NLS-1$
 		assertTrue(HelperString.isNumeric("123")); //$NON-NLS-1$
@@ -64,6 +63,15 @@ public class HelperStringTest {
 		assertTrue(HelperString.isNumeric("-123.23")); //$NON-NLS-1$
 		assertFalse(HelperString.isNumeric("123.23abc")); //$NON-NLS-1$
 		assertFalse(HelperString.isNumeric("123..23")); //$NON-NLS-1$
+
+		try {
+			HelperString.isNumeric(null);
+			fail("input is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
@@ -71,7 +79,7 @@ public class HelperStringTest {
 		assertEquals(10, HelperString.fill('1', 10).length());
 
 		try {
-			assertNotNull(HelperString.fill('1', 0));
+			HelperString.fill('1', 0);
 			fail("fillLength must be greater than 0"); //$NON-NLS-1$
 		} catch (RuntimeExceptionMustBeGreater ex) {
 			//nothing to do
@@ -82,49 +90,113 @@ public class HelperStringTest {
 
 	@Test
 	public void testReverse() {
-		assertEquals("nafetS", HelperString.reverse("Stefan")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("6791 regrebnebuaL nafetS", HelperString.reverse("Stefan Laubenberger 1976")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals(HelperString.EMPTY_STRING, HelperString.reverse(HelperString.EMPTY_STRING));
 
-//		try {
-//			HelperString.reverse(null);
-//            fail("input is null!"); //$NON-NLS-1$
-//		} catch (IllegalArgumentException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
+		try {
+			HelperString.reverse(null);
+         fail("input is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
 	public void testGetNumericString() {
-//        assertNull(HelperString.getValidNumericString(null));
-//        assertNull(HelperString.getValidNumericString(HelperString.EMPTY_STRING)); 
+		assertEquals("1123.0", HelperString.getNumericString("1abc!@123.0")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("123.23", HelperString.getNumericString("abc!@123.23abc!@")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("-123.23", HelperString.getNumericString("-abc!@-123.23abc!@")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("123.23", HelperString.getNumericString("abc!@123.2-3abc!@")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals("123.23", HelperString.getNumericString("abc!@123..23abc!@")); //$NON-NLS-1$ //$NON-NLS-2$
 
-		assertEquals("123.0", HelperString.getNumericString("123.0")); //$NON-NLS-1$ //$NON-NLS-2$
-		assertEquals("123.23", HelperString.getNumericString("123.23abc")); //$NON-NLS-1$ //$NON-NLS-2$
-		assertEquals("-123.23", HelperString.getNumericString("--123.23abc")); //$NON-NLS-1$ //$NON-NLS-2$
-		assertEquals("123.23", HelperString.getNumericString("123.2-3abc")); //$NON-NLS-1$ //$NON-NLS-2$
-		assertEquals("123.23", HelperString.getNumericString("123..23")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertNull(HelperString.getNumericString(HelperString.EMPTY_STRING));
+		assertNull(HelperString.getNumericString(HelperString.PERIOD));
+		assertNull(HelperString.getNumericString(HelperString.NEGATIVE_SIGN));
+		assertNull(HelperString.getNumericString("abc!@")); //$NON-NLS-1$
 
-		assertNull(HelperString.getNumericString(".")); //$NON-NLS-1$
-		assertNull(HelperString.getNumericString("-")); //$NON-NLS-1$
+		try {
+			HelperString.reverse(null);
+         fail("input is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
 	public void testConcatenate() {
 		assertEquals("StefanLaubenberger", HelperString.concatenate("Stefan", "Laubenberger")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		assertEquals("Stefan Laubenberger", HelperString.concatenate(new String[]{"Stefan", "Laubenberger"}, " ", true)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-//		assertNull(HelperString.concatenate(null));
+		assertEquals("Stefan Laubenberger", HelperString.concatenate(new String[]{"Stefan", "Laubenberger\n"}, HelperString.SPACE, true)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		assertEquals("Stefan Laubenberger\n", HelperString.concatenate(new String[]{"Stefan", "Laubenberger\n"}, HelperString.SPACE, false)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+
+		try {
+			HelperString.concatenate(null);
+         fail("strings is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperString.concatenate(HelperArray.EMPTY_ARRAY_STRING);
+         fail("strings is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperString.concatenate(null, HelperString.SPACE, true);
+         fail("strings is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperString.concatenate(HelperArray.EMPTY_ARRAY_STRING, HelperString.SPACE, true);
+         fail("strings is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	@Test
 	public void testStartsWith() {
-		assertTrue(HelperString.startsWith("Stefan Laubenberger", "sTe")); //$NON-NLS-1$ //$NON-NLS-2$
-//		assertFalse(HelperString.startsWith("Stefan Laubenberger", null)); //$NON-NLS-1$
+		assertTrue(HelperString.startsWith("StEfan", "sTe")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertFalse(HelperString.startsWith("StEfan", "sTa")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertFalse(HelperString.startsWith(HelperString.EMPTY_STRING, "sTe")); //$NON-NLS-1$
 
 		try {
-			HelperString.startsWith(null, "blabla"); //$NON-NLS-1$
+			HelperString.startsWith(null, "sTe"); //$NON-NLS-1$
 			fail("string is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperString.startsWith("StEfan", null); //$NON-NLS-1$
+			fail("prefix is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperString.startsWith("StEfan", HelperString.EMPTY_STRING); //$NON-NLS-1$
+			fail("prefix is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -133,13 +205,32 @@ public class HelperStringTest {
 
 	@Test
 	public void testEndsWith() {
-		assertTrue(HelperString.endsWith("Stefan Laubenberger", "GeR")); //$NON-NLS-1$ //$NON-NLS-2$
-//		assertFalse(HelperString.endsWith("Stefan Laubenberger", null)); //$NON-NLS-1$
+		assertTrue(HelperString.endsWith("StefAn", "FaN")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertFalse(HelperString.endsWith("StEfAn", "faM")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertFalse(HelperString.endsWith(HelperString.EMPTY_STRING, "FaN")); //$NON-NLS-1$
 
 		try {
-			HelperString.endsWith(null, "blabla"); //$NON-NLS-1$
+			HelperString.endsWith(null, "FaN"); //$NON-NLS-1$
 			fail("string is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperString.endsWith("StEfan", null); //$NON-NLS-1$
+			fail("suffix is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperString.endsWith("StEfan", HelperString.EMPTY_STRING); //$NON-NLS-1$
+			fail("suffix is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
@@ -148,13 +239,32 @@ public class HelperStringTest {
 
 	@Test
 	public void testContains() {
-		assertTrue(HelperString.contains("Stefan Laubenberger", "lAUb")); //$NON-NLS-1$ //$NON-NLS-2$
-//		assertFalse(HelperString.contains("Stefan Laubenberger", null)); //$NON-NLS-1$
+		assertTrue(HelperString.contains("Stefan", "eFA")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertFalse(HelperString.contains("StEfAn", "aFA")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertFalse(HelperString.contains(HelperString.EMPTY_STRING, "eFA")); //$NON-NLS-1$
 
 		try {
-			HelperString.contains(null, "blabla"); //$NON-NLS-1$
+			HelperString.contains(null, "FaN"); //$NON-NLS-1$
 			fail("string is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperString.contains("StEfan", null); //$NON-NLS-1$
+			fail("part is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperString.contains("StEfan", HelperString.EMPTY_STRING); //$NON-NLS-1$
+			fail("part is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());

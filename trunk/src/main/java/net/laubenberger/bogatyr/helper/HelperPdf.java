@@ -68,7 +68,7 @@ import com.lowagie.text.pdf.parser.PdfTextExtractor;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101119)
+ * @version 0.9.4 (20101129)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -142,7 +142,7 @@ public abstract class HelperPdf {
 	 * @since 0.9.2
 	 */
 	public static void writePdfFromImages(final Rectangle pageSize, final boolean scale, final File file,
-			final File... files) throws DocumentException, IOException {
+			final File... files) throws DocumentException, IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, files));
 		if (null == pageSize) {
 			throw new RuntimeExceptionIsNull("pageSize"); //$NON-NLS-1$
@@ -203,7 +203,7 @@ public abstract class HelperPdf {
 	 * @since 0.9.2
 	 */
 	public static void writePdfFromImages(final Rectangle pageSize, final boolean scale, final File file,
-			final java.awt.Image... images) throws DocumentException, IOException {
+			final java.awt.Image... images) throws DocumentException, IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, images));
 		if (null == pageSize) {
 			throw new RuntimeExceptionIsNull("pageSize"); //$NON-NLS-1$
@@ -267,9 +267,12 @@ public abstract class HelperPdf {
 	 * @since 0.9.2
 	 */
 	public static void writePdfFromPpt(final Rectangle pageSize, final boolean scale, final File file,
-			final SlideShow ppt) throws IOException, DocumentException {
+			final SlideShow ppt) throws IOException, DocumentException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, ppt));
-
+		if (null == ppt) {
+			throw new RuntimeExceptionIsNull("ppt"); //$NON-NLS-1$
+		}
+		
 		final File[] files = new File[ppt.getSlides().length];
 		for (int ii = 0; ii < ppt.getSlides().length; ii++) {
 			files[ii] = HelperIO.getTemporaryFile(HelperPdf.class.getSimpleName() + "-slide", IMAGE_TYPE); //$NON-NLS-1$
@@ -306,9 +309,12 @@ public abstract class HelperPdf {
 	 * @since 0.9.2
 	 */
 	public static void writePdfFromPpt(final Rectangle pageSize, final boolean scale, final File file, final File pptFile)
-			throws IOException, DocumentException {
+			throws IOException, DocumentException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(pageSize, scale, file, pptFile));
-
+		if (null == pptFile) {
+			throw new RuntimeExceptionIsNull("pptFile"); //$NON-NLS-1$
+		}
+		
 		InputStream is = null;
 		try {
 			is = new FileInputStream(pptFile);
@@ -332,9 +338,12 @@ public abstract class HelperPdf {
 	 * @see File
 	 * @since 0.9.3
 	 */
-	public static String getText(final File file) throws IOException {
+	public static String getText(final File file) throws IOException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
-
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
+		
 		final PdfReader pdfReader = new PdfReader(file.getAbsolutePath());
 		final PdfTextExtractor pdfExtractor = new PdfTextExtractor(pdfReader);
 
@@ -370,7 +379,7 @@ public abstract class HelperPdf {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void setMetaData(final File source, final File dest, final Map<String, String> metadata)
-			throws IOException, DocumentException {
+			throws IOException, DocumentException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, metadata));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
@@ -378,14 +387,11 @@ public abstract class HelperPdf {
 		if (null == dest) {
 			throw new RuntimeExceptionIsNull("dest"); //$NON-NLS-1$
 		}
-		if (null == metadata) {
-			throw new RuntimeExceptionIsNull("metadata"); //$NON-NLS-1$
-		}
-		if (!HelperMap.isValid(metadata)) {
-			throw new RuntimeExceptionIsEmpty("metadata"); //$NON-NLS-1$
-		}
 		if (HelperObject.isEquals(source, dest)) {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		if (null == metadata) {
+			throw new RuntimeExceptionIsNull("metadata"); //$NON-NLS-1$
 		}
 
 		PdfReader reader = null;
@@ -411,6 +417,40 @@ public abstract class HelperPdf {
 	}
 	
 	/**
+	 * Returns the metadata of a given PDF as {@link Map}.
+	 * 
+	 * @param file
+	 *           input as PDF
+	 * @return {@link Map} containinfg the metadata of the given PDF
+	 * @throws IOException
+	 * @see File
+	 * @since 0.9.4
+	 */
+	@SuppressWarnings("unchecked")
+	public static Map<String, String> getMetaData(final File file) throws IOException { // $JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
+		
+		PdfReader reader = null;
+		HashMap<String, String> result;
+		
+		try {
+			reader = new PdfReader(file.getAbsolutePath());
+
+			result = reader.getInfo();
+		} finally {
+			if (null != reader) {
+				reader.close();
+			}
+		}
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
+	/**
 	 * Encrypt a PDF with a given user and password.
 	 * 
 	 * @param source
@@ -426,7 +466,7 @@ public abstract class HelperPdf {
 	 * @since 0.9.4
 	 */
 	public static void encrypt(final File source, final File dest, final byte[] user, final byte[] password)
-			throws IOException, DocumentException {
+			throws IOException, DocumentException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, user, password));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
@@ -485,7 +525,7 @@ public abstract class HelperPdf {
 	 * @since 0.9.4
 	 */
 	public static void decrypt(final File source, final File dest, final byte[] password) throws IOException,
-			DocumentException {
+			DocumentException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, password));
 
 		unlock(source, dest, password);
@@ -507,7 +547,7 @@ public abstract class HelperPdf {
 	 * @since 0.9.4
 	 */
 	public static void lock(final File source, final File dest, final byte[] password)
-			throws IOException, DocumentException {
+			throws IOException, DocumentException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, password));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
@@ -532,7 +572,7 @@ public abstract class HelperPdf {
 			reader = new PdfReader(source.getAbsolutePath());
 			os = new FileOutputStream(dest);
 
-			PdfEncryptor.encrypt(reader, os, null, password, 0, true);
+			PdfEncryptor.encrypt(reader, os, null , password, 0, true);
 		} finally {
 			if (null != os) {
 				os.close();
@@ -558,7 +598,7 @@ public abstract class HelperPdf {
 	 * @since 0.9.0
 	 */
 	public static void unlock(final File source, final File dest, final byte[] password) throws IOException,
-			DocumentException {
+			DocumentException { // $JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(source, dest, password));
 		if (null == source) {
 			throw new RuntimeExceptionIsNull("source"); //$NON-NLS-1$
@@ -586,7 +626,6 @@ public abstract class HelperPdf {
 			PdfEncryptor.encrypt(reader, os, null, null, PdfWriter.ALLOW_ASSEMBLY | PdfWriter.ALLOW_COPY
 					| PdfWriter.ALLOW_DEGRADED_PRINTING | PdfWriter.ALLOW_FILL_IN | PdfWriter.ALLOW_MODIFY_ANNOTATIONS
 					| PdfWriter.ALLOW_MODIFY_CONTENTS | PdfWriter.ALLOW_PRINTING | PdfWriter.ALLOW_SCREENREADERS, true);
-
 		} finally {
 			if (null != os) {
 				os.close();

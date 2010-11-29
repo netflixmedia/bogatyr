@@ -27,22 +27,545 @@
 
 package net.laubenberger.bogatyr.helper;
 
-import org.junit.Ignore;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEquals;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import net.laubenberger.bogatyr.misc.resource.Resource;
+import net.laubenberger.bogatyr.misc.resource.ResourceImage;
+import net.laubenberger.bogatyr.misc.resource.ResourceMisc;
+import net.laubenberger.bogatyr.misc.resource.ResourceOffice;
+
+import org.apache.poi.hslf.usermodel.SlideShow;
 import org.junit.Test;
+
+import com.lowagie.text.PageSize;
+import com.lowagie.text.exceptions.BadPasswordException;
+import com.lowagie.text.pdf.PdfReader;
 
 
 /**
- * Junit test
+ * JUnit test for {@link HelperPdf}
  *
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101129
  */
 public class HelperPdfTest {
-	
-	@Ignore
+
 	@Test
 	public void testWritePdfFromImages() {
-		//atm nothing
+		final List<File> files = new ArrayList<File>(ResourceImage.values().length);
+		final List<Image> images = new ArrayList<Image>(ResourceImage.values().length);
+		
+		for (final Resource res : ResourceImage.values()) {
+			files.add(res.getResourceAsFile());
+			try {
+				images.add(HelperImage.readImage(res.getResourceAsFile()));
+			} catch (IOException ex) {
+				fail(ex.getMessage());
+			}
+		}
+		
+		File pdf = null;
+		try {
+			pdf = HelperIO.getTemporaryFile("pdf");
+			
+			HelperPdf.writePdfFromImages(PageSize.A4, true, pdf, HelperCollection.toArray(files));
+			assertTrue(pdf.length() > 9000);
+
+			HelperPdf.writePdfFromImages(PageSize.A4, true, pdf, HelperCollection.toArray(images));
+			assertTrue(pdf.length() > 9000);
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.writePdfFromImages(null, true, pdf, HelperCollection.toArray(files));
+			fail("pageSize is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.writePdfFromImages(PageSize.A4, true, null, HelperCollection.toArray(files));
+			fail("file is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}		
+		
+		try {
+			HelperPdf.writePdfFromImages(PageSize.A4, true, pdf, (File[])null);
+			fail("files is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.writePdfFromImages(PageSize.A4, true, pdf, new File[0]);
+			fail("files is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}	
+		
+		try {
+			HelperPdf.writePdfFromImages(null, true, pdf, HelperCollection.toArray(images));
+			fail("pageSize is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.writePdfFromImages(PageSize.A4, true, null, HelperCollection.toArray(images));
+			fail("file is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}		
+		
+		try {
+			HelperPdf.writePdfFromImages(PageSize.A4, true, pdf, (Image[])null);
+			fail("images is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.writePdfFromImages(PageSize.A4, true, pdf, new Image[0]);
+			fail("images is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}	
+	}
+	
+	@Test
+	public void testWritePdfFromPpt() {
+		
+		File pdf = null;
+		try {
+			pdf = HelperIO.getTemporaryFile("pdf");
+			
+			HelperPdf.writePdfFromPpt(PageSize.A4, true, pdf, ResourceOffice.PPT.getResourceAsFile());
+			assertTrue(pdf.length() > 4000);
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.writePdfFromPpt(null, true, pdf, ResourceOffice.PPT.getResourceAsFile());
+			fail("pageSize is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.writePdfFromPpt(PageSize.A4, true, null, ResourceOffice.PPT.getResourceAsFile());
+			fail("file is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}		
+		
+		try {
+			HelperPdf.writePdfFromPpt(PageSize.A4, true, pdf, (File)null);
+			fail("pptFile is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.writePdfFromPpt(PageSize.A4, true, pdf, (SlideShow)null);
+			fail("ppt is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetText() {
+		try {
+			assertEquals("Hello world!\nThis is a Bogatyr PDF test file.\n", HelperPdf.getText(ResourceMisc.PDF.getResourceAsFile()));
+		} catch (IOException ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.getText(null);
+			fail("file is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+
+	@Test
+	public void testSetAndGetMetaData() {
+		final Map<String, String> metadata = new HashMap<String, String>();
+		metadata.put("myInfo", "This is my additional info");
+		metadata.put("myMetaData", "This is my additional metadata");
+		
+		File dest = null;
+		
+		try {
+			dest = HelperIO.getTemporaryFile("pdf");
+
+			final Map<String, String> old_metadata = HelperPdf.getMetaData(ResourceMisc.PDF.getResourceAsFile());
+//			System.err.println(HelperMap.dump(old_metadata));
+
+			
+			HelperPdf.setMetaData(ResourceMisc.PDF.getResourceAsFile(), dest, metadata);
+			
+			final Map<String, String> new_metadata = HelperPdf.getMetaData(dest);
+//			System.err.println(HelperMap.dump(new_metadata));
+
+			assertEquals(old_metadata.size() + 3, new_metadata.size()); // +3 is composed of 2 new entries and the ModDate (automatically added by iTest)
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			final Map<String, String> old_metadata = HelperPdf.getMetaData(ResourceMisc.PDF.getResourceAsFile());
+
+			HelperPdf.setMetaData(ResourceMisc.PDF.getResourceAsFile(), dest, new HashMap<String, String>());
+			
+			final Map<String, String> new_metadata = HelperPdf.getMetaData(dest);
+
+			assertEquals(old_metadata.size() + 1, new_metadata.size()); // + 1 because of the ModDate (automatically added by iTest)
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+
+		try {
+			HelperPdf.setMetaData(null, dest, metadata);
+			fail("source is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.setMetaData(ResourceMisc.PDF.getResourceAsFile(), null, metadata);
+			fail("dest is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.setMetaData(ResourceMisc.PDF.getResourceAsFile(), ResourceMisc.PDF.getResourceAsFile(), metadata);
+			fail("source is equals dest"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEquals ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.setMetaData(ResourceMisc.PDF.getResourceAsFile(), dest, null);
+			fail("metadata is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.getMetaData(null);
+			fail("file is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEncryptAndDecrypt() {
+		File encrypted = null;
+		File decrypted = null;
+		
+		try {
+			encrypted = HelperIO.getTemporaryFile("pdf");
+			decrypted = HelperIO.getTemporaryFile("pdf");
+
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, "Stefan".getBytes(), "1234".getBytes());
+			
+			try {
+				HelperPdf.getText(encrypted);
+				fail("file is encrypted"); //$NON-NLS-1$
+			} catch (BadPasswordException ex) {
+				//nothing to do
+			}
+			
+			HelperPdf.decrypt(encrypted, decrypted, "1234".getBytes());
+			
+			assertEquals("Hello world!\nThis is a Bogatyr PDF test file.\n", HelperPdf.getText(decrypted));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.encrypt(null, encrypted, "Stefan".getBytes(), "1234".getBytes());
+			fail("source is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), null, "Stefan".getBytes(), "1234".getBytes());
+			fail("dest is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), ResourceMisc.PDF.getResourceAsFile(), "Stefan".getBytes(), "1234".getBytes());
+			fail("source is equals dest"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEquals ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, null, "1234".getBytes());
+			fail("user is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, HelperArray.EMPTY_ARRAY_BYTE, "1234".getBytes());
+			fail("user is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, "Stefan".getBytes(), null);
+			fail("password is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, "Stefan".getBytes(), HelperArray.EMPTY_ARRAY_BYTE);
+			fail("password is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.decrypt(null, encrypted, "1234".getBytes());
+			fail("source is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.decrypt(ResourceMisc.PDF.getResourceAsFile(), null, "1234".getBytes());
+			fail("dest is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.decrypt(ResourceMisc.PDF.getResourceAsFile(), ResourceMisc.PDF.getResourceAsFile(), "1234".getBytes());
+			fail("source is equals dest"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEquals ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.decrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, null);
+			fail("password is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.decrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, HelperArray.EMPTY_ARRAY_BYTE);
+			fail("password is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testLockAndUnlock() {
+		File locked = null;
+		File unlocked = null;
+		PdfReader reader = null;
+		
+		try {
+			locked = HelperIO.getTemporaryFile("pdf");
+			unlocked = HelperIO.getTemporaryFile("pdf");
+
+			HelperPdf.lock(ResourceMisc.PDF.getResourceAsFile(), locked, "1234".getBytes());
+			
+			reader = new PdfReader(locked.getAbsolutePath());
+			assertEquals(-3904, reader.getPermissions());
+
+			HelperPdf.unlock(locked, unlocked, "1234".getBytes());
+			
+			reader = new PdfReader(unlocked.getAbsolutePath());
+			assertEquals(-4, reader.getPermissions());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			fail(ex.getMessage());
+		} finally {
+			if (null != reader) {
+				reader.close();
+			}
+		}
+		
+		try {
+			HelperPdf.lock(null, locked, "1234".getBytes());
+			fail("source is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.lock(ResourceMisc.PDF.getResourceAsFile(), null, "1234".getBytes());
+			fail("dest is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.lock(ResourceMisc.PDF.getResourceAsFile(), ResourceMisc.PDF.getResourceAsFile(), "1234".getBytes());
+			fail("source is equals dest"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEquals ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.lock(ResourceMisc.PDF.getResourceAsFile(), locked, null);
+			fail("password is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.lock(ResourceMisc.PDF.getResourceAsFile(), locked, HelperArray.EMPTY_ARRAY_BYTE);
+			fail("password is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.unlock(null, locked, "1234".getBytes());
+			fail("source is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.unlock(ResourceMisc.PDF.getResourceAsFile(), null, "1234".getBytes());
+			fail("dest is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.unlock(ResourceMisc.PDF.getResourceAsFile(), ResourceMisc.PDF.getResourceAsFile(), "1234".getBytes());
+			fail("source is equals dest"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEquals ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.unlock(ResourceMisc.PDF.getResourceAsFile(), locked, null);
+			fail("password is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperPdf.unlock(ResourceMisc.PDF.getResourceAsFile(), locked, HelperArray.EMPTY_ARRAY_BYTE);
+			fail("password is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 	
 //	@Test
@@ -68,68 +591,6 @@ public class HelperPdfTest {
 //		try {
 //			HelperPdf.writePdfFromHTML(null, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".html")); //$NON-NLS-1$ //$NON-NLS-2$
 //			fail("file is null!"); //$NON-NLS-1$
-//		} catch (IllegalArgumentException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
-//	}
-	
-//	@Test
-//	public void testCreatePdf() {
-//		final JComponent component = new Button("Hello world", HelperString.EMPTY_STRING); //$NON-NLS-1$ 
-//		component.setBackground(Color.GREEN);
-//		component.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-//		component.setForeground(Color.RED);
-//		component.setFont(new Font("Arial", Font.PLAIN, 16)); //$NON-NLS-1$
-//		component.setSize(new Dimension(100, 100));
-//
-//		final JComponent component2 = new Button("Hello again", HelperString.EMPTY_STRING); //$NON-NLS-1$ 
-//		component2.setBackground(Color.GREEN);
-//		component2.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-//		component2.setForeground(Color.CYAN);
-//		component2.setFont(new Font("Arial", Font.BOLD, 20)); //$NON-NLS-1$
-//		component2.setSize(new Dimension(100, 100));
-//
-//		try {
-//			File output = HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"); //$NON-NLS-1$ //$NON-NLS-2$
-////			File output = new File("bogatyr.pdf");
-//			HelperPdf.writePdfFromImages(PageSize.A4, false, output, HelperImage.getImage(component), HelperImage.getImage(component2));
-//			
-//			
-//			HelperPdf.lock(new File("test.pdf"), new File("test_lock.pdf"), "hi".getBytes());
-//			HelperPdf.unlock( new File("test_lock.pdf"), new File("test_unlock.pdf"), "hi".getBytes());
-//
-//			HelperPdf.encrypt(new File("test.pdf"), new File("test_encrypt.pdf"), "me".getBytes(), "hi".getBytes());
-//			HelperPdf.decrypt( new File("test_encrypt.pdf"), new File("test_decrypt.pdf"), "hi".getBytes());
-//
-////			LauncherFile.open(output);
-//		} catch (Exception ex) {
-//		    ex.printStackTrace();
-//			fail(ex.getMessage());
-//		}
-
-//		try {
-//			HelperPdf.writePdfFromImage(PageSize.A4, true, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"), null); //$NON-NLS-1$ //$NON-NLS-2$
-//			fail("components is null!"); //$NON-NLS-1$
-//		} catch (IllegalArgumentException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
-//
-//		try {
-//			HelperPdf.writePdfFromImage(PageSize.A4, true, null, component);
-//			fail("file is null!"); //$NON-NLS-1$
-//		} catch (IllegalArgumentException ex) {
-//			//nothing to do
-//		} catch (Exception ex) {
-//			fail(ex.getMessage());
-//		}
-//	
-//		try {
-//			HelperPdf.writePdfFromImage(null, true, HelperIO.getTemporaryFile("bogatyr_" + getClass().getSimpleName(), ".pdf"), component);
-//			fail("pageSize is null!"); //$NON-NLS-1$
 //		} catch (IllegalArgumentException ex) {
 //			//nothing to do
 //		} catch (Exception ex) {

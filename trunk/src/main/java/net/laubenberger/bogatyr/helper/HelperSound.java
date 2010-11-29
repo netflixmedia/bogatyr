@@ -62,7 +62,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for sound operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101129)
  * @since 0.5.0
  */
 public abstract class HelperSound {
@@ -80,7 +80,7 @@ public abstract class HelperSound {
 	 * @see Clip
 	 * @since 0.5.0
 	 */
-	public static Clip getClip(final File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	public static Clip getClip(final File file) throws UnsupportedAudioFileException, IOException, LineUnavailableException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
@@ -127,7 +127,7 @@ public abstract class HelperSound {
 	 * @see Sequence
 	 * @since 0.5.0
 	 */
-	public static Sequence getSequence(final File file) throws InvalidMidiDataException, IOException {
+	public static Sequence getSequence(final File file) throws InvalidMidiDataException, IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$

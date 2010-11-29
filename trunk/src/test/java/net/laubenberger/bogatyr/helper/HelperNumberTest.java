@@ -42,7 +42,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperNumber}
  *
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101129
  */
 public class HelperNumberTest {
 	@Test
@@ -113,7 +113,15 @@ public class HelperNumberTest {
 	public void testGetNumber() {
 		assertEquals(new BigDecimal("12.35"), HelperNumber.getNumber("12.35")); //$NON-NLS-1$ //$NON-NLS-2$
 		assertEquals(null, HelperNumber.getNumber("blabla")); //$NON-NLS-1$
-		assertEquals(null, HelperNumber.getNumber(null));
+		
+		try {
+			HelperNumber.getNumber(null);
+			fail("text is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
 
 	
