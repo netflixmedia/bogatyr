@@ -45,7 +45,7 @@ import org.junit.Test;
  *  JUnit test for {@link EncoderBase64}
  *
  * @author Stefan Laubenberger
- * @version 20101106
+ * @version 20101129
  */
 public class EncoderBase64Test {
 	@Test
@@ -53,11 +53,7 @@ public class EncoderBase64Test {
 		String encoded = null;
 
 		// Test with empty string data
-		try {
-			encoded = EncoderBase64.encode(HelperString.EMPTY_STRING);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		encoded = EncoderBase64.encode(HelperString.EMPTY_STRING);
 		byte[] decoded = EncoderBase64.decode(encoded);
 		
 		try {
@@ -67,11 +63,7 @@ public class EncoderBase64Test {
 		}
 		
 		// Test with real string data
-		try {
-			encoded = EncoderBase64.encode(AllBogatyrTests.DATA);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		encoded = EncoderBase64.encode(AllBogatyrTests.DATA);
 		decoded = EncoderBase64.decode(encoded);
 
 		try {

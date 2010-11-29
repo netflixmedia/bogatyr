@@ -31,6 +31,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.image.ColorModel;
 
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for screens.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100514)
+ * @version 0.9.4 (20101129)
  * @since 0.9.1
  */
 public abstract class HelperScreen {
@@ -52,7 +54,7 @@ public abstract class HelperScreen {
 	 * @see Dimension
 	 * @since 0.9.1
 	 */
-	public static Dimension getCurrentScreenSize() {
+	public static Dimension getCurrentScreenSize() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final Dimension result = Toolkit.getDefaultToolkit().getScreenSize();
@@ -68,7 +70,7 @@ public abstract class HelperScreen {
 	 * @see ColorModel
 	 * @since 0.9.1
 	 */
-	public static ColorModel getCurrentColorModel() {
+	public static ColorModel getCurrentColorModel() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final ColorModel result = Toolkit.getDefaultToolkit().getColorModel();
@@ -77,7 +79,7 @@ public abstract class HelperScreen {
 		return result;
 	}
 
-//	public static ColorModel getCurrentNumberOfColors() {
+//	public static ColorSpace getCurrentNumberOfColors() {
 //		return Toolkit.getDefaultToolkit().getColorModel().getColorSpace();
 //	}
 
@@ -87,7 +89,7 @@ public abstract class HelperScreen {
 	 * @return current screen resolution in DPI
 	 * @since 0.9.1
 	 */
-	public static int getCurrentScreenResolution() {
+	public static int getCurrentScreenResolution() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		final int result = Toolkit.getDefaultToolkit().getScreenResolution();
@@ -105,8 +107,11 @@ public abstract class HelperScreen {
 	 * @since 0.9.1
 	 */
 	public static boolean isValidScreenSize(final Dimension minSize) {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(minSize));
+		if (null == minSize) {
+			throw new RuntimeExceptionIsNull("minSize"); //$NON-NLS-1$
+		}
+		
 		final Dimension resolution = getCurrentScreenSize();
 		final boolean result = resolution.width >= minSize.width && resolution.height >= minSize.height;
 

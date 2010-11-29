@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * Encodes and decodes data to Base64 format.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101119)
+ * @version 0.9.4 (20101129)
  * @since 0.1.0
  */
 public abstract class EncoderBase64 {
@@ -94,16 +94,21 @@ public abstract class EncoderBase64 {
 	 *
 	 * @param input {@link String} to be encoded
 	 * @return {@link String} with the Base64 encoded data
-	 * @throws UnsupportedEncodingException 
 	 * @since 0.1.0
 	 */
-	public static String encode(final String input) throws UnsupportedEncodingException { //$JUnit$
+	public static String encode(final String input) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 		
-		final String result = encode(input, Constants.ENCODING_DEFAULT);
+		String result = null;
+		try {
+			result = encode(input, Constants.ENCODING_DEFAULT);
+		} catch (UnsupportedEncodingException ex) {
+			// should never happen!
+			log.error("Encoding invalid", ex);
+		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

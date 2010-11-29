@@ -40,18 +40,18 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * This is a helper class for XML operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101126)
+ * @version 0.9.4 (20101129)
  * @since 0.3.0
  */
 public abstract class HelperXml {
@@ -151,10 +151,9 @@ public abstract class HelperXml {
 	 * @see String
 	 * @throws JAXBException
 	 * @throws IOException 
-	 * @throws UnsupportedEncodingException 
 	 * @since 0.9.4
 	 */
-	public static <T> String serialize(final T data) throws JAXBException, UnsupportedEncodingException, IOException { //$JUnit$
+	public static <T> String serialize(final T data) throws JAXBException, IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(data));
 
 		String result = null;
@@ -229,17 +228,22 @@ public abstract class HelperXml {
 	 * @return data as object
 	 * @see String
 	 * @throws JAXBException
-	 * @throws UnsupportedEncodingException 
 	 * @since 0.9.4
 	 */
-	public static <T> T deserialize(final String input, final Class<T> clazz) throws JAXBException, UnsupportedEncodingException { //$JUnit$
+	public static <T> T deserialize(final String input, final Class<T> clazz) throws JAXBException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input, clazz));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 		
 		T result = null;
-		final InputStream is = new ByteArrayInputStream(input.getBytes(Constants.ENCODING_DEFAULT));
+		InputStream is = null;
+		try {
+			is = new ByteArrayInputStream(input.getBytes(Constants.ENCODING_DEFAULT));
+		} catch (UnsupportedEncodingException ex) {
+			// should never happen!
+			log.error("Encoding invalid", ex);
+		}
 
 		result = deserialize(is, clazz);
 

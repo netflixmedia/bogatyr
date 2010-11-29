@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101119)
+ * @version 0.9.4 (20101129)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -165,9 +165,6 @@ public abstract class HelperString {
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
-		if (!isValid(input)) {
-			throw new RuntimeExceptionIsEmpty("input"); //$NON-NLS-1$
-		}
 		
 		final String result = new StringBuilder(input).reverse().toString();
 
@@ -178,21 +175,24 @@ public abstract class HelperString {
 	/**
 	 * Clean a {@link String} to numeric chars.
 	 *
-	 * @param text {@link String}
+	 * @param input {@link String}
 	 * @return numeric {@link String}
 	 * @since 0.7.0
 	 */
-	public static String getNumericString(final String text) { //$JUnit$
-		log.debug(HelperLog.methodStart(text));
+	public static String getNumericString(final String input) { //$JUnit$
+		log.debug(HelperLog.methodStart(input));
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
 		
 		String result = null;
-		if (isValid(text)) {
+		if (isValid(input)) {
 			boolean isNegative = false;
-			if (text.startsWith(NEGATIVE_SIGN)) {
+			if (input.startsWith(NEGATIVE_SIGN)) {
 				isNegative = true;
 			}
 	
-			final Matcher matcher = PATTERN.matcher(text);
+			final Matcher matcher = PATTERN.matcher(input);
 			final String temp = matcher.replaceAll(EMPTY_STRING);
 			
 			boolean isPeriod = false;
@@ -278,61 +278,61 @@ public abstract class HelperString {
 		return result;
 	}
 
-	/**
-	 * Returns a {@link String} from a given byte-array and encoding.
-	 *
-	 * @param data	  for the {@link String}
-	 *                 //     * @param length of the {@link String}
-	 * @param encoding of the given data
-	 * @return new {@link String}
-	 * @throws UnsupportedEncodingException
-	 * @since 0.8.0
-	 */
-	public static String toString(final byte[] data, final String encoding) throws UnsupportedEncodingException {
-		log.debug(HelperLog.methodStart(data, encoding));
-		if (null == data) {
-			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
-		}
-		if (null == encoding) {
-			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
-		}
-		if (!isValid(encoding)) {
-			throw new RuntimeExceptionIsEmpty("encoding"); //$NON-NLS-1$
-		}
-
-		final String result = new String(data, encoding);
-
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
-
-	/**
-	 * Returns a byte-array from a given {@link String} and encoding.
-	 *
-	 * @param input	 {@link String} for the byte-array
-	 * @param encoding of the given {@link String}
-	 * @return {@link String} as byte-array
-	 * @throws UnsupportedEncodingException
-	 * @since 0.8.0
-	 */
-	public static byte[] toBytes(final String input, final String encoding) throws UnsupportedEncodingException {
-		log.debug(HelperLog.methodStart(input, encoding));
-		if (null == input) {
-			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
-		}
-		if (null == encoding) {
-			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
-		}
-		if (!isValid(encoding)) {
-			throw new RuntimeExceptionIsEmpty("encoding"); //$NON-NLS-1$
-		}
-
-
-		final byte[] result = input.getBytes(encoding);
-
-		log.debug(HelperLog.methodExit(result));
-		return result;
-	}
+//	/**
+//	 * Returns a {@link String} from a given byte-array and encoding.
+//	 *
+//	 * @param data	  for the {@link String}
+//	 *                 //     * @param length of the {@link String}
+//	 * @param encoding of the given data
+//	 * @return new {@link String}
+//	 * @throws UnsupportedEncodingException
+//	 * @since 0.8.0
+//	 */
+//	public static String toString(final byte[] data, final String encoding) throws UnsupportedEncodingException {
+//		log.debug(HelperLog.methodStart(data, encoding));
+//		if (null == data) {
+//			throw new RuntimeExceptionIsNull("data"); //$NON-NLS-1$
+//		}
+//		if (null == encoding) {
+//			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
+//		}
+//		if (!isValid(encoding)) {
+//			throw new RuntimeExceptionIsEmpty("encoding"); //$NON-NLS-1$
+//		}
+//
+//		final String result = new String(data, encoding);
+//
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
+//
+//	/**
+//	 * Returns a byte-array from a given {@link String} and encoding.
+//	 *
+//	 * @param input	 {@link String} for the byte-array
+//	 * @param encoding of the given {@link String}
+//	 * @return {@link String} as byte-array
+//	 * @throws UnsupportedEncodingException
+//	 * @since 0.8.0
+//	 */
+//	public static byte[] toBytes(final String input, final String encoding) throws UnsupportedEncodingException {
+//		log.debug(HelperLog.methodStart(input, encoding));
+//		if (null == input) {
+//			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+//		}
+//		if (null == encoding) {
+//			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
+//		}
+//		if (!isValid(encoding)) {
+//			throw new RuntimeExceptionIsEmpty("encoding"); //$NON-NLS-1$
+//		}
+//
+//
+//		final byte[] result = input.getBytes(encoding);
+//
+//		log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
 
 	/**
 	 * The same as startsWith() from {@link String}, but ignores the case.

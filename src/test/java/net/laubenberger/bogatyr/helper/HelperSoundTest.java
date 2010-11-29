@@ -29,55 +29,148 @@ package net.laubenberger.bogatyr.helper;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.InputStream;
 
 import javax.sound.midi.Sequence;
 import javax.sound.sampled.Clip;
 
-import org.junit.Test;
-
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.resource.ResourceSound;
+
+import org.junit.Test;
 
 
 /**
  * JUnit test for {@link HelperSound}
  *
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101129
  */
 public class HelperSoundTest {
 	@Test
-	public void testGetAndPlayClip() {
+	public void testGetClip() {
 		try {
-			final Clip clip = HelperSound.getClip(ResourceSound.WAV.getResourceAsStream());
-
-			assertNotNull(clip);
-
-			HelperSound.play(clip);
+			assertNotNull(HelperSound.getClip(ResourceSound.WAV.getResourceAsStream()));
+			assertNotNull(HelperSound.getClip(ResourceSound.WAV.getResourceAsFile()));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			fail(ex.getMessage());
 		}
+		
+		try {
+			HelperSound.getClip((File)null);
+			fail("file is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperSound.getClip((InputStream)null);
+			fail("is is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
-
+	
 	@Test
-	public void testGetAndPlaySequence() {
+	public void testPlayClip() {
 		try {
-			final Sequence sequence = HelperSound.getSequence(ResourceSound.MID.getResourceAsStream());
-
-			assertNotNull(sequence);
-
-			HelperSound.play(sequence);
+			HelperSound.play(HelperSound.getClip(ResourceSound.WAV.getResourceAsStream()));
+			HelperSound.play(HelperSound.getClip(ResourceSound.WAV.getResourceAsFile()));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			fail(ex.getMessage());
 		}
+		
+		try {
+			HelperSound.play((Clip)null);
+			fail("clip is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
 	}
-
+	
+	@Test
+	public void testGetSequence() {
+		try {
+			assertNotNull(HelperSound.getSequence(ResourceSound.MID.getResourceAsStream()));
+			assertNotNull(HelperSound.getSequence(ResourceSound.MID.getResourceAsFile()));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperSound.getSequence((File)null);
+			fail("file is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperSound.getSequence((InputStream)null);
+			fail("is is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testPlaySequence() {
+		try {
+			HelperSound.play(HelperSound.getSequence(ResourceSound.MID.getResourceAsStream()));
+			HelperSound.play(HelperSound.getSequence(ResourceSound.MID.getResourceAsFile()));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperSound.play((Sequence)null);
+			fail("sequence is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetSequencer() {
+		try {
+			assertNotNull(HelperSound.getSequencer(HelperSound.getSequence(ResourceSound.MID.getResourceAsStream())));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			fail(ex.getMessage());
+		}
+		
+		try {
+			HelperSound.getSequencer(null);
+			fail("sequence is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			//nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
 	@Test
 	public void testGetAvailableClipFormats() {
-		assertNotNull(HelperSound.getAvailableClipFormats());
+		//System.err.println(HelperCollection.dump(HelperSound.getAvailableClipFormats()));
+		assertTrue(HelperSound.getAvailableClipFormats().size() > 2);
 	}
 
 }
-
-

@@ -46,6 +46,10 @@ import net.laubenberger.bogatyr.helper.HelperMathTest;
 import net.laubenberger.bogatyr.helper.HelperNetTest;
 import net.laubenberger.bogatyr.helper.HelperNumberTest;
 import net.laubenberger.bogatyr.helper.HelperObjectTest;
+import net.laubenberger.bogatyr.helper.HelperPdfTest;
+import net.laubenberger.bogatyr.helper.HelperScreenTest;
+import net.laubenberger.bogatyr.helper.HelperSoundTest;
+import net.laubenberger.bogatyr.helper.HelperStringTest;
 import net.laubenberger.bogatyr.helper.HelperTimeTest;
 import net.laubenberger.bogatyr.helper.HelperXmlTest;
 import net.laubenberger.bogatyr.helper.encoder.EncoderBase64Test;
@@ -67,7 +71,7 @@ import org.junit.runner.Result;
  * JUnit test suite
  *
  * @author Stefan Laubenberger
- * @version 20101126
+ * @version 20101129
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA = "!$'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ" + //$NON-NLS-1$
@@ -132,9 +136,11 @@ public class AllBogatyrTests implements Runnable {
 				HelperNetTest.class,
 				HelperNumberTest.class,
 				HelperObjectTest.class,
-//				HelperPdfTest.class,
-//				HelperSoundTest.class,
-//				HelperStringTest.class,
+				HelperPdfTest.class,
+				HelperScreenTest.class,
+				HelperSoundTest.class,
+				HelperStringTest.class,
+//				HelperSwingTest.class, //TODO create JUnit test
 				HelperTimeTest.class,
 				HelperXmlTest.class
 //				ContextTest.class,
