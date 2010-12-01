@@ -25,31 +25,21 @@
  * <laubenberger@gmail.com>
  */
 
-package net.laubenberger.bogatyr.model.misc;
+package net.laubenberger.bogatyr.misc.exception;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
-import javax.xml.bind.annotation.XmlRootElement;
-
-import net.laubenberger.bogatyr.helper.HelperString;
+import java.util.Date;
 
 /**
- * Possible months.
+ * This runtime exception is thrown if a date value is after a max date.
  *
  * @author Stefan Laubenberger
  * @version 0.9.4 (20101202)
- * @since 0.9.1
+ * @since 0.9.4
  */
-@XmlRootElement(name = "month")
-public enum Month {
-	JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER;
+public class RuntimeExceptionMustBeBefore extends IllegalArgumentException {
+	private static final long serialVersionUID = 7411641846055376788L;
 
-	public String getName() {
-		return getName(Locale.getDefault());
-	}
-
-	public String getName(final Locale locale) {
-		return new SimpleDateFormat(HelperString.EMPTY_STRING, locale).getDateFormatSymbols().getMonths()[ordinal()];
+	public RuntimeExceptionMustBeBefore(final String argument, final Date currentDate, final Date maxDate) {
+		super(argument + " (" + currentDate + ") must be before " + maxDate); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 }

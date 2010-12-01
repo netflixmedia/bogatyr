@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * Encodes and decodes data to Base64 format.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101129)
+ * @version 0.9.4 (20101202)
  * @since 0.1.0
  */
 public abstract class EncoderBase64 {
@@ -53,38 +53,38 @@ public abstract class EncoderBase64 {
 
 	private static final String ERROR_ILLEGAL_CHARACTER = "Illegal character in Base64 encoded data"; //$NON-NLS-1$
 
-	private static final char[] map1 = new char[64];
-	private static final byte[] map2 = new byte[128];
+	private static final char[] MAP1 = new char[64];
+	private static final byte[] MAP2 = new byte[128];
 
 	// Mapping table from 6-bit nibbles to Base64 characters.
 
 	static {
 		int ii = 0;
 		for (char c = 'A'; 'Z' >= c; c++) {
-			map1[ii] = c;
+			MAP1[ii] = c;
 			ii++;
 		}
 		for (char c = 'a'; 'z' >= c; c++) {
-			map1[ii] = c;
+			MAP1[ii] = c;
 			ii++;
 		}
 		for (char c = '0'; '9' >= c; c++) {
-			map1[ii] = c;
+			MAP1[ii] = c;
 			ii++;
 		}
-		map1[ii] = '+';
+		MAP1[ii] = '+';
 		ii++;
-		map1[ii] = '/';
+		MAP1[ii] = '/';
 	}
 
 	// Mapping table from Base64 characters to 6-bit nibbles.
 
 	static {
-		for (int ii = 0; ii < map2.length; ii++) {
-			map2[ii] = (byte) -1;
+		for (int ii = 0; ii < MAP2.length; ii++) {
+			MAP2[ii] = (byte) -1;
 		}
 		for (int ii = 0; 64 > ii; ii++) {
-			map2[map1[ii]] = (byte) ii;
+			MAP2[MAP1[ii]] = (byte) ii;
 		}
 	}
 
@@ -107,7 +107,7 @@ public abstract class EncoderBase64 {
 			result = encode(input, Constants.ENCODING_DEFAULT);
 		} catch (UnsupportedEncodingException ex) {
 			// should never happen!
-			log.error("Encoding invalid", ex);
+			log.error("Encoding invalid", ex); //$NON-NLS-1$
 		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
@@ -235,10 +235,10 @@ public abstract class EncoderBase64 {
 			if (Byte.MAX_VALUE < i0 || Byte.MAX_VALUE < i1 || Byte.MAX_VALUE < i2 || Byte.MAX_VALUE < i3) {
 				throw new IllegalArgumentException(ERROR_ILLEGAL_CHARACTER);
 			}
-			final int b0 = map2[i0];
-			final int b1 = map2[i1];
-			final int b2 = map2[i2];
-			final int b3 = map2[i3];
+			final int b0 = MAP2[i0];
+			final int b1 = MAP2[i1];
+			final int b2 = MAP2[i2];
+			final int b3 = MAP2[i3];
 
 			if (0 > b0 || 0 > b1 || 0 > b2 || 0 > b3) {
 				throw new IllegalArgumentException(ERROR_ILLEGAL_CHARACTER);
@@ -296,13 +296,13 @@ public abstract class EncoderBase64 {
 			final int o1 = (i0 & 3) << 4 | i1 >>> 4;
 			final int o2 = (i1 & 0xf) << 2 | i2 >>> 6;
 			final int o3 = i2 & 0x3F;
-			result[op] = map1[o0];
+			result[op] = MAP1[o0];
 			op++;
-			result[op] = map1[o1];
+			result[op] = MAP1[o1];
 			op++;
-			result[op] = op < oDataLen ? map1[o2] : '=';
+			result[op] = op < oDataLen ? MAP1[o2] : '=';
 			op++;
-			result[op] = op < oDataLen ? map1[o3] : '=';
+			result[op] = op < oDataLen ? MAP1[o3] : '=';
 			op++;
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));

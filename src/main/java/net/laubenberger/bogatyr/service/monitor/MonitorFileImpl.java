@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101105)
+ * @version 0.9.4 (20101202)
  * @since 0.9.4
  */
 public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
@@ -137,7 +137,7 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 	 * Implemented methods
 	 */
 	@Override
-	public void start(long delay, long interval) {
+	public void start(final long delay, final long interval) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(delay, interval));
 		if (0L > delay) {
 			throw new RuntimeExceptionMustBeGreater("delay", delay, 0); //$NON-NLS-1$
@@ -163,7 +163,7 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 	}
 	
 	@Override
-	public void start(long interval) {
+	public void start(final long interval) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(interval));
 		
 		start(0L, interval);
@@ -217,7 +217,7 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 	}
 	
 	@Override
-	public void addListener(ListenerFileChanged listener) {
+	public void addListener(final ListenerFileChanged listener) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
@@ -229,7 +229,7 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 	}
 
 	@Override
-	public void deleteListener(ListenerFileChanged listener) {
+	public void deleteListener(final ListenerFileChanged listener) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(listener));
 		if (null == listener) {
 			throw new RuntimeExceptionIsNull("listener"); //$NON-NLS-1$
@@ -260,7 +260,7 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 		@Override
 		public void run() {
 			try {
-				byte[] hash = hcg.getFastHash(file);
+				final byte[] hash = hcg.getFastHash(file);
 				
 				if (!Arrays.equals(this.hash, hash)) {
 					this.hash = hash;

@@ -60,6 +60,8 @@ import net.laubenberger.bogatyr.helper.launcher.LauncherFileTest;
 import net.laubenberger.bogatyr.helper.launcher.LauncherMailTest;
 import net.laubenberger.bogatyr.helper.launcher.LauncherProcessTest;
 import net.laubenberger.bogatyr.misc.Constants;
+import net.laubenberger.bogatyr.model.context.ContextTest;
+import net.laubenberger.bogatyr.service.crypto.CertificateProviderTest;
 import net.laubenberger.bogatyr.view.swing.factory.FormatFactory;
 
 import org.apache.log4j.PropertyConfigurator;
@@ -71,7 +73,7 @@ import org.junit.runner.Result;
  * JUnit test suite
  *
  * @author Stefan Laubenberger
- * @version 20101129
+ * @version 20101202
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA = "!$'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ" + //$NON-NLS-1$
@@ -142,18 +144,18 @@ public class AllBogatyrTests implements Runnable {
 				HelperStringTest.class,
 //				HelperSwingTest.class, //TODO create JUnit test
 				HelperTimeTest.class,
-				HelperXmlTest.class
-//				ContextTest.class,
-//				CertificateProviderTest.class,
+				HelperXmlTest.class,
+				ContextTest.class,
+//				UnitAreaTest.class,
+//				UnitLengthTest.class,
+//				UnitVolumeTest.class,
+//				UnitWeightTest.class
+				CertificateProviderTest.class
 //				CryptoAsymmetricTest.class,
 //				CryptoSymmetricTest.class,
 //				ScramblerTest.class,
 ////				PaginatorTest.class,
 ////				PrinterTest.class,
-//				UnitAreaTest.class,
-//				UnitLengthTest.class,
-//				UnitVolumeTest.class,
-//				UnitWeightTest.class
 		);
 
 		System.out.println("** Test run completed **"); //$NON-NLS-1$

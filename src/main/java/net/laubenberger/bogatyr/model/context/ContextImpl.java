@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.model.ModelAbstract;
  * Implementation of the context for applications.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.4 (20101202)
  * @since 0.1.0
  */
 public class ContextImpl extends ModelAbstract implements Context {
@@ -82,7 +82,7 @@ public class ContextImpl extends ModelAbstract implements Context {
 
 	@Override
 	@XmlTransient
-	public Map<Object, Object> getData() {
+	public Map<Object, Object> getData() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(contextData));
@@ -90,7 +90,7 @@ public class ContextImpl extends ModelAbstract implements Context {
 	}
 
 	@Override
-	public void setData(final Map<Object, Object> data) {
+	public void setData(final Map<Object, Object> data) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(data));
 
 		if (!HelperObject.isEquals(data, contextData)) {
@@ -108,9 +108,9 @@ public class ContextImpl extends ModelAbstract implements Context {
 		if (null == key) {
 			throw new RuntimeExceptionIsNull("key"); //$NON-NLS-1$
 		}
-//		if (null == value) {
-//			throw new RuntimeExceptionIsNull("value"); //$NON-NLS-1$
-//		}
+		if (null == value) {
+			throw new RuntimeExceptionIsNull("value"); //$NON-NLS-1$
+		}
 
 		if (null == contextData) {
 			contextData = new ConcurrentHashMap<Object, Object>();
@@ -156,8 +156,12 @@ public class ContextImpl extends ModelAbstract implements Context {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T getValue(final Object key, final Class<T> clazz) {
+	public <T> T getValue(final Object key, final Class<T> clazz) { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key, clazz));
+		if (null == clazz) {
+			throw new RuntimeExceptionIsNull("clazz"); //$NON-NLS-1$
+		}
+
 		final Object obj = getValue(key);
 
 		T result = null;

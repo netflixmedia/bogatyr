@@ -28,7 +28,6 @@
 package net.laubenberger.bogatyr.helper;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -47,7 +46,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperIO}
  *
  * @author Stefan Laubenberger
- * @version 20101126
+ * @version 20101202
  */
 public class HelperIOTest { //TODO complete tests for all methods
 	@Test

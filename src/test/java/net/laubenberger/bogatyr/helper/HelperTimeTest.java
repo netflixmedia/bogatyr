@@ -47,7 +47,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperTime}
  *
  * @author Stefan Laubenberger
- * @version 20101126
+ * @version 20101202
  */
 public class HelperTimeTest {
 	@Test
@@ -61,7 +61,7 @@ public class HelperTimeTest {
 		}
 
 		try {
-			assertEquals(df.format(new Date()), df.format(HelperTime.getAtomicTime("time-a.nist.gov")));
+			assertEquals(df.format(new Date()), df.format(HelperTime.getAtomicTime("time-a.nist.gov"))); //$NON-NLS-1$
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
@@ -81,13 +81,13 @@ public class HelperTimeTest {
 		final DateFormat df = FormatFactory.createDateFormat(FormatFactory.PATTERN_DATE_YEAR_MONTH_DAY);
 		
 		try {
-			assertEquals(df.parse("0.1.1"), HelperTime.getDate(0, 1, 1));
-			assertEquals(df.parse("-400.1.1"), HelperTime.getDate(-400, 1, 1));
-			assertEquals(df.parse("-290000000.1.1"), HelperTime.getDate(-290000000, 1, 1));
-			assertEquals(df.parse("290000000.1.1"), HelperTime.getDate(290000000, 1, 1));
-			assertEquals(df.parse("2011.2.28"), HelperTime.getDate(2011, 2, 28));
-			assertEquals(df.parse("2012.2.29"), HelperTime.getDate(2012, 2, 29));
-			assertNotSame(df.parse("1976.12.31"), HelperTime.getDate(1976, 12, 30));
+			assertEquals(df.parse("0.1.1"), HelperTime.getDate(0, 1, 1)); //$NON-NLS-1$
+			assertEquals(df.parse("-400.1.1"), HelperTime.getDate(-400, 1, 1)); //$NON-NLS-1$
+			assertEquals(df.parse("-290000000.1.1"), HelperTime.getDate(-290000000, 1, 1)); //$NON-NLS-1$
+			assertEquals(df.parse("290000000.1.1"), HelperTime.getDate(290000000, 1, 1)); //$NON-NLS-1$
+			assertEquals(df.parse("2011.2.28"), HelperTime.getDate(2011, 2, 28)); //$NON-NLS-1$
+			assertEquals(df.parse("2012.2.29"), HelperTime.getDate(2012, 2, 29)); //$NON-NLS-1$
+			assertNotSame(df.parse("1976.12.31"), HelperTime.getDate(1976, 12, 30)); //$NON-NLS-1$
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
@@ -161,13 +161,13 @@ public class HelperTimeTest {
 		final DateFormat df = FormatFactory.createDateFormat(FormatFactory.PATTERN_DATE_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND);
 		
 		try {
-			assertEquals(df.parse("0.1.1 1:2:3"), HelperTime.getDate(0, 1, 1, 1, 2, 3));
-			assertEquals(df.parse("-400.1.1 1:2:3"), HelperTime.getDate(-400, 1, 1, 1, 2, 3));
-			assertEquals(df.parse("-290000000.1.1 1:2:3"), HelperTime.getDate(-290000000, 1, 1, 1, 2, 3));
-			assertEquals(df.parse("290000000.1.1 1:2:3"), HelperTime.getDate(290000000, 1, 1, 1, 2, 3));
-			assertEquals(df.parse("2011.2.28 1:2:3"), HelperTime.getDate(2011, 2, 28, 1, 2, 3));
-			assertEquals(df.parse("2012.2.29 1:2:3"), HelperTime.getDate(2012, 2, 29, 1, 2, 3));
-			assertNotSame(df.parse("1976.12.31 1:2:3"), HelperTime.getDate(1976, 12, 30, 1, 2, 3));
+			assertEquals(df.parse("0.1.1 1:2:3"), HelperTime.getDate(0, 1, 1, 1, 2, 3)); //$NON-NLS-1$
+			assertEquals(df.parse("-400.1.1 1:2:3"), HelperTime.getDate(-400, 1, 1, 1, 2, 3)); //$NON-NLS-1$
+			assertEquals(df.parse("-290000000.1.1 1:2:3"), HelperTime.getDate(-290000000, 1, 1, 1, 2, 3)); //$NON-NLS-1$
+			assertEquals(df.parse("290000000.1.1 1:2:3"), HelperTime.getDate(290000000, 1, 1, 1, 2, 3)); //$NON-NLS-1$
+			assertEquals(df.parse("2011.2.28 1:2:3"), HelperTime.getDate(2011, 2, 28, 1, 2, 3)); //$NON-NLS-1$
+			assertEquals(df.parse("2012.2.29 1:2:3"), HelperTime.getDate(2012, 2, 29, 1, 2, 3)); //$NON-NLS-1$
+			assertNotSame(df.parse("1976.12.31 1:2:3"), HelperTime.getDate(1976, 12, 30, 1, 2, 3)); //$NON-NLS-1$
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
@@ -295,13 +295,13 @@ public class HelperTimeTest {
 		final DateFormat df = FormatFactory.createDateFormat(FormatFactory.PATTERN_DATE_YEAR_MONTH_DAY);
 		
 		try {
-			assertEquals(df.parse("0.1.1"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(0, 1, 1, 1, 2, 3)));
-			assertEquals(df.parse("-400.1.1"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(-400, 1, 1, 1, 2, 3)));
-			assertEquals(df.parse("-290000000.1.1"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(-290000000, 1, 1, 1, 2, 3)));
-			assertEquals(df.parse("290000000.1.1"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(290000000, 1, 1, 1, 2, 3)));
-			assertEquals(df.parse("2011.2.28"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(2011, 2, 28, 1, 2, 3)));
-			assertEquals(df.parse("2012.2.29"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(2012, 2, 29, 1, 2, 3)));
-			assertNotSame(df.parse("1976.12.31"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(1976, 12, 30, 1, 2, 3)));
+			assertEquals(df.parse("0.1.1"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(0, 1, 1, 1, 2, 3))); //$NON-NLS-1$
+			assertEquals(df.parse("-400.1.1"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(-400, 1, 1, 1, 2, 3))); //$NON-NLS-1$
+			assertEquals(df.parse("-290000000.1.1"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(-290000000, 1, 1, 1, 2, 3))); //$NON-NLS-1$
+			assertEquals(df.parse("290000000.1.1"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(290000000, 1, 1, 1, 2, 3))); //$NON-NLS-1$
+			assertEquals(df.parse("2011.2.28"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(2011, 2, 28, 1, 2, 3))); //$NON-NLS-1$
+			assertEquals(df.parse("2012.2.29"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(2012, 2, 29, 1, 2, 3))); //$NON-NLS-1$
+			assertNotSame(df.parse("1976.12.31"), HelperTime.getDateAsAbsoluteDate(HelperTime.getDate(1976, 12, 30, 1, 2, 3))); //$NON-NLS-1$
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}

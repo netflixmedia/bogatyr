@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for maps.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101108)
+ * @version 0.9.4 (20101202)
  * @since 0.9.0
  */
 public abstract class HelperMap {
@@ -138,7 +138,7 @@ public abstract class HelperMap {
 			sb.append(pair.getValue());
 		}
 
-		String result = sb.toString();
+		final String result = sb.toString();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
