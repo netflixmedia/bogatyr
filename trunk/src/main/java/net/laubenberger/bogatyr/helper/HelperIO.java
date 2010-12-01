@@ -69,7 +69,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101126)
+ * @version 0.9.4 (20101202)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -704,7 +704,7 @@ public abstract class HelperIO {
 
 			String line = null;
 
-			while ((line = br.readLine()) != null) {
+			while (null != (line = br.readLine())) {
 				if (0 < sb.length()) {
 					sb.append(HelperString.NEW_LINE);
 				}
@@ -717,7 +717,7 @@ public abstract class HelperIO {
 			return result;
 		} finally {
 			try {
-				if (br != null) br.close();
+				if (null != br) br.close();
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
@@ -782,7 +782,7 @@ public abstract class HelperIO {
 
 			String line = null;
 
-			while ((line = br.readLine()) != null) {
+			while (null != (line = br.readLine())) {
 				result.add(line);
 			}
 
@@ -790,7 +790,7 @@ public abstract class HelperIO {
 			return result;
 		} finally {
 			try {
-				if (br != null) br.close();
+				if (null != br) br.close();
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}

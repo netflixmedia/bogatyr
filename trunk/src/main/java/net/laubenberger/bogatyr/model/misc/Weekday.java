@@ -38,7 +38,7 @@ import net.laubenberger.bogatyr.helper.HelperString;
  * Possible weekdays.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100817)
+ * @version 0.9.4 (20101202)
  * @since 0.9.1
  */
 @XmlRootElement(name = "weekday")
@@ -46,7 +46,7 @@ public enum Weekday {
 	SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
 
 	public String getName() {
-		return new SimpleDateFormat().getDateFormatSymbols().getWeekdays()[ordinal() + 1];
+		return getName(Locale.getDefault());
 	}
 
 	public String getName(final Locale locale) {

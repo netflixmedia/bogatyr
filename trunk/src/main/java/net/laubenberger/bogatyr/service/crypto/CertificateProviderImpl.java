@@ -50,6 +50,15 @@ import java.util.Date;
 
 import javax.security.auth.x500.X500Principal;
 
+import net.laubenberger.bogatyr.helper.HelperCrypto;
+import net.laubenberger.bogatyr.helper.HelperIO;
+import net.laubenberger.bogatyr.helper.HelperLog;
+import net.laubenberger.bogatyr.helper.HelperString;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
+import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeBefore;
+import net.laubenberger.bogatyr.service.ServiceAbstract;
+
 import org.bouncycastle.asn1.x509.BasicConstraints;
 import org.bouncycastle.asn1.x509.ExtendedKeyUsage;
 import org.bouncycastle.asn1.x509.GeneralName;
@@ -61,18 +70,12 @@ import org.bouncycastle.x509.X509V3CertificateGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.laubenberger.bogatyr.helper.HelperCrypto;
-import net.laubenberger.bogatyr.helper.HelperIO;
-import net.laubenberger.bogatyr.helper.HelperLog;
-import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
-import net.laubenberger.bogatyr.service.ServiceAbstract;
-
 
 /**
  * This class generates, reads and writes X.509 certificates.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101105)
+ * @version 0.9.4 (20101202)
  * @since 0.3.0
  */
 public class CertificateProviderImpl extends ServiceAbstract implements CertificateProvider {
@@ -125,7 +128,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 	}
 
 	@Override
-	public X509Certificate readCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException {
+	public X509Certificate readCertificate(final InputStream is) throws CertificateException, NoSuchProviderException, IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(is));
 		if (null == is) {
 			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
@@ -146,7 +149,7 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 	}
 
 	@Override
-	public void writeCertificate(final OutputStream os, final Certificate cert) throws CertificateEncodingException, IOException {
+	public void writeCertificate(final OutputStream os, final Certificate cert) throws CertificateEncodingException, IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(os, cert));
 		if (null == os) {
 			throw new RuntimeExceptionIsNull("os"); //$NON-NLS-1$
@@ -181,17 +184,28 @@ public class CertificateProviderImpl extends ServiceAbstract implements Certific
 		if (null == issuerDN) {
 			throw new RuntimeExceptionIsNull("issuerDN"); //$NON-NLS-1$
 		}
+		if (!HelperString.isValid(issuerDN)) {
+			throw new RuntimeExceptionIsEmpty("issuerDN"); //$NON-NLS-1$
+		}
 		if (null == subjectDN) {
 			throw new RuntimeExceptionIsNull("subjectDN"); //$NON-NLS-1$
 		}
-		if (null == generalName) {
+		if (!HelperString.isValid(subjectDN)) {
+			throw new RuntimeExceptionIsEmpty("subjectDN"); //$NON-NLS-1$
+		}		if (null == generalName) {
 			throw new RuntimeExceptionIsNull("generalName"); //$NON-NLS-1$
+		}
+		if (!HelperString.isValid(generalName)) {
+			throw new RuntimeExceptionIsEmpty("generalName"); //$NON-NLS-1$
 		}
 		if (null == start) {
 			throw new RuntimeExceptionIsNull("start"); //$NON-NLS-1$
 		}
 		if (null == end) {
 			throw new RuntimeExceptionIsNull("end"); //$NON-NLS-1$
+		}
+		if (start.after(end)) {
+			throw new RuntimeExceptionMustBeBefore("start", start, end); //$NON-NLS-1$
 		}
 
 		// generate the certificate

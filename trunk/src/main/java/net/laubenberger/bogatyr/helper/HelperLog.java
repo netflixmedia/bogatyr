@@ -34,7 +34,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for logging.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101108)
+ * @version 0.9.4 (20101202)
  * @since 0.9.1
  */
 public abstract class HelperLog {
@@ -137,7 +137,7 @@ public abstract class HelperLog {
 				sb.append(EMPTY);
 			} else {
 				for (final Object obj : args) {
-					if (sb.length() > 0) {
+					if (0 < sb.length()) {
 						sb.append(HelperString.COMMA);
 					}
 					sb.append(HelperString.SPACE);

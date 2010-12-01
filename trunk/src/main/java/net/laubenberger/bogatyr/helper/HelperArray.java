@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101119)
+ * @version 0.9.4 (20101202)
  * @since 0.7.0
  */
 public abstract class HelperArray { //TODO implement all methods for all primitive types
@@ -251,7 +251,7 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 			throw new RuntimeExceptionIsNull("array"); //$NON-NLS-1$
 		}
 		
-		boolean result = Arrays.asList(array).contains(object);
+		final boolean result = Arrays.asList(array).contains(object);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -335,7 +335,7 @@ public abstract class HelperArray { //TODO implement all methods for all primiti
 			sb.append(element);
 		}
 
-		String result = sb.toString();
+		final String result = sb.toString();
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

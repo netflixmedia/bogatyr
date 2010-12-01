@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for time operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101126)
+ * @version 0.9.4 (20101202)
  * @since 0.7.0
  */
 public abstract class HelperTime {
@@ -338,7 +338,7 @@ public abstract class HelperTime {
 			result = df.parse(df.format(date));
 		} catch (ParseException ex) {
 			// should never happen!
-			log.error("Could not parse date", ex);
+			log.error("Could not parse date", ex); //$NON-NLS-1$
 		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));

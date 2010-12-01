@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for XML operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101129)
+ * @version 0.9.4 (20101202)
  * @since 0.3.0
  */
 public abstract class HelperXml {
@@ -242,7 +242,7 @@ public abstract class HelperXml {
 			is = new ByteArrayInputStream(input.getBytes(Constants.ENCODING_DEFAULT));
 		} catch (UnsupportedEncodingException ex) {
 			// should never happen!
-			log.error("Encoding invalid", ex);
+			log.error("Encoding invalid", ex); //$NON-NLS-1$
 		}
 
 		result = deserialize(is, clazz);

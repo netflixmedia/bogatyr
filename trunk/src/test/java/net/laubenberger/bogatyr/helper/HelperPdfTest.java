@@ -59,10 +59,12 @@ import com.lowagie.text.pdf.PdfReader;
  * JUnit test for {@link HelperPdf}
  *
  * @author Stefan Laubenberger
- * @version 20101129
+ * @version 20101202
  */
 public class HelperPdfTest {
-
+	private static final byte[] USER = "admin".getBytes(); //$NON-NLS-1$
+	private static final byte[] PASSWORD = "1234".getBytes(); //$NON-NLS-1$
+	
 	@Test
 	public void testWritePdfFromImages() {
 		final List<File> files = new ArrayList<File>(ResourceImage.values().length);
@@ -79,7 +81,7 @@ public class HelperPdfTest {
 		
 		File pdf = null;
 		try {
-			pdf = HelperIO.getTemporaryFile("pdf");
+			pdf = HelperIO.getTemporaryFile("pdf"); //$NON-NLS-1$
 			
 			HelperPdf.writePdfFromImages(PageSize.A4, true, pdf, HelperCollection.toArray(files));
 			assertTrue(pdf.length() > 9000);
@@ -168,7 +170,7 @@ public class HelperPdfTest {
 		
 		File pdf = null;
 		try {
-			pdf = HelperIO.getTemporaryFile("pdf");
+			pdf = HelperIO.getTemporaryFile("pdf"); //$NON-NLS-1$
 			
 			HelperPdf.writePdfFromPpt(PageSize.A4, true, pdf, ResourceOffice.PPT.getResourceAsFile());
 			assertTrue(pdf.length() > 4000);
@@ -216,7 +218,7 @@ public class HelperPdfTest {
 	@Test
 	public void testGetText() {
 		try {
-			assertEquals("Hello world!\nThis is a Bogatyr PDF test file.\n", HelperPdf.getText(ResourceMisc.PDF.getResourceAsFile()));
+			assertEquals("Hello world!\nThis is a Bogatyr PDF test file.\n", HelperPdf.getText(ResourceMisc.PDF.getResourceAsFile())); //$NON-NLS-1$
 		} catch (IOException ex) {
 			fail(ex.getMessage());
 		}
@@ -234,13 +236,13 @@ public class HelperPdfTest {
 	@Test
 	public void testSetAndGetMetaData() {
 		final Map<String, String> metadata = new HashMap<String, String>();
-		metadata.put("myInfo", "This is my additional info");
-		metadata.put("myMetaData", "This is my additional metadata");
+		metadata.put("myInfo", "This is my additional info"); //$NON-NLS-1$ //$NON-NLS-2$
+		metadata.put("myMetaData", "This is my additional metadata"); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		File dest = null;
 		
 		try {
-			dest = HelperIO.getTemporaryFile("pdf");
+			dest = HelperIO.getTemporaryFile("pdf"); //$NON-NLS-1$
 
 			final Map<String, String> old_metadata = HelperPdf.getMetaData(ResourceMisc.PDF.getResourceAsFile());
 //			System.err.println(HelperMap.dump(old_metadata));
@@ -320,10 +322,10 @@ public class HelperPdfTest {
 		File decrypted = null;
 		
 		try {
-			encrypted = HelperIO.getTemporaryFile("pdf");
-			decrypted = HelperIO.getTemporaryFile("pdf");
+			encrypted = HelperIO.getTemporaryFile("pdf"); //$NON-NLS-1$
+			decrypted = HelperIO.getTemporaryFile("pdf"); //$NON-NLS-1$
 
-			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, "Stefan".getBytes(), "1234".getBytes());
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, USER, PASSWORD);
 			
 			try {
 				HelperPdf.getText(encrypted);
@@ -332,16 +334,16 @@ public class HelperPdfTest {
 				//nothing to do
 			}
 			
-			HelperPdf.decrypt(encrypted, decrypted, "1234".getBytes());
+			HelperPdf.decrypt(encrypted, decrypted, PASSWORD);
 			
-			assertEquals("Hello world!\nThis is a Bogatyr PDF test file.\n", HelperPdf.getText(decrypted));
+			assertEquals("Hello world!\nThis is a Bogatyr PDF test file.\n", HelperPdf.getText(decrypted)); //$NON-NLS-1$
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			fail(ex.getMessage());
 		}
 		
 		try {
-			HelperPdf.encrypt(null, encrypted, "Stefan".getBytes(), "1234".getBytes());
+			HelperPdf.encrypt(null, encrypted, USER, PASSWORD);
 			fail("source is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
@@ -350,7 +352,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), null, "Stefan".getBytes(), "1234".getBytes());
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), null, USER, PASSWORD);
 			fail("dest is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
@@ -359,7 +361,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), ResourceMisc.PDF.getResourceAsFile(), "Stefan".getBytes(), "1234".getBytes());
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), ResourceMisc.PDF.getResourceAsFile(), USER, PASSWORD);
 			fail("source is equals dest"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsEquals ex) {
 			//nothing to do
@@ -368,7 +370,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, null, "1234".getBytes());
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, null, PASSWORD);
 			fail("user is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
@@ -377,7 +379,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, HelperArray.EMPTY_ARRAY_BYTE, "1234".getBytes());
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, HelperArray.EMPTY_ARRAY_BYTE, PASSWORD);
 			fail("user is empty"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
@@ -386,7 +388,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, "Stefan".getBytes(), null);
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, USER, null);
 			fail("password is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
@@ -395,7 +397,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, "Stefan".getBytes(), HelperArray.EMPTY_ARRAY_BYTE);
+			HelperPdf.encrypt(ResourceMisc.PDF.getResourceAsFile(), encrypted, USER, HelperArray.EMPTY_ARRAY_BYTE);
 			fail("password is empty"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsEmpty ex) {
 			//nothing to do
@@ -404,7 +406,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.decrypt(null, encrypted, "1234".getBytes());
+			HelperPdf.decrypt(null, encrypted, PASSWORD);
 			fail("source is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
@@ -413,7 +415,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.decrypt(ResourceMisc.PDF.getResourceAsFile(), null, "1234".getBytes());
+			HelperPdf.decrypt(ResourceMisc.PDF.getResourceAsFile(), null, PASSWORD);
 			fail("dest is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
@@ -422,7 +424,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.decrypt(ResourceMisc.PDF.getResourceAsFile(), ResourceMisc.PDF.getResourceAsFile(), "1234".getBytes());
+			HelperPdf.decrypt(ResourceMisc.PDF.getResourceAsFile(), ResourceMisc.PDF.getResourceAsFile(), PASSWORD);
 			fail("source is equals dest"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsEquals ex) {
 			//nothing to do
@@ -456,15 +458,15 @@ public class HelperPdfTest {
 		PdfReader reader = null;
 		
 		try {
-			locked = HelperIO.getTemporaryFile("pdf");
-			unlocked = HelperIO.getTemporaryFile("pdf");
+			locked = HelperIO.getTemporaryFile("pdf"); //$NON-NLS-1$
+			unlocked = HelperIO.getTemporaryFile("pdf"); //$NON-NLS-1$
 
-			HelperPdf.lock(ResourceMisc.PDF.getResourceAsFile(), locked, "1234".getBytes());
+			HelperPdf.lock(ResourceMisc.PDF.getResourceAsFile(), locked, PASSWORD);
 			
 			reader = new PdfReader(locked.getAbsolutePath());
 			assertEquals(-3904, reader.getPermissions());
 
-			HelperPdf.unlock(locked, unlocked, "1234".getBytes());
+			HelperPdf.unlock(locked, unlocked, PASSWORD);
 			
 			reader = new PdfReader(unlocked.getAbsolutePath());
 			assertEquals(-4, reader.getPermissions());
@@ -478,7 +480,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.lock(null, locked, "1234".getBytes());
+			HelperPdf.lock(null, locked, PASSWORD);
 			fail("source is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
@@ -487,7 +489,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.lock(ResourceMisc.PDF.getResourceAsFile(), null, "1234".getBytes());
+			HelperPdf.lock(ResourceMisc.PDF.getResourceAsFile(), null, PASSWORD);
 			fail("dest is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
@@ -496,7 +498,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.lock(ResourceMisc.PDF.getResourceAsFile(), ResourceMisc.PDF.getResourceAsFile(), "1234".getBytes());
+			HelperPdf.lock(ResourceMisc.PDF.getResourceAsFile(), ResourceMisc.PDF.getResourceAsFile(), PASSWORD);
 			fail("source is equals dest"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsEquals ex) {
 			//nothing to do
@@ -523,7 +525,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.unlock(null, locked, "1234".getBytes());
+			HelperPdf.unlock(null, locked, PASSWORD);
 			fail("source is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
@@ -532,7 +534,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.unlock(ResourceMisc.PDF.getResourceAsFile(), null, "1234".getBytes());
+			HelperPdf.unlock(ResourceMisc.PDF.getResourceAsFile(), null, PASSWORD);
 			fail("dest is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
 			//nothing to do
@@ -541,7 +543,7 @@ public class HelperPdfTest {
 		}
 		
 		try {
-			HelperPdf.unlock(ResourceMisc.PDF.getResourceAsFile(), ResourceMisc.PDF.getResourceAsFile(), "1234".getBytes());
+			HelperPdf.unlock(ResourceMisc.PDF.getResourceAsFile(), ResourceMisc.PDF.getResourceAsFile(), PASSWORD);
 			fail("source is equals dest"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsEquals ex) {
 			//nothing to do

@@ -27,7 +27,6 @@
 
 package net.laubenberger.bogatyr.helper;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -46,7 +45,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101129)
+ * @version 0.9.4 (20101202)
  * @since 0.7.0
  */
 public abstract class HelperString {
