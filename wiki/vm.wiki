@@ -22,7 +22,7 @@ Example:<br>
 || *JVM* *option* || *Description* ||
 ||-Xsssize in bytes||sets the size of the Java stack (default is 512KB).||
 
-Each thread in the VM get's a stack. The stack size will limit the number of threads that you can have. If you get a [[http://java.sun.com/javase/6/docs/api/java/lang/StackOverflowError.html|StackOverflowError]] increase the value. 2048k is an appropriate value for most situations 
+Each thread in the VM get's a stack. The stack size will limit the number of threads that you can have. If you get a [http://java.sun.com/javase/6/docs/api/java/lang/StackOverflowError.html StackOverflowError] increase the value. 2048k is an appropriate value for most situations 
 
 Example:<br>
 {{{java -Xss2048k}}}
