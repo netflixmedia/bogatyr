@@ -2,3 +2,4 @@
 #sidebar Index
 
   * [Hints]
+  * [vm]
