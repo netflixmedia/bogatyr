@@ -32,6 +32,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JSlider;
 import javax.swing.LookAndFeel;
@@ -50,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for Swing.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100813)
+ * @version 0.9.4 (20101227)
  * @since 0.9.0
  */
 public abstract class HelperSwing {
@@ -83,7 +84,7 @@ public abstract class HelperSwing {
 
 				UIManager.setLookAndFeel(laf);
 
-				for (final Map.Entry<?, ?> pair : map.entrySet()) {
+				for (final Entry<?, ?> pair : map.entrySet()) {
 					UIManager.put(pair.getKey(), pair.getValue());
 				}
 			} catch (Exception ex) {

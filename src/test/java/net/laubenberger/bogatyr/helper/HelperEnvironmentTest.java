@@ -46,7 +46,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperEnvironment}
  *
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101227
  */
 public class HelperEnvironmentTest {
 	@Test
@@ -104,7 +104,7 @@ public class HelperEnvironmentTest {
 	@Test
 	public void testGetJavaProperties() {
 //		System.err.println(HelperEnvironment.getJavaProperties().size());
-		assertTrue(HelperEnvironment.getJavaProperties().size() > 50);
+		assertTrue(50 < HelperEnvironment.getJavaProperties().size());
 		assertEquals(System.getProperties(), HelperEnvironment.getJavaProperties());
 	}
 	
@@ -147,7 +147,7 @@ public class HelperEnvironmentTest {
 	@Test
 	public void testGetOsEnvironmentVariables() {
 //		System.err.println(HelperEnvironment.getOsEnvironmentVariables().size());
-		assertTrue(HelperEnvironment.getOsEnvironmentVariables().size() > 5);
+		assertTrue(5 < HelperEnvironment.getOsEnvironmentVariables().size());
 		assertEquals(System.getenv(), HelperEnvironment.getOsEnvironmentVariables());
 	}
 
@@ -220,25 +220,25 @@ public class HelperEnvironmentTest {
 	@Test
 	public void testGetReportJava() {
 //		System.err.println(HelperEnvironment.getReportJava().length());
-		assertTrue(HelperEnvironment.getReportJava().length() > 4000);
+		assertTrue(4000 < HelperEnvironment.getReportJava().length());
 	}
 	
 	@Test
 	public void testGetReportOS() {
 //		System.err.println(HelperEnvironment.getReportOS().length());
-		assertTrue(HelperEnvironment.getReportOS().length() > 500);
+		assertTrue(500 < HelperEnvironment.getReportOS().length());
 	}
 	
 	@Test
 	public void testGetReportUser() {
 //		System.err.println(HelperEnvironment.getReportUser().length());
-		assertTrue(HelperEnvironment.getReportUser().length() > 300);
+		assertTrue(300 < HelperEnvironment.getReportUser().length());
 	}	
 	
 	@Test
 	public void testGetReportSystem() {
 //		System.err.println(HelperEnvironment.getReportSystem().length());
-		assertTrue(HelperEnvironment.getReportSystem().length() > 200);
+		assertTrue(200 < HelperEnvironment.getReportSystem().length());
 	}
 }
 

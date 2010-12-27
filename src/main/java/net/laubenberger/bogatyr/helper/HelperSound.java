@@ -47,7 +47,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
-import javax.sound.sampled.Line;
+import javax.sound.sampled.Line.Info;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.AudioFileFormat.Type;
@@ -62,7 +62,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for sound operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101129)
+ * @version 0.9.4 (20101227)
  * @since 0.5.0
  */
 public abstract class HelperSound {
@@ -291,7 +291,7 @@ public abstract class HelperSound {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(ais));
 
 		try {
-			final Line.Info info = new DataLine.Info(Clip.class, ais.getFormat());
+			final Info info = new DataLine.Info(Clip.class, ais.getFormat());
 			final Clip result = (Clip) AudioSystem.getLine(info);
 			result.open(ais);
 

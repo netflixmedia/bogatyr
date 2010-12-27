@@ -69,7 +69,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101202)
+ * @version 0.9.4 (20101227)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -175,7 +175,7 @@ public abstract class HelperIO {
 			throw new RuntimeExceptionIsEquals("source", "dest"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		if (!source.isDirectory()) {
+		if (source.isDirectory()) {
 			copyDirectory(source, dest);
 		} else {
 			copyFile(source, dest);
@@ -719,7 +719,7 @@ public abstract class HelperIO {
 			try {
 				if (null != br) br.close();
 			} catch (IOException ex) {
-				ex.printStackTrace();
+				log.error("Could not close the reader", ex);
 			}
 		}
 	}
@@ -792,7 +792,7 @@ public abstract class HelperIO {
 			try {
 				if (null != br) br.close();
 			} catch (IOException ex) {
-				ex.printStackTrace();
+				log.error("Could not close the reader", ex);
 			}
 		}
 	}
@@ -1272,9 +1272,7 @@ public abstract class HelperIO {
 			throw new RuntimeExceptionIsNull("fileName"); //$NON-NLS-1$
 		}
 
-		final String result;
-
-		result = fileName.contains(HelperString.PERIOD) ? fileName
+		final String result = fileName.contains(HelperString.PERIOD) ? fileName
 				.substring(0, fileName.lastIndexOf(HelperString.PERIOD)) : fileName;
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
@@ -1358,8 +1356,6 @@ public abstract class HelperIO {
 	private static void copyFile(final File source, final File dest) throws IOException {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(source, dest));
 
-		final byte[] buffer = new byte[Constants.DEFAULT_FILE_BUFFER_SIZE];
-
 		if (!dest.exists()) {
 			dest.mkdirs();
 			dest.delete();
@@ -1373,6 +1369,9 @@ public abstract class HelperIO {
 			is = new FileInputStream(source);
 			os = new FileOutputStream(dest);
 			int len;
+
+			final byte[] buffer = new byte[Constants.DEFAULT_FILE_BUFFER_SIZE];
+
 			while (0 < (len = is.read(buffer))) {
 				os.write(buffer, 0, len);
 			}

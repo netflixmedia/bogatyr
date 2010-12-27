@@ -46,7 +46,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperNet}
  *
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101227
  */
 public class HelperNetTest {
 	@Test
@@ -355,7 +355,7 @@ public class HelperNetTest {
 	@Test
 	public void testGetLocalIps() { 
 		try {
-			assertTrue(HelperNet.getLocalIps().size() > 0);
+			assertTrue(!HelperNet.getLocalIps().isEmpty());
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
@@ -364,7 +364,7 @@ public class HelperNetTest {
 	@Test
 	public void testGetNetworkInterfaces() { 
 		try {
-			assertTrue(HelperNet.getNetworkInterfaces().size() > 0);
+			assertTrue(!HelperNet.getNetworkInterfaces().isEmpty());
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
@@ -392,7 +392,7 @@ public class HelperNetTest {
 	public void testReadUrl() {
 		try {
 //			System.err.println(HelperIO.readStream(HelperNet.readUrl(Constants.BOGATYR.getUrl())).length);
-			assertTrue(HelperIO.readStream(HelperNet.readUrl(Constants.BOGATYR.getUrl())).length > 2000);
+			assertTrue(2000 < HelperIO.readStream(HelperNet.readUrl(Constants.BOGATYR.getUrl())).length);
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}

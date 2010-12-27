@@ -29,7 +29,7 @@ package net.laubenberger.bogatyr.service.updater;
 
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Map;import java.util.Map.Entry;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
@@ -41,7 +41,7 @@ import net.laubenberger.bogatyr.model.misc.Platform;
  * Map adapter for the key {@link Platform} and value {@link URL}.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100504)
+ * @version 0.9.4 (20101227)
  * @since 0.9.2
  */
 public class MapAdapterPlatformURL extends XmlAdapter<XmlMap, Map<Platform, URL>> {
@@ -55,7 +55,7 @@ public class MapAdapterPlatformURL extends XmlAdapter<XmlMap, Map<Platform, URL>
 		if (null != map) {
 			final XmlMap xmlMap = new XmlMap();
 
-			for (final Map.Entry<Platform, URL> entry : map.entrySet()) {
+			for (final Entry<Platform, URL> entry : map.entrySet()) {
 				xmlMap.getEntries().add(new XmlEntry(entry.getKey().name(), entry.getValue().toExternalForm()));
 			}
 			return xmlMap;

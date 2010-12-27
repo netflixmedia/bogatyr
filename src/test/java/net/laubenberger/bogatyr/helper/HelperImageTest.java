@@ -54,20 +54,20 @@ import org.junit.Test;
  * JUnit test for {@link HelperImage}
  * 
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101227
  */
 public class HelperImageTest {
 	@Test
 	public void testReadImage() {
 		try {
-			for (ResourceImage res : ResourceImage.values()) {
+			for (final ResourceImage res : ResourceImage.values()) {
 				assertEquals(32, HelperImage.readImage(res.getResourceAsFile()).getWidth());
 			}
 		} catch (IOException ex) {
 			fail(ex.getMessage());
 		}
 		try {
-			for (ResourceImage res : ResourceImage.values()) {
+			for (final ResourceImage res : ResourceImage.values()) {
 				assertEquals(32, HelperImage.readImage(res.getResourceAsStream()).getWidth());
 			}
 		} catch (IOException ex) {
@@ -239,7 +239,7 @@ public class HelperImageTest {
 	@Test
 	public void testGetImageReadFormats() {
 //		System.err.println(HelperImage.getAvailableImageReadFormats().size());
-		assertTrue(HelperImage.getAvailableImageReadFormats().size() >= 4);
+		assertTrue(4 <= HelperImage.getAvailableImageReadFormats().size());
 		assertTrue(HelperImage.getAvailableImageReadFormats().contains(HelperImage.TYPE_PNG));
 		assertTrue(HelperImage.getAvailableImageReadFormats().contains(HelperImage.TYPE_GIF));
 		assertTrue(HelperImage.getAvailableImageReadFormats().contains(HelperImage.TYPE_JPG));
@@ -249,7 +249,7 @@ public class HelperImageTest {
 	@Test
 	public void testGetImageWriteFormats() {
 //		System.err.println(HelperImage.getAvailableImageWriteFormats().size());
-		assertTrue(HelperImage.getAvailableImageWriteFormats().size() >= 4);
+		assertTrue(4 <= HelperImage.getAvailableImageWriteFormats().size());
 		assertTrue(HelperImage.getAvailableImageWriteFormats().contains(HelperImage.TYPE_PNG));
 		assertTrue(HelperImage.getAvailableImageWriteFormats().contains(HelperImage.TYPE_GIF));
 		assertTrue(HelperImage.getAvailableImageWriteFormats().contains(HelperImage.TYPE_JPG));
@@ -259,7 +259,7 @@ public class HelperImageTest {
 	@Test
 	public void testGetImageReadMIMETypes() {
 //		System.err.println(HelperImage.getAvailableImageReadMIMETypes().size());
-		assertTrue(HelperImage.getAvailableImageReadMIMETypes().size() >= 4);
+		assertTrue(4 <= HelperImage.getAvailableImageReadMIMETypes().size());
 		assertTrue(HelperImage.getAvailableImageReadMIMETypes().contains("image/png")); //$NON-NLS-1$
 		assertTrue(HelperImage.getAvailableImageReadMIMETypes().contains("image/jpeg")); //$NON-NLS-1$
 	}
@@ -267,7 +267,7 @@ public class HelperImageTest {
 	@Test
 	public void testGetImageWriteMIMETypes() {
 //		System.err.println(HelperImage.getAvailableImageWriteMIMETypes().size());
-		assertTrue(HelperImage.getAvailableImageWriteMIMETypes().size() >= 4);
+		assertTrue(4 <= HelperImage.getAvailableImageWriteMIMETypes().size());
 		assertTrue(HelperImage.getAvailableImageWriteMIMETypes().contains("image/png")); //$NON-NLS-1$
 		assertTrue(HelperImage.getAvailableImageWriteMIMETypes().contains("image/jpeg")); //$NON-NLS-1$
 	}

@@ -45,16 +45,16 @@ import org.junit.Test;
  * JUnit test for {@link HelperMath}
  *
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101227
  */
 public class HelperMathTest {
 	@Test
 	public void testGcd() {
-		assertTrue(0 == new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("2"), new BigDecimal("4"))));	//$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-		assertTrue(0 == new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("2"), new BigDecimal("2")))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		assertTrue(0 == new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("4"), new BigDecimal("2"))));	//$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-		assertTrue(0 == new BigDecimal("2.5").compareTo(HelperMath.gcd(new BigDecimal("2.5"), new BigDecimal("5"))));  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
-		assertTrue(0 == BigDecimal.ZERO.compareTo(HelperMath.gcd(BigDecimal.ZERO, BigDecimal.ZERO)));
+		assertEquals(0, new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("2"), new BigDecimal("4"))));	//$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+		assertEquals(0, new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("2"), new BigDecimal("2")))); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		assertEquals(0, new BigDecimal("2").compareTo(HelperMath.gcd(new BigDecimal("4"), new BigDecimal("2"))));	//$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+		assertEquals(0, new BigDecimal("2.5").compareTo(HelperMath.gcd(new BigDecimal("2.5"), new BigDecimal("5"))));  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		assertEquals(0, BigDecimal.ZERO.compareTo(HelperMath.gcd(BigDecimal.ZERO, BigDecimal.ZERO)));
 
         try {
             HelperMath.gcd(null, BigDecimal.ZERO);
@@ -95,8 +95,8 @@ public class HelperMathTest {
 
 	@Test
 	public void testLcm() {
-		assertTrue(0 == BigDecimal.TEN.compareTo(HelperMath.lcm(new BigDecimal("2"), new BigDecimal("5"))));  //$NON-NLS-1$//$NON-NLS-2$
-		assertTrue(0 == BigDecimal.TEN.compareTo(HelperMath.lcm(new BigDecimal("5"), new BigDecimal("2")))); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals(0, BigDecimal.TEN.compareTo(HelperMath.lcm(new BigDecimal("2"), new BigDecimal("5"))));  //$NON-NLS-1$//$NON-NLS-2$
+		assertEquals(0, BigDecimal.TEN.compareTo(HelperMath.lcm(new BigDecimal("5"), new BigDecimal("2")))); //$NON-NLS-1$ //$NON-NLS-2$
 
         try {
             HelperMath.lcm(null, BigDecimal.ZERO);

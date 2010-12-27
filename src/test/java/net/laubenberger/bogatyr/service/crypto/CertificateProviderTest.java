@@ -54,7 +54,7 @@ import org.junit.Test;
  * JUnit test for {@link CertificateProviderImpl}
  *
  * @author Stefan Laubenberger
- * @version 20101202
+ * @version 20101227
  */
 public class CertificateProviderTest {
 	private static final String CN_ISSUER = "CN=ISSUER"; //$NON-NLS-1$
@@ -75,13 +75,11 @@ public class CertificateProviderTest {
 	
 	@Test
 	public void testReadCertificate() {
-		X509Certificate cert_original = null;
-		File file = null;
 		
 		try {
-			file = HelperIO.getTemporaryFile();
+			File file = HelperIO.getTemporaryFile();
 
-			cert_original = publicKeyProvider.generateCertificate(keyPair, CN_ISSUER, CN_SUBJECT, GENERAL_NAME, DATE_START, DATE_END);
+			X509Certificate cert_original = publicKeyProvider.generateCertificate(keyPair, CN_ISSUER, CN_SUBJECT, GENERAL_NAME, DATE_START, DATE_END);
 			publicKeyProvider.writeCertificate(file, cert_original);
 			final X509Certificate cert_new = publicKeyProvider.readCertificate(file);
 

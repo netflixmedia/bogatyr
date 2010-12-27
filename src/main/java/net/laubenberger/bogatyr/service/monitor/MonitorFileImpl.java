@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101202)
+ * @version 0.9.4 (20101227)
  * @since 0.9.4
  */
 public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
@@ -74,8 +74,11 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 	
 	
 	public MonitorFileImpl(final File file) throws NoSuchAlgorithmException {
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(file));
-		
+		super();
+		if (log.isTraceEnabled()) {
+			log.trace(HelperLog.constructor(file));
+		}
+
 		if (null == file) {
 			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
 		}
@@ -248,11 +251,12 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 	private class FileMonitorTask extends TimerTask {
 		byte[] hash;
 		
-		public FileMonitorTask() {
+		private FileMonitorTask() {
+			super();
 			try {
 				hash = hcg.getFastHash(file);
-			} catch (IOException e) {
-//				e.printStackTrace();
+			} catch (IOException ex) {
+//				ex.printStackTrace();
 //				fireFileNotFound();
 			}
 		}
@@ -266,8 +270,8 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 					this.hash = hash;
 					fireFileChanged();
 				}
-			} catch (IOException e) {
-//				e.printStackTrace();
+			} catch (IOException ex) {
+//				ex.printStackTrace();
 				fireFileNotFound();
 			}
 		}

@@ -41,7 +41,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperArray}
  *
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101227
  */
 public class HelperArrayTest {
 
@@ -172,7 +172,7 @@ public class HelperArrayTest {
 	
 	@Test
 	public void testDumpBytes() {
-		byte[] array = {1, 2, 3};
+		final byte[] array = {1, 2, 3};
 
 //		System.err.println(HelperArray.dump(array).length());
 		assertEquals(5, HelperArray.dump(array).length());

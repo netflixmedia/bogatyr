@@ -28,6 +28,7 @@
 package net.laubenberger.bogatyr.helper;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
@@ -42,7 +43,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperNumber}
  *
  * @author Stefan Laubenberger
- * @version 20101129
+ * @version 20101227
  */
 public class HelperNumberTest {
 	@Test
@@ -112,7 +113,7 @@ public class HelperNumberTest {
 	@Test
 	public void testGetNumber() {
 		assertEquals(new BigDecimal("12.35"), HelperNumber.getNumber("12.35")); //$NON-NLS-1$ //$NON-NLS-2$
-		assertEquals(null, HelperNumber.getNumber("blabla")); //$NON-NLS-1$
+		assertNull(HelperNumber.getNumber("blabla")); //$NON-NLS-1$
 		
 		try {
 			HelperNumber.getNumber(null);
@@ -129,7 +130,7 @@ public class HelperNumberTest {
 	public void testGetString() {
 		assertEquals("12.35", HelperNumber.getString(new BigDecimal("12.35"))); //$NON-NLS-1$ //$NON-NLS-2$
 		assertEquals("NaN", HelperNumber.getString(Double.NaN)); //$NON-NLS-1$
-		assertEquals(null, HelperNumber.getString(null));
+		assertNull(HelperNumber.getString(null));
 	}
 }
 

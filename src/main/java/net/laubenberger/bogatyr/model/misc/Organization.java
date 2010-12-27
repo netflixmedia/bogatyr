@@ -32,15 +32,16 @@ import java.util.List;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import net.laubenberger.bogatyr.model.Model;
+import net.laubenberger.bogatyr.model.misc.OrganizationImpl.XmlAdapter;
 
 /**
  * The interface for the organization model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.4 (20101227)
  * @since 0.9.2
  */
-@XmlJavaTypeAdapter(OrganizationImpl.XmlAdapter.class)
+@XmlJavaTypeAdapter(XmlAdapter.class)
 public interface Organization extends Model, Address, Phone, Fax, Email, Url {
 	String MEMBER_PERSONS 		= "persons"; //$NON-NLS-1$
 	String MEMBER_ROLES 			= "roles"; //$NON-NLS-1$

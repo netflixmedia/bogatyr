@@ -32,7 +32,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import net.laubenberger.bogatyr.model.Model;
+import net.laubenberger.bogatyr.model.Model;import net.laubenberger.bogatyr.model.misc.PersonImpl.XmlAdapter;
 
 /**
  * The interface for the person model.
@@ -41,7 +41,7 @@ import net.laubenberger.bogatyr.model.Model;
  * @version 0.9.2 (20100611)
  * @since 0.9.1
  */
-@XmlJavaTypeAdapter(PersonImpl.XmlAdapter.class)
+@XmlJavaTypeAdapter(XmlAdapter.class)
 public interface Person extends Model, Address, Phone, Fax, Email, Url {
 	String MEMBER_FORENAME 				= "forename"; //$NON-NLS-1$
 	String MEMBER_BIRTHDAY 				= "birthday"; //$NON-NLS-1$

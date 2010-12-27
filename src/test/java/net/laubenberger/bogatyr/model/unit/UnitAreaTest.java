@@ -36,14 +36,13 @@ import java.math.RoundingMode;
 import org.junit.Test;
 
 import net.laubenberger.bogatyr.helper.HelperNumber;
-import net.laubenberger.bogatyr.model.unit.Area;
 
 
 /**
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20101227
  */
 public class UnitAreaTest {
 	private static final MathContext MC = new MathContext(5, RoundingMode.HALF_EVEN);

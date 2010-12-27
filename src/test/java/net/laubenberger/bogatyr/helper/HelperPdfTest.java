@@ -59,7 +59,7 @@ import com.lowagie.text.pdf.PdfReader;
  * JUnit test for {@link HelperPdf}
  *
  * @author Stefan Laubenberger
- * @version 20101202
+ * @version 20101227
  */
 public class HelperPdfTest {
 	private static final byte[] USER = "admin".getBytes(); //$NON-NLS-1$
@@ -84,10 +84,10 @@ public class HelperPdfTest {
 			pdf = HelperIO.getTemporaryFile("pdf"); //$NON-NLS-1$
 			
 			HelperPdf.writePdfFromImages(PageSize.A4, true, pdf, HelperCollection.toArray(files));
-			assertTrue(pdf.length() > 9000);
+			assertTrue(9000 < pdf.length());
 
 			HelperPdf.writePdfFromImages(PageSize.A4, true, pdf, HelperCollection.toArray(images));
-			assertTrue(pdf.length() > 9000);
+			assertTrue(9000 < pdf.length());
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
@@ -173,7 +173,7 @@ public class HelperPdfTest {
 			pdf = HelperIO.getTemporaryFile("pdf"); //$NON-NLS-1$
 			
 			HelperPdf.writePdfFromPpt(PageSize.A4, true, pdf, ResourceOffice.PPT.getResourceAsFile());
-			assertTrue(pdf.length() > 4000);
+			assertTrue(4000 < pdf.length());
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}

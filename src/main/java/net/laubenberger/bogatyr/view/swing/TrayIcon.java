@@ -33,7 +33,6 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.PopupMenu;
-import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -54,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended {@link java.awt.TrayIcon} with {@link JPopupMenu} support.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100618)
+ * @version 0.9.4 (20101227)
  * @since 0.9.2
  */
 public class TrayIcon extends java.awt.TrayIcon {
@@ -65,7 +64,7 @@ public class TrayIcon extends java.awt.TrayIcon {
 //	private static final int MAC_MENUBAR_OFFSET = 0;
 	
 	int counterMouseClicks = 1;
-	private Window window;
+	private JDialog dialog;
 	private JPopupMenu popup;
 	private final PopupMenuListener popupListener = new PopupMenuListener() {
 		@Override
@@ -188,35 +187,35 @@ public class TrayIcon extends java.awt.TrayIcon {
 
 	void showJPopupMenu(final MouseEvent e) {
 		if (null != popup) {
-			if (null == window) {
-				window = new JDialog((Frame) null);
-				((JDialog) window).setUndecorated(true);
-				window.setAlwaysOnTop(true);
+			if (null == dialog) {
+				dialog = new JDialog((Frame) null);
+				dialog.setUndecorated(true);
+				dialog.setAlwaysOnTop(true);
 				final Dimension size = popup.getPreferredSize();
 
 				final Point centerPoint = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
 				if (e.getY() > centerPoint.getY()) {
-					window.setLocation(Platform.MAC_OSX == PLATFORM ? e.getXOnScreen() : e.getX(), Platform.MAC_OSX == PLATFORM ? MAC_MENUBAR_OFFSET : e
+					dialog.setLocation(Platform.MAC_OSX == PLATFORM ? e.getXOnScreen() : e.getX(), Platform.MAC_OSX == PLATFORM ? MAC_MENUBAR_OFFSET : e
 							.getY()
 							- size.height);
 				} else {
-					window.setLocation(Platform.MAC_OSX == PLATFORM ? e.getXOnScreen() : e.getX(), Platform.MAC_OSX == PLATFORM ? MAC_MENUBAR_OFFSET : e
+					dialog.setLocation(Platform.MAC_OSX == PLATFORM ? e.getXOnScreen() : e.getX(), Platform.MAC_OSX == PLATFORM ? MAC_MENUBAR_OFFSET : e
 							.getY());
 				}
 
-				window.setVisible(true);
+				dialog.setVisible(true);
 
-				popup.show(((RootPaneContainer) window).getContentPane(), 0, 0);
+				popup.show(((RootPaneContainer) dialog).getContentPane(), 0, 0);
 
-				window.toFront();
+				dialog.toFront();
 			}
 		}
 	}
 
 	void hideJPopupMenu() {
-		if (null != window) {
-			window.dispose();
-			window = null;
+		if (null != dialog) {
+			dialog.dispose();
+			dialog = null;
 		}
 	}
 }

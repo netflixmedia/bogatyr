@@ -46,7 +46,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperIO}
  *
  * @author Stefan Laubenberger
- * @version 20101202
+ * @version 20101227
  */
 public class HelperIOTest { //TODO complete tests for all methods
 	@Test
@@ -126,7 +126,7 @@ public class HelperIOTest { //TODO complete tests for all methods
 
 	@Test
 	public void testGetFiles() {
-		assertTrue(HelperIO.getFiles(HelperEnvironment.getOsTempDirectory(), null, -1).size() > 0);
+		assertTrue(!HelperIO.getFiles(HelperEnvironment.getOsTempDirectory(), null, -1).isEmpty());
 
 		try {
 			HelperIO.getFiles(null, null, -1);

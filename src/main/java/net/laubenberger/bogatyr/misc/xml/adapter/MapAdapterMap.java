@@ -29,6 +29,7 @@ package net.laubenberger.bogatyr.misc.xml.adapter;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
@@ -39,7 +40,7 @@ import net.laubenberger.bogatyr.misc.xml.XmlMap;
  * Map adapter for the key {@link String} and value {@link Map} (multi map).
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100618)
+ * @version 0.9.4 (20101227)
  * @since 0.9.2
  */
 public class MapAdapterMap extends XmlAdapter<XmlMap, Map<String, Map<String, String>>> {
@@ -53,8 +54,8 @@ public class MapAdapterMap extends XmlAdapter<XmlMap, Map<String, Map<String, St
 		if (null != map) {
 			final XmlMap xmlMap = new XmlMap();
 
-			for (final Map.Entry<String, Map<String, String>> entry : map.entrySet()) {
-				for (final Map.Entry<String, String> item : entry.getValue().entrySet()) {
+			for (final Entry<String, Map<String, String>> entry : map.entrySet()) {
+				for (final Entry<String, String> item : entry.getValue().entrySet()) {
 					xmlMap.getEntries().add(new XmlEntry(entry.getKey(), item.getKey(), item.getValue()));
 				}
 				

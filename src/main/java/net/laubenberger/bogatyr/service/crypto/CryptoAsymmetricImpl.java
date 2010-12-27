@@ -63,7 +63,7 @@ import org.slf4j.LoggerFactory;
  * This is a class for asymmetric cryptology via RSA.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101119)
+ * @version 0.9.4 (20101227)
  * @since 0.1.0
  */
 public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymmetric {
@@ -312,9 +312,7 @@ public class CryptoAsymmetricImpl extends ServiceAbstract implements CryptoAsymm
 					if (ii == input.length - 1) { // last byte
 						final byte[] usedBytes = new byte[tempCounter + 1];
 
-						for (int xx = 0; xx <= tempCounter; xx++) {
-							usedBytes[xx] = input[ii - tempCounter + xx];
-						}
+						System.arraycopy(input, ii - tempCounter + 0, usedBytes, 0, tempCounter + 1);
 						result = HelperArray.concatenate(result, encryptInternal(usedBytes, key));
 					}
 					tempCounter++;
