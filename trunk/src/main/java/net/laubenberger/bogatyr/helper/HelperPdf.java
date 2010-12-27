@@ -68,7 +68,7 @@ import com.lowagie.text.pdf.parser.PdfTextExtractor;
  * href="http://itextpdf.com/">iText</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101129)
+ * @version 0.9.4 (20101227)
  * @since 0.5.0
  */
 public abstract class HelperPdf {
@@ -434,7 +434,7 @@ public abstract class HelperPdf {
 		}
 		
 		PdfReader reader = null;
-		HashMap<String, String> result;
+		Map<String, String> result;
 		
 		try {
 			reader = new PdfReader(file.getAbsolutePath());

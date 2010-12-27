@@ -34,14 +34,13 @@ import java.math.BigDecimal;
 import org.junit.Test;
 
 import net.laubenberger.bogatyr.helper.HelperNumber;
-import net.laubenberger.bogatyr.model.unit.Volume;
 
 
 /**
  * Junit test
  *
  * @author Stefan Laubenberger
- * @version 20100416
+ * @version 20101227
  */
 public class UnitVolumeTest {
 	@Test

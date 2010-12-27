@@ -34,16 +34,16 @@ import java.util.UUID;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import net.laubenberger.bogatyr.model.Model;
+import net.laubenberger.bogatyr.model.Model;import net.laubenberger.bogatyr.model.misc.DocumentImpl.XmlAdapter;
 
 /**
  * The interface for the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.4 (20101227)
  * @since 0.9.1
  */
-@XmlJavaTypeAdapter(DocumentImpl.XmlAdapter.class)
+@XmlJavaTypeAdapter(XmlAdapter.class)
 public interface Document extends Model, Url {
 	String MEMBER_NAME 					= "name"; //$NON-NLS-1$
 	String MEMBER_VERSION 				= "version"; //$NON-NLS-1$

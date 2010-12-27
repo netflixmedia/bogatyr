@@ -45,15 +45,14 @@ import org.junit.Test;
  *  JUnit test for {@link EncoderBase64}
  *
  * @author Stefan Laubenberger
- * @version 20101129
+ * @version 20101227
  */
 public class EncoderBase64Test {
 	@Test
 	public void testPassEncodeAndDecodeString() {
-		String encoded = null;
 
 		// Test with empty string data
-		encoded = EncoderBase64.encode(HelperString.EMPTY_STRING);
+		String encoded = EncoderBase64.encode(HelperString.EMPTY_STRING);
 		byte[] decoded = EncoderBase64.decode(encoded);
 		
 		try {
@@ -75,10 +74,9 @@ public class EncoderBase64Test {
 	
 	@Test
 	public void testPassEncodeAndDecodeByteArray() {
-		char[] encoded = null;
 
 		// Test with empty byte-array data
-		encoded = EncoderBase64.encode(HelperArray.EMPTY_ARRAY_BYTE);
+		char[] encoded = EncoderBase64.encode(HelperArray.EMPTY_ARRAY_BYTE);
 		byte[] decoded = EncoderBase64.decode(encoded);
 		
 		assertArrayEquals(HelperArray.EMPTY_ARRAY_BYTE, decoded);

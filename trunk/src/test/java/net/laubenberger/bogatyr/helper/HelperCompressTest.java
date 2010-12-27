@@ -49,7 +49,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperCompress}
  * 
  * @author Stefan Laubenberger
- * @version 20101126
+ * @version 20101227
  */
 public class HelperCompressTest {
 
@@ -62,16 +62,16 @@ public class HelperCompressTest {
 		try {
 			fileZip = HelperIO.getTemporaryFile("test", "zip"); //$NON-NLS-1$ //$NON-NLS-2$
 			
-			for (Resource resource : ResourceImage.values()) {
+			for (final Resource resource : ResourceImage.values()) {
 				files.add(resource.getResourceAsFile());
 			}
-			for (Resource resource : ResourceMisc.values()) {
+			for (final Resource resource : ResourceMisc.values()) {
 				files.add(resource.getResourceAsFile());
 			}
-			for (Resource resource : ResourceOffice.values()) {
+			for (final Resource resource : ResourceOffice.values()) {
 				files.add(resource.getResourceAsFile());
 			}
-			for (Resource resource : ResourceSound.values()) {
+			for (final Resource resource : ResourceSound.values()) {
 				files.add(resource.getResourceAsFile());
 			}
 			
@@ -101,7 +101,7 @@ public class HelperCompressTest {
 			fail(ex.getMessage());
 		}
 
-		for (File file : files) {
+		for (final File file : files) {
 			assertEquals(file.length(), new File(fileZipExtractDir + HelperEnvironment.getOsTempDirectory().getAbsolutePath(), file.getName()).length());
 		}
 	}

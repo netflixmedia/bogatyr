@@ -27,21 +27,19 @@
 
 package net.laubenberger.bogatyr.helper;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import net.laubenberger.bogatyr.AllBogatyrTests;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 /**
  * JUnit test for {@link HelperObject}
  * 
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101227
  */
 public class HelperObjectTest
 {
@@ -170,7 +168,7 @@ public class HelperObjectTest
         }
 
         try {
-            assertFalse(AllBogatyrTests.DATA == HelperObject.clone(AllBogatyrTests.DATA));
+			  assertNotSame(AllBogatyrTests.DATA, HelperObject.clone(AllBogatyrTests.DATA));
         } catch (Exception ex) {
             fail(ex.getMessage());
         }

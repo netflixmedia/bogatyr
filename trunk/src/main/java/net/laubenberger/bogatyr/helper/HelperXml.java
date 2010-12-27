@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for XML operations.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101202)
+ * @version 0.9.4 (20101227)
  * @since 0.3.0
  */
 public abstract class HelperXml {
@@ -156,12 +156,11 @@ public abstract class HelperXml {
 	public static <T> String serialize(final T data) throws JAXBException, IOException { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(data));
 
-		String result = null;
 		final ByteArrayOutputStream os = new ByteArrayOutputStream();
 		
 		serialize(os, data);
 
-		result = new String(HelperIO.readStream(HelperIO.convertOutputToInputStream(os)), Constants.ENCODING_DEFAULT);
+		final String result = new String(HelperIO.readStream(HelperIO.convertOutputToInputStream(os)), Constants.ENCODING_DEFAULT);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -236,7 +235,6 @@ public abstract class HelperXml {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 		
-		T result = null;
 		InputStream is = null;
 		try {
 			is = new ByteArrayInputStream(input.getBytes(Constants.ENCODING_DEFAULT));
@@ -245,7 +243,7 @@ public abstract class HelperXml {
 			log.error("Encoding invalid", ex); //$NON-NLS-1$
 		}
 
-		result = deserialize(is, clazz);
+		final T result = deserialize(is, clazz);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

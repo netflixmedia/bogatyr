@@ -49,7 +49,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperGraphic}
  *
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101227
  */
 public class HelperGraphicTest {
 	@Test
@@ -260,7 +260,7 @@ public class HelperGraphicTest {
 	@Test
 	public void testGetAvailableFonts() {
 //		System.err.println(HelperGraphic.getAvailableFonts().size());
-		assertTrue(HelperGraphic.getAvailableFonts().size() > 50);
+		assertTrue(50 < HelperGraphic.getAvailableFonts().size());
 	}
 
 	@Test

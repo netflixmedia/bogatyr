@@ -33,7 +33,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsEmpty;
@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101119)
+ * @version 0.9.4 (20101227)
  * @since 0.7.0
  */
 public abstract class HelperCrypto {
@@ -294,7 +294,7 @@ public abstract class HelperCrypto {
 		
 		final Collection<String> result = new HashSet<String>();
 
-		for (final Map.Entry<?, ?> pair : provider.entrySet()) {
+		for (final Entry<?, ?> pair : provider.entrySet()) {
 			final String entry = (String) pair.getKey();
 
 			if (HelperString.startsWith(entry, id) && !HelperString.isNumeric(entry.substring(id.length(), id.length() + 1))) {

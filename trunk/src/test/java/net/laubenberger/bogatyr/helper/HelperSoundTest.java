@@ -47,7 +47,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperSound}
  *
  * @author Stefan Laubenberger
- * @version 20101129
+ * @version 20101227
  */
 public class HelperSoundTest {
 	@Test
@@ -170,7 +170,7 @@ public class HelperSoundTest {
 	@Test
 	public void testGetAvailableClipFormats() {
 		//System.err.println(HelperCollection.dump(HelperSound.getAvailableClipFormats()));
-		assertTrue(HelperSound.getAvailableClipFormats().size() > 2);
+		assertTrue(2 < HelperSound.getAvailableClipFormats().size());
 	}
 
 }

@@ -48,7 +48,7 @@ import org.junit.Test;
  * JUnit test for {@link LauncherProcess}
  * 
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101227
  */
 public class LauncherProcessTest {
 	private File fileOutput;
@@ -70,7 +70,7 @@ public class LauncherProcessTest {
 	@Test
 	public void testPassCreateAndStartProcess() {
 
-		if (HelperEnvironment.getPlatform() == Platform.WINDOWS) {
+		if (Platform.WINDOWS == HelperEnvironment.getPlatform()) {
 			try {
 				LauncherProcess.createAndStartProcess(new String[] { "dir" }, osOutput, osError); //$NON-NLS-1$
 			} catch (IOException ex) {
@@ -79,7 +79,7 @@ public class LauncherProcessTest {
 
 			sleep();
 			
-			assertTrue(fileOutput.length() > 0);
+			assertTrue(0 < fileOutput.length());
 
 			try {
 				LauncherProcess.createAndStartProcess(new String[] { "dir", "-ä" }, osOutput, osError); //$NON-NLS-1$ //$NON-NLS-2$
@@ -89,7 +89,7 @@ public class LauncherProcessTest {
 
 			sleep();
 			
-			assertTrue(fileError.length() > 0);
+			assertTrue(0 < fileError.length());
 		} else {
 			try {
 				LauncherProcess.createAndStartProcess(new String[] { "ls", "-l" }, osOutput, osError); //$NON-NLS-1$ //$NON-NLS-2$
@@ -99,7 +99,7 @@ public class LauncherProcessTest {
 
 			sleep();
 			
-			assertTrue(fileOutput.length() > 0);
+			assertTrue(0 < fileOutput.length());
 
 			try {
 				LauncherProcess.createAndStartProcess(new String[] { "ls", "-ä" }, osOutput, osError); //$NON-NLS-1$ //$NON-NLS-2$
@@ -109,7 +109,7 @@ public class LauncherProcessTest {
 
 			sleep();
 
-			assertTrue(fileError.length() > 0);
+			assertTrue(0 < fileError.length());
 		}
 	}
 

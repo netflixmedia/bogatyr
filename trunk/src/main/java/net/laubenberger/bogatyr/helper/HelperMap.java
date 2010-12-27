@@ -29,7 +29,7 @@ package net.laubenberger.bogatyr.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Map;import java.util.Map.Entry;
 
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for maps.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101202)
+ * @version 0.9.4 (20101227)
  * @since 0.9.0
  */
 public abstract class HelperMap {
@@ -81,7 +81,7 @@ public abstract class HelperMap {
 
 		final List<K> result = new ArrayList<K>(map.size());
 
-		for (final Map.Entry<K, V> pair : map.entrySet()) {
+		for (final Entry<K, V> pair : map.entrySet()) {
 			result.add(pair.getKey());
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
@@ -105,7 +105,7 @@ public abstract class HelperMap {
 
 		final List<V> result = new ArrayList<V>(map.size());
 
-		for (final Map.Entry<K, V> pair : map.entrySet()) {
+		for (final Entry<K, V> pair : map.entrySet()) {
 			result.add(pair.getValue());
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
@@ -129,7 +129,7 @@ public abstract class HelperMap {
 
 		final StringBuilder sb = new StringBuilder();
 
-		for (final Map.Entry<?, ?> pair : map.entrySet()) {
+		for (final Entry<?, ?> pair : map.entrySet()) {
 			if (0 < sb.length()) {
 				sb.append(HelperString.NEW_LINE);
 			}

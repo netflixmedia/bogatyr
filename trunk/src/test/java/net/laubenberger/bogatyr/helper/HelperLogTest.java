@@ -39,13 +39,13 @@ import org.junit.Test;
  * JUnit test for {@link HelperLog}
  *
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20101227
  */
 public class HelperLogTest {
 	@Test
 	public void testApplicationStart() {
 //		System.err.println(HelperLog.applicationStart().length());
-		assertTrue(HelperLog.applicationStart().length() > 6000);
+		assertTrue(6000 < HelperLog.applicationStart().length());
 
 		try {
 			HelperLog.applicationStart(null);
