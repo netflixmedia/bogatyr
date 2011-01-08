@@ -34,12 +34,12 @@ We program every day since many years with Java. Like in every other language, w
  * *Profiler* to count the execution time java code
  * FastHash for hashing large data very fast
   
-===== News =====
+== News ==
  * 2010-02-12 Bogatyr 0.94 released! ([[http://code.google.com/p/bogatyr/downloads/list|Download]])  
 
 == Tutorials ==
 
-===== Examples =====
+== Examples ==
 
-===== Hints =====
+== Hints ==
 For our experience around Java, please check out the [[hints:hints]].
