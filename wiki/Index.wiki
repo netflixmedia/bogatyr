@@ -1,4 +1,3 @@
-#labels Featured
 #sidebar Index
 
   * [main]
