@@ -1,5 +1,6 @@
 #labels Featured
 #sidebar Index
 
+  * [main]
   * [Hints]
   * [vm]
