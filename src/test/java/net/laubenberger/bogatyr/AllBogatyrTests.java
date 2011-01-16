@@ -64,7 +64,6 @@ import net.laubenberger.bogatyr.model.context.ContextTest;
 import net.laubenberger.bogatyr.service.crypto.CertificateProviderTest;
 import net.laubenberger.bogatyr.view.swing.factory.FormatFactory;
 
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
@@ -86,8 +85,6 @@ public class AllBogatyrTests implements Runnable {
 
 
 	public static void main(final String[] args) {
-		PropertyConfigurator.configure("src/test/configuration/log4j.properties"); //$NON-NLS-1$
-
 		final DateFormat df = FormatFactory.createDateFormat(FormatFactory.PATTERN_DATE_YEAR_MONTH_DAY_HOUR_MINUTE_SECOND_MILLISECOND);
 
 		System.out.println("+---------------------------+"); //$NON-NLS-1$

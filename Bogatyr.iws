@@ -20,21 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="6099473d-4163-40d6-a2ae-9afd78c1b030" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/config/logback.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/config/log4j.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/configuration/log4j.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/configuration/log4j.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/util/configuration/log4j.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/configuration" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/util/configuration" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sample/configuration/filemanager/standard.properties" afterPath="$PROJECT_DIR$/src/sample/config/filemanager/standard.properties" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sample/configuration/helloworld/standard.properties" afterPath="$PROJECT_DIR$/src/sample/config/helloworld/standard.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/logback-test.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Bogatyr.iws" afterPath="$PROJECT_DIR$/Bogatyr.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sample/configuration/filemanager" afterPath="$PROJECT_DIR$/src/sample/config/filemanager" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sample/configuration/helloworld" afterPath="$PROJECT_DIR$/src/sample/config/helloworld" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sample/configuration" afterPath="$PROJECT_DIR$/src/sample/config" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/java/filemanager/FileManager.java" afterPath="$PROJECT_DIR$/src/sample/java/filemanager/FileManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/java/helloworld/HelloWorld.java" afterPath="$PROJECT_DIR$/src/sample/java/helloworld/HelloWorld.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/AllBogatyrTests.java" afterPath="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/AllBogatyrTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/java/CheckExample.java" afterPath="$PROJECT_DIR$/src/util/java/CheckExample.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/java/CheckJUnit.java" afterPath="$PROJECT_DIR$/src/util/java/CheckJUnit.java" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path="$USER_HOME$/.grails/" />
@@ -114,7 +109,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperSwing.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/helper/HelperXml.java" />
         <option value="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/helper/launcher/LauncherProcessTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/xml/adapter/MapAdapterHashCode.java" />
@@ -130,6 +124,7 @@
         <option value="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/model/unit/UnitLengthTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/model/unit/UnitWeightTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/net/laubenberger/bogatyr/model/unit/UnitVolumeTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java" />
       </list>
     </option>
   </component>
@@ -780,7 +775,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
@@ -831,10 +825,6 @@
               <option name="myItemId" value="sample" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -850,29 +840,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="sample" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bogatyr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Bogatyr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sample" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
+              <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -893,10 +861,49 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bogatyr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bogatyr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bogatyr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bogatyr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="misc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1302,7 +1309,7 @@
     <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="-RuntimeExceptionMustBeAfter &amp; -Before added&#10;-Code clean-up&#10;-more JUnit tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Log4J replaced by Logback" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1315,7 +1322,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="-AdapterDimension added&#10;" />
     <MESSAGE value="-Dialog improved&#10;" />
     <MESSAGE value="-new method for LauncherMail&#10;-new method for ActionAbstract&#10;-Typo in HelperLog" />
     <MESSAGE value="-new HQ rendering hints for upscale/downscale" />
@@ -1340,6 +1346,7 @@
     <MESSAGE value="-Exceptions cleaned-up and new ones added&#10;-HelperPreferences removed&#10;-Code and JUnit test improvements&#10;-Various resources for tests added" />
     <MESSAGE value="-HelperXml: serialize&amp;deserialize with String&#10;-HelperIO: only one copy method for files and folders&#10;-JUnit tests extended" />
     <MESSAGE value="-RuntimeExceptionMustBeAfter &amp; -Before added&#10;-Code clean-up&#10;-more JUnit tests" />
+    <MESSAGE value="-Log4J replaced by Logback" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -1462,9 +1469,9 @@
         <state line="42" column="20" selection-start="1018" selection-end="1018" vertical-scroll-proportion="0.1575179" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/resources/config/filemanager/standard.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/laubenberger/bogatyr/misc/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="61" column="97" selection-start="1861" selection-end="1861" vertical-scroll-proportion="0.33454546">
           <folding />
         </state>
       </provider>

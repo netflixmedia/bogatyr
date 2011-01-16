@@ -40,7 +40,6 @@ import net.laubenberger.bogatyr.helper.HelperIO;
 import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.helper.launcher.LauncherFile;
 
-import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,8 +66,6 @@ public class CheckExample {
 	 * @param args
 	 */
 	public static void main(final String[] args) {
-		PropertyConfigurator.configure("src/util/configuration/log4j.properties"); //$NON-NLS-1$
-
 //		list(true);
 		list(false);
 	}

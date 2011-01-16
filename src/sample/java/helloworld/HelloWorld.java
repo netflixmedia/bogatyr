@@ -48,7 +48,6 @@ import net.laubenberger.bogatyr.service.localizer.LocalizerFile;
 import net.laubenberger.bogatyr.service.property.PropertyImpl;
 import net.laubenberger.bogatyr.view.View;
 
-import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,8 +76,6 @@ public class HelloWorld extends ControllerApplicationAbstract<ModelApplication, 
 	private static final String RES_BYE = "HelloWorld.bye"; //$NON-NLS-1$
 
 	static {
-		PropertyConfigurator.configure("src/sample/configuration/log4j.properties"); //$NON-NLS-1$
-
 		MODEL = new ModelApplicationImpl(
 				"HelloWorld", new BigDecimal("0.92"), 266, HelperTime.getDate(2010, 5, 10, 0, 28, 0), null, null, null, null, null, false, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$
 
