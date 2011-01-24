@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * This launcher starts the system browser and displays an URI.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101119)
+ * @version 0.9.5 (20110124)
  * @since 0.2.0
  */
 public abstract class LauncherBrowser {
@@ -92,7 +92,7 @@ public abstract class LauncherBrowser {
 
 		final String prefix = "://"; //$NON-NLS-1$
 
-		if (url.contains(prefix)) {
+		if (HelperString.contains(url, prefix)) {
 			browse(new URI(url));
 		} else {
 			//best guess as protocol is http

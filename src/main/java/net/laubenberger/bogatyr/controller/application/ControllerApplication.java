@@ -27,6 +27,8 @@
 
 package net.laubenberger.bogatyr.controller.application;
 
+import java.util.Map;
+
 import net.laubenberger.bogatyr.controller.Controller;
 import net.laubenberger.bogatyr.model.application.ModelApplication;
 import net.laubenberger.bogatyr.view.View;
@@ -36,7 +38,7 @@ import net.laubenberger.bogatyr.view.View;
  * The interface for the application controller.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100818)
+ * @version 0.9.5 (20110124)
  * @since 0.9.0
  */
 public interface ControllerApplication<M extends ModelApplication, V extends View> extends Controller, Runnable {
@@ -86,7 +88,7 @@ public interface ControllerApplication<M extends ModelApplication, V extends Vie
 	 * @return report about the current application
 	 * @since 0.9.3
 	 */
-	String getReport();
+	Map<String, Object> getReport();
 	
 	//TODO add public actions (e.g. save)
 }

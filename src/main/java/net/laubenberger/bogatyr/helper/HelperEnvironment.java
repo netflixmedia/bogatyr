@@ -30,6 +30,7 @@ package net.laubenberger.bogatyr.helper;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -50,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * It also provides informations about vm memory, temp/user directory and variables.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101105)
+ * @version 0.9.5 (20110124)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -504,40 +505,19 @@ public abstract class HelperEnvironment {
 	 * @return report about the current Java environment
 	 * @since 0.9.3
 	 */
-	public static String getReportJava() { //$JUnit$
+	public static Map<String, Object> getReportJava() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
-		final StringBuilder sb = new StringBuilder();
+		final Map<String, Object> result = new HashMap<String, Object>();
 		
-		sb.append("Java version: "); //$NON-NLS-1$
-		sb.append(getJavaVersion());
-		sb.append(HelperString.NEW_LINE);
+		result.put("version", getJavaVersion()); //$NON-NLS-1$
+		result.put("vendor", getJavaVendor()); //$NON-NLS-1$
+		result.put("VM name", getJavaVmName()); //$NON-NLS-1$
+		result.put("VM version", getJavaVmVersion()); //$NON-NLS-1$
+		result.put("Java properties", HelperMap.dump(getJavaProperties())); //$NON-NLS-1$
+		result.put("class path", getClassPath()); //$NON-NLS-1$
+		result.put("library path", getLibraryPath()); //$NON-NLS-1$
 
-		sb.append("Java vendor: "); //$NON-NLS-1$
-		sb.append(getJavaVendor());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("Java VM name: "); //$NON-NLS-1$
-		sb.append(getJavaVmName());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("Java VM version: "); //$NON-NLS-1$
-		sb.append(getJavaVmVersion());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("Java properties: "); //$NON-NLS-1$
-		sb.append(HelperMap.dump(getJavaProperties()));
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("Class path: "); //$NON-NLS-1$
-		sb.append(getClassPath());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("Library path: "); //$NON-NLS-1$
-		sb.append(getLibraryPath());
-		
-		final String result = sb.toString();
-		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
@@ -548,35 +528,17 @@ public abstract class HelperEnvironment {
 	 * @return report about the current operating system
 	 * @since 0.9.3
 	 */
-	public static String getReportOS() { //$JUnit$
+	public static Map<String, Object> getReportOS() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
-		final StringBuilder sb = new StringBuilder();
+		final Map<String, Object> result = new HashMap<String, Object>();
 		
-		sb.append("Platform: "); //$NON-NLS-1$
-		sb.append(getPlatform());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("OS name: "); //$NON-NLS-1$
-		sb.append(getOsName());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("OS version: "); //$NON-NLS-1$
-		sb.append(getOsVersion());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("OS architecture: "); //$NON-NLS-1$
-		sb.append(getOsArch());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("OS temporary directory: "); //$NON-NLS-1$
-		sb.append(getOsTempDirectory());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("OS environment variables: "); //$NON-NLS-1$
-		sb.append(HelperMap.dump(getOsEnvironmentVariables()));
-		
-		final String result = sb.toString();
+		result.put("platform", getPlatform()); //$NON-NLS-1$
+		result.put("name", getOsName()); //$NON-NLS-1$
+		result.put("version", getOsVersion()); //$NON-NLS-1$
+		result.put("architecture", getOsArch()); //$NON-NLS-1$
+		result.put("temporary directory", getOsTempDirectory()); //$NON-NLS-1$
+		result.put("environment variables", HelperMap.dump(getOsEnvironmentVariables())); //$NON-NLS-1$
 		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -588,35 +550,17 @@ public abstract class HelperEnvironment {
 	 * @return report about the current user
 	 * @since 0.9.3
 	 */
-	public static String getReportUser() { //$JUnit$
+	public static Map<String, Object> getReportUser() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
-		final StringBuilder sb = new StringBuilder();
+		final Map<String, Object> result = new HashMap<String, Object>();
 		
-		sb.append("User name: "); //$NON-NLS-1$
-		sb.append(getUserName());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("User home directory: "); //$NON-NLS-1$
-		sb.append(getUserHomeDirectory());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("User directory: "); //$NON-NLS-1$
-		sb.append(getUserDirectory());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("User country: "); //$NON-NLS-1$
-		sb.append(getUserCountry());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("User language: "); //$NON-NLS-1$
-		sb.append(getUserLanguage());
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("User timezone: "); //$NON-NLS-1$
-		sb.append(getUserTimezone());
-		
-		final String result = sb.toString();
+		result.put("name", getUserName()); //$NON-NLS-1$
+		result.put("home directory", getUserHomeDirectory()); //$NON-NLS-1$
+		result.put("directory", getUserDirectory()); //$NON-NLS-1$
+		result.put("country", getUserCountry()); //$NON-NLS-1$
+		result.put("language", getUserLanguage()); //$NON-NLS-1$
+		result.put("timezone", getUserTimezone()); //$NON-NLS-1$
 		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
@@ -628,66 +572,27 @@ public abstract class HelperEnvironment {
 	 * @return report about the current system environment
 	 * @since 0.9.3
 	 */
-	public static String getReportSystem() { //$JUnit$
+	public static Map<String, Object> getReportSystem() { //$JUnit$
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 		
-		final StringBuilder sb = new StringBuilder();
+		final Map<String, Object> result = new HashMap<String, Object>();
 		
-		sb.append("Available processors (cores): "); //$NON-NLS-1$
-		sb.append(getAvailableProcessors());
-		sb.append(HelperString.NEW_LINE);
-		
-		sb.append("Current screen size: "); //$NON-NLS-1$
-		sb.append(HelperScreen.getCurrentScreenSize());
-		sb.append(HelperString.NEW_LINE);
-		
-		sb.append("Maximum memory: "); //$NON-NLS-1$
-		sb.append(Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryMax()).setScale(3, BigDecimal.ROUND_DOWN));
-		sb.append(" MB"); //$NON-NLS-1$
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("Total memory: "); //$NON-NLS-1$
-		sb.append(Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryTotal()).setScale(3, BigDecimal.ROUND_DOWN));
-		sb.append(" MB"); //$NON-NLS-1$
-		sb.append(HelperString.NEW_LINE);
-
-		sb.append("Free memory: "); //$NON-NLS-1$
-		sb.append(Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryFree()).setScale(3, BigDecimal.ROUND_DOWN));
-		sb.append(" MB"); //$NON-NLS-1$
-		sb.append(HelperString.NEW_LINE);
-		
-		sb.append("Used memory: "); //$NON-NLS-1$
-		sb.append(Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryUsed()).setScale(3, BigDecimal.ROUND_DOWN));
-		sb.append(" MB"); //$NON-NLS-1$
-		sb.append(HelperString.NEW_LINE);
+		result.put("processors/cores", getAvailableProcessors()); //$NON-NLS-1$
+		result.put("current screen size", HelperScreen.getCurrentScreenSize()); //$NON-NLS-1$
+		result.put("memory maximum", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryMax()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$
+		result.put("memory total", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryTotal()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$
+		result.put("memory free", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryFree()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$
+		result.put("memory used", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryUsed()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$
 
 		final List<File> files = HelperIO.getAvailableDrives();
 
 		for (final File root : files) {
-//			if (HelperIO.isDrive(root)) {
-				sb.append("Drive: "); //$NON-NLS-1$
-				sb.append(root.getAbsolutePath());
-				sb.append(HelperString.NEW_LINE);
-				sb.append("Total space: "); //$NON-NLS-1$
-				sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceTotal(root)).setScale(3, BigDecimal.ROUND_DOWN));
-				sb.append(" GB"); //$NON-NLS-1$
-				sb.append(HelperString.NEW_LINE);
-				sb.append("Free space: "); //$NON-NLS-1$
-				sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceFree(root)).setScale(3, BigDecimal.ROUND_DOWN));
-				sb.append(" GB"); //$NON-NLS-1$
-				sb.append(HelperString.NEW_LINE);
-				sb.append("Usable space: "); //$NON-NLS-1$
-				sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceUsable(root)).setScale(3, BigDecimal.ROUND_DOWN));
-				sb.append(" GB"); //$NON-NLS-1$
-				sb.append(HelperString.NEW_LINE);
-				sb.append("Used space: "); //$NON-NLS-1$
-				sb.append(Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceUsed(root)).setScale(3, BigDecimal.ROUND_DOWN));
-				sb.append(" GB"); //$NON-NLS-1$
-				sb.append(HelperString.NEW_LINE);
-//			}
+
+			result.put("drive" + root.getName() + " path", root.getAbsolutePath()); //$NON-NLS-1$
+			result.put("drive" + root.getName() + " space total", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceTotal(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$
+			result.put("drive" + root.getName() + " space free", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceFree(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$
+			result.put("drive" + root.getName() + " space used", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceUsed(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$
 		}
-		
-		final String result = sb.toString();
 		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

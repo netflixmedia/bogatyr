@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.ResourceBundle.Control;
 
 import javax.swing.KeyStroke;
 
@@ -50,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * Localizer implementation for file access.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100526)
+ * @version 0.9.5 (20110124)
  * @since 0.1.0
  */
 public class LocalizerFile extends LocalizerAbstract {
@@ -63,7 +64,8 @@ public class LocalizerFile extends LocalizerAbstract {
 	public static final String POSTFIX_TOOLTIP = ".tooltip"; //$NON-NLS-1$
 
 	private String localizerBase;
-	final ClassLoader classLoader;
+	private ClassLoader classLoader;
+	private Control control;
 	private ResourceBundle bundle;
 
 
@@ -73,6 +75,11 @@ public class LocalizerFile extends LocalizerAbstract {
 	}
 
 	public LocalizerFile(final String localizerBase, final ClassLoader classLoader) {
+		this(localizerBase, ClassLoader.getSystemClassLoader(), null);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(localizerBase, classLoader));
+	}
+	
+	public LocalizerFile(final String localizerBase, final ClassLoader classLoader, Control control) {
 		super();
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(localizerBase, classLoader));
 
@@ -83,17 +90,18 @@ public class LocalizerFile extends LocalizerAbstract {
 		if (null == classLoader) {
 			throw new RuntimeExceptionIsNull("classLoader"); //$NON-NLS-1$
 		}
-
+		
 		this.localizerBase = localizerBase;
 		this.classLoader = classLoader;
+		this.control = control;
 
-		init();
+		setupBundle(getLocale());
 	}
 	
 	/**
 	 * Returns the localize base of the resource file.
 	 *
-	 * @return localize base of the resource file
+	 * @return localizer base of the resource file
 	 * @since 0.1.0
 	 */
 	public String getLocalizerBase() {
@@ -104,7 +112,35 @@ public class LocalizerFile extends LocalizerAbstract {
 	}
 
 	/**
-	 * Sets the localize base of the resource file.
+	 * Returns the {@link ClassLoader} of the resource file.
+	 *
+	 * @return {@link ClassLoader} of the resource file
+	 * @see ClassLoader
+	 * @since 0.9.5
+	 */
+	public ClassLoader getClassLoader() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(classLoader));
+		return classLoader;
+	}
+
+	/**
+	 * Returns the {@link Control} of the resource file.
+	 *
+	 * @return {@link Control} of the resource file
+	 * @see Control
+	 * @since 0.9.5
+	 */
+	public Control getControl() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(control));
+		return control;
+	}
+	
+	/**
+	 * Sets the localizer base of the resource file.
 	 *
 	 * @param localizerBase of the resource file
 	 * @since 0.1.0
@@ -116,18 +152,74 @@ public class LocalizerFile extends LocalizerAbstract {
 		}
 
 		this.localizerBase = localizerBase;
-		bundle = ResourceBundle.getBundle(localizerBase, getLocale(), classLoader);
+		setupBundle(getLocale());
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
+	/**
+	 * Sets the {@link ClassLoader} for the resource file.
+	 *
+	 * @param classLoader for the resource file
+	 * @see ClassLoader
+	 * @since 0.9.5
+	 */
+	public void setClassLoader(ClassLoader classLoader) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(classLoader));
+		if (null == classLoader) {
+			throw new RuntimeExceptionIsNull("classLoader"); //$NON-NLS-1$
+		}
 
+		this.classLoader = classLoader;
+		setupBundle(getLocale());
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
+
+	/**
+	 * Sets the {@link Control} for the resource file.
+	 *
+	 * @param control for the resource file
+	 * @see Control
+	 * @since 0.9.5
+	 */
+	public void setControl(Control control) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(control));
+
+		this.control = control;
+		setupBundle(getLocale());
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
+	
+	
 	/*
 	 * Private methods
 	 */
 
-	private void init() {
-		bundle = ResourceBundle.getBundle(localizerBase, getLocale(), classLoader);
+	private void setupBundle(final Locale locale) {
+		if (control == null) {
+			bundle = ResourceBundle.getBundle(localizerBase, locale, classLoader);
+		} else {
+			try {
+				bundle = control.newBundle(localizerBase, locale, "java.class", classLoader, false); //java.properties //$NON-NLS-1$
+			} catch (Exception ex) {
+				log.error("Could not enable the new bundle", ex); //$NON-NLS-1$
+			}
+		}
+
+		//		Enumeration<String> enu = bundle.getKeys();
+//		
+//		while(enu.hasMoreElements()) {
+//			String key = enu.nextElement();
+//			try {
+//				System.err.println(new String(bundle.getString(key).getBytes(), Constants.ENCODING_UTF8));
+//			} catch (UnsupportedEncodingException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+
 	}
 
 
@@ -142,8 +234,8 @@ public class LocalizerFile extends LocalizerAbstract {
 			throw new RuntimeExceptionIsNull("locale"); //$NON-NLS-1$
 		}
 
-		bundle = ResourceBundle.getBundle(localizerBase, locale, classLoader);
-
+		setupBundle(locale);
+		
 		super.setLocale(locale);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());

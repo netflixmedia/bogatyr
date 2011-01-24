@@ -32,10 +32,17 @@ package net.laubenberger.bogatyr.service.timer;
  * Defines the methods for the implementation of the timer.
  *
  * @author Stefan Laubenberger
- * @version 0.9.1 (20100416)
+ * @version 0.9.5 (20110124)
  * @since 0.6.0
  */
 public interface Timer extends TimeMachine {
+	/**
+	 * Starts immediately the timer with a standard interval of 1000ms.
+	 *
+	 * @since 0.9.5
+	 */
+	void start();
+	
 	/**
 	 * Starts immediately the timer with a given interval.
 	 *

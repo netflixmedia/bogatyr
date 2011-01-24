@@ -45,7 +45,7 @@ import java.util.Vector;
  * This is an extended JTable.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.5 (20110124)
  * @since 0.7.0
  */
 public class Table extends JTable implements Activatable {
@@ -55,6 +55,10 @@ public class Table extends JTable implements Activatable {
 
 	private boolean isNotActive;
 
+	{
+		setAutoCreateRowSorter(true);
+	}
+	
 	/*
 	 * Superclass constructors
 	 */

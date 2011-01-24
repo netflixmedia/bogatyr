@@ -46,7 +46,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperEnvironment}
  *
  * @author Stefan Laubenberger
- * @version 20101227
+ * @version 20110124
  */
 public class HelperEnvironmentTest {
 	@Test
@@ -219,26 +219,22 @@ public class HelperEnvironmentTest {
 	
 	@Test
 	public void testGetReportJava() {
-//		System.err.println(HelperEnvironment.getReportJava().length());
-		assertTrue(4000 < HelperEnvironment.getReportJava().length());
+		assertEquals(7, HelperEnvironment.getReportJava().size());
 	}
 	
 	@Test
 	public void testGetReportOS() {
-//		System.err.println(HelperEnvironment.getReportOS().length());
-		assertTrue(500 < HelperEnvironment.getReportOS().length());
+		assertEquals(6,  HelperEnvironment.getReportOS().size());
 	}
 	
 	@Test
 	public void testGetReportUser() {
-//		System.err.println(HelperEnvironment.getReportUser().length());
-		assertTrue(300 < HelperEnvironment.getReportUser().length());
+		assertEquals(6,  HelperEnvironment.getReportUser().size());
 	}	
 	
 	@Test
 	public void testGetReportSystem() {
-//		System.err.println(HelperEnvironment.getReportSystem().length());
-		assertTrue(200 < HelperEnvironment.getReportSystem().length());
+		assertTrue(6 < HelperEnvironment.getReportSystem().size());
 	}
 }
 

@@ -34,7 +34,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * This is a helper class for logging.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101202)
+ * @version 0.9.5 (20110124)
  * @since 0.9.1
  */
 public abstract class HelperLog {
@@ -77,7 +77,7 @@ public abstract class HelperLog {
 		sb.append(application);
 		sb.append(HelperString.fill('#', LINE_LENGTH - application.length())); 
 		sb.append(HelperString.NEW_LINE);
-		sb.append(controller.getReport());
+		sb.append(HelperMap.dump(controller.getReport()));
 		sb.append(HelperString.NEW_LINE);
 		
 		sb.append(getReport());
@@ -158,7 +158,7 @@ public abstract class HelperLog {
 		sb.append(java);
 		sb.append(HelperString.fill('#', LINE_LENGTH - java.length())); 
 		sb.append(HelperString.NEW_LINE);
-		sb.append(HelperEnvironment.getReportJava());
+		sb.append(HelperMap.dump(HelperEnvironment.getReportJava()));
 		sb.append(HelperString.NEW_LINE);
 
 		// OS
@@ -166,7 +166,7 @@ public abstract class HelperLog {
 		sb.append(os);
 		sb.append(HelperString.fill('#', LINE_LENGTH - os.length())); 
 		sb.append(HelperString.NEW_LINE);
-		sb.append(HelperEnvironment.getReportOS());
+		sb.append(HelperMap.dump(HelperEnvironment.getReportOS()));
 		sb.append(HelperString.NEW_LINE);
 
 		// User
@@ -174,7 +174,7 @@ public abstract class HelperLog {
 		sb.append(user);
 		sb.append(HelperString.fill('#', LINE_LENGTH - user.length())); 
 		sb.append(HelperString.NEW_LINE);
-		sb.append(HelperEnvironment.getReportUser());
+		sb.append(HelperMap.dump(HelperEnvironment.getReportUser()));
 		sb.append(HelperString.NEW_LINE);
 		
 		// System
@@ -182,7 +182,7 @@ public abstract class HelperLog {
 		sb.append(system);
 		sb.append(HelperString.fill('#', LINE_LENGTH - system.length())); 
 		sb.append(HelperString.NEW_LINE);
-		sb.append(HelperEnvironment.getReportSystem());
+		sb.append(HelperMap.dump(HelperEnvironment.getReportSystem()));
 
 		return sb.toString();
 	}

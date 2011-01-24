@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
  * This launcher starts the system mail application.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101119)
+ * @version 0.9.5 (20110124)
  * @since 0.7.0
  */
 public abstract class LauncherMail {
@@ -73,7 +73,7 @@ public abstract class LauncherMail {
 	}
 
 	/**
-	 * Opens an email address given as {@link URI} with the default mail application.
+	 * Opens the default mail application with the given email address as {@link URI}.
 	 *
 	 * @param uri for the mail application (e.g. "mailto:yourname@yourmail.com"). It supports CC, BCC, SUBJECT, and BODY.
 	 * @throws IOException
@@ -94,9 +94,39 @@ public abstract class LauncherMail {
 		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
-
+	
 	/**
-	 * Opens an email with a given subject, body and addresses with the default mail application.
+	 * Opens the default mail application with the given email address as {@link String}.
+	 *
+	 * @param emailAddress for the mail (e.g. "yourname@yourmail.com").
+	 * @throws IOException
+	 * @throws URISyntaxException 
+	 * @see URI
+	 * @since 0.9.5
+	 */
+	public static void mail(final String emailAddress) throws IOException, URISyntaxException { //$JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(emailAddress));
+		if (null == emailAddress) {
+			throw new RuntimeExceptionIsNull("emailAddress"); //$NON-NLS-1$
+		}
+		if (!HelperString.isValid(emailAddress)) {
+			throw new RuntimeExceptionIsEmpty("emailAddress"); //$NON-NLS-1$
+		}
+		
+		final String prefix = "mailto:"; //$NON-NLS-1$
+
+		if (HelperString.startsWith(emailAddress, prefix)) {
+			mail(new URI(emailAddress));
+		} else {
+			//best guess - add the prefix
+			mail(new URI(prefix + emailAddress));
+		}
+		
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
+	
+	/**
+	 * Opens the default mail application with a given subject, body and addresses.
 	 *
 	 * @param subject		  for the mail
 	 * @param body			  for the mail
@@ -124,6 +154,7 @@ public abstract class LauncherMail {
 		}
 
 		final StringBuilder sb = new StringBuilder();
+		sb.append("mailto:"); //$NON-NLS-1$
 		for (final String address : emailAddresses) {
 			if (null == address) {
 				throw new RuntimeExceptionIsNull("address"); //$NON-NLS-1$
@@ -142,11 +173,7 @@ public abstract class LauncherMail {
 			sb.append(URLEncoder.encode(body, Constants.ENCODING_UTF8).replace(HelperString.PLUS_SIGN, HEX_SPACE));
 		}
 		
-		final String addresses = sb.toString();
-
-		final String prefix = "mailto:"; //$NON-NLS-1$
-
-		mail(new URI(prefix + addresses));
+		mail(new URI(sb.toString()));
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
