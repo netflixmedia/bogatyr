@@ -201,10 +201,24 @@ public class LocalizerFile extends LocalizerAbstract {
 		if (control == null) {
 			bundle = ResourceBundle.getBundle(localizerBase, locale, classLoader);
 		} else {
+			
+			bundle = ResourceBundle.getBundle(localizerBase, locale, classLoader, new EncodingControl());
+			
 			try {
-				bundle = control.newBundle(localizerBase, locale, "java.class", classLoader, false); //java.properties //$NON-NLS-1$
+				bundle = control.newBundle(localizerBase, locale, "java.class", classLoader, false); //$NON-NLS-1$
+				
+				if (bundle == null) {
+					bundle = control.newBundle(localizerBase, locale, "java.properties", classLoader, false); //$NON-NLS-1$
+				}
 			} catch (Exception ex) {
 				log.error("Could not enable the new bundle", ex); //$NON-NLS-1$
+			}
+
+			if (bundle == null) {
+//				System.err.println("localizerBase " + localizerBase);
+//				System.err.println("locale " + locale);
+//				System.err.println("classLoader " + classLoader);
+				bundle = ResourceBundle.getBundle(localizerBase, locale, classLoader); //worst case fallback
 			}
 		}
 
