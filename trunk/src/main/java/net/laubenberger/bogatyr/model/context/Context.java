@@ -36,7 +36,7 @@ import net.laubenberger.bogatyr.model.Model;
  * Interface for the context in applications.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.5 (20110124)
  * @since 0.6.0
  */
 public interface Context extends Model {

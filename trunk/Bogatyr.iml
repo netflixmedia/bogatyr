@@ -37,15 +37,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.16/log4j-1.2.16.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -55,7 +46,16 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j12/1.6.1/slf4j-log4j12-1.6.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/ch/qos/logback/logback-classic/0.9.27/logback-classic-0.9.27.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/ch/qos/logback/logback-core/0.9.27/logback-core-0.9.27.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

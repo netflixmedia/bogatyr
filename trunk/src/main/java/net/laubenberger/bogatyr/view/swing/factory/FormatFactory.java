@@ -56,12 +56,14 @@ import org.slf4j.LoggerFactory;
  * This is a format factory.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101119)
+ * @version 0.9.5 (20110124)
  * @since 0.9.0
  */
 public abstract class FormatFactory {
 	private static final Logger log = LoggerFactory.getLogger(FormatFactory.class);
 
+	public static final String PATTERN_DATE_ISO8601 = "yyyy-MM-dd'T'HH:mm:ssz"; //$NON-NLS-1$
+    public static final String PATTERN_DATE_RSS2 = "EEE, dd MMM yyyy HH:mm:ss z"; //$NON-NLS-1$
 	public static final String PATTERN_DATE_DAY_MONTH_YEAR = "dd.MM.yyyy"; //$NON-NLS-1$
 	public static final String PATTERN_DATE_YEAR_MONTH_DAY = "yyyy.MM.dd"; //$NON-NLS-1$
 	public static final String PATTERN_DATE_YEAR_MONTH_DAY_HOUR_MINUTE = "yyyy.MM.dd HH:mm"; //$NON-NLS-1$

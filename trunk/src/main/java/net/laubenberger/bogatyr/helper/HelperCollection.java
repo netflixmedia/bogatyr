@@ -28,6 +28,7 @@
 package net.laubenberger.bogatyr.helper;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -45,7 +46,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101119)
+ * @version 0.9.5 (20110124)
  * @since 0.7.0
  */
 public abstract class HelperCollection {
@@ -110,7 +111,7 @@ public abstract class HelperCollection {
 			throw new RuntimeExceptionIsNull("elements"); //$NON-NLS-1$
 		}
 
-		final List<E> result = Arrays.asList(elements);
+		final List<E> result = new ArrayList<E>(Arrays.asList(elements));
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

@@ -43,7 +43,7 @@ import org.junit.Test;
  * JUnit test for {@link LauncherMail}
  * 
  * @author Stefan Laubenberger
- * @version 20101119
+ * @version 20110124
  */
 public class LauncherMailTest {
 	@Test
@@ -60,6 +60,18 @@ public class LauncherMailTest {
 			fail(ex.getMessage());
 		}
 
+		try {
+			LauncherMail.mail("mailto:yourname@yourmail.com"); //$NON-NLS-1$
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			LauncherMail.mail("yourname@yourmail.com"); //$NON-NLS-1$
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
 		try {
 			LauncherMail
 					.mail(
@@ -80,14 +92,32 @@ public class LauncherMailTest {
 	@Test
 	public void testFailMail() {
 		try {
-			LauncherMail.mail(null);
+			LauncherMail.mail((URI)null);
 			fail("uri is null"); //$NON-NLS-1$
 		} catch (RuntimeExceptionIsNull ex) {
 			// nothing to do
 		} catch (Exception ex) {
 			fail(ex.getMessage());
 		}
-
+		
+		try {
+			LauncherMail.mail((String)null);
+			fail("emailAddress is null"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsNull ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
+		try {
+			LauncherMail.mail(HelperString.EMPTY_STRING);
+			fail("emailAddress is empty"); //$NON-NLS-1$
+		} catch (RuntimeExceptionIsEmpty ex) {
+			// nothing to do
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+		
 		try {
 			LauncherMail
 					.mail(

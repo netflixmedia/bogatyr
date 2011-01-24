@@ -40,16 +40,13 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionMustBeGreater;
  * This is a countdown timer which informs all added listeners about its state.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101007)
+ * @version 0.9.5 (20110124)
  * @since 0.6.0
  */
 public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer {
 	private static final Logger log = LoggerFactory.getLogger(CountdownTimerImpl.class);
 
-	private static final long DEFAULT_DELAY = 1000L;
-
 	long runtime;
-
 
 	public CountdownTimerImpl() {
 		super();
@@ -64,11 +61,11 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 	@Override
 	public void start(final long runtime) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(runtime));
-		if (0L > runtime) {
+		if (0L >= runtime) {
 			throw new RuntimeExceptionMustBeGreater("runtime", runtime, 0); //$NON-NLS-1$
 		}
 
-		start(0L, runtime, DEFAULT_DELAY);
+		start(0L, runtime, DEFAULT_INTERVAL);
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
@@ -79,10 +76,10 @@ public class CountdownTimerImpl extends TimerAbstract implements CountdownTimer 
 		if (0L > delay) {
 			throw new RuntimeExceptionMustBeGreater("delay", delay, 0); //$NON-NLS-1$
 		}
-		if (0L > runtime) {
+		if (0L >= runtime) {
 			throw new RuntimeExceptionMustBeGreater("runtime", runtime, 0); //$NON-NLS-1$
 		}
-		if (0L > interval) {
+		if (0L >= interval) {
 			throw new RuntimeExceptionMustBeGreater("interval", interval, 0); //$NON-NLS-1$
 		}
 

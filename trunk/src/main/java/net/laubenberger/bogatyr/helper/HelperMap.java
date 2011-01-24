@@ -28,8 +28,10 @@
 package net.laubenberger.bogatyr.helper;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;import java.util.Map.Entry;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 
@@ -40,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for maps.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101227)
+ * @version 0.9.5 (20110124)
  * @since 0.9.0
  */
 public abstract class HelperMap {
@@ -139,6 +141,39 @@ public abstract class HelperMap {
 		}
 
 		final String result = sb.toString();
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
+	/**
+	 * Returns a 2D array of the given {@link Map}.
+	 * 
+	 * @param map for the array
+	 * @return array with the map content
+	 * @see Map
+	 * @since 0.9.5
+	 */
+	public static Object[][] toArray(final Map<?, ?> map) { // $JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(map));
+		if (null == map) {
+			throw new RuntimeExceptionIsNull("map"); //$NON-NLS-1$
+		}	
+		
+		final Object[][] result = new Object[map.size()][2];
+
+		
+		Iterator<?> iter = map.entrySet().iterator();
+
+		int ii = 0;
+		while(iter.hasNext()){
+		    Map.Entry<?, ?> mapping = (Map.Entry<?, ?>) iter.next();
+
+		    result[ii][0] = mapping.getKey();
+		    result[ii][1] = mapping.getValue();
+
+		    ii++;
+		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
