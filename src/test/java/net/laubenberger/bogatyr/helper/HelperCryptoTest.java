@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -53,7 +53,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperCrypto}
  *
  * @author Stefan Laubenberger
- * @version 20101227
+ * @version 20110213
  */
 public class HelperCryptoTest {
 
@@ -65,7 +65,7 @@ public class HelperCryptoTest {
 		
 		final Set<String> set = new HashSet<String>(ITERATION);
 		
-		for (int ii = 0; ii < ITERATION; ii++) {
+		for (int ii = 0; ITERATION > ii; ii++) {
 		    final String key = HelperCrypto.getRandomKey(16, '1', '2', '3', '4', '5', '6');
 		    assertFalse(set.contains(key));
 		    set.add(key);
@@ -105,7 +105,7 @@ public class HelperCryptoTest {
 
 		final Set<String> set = new HashSet<String>(ITERATION);
 	        
-        for (int ii = 0; ii < ITERATION; ii++) {
+        for (int ii = 0; ITERATION > ii; ii++) {
             final String key = HelperCrypto.getRandomKey(8);
             assertFalse(set.contains(key));
             set.add(key);
@@ -127,7 +127,7 @@ public class HelperCryptoTest {
 	    
        final Set<UUID> set = new HashSet<UUID>(ITERATION);
         
-        for (int ii = 0; ii < ITERATION; ii++) {
+        for (int ii = 0; ITERATION > ii; ii++) {
             final UUID key = HelperCrypto.getUUID();
             assertFalse(set.contains(key));
             set.add(key);
@@ -193,7 +193,7 @@ public class HelperCryptoTest {
 		}
 		
 		assertFalse(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoSymmetricAlgo.AES.getAlgorithm()));
-		assertFalse(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoAsymmetricAlgo.ELGAMAL.getAlgorithm()));
+		assertFalse(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoAsymmetricAlgo.RSA.getAlgorithm()));
 		assertFalse(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).contains(HashCodeAlgo.SHA256.getAlgorithm()));
 		assertFalse(HelperCrypto.getMacs(HelperCrypto.DEFAULT_PROVIDER).contains(SignatureAlgo.SHA256_WITH_RSA.getAlgorithm()));
 		
@@ -217,7 +217,7 @@ public class HelperCryptoTest {
 		}
 		
 		assertFalse(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoSymmetricAlgo.AES.getAlgorithm()));
-		assertFalse(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoAsymmetricAlgo.ELGAMAL.getAlgorithm()));
+		assertFalse(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoAsymmetricAlgo.RSA.getAlgorithm()));
 		assertFalse(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).contains(HmacAlgo.SHA256.getAlgorithm()));
 		assertFalse(HelperCrypto.getMessageDigests(HelperCrypto.DEFAULT_PROVIDER).contains(SignatureAlgo.SHA256_WITH_RSA.getAlgorithm()));
 		
@@ -241,7 +241,6 @@ public class HelperCryptoTest {
 		}
 		
 		assertFalse(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoSymmetricAlgo.AES.getAlgorithm()));
-		assertFalse(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoAsymmetricAlgo.ELGAMAL.getAlgorithm()));
 		assertFalse(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).contains(HashCodeAlgo.SHA256.getAlgorithm()));
 		assertFalse(HelperCrypto.getSignatures(HelperCrypto.DEFAULT_PROVIDER).contains(HmacAlgo.SHA256.getAlgorithm()));
 		
@@ -315,7 +314,7 @@ public class HelperCryptoTest {
 			assertTrue(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(algo.getAlgorithm()));
 		}	
 		
-		assertFalse(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoAsymmetricAlgo.ELGAMAL.getAlgorithm()));
+		assertFalse(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(CryptoAsymmetricAlgo.RSA.getAlgorithm()));
 		assertFalse(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(HashCodeAlgo.SHA256.getAlgorithm()));
 		assertFalse(HelperCrypto.getKeyGenerators(HelperCrypto.DEFAULT_PROVIDER).contains(SignatureAlgo.SHA256_WITH_RSA.getAlgorithm()));
 		

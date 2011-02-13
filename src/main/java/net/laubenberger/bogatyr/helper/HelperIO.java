@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -69,7 +69,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101227)
+ * @version 0.9.5 (20110213)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -719,7 +719,7 @@ public abstract class HelperIO {
 			try {
 				if (null != br) br.close();
 			} catch (IOException ex) {
-				log.error("Could not close the reader", ex);
+				log.error("Could not close the reader", ex); //$NON-NLS-1$
 			}
 		}
 	}
@@ -792,7 +792,7 @@ public abstract class HelperIO {
 			try {
 				if (null != br) br.close();
 			} catch (IOException ex) {
-				log.error("Could not close the reader", ex);
+				log.error("Could not close the reader", ex); //$NON-NLS-1$
 			}
 		}
 	}

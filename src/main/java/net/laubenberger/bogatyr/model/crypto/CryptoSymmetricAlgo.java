@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Symmetric crypto algorithms available in BouncyCastle
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101105)
+ * @version 0.9.5 (20110213)
  * @since 0.9.1
  */
 @XmlRootElement(name = "cryptoSymmetricAlgo")
@@ -49,7 +49,7 @@ public enum CryptoSymmetricAlgo implements CryptoAlgo {
 	NOEKEON("NOEKEON", "NOEKEON/CBC/PKCS5Padding", 128, 16), //$NON-NLS-1$ //$NON-NLS-2$
 	RC2("RC2", "RC2/CBC/PKCS5Padding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
 	RC5("RC5", "RC5/CBC/PKCS5Padding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
-	RC6("RC6", "RC6/CBC/PKCS5Padding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
+	RC6("RC6", "RC6/CBC/PKCS5Padding", 128, 16), //$NON-NLS-1$ //$NON-NLS-2$
 	RIJNDAEL("RIJNDAEL", "RIJNDAEL/CBC/PKCS5Padding", 192, 16), //$NON-NLS-1$ //$NON-NLS-2$
 	SEED("SEED", "SEED/CBC/PKCS5Padding", 128, 16), //$NON-NLS-1$ //$NON-NLS-2$
 	SERPENT("SERPENT", "SERPENT/CBC/PKCS5Padding", 256, 16), //$NON-NLS-1$ //$NON-NLS-2$

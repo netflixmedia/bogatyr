@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -34,13 +34,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Asymmetric crypto algorithms available in BouncyCastle
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101105)
+ * @version 0.9.5 (20110213)
  * @since 0.9.1
  */
 @XmlRootElement(name = "cryptoAsymmetricAlgo")
 public enum CryptoAsymmetricAlgo implements CryptoAlgo {
-	RSA("RSA", "RSA/NONE/PKCS1PADDING", 2048),  //$NON-NLS-1$//$NON-NLS-2$
-	ELGAMAL("ELGAMAL", "ELGAMAL/NONE/PKCS1Padding", 1024);  //$NON-NLS-1$//$NON-NLS-2$
+	RSA("RSA", "RSA/NONE/PKCS1PADDING", 2048);  //$NON-NLS-1$//$NON-NLS-2$
+//	ELGAMAL("ELGAMAL", "ELGAMAL/NONE/PKCS1Padding", 1024);  //$NON-NLS-1$//$NON-NLS-2$
 
 	private final String algorithm;
 	private final String xform;

@@ -36,20 +36,22 @@ import org.junit.Test;
 
 
 /**
- * JUnit test for {@link Weight}
+ * JUnit test for {@link Bit}
  *
  * @author Stefan Laubenberger
  * @version 20110213
  */
-public class UnitWeightTest {
+public class UnitBitTest {
+
 	@Test
 	public void testConvert() {
-		for (final Weight unit : Weight.values()) {
-			assertEquals(Weight.KILOGRAM.convertTo(unit, BigDecimal.ONE), unit.factor);
+
+		for (final Bit unit : Bit.values()) {
+			assertEquals(Bit.BIT.convertTo(unit, BigDecimal.ONE), unit.factor);
 		}
 
 		try {
-			Weight.KILOGRAM.convertTo(null, BigDecimal.ONE);
+			Bit.BIT.convertTo(null, BigDecimal.ONE);
 			fail("toUnit is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -58,7 +60,7 @@ public class UnitWeightTest {
 		}
 		
 		try {
-			Weight.KILOGRAM.convertTo(Weight.GRAM, null);
+			Bit.BIT.convertTo(Bit.BYTE, null);
 			fail("value is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

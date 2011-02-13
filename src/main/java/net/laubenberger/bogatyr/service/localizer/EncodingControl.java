@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -75,19 +75,19 @@ public class EncodingControl extends Control {
 	}
 
 	@Override
-	public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
+	public ResourceBundle newBundle(final String baseName, final Locale locale, final String format, final ClassLoader loader, final boolean reload)
 			throws IllegalAccessException, InstantiationException, IOException {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(baseName, locale, format, loader, reload));
 
-		String bundleName = toBundleName(baseName, locale);
-		String resourceName = toResourceName(bundleName, "properties");
+		final String bundleName = toBundleName(baseName, locale);
+		final String resourceName = toResourceName(bundleName, "properties"); //$NON-NLS-1$
 		ResourceBundle result = null;
 		InputStream stream = null;
 		if (reload) {
-			URL url = loader.getResource(resourceName);
-			if (url != null) {
-				URLConnection connection = url.openConnection();
-				if (connection != null) {
+			final URL url = loader.getResource(resourceName);
+			if (null != url) {
+				final URLConnection connection = url.openConnection();
+				if (null != connection) {
 					connection.setUseCaches(false);
 					stream = connection.getInputStream();
 				}
@@ -96,7 +96,7 @@ public class EncodingControl extends Control {
 			stream = loader.getResourceAsStream(resourceName);
 		}
 
-		if (stream != null) {
+		if (null != stream) {
 			try {
 				result = new PropertyResourceBundle(new InputStreamReader(stream, encoding));
 			} finally {
