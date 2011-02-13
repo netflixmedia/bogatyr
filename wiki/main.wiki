@@ -43,4 +43,4 @@ We program every day since many years with Java. Like in every other language, w
 == Examples ==
 
 == Hints ==
-For our experience around Java, please check out the [[hints:hints]].
+For our experience around Java, please check out the [Hints].
