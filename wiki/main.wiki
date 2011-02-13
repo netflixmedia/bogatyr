@@ -37,8 +37,7 @@ We program every day since many years with Java. Like in every other language, w
   
 == News ==
  * *2010-02-13* Bogatyr 0.95 released! ([[http://code.google.com/p/bogatyr/downloads/list|Download]])  
- * 2010-12-27 Bogatyr 0.94 released! ([[http://code.google.com/p/bogatyr/downloads/list|Download]])  
-
+ * 2010-12-27 Bogatyr 0.94 released
 == Tutorials ==
 
 == Examples ==
