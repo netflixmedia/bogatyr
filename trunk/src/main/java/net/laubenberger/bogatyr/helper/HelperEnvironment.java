@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * It also provides informations about vm memory, temp/user directory and variables.
  *
  * @author Stefan Laubenberger
- * @version 0.9.5 (20110124)
+ * @version 0.9.5 (20110213)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -579,19 +579,19 @@ public abstract class HelperEnvironment {
 		
 		result.put("processors/cores", getAvailableProcessors()); //$NON-NLS-1$
 		result.put("current screen size", HelperScreen.getCurrentScreenSize()); //$NON-NLS-1$
-		result.put("memory maximum", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryMax()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$
-		result.put("memory total", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryTotal()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$
-		result.put("memory free", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryFree()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$
-		result.put("memory used", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryUsed()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$
+		result.put("memory maximum", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryMax()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
+		result.put("memory total", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryTotal()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
+		result.put("memory free", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryFree()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
+		result.put("memory used", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryUsed()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		final List<File> files = HelperIO.getAvailableDrives();
 
 		for (final File root : files) {
 
-			result.put("drive" + root.getName() + " path", root.getAbsolutePath()); //$NON-NLS-1$
-			result.put("drive" + root.getName() + " space total", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceTotal(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$
-			result.put("drive" + root.getName() + " space free", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceFree(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$
-			result.put("drive" + root.getName() + " space used", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceUsed(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$
+			result.put("drive" + root.getName() + " path", root.getAbsolutePath()); //$NON-NLS-1$ //$NON-NLS-2$
+			result.put("drive" + root.getName() + " space total", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceTotal(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			result.put("drive" + root.getName() + " space free", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceFree(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			result.put("drive" + root.getName() + " space used", Bit.BYTE.convertTo(Bit.GIGABYTE, HelperIO.getSpaceUsed(root)).setScale(3, BigDecimal.ROUND_DOWN) + " GB"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));

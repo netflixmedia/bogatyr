@@ -36,20 +36,22 @@ import org.junit.Test;
 
 
 /**
- * JUnit test for {@link Weight}
+ * JUnit test for {@link Time}
  *
  * @author Stefan Laubenberger
  * @version 20110213
  */
-public class UnitWeightTest {
+public class UnitTimeTest {
+
 	@Test
 	public void testConvert() {
-		for (final Weight unit : Weight.values()) {
-			assertEquals(Weight.KILOGRAM.convertTo(unit, BigDecimal.ONE), unit.factor);
+
+		for (final Time unit : Time.values()) {
+			assertEquals(Time.SECOND.convertTo(unit, BigDecimal.ONE), unit.factor);
 		}
 
 		try {
-			Weight.KILOGRAM.convertTo(null, BigDecimal.ONE);
+			Time.SECOND.convertTo(null, BigDecimal.ONE);
 			fail("toUnit is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do
@@ -58,7 +60,7 @@ public class UnitWeightTest {
 		}
 		
 		try {
-			Weight.KILOGRAM.convertTo(Weight.GRAM, null);
+			Time.SECOND.convertTo(Time.MINUTE, null);
 			fail("value is null"); //$NON-NLS-1$
 		} catch (IllegalArgumentException ex) {
 			//nothing to do

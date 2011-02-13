@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -54,7 +54,7 @@ import org.junit.Test;
  * JUnit test for {@link CertificateProviderImpl}
  *
  * @author Stefan Laubenberger
- * @version 20101227
+ * @version 20110213
  */
 public class CertificateProviderTest {
 	private static final String CN_ISSUER = "CN=ISSUER"; //$NON-NLS-1$
@@ -77,9 +77,9 @@ public class CertificateProviderTest {
 	public void testReadCertificate() {
 		
 		try {
-			File file = HelperIO.getTemporaryFile();
+			final File file = HelperIO.getTemporaryFile();
 
-			X509Certificate cert_original = publicKeyProvider.generateCertificate(keyPair, CN_ISSUER, CN_SUBJECT, GENERAL_NAME, DATE_START, DATE_END);
+			final X509Certificate cert_original = publicKeyProvider.generateCertificate(keyPair, CN_ISSUER, CN_SUBJECT, GENERAL_NAME, DATE_START, DATE_END);
 			publicKeyProvider.writeCertificate(file, cert_original);
 			final X509Certificate cert_new = publicKeyProvider.readCertificate(file);
 

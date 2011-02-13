@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * Localizer implementation for file access.
  *
  * @author Stefan Laubenberger
- * @version 0.9.5 (20110124)
+ * @version 0.9.5 (20110213)
  * @since 0.1.0
  */
 public class LocalizerFile extends LocalizerAbstract {
@@ -79,7 +79,7 @@ public class LocalizerFile extends LocalizerAbstract {
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(localizerBase, classLoader));
 	}
 	
-	public LocalizerFile(final String localizerBase, final ClassLoader classLoader, Control control) {
+	public LocalizerFile(final String localizerBase, final ClassLoader classLoader, final Control control) {
 		super();
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(localizerBase, classLoader));
 
@@ -164,7 +164,7 @@ public class LocalizerFile extends LocalizerAbstract {
 	 * @see ClassLoader
 	 * @since 0.9.5
 	 */
-	public void setClassLoader(ClassLoader classLoader) {
+	public void setClassLoader(final ClassLoader classLoader) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(classLoader));
 		if (null == classLoader) {
 			throw new RuntimeExceptionIsNull("classLoader"); //$NON-NLS-1$
@@ -183,7 +183,7 @@ public class LocalizerFile extends LocalizerAbstract {
 	 * @see Control
 	 * @since 0.9.5
 	 */
-	public void setControl(Control control) {
+	public void setControl(final Control control) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(control));
 
 		this.control = control;
@@ -198,7 +198,7 @@ public class LocalizerFile extends LocalizerAbstract {
 	 */
 
 	private void setupBundle(final Locale locale) {
-		if (control == null) {
+		if (null == control) {
 			bundle = ResourceBundle.getBundle(localizerBase, locale, classLoader);
 		} else {
 			
@@ -207,14 +207,14 @@ public class LocalizerFile extends LocalizerAbstract {
 			try {
 				bundle = control.newBundle(localizerBase, locale, "java.class", classLoader, false); //$NON-NLS-1$
 				
-				if (bundle == null) {
+				if (null == bundle) {
 					bundle = control.newBundle(localizerBase, locale, "java.properties", classLoader, false); //$NON-NLS-1$
 				}
 			} catch (Exception ex) {
 				log.error("Could not enable the new bundle", ex); //$NON-NLS-1$
 			}
 
-			if (bundle == null) {
+			if (null == bundle) {
 //				System.err.println("localizerBase " + localizerBase);
 //				System.err.println("locale " + locale);
 //				System.err.println("classLoader " + classLoader);

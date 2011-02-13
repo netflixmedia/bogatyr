@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  * This is an extended JLabel.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.5 (20110213)
  * @since 0.2.0
  */
 public class Label extends JLabel {
@@ -49,8 +49,8 @@ public class Label extends JLabel {
 	private static final Logger log = LoggerFactory.getLogger(Label.class);
 
 	/*
-		 * Superclass constructors
-		 */
+	 * Superclass constructors
+	 */
 
 	public Label() {
 		super();
@@ -80,5 +80,17 @@ public class Label extends JLabel {
 	public Label(final String text, final int horizontalAlignment) {
 		super(text, horizontalAlignment);
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, horizontalAlignment));
+	}
+	
+	
+	/*
+	 * Own constructors
+	 */
+
+	public Label(final String text, final Icon icon) {
+		super(text);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(text, icon));
+	
+		setIcon(icon);
 	}
 }

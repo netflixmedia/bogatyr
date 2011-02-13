@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for maps.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.5 (20110124)
+ * @version 0.9.5 (20110213)
  * @since 0.9.0
  */
 public abstract class HelperMap {
@@ -163,11 +163,11 @@ public abstract class HelperMap {
 		final Object[][] result = new Object[map.size()][2];
 
 		
-		Iterator<?> iter = map.entrySet().iterator();
+		final Iterator<?> iter = map.entrySet().iterator();
 
 		int ii = 0;
 		while(iter.hasNext()){
-		    Map.Entry<?, ?> mapping = (Map.Entry<?, ?>) iter.next();
+		    final Map.Entry<?, ?> mapping = (Map.Entry<?, ?>) iter.next();
 
 		    result[ii][0] = mapping.getKey();
 		    result[ii][1] = mapping.getValue();

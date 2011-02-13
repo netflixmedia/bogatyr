@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -39,7 +39,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Time units
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100817)
+ * @version 0.9.5 (20110213)
  * @since 0.8.0
  */
 @XmlRootElement(name = "time")
@@ -71,7 +71,7 @@ public enum Time implements Unit<Time> {
 	 */
 
 	@Override
-	public BigDecimal convertTo(final Time toUnit, final Number value) {
+	public BigDecimal convertTo(final Time toUnit, final Number value) { //$JUnit$
 		if (null == toUnit) {
 			throw new RuntimeExceptionIsNull("toUnit"); //$NON-NLS-1$
 		}

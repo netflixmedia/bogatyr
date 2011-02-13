@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -61,7 +61,16 @@ import net.laubenberger.bogatyr.helper.launcher.LauncherMailTest;
 import net.laubenberger.bogatyr.helper.launcher.LauncherProcessTest;
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.model.context.ContextTest;
+import net.laubenberger.bogatyr.model.unit.UnitAreaTest;
+import net.laubenberger.bogatyr.model.unit.UnitBitTest;
+import net.laubenberger.bogatyr.model.unit.UnitLengthTest;
+import net.laubenberger.bogatyr.model.unit.UnitTimeTest;
+import net.laubenberger.bogatyr.model.unit.UnitVolumeTest;
+import net.laubenberger.bogatyr.model.unit.UnitWeightTest;
 import net.laubenberger.bogatyr.service.crypto.CertificateProviderTest;
+import net.laubenberger.bogatyr.service.crypto.CryptoAsymmetricTest;
+import net.laubenberger.bogatyr.service.crypto.CryptoSymmetricTest;
+import net.laubenberger.bogatyr.service.crypto.ScramblerTest;
 import net.laubenberger.bogatyr.view.swing.factory.FormatFactory;
 
 import org.junit.runner.JUnitCore;
@@ -72,7 +81,7 @@ import org.junit.runner.Result;
  * JUnit test suite
  *
  * @author Stefan Laubenberger
- * @version 20101202
+ * @version 20110213
  */
 public class AllBogatyrTests implements Runnable {
 	public static final String DATA = "!$'()*+,-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ" + //$NON-NLS-1$
@@ -127,7 +136,7 @@ public class AllBogatyrTests implements Runnable {
 				HelperEnvironmentTest.class,
 				HelperGraphicTest.class,
 				HelperImageTest.class,
-				HelperIOTest.class, //TODO JUnit tests not completed!
+				HelperIOTest.class, //TODO JUnit tests not complete!
 				HelperKeyboardTest.class,
 				HelperLogTest.class,
 				HelperMapTest.class,
@@ -143,16 +152,17 @@ public class AllBogatyrTests implements Runnable {
 				HelperTimeTest.class,
 				HelperXmlTest.class,
 				ContextTest.class,
-//				UnitAreaTest.class,
-//				UnitLengthTest.class,
-//				UnitVolumeTest.class,
-//				UnitWeightTest.class
-				CertificateProviderTest.class
-//				CryptoAsymmetricTest.class,
-//				CryptoSymmetricTest.class,
-//				ScramblerTest.class,
+				UnitAreaTest.class,
+				UnitBitTest.class,
+				UnitLengthTest.class,
+				UnitTimeTest.class,
+				UnitVolumeTest.class,
+				UnitWeightTest.class,
+				CertificateProviderTest.class,
+				CryptoAsymmetricTest.class, //TODO JUnit tests not complete!
+				CryptoSymmetricTest.class,  //TODO JUnit tests not complete!
+				ScramblerTest.class  //TODO JUnit tests not complete!
 ////				PaginatorTest.class,
-////				PrinterTest.class,
 		);
 
 		System.out.println("** Test run completed **"); //$NON-NLS-1$
