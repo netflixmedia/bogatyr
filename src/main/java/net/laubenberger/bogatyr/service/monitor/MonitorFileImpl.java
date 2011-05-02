@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101227)
+ * @version 0.9.6 (20100502)
  * @since 0.9.4
  */
 public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
@@ -248,10 +248,10 @@ public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
 	 * Inner classes
 	 */
 	
-	private class FileMonitorTask extends TimerTask {
+	class FileMonitorTask extends TimerTask {
 		byte[] hash;
 		
-		private FileMonitorTask() {
+		FileMonitorTask() {
 			super();
 			try {
 				hash = hcg.getFastHash(file);

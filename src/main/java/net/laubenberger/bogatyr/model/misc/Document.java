@@ -30,17 +30,17 @@ package net.laubenberger.bogatyr.model.misc;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import net.laubenberger.bogatyr.model.Model;import net.laubenberger.bogatyr.model.misc.DocumentImpl.XmlAdapter;
+import net.laubenberger.bogatyr.model.Model;
+import net.laubenberger.bogatyr.model.misc.DocumentImpl.XmlAdapter;
 
 /**
  * The interface for the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101227)
+ * @version 0.9.6 (20110418)
  * @since 0.9.1
  */
 @XmlJavaTypeAdapter(XmlAdapter.class)
@@ -49,7 +49,7 @@ public interface Document extends Model, Url {
 	String MEMBER_VERSION 				= "version"; //$NON-NLS-1$
 	String MEMBER_BUILD 					= "build"; //$NON-NLS-1$
 	String MEMBER_CREATED 				= "created"; //$NON-NLS-1$
-	String MEMBER_UUID 					= "UUID"; //$NON-NLS-1$
+//	String MEMBER_UUID 					= "UUID"; //$NON-NLS-1$
 	String MEMBER_ORGANIZATIONS 		= "organizations"; //$NON-NLS-1$
 	String MEMBER_PERSONS 				= "persons"; //$NON-NLS-1$
 	String METHOD_ADD_ORGANIZATION 	= "addOrganization"; //$NON-NLS-1$
@@ -83,7 +83,7 @@ public interface Document extends Model, Url {
 
 	void addPerson(Person person);
 	
-	UUID getUUID();
-
-	void setUUID(UUID uuid);
+//	UUID getUUID();
+//
+//	void setUUID(UUID uuid);
 }

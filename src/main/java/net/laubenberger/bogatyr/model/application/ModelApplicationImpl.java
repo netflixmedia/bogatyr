@@ -58,7 +58,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the application model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100909)
+ * @version 0.9.6 (20110502)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelApplication")
@@ -83,11 +83,11 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 	}
 
 	public ModelApplicationImpl(final String name, final BigDecimal version, final int build,
-										 final Date created, final UUID uuid, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final URL updateLocation, final boolean isDebug,
-										 final Localizer localizer, final Property property, final Map<String, String> mapTag) {
-		super(name, version, build, created, uuid, url, listOrganization, listPerson, mapTag);
+										 final Date created, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final URL updateLocation, final boolean isDebug,
+										 final Localizer localizer, final Property property, final UUID uuid, final Map<String, String> mapTag) {
+		super(name, version, build, created, /*uuid,*/ url, listOrganization, listPerson, uuid, mapTag);
 
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, uuid, url, listOrganization, listPerson, updateLocation, isDebug, localizer, property, mapTag));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, url, listOrganization, listPerson, updateLocation, isDebug, localizer, property, uuid, mapTag));
 
 		this.updateLocation = updateLocation;
 		this.isDebug = isDebug;

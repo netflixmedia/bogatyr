@@ -60,7 +60,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for image operations.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101227)
+ * @version 0.9.6 (20110502)
  * @since 0.4.0
  */
 public abstract class HelperImage {
@@ -643,7 +643,7 @@ public abstract class HelperImage {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart(image));
 
 		class StatusObserver implements ImageObserver {
-			private boolean imageLoaded;
+			boolean imageLoaded;
 
 			@Override
 			public boolean imageUpdate(final Image img, final int infoflags, final int x, final int y, final int width,

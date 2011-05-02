@@ -52,14 +52,14 @@ import org.slf4j.LoggerFactory;
  * Collected constants of very general utility.
  *
  * @author Stefan Laubenberger
- * @version 0.9.5 (20110213)
+ * @version 0.9.6 (20110502)
  * @since 0.7.0
  */
 public abstract class Constants {
 	private static final Logger log = LoggerFactory.getLogger(Constants.class);
 
 	//Bogatyr specific
-	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.95"), 339, HelperTime.getDate(2011, 2, 13, 20, 10, 0), UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null, null, null, null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.96"), 344, HelperTime.getDate(2011, 5, 2, 16, 40, 0), null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
@@ -180,7 +180,7 @@ public abstract class Constants {
 		try {
 			BOGATYR.setUrl(new URL("http://dev.laubenberger.net/bogatyr/")); //$NON-NLS-1$
 			
-			BOGATYR.addPerson(new PersonImpl("Laubenberger", "Stefan", HelperTime.getDate(1976, 12, 30), Gender.MALE, "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net"), null, HelperCollection.getList(Role.ADMINISTRATOR, Role.ARCHITECT, Role.DESIGNER, Role.DEVELOPER, Role.MANUFACTURER, Role.OWNER, Role.PROJECT_MANAGER, Role.PUBLISHER, Role.REVIEWER, Role.TESTER, Role.WRITER), null));   //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$
+			BOGATYR.addPerson(new PersonImpl("Laubenberger", "Stefan", HelperTime.getDate(1976, 12, 30), Gender.MALE, "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net"), null, HelperCollection.getList(Role.ADMINISTRATOR, Role.ARCHITECT, Role.DESIGNER, Role.DEVELOPER, Role.MANUFACTURER, Role.OWNER, Role.PROJECT_MANAGER, Role.PUBLISHER, Role.REVIEWER, Role.TESTER, Role.WRITER), UUID.fromString("490955a3-76e7-44c7-a318-6f16aae94fcd"), null));   //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$
 		} catch (MalformedURLException ex) {
 			// should never happen!
 			log.error("URL invalid", ex); //$NON-NLS-1$

@@ -30,6 +30,7 @@ package net.laubenberger.bogatyr.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 
 import net.laubenberger.bogatyr.misc.HolderObserver;
 import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObject;
@@ -38,7 +39,7 @@ import net.laubenberger.bogatyr.misc.extendedObject.ExtendedObject;
  * Defines the methods for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100818)
+ * @version 0.9.6 (20110418)
  * @since 0.9.0
  */
 public interface Model extends ExtendedObject, Serializable, HolderObserver {
@@ -46,11 +47,12 @@ public interface Model extends ExtendedObject, Serializable, HolderObserver {
 	String MEMBER_TAGS 			= "tags"; //$NON-NLS-1$
 	String METHOD_ADD_TAG 		= "addTag"; //$NON-NLS-1$
 //	String METHOD_REMOVE_TAG = "removeTag"; //$NON-NLS-1$
-
+	String MEMBER_UUID 			= "UUID"; //$NON-NLS-1$
+	
 	/**
 	 * Sets the instantiation date of the model.
 	 *
-	 * @param instantiated date of the model
+	 * @param instantiated date for the model
 	 * @since 0.9.0
 	 */
 	void setInstantiated(Date instantiated);
@@ -70,6 +72,14 @@ public interface Model extends ExtendedObject, Serializable, HolderObserver {
 	 * @since 0.9.1
 	 */
 	void setTags(Map<String, String> tags);
+
+	/**
+	 * Sets the UUID of the model.
+	 *
+	 * @param UUID for the model
+	 * @since 0.9.6
+	 */
+	void setUUID(UUID uuid);
 
 	/**
 	 * Returns the value of a tag for a given key.
@@ -96,4 +106,13 @@ public interface Model extends ExtendedObject, Serializable, HolderObserver {
 //	 * @since 0.9.1
 //	 */
 //	void removeTag(String key);
+	
+	
+	/**
+	 * Returns the UUID of the model.
+	 *
+	 * @return UUID for the model
+	 * @since 0.9.6
+	 */
+	UUID getUUID();
 }

@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * It also provides informations about vm memory, temp/user directory and variables.
  *
  * @author Stefan Laubenberger
- * @version 0.9.5 (20110213)
+ * @version 0.9.6 (20110318)
  * @since 0.1.0
  */
 public abstract class HelperEnvironment {
@@ -578,7 +578,9 @@ public abstract class HelperEnvironment {
 		final Map<String, Object> result = new HashMap<String, Object>();
 		
 		result.put("processors/cores", getAvailableProcessors()); //$NON-NLS-1$
-		result.put("current screen size", HelperScreen.getCurrentScreenSize()); //$NON-NLS-1$
+		if (HelperScreen.getCurrentScreenSize() != null) result.put("current screen size", HelperScreen.getCurrentScreenSize()); //$NON-NLS-1$
+		if (HelperScreen.getCurrentColorModel() != null) result.put("current color model", HelperScreen.getCurrentColorModel()); //$NON-NLS-1$
+		if (HelperScreen.getCurrentScreenResolution() > 0) result.put("current screen resolution", HelperScreen.getCurrentScreenResolution() + " DPI"); //$NON-NLS-1$ //$NON-NLS-2$
 		result.put("memory maximum", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryMax()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
 		result.put("memory total", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryTotal()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
 		result.put("memory free", Bit.BYTE.convertTo(Bit.MEGABYTE, getMemoryFree()).setScale(3, BigDecimal.ROUND_DOWN) + " MB"); //$NON-NLS-1$ //$NON-NLS-2$
