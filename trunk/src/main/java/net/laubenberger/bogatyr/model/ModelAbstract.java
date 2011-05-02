@@ -31,6 +31,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
+import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -51,11 +52,11 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100909)
+ * @version 0.9.6 (20110502)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
-@XmlType(propOrder = {Model.MEMBER_INSTANTIATED, Model.MEMBER_TAGS})
+@XmlType(propOrder = {Model.MEMBER_INSTANTIATED, Model.MEMBER_UUID, Model.MEMBER_TAGS})
 public abstract class ModelAbstract extends Observable implements Model {
 	private static final long serialVersionUID = 3491320587479082917L;
 
@@ -65,15 +66,17 @@ public abstract class ModelAbstract extends Observable implements Model {
 
 	private boolean isNotifyEnabled = true;
 	private Date instantiated = new Date();
-
+	private UUID uuid;
+	
 	protected ModelAbstract() {
 		super();
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
-	protected ModelAbstract(final Map<String, String> mapTag) {
+	protected ModelAbstract(UUID uuid, final Map<String, String> mapTag) {
 		super();
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(mapTag));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(uuid, mapTag));
+		this.uuid = uuid;
 		this.mapTag = mapTag;
 	}
 
@@ -81,49 +84,33 @@ public abstract class ModelAbstract extends Observable implements Model {
 	/*
 	 * Overridden methods
 	 */
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((null == instantiated) ? 0 : instantiated
-				.hashCode());
+		result = prime * result + ((instantiated == null) ? 0 : instantiated.hashCode());
 		result = prime * result + (isNotifyEnabled ? 1231 : 1237);
-		result = prime * result + ((null == mapTag) ? 0 : mapTag.hashCode());
+		result = prime * result + ((mapTag == null) ? 0 : mapTag.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (null == obj) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		final ModelAbstract other = (ModelAbstract) obj;
-		if (null == instantiated) {
-			if (null != other.instantiated) {
-				return false;
-			}
-		} else if (!instantiated.equals(other.instantiated)) {
-			return false;
-		}
-		if (isNotifyEnabled != other.isNotifyEnabled) {
-			return false;
-		}
-		if (null == mapTag) {
-			if (null != other.mapTag) {
-				return false;
-			}
-		} else if (!mapTag.equals(other.mapTag)) {
-			return false;
-		}
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		ModelAbstract other = (ModelAbstract) obj;
+		if (instantiated == null) {
+			if (other.instantiated != null) return false;
+		} else if (!instantiated.equals(other.instantiated)) return false;
+		if (isNotifyEnabled != other.isNotifyEnabled) return false;
+		if (mapTag == null) {
+			if (other.mapTag != null) return false;
+		} else if (!mapTag.equals(other.mapTag)) return false;
+		if (uuid == null) {
+			if (other.uuid != null) return false;
+		} else if (!uuid.equals(other.uuid)) return false;
 		return true;
 	}
 
@@ -196,6 +183,16 @@ public abstract class ModelAbstract extends Observable implements Model {
 		return result;
 	}
 
+
+	@Override
+	@XmlElement
+	public UUID getUUID() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(uuid));
+		return uuid;
+	}
+	
 	@Override
 	public void setNotifyEnabled(final boolean enabled) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(enabled));
@@ -231,6 +228,19 @@ public abstract class ModelAbstract extends Observable implements Model {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
+	@Override
+	public void setUUID(final UUID uuid) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(uuid));
+
+		if (!HelperObject.isEquals(uuid, this.uuid)) {
+			this.uuid = uuid;
+			setChanged();
+			notifyObservers(MEMBER_UUID);
+		}
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
+	
 	@Override
 	public void addTag(final String key, final String value) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(key, value));

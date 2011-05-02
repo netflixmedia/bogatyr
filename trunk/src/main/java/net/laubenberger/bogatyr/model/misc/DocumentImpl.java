@@ -53,11 +53,11 @@ import org.slf4j.LoggerFactory;
  * The implementation of the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100909)
+ * @version 0.9.6 (20110502)
  * @since 0.9.1
  */
 @XmlRootElement(name = "document")
-@XmlType(propOrder = {Document.MEMBER_NAME, Document.MEMBER_VERSION, Document.MEMBER_BUILD, Document.MEMBER_CREATED, Document.MEMBER_UUID, Url.MEMBER_URL, Document.MEMBER_ORGANIZATIONS, Document.MEMBER_PERSONS})
+@XmlType(propOrder = {Document.MEMBER_NAME, Document.MEMBER_VERSION, Document.MEMBER_BUILD, Document.MEMBER_CREATED, Url.MEMBER_URL, Document.MEMBER_ORGANIZATIONS, Document.MEMBER_PERSONS})
 public class DocumentImpl extends ModelAbstract implements Document {
 	private static final long serialVersionUID = 5505184629744108815L;
 
@@ -67,7 +67,6 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	private BigDecimal version;
 	private int build;
 	private Date created;
-	private UUID uuid;
 	private URL url;
 	private List<Organization> listOrganization;
 	private List<Person> listPerson;
@@ -78,15 +77,14 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	public DocumentImpl(final String name, final BigDecimal version, final int build,
-							  final Date created, final UUID uuid, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final Map<String, String> mapTag) {
-		super(mapTag);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, uuid, url, listOrganization, listPerson, mapTag));
+							  final Date created, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final UUID uuid, final Map<String, String> mapTag) {
+		super(uuid, mapTag);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, url, listOrganization, listPerson, uuid, mapTag));
 
 		this.name = name;
 		this.version = version;
 		this.build = build;
 		this.created = created;
-		this.uuid = uuid;
 		this.url = url;
 		this.listOrganization = listOrganization;
 		this.listPerson = listPerson;
@@ -96,68 +94,45 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	/*
 	 * Overridden methods
 	 */
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + build;
-		result = prime * result + ((null == created) ? 0 : created.hashCode());
-		result = prime * result + ((null == listOrganization) ? 0 : listOrganization.hashCode());
-		result = prime * result + ((null == listPerson) ? 0 : listPerson.hashCode());
-		result = prime * result + ((null == name) ? 0 : name.hashCode());
-		result = prime * result + ((null == url) ? 0 : url.hashCode());
-		result = prime * result + ((null == uuid) ? 0 : uuid.hashCode());
-		result = prime * result + ((null == version) ? 0 : version.hashCode());
+		result = prime * result + ((created == null) ? 0 : created.hashCode());
+		result = prime * result + ((listOrganization == null) ? 0 : listOrganization.hashCode());
+		result = prime * result + ((listPerson == null) ? 0 : listPerson.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final DocumentImpl other = (DocumentImpl) obj;
-		if (build != other.build)
-			return false;
-		if (null == created) {
-			if (null != other.created)
-				return false;
-		} else if (!created.equals(other.created))
-			return false;
-		if (null == listOrganization) {
-			if (null != other.listOrganization)
-				return false;
-		} else if (!listOrganization.equals(other.listOrganization))
-			return false;
-		if (null == listPerson) {
-			if (null != other.listPerson)
-				return false;
-		} else if (!listPerson.equals(other.listPerson))
-			return false;
-		if (null == name) {
-			if (null != other.name)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (null == url) {
-			if (null != other.url)
-				return false;
-		} else if (!url.equals(other.url))
-			return false;
-		if (null == uuid) {
-			if (null != other.uuid)
-				return false;
-		} else if (!uuid.equals(other.uuid))
-			return false;
-		if (null == version) {
-			if (null != other.version)
-				return false;
-		} else if (!version.equals(other.version))
-			return false;
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (!super.equals(obj)) return false;
+		if (getClass() != obj.getClass()) return false;
+		DocumentImpl other = (DocumentImpl) obj;
+		if (build != other.build) return false;
+		if (created == null) {
+			if (other.created != null) return false;
+		} else if (!created.equals(other.created)) return false;
+		if (listOrganization == null) {
+			if (other.listOrganization != null) return false;
+		} else if (!listOrganization.equals(other.listOrganization)) return false;
+		if (listPerson == null) {
+			if (other.listPerson != null) return false;
+		} else if (!listPerson.equals(other.listPerson)) return false;
+		if (name == null) {
+			if (other.name != null) return false;
+		} else if (!name.equals(other.name)) return false;
+		if (url == null) {
+			if (other.url != null) return false;
+		} else if (!url.equals(other.url)) return false;
+		if (version == null) {
+			if (other.version != null) return false;
+		} else if (!version.equals(other.version)) return false;
 		return true;
 	}
 	
@@ -182,15 +157,6 @@ public class DocumentImpl extends ModelAbstract implements Document {
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(created));
 		return created;
-	}
-
-	@Override
-	@XmlElement
-	public UUID getUUID() {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(uuid));
-		return uuid;
 	}
 
 	@Override
@@ -241,19 +207,6 @@ public class DocumentImpl extends ModelAbstract implements Document {
 			this.created = created;
 			setChanged();
 			notifyObservers(MEMBER_CREATED);
-		}
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
-	}
-
-	@Override
-	public void setUUID(final UUID uuid) {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(uuid));
-
-		if (!HelperObject.isEquals(uuid, this.uuid)) {
-			this.uuid = uuid;
-			setChanged();
-			notifyObservers(MEMBER_UUID);
 		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());

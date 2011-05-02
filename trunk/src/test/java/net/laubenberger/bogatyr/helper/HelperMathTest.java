@@ -419,7 +419,19 @@ public class HelperMathTest {
 
     @Test
     public void testCalcBirthdayProblem() {
-        assertEquals(0.50729D, HelperMath.calcBirthdayProblem(23), 0.00001D);
+//System.err.println(HelperMath.calcBirthdayProblem(3)*100);
+//System.err.println(HelperMath.calcBirthdayProblem(4)*100);
+//System.err.println(HelperMath.calcBirthdayProblem(5)*100);
+//System.err.println(HelperMath.calcBirthdayProblem(7)*100);
+//System.err.println(HelperMath.calcBirthdayProblem(8)*100);
+//System.err.println(HelperMath.calcBirthdayProblem(12)*100);
+//System.err.println(HelperMath.calcBirthdayProblem(16)*100);
+//System.err.println(HelperMath.calcBirthdayProblem(20)*100);
+//System.err.println(HelperMath.calcBirthdayProblem(24)*100);
+//System.err.println(HelperMath.calcBirthdayProblem(32)*100);
+//System.err.println(HelperMath.calcBirthdayProblem(48)*100);
+
+   	 assertEquals(0.50729D, HelperMath.calcBirthdayProblem(23), 0.00001D);
         
         try {
             HelperMath.calcBirthdayProblem(0);

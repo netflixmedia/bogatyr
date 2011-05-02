@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -51,7 +52,7 @@ import net.laubenberger.bogatyr.model.ModelAbstract;
  * The implementation of the person model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100909)
+ * @version 0.9.6 (20110502)
  * @since 0.9.1
  */
 @XmlRootElement(name = "person")
@@ -83,9 +84,9 @@ public class PersonImpl extends ModelAbstract implements Person {
 
 	public PersonImpl(final String name, final String forename, final Date birthday,
 							final Gender gender, final String street, final String zip, final String city,
-							final Country country, final String phoneNumber, final String faxNumber, final String email, final URL url, final List<Organization> listOrganization, final List<Role> listRole, final Map<String, String> mapTag) {
-		super(mapTag);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, forename, birthday, gender, street, zip, city, country, phoneNumber, faxNumber, email, url, mapTag));
+							final Country country, final String phoneNumber, final String faxNumber, final String email, final URL url, final List<Organization> listOrganization, final List<Role> listRole, final UUID uuid, final Map<String, String> mapTag) {
+		super(uuid, mapTag);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, forename, birthday, gender, street, zip, city, country, phoneNumber, faxNumber, email, url, uuid, mapTag));
 		this.name = name;
 		this.forename = forename;
 		this.birthday = birthday;

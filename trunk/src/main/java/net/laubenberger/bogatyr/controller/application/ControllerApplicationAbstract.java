@@ -147,7 +147,7 @@ public abstract class ControllerApplicationAbstract<M extends ModelApplication, 
 			result.put(Document.MEMBER_VERSION, model.getVersion());
 		}
 		if (null != model.getUUID()) {
-			result.put(Document.MEMBER_UUID, model.getUUID());
+			result.put(Model.MEMBER_UUID, model.getUUID());
 		}
 		if (null != model.getUrl()) {
 			result.put(Url.MEMBER_URL, model.getUrl());

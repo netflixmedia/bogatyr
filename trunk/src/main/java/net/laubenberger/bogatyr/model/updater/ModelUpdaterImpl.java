@@ -59,7 +59,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the updater model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100817)
+ * @version 0.9.6 (20110502)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelUpdater")
@@ -78,9 +78,9 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 	}
 
 	public ModelUpdaterImpl(final String name, final BigDecimal version, final int build,
-									final Date created, final UUID uuid, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final Map<Platform, URL> mapLocation, final Map<HashCodeAlgo, String> mapHash, final Map<String, String> mapTag) {
-		super(name, version, build, created, uuid, url, listOrganization, listPerson, mapTag);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, uuid, url, listOrganization, listPerson, mapLocation, mapHash, mapTag));
+									final Date created, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final Map<Platform, URL> mapLocation, final Map<HashCodeAlgo, String> mapHash, final UUID uuid, final Map<String, String> mapTag) {
+		super(name, version, build, created, url, listOrganization, listPerson, uuid, mapTag);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, url, listOrganization, listPerson, mapLocation, mapHash, uuid, mapTag));
 		this.mapLocation = mapLocation;
 		this.mapHash = mapHash;
 	}

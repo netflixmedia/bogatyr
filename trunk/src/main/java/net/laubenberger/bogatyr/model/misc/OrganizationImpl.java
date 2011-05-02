@@ -32,6 +32,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -50,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the organization model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.3 (20100909)
+ * @version 0.9.6 (20110502)
  * @since 0.9.2
  */
 @XmlRootElement(name = "organization")
@@ -80,9 +81,9 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 
 
 	public OrganizationImpl(final String name, final String street, final String zip,
-									final String city, final Country country, final String phoneNumber, final String faxNumber, final String email, final URL url, final List<Person> listPerson, final List<Role> listRole, final Map<String, String> mapTag) {
-		super(mapTag);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, street, zip, city, country, phoneNumber, faxNumber, email, url, listPerson, listRole, mapTag));
+									final String city, final Country country, final String phoneNumber, final String faxNumber, final String email, final URL url, final List<Person> listPerson, final List<Role> listRole, final UUID uuid, final Map<String, String> mapTag) {
+		super(uuid, mapTag);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, street, zip, city, country, phoneNumber, faxNumber, email, url, listPerson, listRole, uuid, mapTag));
 		this.name = name;
 		this.street = street;
 		this.zip = zip;
