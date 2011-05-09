@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * <strong>Note:</strong> This class needs <a href="http://www.bouncycastle.org/">BouncyCastle</a> to work.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.6 (20100502)
+ * @version 0.9.6 (20110502)
  * @since 0.9.4
  */
 public class MonitorFileImpl extends ServiceAbstract implements MonitorFile {
