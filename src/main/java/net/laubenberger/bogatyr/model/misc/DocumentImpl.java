@@ -53,11 +53,11 @@ import org.slf4j.LoggerFactory;
  * The implementation of the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110502)
+ * @version 0.9.6 (20110505)
  * @since 0.9.1
  */
 @XmlRootElement(name = "document")
-@XmlType(propOrder = {Document.MEMBER_NAME, Document.MEMBER_VERSION, Document.MEMBER_BUILD, Document.MEMBER_CREATED, Url.MEMBER_URL, Document.MEMBER_ORGANIZATIONS, Document.MEMBER_PERSONS})
+@XmlType(propOrder = {Document.MEMBER_NAME, Document.MEMBER_VERSION, Document.MEMBER_BUILD, Document.MEMBER_CREATED, Document.MEMBER_LANGUAGE, Url.MEMBER_URL, Document.MEMBER_ORGANIZATIONS, Document.MEMBER_PERSONS})
 public class DocumentImpl extends ModelAbstract implements Document {
 	private static final long serialVersionUID = 5505184629744108815L;
 
@@ -67,6 +67,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	private BigDecimal version;
 	private int build;
 	private Date created;
+	private Language language;
 	private URL url;
 	private List<Organization> listOrganization;
 	private List<Person> listPerson;
@@ -77,14 +78,15 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	public DocumentImpl(final String name, final BigDecimal version, final int build,
-							  final Date created, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final UUID uuid, final Map<String, String> mapTag) {
+							  final Date created, final Language language, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final UUID uuid, final Map<String, String> mapTag) {
 		super(uuid, mapTag);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, url, listOrganization, listPerson, uuid, mapTag));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, language, url, listOrganization, listPerson, uuid, mapTag));
 
 		this.name = name;
 		this.version = version;
 		this.build = build;
 		this.created = created;
+		this.language = language;
 		this.url = url;
 		this.listOrganization = listOrganization;
 		this.listPerson = listPerson;
@@ -100,6 +102,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		int result = super.hashCode();
 		result = prime * result + build;
 		result = prime * result + ((created == null) ? 0 : created.hashCode());
+		result = prime * result + ((language == null) ? 0 : language.hashCode());
 		result = prime * result + ((listOrganization == null) ? 0 : listOrganization.hashCode());
 		result = prime * result + ((listPerson == null) ? 0 : listPerson.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -118,6 +121,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		if (created == null) {
 			if (other.created != null) return false;
 		} else if (!created.equals(other.created)) return false;
+		if (language != other.language) return false;
 		if (listOrganization == null) {
 			if (other.listOrganization != null) return false;
 		} else if (!listOrganization.equals(other.listOrganization)) return false;
@@ -135,6 +139,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		} else if (!version.equals(other.version)) return false;
 		return true;
 	}
+
 	
 
 	/*
@@ -161,6 +166,15 @@ public class DocumentImpl extends ModelAbstract implements Document {
 
 	@Override
 	@XmlElement
+	public Language getLanguage() {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(language));
+		return language;
+	}
+	
+	@Override
+	@XmlElement
 	public String getName() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
@@ -176,7 +190,7 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(version));
 		return version;
 	}
-
+	
 	@Override
 	@XmlElement
 	public URL getUrl() {
@@ -212,6 +226,19 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
 	}
 
+	@Override
+	public void setLanguage(final Language language) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(language));
+
+		if (!HelperObject.isEquals(language, this.language)) {
+			this.language = language;
+			setChanged();
+			notifyObservers(MEMBER_LANGUAGE);
+		}
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit());
+	}
+	
 	@Override
 	public void setName(final String name) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(name));

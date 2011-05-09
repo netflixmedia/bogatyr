@@ -46,6 +46,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.misc.xml.adapter.MapAdapterHashCode;
 import net.laubenberger.bogatyr.model.crypto.HashCodeAlgo;
 import net.laubenberger.bogatyr.model.misc.DocumentImpl;
+import net.laubenberger.bogatyr.model.misc.Language;
 import net.laubenberger.bogatyr.model.misc.Organization;
 import net.laubenberger.bogatyr.model.misc.Person;
 import net.laubenberger.bogatyr.model.misc.Platform;
@@ -78,9 +79,9 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 	}
 
 	public ModelUpdaterImpl(final String name, final BigDecimal version, final int build,
-									final Date created, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final Map<Platform, URL> mapLocation, final Map<HashCodeAlgo, String> mapHash, final UUID uuid, final Map<String, String> mapTag) {
-		super(name, version, build, created, url, listOrganization, listPerson, uuid, mapTag);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, url, listOrganization, listPerson, mapLocation, mapHash, uuid, mapTag));
+									final Date created, final Language language, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final Map<Platform, URL> mapLocation, final Map<HashCodeAlgo, String> mapHash, final UUID uuid, final Map<String, String> mapTag) {
+		super(name, version, build, created, language, url, listOrganization, listPerson, uuid, mapTag);
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, language, url, listOrganization, listPerson, mapLocation, mapHash, uuid, mapTag));
 		this.mapLocation = mapLocation;
 		this.mapHash = mapHash;
 	}

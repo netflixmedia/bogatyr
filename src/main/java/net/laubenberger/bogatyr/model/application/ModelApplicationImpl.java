@@ -43,6 +43,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.model.misc.DocumentImpl;
+import net.laubenberger.bogatyr.model.misc.Language;
 import net.laubenberger.bogatyr.model.misc.Organization;
 import net.laubenberger.bogatyr.model.misc.Person;
 import net.laubenberger.bogatyr.model.worker.ModelWorker;
@@ -58,7 +59,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the application model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110502)
+ * @version 0.9.6 (20110505)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelApplication")
@@ -83,11 +84,11 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 	}
 
 	public ModelApplicationImpl(final String name, final BigDecimal version, final int build,
-										 final Date created, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final URL updateLocation, final boolean isDebug,
+										 final Date created, final Language language, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final URL updateLocation, final boolean isDebug,
 										 final Localizer localizer, final Property property, final UUID uuid, final Map<String, String> mapTag) {
-		super(name, version, build, created, /*uuid,*/ url, listOrganization, listPerson, uuid, mapTag);
+		super(name, version, build, created, language, url, listOrganization, listPerson, uuid, mapTag);
 
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, url, listOrganization, listPerson, updateLocation, isDebug, localizer, property, uuid, mapTag));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, language, url, listOrganization, listPerson, updateLocation, isDebug, localizer, property, uuid, mapTag));
 
 		this.updateLocation = updateLocation;
 		this.isDebug = isDebug;

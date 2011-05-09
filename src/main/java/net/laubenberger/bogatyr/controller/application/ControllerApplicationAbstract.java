@@ -149,6 +149,9 @@ public abstract class ControllerApplicationAbstract<M extends ModelApplication, 
 		if (null != model.getUUID()) {
 			result.put(Model.MEMBER_UUID, model.getUUID());
 		}
+		if (null != model.getLanguage()) {
+			result.put(Document.MEMBER_LANGUAGE, model.getLanguage());
+		}
 		if (null != model.getUrl()) {
 			result.put(Url.MEMBER_URL, model.getUrl());
 		}
