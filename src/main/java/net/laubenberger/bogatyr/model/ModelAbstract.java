@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110502)
+ * @version 0.9.6 (20110517)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
@@ -73,7 +73,7 @@ public abstract class ModelAbstract extends Observable implements Model {
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
-	protected ModelAbstract(UUID uuid, final Map<String, String> mapTag) {
+	protected ModelAbstract(final UUID uuid, final Map<String, String> mapTag) {
 		super();
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(uuid, mapTag));
 		this.uuid = uuid;
@@ -88,28 +88,28 @@ public abstract class ModelAbstract extends Observable implements Model {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((instantiated == null) ? 0 : instantiated.hashCode());
+		result = prime * result + ((null == instantiated) ? 0 : instantiated.hashCode());
 		result = prime * result + (isNotifyEnabled ? 1231 : 1237);
-		result = prime * result + ((mapTag == null) ? 0 : mapTag.hashCode());
-		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+		result = prime * result + ((null == mapTag) ? 0 : mapTag.hashCode());
+		result = prime * result + ((null == uuid) ? 0 : uuid.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj) return true;
-		if (obj == null) return false;
+		if (null == obj) return false;
 		if (getClass() != obj.getClass()) return false;
-		ModelAbstract other = (ModelAbstract) obj;
-		if (instantiated == null) {
-			if (other.instantiated != null) return false;
+		final ModelAbstract other = (ModelAbstract) obj;
+		if (null == instantiated) {
+			if (null != other.instantiated) return false;
 		} else if (!instantiated.equals(other.instantiated)) return false;
 		if (isNotifyEnabled != other.isNotifyEnabled) return false;
-		if (mapTag == null) {
-			if (other.mapTag != null) return false;
+		if (null == mapTag) {
+			if (null != other.mapTag) return false;
 		} else if (!mapTag.equals(other.mapTag)) return false;
-		if (uuid == null) {
-			if (other.uuid != null) return false;
+		if (null == uuid) {
+			if (null != other.uuid) return false;
 		} else if (!uuid.equals(other.uuid)) return false;
 		return true;
 	}
