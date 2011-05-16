@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110505)
+ * @version 0.9.6 (20110517)
  * @since 0.9.1
  */
 @XmlRootElement(name = "document")
@@ -101,41 +101,41 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + build;
-		result = prime * result + ((created == null) ? 0 : created.hashCode());
-		result = prime * result + ((language == null) ? 0 : language.hashCode());
-		result = prime * result + ((listOrganization == null) ? 0 : listOrganization.hashCode());
-		result = prime * result + ((listPerson == null) ? 0 : listPerson.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((url == null) ? 0 : url.hashCode());
-		result = prime * result + ((version == null) ? 0 : version.hashCode());
+		result = prime * result + ((null == created) ? 0 : created.hashCode());
+		result = prime * result + ((null == language) ? 0 : language.hashCode());
+		result = prime * result + ((null == listOrganization) ? 0 : listOrganization.hashCode());
+		result = prime * result + ((null == listPerson) ? 0 : listPerson.hashCode());
+		result = prime * result + ((null == name) ? 0 : name.hashCode());
+		result = prime * result + ((null == url) ? 0 : url.hashCode());
+		result = prime * result + ((null == version) ? 0 : version.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj) return true;
 		if (!super.equals(obj)) return false;
 		if (getClass() != obj.getClass()) return false;
-		DocumentImpl other = (DocumentImpl) obj;
+		final DocumentImpl other = (DocumentImpl) obj;
 		if (build != other.build) return false;
-		if (created == null) {
-			if (other.created != null) return false;
+		if (null == created) {
+			if (null != other.created) return false;
 		} else if (!created.equals(other.created)) return false;
 		if (language != other.language) return false;
-		if (listOrganization == null) {
-			if (other.listOrganization != null) return false;
+		if (null == listOrganization) {
+			if (null != other.listOrganization) return false;
 		} else if (!listOrganization.equals(other.listOrganization)) return false;
-		if (listPerson == null) {
-			if (other.listPerson != null) return false;
+		if (null == listPerson) {
+			if (null != other.listPerson) return false;
 		} else if (!listPerson.equals(other.listPerson)) return false;
-		if (name == null) {
-			if (other.name != null) return false;
+		if (null == name) {
+			if (null != other.name) return false;
 		} else if (!name.equals(other.name)) return false;
-		if (url == null) {
-			if (other.url != null) return false;
+		if (null == url) {
+			if (null != other.url) return false;
 		} else if (!url.equals(other.url)) return false;
-		if (version == null) {
-			if (other.version != null) return false;
+		if (null == version) {
+			if (null != other.version) return false;
 		} else if (!version.equals(other.version)) return false;
 		return true;
 	}

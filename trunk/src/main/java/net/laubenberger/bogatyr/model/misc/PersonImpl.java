@@ -52,7 +52,7 @@ import net.laubenberger.bogatyr.model.ModelAbstract;
  * The implementation of the person model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110505)
+ * @version 0.9.6 (20110517)
  * @since 0.9.1
  */
 @XmlRootElement(name = "person")
@@ -113,68 +113,68 @@ public class PersonImpl extends ModelAbstract implements Person {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((faxNumber == null) ? 0 : faxNumber.hashCode());
-		result = prime * result + ((forename == null) ? 0 : forename.hashCode());
-		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-		result = prime * result + ((language == null) ? 0 : language.hashCode());
-		result = prime * result + ((listOrganization == null) ? 0 : listOrganization.hashCode());
-		result = prime * result + ((listRole == null) ? 0 : listRole.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result + ((street == null) ? 0 : street.hashCode());
-		result = prime * result + ((url == null) ? 0 : url.hashCode());
-		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
+		result = prime * result + ((null == birthday) ? 0 : birthday.hashCode());
+		result = prime * result + ((null == city) ? 0 : city.hashCode());
+		result = prime * result + ((null == country) ? 0 : country.hashCode());
+		result = prime * result + ((null == email) ? 0 : email.hashCode());
+		result = prime * result + ((null == faxNumber) ? 0 : faxNumber.hashCode());
+		result = prime * result + ((null == forename) ? 0 : forename.hashCode());
+		result = prime * result + ((null == gender) ? 0 : gender.hashCode());
+		result = prime * result + ((null == language) ? 0 : language.hashCode());
+		result = prime * result + ((null == listOrganization) ? 0 : listOrganization.hashCode());
+		result = prime * result + ((null == listRole) ? 0 : listRole.hashCode());
+		result = prime * result + ((null == name) ? 0 : name.hashCode());
+		result = prime * result + ((null == phoneNumber) ? 0 : phoneNumber.hashCode());
+		result = prime * result + ((null == street) ? 0 : street.hashCode());
+		result = prime * result + ((null == url) ? 0 : url.hashCode());
+		result = prime * result + ((null == zip) ? 0 : zip.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj) return true;
 		if (!super.equals(obj)) return false;
 		if (getClass() != obj.getClass()) return false;
-		PersonImpl other = (PersonImpl) obj;
-		if (birthday == null) {
-			if (other.birthday != null) return false;
+		final PersonImpl other = (PersonImpl) obj;
+		if (null == birthday) {
+			if (null != other.birthday) return false;
 		} else if (!birthday.equals(other.birthday)) return false;
-		if (city == null) {
-			if (other.city != null) return false;
+		if (null == city) {
+			if (null != other.city) return false;
 		} else if (!city.equals(other.city)) return false;
 		if (country != other.country) return false;
-		if (email == null) {
-			if (other.email != null) return false;
+		if (null == email) {
+			if (null != other.email) return false;
 		} else if (!email.equals(other.email)) return false;
-		if (faxNumber == null) {
-			if (other.faxNumber != null) return false;
+		if (null == faxNumber) {
+			if (null != other.faxNumber) return false;
 		} else if (!faxNumber.equals(other.faxNumber)) return false;
-		if (forename == null) {
-			if (other.forename != null) return false;
+		if (null == forename) {
+			if (null != other.forename) return false;
 		} else if (!forename.equals(other.forename)) return false;
 		if (gender != other.gender) return false;
 		if (language != other.language) return false;
-		if (listOrganization == null) {
-			if (other.listOrganization != null) return false;
+		if (null == listOrganization) {
+			if (null != other.listOrganization) return false;
 		} else if (!listOrganization.equals(other.listOrganization)) return false;
-		if (listRole == null) {
-			if (other.listRole != null) return false;
+		if (null == listRole) {
+			if (null != other.listRole) return false;
 		} else if (!listRole.equals(other.listRole)) return false;
-		if (name == null) {
-			if (other.name != null) return false;
+		if (null == name) {
+			if (null != other.name) return false;
 		} else if (!name.equals(other.name)) return false;
-		if (phoneNumber == null) {
-			if (other.phoneNumber != null) return false;
+		if (null == phoneNumber) {
+			if (null != other.phoneNumber) return false;
 		} else if (!phoneNumber.equals(other.phoneNumber)) return false;
-		if (street == null) {
-			if (other.street != null) return false;
+		if (null == street) {
+			if (null != other.street) return false;
 		} else if (!street.equals(other.street)) return false;
-		if (url == null) {
-			if (other.url != null) return false;
+		if (null == url) {
+			if (null != other.url) return false;
 		} else if (!url.equals(other.url)) return false;
-		if (zip == null) {
-			if (other.zip != null) return false;
+		if (null == zip) {
+			if (null != other.zip) return false;
 		} else if (!zip.equals(other.zip)) return false;
 		return true;
 	}

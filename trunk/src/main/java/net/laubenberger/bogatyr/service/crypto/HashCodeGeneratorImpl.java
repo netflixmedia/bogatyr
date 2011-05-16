@@ -58,7 +58,7 @@ import org.slf4j.LoggerFactory;
  * This is an implementation for hash code generation.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101119)
+ * @version 0.9.6 (20110517)
  * @since 0.9.0
  */
 public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGenerator {
@@ -212,7 +212,7 @@ public class HashCodeGeneratorImpl extends ServiceAbstract implements HashCodeGe
 
 			temp = HelperArray.concatenate(temp, Arrays.copyOfRange(input, position, position + partSize));
 
-			position += offset;
+			position += offset + partSize;
 		}
 		final byte[] result = getHash(temp);
 
