@@ -64,7 +64,7 @@ public class FileManager extends ControllerApplicationAbstract<ModelApplication,
 	private static final Logger log = LoggerFactory.getLogger(FileManager.class);
 
 	// Fixed parameter - e.g. this could be an argument
-	private static final String ARG_PROPERTY_LOCATION = "src/sample/configuration/filemanager/standard.properties"; //$NON-NLS-1$
+	private static final String ARG_PROPERTY_LOCATION = "src/sample/config/filemanager/standard.properties"; //$NON-NLS-1$
 
 	static final ModelApplication MODEL;
 	

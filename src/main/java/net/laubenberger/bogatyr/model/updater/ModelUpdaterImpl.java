@@ -129,8 +129,27 @@ public class ModelUpdaterImpl extends DocumentImpl implements ModelUpdater {
 		}
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return getClass().getName() + "[instantiated=" + getInstantiated() +  //$NON-NLS-1$
+			", isNotifyEnabled=" + isNotifyEnabled() + //$NON-NLS-1$
+			", uuid=" + getUUID() +  //$NON-NLS-1$
+			", mapTag=" + getTags() +  //$NON-NLS-1$
+			", name=" + getName() + //$NON-NLS-1$ 
+			", version=" + getVersion() + //$NON-NLS-1$ 
+			", build=" + getBuild() + //$NON-NLS-1$ 
+			", created=" + getCreated() + //$NON-NLS-1$ 
+			", language=" + getLanguage() + //$NON-NLS-1$ 
+			", url=" + getUrl() + //$NON-NLS-1$ 
+			", listOrganization=" + getOrganizations() + //$NON-NLS-1$ 
+			", listPerson=" + getPersons() + //$NON-NLS-1$ 
+			", mapLocation=" + mapLocation + //$NON-NLS-1$ 
+			", mapHash=" + mapHash + //$NON-NLS-1$ 
+			']'; 
+	}
 
-
+	
 	/*
 	 * Implemented methods
 	 */

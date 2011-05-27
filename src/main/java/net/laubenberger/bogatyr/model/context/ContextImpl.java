@@ -73,7 +73,8 @@ public class ContextImpl extends ModelAbstract implements Context {
 	 */
 	@Override
 	public String toString() {
-		return getClass().getName() + "[contextData=" + contextData + ']'; //$NON-NLS-1$
+		return getClass().getName() + "[instantiated=" + getInstantiated() + ", isNotifyEnabled=" + isNotifyEnabled() //$NON-NLS-1$ //$NON-NLS-2$
+		+ ", uuid=" + getUUID() + ", mapTag=" + getTags() + ", contextData=" + contextData+ ']'; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	/*

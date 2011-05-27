@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110517)
+ * @version 0.9.6 (20110527)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
@@ -116,8 +116,11 @@ public abstract class ModelAbstract extends Observable implements Model {
 
 	@Override
 	public String toString() {
-		return getClass().getName() + "[instantiated=" + instantiated + ", isNotifyEnabled=" + isNotifyEnabled //$NON-NLS-1$ //$NON-NLS-2$
-				+ ", mapTag=" + mapTag + ']'; //$NON-NLS-1$
+		return getClass().getName() + "[instantiated=" + instantiated +  //$NON-NLS-1$
+			", isNotifyEnabled=" + isNotifyEnabled + //$NON-NLS-1$
+			", uuid=" + uuid +  //$NON-NLS-1$
+			", mapTag=" + mapTag +  //$NON-NLS-1$
+			']';
 	}
 	
 	@Override

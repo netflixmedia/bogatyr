@@ -123,6 +123,27 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return getClass().getName() + "[instantiated=" + getInstantiated() +  //$NON-NLS-1$
+		", isNotifyEnabled=" + isNotifyEnabled() + //$NON-NLS-1$
+		", uuid=" + getUUID() +  //$NON-NLS-1$
+		", mapTag=" + getTags() +  //$NON-NLS-1$
+		", name=" + getName() + //$NON-NLS-1$ 
+		", version=" + getVersion() + //$NON-NLS-1$ 
+		", build=" + getBuild() + //$NON-NLS-1$ 
+		", created=" + getCreated() + //$NON-NLS-1$ 
+		", language=" + getLanguage() + //$NON-NLS-1$ 
+		", url=" + getUrl() + //$NON-NLS-1$ 
+		", organizations=" + getOrganizations() + //$NON-NLS-1$ 
+		", persons=" + getPersons() + //$NON-NLS-1$ 
+		", updateLocation=" + updateLocation + //$NON-NLS-1$ 
+		", isDebug=" + isDebug + //$NON-NLS-1$ 
+		", localizer=" + localizer + //$NON-NLS-1$ 
+		", property=" + property + //$NON-NLS-1$ 
+		']'; 
+	}
+
 
 	/*
 	 * Implemented methods

@@ -56,6 +56,7 @@ public enum Country { //TODO complete the list with all countries
 	AUSTRALIA(new Locale("en", "AU")), //$NON-NLS-1$//$NON-NLS-2$
 	AUSTRIA(new Locale("de", "AT")), //$NON-NLS-1$//$NON-NLS-2$
 	BAHRAIN(new Locale("ar", "BH")), //$NON-NLS-1$//$NON-NLS-2$
+//	BANGLADESH(new Locale("???", "BD")), //$NON-NLS-1$//$NON-NLS-2$
 	BELARUS(new Locale("be", "BY")), //$NON-NLS-1$//$NON-NLS-2$
 	BELGIUM(new Locale("nl", "BE")), //$NON-NLS-1$//$NON-NLS-2$
 	BOLIVIA(new Locale("es", "BO")), //$NON-NLS-1$//$NON-NLS-2$
@@ -66,8 +67,11 @@ public enum Country { //TODO complete the list with all countries
 	CHILE(new Locale("es", "CL")), //$NON-NLS-1$//$NON-NLS-2$
 	CHINA(Locale.CHINA),
 	COLOMBIA(new Locale("es", "CO")), //$NON-NLS-1$//$NON-NLS-2$
+	CONGO(new Locale("fr", "CD")), //$NON-NLS-1$//$NON-NLS-2$
 	COSTA_RICA(new Locale("es", "CR")), //$NON-NLS-1$//$NON-NLS-2$
+	CÔTE_D_IVOIRE(new Locale("fr", "CI")), //$NON-NLS-1$//$NON-NLS-2$
 	CROATIA(new Locale("hr", "HR")), //$NON-NLS-1$//$NON-NLS-2$
+	CUBA(new Locale("es", "CU")), //$NON-NLS-1$//$NON-NLS-2$
 	CYPRUS(new Locale("el", "CY")), //$NON-NLS-1$//$NON-NLS-2$
 	CZECH_REPUBLIC(new Locale("cs", "CZ")), //$NON-NLS-1$//$NON-NLS-2$
 	DENMARK(new Locale("da", "DK")), //$NON-NLS-1$//$NON-NLS-2$
@@ -80,24 +84,30 @@ public enum Country { //TODO complete the list with all countries
 	FRANCE(Locale.FRANCE),
 	GERMANY(Locale.GERMANY),
 	GREECE(new Locale("el", "GR")), //$NON-NLS-1$//$NON-NLS-2$
+	GHANA(new Locale("en", "GH")), //$NON-NLS-1$//$NON-NLS-2$
 	GUATEMALA(new Locale("es", "GT")), //$NON-NLS-1$//$NON-NLS-2$
+	HAITI(new Locale("fr", "HT")), //$NON-NLS-1$//$NON-NLS-2$
 	HONDURAS(new Locale("es", "HN")), //$NON-NLS-1$//$NON-NLS-2$
 	HONG_KONG(new Locale("zh", "HK")), //$NON-NLS-1$//$NON-NLS-2$
 	HUNGARY(new Locale("hu", "HU")), //$NON-NLS-1$//$NON-NLS-2$
 	ICELAND(new Locale("is", "IS")), //$NON-NLS-1$//$NON-NLS-2$
 	INDIA(new Locale("hi", "IN")), //$NON-NLS-1$//$NON-NLS-2$
 	INDONESIA(new Locale("in", "ID")), //$NON-NLS-1$//$NON-NLS-2$
+	IRAN(new Locale("ar", "IR")), //$NON-NLS-1$//$NON-NLS-2$
 	IRAQ(new Locale("ar", "IQ")), //$NON-NLS-1$//$NON-NLS-2$
 	IRELAND(new Locale("en", "IE")), //$NON-NLS-1$//$NON-NLS-2$
 	ISRAEL(new Locale("iw", "IL")), //$NON-NLS-1$//$NON-NLS-2$
 	ITALY(Locale.ITALY),
+	JAMAICA(new Locale("en", "JM")), //$NON-NLS-1$//$NON-NLS-2$
 	JAPAN(Locale.JAPAN),
 	JORDAN(new Locale("ar", "JO")), //$NON-NLS-1$//$NON-NLS-2$
+	KENYA(new Locale("en", "KE")), //$NON-NLS-1$//$NON-NLS-2$
 	KOREA(Locale.KOREA),
 	KUWAIT(new Locale("ar", "KW")), //$NON-NLS-1$//$NON-NLS-2$
 	LATVIA(new Locale("lv", "LV")), //$NON-NLS-1$//$NON-NLS-2$
 	LEBANON(new Locale("ar", "LB")), //$NON-NLS-1$//$NON-NLS-2$
 	LIBYA(new Locale("ar", "LY")), //$NON-NLS-1$//$NON-NLS-2$
+	LIECHTENSTEIN(new Locale("de", "LI")), //$NON-NLS-1$//$NON-NLS-2$
 	LITHUANIA(new Locale("lt", "LT")), //$NON-NLS-1$//$NON-NLS-2$
 	LUXEMBOURG(new Locale("de", "LU")), //$NON-NLS-1$//$NON-NLS-2$
 	MACEDONIA(new Locale("mk", "MK")), //$NON-NLS-1$//$NON-NLS-2$
@@ -109,8 +119,10 @@ public enum Country { //TODO complete the list with all countries
 	NETHERLANDS(new Locale("nl", "NL")), //$NON-NLS-1$//$NON-NLS-2$
 	NEW_ZEALAND(new Locale("en", "NZ")), //$NON-NLS-1$//$NON-NLS-2$
 	NICARAGUA(new Locale("es", "NI")), //$NON-NLS-1$//$NON-NLS-2$
+	NIGERIA(new Locale("en", "NG")), //$NON-NLS-1$//$NON-NLS-2$
 	NORWAY(new Locale("no", "NO")), //$NON-NLS-1$//$NON-NLS-2$
 	OMAN(new Locale("ar", "OM")), //$NON-NLS-1$//$NON-NLS-2$
+	PAKISTAN(new Locale("en", "PK")), //$NON-NLS-1$//$NON-NLS-2$
 	PANAMA(new Locale("es", "PA")), //$NON-NLS-1$//$NON-NLS-2$
 	PARAGUAY(new Locale("es", "PY")), //$NON-NLS-1$//$NON-NLS-2$
 	PERU(new Locale("es", "PE")), //$NON-NLS-1$//$NON-NLS-2$
@@ -137,6 +149,7 @@ public enum Country { //TODO complete the list with all countries
 	THAILAND(new Locale("th", "TH")), //$NON-NLS-1$//$NON-NLS-2$
 	TUNISIA(new Locale("ar", "TN")), //$NON-NLS-1$//$NON-NLS-2$
 	TURKEY(new Locale("tr", "TR")), //$NON-NLS-1$//$NON-NLS-2$
+	UGANDA(new Locale("en", "UG")), //$NON-NLS-1$//$NON-NLS-2$
 	UKRAINE(new Locale("uk", "UA")), //$NON-NLS-1$//$NON-NLS-2$
 	UNITED_ARAB_EMIRATES(new Locale("ar", "AE")), //$NON-NLS-1$//$NON-NLS-2$
 	UNITED_KINGDOM(Locale.UK),
