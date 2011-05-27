@@ -63,7 +63,7 @@ public class HelloWorld extends ControllerApplicationAbstract<ModelApplication, 
 	private static final Logger log = LoggerFactory.getLogger(HelloWorld.class);
 
 	// Fixed parameter - e.g. this could be an argument
-	private static final String ARG_PROPERTY_LOCATION = "src/sample/configuration/helloworld/standard.properties"; //$NON-NLS-1$
+	private static final String ARG_PROPERTY_LOCATION = "src/sample/config/helloworld/standard.properties"; //$NON-NLS-1$
 
 	private static final ModelApplication MODEL;
 	

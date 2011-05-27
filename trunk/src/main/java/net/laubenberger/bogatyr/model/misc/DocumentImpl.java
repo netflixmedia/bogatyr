@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110517)
+ * @version 0.9.6 (20110527)
  * @since 0.9.1
  */
 @XmlRootElement(name = "document")
@@ -69,8 +69,8 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	private Date created;
 	private Language language;
 	private URL url;
-	private List<Organization> listOrganization;
-	private List<Person> listPerson;
+	private List<Organization> organizations;
+	private List<Person> persons;
 
 	public DocumentImpl() {
 		super();
@@ -78,9 +78,9 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	}
 
 	public DocumentImpl(final String name, final BigDecimal version, final int build,
-							  final Date created, final Language language, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final UUID uuid, final Map<String, String> mapTag) {
+							  final Date created, final Language language, final URL url, final List<Organization> organizations, final List<Person> persons, final UUID uuid, final Map<String, String> mapTag) {
 		super(uuid, mapTag);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, language, url, listOrganization, listPerson, uuid, mapTag));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, language, url, organizations, persons, uuid, mapTag));
 
 		this.name = name;
 		this.version = version;
@@ -88,8 +88,8 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		this.created = created;
 		this.language = language;
 		this.url = url;
-		this.listOrganization = listOrganization;
-		this.listPerson = listPerson;
+		this.organizations = organizations;
+		this.persons = persons;
 	}
 
 
@@ -101,47 +101,63 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + build;
-		result = prime * result + ((null == created) ? 0 : created.hashCode());
-		result = prime * result + ((null == language) ? 0 : language.hashCode());
-		result = prime * result + ((null == listOrganization) ? 0 : listOrganization.hashCode());
-		result = prime * result + ((null == listPerson) ? 0 : listPerson.hashCode());
-		result = prime * result + ((null == name) ? 0 : name.hashCode());
-		result = prime * result + ((null == url) ? 0 : url.hashCode());
-		result = prime * result + ((null == version) ? 0 : version.hashCode());
+		result = prime * result + ((created == null) ? 0 : created.hashCode());
+		result = prime * result + ((language == null) ? 0 : language.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((organizations == null) ? 0 : organizations.hashCode());
+		result = prime * result + ((persons == null) ? 0 : persons.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(final Object obj) {
+	public boolean equals(Object obj) {
 		if (this == obj) return true;
 		if (!super.equals(obj)) return false;
 		if (getClass() != obj.getClass()) return false;
-		final DocumentImpl other = (DocumentImpl) obj;
+		DocumentImpl other = (DocumentImpl) obj;
 		if (build != other.build) return false;
-		if (null == created) {
-			if (null != other.created) return false;
+		if (created == null) {
+			if (other.created != null) return false;
 		} else if (!created.equals(other.created)) return false;
 		if (language != other.language) return false;
-		if (null == listOrganization) {
-			if (null != other.listOrganization) return false;
-		} else if (!listOrganization.equals(other.listOrganization)) return false;
-		if (null == listPerson) {
-			if (null != other.listPerson) return false;
-		} else if (!listPerson.equals(other.listPerson)) return false;
-		if (null == name) {
-			if (null != other.name) return false;
+		if (name == null) {
+			if (other.name != null) return false;
 		} else if (!name.equals(other.name)) return false;
-		if (null == url) {
-			if (null != other.url) return false;
+		if (organizations == null) {
+			if (other.organizations != null) return false;
+		} else if (!organizations.equals(other.organizations)) return false;
+		if (persons == null) {
+			if (other.persons != null) return false;
+		} else if (!persons.equals(other.persons)) return false;
+		if (url == null) {
+			if (other.url != null) return false;
 		} else if (!url.equals(other.url)) return false;
-		if (null == version) {
-			if (null != other.version) return false;
+		if (version == null) {
+			if (other.version != null) return false;
 		} else if (!version.equals(other.version)) return false;
 		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		return getClass().getName() + "[instantiated=" + getInstantiated() +  //$NON-NLS-1$
+			", isNotifyEnabled=" + isNotifyEnabled() + //$NON-NLS-1$
+			", uuid=" + getUUID() +  //$NON-NLS-1$
+			", mapTag=" + getTags() +  //$NON-NLS-1$
+			", name=" + name + //$NON-NLS-1$ 
+			", version=" + version + //$NON-NLS-1$ 
+			", build=" + build + //$NON-NLS-1$ 
+			", created=" + created + //$NON-NLS-1$ 
+			", language=" + language + //$NON-NLS-1$ 
+			", url=" + url + //$NON-NLS-1$ 
+			", organizations=" + organizations + //$NON-NLS-1$ 
+			", persons=" + persons + //$NON-NLS-1$ 
+			']'; 
+	}
 
+	
 	/*
 	 * Implemented methods
 	 */
@@ -283,16 +299,16 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	public List<Organization> getOrganizations() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listOrganization));
-		return listOrganization;
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(organizations));
+		return organizations;
 	}
 
 	@Override
 	public void setOrganizations(final List<Organization> organizations) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(organizations));
 
-		if (!HelperObject.isEquals(organizations, listOrganization)) {
-			listOrganization = organizations;
+		if (!HelperObject.isEquals(this.organizations, organizations)) {
+			this.organizations = organizations;
 			setChanged();
 			notifyObservers(MEMBER_ORGANIZATIONS);
 		}
@@ -305,16 +321,16 @@ public class DocumentImpl extends ModelAbstract implements Document {
 	public List<Person> getPersons() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listPerson));
-		return listPerson;
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(persons));
+		return persons;
 	}
 
 	@Override
 	public void setPersons(final List<Person> persons) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(persons));
 
-		if (!HelperObject.isEquals(persons, listPerson)) {
-			listPerson = persons;
+		if (!HelperObject.isEquals(this.persons, persons)) {
+			this.persons = persons;
 			setChanged();
 			notifyObservers(MEMBER_PERSONS);
 		}
@@ -329,10 +345,10 @@ public class DocumentImpl extends ModelAbstract implements Document {
 			throw new RuntimeExceptionIsNull("organization"); //$NON-NLS-1$
 		}
 
-		if (null == listOrganization) {
-			listOrganization = new ArrayList<Organization>();
+		if (null == organizations) {
+			organizations = new ArrayList<Organization>();
 		}
-		listOrganization.add(organization);
+		organizations.add(organization);
 		setChanged();
 		notifyObservers(METHOD_ADD_ORGANIZATION);
 
@@ -346,10 +362,10 @@ public class DocumentImpl extends ModelAbstract implements Document {
 			throw new RuntimeExceptionIsNull("person"); //$NON-NLS-1$
 		}
 
-		if (null == listPerson) {
-			listPerson = new ArrayList<Person>();
+		if (null == persons) {
+			persons = new ArrayList<Person>();
 		}
-		listPerson.add(person);
+		persons.add(person);
 		setChanged();
 		notifyObservers(METHOD_ADD_PERSON);
 

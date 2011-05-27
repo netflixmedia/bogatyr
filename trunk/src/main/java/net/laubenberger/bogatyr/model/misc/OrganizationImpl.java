@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the organization model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110502)
+ * @version 0.9.6 (20110527)
  * @since 0.9.2
  */
 @XmlRootElement(name = "organization")
@@ -70,8 +70,8 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 	private String faxNumber;
 	private String email;
 	private URL url;
-	private List<Person> listPerson;
-	private List<Role> listRole;
+	private List<Person> persons;
+	private List<Role> roles;
 	
 	
 	public OrganizationImpl() {
@@ -81,9 +81,9 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 
 
 	public OrganizationImpl(final String name, final String street, final String zip,
-									final String city, final Country country, final String phoneNumber, final String faxNumber, final String email, final URL url, final List<Person> listPerson, final List<Role> listRole, final UUID uuid, final Map<String, String> mapTag) {
+									final String city, final Country country, final String phoneNumber, final String faxNumber, final String email, final URL url, final List<Person> persons, final List<Role> roles, final UUID uuid, final Map<String, String> mapTag) {
 		super(uuid, mapTag);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, street, zip, city, country, phoneNumber, faxNumber, email, url, listPerson, listRole, uuid, mapTag));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, street, zip, city, country, phoneNumber, faxNumber, email, url, persons, roles, uuid, mapTag));
 		this.name = name;
 		this.street = street;
 		this.zip = zip;
@@ -93,98 +93,90 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 		this.faxNumber = faxNumber;
 		this.email = email;
 		this.url = url;
-		this.listPerson = listPerson;
-		this.listRole = listRole;
+		this.persons = persons;
+		this.roles = roles;
 	}
 
 
 	/*
 	 * Overridden methods
 	 */
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((null == city) ? 0 : city.hashCode());
-		result = prime * result + ((null == country) ? 0 : country.hashCode());
-		result = prime * result + ((null == email) ? 0 : email.hashCode());
-		result = prime * result + ((null == faxNumber) ? 0 : faxNumber.hashCode());
-		result = prime * result + ((null == listPerson) ? 0 : listPerson.hashCode());
-		result = prime * result + ((null == listRole) ? 0 : listRole.hashCode());
-		result = prime * result + ((null == name) ? 0 : name.hashCode());
-		result = prime * result + ((null == phoneNumber) ? 0 : phoneNumber.hashCode());
-		result = prime * result + ((null == street) ? 0 : street.hashCode());
-		result = prime * result + ((null == url) ? 0 : url.hashCode());
-		result = prime * result + ((null == zip) ? 0 : zip.hashCode());
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((faxNumber == null) ? 0 : faxNumber.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((persons == null) ? 0 : persons.hashCode());
+		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
+		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final OrganizationImpl other = (OrganizationImpl) obj;
-		if (null == city) {
-			if (null != other.city)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
-		if (null == country) {
-			if (null != other.country)
-				return false;
-		} else if (country != other.country)
-			return false;
-		if (null == email) {
-			if (null != other.email)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (null == faxNumber) {
-			if (null != other.faxNumber)
-				return false;
-		} else if (!faxNumber.equals(other.faxNumber))
-			return false;
-		if (null == listPerson) {
-			if (null != other.listPerson)
-				return false;
-		} else if (!listPerson.equals(other.listPerson))
-			return false;
-		if (null == listRole) {
-			if (null != other.listRole)
-				return false;
-		} else if (!listRole.equals(other.listRole))
-			return false;
-		if (null == name) {
-			if (null != other.name)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (null == phoneNumber) {
-			if (null != other.phoneNumber)
-				return false;
-		} else if (!phoneNumber.equals(other.phoneNumber))
-			return false;
-		if (null == street) {
-			if (null != other.street)
-				return false;
-		} else if (!street.equals(other.street))
-			return false;
-		if (null == url) {
-			if (null != other.url)
-				return false;
-		} else if (!url.equals(other.url))
-			return false;
-		if (null == zip) {
-			if (null != other.zip)
-				return false;
-		} else if (!zip.equals(other.zip))
-			return false;
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (!super.equals(obj)) return false;
+		if (getClass() != obj.getClass()) return false;
+		OrganizationImpl other = (OrganizationImpl) obj;
+		if (city == null) {
+			if (other.city != null) return false;
+		} else if (!city.equals(other.city)) return false;
+		if (country != other.country) return false;
+		if (email == null) {
+			if (other.email != null) return false;
+		} else if (!email.equals(other.email)) return false;
+		if (faxNumber == null) {
+			if (other.faxNumber != null) return false;
+		} else if (!faxNumber.equals(other.faxNumber)) return false;
+		if (name == null) {
+			if (other.name != null) return false;
+		} else if (!name.equals(other.name)) return false;
+		if (persons == null) {
+			if (other.persons != null) return false;
+		} else if (!persons.equals(other.persons)) return false;
+		if (phoneNumber == null) {
+			if (other.phoneNumber != null) return false;
+		} else if (!phoneNumber.equals(other.phoneNumber)) return false;
+		if (roles == null) {
+			if (other.roles != null) return false;
+		} else if (!roles.equals(other.roles)) return false;
+		if (street == null) {
+			if (other.street != null) return false;
+		} else if (!street.equals(other.street)) return false;
+		if (url == null) {
+			if (other.url != null) return false;
+		} else if (!url.equals(other.url)) return false;
+		if (zip == null) {
+			if (other.zip != null) return false;
+		} else if (!zip.equals(other.zip)) return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getName() + "[instantiated=" + getInstantiated() +  //$NON-NLS-1$
+			", isNotifyEnabled=" + isNotifyEnabled() + //$NON-NLS-1$
+			", uuid=" + getUUID() +  //$NON-NLS-1$
+			", mapTag=" + getTags() +  //$NON-NLS-1$
+			", name=" + name + //$NON-NLS-1$ 
+			", street=" + street + //$NON-NLS-1$ 
+			", zip=" + zip + //$NON-NLS-1$ 
+			", city=" + city + //$NON-NLS-1$ 
+			", country=" + country + //$NON-NLS-1$ 
+			", phoneNumber=" + phoneNumber + //$NON-NLS-1$ 
+			", faxNumber=" + faxNumber + //$NON-NLS-1$ 
+			", email=" + email + //$NON-NLS-1$ 
+			", url=" + url + //$NON-NLS-1$ 
+			", persons=" + persons + //$NON-NLS-1$ 
+			", roles=" + roles + //$NON-NLS-1$ 
+			']'; 
 	}
 
 
@@ -395,16 +387,16 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 	public List<Person> getPersons() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listPerson));
-		return listPerson;
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(persons));
+		return persons;
 	}
 
 	@Override
 	public void setPersons(final List<Person> persons) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(persons));
 
-		if (!HelperObject.isEquals(persons, listPerson)) {
-			listPerson = persons;
+		if (!HelperObject.isEquals(this.persons, persons)) {
+			this.persons = persons;
 			setChanged();
 			notifyObservers(MEMBER_PERSONS);
 		}
@@ -417,16 +409,16 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 	public List<Role> getRoles() {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart());
 
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(listRole));
-		return listRole;
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(roles));
+		return roles;
 	}
 
 	@Override
 	public void setRoles(final List<Role> roles) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(roles));
 
-		if (!HelperObject.isEquals(roles, listRole)) {
-			listRole = roles;
+		if (!HelperObject.isEquals(roles, roles)) {
+			this.roles = roles;
 			setChanged();
 			notifyObservers(MEMBER_ROLES);
 		}
@@ -441,10 +433,10 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 			throw new RuntimeExceptionIsNull("person"); //$NON-NLS-1$
 		}
 
-		if (null == listPerson) {
-			listPerson = new ArrayList<Person>();
+		if (null == persons) {
+			persons = new ArrayList<Person>();
 		}
-		listPerson.add(person);
+		persons.add(person);
 		setChanged();
 		notifyObservers(METHOD_ADD_PERSON);
 
@@ -458,10 +450,10 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 			throw new RuntimeExceptionIsNull("role"); //$NON-NLS-1$
 		}
 
-		if (null == listRole) {
-			listRole = new ArrayList<Role>();
+		if (null == roles) {
+			roles = new ArrayList<Role>();
 		}
-		listRole.add(role);
+		roles.add(role);
 		setChanged();
 		notifyObservers(METHOD_ADD_ROLE);
 
