@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,16 +32,16 @@ import java.util.List;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import net.laubenberger.bogatyr.model.Model;
-import net.laubenberger.bogatyr.model.misc.OrganizationImpl.XmlAdapter;
+import net.laubenberger.bogatyr.model.misc.OrganizationImpl.XmlAdapterOrganization;
 
 /**
  * The interface for the organization model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101227)
+ * @version 0.9.6 (20110527)
  * @since 0.9.2
  */
-@XmlJavaTypeAdapter(XmlAdapter.class)
+@XmlJavaTypeAdapter(XmlAdapterOrganization.class)
 public interface Organization extends Model, Address, Phone, Fax, Email, Url {
 	String MEMBER_PERSONS 		= "persons"; //$NON-NLS-1$
 	String MEMBER_ROLES 			= "roles"; //$NON-NLS-1$

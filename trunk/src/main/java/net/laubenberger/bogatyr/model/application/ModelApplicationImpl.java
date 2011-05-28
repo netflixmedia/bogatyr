@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -59,7 +59,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the application model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110505)
+ * @version 0.9.6 (20110527)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelApplication")
@@ -251,7 +251,7 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 	 * Inner classes
 	 */
 
-	public static class XmlAdapter extends javax.xml.bind.annotation.adapters.XmlAdapter<ModelApplicationImpl, ModelApplication> {
+	public static class XmlAdapterModelApplication extends javax.xml.bind.annotation.adapters.XmlAdapter<ModelApplicationImpl, ModelApplication> {
 
 		@Override
 		public ModelApplicationImpl marshal(final ModelApplication model) {

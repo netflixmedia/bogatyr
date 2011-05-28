@@ -60,7 +60,7 @@ public abstract class Constants {
 	private static final Logger log = LoggerFactory.getLogger(Constants.class);
 
 	//Bogatyr specific
-	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.96"), 347, HelperTime.getDate(2011, 5, 27, 4, 22, 0), Language.ENGLISH, null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.96"), 348, HelperTime.getDate(2011, 5, 27, 17, 38, 0), Language.ENGLISH, null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;

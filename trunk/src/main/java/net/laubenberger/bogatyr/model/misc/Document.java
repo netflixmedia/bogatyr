@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -34,16 +34,16 @@ import java.util.List;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import net.laubenberger.bogatyr.model.Model;
-import net.laubenberger.bogatyr.model.misc.DocumentImpl.XmlAdapter;
+import net.laubenberger.bogatyr.model.misc.DocumentImpl.XmlAdapterDocument;
 
 /**
  * The interface for the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110505)
+ * @version 0.9.6 (20110527)
  * @since 0.9.1
  */
-@XmlJavaTypeAdapter(XmlAdapter.class)
+@XmlJavaTypeAdapter(XmlAdapterDocument.class)
 public interface Document extends Model, Url {
 	String MEMBER_NAME 					= "name"; //$NON-NLS-1$
 	String MEMBER_VERSION 				= "version"; //$NON-NLS-1$
