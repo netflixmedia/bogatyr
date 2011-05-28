@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,7 +31,8 @@ import java.net.URL;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import net.laubenberger.bogatyr.model.application.ModelApplicationImpl.XmlAdapter;import net.laubenberger.bogatyr.model.misc.Document;
+import net.laubenberger.bogatyr.model.application.ModelApplicationImpl.XmlAdapterModelApplication;
+import net.laubenberger.bogatyr.model.misc.Document;
 import net.laubenberger.bogatyr.model.worker.ModelWorker;
 import net.laubenberger.bogatyr.service.localizer.Localizer;
 import net.laubenberger.bogatyr.service.property.Property;
@@ -40,10 +41,10 @@ import net.laubenberger.bogatyr.service.property.Property;
  * The interface for the application model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.2 (20100611)
+ * @version 0.9.6 (20110527)
  * @since 0.9.0
  */
-@XmlJavaTypeAdapter(XmlAdapter.class)
+@XmlJavaTypeAdapter(XmlAdapterModelApplication.class)
 public interface ModelApplication extends Document {
 	String MEMBER_UPDATE_LOCATION	= "updateLocation"; //$NON-NLS-1$
 	String MEMBER_DEBUG				= "debug"; //$NON-NLS-1$

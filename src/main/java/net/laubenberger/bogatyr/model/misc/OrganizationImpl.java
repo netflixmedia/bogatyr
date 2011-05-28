@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2010 by Stefan Laubenberger.
+ * Copyright (c) 2007-2011 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -465,7 +465,7 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 	 * Inner classes
 	 */
 
-	public static class XmlAdapter extends javax.xml.bind.annotation.adapters.XmlAdapter<OrganizationImpl, Organization> {
+	public static class XmlAdapterOrganization extends javax.xml.bind.annotation.adapters.XmlAdapter<OrganizationImpl, Organization> {
 
 		@Override
 		public OrganizationImpl marshal(final Organization model) {
