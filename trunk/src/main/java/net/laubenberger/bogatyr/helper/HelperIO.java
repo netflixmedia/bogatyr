@@ -69,7 +69,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.5 (20110213)
+ * @version 0.9.6 (20110228)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -976,7 +976,7 @@ public abstract class HelperIO {
 	// }
 
 	/**
-	 * Returns the total space of a given {@link File} location in bytes.
+	 * Returns the total space of a given {@link File} root location in bytes.
 	 * 
 	 * @param file
 	 *           location
@@ -997,7 +997,7 @@ public abstract class HelperIO {
 	}
 
 	/**
-	 * Returns the free space of a given {@link File} location in bytes.
+	 * Returns the free space of a given {@link File} root location in bytes.
 	 * 
 	 * @param file
 	 *           location
@@ -1018,7 +1018,7 @@ public abstract class HelperIO {
 	}
 
 	/**
-	 * Returns the usable space of a given {@link File} location in bytes.
+	 * Returns the usable space of a given {@link File} root location in bytes.
 	 * 
 	 * @param file
 	 *           location
@@ -1039,7 +1039,7 @@ public abstract class HelperIO {
 	}
 
 	/**
-	 * Returns the used space of a given {@link File} location in bytes.
+	 * Returns the used space of a given {@link File} root location in bytes.
 	 * 
 	 * @param file
 	 *           location
@@ -1302,7 +1302,88 @@ public abstract class HelperIO {
 		return result;
 	}
 	
+	/**
+	 * Returns the number of files in a path.
+	 * 
+	 * @param path
+	 *           for searching
+	 * @return number of files
+	 * @see File
+	 * @since 0.9.6
+	 */
+	public static int getNumberOfFiles(final File path) { // $JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(path));
+
+		final FileFilter filter = new FileFilter() {
+			@Override
+			public boolean accept(final File file) {
+				return !file.isDirectory();
+			}
+		};
+
+		final int result = HelperIO.getFiles(path, filter).size();
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
 	
+	/**
+	 * Returns the number of directories in a path.
+	 * 
+	 * @param path
+	 *           for searching
+	 * @return number of directories
+	 * @see File
+	 * @since 0.9.6
+	 */
+	public static int getNumberOfDirectories(final File path) { // $JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(path));
+
+		final FileFilter filter = new FileFilter() {
+			@Override
+			public boolean accept(final File file) {
+				return file.isDirectory();
+			}
+		};
+
+		final int result = HelperIO.getFiles(path, filter).size();
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+
+	/**
+	 * Returns the used space of a given {@link File} path in bytes.
+	 * 
+	 * @param file
+	 *           path
+	 * @return used space in bytes
+	 * @see File
+	 * @since 0.9.6
+	 */
+	public static long getSpaceUsedInPath(final File file) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
+
+//		final FileFilter filter = new FileFilter() {
+//			@Override
+//			public boolean accept(final File file) {
+//				return !file.isDirectory();
+//			}
+//		};
+		
+		long result = 0L;
+		
+//		List<File> list = HelperIO.getFiles(new File(path), filter);
+		List<File> list = HelperIO.getFiles(file);
+		
+		for (File tempFile : list) {
+			result += tempFile.length();
+		}
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+
 	/*
 	 * Private methods
 	 */
