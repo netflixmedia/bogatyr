@@ -46,7 +46,7 @@ import org.junit.Test;
  * JUnit test for {@link HelperIO}
  *
  * @author Stefan Laubenberger
- * @version 20101227
+ * @version 20110601
  */
 public class HelperIOTest { //TODO complete tests for all methods
 	@Test
@@ -258,6 +258,21 @@ public class HelperIOTest { //TODO complete tests for all methods
 			fail(ex.getMessage());
 		}
 	}
+
+//	@Test
+//	public void testGetPath() {
+//		File file;
+//		try {
+//			file = HelperIO.getTemporaryFile();
+//			System.err.println(file);
+//			
+//			System.err.println(HelperIO.getPath(file));
+//
+//			System.err.println(HelperIO.getPath(file, "123"));
+//		} catch (IOException ex) {
+//			fail(ex.getMessage());
+//		}
+//	}
 }
 
 

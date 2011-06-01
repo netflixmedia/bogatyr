@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  * This is a helper class for screens.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110517)
+ * @version 0.9.6 (20110601)
  * @since 0.9.1
  */
 public abstract class HelperScreen {
@@ -132,7 +132,7 @@ public abstract class HelperScreen {
 		}
 
 		final Dimension resolution = getCurrentScreenSize();
-		final boolean result = null == getCurrentScreenSize() ? false : resolution.width >= minSize.width && resolution.height >= minSize.height;
+		final boolean result = null != getCurrentScreenSize() && resolution.width >= minSize.width && resolution.height >= minSize.height;
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;

@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110527)
+ * @version 0.9.6 (20110601)
  * @since 0.9.1
  */
 @XmlRootElement(name = "document")
@@ -101,41 +101,41 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + build;
-		result = prime * result + ((created == null) ? 0 : created.hashCode());
-		result = prime * result + ((language == null) ? 0 : language.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((organizations == null) ? 0 : organizations.hashCode());
-		result = prime * result + ((persons == null) ? 0 : persons.hashCode());
-		result = prime * result + ((url == null) ? 0 : url.hashCode());
-		result = prime * result + ((version == null) ? 0 : version.hashCode());
+		result = prime * result + ((null == created) ? 0 : created.hashCode());
+		result = prime * result + ((null == language) ? 0 : language.hashCode());
+		result = prime * result + ((null == name) ? 0 : name.hashCode());
+		result = prime * result + ((null == organizations) ? 0 : organizations.hashCode());
+		result = prime * result + ((null == persons) ? 0 : persons.hashCode());
+		result = prime * result + ((null == url) ? 0 : url.hashCode());
+		result = prime * result + ((null == version) ? 0 : version.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj) return true;
 		if (!super.equals(obj)) return false;
 		if (getClass() != obj.getClass()) return false;
-		DocumentImpl other = (DocumentImpl) obj;
+		final DocumentImpl other = (DocumentImpl) obj;
 		if (build != other.build) return false;
-		if (created == null) {
-			if (other.created != null) return false;
+		if (null == created) {
+			if (null != other.created) return false;
 		} else if (!created.equals(other.created)) return false;
 		if (language != other.language) return false;
-		if (name == null) {
-			if (other.name != null) return false;
+		if (null == name) {
+			if (null != other.name) return false;
 		} else if (!name.equals(other.name)) return false;
-		if (organizations == null) {
-			if (other.organizations != null) return false;
+		if (null == organizations) {
+			if (null != other.organizations) return false;
 		} else if (!organizations.equals(other.organizations)) return false;
-		if (persons == null) {
-			if (other.persons != null) return false;
+		if (null == persons) {
+			if (null != other.persons) return false;
 		} else if (!persons.equals(other.persons)) return false;
-		if (url == null) {
-			if (other.url != null) return false;
+		if (null == url) {
+			if (null != other.url) return false;
 		} else if (!url.equals(other.url)) return false;
-		if (version == null) {
-			if (other.version != null) return false;
+		if (null == version) {
+			if (null != other.version) return false;
 		} else if (!version.equals(other.version)) return false;
 		return true;
 	}

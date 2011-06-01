@@ -38,7 +38,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Bit units
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110228)
+ * @version 0.9.6 (20110601)
  * @since 0.9.0
  */
 @XmlRootElement(name = "bit")
@@ -81,7 +81,7 @@ public enum Bit implements Unit<Bit> {
 	final BigDecimal factor;
 	final String symbol;
 
-	Bit(final BigDecimal factor, String symbol) {
+	Bit(final BigDecimal factor, final String symbol) {
 		this.factor = factor;
 		this.symbol = symbol;
 	}

@@ -39,7 +39,7 @@ import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
  * Encodes data to clean HTML-format.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101103)
+ * @version 0.9.6 (20110601)
  * @since 0.9.1
  */
 public abstract class EncoderHtml {
@@ -72,27 +72,34 @@ public abstract class EncoderHtml {
 				}
 			} else {
 				lastWasBlankChar = false;
-				if ('"' == c) {
-					sb.append("&quot;"); //$NON-NLS-1$
-				} else if ('&' == c) {
-					sb.append("&amp;"); //$NON-NLS-1$
-				} else if ('<' == c) {
-					sb.append("&lt;"); //$NON-NLS-1$
-				} else if ('>' == c) {
-					sb.append("&gt;"); //$NON-NLS-1$
-				} else if ('\n' == c) {
-					sb.append("&lt;br/&gt;"); //$NON-NLS-1$
-				} else {
-					final int ci = 0xffff & c;
-					if (160 > ci) {
-						// 7 Bit
-						sb.append(c);
-					} else {
-						// not 7 Bit - replace with the unicode system
-						sb.append("&#"); //$NON-NLS-1$
-						sb.append(Integer.toString(ci));
-						sb.append(';');
-					}
+				switch (c) {
+					case '"':
+						sb.append("&quot;"); //$NON-NLS-1$
+						break;
+					case '&':
+						sb.append("&amp;"); //$NON-NLS-1$
+						break;
+					case '<':
+						sb.append("&lt;"); //$NON-NLS-1$
+						break;
+					case '>':
+						sb.append("&gt;"); //$NON-NLS-1$
+						break;
+					case '\n':
+						sb.append("&lt;br/&gt;"); //$NON-NLS-1$
+						break;
+					default:
+						final int ci = 0xffff & c;
+						if (160 > ci) {
+							// 7 Bit
+							sb.append(c);
+						} else {
+							// not 7 Bit - replace with the unicode system
+							sb.append("&#"); //$NON-NLS-1$
+							sb.append(Integer.toString(ci));
+							sb.append(';');
+						}
+						break;
 				}
 			}
 		}

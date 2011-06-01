@@ -45,7 +45,7 @@ import net.laubenberger.bogatyr.helper.HelperObject;
  * <strong>Note:</strong> The language is always the main language of a country.
  *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101106)
+ * @version 0.9.6 (20110601)
  * @since 0.9.1
  */
 @XmlRootElement(name = "country")
@@ -69,7 +69,7 @@ public enum Country { //TODO complete the list with all countries
 	COLOMBIA(new Locale("es", "CO")), //$NON-NLS-1$//$NON-NLS-2$
 	CONGO(new Locale("fr", "CD")), //$NON-NLS-1$//$NON-NLS-2$
 	COSTA_RICA(new Locale("es", "CR")), //$NON-NLS-1$//$NON-NLS-2$
-	CÔTE_D_IVOIRE(new Locale("fr", "CI")), //$NON-NLS-1$//$NON-NLS-2$
+	COTE_D_IVOIRE(new Locale("fr", "CI")), //$NON-NLS-1$//$NON-NLS-2$
 	CROATIA(new Locale("hr", "HR")), //$NON-NLS-1$//$NON-NLS-2$
 	CUBA(new Locale("es", "CU")), //$NON-NLS-1$//$NON-NLS-2$
 	CYPRUS(new Locale("el", "CY")), //$NON-NLS-1$//$NON-NLS-2$
