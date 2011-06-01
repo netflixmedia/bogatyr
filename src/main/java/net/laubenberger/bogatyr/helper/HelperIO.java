@@ -69,7 +69,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.6 (20110228)
+ * @version 0.9.6 (20110601)
  * @since 0.1.0
  */
 public abstract class HelperIO {
@@ -1311,8 +1311,11 @@ public abstract class HelperIO {
 	 * @see File
 	 * @since 0.9.6
 	 */
-	public static int getNumberOfFiles(final File path) { // $JUnit$
+	public static int getNumberOfFiles(final File path) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(path));
+		if (null == path) {
+			throw new RuntimeExceptionIsNull("path"); //$NON-NLS-1$
+		}
 
 		final FileFilter filter = new FileFilter() {
 			@Override
@@ -1336,8 +1339,11 @@ public abstract class HelperIO {
 	 * @see File
 	 * @since 0.9.6
 	 */
-	public static int getNumberOfDirectories(final File path) { // $JUnit$
+	public static int getNumberOfDirectories(final File path) {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(path));
+		if (null == path) {
+			throw new RuntimeExceptionIsNull("path"); //$NON-NLS-1$
+		}
 
 		final FileFilter filter = new FileFilter() {
 			@Override
@@ -1361,8 +1367,11 @@ public abstract class HelperIO {
 	 * @see File
 	 * @since 0.9.6
 	 */
-	public static long getSpaceUsedInPath(final File file) {
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
+	public static long getSpaceUsedInPath(final File path) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(path));
+		if (null == path) {
+			throw new RuntimeExceptionIsNull("path"); //$NON-NLS-1$
+		}
 
 //		final FileFilter filter = new FileFilter() {
 //			@Override
@@ -1374,16 +1383,65 @@ public abstract class HelperIO {
 		long result = 0L;
 		
 //		List<File> list = HelperIO.getFiles(new File(path), filter);
-		List<File> list = HelperIO.getFiles(file);
+		final List<File> list = HelperIO.getFiles(path);
 		
-		for (File tempFile : list) {
+		for (final File tempFile : list) {
 			result += tempFile.length();
 		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
+	
+	/**
+	 * Returns the path of a given file.
+	 * 
+	 * @param file
+	 * @return path of the given file
+	 * @see File
+	 * @since 0.9.6
+	 */
+	public static String getPath(final File file) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
 
+		String result = file.getAbsolutePath();
+		
+		if (file.isFile()) {
+			result = file.getAbsolutePath().substring(0, file.getAbsolutePath().length() - file.getName().length());
+		}
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
+	/**
+	 * Returns the path of a given file and name.
+	 * 
+	 * @param file
+	 * @param file
+	 * @return path of the given file and name
+	 * @see File
+	 * @since 0.9.6
+	 */
+	public static String getPath(final File file, final String name) {
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(file));
+		if (null == file) {
+			throw new RuntimeExceptionIsNull("file"); //$NON-NLS-1$
+		}
+		if (null == name) {
+			throw new RuntimeExceptionIsNull("name"); //$NON-NLS-1$
+		}
+
+		final String result = file.getAbsolutePath().substring(0, file.getAbsolutePath().length() - name.length());
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}	
+	
+	
 	/*
 	 * Private methods
 	 */

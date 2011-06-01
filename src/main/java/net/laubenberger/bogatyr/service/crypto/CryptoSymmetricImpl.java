@@ -77,7 +77,7 @@ import org.slf4j.LoggerFactory;
  * This is a class for symmetric cryptology via AES.
   *
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101119)
+ * @version 0.9.6 (20110601)
  * @since 0.1.0
  */
 public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmetric {
@@ -115,7 +115,6 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 	/*
 	 * Private methods
 	 */
-
 	private AlgorithmParameterSpec prepareIv() {
 		if (log.isTraceEnabled()) log.trace(HelperLog.methodStart());
 
@@ -223,6 +222,7 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 			throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
 		}
 
+//		cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(cipher.getIV()));
 		cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
 		final byte[] result = cipher.doFinal(input);
 
@@ -246,6 +246,7 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 			throw new RuntimeExceptionExceedsVmMemory("input", input.length * 2); //$NON-NLS-1$
 		}
 
+//		cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(cipher.getIV()));
 		cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
 		final byte[] result = cipher.doFinal(input);
 
@@ -283,6 +284,7 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 
 		final byte[] buffer = new byte[bufferSize];
 
+//		cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(cipher.getIV()));
 		cipher.init(Cipher.ENCRYPT_MODE, key, prepareIv());
 		os = new CipherOutputStream(os, cipher);
 
@@ -329,6 +331,7 @@ public class CryptoSymmetricImpl extends ServiceAbstract implements CryptoSymmet
 		CipherInputStream cis = null;
 
 		try {
+//			cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(cipher.getIV()));
 			cipher.init(Cipher.DECRYPT_MODE, key, prepareIv());
 			cis = new CipherInputStream(is, cipher);
 

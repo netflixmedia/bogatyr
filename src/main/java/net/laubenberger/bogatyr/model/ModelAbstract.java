@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110527)
+ * @version 0.9.6 (20110601)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
@@ -185,7 +185,6 @@ public abstract class ModelAbstract extends Observable implements Model {
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
-
 
 	@Override
 	@XmlElement

@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the organization model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110527)
+ * @version 0.9.6 (20110601)
  * @since 0.9.2
  */
 @XmlRootElement(name = "organization")
@@ -105,56 +105,56 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((faxNumber == null) ? 0 : faxNumber.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((persons == null) ? 0 : persons.hashCode());
-		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
-		result = prime * result + ((street == null) ? 0 : street.hashCode());
-		result = prime * result + ((url == null) ? 0 : url.hashCode());
-		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
+		result = prime * result + ((null == city) ? 0 : city.hashCode());
+		result = prime * result + ((null == country) ? 0 : country.hashCode());
+		result = prime * result + ((null == email) ? 0 : email.hashCode());
+		result = prime * result + ((null == faxNumber) ? 0 : faxNumber.hashCode());
+		result = prime * result + ((null == name) ? 0 : name.hashCode());
+		result = prime * result + ((null == persons) ? 0 : persons.hashCode());
+		result = prime * result + ((null == phoneNumber) ? 0 : phoneNumber.hashCode());
+		result = prime * result + ((null == roles) ? 0 : roles.hashCode());
+		result = prime * result + ((null == street) ? 0 : street.hashCode());
+		result = prime * result + ((null == url) ? 0 : url.hashCode());
+		result = prime * result + ((null == zip) ? 0 : zip.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj) return true;
 		if (!super.equals(obj)) return false;
 		if (getClass() != obj.getClass()) return false;
-		OrganizationImpl other = (OrganizationImpl) obj;
-		if (city == null) {
-			if (other.city != null) return false;
+		final OrganizationImpl other = (OrganizationImpl) obj;
+		if (null == city) {
+			if (null != other.city) return false;
 		} else if (!city.equals(other.city)) return false;
 		if (country != other.country) return false;
-		if (email == null) {
-			if (other.email != null) return false;
+		if (null == email) {
+			if (null != other.email) return false;
 		} else if (!email.equals(other.email)) return false;
-		if (faxNumber == null) {
-			if (other.faxNumber != null) return false;
+		if (null == faxNumber) {
+			if (null != other.faxNumber) return false;
 		} else if (!faxNumber.equals(other.faxNumber)) return false;
-		if (name == null) {
-			if (other.name != null) return false;
+		if (null == name) {
+			if (null != other.name) return false;
 		} else if (!name.equals(other.name)) return false;
-		if (persons == null) {
-			if (other.persons != null) return false;
+		if (null == persons) {
+			if (null != other.persons) return false;
 		} else if (!persons.equals(other.persons)) return false;
-		if (phoneNumber == null) {
-			if (other.phoneNumber != null) return false;
+		if (null == phoneNumber) {
+			if (null != other.phoneNumber) return false;
 		} else if (!phoneNumber.equals(other.phoneNumber)) return false;
-		if (roles == null) {
-			if (other.roles != null) return false;
+		if (null == roles) {
+			if (null != other.roles) return false;
 		} else if (!roles.equals(other.roles)) return false;
-		if (street == null) {
-			if (other.street != null) return false;
+		if (null == street) {
+			if (null != other.street) return false;
 		} else if (!street.equals(other.street)) return false;
-		if (url == null) {
-			if (other.url != null) return false;
+		if (null == url) {
+			if (null != other.url) return false;
 		} else if (!url.equals(other.url)) return false;
-		if (zip == null) {
-			if (other.zip != null) return false;
+		if (null == zip) {
+			if (null != other.zip) return false;
 		} else if (!zip.equals(other.zip)) return false;
 		return true;
 	}
