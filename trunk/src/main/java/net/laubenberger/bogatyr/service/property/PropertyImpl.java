@@ -32,25 +32,27 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperNumber;
+import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.service.ServiceAbstract;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This is the properties class for file and stream access.
- *
+ * 
  * @author Stefan Laubenberger
- * @version 0.9.4 (20101106)
+ * @author Roman Wuersch
+ * @version 0.9.7 (20110902)
  * @since 0.1.0
  */
 public class PropertyImpl extends ServiceAbstract implements Property {
@@ -58,24 +60,34 @@ public class PropertyImpl extends ServiceAbstract implements Property {
 
 	private final Properties properties;
 
-
-	public PropertyImpl(final InputStream is) throws IOException {
+	public PropertyImpl(final InputStream inputStream, final String encoding) throws IOException {
 		super();
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(is));
+		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(inputStream));
 
-		if (null == is) {
-			throw new RuntimeExceptionIsNull("is"); //$NON-NLS-1$
+		if (null == inputStream) {
+			throw new RuntimeExceptionIsNull("inputStream");
 		}
-
+		if (null == encoding) {
+			throw new RuntimeExceptionIsNull("encoding");
+		}
+		
 		properties = new Properties();
-		properties.load(is);
+		properties.load(new InputStreamReader(inputStream, encoding));
+	}
+
+	public PropertyImpl(final File file, final String encoding) throws IOException {
+		this(new BufferedInputStream(new FileInputStream(file)), encoding);
+	}
+
+	public PropertyImpl(final InputStream inputStream) throws IOException {
+		this(inputStream, Constants.ENCODING_DEFAULT);
 	}
 
 	public PropertyImpl(final File file) throws IOException {
-		this(new BufferedInputStream(new FileInputStream(file)));
+		this(file, Constants.ENCODING_DEFAULT);
 	}
 
-
+	
 	/*
 	 * Implemented methods
 	 */
@@ -141,11 +153,11 @@ public class PropertyImpl extends ServiceAbstract implements Property {
 			try {
 				result = new URL(value);
 			} catch (MalformedURLException ex) {
-				//do nothing
-//				if (log.isInfoEnabled()) log.info("URL invalid", ex); //$NON-NLS-1$
+				// do nothing
+				//				if (log.isInfoEnabled()) log.info("URL invalid", ex); //$NON-NLS-1$
 			}
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
-}   
+}
