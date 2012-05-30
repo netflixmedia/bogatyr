@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2011 by Stefan Laubenberger.
+ * Copyright (c) 2007-2012 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -42,6 +42,7 @@ import net.laubenberger.bogatyr.model.misc.Document;
 import net.laubenberger.bogatyr.model.misc.DocumentImpl;
 import net.laubenberger.bogatyr.model.misc.Gender;
 import net.laubenberger.bogatyr.model.misc.Language;
+import net.laubenberger.bogatyr.model.misc.Person;
 import net.laubenberger.bogatyr.model.misc.PersonImpl;
 import net.laubenberger.bogatyr.model.misc.Role;
 
@@ -53,14 +54,14 @@ import org.slf4j.LoggerFactory;
  * Collected constants of very general utility.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110601)
+ * @version 0.9.7 (20120530)
  * @since 0.7.0
  */
 public abstract class Constants {
 	private static final Logger log = LoggerFactory.getLogger(Constants.class);
 
 	//Bogatyr specific
-	public static final Document BOGATYR = new DocumentImpl("Bogatyr", new BigDecimal("0.96"), 350, HelperTime.getDate(2011, 6, 1, 11, 25, 0), Language.ENGLISH, null, null, null, UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5"), null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final Document BOGATYR = new DocumentImpl();
 
 	//defaults
 //	public static final MathContext DEFAULT_MATHCONTEXT = MathContext.DECIMAL128;
@@ -179,9 +180,30 @@ public abstract class Constants {
 
 	static {
 		try {
+			BOGATYR.setName("Bogatyr"); //$NON-NLS-1$
+			BOGATYR.setVersion(new BigDecimal("0.97")); //$NON-NLS-1$
+			BOGATYR.setBuild(352);
+			BOGATYR.setCreated(HelperTime.getDate(2012, 5, 30, 21, 22, 0));
+			BOGATYR.setLanguage(Language.ENGLISH);
+			BOGATYR.setUUID(UUID.fromString("4d8f7b88-2a1e-4f74-98ca-99d8a0cf97a5")); //$NON-NLS-1$
 			BOGATYR.setUrl(new URL("http://dev.laubenberger.net/bogatyr/")); //$NON-NLS-1$
 			
-			BOGATYR.addPerson(new PersonImpl("Laubenberger", "Stefan", HelperTime.getDate(1976, 12, 30), Gender.MALE, Language.GERMAN, "Bullingerstrasse 53", "8004", "Zürich", Country.SWITZERLAND, "+41 1 401 27 43", null, "laubenberger@gmail.com", new URL("http://www.laubenberger.net"), null, HelperCollection.getList(Role.ADMINISTRATOR, Role.ARCHITECT, Role.DESIGNER, Role.DEVELOPER, Role.MANUFACTURER, Role.OWNER, Role.PROJECT_MANAGER, Role.PUBLISHER, Role.REVIEWER, Role.TESTER, Role.WRITER), UUID.fromString("490955a3-76e7-44c7-a318-6f16aae94fcd"), null));   //$NON-NLS-1$ //$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$ //$NON-NLS-8$ //$NON-NLS-9$
+			Person person = new PersonImpl();
+			person.setName("Laubenberger"); //$NON-NLS-1$
+			person.setForename("Stefan"); //$NON-NLS-1$
+			person.setBirthday(HelperTime.getDate(1976, 12, 30, 21, 56, 0));
+			person.setGender(Gender.MALE);
+			person.setLanguage(Language.GERMAN);
+			person.setStreet("Bullingerstrasse 53"); //$NON-NLS-1$
+			person.setZip("8004"); //$NON-NLS-1$
+			person.setCity("Zürich"); //$NON-NLS-1$
+			person.setCountry(Country.SWITZERLAND);
+			person.setEmail("laubenberger@gmail.com"); //$NON-NLS-1$
+			person.setUrl(new URL("http://www.laubenberger.net")); //$NON-NLS-1$
+			person.setRoles(HelperCollection.getList(Role.ADMINISTRATOR, Role.ARCHITECT, Role.DESIGNER, Role.DEVELOPER, Role.MANUFACTURER, Role.OWNER, Role.PROJECT_MANAGER, Role.PUBLISHER, Role.REVIEWER, Role.TESTER, Role.WRITER));
+			person.setUUID(UUID.fromString("490955a3-76e7-44c7-a318-6f16aae94fcd")); //$NON-NLS-1$
+						
+			BOGATYR.addPerson(person);
 		} catch (MalformedURLException ex) {
 			// should never happen!
 			log.error("URL invalid", ex); //$NON-NLS-1$

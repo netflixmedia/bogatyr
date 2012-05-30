@@ -1,5 +1,5 @@
 -----------------------------------------------------
- Bogatyr 0.9.6
+ Bogatyr 0.9.7
 
  Project Homepage :
    http://code.google.com/p/bogatyr/ 

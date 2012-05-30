@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2011 by Stefan Laubenberger.
+ * Copyright (c) 2007-2012 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -33,8 +33,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -53,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the document model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110601)
+ * @version 0.9.7 (20120530)
  * @since 0.9.1
  */
 @XmlRootElement(name = "document")
@@ -77,20 +75,20 @@ public class DocumentImpl extends ModelAbstract implements Document {
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
-	public DocumentImpl(final String name, final BigDecimal version, final int build,
-							  final Date created, final Language language, final URL url, final List<Organization> organizations, final List<Person> persons, final UUID uuid, final Map<String, String> mapTag) {
-		super(uuid, mapTag);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, language, url, organizations, persons, uuid, mapTag));
-
-		this.name = name;
-		this.version = version;
-		this.build = build;
-		this.created = created;
-		this.language = language;
-		this.url = url;
-		this.organizations = organizations;
-		this.persons = persons;
-	}
+//	public DocumentImpl(final String name, final BigDecimal version, final int build,
+//							  final Date created, final Language language, final URL url, final List<Organization> organizations, final List<Person> persons, final UUID uuid, final Map<String, String> mapTag) {
+//		super(uuid, mapTag);
+//		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, language, url, organizations, persons, uuid, mapTag));
+//
+//		this.name = name;
+//		this.version = version;
+//		this.build = build;
+//		this.created = created;
+//		this.language = language;
+//		this.url = url;
+//		this.organizations = organizations;
+//		this.persons = persons;
+//	}
 
 
 	/*

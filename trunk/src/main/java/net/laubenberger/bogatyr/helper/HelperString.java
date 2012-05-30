@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2011 by Stefan Laubenberger.
+ * Copyright (c) 2007-2012 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101202)
+ * @version 0.9.7 (20105230)
  * @since 0.7.0
  */
 public abstract class HelperString {
@@ -89,11 +89,11 @@ public abstract class HelperString {
 	 * @since 0.7.0
 	 */
 	public static boolean isValid(final CharSequence input) { //$JUnit$
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 
 		final boolean result = !(null == input || 0 == input.length());
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -105,7 +105,7 @@ public abstract class HelperString {
 	 * @since 0.7.0
 	 */
 	public static boolean isNumeric(final String input) { //$JUnit$
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -121,7 +121,7 @@ public abstract class HelperString {
 //			if (log.isInfoEnabled()) log.info("NumberFormat invalid", ex); //$NON-NLS-1$
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -134,7 +134,7 @@ public abstract class HelperString {
 	 * @since 0.7.0
 	 */
 	public static String fill(final char fillChar, final int fillLength) { //$JUnit$
-		log.debug(HelperLog.methodStart(fillChar, fillLength));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(fillChar, fillLength));
 		if (0 >= fillLength) {
 			throw new RuntimeExceptionMustBeGreater("fillLength", fillLength, 0); //$NON-NLS-1$
 		}
@@ -148,7 +148,7 @@ public abstract class HelperString {
 		}
 		final String result = new String(chars);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -160,14 +160,14 @@ public abstract class HelperString {
 	 * @since 0.7.0
 	 */
 	public static String reverse(final String input) { //$JUnit$
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
 		
 		final String result = new StringBuilder(input).reverse().toString();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -179,7 +179,7 @@ public abstract class HelperString {
 	 * @since 0.7.0
 	 */
 	public static String getNumericString(final String input) { //$JUnit$
-		log.debug(HelperLog.methodStart(input));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
 		if (null == input) {
 			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
 		}
@@ -216,7 +216,7 @@ public abstract class HelperString {
 			}
 		}
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -230,7 +230,7 @@ public abstract class HelperString {
 	 * @since 0.7.0
 	 */
 	public static String concatenate(final String[] strings, final String separator, final boolean isTrimmed) { //$JUnit$
-		log.debug(HelperLog.methodStart(strings, separator, isTrimmed));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(strings, separator, isTrimmed));
 		if (null == strings) {
 			throw new RuntimeExceptionIsNull("strings"); //$NON-NLS-1$
 		}
@@ -257,7 +257,7 @@ public abstract class HelperString {
 		}
 		final String result = sb.toString();
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -269,11 +269,11 @@ public abstract class HelperString {
 	 * @since 0.9.0
 	 */
 	public static String concatenate(final String... strings) { //$JUnit$
-		log.debug(HelperLog.methodStart(strings));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(strings));
 
 		final String result = concatenate(strings, null, true);
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -342,7 +342,7 @@ public abstract class HelperString {
 	 * @since 0.9.0
 	 */
 	public static boolean startsWith(final String string, final String prefix) { //$JUnit$
-		log.debug(HelperLog.methodStart(string, prefix));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(string, prefix));
 		if (null == string) {
 			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
 		}
@@ -356,7 +356,7 @@ public abstract class HelperString {
 //		final boolean result = string.matches("(?i)" + prefix + ".*");  //$NON-NLS-1$//$NON-NLS-2$
 		final boolean result = string.toUpperCase(Locale.getDefault()).startsWith(prefix.toUpperCase(Locale.getDefault()));
 		
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -369,7 +369,7 @@ public abstract class HelperString {
 	 * @since 0.9.0
 	 */
 	public static boolean endsWith(final String string, final String suffix) { //$JUnit$
-		log.debug(HelperLog.methodStart(string, suffix));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(string, suffix));
 		if (null == string) {
 			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
 		}
@@ -383,7 +383,7 @@ public abstract class HelperString {
 //		final boolean result = string.matches("(?i).*" + suffix); //$NON-NLS-1$
 		final boolean result = string.toUpperCase(Locale.getDefault()).endsWith(suffix.toUpperCase(Locale.getDefault()));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 
@@ -396,7 +396,7 @@ public abstract class HelperString {
 	 * @since 0.9.0
 	 */
 	public static boolean contains(final String string, final String part) { //$JUnit$
-		log.debug(HelperLog.methodStart(string, part));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(string, part));
 		if (null == string) {
 			throw new RuntimeExceptionIsNull("string"); //$NON-NLS-1$
 		}
@@ -410,7 +410,47 @@ public abstract class HelperString {
 //		final boolean result = string.matches("(?i).*" + part + ".*");  //$NON-NLS-1$//$NON-NLS-2$
 		final boolean result = string.toUpperCase(Locale.getDefault()).contains(part.toUpperCase(Locale.getDefault()));
 
-		log.debug(HelperLog.methodExit(result));
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+	
+
+	/**
+	 * Quote a {@link String} with a given quote sign.
+	 *
+	 * @param input {@link String}
+	 * @return quoted {@link String}
+	 * @since 0.9.7
+	 */
+	public static String quote(final String input, final String quoteSign) { //$JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
+		if (null == input) {
+			throw new RuntimeExceptionIsNull("input"); //$NON-NLS-1$
+		}
+		
+		if (null == quoteSign) {
+			throw new RuntimeExceptionIsNull("quoteSign"); //$NON-NLS-1$
+		}		
+		
+		final String result = quoteSign + input + quoteSign;
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+		return result;
+	}
+
+	/**
+	 * Quote a {@link String} with single quotes.
+	 *
+	 * @param input {@link String}
+	 * @return quoted {@link String}
+	 * @since 0.9.7
+	 */
+	public static String quote(final String input) { //$JUnit$
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(input));
+		
+		final String result = quote(input, SINGLE_QUOTE);
+
+		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}
 }

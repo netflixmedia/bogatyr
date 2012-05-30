@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2011 by Stefan Laubenberger.
+ * Copyright (c) 2007-2012 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -39,6 +39,7 @@ import javax.swing.KeyStroke;
 import net.laubenberger.bogatyr.helper.HelperEnvironment;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
+import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.model.misc.Language;
 import net.laubenberger.bogatyr.model.misc.Platform;
@@ -51,7 +52,7 @@ import org.slf4j.LoggerFactory;
  * Localizer implementation for file access.
  *
  * @author Stefan Laubenberger
- * @version 0.9.5 (20110213)
+ * @version 0.9.7 (20120530)
  * @since 0.1.0
  */
 public class LocalizerFile extends LocalizerAbstract {
@@ -268,7 +269,7 @@ public class LocalizerFile extends LocalizerAbstract {
 		try {
 			result = bundle.getString(key);
 		} catch (MissingResourceException ex) {
-			if (log.isWarnEnabled()) log.warn("Resource not found", ex); //$NON-NLS-1$
+			if (log.isWarnEnabled()) log.warn("Could not find resource for key: " + HelperString.quote(key), ex); //$NON-NLS-1$
 		}
 
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));

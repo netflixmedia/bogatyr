@@ -40,6 +40,7 @@ import org.slf4j.LoggerFactory;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperNumber;
+import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.misc.Event;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.service.ServiceAbstract;
@@ -125,8 +126,7 @@ public abstract class LocalizerAbstract extends ServiceAbstract implements Local
 			try {
 				result = new URL(value);
 			} catch (MalformedURLException ex) {
-				//do nothing
-//				if (log.isInfoEnabled()) log.info("URL invalid", ex); //$NON-NLS-1$
+				if (log.isInfoEnabled()) log.info("URL is invalid: " + HelperString.quote(value), ex); //$NON-NLS-1$
 			}
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));

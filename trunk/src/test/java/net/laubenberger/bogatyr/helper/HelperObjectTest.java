@@ -216,17 +216,17 @@ public class HelperObjectTest
         assertFalse(HelperObject.isEquals(null, "B")); //$NON-NLS-1$
     }
 
-    @Test
-    public void testQuote() {
-        assertEquals("'A'", HelperObject.quote("A")); //$NON-NLS-1$//$NON-NLS-2$
-
-        try {
-            HelperObject.quote(null);
-            fail("object is null"); //$NON-NLS-1$
-        } catch (RuntimeExceptionIsNull ex) {
-            // nothing to do
-        } catch (Exception ex) {
-            fail(ex.getMessage());
-        }
-    }
+//    @Test
+//    public void testQuote() {
+//        assertEquals("'A'", HelperObject.quote("A")); //$NON-NLS-1$//$NON-NLS-2$
+//
+//        try {
+//            HelperObject.quote(null);
+//            fail("object is null"); //$NON-NLS-1$
+//        } catch (RuntimeExceptionIsNull ex) {
+//            // nothing to do
+//        } catch (Exception ex) {
+//            fail(ex.getMessage());
+//        }
+//    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2011 by Stefan Laubenberger.
+ * Copyright (c) 2007-2012 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -32,27 +32,25 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.model.ModelAbstract;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * The implementation of the person model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110517)
+ * @version 0.9.7 (20120530)
  * @since 0.9.1
  */
 @XmlRootElement(name = "person")
@@ -83,27 +81,27 @@ public class PersonImpl extends ModelAbstract implements Person {
 		super();
 	}
 
-	public PersonImpl(final String name, final String forename, final Date birthday,
-							final Gender gender, final Language language, final String street, final String zip, final String city,
-							final Country country, final String phoneNumber, final String faxNumber, final String email, final URL url, final List<Organization> organizations, final List<Role> roles, final UUID uuid, final Map<String, String> mapTag) {
-		super(uuid, mapTag);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, forename, birthday, gender, language, street, zip, city, country, phoneNumber, faxNumber, email, url, organizations, roles, uuid, mapTag));
-		this.name = name;
-		this.forename = forename;
-		this.birthday = birthday;
-		this.gender = gender;
-		this.language = language;
-		this.street = street;
-		this.zip = zip;
-		this.city = city;
-		this.country = country;
-		this.phoneNumber = phoneNumber;
-		this.faxNumber = faxNumber;
-		this.email = email;
-		this.url = url;
-		this.organizations = organizations;
-		this.roles = roles;
-	}
+//	public PersonImpl(final String name, final String forename, final Date birthday,
+//							final Gender gender, final Language language, final String street, final String zip, final String city,
+//							final Country country, final String phoneNumber, final String faxNumber, final String email, final URL url, final List<Organization> organizations, final List<Role> roles, final UUID uuid, final Map<String, String> mapTag) {
+//		super(uuid, mapTag);
+//		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, forename, birthday, gender, language, street, zip, city, country, phoneNumber, faxNumber, email, url, organizations, roles, uuid, mapTag));
+//		this.name = name;
+//		this.forename = forename;
+//		this.birthday = birthday;
+//		this.gender = gender;
+//		this.language = language;
+//		this.street = street;
+//		this.zip = zip;
+//		this.city = city;
+//		this.country = country;
+//		this.phoneNumber = phoneNumber;
+//		this.faxNumber = faxNumber;
+//		this.email = email;
+//		this.url = url;
+//		this.organizations = organizations;
+//		this.roles = roles;
+//	}
 
 
 	/*
