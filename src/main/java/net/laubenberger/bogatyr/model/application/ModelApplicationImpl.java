@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2011 by Stefan Laubenberger.
+ * Copyright (c) 2007-2012 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -28,12 +28,7 @@
 package net.laubenberger.bogatyr.model.application;
 
 
-import java.math.BigDecimal;
 import java.net.URL;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,9 +38,6 @@ import javax.xml.bind.annotation.XmlType;
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperObject;
 import net.laubenberger.bogatyr.model.misc.DocumentImpl;
-import net.laubenberger.bogatyr.model.misc.Language;
-import net.laubenberger.bogatyr.model.misc.Organization;
-import net.laubenberger.bogatyr.model.misc.Person;
 import net.laubenberger.bogatyr.model.worker.ModelWorker;
 import net.laubenberger.bogatyr.model.worker.ModelWorkerImpl;
 import net.laubenberger.bogatyr.service.localizer.Localizer;
@@ -59,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the application model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110527)
+ * @version 0.9.7 (20120530)
  * @since 0.9.0
  */
 @XmlRootElement(name = "modelApplication")
@@ -83,18 +75,18 @@ public class ModelApplicationImpl extends DocumentImpl implements ModelApplicati
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
-	public ModelApplicationImpl(final String name, final BigDecimal version, final int build,
-										 final Date created, final Language language, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final URL updateLocation, final boolean isDebug,
-										 final Localizer localizer, final Property property, final UUID uuid, final Map<String, String> mapTag) {
-		super(name, version, build, created, language, url, listOrganization, listPerson, uuid, mapTag);
-
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, language, url, listOrganization, listPerson, updateLocation, isDebug, localizer, property, uuid, mapTag));
-
-		this.updateLocation = updateLocation;
-		this.isDebug = isDebug;
-		this.localizer = localizer;
-		this.property = property;
-	}
+//	public ModelApplicationImpl(final String name, final BigDecimal version, final int build,
+//										 final Date created, final Language language, final URL url, final List<Organization> listOrganization, final List<Person> listPerson, final URL updateLocation, final boolean isDebug,
+//										 final Localizer localizer, final Property property, final UUID uuid, final Map<String, String> mapTag) {
+//		super(name, version, build, created, language, url, listOrganization, listPerson, uuid, mapTag);
+//
+//		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, version, build, created, language, url, listOrganization, listPerson, updateLocation, isDebug, localizer, property, uuid, mapTag));
+//
+//		this.updateLocation = updateLocation;
+//		this.isDebug = isDebug;
+//		this.localizer = localizer;
+//		this.property = property;
+//	}
 
 
 	/*

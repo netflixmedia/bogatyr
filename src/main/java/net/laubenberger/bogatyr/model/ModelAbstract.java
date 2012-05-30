@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2011 by Stefan Laubenberger.
+ * Copyright (c) 2007-2012 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
  * This is the skeleton for all models.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110601)
+ * @version 0.9.7 (20120530)
  * @since 0.7.0
  */
 @XmlRootElement(name = "model")
@@ -73,12 +73,12 @@ public abstract class ModelAbstract extends Observable implements Model {
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor());
 	}
 
-	protected ModelAbstract(final UUID uuid, final Map<String, String> mapTag) {
-		super();
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(uuid, mapTag));
-		this.uuid = uuid;
-		this.mapTag = mapTag;
-	}
+//	protected ModelAbstract(final UUID uuid, final Map<String, String> mapTag) {
+//		super();
+//		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(uuid, mapTag));
+//		this.uuid = uuid;
+//		this.mapTag = mapTag;
+//	}
 
 
 	/*

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2011 by Stefan Laubenberger.
+ * Copyright (c) 2007-2012 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -31,8 +31,6 @@ package net.laubenberger.bogatyr.model.misc;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -51,7 +49,7 @@ import org.slf4j.LoggerFactory;
  * The implementation of the organization model.
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110601)
+ * @version 0.9.7 (20120530)
  * @since 0.9.2
  */
 @XmlRootElement(name = "organization")
@@ -80,22 +78,22 @@ public class OrganizationImpl extends ModelAbstract implements Organization {
 	}
 
 
-	public OrganizationImpl(final String name, final String street, final String zip,
-									final String city, final Country country, final String phoneNumber, final String faxNumber, final String email, final URL url, final List<Person> persons, final List<Role> roles, final UUID uuid, final Map<String, String> mapTag) {
-		super(uuid, mapTag);
-		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, street, zip, city, country, phoneNumber, faxNumber, email, url, persons, roles, uuid, mapTag));
-		this.name = name;
-		this.street = street;
-		this.zip = zip;
-		this.city = city;
-		this.country = country;
-		this.phoneNumber = phoneNumber;
-		this.faxNumber = faxNumber;
-		this.email = email;
-		this.url = url;
-		this.persons = persons;
-		this.roles = roles;
-	}
+//	public OrganizationImpl(final String name, final String street, final String zip,
+//									final String city, final Country country, final String phoneNumber, final String faxNumber, final String email, final URL url, final List<Person> persons, final List<Role> roles, final UUID uuid, final Map<String, String> mapTag) {
+//		super(uuid, mapTag);
+//		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(name, street, zip, city, country, phoneNumber, faxNumber, email, url, persons, roles, uuid, mapTag));
+//		this.name = name;
+//		this.street = street;
+//		this.zip = zip;
+//		this.city = city;
+//		this.country = country;
+//		this.phoneNumber = phoneNumber;
+//		this.faxNumber = faxNumber;
+//		this.email = email;
+//		this.url = url;
+//		this.persons = persons;
+//		this.roles = roles;
+//	}
 
 
 	/*

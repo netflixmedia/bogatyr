@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2011 by Stefan Laubenberger.
+ * Copyright (c) 2007-2012 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -54,7 +54,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Stefan Laubenberger
  * @author Silvan Spross
- * @version 0.9.4 (20101119)
+ * @version 0.9.7 (20120530)
  * @since 0.7.0
  */
 public abstract class HelperObject {
@@ -320,24 +320,24 @@ public abstract class HelperObject {
 		return result;
 	}
 
-	/**
-	 * Quotes a given {@link Object} for different purposes (e.g. logging).
-	 *
-	 * @param object to quote
-	 * @return quoted object string
-	 * @since 0.9.1
-	 */
-	public static String quote(final Object object) { //$JUnit$
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(object));
-		if (null == object) {
-			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
-		}
-
-		final String result = HelperString.SINGLE_QUOTE + String.valueOf(object) + HelperString.SINGLE_QUOTE;
-
-		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
-		return result;
-	}
+//	/**
+//	 * Quotes a given {@link Object} for different purposes (e.g. logging).
+//	 *
+//	 * @param object to quote
+//	 * @return quoted object string
+//	 * @since 0.9.1
+//	 */
+//	public static String quote(final Object object) { //$JUnit$
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodStart(object));
+//		if (null == object) {
+//			throw new RuntimeExceptionIsNull("object"); //$NON-NLS-1$
+//		}
+//
+//		final String result = HelperString.SINGLE_QUOTE + String.valueOf(object) + HelperString.SINGLE_QUOTE;
+//
+//		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
+//		return result;
+//	}
 
 
 	/*

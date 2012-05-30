@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2011 by Stefan Laubenberger.
+ * Copyright (c) 2007-2012 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
  * The skeleton for the application controller.
  * 
  * @author Stefan Laubenberger
- * @version 0.9.5 (20110124)
+ * @version 0.9.7 (20120530)
  * @since 0.9.0
  */
 public abstract class ControllerApplicationAbstract<M extends ModelApplication, V extends View> extends
@@ -134,55 +134,61 @@ public abstract class ControllerApplicationAbstract<M extends ModelApplication, 
 
 		final Map<String, Object> result = new HashMap<String, Object>();
 
-		result.put(Document.MEMBER_BUILD, model.getBuild());
-		result.put(Document.MEMBER_CREATED, model.getCreated());
-		result.put(Model.MEMBER_INSTANTIATED, model.getInstantiated());
-		result.put(ModelApplication.MEMBER_DEBUG, model.isDebug());
-
-		if (null != model.getName()) {
-			result.put(Document.MEMBER_NAME, model.getName());
+		if (null != model) {
+			result.put(Document.MEMBER_BUILD, model.getBuild());
+			result.put(Document.MEMBER_CREATED, model.getCreated());
+			result.put(Model.MEMBER_INSTANTIATED, model.getInstantiated());
+			result.put(ModelApplication.MEMBER_DEBUG, model.isDebug());
+			
+			if (null != model.getName()) {
+				result.put(Document.MEMBER_NAME, model.getName());
+			}
+			
+			if (null != model.getName()) {
+				result.put(Document.MEMBER_NAME, model.getName());
+			}
+	
+			if (null != model.getVersion()) {
+				result.put(Document.MEMBER_VERSION, model.getVersion());
+			}
+			if (null != model.getUUID()) {
+				result.put(Model.MEMBER_UUID, model.getUUID());
+			}
+			if (null != model.getLanguage()) {
+				result.put(Document.MEMBER_LANGUAGE, model.getLanguage());
+			}
+			if (null != model.getUrl()) {
+				result.put(Url.MEMBER_URL, model.getUrl());
+			}
+			if (null != model.getName()) {
+				result.put(Document.MEMBER_NAME, model.getName());
+			}
+	
+			if (null != model.getUpdateLocation()) {
+				result.put(ModelApplication.MEMBER_UPDATE_LOCATION, model.getUpdateLocation());
+			}
+	
+			if (null != model.getProperty()) {
+				result.put(ModelApplication.MEMBER_PROPERTY, model.getProperty());
+			}
+	
+			if (null != model.getLocalizer()) {
+				result.put(ModelApplication.MEMBER_LOCALIZER, model.getLocalizer());
+			}
+	
+			if (null != model.getOrganizations()) {
+				result.put(Document.MEMBER_ORGANIZATIONS, HelperCollection.dump(model.getOrganizations()));
+			}
+	
+			if (null != model.getPersons()) {
+				result.put(Document.MEMBER_PERSONS, HelperCollection.dump(model.getPersons()));
+			}
+	
+			if (null != model.getTags()) {
+				result.put(Model.MEMBER_TAGS, HelperMap.dump(model.getTags()));
+			}
 		}
-
-		if (null != model.getVersion()) {
-			result.put(Document.MEMBER_VERSION, model.getVersion());
-		}
-		if (null != model.getUUID()) {
-			result.put(Model.MEMBER_UUID, model.getUUID());
-		}
-		if (null != model.getLanguage()) {
-			result.put(Document.MEMBER_LANGUAGE, model.getLanguage());
-		}
-		if (null != model.getUrl()) {
-			result.put(Url.MEMBER_URL, model.getUrl());
-		}
-		if (null != model.getName()) {
-			result.put(Document.MEMBER_NAME, model.getName());
-		}
-
-		if (null != model.getUpdateLocation()) {
-			result.put(ModelApplication.MEMBER_UPDATE_LOCATION, model.getUpdateLocation());
-		}
-
-		if (null != model.getProperty()) {
-			result.put(ModelApplication.MEMBER_PROPERTY, model.getProperty());
-		}
-
-		if (null != model.getLocalizer()) {
-			result.put(ModelApplication.MEMBER_LOCALIZER, model.getLocalizer());
-		}
-
-		if (null != model.getOrganizations()) {
-			result.put(Document.MEMBER_ORGANIZATIONS, HelperCollection.dump(model.getOrganizations()));
-		}
-
-		if (null != model.getPersons()) {
-			result.put(Document.MEMBER_PERSONS, HelperCollection.dump(model.getPersons()));
-		}
-
-		if (null != model.getTags()) {
-			result.put(Model.MEMBER_TAGS, HelperMap.dump(model.getTags()));
-		}
-
+		
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));
 		return result;
 	}

@@ -34,12 +34,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Symmetric crypto algorithms available in BouncyCastle
  *
  * @author Stefan Laubenberger
- * @version 0.9.6 (20110601)
+ * @version 0.9.7 (20110607)
  * @since 0.9.1
  */
 @XmlRootElement(name = "cryptoSymmetricAlgo")
 public enum CryptoSymmetricAlgo implements CryptoAlgo {
 	AES("AES", "AES/CFB/NoPadding", 192, 16), //$NON-NLS-1$ //$NON-NLS-2$
+//	AES("AES", "AES/CFB/NoPadding", 128, 16), //$NON-NLS-1$ //$NON-NLS-2$
 	DES("DES", "DES/CFB/NoPadding", 64, 8), //$NON-NLS-1$ //$NON-NLS-2$
 	DESEDE("DESEDE", "DESEDE/CFB/NoPadding", 128, 8), //$NON-NLS-1$ //$NON-NLS-2$
 	BLOWFISH("BLOWFISH", "BLOWFISH/CFB/NoPadding", 448, 8), //$NON-NLS-1$ //$NON-NLS-2$

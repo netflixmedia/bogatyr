@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007-2011 by Stefan Laubenberger.
+ * Copyright (c) 2007-2012 by Stefan Laubenberger.
  *
  * Bogatyr is free software: you can redistribute it and/or modify
  * it under the terms of the General Public License v2.0.
@@ -40,6 +40,7 @@ import java.util.Properties;
 
 import net.laubenberger.bogatyr.helper.HelperLog;
 import net.laubenberger.bogatyr.helper.HelperNumber;
+import net.laubenberger.bogatyr.helper.HelperString;
 import net.laubenberger.bogatyr.misc.Constants;
 import net.laubenberger.bogatyr.misc.exception.RuntimeExceptionIsNull;
 import net.laubenberger.bogatyr.service.ServiceAbstract;
@@ -52,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Stefan Laubenberger
  * @author Roman Wuersch
- * @version 0.9.7 (20110902)
+ * @version 0.9.7 (20120530)
  * @since 0.1.0
  */
 public class PropertyImpl extends ServiceAbstract implements Property {
@@ -65,10 +66,10 @@ public class PropertyImpl extends ServiceAbstract implements Property {
 		if (log.isTraceEnabled()) log.trace(HelperLog.constructor(inputStream));
 
 		if (null == inputStream) {
-			throw new RuntimeExceptionIsNull("inputStream");
+			throw new RuntimeExceptionIsNull("inputStream"); //$NON-NLS-1$
 		}
 		if (null == encoding) {
-			throw new RuntimeExceptionIsNull("encoding");
+			throw new RuntimeExceptionIsNull("encoding"); //$NON-NLS-1$
 		}
 		
 		properties = new Properties();
@@ -153,8 +154,7 @@ public class PropertyImpl extends ServiceAbstract implements Property {
 			try {
 				result = new URL(value);
 			} catch (MalformedURLException ex) {
-				// do nothing
-				//				if (log.isInfoEnabled()) log.info("URL invalid", ex); //$NON-NLS-1$
+				if (log.isInfoEnabled()) log.info("URL is invalid: " + HelperString.quote(value), ex); //$NON-NLS-1$
 			}
 		}
 		if (log.isDebugEnabled()) log.debug(HelperLog.methodExit(result));

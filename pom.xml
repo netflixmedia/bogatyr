@@ -31,7 +31,7 @@
 	<groupId>net.laubenberger</groupId>
 	<artifactId>bogatyr</artifactId>
 	<packaging>jar</packaging>
-	<version>0.96</version>
+	<version>0.97</version>
 	<name>bogatyr</name>
 	<description>Bogatyr Java library</description>
 	<url>http://dev.laubenberger.net/bogatyr/</url>
@@ -232,7 +232,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.6.1</version>
+			<version>1.6.4</version>
 			<scope>compile</scope>
 		</dependency>
 <!--
@@ -258,7 +258,7 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>0.9.27</version>
+			<version>1.0.3</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
